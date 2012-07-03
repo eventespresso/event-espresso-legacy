@@ -1,0 +1,4923 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Event Espresso\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-06 12:25-0700\n"
+"PO-Revision-Date: 2010-12-14 01:08-0700\n"
+"Last-Translator: Seth Shoultes <support@eventespresso.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: C:\\Users\\sshoultes\\Documents\\My Dropbox\\Event Espresso\\wp-content\\plugins\\event-espresso.3.0.9-beta\n"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:219
+#, fuzzy
+msgid "Event Espresso"
+msgstr "Eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:219
+#, fuzzy
+msgid "Event Manager"
+msgstr "Gestión de eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:222
+msgid "Event Espresso - General Settings"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:222
+#, fuzzy
+msgid "General Settings"
+msgstr "Configuración de e-mail"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:225
+msgid "Event Espresso - Event Setup"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:225
+#, fuzzy
+msgid "Event Setup"
+msgstr "Nombre del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:228
+#, fuzzy
+msgid "Event Espresso - Attendees/Payments"
+msgstr "Ver asistentes/pagos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:228
+msgid "Attendees/Payments"
+msgstr "Asistentes/Pagos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:231
+#, fuzzy
+msgid "Event Espresso - Manage Event Categories"
+msgstr "Categorías de eventos:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:231
+#, fuzzy
+msgid "Event Categories"
+msgstr "Categorías de eventos:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:235
+msgid "Event Espresso - Member Settings"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:235
+#, fuzzy
+msgid "Member Settings"
+msgstr "Opciones"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:238
+msgid "Event Espresso - General Coupons"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:238
+msgid "General Coupons"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:242
+msgid "Groupons"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:242
+#, fuzzy
+msgid "Groupon Codes"
+msgstr "Código de descuento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:248
+msgid "Event Espresso - Gateway Settings"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:248
+#, fuzzy
+msgid "Gateway Settings"
+msgstr "Configuración de PayPal"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:253
+#, fuzzy
+msgid "Event Espresso - Form Questions"
+msgstr "Descripción del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:253
+#, fuzzy
+msgid "Form Questions"
+msgstr "Descripción:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:256
+msgid "Event Espresso - Form Groups"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:256
+msgid "Form Groups"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:261
+msgid "Event Espresso - Facebook Settings"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:261
+#, fuzzy
+msgid "Facebook Settings"
+msgstr "Configuración de e-mail"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:267
+msgid "Event Espresso - Addons"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:267
+#, fuzzy
+msgid "Addons"
+msgstr "Dirección"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:270
+msgid "Event Espresso - Help/Support"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:270
+msgid "Help/Support"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:295
+msgid "Settings"
+msgstr "Opciones"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:296
+msgid "Events"
+msgstr "Eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:362
+msgid "Please setup Organization in the Admin Panel!"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:375
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:399
+#, fuzzy
+msgid "Sorry, you did not enter the correct anti-spam phrase. Please click your browser's back button and try again."
+msgstr "Lo lamentamos, no indicó correctamente la frase de control anti-spam. Por favor pulse el botón VOLVER ATRÁS de su navegador e inténtelo de nuevo."
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+msgid "Group"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+msgid "Reg ID"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+#, fuzzy
+msgid "Last Name"
+msgstr "Apellidos:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+#, fuzzy
+msgid "First Name"
+msgstr "Nombre de Pila:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+msgid "Email"
+msgstr "E-mail"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+#, fuzzy
+msgid "Address"
+msgstr "Dirección"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+msgid "City"
+msgstr "Ciudad"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+msgid "State"
+msgstr "Provincia o estado"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+#, fuzzy
+msgid "Zip"
+msgstr "CP/ZIP:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+msgid "Phone"
+msgstr "Teléfono"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+msgid "Payment Method"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+#, fuzzy
+msgid "Reg Date"
+msgstr "Fecha finalización"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+#, fuzzy
+msgid "Pay Status"
+msgstr "Estado"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+#, fuzzy
+msgid "Type of Payment"
+msgstr "Total recaudado"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+msgid "Transaction ID"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+msgid "Payment"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+#, fuzzy
+msgid "Coupon Code"
+msgstr "Código de descuento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+msgid "# Attendees"
+msgstr "Nº Asistentes"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+msgid "Date Paid"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+#, fuzzy
+msgid "Event Name"
+msgstr "Nombre del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+#, fuzzy
+msgid "Price Option"
+msgstr "Descuento "
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+#, fuzzy
+msgid "Event Date"
+msgstr "Fecha(s) del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:427
+#, fuzzy
+msgid "Event Time"
+msgstr "Horario del Evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:576
+msgid "No participant data has been collected."
+msgstr "No se ha recogido datos de participantes"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/espresso.php:582
+msgid "This Is Not A Valid Selection!"
+msgstr "¡Valor seleccionado inválido!"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/authnet_ipn.php:40
+msgid "Thank You!"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/authnet_ipn.php:41
+msgid "Your transaction has been processed."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/authnet_ipn.php:46
+#, fuzzy
+msgid "There was an error processing your transaction!"
+msgstr "Hubo un error en los datos, por favor inténtelo de nuevo."
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/authnet_vars.php:23
+msgid "Reg. ID:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/authnet_vars.php:23
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/paypal_vars.php:22
+#, fuzzy
+msgid "Name:"
+msgstr "Nombre"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/authnet_vars.php:23
+msgid "Total Registrants:"
+msgstr "Total de registrados:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/authnet_vars.php:55
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/paypal_vars.php:53
+msgid "Debug Mode Is Turned On"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:13
+msgid "Authorize.net settings saved."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:20
+#, fuzzy
+msgid "Authorize.net Settings"
+msgstr "Configuración de la Organización"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:41
+msgid "Activate Authorize.net?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:45
+msgid "Deactivate Authorize.net?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:49
+msgid "The Authorize.net gateway is installed. Would you like to activate it?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:71
+msgid "Authorize.net Login I.D."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:78
+msgid "Authorize.net Transaction Key"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:85
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:157
+msgid "Button Image URL: "
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:93
+msgid "Image URL:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:99
+#, fuzzy
+msgid "(used for your business/personal logo on the Authorize.net payment page)"
+msgstr "URL de una imagen (usado para personalizar PayPal con su logotipo)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:104
+msgid "Relay Response URL :"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:109
+msgid "Use the test mode feature for Autorize.net?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:115
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:181
+#, fuzzy
+msgid "By-pass the payment confirmation page?"
+msgstr "E-mail de confirmación del pago"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:118
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:185
+msgid "Yes"
+msgstr "Sí"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:119
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:184
+msgid "No"
+msgstr "No"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:123
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:206
+msgid "Current Button Image:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:131
+msgid "Update Authorize.net Settings"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:135
+msgid ""
+"<h2>Relay Response</h2>\n"
+"      <p>This shows the specific the URL to which the gateway should return the relay response for a transaction. This the page should be set in your Authorize.net account. Login to Authorize.net, goto Account > Response/Receipt URLs > Add URL and enter the following URL.</p>\n"
+"\t  <p><strong>Relay Response URL:</strong> "
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:146
+#, fuzzy
+msgid "Authorize.net Image URL (logo for payment page)"
+msgstr "URL de imagen PayPal (su logotipo para la página de PayPal)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:149
+#, fuzzy
+msgid "The URL of the image displayed as your logo in the header of the Authorize.net checkout pages."
+msgstr "La URL de una imagen de 150x50 pixels mostrada como su logotipo en la esquina superior izquierda de la página de pago de PayPal."
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/authnet/settings.php:153
+msgid ""
+"<h2>Authorize.net Test Mode</h2>\n"
+"      <p>Test Mode allows you to submit test transactions to the payment gateway. Transactions that are submitted while Test Mode is ON are NOT actually processed. The result of a transaction depends on the card number submitted, and the invoice amount. If you want a transaction to be approved, use one of the following card numbers.</p><p>370000000000002 (American Express)<br />\n"
+"6011000000000012 (Discover)<br />\n"
+"5424000000000015 (Master Card)<br />\n"
+"4007000000027 (Visa)<br />\n"
+"</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/bank_payment_vars.php:10
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/settings.php:88
+msgid "Name on Account:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/bank_payment_vars.php:11
+#, fuzzy
+msgid "Account Number:"
+msgstr "Apellidos:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/bank_payment_vars.php:12
+msgid "Financial Institution:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/bank_payment_vars.php:13
+msgid "Address:"
+msgstr "Dirección"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/settings.php:13
+msgid "Electronic Funds Transfer settings saved."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/settings.php:21
+msgid "Electronic Funds Transfer Settings"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/settings.php:42
+msgid "Activate Electronic Funds Transfers?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/settings.php:45
+msgid "Deactivate Electronic Funds Transfers?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/settings.php:49
+msgid "The Electronic Funds Transfers is installed. Would you like to activate it?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/settings.php:72
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/check/settings.php:67
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:73
+msgid "Title:"
+msgstr "Título"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/settings.php:75
+msgid "Electronic Funds Transfers"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/settings.php:79
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/check/settings.php:70
+#, fuzzy
+msgid "Payment Instructions:"
+msgstr "E-mail de confirmación del pago"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/settings.php:82
+msgid "Please initiate an electronic payment using the bank information below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/settings.php:95
+msgid "Bank Account#:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/settings.php:102
+#, fuzzy
+msgid "Bank Name:"
+msgstr "Apellidos:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/settings.php:109
+#, fuzzy
+msgid "Bank Address:"
+msgstr "Dirección"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/bank/settings.php:119
+msgid "Update Electronic Funds Transfer Settings"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/check/check_payment_vars.php:10
+msgid "Payable to:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/check/check_payment_vars.php:11
+#, fuzzy
+msgid "Payment Address:"
+msgstr "Dirección"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/check/settings.php:11
+msgid "Check/Money Order Payment settings saved."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/check/settings.php:18
+msgid "Check/Money Order Payment Settings"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/check/settings.php:39
+msgid "Activate Check/Money Order Payments?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/check/settings.php:42
+msgid "Deactivate Check/Money Order Payments?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/check/settings.php:46
+msgid "The Check/Money Order Payments is installed. Would you like to activate it?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/check/settings.php:68
+msgid "Check/Money Order Payments"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/check/settings.php:71
+msgid "Please send Check/Money Order to the address below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/check/settings.php:73
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:87
+msgid "Payable To:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/check/settings.php:76
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:94
+#, fuzzy
+msgid "Address to Send Payment:"
+msgstr "Asistentes/Pagos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/check/settings.php:97
+msgid "Update Check/Money Order Payment Settings"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/invoice_vars.php:10
+msgid "Download PDF Invoice"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:14
+msgid "Invoice Payment settings saved."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:22
+#, fuzzy
+msgid "Invoice Payment Settings"
+msgstr "Configuración de PayPal"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:43
+#, fuzzy
+msgid "Activate Invoice Payments?"
+msgstr "Asistentes/Pagos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:46
+msgid "Deactivate Invoice Payments?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:50
+msgid "The Invoice Payments is installed. Would you like to activate it?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:76
+#, fuzzy
+msgid "Invoice Payments"
+msgstr "Total recaudado"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:80
+msgid "Invoice Instructions:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:83
+msgid "Please send Invoice to the address below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:118
+#, fuzzy
+msgid "PDF Settings"
+msgstr "Opciones"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:122
+msgid "PDF Title (top right of the invoice):"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:125
+msgid "Invoice"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:129
+msgid "Logo URL (logo for the top left of the invoice):"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:136
+msgid "Invoice Instructions in PDF:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:139
+msgid "Please send this invoice with payment attached to the address above, or use the payment link below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/settings.php:146
+#, fuzzy
+msgid "Update Invoice Payment Settings"
+msgstr "Actualizar evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/template.php:107
+msgid "Page"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/template.php:123
+#, fuzzy
+msgid "Date: "
+msgstr "Fecha:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/template.php:124
+#, fuzzy
+msgid "Attendee ID: "
+msgstr "Asistentes:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/template.php:136
+msgid "Bill To: "
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/invoice/template.php:147
+msgid "Amount Owed"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/paypal_vars.php:22
+#, fuzzy
+msgid "Registrant Email:"
+msgstr "Total de registrados:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:14
+#, fuzzy
+msgid "PayPal settings saved."
+msgstr "Configuración de PayPal"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:23
+msgid "PayPal Settings"
+msgstr "Configuración de PayPal"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:44
+msgid "Activate PayPal IPN?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:47
+msgid "Deactivate PayPal IPN?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:52
+msgid "The PayPal IPN addon is installed. Would you like to activate it?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:73
+msgid "Paypal I.D."
+msgstr "ID de PayPal"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:78
+msgid "(Typically payment@yourdomain.com)"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:82
+msgid "Select the currency for your country:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:88
+msgid "U.S. Dollars ($)"
+msgstr "Dólar estadounidense ($)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:91
+msgid "Australian Dollars (A $)"
+msgstr "Dólares australianos (A $)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:94
+msgid "Pounds Sterling (&pound;)"
+msgstr "Libra esterlina (&pound;)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:97
+msgid "Canadian Dollars (C $)"
+msgstr "Dólar canadiense (C $)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:100
+msgid "Czech Koruna"
+msgstr "Corona Checa"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:103
+msgid "Danish Krone"
+msgstr "Corona danesa"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:106
+msgid "Euros (&#8364;)"
+msgstr "Euros (&#8364;)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:109
+msgid "Hong Kong Dollar ($)"
+msgstr "Dolar de Hong Kong ($)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:112
+msgid "Hungarian Forint"
+msgstr "Florín húngaro"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:115
+msgid "Israeli Shekel"
+msgstr "Shekel israelí "
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:118
+msgid "Yen (&yen;)"
+msgstr "Yen (&yen;)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:121
+msgid "Mexican Peso"
+msgstr "Peso mexicano"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:124
+msgid "New Zealand Dollar ($)"
+msgstr "Dólar de Nueva Zelanda ($)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:127
+msgid "Norwegian Krone"
+msgstr "Corona noruega"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:130
+msgid "Polish Zloty"
+msgstr "Zloty polaco"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:133
+msgid "Singapore Dollar ($)"
+msgstr "Dólar de Singapur ($)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:136
+msgid "Swedish Krona"
+msgstr "Corona sueca"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:139
+msgid "Brazilian Real (only for Brazilian users)"
+msgstr "Real brasileño (sólo para Brasil)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:142
+msgid "Malaysian Ringgits (only for Malaysian users)"
+msgstr "Ringgit malasio (sólo para Malasia)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:145
+msgid "Philippine Pesos"
+msgstr "Peso filipino"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:148
+msgid "Taiwan New Dollars"
+msgstr "Nuevo dólar de Taiwan"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:151
+msgid "Thai Baht"
+msgstr "Bath tailandés"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:164
+#, fuzzy
+msgid "Image URL (logo for payment page):"
+msgstr "URL de imagen PayPal (su logotipo para la página de PayPal)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:169
+#, fuzzy
+msgid "(used for your business/personal logo on the PayPal page)"
+msgstr "URL de una imagen (usado para personalizar PayPal con su logotipo)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:175
+msgid "% Surcharge (Added to the total): "
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:190
+msgid "Shipping address options?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:193
+msgid "Do not prompt for an address"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:194
+msgid "Prompt for an address, but do not require one"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:195
+msgid "Prompt for an address, and require one"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:200
+msgid "Use the debugging feature and the <a href=\"https://developer.paypal.com/devscr?cmd=_home||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox_get_started\" title=\"PayPal Sandbox Login||Sandbox Tutorial||Getting Started with PayPal Sandbox\" target=\"_blank\">PayPal Sandbox</a>?"
+msgstr "Utilice el entorno de  pruebas de <a href=\"https://developer.paypal.com/devscr?cmd=_home||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox_get_started\" title=\"PayPal Sandbox Login||Sandbox Tutorial||Getting Started with PayPal Sandbox\" target=\"_blank\">PayPal Sandbox</a>?"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:214
+#, fuzzy
+msgid "Update PayPal Settings"
+msgstr "Configuración de PayPal"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:218
+msgid ""
+"<h2>PayPal Sandbox</h2>\n"
+"      <p>In addition to using the PayPal Sandbox fetaure. The debugging feature will also output the form varibales to the payment page, send an email to the admin that contains the all PayPal variables.</p>\n"
+"      <hr />\n"
+"      <p>The PayPal Sandbox is a testing environment that is a duplicate of the live PayPal site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live PayPal environment. Create and manage test accounts, and view emails and API credentials for those test accounts.</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:225
+#, fuzzy
+msgid "PayPal Image URL (logo for payment page)"
+msgstr "URL de imagen PayPal (su logotipo para la página de PayPal)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:228
+msgid "The URL of the 150x50-pixel image displayed as your logo in the upper left corner of the PayPal checkout pages."
+msgstr "La URL de una imagen de 150x50 pixels mostrada como su logotipo en la esquina superior izquierda de la página de pago de PayPal."
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:231
+msgid "Default - Your business name, if you have a Business account, or your email address, if you have Premier or Personal account."
+msgstr "Por defecto - Nombre de su empresa, si tiene una cuenta, su dirección de e-mail, si tiene una cuenta premium o personal."
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:235
+msgid ""
+"<h2>PayPal Currency</h2>\n"
+"      <p>PayPal uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, select the currency you wish to use. The dropdown lists all currencies that PayPal (currently) supports. "
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:239
+msgid ""
+"<h2>Payment Surcharge</h2>\n"
+"      <p>Please enter a decimal number indicating a percent surcharge.\n"
+"      For example, if you enter 3.00, 3% will be added to the final price of the event during the checkout.\n"
+"      If the event price is initially $100, the price with the surcharge will be $103.<br />\n"
+"      This surcharge will apply to all new events.  However, you will have the ability to change this value during the event creation.\n"
+"      </p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/gateways/paypal/settings.php:247
+msgid ""
+"<h2>Shipping Address</h2>\n"
+"      <p>By default, PayPal will display shipping address information on the PayPal payment screen. If you plan on shipping items to a registrant (shirts, invoices, etc) then use this option. Otherwise it should not be used, as it will require a shipping address when someone registers for an event.</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:8
+msgid "Manage Addons"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:12
+msgid "Groupon Integration Module"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:15
+msgid "Did your site get featured on <a href=\"http://www.groupon.com/\" target=\"_blank\">Groupon.com</a>? Now you can easily accept Groupon codes to your events! Once installed, just upload all of your Groupon codes to the database and your ready to go. How easy is that?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:16
+msgid "About Groupon"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:17
+msgid "<a href=\"http://www.groupon.com/\" target=\"_blank\">Groupon</a> is a deal-of-the-day website that is localized to major markets in the United States. The first market for Groupon was Chicago, followed soon thereafter by Boston and New York City. As of January 2010, Groupon serves more than 40 markets. Groupon debuted in November 2008 as part of The Point, a platform for collective action."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:22
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:45
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:85
+msgid "Installed"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:23
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:46
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:86
+#, fuzzy
+msgid "Active"
+msgstr "Acción"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:23
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:46
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:86
+#, fuzzy
+msgid "Not Active"
+msgstr "Acción"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:35
+msgid "Members Integration Module"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:59
+msgid "Custom Files"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:62
+msgid "These files offer support for custom templates, functions, and shortcodes. Virtually allowing you to customize the plugin to your needs and making your custom changes future proof."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:64
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:65
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:66
+msgid " - Installed"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:64
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:65
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:66
+msgid " - Not Installed"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_addons.php:76
+msgid "Authorize.net SIM Gateway"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_support.php:68
+msgid "Run Upgrade Script"
+msgstr "Ejecutar script de actualización"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_support.php:82
+#, fuzzy
+msgid "Run Attendee Update Script"
+msgstr "Ejecutar script de actualización"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_support.php:142
+#, fuzzy
+msgid "Attendee data has been updated!"
+msgstr "¡La información del evento ha sido actualizada!"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_support.php:145
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_support.php:278
+msgid "There was an error in your submission, please try again."
+msgstr "Hubo un error en los datos, por favor inténtelo de nuevo."
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin_support.php:275
+msgid "Event data has been updated!"
+msgstr "¡La información del evento ha sido actualizada!"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:21
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:127
+msgid "Event Registration with PayPal IPN"
+msgstr "Registro en el evento por IPN PayPal"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:83
+#, fuzzy
+msgid "Events stats"
+msgstr "Fecha(s) del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:84
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:128
+msgid "View Attendees/Payments"
+msgstr "Ver asistentes/pagos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:99
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:142
+msgid "Total Active Events"
+msgstr "Total de eventos activos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:100
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:143
+msgid "All Time Attendees"
+msgstr "Total asistentes"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:101
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:144
+msgid "All Time Paid"
+msgstr "Total pagados"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:102
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:145
+msgid "All Time Not Paid"
+msgstr "Total no pagados"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:103
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:146
+msgid "All Time Payments"
+msgstr "Total recaudado"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:162
+msgid "Next 3 Upcoming Events"
+msgstr "Próximos tres eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:178
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/add_new_attendee.php:92
+msgid "Start Date:"
+msgstr "Fecha de inicio:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/dashboard_widget.php:178
+msgid "Attendees:"
+msgstr "Asistentes:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/database_install.new.php:335
+msgid "Payment Received for [event_name]"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/database_install.new.php:336
+msgid "<p>***This Is An Automated Response*** </p><p>Thank You [fname] [lname]</p>  <p>We have just  received a payment in the amount of $[event_price] for your registration to [event_name].</p> <p>PayPal transaction ID: [txn_id]</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/database_install.new.php:338
+#, fuzzy
+msgid "<p>***This is an automated response - Do Not Reply***</p> <p>Thank you [fname] [lname] for registering for [event].</p><p>Start time: [start_time]</p><p>Location:<br>[location]</p><p>Phone: [location_phone]</p><p>Google Map: [google_map_link]</p><p> We hope that you will find this event both informative and enjoyable. Should have any questions, please contact [contact].</p><p>If you have not done so already, please submit your payment in the amount of [cost].</p><p>Click here to review your payment information [payment_url].</p><p>Thank You.</p>"
+msgstr "<p>***Esta es una respuesta automática, por favor no conteste***</p> <p>Estimado [fname] [lname], gracias por registrarse en: [event].</p><p>Hora de inicio: [start_time]</p><p>Lugar:<br>[location]</p><p>Teléfono: [location_phone]</p><p>Mapa de Google: [google_map_link]</p><p> Esperamos que disfrute del evento. Si desea realizar alguna consulta por favor contáctenos en [contact].</p><p>Si no lo ha hecho ya, por favor proceda a realizar el pago por la cantidad de [cost] €.</p><p>Pulse este enlace para comprobar su información del pago [payment_url].</p><p>Muchas gracias.</p>"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:17
+msgid "<p>Add New Question</p><p>Enter a new question below.  The type refers to the way a participant can respond to the question.</p><ul><li>Text will allow a single line of text to be entered</li><li>Text area will allow multiple lines of text to be entered</li><li>Single will prompt the participant with choices, only allowing a single response</li><li>Multiple will prompt the participant with choices, allowing multiple responses</li></ul>When using single or multiple, enter the possible values in the value box separated by commas.</p></p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:32
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:95
+#, fuzzy
+msgid "Question:"
+msgstr "Descripción:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:36
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:99
+msgid "Type:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:38
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:104
+msgid "Text"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:39
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:105
+msgid "Text Area"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:40
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:106
+#, fuzzy
+msgid "Single"
+msgstr "Evento único"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:41
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:107
+msgid "Multiple"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:42
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:108
+msgid "Drop Down"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:46
+msgid "Values:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:50
+msgid "Required:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:81
+msgid ""
+"<p>Edit Question</p>\n"
+"\t\t\t\t<p>Edit question below.  The type refers to the way a participant can respond to the question.\n"
+"\t\t\t\t<li>Text will allow a single line of text to be entered</li>\n"
+"\t\t\t\t<li>Text area will allow multiple lines of text to be entered</li>\n"
+"\t\t\t\t<li>Single will prompt the participant with choices, only allowing a single response</li>\n"
+"\t\t\t\t<li>Multiple will prompt the participant with choices, allowing multiple responses</li>\n"
+"\t\t\t\tWhen using single or multiple, enter the possible values in the value box separated by commas.</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:112
+msgid "Values"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:202
+msgid "Please select event to Add/Edit/Delete Registration Questions:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:218
+#, fuzzy
+msgid "Event Questions -"
+msgstr "Descripción del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event_form_config.php:221
+msgid "Add additional questions to the registration form below.  By default all participants will be asked for their email address, first name, last name, street address, city, state, zip code, and phone number."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:70
+#, fuzzy
+msgid "Organization details saved."
+msgstr "Configuración de la Organización"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:112
+msgid "Organization Settings"
+msgstr "Configuración de la Organización"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:120
+msgid "Set up Your Organization to Recieve Payments"
+msgstr "Indique los datos fiscales de su organización para recibir los pagos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:128
+#, fuzzy
+msgid "Organization Name:"
+msgstr "Dirección de la organización (línea 2):"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:134
+#, fuzzy
+msgid "Organization Street 1:"
+msgstr "Dirección de la organización (línea 2):"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:140
+msgid "Organization Street 2:"
+msgstr "Dirección de la organización (línea 2):"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:146
+#, fuzzy
+msgid "Organization City:"
+msgstr "Dirección de la organización (línea 2):"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:152
+#, fuzzy
+msgid "Organization State:"
+msgstr "Dirección de la organización (línea 2):"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:158
+#, fuzzy
+msgid "Organization Zip/Postal Code:"
+msgstr "Código postal / ZIP:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:164
+#, fuzzy
+msgid "Organization Country:"
+msgstr "Dirección de la organización (línea 2):"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:169
+msgid "Time Zone:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:174
+#, fuzzy
+msgid "Primary contact email:"
+msgstr "E-mail principal de contacto  <span>*</span>:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:185
+#, fuzzy
+msgid "Page Settings"
+msgstr "Configuración de PayPal"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:192
+msgid "**Attention**"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:194
+msgid "These settings are very important and must be configured for the plugin to function correctly. Visibility must be set to"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:196
+msgid "Public on all pages"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:198
+msgid "If you need help, please visit the "
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:200
+#, fuzzy
+msgid "support"
+msgstr "Exportar"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:202
+msgid "page or the"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:204
+msgid "for more information and instructions."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:208
+#, fuzzy
+msgid "Show a single event or all events on the registration page?"
+msgstr "¿Desea mostrar un único evento en la página de registro, o varios? <span>*"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:211
+msgid "All Events"
+msgstr "Todos los eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:212
+msgid "Single Event"
+msgstr "Evento único"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:218
+msgid "Main registration page:"
+msgstr "Página principal de registro:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:222
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:245
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:269
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:291
+#, fuzzy
+msgid "Main page"
+msgstr "Página principal de eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:228
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:251
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:297
+msgid "This page should contain the"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:230
+msgid ""
+"shortcode. <br />\n"
+"This page can be hidden from navigation if desired, <br />\n"
+"but should always contain the {ESPRESSO_EVENTS} shortcode."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:235
+msgid ""
+"<h2>Main Events Page</h2>\n"
+"\t\t\t\t\t\t<p>This is the page that displays your events.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{ESPRESSO_EVENTS}</strong> shortcode.</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:241
+msgid "Auto Return URL (Thank You and Return Payment page):"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:253
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:299
+msgid ""
+"shortcode. <br />\n"
+"This page should hidden from your navigation, <br />\n"
+"but still viewable to the public (not password protected.)"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:258
+msgid ""
+"<h2>Auto Return URL</h2>\n"
+"\t\t\t\t\t\t<p>The URL to which the payer\"s browser is redirected after completing the payment; for example, a URL on your site that displays a \"Thank you for your payment\" page.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{ESPRESSO_PAYMENTS}</strong> shortcode.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:265
+msgid "Cancel Return URL (used for cancelled payments):"
+msgstr "URL de retorno para cancelación (usada para pagos cancelados)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:275
+msgid ""
+"This should be a page on your website that contains a cancelled message. <br />\n"
+"No short tags are needed. This page should hidden from your navigation, <br />\n"
+"but still viewable to the public (not password protected.)"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:280
+msgid ""
+"<h2>Cancel Return URL</h2>\n"
+"\t\t\t\t\t\t<p>A URL to which the payer's browser is redirected if payment is cancelled; for example, a URL on your website that displays a \"Payment Canceled\" page.</p>\n"
+"\t\t\t\t\t\t<p>This should be a page on your website that contains a cancelled message. No short tags are needed.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:287
+#, fuzzy
+msgid "Notify URL (used to process payments):"
+msgstr "URL de retorno para cancelación (usada para pagos cancelados)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:304
+msgid ""
+"<h2>Notify URL</h2>\n"
+"\t\t\t\t\t\t<p>The URL to which PayPal posts information about the transaction, in the form of Instant Payment Notification messages.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{ESPRESSO_TXN_PAGE}</strong> shortcode.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:315
+#, fuzzy
+msgid "reCAPTCHA Settings"
+msgstr "Opciones"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:323
+msgid "<strong>Use <a href=\"http://recaptcha.net/||http://recaptcha.net/learnmore.html||https://admin.recaptcha.net/accounts/login/?next=/recaptcha/sites/||http://recaptcha.net/apidocs/captcha/client.html\" title=\"reCAPTCHA Home Page||What is reCAPTCHA||reCAPTCHA Account||reCAPTCHA Client API Documentation\" target=\"_blank\">reCAPTCHA</a> to block spam registrations</strong>:"
+msgstr "<strong>Usar <a href=\"http://recaptcha.net/||http://recaptcha.net/learnmore.html||https://admin.recaptcha.net/accounts/login/?next=/recaptcha/sites/||http://recaptcha.net/apidocs/captcha/client.html\" title=\"Web de reCAPTCHA||Qué es reCAPTCHA||Cuenta reCAPTCHA||Documentación sobre el API de reCAPTCHA\" target=\"_blank\">reCAPTCHA</a> para bloquear intentos de SPAM</strong>:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:335
+msgid "Public Key:"
+msgstr "Clave pública:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:341
+msgid "Private Key:"
+msgstr "Clave privada:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:347
+msgid "Look &amp; Feel Customization"
+msgstr "Personalización del aspecto"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:352
+msgid "Theme:"
+msgstr "Tema gráfico:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:356
+msgid "Red"
+msgstr "Rojo"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:357
+msgid "White"
+msgstr "Blanco"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:358
+msgid "Blackglass"
+msgstr "Oscuro"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:359
+msgid "Clean"
+msgstr "Limpiar"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:365
+msgid "Language:"
+msgstr "Idioma:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:369
+msgid "English"
+msgstr "Inglés"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:370
+msgid "Spanish"
+msgstr "Español"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:371
+msgid "Dutch"
+msgstr "Alemán"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:372
+msgid "French"
+msgstr "Francés"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:373
+msgid "German"
+msgstr "Alemán"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:374
+msgid "Portuguese"
+msgstr "Portugués"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:375
+msgid "Russian"
+msgstr "Ruso"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:376
+msgid "Turkish"
+msgstr "Turco"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:383
+msgid ""
+"<h2>reCAPTCHA Information</h2>\n"
+"\t\t\t\t\t\t<p>reCAPTCHA helps prevent automated abuse of your site (such as comment spam or bogus registrations) by using a <a href=\"http://recaptcha.net/captcha.html\">CAPTCHA</a> to\n"
+"\t\t\tensure that only humans perform certain actions.</p>\n"
+"\t\t\t<p>You must sign up for a <a href=\"https://admin.recaptcha.net/accounts/signup/?next=%2Frecaptcha%2Fsites%2F\" target=\"_blank\">free reCAPTCHA</a> account to use it with this plugin. If you already have a reCAPTCHA account enter your \"Public\" and \"Private\" keys on this page.</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:390
+msgid "Event Listing Types"
+msgstr "Forma de presentación de eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:393
+msgid "If set to \"Single Event\", only one event will be displayed on the page.</p> <p class=\"red_text\">**Attention** Setting this option to \"Single Event\" will disable the \"Event Registration Widget\" and \"SINGLEEVENT\" shortcode functionality."
+msgstr "Seleccionando \"evento único\", solo se mostrará un evento en la página.</p> <p class=\"red_text\">**Atención** Configurar esta opción a \"evento único\" descativará el widget de registro en eventos \"Event Registration Widget\" y la funcionalidad del código \"SINGLEEVENT\"."
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:402
+#, fuzzy
+msgid "Template Customization"
+msgstr "Personalización del aspecto"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:415
+msgid "Your templates have been copied."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:429
+msgid "Theming your event listings and registration pages is easy."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:432
+msgid "You just need to edit the appropriate files in the following location."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:435
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:475
+#, fuzzy
+msgid "Path:"
+msgstr "Fecha:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:439
+#, fuzzy
+msgid "Current Template Files"
+msgstr "Categorías de eventos:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:447
+msgid " - Moved"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:451
+msgid " - Not Moved"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:458
+msgid "Remember, if updates are made or features are added to these templates in the future. You will need to make the updates to your customized templates."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:465
+msgid "In order to use this this feature, you will need to move the files located in the <span class=\"display-path\"><strong>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:468
+msgid "The permissions on your templates directory are incorrect."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:471
+msgid "To move your files automatically, please set the permissions to 775 on the following directory."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:481
+msgid "If you plan on modifying the look of your event listings, registration page, or attendee list. Use the option below to move these templates to a safe place. Keep in mind, if updates are made or features are added to these templates in the future. You will need to make the updates to your customized templates."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:484
+msgid "Your template files have not been moved."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:486
+#, php-format
+msgid "Click here to <a href='%s'>Move your files</a> to a safe place."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:497
+msgid "Email Settings"
+msgstr "Configuración de e-mail"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:508
+#, fuzzy
+msgid "Send payment confirmation emails?"
+msgstr "E-mail de confirmación del pago"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:512
+#, fuzzy
+msgid "Send registration confirmation emails before payment is received?"
+msgstr "¿Desea enviar e-mails de confirmación personalizados para este evento?"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:516
+msgid "Payment Confirmation Email:"
+msgstr "E-mail de confirmación del pago"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:520
+msgid "Email Subject:"
+msgstr "Asunto del e-mail:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:531
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:547
+msgid "View Custom Email Tags"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:538
+#, fuzzy
+msgid "Default Registration Confirmation Email:"
+msgstr "E-mail de confirmación del registro"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:549
+#, fuzzy
+msgid "Example"
+msgstr "Ejemplos de e-mail"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:562
+msgid "Save Options"
+msgstr "Guardar opciones"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:569
+msgid ""
+"<h2>Email Settings</h2><p><strong>Email Confirmations:</strong><br>\n"
+"For customized confirmation emails, the following tags can be placed in the email form and they will pull data from the database to include in the email.</p>\n"
+"<p>[fname], [lname], [phone], [event],[description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [start_date], [start_time], [end_date], [end_time]</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/organization_config.php:574
+#, fuzzy
+msgid ""
+" <h2>Sample Mail Send:</h2>\n"
+"\n"
+"<p>***This is an automated response - Do Not Reply***</p>\n"
+"<p>Thank you [fname] [lname] for registering for [event]. We hope that you will find this event both informative and enjoyable. Should have any questions, please contact [contact].</p>\n"
+"<p>If you have not done so already, please submit your payment in the amount of [cost].</p>\n"
+"<p>Click here to review your payment information [payment_url].</p>\n"
+"<p>Thank You.</p>"
+msgstr "<p>***Esta es una respuesta automática, por favor no conteste***</p> <p>Estimado [fname] [lname], gracias por registrarse en: [event].</p><p>Hora de inicio: [start_time]</p><p>Lugar:<br>[location]</p><p>Teléfono: [location_phone]</p><p>Mapa de Google: [google_map_link]</p><p> Esperamos que disfrute del evento. Si desea realizar alguna consulta por favor contáctenos en [contact].</p><p>Si no lo ha hecho ya, por favor proceda a realizar el pago por la cantidad de [cost] €.</p><p>Pulse este enlace para comprobar su información del pago [payment_url].</p><p>Muchas gracias.</p>"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/PaymentGateway.php:243
+#, fuzzy
+msgid "Field Name"
+msgstr "Nombre de Pila:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/PaymentGateway.php:244
+msgid "Value"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/shortcodes.php:7
+msgid "No ID Supplied"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/shortcodes.php:21
+#, fuzzy
+msgid "No Category ID Supplied"
+msgstr "No se seleccionó ninguna categoría"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/widget.php:9
+msgid "A widget to display your upcoming events."
+msgstr "Un widget para mostrar los próximos eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/widget.php:15
+#, fuzzy
+msgid "Event Espresso Widget"
+msgstr "Widget para registrarse en eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/widget.php:76
+msgid "Upcoming Events"
+msgstr "Próximos eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/add_new_attendee.php:15
+#, fuzzy
+msgid "Added Attendee to Database"
+msgstr "Limite de asistentes"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/add_new_attendee.php:106
+msgid "First Name:"
+msgstr "Nombre de Pila:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/add_new_attendee.php:114
+msgid "Last Name:"
+msgstr "Apellidos:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/add_new_attendee.php:120
+msgid "Email:"
+msgstr "E-mail:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/add_new_attendee.php:184
+#, fuzzy
+msgid "Amount Paid:"
+msgstr "Total no pagados"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/add_new_attendee.php:192
+msgid "Submit"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/edit_attendee_record.php:139
+#, fuzzy
+msgid "Attendee details saved for "
+msgstr "Los detalles del evento se guardaron para "
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/edit_attendee_record.php:143
+#, fuzzy
+msgid "Registration Id #"
+msgstr "Precio del registro"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/edit_attendee_record.php:149
+msgid "How is attendee paying for registration?"
+msgstr "¿Cual es la forma de pago para registrarse?"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/edit_attendee_record.php:152
+msgid "Credit Card or Paypal"
+msgstr "Tarjeta de crédito o PayPal"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/edit_attendee_record.php:153
+msgid "Cash"
+msgstr "Efectivo"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/edit_attendee_record.php:154
+msgid "Check"
+msgstr "Marcar"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/edit_attendee_record.php:214
+msgid "Update Record"
+msgstr "Actualizar registro"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/edit_attendee_record.php:224
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:217
+#, fuzzy
+msgid "Edit Attendee"
+msgstr "Asistentes"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/edit_attendee_record.php:226
+#, fuzzy
+msgid "Delete Attendee"
+msgstr "Asistentes"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:88
+#, fuzzy
+msgid "Edit Attendee Payment Record"
+msgstr "Ver asistentes/pagos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:92
+#, fuzzy
+msgid "Payment details saved for"
+msgstr "Los detalles del evento se guardaron para "
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:94
+#, fuzzy
+msgid "Payment notification has been sent."
+msgstr "¡La información del evento ha sido actualizada!"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:103
+#, fuzzy
+msgid "Attendee"
+msgstr "Asistentes:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:103
+#, fuzzy
+msgid "Registered For:"
+msgstr "Registro on-line"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:107
+msgid "Payment Details"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:108
+msgid "Invoice/Payment Reminder"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:116
+#, fuzzy
+msgid "Payment Status:"
+msgstr "Estado"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:118
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:14
+#, fuzzy
+msgid "None"
+msgstr "No"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:119
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:22
+msgid "Completed"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:120
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:18
+msgid "Pending"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:121
+msgid "Incomplete"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:125
+#, fuzzy
+msgid "Transaction Type:"
+msgstr "Dirección de la organización (línea 2):"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:127
+#, fuzzy
+msgid "Transaction ID:"
+msgstr "Dirección de la organización (línea 2):"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:129
+#, fuzzy
+msgid "Amount:"
+msgstr "Ciudad:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:132
+msgid "How Many People:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:134
+#, fuzzy
+msgid "Date Paid:"
+msgstr "Fecha:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:143
+#, fuzzy
+msgid "Do you want to send a payment recieved notice to registrant?"
+msgstr "¿Desea mostrar la descripción del evento en la página de registro?"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:161
+#, fuzzy
+msgid "Invoice Subject"
+msgstr "Asunto del e-mail:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:161
+msgid "Payment Reminder for [event]"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:162
+msgid "Message"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/enter_attendee_payments.php:164
+msgid "Dear [fname] [lname], <p>Our records show that we have not received your payment of [cost] for [event_link].</p> <p>Please visit [payment_url] to view your payment options.</p><p>Sincerely,<br />"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/index.php:10
+#, fuzzy
+msgid "Attendee Payments"
+msgstr "Asistentes/Pagos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/index.php:14
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/index.php:40
+#, fuzzy
+msgid "Attendee Reports"
+msgstr "Asistentes:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/index.php:19
+#, fuzzy
+msgid "Edit Attendee Data"
+msgstr "Asistentes"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/index.php:24
+#, fuzzy
+msgid "Edit Attendee Payment"
+msgstr "Ver asistentes/pagos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/index.php:29
+#, fuzzy
+msgid "Add New Attendee"
+msgstr "Ver asistentes"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:41
+#, fuzzy
+msgid "Customer(s) have been successfully deleted from the event."
+msgstr "Los descuentos han sido borrados correctamente de la base de datos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:68
+msgid "View event page"
+msgstr "Ver página del evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:77
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:89
+#, fuzzy
+msgid "Export to Excel"
+msgstr "Exportar a Excel"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:80
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:89
+msgid "Edit Event"
+msgstr "Editar evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:82
+#, fuzzy
+msgid "Add Attendee"
+msgstr "Asistentes"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:96
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:37
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:67
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:61
+#, fuzzy
+msgid "Records"
+msgstr "Rojo"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:98
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:278
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:38
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:134
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:69
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:161
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:63
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:153
+msgid "of"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:101
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:40
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:72
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:66
+msgid "Reset"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:108
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:48
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:79
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:73
+msgid "Delete"
+msgstr "Borrar"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:114
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:85
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:79
+msgid "Name"
+msgstr "Nombre"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:120
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:83
+msgid "Amount"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:129
+msgid "Coupon"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:135
+#, fuzzy
+msgid "Registration Date"
+msgstr "Precio del registro"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:138
+#, fuzzy
+msgid "Payment Date"
+msgstr "Fecha(s) del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:141
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:54
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:92
+msgid "Action"
+msgstr "Acción"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:201
+#, fuzzy
+msgid "Registration #: "
+msgstr "Precio del registro"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:206
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:216
+#, fuzzy
+msgid "Edit Payment"
+msgstr "Editar evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:218
+#, fuzzy
+msgid "Resend Registration Details"
+msgstr "Widget para registrarse en eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:238
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:95
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:122
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:116
+msgid "No Record Found!"
+msgstr "¡No hay registros!"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:248
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:104
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:130
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:123
+msgid "Check All"
+msgstr "Marcar todo"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:250
+#, fuzzy
+msgid "Delete Customer(s)"
+msgstr "Asistentes"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:260
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:120
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:143
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:135
+msgid "View All"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/list_attendee_payments.php:273
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:132
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:156
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:148
+msgid "Entries Per Page"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:21
+msgid "Event(s) have been permanently deleted."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:28
+msgid "Select an event to view attendee details and payments"
+msgstr "Seleccione un evento para ver la lista de asistentes y pagos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:49
+msgid "Event ID"
+msgstr "ID del evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:51
+msgid "Start Date"
+msgstr "Fecha de inicio"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:52
+msgid "Status"
+msgstr "Estado"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:85
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:89
+msgid "View Attendees"
+msgstr "Ver asistentes"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:89
+#, fuzzy
+msgid "Export to CSV"
+msgstr "Exportar a Excel"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/admin-reports/process_payments.php:106
+msgid "Permanently Delete Events(s)"
+msgstr ""
+
+# Advanced Events Registration Pro translation file
+# Copyright (C) 2010 Seth Shoultes
+# This file is distributed under the same license as the PACKAGE package.
+# Seth Shoultes <seth@smartwebutah.com>, 2010
+# For information on translating this plugin, please refer to http://codex.wordpress.org/Translating_WordPress
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/add_new_category.php:12
+#, fuzzy
+msgid "Add a Category"
+msgstr "Crear nueva categoría"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/add_new_category.php:16
+#, fuzzy
+msgid "Category Name"
+msgstr "Apellidos:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/add_new_category.php:18
+#, fuzzy
+msgid "Do you want to display the event description on the events page?"
+msgstr "¿Desea mostrar la descripción del evento en la página de registro?"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/add_new_category.php:31
+#, fuzzy
+msgid "Category Description"
+msgstr "Descripción:"
+
+# Advanced Events Registration Pro translation file
+# Copyright (C) 2010 Seth Shoultes
+# This file is distributed under the same license as the PACKAGE package.
+# Seth Shoultes <seth@smartwebutah.com>, 2010
+# For information on translating this plugin, please refer to http://codex.wordpress.org/Translating_WordPress
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/add_new_category.php:37
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:46
+msgid "Add New Category"
+msgstr "Crear nueva categoría"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/edit_event_category.php:22
+#, fuzzy
+msgid "Edit Category:"
+msgstr "Categoría del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/edit_event_category.php:27
+#, fuzzy
+msgid "Category Name:"
+msgstr "Apellidos:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/edit_event_category.php:28
+#, fuzzy
+msgid "Unique Category Identifier:"
+msgstr "Identificador único del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/edit_event_category.php:29
+#, fuzzy
+msgid "Do you want to display the category description on the events page?"
+msgstr "¿Desea mostrar la descripción del evento en la página de registro?"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/edit_event_category.php:38
+#, fuzzy
+msgid "Category Description:"
+msgstr "Descripción:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/edit_event_category.php:43
+msgid "Update Category"
+msgstr "Actualizar Categoría"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:13
+#, fuzzy
+msgid "Manage Event Categories"
+msgstr "Categorías de eventos:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:31
+#, fuzzy
+msgid "Categories have been successfully deleted from the event."
+msgstr "Los descuentos han sido borrados correctamente de la base de datos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:37
+#, fuzzy
+msgid "Current Categories"
+msgstr "Categorías de eventos:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:82
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:76
+msgid "ID"
+msgstr "ID"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:89
+#, fuzzy
+msgid "Shortcode"
+msgstr "Código para la página"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:116
+#, fuzzy
+msgid "Edit Category"
+msgstr "Actualizar Categoría"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:132
+#, fuzzy
+msgid "Delete Category"
+msgstr "Actualizar Categoría"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/category-management/index.php:170
+msgid ""
+"<h2>Unique Category Identifier</h2>\n"
+"      <p>This should be a unique identifier for the category. Example: \"category1\" (without qoutes.)</p>\n"
+"      <p>The unique ID can also be used in individual pages using the  \t[EVENT_ESPRESSO_CATEGORY event_category_id=\"category_identifier\"] shortcode.</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/add_discount.php:16
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/add_discount.php:22
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/update_discount.php:22
+#, fuzzy
+msgid "The discount code "
+msgstr "Código de descuento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/delete_discount.php:49
+msgid "Discounts have been successfully deleted from the database."
+msgstr "Los descuentos han sido borrados correctamente de la base de datos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/edit_discount.php:19
+msgid "Edit Discount:"
+msgstr "Editar descuento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/edit_discount.php:27
+msgid "Dicount Code:"
+msgstr "Código de descuento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/edit_discount.php:33
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/new_discount.php:20
+msgid "Price Discount"
+msgstr "Descuento "
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/edit_discount.php:38
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/new_discount.php:25
+msgid "Is this a percentage discount?"
+msgstr "¿El descuento es un porcentaje?"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/edit_discount.php:48
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/new_discount.php:32
+msgid "Discount Code Description"
+msgstr "Descripción del código de descuento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/edit_discount.php:54
+msgid "Update Discount"
+msgstr "Actualizar descuento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:7
+msgid "Manage Event Discounts"
+msgstr "Gestionar descuentos del evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:39
+msgid "Current Discount Codes"
+msgstr "Códigos de descuento actuales"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:48
+#, fuzzy
+msgid "Add New Discount"
+msgstr "Añadir un nuevo código de descuento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:86
+msgid "Percentage"
+msgstr "Porcentaje"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/index.php:125
+msgid "Delete Discount"
+msgstr "Borrar descuento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/new_discount.php:7
+msgid "Add a Discount Code"
+msgstr "Añadir un código de descuento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/new_discount.php:14
+msgid "Discount Code"
+msgstr "Código de descuento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/new_discount.php:38
+msgid "Add New Discount Code"
+msgstr "Añadir un nuevo código de descuento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/update_discount.php:16
+#, fuzzy
+msgid "The discount "
+msgstr "Descuento "
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/use_coupon_code.php:22
+#, fuzzy
+msgid "<p id=\"event_espresso_valid_coupon\"><strong>You are using discount code:</strong> "
+msgstr "<strong>Escoger una opción:</strong>"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/use_coupon_code.php:31
+msgid "0.00"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/use_coupon_code.php:42
+msgid "<p id=\"event_espresso_invalid_coupon\"><font color=\"red\">Sorry, that coupon code is invalid or expired.</font></p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/coupon-management/use_coupon_code.php:52
+msgid "Do you have a promo code?"
+msgstr "¿Dispone de un código promocional?"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:18
+#, fuzzy
+msgid "New Event"
+msgstr "Ver evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:23
+#, fuzzy
+msgid "Are you sure you want to cancel "
+msgstr "Está seguro de borrar el registro "
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:24
+msgid "Cancel"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:27
+msgid "Submit New Event"
+msgstr "Crear nuevo evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:46
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:150
+#, fuzzy
+msgid "Is this an active event? "
+msgstr "¿Es este un evento activo?"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:47
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:151
+#, fuzzy
+msgid "Is this an on-going event? "
+msgstr "¿Es este un evento activo?"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:48
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:152
+#, fuzzy
+msgid "Display  description? "
+msgstr "Descripción"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:49
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:153
+msgid "Attendee Limit"
+msgstr "Limite de asistentes"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:50
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:154
+#, fuzzy
+msgid "leave blank for unlimited"
+msgstr "(dejar vacío para ilimitados)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:51
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:155
+msgid "Allow group registrations?"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:52
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:156
+#, fuzzy
+msgid "Max Group Registrants"
+msgstr "Total de registrados:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:61
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:165
+#, fuzzy
+msgid "Member Options"
+msgstr "Guardar opciones"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:75
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:179
+#, fuzzy
+msgid "Event Category"
+msgstr "Categoría del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:88
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:192
+#, fuzzy
+msgid "Event to Post"
+msgstr "Eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:92
+#, fuzzy
+msgid "Create a post for this event?"
+msgstr "¿Permitir códigos promocionales para este evento?"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:105
+#, fuzzy
+msgid "Category"
+msgstr "Actualizar Categoría"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:106
+msgid "Author"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:107
+msgid "Tags"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:108
+msgid " Post templates are stored in the \"templates\" directory of the plugin."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:119
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:234
+#, fuzzy
+msgid "Event Promotions"
+msgstr "Eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:122
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:238
+#, fuzzy
+msgid "Early Registration Discount"
+msgstr "Precio del registro"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:124
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:240
+msgid "End Date:"
+msgstr "Fecha finalización:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:126
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:241
+#, fuzzy
+msgid "Percentage:"
+msgstr "Porcentaje"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:130
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:245
+#, fuzzy
+msgid "(Leave blank if not applicable)"
+msgstr "(dejar vacío para ilimitados)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:132
+#, fuzzy
+msgid "Allow discount codes? "
+msgstr "Código de descuento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:162
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:279
+#, fuzzy
+msgid "Event Questions"
+msgstr "Descripción del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:166
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:283
+#, fuzzy
+msgid "Question Groups"
+msgstr "Descripción:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:194
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:311
+#, fuzzy
+msgid "Groupon Options"
+msgstr "Opciones"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:209
+#, fuzzy
+msgid "Calendar Options"
+msgstr "Guardar opciones"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:212
+#, fuzzy
+msgid "It looks like you are using the \"<a href=\"http://wordpress.org/extend/plugins/calendar/\" target=\"_blank\" title=\"Calendar developed and supported by Kieran O'Shea\">Calendar</a>\" plugin. Would you like to add this event to the calendar?"
+msgstr "Parece que está usando el plugin de \"<a href=\"http://wordpress.org/extend/plugins/calendar/\" target=\"_blank\" title=\"Calendar developed and supported by Kieran O\\'Shea\">Calendarios</a>\". ¿Desea añadir este evento al calendario?"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:213
+msgid "Choose a <a href=\"admin.php?page=calendar-categories\">Calendar Category</a>:"
+msgstr "Escoger una <a href=\"admin.php?page=calendar-categories\">categoría de calendario</a>:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:223
+#, fuzzy
+msgid "Add to Calendar:"
+msgstr "Añadir un evento al calendario"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:243
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:332
+#, fuzzy
+msgid "Event Title"
+msgstr "Horario del Evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:250
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:339
+msgid "Unique Event Identifier:"
+msgstr "Identificador único del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:253
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:342
+#, fuzzy
+msgid "Get Shortcode"
+msgstr "Código para la página"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:254
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:343
+msgid "Get URL"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:287
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:376
+#, fuzzy
+msgid "Event Date/Times"
+msgstr "Horario del Evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:294
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:381
+#, fuzzy
+msgid "Registration / Event Dates"
+msgstr "Precio del registro"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:295
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:382
+#, fuzzy
+msgid "Event Times"
+msgstr "Horario del Evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:300
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:386
+#, fuzzy
+msgid "Registration Dates"
+msgstr "Precio del registro"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:300
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:386
+#, fuzzy
+msgid "Registration Start:"
+msgstr "Widget para registrarse en eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:301
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:387
+#, fuzzy
+msgid "Registration End:"
+msgstr "Precio del registro"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:303
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:389
+#, fuzzy
+msgid "Event Dates"
+msgstr "Fecha(s) del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:303
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:389
+#, fuzzy
+msgid "Event Start Date"
+msgstr "Fecha(s) del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:304
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:390
+#, fuzzy
+msgid "Event End Date"
+msgstr "Fecha(s) del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:316
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:402
+#, fuzzy
+msgid "Event Pricing"
+msgstr "Precios del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:337
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:422
+#, fuzzy
+msgid "Event Location"
+msgstr "Localización del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:344
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:427
+msgid "Physical Location"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:345
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:428
+#, fuzzy
+msgid "Virtual Location"
+msgstr "Localización del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:351
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:433
+msgid "Full Address (country included):"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:356
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:438
+msgid "Phone:"
+msgstr "Teléfono:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:361
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:447
+#, fuzzy
+msgid "URL of Event:"
+msgstr "Coste del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:366
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:452
+#, fuzzy
+msgid "Call in Number:"
+msgstr "Apellidos:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:378
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:464
+#, fuzzy
+msgid "Email Confirmation:"
+msgstr "<h2>Confirmaciones de e-mail</h2>"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_new_event.php:387
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:473
+msgid "Send custom confirmation emails for this event?"
+msgstr "¿Desea enviar e-mails de confirmación personalizados para este evento?"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_to_calendar.php:25
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/copy_event.php:129
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/insert_event.php:189
+msgid "The event"
+msgstr "El evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_to_calendar.php:25
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/copy_event.php:129
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/insert_event.php:192
+msgid "has been added."
+msgstr "ha sido añadido."
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/add_to_calendar.php:27
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/copy_event.php:131
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/insert_event.php:194
+msgid "There was an error in your submission, please try again. The event was not saved!"
+msgstr "Hubo un error en los datos, por favor inténtelo de nuevo. El evento no se guardó."
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:93
+msgid "Quick Overview"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:100
+msgid "View Event"
+msgstr "Ver evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:104
+#, fuzzy
+msgid "Are you sure you want to copy "
+msgstr "Está seguro de borrar el registro "
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:105
+#, fuzzy
+msgid "Duplicate Event"
+msgstr "Actualizar evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:119
+#, fuzzy
+msgid "Current Status:"
+msgstr "Eventos actuales"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:122
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/event_list.php:39
+#, fuzzy
+msgid "Attendees"
+msgstr "Asistentes:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:129
+#, fuzzy
+msgid "Are you sure you want to delete "
+msgstr "Está seguro de borrar el registro "
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:130
+#, fuzzy
+msgid "Delete Event"
+msgstr "Borrar este evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:133
+msgid "Update Event"
+msgstr "Actualizar evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:218
+#, fuzzy
+msgid "Update post for this event?"
+msgstr "URL única para este evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:221
+#, fuzzy
+msgid "Category:"
+msgstr "Categoría del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:222
+msgid "Author:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:223
+msgid "Tags:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:224
+msgid "Post templates are stored in the \"templates\" directory of the plugin."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:247
+#, fuzzy
+msgid "<strong>Allow discount codes?</strong> "
+msgstr "<strong>Escoger una opción:</strong>"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/edit_event.php:442
+#, fuzzy
+msgid "Google Map Link (for email):"
+msgstr "Enlace al mapa de Google:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/event_list.php:8
+msgid "Current Events"
+msgstr "Eventos actuales"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/event_list.php:15
+msgid "Import CSV"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/event_list.php:18
+msgid "Add New Event"
+msgstr "Añadir un nuevo evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/event_list.php:36
+#, fuzzy
+msgid "Event Start"
+msgstr "Fecha(s) del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/event_list.php:37
+#, fuzzy
+msgid "Registration Start"
+msgstr "Precio del registro"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/event_list.php:80
+msgid ""
+"<h2>Event Identifier</h2>\n"
+"      <p>The unique ID can be used in individual pages using:<br />\n"
+"\t  <span  class=\"updated fade\">[SINGLEEVENT single_event_id=\""
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/event_list.php:128
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/index.php:69
+msgid ""
+"<h2>Coupon/Promo Code</h2>\n"
+"      <p>This is used to apply discounts to events.</p>\n"
+"      <p>A coupon or promo code could can be anything you want. For example: Say you have an event that costs "
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/event_list.php:133
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/index.php:74
+msgid ""
+"<h2>Event Identifier</h2>\n"
+"      <p>This should be a unique identifier for the event. Example: \"Event1\" (without qoutes.)</p>\n"
+"      <p>The unique ID can also be used in individual pages using the [SINGLEEVENT single_event_id=\"Unique Event ID\"] shortcode.</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/event_list.php:138
+msgid ""
+"<h2>Email Confirmations</h2>\n"
+"  <p>For customized confirmation emails, the following tags can be placed in the email form and they will pull data from the database to include in the email.</p>\n"
+"  <p>[fname], [lname], [phone], [event],[description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link]</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:10
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:15
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:27
+msgid "Start Time"
+msgstr "Hora de inicio"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:10
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:27
+msgid "End Time"
+msgstr "Hora finalización"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:15
+msgid "End Time:"
+msgstr "Hora finalización:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:21
+msgid "Add Additional Time"
+msgstr "Añadir un horario adicional"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:43
+msgid "Standard Pricing"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:52
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:88
+msgid "Price"
+msgstr "Precio"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:54
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:69
+msgid "Surcharge:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:55
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:73
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:88
+#, fuzzy
+msgid "Remove Attendee"
+msgstr "Sin asistentes"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:65
+msgid "Price:"
+msgstr "Precio"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:79
+#, fuzzy
+msgid "(enter 0.00 for free events, enter 2 place decimal i.e. "
+msgstr "(dejar vacío para eventos gratuitos, indicar 2 decimales, por ejemplo 7.00)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:80
+msgid "Add A Price"
+msgstr "Añadir un precio"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:88
+msgid "Surcharge"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/functions.php:126
+#, fuzzy
+msgid "No Categories"
+msgstr "Categorías de eventos:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/index.php:11
+msgid "Event Management"
+msgstr "Gestión de eventos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/insert_event.php:184
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/update_event.php:194
+msgid "There was error finding a post template. Please verify your post templates are available."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/insert_event.php:192
+#, fuzzy
+msgid "Edit this event?"
+msgstr "Editar este evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/event-management/update_event.php:198
+msgid "Event details saved for"
+msgstr "Los detalles del evento se guardaron para "
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/edit_group.php:21
+#, fuzzy
+msgid "Edit Group"
+msgstr "Editar descuento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/edit_group.php:24
+msgid "Edit this group using the form below."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/edit_group.php:25
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/edit_group.php:27
+#, fuzzy
+msgid "Group Name:"
+msgstr "Nombre de Pila:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/edit_group.php:27
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/edit_group.php:31
+#, fuzzy
+msgid "Group Identifier:"
+msgstr "Identificador del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/edit_group.php:29
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/edit_group.php:33
+msgid "Description:"
+msgstr "Descripción:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/index.php:8
+msgid "Manage Additional Questions"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/index.php:36
+#, fuzzy
+msgid "Current Questions"
+msgstr "Descripción del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/index.php:44
+#, fuzzy
+msgid "Add New Question"
+msgstr "Añadir un nuevo evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/index.php:73
+#, fuzzy
+msgid "Question"
+msgstr "Descripción:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/index.php:79
+msgid "Type"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/index.php:82
+msgid "Required"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/index.php:123
+#, fuzzy
+msgid "Delete Question"
+msgstr "Descripción del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/delete_group.php:31
+#, fuzzy
+msgid "Question Groups have been successfully deleted."
+msgstr "Los descuentos han sido borrados correctamente de la base de datos"
+
+# Advanced Events Registration Pro translation file
+# Copyright (C) 2010 Seth Shoultes
+# This file is distributed under the same license as the PACKAGE package.
+# Seth Shoultes <seth@smartwebutah.com>, 2010
+# For information on translating this plugin, please refer to http://codex.wordpress.org/Translating_WordPress
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/edit_group.php:21
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/index.php:46
+#, fuzzy
+msgid "Add New Group"
+msgstr "Crear nueva categoría"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/edit_group.php:26
+#, fuzzy
+msgid "Group Information"
+msgstr "Información sobre la localización del evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/edit_group.php:29
+msgid "Group Order:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/edit_group.php:38
+#, fuzzy
+msgid "Questions"
+msgstr "Descripción:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/index.php:8
+msgid "Manage Additional Question Groups"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/index.php:40
+#, fuzzy
+msgid "Current Groups"
+msgstr "Eventos actuales"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/index.php:77
+#, fuzzy
+msgid "Group Name"
+msgstr "Nombre de Pila:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/index.php:81
+#, fuzzy
+msgid "Indentifier"
+msgstr "Identificador del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/index.php:84
+msgid "Description"
+msgstr "Descripción"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/index.php:87
+msgid "Order"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/index.php:128
+#, fuzzy
+msgid "Delete Question Group"
+msgstr "Descripción del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/insert_group.php:32
+#, fuzzy
+msgid "The group has been added."
+msgstr "ha sido añadido."
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/insert_group.php:35
+#, fuzzy
+msgid "There was an error in your submission, please try again. The group was not saved!"
+msgstr "Hubo un error en los datos, por favor inténtelo de nuevo. El evento no se guardó."
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/new_group.php:13
+msgid "Add new groups using the form below."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/groups/new_group.php:29
+#, fuzzy
+msgid "Add Questions:"
+msgstr "Descripción:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/questions/delete_question.php:31
+#, fuzzy
+msgid "Questions have been successfully deleted."
+msgstr "Los descuentos han sido borrados correctamente de la base de datos"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/questions/edit_question.php:21
+#, fuzzy
+msgid "Edit Question"
+msgstr "Descripción del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/questions/edit_question.php:26
+msgid "Edit the question using the form below.  By default all participants will be asked for their first name, last name, and email address."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/questions/edit_question.php:75
+msgid "Nothing found!"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/questions/new_question.php:7
+#, fuzzy
+msgid "Add New Questions"
+msgstr "Añadir un nuevo evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/form-builder/questions/new_question.php:10
+msgid "Add questions using the form below.  By default all participants will be asked for their first name, last name, and email address."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:397
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:656
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:669
+#, fuzzy
+msgid "No country selected"
+msgstr "No se seleccionó ningún descuento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:933
+msgid "New @ Shoultes.net"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:948
+msgid "Helpful Plugin Links"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:953
+msgid "Installation &amp; Usage Guide"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:954
+#, fuzzy
+msgid "Frequently Asked Questions"
+msgstr "Descripción del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:955
+msgid "Bug Submission Form"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:956
+msgid "Feature Request Form"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:971
+msgid ""
+"<h2>Email Confirmations</h2>\n"
+"  <p>For customized confirmation emails, the following tags can be placed in the email form and they will pull data from the database to include in the email.</p>\n"
+"  <p>[fname], [lname], [phone], [event], [event_link], [event_url], [description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link]</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:991
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:993
+msgid "Event Espresso must be configured. Go to"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:991
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:993
+#, fuzzy
+msgid "the Organization Settings page"
+msgstr "Configuración de la Organización"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:991
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:993
+msgid "to configure the plugin \"Page Settings.\""
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:1000
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:1002
+msgid "Event Espresso attendee data needs to be updated. Please visit the "
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:1000
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:1002
+msgid "Support page"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:1000
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/admin.php:1002
+msgid "to configure update the attendee information."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/email.php:106
+msgid "has signed up on-line for"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/email.php:107
+#, fuzzy
+msgid "Email address is"
+msgstr "Dirección de e-mail:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/email.php:109
+msgid "City:"
+msgstr "Ciudad:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/email.php:110
+#, fuzzy
+msgid "State:"
+msgstr "Provincia o estado"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/email.php:111
+msgid "Zip:"
+msgstr "CP/ZIP:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/email.php:326
+#, fuzzy
+msgid "Event Cancellation Notice"
+msgstr "Localización del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/email.php:327
+#, fuzzy
+msgid " has been cancelled."
+msgstr "ha sido añadido."
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/email.php:328
+msgid "For more information, please email "
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:43
+msgid "Add More Attendees? (click to toggle, limit "
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:45
+#, fuzzy
+msgid "Add an Additonal Attendee"
+msgstr "¿Asistentes adicionales?"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:116
+msgid "ONGOING"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:119
+msgid "EXPIRED"
+msgstr "EXPIRADO"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:122
+#, fuzzy
+msgid "ACTIVE"
+msgstr "INACTIVO"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:125
+#, fuzzy
+msgid "NOT_ACTIVE"
+msgstr "INACTIVO"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:128
+#, fuzzy
+msgid "DELETED"
+msgstr "BORRAR"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:221
+msgid "EVENT FULL"
+msgstr "PLAZAS AGOTADAS"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:284
+msgid "NO DATE SUPPLIED"
+msgstr "FALTA LA FECHA"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:324
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:327
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:458
+msgid "Free Event"
+msgstr "Evento gratuito"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:421
+#, fuzzy
+msgid "Choose an Option: "
+msgstr "<strong>Escoger una opción:</strong>"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:430
+msgid " Early Pricing"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:449
+msgid " (including "
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:454
+#, fuzzy
+msgid "Price: "
+msgstr "Precio"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:459
+#, fuzzy
+msgid "free event"
+msgstr "Evento gratuito"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:471
+#, fuzzy
+msgid "Start Time:</span> "
+msgstr "Hora de inicio"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:474
+#, fuzzy
+msgid "End Time: "
+msgstr "Hora finalización:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:479
+#, fuzzy
+msgid "Choose an Event Time:"
+msgstr "Horario del Evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:515
+#, fuzzy
+msgid "Start Time: "
+msgstr "Hora de inicio"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/functions/main.php:517
+#, fuzzy
+msgid "<br />End Time: "
+msgstr "Hora finalización:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/add_attendees_to_db.php:132
+msgid "Form Questions:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/add_attendees_to_db.php:195
+msgid "This is a free event. Details have been sent to your email."
+msgstr "Este es un evento gratuito. Los detalles se le enviarán a su e-mail."
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/add_attendees_to_db.php:196
+msgid "Your Registration data has been added to our records."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_gateways.php:9
+#, fuzzy
+msgid "Manage Payment Gateways"
+msgstr "Categorías de eventos:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_gateways.php:33
+msgid "<li><a href=\"https://www.e-junkie.com/ecom/gb.php?c=cart&i=ESPRESSO-AUTHNET-SIM-GTWY&cl=113214&ejc=2\" target=\"ej_ejc\" class=\"ec_ejc_thkbx\" onClick=\"javascript:return EJEJC_lc(this);\"><img src=\""
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_gateways.php:35
+msgid "<li class=\"red_alert\">It looks like your Authorize.net files are missing. If you did not recieve these files, please contact <a href=\"mailto:support@eventespresso.com\">support@eventespresso.com</a></li>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_gateways.php:53
+msgid "Install Payment Gateways"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_gateways.php:65
+msgid "Your gateways have been installed."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_gateways.php:77
+msgid "Please set the permissions to 775 on the following directory."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_gateways.php:83
+msgid "Your gateway files have not been moved."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_gateways.php:99
+msgid ""
+"<h2>Button Image URL</h2>\n"
+"      <p>A default payment button is provided. A custom payment button may be used, choose your image or upload a new one, and just copy the \"file url\" here (optional.)</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_gateways.php:103
+msgid ""
+"<h2>By-passing the Confirmation Page</h2>\n"
+"      <p>This will allow you to send your customers directly to the payment gateway of your choice.</p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:228
+#, fuzzy
+msgid "<p><strong>You are using discount code:</strong> "
+msgstr "<strong>Escoger una opción:</strong>"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:236
+msgid "<p><font color=\"red\">Sorry, that coupon code is invalid or expired.</font></p>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:245
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:122
+msgid "Please verify your registration details:"
+msgstr "Por favor verifique sus datos de registro:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:248
+msgid "Event Name/Price:"
+msgstr "Nombre/Precio del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:252
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:139
+msgid "Attendee Name:"
+msgstr "Nombre del asistente:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:256
+msgid "Email Address:"
+msgstr "Dirección de e-mail:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:301
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:220
+msgid "Please check your email for payment information."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:361
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:274
+msgid "<br><br><strong>Thank You "
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:363
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:276
+msgid "Our records indicate you have paid"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:364
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:277
+msgid "Our records indicate your payment is pending."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:364
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:277
+msgid "Amount pending:"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:372
+msgid "Payment By Credit Card, Debit Card or Pay Pal Account"
+msgstr "Pago por tarjeta de crédito/débito o PayPal"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:373
+msgid "(a PayPal account is not required to pay by credit card)."
+msgstr "(no se requiere una cuenta de PayPal para pagar con tarjeta de crédito)"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:374
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:283
+msgid "Payment will be in the amount of"
+msgstr "La cantidad a pagar es de"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page-tier.php:375
+msgid "PayPal Payments will be sent to:"
+msgstr "Los pagos en PayPal serán enviados a:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:117
+#, fuzzy
+msgid "Free"
+msgstr "Francés"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:127
+msgid "Event Name:"
+msgstr "Nombre del evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:133
+#, fuzzy
+msgid "Type/Price:"
+msgstr "Precio"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:165
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:293
+#, fuzzy
+msgid "<strong id=\"event_espresso_no_payment\">No Payment Necessary</strong>"
+msgstr "<strong>Precio:</strong>"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:168
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:296
+msgid "No payment gateways installed. Please install at least one payment gateway."
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:206
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:334
+msgid "<h3>No payment gateways installed. Please install at least one payment gateway.</h3>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/payment_page.php:287
+#, fuzzy
+msgid "Payment Options"
+msgstr "Guardar opciones"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/process_payments.php:32
+msgid "Problem With Your Website Payment IPN"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/process_payments.php:33
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/process_payments.php:40
+msgid "The IPN for "
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/includes/process-registration/process_payments.php:39
+msgid "Website Payment IPN Not Setup"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/templates/attendee_list.php:59
+#, fuzzy
+msgid "Attendee Listing For:"
+msgstr "Límite de asistentes:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/templates/event_list.php:92
+msgid "Date:"
+msgstr "Fecha:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/templates/event_list.php:109
+#, fuzzy
+msgid "Available Spaces:"
+msgstr "Descuentos disponibles para el evento:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/templates/event_list.php:111
+msgid "Register Online"
+msgstr "Registro on-line"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/templates/event_post.php:65
+msgid "View Map"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/templates/event_post.php:65
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/templates/event_post.php:71
+#, fuzzy
+msgid "Register"
+msgstr "Registro on-line"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/templates/registration_page.php:149
+msgid "We are sorry but this event has reached the maximum number of attendees!"
+msgstr "¡Lo sentimos pero este evento ha completado el máximo número de asistentes.!"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/templates/registration_page.php:150
+msgid "Please check back in the event someone cancels."
+msgstr "Por favor vuelva para comprobar si alguien canceló su asistencia"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/templates/registration_page.php:151
+msgid "Current Number of Attendees:"
+msgstr "Número de asistentes actuales:"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/templates/registration_page.php:185
+msgid "<h3 class=\"expired_event\">This event has passed.</h3>"
+msgstr ""
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/templates/registration_page.php:195
+#, fuzzy
+msgid "Personal Information"
+msgstr "Información sobre la localización del evento"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/templates/registration_page.php:298
+msgid "Anti-Spam Measure: Please enter the following phrase"
+msgstr "Control anti-spam: por favor escriba la siguiente frase"
+
+#: C:\Users\sshoultes\Documents\My
+#: Dropbox\Event
+#: Espresso\wp-content\plugins\event-espresso.3.0.9-beta/templates/registration_page.php:316
+#, fuzzy
+msgid "<h3>This event has expired or is no longer available.</h3>"
+msgstr "Lo lamentamos, este evento ha expirado o no está disponible."
+
+#, fuzzy
+#~ msgid "Discount Codes"
+#~ msgstr "Código de descuento"
+
+#~ msgid ""
+#~ "Payment must be made to complete registration. Please click the button "
+#~ "below to pay for your registration."
+#~ msgstr ""
+#~ "Para finalizar su registro debe cursar el pago. Por favor pulse el botón "
+#~ "de abajo para ir al sistema pagos (externo a esta web)"
+
+#~ msgid "Add New Dicount Code"
+#~ msgstr "Añadir un nuevo código de descuento"
+
+#~ msgid "Invalid E-mail ID"
+#~ msgstr "ID de e-mail incorrecto"
+
+#~ msgid "Please enter your first name."
+#~ msgstr "Por favor indique su nombre de pila."
+
+#~ msgid "Please enter your last name."
+#~ msgstr "Por favor indique sus apellidos."
+
+#~ msgid "Please Enter your Email address"
+#~ msgstr "Por favor indique su dirección de e-mail"
+
+#~ msgid "Please enter your email address."
+#~ msgstr "Por favor indique su dirección de e-mail"
+
+#~ msgid "Please enter your phone number."
+#~ msgstr "Por favor indique su teléfono."
+
+#~ msgid "Please enter your address."
+#~ msgstr "Por favor indique su dirección."
+
+#~ msgid "Please enter your city."
+#~ msgstr "Por favor indique su ciudad."
+
+#~ msgid "Please enter your state."
+#~ msgstr "Por favor indique su estado o provincia."
+
+#~ msgid "Please enter your zip code."
+#~ msgstr "Por favor indique su código postal o ZIP"
+
+#, fuzzy
+#~ msgid "Please enter your country."
+#~ msgstr "Por favor indique su ciudad."
+
+#, fuzzy
+#~ msgid "Please select your payment method."
+#~ msgstr "Por favor indique sus apellidos."
+
+#~ msgid "The following fields need to be completed before you can submit."
+#~ msgstr "Los siguientes campos necesitan completarse antes de continuar."
+
+#, fuzzy
+#~ msgid "Organization Vat Number:"
+#~ msgstr "Dirección de la organización (línea 2):"
+
+#~ msgid "Address/Street/Number:"
+#~ msgstr "Dirección/Calle/Número"
+
+#~ msgid "City/Town/Village:"
+#~ msgstr "Ciudad o población:"
+
+#~ msgid "State/County/Province:"
+#~ msgstr "Provincia o Estado (y País)"
+
+#~ msgid "<p align=\"left\"><strong>Start Time:</strong> "
+#~ msgstr "<p align=\"left\"><strong>Hora de inicio:</strong> "
+
+#~ msgid "<strong>Choose a Start Time:</strong> "
+#~ msgstr "<strong>Escoger la hora de inicio:</strong> "
+
+#~ msgid "<strong>Price:</strong>"
+#~ msgstr "<strong>Precio:</strong>"
+
+#~ msgid "The # of people who will be attending IN ADDITION TO yourself."
+#~ msgstr "Número de personas que asistirán ADEMÁS de usted."
+
+#, fuzzy
+#~ msgid "<strong>Choose payment method:</strong> "
+#~ msgstr "<strong>Escoger una opción:</strong>"
+
+#, fuzzy
+#~ msgid "Event Registration"
+#~ msgstr "Widget para registrarse en eventos"
+
+#~ msgid "ACTIVE EVENT"
+#~ msgstr "EVENTO ACTIVO"
+
+#~ msgid " Attendees:"
+#~ msgstr "Asistentes"
+
+#~ msgid "Spaces Available:"
+#~ msgstr "Plazas disponibles:"
+
+#, fuzzy
+#~ msgid "Event Full"
+#~ msgstr "ID del evento"
+
+#~ msgid "Organization Name <span>*</span>:"
+#~ msgstr "Nombre de la organización <span>*</span>:"
+
+#~ msgid "Organization Street 1 <span>*</span>:"
+#~ msgstr "Dirección de la organización (línea 1) <span>*</span>:"
+
+#~ msgid "Organization City <span>*</span>:"
+#~ msgstr "Ciudad de la Organización <span>*</span>:"
+
+#~ msgid "Organization State <span>*</span>:"
+#~ msgstr "Estado o Provincia de la organización <span>*</span>:"
+
+#~ msgid "Organization Zip Code <span>*</span>:"
+#~ msgstr "Código Postal / Zip de la organización <span>*</span>:"
+
+#, fuzzy
+#~ msgid "Organization Country<span>*</span>:"
+#~ msgstr "Ciudad de la Organización <span>*</span>:"
+
+#~ msgid ""
+#~ "<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=p/mer/"
+#~ "express_return_summary-outside\" title=\"Auto Return Overview\" target="
+#~ "\"_blank\">Auto Return URL</a> (used for return to make payments):"
+#~ msgstr ""
+#~ "<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=p/mer/"
+#~ "express_return_summary-outside\" title=\"Auto Return Overview\" target="
+#~ "\"_blank\">URL de auto-retorno</a> (usada al volver de la plataforma de "
+#~ "pagos):"
+
+#~ msgid ""
+#~ "Do You Want To Send Payment Confirmation Emails? (This option must be "
+#~ "enable to send custom mails in events)"
+#~ msgstr ""
+#~ "¿Desea enviar emails para confirmación de los pagos? (Esta opción debe "
+#~ "activarse para enviar e-mails personalizados para cada evento)"
+
+#~ msgid "Email Body:"
+#~ msgstr "Texto del e-mail:"
+
+#, fuzzy
+#~ msgid "Not active event"
+#~ msgstr "Total de eventos activos"
+
+#, fuzzy
+#~ msgid "Start Payment"
+#~ msgstr "Fecha de inicio"
+
+#, fuzzy
+#~ msgid "Please retry or contact organization."
+#~ msgstr "Por favor indique sus apellidos."
+
+#~ msgid "Export Current Attendee List To Excel"
+#~ msgstr "Exportar lista actual de asistentes a Excel"
+
+#~ msgid "Are you sure you want to delete record for"
+#~ msgstr "Está seguro de borrar el registro "
+
+#~ msgid "No Record Found"
+#~ msgstr "No hay registros"
+
+#~ msgid "Cost"
+#~ msgstr "Coste"
+
+#~ msgid "End Date"
+#~ msgstr "Fecha finalización"
+
+#~ msgid "Export To Excel"
+#~ msgstr "Exportar a Excel"
+
+#~ msgid "Attendee Management"
+#~ msgstr "Gestión de Asistentes:"
+
+#, fuzzy
+#~ msgid "Attendee #"
+#~ msgstr "Asistentes:"
+
+#~ msgid "Add An Event"
+#~ msgstr "Añadir un evento"
+
+#~ msgid "Event Description:"
+#~ msgstr "Descripción del evento:"
+
+#~ msgid "<p>This is a sample description in HTML</p>"
+#~ msgstr "<p>Esto es un ejemplo de la descripción en HTML</p>"
+
+#~ msgid "Do you want to send a custom confirmation email?"
+#~ msgstr "¿Desea enviar un e-mail de confirmación personalizado?"
+
+#~ msgid "Custom Confirmation Email For This Event:"
+#~ msgstr "E-mail de confirmación personalizado para este evento:"
+
+#~ msgid "Event Date(s):"
+#~ msgstr "Fecha(s) del evento:"
+
+#~ msgid "from"
+#~ msgstr "desde"
+
+#~ msgid "to"
+#~ msgstr "hasta"
+
+#~ msgid "Add A Time"
+#~ msgstr "Añadir un horario"
+
+#~ msgid "(leave blank for free events, enter 2 place decimal i.e. 7.00)"
+#~ msgstr ""
+#~ "(dejar vacío para eventos gratuitos, indicar 2 decimales, por ejemplo "
+#~ "7.00)"
+
+#~ msgid "(leave blank for unlimited attendees)"
+#~ msgstr "(dejar vacío para ilimitados asistentes)"
+
+#~ msgid "Allow payment for more than one person at a time?"
+#~ msgstr "¿Permitir registro/pago de varios asistentes juntos?"
+
+#~ msgid "Max Number of Additional Attendees:"
+#~ msgstr "Máximo número de asistentes adicionales:"
+
+#~ msgid "Is this event active?"
+#~ msgstr "¿El evento está activo?"
+
+#~ msgid "Y"
+#~ msgstr "S"
+
+#~ msgid "N"
+#~ msgstr "N"
+
+#~ msgid "Event Discounts:"
+#~ msgstr "Descuentos del evento:"
+
+#~ msgid "Copy This Event"
+#~ msgstr "Copiar este evento"
+
+#, fuzzy
+#~ msgid "Phone: "
+#~ msgstr "Teléfono:"
+
+#~ msgid "PLEASE UPDATE THIS EVENT"
+#~ msgstr "POR FAVOR ACTUALICE ESTE EVENTO"
+
+#~ msgid "Custom Confirmation Mail:"
+#~ msgstr "Email de confirmación personalizado:"
+
+#~ msgid "Export Payment List to Excel"
+#~ msgstr "Exportar lista de pagos a Excel"
+
+#~ msgid "Event Identifier:"
+#~ msgstr "Identificador del evento:"
+
+#~ msgid "Start time:"
+#~ msgstr "Hora de inicio:"
+
+#~ msgid "End time:"
+#~ msgstr "Hora finalización:"
+
+#, fuzzy
+#~ msgid "Allow payment for more than one person at a time? (max # people "
+#~ msgstr "¿Permitir registro/pago de varios asistentes juntos?"
+
+#~ msgid "Event Categories:"
+#~ msgstr "Categorías de eventos:"
+
+#, fuzzy
+#~ msgid "Category Shortcode for"
+#~ msgstr "Código para la página"
+
+#~ msgid "No category selected"
+#~ msgstr "No se seleccionó ninguna categoría"
+
+#~ msgid "Allow discount codes for this event?"
+#~ msgstr "¿Permitir códigos de descuento para este evento?"
+
+#~ msgid "Event Discount Codes:"
+#~ msgstr "Códigos de descuento del evento:"
+
+#, fuzzy
+#~ msgid "Discount Code:"
+#~ msgstr "Código de descuento:"
+
+#, fuzzy
+#~ msgid "discount"
+#~ msgstr "Editar descuento"
+
+#~ msgid "No discount selected"
+#~ msgstr "No se seleccionó ningún descuento"
+
+#~ msgid "Shortcode for Page:"
+#~ msgstr "Código para la página"
+
+#~ msgid "Edit"
+#~ msgstr "Editar"
+
+#~ msgid "Custom Confirmation Email:"
+#~ msgstr "Email de confirmación personalizado:"
+
+#, fuzzy
+#~ msgid "Prices:"
+#~ msgstr "Precio"
+
+#, fuzzy
+#~ msgid "Event tax percentage"
+#~ msgstr "Gestión de eventos"
+
+#, fuzzy
+#~ msgid "Promo:"
+#~ msgstr "desde"
+
+#, fuzzy
+#~ msgid "Date"
+#~ msgstr "Fecha:"
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "Actualizar evento"
+
+#, fuzzy
+#~ msgid "Select"
+#~ msgstr "Borrar"
+
+#, fuzzy
+#~ msgid "No module selected"
+#~ msgstr "No se seleccionó ningún descuento"
+
+#, fuzzy
+#~ msgid "Attendee Name/Email:"
+#~ msgstr "Nombre del asistente:"
+
+#, fuzzy
+#~ msgid "Total Price:"
+#~ msgstr "Precio"
+
+#, fuzzy
+#~ msgid "Payment module has been updated"
+#~ msgstr "¡La información del evento ha sido actualizada!"
+
+#~ msgid " <h2>PayPal Currency Settings</h2"
+#~ msgstr "<h2>Opciones de moneda de PayPal</h2>"
+
+#~ msgid " <p><strong>Email Confirmations:</strong><br"
+#~ msgstr " <p><strong>Confirmación por e-mail:</strong><br"
+
+#~ msgid "<h2>Auto Return URL</h2"
+#~ msgstr "<h2>URL de auto-retorno</h2>"
+
+#~ msgid "<h2>Cancel Return URL</h2"
+#~ msgstr "<h2>URL de cancelación</h2>"
+
+#~ msgid "<h2>Event Identifier</h2"
+#~ msgstr "<h2>Identificador del evento</h2>"
+
+#~ msgid "<h2>Main Events Page</h2"
+#~ msgstr "<h2>Página principal de eventos</h2>"
+
+#~ msgid "<h2>Notify URL</h2"
+#~ msgstr "<h2>URL de notificación</h2>"
+
+#~ msgid "<h2>PayPal Sandbox</h2"
+#~ msgstr "<h2>Entorno de pruebas de PayPal</h2>"
+
+#~ msgid ""
+#~ "<span style=\"color: #090; padding-left:20px; font-weight:bold;\">ACTIVE "
+#~ "EVENT</span>"
+#~ msgstr ""
+#~ "<span style=\"color: #090; padding-left:20px; font-weight:bold;\">EVENTO "
+#~ "ACTIVO</span>"
+
+#~ msgid ""
+#~ "<span style=\"color: #F00; padding-left:30px; font-weight:bold;"
+#~ "\">EXPIRED</span>"
+#~ msgstr ""
+#~ "<span style=\"color: #F00; padding-left:30px; font-weight:bold;"
+#~ "\">EXPIRADO</span>"
+
+#~ msgid ""
+#~ "<span style=\"color: #F00; padding-left:30px; font-weight:bold;\">NOT "
+#~ "ACTIVE</span>"
+#~ msgstr ""
+#~ "<span style=\"color: #F00; padding-left:30px; font-weight:bold;\">NO "
+#~ "ACTIVO</span>"
+
+#~ msgid "All areas marked by <span>*</span> must be filled in."
+#~ msgstr "Los campos marcados con <span>*</span> son obligatorios."
+
+#~ msgid "Custom PayPal Settings"
+#~ msgstr "Configuración de PayPal personalizada:"
+
+#~ msgid "Debugging"
+#~ msgstr "Depuración"
+
+#~ msgid "PayPal Currency"
+#~ msgstr "Moneda para uso en PayPal"
+
+#~ msgid ""
+#~ "Select the <a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/mc/"
+#~ "mc_receive-outside||https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/mc/"
+#~ "mc_convert-outside||https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/mc/"
+#~ "mc_wa-outside\" title=\"Receiving Money||Currency Conversion||Website "
+#~ "Payments\" target=\"_blank\">PayPal Currency</a> for your country:"
+#~ msgstr ""
+#~ "Seleccione la <a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/"
+#~ "mc/mc_receive-outside||https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/"
+#~ "mc/mc_convert-outside||https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/"
+#~ "mc/mc_wa-outside\" title=\"Receiving Money||Currency Conversion||Website "
+#~ "Payments\" target=\"_blank\">moneda de PayPal</a> para su país:"
+
+#~ msgid ""
+#~ "Typically payment@yourdomain.com - leave blank if you do not want to "
+#~ "accept paypal:"
+#~ msgstr ""
+#~ "Por ejemplo pagos@sudominio.com - dejar en blanco si no desea aceptar "
+#~ "pago por PayPal"

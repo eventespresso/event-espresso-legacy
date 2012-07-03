@@ -1,0 +1,2245 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Advanced Events Pro\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-02 11:49-0700\n"
+"PO-Revision-Date: 2010-12-14 01:08-0700\n"
+"Last-Translator: Seth Shoultes <support@eventespresso.com>\n"
+"Language-Team: DJP <djp0612@hotmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: C:\\Users\\sshoultes\\Downloads\\advanced-events-registration-pro\\advanced-events-registration-pro\n"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:182
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:182
+msgid "Settings"
+msgstr "Paramètres"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:183
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:183
+msgid "Events"
+msgstr "Evènements"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:192
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:192
+msgid "Events Registration Pro"
+msgstr "Event ESPRESSO"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:192
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:192
+msgid "Events Pro"
+msgstr "Events Pro"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:193
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:193
+msgid "Configure Organization"
+msgstr "Configurer l'Organisation"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:194
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:194
+msgid "Event Setup"
+msgstr "Création de l'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:195
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:195
+msgid "Discount Codes"
+msgstr "Codes de réductions"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:196
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:196
+msgid "Manage Event Categories"
+msgstr "Gérer les Catégories des événements"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:196
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:196
+msgid "Event Categories"
+msgstr "Catégories des événements"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:197
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:197
+msgid "Regform Setup"
+msgstr "Création du formulaire d'enregistrement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:198
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:198
+msgid "Attendees/Payments"
+msgstr "Participants/Paiements"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:199
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:199
+msgid "Payment Methods"
+msgstr "Modes de Règlement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:200
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:200
+msgid "Help/Support"
+msgstr "Aide/Assistance"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:260
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:260
+msgid "No ID Supplied"
+msgstr "Identification non  spécifiée"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:268
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:268
+msgid "No Category ID Supplied"
+msgstr "identification de la catégorie non spécifiée"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:287
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:287
+msgid "No Date Supplied"
+msgstr "Date non spécifiée"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:307
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:307
+msgid "Please setup Organization in the Admin Panel!"
+msgstr "Veuillez spécifier l'organisation dans le panneau d'administration"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:317
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:338
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:317
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:338
+msgid "Sorry, you did not enter the correct anti-spam phrase. Please click your browser's back button and try again."
+msgstr "Désolé,vous n'avez pas entré la phrase Anti-spam correcte. Cliquez sur le bouton retour de votre navigateur et essayez à nouveau."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:468
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:529
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:468
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:529
+msgid "No participant data has been collected."
+msgstr "Aucune données de participants n'a été collectée"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Reg ID"
+msgstr "Donnée d'enregistrement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Last Name"
+msgstr "Nom"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "First Name"
+msgstr "Prénom"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Email"
+msgstr "Email"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Address"
+msgstr "Adresse"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "City"
+msgstr "Ville"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "State"
+msgstr "Département/Province"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Zip"
+msgstr "Code Postal"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Phone"
+msgstr "Téléphone"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Payment Method"
+msgstr "Mode de règlement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Reg Date"
+msgstr "Date d'enregistrement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Pay Status"
+msgstr "Etat du règlement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Type of Payment"
+msgstr "Mode de paiement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Transaction ID"
+msgstr "Identifiant de la transaction"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Payment"
+msgstr "Paiement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Coupon Code"
+msgstr "Code du coupon de réduction"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "# Attendees"
+msgstr "#  Participants"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Date Paid"
+msgstr "Date de paiement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Event Name"
+msgstr "Nom de l'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Event Date"
+msgstr "Date de l'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Event Time"
+msgstr "Heure de l'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:478
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:478
+msgid "Answers"
+msgstr "Réponses"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/event_regis.php:535
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis.php:535
+msgid "This Is Not A Valid Selection!"
+msgstr "Ce n'est pas une sélection valide!"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/add_attedees_to_db.php:55
+msgid "Form Questions:"
+msgstr "Questions du formulaire:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/add_attedees_to_db.php:132
+msgid "has signed up on-line for"
+msgstr "a signé en ligne pour"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/add_attedees_to_db.php:133
+msgid "Email address is"
+msgstr "l'adresse Email est"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/add_attedees_to_db.php:134
+msgid "Address:"
+msgstr "Adresse :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/add_attedees_to_db.php:135
+msgid "City:"
+msgstr "Ville :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/add_attedees_to_db.php:136
+msgid "State:"
+msgstr "Département/Province :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/add_attedees_to_db.php:137
+msgid "Zip:"
+msgstr "Code Postal :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/add_attedees_to_db.php:138
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:293
+msgid "Phone:"
+msgstr "Téléphone :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/add_attedees_to_db.php:248
+msgid "This is a free event. Details have been sent to your email."
+msgstr "Cet événement est gratuit. Les détails ont été envoyés à votre adresse email."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/add_attedees_to_db.php:250
+msgid "Payment must be made to complete registration. Please click the button below to pay for your registration."
+msgstr "Le paiement doit être effectué pour terminer l'enregistrement. Veuillez cliquer sur le bouton ci-dessous pour régler votre Participation."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/add_attedees_to_db.php:253
+msgid "Your Registration data has been added to our records."
+msgstr "Vos données d'enregistrement ont été ajoutées."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:5
+msgid "Manage Event Discounts"
+msgstr "Gérez les codes de réduction"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:17
+msgid "Discounts have been successfully deleted from the database."
+msgstr "Les codes de réduction ont été supprimés de notre base de données."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:33
+msgid "The discount "
+msgstr "La réduction"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:35
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:52
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:54
+msgid "The discount code "
+msgstr "Le code de réduction"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:66
+msgid "Add New Dicount Code"
+msgstr "Ajouter un code de réduction"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:75
+msgid "Add a Discount Code"
+msgstr "Ajouter un code de réduction"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:79
+msgid "Discount Code"
+msgstr "Code de réduction"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:80
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:127
+msgid "Price Discount"
+msgstr "Prix Réduit"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:81
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:128
+msgid "Is this a percentage discount?"
+msgstr "Est-ce un pourcentage de réduction?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:82
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:129
+msgid "Yes"
+msgstr "Oui"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:83
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:130
+msgid "No"
+msgstr "Non"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:85
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:132
+msgid "Discount Code Description"
+msgstr "Description du code de réduction"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:92
+msgid "Add New Discount Code"
+msgstr "Ajout d'un code de réduction"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:121
+msgid "Edit Discount:"
+msgstr "Editez les réductions"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:126
+msgid "Dicount Code:"
+msgstr "Code de réduction:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:139
+msgid "Update Discount"
+msgstr "Mise a jour des réductions"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:153
+msgid "Current Discount Codes"
+msgstr "Code de réduction actuel"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:158
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:169
+msgid "Delete"
+msgstr "Supprimez"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:159
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:170
+msgid "ID"
+msgstr "identification"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:160
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:171
+msgid "Name"
+msgstr "Nom"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:161
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:172
+msgid "Price"
+msgstr "Prix"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:162
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:173
+msgid "Description"
+msgstr "Description"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:163
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:174
+msgid "Percentage"
+msgstr "Pourcentage"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:164
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:175
+msgid "Action"
+msgstr "Action"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:200
+msgid "Edit Discount"
+msgstr "Editez la réduction"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:205
+msgid "No Record Found!"
+msgstr "Pas d'enregistrement trouvé!"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:211
+msgid "Check All"
+msgstr "Contrôlez tout"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_event_discounts.php:212
+msgid "Delete Discount"
+msgstr "Supprimez la réduction"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_support.php:58
+msgid "Run Upgrade Script"
+msgstr "Executez la mise a jour"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_support.php:212
+msgid "Event data has been updated!"
+msgstr "Les données d'enregistrement ont été mises a jour!"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin_support.php:214
+msgid "There was an error in your submission, please try again."
+msgstr "Il y a une erreur dans votre soumission, essayez à nouveau."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:20
+msgid ""
+"<p>Add New Question</p>\n"
+"\t<p>Enter a new question below.  The type refers to the way a participant can respond to the question.\n"
+"\t<li>Text will allow a single line of text to be entered</li>\n"
+"\t<li>Text area will allow multiple lines of text to be entered</li>\n"
+"\t<li>Single will prompt the participant with choices, only allowing a single response</li>\n"
+"\t<li>Multiple will prompt the participant with choices, allowing multiple responses</li>\n"
+"\tWhen using single or multiple, enter the possible values in the value box separated by commas.\n"
+"\t</p>"
+msgstr ""
+"<p>Entrez une nouvelle question Ci-dessous.Le type se réfère a la façon dont un participant peut répondre a la question.\n"
+"<li>une seule ligne de texte ne pourra être ajoutée</li>\n"
+"<li>Le secteur de texte pourra accepter l'entée de multiples lignes de texte</li>\n"
+"<li>Unique va n'autoriser qu'une seule réponse</li>\n"
+"<li>Multiple va autoriser les choix aux participants,permettant les réponses multiple</li>\n"
+"Lorsque vous utilisez simple ou multiple, entrez les valeurs possibles dans la case de valeur séparé par des virgules.\n"
+"</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:32
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:95
+msgid "Question:"
+msgstr "Question:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:36
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:99
+msgid "Type:"
+msgstr "Type:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:38
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:104
+msgid "Text"
+msgstr "Texte"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:39
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:105
+msgid "Text Area"
+msgstr "Zone de Texte"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:40
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:106
+msgid "Single"
+msgstr "Unique"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:41
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:107
+msgid "Multiple"
+msgstr "Mutiple"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:42
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:108
+msgid "Drop Down"
+msgstr "Drop Down"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:46
+msgid "Values:"
+msgstr "Valeurs:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:50
+msgid "Required:"
+msgstr "Requis:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:81
+msgid ""
+"<p>Edit Question</p>\n"
+"\t\t\t\t<p>Edit question below.  The type refers to the way a participant can respond to the question.\n"
+"\t\t\t\t<li>Text will allow a single line of text to be entered</li>\n"
+"\t\t\t\t<li>Text area will allow multiple lines of text to be entered</li>\n"
+"\t\t\t\t<li>Single will prompt the participant with choices, only allowing a single response</li>\n"
+"\t\t\t\t<li>Multiple will prompt the participant with choices, allowing multiple responses</li>\n"
+"\t\t\t\tWhen using single or multiple, enter the possible values in the value box separated by commas.</p>"
+msgstr ""
+"<p>Editez la Question</p>\n"
+"<p>Editez la question Ci-dessous.Le type se réfère a la façon dont un participant peut répondre a la question.\n"
+"<li>une seule ligne de texte ne pourra être ajoutée</li>\n"
+"<li>Le secteur de texte pourra accepter l'entée de multiples lignes de texte</li>\n"
+"<li>Unique va n'autoriser qu'une seule réponse</li>\n"
+"<li>Multiple va autoriser les choix aux participants,permettant les réponses multiple</li>\n"
+"Lorsque vous utilisez simple ou multiple, entrez les valeurs possibles dans la case de valeur séparé par des virgules.\n"
+"</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:112
+msgid "Values"
+msgstr "Valeurs"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:202
+msgid "Please select event to Add/Edit/Delete Registration Questions:"
+msgstr "SVP sélectionnez l'événement pour Ajouter/Editer/Supprimer les Questions d'enregistrement:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:218
+msgid "Event Questions -"
+msgstr "Questions sur l'événement-"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_form_config.php:221
+msgid "Add additional questions to the registration form below.  By default all participants will be asked for their email address, first name, last name, street address, city, state, zip code, and phone number."
+msgstr "Ajouter une question additionnelle pour la forme d'enregistrement ci-dessous. Par défaut tous les participants vont se voir demander leur adresse Email, leur prénom, leur Nom de Famille, leur Adresse, Ville, Etat, Code Postal, et numéro de téléphone"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:98
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:103
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:108
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:113
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:118
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:123
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:128
+msgid "Invalid E-mail ID"
+msgstr "Adresse Email Invalide"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:136
+msgid "Please enter your first name."
+msgstr "Veuillez entrer votre Prénom"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:140
+msgid "Please enter your last name."
+msgstr "Veuillez entrer votre Nom"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:146
+msgid "Please Enter your Email address"
+msgstr "Veuillez entrer votre Adresse Mail"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:156
+msgid "Please enter your email address."
+msgstr "Veuillez entrer votre Adresse Mail"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:161
+msgid "Please enter your phone number."
+msgstr "Veuillez entrer votre numéro de téléphone."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:165
+msgid "Please enter your address."
+msgstr "Veuillez entrer votre Adresse"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:169
+msgid "Please enter your city."
+msgstr "Veuillez entrer votre ville"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:174
+msgid "Please enter your state."
+msgstr "Veuillez entrer votre département ou province;"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:178
+msgid "Please enter your zip code."
+msgstr "Veuillez entrer votre code postal"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:183
+msgid "Please enter your country."
+msgstr "Veuillez entrer votre Pays"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:193
+msgid "Please select your payment method."
+msgstr "Veuillez sélectionner votre mode de paiement."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:231
+msgid "The following fields need to be completed before you can submit."
+msgstr "Les champs suivants doivent être remplis avant de pouvoir vous inscrire."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:259
+msgid "We are sorry but this event has reached the maximum number of attendees!"
+msgstr "Nous sommes désolé mais cette manifestation a atteint le maximum de participants possible!"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:260
+msgid "Please check back in the event someone cancels."
+msgstr "Veuillez nous visiter à nouveau au cas ou nous aurions un désistement."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:261
+msgid "Current Number of Attendees:"
+msgstr "Nombre de Participants :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:267
+msgid "Start Date:"
+msgstr "Date de début :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:270
+msgid "Description:"
+msgstr "Description:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:274
+msgid "Attendee data"
+msgstr "Coordonnées du participant:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:276
+msgid "First Name:"
+msgstr "Prénom :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:279
+msgid "Last Name:"
+msgstr "Nom :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:283
+msgid "Organization Name:"
+msgstr "Nom de l'organisateur :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:283
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:286
+msgid "(for billing, optional)"
+msgstr "(pour facturation, optionnel)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:286
+msgid "Organization Vat Number:"
+msgstr "numéro de TVA de l'organisateur:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:290
+msgid "Email:"
+msgstr "Email :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:296
+msgid "Address/Street/Number:"
+msgstr "Adresse/Rue/Numéro :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:299
+msgid "City/Town/Village:"
+msgstr "Ville/Village :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:302
+msgid "State/County/Province:"
+msgstr "Pays/Province :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:305
+msgid "Zip/Postal Code:"
+msgstr "Code Postal :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:308
+msgid "Country:"
+msgstr "Pays :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:329
+msgid "Payment data"
+msgstr "Données de Règlement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:337
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:353
+msgid "<p align=\"left\"><strong>Start Time:</strong> "
+msgstr "<p align=\"left\"><strong>Date de début :</strong> "
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:343
+msgid "<strong>Choose a Start Time:</strong> "
+msgstr "<strong>Choisisez une heure de début :</strong> "
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:368
+msgid "<strong>Price:</strong>"
+msgstr "<strong>Prix :</strong>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:372
+msgid "Free Event"
+msgstr "Evénement gratuit"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:375
+msgid "<strong>Choose an Option:</strong>"
+msgstr "<strong>Choisssez une Option :</strong>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:391
+msgid "Additional attendees?"
+msgstr "Participants supplémentaires ?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:401
+msgid "The # of people who will be attending IN ADDITION TO yourself."
+msgstr "Le nombre de personnes qui vont participer EN PLUS de vous-même."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:413
+msgid "Do you have a promo code?"
+msgstr "Avez-vous un coupon de réduction ?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:419
+msgid "<strong>Choose payment method:</strong> "
+msgstr "<strong>Choisissez votre mode de paiement:</strong> "
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:439
+msgid "No payment method active. Please contact organization for payment."
+msgstr "Aucun mode de paiement actif. Veuillez contacter l'organisateur pour votre règlement."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:454
+msgid "Anti-Spam Measure: Please enter the following phrase"
+msgstr "Mesures Anti-Spam: SVP entrez la phrase suivante"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:459
+msgid "Submit"
+msgstr "Valider"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_register_attendees.php:467
+msgid "Sorry, this event has expired or is no longer available."
+msgstr "Désolé, cette manifestation est terminée ou n'est plus disponible."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:56
+msgid "Event Registration"
+msgstr "Enregistrement à l'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:119
+msgid "Events stats"
+msgstr "Statistiques de l'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:120
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:164
+msgid "View Attendees/Payments"
+msgstr "Voir les Participants/Paiements"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:135
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:178
+msgid "Total Active Events"
+msgstr "Tous les événements actifs"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:136
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:179
+msgid "All Time Attendees"
+msgstr "Totalité des participants"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:137
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:180
+msgid "All Time Paid"
+msgstr "Totalité des paiements"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:138
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:181
+msgid "All Time Not Paid"
+msgstr "Totalité des impayés"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:139
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:182
+msgid "All Time Payments"
+msgstr "Totalité des paiements"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:163
+msgid "Event Registration with PayPal IPN"
+msgstr "Enregistrement événement par PayPal IPN"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:198
+msgid "Next 3 Upcoming Events"
+msgstr "Les 3 événements suivants"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_regis_dashboard_widget.php:234
+msgid "Attendees:"
+msgstr "Participants :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/functions.php:27
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:97
+msgid "EXPIRED"
+msgstr "EXPIRÉ"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/functions.php:29
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:99
+msgid "ACTIVE EVENT"
+msgstr "ÉVÉNEMENT ACTIF"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/functions.php:31
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:101
+msgid "NOT ACTIVE"
+msgstr "NON ACTIF"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/functions.php:54
+msgid " Attendees:"
+msgstr "Participants :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/functions.php:60
+msgid "NO DATE SUPPLIED"
+msgstr "AUCUNE DATE SOUMISE"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/get_event_details.php:29
+msgid "EVENT FULL"
+msgstr "ÉVÉNEMENT COMPLET"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/get_event_details.php:47
+msgid "Price: "
+msgstr "Prix :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/get_event_details.php:57
+msgid "Date:"
+msgstr "Date :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/get_event_details.php:60
+msgid "Spaces Available:"
+msgstr "Places disponibles :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/get_event_details.php:63
+msgid "Register Online"
+msgstr "Enregistrement en ligne"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/get_event_details_table.php:22
+msgid "Event Full"
+msgstr "Événement Complet"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/get_event_details_table.php:26
+msgid "Unlimited"
+msgstr "Illimité"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:73
+msgid "Organization details saved."
+msgstr "Détails de l'organisateur sauvegardés."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:81
+msgid "Organization Settings"
+msgstr "Détails de l'organisateur"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:88
+msgid "Set up Your Organization to Recieve Payments"
+msgstr "Configurez votre Organisation pour recevoir les Paiements"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:100
+msgid "Organization Name <span>*</span>:"
+msgstr "Nom de l'organisateur<span>*</span>:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:104
+msgid "Organization Street 1 <span>*</span>:"
+msgstr "Adresse Rue 1 de l'organisateur <span>*</span>:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:108
+msgid "Organization Street 2:"
+msgstr "Adresse Rue 2"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:112
+msgid "Organization City <span>*</span>:"
+msgstr "Ville de l'organisateur <span>*</span>:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:116
+msgid "Organization State <span>*</span>:"
+msgstr "Département de l'organisateur <span>*</span>:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:120
+msgid "Organization Zip Code <span>*</span>:"
+msgstr "Code postal de l'organisateur <span>*</span>:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:124
+msgid "Organization Country<span>*</span>:"
+msgstr "Pays de l'organisateur<span>*</span>:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:128
+msgid "Primary contact email <span>*</span>:"
+msgstr "Email du contact principal <span>*</span>:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:134
+msgid "Select the currency for your country:"
+msgstr "Sélectionnez la monnaie de votre Pays"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:151
+msgid "reCAPTCHA Settings"
+msgstr "reCAPTCHA détails"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:158
+msgid "<strong>Use <a href=\"http://recaptcha.net/||http://recaptcha.net/learnmore.html||https://admin.recaptcha.net/accounts/login/?next=/recaptcha/sites/||http://recaptcha.net/apidocs/captcha/client.html\" title=\"reCAPTCHA Home Page||What is reCAPTCHA||reCAPTCHA Account||reCAPTCHA Client API Documentation\" target=\"_blank\">reCAPTCHA</a> to block spam registrations</strong>:"
+msgstr "<strong>Use <a href=\"http://recaptcha.net/||http://recaptcha.net/learnmore.html||https://admin.recaptcha.net/accounts/login/?next=/recaptcha/sites/||http://recaptcha.net/apidocs/captcha/client.html\" title=\"reCAPTCHA Home Page||What is reCAPTCHA||reCAPTCHA Account||reCAPTCHA Client API Documentation\" target=\"_blank\">reCAPTCHA</a> to block spam registrations</strong>:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:168
+msgid "Public Key:"
+msgstr "Clé Publique:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:171
+msgid "Private Key:"
+msgstr "Clé Privée:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:173
+msgid "Look &amp; Feel Customization"
+msgstr "Look &amp; Feel Customization"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:174
+msgid "Theme:"
+msgstr "Thème"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:177
+msgid "Red"
+msgstr "Rouge"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:178
+msgid "White"
+msgstr "Blanc"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:179
+msgid "Blackglass"
+msgstr "Blackglass"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:180
+msgid "Clean"
+msgstr "Sobre"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:186
+msgid "Language:"
+msgstr "Langue :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:189
+msgid "English"
+msgstr "Anglais"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:190
+msgid "Spanish"
+msgstr "Espagnol"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:191
+msgid "Dutch"
+msgstr "Néerlandais"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:192
+msgid "French"
+msgstr "Français"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:193
+msgid "German"
+msgstr "Allemand"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:194
+msgid "Portuguese"
+msgstr "Portuguais"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:195
+msgid "Russian"
+msgstr "Russe"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:196
+msgid "Turkish"
+msgstr "Turc"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:204
+msgid ""
+"<h2>Cancel Return URL</h2>\n"
+"\t\t\t\t\t\t<p>reCAPTCHA helps prevent automated abuse of your site (such as comment spam or bogus registrations) by using a <a href=\"http://recaptcha.net/captcha.html\">CAPTCHA</a> to\n"
+"\t\t\tensure that only humans perform certain actions.</p>\n"
+"\t\t\t<p>You must sign up for a <a href=\"https://admin.recaptcha.net/accounts/signup/?next=%2Frecaptcha%2Fsites%2F\" target=\"_blank\">free reCAPTCHA</a> account to use it with this plugin. If you already have a reCAPTCHA account enter your \"Public\" and \"Private\" keys on this page.</p>"
+msgstr ""
+"<h2>Cancel Return URL</h2>\n"
+"\t\t\t\t\t\t<p>reCAPTCHA helps prevent automated abuse of your site (such as comment spam or bogus registrations) by using a <a href=\"http://recaptcha.net/captcha.html\">CAPTCHA</a> to\n"
+"\t\t\tensure that only humans perform certain actions.</p>\n"
+"\t\t\t<p>You must sign up for a <a href=\"https://admin.recaptcha.net/accounts/signup/?next=%2Frecaptcha%2Fsites%2F\" target=\"_blank\">free reCAPTCHA</a> account to use it with this plugin. If you already have a reCAPTCHA account enter your \"Public\" and \"Private\" keys on this page.</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:210
+msgid "Event Listing Types"
+msgstr "Liste des types d'événements"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:211
+msgid "If set to \"Single Event\", only one event will be displayed on the page.</p> <p class=\"red_text\">**Attention** Setting this option to \"Single Event\" will disable the \"Event Registration Widget\" and \"SINGLEEVENT\" shortcode functionality."
+msgstr "If set to \"Single Event\", only one event will be displayed on the page.</p> <p class=\"red_text\">**Attention** Setting this option to \"Single Event\" will disable the \"Event Registration Widget\" and \"SINGLEEVENT\" shortcode functionality."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:217
+msgid "Special pages for payment modules"
+msgstr "Pages Spéciales pour les modules de règlement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:221
+msgid "Main registration page:"
+msgstr "Page d'enregistrement principale"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:224
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:245
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:259
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:273
+msgid "Main page"
+msgstr "Page Principale"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:230
+msgid ""
+"<h2>Main Events Page</h2>\n"
+"\t\t\t\t\t\t<p>This is the page that displays your events.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{EVENTREGIS}</strong> shortcode.</p>"
+msgstr ""
+"<h2>Page d'enregistrement principale</h2>\n"
+"\t\t\t\t\t\t<p>C'est la page qui décrit votre événement.</p>\n"
+"\t\t\t\t\t\t<p>Cette page doit contenir le shortcode <strong>{EVENTREGIS}</strong> .</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:234
+msgid "Do you want to show a single event or all events on the registration page?<span>*"
+msgstr "Désirez-vous montrer un seul événement sur la page d'enregistrement ?<span>*"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:237
+msgid "Single Event"
+msgstr "Événement unique"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:238
+msgid "All Events"
+msgstr "Tous les événements"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:242
+msgid "<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=p/mer/express_return_summary-outside\" title=\"Auto Return Overview\" target=\"_blank\">Auto Return URL</a> (used for return to make payments):"
+msgstr "<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=p/mer/express_return_summary-outside\" title=\"Auto Return Overview\" target=\"_blank\">Auto Return URL</a> (used for return to make payments):"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:251
+msgid ""
+"<h2>Auto Return URL</h2>\n"
+"\t\t\t\t\t\t<p>The URL to which the payer\"s browser is redirected after completing the payment; for example, a URL on your site that displays a \"Thank you for your payment\" page.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{EVENTREGPAY}</strong> shortcode.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+"<h2>Auto Return URL</h2>\n"
+"\t\t\t\t\t\t<p>C'est L'URL vers laquelle le navigateur du payeur est redirigé après avoir complété le paiement, une URL sur votre site qui montre \"Merci pour votre paiement\" page.</p>\n"
+"\t\t\t\t\t\t<p>Cette page doit contenir<strong>{EVENTREGPAY}</strong> shortcode.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />Cette page doit ètre cachée dans votre menu de naviguation. Exclure cette page en utilisant  \"Exclude Pages\" plugin de http://wordpress.org/extend/plugins/exclude-pages/ ou en utilisant \"exclude\" le paramètre \"wp_list_pages\" template tag. SVP referez vous a  http://codex.wordpress.org/Template_Tags/wp_list_pages Pour plus d'information sur la façon d'exclure des pages.</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:256
+msgid "Cancel Return URL (used for cancelled payments):"
+msgstr "Annuler l'URL de retour (utilisé pour abandonner un paiement):"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:265
+msgid ""
+"<h2>Cancel Return URL</h2>\n"
+"\t\t\t\t\t\t<p>A URL to which the payer's browser is redirected if payment is cancelled; for example, a URL on your website that displays a \"Payment Canceled\" page.</p>\n"
+"\t\t\t\t\t\t<p>This should be a page on your website that contains a cancelled message. No short tags are needed.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+"<h2>Cancel Return URL</h2>\n"
+"\t\t\t\t\t\t<p>Une URL vers laquelle le navigateur du payeur est redirigé si le paiement est annullé; par exemple, une URL sur votre site qui montre une \"Payment Canceled\" page.</p>\n"
+"\t\t\t\t\t\t<p>Cela doit etre une page sur votre site qui contient un message d'annulation. aucun short tags n'est nécessaire.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />Cette page doit ètre cachée dans votre menu de naviguation. Exclure cette page en utilisant  \"Exclude Pages\" plugin de http://wordpress.org/extend/plugins/exclude-pages/ ou en utilisant \"exclude\" le paramètre \"wp_list_pages\" template tag. SVP référez vous a  http://codex.wordpress.org/Template_Tags/wp_list_pages Pour plus d'information sur la façon d'exclure des pages.</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:279
+msgid ""
+"<h2>Notify URL</h2>\n"
+"\t\t\t\t\t\t<p>The URL to which PayPal posts information about the transaction, in the form of Instant Payment Notification messages.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{EVENTPAYPALTXN}</strong> shortcode.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+"<h2>Notify URL</h2>\n"
+"\t\t\t\t\t\t<p>L'  URL vers laquelle PayPal poste les information sur la transaction, sous la forme d'un message de notification de paiement insatantané.</p>\n"
+"\t\t\t\t\t\t<p>cette page doit contenir <strong>{EVENTPAYPALTXN}</strong> shortcode.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />Cette page doit ètre cachée dans votre menu de naviguation. Exclure cette page en utilisant  \"Exclude Pages\" plugin de http://wordpress.org/extend/plugins/exclude-pages/ ou en utilisant \"exclude\" le paramètre \"wp_list_pages\" template tag. SVP referez vous a  http://codex.wordpress.org/Template_Tags/wp_list_pages Pour plus d'information sur la façon d'exclure des pages.</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:292
+msgid "Email Settings"
+msgstr "Configuration de l'Email"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:296
+msgid "Do You Want To Send Payment Confirmation Emails? (This option must be enable to send custom mails in events)"
+msgstr "Desirez-vous envoyer des Emails de confirmation? (Cette option doit être souscrite pour expédier des emails personalisés dans les événements."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:299
+msgid "Example"
+msgstr "Exemple"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:301
+msgid "Payment Confirmation Email:"
+msgstr "Email de Confirmation de Paiement :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:302
+msgid "Email Subject:"
+msgstr "Sujet de l'Email :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:303
+msgid "Email Body:"
+msgstr "Contenu de l'Email :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:309
+msgid "Default Registration Confirmation Email"
+msgstr "Email par défaut de confirmation d'enregistrement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:325
+msgid "Save Options"
+msgstr "Sauvegardez les options"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:330
+msgid ""
+"<h2>Email Settings</h2><p><strong>Email Confirmations:</strong><br>\n"
+"For customized confirmation emails, the following tags can be placed in the email form and they will pull data from the database to include in the email.</p>\n"
+"<p>[fname], [lname], [phone], [event],[description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [start_date], [start_time], [end_date], [end_time]</p>"
+msgstr ""
+"<h2>Email Settings</h2><p><strong>Email de Confirmations:</strong><br>\n"
+"Pour les Emails de confirmation personnalisés, les tags suivants peuvent être placés dans la forme de l'email , ils spécifierons les données qui seront fixées par la base de donnée pour les inclures dans l'email.</p>\n"
+"<p>[fname], [lname], [phone], [event],[description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [start_date], [start_time], [end_date], [end_time]</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/organization_config_mnu.php:336
+msgid ""
+" <h2>Sample Mail Send:</h2>\n"
+"\n"
+"<p>***This is an automated response - Do Not Reply***</p>\n"
+"<p>Thank you [fname] [lname] for registering for [event]. We hope that you will find this event both informative and enjoyable. Should have any questions, please contact [contact].</p>\n"
+"<p>If you have not done so already, please submit your payment in the amount of [cost].</p>\n"
+"<p>Click here to review your payment information [payment_url].</p>\n"
+"<p>Thank You.</p>"
+msgstr ""
+" <h2>Exemple de Mail expédié</h2>\n"
+"\n"
+"<p>***Ceci est une réponse automatique - Ne répondez pas***</p>\n"
+"<p>Merci [fname] [lname] de vous enregistrez pour [event]. Nous espérons que vous l'apprécierez. Si vous avez des questions , veuillez contacter [contact].</p>\n"
+"<p>Si vous ne l'avez pas encore fait, merci d'effectuer votre paiement pour un montant de[cost].</p>\n"
+"<p>Cliquez ici pour voir vos informations de paiement [payment_url].</p>\n"
+"<p>Merci.</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment_page.php:18
+msgid "Please contact organization to complete payment. Thank you."
+msgstr "Veuillez contacter l'organisateur pour finaliser votre paiement. Merci."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment_page.php:40
+msgid "Not active event"
+msgstr "Événement non actif"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment_page.php:94
+#, php-format
+msgid "You are using discount code: %s (%s discount)"
+msgstr "Vous utilisez un coupon de réduction: %s (%s discount)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment_page.php:99
+#, php-format
+msgid "Sorry, %s coupon code is invalid or expired, normal prices will be charged."
+msgstr "Désolé, %s le coupon de réduction est n'est pas valide ou est expiré. Le prix normal sera appliqué."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment_page.php:155
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment_page.php:166
+msgid "VAT"
+msgstr "TVA"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment_page.php:218
+msgid "Please verify your registration details:"
+msgstr "Veuillez vérifier vos détails d'enregistrement:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment_page.php:241
+msgid "Start Payment"
+msgstr "Démarrer le Paiement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment_page.php:296
+msgid "Your payment status was changed to:"
+msgstr "L'état de votre paiement a été changé en :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment_page.php:297
+msgid "Thank you for registering, you will receive confirmation e-mail"
+msgstr "Merci de votre enregistrement, vous allez recevoir une confirmation par Email"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment_page.php:305
+msgid "Payment process was cancelled by payment gateway."
+msgstr "La procédure de paiement a été annulée par la plateforme de paiement."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment_page.php:306
+msgid "Please retry or contact organization."
+msgstr "Veuillez réessayer ou contactez l'organisateur."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/widget.php:11
+msgid "A widget to display your upcoming events."
+msgstr "Un widget pour afficher vos événements à venir."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/widget.php:17
+msgid "Event Registration Widget"
+msgstr "Widget d'enregistrement à un événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/widget.php:79
+msgid "Upcoming Events"
+msgstr "Evénements à venir"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/widget.php:84
+msgid "Title:"
+msgstr "Titre :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_list_attendees.php:26
+msgid "Export Current Attendee List To Excel"
+msgstr "Exporter la liste actuelle des participants sous Excel"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_list_attendees.php:87
+msgid "DELETE"
+msgstr "SUPPRIMEZ"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_list_attendees.php:87
+msgid "Are you sure you want to delete record for"
+msgstr "Etes-vous certain de vouloir supprimer votre enregistrement pour"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:29
+msgid "No Record Found"
+msgstr "aucun enregistrement trouvé"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:34
+msgid "Select an event to view attendee details and payments"
+msgstr "Selectionnez un événement pour en voir le détail et les paiements"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:39
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:52
+msgid "Event ID"
+msgstr "ID d'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:41
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:54
+msgid "Cost"
+msgstr "Coût"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:42
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:55
+msgid "Start Date"
+msgstr "Date de début"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:43
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:56
+msgid "End Date"
+msgstr "Date de Fin"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:44
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:57
+msgid "Status"
+msgstr "Etat"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:46
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:59
+msgid "Export"
+msgstr "Exportez"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:121
+msgid "Export To Excel"
+msgstr "Exportez sous Excel"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:122
+msgid "View Attendees"
+msgstr "Voir les Participants"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:122
+msgid "Edit Event"
+msgstr "Modifier l'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/admin_process_payments.php:122
+msgid "View Event"
+msgstr "Voir l'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/edit_attendee_record.php:129
+msgid "Attendee Management"
+msgstr "Gestion des participants"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/edit_attendee_record.php:131
+msgid "Attendee details saved for "
+msgstr "Détails des participant sauvegardé pour"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/edit_attendee_record.php:136
+msgid "Attendee #"
+msgstr "Participants #"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/edit_attendee_record.php:144
+msgid "Organization:"
+msgstr "Organisateur :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/edit_attendee_record.php:145
+msgid "Vat Number:"
+msgstr "Numéro de TVA:"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/edit_attendee_record.php:163
+msgid "How is attendee paying for registration?"
+msgstr "Comment les participants règlent-ils leur enregistrement ?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/edit_attendee_record.php:198
+msgid "Update Record"
+msgstr "Mise a jour de l'enregistrement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/edit_attendee_record.php:201
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/enter_attendee_payments.php:134
+msgid "Attendees and Payments"
+msgstr "Partipants et Paiements"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/enter_attendee_payments.php:107
+msgid "None"
+msgstr "Aucun"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/enter_attendee_payments.php:108
+msgid "Completed"
+msgstr "Complété"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/enter_attendee_payments.php:109
+msgid "Pending"
+msgstr "En attente"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/list_attendee_payments.php:23
+msgid "Customer(s) have been successfully deleted from the event."
+msgstr "Ce(s) participant(s) a (ont) été supprimés avec succès de l'événement."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/list_attendee_payments.php:33
+msgid "Amount"
+msgstr "Montant"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/list_attendee_payments.php:34
+msgid "Coupon"
+msgstr "Coupon"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/list_attendee_payments.php:35
+msgid "Quantity"
+msgstr "Quantité"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/list_attendee_payments.php:106
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:90
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/index.php:130
+msgid "View event page"
+msgstr "Voir la page de l'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/list_attendee_payments.php:109
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:93
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:68
+msgid "End Date:"
+msgstr "Date de fin :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/list_attendee_payments.php:115
+msgid "Export to Excel"
+msgstr "Exportation sous Excel"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/list_attendee_payments.php:159
+msgid "Edit Payment"
+msgstr "Modifier le Paiement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/list_attendee_payments.php:159
+msgid "Edit Attendee"
+msgstr "Edition de(s) participant(s)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/list_attendee_payments.php:171
+msgid "Delete Attendee(s)"
+msgstr "Suppression de(s) participant(s)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/admin-reports/list_attendee_payments.php:183
+msgid ""
+"<h2>More Info</h2>\n"
+"      <p>This URL can be used to initiate transactions to test the Instant Payment Notification (IPN). </p>\n"
+"      <p>PayPal has an <a href=\"https://developer.paypal.com/us/cgi-bin/devscr?cmd=_ipn-link-session\" target=\"_blank\">Instant Payment Notification (IPN) simulator</a>. This is where the URL can be used to test your installation of this program.</p>\n"
+"      <p>Copy the URL of this link and paste it into the <a href=\"https://developer.paypal.com/us/cgi-bin/devscr?cmd=_ipn-link-session\" target=\"_blank\">Instant Payment Notification (IPN) simulator</a> to test. </p>"
+msgstr ""
+"<h2>More Info</h2>\n"
+"      <p>Cette URL peut être utilisée pour initialiser les transactions et tester les Notifications de Paiement Instantané (IPN). </p>\n"
+"      <p>PayPal a un <a href=\"https://developer.paypal.com/us/cgi-bin/devscr?cmd=_ipn-link-session\" target=\"_blank\">Instant Payment Notification (IPN) simulator</a>. C'est ici que l'URL peut être utilisée pour tester l'installation de ce programme.</p>\n"
+"      <p>Copiez l' URL de ce lien et collez le dans <a href=\"https://developer.paypal.com/us/cgi-bin/devscr?cmd=_ipn-link-session\" target=\"_blank\">Instant Payment Notification (IPN) simulator</a> pour  test. </p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/add_new_category.php:33
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/index.php:26
+msgid "Add New Category"
+msgstr "Ajouter une nouvelle Catégorie"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/edit_event_category.php:18
+msgid "Edit Category:"
+msgstr "Edition des Catégories :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/edit_event_category.php:23
+msgid "Category Name:"
+msgstr "Nom de la Catégorie :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/edit_event_category.php:24
+msgid "Unique Category Identifier:"
+msgstr "Identifiant unique pour la Catégorie :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/edit_event_category.php:25
+msgid "Do you want to display the event description on the events page?"
+msgstr "Voulez-vous montrer la description de l'événement sur le page des événements ?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/edit_event_category.php:38
+msgid "Category Description:"
+msgstr "Description de la Catégorie"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/edit_event_category.php:45
+msgid "Update Category"
+msgstr "Mise à jour de la Catégorie"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/index.php:21
+msgid "Categories have been successfully deleted from the event."
+msgstr "Les Catégories ont été supprimées avec succès de l'événement."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/index.php:37
+msgid "Current Categories"
+msgstr "Catégories actuelles"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/index.php:45
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/index.php:58
+msgid "Identifier"
+msgstr "Identifiant"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/index.php:47
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/index.php:60
+msgid "Display Description"
+msgstr "Afficher la description"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/index.php:48
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/index.php:61
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/index.php:69
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/index.php:88
+msgid "Edit Category"
+msgstr "Editez la Catégorie"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/index.php:100
+msgid "Delete Category"
+msgstr "Supprimez la Catégorie"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/category_management/index.php:104
+msgid ""
+"<h2>Unique Category Identifier</h2>\n"
+"      <p>This should be a unique identifier for the category. Example: \"category1\" (without qoutes.)</p>\n"
+"      <p>The unique ID can also be used in individual pages using the  \t[EVENT_REGIS_CATEGORY event_category_id=\"category_identifier\"] shortcode.</p>"
+msgstr ""
+"<h2>Identifiant Unique de Catégorie</h2>\n"
+"      <p>Ceci doit être un identifiant unique pour la catégorie. Exemple: \"category1\" (sans les guillemets.)</p>\n"
+"      <p>L'identifiant unique ID peut être également utilisé dans les pages individuelles en utilisant le shortcode \t[EVENT_REGIS_CATEGORY event_category_id=\"category_identifier\"] .</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_event_to_db.php:82
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_to_calendar.php:29
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/copy_event.php:92
+msgid "The event"
+msgstr "L'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_event_to_db.php:82
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_to_calendar.php:29
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/copy_event.php:92
+msgid "has been added."
+msgstr "a été ajouté."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_event_to_db.php:84
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_to_calendar.php:31
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/copy_event.php:94
+msgid "There was an error in your submission, please try again. The event was not saved!"
+msgstr "Il y a une erreur dans votre soumission, veuillez essayer à nouveau. L'événement n'a pas été sauvegardé !"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:8
+msgid "Add An Event"
+msgstr "Ajouter un événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:14
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:74
+msgid "Event Location Information"
+msgstr "Lieu de l'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:20
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:137
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:84
+msgid "Do you want to display the event description on registration page?"
+msgstr "Souhaitez-vous afficher la description de l'événement sur la page d'enregistrement ?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:24
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:140
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:82
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:88
+msgid "Event Description:"
+msgstr "Description de l'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:25
+msgid "<p>This is a sample description in HTML</p>"
+msgstr "<p>Ceci est un exemple de description en HTML</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:29
+msgid "Do you want to send a custom confirmation email?"
+msgstr "Souhaitez-vous envoyer un Email de confirmation personnalisé ?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:33
+msgid "Custom Confirmation Email For This Event:"
+msgstr "Email de confirmation personnalisé pour cet événement :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:34
+msgid "<p>***This is an automated response - Do Not Reply***</p> <p>Thank you [fname] [lname] for registering for [event].</p><p>Start time: [start_time]</p><p>Location:<br>[location]</p><p>Phone: [location_phone]</p><p>Google Map: [google_map_link]</p><p> We hope that you will find this event both informative and enjoyable. Should have any questions, please contact [contact].</p><p>If you have not done so already, please submit your payment in the amount of $[cost].</p><p>Click here to review your payment information [payment_url].</p><p>Thank You.</p>"
+msgstr "<p>***Ceci est une réponse automatique- Ne répondez pas***</p> <p>Merci [fname] [lname] de vous être enregistré pour [event].</p><p>Heure de début: [start_time]</p><p>Lieu :<br>[location]</p><p>téléphone: [location_phone]</p><p>Google Map: [google_map_link]</p><p> Nous espérons que vous trouverez cet évènement agréable. Si vous avez des questions, veuillez contacter  [contact].</p><p>Si vous ne l'avez pas encore fait,soumettez votre paiement pour un montant de [cost] Euros.</p> <p>Cliquez ici pour voir le détail des informations de paiement [payment_url].</p><p>Merci.</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:41
+msgid "Submit New Event"
+msgstr "Soumettre un nouvel événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:47
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:121
+msgid "Event Name:"
+msgstr "Nom de l'événement :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:48
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:124
+msgid "Unique Event Identifier:"
+msgstr "Identifiant Unique de l'événement :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:50
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:136
+msgid "Event Date(s):"
+msgstr "Date(s) de l'événement :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:52
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:138
+msgid "from"
+msgstr " à partir de "
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:68
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:155
+msgid "to"
+msgstr "jusqu'à"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:85
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:181
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:174
+msgid "Event Times:"
+msgstr "Horaires de l'événement :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:90
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:102
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:214
+msgid "Start Time"
+msgstr "heure de début"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:91
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:102
+msgid "End Time:"
+msgstr "heure de fin"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:95
+msgid "Add A Time"
+msgstr "ajouter une heure"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:108
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:235
+msgid "Cost of the Event:"
+msgstr "Coût de cet événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:113
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:200
+msgid "Price:"
+msgstr "Prix :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:118
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:248
+msgid "Add A Price"
+msgstr "Ajouter un prix"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:119
+msgid "(leave blank for free events, enter 2 place decimal i.e. 7.00)"
+msgstr "(laisser en blanc si l'événement est gratuit, entrer 2 décimales ex 7.00)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:135
+msgid "Attendee Limit:"
+msgstr "Limite max pour les participants :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:136
+msgid "(leave blank for unlimited attendees)"
+msgstr "(laisser en blanc pour un nombre illimité de participants)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:137
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:224
+msgid "Allow payment for more than one person at a time?"
+msgstr "Autoriser le paiement pour plus d'une personne à la fois?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:140
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:228
+msgid "Max Number of Additional Attendees:"
+msgstr "Nombre de participants supplémentaires max :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:144
+msgid "Is this event active?"
+msgstr "Cet événement est-il actif ?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:146
+msgid "Y"
+msgstr "O"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:147
+msgid "N"
+msgstr "N"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:150
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:192
+msgid "Event Category:"
+msgstr "Catégorie de l'événement :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:164
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:288
+msgid "Allow promo codes for this event?"
+msgstr "Autorisez les coupons Promo pour cet événement ?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/add_new_event.php:169
+msgid "Event Discounts:"
+msgstr "Réductions :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:8
+msgid "Current Events"
+msgstr "Evénements en cours"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:103
+msgid "Edit this Event"
+msgstr "Modifier cet événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:110
+msgid "Copy This Event"
+msgstr "Dupliquer cet événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:110
+msgid "Are you sure you want to copy "
+msgstr "Êtes-vous certain(e) de vouloir dupliquer ?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:117
+msgid "Delete This Event"
+msgstr "Supprimer cet événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:117
+msgid "Are you sure you want to delete "
+msgstr "Êtes-vous certain(e) de vouloir SUPPRIMER ?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:126
+msgid "Event Location: "
+msgstr "Lieu de l'événement :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:130
+msgid "Phone: "
+msgstr "Téléphone :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:132
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:78
+msgid "Google Map Link:"
+msgstr "lien Google maps"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:144
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:153
+msgid "PLEASE UPDATE THIS EVENT"
+msgstr "VEUILLEZ ACTUALISER CET ÉVÉNEMENT"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:149
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:100
+msgid "Send custom confirmation emails for this event?"
+msgstr "Expédier des Emails de confirmation personnalisés pour cet événement?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:159
+msgid "Custom Confirmation Mail:"
+msgstr "Email de confirmation personnalisé"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:168
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:171
+msgid "No Attendees"
+msgstr "Aucun participants"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:172
+msgid "Export Payment List to Excel"
+msgstr "Exportez la liste des paiements sous Excel"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:178
+msgid "Event Identifier:"
+msgstr "Identifiant de l' événement :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:188
+msgid "Start time:"
+msgstr "Heure de début"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:188
+msgid "End time:"
+msgstr "Heure de fin"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:193
+msgid "Event Prices:"
+msgstr "Prix de l'événement :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:205
+msgid "Tax mode"
+msgstr " mode de taxes"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:209
+msgid "Allow payment for more than one person at a time? (max # people "
+msgstr "Permettre le paiement pour plus d'une personne a la fois (max # people "
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:212
+msgid "Event Categories:"
+msgstr "Catégories des événements :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:225
+msgid "Category Shortcode for"
+msgstr "Shortcode de la catégorie pour"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:226
+msgid "Use this shortcode to display all events assigned to this category:"
+msgstr "Utilisez ce shortcode pour afficher tous les événements assignés à cette catégorie :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:235
+msgid "No category selected"
+msgstr "Aucune catégorie sélectionnée"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:239
+msgid "Allow discount codes for this event?"
+msgstr "Autoriser les coupons promo pour cet événement ?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:242
+msgid "Event Discount Codes:"
+msgstr "Coupon de réduction de l'événement :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:255
+msgid "Discount Code:"
+msgstr "Coupon de réduction :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:256
+msgid "Use this coupon/discount code to get a"
+msgstr "Utilisez ce coupon/code de réduction pour obtenir"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:256
+msgid "discount"
+msgstr "une réduction"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:264
+msgid "No discount selected"
+msgstr "Aucun coupon de réduction sélectionné"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:269
+msgid "Options"
+msgstr "Options"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:272
+msgid "Unique Url for this event:"
+msgstr "Identifiant unique pour cet événement :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:276
+msgid "Shortcode for Page:"
+msgstr "Shortcode pour la page :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:281
+msgid "It looks like you are using the \"<a href=\"http://wordpress.org/extend/plugins/calendar/\" target=\"_blank\" title=\"Calendar developed and supported by Kieran O'Shea\">Calendar</a>\" plugin. Would you like to add this event to the calendar?"
+msgstr "Il semblerait que vous utilisiez le \"<a href=\"http://wordpress.org/extend/plugins/calendar/\" target=\"_blank\" title=\"Calendar developed and supported by Kieran O'Shea\">Calendar</a>\" plugin. Voulez-vous ajouter cet événement au calendrier?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:285
+msgid "Choose a <a href=\"admin.php?page=calendar-categories\">Calendar Category</a>:"
+msgstr "Choisissez une <a href=\"admin.php?page=calendar-categories\">Catégorie du calendrier</a> :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/display_event_details.php:300
+msgid "Add Event to Calendar"
+msgstr "Ajouter l'événement au calendrier"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:68
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/index.php:137
+msgid "Edit"
+msgstr "Modifier"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:76
+msgid "Full Address (country included):"
+msgstr "Adresse complète (Pays inclus) :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:96
+msgid "Email Confirmation:"
+msgstr "Email de confirmation :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:105
+msgid "Custom Confirmation Email:"
+msgstr "Email de Confirmation personalisé :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:114
+msgid "Update Event"
+msgstr "Mise à jour de l'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:119
+msgid "Name and Date/Time:"
+msgstr "Nom et Date/Heure :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:127
+msgid "Is this an active event?"
+msgstr "Cet événement est-il actif ?"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:188
+msgid "Add Additional Time"
+msgstr "Ajouter une heure additionnelle"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:214
+msgid "End Time"
+msgstr "Heure de fin"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:222
+msgid "Attendee Limit"
+msgstr "Limite max de participants"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:223
+msgid "(leave blank for unlimited)"
+msgstr "(laissez en blanc pour illimité)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:233
+msgid "Prices:"
+msgstr "Prix :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:249
+msgid "(leave blank for free events, enter 2 place decimal i.e. "
+msgstr "(laisser en blanc pour les événements gratuits, entrez la place de deux décimales ex.)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:265
+msgid "Event tax percentage"
+msgstr "Pourcentage de taxes pour l'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:269
+msgid "Add tax percentage to attendees from:"
+msgstr "Ajouter un pourcentage de taxes pour les participants à :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:273
+msgid "Never add (taxes are included in prices)"
+msgstr "Ne jamais ajouter (les taxes sont incluses dans le prix)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:274
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:275
+msgid "only from "
+msgstr "uniquement de"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:275
+msgid " and from EU with no VAT number"
+msgstr "et pour les EU sans numéro de TVA"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:276
+msgid "Always Add"
+msgstr "Toujours ajouter"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:285
+msgid "Promo:"
+msgstr "Promo :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/edit_event.php:293
+msgid "Available Event Discounts:"
+msgstr "Réductions disponibles pour cet événement :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/index.php:14
+msgid "Event Management"
+msgstr "Gestion de l'événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/index.php:19
+msgid "Add New Event"
+msgstr "Ajouter un nouvel événement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/index.php:66
+msgid "Date"
+msgstr "Date"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/index.php:68
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/index.php:137
+msgid "Attendees"
+msgstr "Participants"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/index.php:137
+msgid "View"
+msgstr "Afficher"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/index.php:151
+msgid ""
+"<h2>Coupon/Promo Code</h2>\n"
+"      <p>This is used to apply discounts to events.</p>\n"
+"      <p>A coupon or promo code could can be anything you want. For example: Say you have an event that costs "
+msgstr ""
+"<h2>Coupon/Code Promo</h2>\n"
+"      <p>Ceci est utilisé pour appliquer un code promo à l'événement.</p>\n"
+"      <p>Un coupon ou un code promo peut être ce que vous voulez. Par exemple : dites que vous avez un événement qui coute"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/index.php:156
+msgid ""
+"<h2>Event Identifier</h2>\n"
+"      <p>This should be a unique identifier for the event. Example: \"Event1\" (without qoutes.)</p>\n"
+"      <p>The unique ID can also be used in individual pages using the [SINGLEEVENT single_event_id=\"Unique Event ID\"] shortcode.</p>"
+msgstr ""
+"<h2>Identifiant de l'événement</h2>\n"
+"      <p>Ceci devrait être un identifiant unique pour l'événement. Exemple: \"Event1\" (sans les guillemets.)</p>\n"
+"      <p>L'identifiant Unique peut aussi être utilisé dans une page individuelle en insérant [SINGLEEVENT single_event_id=\"Unique Event ID\"] shortcode.</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/index.php:161
+msgid ""
+"<h2>Email Confirmations</h2>\n"
+"  <p>For customized confirmation emails, the following tags can be placed in the email form and they will pull data from the database to include in the email.</p>\n"
+"  <p>[fname], [lname], [phone], [event],[description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link]</p>"
+msgstr ""
+"<h2>Email de Confirmation</h2>\n"
+"  <p>Pour les emails de confirmation personnalisés, les tags suivants peuvent être placé dans le contenu de l'email et ceci insèrera les données venant de la base de donnée .</p>\n"
+"  <p>[fname], [lname], [phone], [event],[description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link]</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/index.php:166
+msgid ""
+"<h2>Tax Modes</h2>\n"
+"  <p>Taxes are charged depending on country relationship between attendant and organization, and also if attendant is particular or have organization VAT number.</p>"
+msgstr ""
+"<h2>Modes des Taxes</h2>\n"
+"  <p>Les taxes sont établies en tenant compte des relations entre le pays des participants et de l'organisateur, et tiendra compte également si le participant est un particulier ou possède un numéro de TVA de société.</p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/event_management/update_event.php:90
+msgid "Event details saved for"
+msgstr "Détails de l'événement sauvegardés pour"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:95
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:228
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:100
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:101
+msgid "<p><strong>You are using discount code:</strong> "
+msgstr "<p><strong>Vous utilisez un coupon de réduction :</strong> "
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:103
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:236
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:123
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:109
+msgid "<p><font color=\"red\">Sorry, that coupon code is invalid or expired.</font></p>"
+msgstr "<p><font color=\"red\">Désolé, ce coupon n'est pas valide ou est expiré.</font></p>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:115
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:248
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:135
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:122
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/order.php:138
+msgid "Event Name/Price:"
+msgstr "Nom de l'événement/Prix :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:119
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:252
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:139
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:126
+msgid "Attendee Name:"
+msgstr "Nom du Participant :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:123
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:256
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:143
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:130
+msgid "Email Address:"
+msgstr "Adresse e-mail :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:128
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:261
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:271
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:148
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:158
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:135
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:145
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/order.php:147
+msgid "Total Registrants:"
+msgstr "Total Enregistrés :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:210
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:301
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:191
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:172
+msgid "Please check your email for payment information."
+msgstr "Veuillez vérifier vos Emails pour les informations de paiement."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:270
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:361
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:251
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:232
+msgid "<br><br><strong>Thank You "
+msgstr "<br><br><strong>Merci"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:272
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:363
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:253
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:234
+msgid "Our records indicate you have paid"
+msgstr "Nos enregistrement indiquent que vous avez payé"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:273
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:364
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:254
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:235
+msgid "Our records indicate your payment is pending."
+msgstr "Nos enregistrements indiquent que votre paiement est en attente"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:273
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:364
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:254
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:235
+msgid "Amount pending:"
+msgstr "En attente du montant :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:281
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:372
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:262
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:243
+msgid "Payment By Credit Card, Debit Card or Pay Pal Account"
+msgstr "Paiement par carte de crédit ou compte Paypal"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:282
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:373
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:263
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:244
+msgid "(a PayPal account is not required to pay by credit card)."
+msgstr "(Un compte Paypal n'est pas nécessaire pour régler par carte de crédit)."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:283
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:374
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:264
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:245
+msgid "Payment will be in the amount of"
+msgstr "Le paiement sera d'un montant de"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/a_payment_page.php:284
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:375
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:265
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:246
+msgid "PayPal Payments will be sent to:"
+msgstr "Les règlements Paypal seront envoyés à :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:57
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:61
+#, php-format
+msgid "Taxes of %s%% not included for attendees from %s"
+msgstr "Taxes de %s%% non incluses pour les participants de %s"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:58
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:62
+#, php-format
+msgid "Taxes of %s%% not included for attendees from European Union (EU)"
+msgstr "Taxes de %s%% non incluses pour les partipants de l'Union Europeenne (EU)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:59
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:63
+#, php-format
+msgid "Taxes of %s%% not included"
+msgstr "Taxes of %s%% non incluses"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:60
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:64
+msgid "Taxes are included in prices"
+msgstr "Les Taxes sont incluses dans les prix"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:78
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:14
+msgid "No configuration values for payment methods"
+msgstr "Aucune valeur configurée pour les méthodes de paiement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:121
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:68
+msgid "U.S. Dollars ($)"
+msgstr "U.S. Dollars ($)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:122
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:69
+msgid "Australian Dollars (A $)"
+msgstr "Australian Dollars (A $)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:123
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:70
+msgid "Pounds Sterling (&pound;)"
+msgstr "Livres Sterling (&pound;)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:124
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:71
+msgid "Canadian Dollars (C $)"
+msgstr "Canadian Dollars (C $)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:125
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:72
+msgid "Czech Koruna"
+msgstr "Czech Koruna"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:126
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:73
+msgid "Danish Krone"
+msgstr "Danish Krone"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:127
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:74
+msgid "Euros (&#8364;)"
+msgstr "Euros (€)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:128
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:75
+msgid "Hong Kong Dollar ($)"
+msgstr "Hong Kong Dollar ($)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:129
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:76
+msgid "Hungarian Forint"
+msgstr "Hungarian Forint"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:130
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:77
+msgid "Israeli Shekel"
+msgstr "Israeli Shekel"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:131
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:78
+msgid "Yen (&yen;)"
+msgstr "Yen (&yen;)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:132
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:79
+msgid "Mexican Peso"
+msgstr "Mexican Peso"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:133
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:80
+msgid "New Zealand Dollar ($)"
+msgstr "New Zealand Dollar ($)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:134
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:81
+msgid "Norwegian Krone"
+msgstr "Norwegian Krone"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:135
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:82
+msgid "Polish Zloty"
+msgstr "Polish Zloty"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:136
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:83
+msgid "Singapore Dollar ($)"
+msgstr "Singapore Dollar ($)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:137
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:84
+msgid "Swedish Krona"
+msgstr "Swedish Krona"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:138
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:85
+msgid "Brazilian Real (only for Brazilian users)"
+msgstr "Brazilian Real (only for Brazilian users)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:139
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:86
+msgid "Malaysian Ringgits (only for Malaysian users)"
+msgstr "Malaysian Ringgits (only for Malaysian users)"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:140
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:87
+msgid "Philippine Pesos"
+msgstr "Philippine Pesos"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:141
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:88
+msgid "Taiwan New Dollars"
+msgstr "Taiwan New Dollars"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:142
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:89
+msgid "Thai Baht"
+msgstr "Thai Baht"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/configuration
+#: (copia).php:170
+msgid "Update"
+msgstr "Mettre à jour"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:271
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:158
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:145
+msgid "Reg. ID:"
+msgstr "ID d'enregistrement :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page-tier.php:271
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:158
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/p_payment_page.php:145
+msgid "Name:"
+msgstr "Nom :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:109
+msgid "0.00"
+msgstr "0.00"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/payment_page.paypal.php:173
+msgid "<strong>No Payment Necessary</strong>"
+msgstr "<strong>Aucun paiement nécessaire</strong>"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/paypal.class.php:143
+msgid "Pay Registration Fee"
+msgstr "Payez le montant de l'enregistrement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/paypal.class.php:251
+msgid "Field Name"
+msgstr "Nom du champ"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/not-used/paypal.class.php:252
+msgid "Value"
+msgstr "Montant"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:92
+msgid "Payment module has been activated, please test configuration."
+msgstr "Le module de paiement a été activé, veuillez tester la configuration."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:105
+msgid "Payment module has been deactivated."
+msgstr "Le module de paiement a été désactivé."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:113
+msgid "Upload New Payment Module"
+msgstr "Téléchargez le nouveau module de paiement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:119
+msgid "This is not yet implemented, please wait until next version."
+msgstr "Ceci n'a pas été implémenté, veuillez attendre la prochaine version."
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:128
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:138
+msgid "Select"
+msgstr "Sélectionnez"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:130
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:140
+msgid "Logo"
+msgstr "Logo "
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:158
+msgid "Active"
+msgstr "Actif"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:158
+msgid "Inactive"
+msgstr "Inactif"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:164
+msgid "Edit Module"
+msgstr "Modifier le module"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:172
+msgid "Activate Module"
+msgstr "Activer le module"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/configuration.php:173
+msgid "Deactivate Module"
+msgstr "Désactiver le module"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:8
+msgid "No module selected"
+msgstr "Aucun module sélectionné"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/edit_payment_module.php:130
+msgid "Update Payment Module"
+msgstr "Mettre à jour le module de paiement"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/order.php:142
+msgid "Attendee Name/Email:"
+msgstr "Nom du participant/Email :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/order.php:152
+msgid "Register Ref. Code:"
+msgstr "Enregistrer le code en ref. :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/order.php:156
+msgid "Total Price:"
+msgstr "Prix total :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/order.php:161
+msgid "Comments:"
+msgstr "Commentaires :"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/oscommerce_functions.php:139
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/oscommerce_functions.php:398
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/oscommerce_functions.php:412
+msgid "No country selected"
+msgstr "Aucun Pays sélectionné"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/update_payment_module.php:23
+msgid "Payment module has been updated"
+msgstr "Le module de paiement a été mis a jour"
+
+#: C:\Users\sshoultes\Downloads\advanced-events-registration-pro\advanced-events-registration-pro/includes/payment/update_payment_module.php:25
+msgid "Error: payment module was not updated."
+msgstr "Erreur: le module de paiement n'a pas été mis a jour."
+
