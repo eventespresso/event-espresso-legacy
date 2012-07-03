@@ -1,0 +1,4504 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Advanced Events Pro\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-12-17 00:30-0700\n"
+"PO-Revision-Date: 2010-12-17 00:30-0700\n"
+"Last-Translator: Seth Shoultes <support@eventespresso.com>\n"
+"Language-Team: DJP <djp0612@hotmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: /Users/sethshoultes/Dropbox/Event Espresso/wp-content/plugins/event-espresso.3.0.17\n"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:263
+#, fuzzy
+msgid "Event Espresso"
+msgstr "Events Pro"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:263
+#, fuzzy
+msgid "Event Manager"
+msgstr "Gestion de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:266
+msgid "Event Espresso - General Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:266
+#, fuzzy
+msgid "General Settings"
+msgstr "Configuration de l'Email"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:269
+msgid "Event Espresso - Event Setup"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:269
+msgid "Event Setup"
+msgstr "Création de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:273
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:274
+msgid "Event Espresso - Simple Shopping Cart"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:273
+#, fuzzy
+msgid "Additional Items"
+msgstr "Participants supplémentaires ?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:274
+msgid "Item Groups"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:278
+#, fuzzy
+msgid "Event Espresso - Attendees/Payments"
+msgstr "Voir les Participants/Paiements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:278
+msgid "Attendees/Payments"
+msgstr "Participants/Paiements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:281
+#, fuzzy
+msgid "Event Espresso - Manage Event Categories"
+msgstr "Gérer les Catégories des événements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:281
+msgid "Event Categories"
+msgstr "Catégories des événements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:284
+msgid "Event Espresso - Email Manager"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:284
+msgid "Email Manager"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:289
+msgid "Event Espresso - Member Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:289
+#, fuzzy
+msgid "Member Settings"
+msgstr "Paramètres"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:292
+msgid "Event Espresso - General Coupons"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:292
+msgid "General Coupons"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:296
+#, fuzzy
+msgid "Groupons"
+msgstr "Coupon"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:296
+#, fuzzy
+msgid "Groupon Codes"
+msgstr "Code du coupon de réduction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:302
+msgid "Event Espresso - Gateway Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:302
+#, fuzzy
+msgid "Gateway Settings"
+msgstr "Paramètres"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:307
+#, fuzzy
+msgid "Event Espresso - Form Questions"
+msgstr "Questions sur l'événement-"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:307
+#, fuzzy
+msgid "Form Questions"
+msgstr "Questions du formulaire:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:310
+msgid "Event Espresso - Form Groups"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:310
+msgid "Form Groups"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:315
+msgid "Event Espresso - Social Media Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:315
+msgid "Social Media"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:320
+msgid "Event Espresso - Calendar Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:320
+#, fuzzy
+msgid "Calendar Settings"
+msgstr "Configuration de l'Email"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:324
+msgid "Event Espresso - Addons"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:324
+#, fuzzy
+msgid "Addons"
+msgstr "Adresse"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:327
+msgid "Event Espresso - Help/Support"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:327
+msgid "Help/Support"
+msgstr "Aide/Assistance"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:352
+msgid "Settings"
+msgstr "Paramètres"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:353
+msgid "Events"
+msgstr "Evènements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:422
+msgid "Please setup Organization in the Admin Panel!"
+msgstr "Veuillez spécifier l'organisation dans le panneau d'administration"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Group"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Reg ID"
+msgstr "Donnée d'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Last Name"
+msgstr "Nom"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "First Name"
+msgstr "Prénom"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Email"
+msgstr "Email"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Address"
+msgstr "Adresse"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "City"
+msgstr "Ville"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "State"
+msgstr "Département/Province"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Zip"
+msgstr "Code Postal"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Phone"
+msgstr "Téléphone"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Payment Method"
+msgstr "Mode de règlement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Reg Date"
+msgstr "Date d'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Pay Status"
+msgstr "Etat du règlement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Type of Payment"
+msgstr "Mode de paiement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Transaction ID"
+msgstr "Identifiant de la transaction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Payment"
+msgstr "Paiement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Coupon Code"
+msgstr "Code du coupon de réduction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "# Attendees"
+msgstr "#  Participants"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Date Paid"
+msgstr "Date de paiement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Event Name"
+msgstr "Nom de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+#, fuzzy
+msgid "Price Option"
+msgstr "Prix Réduit"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Event Date"
+msgstr "Date de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:459
+msgid "Event Time"
+msgstr "Heure de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:610
+msgid "No participant data has been collected."
+msgstr "Aucune données de participants n'a été collectée"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/espresso.php:616
+msgid "This Is Not A Valid Selection!"
+msgstr "Ce n'est pas une sélection valide!"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:9
+#, fuzzy
+msgid "Manage Payment Gateways"
+msgstr "Gérer les Catégories des événements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:61
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:87
+msgid "Move Your Payment Gateways"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:67
+msgid "Modifying and adding payment gateways is easy."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:70
+msgid "You just need to add/edit the appropriate files in the following location."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:73
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:112
+#, fuzzy
+msgid "Path:"
+msgstr "Date :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:76
+msgid "Remember, if updates are made or features are added to these templates in the future. You will need to make the updates to your customized templates."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:99
+msgid "Your gateways have been moved."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:110
+msgid "The permissions on your templates directory are incorrect."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:111
+msgid "Please set the permissions to 775 on the following directory."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:117
+msgid "If you plan on adding additional payment gateways. Please use the link below to move your gateway files to a safe place."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:118
+msgid "Your gateway files have not been moved."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:119
+#, php-format
+msgid "Click here to <a href='%s'>Move your files</a> to a safe place."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:134
+msgid ""
+"<h2>Button Image URL</h2>\n"
+"      <p>A default payment button is provided. A custom payment button may be used, choose your image or upload a new one, and just copy the \"file url\" here (optional.)</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/payment_gateways.php:138
+msgid ""
+"<h2>By-passing the Confirmation Page</h2>\n"
+"      <p>This will allow you to send your customers directly to the payment gateway of your choice.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/PaymentGateway.php:216
+msgid "Field Name"
+msgstr "Nom du champ"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/PaymentGateway.php:217
+msgid "Value"
+msgstr "Montant"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/process_payments.php:42
+msgid "Problem With Your Website Payment IPN"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/process_payments.php:43
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/process_payments.php:50
+msgid "The IPN for "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/process_payments.php:49
+msgid "Website Payment IPN Not Setup"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/authnet_ipn.php:40
+msgid "Thank You!"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/authnet_ipn.php:41
+msgid "Your transaction has been processed."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/authnet_ipn.php:46
+#, fuzzy
+msgid "There was an error processing your transaction!"
+msgstr "Il y a une erreur dans votre soumission, essayez à nouveau."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/authnet_vars.php:23
+msgid "Reg. ID:"
+msgstr "ID d'enregistrement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/authnet_vars.php:23
+msgid "Name:"
+msgstr "Nom :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/authnet_vars.php:23
+msgid "Total Registrants:"
+msgstr "Total Enregistrés :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/authnet_vars.php:60
+msgid "Debug Mode Is Turned On"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:13
+msgid "Authorize.net settings saved."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:19
+#, fuzzy
+msgid "Authorize.net Settings"
+msgstr "Détails de l'organisateur"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:39
+msgid "Activate Authorize.net?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:42
+#, fuzzy
+msgid "Deactivate Authorize.net?"
+msgstr "Désactiver le module"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:46
+msgid "The Authorize.net gateway is installed. Would you like to activate it?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:73
+msgid "Authorize.net Login I.D."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:80
+msgid "Authorize.net Transaction Key"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:87
+msgid "Button Image URL: "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:95
+msgid "Image URL:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:101
+msgid "(used for your business/personal logo on the Authorize.net payment page)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:106
+msgid "Relay Response URL :"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:111
+msgid "Use the test mode feature for Autorize.net?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:117
+#, fuzzy
+msgid "By-pass the payment confirmation page?"
+msgstr "Email de Confirmation de Paiement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:120
+msgid "Yes"
+msgstr "Oui"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:121
+msgid "No"
+msgstr "Non"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:125
+msgid "Current Button Image:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:133
+msgid "Update Authorize.net Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:137
+msgid ""
+"<h2>Relay Response</h2>\n"
+"      <p>This shows the specific the URL to which the gateway should return the relay response for a transaction. This the page should be set in your Authorize.net account. Login to Authorize.net, goto Account > Response/Receipt URLs > Add URL and enter the following URL.</p>\n"
+"\t  <p><strong>Relay Response URL:</strong> "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:145
+msgid "Authorize.net Image URL (logo for payment page)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:148
+msgid "The URL of the image displayed as your logo in the header of the Authorize.net checkout pages."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/authnet/settings.php:152
+msgid ""
+"<h2>Authorize.net Test Mode</h2>\n"
+"      <p>Test Mode allows you to submit test transactions to the payment gateway. Transactions that are submitted while Test Mode is ON are NOT actually processed. The result of a transaction depends on the card number submitted, and the invoice amount. If you want a transaction to be approved, use one of the following card numbers.</p><p>370000000000002 (American Express)<br />\n"
+"6011000000000012 (Discover)<br />\n"
+"5424000000000015 (Master Card)<br />\n"
+"4007000000027 (Visa)<br />\n"
+"</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/bank_payment_vars.php:10
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/settings.php:86
+msgid "Name on Account:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/bank_payment_vars.php:11
+#, fuzzy
+msgid "Account Number:"
+msgstr "Numéro de TVA:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/bank_payment_vars.php:12
+msgid "Financial Institution:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/bank_payment_vars.php:13
+msgid "Address:"
+msgstr "Adresse :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/settings.php:13
+msgid "Electronic Funds Transfer settings saved."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/settings.php:21
+msgid "Electronic Funds Transfer Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/settings.php:41
+msgid "Activate Electronic Funds Transfers?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/settings.php:44
+msgid "Deactivate Electronic Funds Transfers?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/settings.php:48
+msgid "The Electronic Funds Transfers is installed. Would you like to activate it?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/settings.php:70
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/check/settings.php:65
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:71
+msgid "Title:"
+msgstr "Titre :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/settings.php:73
+msgid "Electronic Funds Transfers"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/settings.php:77
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/check/settings.php:68
+#, fuzzy
+msgid "Payment Instructions:"
+msgstr "Email de Confirmation de Paiement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/settings.php:80
+msgid "Please initiate an electronic payment using the bank information below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/settings.php:93
+msgid "Bank Account#:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/settings.php:100
+#, fuzzy
+msgid "Bank Name:"
+msgstr "Nom :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/settings.php:107
+#, fuzzy
+msgid "Bank Address:"
+msgstr "Adresse :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/bank/settings.php:117
+msgid "Update Electronic Funds Transfer Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/check/check_payment_vars.php:10
+msgid "Payable to:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/check/check_payment_vars.php:11
+#, fuzzy
+msgid "Payment Address:"
+msgstr "Adresse :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/check/settings.php:11
+msgid "Check/Money Order Payment settings saved."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/check/settings.php:18
+msgid "Check/Money Order Payment Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/check/settings.php:38
+msgid "Activate Check/Money Order Payments?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/check/settings.php:41
+msgid "Deactivate Check/Money Order Payments?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/check/settings.php:45
+msgid "The Check/Money Order Payments is installed. Would you like to activate it?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/check/settings.php:66
+msgid "Check/Money Order Payments"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/check/settings.php:69
+msgid "Please send Check/Money Order to the address below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/check/settings.php:71
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:85
+msgid "Payable To:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/check/settings.php:74
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:92
+#, fuzzy
+msgid "Address to Send Payment:"
+msgstr "Partipants et Paiements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/check/settings.php:95
+msgid "Update Check/Money Order Payment Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/invoice_vars.php:10
+msgid "Download PDF Invoice"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:14
+msgid "Invoice Payment settings saved."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:22
+msgid "Invoice Payment Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:42
+#, fuzzy
+msgid "Activate Invoice Payments?"
+msgstr "Participants/Paiements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:45
+msgid "Deactivate Invoice Payments?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:49
+msgid "The Invoice Payments is installed. Would you like to activate it?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:74
+#, fuzzy
+msgid "Invoice Payments"
+msgstr "Totalité des paiements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:78
+msgid "Invoice Instructions:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:81
+msgid "Please send Invoice to the address below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:116
+#, fuzzy
+msgid "PDF Settings"
+msgstr "Paramètres"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:120
+msgid "PDF Title (top right of the invoice):"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:123
+msgid "Invoice"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:127
+msgid "Logo URL (logo for the top left of the invoice):"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:134
+msgid "Invoice Instructions in PDF:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:137
+msgid "Please send this invoice with payment attached to the address above, or use the payment link below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/settings.php:144
+#, fuzzy
+msgid "Update Invoice Payment Settings"
+msgstr "Mettre à jour le module de paiement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/template.php:121
+msgid "Page"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/template.php:138
+#, fuzzy
+msgid "Date: "
+msgstr "Date :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/template.php:139
+#, fuzzy
+msgid "Attendee ID: "
+msgstr "Participants :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/template.php:151
+msgid "Bill To: "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/invoice/template.php:161
+#, fuzzy
+msgid "Amount Owed"
+msgstr "Montant"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/paypal_vars.php:23
+#, fuzzy
+msgid "Registrant Email:"
+msgstr "Total Enregistrés :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:14
+msgid "PayPal settings saved."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:21
+#, fuzzy
+msgid "PayPal Settings"
+msgstr "Configuration de l'Email"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:41
+msgid "Activate PayPal IPN?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:44
+#, fuzzy
+msgid "Deactivate PayPal IPN?"
+msgstr "Désactiver le module"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:49
+msgid "The PayPal IPN addon is installed. Would you like to activate it?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:74
+msgid "Paypal I.D."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:79
+msgid "(Typically payment@yourdomain.com)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:83
+msgid "Select the currency for your country:"
+msgstr "Sélectionnez la monnaie de votre Pays"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:89
+msgid "U.S. Dollars ($)"
+msgstr "U.S. Dollars ($)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:92
+msgid "Australian Dollars (A $)"
+msgstr "Australian Dollars (A $)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:95
+msgid "Pounds Sterling (&pound;)"
+msgstr "Livres Sterling (&pound;)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:98
+msgid "Canadian Dollars (C $)"
+msgstr "Canadian Dollars (C $)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:101
+msgid "Czech Koruna"
+msgstr "Czech Koruna"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:104
+msgid "Danish Krone"
+msgstr "Danish Krone"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:107
+msgid "Euros (&#8364;)"
+msgstr "Euros (€)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:110
+msgid "Hong Kong Dollar ($)"
+msgstr "Hong Kong Dollar ($)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:113
+msgid "Hungarian Forint"
+msgstr "Hungarian Forint"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:116
+msgid "Israeli Shekel"
+msgstr "Israeli Shekel"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:119
+msgid "Yen (&yen;)"
+msgstr "Yen (&yen;)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:122
+msgid "Mexican Peso"
+msgstr "Mexican Peso"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:125
+msgid "New Zealand Dollar ($)"
+msgstr "New Zealand Dollar ($)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:128
+msgid "Norwegian Krone"
+msgstr "Norwegian Krone"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:131
+msgid "Polish Zloty"
+msgstr "Polish Zloty"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:134
+msgid "Singapore Dollar ($)"
+msgstr "Singapore Dollar ($)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:137
+msgid "Swedish Krona"
+msgstr "Swedish Krona"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:140
+msgid "Brazilian Real (only for Brazilian users)"
+msgstr "Brazilian Real (only for Brazilian users)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:143
+msgid "Malaysian Ringgits (only for Malaysian users)"
+msgstr "Malaysian Ringgits (only for Malaysian users)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:146
+msgid "Philippine Pesos"
+msgstr "Philippine Pesos"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:149
+msgid "Taiwan New Dollars"
+msgstr "Taiwan New Dollars"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:152
+msgid "Thai Baht"
+msgstr "Thai Baht"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:165
+msgid "Image URL (logo for payment page):"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:170
+msgid "(used for your business/personal logo on the PayPal page)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:176
+msgid "% Surcharge (Added to the total): "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:191
+msgid "Shipping address options?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:194
+msgid "Do not prompt for an address"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:195
+msgid "Prompt for an address, but do not require one"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:196
+msgid "Prompt for an address, and require one"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:201
+msgid "Use the debugging feature and the <a href=\"https://developer.paypal.com/devscr?cmd=_home||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox_get_started\" title=\"PayPal Sandbox Login||Sandbox Tutorial||Getting Started with PayPal Sandbox\" target=\"_blank\">PayPal Sandbox</a>?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:215
+#, fuzzy
+msgid "Update PayPal Settings"
+msgstr "Configuration de l'Email"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:219
+msgid ""
+"<h2>PayPal Sandbox</h2>\n"
+"      <p>In addition to using the PayPal Sandbox fetaure. The debugging feature will also output the form varibales to the payment page, send an email to the admin that contains the all PayPal variables.</p>\n"
+"      <hr />\n"
+"      <p>The PayPal Sandbox is a testing environment that is a duplicate of the live PayPal site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live PayPal environment. Create and manage test accounts, and view emails and API credentials for those test accounts.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:226
+msgid "PayPal Image URL (logo for payment page)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:229
+msgid "The URL of the 150x50-pixel image displayed as your logo in the upper left corner of the PayPal checkout pages."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:232
+msgid "Default - Your business name, if you have a Business account, or your email address, if you have Premier or Personal account."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:236
+msgid ""
+"<h2>PayPal Currency</h2>\n"
+"      <p>PayPal uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, select the currency you wish to use. The dropdown lists all currencies that PayPal (currently) supports. "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:240
+msgid ""
+"<h2>Payment Surcharge</h2>\n"
+"      <p>Please enter a decimal number indicating a percent surcharge.\n"
+"      For example, if you enter 3.00, 3% will be added to the final price of the event during the checkout.\n"
+"      If the event price is initially $100, the price with the surcharge will be $103.<br />\n"
+"      This surcharge will apply to all new events.  However, you will have the ability to change this value during the event creation.\n"
+"      </p>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/gateways/paypal/settings.php:248
+msgid ""
+"<h2>Shipping Address</h2>\n"
+"      <p>By default, PayPal will display shipping address information on the PayPal payment screen. If you plan on shipping items to a registrant (shirts, invoices, etc) then use this option. Otherwise it should not be used, as it will require a shipping address when someone registers for an event.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:8
+msgid "Manage Addons"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:12
+msgid "Groupon Integration Module"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:15
+msgid "Did your site get featured on <a href=\"http://www.groupon.com/\" target=\"_blank\">Groupon.com</a>? Now you can easily accept Groupon codes to your events! Once installed, just upload all of your Groupon codes to the database and your ready to go. How easy is that?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:16
+msgid "About Groupon"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:17
+msgid "<a href=\"http://www.groupon.com/\" target=\"_blank\">Groupon</a> is a deal-of-the-day website that is localized to major markets in the United States. The first market for Groupon was Chicago, followed soon thereafter by Boston and New York City. As of January 2010, Groupon serves more than 40 markets. Groupon debuted in November 2008 as part of The Point, a platform for collective action."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:22
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:45
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:85
+msgid "Installed"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:23
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:46
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:86
+msgid "Active"
+msgstr "Actif"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:23
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:46
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:86
+#, fuzzy
+msgid "Not Active"
+msgstr "Actif"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:35
+msgid "Members Integration Module"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:59
+msgid "Custom Files"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:62
+msgid "These files offer support for custom templates, functions, and shortcodes. Virtually allowing you to customize the plugin to your needs and making your custom changes future proof."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:64
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:65
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:66
+msgid " - Installed"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:64
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:65
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:66
+msgid " - Not Installed"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_addons.php:76
+msgid "Authorize.net SIM Gateway"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_support.php:60
+msgid "Run Upgrade Script"
+msgstr "Executez la mise a jour"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_support.php:74
+#, fuzzy
+msgid "Run Attendee Update Script"
+msgstr "Executez la mise a jour"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_support.php:134
+#, fuzzy
+msgid "Attendee data has been updated!"
+msgstr "Les données d'enregistrement ont été mises a jour!"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_support.php:137
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_support.php:270
+msgid "There was an error in your submission, please try again."
+msgstr "Il y a une erreur dans votre soumission, essayez à nouveau."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin_support.php:267
+msgid "Event data has been updated!"
+msgstr "Les données d'enregistrement ont été mises a jour!"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:21
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:127
+msgid "Event Registration with PayPal IPN"
+msgstr "Enregistrement événement par PayPal IPN"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:83
+msgid "Events stats"
+msgstr "Statistiques de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:84
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:128
+msgid "View Attendees/Payments"
+msgstr "Voir les Participants/Paiements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:99
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:142
+msgid "Total Active Events"
+msgstr "Tous les événements actifs"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:100
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:143
+msgid "All Time Attendees"
+msgstr "Totalité des participants"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:101
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:144
+msgid "All Time Paid"
+msgstr "Totalité des paiements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:102
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:145
+msgid "All Time Not Paid"
+msgstr "Totalité des impayés"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:103
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:146
+msgid "All Time Payments"
+msgstr "Totalité des paiements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:162
+msgid "Next 3 Upcoming Events"
+msgstr "Les 3 événements suivants"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:178
+msgid "Start Date:"
+msgstr "Date de début :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/dashboard_widget.php:178
+msgid "Attendees:"
+msgstr "Participants :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/database_install.new.php:240
+msgid "Payment Received for [event_name]"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/database_install.new.php:241
+msgid "<p>***This Is An Automated Response*** </p><p>Thank You [fname] [lname]</p>  <p>We have just  received a payment in the amount of [event_price] for your registration to [event_name].</p> <p>PayPal transaction ID: [txn_id]</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/database_install.new.php:243
+#, fuzzy
+msgid "<p>***This is an automated response - Do Not Reply***</p> <p>Thank you [fname] [lname] for registering for [event].</p><p>Start time: [start_time]</p><p>Location:<br>[location]</p><p>Phone: [location_phone]</p><p>Google Map: [google_map_link]</p><p> We hope that you will find this event both informative and enjoyable. Should have any questions, please contact [contact].</p><p>If you have not done so already, please submit your payment in the amount of [cost].</p><p>Click here to review your payment information [payment_url].</p><p>Thank You.</p>"
+msgstr "<p>***Ceci est une réponse automatique- Ne répondez pas***</p> <p>Merci [fname] [lname] de vous être enregistré pour [event].</p><p>Heure de début: [start_time]</p><p>Lieu :<br>[location]</p><p>téléphone: [location_phone]</p><p>Google Map: [google_map_link]</p><p> Nous espérons que vous trouverez cet évènement agréable. Si vous avez des questions, veuillez contacter  [contact].</p><p>Si vous ne l'avez pas encore fait,soumettez votre paiement pour un montant de [cost] Euros.</p> <p>Cliquez ici pour voir le détail des informations de paiement [payment_url].</p><p>Merci.</p>"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:81
+msgid "Organization details saved."
+msgstr "Détails de l'organisateur sauvegardés."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:134
+msgid "Organization Settings"
+msgstr "Détails de l'organisateur"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:142
+msgid "Organization Name:"
+msgstr "Nom de l'organisateur :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:148
+#, fuzzy
+msgid "Organization Street 1:"
+msgstr "Adresse Rue 2"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:154
+msgid "Organization Street 2:"
+msgstr "Adresse Rue 2"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:160
+#, fuzzy
+msgid "Organization City:"
+msgstr "Organisateur :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:166
+#, fuzzy
+msgid "Organization State:"
+msgstr "Nom de l'organisateur :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:172
+#, fuzzy
+msgid "Organization Zip/Postal Code:"
+msgstr "Code Postal :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:178
+#, fuzzy
+msgid "Organization Country:"
+msgstr "Organisateur :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:188
+#, fuzzy
+msgid "Primary contact email:"
+msgstr "Email du contact principal <span>*</span>:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:192
+#, fuzzy
+msgid "Time and Date Settings"
+msgstr "Configuration de l'Email"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:193
+#, fuzzy
+msgid "Current Time"
+msgstr "Heure de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:194
+msgid "Change timezone and date format settings?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:198
+#, fuzzy
+msgid "Events expire on registration end date?"
+msgstr "Widget d'enregistrement à un événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:203
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:336
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:403
+msgid "Save Options"
+msgstr "Sauvegardez les options"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:211
+#, fuzzy
+msgid "Page Settings"
+msgstr "Paramètres"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:218
+msgid "**Attention**"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:220
+msgid "These settings are very important and must be configured for the plugin to function correctly. Visibility must be set to"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:222
+msgid "Public on all pages"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:224
+msgid "If you need help, please visit the "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:226
+#, fuzzy
+msgid "support"
+msgstr "Aide/Assistance"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:228
+msgid "page or the"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:230
+msgid "for more information and instructions."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:234
+#, fuzzy
+msgid "Show a single event or all events on the registration page?"
+msgstr "Désirez-vous montrer un seul événement sur la page d'enregistrement ?<span>*"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:237
+msgid "All Events"
+msgstr "Tous les événements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:238
+msgid "Single Event"
+msgstr "Événement unique"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:244
+msgid "Main registration page:"
+msgstr "Page d'enregistrement principale"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:248
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:271
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:295
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:317
+msgid "Main page"
+msgstr "Page Principale"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:254
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:277
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:323
+msgid "This page should contain the"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:256
+msgid ""
+"shortcode. <br />\n"
+"This page can be hidden from navigation if desired, <br />\n"
+"but should always contain the {ESPRESSO_EVENTS} shortcode."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:261
+#, fuzzy
+msgid ""
+"<h2>Main Events Page</h2>\n"
+"\t\t\t\t\t\t<p>This is the page that displays your events.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{ESPRESSO_EVENTS}</strong> shortcode.</p>"
+msgstr ""
+"<h2>Page d'enregistrement principale</h2>\n"
+"\t\t\t\t\t\t<p>C'est la page qui décrit votre événement.</p>\n"
+"\t\t\t\t\t\t<p>Cette page doit contenir le shortcode <strong>{EVENTREGIS}</strong> .</p>"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:267
+msgid "Auto Return URL (Thank You and Return Payment page):"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:279
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:325
+msgid ""
+"shortcode. <br />\n"
+"This page should hidden from your navigation, <br />\n"
+"but still viewable to the public (not password protected.)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:284
+#, fuzzy
+msgid ""
+"<h2>Auto Return URL</h2>\n"
+"\t\t\t\t\t\t<p>The URL to which the payer\"s browser is redirected after completing the payment; for example, a URL on your site that displays a \"Thank you for your payment\" page.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{ESPRESSO_PAYMENTS}</strong> shortcode.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+"<h2>Auto Return URL</h2>\n"
+"\t\t\t\t\t\t<p>C'est L'URL vers laquelle le navigateur du payeur est redirigé après avoir complété le paiement, une URL sur votre site qui montre \"Merci pour votre paiement\" page.</p>\n"
+"\t\t\t\t\t\t<p>Cette page doit contenir<strong>{EVENTREGPAY}</strong> shortcode.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />Cette page doit ètre cachée dans votre menu de naviguation. Exclure cette page en utilisant  \"Exclude Pages\" plugin de http://wordpress.org/extend/plugins/exclude-pages/ ou en utilisant \"exclude\" le paramètre \"wp_list_pages\" template tag. SVP referez vous a  http://codex.wordpress.org/Template_Tags/wp_list_pages Pour plus d'information sur la façon d'exclure des pages.</p>"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:291
+msgid "Cancel Return URL (used for cancelled payments):"
+msgstr "Annuler l'URL de retour (utilisé pour abandonner un paiement):"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:301
+msgid ""
+"This should be a page on your website that contains a cancelled message. <br />\n"
+"No short tags are needed. This page should hidden from your navigation, <br />\n"
+"but still viewable to the public (not password protected.)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:306
+msgid ""
+"<h2>Cancel Return URL</h2>\n"
+"\t\t\t\t\t\t<p>A URL to which the payer's browser is redirected if payment is cancelled; for example, a URL on your website that displays a \"Payment Canceled\" page.</p>\n"
+"\t\t\t\t\t\t<p>This should be a page on your website that contains a cancelled message. No short tags are needed.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+"<h2>Cancel Return URL</h2>\n"
+"\t\t\t\t\t\t<p>Une URL vers laquelle le navigateur du payeur est redirigé si le paiement est annullé; par exemple, une URL sur votre site qui montre une \"Payment Canceled\" page.</p>\n"
+"\t\t\t\t\t\t<p>Cela doit etre une page sur votre site qui contient un message d'annulation. aucun short tags n'est nécessaire.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />Cette page doit ètre cachée dans votre menu de naviguation. Exclure cette page en utilisant  \"Exclude Pages\" plugin de http://wordpress.org/extend/plugins/exclude-pages/ ou en utilisant \"exclude\" le paramètre \"wp_list_pages\" template tag. SVP référez vous a  http://codex.wordpress.org/Template_Tags/wp_list_pages Pour plus d'information sur la façon d'exclure des pages.</p>"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:313
+#, fuzzy
+msgid "Notify URL (used to process payments):"
+msgstr "Annuler l'URL de retour (utilisé pour abandonner un paiement):"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:330
+#, fuzzy
+msgid ""
+"<h2>Notify URL</h2>\n"
+"\t\t\t\t\t\t<p>The URL to which PayPal posts information about the transaction, in the form of Instant Payment Notification messages.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{ESPRESSO_TXN_PAGE}</strong> shortcode.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+"<h2>Notify URL</h2>\n"
+"\t\t\t\t\t\t<p>L'  URL vers laquelle PayPal poste les information sur la transaction, sous la forme d'un message de notification de paiement insatantané.</p>\n"
+"\t\t\t\t\t\t<p>cette page doit contenir <strong>{EVENTPAYPALTXN}</strong> shortcode.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />Cette page doit ètre cachée dans votre menu de naviguation. Exclure cette page en utilisant  \"Exclude Pages\" plugin de http://wordpress.org/extend/plugins/exclude-pages/ ou en utilisant \"exclude\" le paramètre \"wp_list_pages\" template tag. SVP referez vous a  http://codex.wordpress.org/Template_Tags/wp_list_pages Pour plus d'information sur la façon d'exclure des pages.</p>"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:344
+msgid "Email Settings"
+msgstr "Configuration de l'Email"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:355
+#, fuzzy
+msgid "Send payment confirmation emails?"
+msgstr "Email de Confirmation de Paiement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:359
+#, fuzzy
+msgid "Send registration confirmation emails before payment is received?"
+msgstr "Expédier des Emails de confirmation personnalisés pour cet événement?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:363
+msgid "Payment Confirmation Email:"
+msgstr "Email de Confirmation de Paiement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:367
+msgid "Email Subject:"
+msgstr "Sujet de l'Email :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:378
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:394
+msgid "View Custom Email Tags"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:385
+#, fuzzy
+msgid "Default Registration Confirmation Email:"
+msgstr "Email par défaut de confirmation d'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:396
+msgid "Example"
+msgstr "Exemple"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:409
+msgid "Advanced Features"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:424
+msgid "Purchase a <a href=\"http://eventespresso.com/download/\" target=\"_blank\">support license</a> to gain access to adavanced features such as CAPTCHA and <a href=\"http://eventespresso.com/features/customizable-event-listings/\" target=\"_blank\">Template Customization</a>."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:437
+msgid "Event Listing Types"
+msgstr "Liste des types d'événements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/organization_config.php:440
+msgid "If set to \"Single Event\", only one event will be displayed on the page.</p> <p class=\"red_text\">**Attention** Setting this option to \"Single Event\" will disable the \"Event Registration Widget\" and \"SINGLEEVENT\" shortcode functionality."
+msgstr "If set to \"Single Event\", only one event will be displayed on the page.</p> <p class=\"red_text\">**Attention** Setting this option to \"Single Event\" will disable the \"Event Registration Widget\" and \"SINGLEEVENT\" shortcode functionality."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/shortcodes.php:15
+msgid "No ID Supplied"
+msgstr "Identification non  spécifiée"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/shortcodes.php:37
+msgid "No Category ID Supplied"
+msgstr "identification de la catégorie non spécifiée"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/shortcodes.php:282
+msgid "<h3 class=\"expired_event\">This event has passed.</h3>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/shortcodes.php:288
+msgid "We are sorry but registration for this event is now closed."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/shortcodes.php:289
+msgid "Please <a href=\"contact\" title=\"contact us\">contact us</a> if you would like to know if spaces are still available."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/shortcodes.php:297
+#, fuzzy
+msgid "We are sorry but this event is not yet open for registration."
+msgstr "Nous sommes désolé mais cette manifestation a atteint le maximum de participants possible!"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/shortcodes.php:298
+msgid "You will be able to register starting "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/shortcodes.php:352
+msgid "Anti-Spam Measure: Please enter the following phrase"
+msgstr "Mesures Anti-Spam: SVP entrez la phrase suivante"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/shortcodes.php:358
+msgid "Submit"
+msgstr "Valider"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/shortcodes.php:433
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/shortcodes.php:436
+msgid "0.00"
+msgstr "0.00"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/custom_post_type.php:6
+#, fuzzy
+msgid "Event Posts"
+msgstr "Statistiques de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/custom_post_type.php:7
+#, fuzzy
+msgid "Event"
+msgstr "Evènements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/custom_post_type.php:8
+#, fuzzy
+msgid "Add New"
+msgstr "Ajouter un nouvel événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/custom_post_type.php:9
+msgid "Add New Event"
+msgstr "Ajouter un nouvel événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/custom_post_type.php:10
+msgid "Edit"
+msgstr "Modifier"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/custom_post_type.php:11
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:75
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:98
+msgid "Edit Event"
+msgstr "Modifier l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/custom_post_type.php:12
+#, fuzzy
+msgid "New Event"
+msgstr "Voir l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/custom_post_type.php:13
+msgid "View Event"
+msgstr "Voir l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/custom_post_type.php:14
+#, fuzzy
+msgid "View Events"
+msgstr "Voir l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/custom_post_type.php:15
+#, fuzzy
+msgid "Search Events"
+msgstr "Événement unique"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/custom_post_type.php:16
+#, fuzzy
+msgid "No events found"
+msgstr "aucun enregistrement trouvé"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/custom_post_type.php:17
+msgid "No events found in Trash"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/custom_post_type.php:18
+#, fuzzy
+msgid "Parent Event"
+msgstr "Evénements en cours"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/custom_post_type.php:21
+#, fuzzy
+msgid "Event Thumbnail"
+msgstr "Heure de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:6
+msgid "reCAPTCHA Settings"
+msgstr "reCAPTCHA détails"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:14
+msgid "<strong>Use <a href=\"http://recaptcha.net/||http://recaptcha.net/learnmore.html||https://admin.recaptcha.net/accounts/login/?next=/recaptcha/sites/||http://recaptcha.net/apidocs/captcha/client.html\" title=\"reCAPTCHA Home Page||What is reCAPTCHA||reCAPTCHA Account||reCAPTCHA Client API Documentation\" target=\"_blank\">reCAPTCHA</a> to block spam registrations</strong>:"
+msgstr "<strong>Use <a href=\"http://recaptcha.net/||http://recaptcha.net/learnmore.html||https://admin.recaptcha.net/accounts/login/?next=/recaptcha/sites/||http://recaptcha.net/apidocs/captcha/client.html\" title=\"reCAPTCHA Home Page||What is reCAPTCHA||reCAPTCHA Account||reCAPTCHA Client API Documentation\" target=\"_blank\">reCAPTCHA</a> to block spam registrations</strong>:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:26
+msgid "Public Key:"
+msgstr "Clé Publique:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:32
+msgid "Private Key:"
+msgstr "Clé Privée:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:38
+msgid "Look &amp; Feel Customization"
+msgstr "Look &amp; Feel Customization"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:43
+msgid "Width:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:49
+msgid "Theme:"
+msgstr "Thème"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:53
+msgid "Red"
+msgstr "Rouge"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:54
+msgid "White"
+msgstr "Blanc"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:55
+msgid "Blackglass"
+msgstr "Blackglass"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:56
+msgid "Clean"
+msgstr "Sobre"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:62
+msgid "Language:"
+msgstr "Langue :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:66
+msgid "English"
+msgstr "Anglais"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:67
+msgid "Spanish"
+msgstr "Espagnol"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:68
+msgid "Dutch"
+msgstr "Néerlandais"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:69
+msgid "French"
+msgstr "Français"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:70
+msgid "German"
+msgstr "Allemand"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:71
+msgid "Portuguese"
+msgstr "Portuguais"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:72
+msgid "Russian"
+msgstr "Russe"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:73
+msgid "Turkish"
+msgstr "Turc"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/recaptcha_form.php:80
+#, fuzzy
+msgid ""
+"<h2>reCAPTCHA Information</h2>\r\n"
+"\t\t\t\t\t\t<p>reCAPTCHA helps prevent automated abuse of your site (such as comment spam or bogus registrations) by using a <a href=\"http://recaptcha.net/captcha.html\">CAPTCHA</a> to ensure that only humans perform certain actions.</p>\r\n"
+"\t\t\t<p>You must sign up for a <a href=\"https://admin.recaptcha.net/accounts/signup/?next=%2Frecaptcha%2Fsites%2F\" target=\"_blank\">free reCAPTCHA</a> account to use it with this plugin. If you already have a reCAPTCHA account enter your \"Public\" and \"Private\" keys on this page.</p>"
+msgstr ""
+"<h2>Cancel Return URL</h2>\n"
+"\t\t\t\t\t\t<p>reCAPTCHA helps prevent automated abuse of your site (such as comment spam or bogus registrations) by using a <a href=\"http://recaptcha.net/captcha.html\">CAPTCHA</a> to\n"
+"\t\t\tensure that only humans perform certain actions.</p>\n"
+"\t\t\t<p>You must sign up for a <a href=\"https://admin.recaptcha.net/accounts/signup/?next=%2Frecaptcha%2Fsites%2F\" target=\"_blank\">free reCAPTCHA</a> account to use it with this plugin. If you already have a reCAPTCHA account enter your \"Public\" and \"Private\" keys on this page.</p>"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:7
+#, fuzzy
+msgid "Template Customization"
+msgstr "Look &amp; Feel Customization"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:20
+msgid "Your templates have been copied."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:34
+msgid "Modifying your event listings and registration pages is easy."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:37
+msgid "You just need to edit the appropriate files in the following location."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:44
+#, fuzzy
+msgid "Current Template Files"
+msgstr "Catégories actuelles"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:52
+msgid "(displays a list of attendees)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:55
+msgid "(logic for displaying the list of events)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:58
+msgid "(displays a list of events)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:61
+msgid "(create-a-post template)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:64
+msgid "(displays your payment page text)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:67
+msgid "(logic for displaying the registration form)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:70
+#, fuzzy
+msgid "(displays your registration form)"
+msgstr "Veuillez vérifier vos détails d'enregistrement:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:73
+msgid "(displays a confimration page for free events)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:76
+msgid "(page that is displayed when returning to pay)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:79
+msgid "(creates a widget for use in your theme)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:86
+msgid " - Moved"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:89
+msgid " - Not Moved"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:104
+msgid "In order to use this this feature, you will need to move the files located in the <span class=\"display-path\"><strong>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:110
+msgid "To move your files automatically, please set the permissions to 775 on the following directory."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:120
+msgid "If you plan on modifying the look of your event listings, registration page, or attendee list. Use the option below to move these templates to a safe place. Keep in mind, if updates are made or features are added to these templates in the future. You will need to make the updates to your customized templates."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-files/template_files.php:123
+msgid "Your template files have not been moved."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/add_new_attendee.php:15
+#, fuzzy
+msgid "Added Attendee to Database"
+msgstr "Coordonnées du participant:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/add_new_attendee.php:122
+#, fuzzy
+msgid "Amount Paid:"
+msgstr "Montant"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/edit_attendee_record.php:136
+msgid "Attendee details saved for "
+msgstr "Détails des participant sauvegardé pour"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/edit_attendee_record.php:140
+#, fuzzy
+msgid "Registration Id #"
+msgstr "Payez le montant de l'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/edit_attendee_record.php:148
+msgid "How is attendee paying for registration?"
+msgstr "Comment les participants règlent-ils leur enregistrement ?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/edit_attendee_record.php:151
+msgid "Credit Card or Paypal"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/edit_attendee_record.php:152
+msgid "Cash"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/edit_attendee_record.php:153
+#, fuzzy
+msgid "Check"
+msgstr "Contrôlez tout"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/edit_attendee_record.php:213
+msgid "Update Record"
+msgstr "Mise a jour de l'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/edit_attendee_record.php:219
+#, fuzzy
+msgid "Additional Attendees"
+msgstr "Participants supplémentaires ?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/edit_attendee_record.php:223
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:210
+msgid "Edit Attendee"
+msgstr "Edition de(s) participant(s)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/edit_attendee_record.php:225
+#, fuzzy
+msgid "Delete Attendee"
+msgstr "Suppression de(s) participant(s)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:85
+#, fuzzy
+msgid "Edit Attendee Payment Record"
+msgstr "Voir les Participants/Paiements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:89
+#, fuzzy
+msgid "Payment details saved for"
+msgstr "Détails de l'événement sauvegardés pour"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:91
+#, fuzzy
+msgid "Payment notification has been sent."
+msgstr "Le module de paiement a été désactivé."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:100
+#, fuzzy
+msgid "Attendee"
+msgstr "Participants"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:100
+#, fuzzy
+msgid "Registered For:"
+msgstr "Enregistrer le code en ref. :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:104
+#, fuzzy
+msgid "Payment Details"
+msgstr "Données de Règlement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:105
+msgid "Invoice/Payment Reminder"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:113
+#, fuzzy
+msgid "Payment Status:"
+msgstr "Etat du règlement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:115
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:9
+msgid "None"
+msgstr "Aucun"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:116
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:17
+msgid "Completed"
+msgstr "Complété"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:117
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:13
+msgid "Pending"
+msgstr "En attente"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:118
+#, fuzzy
+msgid "Incomplete"
+msgstr "Complété"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:122
+#, fuzzy
+msgid "Transaction Type:"
+msgstr "Identifiant de la transaction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:124
+#, fuzzy
+msgid "Transaction ID:"
+msgstr "Identifiant de la transaction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:126
+#, fuzzy
+msgid "Amount:"
+msgstr "Montant"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:129
+msgid "How Many People:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:131
+#, fuzzy
+msgid "Date Paid:"
+msgstr "Date de paiement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:140
+#, fuzzy
+msgid "Do you want to send a payment recieved notice to registrant?"
+msgstr "Souhaitez-vous afficher la description de l'événement sur la page d'enregistrement ?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:158
+#, fuzzy
+msgid "Invoice Subject"
+msgstr "Sujet de l'Email :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:158
+msgid "Payment Reminder for [event]"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:159
+msgid "Message"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/enter_attendee_payments.php:161
+msgid "Dear [fname] [lname], <p>Our records show that we have not received your payment of [cost] for [event_link].</p> <p>Please visit [payment_url] to view your payment options.</p><p>Sincerely,<br />"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/event_newsletter.php:33
+msgid "Send an Email to the Attendees of"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/event_newsletter.php:36
+#, fuzzy
+msgid "Use a <a href=\"admin.php?page=event_emails\">pre-existing email</a>? "
+msgstr "Choisissez une <a href=\"admin.php?page=calendar-categories\">Catégorie du calendrier</a> :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/event_newsletter.php:39
+#, fuzzy
+msgid "Email Subject Line"
+msgstr "Sujet de l'Email :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/event_newsletter.php:40
+#, fuzzy
+msgid "Email Text"
+msgstr "Email"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/event_newsletter.php:43
+#, fuzzy
+msgid "Email Example"
+msgstr "Exemple"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/event_newsletter.php:47
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:79
+msgid "Send Newsletter"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/event_newsletter.php:55
+msgid "<< Back to"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/event_newsletter.php:58
+msgid ""
+"<h2>Pre-existing Emails</h2>\n"
+"      <p>This will override the custom email below if selected.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/index.php:10
+#, fuzzy
+msgid "Attendee Payments"
+msgstr "Participants/Paiements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/index.php:14
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/index.php:45
+#, fuzzy
+msgid "Attendee Reports"
+msgstr "Participants"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/index.php:19
+#, fuzzy
+msgid "Edit Attendee Data"
+msgstr "Edition de(s) participant(s)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/index.php:29
+#, fuzzy
+msgid "Add New Attendee"
+msgstr "Voir les Participants"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/index.php:34
+#, fuzzy
+msgid "Event Newsletter"
+msgstr "Statistiques de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:36
+msgid "Customer(s) have been successfully deleted from the event."
+msgstr "Ce(s) participant(s) a (ont) été supprimés avec succès de l'événement."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:63
+msgid "View event page"
+msgstr "Voir la page de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:72
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:98
+msgid "Export to Excel"
+msgstr "Exportation sous Excel"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:77
+#, fuzzy
+msgid "Add Attendee"
+msgstr "Edition de(s) participant(s)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:93
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:46
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:67
+#, fuzzy
+msgid "Records"
+msgstr "Rouge"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:95
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:272
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:47
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:144
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:69
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:161
+msgid "of"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:98
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:49
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:72
+msgid "Reset"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:105
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:58
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:79
+msgid "Delete"
+msgstr "Supprimez"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:111
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:85
+msgid "Name"
+msgstr "Nom"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:117
+msgid "Amount"
+msgstr "Montant"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:126
+msgid "Coupon"
+msgstr "Coupon"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:132
+#, fuzzy
+msgid "Registration Date"
+msgstr "Payez le montant de l'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:135
+#, fuzzy
+msgid "Payment Date"
+msgstr "Données de Règlement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:138
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:64
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:92
+msgid "Action"
+msgstr "Action"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:194
+#, fuzzy
+msgid "Registration #: "
+msgstr "Payez le montant de l'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:199
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:209
+msgid "Edit Payment"
+msgstr "Modifier le Paiement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:211
+#, fuzzy
+msgid "Resend Registration Details"
+msgstr "Widget d'enregistrement à un événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:232
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:105
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:122
+msgid "No Record Found!"
+msgstr "Pas d'enregistrement trouvé!"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:242
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:114
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:130
+msgid "Check All"
+msgstr "Contrôlez tout"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:244
+#, fuzzy
+msgid "Delete Customer(s)"
+msgstr "Suppression de(s) participant(s)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:254
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:130
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:143
+#, fuzzy
+msgid "View All"
+msgstr "Afficher"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/list_attendee_payments.php:267
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:142
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:156
+msgid "Entries Per Page"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:21
+msgid "Event(s) have been permanently deleted."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:28
+msgid "Select an event to view attendee details and payments"
+msgstr "Selectionnez un événement pour en voir le détail et les paiements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:33
+#, fuzzy
+msgid "Export All Event Attendees to Excel"
+msgstr "Exporter la liste actuelle des participants sous Excel"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:59
+msgid "Event ID"
+msgstr "ID d'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:61
+msgid "Start Date"
+msgstr "Date de début"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:62
+msgid "Status"
+msgstr "Etat"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:94
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:98
+msgid "View Attendees"
+msgstr "Voir les Participants"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:98
+#, fuzzy
+msgid "Export to CSV"
+msgstr "Exportation sous Excel"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:99
+msgid "Send Event Newsletter"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:99
+#, fuzzy
+msgid "Newsletter"
+msgstr "Supprimez"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/admin-reports/process_payments.php:116
+msgid "Permanently Delete Events(s)"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/add_new_category.php:12
+#, fuzzy
+msgid "Add a Category"
+msgstr "Ajouter une nouvelle Catégorie"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/add_new_category.php:17
+#, fuzzy
+msgid "Category Name"
+msgstr "Nom de la Catégorie :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/add_new_category.php:19
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/edit_event_category.php:30
+#, fuzzy
+msgid "Do you want to display the category description on the events page?"
+msgstr "Voulez-vous montrer la description de l'événement sur le page des événements ?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/add_new_category.php:32
+#, fuzzy
+msgid "Category Description"
+msgstr "Description de la Catégorie"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/add_new_category.php:38
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:46
+msgid "Add New Category"
+msgstr "Ajouter une nouvelle Catégorie"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/edit_event_category.php:22
+msgid "Edit Category:"
+msgstr "Edition des Catégories :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/edit_event_category.php:28
+msgid "Category Name:"
+msgstr "Nom de la Catégorie :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/edit_event_category.php:29
+msgid "Unique Category Identifier:"
+msgstr "Identifiant unique pour la Catégorie :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/edit_event_category.php:39
+msgid "Category Description:"
+msgstr "Description de la Catégorie"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/edit_event_category.php:44
+msgid "Update Category"
+msgstr "Mise à jour de la Catégorie"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:13
+msgid "Manage Event Categories"
+msgstr "Gérer les Catégories des événements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:31
+msgid "Categories have been successfully deleted from the event."
+msgstr "Les Catégories ont été supprimées avec succès de l'événement."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:37
+msgid "Current Categories"
+msgstr "Catégories actuelles"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:82
+msgid "ID"
+msgstr "identification"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:89
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:116
+msgid "Edit Category"
+msgstr "Editez la Catégorie"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:132
+msgid "Delete Category"
+msgstr "Supprimez la Catégorie"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/category-management/index.php:170
+#, fuzzy
+msgid ""
+"<h2>Unique Category Identifier</h2>\n"
+"      <p>This should be a unique identifier for the category. Example: \"category1\" (without qoutes.)</p>\n"
+"      <p>The unique ID can also be used in individual pages using the  \t[EVENT_ESPRESSO_CATEGORY event_category_id=\"category_identifier\"] shortcode.</p>"
+msgstr ""
+"<h2>Identifiant Unique de Catégorie</h2>\n"
+"      <p>Ceci doit être un identifiant unique pour la catégorie. Exemple: \"category1\" (sans les guillemets.)</p>\n"
+"      <p>L'identifiant unique ID peut être également utilisé dans les pages individuelles en utilisant le shortcode \t[EVENT_REGIS_CATEGORY event_category_id=\"category_identifier\"] .</p>"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/add_discount.php:16
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/add_discount.php:22
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/update_discount.php:22
+msgid "The discount code "
+msgstr "Le code de réduction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/delete_discount.php:49
+msgid "Discounts have been successfully deleted from the database."
+msgstr "Les codes de réduction ont été supprimés de notre base de données."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/edit_discount.php:37
+msgid "Edit Discount:"
+msgstr "Editez les réductions"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/edit_discount.php:53
+msgid "Dicount Code:"
+msgstr "Code de réduction:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/edit_discount.php:65
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/new_discount.php:39
+msgid "Price Discount"
+msgstr "Prix Réduit"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/edit_discount.php:75
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/new_discount.php:49
+msgid "Is this a percentage discount?"
+msgstr "Est-ce un pourcentage de réduction?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/edit_discount.php:95
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/new_discount.php:63
+msgid "Discount Code Description"
+msgstr "Description du code de réduction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/edit_discount.php:107
+msgid "Update Discount"
+msgstr "Mise a jour des réductions"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/index.php:7
+msgid "Manage Event Discounts"
+msgstr "Gérez les codes de réduction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/index.php:39
+msgid "Current Discount Codes"
+msgstr "Code de réduction actuel"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/index.php:48
+#, fuzzy
+msgid "Add New Discount"
+msgstr "Ajout d'un code de réduction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/index.php:86
+msgid "Percentage"
+msgstr "Pourcentage"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/index.php:125
+msgid "Delete Discount"
+msgstr "Supprimez la réduction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/new_discount.php:13
+msgid "Add a Discount Code"
+msgstr "Ajouter un code de réduction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/new_discount.php:27
+msgid "Discount Code"
+msgstr "Code de réduction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/new_discount.php:75
+msgid "Add New Discount Code"
+msgstr "Ajout d'un code de réduction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/update_discount.php:16
+msgid "The discount "
+msgstr "La réduction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/use_coupon_code.php:23
+#, fuzzy
+msgid "<p id=\"event_espresso_valid_coupon\"><strong>You are using discount code:</strong> "
+msgstr "<p><strong>Vous utilisez un coupon de réduction :</strong> "
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/use_coupon_code.php:49
+#, fuzzy
+msgid "Sorry, that coupon code is invalid or expired."
+msgstr "<p><font color=\"red\">Désolé, ce coupon n'est pas valide ou est expiré.</font></p>"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/coupon-management/use_coupon_code.php:61
+msgid "Do you have a promo code?"
+msgstr "Avez-vous un coupon de réduction ?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/add_new_email.php:13
+msgid "Add an Email"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/add_new_email.php:18
+#, fuzzy
+msgid "Email Name"
+msgstr "Nom du champ"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/add_new_email.php:27
+#, fuzzy
+msgid "Add Email"
+msgstr "Email"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/edit_email.php:21
+#, fuzzy
+msgid "Edit Email:"
+msgstr "Email :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/edit_email.php:27
+#, fuzzy
+msgid "Email Name:"
+msgstr "Email :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/edit_email.php:27
+#, fuzzy
+msgid "Email Subject Line:"
+msgstr "Sujet de l'Email :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/edit_email.php:28
+#, fuzzy
+msgid "Email Text:"
+msgstr "Sujet de l'Email :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/edit_email.php:34
+#, fuzzy
+msgid "Update Email"
+msgstr "Mise à jour de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/index.php:13
+#, fuzzy
+msgid "Manage Event Emails"
+msgstr "Gérer les Catégories des événements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/index.php:28
+#, fuzzy
+msgid "Emails have been successfully deleted."
+msgstr "Les Catégories ont été supprimées avec succès de l'événement."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/index.php:42
+#, fuzzy
+msgid "Current Emails"
+msgstr "Evénements en cours"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/index.php:52
+#, fuzzy
+msgid "Add New Email"
+msgstr "Ajouter un nouvel événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/index.php:55
+msgid "Create customized emails for use in multiple events."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/index.php:110
+#, fuzzy
+msgid "Edit Email"
+msgstr "Email"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/index.php:127
+#, fuzzy
+msgid "Delete Email"
+msgstr "Supprimez"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/update_email.php:16
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/update_email.php:18
+msgid "The email"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/update_email.php:16
+#, fuzzy
+msgid "has been updated"
+msgstr "a été ajouté."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/email-manager/update_email.php:18
+msgid "was not updated"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:23
+#, fuzzy
+msgid "Are you sure you want to cancel "
+msgstr "Êtes-vous certain(e) de vouloir SUPPRIMER ?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:24
+msgid "Cancel"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:27
+msgid "Submit New Event"
+msgstr "Soumettre un nouvel événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:43
+msgid "Primary"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:43
+msgid "Secondary"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:43
+msgid "Ongoing"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:43
+#, fuzzy
+msgid "Deleted"
+msgstr "Supprimez"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:46
+msgid "Attendee Limit"
+msgstr "Limite max de participants"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:47
+#, fuzzy
+msgid "leave blank for unlimited"
+msgstr "(laissez en blanc pour illimité)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:48
+msgid "Allow group registrations?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:49
+#, fuzzy
+msgid "Max Group Registrants"
+msgstr "Total Enregistrés :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:51
+#, fuzzy
+msgid "Advanced Options:"
+msgstr "Sauvegardez les options"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:53
+#, fuzzy
+msgid "Is this an active event? "
+msgstr "Cet événement est-il actif ?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:54
+#, fuzzy
+msgid "Event Status: "
+msgstr "Statistiques de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:55
+#, fuzzy
+msgid "Display  description? "
+msgstr "Afficher la description"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:56
+#, fuzzy
+msgid "Display  registration form? "
+msgstr "Afficher la description"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:58
+#, fuzzy
+msgid "Use an alternate registration page?"
+msgstr "Page d'enregistrement principale"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:60
+#, fuzzy
+msgid "Use an alternate email address?"
+msgstr "Veuillez entrer votre Adresse Mail"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:70
+#, fuzzy
+msgid "Member Options"
+msgstr "Sauvegardez les options"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:84
+#, fuzzy
+msgid "Event Category"
+msgstr "Catégorie de l'événement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:99
+#, fuzzy
+msgid "Event Promotions"
+msgstr "Events Pro"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:102
+#, fuzzy
+msgid "Early Registration Discount"
+msgstr "Payez le montant de l'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:104
+msgid "End Date:"
+msgstr "Date de fin :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:106
+#, fuzzy
+msgid "Percentage:"
+msgstr "Pourcentage"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:108
+#, fuzzy
+msgid "(Leave blank if not applicable)"
+msgstr "(laissez en blanc pour illimité)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:110
+#, fuzzy
+msgid "Allow discount codes? "
+msgstr "Le code de réduction"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:137
+#, fuzzy
+msgid "Event Questions"
+msgstr "Questions sur l'événement-"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:141
+#, fuzzy
+msgid "Question Groups"
+msgstr "Question:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:142
+msgid "Add a pre-populated <a href=\"admin.php?page=form_groups\" target=\"_blank\">group</a> of <a href=\"admin.php?page=form_builder\" target=\"_blank\">questions</a> to your event. The personal information group is rquired for all events."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:173
+#, fuzzy
+msgid "Groupon Options"
+msgstr "Options"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:188
+#, fuzzy
+msgid "Calendar Options"
+msgstr "Sauvegardez les options"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:191
+msgid "It looks like you are using the \"<a href=\"http://wordpress.org/extend/plugins/calendar/\" target=\"_blank\" title=\"Calendar developed and supported by Kieran O'Shea\">Calendar</a>\" plugin. Would you like to add this event to the calendar?"
+msgstr "Il semblerait que vous utilisiez le \"<a href=\"http://wordpress.org/extend/plugins/calendar/\" target=\"_blank\" title=\"Calendar developed and supported by Kieran O'Shea\">Calendar</a>\" plugin. Voulez-vous ajouter cet événement au calendrier?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:192
+msgid "Choose a <a href=\"admin.php?page=calendar-categories\">Calendar Category</a>:"
+msgstr "Choisissez une <a href=\"admin.php?page=calendar-categories\">Catégorie du calendrier</a> :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:202
+#, fuzzy
+msgid "Add to Calendar:"
+msgstr "Ajouter l'événement au calendrier"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:217
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:220
+#, fuzzy
+msgid "Event Title"
+msgstr "Heure de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:227
+msgid "Unique Event Identifier:"
+msgstr "Identifiant Unique de l'événement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:230
+#, fuzzy
+msgid "Get Shortcode"
+msgstr "Shortcode"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:231
+msgid "Get URL"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:237
+#, fuzzy
+msgid "Event Description"
+msgstr "Description de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:264
+#, fuzzy
+msgid "Event Date/Times"
+msgstr "Horaires de l'événement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:271
+#, fuzzy
+msgid "Registration Dates"
+msgstr "Payez le montant de l'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:271
+#, fuzzy
+msgid "Registration Start:"
+msgstr "Event ESPRESSO"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:272
+#, fuzzy
+msgid "Registration End:"
+msgstr "Payez le montant de l'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:274
+#, fuzzy
+msgid "Event Dates"
+msgstr "Date de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:274
+#, fuzzy
+msgid "Event Start Date:"
+msgstr "Date de début :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:275
+#, fuzzy
+msgid "Event End Date:"
+msgstr "Date de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:284
+#, fuzzy
+msgid "Registration Times"
+msgstr "Payez le montant de l'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:287
+#, fuzzy
+msgid "Event Times"
+msgstr "Horaires de l'événement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:321
+#, fuzzy
+msgid "Event Pricing"
+msgstr "Prix de l'événement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:338
+#, fuzzy
+msgid "Advanced Options"
+msgstr "Sauvegardez les options"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:343
+#, fuzzy
+msgid "Event Location"
+msgstr "Lieu de l'événement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:350
+msgid "Physical Location"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:351
+#, fuzzy
+msgid "Virtual Location"
+msgstr "Lieu de l'événement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:363
+#, fuzzy
+msgid "Address 2:"
+msgstr "Adresse :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:368
+msgid "City:"
+msgstr "Ville :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:373
+msgid "State:"
+msgstr "Département/Province :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:378
+msgid "Zip/Postal Code:"
+msgstr "Code Postal :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:383
+msgid "Country:"
+msgstr "Pays :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:391
+msgid "Phone:"
+msgstr "Téléphone :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:395
+#, fuzzy
+msgid "URL of Event:"
+msgstr "Coût de cet événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:400
+#, fuzzy
+msgid "Call in Number:"
+msgstr "Numéro de TVA:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:412
+msgid "Email Confirmation:"
+msgstr "Email de confirmation :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:417
+msgid "Send custom confirmation emails for this event?"
+msgstr "Expédier des Emails de confirmation personnalisés pour cet événement?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:420
+msgid "Create a custom email"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:445
+msgid "Create a Post"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:449
+#, fuzzy
+msgid "Create a post for this event?"
+msgstr "Autorisez les coupons Promo pour cet événement ?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:467
+#, fuzzy
+msgid "Espresso Event"
+msgstr "Evénement gratuit"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:467
+#, fuzzy
+msgid "Post"
+msgstr "Coût"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:475
+msgid "Author"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:476
+msgid "Post Type"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:477
+msgid "Tags"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:478
+#, fuzzy
+msgid "Post Categories:"
+msgstr "Catégories des événements :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_new_event.php:483
+msgid "Post templates are stored in the \"templates\" directory of the plugin."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_to_calendar.php:25
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/copy_event.php:144
+msgid "The event"
+msgstr "L'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_to_calendar.php:25
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/copy_event.php:144
+msgid "has been added."
+msgstr "a été ajouté."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/add_to_calendar.php:27
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/copy_event.php:146
+msgid "There was an error in your submission, please try again. The event was not saved!"
+msgstr "Il y a une erreur dans votre soumission, veuillez essayer à nouveau. L'événement n'a pas été sauvegardé !"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:102
+msgid "Quick Overview"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:113
+msgid "Are you sure you want to copy "
+msgstr "Êtes-vous certain(e) de vouloir dupliquer ?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:114
+#, fuzzy
+msgid "Duplicate Event"
+msgstr "Mise à jour de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:128
+#, fuzzy
+msgid "Current Status:"
+msgstr "Evénements en cours"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:131
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_list.php:69
+msgid "Attendees"
+msgstr "Participants"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:142
+msgid "Are you sure you want to delete "
+msgstr "Êtes-vous certain(e) de vouloir SUPPRIMER ?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:143
+#, fuzzy
+msgid "Delete Event"
+msgstr "Supprimer cet événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:146
+msgid "Update Event"
+msgstr "Mise à jour de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:227
+#, fuzzy
+msgid "<strong>Allow discount codes?</strong> "
+msgstr "<p><strong>Vous utilisez un coupon de réduction :</strong> "
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:292
+#, fuzzy
+msgid "Cart Items"
+msgstr "Date de début"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:297
+msgid "Add a pre-populated <a href=\"admin.php?page=item_groups\">group</a> of <a href=\"admin.php?page=cart_items\">items</a> to your event."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:404
+#, fuzzy
+msgid "Event Start Date"
+msgstr "Date de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:405
+#, fuzzy
+msgid "Event End Date"
+msgstr "Date de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:518
+#, fuzzy
+msgid "Google Map Link (for email):"
+msgstr "lien Google maps"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:595
+#, fuzzy
+msgid "Add/Update post for this event?"
+msgstr "Autoriser les coupons promo pour cet événement ?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:614
+msgid "Author:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/edit_event.php:617
+msgid "Tags:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:14
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:21
+#, fuzzy
+msgid "Reg Start Time"
+msgstr "heure de début"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:14
+#, fuzzy
+msgid "Reg End Time"
+msgstr "Heure de fin"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:21
+#, fuzzy
+msgid "Reg End Time:"
+msgstr "heure de fin"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:36
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:41
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:53
+msgid "Start Time"
+msgstr "heure de début"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:36
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:53
+msgid "End Time"
+msgstr "Heure de fin"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:41
+msgid "End Time:"
+msgstr "heure de fin"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:47
+msgid "Add Additional Time"
+msgstr "Ajouter une heure additionnelle"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:69
+msgid "Standard Pricing"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:78
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:114
+msgid "Price"
+msgstr "Prix"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:80
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:95
+msgid "Surcharge:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:81
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:99
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:114
+#, fuzzy
+msgid "Remove Attendee"
+msgstr "Aucun participants"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:91
+msgid "Price:"
+msgstr "Prix :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:105
+#, fuzzy
+msgid "(enter 0.00 for free events, enter 2 place decimal i.e. "
+msgstr "(laisser en blanc pour les événements gratuits, entrez la place de deux décimales ex.)"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:106
+msgid "Add A Price"
+msgstr "Ajouter un prix"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:114
+msgid "Surcharge"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_functions.php:152
+#, fuzzy
+msgid "No Categories"
+msgstr "Catégories des événements"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_list.php:37
+msgid "Current Events"
+msgstr "Evénements en cours"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_list.php:43
+msgid "Import CSV"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_list.php:65
+#, fuzzy
+msgid "Event Start"
+msgstr "Statistiques de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_list.php:66
+#, fuzzy
+msgid "Registration Start"
+msgstr "Payez le montant de l'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_list.php:124
+msgid ""
+"<h2>Event Identifier</h2>\n"
+"\n"
+"      <p>The unique ID can be used in individual pages using:<br />\n"
+"\n"
+"\t  <span  class=\"updated fade\">[SINGLEEVENT single_event_id=\""
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_list.php:144
+#, fuzzy
+msgid "Delete Events(s)"
+msgstr "Supprimer cet événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_list.php:184
+msgid ""
+"<h2>Coupon/Promo Code</h2>\n"
+"      <p>This is used to apply discounts to events.</p>\n"
+"      <p>A coupon or promo code could can be anything you want. For example: Say you have an event that costs "
+msgstr ""
+"<h2>Coupon/Code Promo</h2>\n"
+"      <p>Ceci est utilisé pour appliquer un code promo à l'événement.</p>\n"
+"      <p>Un coupon ou un code promo peut être ce que vous voulez. Par exemple : dites que vous avez un événement qui coute"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/event_list.php:190
+#, fuzzy
+msgid ""
+"<h2>Event Identifier</h2>\n"
+"\n"
+"      <p>This should be a unique identifier for the event. Example: \"Event1\" (without qoutes.)</p>\n"
+"\n"
+"      <p>The unique ID can also be used in individual pages using the [SINGLEEVENT single_event_id=\"Unique Event ID\"] shortcode.</p>"
+msgstr ""
+"<h2>Identifiant de l'événement</h2>\n"
+"      <p>Ceci devrait être un identifiant unique pour l'événement. Exemple: \"Event1\" (sans les guillemets.)</p>\n"
+"      <p>L'identifiant Unique peut aussi être utilisé dans une page individuelle en insérant [SINGLEEVENT single_event_id=\"Unique Event ID\"] shortcode.</p>"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/index.php:11
+msgid "Event Management"
+msgstr "Gestion de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/index.php:69
+msgid ""
+"<h2>Pre-existing Emails</h2>\r\n"
+"      <p>These emails will override the custom email if a pre-existing email is selected. You must select \"Yes\" in the \"Send custom confirmation emails for this event?\" above.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/index.php:73
+#, fuzzy
+msgid ""
+"<h2>Coupon/Promo Code</h2>\r\n"
+"      <p>This is used to apply discounts to events.</p>\r\n"
+"      <p>A coupon or promo code could can be anything you want. For example: Say you have an event that costs "
+msgstr ""
+"<h2>Coupon/Code Promo</h2>\n"
+"      <p>Ceci est utilisé pour appliquer un code promo à l'événement.</p>\n"
+"      <p>Un coupon ou un code promo peut être ce que vous voulez. Par exemple : dites que vous avez un événement qui coute"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/index.php:78
+#, fuzzy
+msgid ""
+"<h2>Event Identifier</h2>\r\n"
+"      <p>This should be a unique identifier for the event. Example: \"Event1\" (without qoutes.)</p>\r\n"
+"      <p>The unique ID can also be used in individual pages using the [SINGLEEVENT single_event_id=\"Unique Event ID\"] shortcode.</p>"
+msgstr ""
+"<h2>Identifiant de l'événement</h2>\n"
+"      <p>Ceci devrait être un identifiant unique pour l'événement. Exemple: \"Event1\" (sans les guillemets.)</p>\n"
+"      <p>L'identifiant Unique peut aussi être utilisé dans une page individuelle en insérant [SINGLEEVENT single_event_id=\"Unique Event ID\"] shortcode.</p>"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/index.php:83
+msgid ""
+"<h2>Secondary Events</h2>\r\n"
+"      <p>These types of events can be used as a overflow or waiting list events.</p>\r\n"
+"      <p>If an event is set up as an \"Secondary Event,\" it can be set to not appear in your event listings template. You will need to customize your event_listing.php file to make this work. For more information, please <a href=\"http://eventespresso.com/forums/?p=512\" target=\"_blank\">visit the forums</a>. "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/index.php:88
+msgid ""
+"<h2>Off-site Registration Page</h2>\r\n"
+"      <p>If an off-site registration page is entered, it will override your registration page and send attendees to the URL that is entered.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/index.php:92
+msgid ""
+"<h2>Alternate Email Address</h2>\r\n"
+"      <p>If an alternate email address is entered. Admin email notifications wil be sent to this address instead.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/index.php:96
+msgid ""
+"<h2>Event Status Types</h2>\r\n"
+"      <ul>\r\n"
+"\t  \t<li><strong>Primary</strong><br />This type if event should always appear in the event lsiting. It is a live event (not deleted, ongoing or secondary.)</li>\r\n"
+"\t\t<li><strong>Secondary</strong><br />This type of event can be hidden and used as a waiting list for a primary event. Template customizations are required. For more information, please <a href=\"http://eventespresso.com/forums/?p=512\" target=\"_blank\">visit the forums</a></li>\r\n"
+"\t\t<li><strong>Ongoing</strong><br />This type of an event can be set to appear in your event listings and display a registration page. Tempalte customizations are required. For more information, please <a href=\"http://eventespresso.com/forums/?p=518\" target=\"_blank\">visit the forums</a></li>\r\n"
+"\t\t<li><strong>Deleted</strong><br />This is event type will not appear in the event listings and will not dispaly a registrations page. Deleted events can still be accessed in the <a href=\"admin.php?page=admin_reports\">Attendee Reports</a> page.</li>\r\n"
+"\t</ul>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/insert_event.php:276
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/update_event.php:390
+msgid "There was error finding a post template. Please verify your post templates are available."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/insert_event.php:335
+#, fuzzy
+msgid "has been added for "
+msgstr "a été ajouté."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/insert_event.php:335
+#, fuzzy
+msgid "Edit this event?"
+msgstr "Modifier cet événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/event-management/update_event.php:479
+#, fuzzy
+msgid "Event details updated for"
+msgstr "Détails de l'événement sauvegardés pour"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/index.php:9
+msgid "Manage Additional Questions"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/index.php:38
+#, fuzzy
+msgid "Current Questions"
+msgstr "Questions sur l'événement-"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/index.php:45
+#, fuzzy
+msgid "Add New Question"
+msgstr "Ajouter un nouvel événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/index.php:74
+#, fuzzy
+msgid "Question"
+msgstr "Question:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/index.php:77
+msgid "Values"
+msgstr "Valeurs"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/index.php:80
+#, fuzzy
+msgid "Type"
+msgstr "Type:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/index.php:83
+#, fuzzy
+msgid "Required"
+msgstr "Requis:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/index.php:86
+msgid "Sequence"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/index.php:132
+#, fuzzy
+msgid "Delete Question"
+msgstr "Questions sur l'événement-"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/delete_group.php:31
+#, fuzzy
+msgid "Question Groups have been successfully deleted."
+msgstr "Ce(s) participant(s) a (ont) été supprimés avec succès de l'événement."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/edit_group.php:25
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/index.php:48
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/new_group.php:8
+#, fuzzy
+msgid "Add New Group"
+msgstr "Ajouter une nouvelle Catégorie"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/edit_group.php:32
+#, fuzzy
+msgid "Group Information"
+msgstr "Lieu de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/edit_group.php:33
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/new_group.php:16
+#, fuzzy
+msgid "Group Name:"
+msgstr "Prénom :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/edit_group.php:35
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/new_group.php:18
+msgid "Group Order:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/edit_group.php:37
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/new_group.php:21
+#, fuzzy
+msgid "Group Identifier:"
+msgstr "Identifiant"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/edit_group.php:39
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/new_group.php:23
+msgid "Description:"
+msgstr "Description:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/edit_group.php:41
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/new_group.php:25
+#, fuzzy
+msgid "Show group name on registration page?"
+msgstr "Page d'enregistrement principale"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/edit_group.php:43
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/new_group.php:27
+#, fuzzy
+msgid "Show group description on registration page?"
+msgstr "Souhaitez-vous afficher la description de l'événement sur la page d'enregistrement ?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/edit_group.php:49
+#, fuzzy
+msgid "Questions"
+msgstr "Question:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/index.php:9
+msgid "Manage Additional Question Groups"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/index.php:42
+#, fuzzy
+msgid "Current Groups"
+msgstr "Evénements en cours"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/index.php:79
+#, fuzzy
+msgid "Group Name"
+msgstr "Prénom"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/index.php:83
+#, fuzzy
+msgid "Indentifier"
+msgstr "Identifiant"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/index.php:86
+msgid "Description"
+msgstr "Description"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/index.php:89
+msgid "Order"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/index.php:135
+#, fuzzy
+msgid "Delete Question Group"
+msgstr "Questions sur l'événement-"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/insert_group.php:40
+#, fuzzy
+msgid "The group has been added."
+msgstr "a été ajouté."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/insert_group.php:43
+#, fuzzy
+msgid "There was an error in your submission, please try again. The group was not saved!"
+msgstr "Il y a une erreur dans votre soumission, veuillez essayer à nouveau. L'événement n'a pas été sauvegardé !"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/new_group.php:15
+msgid "Add new groups using the form below."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/groups/new_group.php:37
+#, fuzzy
+msgid "Add Questions:"
+msgstr "Question:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/delete_question.php:31
+#, fuzzy
+msgid "Questions have been successfully deleted."
+msgstr "Ce(s) participant(s) a (ont) été supprimés avec succès de l'événement."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:23
+#, fuzzy
+msgid "Edit Question"
+msgstr "Questions sur l'événement-"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:29
+#, fuzzy
+msgid "Edit the question using the form below.  By default all participants will be asked for their first name, last name, and email address."
+msgstr "Ajouter une question additionnelle pour la forme d'enregistrement ci-dessous. Par défaut tous les participants vont se voir demander leur adresse Email, leur prénom, leur Nom de Famille, leur Adresse, Ville, Etat, Code Postal, et numéro de téléphone"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:33
+msgid "Question:"
+msgstr "Question:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:40
+msgid "Type:"
+msgstr "Type:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:44
+msgid "Text"
+msgstr "Texte"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:45
+msgid "Text Area"
+msgstr "Zone de Texte"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:46
+msgid "Single"
+msgstr "Unique"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:47
+msgid "Drop Down"
+msgstr "Drop Down"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:48
+msgid "Multiple"
+msgstr "Mutiple"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:53
+msgid "Values:"
+msgstr "Valeurs:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:55
+msgid "A comma seperated list of values. Eg. black, blue, red"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:60
+msgid "Required:"
+msgstr "Requis:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:62
+msgid "Mark this question as required."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:70
+#, fuzzy
+msgid "Required Text:"
+msgstr "Requis:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:72
+msgid "Text displayed if not completed."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:77
+msgid "Order/Sequence:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/edit_question.php:94
+msgid "Nothing found!"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/new_question.php:7
+#, fuzzy
+msgid "Add New Questions"
+msgstr "Ajouter un nouvel événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/form-builder/questions/new_question.php:11
+#, fuzzy
+msgid "Add questions using the form below.  By default all participants will be asked for their first name, last name, and email address."
+msgstr "Ajouter une question additionnelle pour la forme d'enregistrement ci-dessous. Par défaut tous les participants vont se voir demander leur adresse Email, leur prénom, leur Nom de Famille, leur Adresse, Ville, Etat, Code Postal, et numéro de téléphone"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:391
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:650
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:663
+msgid "No country selected"
+msgstr "Aucun Pays sélectionné"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:927
+msgid "New @ Event Espresso"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:933
+msgid "From the Blog"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:935
+msgid "From the Forums"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:945
+msgid "Helpful Plugin Links"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:950
+msgid "Installation &amp; Usage Guide"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:973
+#, fuzzy
+msgid ""
+"<h2>Email Confirmations</h2>\n"
+"  <p>For customized confirmation emails, the following tags can be placed in the email form and they will pull data from the database to include in the email.</p>\n"
+"  <p>[registration_id], [fname], [lname], [phone], [event], [event_link], [event_url], [description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link]</p>"
+msgstr ""
+"<h2>Email de Confirmation</h2>\n"
+"  <p>Pour les emails de confirmation personnalisés, les tags suivants peuvent être placé dans le contenu de l'email et ceci insèrera les données venant de la base de donnée .</p>\n"
+"  <p>[fname], [lname], [phone], [event],[description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link]</p>"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:979
+msgid ""
+" <h2>Sample Mail Send:</h2>\n"
+"\n"
+"<p>***This is an automated response - Do Not Reply***</p>\n"
+"<p>Thank you [fname] [lname] for registering for [event]. We hope that you will find this event both informative and enjoyable. Should have any questions, please contact [contact].</p>\n"
+"<p>If you have not done so already, please submit your payment in the amount of [cost].</p>\n"
+"<p>Click here to review your payment information [payment_url].</p>\n"
+"<p>Thank You.</p>"
+msgstr ""
+" <h2>Exemple de Mail expédié</h2>\n"
+"\n"
+"<p>***Ceci est une réponse automatique - Ne répondez pas***</p>\n"
+"<p>Merci [fname] [lname] de vous enregistrez pour [event]. Nous espérons que vous l'apprécierez. Si vous avez des questions , veuillez contacter [contact].</p>\n"
+"<p>Si vous ne l'avez pas encore fait, merci d'effectuer votre paiement pour un montant de[cost].</p>\n"
+"<p>Cliquez ici pour voir vos informations de paiement [payment_url].</p>\n"
+"<p>Merci.</p>"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1003
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1005
+msgid "Event Espresso must be configured. Go to"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1003
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1005
+#, fuzzy
+msgid "the Organization Settings page"
+msgstr "Détails de l'organisateur"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1003
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1005
+msgid "to configure the plugin \"Page Settings.\""
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1012
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1014
+msgid "Event Espresso attendee data needs to be updated. Please visit the "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1012
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1014
+msgid "Support page"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1012
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1014
+msgid "to configure update the attendee information."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1038
+msgid "Assign a Secondary Event? "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1039
+#, fuzzy
+msgid "Overflow Event"
+msgstr "Voir l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1071
+#, fuzzy
+msgid "Select Value"
+msgstr "Sélectionnez"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/admin.php:1086
+msgid "No Results"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/email.php:118
+msgid "has signed up on-line for"
+msgstr "a signé en ligne pour"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/email.php:119
+#, fuzzy
+msgid "Registration ID:"
+msgstr "Payez le montant de l'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/email.php:120
+#, fuzzy
+msgid "Email address:"
+msgstr "Adresse e-mail :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/email.php:124
+msgid "Zip:"
+msgstr "Code Postal :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/email.php:467
+#, fuzzy
+msgid "Event Cancellation Notice"
+msgstr "Lieu de l'événement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/email.php:468
+#, fuzzy
+msgid " has been cancelled."
+msgstr "a été ajouté."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/email.php:469
+msgid "For more information, please email "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/email.php:778
+#, fuzzy
+msgid "Email Sent to "
+msgstr "Configuration de l'Email"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:67
+msgid "Add More Attendees? (click to toggle, limit "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:67
+#, fuzzy
+msgid "Add an Additonal Attendee"
+msgstr "Participants supplémentaires ?"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:116
+msgid "ONGOING"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:123
+msgid "SECONDARY"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:132
+msgid "CLOSED"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:139
+msgid "NOT_OPEN"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:146
+msgid "OPEN"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:155
+msgid "EXPIRED"
+msgstr "EXPIRÉ"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:162
+#, fuzzy
+msgid "ACTIVE"
+msgstr "NON ACTIF"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:169
+#, fuzzy
+msgid "NOT_ACTIVE"
+msgstr "NON ACTIF"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:176
+#, fuzzy
+msgid "DELETED"
+msgstr "SUPPRIMEZ"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:354
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:464
+msgid " (including "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:361
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:364
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:473
+msgid "Free Event"
+msgstr "Evénement gratuit"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:436
+#, fuzzy
+msgid "Choose an Option: "
+msgstr "<strong>Choisssez une Option :</strong>"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:445
+msgid " Early Pricing"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:469
+msgid "Price: "
+msgstr "Prix :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/main.php:474
+#, fuzzy
+msgid "free event"
+msgstr "Evénement gratuit"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:35
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:37
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:39
+msgid "in"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:35
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:45
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:80
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:87
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:121
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:130
+msgid "hours"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:37
+msgid "today"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:37
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:123
+msgid "minutes"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:41
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:83
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:126
+msgid "day"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:43
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:85
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:128
+msgid "days"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:45
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:87
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:130
+msgid "and"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:80
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:87
+msgid "ago"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:117
+msgid "allday"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:119
+msgid "duration"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:143
+#, fuzzy
+msgid "Start Time:</span> "
+msgstr "heure de début"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:146
+#, fuzzy
+msgid "End Time: "
+msgstr "heure de fin"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:151
+#, fuzzy
+msgid "Choose an Event Time:"
+msgstr "Horaires de l'événement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:210
+#, fuzzy
+msgid "Start Time: "
+msgstr "heure de début"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:212
+#, fuzzy
+msgid "<br />End Time: "
+msgstr "heure de fin"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:261
+msgid "NO DATE SUPPLIED"
+msgstr "AUCUNE DATE SOUMISE"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/functions/time_date.php:373
+#, fuzzy
+msgid "Choose Event Timezone:"
+msgstr "Horaires de l'événement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/process-registration/add_attendees_to_db.php:78
+msgid "Sorry, you did not enter the correct anti-spam phrase. Please click your browser's back button and try again."
+msgstr "Désolé,vous n'avez pas entré la phrase Anti-spam correcte. Cliquez sur le bouton retour de votre navigateur et essayez à nouveau."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/process-registration/add_attendees_to_db.php:179
+msgid "Form Questions:"
+msgstr "Questions du formulaire:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/process-registration/attendee_edit_record.php:133
+#, fuzzy
+msgid "Registration For:"
+msgstr "Payez le montant de l'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/process-registration/attendee_edit_record.php:147
+msgid "Select an attendee to edit:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/process-registration/attendee_edit_record.php:235
+#, fuzzy
+msgid "Finalize Registration"
+msgstr "Enregistrement à l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/process-registration/payment_page.php:130
+#, fuzzy
+msgid "Free"
+msgstr "Français"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/includes/process-registration/payment_page.php:268
+msgid "Please check your email for payment information."
+msgstr "Veuillez vérifier vos Emails pour les informations de paiement."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/post-type-samples/page-event_list.php:128
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/post-type-samples/single-espresso_event.php:39
+#, fuzzy
+msgid "Pages:"
+msgstr "Valeurs:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/post-type-samples/single-espresso_event.php:52
+#, php-format
+msgid "View all posts by %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/attendee_list.php:55
+#, fuzzy
+msgid "Attendee Listing For: "
+msgstr "Limite max pour les participants :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/confirmation_display.php:8
+msgid "Please verify your registration details:"
+msgstr "Veuillez vérifier vos détails d'enregistrement:"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/confirmation_display.php:13
+msgid "Event Name:"
+msgstr "Nom de l'événement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/confirmation_display.php:19
+#, fuzzy
+msgid "Type/Price:"
+msgstr "Prix :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/confirmation_display.php:25
+msgid "Attendee Name:"
+msgstr "Nom du Participant :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/confirmation_display.php:49
+msgid "Phone: "
+msgstr "Téléphone :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/confirmation_display.php:54
+#, fuzzy
+msgid "Contact Information:"
+msgstr "Lieu de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/confirmation_display.php:66
+#, fuzzy
+msgid "Additional Information:"
+msgstr "Lieu de l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/confirmation_display.php:75
+#, fuzzy
+msgid "Confirm Registration"
+msgstr "Enregistrement à l'événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/confirmation_display.php:75
+msgid "or"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/confirmation_display.php:75
+msgid "Edit Your Details?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/event_list_display.php:41
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/event_list_display.php:47
+#, fuzzy
+msgid "Available Spaces:"
+msgstr "Réductions disponibles pour cet événement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/event_list_display.php:43
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/registration_page.php:172
+msgid "Join Waiting List"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/event_list_display.php:49
+msgid "Register Online"
+msgstr "Enregistrement en ligne"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/event_post.php:63
+#, fuzzy
+msgid "View Map"
+msgstr "Afficher"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/event_post.php:63
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/event_post.php:69
+#, fuzzy
+msgid "Register"
+msgstr "Enregistrement en ligne"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/payment_page.php:7
+#, fuzzy
+msgid "Thank you! Your registration is confirmed for"
+msgstr "Merci de votre enregistrement, vous allez recevoir une confirmation par Email"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/payment_page.php:9
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/payment_page.php:20
+#, fuzzy
+msgid "Your Registration ID:"
+msgstr "Payez le montant de l'enregistrement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/payment_page.php:11
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/payment_page.php:21
+msgid "A confirmation email has been sent with additional details of your registration."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/payment_page.php:16
+msgid "Your registration is not complete until payment is received."
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/payment_page.php:18
+#, fuzzy
+msgid "Amount due: "
+msgstr "Montant"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/payment_page.php:23
+#, fuzzy
+msgid "Please choose a payment option:<"
+msgstr "Veuillez vérifier vos Emails pour les informations de paiement."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/registration_page.php:166
+msgid "We are sorry but this event has reached the maximum number of attendees!"
+msgstr "Nous sommes désolé mais cette manifestation a atteint le maximum de participants possible!"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/registration_page.php:167
+msgid "Please check back in the event someone cancels."
+msgstr "Veuillez nous visiter à nouveau au cas ou nous aurions un désistement."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/registration_page.php:168
+msgid "Current Number of Attendees:"
+msgstr "Nombre de Participants :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/registration_page.php:192
+#, fuzzy
+msgid "<h3>This event has expired or is no longer available.</h3>"
+msgstr "Désolé, cette manifestation est terminée ou n'est plus disponible."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/return_payment.php:5
+msgid "Thank You "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/return_payment.php:7
+msgid " for registering for "
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/return_payment.php:13
+msgid "Our records indicate you have paid"
+msgstr "Nos enregistrement indiquent que vous avez payé"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/return_payment.php:15
+msgid "Our records indicate your payment is pending."
+msgstr "Nos enregistrements indiquent que votre paiement est en attente"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/return_payment.php:15
+msgid "Amount pending:"
+msgstr "En attente du montant :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/return_payment.php:21
+msgid "Payment will be in the amount of"
+msgstr "Le paiement sera d'un montant de"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/return_payment.php:25
+#, fuzzy
+msgid "Payment Options:"
+msgstr "Sauvegardez les options"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/widget.php:8
+msgid "A widget to display your upcoming events."
+msgstr "Un widget pour afficher vos événements à venir."
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/widget.php:14
+#, fuzzy
+msgid "Event Espresso Widget"
+msgstr "Widget d'enregistrement à un événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/widget.php:111
+msgid "Upcoming Events"
+msgstr "Evénements à venir"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/widget.php:111
+#, fuzzy
+msgid "false"
+msgstr "Montant"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/widget.php:130
+msgid "Event Category:"
+msgstr "Catégorie de l'événement :"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/widget.php:135
+msgid "Limit:"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/widget.php:139
+#, fuzzy
+msgid "Optional Settings:"
+msgstr "Détails de l'organisateur"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/widget.php:140
+msgid "Show Expired Events?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/widget.php:141
+msgid "Show Secondary Events?"
+msgstr ""
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/widget.php:142
+#, fuzzy
+msgid "Show Deleted Events?"
+msgstr "Supprimer cet événement"
+
+#: /Users/sethshoultes/Dropbox/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17/templates/widget.php:143
+#, fuzzy
+msgid "Show Recurring Events?"
+msgstr "Evénements en cours"
+

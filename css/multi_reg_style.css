@@ -1,0 +1,22 @@
+/**
+    Multi registration form style
+*/
+
+
+#ee_multi_regis_form {
+    outline: 2px solid #e8e8e8;
+    margin: 5px 0;
+
+   padding: 5px;
+
+}
+
+#event_total_price{
+
+    color: #333333;
+    font-size: 30px;
+    float: right;
+    text-align: right;
+
+}
+
