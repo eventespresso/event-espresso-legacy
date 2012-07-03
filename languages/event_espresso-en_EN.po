@@ -1,0 +1,4192 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Event Espresso\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-12-17 00:24-0700\n"
+"PO-Revision-Date: 2010-12-17 00:27-0700\n"
+"Last-Translator: Seth Shoultes <support@eventespresso.com>\n"
+"Language-Team: Seth Shoultes <support@eventespresso.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: /Users/sethshoultes/Websites/Local Websites/Event Espresso/wp-content/plugins/event-espresso.3.0.17.b.32\n"
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:261
+msgid "Event Espresso"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:261
+msgid "Event Manager"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:264
+msgid "Event Espresso - General Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:264
+msgid "General Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:267
+msgid "Event Espresso - Event Setup"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:267
+msgid "Event Setup"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:271
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:272
+msgid "Event Espresso - Simple Shopping Cart"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:271
+msgid "Additional Items"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:272
+msgid "Item Groups"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:276
+msgid "Event Espresso - Attendees/Payments"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:276
+msgid "Attendees/Payments"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:279
+msgid "Event Espresso - Manage Event Categories"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:279
+msgid "Event Categories"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:282
+msgid "Event Espresso - Email Manager"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:282
+msgid "Email Manager"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:287
+msgid "Event Espresso - Member Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:287
+msgid "Member Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:290
+msgid "Event Espresso - General Coupons"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:290
+msgid "General Coupons"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:294
+msgid "Groupons"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:294
+msgid "Groupon Codes"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:300
+msgid "Event Espresso - Gateway Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:300
+msgid "Gateway Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:305
+msgid "Event Espresso - Form Questions"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:305
+msgid "Form Questions"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:308
+msgid "Event Espresso - Form Groups"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:308
+msgid "Form Groups"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:313
+msgid "Event Espresso - Social Media Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:313
+msgid "Social Media"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:318
+msgid "Event Espresso - Calendar Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:318
+msgid "Calendar Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:322
+msgid "Event Espresso - Addons"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:322
+msgid "Addons"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:325
+msgid "Event Espresso - Help/Support"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:325
+msgid "Help/Support"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:350
+msgid "Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:351
+msgid "Events"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:387
+msgid "Sorry, you did not enter the correct anti-spam phrase. Please click your browser's back button and try again."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Group"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Reg ID"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Last Name"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "First Name"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Email"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Address"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "City"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "State"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Zip"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Phone"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Payment Method"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Reg Date"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Pay Status"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Type of Payment"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Transaction ID"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Payment"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Coupon Code"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "# Attendees"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Date Paid"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Event Name"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Price Option"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Event Date"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:421
+msgid "Event Time"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:572
+msgid "No participant data has been collected."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/espresso.php:578
+msgid "This Is Not A Valid Selection!"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:9
+msgid "Manage Payment Gateways"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:61
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:87
+msgid "Move Your Payment Gateways"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:67
+msgid "Modifying and adding payment gateways is easy."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:70
+msgid "You just need to add/edit the appropriate files in the following location."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:73
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:112
+msgid "Path:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:76
+msgid "Remember, if updates are made or features are added to these templates in the future. You will need to make the updates to your customized templates."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:99
+msgid "Your gateways have been moved."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:110
+msgid "The permissions on your templates directory are incorrect."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:111
+msgid "Please set the permissions to 775 on the following directory."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:117
+msgid "If you plan on adding additional payment gateways. Please use the link below to move your gateway files to a safe place."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:118
+msgid "Your gateway files have not been moved."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:119
+#, php-format
+msgid "Click here to <a href='%s'>Move your files</a> to a safe place."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:134
+msgid ""
+"<h2>Button Image URL</h2>\n"
+"      <p>A default payment button is provided. A custom payment button may be used, choose your image or upload a new one, and just copy the \"file url\" here (optional.)</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/payment_gateways.php:138
+msgid ""
+"<h2>By-passing the Confirmation Page</h2>\n"
+"      <p>This will allow you to send your customers directly to the payment gateway of your choice.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/PaymentGateway.php:216
+msgid "Field Name"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/PaymentGateway.php:217
+msgid "Value"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/process_payments.php:42
+msgid "Problem With Your Website Payment IPN"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/process_payments.php:43
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/process_payments.php:50
+msgid "The IPN for "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/process_payments.php:49
+msgid "Website Payment IPN Not Setup"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/authnet_ipn.php:40
+msgid "Thank You!"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/authnet_ipn.php:41
+msgid "Your transaction has been processed."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/authnet_ipn.php:46
+msgid "There was an error processing your transaction!"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/authnet_vars.php:23
+msgid "Reg. ID:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/authnet_vars.php:23
+msgid "Name:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/authnet_vars.php:23
+msgid "Total Registrants:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/authnet_vars.php:60
+msgid "Debug Mode Is Turned On"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:13
+msgid "Authorize.net settings saved."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:19
+msgid "Authorize.net Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:39
+msgid "Activate Authorize.net?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:42
+msgid "Deactivate Authorize.net?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:46
+msgid "The Authorize.net gateway is installed. Would you like to activate it?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:73
+msgid "Authorize.net Login I.D."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:80
+msgid "Authorize.net Transaction Key"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:87
+msgid "Button Image URL: "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:95
+msgid "Image URL:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:101
+msgid "(used for your business/personal logo on the Authorize.net payment page)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:106
+msgid "Relay Response URL :"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:111
+msgid "Use the test mode feature for Autorize.net?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:117
+msgid "By-pass the payment confirmation page?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:120
+msgid "Yes"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:121
+msgid "No"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:125
+msgid "Current Button Image:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:133
+msgid "Update Authorize.net Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:137
+msgid ""
+"<h2>Relay Response</h2>\n"
+"      <p>This shows the specific the URL to which the gateway should return the relay response for a transaction. This the page should be set in your Authorize.net account. Login to Authorize.net, goto Account > Response/Receipt URLs > Add URL and enter the following URL.</p>\n"
+"\t  <p><strong>Relay Response URL:</strong> "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:145
+msgid "Authorize.net Image URL (logo for payment page)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:148
+msgid "The URL of the image displayed as your logo in the header of the Authorize.net checkout pages."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/authnet/settings.php:152
+msgid ""
+"<h2>Authorize.net Test Mode</h2>\n"
+"      <p>Test Mode allows you to submit test transactions to the payment gateway. Transactions that are submitted while Test Mode is ON are NOT actually processed. The result of a transaction depends on the card number submitted, and the invoice amount. If you want a transaction to be approved, use one of the following card numbers.</p><p>370000000000002 (American Express)<br />\n"
+"6011000000000012 (Discover)<br />\n"
+"5424000000000015 (Master Card)<br />\n"
+"4007000000027 (Visa)<br />\n"
+"</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/bank_payment_vars.php:10
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/settings.php:86
+msgid "Name on Account:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/bank_payment_vars.php:11
+msgid "Account Number:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/bank_payment_vars.php:12
+msgid "Financial Institution:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/bank_payment_vars.php:13
+msgid "Address:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/settings.php:13
+msgid "Electronic Funds Transfer settings saved."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/settings.php:21
+msgid "Electronic Funds Transfer Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/settings.php:41
+msgid "Activate Electronic Funds Transfers?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/settings.php:44
+msgid "Deactivate Electronic Funds Transfers?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/settings.php:48
+msgid "The Electronic Funds Transfers is installed. Would you like to activate it?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/settings.php:70
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/check/settings.php:65
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:71
+msgid "Title:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/settings.php:73
+msgid "Electronic Funds Transfers"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/settings.php:77
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/check/settings.php:68
+msgid "Payment Instructions:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/settings.php:80
+msgid "Please initiate an electronic payment using the bank information below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/settings.php:93
+msgid "Bank Account#:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/settings.php:100
+msgid "Bank Name:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/settings.php:107
+msgid "Bank Address:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/bank/settings.php:117
+msgid "Update Electronic Funds Transfer Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/check/check_payment_vars.php:10
+msgid "Payable to:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/check/check_payment_vars.php:11
+msgid "Payment Address:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/check/settings.php:11
+msgid "Check/Money Order Payment settings saved."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/check/settings.php:18
+msgid "Check/Money Order Payment Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/check/settings.php:38
+msgid "Activate Check/Money Order Payments?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/check/settings.php:41
+msgid "Deactivate Check/Money Order Payments?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/check/settings.php:45
+msgid "The Check/Money Order Payments is installed. Would you like to activate it?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/check/settings.php:66
+msgid "Check/Money Order Payments"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/check/settings.php:69
+msgid "Please send Check/Money Order to the address below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/check/settings.php:71
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:85
+msgid "Payable To:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/check/settings.php:74
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:92
+msgid "Address to Send Payment:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/check/settings.php:95
+msgid "Update Check/Money Order Payment Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/invoice_vars.php:10
+msgid "Download PDF Invoice"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:14
+msgid "Invoice Payment settings saved."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:22
+msgid "Invoice Payment Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:42
+msgid "Activate Invoice Payments?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:45
+msgid "Deactivate Invoice Payments?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:49
+msgid "The Invoice Payments is installed. Would you like to activate it?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:74
+msgid "Invoice Payments"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:78
+msgid "Invoice Instructions:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:81
+msgid "Please send Invoice to the address below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:116
+msgid "PDF Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:120
+msgid "PDF Title (top right of the invoice):"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:123
+msgid "Invoice"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:127
+msgid "Logo URL (logo for the top left of the invoice):"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:134
+msgid "Invoice Instructions in PDF:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:137
+msgid "Please send this invoice with payment attached to the address above, or use the payment link below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/settings.php:144
+msgid "Update Invoice Payment Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/template.php:121
+msgid "Page"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/template.php:242
+msgid "Date: "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/template.php:243
+msgid "Attendee ID: "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/template.php:255
+msgid "Bill To: "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/invoice/template.php:265
+msgid "Amount Owed"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/paypal_vars.php:23
+msgid "Registrant Email:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:14
+msgid "PayPal settings saved."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:21
+msgid "PayPal Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:41
+msgid "Activate PayPal IPN?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:44
+msgid "Deactivate PayPal IPN?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:49
+msgid "The PayPal IPN addon is installed. Would you like to activate it?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:74
+msgid "Paypal I.D."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:79
+msgid "(Typically payment@yourdomain.com)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:83
+msgid "Select the currency for your country:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:89
+msgid "U.S. Dollars ($)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:92
+msgid "Australian Dollars (A $)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:95
+msgid "Pounds Sterling (&pound;)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:98
+msgid "Canadian Dollars (C $)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:101
+msgid "Czech Koruna"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:104
+msgid "Danish Krone"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:107
+msgid "Euros (&#8364;)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:110
+msgid "Hong Kong Dollar ($)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:113
+msgid "Hungarian Forint"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:116
+msgid "Israeli Shekel"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:119
+msgid "Yen (&yen;)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:122
+msgid "Mexican Peso"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:125
+msgid "New Zealand Dollar ($)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:128
+msgid "Norwegian Krone"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:131
+msgid "Polish Zloty"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:134
+msgid "Singapore Dollar ($)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:137
+msgid "Swedish Krona"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:140
+msgid "Brazilian Real (only for Brazilian users)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:143
+msgid "Malaysian Ringgits (only for Malaysian users)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:146
+msgid "Philippine Pesos"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:149
+msgid "Taiwan New Dollars"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:152
+msgid "Thai Baht"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:165
+msgid "Image URL (logo for payment page):"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:170
+msgid "(used for your business/personal logo on the PayPal page)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:176
+msgid "% Surcharge (Added to the total): "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:191
+msgid "Shipping address options?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:194
+msgid "Do not prompt for an address"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:195
+msgid "Prompt for an address, but do not require one"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:196
+msgid "Prompt for an address, and require one"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:201
+msgid "Use the debugging feature and the <a href=\"https://developer.paypal.com/devscr?cmd=_home||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox_get_started\" title=\"PayPal Sandbox Login||Sandbox Tutorial||Getting Started with PayPal Sandbox\" target=\"_blank\">PayPal Sandbox</a>?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:215
+msgid "Update PayPal Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:219
+msgid ""
+"<h2>PayPal Sandbox</h2>\n"
+"      <p>In addition to using the PayPal Sandbox fetaure. The debugging feature will also output the form varibales to the payment page, send an email to the admin that contains the all PayPal variables.</p>\n"
+"      <hr />\n"
+"      <p>The PayPal Sandbox is a testing environment that is a duplicate of the live PayPal site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live PayPal environment. Create and manage test accounts, and view emails and API credentials for those test accounts.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:226
+msgid "PayPal Image URL (logo for payment page)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:229
+msgid "The URL of the 150x50-pixel image displayed as your logo in the upper left corner of the PayPal checkout pages."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:232
+msgid "Default - Your business name, if you have a Business account, or your email address, if you have Premier or Personal account."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:236
+msgid ""
+"<h2>PayPal Currency</h2>\n"
+"      <p>PayPal uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, select the currency you wish to use. The dropdown lists all currencies that PayPal (currently) supports. "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:240
+msgid ""
+"<h2>Payment Surcharge</h2>\n"
+"      <p>Please enter a decimal number indicating a percent surcharge.\n"
+"      For example, if you enter 3.00, 3% will be added to the final price of the event during the checkout.\n"
+"      If the event price is initially $100, the price with the surcharge will be $103.<br />\n"
+"      This surcharge will apply to all new events.  However, you will have the ability to change this value during the event creation.\n"
+"      </p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/gateways/paypal/settings.php:248
+msgid ""
+"<h2>Shipping Address</h2>\n"
+"      <p>By default, PayPal will display shipping address information on the PayPal payment screen. If you plan on shipping items to a registrant (shirts, invoices, etc) then use this option. Otherwise it should not be used, as it will require a shipping address when someone registers for an event.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:8
+msgid "Manage Addons"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:12
+msgid "Groupon Integration Module"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:15
+msgid "Did your site get featured on <a href=\"http://www.groupon.com/\" target=\"_blank\">Groupon.com</a>? Now you can easily accept Groupon codes to your events! Once installed, just upload all of your Groupon codes to the database and your ready to go. How easy is that?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:16
+msgid "About Groupon"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:17
+msgid "<a href=\"http://www.groupon.com/\" target=\"_blank\">Groupon</a> is a deal-of-the-day website that is localized to major markets in the United States. The first market for Groupon was Chicago, followed soon thereafter by Boston and New York City. As of January 2010, Groupon serves more than 40 markets. Groupon debuted in November 2008 as part of The Point, a platform for collective action."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:22
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:45
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:85
+msgid "Installed"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:23
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:46
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:86
+msgid "Active"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:23
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:46
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:86
+msgid "Not Active"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:35
+msgid "Members Integration Module"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:59
+msgid "Custom Files"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:62
+msgid "These files offer support for custom templates, functions, and shortcodes. Virtually allowing you to customize the plugin to your needs and making your custom changes future proof."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:64
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:65
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:66
+msgid " - Installed"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:64
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:65
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:66
+msgid " - Not Installed"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_addons.php:76
+msgid "Authorize.net SIM Gateway"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_support.php:60
+msgid "Run Upgrade Script"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_support.php:74
+msgid "Run Attendee Update Script"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_support.php:134
+msgid "Attendee data has been updated!"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_support.php:137
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_support.php:270
+msgid "There was an error in your submission, please try again."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin_support.php:267
+msgid "Event data has been updated!"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:21
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:127
+msgid "Event Registration with PayPal IPN"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:83
+msgid "Events stats"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:84
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:128
+msgid "View Attendees/Payments"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:99
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:142
+msgid "Total Active Events"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:100
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:143
+msgid "All Time Attendees"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:101
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:144
+msgid "All Time Paid"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:102
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:145
+msgid "All Time Not Paid"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:103
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:146
+msgid "All Time Payments"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:162
+msgid "Next 3 Upcoming Events"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:178
+msgid "Start Date:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/dashboard_widget.php:178
+msgid "Attendees:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/database_install.new.php:240
+msgid "Payment Received for [event_name]"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/database_install.new.php:241
+msgid "<p>***This Is An Automated Response*** </p><p>Thank You [fname] [lname]</p>  <p>We have just  received a payment in the amount of $[event_price] for your registration to [event_name].</p> <p>PayPal transaction ID: [txn_id]</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/database_install.new.php:243
+msgid "<p>***This is an automated response - Do Not Reply***</p> <p>Thank you [fname] [lname] for registering for [event].</p><p>Start time: [start_time]</p><p>Location:<br>[location]</p><p>Phone: [location_phone]</p><p>Google Map: [google_map_link]</p><p> We hope that you will find this event both informative and enjoyable. Should have any questions, please contact [contact].</p><p>If you have not done so already, please submit your payment in the amount of [cost].</p><p>Click here to review your payment information [payment_url].</p><p>Thank You.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:81
+msgid "Organization details saved."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:134
+msgid "Organization Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:142
+msgid "Organization Name:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:148
+msgid "Organization Street 1:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:154
+msgid "Organization Street 2:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:160
+msgid "Organization City:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:166
+msgid "Organization State:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:172
+msgid "Organization Zip/Postal Code:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:178
+msgid "Organization Country:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:188
+msgid "Primary contact email:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:192
+msgid "Time and Date Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:193
+msgid "Current Time"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:194
+msgid "Change timezone and date format settings?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:198
+msgid "Events expire on registration end date?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:203
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:336
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:403
+msgid "Save Options"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:211
+msgid "Page Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:218
+msgid "**Attention**"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:220
+msgid "These settings are very important and must be configured for the plugin to function correctly. Visibility must be set to"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:222
+msgid "Public on all pages"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:224
+msgid "If you need help, please visit the "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:226
+msgid "support"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:228
+msgid "page or the"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:230
+msgid "for more information and instructions."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:234
+msgid "Show a single event or all events on the registration page?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:237
+msgid "All Events"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:238
+msgid "Single Event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:244
+msgid "Main registration page:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:248
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:271
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:295
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:317
+msgid "Main page"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:254
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:277
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:323
+msgid "This page should contain the"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:256
+msgid ""
+"shortcode. <br />\n"
+"This page can be hidden from navigation if desired, <br />\n"
+"but should always contain the {ESPRESSO_EVENTS} shortcode."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:261
+msgid ""
+"<h2>Main Events Page</h2>\n"
+"\t\t\t\t\t\t<p>This is the page that displays your events.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{ESPRESSO_EVENTS}</strong> shortcode.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:267
+msgid "Auto Return URL (Thank You and Return Payment page):"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:279
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:325
+msgid ""
+"shortcode. <br />\n"
+"This page should hidden from your navigation, <br />\n"
+"but still viewable to the public (not password protected.)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:284
+msgid ""
+"<h2>Auto Return URL</h2>\n"
+"\t\t\t\t\t\t<p>The URL to which the payer\"s browser is redirected after completing the payment; for example, a URL on your site that displays a \"Thank you for your payment\" page.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{ESPRESSO_PAYMENTS}</strong> shortcode.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:291
+msgid "Cancel Return URL (used for cancelled payments):"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:301
+msgid ""
+"This should be a page on your website that contains a cancelled message. <br />\n"
+"No short tags are needed. This page should hidden from your navigation, <br />\n"
+"but still viewable to the public (not password protected.)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:306
+msgid ""
+"<h2>Cancel Return URL</h2>\n"
+"\t\t\t\t\t\t<p>A URL to which the payer's browser is redirected if payment is cancelled; for example, a URL on your website that displays a \"Payment Canceled\" page.</p>\n"
+"\t\t\t\t\t\t<p>This should be a page on your website that contains a cancelled message. No short tags are needed.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:313
+msgid "Notify URL (used to process payments):"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:330
+msgid ""
+"<h2>Notify URL</h2>\n"
+"\t\t\t\t\t\t<p>The URL to which PayPal posts information about the transaction, in the form of Instant Payment Notification messages.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{ESPRESSO_TXN_PAGE}</strong> shortcode.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:344
+msgid "Email Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:355
+msgid "Send payment confirmation emails?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:359
+msgid "Send registration confirmation emails before payment is received?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:363
+msgid "Payment Confirmation Email:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:367
+msgid "Email Subject:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:378
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:394
+msgid "View Custom Email Tags"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:385
+msgid "Default Registration Confirmation Email:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:396
+msgid "Example"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:409
+msgid "Advanced Features"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:424
+msgid "Purchase a <a href=\"http://eventespresso.com/download/\" target=\"_blank\">support license</a> to gain access to adavanced features such as CAPTCHA and <a href=\"http://eventespresso.com/features/customizable-event-listings/\" target=\"_blank\">Template Customization</a>."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:437
+msgid "Event Listing Types"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/organization_config.php:440
+msgid "If set to \"Single Event\", only one event will be displayed on the page.</p> <p class=\"red_text\">**Attention** Setting this option to \"Single Event\" will disable the \"Event Registration Widget\" and \"SINGLEEVENT\" shortcode functionality."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/shortcodes.php:15
+msgid "No ID Supplied"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/shortcodes.php:37
+msgid "No Category ID Supplied"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/shortcodes.php:282
+msgid "<h3 class=\"expired_event\">This event has passed.</h3>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/shortcodes.php:288
+msgid "We are sorry but registration for this event is now closed."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/shortcodes.php:289
+msgid "Please <a href=\"contact\" title=\"contact us\">contact us</a> if you would like to know if spaces are still available."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/shortcodes.php:297
+msgid "We are sorry but this event is not yet open for registration."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/shortcodes.php:298
+msgid "You will be able to register starting "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/shortcodes.php:352
+msgid "Anti-Spam Measure: Please enter the following phrase"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/shortcodes.php:358
+msgid "Submit"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/shortcodes.php:433
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/shortcodes.php:436
+msgid "0.00"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/custom_post_type.php:6
+msgid "Event Posts"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/custom_post_type.php:7
+msgid "Event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/custom_post_type.php:8
+msgid "Add New"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/custom_post_type.php:9
+msgid "Add New Event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/custom_post_type.php:10
+msgid "Edit"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/custom_post_type.php:11
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:75
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:98
+msgid "Edit Event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/custom_post_type.php:12
+msgid "New Event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/custom_post_type.php:13
+msgid "View Event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/custom_post_type.php:14
+msgid "View Events"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/custom_post_type.php:15
+msgid "Search Events"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/custom_post_type.php:16
+msgid "No events found"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/custom_post_type.php:17
+msgid "No events found in Trash"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/custom_post_type.php:18
+msgid "Parent Event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/custom_post_type.php:21
+msgid "Event Thumbnail"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:6
+msgid "reCAPTCHA Settings"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:14
+msgid "<strong>Use <a href=\"http://recaptcha.net/||http://recaptcha.net/learnmore.html||https://admin.recaptcha.net/accounts/login/?next=/recaptcha/sites/||http://recaptcha.net/apidocs/captcha/client.html\" title=\"reCAPTCHA Home Page||What is reCAPTCHA||reCAPTCHA Account||reCAPTCHA Client API Documentation\" target=\"_blank\">reCAPTCHA</a> to block spam registrations</strong>:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:26
+msgid "Public Key:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:32
+msgid "Private Key:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:38
+msgid "Look &amp; Feel Customization"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:43
+msgid "Width:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:49
+msgid "Theme:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:53
+msgid "Red"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:54
+msgid "White"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:55
+msgid "Blackglass"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:56
+msgid "Clean"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:62
+msgid "Language:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:66
+msgid "English"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:67
+msgid "Spanish"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:68
+msgid "Dutch"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:69
+msgid "French"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:70
+msgid "German"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:71
+msgid "Portuguese"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:72
+msgid "Russian"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:73
+msgid "Turkish"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/recaptcha_form.php:80
+msgid ""
+"<h2>reCAPTCHA Information</h2>\r\n"
+"\t\t\t\t\t\t<p>reCAPTCHA helps prevent automated abuse of your site (such as comment spam or bogus registrations) by using a <a href=\"http://recaptcha.net/captcha.html\">CAPTCHA</a> to ensure that only humans perform certain actions.</p>\r\n"
+"\t\t\t<p>You must sign up for a <a href=\"https://admin.recaptcha.net/accounts/signup/?next=%2Frecaptcha%2Fsites%2F\" target=\"_blank\">free reCAPTCHA</a> account to use it with this plugin. If you already have a reCAPTCHA account enter your \"Public\" and \"Private\" keys on this page.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:7
+msgid "Template Customization"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:20
+msgid "Your templates have been copied."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:34
+msgid "Modifying your event listings and registration pages is easy."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:37
+msgid "You just need to edit the appropriate files in the following location."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:44
+msgid "Current Template Files"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:52
+msgid "(displays a list of attendees)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:55
+msgid "(logic for displaying the list of events)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:58
+msgid "(displays a list of events)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:61
+msgid "(create-a-post template)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:64
+msgid "(displays your payment page text)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:67
+msgid "(logic for displaying the registration form)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:70
+msgid "(displays your registration form)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:73
+msgid "(displays a confimration page for free events)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:76
+msgid "(page that is displayed when returning to pay)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:79
+msgid "(creates a widget for use in your theme)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:86
+msgid " - Moved"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:89
+msgid " - Not Moved"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:104
+msgid "In order to use this this feature, you will need to move the files located in the <span class=\"display-path\"><strong>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:110
+msgid "To move your files automatically, please set the permissions to 775 on the following directory."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:120
+msgid "If you plan on modifying the look of your event listings, registration page, or attendee list. Use the option below to move these templates to a safe place. Keep in mind, if updates are made or features are added to these templates in the future. You will need to make the updates to your customized templates."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-files/template_files.php:123
+msgid "Your template files have not been moved."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/add_new_attendee.php:15
+msgid "Added Attendee to Database"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/add_new_attendee.php:122
+msgid "Amount Paid:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/edit_attendee_record.php:136
+msgid "Attendee details saved for "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/edit_attendee_record.php:140
+msgid "Registration Id #"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/edit_attendee_record.php:148
+msgid "How is attendee paying for registration?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/edit_attendee_record.php:151
+msgid "Credit Card or Paypal"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/edit_attendee_record.php:152
+msgid "Cash"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/edit_attendee_record.php:153
+msgid "Check"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/edit_attendee_record.php:213
+msgid "Update Record"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/edit_attendee_record.php:219
+msgid "Additional Attendees"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/edit_attendee_record.php:223
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:210
+msgid "Edit Attendee"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/edit_attendee_record.php:225
+msgid "Delete Attendee"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:85
+msgid "Edit Attendee Payment Record"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:89
+msgid "Payment details saved for"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:91
+msgid "Payment notification has been sent."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:100
+msgid "Attendee"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:100
+msgid "Registered For:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:104
+msgid "Payment Details"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:105
+msgid "Invoice/Payment Reminder"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:113
+msgid "Payment Status:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:115
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:9
+msgid "None"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:116
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:17
+msgid "Completed"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:117
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:13
+msgid "Pending"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:118
+msgid "Incomplete"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:122
+msgid "Transaction Type:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:124
+msgid "Transaction ID:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:126
+msgid "Amount:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:129
+msgid "How Many People:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:131
+msgid "Date Paid:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:140
+msgid "Do you want to send a payment recieved notice to registrant?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:158
+msgid "Invoice Subject"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:158
+msgid "Payment Reminder for [event]"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:159
+msgid "Message"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/enter_attendee_payments.php:161
+msgid "Dear [fname] [lname], <p>Our records show that we have not received your payment of [cost] for [event_link].</p> <p>Please visit [payment_url] to view your payment options.</p><p>Sincerely,<br />"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/event_newsletter.php:33
+msgid "Send an Email to the Attendees of"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/event_newsletter.php:36
+msgid "Use a <a href=\"admin.php?page=event_emails\">pre-existing email</a>? "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/event_newsletter.php:39
+msgid "Email Subject Line"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/event_newsletter.php:40
+msgid "Email Text"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/event_newsletter.php:43
+msgid "Email Example"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/event_newsletter.php:47
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:79
+msgid "Send Newsletter"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/event_newsletter.php:55
+msgid "<< Back to"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/event_newsletter.php:58
+msgid ""
+"<h2>Pre-existing Emails</h2>\n"
+"      <p>This will override the custom email below if selected.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/index.php:10
+msgid "Attendee Payments"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/index.php:14
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/index.php:45
+msgid "Attendee Reports"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/index.php:19
+msgid "Edit Attendee Data"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/index.php:29
+msgid "Add New Attendee"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/index.php:34
+msgid "Event Newsletter"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:36
+msgid "Customer(s) have been successfully deleted from the event."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:63
+msgid "View event page"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:72
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:98
+msgid "Export to Excel"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:77
+msgid "Add Attendee"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:93
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:46
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:67
+msgid "Records"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:95
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:272
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:47
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:144
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:69
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:161
+msgid "of"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:98
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:49
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:72
+msgid "Reset"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:105
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:58
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:79
+msgid "Delete"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:111
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:85
+msgid "Name"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:117
+msgid "Amount"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:126
+msgid "Coupon"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:132
+msgid "Registration Date"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:135
+msgid "Payment Date"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:138
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:64
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:92
+msgid "Action"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:194
+msgid "Registration #: "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:199
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:209
+msgid "Edit Payment"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:211
+msgid "Resend Registration Details"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:232
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:105
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:122
+msgid "No Record Found!"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:242
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:114
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:130
+msgid "Check All"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:244
+msgid "Delete Customer(s)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:254
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:130
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:143
+msgid "View All"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/list_attendee_payments.php:267
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:142
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:156
+msgid "Entries Per Page"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:21
+msgid "Event(s) have been permanently deleted."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:28
+msgid "Select an event to view attendee details and payments"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:33
+msgid "Export All Event Attendees to Excel"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:59
+msgid "Event ID"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:61
+msgid "Start Date"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:62
+msgid "Status"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:94
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:98
+msgid "View Attendees"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:98
+msgid "Export to CSV"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:99
+msgid "Send Event Newsletter"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:99
+msgid "Newsletter"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/admin-reports/process_payments.php:116
+msgid "Permanently Delete Events(s)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/add_new_category.php:12
+msgid "Add a Category"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/add_new_category.php:17
+msgid "Category Name"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/add_new_category.php:19
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/edit_event_category.php:30
+msgid "Do you want to display the category description on the events page?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/add_new_category.php:32
+msgid "Category Description"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/add_new_category.php:38
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:46
+msgid "Add New Category"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/edit_event_category.php:22
+msgid "Edit Category:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/edit_event_category.php:28
+msgid "Category Name:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/edit_event_category.php:29
+msgid "Unique Category Identifier:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/edit_event_category.php:39
+msgid "Category Description:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/edit_event_category.php:44
+msgid "Update Category"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:13
+msgid "Manage Event Categories"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:31
+msgid "Categories have been successfully deleted from the event."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:37
+msgid "Current Categories"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:82
+msgid "ID"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:89
+msgid "Shortcode"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:116
+msgid "Edit Category"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:132
+msgid "Delete Category"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/category-management/index.php:170
+msgid ""
+"<h2>Unique Category Identifier</h2>\n"
+"      <p>This should be a unique identifier for the category. Example: \"category1\" (without qoutes.)</p>\n"
+"      <p>The unique ID can also be used in individual pages using the  \t[EVENT_ESPRESSO_CATEGORY event_category_id=\"category_identifier\"] shortcode.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/add_discount.php:16
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/add_discount.php:22
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/update_discount.php:22
+msgid "The discount code "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/delete_discount.php:49
+msgid "Discounts have been successfully deleted from the database."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/edit_discount.php:37
+msgid "Edit Discount:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/edit_discount.php:53
+msgid "Dicount Code:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/edit_discount.php:65
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/new_discount.php:39
+msgid "Price Discount"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/edit_discount.php:75
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/new_discount.php:49
+msgid "Is this a percentage discount?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/edit_discount.php:95
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/new_discount.php:63
+msgid "Discount Code Description"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/edit_discount.php:107
+msgid "Update Discount"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/index.php:7
+msgid "Manage Event Discounts"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/index.php:39
+msgid "Current Discount Codes"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/index.php:48
+msgid "Add New Discount"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/index.php:86
+msgid "Percentage"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/index.php:125
+msgid "Delete Discount"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/new_discount.php:13
+msgid "Add a Discount Code"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/new_discount.php:27
+msgid "Discount Code"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/new_discount.php:75
+msgid "Add New Discount Code"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/update_discount.php:16
+msgid "The discount "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/use_coupon_code.php:23
+msgid "<p id=\"event_espresso_valid_coupon\"><strong>You are using discount code:</strong> "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/use_coupon_code.php:49
+msgid "Sorry, that coupon code is invalid or expired."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/coupon-management/use_coupon_code.php:61
+msgid "Do you have a promo code?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/add_new_email.php:13
+msgid "Add an Email"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/add_new_email.php:18
+msgid "Email Name"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/add_new_email.php:27
+msgid "Add Email"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/edit_email.php:21
+msgid "Edit Email:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/edit_email.php:27
+msgid "Email Name:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/edit_email.php:27
+msgid "Email Subject Line:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/edit_email.php:28
+msgid "Email Text:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/edit_email.php:34
+msgid "Update Email"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/index.php:13
+msgid "Manage Event Emails"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/index.php:28
+msgid "Emails have been successfully deleted."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/index.php:42
+msgid "Current Emails"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/index.php:52
+msgid "Add New Email"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/index.php:55
+msgid "Create customized emails for use in multiple events."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/index.php:110
+msgid "Edit Email"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/index.php:127
+msgid "Delete Email"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/update_email.php:16
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/update_email.php:18
+msgid "The email"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/update_email.php:16
+msgid "has been updated"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/email-manager/update_email.php:18
+msgid "was not updated"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:23
+msgid "Are you sure you want to cancel "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:24
+msgid "Cancel"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:27
+msgid "Submit New Event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:43
+msgid "Primary"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:43
+msgid "Secondary"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:43
+msgid "Ongoing"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:43
+msgid "Deleted"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:46
+msgid "Attendee Limit"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:47
+msgid "leave blank for unlimited"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:48
+msgid "Allow group registrations?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:49
+msgid "Max Group Registrants"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:51
+msgid "Advanced Options:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:53
+msgid "Is this an active event? "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:54
+msgid "Event Status: "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:55
+msgid "Display  description? "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:56
+msgid "Display  registration form? "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:58
+msgid "Use an off-site registration page?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:60
+msgid "Use an alternate email address?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:70
+msgid "Member Options"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:84
+msgid "Event Category"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:99
+msgid "Event Promotions"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:102
+msgid "Early Registration Discount"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:104
+msgid "End Date:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:106
+msgid "Percentage:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:108
+msgid "(Leave blank if not applicable)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:110
+msgid "Allow discount codes? "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:137
+msgid "Event Questions"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:141
+msgid "Question Groups"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:142
+msgid "Add a pre-populated <a href=\"admin.php?page=form_groups\" target=\"_blank\">group</a> of <a href=\"admin.php?page=form_builder\" target=\"_blank\">questions</a> to your event. The personal information group is rquired for all events."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:173
+msgid "Groupon Options"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:188
+msgid "Calendar Options"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:191
+msgid "It looks like you are using the \"<a href=\"http://wordpress.org/extend/plugins/calendar/\" target=\"_blank\" title=\"Calendar developed and supported by Kieran O'Shea\">Calendar</a>\" plugin. Would you like to add this event to the calendar?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:192
+msgid "Choose a <a href=\"admin.php?page=calendar-categories\">Calendar Category</a>:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:202
+msgid "Add to Calendar:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:217
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:220
+msgid "Event Title"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:227
+msgid "Unique Event Identifier:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:230
+msgid "Get Shortcode"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:231
+msgid "Get URL"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:237
+msgid "Event Description"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:264
+msgid "Event Date/Times"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:271
+msgid "Registration Dates"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:271
+msgid "Registration Start:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:272
+msgid "Registration End:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:274
+msgid "Event Dates"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:274
+msgid "Event Start Date:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:275
+msgid "Event End Date:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:284
+msgid "Registration Times"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:287
+msgid "Event Times"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:321
+msgid "Event Pricing"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:338
+msgid "Advanced Options"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:343
+msgid "Event Location"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:350
+msgid "Physical Location"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:351
+msgid "Virtual Location"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:363
+msgid "Address 2:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:368
+msgid "City:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:373
+msgid "State:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:378
+msgid "Zip/Postal Code:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:383
+msgid "Country:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:391
+msgid "Phone:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:395
+msgid "URL of Event:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:400
+msgid "Call in Number:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:412
+msgid "Email Confirmation:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:417
+msgid "Send custom confirmation emails for this event?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:420
+msgid "Create a custom email"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:445
+msgid "Create a Post"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:449
+msgid "Create a post for this event?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:467
+msgid "Espresso Event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:467
+msgid "Post"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:475
+msgid "Author"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:476
+msgid "Post Type"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:477
+msgid "Tags"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:478
+msgid "Post Categories:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_new_event.php:483
+msgid "Post templates are stored in the \"templates\" directory of the plugin."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_to_calendar.php:25
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/copy_event.php:144
+msgid "The event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_to_calendar.php:25
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/copy_event.php:144
+msgid "has been added."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/add_to_calendar.php:27
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/copy_event.php:146
+msgid "There was an error in your submission, please try again. The event was not saved!"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:102
+msgid "Quick Overview"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:113
+msgid "Are you sure you want to copy "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:114
+msgid "Duplicate Event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:128
+msgid "Current Status:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:131
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_list.php:69
+msgid "Attendees"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:142
+msgid "Are you sure you want to delete "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:143
+msgid "Delete Event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:146
+msgid "Update Event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:227
+msgid "<strong>Allow discount codes?</strong> "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:292
+msgid "Cart Items"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:297
+msgid "Add a pre-populated <a href=\"admin.php?page=item_groups\">group</a> of <a href=\"admin.php?page=cart_items\">items</a> to your event."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:404
+msgid "Event Start Date"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:405
+msgid "Event End Date"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:518
+msgid "Google Map Link (for email):"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:595
+msgid "Add/Update post for this event?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:614
+msgid "Author:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/edit_event.php:617
+msgid "Tags:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:14
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:21
+msgid "Reg Start Time"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:14
+msgid "Reg End Time"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:21
+msgid "Reg End Time:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:36
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:41
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:53
+msgid "Start Time"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:36
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:53
+msgid "End Time"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:41
+msgid "End Time:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:47
+msgid "Add Additional Time"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:69
+msgid "Standard Pricing"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:78
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:114
+msgid "Price"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:80
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:95
+msgid "Surcharge:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:81
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:99
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:114
+msgid "Remove Attendee"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:91
+msgid "Price:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:105
+msgid "(enter 0.00 for free events, enter 2 place decimal i.e. "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:106
+msgid "Add A Price"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:114
+msgid "Surcharge"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_functions.php:152
+msgid "No Categories"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_list.php:37
+msgid "Current Events"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_list.php:43
+msgid "Import CSV"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_list.php:65
+msgid "Event Start"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_list.php:66
+msgid "Registration Start"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_list.php:124
+msgid ""
+"<h2>Event Identifier</h2>\n"
+"\n"
+"      <p>The unique ID can be used in individual pages using:<br />\n"
+"\n"
+"\t  <span  class=\"updated fade\">[SINGLEEVENT single_event_id=\""
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_list.php:144
+msgid "Delete Events(s)"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_list.php:184
+msgid ""
+"<h2>Coupon/Promo Code</h2>\n"
+"      <p>This is used to apply discounts to events.</p>\n"
+"      <p>A coupon or promo code could can be anything you want. For example: Say you have an event that costs "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/event_list.php:190
+msgid ""
+"<h2>Event Identifier</h2>\n"
+"\n"
+"      <p>This should be a unique identifier for the event. Example: \"Event1\" (without qoutes.)</p>\n"
+"\n"
+"      <p>The unique ID can also be used in individual pages using the [SINGLEEVENT single_event_id=\"Unique Event ID\"] shortcode.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/index.php:11
+msgid "Event Management"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/index.php:69
+msgid ""
+"<h2>Pre-existing Emails</h2>\r\n"
+"      <p>These emails will override the custom email if a pre-existing email is selected. You must select \"Yes\" in the \"Send custom confirmation emails for this event?\" above.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/index.php:73
+msgid ""
+"<h2>Coupon/Promo Code</h2>\r\n"
+"      <p>This is used to apply discounts to events.</p>\r\n"
+"      <p>A coupon or promo code could can be anything you want. For example: Say you have an event that costs "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/index.php:78
+msgid ""
+"<h2>Event Identifier</h2>\r\n"
+"      <p>This should be a unique identifier for the event. Example: \"Event1\" (without qoutes.)</p>\r\n"
+"      <p>The unique ID can also be used in individual pages using the [SINGLEEVENT single_event_id=\"Unique Event ID\"] shortcode.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/index.php:83
+msgid ""
+"<h2>Secondary Events</h2>\r\n"
+"      <p>These types of events can be used as a overflow or waiting list events.</p>\r\n"
+"      <p>If an event is set up as an \"Secondary Event,\" it can be set to not appear in your event listings template. You will need to customize your event_listing.php file to make this work. For more information, please <a href=\"http://eventespresso.com/forums/?p=512\" target=\"_blank\">visit the forums</a>. "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/index.php:88
+msgid ""
+"<h2>Off-site Registration Page</h2>\r\n"
+"      <p>If an off-site registration page is entered, it will override your registration page and send attendees to the URL that is entered.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/index.php:92
+msgid ""
+"<h2>Alternate Email Address</h2>\r\n"
+"      <p>If an alternate email address is entered. Admin email notifications wil be sent to this address instead.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/index.php:96
+msgid ""
+"<h2>Event Status Types</h2>\r\n"
+"      <ul>\r\n"
+"\t  \t<li><strong>Primary</strong><br />This type if event should always appear in the event lsiting. It is a live event (not deleted, ongoing or secondary.)</li>\r\n"
+"\t\t<li><strong>Secondary</strong><br />This type of event can be hidden and used as a waiting list for a primary event. Template customizations are required. For more information, please <a href=\"http://eventespresso.com/forums/?p=512\" target=\"_blank\">visit the forums</a></li>\r\n"
+"\t\t<li><strong>Ongoing</strong><br />This type of an event can be set to appear in your event listings and display a registration page. Tempalte customizations are required. For more information, please <a href=\"http://eventespresso.com/forums/?p=518\" target=\"_blank\">visit the forums</a></li>\r\n"
+"\t\t<li><strong>Deleted</strong><br />This is event type will not appear in the event listings and will not dispaly a registrations page. Deleted events can still be accessed in the <a href=\"admin.php?page=admin_reports\">Attendee Reports</a> page.</li>\r\n"
+"\t</ul>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/insert_event.php:276
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/update_event.php:390
+msgid "There was error finding a post template. Please verify your post templates are available."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/insert_event.php:335
+msgid "has been added for "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/insert_event.php:335
+msgid "Edit this event?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/event-management/update_event.php:479
+msgid "Event details updated for"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/index.php:9
+msgid "Manage Additional Questions"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/index.php:38
+msgid "Current Questions"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/index.php:45
+msgid "Add New Question"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/index.php:74
+msgid "Question"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/index.php:77
+msgid "Values"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/index.php:80
+msgid "Type"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/index.php:83
+msgid "Required"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/index.php:86
+msgid "Sequence"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/index.php:132
+msgid "Delete Question"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/delete_group.php:31
+msgid "Question Groups have been successfully deleted."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/edit_group.php:25
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/index.php:48
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/new_group.php:8
+msgid "Add New Group"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/edit_group.php:32
+msgid "Group Information"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/edit_group.php:33
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/new_group.php:16
+msgid "Group Name:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/edit_group.php:35
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/new_group.php:18
+msgid "Group Order:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/edit_group.php:37
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/new_group.php:21
+msgid "Group Identifier:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/edit_group.php:39
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/new_group.php:23
+msgid "Description:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/edit_group.php:41
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/new_group.php:25
+msgid "Show group name on registration page?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/edit_group.php:43
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/new_group.php:27
+msgid "Show group description on registration page?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/edit_group.php:49
+msgid "Questions"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/index.php:9
+msgid "Manage Additional Question Groups"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/index.php:42
+msgid "Current Groups"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/index.php:79
+msgid "Group Name"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/index.php:83
+msgid "Indentifier"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/index.php:86
+msgid "Description"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/index.php:89
+msgid "Order"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/index.php:135
+msgid "Delete Question Group"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/insert_group.php:40
+msgid "The group has been added."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/insert_group.php:43
+msgid "There was an error in your submission, please try again. The group was not saved!"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/new_group.php:15
+msgid "Add new groups using the form below."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/groups/new_group.php:37
+msgid "Add Questions:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/delete_question.php:31
+msgid "Questions have been successfully deleted."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:23
+msgid "Edit Question"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:29
+msgid "Edit the question using the form below.  By default all participants will be asked for their first name, last name, and email address."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:33
+msgid "Question:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:40
+msgid "Type:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:44
+msgid "Text"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:45
+msgid "Text Area"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:46
+msgid "Single"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:47
+msgid "Drop Down"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:48
+msgid "Multiple"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:53
+msgid "Values:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:55
+msgid "A comma seperated list of values. Eg. black, blue, red"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:60
+msgid "Required:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:62
+msgid "Mark this question as required."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:70
+msgid "Required Text:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:72
+msgid "Text displayed if not completed."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:77
+msgid "Order/Sequence:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/edit_question.php:94
+msgid "Nothing found!"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/new_question.php:7
+msgid "Add New Questions"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/form-builder/questions/new_question.php:11
+msgid "Add questions using the form below.  By default all participants will be asked for their first name, last name, and email address."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:391
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:650
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:663
+msgid "No country selected"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:927
+msgid "New @ Event Espresso"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:933
+msgid "From the Blog"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:935
+msgid "From the Forums"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:945
+msgid "Helpful Plugin Links"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:950
+msgid "Installation &amp; Usage Guide"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:973
+msgid ""
+"<h2>Email Confirmations</h2>\n"
+"  <p>For customized confirmation emails, the following tags can be placed in the email form and they will pull data from the database to include in the email.</p>\n"
+"  <p>[registration_id], [fname], [lname], [phone], [event], [event_link], [event_url], [description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link]</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:979
+msgid ""
+" <h2>Sample Mail Send:</h2>\n"
+"\n"
+"<p>***This is an automated response - Do Not Reply***</p>\n"
+"<p>Thank you [fname] [lname] for registering for [event]. We hope that you will find this event both informative and enjoyable. Should have any questions, please contact [contact].</p>\n"
+"<p>If you have not done so already, please submit your payment in the amount of [cost].</p>\n"
+"<p>Click here to review your payment information [payment_url].</p>\n"
+"<p>Thank You.</p>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1003
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1005
+msgid "Event Espresso must be configured. Go to"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1003
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1005
+msgid "the Organization Settings page"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1003
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1005
+msgid "to configure the plugin \"Page Settings.\""
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1012
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1014
+msgid "Event Espresso attendee data needs to be updated. Please visit the "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1012
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1014
+msgid "Support page"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1012
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1014
+msgid "to configure update the attendee information."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1038
+msgid "Assign a Secondary Event? "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1039
+msgid "Overflow Event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1071
+msgid "Select Value"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/admin.php:1086
+msgid "No Results"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/email.php:118
+msgid "has signed up on-line for"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/email.php:119
+msgid "Registration ID:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/email.php:120
+msgid "Email address:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/email.php:124
+msgid "Zip:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/email.php:456
+msgid "Event Cancellation Notice"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/email.php:457
+msgid " has been cancelled."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/email.php:458
+msgid "For more information, please email "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/email.php:745
+msgid "Email Sent to "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:67
+msgid "Add More Attendees? (click to toggle, limit "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:67
+msgid "Add an Additonal Attendee"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:116
+msgid "ONGOING"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:123
+msgid "SECONDARY"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:132
+msgid "CLOSED"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:139
+msgid "NOT_OPEN"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:146
+msgid "OPEN"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:155
+msgid "EXPIRED"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:162
+msgid "ACTIVE"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:169
+msgid "NOT_ACTIVE"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:176
+msgid "DELETED"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:354
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:464
+msgid " (including "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:361
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:364
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:473
+msgid "Free Event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:436
+msgid "Choose an Option: "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:445
+msgid " Early Pricing"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:469
+msgid "Price: "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/main.php:474
+msgid "free event"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:35
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:37
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:39
+msgid "in"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:35
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:45
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:80
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:87
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:121
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:130
+msgid "hours"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:37
+msgid "today"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:37
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:123
+msgid "minutes"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:41
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:83
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:126
+msgid "day"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:43
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:85
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:128
+msgid "days"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:45
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:87
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:130
+msgid "and"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:80
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:87
+msgid "ago"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:117
+msgid "allday"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:119
+msgid "duration"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:143
+msgid "Start Time:</span> "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:146
+msgid "End Time: "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:151
+msgid "Choose an Event Time:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:210
+msgid "Start Time: "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:212
+msgid "<br />End Time: "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:261
+msgid "NO DATE SUPPLIED"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/functions/time_date.php:373
+msgid "Choose Event Timezone:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/process-registration/add_attendees_to_db.php:170
+msgid "Form Questions:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/process-registration/attendee_edit_record.php:133
+msgid "Registration For:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/process-registration/attendee_edit_record.php:147
+msgid "Select an attendee to edit:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/process-registration/attendee_edit_record.php:235
+msgid "Finalize Registration"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/process-registration/payment_page.php:130
+msgid "Free"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/includes/process-registration/payment_page.php:269
+msgid "Please check your email for payment information."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/post-type-samples/page-event_list.php:128
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/post-type-samples/single-espresso_event.php:39
+msgid "Pages:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/post-type-samples/single-espresso_event.php:52
+#, php-format
+msgid "View all posts by %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/attendee_list.php:55
+msgid "Attendee Listing For: "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/confirmation_display.php:7
+msgid "Thank you! Your registration is confirmed for"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/confirmation_display.php:9
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/confirmation_display.php:20
+msgid "Your Registration ID:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/confirmation_display.php:11
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/confirmation_display.php:21
+msgid "A confirmation email has been sent with additional details of your registration."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/confirmation_display.php:16
+msgid "Your registration is not complete until payment is received."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/confirmation_display.php:18
+msgid "Amount due: "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/confirmation_display.php:23
+msgid "Please choose a payment option:<"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/event_list_display.php:41
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/event_list_display.php:47
+msgid "Available Spaces:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/event_list_display.php:43
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/registration_page.php:164
+msgid "Join Waiting List"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/event_list_display.php:49
+msgid "Register Online"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/event_post.php:63
+msgid "View Map"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/event_post.php:63
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/event_post.php:69
+msgid "Register"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/payment_page.php:8
+msgid "Please verify your registration details:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/payment_page.php:13
+msgid "Event Name:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/payment_page.php:19
+msgid "Type/Price:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/payment_page.php:25
+msgid "Attendee Name:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/payment_page.php:49
+msgid "Phone: "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/payment_page.php:54
+msgid "Contact Information:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/payment_page.php:66
+msgid "Additional Information:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/payment_page.php:75
+msgid "Confirm Registration"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/payment_page.php:75
+msgid "or"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/payment_page.php:75
+msgid "Edit Your Details?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/registration_page.php:158
+msgid "We are sorry but this event has reached the maximum number of attendees!"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/registration_page.php:159
+msgid "Please check back in the event someone cancels."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/registration_page.php:160
+msgid "Current Number of Attendees:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/registration_page.php:184
+msgid "<h3>This event has expired or is no longer available.</h3>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/return_payment.php:5
+msgid "Thank You "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/return_payment.php:7
+msgid " for registering for "
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/return_payment.php:13
+msgid "Our records indicate you have paid"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/return_payment.php:15
+msgid "Our records indicate your payment is pending."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/return_payment.php:15
+msgid "Amount pending:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/return_payment.php:21
+msgid "Payment will be in the amount of"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/return_payment.php:25
+msgid "Payment Options"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/return_payment.php:31
+msgid "<strong id=\"event_espresso_no_payment\">No Payment Necessary</strong>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/return_payment.php:34
+msgid "No payment gateways installed. Please install at least one payment gateway."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/return_payment.php:72
+msgid "<h3>No payment gateways installed. Please install at least one payment gateway.</h3>"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/widget.php:8
+msgid "A widget to display your upcoming events."
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/widget.php:14
+msgid "Event Espresso Widget"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/widget.php:111
+msgid "Upcoming Events"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/widget.php:111
+msgid "false"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/widget.php:130
+msgid "Event Category:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/widget.php:135
+msgid "Limit:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/widget.php:139
+msgid "Optional Settings:"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/widget.php:140
+msgid "Show Expired Events?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/widget.php:141
+msgid "Show Secondary Events?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/widget.php:142
+msgid "Show Deleted Events?"
+msgstr ""
+
+#: /Users/sethshoultes/Websites/Local Websites/Event
+#: Espresso/wp-content/plugins/event-espresso.3.0.17.b.32/templates/widget.php:143
+msgid "Show Recurring Events?"
+msgstr ""
+
