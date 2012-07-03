@@ -1,0 +1,88 @@
+<?php
+
+function espresso_display_exact($payment_data) {
+	extract($payment_data);
+// Setup class
+	include_once ('Exact.php');
+
+	global $org_options;
+	$myExact = new Exact(); // initiate an instance of the class
+	echo '<!--Event Espresso Exact.com Gateway Version ' . $myExact->gateway_version . '-->';
+	$exact_settings = get_option('event_espresso_exact_settings');
+	$exact_login_id = empty($exact_settings['exact_login_id']) ? '' : $exact_settings['exact_login_id'];
+	$exact_transaction_key = empty($exact_settings['exact_transaction_key']) ? '' : $exact_settings['exact_transaction_key'];
+	$button_type = empty($exact_settings['button_type']) ? '' : $exact_settings['button_type'];
+//$button_url = $exact_settings['button_url'];
+	$image_url = empty($exact_settings['image_url']) ? '' : $exact_settings['image_url'];
+	$use_sandbox = $exact_settings['use_sandbox'];
+	$use_testmode = $exact_settings['test_transactions'];
+	if ($use_testmode == true) {
+		// Enable test mode if needed
+		$myExact->enableTestMode();
+	}
+	if ($use_sandbox) {
+		// Enable test mode if needed
+		$myExact->useTestServer();
+	}
+
+	$quantity = isset($quantity) && $quantity > 0 ? $quantity : espresso_count_attendees_for_registration($attendee_id);
+
+	$myExact->setUserInfo($exact_login_id, $exact_transaction_key);
+	$myExact->addField('x_amount', number_format($event_cost, 2));
+	$myExact->addField('x_show_form', 'PAYMENT_FORM');
+	$myExact->addField('x_reference_3', $registration_id . '|exact');
+	$myExact->addField('x_relay_response', 'TRUE');
+	if ($exact_settings['force_ssl_return']) {
+		$home = str_replace("http://", "https://", home_url());
+	} else {
+		$home = home_url();
+	}
+	$myExact->addField('x_relay_url', $home . '/?type=exact&page_id=' . $org_options['return_url']);
+	$myExact->addField('x_description', stripslashes_deep($event_name) . ' | ' . __('Reg. ID:', 'event_espresso') . ' ' . $attendee_id . ' | ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($fname . ' ' . $lname) . ' | ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity);
+	$myExact->addField('x_logo_url', $image_url);
+	$myExact->addField('x_invoice_num', event_espresso_session_id());
+//Post variables
+	$myExact->addField('x_cust_id', $attendee_id);
+
+	$myExact->addField('x_first_name', $fname);
+	$myExact->addField('x_last_name', $lname);
+	$myExact->addField('x_email', $attendee_email);
+	$myExact->addField('x_address', $address);
+	$myExact->addField('x_city', $city);
+	$myExact->addField('x_state', $state);
+	$myExact->addField('x_zip', $zip);
+	$myExact->addField('x_fp_sequence', $attendee_id);
+
+
+
+//Enable this function if you want to send payment notification before the person has paid.
+//This function is copied on the payment processing page
+//event_espresso_send_payment_notification($attendee_id, $txn_id, $amount_pd);
+//Decide if you want to auto redirect to your payment website or display a payment button.
+	if (!empty($exact_settings['bypass_payment_page']) && $exact_settings['bypass_payment_page'] == 'Y') {
+		$myExact->submitPayment(); //Enable auto redirect to payment site
+	} else {
+		if (empty($exact_settings['button_url'])) {
+			//$button_url = EVENT_ESPRESSO_GATEWAY_URL . "exact/btn_cc_vmad.gif";
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/exact/btn_cc_vmad.gif")) {
+				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/exact/btn_cc_vmad.gif";
+			} else {
+				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/btn_cc_vmad.gif";
+			}
+		} elseif (file_exists($exact_settings['button_url'])) {
+			$button_url = $exact_settings['button_url'];
+		} else {
+			//If no other buttons exist, then use the default location
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/btn_cc_vmad.gif";
+		}
+		$myExact->submitButton($button_url, 'exact'); //Display payment button
+	}
+
+	if ($use_sandbox) {
+		echo '<p>Test credit card # 4007000000027</p>';
+		echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3>';
+		$myExact->dump_fields(); // for debugging, output a table of all the fields
+	}
+}
+
+add_action('action_hook_espresso_display_offsite_payment_gateway', 'espresso_display_exact');
