@@ -1,0 +1,132 @@
+<?php
+
+function espresso_transactions_exact_get_attendee_id($attendee_id) {
+	if (!empty($_REQUEST['x_cust_id'])) {
+		$attendee_id = $_REQUEST['x_cust_id'];
+	}
+	return $attendee_id;
+}
+
+add_filter('filter_hook_espresso_transactions_get_attendee_id', 'espresso_transactions_exact_get_attendee_id');
+
+function espresso_process_exact($payment_data) {
+// Include the authorize.net library
+	include_once ('Exact.php');
+	echo '<!--Event Espresso Exact.com Gateway Version ' . $exact_gateway_version . '-->';
+// Create an instance of the authorize.net library
+	$myExact = new Exact();
+
+// Log the IPN results
+	$myExact->ipnLog = TRUE;
+
+	$exact_settings = get_option('event_espresso_exact_settings');
+	$exact_login_id = $exact_settings['exact_login_id'];
+	$exact_transaction_key = $exact_settings['exact_transaction_key'];
+
+// Enable test mode if needed
+//4007000000027  <-- test successful visa
+//4222222222222  <-- test failure card number
+	if ($exact_settings['use_sandbox']) {
+		$myExact->enableTestMode();
+		$email_transaction_dump = true;
+	}
+
+// Specify your authorize login and secret
+	$myExact->setUserInfo($exact_login_id, $exact_transaction_key);
+
+// Check validity and write down it
+	if ($myExact->validateIpn()) {
+
+		$txn_type = $myExact->ipnData['x_method'];
+		$txn_id = $myExact->ipnData['x_trans_id'];
+		$amount_pd = $myExact->ipnData['x_amount'];
+		$attendee_id = $myExact->ipnData['x_cust_id'];
+		$payment_date = date("d-m-Y");
+
+		//file_put_contents('authorize.txt', 'SUCCESS' . date("m-d-Y")); //Used for debugging purposes
+		//Be sure to echo something to the screen so authent knows that the ipn works
+		//store the results in reusable variables
+		if ($myExact->ipnData['x_response_code'] == 1) {
+			?>
+			<h2><?php _e('Thank You!', 'event_espresso'); ?></h2>
+			<p><?php _e('Your transaction has been processed.', 'event_espresso'); ?></p>
+			<?php
+			$payment_status = 'Completed';
+			$sql = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id='" . espresso_registration_id($attendee_id) . "' ";
+			$sql .= " AND id= '" . $attendee_id . "' ";
+			$sql .= " ORDER BY id";
+
+			$attendees = $wpdb->get_results($sql);
+			$total_cost = 0;
+			foreach ($attendees as $attendee) {
+				$attendee_id = $attendee->id;
+				$att_registration_id = $attendee->registration_id;
+				$lname = $attendee->lname;
+				$fname = $attendee->fname;
+				$total_cost += $attendee->amount_pd;
+				$event_id = $attendee->event_id;
+			}
+
+			$events = $wpdb->get_results("SELECT * FROM " . EVENTS_DETAIL_TABLE . " WHERE id='" . $event_id . "'");
+			foreach ($events as $event) {
+				$event_id = $event->id;
+				$event_name = $event->event_name;
+				$event_desc = $event->event_desc;
+				$event_description = $event->event_desc;
+				$event_identifier = $event->event_identifier;
+				$active = $event->is_active;
+			}
+			//Build links
+			$event_url = espresso_reg_url($event_id);
+			$event_link = '<a href="' . $event_url . '">' . $event_name . '</a>';
+			$payment_data['event_link'] = $event_link;
+			$payment_data['fname'] = $fname;
+			$payment_data['lname'] = $lname;
+			$payment_data['txn_type'] = $txn_type;
+			$payment_data['payment_date'] = $payment_date;
+			$payment_data['total_cost'] = $total_cost;
+			$payment_data['payment_status'] = $payment_status;
+			$payment_data['att_registration_id'] = $att_registration_id;
+			$payment_data['txn_id'] = $txn_id;
+		} else {
+			?>
+			<h2 style="color:#F00;"><?php _e('There was an error processing your transaction!', 'event_espresso'); ?></h2>
+			<p><strong>Error:</strong> (<?php echo $response_reason_code; ?> - <?php echo $response_reason_code; ?>) - <?php echo $response_reason_text; ?></p>
+			<?php
+			$payment_status = 'Payment Declined';
+		}
+		global $wpdb;
+
+		$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET payment_status = '" . $payment_status . "', txn_type = '" . $txn_type . "', txn_id = '" . $txn_id . "', payment_date ='" . $payment_date . "', transaction_details = '" . serialize($myExact) . "'  WHERE registration_id ='" . espresso_registration_id($attendee_id) . "'";
+
+		$wpdb->query($sql);
+
+		//Debugging option
+		$email_transaction_dump = true;
+		if ($email_transaction_dump == true) {
+			// For this, we'll just email ourselves ALL the data as plain text output.
+			$subject = 'Exact.com Notification - Gateway Variable Dump';
+			$body = "An authorize.net payment notification was successfully recieved\n";
+			$body .= "from " . $myExact->ipnData['x_email'] . " on " . date('m/d/Y');
+			$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+			foreach ($myExact->ipnData as $key => $value) {
+				$body .= "\n$key: $value\n";
+			}
+			wp_mail($contact, $subject, $body);
+		}
+	} else {
+		file_put_contents('authorize.txt', "FAILURE\n\n" . $myExact->ipnData);
+		//echo something to the screen so authent knows that the ipn works
+		$subject = 'Instant Payment Notification - Gateway Variable Dump';
+		$body = "An instant payment notification failed\n";
+		$body .= "from " . $myExact->ipnData['x_email'] . " on " . date('m/d/Y');
+		$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+		foreach ($myExact->ipnData as $key => $value) {
+			$body .= "\n$key: $value\n";
+		}
+		wp_mail($contact, $subject, $body);
+	}
+	return $payment_data;
+}
+
+add_filter('filter_hook_espresso_transactions_get_payment_data', 'espresso_process_exact');
