@@ -1,0 +1,3594 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Event Espresso\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-11 20:21+0100\n"
+"PO-Revision-Date: 2010-08-11 20:21+0100\n"
+"Last-Translator: Ale <info@arsetmedia.it>\n"
+"Language-Team: ArsEtMedia <info@arsetmedia.it>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SearchPath-0: C:\\ALE\\ARSETMEDIA\\event-espresso.3.0.11\n"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:219
+#, fuzzy
+msgid "Event Espresso"
+msgstr "Eventi"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:219
+#, fuzzy
+msgid "Event Manager"
+msgstr "Gestione Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:222
+msgid "Event Espresso - General Settings"
+msgstr "Event Espresso - Impostazioni Generali"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:222
+#, fuzzy
+msgid "General Settings"
+msgstr "Settaggio Generale"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:225
+msgid "Event Espresso - Event Setup"
+msgstr "Event Espresso - Impostazioni Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:225
+#, fuzzy
+msgid "Event Setup"
+msgstr "Nome Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:228
+#, fuzzy
+msgid "Event Espresso - Attendees/Payments"
+msgstr "Vedi Partecipanti/Pagamenti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:228
+msgid "Attendees/Payments"
+msgstr "Partecipanti/Pagamenti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:231
+#, fuzzy
+msgid "Event Espresso - Manage Event Categories"
+msgstr "Categorie Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:231
+#, fuzzy
+msgid "Event Categories"
+msgstr "Categorie Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:235
+msgid "Event Espresso - Member Settings"
+msgstr "Event Espresso - Impostazioni Parteciapante"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:235
+#, fuzzy
+msgid "Member Settings"
+msgstr "Impostazioni"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:238
+msgid "Event Espresso - General Coupons"
+msgstr "Event Espresso - Buoni Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:238
+msgid "General Coupons"
+msgstr "Buoni Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:242
+msgid "Groupons"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:242
+#, fuzzy
+msgid "Groupon Codes"
+msgstr "Codice di Sconto:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:248
+msgid "Event Espresso - Gateway Settings"
+msgstr "Event Espresso - Impostazioni Gateway"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:248
+#, fuzzy
+msgid "Gateway Settings"
+msgstr "PayPal Setting"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:253
+msgid "Event Espresso - Form Questions"
+msgstr "Event Espresso - Domande su Form"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:253
+msgid "Form Questions"
+msgstr "Domande su Form"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:256
+msgid "Event Espresso - Form Groups"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:256
+msgid "Form Groups"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:261
+msgid "Event Espresso - Facebook Settings"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:261
+msgid "Facebook Settings"
+msgstr "Settaggi Facebook"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:267
+msgid "Event Espresso - Addons"
+msgstr "Aggiunte - Event Espresso"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:267
+msgid "Addons"
+msgstr "Aggiunte"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:270
+msgid "Event Espresso - Help/Support"
+msgstr "Event Espresso - Aiuto/Supporto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:270
+msgid "Help/Support"
+msgstr "Aiuto/Supporto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:295
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:296
+msgid "Events"
+msgstr "Eventi"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:362
+msgid "Please setup Organization in the Admin Panel!"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:375
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:399
+#, fuzzy
+msgid "Sorry, you did not enter the correct anti-spam phrase. Please click your browser's back button and try again."
+msgstr "Spiacenti, non hai inserito correttamente la frase anti-spam. Per favore clicca sul bottone del tuo browser che ti fa tornare indietro di una pagina."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "Group"
+msgstr "Gruppo"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "Reg ID"
+msgstr "ID Registrazione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+#, fuzzy
+msgid "Last Name"
+msgstr "Cognome:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+#, fuzzy
+msgid "First Name"
+msgstr "Nome:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "Email"
+msgstr "Email"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+#, fuzzy
+msgid "Address"
+msgstr "Indirizzo:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "City"
+msgstr "Città"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "State"
+msgstr "Nazione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+#, fuzzy
+msgid "Zip"
+msgstr "CAP:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "Phone"
+msgstr "Telefono"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "Payment Method"
+msgstr "Metodo di Pagamento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "Reg Date"
+msgstr "Data registrazione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "Pay Status"
+msgstr "Stato Pagamento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "Type of Payment"
+msgstr "Tipo di Pagamento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "Transaction ID"
+msgstr "codice ID Transazione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "Payment"
+msgstr "Pagamento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+#, fuzzy
+msgid "Coupon Code"
+msgstr "Codice di Sconto:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "# Attendees"
+msgstr "# Partecipanti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "Date Paid"
+msgstr "Data Pagamento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+msgid "Event Name"
+msgstr "Corso:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+#, fuzzy
+msgid "Price Option"
+msgstr "Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+#, fuzzy
+msgid "Event Date"
+msgstr "Data(e) Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:427
+#, fuzzy
+msgid "Event Time"
+msgstr "Orari Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:576
+msgid "No participant data has been collected."
+msgstr "Nessuna informazione sul partecipante acquisita."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/espresso.php:582
+msgid "This Is Not A Valid Selection!"
+msgstr "Questa non è una Selezione Valida!"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/authnet_ipn.php:40
+msgid "Thank You!"
+msgstr "Grazie!"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/authnet_ipn.php:41
+msgid "Your transaction has been processed."
+msgstr "La tua transazione è in lavorazione."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/authnet_ipn.php:46
+#, fuzzy
+msgid "There was an error processing your transaction!"
+msgstr "C'è stato un errore nella tua conferma, per favore riprova."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/authnet_vars.php:23
+msgid "Reg. ID:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/authnet_vars.php:23
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/paypal_vars.php:22
+#, fuzzy
+msgid "Name:"
+msgstr "Nome"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/authnet_vars.php:23
+msgid "Total Registrants:"
+msgstr "Totale Registrati:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/authnet_vars.php:55
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/paypal_vars.php:53
+msgid "Debug Mode Is Turned On"
+msgstr "Modo DEBUG ATTIVO"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:13
+msgid "Authorize.net settings saved."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:20
+msgid "Authorize.net Settings"
+msgstr "Impostazioni Authorize.net"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:41
+msgid "Activate Authorize.net?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:45
+msgid "Deactivate Authorize.net?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:49
+msgid "The Authorize.net gateway is installed. Would you like to activate it?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:71
+msgid "Authorize.net Login I.D."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:78
+msgid "Authorize.net Transaction Key"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:85
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:157
+msgid "Button Image URL: "
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:93
+msgid "Image URL:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:99
+#, fuzzy
+msgid "(used for your business/personal logo on the Authorize.net payment page)"
+msgstr "Image URL (usata per il tuo logo personale nella pagina PayPal):"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:104
+msgid "Relay Response URL :"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:109
+msgid "Use the test mode feature for Autorize.net?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:115
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:181
+msgid "By-pass the payment confirmation page?"
+msgstr "Salta pagina Conferma Pagamento?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:118
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:185
+msgid "Yes"
+msgstr "Sì"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:119
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:184
+msgid "No"
+msgstr "No"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:123
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:206
+msgid "Current Button Image:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:131
+msgid "Update Authorize.net Settings"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:135
+msgid ""
+"<h2>Relay Response</h2>\n"
+"      <p>This shows the specific the URL to which the gateway should return the relay response for a transaction. This the page should be set in your Authorize.net account. Login to Authorize.net, goto Account > Response/Receipt URLs > Add URL and enter the following URL.</p>\n"
+"\t  <p><strong>Relay Response URL:</strong> "
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:146
+#, fuzzy
+msgid "Authorize.net Image URL (logo for payment page)"
+msgstr "PayPal Image URL (logo per pagina PayPal)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:149
+#, fuzzy
+msgid "The URL of the image displayed as your logo in the header of the Authorize.net checkout pages."
+msgstr "L' URL dell'immagine di  150x50-pixel mostrata come tuo logo nella parte sinistra alta delle pagine di checkout di PayPal."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/authnet/settings.php:153
+msgid ""
+"<h2>Authorize.net Test Mode</h2>\n"
+"      <p>Test Mode allows you to submit test transactions to the payment gateway. Transactions that are submitted while Test Mode is ON are NOT actually processed. The result of a transaction depends on the card number submitted, and the invoice amount. If you want a transaction to be approved, use one of the following card numbers.</p><p>370000000000002 (American Express)<br />\n"
+"6011000000000012 (Discover)<br />\n"
+"5424000000000015 (Master Card)<br />\n"
+"4007000000027 (Visa)<br />\n"
+"</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/bank_payment_vars.php:10
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/settings.php:88
+msgid "Name on Account:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/bank_payment_vars.php:11
+#, fuzzy
+msgid "Account Number:"
+msgstr "Numero di Conto:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/bank_payment_vars.php:12
+msgid "Financial Institution:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/bank_payment_vars.php:13
+msgid "Address:"
+msgstr "Indirizzo:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/settings.php:13
+msgid "Electronic Funds Transfer settings saved."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/settings.php:21
+msgid "Electronic Funds Transfer Settings"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/settings.php:42
+msgid "Activate Electronic Funds Transfers?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/settings.php:45
+#, fuzzy
+msgid "Deactivate Electronic Funds Transfers?"
+msgstr "Deactivate Electronic Funds Transfers?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/settings.php:49
+msgid "The Electronic Funds Transfers is installed. Would you like to activate it?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/settings.php:72
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/check/settings.php:67
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:73
+msgid "Title:"
+msgstr "Titolo:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/settings.php:75
+msgid "Electronic Funds Transfers"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/settings.php:79
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/check/settings.php:70
+#, fuzzy
+msgid "Payment Instructions:"
+msgstr "Email Conferma Pagamento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/settings.php:82
+msgid "Please initiate an electronic payment using the bank information below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/settings.php:95
+msgid "Bank Account#:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/settings.php:102
+#, fuzzy
+msgid "Bank Name:"
+msgstr "Cognome:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/settings.php:109
+#, fuzzy
+msgid "Bank Address:"
+msgstr "Indirizzo:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/bank/settings.php:119
+msgid "Update Electronic Funds Transfer Settings"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/check/check_payment_vars.php:10
+msgid "Payable to:"
+msgstr "Pagabile a:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/check/check_payment_vars.php:11
+#, fuzzy
+msgid "Payment Address:"
+msgstr "Indirizzo:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/check/settings.php:11
+msgid "Check/Money Order Payment settings saved."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/check/settings.php:18
+msgid "Check/Money Order Payment Settings"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/check/settings.php:39
+msgid "Activate Check/Money Order Payments?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/check/settings.php:42
+msgid "Deactivate Check/Money Order Payments?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/check/settings.php:46
+msgid "The Check/Money Order Payments is installed. Would you like to activate it?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/check/settings.php:68
+msgid "Check/Money Order Payments"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/check/settings.php:71
+msgid "Please send Check/Money Order to the address below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/check/settings.php:73
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:87
+msgid "Payable To:"
+msgstr "Pagabile a:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/check/settings.php:76
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:94
+#, fuzzy
+msgid "Address to Send Payment:"
+msgstr "Partecipanti/Pagamenti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/check/settings.php:97
+msgid "Update Check/Money Order Payment Settings"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/invoice_vars.php:10
+msgid "Download PDF Invoice"
+msgstr "Scarica Fattura PDF"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:14
+msgid "Invoice Payment settings saved."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:22
+#, fuzzy
+msgid "Invoice Payment Settings"
+msgstr "PayPal Setting"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:43
+#, fuzzy
+msgid "Activate Invoice Payments?"
+msgstr "Partecipanti/Pagamenti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:46
+msgid "Deactivate Invoice Payments?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:50
+msgid "The Invoice Payments is installed. Would you like to activate it?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:76
+#, fuzzy
+msgid "Invoice Payments"
+msgstr "Tutti i Pagamenti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:80
+msgid "Invoice Instructions:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:83
+msgid "Please send Invoice to the address below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:118
+#, fuzzy
+msgid "PDF Settings"
+msgstr "Impostazioni"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:122
+msgid "PDF Title (top right of the invoice):"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:125
+msgid "Invoice"
+msgstr "Fattura"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:129
+msgid "Logo URL (logo for the top left of the invoice):"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:136
+msgid "Invoice Instructions in PDF:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:139
+msgid "Please send this invoice with payment attached to the address above, or use the payment link below. Payment must be received within 48 hours of event date."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/settings.php:146
+#, fuzzy
+msgid "Update Invoice Payment Settings"
+msgstr "Aggiorna Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/template.php:107
+msgid "Page"
+msgstr "Pagina"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/template.php:123
+#, fuzzy
+msgid "Date: "
+msgstr "Data:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/template.php:124
+msgid "Attendee ID: "
+msgstr "ID Partecipante:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/template.php:136
+msgid "Bill To: "
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/invoice/template.php:147
+msgid "Amount Owed"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/paypal_vars.php:22
+msgid "Registrant Email:"
+msgstr "Email Partecipante:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:14
+#, fuzzy
+msgid "PayPal settings saved."
+msgstr "PayPal Setting"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:23
+msgid "PayPal Settings"
+msgstr "PayPal Setting"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:44
+msgid "Activate PayPal IPN?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:47
+msgid "Deactivate PayPal IPN?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:52
+msgid "The PayPal IPN addon is installed. Would you like to activate it?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:73
+msgid "Paypal I.D."
+msgstr "Paypal I.D."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:78
+msgid "(Typically payment@yourdomain.com)"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:82
+msgid "Select the currency for your country:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:88
+msgid "U.S. Dollars ($)"
+msgstr "U.S. Dollars ($)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:91
+msgid "Australian Dollars (A $)"
+msgstr "Australian Dollars (A $)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:94
+msgid "Pounds Sterling (&pound;)"
+msgstr "Pounds Sterling (&pound;)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:97
+msgid "Canadian Dollars (C $)"
+msgstr "Canadian Dollars (C $)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:100
+msgid "Czech Koruna"
+msgstr "Czech Koruna"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:103
+msgid "Danish Krone"
+msgstr "Danish Krone"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:106
+msgid "Euros (&#8364;)"
+msgstr "Euro (&#8364;)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:109
+msgid "Hong Kong Dollar ($)"
+msgstr "Hong Kong Dollar ($)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:112
+msgid "Hungarian Forint"
+msgstr "Hungarian Forint"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:115
+msgid "Israeli Shekel"
+msgstr "Israeli Shekel"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:118
+msgid "Yen (&yen;)"
+msgstr "Yen (&yen;)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:121
+msgid "Mexican Peso"
+msgstr "Mexican Peso"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:124
+msgid "New Zealand Dollar ($)"
+msgstr "New Zealand Dollar ($)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:127
+msgid "Norwegian Krone"
+msgstr "Norwegian Krone"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:130
+msgid "Polish Zloty"
+msgstr "Polish Zloty"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:133
+msgid "Singapore Dollar ($)"
+msgstr "Singapore Dollar ($)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:136
+msgid "Swedish Krona"
+msgstr "Swedish Krona"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:139
+msgid "Brazilian Real (only for Brazilian users)"
+msgstr "Brazilian Real (only for Brazilian users)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:142
+msgid "Malaysian Ringgits (only for Malaysian users)"
+msgstr "Malaysian Ringgits (only for Malaysian users)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:145
+msgid "Philippine Pesos"
+msgstr "Philippine Pesos"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:148
+msgid "Taiwan New Dollars"
+msgstr "Taiwan New Dollars"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:151
+msgid "Thai Baht"
+msgstr "Thai Baht"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:164
+#, fuzzy
+msgid "Image URL (logo for payment page):"
+msgstr "PayPal Image URL (logo per pagina PayPal)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:169
+#, fuzzy
+msgid "(used for your business/personal logo on the PayPal page)"
+msgstr "Image URL (usata per il tuo logo personale nella pagina PayPal):"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:175
+msgid "% Surcharge (Added to the total): "
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:190
+msgid "Shipping address options?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:193
+msgid "Do not prompt for an address"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:194
+msgid "Prompt for an address, but do not require one"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:195
+msgid "Prompt for an address, and require one"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:200
+msgid "Use the debugging feature and the <a href=\"https://developer.paypal.com/devscr?cmd=_home||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox_get_started\" title=\"PayPal Sandbox Login||Sandbox Tutorial||Getting Started with PayPal Sandbox\" target=\"_blank\">PayPal Sandbox</a>?"
+msgstr "Usa la funzione di debugging  e <a href=\"https://developer.paypal.com/devscr?cmd=_home||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox_get_started\" title=\"PayPal Sandbox Login||Sandbox Tutorial||Getting Started with PayPal Sandbox\" target=\"_blank\">PayPal Sandbox</a>?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:214
+#, fuzzy
+msgid "Update PayPal Settings"
+msgstr "PayPal Setting"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:218
+msgid ""
+"<h2>PayPal Sandbox</h2>\n"
+"      <p>In addition to using the PayPal Sandbox fetaure. The debugging feature will also output the form varibales to the payment page, send an email to the admin that contains the all PayPal variables.</p>\n"
+"      <hr />\n"
+"      <p>The PayPal Sandbox is a testing environment that is a duplicate of the live PayPal site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live PayPal environment. Create and manage test accounts, and view emails and API credentials for those test accounts.</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:225
+#, fuzzy
+msgid "PayPal Image URL (logo for payment page)"
+msgstr "PayPal Image URL (logo per pagina PayPal)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:228
+msgid "The URL of the 150x50-pixel image displayed as your logo in the upper left corner of the PayPal checkout pages."
+msgstr "L' URL dell'immagine di  150x50-pixel mostrata come tuo logo nella parte sinistra alta delle pagine di checkout di PayPal."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:231
+msgid "Default - Your business name, if you have a Business account, or your email address, if you have Premier or Personal account."
+msgstr "Opzione Pre-definita - Nome della tua azienda, se hai un Business Account, o il tuo indirizzo Email, se hai un Account Premier o Personal."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:235
+msgid ""
+"<h2>PayPal Currency</h2>\n"
+"      <p>PayPal uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, select the currency you wish to use. The dropdown lists all currencies that PayPal (currently) supports. "
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:239
+msgid ""
+"<h2>Payment Surcharge</h2>\n"
+"      <p>Please enter a decimal number indicating a percent surcharge.\n"
+"      For example, if you enter 3.00, 3% will be added to the final price of the event during the checkout.\n"
+"      If the event price is initially $100, the price with the surcharge will be $103.<br />\n"
+"      This surcharge will apply to all new events.  However, you will have the ability to change this value during the event creation.\n"
+"      </p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/gateways/paypal/settings.php:247
+msgid ""
+"<h2>Shipping Address</h2>\n"
+"      <p>By default, PayPal will display shipping address information on the PayPal payment screen. If you plan on shipping items to a registrant (shirts, invoices, etc) then use this option. Otherwise it should not be used, as it will require a shipping address when someone registers for an event.</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:8
+msgid "Manage Addons"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:12
+msgid "Groupon Integration Module"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:15
+msgid "Did your site get featured on <a href=\"http://www.groupon.com/\" target=\"_blank\">Groupon.com</a>? Now you can easily accept Groupon codes to your events! Once installed, just upload all of your Groupon codes to the database and your ready to go. How easy is that?"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:16
+msgid "About Groupon"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:17
+msgid "<a href=\"http://www.groupon.com/\" target=\"_blank\">Groupon</a> is a deal-of-the-day website that is localized to major markets in the United States. The first market for Groupon was Chicago, followed soon thereafter by Boston and New York City. As of January 2010, Groupon serves more than 40 markets. Groupon debuted in November 2008 as part of The Point, a platform for collective action."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:22
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:45
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:85
+msgid "Installed"
+msgstr "Installato"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:23
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:46
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:86
+#, fuzzy
+msgid "Active"
+msgstr "Azione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:23
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:46
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:86
+#, fuzzy
+msgid "Not Active"
+msgstr "Azione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:35
+msgid "Members Integration Module"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:59
+msgid "Custom Files"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:62
+msgid "These files offer support for custom templates, functions, and shortcodes. Virtually allowing you to customize the plugin to your needs and making your custom changes future proof."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:64
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:65
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:66
+msgid " - Installed"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:64
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:65
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:66
+msgid " - Not Installed"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_addons.php:76
+msgid "Authorize.net SIM Gateway"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_support.php:68
+msgid "Run Upgrade Script"
+msgstr "Avvia lo Script di Aggiornamento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_support.php:82
+#, fuzzy
+msgid "Run Attendee Update Script"
+msgstr "Avvia lo Script di Aggiornamento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_support.php:142
+#, fuzzy
+msgid "Attendee data has been updated!"
+msgstr "Le informazione dell'Evento sono state aggiornate!"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_support.php:145
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_support.php:278
+msgid "There was an error in your submission, please try again."
+msgstr "C'è stato un errore nella tua conferma, per favore riprova."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin_support.php:275
+msgid "Event data has been updated!"
+msgstr "Le informazione dell'Evento sono state aggiornate!"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:21
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:127
+msgid "Event Registration with PayPal IPN"
+msgstr "Registrazione Evento con PayPal IPN"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:83
+#, fuzzy
+msgid "Events stats"
+msgstr "Data(e) Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:84
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:128
+msgid "View Attendees/Payments"
+msgstr "Vedi Iscritti/Pagamenti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:99
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:142
+msgid "Total Active Events"
+msgstr "Totale Eventi Attivi"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:100
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:143
+msgid "All Time Attendees"
+msgstr "Tutti i Partecipanti "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:101
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:144
+msgid "All Time Paid"
+msgstr "Tutti i Partecipanti che hanno pagato"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:102
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:145
+msgid "All Time Not Paid"
+msgstr "Tutti i Partecipanti che non hanno pagato"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:103
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:146
+msgid "All Time Payments"
+msgstr "Tutti i Pagamenti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:162
+msgid "Next 3 Upcoming Events"
+msgstr "Prossimi 3 Eventi"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:178
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/add_new_attendee.php:92
+msgid "Start Date:"
+msgstr "Data Inizio:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/dashboard_widget.php:178
+msgid "Attendees:"
+msgstr "Partecipanti:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/database_install.new.php:335
+msgid "Payment Received for [event_name]"
+msgstr "Pagamento Ricevuto per il  [event_name]"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/database_install.new.php:336
+msgid "<p>***This Is An Automated Response*** </p><p>Thank You [fname] [lname]</p>  <p>We have just  received a payment in the amount of $[event_price] for your registration to [event_name].</p> <p>PayPal transaction ID: [txn_id]</p>"
+msgstr "<p>***Questa email viene generata automaticamente. Non rispondere**</p><p>Grazie  [fname] [lname]</p>  <p>Abbiamo ricevuto il pagamento di Euro [event_price] per la tua registrazione al [event_name].</p> <p>Codice ID della transazione PayPal  : [txn_id]</p><p>Per eventuali informazioni riguardo a luoghi, date e orari dei corsi, puoi contattarci al seguente indirizzo email: [contact].</p>"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/database_install.new.php:338
+msgid "<p>***This is an automated response - Do Not Reply***</p> <p>Thank you [fname] [lname] for registering for [event].</p><p>Start time: [start_time]</p><p>Location:<br>[location]</p><p>Phone: [location_phone]</p><p>Google Map: [google_map_link]</p><p> We hope that you will find this event both informative and enjoyable. Should have any questions, please contact [contact].</p><p>If you have not done so already, please submit your payment in the amount of [cost].</p><p>Click here to review your payment information [payment_url].</p><p>Thank You.</p>"
+msgstr "<p>***Questa è una risposta automatica - Non Rispondere***</p> <p>Ciao [fname] [lname], grazie per esserti registrato all'evento [event].</p><p>Ora d'inizio: [start_time]</p><p>Luogo:<br>[location]</p><p>Telefono: [location_phone]</p><p>Google Map: [google_map_link]</p><p> Speriamo che l'evento sia utile e piacevole. Dovessi avere qualche domanda, ti preghiamo di contattare [contact].</p><p>Se non l'hai ancora fatto, ti preghiamo di procedere al pagamento di € [cost].</p><p>Clicca qui per rivedere le tue informazioni di pagamento [payment_url].</p><p>Grazie.</p>"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:70
+#, fuzzy
+msgid "Organization details saved."
+msgstr "Setting Organizzazione "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:112
+msgid "Organization Settings"
+msgstr "Setting Organizzazione "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:120
+msgid "Set up Your Organization to Recieve Payments"
+msgstr "Configura la tua Organizzazione per Ricevere Pagamenti "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:128
+#, fuzzy
+msgid "Organization Name:"
+msgstr "Organizzazione via 2:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:134
+#, fuzzy
+msgid "Organization Street 1:"
+msgstr "Organizzazione via 2:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:140
+msgid "Organization Street 2:"
+msgstr "Organizzazione via 2:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:146
+#, fuzzy
+msgid "Organization City:"
+msgstr "Organizzazione via 2:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:152
+#, fuzzy
+msgid "Organization State:"
+msgstr "Organizzazione via 2:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:158
+#, fuzzy
+msgid "Organization Zip/Postal Code:"
+msgstr "CAP:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:164
+#, fuzzy
+msgid "Organization Country:"
+msgstr "Organizzazione via 2:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:169
+msgid "Time Zone:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:174
+#, fuzzy
+msgid "Primary contact email:"
+msgstr "contatto email principale <span>*</span>:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:185
+#, fuzzy
+msgid "Page Settings"
+msgstr "PayPal Setting"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:192
+msgid "**Attention**"
+msgstr "**Attenzione**"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:194
+msgid "These settings are very important and must be configured for the plugin to function correctly. Visibility must be set to"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:196
+msgid "Public on all pages"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:198
+msgid "If you need help, please visit the "
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:200
+#, fuzzy
+msgid "support"
+msgstr "Esporta"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:202
+msgid "page or the"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:204
+msgid "for more information and instructions."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:208
+#, fuzzy
+msgid "Show a single event or all events on the registration page?"
+msgstr "Nella Pagina di Registrazione vuoi mostrare un singolo evento o tutti gli eventi? "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:211
+msgid "All Events"
+msgstr "Tutti gli Eventi"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:212
+msgid "Single Event"
+msgstr "Evento Singolo"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:218
+msgid "Main registration page:"
+msgstr "Pagina Principale Registrazione:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:222
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:245
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:269
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:291
+#, fuzzy
+msgid "Main page"
+msgstr "Pagina Principale Eventi"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:228
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:251
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:297
+msgid "This page should contain the"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:230
+msgid ""
+"shortcode. <br />\n"
+"This page can be hidden from navigation if desired, <br />\n"
+"but should always contain the {ESPRESSO_EVENTS} shortcode."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:235
+msgid ""
+"<h2>Main Events Page</h2>\n"
+"\t\t\t\t\t\t<p>This is the page that displays your events.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{ESPRESSO_EVENTS}</strong> shortcode.</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:241
+msgid "Auto Return URL (Thank You and Return Payment page):"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:253
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:299
+msgid ""
+"shortcode. <br />\n"
+"This page should hidden from your navigation, <br />\n"
+"but still viewable to the public (not password protected.)"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:258
+msgid ""
+"<h2>Auto Return URL</h2>\n"
+"\t\t\t\t\t\t<p>The URL to which the payer\"s browser is redirected after completing the payment; for example, a URL on your site that displays a \"Thank you for your payment\" page.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{ESPRESSO_PAYMENTS}</strong> shortcode.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:265
+msgid "Cancel Return URL (used for cancelled payments):"
+msgstr "Cancel Return URL (usato per i pagamenti cancellati):"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:275
+msgid ""
+"This should be a page on your website that contains a cancelled message. <br />\n"
+"No short tags are needed. This page should hidden from your navigation, <br />\n"
+"but still viewable to the public (not password protected.)"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:280
+msgid ""
+"<h2>Cancel Return URL</h2>\n"
+"\t\t\t\t\t\t<p>A URL to which the payer's browser is redirected if payment is cancelled; for example, a URL on your website that displays a \"Payment Canceled\" page.</p>\n"
+"\t\t\t\t\t\t<p>This should be a page on your website that contains a cancelled message. No short tags are needed.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:287
+#, fuzzy
+msgid "Notify URL (used to process payments):"
+msgstr "Cancel Return URL (usato per i pagamenti cancellati):"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:304
+msgid ""
+"<h2>Notify URL</h2>\n"
+"\t\t\t\t\t\t<p>The URL to which PayPal posts information about the transaction, in the form of Instant Payment Notification messages.</p>\n"
+"\t\t\t\t\t\t<p>This page should contain the <strong>{ESPRESSO_TXN_PAGE}</strong> shortcode.</p>\n"
+"\t\t\t\t\t\t<p class=\"red_text\"><strong>ATTENTION:</strong><br />This page should be hidden from from your navigation menu. Exclude pages by using the \"Exclude Pages\" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the \"exclude\" parameter in your \"wp_list_pages\" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:315
+#, fuzzy
+msgid "reCAPTCHA Settings"
+msgstr "Impostazioni"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:323
+msgid "<strong>Use <a href=\"http://recaptcha.net/||http://recaptcha.net/learnmore.html||https://admin.recaptcha.net/accounts/login/?next=/recaptcha/sites/||http://recaptcha.net/apidocs/captcha/client.html\" title=\"reCAPTCHA Home Page||What is reCAPTCHA||reCAPTCHA Account||reCAPTCHA Client API Documentation\" target=\"_blank\">reCAPTCHA</a> to block spam registrations</strong>:"
+msgstr "<strong>Usa <a href=\"http://recaptcha.net/||http://recaptcha.net/learnmore.html||https://admin.recaptcha.net/accounts/login/?next=/recaptcha/sites/||http://recaptcha.net/apidocs/captcha/client.html\" title=\"reCAPTCHA Home Page||What is reCAPTCHA||reCAPTCHA Account||reCAPTCHA Client API Documentation\" target=\"_blank\">reCAPTCHA</a> per bloccare registrazioni spam</strong>:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:335
+msgid "Public Key:"
+msgstr "Public Key:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:341
+msgid "Private Key:"
+msgstr "Private Key:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:347
+msgid "Look &amp; Feel Customization"
+msgstr "Configurazione Aspetto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:352
+msgid "Theme:"
+msgstr "Tema:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:356
+msgid "Red"
+msgstr "Rosso"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:357
+msgid "White"
+msgstr "Bianco"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:358
+msgid "Blackglass"
+msgstr "Vetro nero"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:359
+msgid "Clean"
+msgstr "Pulisci"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:365
+msgid "Language:"
+msgstr "Lingua:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:369
+msgid "English"
+msgstr "English"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:370
+msgid "Spanish"
+msgstr "Spanish"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:371
+msgid "Dutch"
+msgstr "Dutch"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:372
+msgid "French"
+msgstr "French"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:373
+msgid "German"
+msgstr "German"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:374
+msgid "Portuguese"
+msgstr "Portuguese"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:375
+msgid "Russian"
+msgstr "Russian"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:376
+msgid "Turkish"
+msgstr "Turkish"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:383
+msgid ""
+"<h2>reCAPTCHA Information</h2>\n"
+"\t\t\t\t\t\t<p>reCAPTCHA helps prevent automated abuse of your site (such as comment spam or bogus registrations) by using a <a href=\"http://recaptcha.net/captcha.html\">CAPTCHA</a> to\n"
+"\t\t\tensure that only humans perform certain actions.</p>\n"
+"\t\t\t<p>You must sign up for a <a href=\"https://admin.recaptcha.net/accounts/signup/?next=%2Frecaptcha%2Fsites%2F\" target=\"_blank\">free reCAPTCHA</a> account to use it with this plugin. If you already have a reCAPTCHA account enter your \"Public\" and \"Private\" keys on this page.</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:390
+msgid "Event Listing Types"
+msgstr "Tipi di Liste Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:393
+msgid "If set to \"Single Event\", only one event will be displayed on the page.</p> <p class=\"red_text\">**Attention** Setting this option to \"Single Event\" will disable the \"Event Registration Widget\" and \"SINGLEEVENT\" shortcode functionality."
+msgstr "Se si sceglie \"Evento Singolo\", solo un evento sarà visualizzato nella pagina.</p> <p class=\"red_text\">**Attenzione** Scegliendo \"Evento Singolo\" si disattiverà la funzionalità \"Widget Registrazione Evento\"  \"SINGLEEVENT\"."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:402
+#, fuzzy
+msgid "Template Customization"
+msgstr "Configurazione Aspetto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:415
+msgid "Your templates have been copied."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:429
+msgid "Theming your event listings and registration pages is easy."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:432
+msgid "You just need to edit the appropriate files in the following location."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:435
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:475
+#, fuzzy
+msgid "Path:"
+msgstr "Data:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:439
+#, fuzzy
+msgid "Current Template Files"
+msgstr "Categorie Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:447
+msgid " - Moved"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:451
+msgid " - Not Moved"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:458
+msgid "Remember, if updates are made or features are added to these templates in the future. You will need to make the updates to your customized templates."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:465
+msgid "In order to use this this feature, you will need to move the files located in the <span class=\"display-path\"><strong>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:468
+msgid "The permissions on your templates directory are incorrect."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:471
+msgid "To move your files automatically, please set the permissions to 775 on the following directory."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:481
+msgid "If you plan on modifying the look of your event listings, registration page, or attendee list. Use the option below to move these templates to a safe place. Keep in mind, if updates are made or features are added to these templates in the future. You will need to make the updates to your customized templates."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:484
+msgid "Your template files have not been moved."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:486
+#, php-format
+msgid "Click here to <a href='%s'>Move your files</a> to a safe place."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:497
+msgid "Email Settings"
+msgstr "Settaggio Email"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:508
+#, fuzzy
+msgid "Send payment confirmation emails?"
+msgstr "Email Conferma Pagamento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:512
+#, fuzzy
+msgid "Send registration confirmation emails before payment is received?"
+msgstr "Spedire email di conferma personalizzata per questo evento?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:516
+msgid "Payment Confirmation Email:"
+msgstr "Email Conferma Pagamento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:520
+msgid "Email Subject:"
+msgstr "Oggetto dell'Email:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:531
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:547
+msgid "View Custom Email Tags"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:538
+#, fuzzy
+msgid "Default Registration Confirmation Email:"
+msgstr "Email di Conferma Registrazione Pre-Definita:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:549
+#, fuzzy
+msgid "Example"
+msgstr "Esempi di Email"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:562
+msgid "Save Options"
+msgstr "Salva Opzioni"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:569
+msgid ""
+"<h2>Email Settings</h2><p><strong>Email Confirmations:</strong><br>\n"
+"For customized confirmation emails, the following tags can be placed in the email form and they will pull data from the database to include in the email.</p>\n"
+"<p>[fname], [lname], [phone], [event],[description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [start_date], [start_time], [end_date], [end_time]</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/organization_config.php:574
+msgid ""
+" <h2>Sample Mail Send:</h2>\n"
+"\n"
+"<p>***This is an automated response - Do Not Reply***</p>\n"
+"<p>Thank you [fname] [lname] for registering for [event]. We hope that you will find this event both informative and enjoyable. Should have any questions, please contact [contact].</p>\n"
+"<p>If you have not done so already, please submit your payment in the amount of [cost].</p>\n"
+"<p>Click here to review your payment information [payment_url].</p>\n"
+"<p>Thank You.</p>"
+msgstr "<p>***Questa è una risposta automatica - Non Rispondere***</p> <p>Ciao [fname] [lname], grazie per esserti registrato all'evento [event].</p><p>Ora d'inizio: [start_time]</p><p>Luogo:<br>[location]</p><p>Telefono: [location_phone]</p><p>Google Map: [google_map_link]</p><p> Speriamo che l'evento sia utile e piacevole. Dovessi avere qualche domanda, ti preghiamo di contattare [contact].</p><p>Se non l'hai ancora fatto, ti preghiamo di procedere al pagamento di € [cost].</p><p>Clicca qui per rivedere le tue informazioni di pagamento [payment_url] .</p><p>Grazie.</p>"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/PaymentGateway.php:243
+#, fuzzy
+msgid "Field Name"
+msgstr "Nome:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/PaymentGateway.php:244
+msgid "Value"
+msgstr "Valore"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/shortcodes.php:7
+msgid "No ID Supplied"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/shortcodes.php:21
+#, fuzzy
+msgid "No Category ID Supplied"
+msgstr "Nessuna categoria selezionata"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/widget.php:9
+msgid "A widget to display your upcoming events."
+msgstr "Un widget per visualizzare i tuoi prossimi eventi. "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/widget.php:15
+#, fuzzy
+msgid "Event Espresso Widget"
+msgstr "Widget Registrazione Eventi"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/widget.php:77
+msgid "Upcoming Events"
+msgstr "Prossimi Eventi"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/add_new_attendee.php:15
+#, fuzzy
+msgid "Added Attendee to Database"
+msgstr "Limite Partecipanti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/add_new_attendee.php:106
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/edit_attendee_record.php:146
+msgid "First Name:"
+msgstr "Nome:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/add_new_attendee.php:114
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/edit_attendee_record.php:147
+msgid "Last Name:"
+msgstr "Cognome:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/add_new_attendee.php:120
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/edit_attendee_record.php:148
+msgid "Email:"
+msgstr "Email:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/add_new_attendee.php:141
+#, fuzzy
+msgid "Amount Paid:"
+msgstr "Tutti i Partecipanti che non hanno pagato"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/add_new_attendee.php:149
+msgid "Submit"
+msgstr "Invia"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/edit_attendee_record.php:139
+#, fuzzy
+msgid "Attendee details saved for "
+msgstr "Dettagli dell'Evento salvati per"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/edit_attendee_record.php:143
+#, fuzzy
+msgid "Registration Id #"
+msgstr "Paga la Quota di Registrazione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/edit_attendee_record.php:149
+msgid "How is attendee paying for registration?"
+msgstr "Il Partecipante come sta pagando per la registrazione?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/edit_attendee_record.php:152
+msgid "Credit Card or Paypal"
+msgstr "Carta di credito o PayPal"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/edit_attendee_record.php:153
+msgid "Cash"
+msgstr "Contanti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/edit_attendee_record.php:154
+msgid "Check"
+msgstr "Controllo"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/edit_attendee_record.php:214
+msgid "Update Record"
+msgstr "Aggiorna Voce Database"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/edit_attendee_record.php:224
+#, fuzzy
+msgid "Edit Attendee"
+msgstr "Partecipanti:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/edit_attendee_record.php:226
+#, fuzzy
+msgid "Delete Attendee"
+msgstr "Partecipanti:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:88
+#, fuzzy
+msgid "Edit Attendee Payment Record"
+msgstr "Vedi Iscritti/Pagamenti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:92
+#, fuzzy
+msgid "Payment details saved for"
+msgstr "Dettagli dell'Evento salvati per"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:94
+#, fuzzy
+msgid "Payment notification has been sent."
+msgstr "Le informazione dell'Evento sono state aggiornate!"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:103
+#, fuzzy
+msgid "Attendee"
+msgstr "Partecipanti:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:103
+#, fuzzy
+msgid "Registered For:"
+msgstr "Registrati Online"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:107
+msgid "Payment Details"
+msgstr "Dettagli Pagamento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:108
+msgid "Invoice/Payment Reminder"
+msgstr "Fattura/Promemoria Pagamento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:116
+msgid "Payment Status:"
+msgstr "Stato Pagamento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:118
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:14
+#, fuzzy
+msgid "None"
+msgstr "No"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:119
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:22
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/use_coupon_code.php:32
+msgid "Completed"
+msgstr "Completato"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:120
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:18
+msgid "Pending"
+msgstr "In lavorazione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:121
+msgid "Incomplete"
+msgstr "Incompleto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:125
+#, fuzzy
+msgid "Transaction Type:"
+msgstr "Organizzazione via 2:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:127
+#, fuzzy
+msgid "Transaction ID:"
+msgstr "Organizzazione via 2:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:129
+#, fuzzy
+msgid "Amount:"
+msgstr "Città:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:132
+msgid "How Many People:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:134
+#, fuzzy
+msgid "Date Paid:"
+msgstr "Data:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:143
+#, fuzzy
+msgid "Do you want to send a payment recieved notice to registrant?"
+msgstr "Vuoi visualizzare la descrizione dell'evento nella pagina di registrazione?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:161
+#, fuzzy
+msgid "Invoice Subject"
+msgstr "Oggetto:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:161
+msgid "Payment Reminder for [event]"
+msgstr "Promemoria di Pagamento per [event]"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:162
+msgid "Message"
+msgstr "Messaggio"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/enter_attendee_payments.php:164
+msgid "Dear [fname] [lname], <p>Our records show that we have not received your payment of [cost] for [event_link].</p> <p>Please visit [payment_url] to view your payment options.</p><p>Sincerely,<br />"
+msgstr "Ciao [fname] [lname], <p>Il tuo pagamento di [cost] per il [event_link] è in lavorazione.</p> <p>Clicca sul link seguente  [payment_url] per vedere i dettagli del tuo pagamento.</p><p>Cordialmente<br>ArsEtMedia<BR>"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/index.php:10
+#, fuzzy
+msgid "Attendee Payments"
+msgstr "Partecipanti/Pagamenti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/index.php:14
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/index.php:40
+#, fuzzy
+msgid "Attendee Reports"
+msgstr "Partecipanti:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/index.php:19
+#, fuzzy
+msgid "Edit Attendee Data"
+msgstr "Partecipanti:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/index.php:24
+#, fuzzy
+msgid "Edit Attendee Payment"
+msgstr "Vedi Iscritti/Pagamenti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/index.php:29
+#, fuzzy
+msgid "Add New Attendee"
+msgstr "Aggiungi Nuovi Partecipanti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:41
+#, fuzzy
+msgid "Customer(s) have been successfully deleted from the event."
+msgstr "Gli Sconti sono stati cancellati con successo dal database."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:68
+msgid "View event page"
+msgstr "Vedi Pagina Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:77
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:89
+#, fuzzy
+msgid "Export to Excel"
+msgstr "Esporta su Excel"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:80
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:89
+msgid "Edit Event"
+msgstr "Modifica Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:82
+#, fuzzy
+msgid "Add Attendee"
+msgstr "Partecipanti:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:96
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:37
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:67
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:61
+#, fuzzy
+msgid "Records"
+msgstr "Rosso"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:98
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:278
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:38
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:134
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:69
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:161
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:63
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:153
+msgid "of"
+msgstr "di"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:101
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:40
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:72
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:66
+msgid "Reset"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:108
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:48
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:79
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:73
+msgid "Delete"
+msgstr "Cancella"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:114
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:85
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:79
+msgid "Name"
+msgstr "Nome"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:120
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:83
+msgid "Amount"
+msgstr "Totale"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:129
+msgid "Coupon"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:135
+#, fuzzy
+msgid "Registration Date"
+msgstr "Paga la Quota di Registrazione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:138
+#, fuzzy
+msgid "Payment Date"
+msgstr "Data(e) Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:141
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:54
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:92
+msgid "Action"
+msgstr "Azione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:201
+#, fuzzy
+msgid "Registration #: "
+msgstr "Paga la Quota di Registrazione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:206
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:216
+#, fuzzy
+msgid "Edit Payment"
+msgstr "Modifica Pagamento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:218
+#, fuzzy
+msgid "Resend Registration Details"
+msgstr "Reinvia Detagli Iscrizione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:238
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:95
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:122
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:116
+msgid "No Record Found!"
+msgstr "Nessuna Corrispondenza Trovata!"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:248
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:104
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:130
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:123
+msgid "Check All"
+msgstr "Seleziona tutto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:250
+#, fuzzy
+msgid "Delete Customer(s)"
+msgstr "Cancella Partecipanti:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:260
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:120
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:143
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:135
+msgid "View All"
+msgstr "Vedi Tutto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/list_attendee_payments.php:273
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:132
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:156
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:148
+msgid "Entries Per Page"
+msgstr "Voci per pagina"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:21
+msgid "Event(s) have been permanently deleted."
+msgstr "L'evento è stato cancellato definitivamente"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:28
+msgid "Select an event to view attendee details and payments"
+msgstr "Seleziona un evento per vedere tutti i dettagli dell'scritto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:49
+msgid "Event ID"
+msgstr "ID Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:51
+msgid "Start Date"
+msgstr "Data Inizio"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:52
+msgid "Status"
+msgstr "Status"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:85
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:89
+msgid "View Attendees"
+msgstr "Vedi Iscritti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:89
+#, fuzzy
+msgid "Export to CSV"
+msgstr "Esporta su Excel"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/admin-reports/process_payments.php:106
+msgid "Permanently Delete Events(s)"
+msgstr "Evento cancellato definitivamente"
+
+# Advanced Events Registration Pro translation file
+# Copyright (C) 2010 Seth Shoultes
+# This file is distributed under the same license as the PACKAGE package.
+# Seth Shoultes <seth@smartwebutah.com>, 2010
+# For information on translating this plugin, please refer to http://codex.wordpress.org/Translating_WordPress
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/add_new_category.php:12
+#, fuzzy
+msgid "Add a Category"
+msgstr "Aggiungi Nuova Categoria"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/add_new_category.php:16
+#, fuzzy
+msgid "Category Name"
+msgstr "Cognome:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/add_new_category.php:18
+#, fuzzy
+msgid "Do you want to display the event description on the events page?"
+msgstr "Vuoi visualizzare la descrizione dell'evento nella pagina di registrazione?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/add_new_category.php:31
+#, fuzzy
+msgid "Category Description"
+msgstr "Descrizione:"
+
+# Advanced Events Registration Pro translation file
+# Copyright (C) 2010 Seth Shoultes
+# This file is distributed under the same license as the PACKAGE package.
+# Seth Shoultes <seth@smartwebutah.com>, 2010
+# For information on translating this plugin, please refer to http://codex.wordpress.org/Translating_WordPress
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/add_new_category.php:37
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:46
+msgid "Add New Category"
+msgstr "Aggiungi Nuova Categoria"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/edit_event_category.php:22
+#, fuzzy
+msgid "Edit Category:"
+msgstr "Modifica Categoria"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/edit_event_category.php:27
+#, fuzzy
+msgid "Category Name:"
+msgstr "Nome Categoria:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/edit_event_category.php:28
+#, fuzzy
+msgid "Unique Category Identifier:"
+msgstr "Unico Identificatore Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/edit_event_category.php:29
+#, fuzzy
+msgid "Do you want to display the category description on the events page?"
+msgstr "Vuoi visualizzare la descrizione dell'evento nella pagina di registrazione?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/edit_event_category.php:38
+#, fuzzy
+msgid "Category Description:"
+msgstr "Descrizione Categoria:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/edit_event_category.php:43
+msgid "Update Category"
+msgstr "Aggiorna Categoria"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:13
+#, fuzzy
+msgid "Manage Event Categories"
+msgstr "Gestisci Categorie Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:31
+#, fuzzy
+msgid "Categories have been successfully deleted from the event."
+msgstr "Gli Sconti sono stati cancellati con successo dal database."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:37
+#, fuzzy
+msgid "Current Categories"
+msgstr "Categorie Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:82
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:76
+msgid "ID"
+msgstr "ID"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:89
+#, fuzzy
+msgid "Shortcode"
+msgstr "Shortcode per Pagina:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:116
+#, fuzzy
+msgid "Edit Category"
+msgstr "Aggiorna Categoria"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:132
+#, fuzzy
+msgid "Delete Category"
+msgstr "Cancella Categoria"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/category-management/index.php:170
+msgid ""
+"<h2>Unique Category Identifier</h2>\n"
+"      <p>This should be a unique identifier for the category. Example: \"category1\" (without qoutes.)</p>\n"
+"      <p>The unique ID can also be used in individual pages using the  \t[EVENT_ESPRESSO_CATEGORY event_category_id=\"category_identifier\"] shortcode.</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/add_discount.php:16
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/add_discount.php:22
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/update_discount.php:22
+#, fuzzy
+msgid "The discount code "
+msgstr "Codice di Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/delete_discount.php:49
+msgid "Discounts have been successfully deleted from the database."
+msgstr "Gli Sconti sono stati cancellati con successo dal database."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/edit_discount.php:19
+msgid "Edit Discount:"
+msgstr "Modifica Sconto:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/edit_discount.php:27
+msgid "Dicount Code:"
+msgstr "Codice di Sconto:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/edit_discount.php:33
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/new_discount.php:20
+msgid "Price Discount"
+msgstr "Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/edit_discount.php:38
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/new_discount.php:25
+msgid "Is this a percentage discount?"
+msgstr "Questo è uno sconto a percentuale?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/edit_discount.php:48
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/new_discount.php:32
+msgid "Discount Code Description"
+msgstr "Descrizione Codice di Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/edit_discount.php:54
+msgid "Update Discount"
+msgstr "Aggiorna Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:7
+msgid "Manage Event Discounts"
+msgstr "Gestisci Sconti Eventi"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:39
+msgid "Current Discount Codes"
+msgstr "Codici di Sconto Correnti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:48
+#, fuzzy
+msgid "Add New Discount"
+msgstr "Aggiungi nuovo Codice di Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:86
+msgid "Percentage"
+msgstr "Percentuale"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/index.php:125
+msgid "Delete Discount"
+msgstr "Cancella Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/new_discount.php:7
+msgid "Add a Discount Code"
+msgstr "Aggiungi un Codice di Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/new_discount.php:14
+msgid "Discount Code"
+msgstr "Codice di Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/new_discount.php:38
+msgid "Add New Discount Code"
+msgstr "Aggiungi nuovo Codice di Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/update_discount.php:16
+#, fuzzy
+msgid "The discount "
+msgstr "Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/use_coupon_code.php:22
+#, fuzzy
+msgid "<p id=\"event_espresso_valid_coupon\"><strong>You are using discount code:</strong> "
+msgstr "<strong>Scegli un'Opzione:</strong>"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/use_coupon_code.php:31
+msgid "0.00"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/use_coupon_code.php:42
+msgid "<p id=\"event_espresso_invalid_coupon\"><font color=\"red\">Sorry, that coupon code is invalid or expired.</font></p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/coupon-management/use_coupon_code.php:52
+msgid "Do you have a promo code?"
+msgstr "Hai un Codice Promozionale?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:18
+#, fuzzy
+msgid "New Event"
+msgstr "Nuovo Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:23
+#, fuzzy
+msgid "Are you sure you want to cancel "
+msgstr "Sei sicuro di voler cancellare la voce di"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:24
+msgid "Cancel"
+msgstr "Annulla"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:27
+msgid "Submit New Event"
+msgstr "Inserisci Nuovo Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:46
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:150
+#, fuzzy
+msgid "Is this an active event? "
+msgstr "Questo è un evento attivo? "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:47
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:151
+#, fuzzy
+msgid "Is this an on-going event? "
+msgstr "Questo è un evento attivo? "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:48
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:152
+#, fuzzy
+msgid "Display  description? "
+msgstr "Descrizione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:49
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:153
+msgid "Attendee Limit"
+msgstr "Limite Partecipanti"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:50
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:154
+#, fuzzy
+msgid "leave blank for unlimited"
+msgstr "(lascia vuoto per numero illimitato)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:51
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:155
+msgid "Allow group registrations?"
+msgstr "Permetti la registrazione di gruppi?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:52
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:156
+#, fuzzy
+msgid "Max Group Registrants"
+msgstr "Totale Iscritti Gruppo:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:61
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:165
+#, fuzzy
+msgid "Member Options"
+msgstr "Salva Opzioni"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:75
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:179
+#, fuzzy
+msgid "Event Category"
+msgstr "Categoria Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:88
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:192
+#, fuzzy
+msgid "Event to Post"
+msgstr "Eventi"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:92
+#, fuzzy
+msgid "Create a post for this event?"
+msgstr "Permetti codici promozionali per questo evento?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:105
+#, fuzzy
+msgid "Category"
+msgstr "Aggiorna Categoria"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:106
+msgid "Author"
+msgstr "Autore"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:107
+msgid "Tags"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:108
+msgid " Post templates are stored in the \"templates\" directory of the plugin."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:119
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:234
+#, fuzzy
+msgid "Event Promotions"
+msgstr "Eventi"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:122
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:238
+#, fuzzy
+msgid "Early Registration Discount"
+msgstr "Paga la Quota di Registrazione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:124
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:240
+msgid "End Date:"
+msgstr "Data fine:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:126
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:241
+#, fuzzy
+msgid "Percentage:"
+msgstr "Percentuale"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:130
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:245
+#, fuzzy
+msgid "(Leave blank if not applicable)"
+msgstr "(lascia vuoto per numero illimitato)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:132
+#, fuzzy
+msgid "Allow discount codes? "
+msgstr "Codice di Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:162
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:279
+#, fuzzy
+msgid "Event Questions"
+msgstr "Descrizione Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:166
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:283
+#, fuzzy
+msgid "Question Groups"
+msgstr "Descrizione:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:194
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:311
+#, fuzzy
+msgid "Groupon Options"
+msgstr "Opzioni"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:209
+#, fuzzy
+msgid "Calendar Options"
+msgstr "Opzioni Calendario"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:212
+#, fuzzy
+msgid "It looks like you are using the \"<a href=\"http://wordpress.org/extend/plugins/calendar/\" target=\"_blank\" title=\"Calendar developed and supported by Kieran O'Shea\">Calendar</a>\" plugin. Would you like to add this event to the calendar?"
+msgstr "Sembra che tu stia usando \"<a href=\"http://wordpress.org/extend/plugins/calendar/\" target=\"_blank\" title=\"Calendar plugin sviluppato e supportato da Kieran O\\'Shea\">Calendar</a>\". Vuoi aggiungere questo evento al calendario?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:213
+msgid "Choose a <a href=\"admin.php?page=calendar-categories\">Calendar Category</a>:"
+msgstr "Scegli una <a href=\"admin.php?page=calendar-categories\">Categoria Calendario</a>:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:223
+#, fuzzy
+msgid "Add to Calendar:"
+msgstr "Aggiungi Evento al Calendario"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:243
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:332
+#, fuzzy
+msgid "Event Title"
+msgstr "Orari Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:250
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:339
+msgid "Unique Event Identifier:"
+msgstr "Unico Identificatore Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:253
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:342
+#, fuzzy
+msgid "Get Shortcode"
+msgstr "Shortcode per Pagina:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:254
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:343
+msgid "Get URL"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:287
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:376
+#, fuzzy
+msgid "Event Date/Times"
+msgstr "Orari Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:294
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:381
+#, fuzzy
+msgid "Registration / Event Dates"
+msgstr "Paga la Quota di Registrazione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:295
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:382
+#, fuzzy
+msgid "Event Times"
+msgstr "Orari Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:300
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:386
+#, fuzzy
+msgid "Registration Dates"
+msgstr "Data di iscrizione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:300
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:386
+#, fuzzy
+msgid "Registration Start:"
+msgstr "Inizio Iscrizione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:301
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:387
+#, fuzzy
+msgid "Registration End:"
+msgstr "Fine Iscrizione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:303
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:389
+#, fuzzy
+msgid "Event Dates"
+msgstr "Date Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:303
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:389
+#, fuzzy
+msgid "Event Start Date"
+msgstr "Data Inizio Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:304
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:390
+#, fuzzy
+msgid "Event End Date"
+msgstr "Data Fine Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:316
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:402
+#, fuzzy
+msgid "Event Pricing"
+msgstr "Costo Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:337
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:422
+#, fuzzy
+msgid "Event Location"
+msgstr "Luogo Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:344
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:427
+msgid "Physical Location"
+msgstr "Localita Fisica"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:345
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:428
+#, fuzzy
+msgid "Virtual Location"
+msgstr "Localita Virtuale:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:351
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:433
+msgid "Full Address (country included):"
+msgstr "Indirizzo Completo"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:356
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:438
+msgid "Phone:"
+msgstr "Telefono:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:361
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:447
+#, fuzzy
+msgid "URL of Event:"
+msgstr "URL dell'Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:366
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:452
+#, fuzzy
+msgid "Call in Number:"
+msgstr "Chiama al Numero:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:378
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:464
+#, fuzzy
+msgid "Email Confirmation:"
+msgstr "<h2>Conferma Email</h2"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_new_event.php:387
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:473
+msgid "Send custom confirmation emails for this event?"
+msgstr "Spedire email di conferma personalizzata per questo evento?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_to_calendar.php:25
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/copy_event.php:129
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/insert_event.php:189
+msgid "The event"
+msgstr "L'evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_to_calendar.php:25
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/copy_event.php:129
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/insert_event.php:192
+msgid "has been added."
+msgstr "è stato aggiunto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/add_to_calendar.php:27
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/copy_event.php:131
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/insert_event.php:194
+msgid "There was an error in your submission, please try again. The event was not saved!"
+msgstr "C'è stato un errore nella tua conferma, per favore riprova. L'evento non è stato salvato!"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:93
+msgid "Quick Overview"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:100
+msgid "View Event"
+msgstr "Vedi Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:104
+msgid "Are you sure you want to copy "
+msgstr "Sei sicuro di voler copiare la voce di"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:105
+msgid "Duplicate Event"
+msgstr "Duplica Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:119
+msgid "Current Status:"
+msgstr "Stato Attuali"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:122
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_list.php:39
+#, fuzzy
+msgid "Attendees"
+msgstr "Partecipanti:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:129
+#, fuzzy
+msgid "Are you sure you want to delete "
+msgstr "Sei sicuro di voler cancellare la voce di"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:130
+#, fuzzy
+msgid "Delete Event"
+msgstr "Cancella questo Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:133
+msgid "Update Event"
+msgstr "Aggiorna Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:218
+#, fuzzy
+msgid "Update post for this event?"
+msgstr "Unico URL per questo evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:221
+#, fuzzy
+msgid "Category:"
+msgstr "Categoria Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:222
+msgid "Author:"
+msgstr "Autore:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:223
+msgid "Tags:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:224
+msgid "Post templates are stored in the \"templates\" directory of the plugin."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:247
+#, fuzzy
+msgid "<strong>Allow discount codes?</strong> "
+msgstr "<strong>Scegli un'Opzione:</strong>"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/edit_event.php:442
+#, fuzzy
+msgid "Google Map Link (for email):"
+msgstr "Google Map Link:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:10
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:15
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:27
+msgid "Start Time"
+msgstr "Ora Inizio"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:10
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:27
+msgid "End Time"
+msgstr "Ora Fine"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:15
+msgid "End Time:"
+msgstr "Ora Fine:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:21
+msgid "Add Additional Time"
+msgstr "Aggiungi un Orario Aggiuntivo"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:43
+msgid "Standard Pricing"
+msgstr "Prezzo Standard"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:52
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:88
+msgid "Price"
+msgstr "Prezzo"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:54
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:69
+msgid "Surcharge:"
+msgstr "Ricarico"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:55
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:73
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:88
+#, fuzzy
+msgid "Remove Attendee"
+msgstr "Nessun Partecipante"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:65
+msgid "Price:"
+msgstr "Prezzo:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:79
+#, fuzzy
+msgid "(enter 0.00 for free events, enter 2 place decimal i.e. "
+msgstr "(lascia vuoto per gli eventi gratuiti, inserisci 2 decimali es. 7.00)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:80
+msgid "Add A Price"
+msgstr "Aggiungi un costo"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:88
+msgid "Surcharge"
+msgstr "Ricarico"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_functions.php:126
+#, fuzzy
+msgid "No Categories"
+msgstr "Categorie Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_list.php:8
+msgid "Current Events"
+msgstr "Eventi Attuali"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_list.php:15
+msgid "Import CSV"
+msgstr "Importa CSV"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_list.php:18
+msgid "Add New Event"
+msgstr "Aggiungi nuovo Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_list.php:36
+#, fuzzy
+msgid "Event Start"
+msgstr "Data Inizio Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_list.php:37
+#, fuzzy
+msgid "Registration Start"
+msgstr "Paga la Quota di Registrazione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_list.php:80
+msgid ""
+"<h2>Event Identifier</h2>\n"
+"      <p>The unique ID can be used in individual pages using:<br />\n"
+"\t  <span  class=\"updated fade\">[SINGLEEVENT single_event_id=\""
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_list.php:128
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/index.php:69
+msgid ""
+"<h2>Coupon/Promo Code</h2>\n"
+"      <p>This is used to apply discounts to events.</p>\n"
+"      <p>A coupon or promo code could can be anything you want. For example: Say you have an event that costs "
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_list.php:133
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/index.php:74
+msgid ""
+"<h2>Event Identifier</h2>\n"
+"      <p>This should be a unique identifier for the event. Example: \"Event1\" (without qoutes.)</p>\n"
+"      <p>The unique ID can also be used in individual pages using the [SINGLEEVENT single_event_id=\"Unique Event ID\"] shortcode.</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/event_list.php:138
+msgid ""
+"<h2>Email Confirmations</h2>\n"
+"  <p>For customized confirmation emails, the following tags can be placed in the email form and they will pull data from the database to include in the email.</p>\n"
+"  <p>[fname], [lname], [phone], [event],[description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link]</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/index.php:11
+msgid "Event Management"
+msgstr "Gestione Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/insert_event.php:184
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/update_event.php:194
+msgid "There was error finding a post template. Please verify your post templates are available."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/insert_event.php:192
+#, fuzzy
+msgid "Edit this event?"
+msgstr "Modifica questo Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/event-management/update_event.php:198
+msgid "Event details saved for"
+msgstr "Dettagli dell'Evento salvati per"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/edit_group.php:21
+#, fuzzy
+msgid "Edit Group"
+msgstr "Modifica Sconto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/edit_group.php:24
+msgid "Edit this group using the form below."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/edit_group.php:25
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/edit_group.php:27
+#, fuzzy
+msgid "Group Name:"
+msgstr "Nome Gruppo:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/edit_group.php:27
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/edit_group.php:31
+#, fuzzy
+msgid "Group Identifier:"
+msgstr "Identificatore Gruppo:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/edit_group.php:29
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/edit_group.php:33
+msgid "Description:"
+msgstr "Descrizione:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/index.php:8
+msgid "Manage Additional Questions"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/index.php:37
+#, fuzzy
+msgid "Current Questions"
+msgstr "Descrizione Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/index.php:44
+#, fuzzy
+msgid "Add New Question"
+msgstr "Aggiungi nuovo Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/index.php:73
+#, fuzzy
+msgid "Question"
+msgstr "Descrizione:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/index.php:76
+msgid "Values"
+msgstr "Valori"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/index.php:79
+msgid "Type"
+msgstr "Tipo"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/index.php:82
+msgid "Required"
+msgstr "Obbligatorio"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/index.php:123
+#, fuzzy
+msgid "Delete Question"
+msgstr "Descrizione Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/delete_group.php:31
+#, fuzzy
+msgid "Question Groups have been successfully deleted."
+msgstr "Gli Sconti sono stati cancellati con successo dal database."
+
+# Advanced Events Registration Pro translation file
+# Copyright (C) 2010 Seth Shoultes
+# This file is distributed under the same license as the PACKAGE package.
+# Seth Shoultes <seth@smartwebutah.com>, 2010
+# For information on translating this plugin, please refer to http://codex.wordpress.org/Translating_WordPress
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/edit_group.php:21
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/index.php:47
+msgid "Add New Group"
+msgstr "Aggiungi Nuovo Gruppo"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/edit_group.php:26
+#, fuzzy
+msgid "Group Information"
+msgstr "Informazioni Luogo Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/edit_group.php:29
+msgid "Group Order:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/edit_group.php:38
+#, fuzzy
+msgid "Questions"
+msgstr "Descrizione:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/index.php:8
+msgid "Manage Additional Question Groups"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/index.php:41
+#, fuzzy
+msgid "Current Groups"
+msgstr "Eventi Attuali"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/index.php:78
+#, fuzzy
+msgid "Group Name"
+msgstr "Nome Gruppo:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/index.php:82
+#, fuzzy
+msgid "Indentifier"
+msgstr "Identificatore Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/index.php:85
+msgid "Description"
+msgstr "Descrizione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/index.php:88
+msgid "Order"
+msgstr "Ordine"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/index.php:129
+#, fuzzy
+msgid "Delete Question Group"
+msgstr "Cancella Domanda Gruppo:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/insert_group.php:32
+#, fuzzy
+msgid "The group has been added."
+msgstr "Il gruppo è stato aggiunto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/insert_group.php:35
+#, fuzzy
+msgid "There was an error in your submission, please try again. The group was not saved!"
+msgstr "C'è stato un errore nella tua conferma, per favore riprova. L'evento non è stato salvato!"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/new_group.php:13
+msgid "Add new groups using the form below."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/groups/new_group.php:29
+#, fuzzy
+msgid "Add Questions:"
+msgstr "Aggiungi Domanda:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/delete_question.php:31
+#, fuzzy
+msgid "Questions have been successfully deleted."
+msgstr "Gli Sconti sono stati cancellati con successo dal database."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/edit_question.php:21
+#, fuzzy
+msgid "Edit Question"
+msgstr "Mdifica Domanda:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/edit_question.php:26
+msgid "Edit the question using the form below.  By default all participants will be asked for their first name, last name, and email address."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/edit_question.php:30
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/new_question.php:11
+#, fuzzy
+msgid "Question:"
+msgstr "Descrizione:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/edit_question.php:37
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/new_question.php:13
+msgid "Type:"
+msgstr "Tipo"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/edit_question.php:41
+msgid "Text"
+msgstr "Testo"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/edit_question.php:42
+msgid "Text Area"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/edit_question.php:43
+#, fuzzy
+msgid "Single"
+msgstr "Evento Singolo"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/edit_question.php:44
+msgid "Drop Down"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/edit_question.php:45
+msgid "Multiple"
+msgstr "Multiplo"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/edit_question.php:50
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/new_question.php:22
+msgid "Values:"
+msgstr "Valori:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/edit_question.php:57
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/new_question.php:24
+msgid "Required:"
+msgstr "Obbligatorio"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/edit_question.php:75
+msgid "Nothing found!"
+msgstr "Non Trovato!!"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/new_question.php:7
+#, fuzzy
+msgid "Add New Questions"
+msgstr "Aggiungi nuova Domanda"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/form-builder/questions/new_question.php:10
+msgid "Add questions using the form below.  By default all participants will be asked for their first name, last name, and email address."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:397
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:656
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:669
+msgid "No country selected"
+msgstr "Nessuna nazione selezionata"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:933
+msgid "New @ Shoultes.net"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:948
+msgid "Helpful Plugin Links"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:953
+msgid "Installation &amp; Usage Guide"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:954
+#, fuzzy
+msgid "Frequently Asked Questions"
+msgstr "Domande Frequenti FAQ:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:955
+msgid "Bug Submission Form"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:956
+msgid "Feature Request Form"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:971
+msgid ""
+"<h2>Email Confirmations</h2>\n"
+"  <p>For customized confirmation emails, the following tags can be placed in the email form and they will pull data from the database to include in the email.</p>\n"
+"  <p>[fname], [lname], [phone], [event], [event_link], [event_url], [description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link]</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:991
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:993
+msgid "Event Espresso must be configured. Go to"
+msgstr "Event Espresso deve essere configurato. Vai a"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:991
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:993
+#, fuzzy
+msgid "the Organization Settings page"
+msgstr "Setting Organizzazione "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:991
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:993
+msgid "to configure the plugin \"Page Settings.\""
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:1000
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:1002
+msgid "Event Espresso attendee data needs to be updated. Please visit the "
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:1000
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:1002
+msgid "Support page"
+msgstr "Supporto"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:1000
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/admin.php:1002
+msgid "to configure update the attendee information."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/email.php:106
+msgid "has signed up on-line for"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/email.php:107
+#, fuzzy
+msgid "Email address is"
+msgstr "Indirizzo Email:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/email.php:109
+msgid "City:"
+msgstr "Città:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/email.php:110
+#, fuzzy
+msgid "State:"
+msgstr "Nazione"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/email.php:111
+msgid "Zip:"
+msgstr "CAP:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/email.php:327
+#, fuzzy
+msgid "Event Cancellation Notice"
+msgstr "Notifica Cancellazione Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/email.php:328
+msgid " has been cancelled."
+msgstr "è stato cancellato."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/email.php:329
+msgid "For more information, please email "
+msgstr "Per ulteriori informazioni, vi preghiamo di scrivere a "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:43
+msgid "Add More Attendees? (click to toggle, limit "
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:45
+#, fuzzy
+msgid "Add an Additonal Attendee"
+msgstr "Partecipanti aggiuntivi?"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:116
+msgid "ONGOING"
+msgstr "IN CORSO"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:119
+msgid "EXPIRED"
+msgstr "SCADUTO"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:122
+msgid "ACTIVE"
+msgstr "ATTIVO"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:125
+#, fuzzy
+msgid "NOT_ACTIVE"
+msgstr "NON ATTIVO"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:128
+msgid "DELETED"
+msgstr "CANCELLATO"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:221
+msgid "EVENT FULL"
+msgstr "CORSO COMPLETO"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:284
+msgid "NO DATE SUPPLIED"
+msgstr "DATA NON FORNITA"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:324
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:327
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:458
+msgid "Free Event"
+msgstr "Evento Gratuito"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:421
+#, fuzzy
+msgid "Choose an Option: "
+msgstr "<strong>Scegli un'Opzione:</strong>"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:430
+msgid " Early Pricing"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:449
+msgid " (including "
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:454
+msgid "Price: "
+msgstr "Prezzo:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:459
+#, fuzzy
+msgid "free event"
+msgstr "Evento Gratuito"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:471
+#, fuzzy
+msgid "Start Time: "
+msgstr "Ora Inizio: "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:474
+#, fuzzy
+msgid "End Time: "
+msgstr "Ora Fine:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:479
+msgid "Choose an Event Time:"
+msgstr "Scegli Orari Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:515
+#, fuzzy
+msgid "Start Time: "
+msgstr "Ora Inizio"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/functions/main.php:517
+#, fuzzy
+msgid "<br />End Time: "
+msgstr "Ora Fine:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/add_attendees_to_db.php:133
+msgid "Form Questions:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/add_attendees_to_db.php:196
+msgid "This is a free event. Details have been sent to your email."
+msgstr "Questo è un evento gratuito. I dettagli ti sono stati spediti via email. "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/add_attendees_to_db.php:197
+msgid "Your Registration data has been added to our records."
+msgstr "La tua iscrizione è stata registrata"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_gateways.php:9
+#, fuzzy
+msgid "Manage Payment Gateways"
+msgstr "Categorie Evento:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_gateways.php:33
+msgid "<li><a href=\"https://www.e-junkie.com/ecom/gb.php?c=cart&i=ESPRESSO-AUTHNET-SIM-GTWY&cl=113214&ejc=2\" target=\"ej_ejc\" class=\"ec_ejc_thkbx\" onClick=\"javascript:return EJEJC_lc(this);\"><img src=\""
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_gateways.php:35
+msgid "<li class=\"red_alert\">It looks like your Authorize.net files are missing. If you did not recieve these files, please contact <a href=\"mailto:support@eventespresso.com\">support@eventespresso.com</a></li>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_gateways.php:53
+msgid "Install Payment Gateways"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_gateways.php:65
+msgid "Your gateways have been installed."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_gateways.php:77
+msgid "Please set the permissions to 775 on the following directory."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_gateways.php:83
+msgid "Your gateway files have not been moved."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_gateways.php:99
+msgid ""
+"<h2>Button Image URL</h2>\n"
+"      <p>A default payment button is provided. A custom payment button may be used, choose your image or upload a new one, and just copy the \"file url\" here (optional.)</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_gateways.php:103
+msgid ""
+"<h2>By-passing the Confirmation Page</h2>\n"
+"      <p>This will allow you to send your customers directly to the payment gateway of your choice.</p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:228
+#, fuzzy
+msgid "<p><strong>You are using discount code:</strong> "
+msgstr "<strong>Scegli un'Opzione:</strong>"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:236
+msgid "<p><font color=\"red\">Sorry, that coupon code is invalid or expired.</font></p>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:247
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:124
+msgid "Please verify your registration details:"
+msgstr "Per favore verifica i dettagli della tua registrazione:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:250
+msgid "Event Name/Price:"
+msgstr "Nome/Costo Evento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:254
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:141
+msgid "Attendee Name:"
+msgstr "Nome Partecipante:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:258
+msgid "Email Address:"
+msgstr "Indirizzo Email:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:310
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:233
+msgid "Please check your email for payment information."
+msgstr "Grazie per aver scelto ArsEtMedia.<BR>Il tuo pagamento è in lavorazione.<BR>Controlla la tua posta elettronica per i dettagli di pagamento."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:375
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:288
+msgid "<br><br><strong>Thank You "
+msgstr "<br><br><strong>Grazie "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:375
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:288
+#, fuzzy
+msgid " for registering for "
+msgstr " per esserti iscritto al "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:377
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:290
+msgid "Our records indicate you have paid"
+msgstr "Il tuo pagamento è stato completato."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:378
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:291
+msgid "Our records indicate your payment is pending."
+msgstr "Il tuo pagamento è in lavorazione."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:378
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:291
+msgid "Amount pending:"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:386
+msgid "Payment By Credit Card, Debit Card or Pay Pal Account"
+msgstr "Pagamento tramite Carta di Credito, Pre-Pagata, Bancomat o Account Pay Pal"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:387
+msgid "(a PayPal account is not required to pay by credit card)."
+msgstr "(Non è necessario un account PayPal per pagare con carta di credito)"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:388
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:297
+msgid "Payment will be in the amount of"
+msgstr "Il pagamento è di "
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page-tier.php:389
+msgid "PayPal Payments will be sent to:"
+msgstr "I Pagamenti PayPal saranno mandati a:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:117
+msgid "Free"
+msgstr "Gratuito"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:129
+msgid "Event Name:"
+msgstr "Corso:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:135
+msgid "Type/Price:"
+msgstr "Prezzo:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:173
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:307
+#, fuzzy
+msgid "<strong id=\"event_espresso_no_payment\">No Payment Necessary</strong>"
+msgstr "<strong>Costo:</strong>"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:176
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:310
+msgid "No payment gateways installed. Please install at least one payment gateway."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:217
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:348
+msgid "<h3>No payment gateways installed. Please install at least one payment gateway.</h3>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/payment_page.php:301
+msgid "Payment Options"
+msgstr "Opzioni Pagamento"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/process_payments.php:32
+msgid "Problem With Your Website Payment IPN"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/process_payments.php:33
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/process_payments.php:40
+msgid "The IPN for "
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/includes/process-registration/process_payments.php:39
+msgid "Website Payment IPN Not Setup"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/attendee_list.php:59
+msgid "Attendee Listing For:"
+msgstr "Lista dei Partecipanti per:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/event_list.php:92
+msgid "Date:"
+msgstr "Data:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/event_list.php:109
+msgid "Available Spaces:"
+msgstr "Posti Disponibili:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/event_list.php:111
+msgid "Register Online"
+msgstr "Iscriviti Adesso"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/event_post.php:65
+msgid "View Map"
+msgstr "Vedi Mappa"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/event_post.php:65
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/event_post.php:71
+#, fuzzy
+msgid "Register"
+msgstr "Registrati Online"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/registration_page.php:160
+msgid "We are sorry but this event has reached the maximum number of attendees!"
+msgstr "Siamo spiacenti, ma questo evento ha raggiunto il numero massimo di partecipanti!"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/registration_page.php:161
+msgid "Please check back in the event someone cancels."
+msgstr "Per favore torna agli eventi in caso qualcuno si cancelli."
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/registration_page.php:162
+msgid "Current Number of Attendees:"
+msgstr "Attuale numero di Partecipanti:"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/registration_page.php:169
+#, fuzzy
+msgid "We are sorry but this event is not yet open for registration."
+msgstr "Siamo spiacenti, ma questo evento ha raggiunto il numero massimo di partecipanti!"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/registration_page.php:170
+msgid "You will be able to register starting "
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/registration_page.php:178
+msgid "We are sorry but registration for this event is now closed."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/registration_page.php:179
+msgid "Please <a href=\"contact\" title=\"contact us\">contact us</a> if you would like to know if spaces are still available."
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/registration_page.php:215
+msgid "<h3 class=\"expired_event\">This event has passed.</h3>"
+msgstr ""
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/registration_page.php:225
+msgid "Personal Information"
+msgstr "Informazioni Personali"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/registration_page.php:286
+msgid "Anti-Spam Measure: Please enter the following phrase"
+msgstr "Anti-Spam: Digita le 2 parole che appaiono in basso"
+
+#: C:\ALE\ARSETMEDIA\event-espresso.3.0.11/templates/registration_page.php:304
+#, fuzzy
+msgid "<h3>This event has expired or is no longer available.</h3>"
+msgstr "Spiacenti, questo evento è scaduto o non è più disponibile."
+
+#, fuzzy
+#~ msgid "Event Questions -"
+#~ msgstr "Descrizione Evento:"
+
+#, fuzzy
+#~ msgid "Prezzo: "
+#~ msgstr "Prezzo:"
+
+#, fuzzy
+#~ msgid "Ora Inizio:</span> "
+#~ msgstr "Orario Inizio"
+
+#, fuzzy
+#~ msgid "Ora Inizio: "
+#~ msgstr "Organizzazione via 2:"
+
+#, fuzzy
+#~ msgid "<br />Ora Fine: "
+#~ msgstr "Orario Finale:"
+
+#, fuzzy
+#~ msgid "Descrizione:"
+#~ msgstr "Descrizione:"
+
+#, fuzzy
+#~ msgid "Discount Codes"
+#~ msgstr "Codice di Sconto"
+
+#~ msgid ""
+#~ "Payment must be made to complete registration. Please click the button "
+#~ "below to pay for your registration."
+#~ msgstr ""
+#~ "Per il completamento della registrazione deve essere effettuato il "
+#~ "pagamento. Per favore clicca sul bottone sotto per pagare la tua "
+#~ "registrazione."
+
+#~ msgid "Add New Dicount Code"
+#~ msgstr "Aggiungi nuovo Codice di Sconto"
+
+#~ msgid "Invalid E-mail ID"
+#~ msgstr "ID E-Mail non valido"
+
+#~ msgid "Please enter your first name."
+#~ msgstr "Per favore inserisci il tuo nome."
+
+#~ msgid "Please enter your last name."
+#~ msgstr "Per favore inserisci il tuo cognome."
+
+#~ msgid "Please Enter your Email address"
+#~ msgstr "Per favore inserisci il tuo indirizzo Email"
+
+#~ msgid "Please enter your email address."
+#~ msgstr "Per favore inserisci il tuo indirizzo email."
+
+#~ msgid "Please enter your phone number."
+#~ msgstr "Per favore inserisci il tuo numero di telefono."
+
+#~ msgid "Please enter your address."
+#~ msgstr "Per favore inserisci il tuo indirizzo."
+
+#~ msgid "Please enter your city."
+#~ msgstr "Per favore inserisci la tua città."
+
+#~ msgid "Please enter your state."
+#~ msgstr "Per favore inserisci la tua Nazione."
+
+#~ msgid "Please enter your zip code."
+#~ msgstr "Per favore inserisci il tuo CAP."
+
+#, fuzzy
+#~ msgid "Please enter your country."
+#~ msgstr "Per favore inserisci la tua città."
+
+#, fuzzy
+#~ msgid "Please select your payment method."
+#~ msgstr "Per favore inserisci il tuo cognome."
+
+#~ msgid "The following fields need to be completed before you can submit."
+#~ msgstr "I seguenti campi devono essere riempiti prima di poter confermare."
+
+#, fuzzy
+#~ msgid "Organization Vat Number:"
+#~ msgstr "Organizzazione via 2:"
+
+#~ msgid "Address/Street/Number:"
+#~ msgstr "Indirizzo/Via/Numero:"
+
+#~ msgid "City/Town/Village:"
+#~ msgstr "Città"
+
+#~ msgid "State/County/Province:"
+#~ msgstr "Provincia:"
+
+#~ msgid "<p align=\"left\"><strong>Start Time:</strong> "
+#~ msgstr "<p align=\"left\"><strong>Ora d'inizio:</strong> "
+
+#~ msgid "<strong>Choose a Start Time:</strong> "
+#~ msgstr "<strong>Scegli un orario di inizio:</strong> "
+
+#~ msgid "<strong>Price:</strong>"
+#~ msgstr "<strong>Costo:</strong>"
+
+#~ msgid "The # of people who will be attending IN ADDITION TO yourself."
+#~ msgstr "Il n. di persone che parteciperanno oltre a te stesso."
+
+#, fuzzy
+#~ msgid "<strong>Choose payment method:</strong> "
+#~ msgstr "<strong>Scegli un'Opzione:</strong>"
+
+#, fuzzy
+#~ msgid "Event Registration"
+#~ msgstr "Widget Registrazione Eventi"
+
+#~ msgid "ACTIVE EVENT"
+#~ msgstr "EVENTO ATTIVO"
+
+#~ msgid " Attendees:"
+#~ msgstr "Partecipanti:"
+
+#~ msgid "Spaces Available:"
+#~ msgstr "Posti Disponibili:"
+
+#, fuzzy
+#~ msgid "Event Full"
+#~ msgstr "ID Evento"
+
+#~ msgid "Organization Name <span>*</span>:"
+#~ msgstr "Nome Organizzazione <span>*</span>:"
+
+#~ msgid "Organization Street 1 <span>*</span>:"
+#~ msgstr "Organizzazione via 1 <span>*</span>:"
+
+#~ msgid "Organization City <span>*</span>:"
+#~ msgstr "Città Organizzazione <span>*</span>:"
+
+#~ msgid "Organization State <span>*</span>:"
+#~ msgstr "Stato Organizzazione <span>*</span>:"
+
+#~ msgid "Organization Zip Code <span>*</span>:"
+#~ msgstr "Organizzazione CAP:"
+
+#, fuzzy
+#~ msgid "Organization Country<span>*</span>:"
+#~ msgstr "Città Organizzazione <span>*</span>:"
+
+#~ msgid ""
+#~ "<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=p/mer/"
+#~ "express_return_summary-outside\" title=\"Auto Return Overview\" target="
+#~ "\"_blank\">Auto Return URL</a> (used for return to make payments):"
+#~ msgstr ""
+#~ "<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=p/mer/"
+#~ "express_return_summary-outside\" title=\"Auto Return Overview\" target="
+#~ "\"_blank\">Auto Return URL</a> (used for return to make payments):"
+
+#~ msgid ""
+#~ "Do You Want To Send Payment Confirmation Emails? (This option must be "
+#~ "enable to send custom mails in events)"
+#~ msgstr ""
+#~ "Vuoi spedire Email di conferma? (Questa opzione deve essere abilitata per "
+#~ "spedire email personalizzate per gli eventi)"
+
+#~ msgid "Email Body:"
+#~ msgstr "Corpo dell'Email:"
+
+#, fuzzy
+#~ msgid "Not active event"
+#~ msgstr "Totale Eventi Attivi"
+
+#, fuzzy
+#~ msgid "Start Payment"
+#~ msgstr "Data Inizio"
+
+#, fuzzy
+#~ msgid "Please retry or contact organization."
+#~ msgstr "Per favore inserisci il tuo cognome."
+
+#~ msgid "Export Current Attendee List To Excel"
+#~ msgstr "Esporta Lista Attuale Partecipanti su Excel"
+
+#~ msgid "Are you sure you want to delete record for"
+#~ msgstr "Sei sicuro di voler cancellare la voce di"
+
+#~ msgid "No Record Found"
+#~ msgstr "Nessuna Corrispondenza Trovata"
+
+#~ msgid "Cost"
+#~ msgstr "Costo"
+
+#~ msgid "End Date"
+#~ msgstr "Data finale"
+
+#~ msgid "Export To Excel"
+#~ msgstr "Esporta su Excel"
+
+#~ msgid "Attendee Management"
+#~ msgstr "Gestione Partecipante"
+
+#, fuzzy
+#~ msgid "Attendee #"
+#~ msgstr "Partecipanti:"
+
+#~ msgid "Add An Event"
+#~ msgstr "Aggiungi un Evento"
+
+#~ msgid "Event Description:"
+#~ msgstr "Descrizione Evento:"
+
+#~ msgid "<p>This is a sample description in HTML</p>"
+#~ msgstr "<p>Questa è una descrizione campione in HTML</p>"
+
+#~ msgid "Do you want to send a custom confirmation email?"
+#~ msgstr "Vuoi spedire una Email di conferma personalizzata? "
+
+#~ msgid "Custom Confirmation Email For This Event:"
+#~ msgstr "Conferma Email Personalizzata per questo Evento:"
+
+#~ msgid "Event Date(s):"
+#~ msgstr "Data(e) Evento:"
+
+#~ msgid "from"
+#~ msgstr "da"
+
+#~ msgid "to"
+#~ msgstr "a"
+
+#~ msgid "Add A Time"
+#~ msgstr "Aggiungi un Orario"
+
+#~ msgid "(leave blank for free events, enter 2 place decimal i.e. 7.00)"
+#~ msgstr ""
+#~ "(lascia vuoto per gli eventi gratuiti, inserisci 2 decimali es. 7.00)"
+
+#~ msgid "(leave blank for unlimited attendees)"
+#~ msgstr "(lascia vuoto per numero illimitato di partecipanti)"
+
+#~ msgid "Allow payment for more than one person at a time?"
+#~ msgstr "Permetti pagamenti per più di una persona alla volta?"
+
+#~ msgid "Max Number of Additional Attendees:"
+#~ msgstr "Numero Massimo di Partecipanti addizionali:"
+
+#~ msgid "Is this event active?"
+#~ msgstr "Questo evento è attivo?"
+
+#~ msgid "Y"
+#~ msgstr "S"
+
+#~ msgid "N"
+#~ msgstr "N"
+
+#~ msgid "Event Discounts:"
+#~ msgstr "Codici di Sconto:"
+
+#~ msgid "Copy This Event"
+#~ msgstr "Copia questo Evento"
+
+#, fuzzy
+#~ msgid "Phone: "
+#~ msgstr "Telefono:"
+
+#~ msgid "PLEASE UPDATE THIS EVENT"
+#~ msgstr "PER FAVORE AGGIORNA QUESTO EVENTO"
+
+#~ msgid "Custom Confirmation Mail:"
+#~ msgstr "Conferma Email Personalizzata:"
+
+#~ msgid "Export Payment List to Excel"
+#~ msgstr "Esporta Lista Pagamento su Excel"
+
+#~ msgid "Event Identifier:"
+#~ msgstr "Identificatore Evento:"
+
+#~ msgid "Start time:"
+#~ msgstr "Orario Inizio:"
+
+#~ msgid "End time:"
+#~ msgstr "Orario finale:"
+
+#, fuzzy
+#~ msgid "Allow payment for more than one person at a time? (max # people "
+#~ msgstr "Permetti pagamenti per più di una persona alla volta?"
+
+#~ msgid "Event Categories:"
+#~ msgstr "Categorie Evento:"
+
+#, fuzzy
+#~ msgid "Category Shortcode for"
+#~ msgstr "Shortcode per Pagina:"
+
+#~ msgid "No category selected"
+#~ msgstr "Nessuna categoria selezionata"
+
+#~ msgid "Allow discount codes for this event?"
+#~ msgstr "Permetti codici di sconto per questo evento?"
+
+#~ msgid "Event Discount Codes:"
+#~ msgstr "Codici di Sconto Evento:"
+
+#, fuzzy
+#~ msgid "Discount Code:"
+#~ msgstr "Codice di Sconto:"
+
+#, fuzzy
+#~ msgid "discount"
+#~ msgstr "Modifica Sconto"
+
+#~ msgid "No discount selected"
+#~ msgstr "Nessuno sconto selezionato"
+
+#~ msgid "Shortcode for Page:"
+#~ msgstr "Shortcode per Pagina:"
+
+#~ msgid "Edit"
+#~ msgstr "Modifica"
+
+#~ msgid "Custom Confirmation Email:"
+#~ msgstr "Conferma Email Personalizzata:"
+
+#, fuzzy
+#~ msgid "Prices:"
+#~ msgstr "Costo:"
+
+#, fuzzy
+#~ msgid "Event tax percentage"
+#~ msgstr "Gestione Evento"
+
+#, fuzzy
+#~ msgid "Promo:"
+#~ msgstr "da"
+
+#, fuzzy
+#~ msgid "Date"
+#~ msgstr "Data:"
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "Aggiorna Evento"
+
+#, fuzzy
+#~ msgid "Select"
+#~ msgstr "Cancella"
+
+#, fuzzy
+#~ msgid "No module selected"
+#~ msgstr "Nessuno sconto selezionato"
+
+#, fuzzy
+#~ msgid "Attendee Name/Email:"
+#~ msgstr "Nome Partecipante:"
+
+#, fuzzy
+#~ msgid "Total Price:"
+#~ msgstr "Costo:"
+
+#, fuzzy
+#~ msgid "Payment module has been updated"
+#~ msgstr "Le informazione dell'Evento sono state aggiornate!"
+
+#~ msgid " <h2>PayPal Currency Settings</h2"
+#~ msgstr "<h2>Impostazione Valuta PayPal</h2>"
+
+#~ msgid " <p><strong>Email Confirmations:</strong><br"
+#~ msgstr " <p><strong>Conferma Email:</strong><br"
+
+#~ msgid "<h2>Auto Return URL</h2"
+#~ msgstr "<h2>Auto Return URL</h2"
+
+#~ msgid "<h2>Cancel Return URL</h2"
+#~ msgstr "<h2>Cancel Return URL</h2"
+
+#~ msgid "<h2>Event Identifier</h2"
+#~ msgstr "<h2>Identificatore Eventi</h2"
+
+#~ msgid "<h2>Main Events Page</h2"
+#~ msgstr "<h2>Pagina Principale Eventi</h2"
+
+#~ msgid "<h2>Notify URL</h2"
+#~ msgstr "<h2>Notifiche URL</h2"
+
+#~ msgid "<h2>PayPal Sandbox</h2"
+#~ msgstr "<h2>PayPal Sandbox</h2"
+
+#~ msgid ""
+#~ "<span style=\"color: #090; padding-left:20px; font-weight:bold;\">ACTIVE "
+#~ "EVENT</span>"
+#~ msgstr ""
+#~ "<span style=\"color: #090; padding-left:20px; font-weight:bold;\">EVENTO "
+#~ "ATTIVO</span>"
+
+#~ msgid ""
+#~ "<span style=\"color: #F00; padding-left:30px; font-weight:bold;"
+#~ "\">EXPIRED</span>"
+#~ msgstr ""
+#~ "<span style=\"color: #F00; padding-left:30px; font-weight:bold;"
+#~ "\">SCADUTO</span>"
+
+#~ msgid ""
+#~ "<span style=\"color: #F00; padding-left:30px; font-weight:bold;\">NOT "
+#~ "ACTIVE</span>"
+#~ msgstr ""
+#~ "<span style=\"color: #F00; padding-left:30px; font-weight:bold;\">NON "
+#~ "ATTIVO</span>"
+
+#~ msgid "All areas marked by <span>*</span> must be filled in."
+#~ msgstr ""
+#~ "Tutte le aree contrassegnate da <span>*</span> devono essere compilate."
+
+#~ msgid "Custom PayPal Settings"
+#~ msgstr "Settaggi Personalizzati PayPal:"
+
+#~ msgid "Debugging"
+#~ msgstr "Debugging"
+
+#~ msgid "PayPal Currency"
+#~ msgstr "Valuta PayPal"
+
+#~ msgid ""
+#~ "Select the <a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/mc/"
+#~ "mc_receive-outside||https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/mc/"
+#~ "mc_convert-outside||https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/mc/"
+#~ "mc_wa-outside\" title=\"Receiving Money||Currency Conversion||Website "
+#~ "Payments\" target=\"_blank\">PayPal Currency</a> for your country:"
+#~ msgstr ""
+#~ "Seleziona il <a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/"
+#~ "mc/mc_receive-outside||https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/"
+#~ "mc/mc_convert-outside||https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/"
+#~ "mc/mc_wa-outside\" title=\"Receiving Money||Currency Conversion||Website "
+#~ "Payments\" target=\"_blank\">PayPal Currency</a> per la tua Nazione:"
+
+#~ msgid ""
+#~ "Typically payment@yourdomain.com - leave blank if you do not want to "
+#~ "accept paypal:"
+#~ msgstr ""
+#~ "Tipicamente pagamento@tuodominio.com - lascia vuoto se non vuoi accettare "
+#~ "PayPal:"
