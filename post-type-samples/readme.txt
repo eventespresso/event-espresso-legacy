@@ -1,0 +1,1 @@
+For more information about these files, please refer to http://eventespresso.com/forums/?p=761
