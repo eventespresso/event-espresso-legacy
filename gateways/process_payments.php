@@ -144,7 +144,7 @@ function event_espresso_txn() {
 		$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_prepare_event_link', $payment_data);
-		if(espresso_return_reg_id() == false || $payment_data['registration_id'] != espresso_return_reg_id()) die("Cheaters never win!");
+		if(espresso_return_reg_id() == false || $payment_data['registration_id'] != espresso_return_reg_id()) die(__('There was a problem finding your Registration ID', 'event_espresso'));
 		$payment_data = apply_filters('filter_hook_espresso_transactions_get_payment_data', $payment_data);
 		espresso_log::singleton()->log(array('file' => __FILE__, 'function' => __FUNCTION__, 'status' => 'Payment for: '. $payment_data['lname'] . ', ' . $payment_data['fname'] . '|| registration id: ' . $payment_data['registration_id'] . '|| transaction details: ' . $payment_data['txn_details']));
 		$payment_data = apply_filters('filter_hook_espresso_update_attendee_payment_data_in_db', $payment_data);

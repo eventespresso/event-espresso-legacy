@@ -352,6 +352,7 @@ function event_espresso_pay() {
 	$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
 	if (espresso_return_reg_id() != false && empty($payment_data['attendee_id'])) {
 		$sql = "SELECT id FROM `" . EVENTS_ATTENDEE_TABLE . "` WHERE registration_id='" . espresso_return_reg_id() . "' ORDER BY id LIMIT 1";
+		//echo $sql;
 		$payment_data['attendee_id'] = $wpdb->get_var($sql);
 		$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_prepare_event_link', $payment_data);
@@ -361,7 +362,7 @@ function event_espresso_pay() {
 		$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_prepare_event_link', $payment_data);
 		if (espresso_return_reg_id() == false || $payment_data['registration_id'] != espresso_return_reg_id())
-			die("Cheaters never win!");
+			die(__('There was a problem finding your Registration ID', 'event_espresso'));
 		if ($payment_data['payment_status'] != 'Completed') {
 			$payment_data = apply_filters('filter_hook_espresso_thank_you_get_payment_data', $payment_data);
 			espresso_log::singleton()->log(array('file' => __FILE__, 'function' => __FUNCTION__, 'status' => 'Payment for: '. $payment_data['lname'] . ', ' . $payment_data['fname'] . '|| registration id: ' . $payment_data['registration_id'] . '|| transaction details: ' . $payment_data['txn_details']));
