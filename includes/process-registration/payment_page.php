@@ -347,7 +347,7 @@ function event_espresso_pay() {
 	global $wpdb, $org_options;
 	$active_gateways = get_option('event_espresso_active_gateways', array());
 	foreach ($active_gateways as $gateway => $path) {
-		require_once($path . "/init.php");
+		event_espresso_require_gateway($gateway . "/init.php");
 	}
 	$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
 	if (espresso_return_reg_id() != false && empty($payment_data['attendee_id'])) {
