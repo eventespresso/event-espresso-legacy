@@ -19,6 +19,7 @@ if (!function_exists('event_espresso_add_item_to_session')) {
 
 
 	function event_espresso_add_item_to_session() {
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		global $wpdb;
 		// echo "<pre>", print_r( $_POST ), "</pre>";
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
@@ -71,7 +72,7 @@ if (!function_exists('event_espresso_add_event_process')) {
 
 
 	function event_espresso_add_event_process($event_id, $event_name) {
-
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
 
 		$events_in_session[$event_id] = array(
@@ -104,7 +105,7 @@ if (!function_exists('event_espresso_json_response')) {
 
 
 	function event_espresso_json_response($params = array()) {
-
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$params['code'] = 1;
 
 		return json_encode($params);
@@ -123,7 +124,7 @@ if (!function_exists('event_espresso_return_session_var')) {
 
 
 	function event_espresso_return_session_var($k = null) {
-
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if (is_null($k))
 			return;
 
@@ -145,7 +146,7 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 
 	function event_espresso_update_item_in_session($update_section = null) {
 		global $wpdb;
-
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		/*
 		 * - grab the event sessions
 		 * - loop through the events and for each one
@@ -291,7 +292,7 @@ if (!function_exists('event_espresso_calculate_total')) {
 		//print_r($_POST);
 		global $wpdb;
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
-
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if (is_array($events_in_session)) {
 
 			$event_total_cost = 0;
@@ -320,6 +321,7 @@ if (!function_exists('event_espresso_calculate_total')) {
 
 						if ($attendee_quantitiy > 0) {
 							$event_cost = event_espresso_get_final_price($_price_id, $event_id);
+							do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line 324: event_cost='.$event_cost);
 							$event_individual_cost[$event_id] += number_format($event_cost * $attendee_quantitiy, 2, '.', '');
 						}
 					}
@@ -327,6 +329,7 @@ if (!function_exists('event_espresso_calculate_total')) {
 					$attendee_quantitiy = 1;
 
 					$event_cost = event_espresso_get_final_price($price_id, $event_id);
+					do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line 331: event_cost='.$event_cost);
 					$event_individual_cost[$event_id] = number_format($event_cost * $attendee_quantitiy, 2, '.', '');
 				}
 				$_SESSION['espresso_session']['events_in_session'][$event_id]['cost'] = $event_individual_cost[$event_id];
@@ -369,7 +372,7 @@ if (!function_exists('event_espresso_delete_item_from_session')) {
 
 	function event_espresso_delete_item_from_session() {
 		global $wpdb;
-
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
 
 		/*
@@ -407,7 +410,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 
 	function event_espresso_load_checkout_page() {
 		global $wpdb, $org_options;
-
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
 
 		if (event_espresso_invoke_cart_error($events_in_session))
@@ -571,7 +574,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
  * NOT USED.  Returns the "Copy from " dropdown.
  */
 function event_espresso_copy_dd($event_id, $meta) {
-
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	$events_in_session = $_SESSION['espresso_session']['events_in_session'];
 	$count_of_events = count($events_in_session);
 
@@ -627,7 +630,7 @@ if (!function_exists('event_espresso_confirm_and_pay')) {
 
 	function event_espresso_confirm_and_pay() {
 		global $wpdb;
-
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
 
 
@@ -683,6 +686,7 @@ if (!function_exists('event_espresso_multi_qty_dd')) {
 
 	function event_espresso_multi_qty_dd($event_id, $price_id, $qty, $value = '') {
 		$counter = 0;
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		?>
 
 		<select name="price_id[<?php echo $event_id; ?>][<?php echo $price_id; ?>]" id="price_id-<?php echo $event_id; ?>" class="price_id">
@@ -716,6 +720,7 @@ if (!function_exists('event_espresso_multi_additional_attendees')) {
 //Need to verify
 //Doesn't look like this function is used anywhere in the plugin
 	function event_espresso_multi_additional_attendees($additional_limit, $available_spaces, $event_id = null) {
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if ($additional_limit == 0)
 			return;
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
@@ -767,7 +772,7 @@ if (!function_exists('event_espresso_cart_link')) {
 
 
 	function event_espresso_cart_link($atts) {
-
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		global $org_options, $this_event_id;
 
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
@@ -818,6 +823,7 @@ if (!function_exists('event_espresso_invoke_cart_error')) {
 
 
 	function event_espresso_invoke_cart_error($events_in_session) {
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if (!is_array($events_in_session)) {
 
 			echo __('It looks like you are attempting to refresh a page after completing your registration or your cart is empty.  Please go to the events page and try again.', 'event_espresso') . "<br />";
@@ -835,7 +841,7 @@ if (!function_exists('event_espresso_clear_session')) {
 //This function should probably be invoked when a payment is confirmed or when the attendee confirms the registration on free events.
 //Right now it only seems to be used in th add_attendees_to_db.php when an attendee confirms a paid registration, but I am not sure it is working.
 	function event_espresso_clear_session() {
-
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$_SESSION['espresso_session'] = '';
 	}
 
@@ -849,7 +855,7 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 
 	function event_espresso_group_price_dropdown($event_id, $label = 1, $multi_reg = 0, $value = '') {
 		global $wpdb, $org_options;
-
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		/*
 		 * find out pricing type.
 		 * - If multiple price options, for each one
@@ -882,9 +888,7 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 				//Setting this field for use on the registration form
 				$_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['price_type'] = $result->price_type;
 				// Addition for Early Registration discount
-				if (early_discount_amount($event_id, $result->event_cost) != false) {
-					$early_price_data = array();
-					$early_price_data = early_discount_amount($event_id, $result->event_cost);
+				if ($early_price_data = early_discount_amount($event_id, $result->event_cost)) {
 					$result->event_cost = $early_price_data['event_price'];
 					$message = __(' Early Pricing', 'event_espresso');
 				}

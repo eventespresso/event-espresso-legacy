@@ -96,13 +96,16 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 		$price_type = $price_options[1];
 		$p_id = $price_id;
 		$event_cost = event_espresso_get_final_price($price_id, $event_id);
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line 99: event_cost='.$event_cost);
 	} elseif ($price_id > 0) {
 		$event_cost = event_espresso_get_final_price($price_id, $event_id);
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line 101: event_cost='.$event_cost);
 		$p_id = $price_id;
 	} else {
 //$event_cost = $_POST['event_cost'];
         if ( isset($_POST['price_id'])) {
             $event_cost = event_espresso_get_final_price($_POST['price_id'], $event_id);
+						do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line 106: event_cost='.$event_cost);
             $p_id = $_POST['price_id'];
         } else {
             $event_cost = 0;
