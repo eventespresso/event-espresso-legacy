@@ -96,16 +96,13 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 		$price_type = $price_options[1];
 		$p_id = $price_id;
 		$event_cost = event_espresso_get_final_price($price_id, $event_id);
-		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line 99: event_cost='.$event_cost);
 	} elseif ($price_id > 0) {
 		$event_cost = event_espresso_get_final_price($price_id, $event_id);
-		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line 101: event_cost='.$event_cost);
 		$p_id = $price_id;
 	} else {
 //$event_cost = $_POST['event_cost'];
         if ( isset($_POST['price_id'])) {
             $event_cost = event_espresso_get_final_price($_POST['price_id'], $event_id);
-						do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line 106: event_cost='.$event_cost);
             $p_id = $_POST['price_id'];
         } else {
             $event_cost = 0;
@@ -159,7 +156,7 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 		if ( $coupon_data['valid'] == true ){
 			$event_price_x_attendees = $event_price_x_attendees - $event_cost;
 			if ( $coupon_data['percentage'] ) {
-				$event_discount_label = $event_original_cost > $event_cost ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_cost, 2, ".", ",") . __(' applied', 'event_espresso') . ')' : '';
+				$event_discount_label = $event_original_cost > $event_cost ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_original_cost - $event_cost, 2, ".", ",") . ' (' . $coupon_data['discount'] . ')'. __(' applied', 'event_espresso') . ')' : '';
 			}else{
 				$event_discount_label = $event_original_cost > $event_cost ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_original_cost - $event_cost, 2, ".", ",") . __(' applied', 'event_espresso') . ')' : '';
 				$event_price_x_attendees = $event_cost;
@@ -174,10 +171,10 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 			$event_price_x_attendees = number_format($event_price_x_attendees - $event_price, 2, ".", ",");
 			$event_discount_label = $event_original_cost > $event_cost ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_price, 2, ".", ",") . __(' applied', 'event_espresso') . ')' : '';
 		}
-		$event_cost = $event_price_x_attendees;
+		//$event_cost = $event_price_x_attendees;
 		
 	} else {
-		$event_cost = $event_original_cost;
+		//$event_cost = $event_original_cost;
 	}
 
 	if ($num_people != 0)

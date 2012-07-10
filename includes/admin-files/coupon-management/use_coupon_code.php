@@ -81,7 +81,7 @@ if (!function_exists('event_espresso_coupon_payment_page')) {
                 }
             }
         }
-        return array('event_cost'=>$event_cost, 'valid'=>$valid, 'percentage'=>$percentage);
+        return array('event_cost'=>$event_cost, 'valid'=>$valid, 'percentage'=>$percentage, 'discount'=>$discount_type_price);
     }
 
 }
