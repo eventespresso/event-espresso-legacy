@@ -1,8 +1,8 @@
 <?php
 
 function espresso_display_paypal($payment_data) {
-	extract($payment_data);
 	global $wpdb;
+	extract($payment_data);
 	include_once ('Paypal.php');
 	$myPaypal = new EE_Paypal();
 	echo '<!-- Event Espresso PayPal Gateway Version ' . $myPaypal->gateway_version . '-->';
@@ -15,7 +15,9 @@ function espresso_display_paypal($payment_data) {
 	if ($use_sandbox) {
 		$myPaypal->enableTestMode();
 	}
-
+	add_action('action_hook_espresso_itemize_paypal_items', 'espresso_itemize_paypal_items', 10, 2);
+	do_action('action_hook_espresso_use_add_on_functions');
+	do_action('action_hook_espresso_itemize_paypal_items', $myPaypal, $attendee_id);
 	$myPaypal->addField('business', $paypal_id);
 	if ($paypal_settings['force_ssl_return']) {
 		$home = str_replace("http://", "https://", home_url());
@@ -29,37 +31,7 @@ function espresso_display_paypal($payment_data) {
 	$event_name = $wpdb->get_var('SELECT event_name FROM ' . EVENTS_DETAIL_TABLE . " WHERE id='" . $event_id . "'");
 	$myPaypal->addField('cmd', '_cart');
 	$myPaypal->addField('upload', '1');
-	$sql = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id='" . $attendee_id . "'";
-	$session_id = $wpdb->get_var($sql);
-	$sql = "SELECT ac.cost, ac.quantity, ed.event_name, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage, gc.id FROM " . EVENTS_ATTENDEE_COST_TABLE . " ac JOIN " . EVENTS_ATTENDEE_TABLE . " a ON ac.attendee_id=a.id JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
-	$sql .= " LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
-	$sql .= " LEFT JOIN " . EVENTS_GROUPON_CODES_TABLE . " gc ON a.id=gc.attendee_id AND gc.groupon_status='0' ";
-	$sql .= " WHERE attendee_session='" . $session_id . "'";
-	$items = $wpdb->get_results($sql);
-	$coupon_amount = empty($items[0]->coupon_code_price) ? 0 : $items[0]->coupon_code_price;
-	$is_coupon_pct = (!empty($items[0]->use_percentage) && $items[0]->use_percentage=='Y') ? true : false;
-	$groupon_used = false;
-	foreach ($items as $key=>$item) {
-		$item_num=$key+1;
-		if (!empty($item->id)) {
-			$groupon_text = ' (groupon code used)';
-			$groupon_used = true;
-			$item_cost = "0.00";
-		} else {
-			$groupon_text = '';
-			$item_cost = $item->cost;
-		}
-		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname . $groupon_text);
-		$myPaypal->addField('amount_' . $item_num, $item_cost);
-		$myPaypal->addField('quantity_' . $item_num, $item->quantity);
-	}
-	if (!empty($coupon_amount) && !$groupon_used) {
-		if ($is_coupon_pct) {
-			$myPaypal->addField('discount_rate_cart', $coupon_amount);
-		} else {
-			$myPaypal->addField('discount_amount_cart', $coupon_amount);
-		}
-	}
+	
 	$myPaypal->addField('currency_code', $paypal_cur);
 	$myPaypal->addField('image_url', empty($paypal_settings['image_url']) ? '' : $paypal_settings['image_url']);
 	$myPaypal->addField('no_shipping ', $no_shipping);
@@ -96,3 +68,28 @@ function espresso_display_paypal($payment_data) {
 }
 
 add_action('action_hook_espresso_display_offsite_payment_gateway', 'espresso_display_paypal');
+
+function espresso_itemize_paypal_items($myPaypal, $attendee_id) {
+	global $wpdb;
+	$sql = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id='" . $attendee_id . "'";
+	$session_id = $wpdb->get_var($sql);
+	$sql = "SELECT ac.cost, ac.quantity, ed.event_name, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage FROM " . EVENTS_ATTENDEE_COST_TABLE . " ac JOIN " . EVENTS_ATTENDEE_TABLE . " a ON ac.attendee_id=a.id JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
+	$sql .= " LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
+	$sql .= " WHERE attendee_session='" . $session_id . "'";
+	$items = $wpdb->get_results($sql);
+	$coupon_amount = empty($items[0]->coupon_code_price) ? 0 : $items[0]->coupon_code_price;
+	$is_coupon_pct = (!empty($items[0]->use_percentage) && $items[0]->use_percentage=='Y') ? true : false;
+	foreach ($items as $key=>$item) {
+		$item_num=$key+1;
+		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname);
+		$myPaypal->addField('amount_' . $item_num, $item->cost);
+		$myPaypal->addField('quantity_' . $item_num, $item->quantity);
+	}
+	if (!empty($coupon_amount)) {
+		if ($is_coupon_pct) {
+			$myPaypal->addField('discount_rate_cart', $coupon_amount);
+		} else {
+			$myPaypal->addField('discount_amount_cart', $coupon_amount);
+		}
+	}
+}
