@@ -343,7 +343,7 @@ function espresso_attendee_price($atts) {
      * Check if the attendee is from old age i.e. before 3.1.10
      * */
     $ice_age = true;
-    $ice_row = $wpdb->get_row($wpdb->prepare("select * from ".EVENTS_ATTENDEE_COST_TABLE." inner join ".EVENTS_ATTENDEE_TABLE." where registration_id = '%s'",$registration_id));
+    $ice_row = $wpdb->get_row($wpdb->prepare("select * from ".EVENTS_ATTENDEE_COST_TABLE." inner join on ".EVENTS_ATTENDEE_TABLE." where registration_id = '%s'",$registration_id));
     if ( $ice_row !== NULL )
     {
         $ice_age = false;
