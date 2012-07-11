@@ -171,10 +171,10 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 			$event_price_x_attendees = number_format($event_price_x_attendees - $event_price, 2, ".", ",");
 			$event_discount_label = $event_original_cost > $event_cost ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_price, 2, ".", ",") . __(' applied', 'event_espresso') . ')' : '';
 		}
-		//$event_cost = $event_price_x_attendees;
+		$event_cost = $event_price_x_attendees;
 		
 	} else {
-		//$event_cost = $event_original_cost;
+		$event_cost = $event_original_cost;
 	}
 
 	if ($num_people != 0)
