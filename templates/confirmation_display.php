@@ -114,7 +114,7 @@ $attendee_num = 1;
                 <th scope="row" class="header">
                   <?php _e('Total Price:','event_espresso'); ?>
                  </th>
-                <td><span class="event_espresso_value"><?php echo $org_options['currency_symbol']?><?php echo $event_price_x_attendees;  echo $event_discount_label;?></span></td>
+                <td><span class="event_espresso_value"><?php echo $org_options['currency_symbol']?><?php echo $event_cost;  echo $event_discount_label;?></span></td>
               </tr>
 
               </table>

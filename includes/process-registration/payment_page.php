@@ -156,7 +156,7 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 		if ( $coupon_data['valid'] == true ){
 			$event_price_x_attendees = $event_price_x_attendees - $event_cost;
 			if ( $coupon_data['percentage'] ) {
-				$event_discount_label = $event_original_cost > $event_cost ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_cost, 2, ".", ",") . __(' applied', 'event_espresso') . ')' : '';
+				$event_discount_label = $event_original_cost > $event_cost ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_original_cost - $event_cost, 2, ".", ",") . ' (' . $coupon_data['discount'] . ')'. __(' applied', 'event_espresso') . ')' : '';
 			}else{
 				$event_discount_label = $event_original_cost > $event_cost ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_original_cost - $event_cost, 2, ".", ",") . __(' applied', 'event_espresso') . ')' : '';
 				$event_price_x_attendees = $event_cost;
@@ -171,10 +171,10 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 			$event_price_x_attendees = number_format($event_price_x_attendees - $event_price, 2, ".", ",");
 			$event_discount_label = $event_original_cost > $event_cost ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_price, 2, ".", ",") . __(' applied', 'event_espresso') . ')' : '';
 		}
-		$event_cost = $event_price_x_attendees;
+		//$event_cost = $event_price_x_attendees;
 		
 	} else {
-		$event_cost = $event_original_cost;
+		//$event_cost = $event_original_cost;
 	}
 
 	if ($num_people != 0)
@@ -347,7 +347,7 @@ function event_espresso_pay() {
 	global $wpdb, $org_options;
 	$active_gateways = get_option('event_espresso_active_gateways', array());
 	foreach ($active_gateways as $gateway => $path) {
-		require_once($path . "/init.php");
+		event_espresso_require_gateway($gateway . "/init.php");
 	}
 	$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
 	if (espresso_return_reg_id() != false && empty($payment_data['attendee_id'])) {

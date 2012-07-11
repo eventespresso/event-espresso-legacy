@@ -195,141 +195,140 @@ function espresso_update_active_gateways() {
 
 
 	$active_gateways = get_option('event_espresso_active_gateways', array());
-	$dir = dirname(__FILE__);
 	if (!empty($active_gateways)) {
 		if (array_key_exists('2checkout', $active_gateways)) {
-			$active_gateways['2checkout'] = $dir . "/2checkout";
+			$active_gateways['2checkout'] = "/gateways/2checkout";
 		}
 		if (array_key_exists('aim', $active_gateways)) {
-			$active_gateways['aim'] = $dir . "/aim";
+			$active_gateways['aim'] = "/gateways/aim";
 		}
 		if (array_key_exists('alipay', $active_gateways)) {
-			$active_gateways['alipay'] = $dir . "/alipay";
+			$active_gateways['alipay'] = "/gateways/alipay";
 		}
 		if (array_key_exists('authnet', $active_gateways)) {
-			$active_gateways['authnet'] = $dir . "/authnet";
+			$active_gateways['authnet'] = "/gateways/authnet";
 		}
 		if (array_key_exists('bank', $active_gateways)) {
-			$active_gateways['bank'] = $dir . "/bank";
+			$active_gateways['bank'] = "/gateways/bank";
 		}
 		if (array_key_exists('check', $active_gateways)) {
-			$active_gateways['check'] = $dir . "/check";
+			$active_gateways['check'] = "/gateways/check";
 		}
 		if (array_key_exists('eway', $active_gateways)) {
-			$active_gateways['eway'] = $dir . "/eway";
+			$active_gateways['eway'] = "/gateways/eway";
 		}
 		if (array_key_exists('exact', $active_gateways)) {
-			$active_gateways['exact'] = $dir . "/exact";
+			$active_gateways['exact'] = "/gateways/exact";
 		}
 		if (array_key_exists('firstdata', $active_gateways)) {
-			$active_gateways['firstdata'] = $dir . "/firstdata";
+			$active_gateways['firstdata'] = "/gateways/firstdata";
 		}
 		if (array_key_exists('firstdata_connect_2', $active_gateways)) {
-			$active_gateways['firstdata_connect_2'] = $dir . "/firstdata_connect_2";
+			$active_gateways['firstdata_connect_2'] = "/gateways/firstdata_connect_2";
 		}
 		if (array_key_exists('ideal', $active_gateways)) {
-			$active_gateways['ideal'] = $dir . "/ideal";
+			$active_gateways['ideal'] = "/gateways/ideal";
 		}
 		if (array_key_exists('invoice', $active_gateways)) {
-			$active_gateways['invoice'] = $dir . "/invoice";
+			$active_gateways['invoice'] = "/gateways/invoice";
 		}
 		if (array_key_exists('mwarrior', $active_gateways)) {
-			$active_gateways['mwarrior'] = $dir . "/mwarrior";
+			$active_gateways['mwarrior'] = "/gateways/mwarrior";
 		}
 		if (array_key_exists('nab', $active_gateways)) {
-			$active_gateways['nab'] = $dir . "/nab";
+			$active_gateways['nab'] = "/gateways/nab";
 		}
 		if (array_key_exists('paypal', $active_gateways)) {
-			$active_gateways['paypal'] = $dir . "/paypal";
+			$active_gateways['paypal'] = "/gateways/paypal";
 		}
 		if (array_key_exists('paypal_pro', $active_gateways)) {
-			$active_gateways['paypal_pro'] = $dir . "/paypal_pro";
+			$active_gateways['paypal_pro'] = "/gateways/paypal_pro";
 		}
 		if (array_key_exists('paytrace', $active_gateways)) {
-			$active_gateways['paytrace'] = $dir . "/paytrace";
+			$active_gateways['paytrace'] = "/gateways/paytrace";
 		}
 		if (array_key_exists('quickpay', $active_gateways)) {
-			$active_gateways['quickpay'] = $dir . "/quickpay";
+			$active_gateways['quickpay'] = "/gateways/quickpay";
 		}
 		if (array_key_exists('realauth', $active_gateways)) {
-			$active_gateways['realauth'] = $dir . "/realauth";
+			$active_gateways['realauth'] = "/gateways/realauth";
 		}
 		if (array_key_exists('stripe', $active_gateways)) {
-			$active_gateways['stripe'] = $dir . "/stripe";
+			$active_gateways['stripe'] = "/gateways/stripe";
 		}
 		if (array_key_exists('wepay', $active_gateways)) {
-			$active_gateways['wepay'] = $dir . "/wepay";
+			$active_gateways['wepay'] = "/gateways/wepay";
 		}
 		if (array_key_exists('worldpay', $active_gateways)) {
-			$active_gateways['worldpay'] = $dir . "/worldpay";
+			$active_gateways['worldpay'] = "/gateways/worldpay";
 		}
 	} else {
 		if (get_option('events_2checkout_active') == true) {
-			$active_gateways['2checkout'] = $dir . "/2checkout";
+			$active_gateways['2checkout'] = "/gateways/2checkout";
 		}
 		if (get_option('events_authnet_aim_active') == true) {
-			$active_gateways['aim'] = $dir . "/aim";
+			$active_gateways['aim'] = "/gateways/aim";
 		}
 		if (get_option('events_alipay_active') == true) {
-			$active_gateways['alipay'] = $dir . "/alipay";
+			$active_gateways['alipay'] = "/gateways/alipay";
 		}
 		if (get_option('events_authnet_active') == true) {
-			$active_gateways['authnet'] = $dir . "/authnet";
+			$active_gateways['authnet'] = "/gateways/authnet";
 		}
 		if (get_option('events_bank_payment_active') == true) {
-			$active_gateways['bank'] = $dir . "/bank";
+			$active_gateways['bank'] = "/gateways/bank";
 		}
 		if (get_option('events_check_payment_active') == true) {
-			$active_gateways['check'] = $dir . "/check";
+			$active_gateways['check'] = "/gateways/check";
 		}
 		if (get_option('events_eway_active') == true) {
-			$active_gateways['eway'] = $dir . "/eway";
+			$active_gateways['eway'] = "/gateways/eway";
 		}
 		if (get_option('events_exact_active') == true) {
-			$active_gateways['exact'] = $dir . "/exact";
+			$active_gateways['exact'] = "/gateways/exact";
 		}
 		if (get_option('events_firstdata_active') == true) {
-			$active_gateways['firstdata'] = $dir . "/firstdata";
+			$active_gateways['firstdata'] = "/gateways/firstdata";
 		}
 		if (get_option('events_firstdata_connect_2_active') == true) {
-			$active_gateways['firstdata_connect_2'] = $dir . "/firstdata_connect_2";
+			$active_gateways['firstdata_connect_2'] = "/gateways/firstdata_connect_2";
 		}
 		if (get_option('events_ideal_active') == true) {
-			$active_gateways['ideal'] = $dir . "/ideal";
+			$active_gateways['ideal'] = "/gateways/ideal";
 		}
 		if (get_option('events_invoice_payment_active') == true) {
-			$active_gateways['invoice'] = $dir . "/invoice";
+			$active_gateways['invoice'] = "/gateways/invoice";
 		}
 		if (get_option('events_mwarrior_active') == true) {
-			$active_gateways['mwarrior'] = $dir . "/mwarrior";
+			$active_gateways['mwarrior'] = "/gateways/mwarrior";
 		}
 		if (get_option('events_nab_active') == true) {
-			$active_gateways['nab'] = $dir . "/nab";
+			$active_gateways['nab'] = "/gateways/nab";
 		}
 		if (get_option('events_paypal_active') == true) {
-			$active_gateways['paypal'] = $dir . "/paypal";
+			$active_gateways['paypal'] = "/gateways/paypal";
 		}
 		if (get_option('events_paypal_pro_active') == true) {
-			$active_gateways['paypal_pro'] = $dir . "/paypal_pro";
+			$active_gateways['paypal_pro'] = "gateways/paypal_pro";
 		}
 		if (get_option('events_paytrace_active') == true) {
-			$active_gateways['paytrace'] = $dir . "/paytrace";
+			$active_gateways['paytrace'] = "gateways/paytrace";
 		}
 		if (get_option('events_quickpay_active') == true) {
-			$active_gateways['quickpay'] = $dir . "/quickpay";
+			$active_gateways['quickpay'] = "gateways/quickpay";
 		}
 		$payment_settings = get_option('event_espresso_realauth_settings');
 		if (!empty($payment_settings['active'])) {
-			$active_gateways['realauth'] = $dir . "/realauth";
+			$active_gateways['realauth'] = "gateways/realauth";
 		}
 		if (get_option('events_stripe_active') == true) {
-			$active_gateways['stripe'] = $dir . "/stripe";
+			$active_gateways['stripe'] = "gateways/stripe";
 		}
 		if (get_option('events_wepay_active') == true) {
-			$active_gateways['wepay'] = $dir . "/wepay";
+			$active_gateways['wepay'] = "wepay";
 		}
 		if (get_option('events_worldpay_active') == true) {
-			$active_gateways['worldpay'] = $dir . "/worldpay";
+			$active_gateways['worldpay'] = "worldpay";
 		}
 	}
 

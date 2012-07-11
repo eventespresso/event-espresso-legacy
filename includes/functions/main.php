@@ -1046,6 +1046,7 @@ if (!function_exists('event_espresso_require_file')) {
 			$full_path = $path_else . $template_file_name;
 		}
 		if (file_exists($full_path) || $must_exist) {
+			$path = substr($full_path,0,strrpos($full_path, '/'));
 			($as_require_once == true) ? require_once($full_path) : require($full_path);
 		}
 	}

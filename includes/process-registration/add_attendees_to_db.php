@@ -5,6 +5,7 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 
 	//This entire function can be overridden using the "Custom Files" addon
 	function event_espresso_add_attendees_to_db($event_id = NULL, $session_vars = NULL) {
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		global $wpdb, $org_options, $espresso_premium;
 		//print_r($session_vars);
 		$count = $wpdb->get_col($wpdb->prepare("SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE attendee_session=%s", $_SESSION['espresso_session']['id']));
@@ -34,6 +35,7 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 		
 		if ( ! function_exists( 'espresso_apply_htmlentities' )) {
 			function espresso_apply_htmlentities( &$value, $key) {
+				do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 				$value = htmlentities( $value, ENT_QUOTES, 'UTF-8' );
 			}
 		}
@@ -119,12 +121,14 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 			$price_id = $price_options[0];
 			$price_type = $price_options[1];
 			$event_cost = event_espresso_get_final_price($price_id, $event_id);
+			do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line 123: event_cost='.$event_cost);
 			/* echo '$event_id = '.$event_id.'<br />';
 			  echo '$price_id = '.$price_id.'<br />';
 			  echo '$event_cost = '.$event_cost;
 			  return; */
 		} else {
 			$event_cost = isset($data_source['price_id']) ? event_espresso_get_final_price($data_source['price_id'], $event_id) : 0.00;
+			do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line 131: event_cost='.$event_cost);
 			$coupon_code = '';
 			$price_type = isset($data_source['price_id']) ? espresso_ticket_information(array('type' => 'ticket', 'price_option' => $data_source['price_id'])) : '';
 		}
@@ -348,6 +352,7 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 				$attendee_cost = seating_chart::get_purchase_price($booking_id);
 			} else {
 				$attendee_cost = event_espresso_get_final_price($attendee_price_id, $event_id);
+				do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line 355: attendee_cost='.$attendee_cost);
 				if (isset($data_source['num_people'])) {
 					$attendee_quantity = $data_source['num_people'];
 				}
@@ -569,6 +574,7 @@ if (!function_exists('event_espresso_add_attendees_to_db_multi')) {
 
 	//This function is called from the shopping cart
 	function event_espresso_add_attendees_to_db_multi() {
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		global $wpdb, $org_options, $no_recaptcha;
 
 		//Added by Imon

@@ -44,7 +44,7 @@ function espresso_display_finalize_payment_header($data) {
 
 $active_gateways = get_option('event_espresso_active_gateways', array());
 foreach ($active_gateways as $gateway => $path) {
-	require_once($path . "/init.php");
+	event_espresso_require_gateway($gateway . "/init.php");
 }
 $data['fname'] = $fname;
 $data['lname'] = $lname;
