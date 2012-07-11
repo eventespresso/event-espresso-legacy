@@ -31,19 +31,29 @@ function espresso_display_paypal($payment_data) {
 	$myPaypal->addField('upload', '1');
 	$sql = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id='" . $attendee_id . "'";
 	$session_id = $wpdb->get_var($sql);
-	$sql = "SELECT ac.cost, ac.quantity, ed.event_name, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage FROM " . EVENTS_ATTENDEE_COST_TABLE . " ac JOIN " . EVENTS_ATTENDEE_TABLE . " a ON ac.attendee_id=a.id JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
+	$sql = "SELECT ac.cost, ac.quantity, ed.event_name, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage, gc.id FROM " . EVENTS_ATTENDEE_COST_TABLE . " ac JOIN " . EVENTS_ATTENDEE_TABLE . " a ON ac.attendee_id=a.id JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
 	$sql .= " LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
+	$sql .= " LEFT JOIN " . EVENTS_GROUPON_CODES_TABLE . " gc ON a.id=gc.attendee_id AND gc.groupon_status='0' ";
 	$sql .= " WHERE attendee_session='" . $session_id . "'";
 	$items = $wpdb->get_results($sql);
 	$coupon_amount = empty($items[0]->coupon_code_price) ? 0 : $items[0]->coupon_code_price;
 	$is_coupon_pct = (!empty($items[0]->use_percentage) && $items[0]->use_percentage=='Y') ? true : false;
+	$groupon_used = false;
 	foreach ($items as $key=>$item) {
 		$item_num=$key+1;
-		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname);
-		$myPaypal->addField('amount_' . $item_num, $item->cost);
+		if (!empty($item->id)) {
+			$groupon_text = ' (groupon code used)';
+			$groupon_used = true;
+			$item_cost = "0.00";
+		} else {
+			$groupon_text = '';
+			$item_cost = $item->cost;
+		}
+		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname . $groupon_text);
+		$myPaypal->addField('amount_' . $item_num, $item_cost);
 		$myPaypal->addField('quantity_' . $item_num, $item->quantity);
 	}
-	if (!empty($coupon_amount)) {
+	if (!empty($coupon_amount) && !$groupon_used) {
 		if ($is_coupon_pct) {
 			$myPaypal->addField('discount_rate_cart', $coupon_amount);
 		} else {
