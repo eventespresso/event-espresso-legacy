@@ -835,43 +835,47 @@ if (!function_exists('espresso_venue_event_list_sc')) {
 		if (empty($atts))
 			return 'No venue id supplied!';
 		extract($atts);
-		$order_by = (isset($order_by) && $order_by != '') ? " ORDER BY " . $order_by . " ASC " : " ORDER BY name, id ASC ";
-		$limit = $limit > 0 ? " LIMIT 0," . $limit . " " : '';
-
 		if (isset($id) && $id > 0) {
-			$sql = "SELECT e.*, ev.name venue_name, ese.start_time, ese.end_time, p.event_cost ";
-			$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
-			$sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " vr ON e.id = vr.event_id ";
-			$sql .= " LEFT JOIN " . EVENTS_VENUE_TABLE . " ev ON vr.venue_id = ev.id  ";
-			$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id= e.id ";
-			$sql .= " LEFT JOIN " . EVENTS_PRICES_TABLE . " p ON p.event_id=e.id ";
-			$sql .= " WHERE e.event_status != 'D' AND e.is_active = 'Y' AND ev.id = '" . $id . "' ";
-
-			$sql .= $order_by;
-			$sql .= $limit;
-			//echo $sql;
-
-			$wpdb->get_results($sql);
-			$num_rows = $wpdb->num_rows;
-			if ($num_rows > 0) {
-
-				$name_before = isset($name_before) ? $name_before : '<p class="venue_name">';
-				$name_after = isset($name_after) ? $name_after : '</p>';
-
-				$venue_name = $wpdb->last_result[0]->venue_name;
+			$atts = array_merge($atts, array('venue_id'=>$id, 'use_venue_id'=>true));
+		}
+			
+//		$order_by = (isset($order_by) && $order_by != '') ? " ORDER BY " . $order_by . " ASC " : " ORDER BY name, id ASC ";
+//		$limit = $limit > 0 ? " LIMIT 0," . $limit . " " : '';
+//
+//		if (isset($id) && $id > 0) {
+//			$sql = "SELECT e.*, ev.name venue_name, ese.start_time, ese.end_time, p.event_cost ";
+//			$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
+//			$sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " vr ON e.id = vr.event_id ";
+//			$sql .= " LEFT JOIN " . EVENTS_VENUE_TABLE . " ev ON vr.venue_id = ev.id  ";
+//			$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id= e.id ";
+//			$sql .= " LEFT JOIN " . EVENTS_PRICES_TABLE . " p ON p.event_id=e.id ";
+//			$sql .= " WHERE e.event_status != 'D' AND e.is_active = 'Y' AND ev.id = '" . $id . "' ";
+//
+//			$sql .= $order_by;
+//			$sql .= $limit;
+//			//echo $sql;
+//
+//			$wpdb->get_results($sql);
+//			$num_rows = $wpdb->num_rows;
+//			if ($num_rows > 0) {
+//
+//				$name_before = isset($name_before) ? $name_before : '<p class="venue_name">';
+//				$name_after = isset($name_after) ? $name_after : '</p>';
+//
+//				$venue_name = $wpdb->last_result[0]->venue_name;
 
 				//template located in event_list_dsiplay.php
 				ob_start();
 				//echo $sql;
-				echo $name_before . $venue_name . $name_after;
-				event_espresso_get_event_details($sql, $css_class);
+				//echo $name_before . $venue_name . $name_after;
+				event_espresso_get_event_details($atts);
 				$buffer = ob_get_contents();
 				ob_end_clean();
 				return $buffer;
-			} else {
-				return 'No events in this venue';
-			}
-		}
+			//} else {
+//				return 'No events in this venue';
+//			}
+//		}
 	}
 
 }
