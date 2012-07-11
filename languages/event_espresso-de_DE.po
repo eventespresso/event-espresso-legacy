@@ -2,26 +2,26 @@
 # This file is distributed under the same license as the Event Espresso package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2012-06-05 11:50-0700\n"
+"PO-Revision-Date: 2012-07-10 18:27-0700\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/0.1\n"
 "Project-Id-Version: Event Espresso\n"
-"POT-Creation-Date: \n"
-"Last-Translator: Chris Reynolds <chris@jazzsequence.com>\n"
 "Language-Team: Ray Popoola, Marko Geisler <support@eventespresso.com>\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: .\n"
+"POT-Creation-Date: \n"
+"Last-Translator: Chris Reynolds <chris@jazzsequence.com>\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
 #: ../gateways/invoice/template.php:174
 msgid "Per Unit"
-msgstr "Je Einheit"
+msgstr "Pro Einheit"
 
 #: ../gateways/invoice/template.php:174
 msgid "Sub total"
@@ -58,7 +58,7 @@ msgstr ""
 
 #: ../gateways/aim/settings.php:106
 msgid "Submit a Test Transaction"
-msgstr ""
+msgstr "Test-Transaktion absenden"
 
 #: ../includes/admin-files/template_settings/index.php:99
 msgid "Template Options"
@@ -70,58 +70,58 @@ msgstr "Anmeldungsdetails bearbeiten"
 
 #: ../gateways/payment_gateways.php:64
 msgid "Bypassing the Confirmation Page"
-msgstr ""
+msgstr "Die Bestätigungsseite überspringen"
 
 #: ../gateways/payment_gateways.php:68
 #: ../gateways/2checkout/settings.php:216
 msgid "Force HTTPS on Return URL"
-msgstr ""
+msgstr "Erzwinge HTTPS bei der Return URL"
 
 #: ../gateways/eway/settings.php:28
 msgid "eWay settings saved."
-msgstr ""
+msgstr "eWay-Einstellungen gespeichert."
 
 #: ../includes/admin-files/venue-management/edit_venue.php:8
 #: ../includes/admin-files/venue-management/update_venue.php:12
 msgid "Sorry, you do not have permission to edit this Venue."
-msgstr ""
+msgstr "Sorry, aber Sie haben nicht ausreichend Rechte, um diesen Veranstaltungsort zu bearbeiten."
 
 #: ../includes/functions/email.php:826
 msgid "Event registration pending"
-msgstr ""
+msgstr "Schwebende Veranstaltungsanmeldung"
 
 #: ../includes/functions/email.php:816
 #: ../includes/functions/email.php:833
 msgid "Thank You."
-msgstr ""
+msgstr "Dankeschön."
 
 #: ../includes/functions/email.php:811
 msgid "New attendee registration approval pending"
-msgstr ""
+msgstr "Neue Teilnehmeranmeldung deren Genehmigung noch aussteht."
 
 #: ../includes/functions/email.php:716
 msgid "%d has been cancelled."
-msgstr ""
+msgstr "%d wurde leider abgesagt."
 
 #: ../gateways/aim/settings.php:100
 msgid "Account Uses Authorize.net development Server"
-msgstr ""
+msgstr "Account nutzt den Authorize.net Development Server"
 
 #: ../gateways/aim/settings.php:124
 msgid "Header Text"
-msgstr ""
+msgstr "Header Text"
 
 #: ../gateways/aim/settings.php:84
 msgid "Authorize.net AIM Login ID"
-msgstr ""
+msgstr "Authorize.net AIM Login ID"
 
 #: ../includes/functions/email.php:717
 msgid "For more information, please email %d"
-msgstr ""
+msgstr "Für mehr Informationen, schreiben Sie gern eine Email an %d"
 
 #: ../includes/event-management/insert_event.php:442
 msgid "There was an error in your submission. The event was not saved! Please try again."
-msgstr ""
+msgstr "Beim Absenden ist leider ein Fehler aufgetreten. Die Veranstaltung wurde nicht gespeichert! Bitte versuchen Sie es erneut."
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:657
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:764
@@ -172,349 +172,349 @@ msgstr "Benutzerberechtigungen"
 
 #: ../gateways/payment_gateways.php:69
 msgid "Forces the gateway provider to send the customer back to the return page -- or pull the return page from the site -- using HTTPS.  This is required in some instances to prevent a warning that the page the user is going to is not secure."
-msgstr ""
+msgstr "Erzwingt Gateway Anbieter, Ihre Kunden zurück zu der Return Page zu schicken -- oder lädt die Return Page von dieser Seite, und dabei HTTPS zu verwenden. Dies ist notwendig in manchen Installationen, um zu verhindern, dass der Nutzer eine Warnung erhält, dass die Seite nicht sicher sei."
 
 #: ../gateways/payment_gateways.php:72
 msgid "Display a Form Header"
-msgstr ""
+msgstr "Zeigt einen Formular-Header"
 
 #: ../gateways/payment_gateways.php:73
 msgid "Select if you would like to display a header above the payment form."
-msgstr ""
+msgstr "Wählen Sie, ob Sie einen Header über dem Zahlungsformular angezeigen lassen möchten."
 
 #: ../gateways/2checkout/2checkout_vars.php:72
 msgid " 2Checkout.com Debug Mode Is Turned On"
-msgstr ""
+msgstr "2Checkout Debug Modus ist angeschaltet"
 
 #: ../gateways/2checkout/settings.php:17
 msgid "2Checkout settings saved."
-msgstr ""
+msgstr "2Checkout-Einstellungen gespeichert."
 
 #: ../gateways/2checkout/settings.php:52
 msgid "2Checkout Settings"
-msgstr ""
+msgstr "2Checkout-Einstellungen"
 
 #: ../gateways/2checkout/settings.php:67
 msgid "Deactivate 2Checkout IPN?"
-msgstr ""
+msgstr "2Checkout IPN deaktivieren?"
 
 #: ../gateways/2checkout/settings.php:70
 msgid "Activate 2Checkout IPN?"
-msgstr ""
+msgstr "2Checkout IPN aktivieren?"
 
 #: ../gateways/2checkout/settings.php:92
 msgid "2Checkout ID"
-msgstr ""
+msgstr "2Checkout ID"
 
 #: ../gateways/2checkout/settings.php:99
 msgid "2Checkout Username"
-msgstr ""
+msgstr "2Checkout Benutzername"
 
 #: ../gateways/2checkout/settings.php:197
 msgid "Bypass Payment Overview Page"
-msgstr ""
+msgstr "Die Zahlungsübersichtsseite überspringen"
 
 #: ../gateways/2checkout/settings.php:209
 msgid "Turn on Debugging Using the"
-msgstr ""
+msgstr "Schaltet das Debugging an und verwendet"
 
 #: ../gateways/2checkout/settings.php:209
 #: ../gateways/2checkout/settings.php:240
 msgid "2Checkout Sandbox"
-msgstr ""
+msgstr "2Checkout Sandbox"
 
 #: ../gateways/2checkout/settings.php:228
 msgid "Current Button Image"
-msgstr ""
+msgstr "Aktuelles Bild des Buttons"
 
 #: ../gateways/2checkout/settings.php:236
 msgid "Update 2Checkout Settings"
-msgstr ""
+msgstr "2Checkout-Einstellungen aktualisieren"
 
 #: ../gateways/2checkout/settings.php:241
 msgid "In addition to using the 2Checkout Sandbox fetaure. The debugging feature will also output the form varibales to the payment page, send an email to the admin that contains the all 2Checkout variables."
-msgstr ""
+msgstr "Eine Ergänzung zur Verwendung des 2Checkout-Sandbox-Features. Das Debugging-Feature gibt außerdem die Formular-Variablen auf der Zahlungsseite aus und sendet eine Email an den Admin, welche alle 2Checkout-Variablen enthält."
 
 #: ../gateways/2checkout/settings.php:243
 msgid "The 2Checkout Sandbox is a testing environment that is a duplicate of the live 2Checkout site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live 2Checkout environment. Create and manage test accounts, and view emails and API credentials for those test accounts."
-msgstr ""
+msgstr "Die 2Checkout Sandbox ist eine Test-Umgebung, die als Duplikat der Live-2Checkout-Seite funktioniert, außer das kein echtes Geld den BEsitzer wechselt. Die Sandbox erlaubt es Ihnen die komplette Integration zu testen, bevor sie Zahlungen an die Live-2Checkout-Umgebung senden. Erstellen und Verwalten Sie Accounts, und lesen Sie Emails und API Logindaten für diese Testaccounts."
 
 #: ../gateways/2checkout/settings.php:246
 msgid "2Checkout Currency"
-msgstr ""
+msgstr "2Checkout Währung"
 
 #: ../gateways/2checkout/settings.php:247
 msgid "2Checkout uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, select the currency you wish to use. The dropdown lists all currencies that 2Checkout (currently) supports."
-msgstr ""
+msgstr "2Checkout verwendet 3-Zeichen ISO-4217 Codes, um Währungen in Feldern und Variablen zu spezifizieren.</p><p>Der Standard-Währungscode ist US Dollar (USD). Falls Sie eine andere Währung benötigen oder akzeptieren wollen, wählen Sie diese Währung hier aus. Die Dropdown-Liste enthält alle Währungen, die 2Checkout (derzeit) unterstützt."
 
 #: ../gateways/alipay/settings.php:79
 msgid "Alipay partner ID"
-msgstr ""
+msgstr "Alipay Partner ID"
 
 #: ../gateways/authnet/settings.php:93
 msgid "Authorize.net Login ID"
-msgstr ""
+msgstr "Authorize.net Login ID"
 
 #: ../gateways/authnet/settings.php:124
 msgid "Relay Response URL"
-msgstr ""
+msgstr "Relay Response URL"
 
 #: ../gateways/authnet/settings.php:128
 msgid "Account Uses Authorize.net's Development Server"
-msgstr ""
+msgstr "Account nutzt den Authorize.net Development Server"
 
 #: ../gateways/eway/settings.php:80
 msgid "Deactivate eWay IPN?"
-msgstr ""
+msgstr "eWay IPN deaktivieren?"
 
 #: ../gateways/eway/settings.php:83
 msgid "Activate eWay IPN?"
-msgstr ""
+msgstr "eWay IPN aktivieren?"
 
 #: ../gateways/eway/settings.php:104
 msgid "eWay ID"
-msgstr ""
+msgstr "eWay ID"
 
 #: ../gateways/eway/settings.php:112
 msgid "eWay username"
-msgstr ""
+msgstr "eWay Benutzername"
 
 #: ../gateways/eway/settings.php:120
 msgid "Choose Your Region"
-msgstr ""
+msgstr "Wählen Sie Ihre Region"
 
 #: ../gateways/eway/settings.php:137
 msgid "The currency set for your region is"
-msgstr ""
+msgstr "Das Währungsset für Ihre Region besteht aus"
 
 #: ../gateways/eway/settings.php:143
 msgid "Image URL (logo for payment page)"
-msgstr ""
+msgstr "Bild-URL (Das Logo für die Zahlungsseite)"
 
 #: ../gateways/eway/settings.php:147
 msgid "(used for your business/personal logo on the eWay page)"
-msgstr ""
+msgstr "(wird verwendet für Ihre Geschäfts-/Persönliches Logo auf den eWay Seiten)"
 
 #: ../gateways/eway/settings.php:171
 #: ../gateways/eway/settings.php:194
 msgid "eWay Sandbox"
-msgstr ""
+msgstr "eWay Sandbox"
 
 #: ../gateways/eway/settings.php:190
 msgid "Update eWay Settings"
-msgstr ""
+msgstr "eWay-Einstellungen aktualisieren"
 
 #: ../gateways/eway/settings.php:195
 msgid "In addition to using the eWay Sandbox fetaure. The debugging feature will also output the form varibales to the payment page, send an email to the admin that contains the all eWay variables."
-msgstr ""
+msgstr "Eine Ergänzung zur Verwendung des eWay-Sandbox-Features. Das Debugging-Feature gibt außerdem die Formular-Variablen auf der Zahlungsseite aus und sendet eine Email an den Admin, welche alle eWay-Variablen enthält."
 
 #: ../gateways/eway/settings.php:197
 msgid "The eWay Sandbox is a testing environment that is a duplicate of the live eWay site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live eWay environment. Create and manage test accounts, and view emails and API credentials for those test accounts."
-msgstr ""
+msgstr "Die eWay Sandbox ist eine Test-Umgebung, die als Duplikat der Live-eWay-Seite funktioniert, außer das kein echtes Geld den Besitzer wechselt. Die Sandbox erlaubt es Ihnen die komplette Integration zu testen, bevor sie Zahlungen an die Live-eWay-Umgebung senden. Erstellen und Verwalten Sie Accounts, und lesen Sie Emails und API Logindaten für diese Testaccounts."
 
 #: ../gateways/eway/settings.php:201
 msgid "eWay Image URL (logo for payment page)"
-msgstr ""
+msgstr "eWay-Bild-URL (Das Logo für die Zahlungsseite)"
 
 #: ../gateways/eway/settings.php:204
 msgid "The URL of the 150x50-pixel image displayed as your logo in the upper left corner of the eWay checkout pages."
-msgstr ""
+msgstr "Die URL des 150x50-Pixel Bildes, dass als Ihr Logo in der linken oberen Ecke der eWay-Checkout Seiten dargestellt wird"
 
 #: ../gateways/eway/settings.php:211
 msgid "eWay Currency"
-msgstr ""
+msgstr "eWay Währung"
 
 #: ../gateways/eway/settings.php:212
 msgid "eWay uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is British Pounds (GBP). The currency must match the region where you are using eway, so changing the region will automatically change the currency."
-msgstr ""
+msgstr "eWay verwendet 3-Zeichen ISO-4217 Codes, um Währungen in Feldern und Variablen zu spezifizieren.</p><p>Der Standard-Währungscode ist Britische Pfund (GBP). Die Währung muss zu der Region passen, in der sie eWay verwenden, daher erzeugt eine Änderung der Region automatisch eine Änderung der Währung."
 
 #: ../gateways/exact/settings.php:92
 msgid "E-xact Login ID"
-msgstr ""
+msgstr "E-xact Login ID"
 
 #: ../gateways/exact/settings.php:131
 msgid "Account Uses E-xact.com's Development Server"
-msgstr ""
+msgstr "Account nutzt den E-xact.com Development Server"
 
 #: ../gateways/firstdata/settings.php:104
 msgid "Use Verify Peer Option in cURL"
-msgstr ""
+msgstr "Verwende die Verify Peer Option in cURL"
 
 #: ../gateways/firstdata/settings.php:138
 msgid "Place the .pem file in the following folder.  Make sure the .pem file has the same name as your store number:"
-msgstr ""
+msgstr "Plazieren Sie die .pem Datei in den folgenden Ordner. Stellen SIe sicher, dass die .pem Datei ihre Store Number als Dateinamen trägt."
 
 #: ../gateways/firstdata_connect_2/settings.php:105
 msgid "First Data Connect 2 Sandbox? "
-msgstr ""
+msgstr "First Data Connect 2 Sandbox? "
 
 #: ../gateways/firstdata_connect_2/settings.php:118
 msgid "Bypass Payment Overview Page "
-msgstr ""
+msgstr "Die Zahlungsübersichtsseite überspringen"
 
 #: ../gateways/firstdata_connect_2/settings.php:173
 msgid "Time Zone"
-msgstr ""
+msgstr "Zeitzone"
 
 #: ../gateways/firstdata_connect_2/settings.php:174
 msgid "Time zone of the transaction. Valid values are: GMT, EST, CST, MST, PST"
-msgstr ""
+msgstr "Zeitzone der Transaktion. Gültige Werte sind: GMT, EST, CST, MST, PST"
 
 #: ../gateways/ideal/settings.php:38
 msgid "iDEAL by Mollie Settings"
-msgstr ""
+msgstr "iDEAL by Mollie-Einstellungen"
 
 #: ../gateways/ideal/settings.php:78
 msgid "Mollie Partner ID"
-msgstr ""
+msgstr "Mollie Partner ID"
 
 #: ../gateways/ideal/settings.php:85
 msgid "Use iDEAL in test mode?"
-msgstr ""
+msgstr "Verwende iDEAL im Testmodus?"
 
 #: ../gateways/ideal/settings.php:106
 msgid "Update iDEAL Settings"
-msgstr ""
+msgstr "iDEAL-Einstellungen aktualisieren"
 
 #: ../gateways/invoice/settings.php:131
 msgid "Logo URL"
-msgstr ""
+msgstr "URL des Logos"
 
 #: ../gateways/invoice/settings.php:138
 msgid "Invoice Instructions in PDF"
-msgstr ""
+msgstr "Rechnungsanweisungen in PDF"
 
 #: ../gateways/mwarrior/settings.php:113
 msgid "Select the Currency for Your Country"
-msgstr ""
+msgstr "Wählen Sie die Währung für Ihr Land"
 
 #: ../gateways/nab/settings.php:95
 msgid "Use NAB Transact Direct Post in test mode?"
-msgstr ""
+msgstr "Verwende NAB Transact Direct Post im Testmodus?"
 
 #: ../gateways/paypal/paypal_vars.php:82
 msgid "PayPal Debug Mode Is Turned On"
-msgstr ""
+msgstr "PayPal Debug Modus ist angeschaltet"
 
 #: ../gateways/paypal/settings.php:90
 msgid "PayPal ID"
-msgstr ""
+msgstr "PayPal ID"
 
 #: ../gateways/paypal/settings.php:199
 msgid "Shipping Address Options"
-msgstr ""
+msgstr "Optionen für Versandadressen"
 
 #: ../gateways/paypal/settings.php:211
 msgid "Use the Debugging Feature and the"
-msgstr ""
+msgstr "Verwende das Debugging-Feature und die"
 
 #: ../gateways/paypal/settings.php:234
 msgid "For PayPal IPN to work, you need a Business or Premier account."
-msgstr ""
+msgstr "Damit PayPal IPN funktioniert, benötigen Sie ein Business oder Premier Konto."
 
 #: ../gateways/paypal_pro/DoDirectPayment.php:151
 msgid "There was no response from PayPal."
-msgstr ""
+msgstr "Keine Antwort von PayPal erhalten."
 
 #: ../gateways/paypal_pro/settings.php:19
 msgid "PayPal Payments Pro settings saved."
-msgstr ""
+msgstr "PayPal Payments Pro-Einstellungen gespeichert."
 
 #: ../gateways/paypal_pro/settings.php:52
 msgid "PayPal Payments Pro Settings"
-msgstr ""
+msgstr "PayPal Payments Pro-Einstellungen"
 
 #: ../gateways/paypal_pro/settings.php:67
 msgid "Deactivate PayPal Payments Pro?"
-msgstr ""
+msgstr "PayPal Payments Pro deaktivieren?"
 
 #: ../gateways/paypal_pro/settings.php:70
 msgid "Activate PayPal Payments Pro?"
-msgstr ""
+msgstr "PayPal Payments Pro aktivieren?"
 
 #: ../gateways/paypal_pro/settings.php:92
 msgid "PayPal Payments Pro Email"
-msgstr ""
+msgstr "PayPal Payments Pro Email"
 
 #: ../gateways/paypal_pro/settings.php:98
 msgid "PayPal API Username"
-msgstr ""
+msgstr "PayPal API Benutzername"
 
 #: ../gateways/paypal_pro/settings.php:104
 msgid "PayPal API Password"
-msgstr ""
+msgstr "PayPal API Passwort"
 
 #: ../gateways/paypal_pro/settings.php:110
 msgid "PayPal API Signature"
-msgstr ""
+msgstr "PayPal API Signatur"
 
 #: ../gateways/paypal_pro/settings.php:215
 msgid "Use PayPal Payments Pro in Sandbox Mode"
-msgstr ""
+msgstr "Verwende PayPal Payments Pro im Sandbox-Modus"
 
 #: ../gateways/paypal_pro/settings.php:245
 msgid "Update PayPal Payments Pro Settings"
-msgstr ""
+msgstr "PayPal Payments Pro-Einstellungen aktualisieren"
 
 #: ../gateways/paytrace/settings.php:14
 msgid "PayTrace settings saved."
-msgstr ""
+msgstr "PayTrace-Einstellungen gespeichert."
 
 #: ../gateways/paytrace/settings.php:42
 msgid "PayTrace Settings"
-msgstr ""
+msgstr "PayTrace-Einstellungen"
 
 #: ../gateways/paytrace/settings.php:57
 msgid "Deactivate PayTrace?"
-msgstr ""
+msgstr "PayTrace deaktivieren?"
 
 #: ../gateways/paytrace/settings.php:60
 msgid "Activate PayTrace?"
-msgstr ""
+msgstr "PayTrace aktivieren?"
 
 #: ../gateways/paytrace/settings.php:82
 msgid "PayTrace User ID"
-msgstr ""
+msgstr "PayTrace User ID"
 
 #: ../gateways/paytrace/settings.php:88
 msgid "PayTrace User Password"
-msgstr ""
+msgstr "PayTrace Benutzerpasswort"
 
 #: ../gateways/paytrace/settings.php:121
 msgid "Update PayTrace Settings"
-msgstr ""
+msgstr "PayTrace-Einstellungen aktualisieren"
 
 #: ../gateways/quickpay/settings.php:17
 msgid "QuickPay settings saved."
-msgstr ""
+msgstr "QuickPay-Einstellungen gespeichert."
 
 #: ../gateways/quickpay/settings.php:53
 msgid "QuickPay Settings"
-msgstr ""
+msgstr "QuickPay-Einstellungen"
 
 #: ../gateways/quickpay/settings.php:68
 msgid "Deactivate QuickPay IPN?"
-msgstr ""
+msgstr "QuickPay IPN deaktivieren?"
 
 #: ../gateways/quickpay/settings.php:71
 msgid "Activate QuickPay IPN?"
-msgstr ""
+msgstr "QuickPay IPN aktivieren?"
 
 #: ../gateways/quickpay/settings.php:93
 msgid "QuickPay ID"
-msgstr ""
+msgstr "QuickPay ID"
 
 #: ../gateways/quickpay/settings.php:99
 msgid "QuickPay md5 Secret"
-msgstr ""
+msgstr "QuickPay MD5 Secret"
 
 #: ../gateways/quickpay/settings.php:104
 msgid "Payment Window Language"
-msgstr ""
+msgstr "Sprache des Zahlungsfensters"
 
 #: ../gateways/quickpay/settings.php:117
 msgid "(Choose which language the transaction window will use.)"
-msgstr ""
+msgstr "(Wählen Sie die Sprache, die das Transaktionsfenster nutzen soll.)"
 
 #: ../gateways/quickpay/settings.php:133
 msgid "(Automatic Capture means you will automatically deduct the amount from the customer.)"
@@ -522,120 +522,120 @@ msgstr ""
 
 #: ../gateways/quickpay/settings.php:136
 msgid "Currency"
-msgstr ""
+msgstr "Währung"
 
 #: ../gateways/quickpay/settings.php:147
 msgid "Turn on Debugging Using the Sandbox"
-msgstr ""
+msgstr "Schaltet das Debugging an und verwendet die Sandbox"
 
 #: ../gateways/quickpay/settings.php:173
 msgid "Update QuickPay Settings"
-msgstr ""
+msgstr "QuickPay-Einstellungen aktualisieren"
 
 #: ../gateways/realauth/settings.php:16
 msgid "RealAuth settings saved."
-msgstr ""
+msgstr "RealAuth-Einstellungen gespeichert."
 
 #: ../gateways/realauth/settings.php:54
 msgid "RealAuth Settings"
-msgstr ""
+msgstr "RealAuth-Einstellungen"
 
 #: ../gateways/realauth/settings.php:69
 msgid "Deactivate RealAuth Payments?"
-msgstr ""
+msgstr "RealAuth Zahlungen deaktivieren?"
 
 #: ../gateways/realauth/settings.php:72
 msgid "Activate RealAuth Payments?"
-msgstr ""
+msgstr "RealAuth Zahlungen aktivieren?"
 
 #: ../gateways/realauth/settings.php:101
 msgid "Merchant ID"
-msgstr ""
+msgstr "Merchant ID"
 
 #: ../gateways/realauth/settings.php:151
 msgid "Update RealAuth Settings"
-msgstr ""
+msgstr "RealAuth-Einstellungen aktualisieren"
 
 #: ../gateways/realauth/settings.php:157
 msgid "RealAuth Auto Settle"
-msgstr ""
+msgstr "RealAuth Auto Settle"
 
 #: ../gateways/realauth/settings.php:165
 msgid "RealAuth Currency"
-msgstr ""
+msgstr "RealAuth Währung"
 
 #: ../gateways/realauth/settings.php:168
 msgid "RealAuth uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, select the currency you wish to use. The dropdown lists all currencies that RealAuth (currently) supports."
-msgstr ""
+msgstr "RealAuth verwendet 3-Zeichen ISO-4217 Codes, um Währungen in Feldern und Variablen zu spezifizieren.</p><p>Der Standard-Währungscode ist US Dollar (USD). Falls Sie eine andere Währung benötigen oder akzeptieren wollen, wählen Sie diese Währung hier aus. Die Dropdown-Liste enthält alle Währungen, die RealAuth (derzeit) unterstützt."
 
 #: ../gateways/stripe/settings.php:96
 msgid "Stripe Currency Symbol (USD)"
-msgstr ""
+msgstr "Das Währungssymbol mit Streifen versehen (USD)"
 
 #: ../gateways/wepay/settings.php:23
 msgid "WePay settings saved."
-msgstr ""
+msgstr "WePay-Einstellungen gespeichert."
 
 #: ../gateways/wepay/settings.php:50
 msgid "WePay Access Token saved."
-msgstr ""
+msgstr "WePay Access Token gespeichert."
 
 #: ../gateways/wepay/settings.php:89
 msgid "WePay Settings"
-msgstr ""
+msgstr "WePay-Einstellungen"
 
 #: ../gateways/wepay/settings.php:104
 msgid "Deactivate WePay IPN?"
-msgstr ""
+msgstr "WePay IPN deaktivieren?"
 
 #: ../gateways/wepay/settings.php:107
 msgid "Activate WePay IPN?"
-msgstr ""
+msgstr "WePay IPN aktivieren?"
 
 #: ../gateways/wepay/settings.php:137
 msgid "WePay Client ID"
-msgstr ""
+msgstr "WePay Client ID"
 
 #: ../gateways/wepay/settings.php:143
 msgid "WePay Client Secret"
-msgstr ""
+msgstr "WePay Client Secret"
 
 #: ../gateways/wepay/settings.php:155
 msgid "Select the Account to Use"
-msgstr ""
+msgstr "Wählen Sie den zu verwendenden Account"
 
 #: ../gateways/wepay/settings.php:177
 #: ../gateways/wepay/settings.php:218
 msgid "WePay Sandbox"
-msgstr ""
+msgstr "WePay Sandbox"
 
 #: ../gateways/wepay/settings.php:198
 msgid "Update WePay Settings"
-msgstr ""
+msgstr "WePay-Einstellungen aktualisieren"
 
 #: ../gateways/wepay/settings.php:219
 msgid "In addition to using the WePay Sandbox fetaure. The debugging feature will also output the form varibales to the payment page, send an email to the admin that contains the all WePay variables."
-msgstr ""
+msgstr "Eine Ergänzung zur Verwendung des WePay-Sandbox-Features. Das Debugging-Feature gibt außerdem die Formular-Variablen auf der Zahlungsseite aus und sendet eine Email an den Admin, welche alle WePay-Variablen enthält."
 
 #: ../gateways/wepay/settings.php:221
 msgid "The WePay Sandbox is a testing environment that is a duplicate of the live WePay site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live WePay environment. Create and manage test accounts, and view emails and API credentials for those test accounts."
-msgstr ""
+msgstr "Die WePay Sandbox ist eine Test-Umgebung, die als Duplikat der Live-WePay-Seite funktioniert, außer das kein echtes Geld den Besitzer wechselt. Die Sandbox erlaubt es Ihnen die komplette Integration zu testen, bevor sie Zahlungen an die Live-WePay-Umgebung senden. Erstellen und Verwalten Sie Accounts, und lesen Sie Emails und API Logindaten für diese Testaccounts."
 
 #: ../gateways/wepay/settings.php:224
 msgid "WePay Instructions"
-msgstr ""
+msgstr "WePay Anweisungen"
 
 #: ../gateways/wepay/settings.php:225
 msgid "To use WePay, follow these steps:"
-msgstr ""
+msgstr "Um WePay zu verwenden, folgen Sie diesen Schritten:"
 
 #: ../gateways/wepay/settings.php:228
 msgid "At WePay.com (or stage.wepay.com for sandbox) sign up as a user and add an account to your user."
-msgstr ""
+msgstr "Unter WePay.com (oder stage.wepay.com für die Sandbox), registrieren Sie sich als Benutzer und fügen die einen Account zu Ihrem Benutzer hinzu."
 
 #: ../gateways/wepay/settings.php:231
 msgid "Register your instance of Event Espresso as an application in your WePay user profile."
-msgstr ""
+msgstr "Registrieren Sie Ihre Installation von Event Espresso als Anwendung in Ihrem WePay Benutzerprofil."
 
 #: ../gateways/wepay/settings.php:237
 msgid "Anytime you change your id and secret on this page and update your WePay settings, you will see a button to authorize your application."
@@ -643,55 +643,55 @@ msgstr ""
 
 #: ../gateways/wepay/settings.php:240
 msgid "Once your application is authorized, you will be able to select from your available accounts, and update your WePay settings."
-msgstr ""
+msgstr "Sobald Ihre Anwendung authorisiert ist, ist es Ihnen möglich aus den ihnen zur Verfügung stehenden Accounts zu wählen und ihre WePay Einstellungen zu aktualisieren."
 
 #: ../gateways/wepay/settings.php:245
 msgid "WePay Account"
-msgstr ""
+msgstr "WePay Account"
 
 #: ../gateways/wepay/settings.php:246
 msgid "The name of the account you want to use with Event Espresso."
-msgstr ""
+msgstr "Der Name des Accounts, den Sie mit Event Espresso verwenden möchten."
 
 #: ../gateways/worldpay/settings.php:16
 msgid "WorldPay settings saved."
-msgstr ""
+msgstr "WorldPay-Einstellungen gespeichert."
 
 #: ../gateways/worldpay/settings.php:65
 msgid "Deactivate WorldPay IPN?"
-msgstr ""
+msgstr "WorldPay IPN deaktivieren?"
 
 #: ../gateways/worldpay/settings.php:68
 msgid "Activate WorldPay IPN?"
-msgstr ""
+msgstr "WorldPay IPN aktivieren?"
 
 #: ../gateways/worldpay/settings.php:91
 msgid "WorldPay Installation ID"
-msgstr ""
+msgstr "WorldPay Installation ID"
 
 #: ../gateways/worldpay/settings.php:110
 msgid "(used for your business/personal logo on the WorldPay page)"
-msgstr ""
+msgstr "(wird verwendet für Ihre Geschäfts-/Persönliches Logo auf den WorldPay Seiten)"
 
 #: ../gateways/worldpay/settings.php:206
 msgid "Turn on Debugging Using the WorldPay Sandbox?"
-msgstr ""
+msgstr "Das Debugging anschalten und die WorldPay Sandbox verwenden?"
 
 #: ../gateways/worldpay/settings.php:226
 msgid "Update WorldPay Settings"
-msgstr ""
+msgstr "WorldPay-Einstellungen aktualisieren"
 
 #: ../gateways/worldpay/settings.php:232
 msgid "WorldPay Sandbox"
-msgstr ""
+msgstr "WorldPay Sandbox"
 
 #: ../gateways/worldpay/settings.php:233
 msgid "In addition to using the WorldPay Sandbox fetaure. The debugging feature will also output the form varibales to the payment page, send an email to the admin that contains the all WorldPay variables."
-msgstr ""
+msgstr "Eine Ergänzung zur Verwendung des WorldPay-Sandbox-Features. Das Debugging-Feature gibt außerdem die Formular-Variablen auf der Zahlungsseite aus und sendet eine Email an den Admin, welche alle WorldPay-Variablen enthält."
 
 #: ../gateways/worldpay/settings.php:235
 msgid "The WorldPay Sandbox is a testing environment that is a duplicate of the live WorldPay site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live WorldPay environment. Create and manage test accounts, and view emails and API credentials for those test accounts."
-msgstr ""
+msgstr "Die WorldPay Sandbox ist eine Test-Umgebung, die als Duplikat der Live-WorldPay-Seite funktioniert, außer das kein echtes Geld den Besitzer wechselt. Die Sandbox erlaubt es Ihnen die komplette Integration zu testen, bevor sie Zahlungen an die Live-WorldPay-Umgebung senden. Erstellen und Verwalten Sie Accounts, und lesen Sie Emails und API Logindaten für diese Testaccounts."
 
 #: ../gateways/worldpay/settings.php:240
 msgid "This shows the specific the URL to which the gateway should return the relay response for a transaction. This the page should be set in your Worldpay account."
@@ -699,31 +699,31 @@ msgstr ""
 
 #: ../gateways/worldpay/settings.php:243
 msgid "Enabling Payment Response"
-msgstr ""
+msgstr "Aktiviere Zahlungsrückmeldung"
 
 #: ../gateways/worldpay/settings.php:244
 msgid ""
 "As a default the payment response feature is set to OFF by default, to enable this\n"
 "feature:"
-msgstr ""
+msgstr "Standardmäßig ist das Payment Response Feature deaktiviert. Folgen Sie diesen Schritten, um es zu aktivieren:"
 
 #: ../gateways/worldpay/settings.php:247
 msgid "Log in to the Merchant Interface"
-msgstr ""
+msgstr "Loggen Sie sich in das Merchant Interface ein"
 
 #: ../gateways/worldpay/settings.php:248
 msgid "Select Installations from the left hand navigation"
-msgstr ""
+msgstr "Wählen Sie Installations in der linken Navigation"
 
 #: ../gateways/worldpay/settings.php:249
 msgid ""
 "Choose an installation and select the Integration Setup button for either the\n"
 "TEST or PRODUCTION environment"
-msgstr ""
+msgstr "Wählen SIe eine Installation und beim Integration Setup Button entweder die TEST oder die PRODUCTION (echtes Geld) Umgebung"
 
 #: ../gateways/worldpay/settings.php:251
 msgid "Check the Enable Payment Response checkbox"
-msgstr ""
+msgstr "Aktivieren Sie die Checkbox bei Payment Response"
 
 #: ../gateways/worldpay/settings.php:252
 msgid ""
@@ -733,33 +733,33 @@ msgstr ""
 
 #: ../gateways/worldpay/settings.php:254
 msgid "Select the Save Changes button"
-msgstr ""
+msgstr "Klicken Sie auf den Save Changes Button"
 
 #: ../gateways/worldpay/settings.php:257
 msgid ""
 "If your Payment Response URL starts with HTTPS:// you will need to\n"
 "make sure that your server supports either SSL 3.0 or TLS 1.0."
-msgstr ""
+msgstr "Falls Ihre Payment Response URL mit HTTPS:// beginnt, muss Ihr Server entweder SSL 3.0 oder TLS 1.0 unterstützen."
 
 #: ../gateways/worldpay/settings.php:264
 msgid "WorldPay Image URL (logo for payment page)"
-msgstr ""
+msgstr "WorldPayBild-URL (Das Logo für die Zahlungsseite)"
 
 #: ../gateways/worldpay/settings.php:267
 msgid "The URL of the 150x50-pixel image displayed as your logo in the upper left corner of the WorldPay checkout pages."
-msgstr ""
+msgstr "Die URL des 150x50-Pixel Bildes, dass als Ihr Logo in der linken oberen Ecke der WorldPay-Checkout Seiten dargestellt wird"
 
 #: ../gateways/worldpay/settings.php:275
 msgid "WorldPay Currency"
-msgstr ""
+msgstr "WorldPay Währung"
 
 #: ../gateways/worldpay/settings.php:276
 msgid "WorldPay uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, select the currency you wish to use. The dropdown lists all currencies that WorldPay (currently) supports."
-msgstr ""
+msgstr "WorldPay verwendet 3-Zeichen ISO-4217 Codes, um Währungen in Feldern und Variablen zu spezifizieren.</p><p>Der Standard-Währungscode ist US Dollar (USD). Falls Sie eine andere Währung benötigen oder akzeptieren wollen, wählen Sie diese Währung hier aus. Die Dropdown-Liste enthält alle Währungen, die WorldPay (derzeit) unterstützt."
 
 #: ../gateways/worldpay/worldpay_vars.php:49
 msgid "WorldPay Debug Mode Is Turned On"
-msgstr ""
+msgstr "WorldPay Debug Modus ist angeschaltet"
 
 #: ../includes/organization_config.php:565
 msgid "Support License"
@@ -878,72 +878,72 @@ msgstr "Keine Veranstaltungen verfügbar..."
 
 #: ../../event-espresso.trunk/gateways/2checkout/settings.php:101
 msgid "2checkout ID"
-msgstr ""
+msgstr "2checkout ID"
 
 #: ../../event-espresso.trunk/gateways/2checkout/settings.php:206
 msgid "Bypass Payment Confirmation Page"
-msgstr ""
+msgstr "Die Zahlungsbestätigungsseite überspringen"
 
 #: ../../event-espresso.trunk/gateways/2checkout/settings.php:213
 msgid "Turn on Debugging Using the 2checkout Sandbox"
-msgstr ""
+msgstr "Schaltet das Debugging and und verwendet die 2Checkout Sandbox"
 
 #: ../../event-espresso.trunk/gateways/aim/settings.php:98
 msgid "Please enter your Authorize.net Login ID"
-msgstr ""
+msgstr "Bitte geben Sie Ihre Authorize.net Login ID ein"
 
 #: ../../event-espresso.trunk/gateways/authnet/settings.php:196
 msgid "Bypass Payment Overview Page? "
-msgstr ""
+msgstr "Die Zahlungsübersichtsseite überspringen?"
 
 #: ../../event-espresso.trunk/gateways/eway/settings.php:115
 msgid "eway ID"
-msgstr ""
+msgstr "eway ID"
 
 #: ../../event-espresso.trunk/gateways/eway/settings.php:171
 msgid "Bypass Payment Overview Page?"
-msgstr ""
+msgstr "Die Zahlungsübersichtsseite überspringen?"
 
 #: ../../event-espresso.trunk/gateways/eway/settings.php:198
 msgid "Use the Debugging Feature and the eway Sandbox?"
-msgstr ""
+msgstr "Verwende das Debugging-Feature und die eWay-Sandbox?"
 
 #: ../../event-espresso.trunk/gateways/firstdata/settings.php:125
 msgid "Use the Debugging Feature and the FirstData Sandbox? "
-msgstr ""
+msgstr "Verwende das Debugging-Feature und die FirstData-Sandbox?"
 
 #: ../../event-espresso.trunk/gateways/paypal/settings.php:226
 #: ../../event-espresso.trunk/gateways/paypal_pro/settings.php:235
 msgid "Use the Debugging Feature and the PayPal Sandbox"
-msgstr ""
+msgstr "Verwende das Debugging-Feature und die PayPal-Sandbox"
 
 #: ../../event-espresso.trunk/gateways/paypal/settings.php:251
 msgid "PayPal Notes"
-msgstr ""
+msgstr "PayPal Notizen"
 
 #: ../../event-espresso.trunk/gateways/paypal/settings.php:268
 msgid "Helpful Links"
-msgstr ""
+msgstr "Hilfreiche Links"
 
 #: ../../event-espresso.trunk/gateways/paypal_pro/settings.php:113
 msgid "PayPal PRO Email"
-msgstr ""
+msgstr "PayPal PRO Email"
 
 #: ../../event-espresso.trunk/gateways/quickpay/settings.php:104
 msgid "quickpay ID"
-msgstr ""
+msgstr "quickpay ID"
 
 #: ../../event-espresso.trunk/gateways/quickpay/settings.php:156
 msgid "Use the Debugging Feature and the sandbox"
-msgstr ""
+msgstr "Verwende das Debugging-Feature und die Sandbox"
 
 #: ../../event-espresso.trunk/gateways/worldpay/settings.php:112
 msgid "worldpay installation ID"
-msgstr ""
+msgstr "WorldPay Installation ID"
 
 #: ../../event-espresso.trunk/gateways/worldpay/settings.php:226
 msgid "Use the Debugging Feature and the worldpay Sandbox?"
-msgstr ""
+msgstr "Verwende das Debugging-Feature und die WorldPay-Sandbox?"
 
 #: ../../event-espresso.trunk/includes/admin-files/dashboard_widget.php:18
 msgid "Event(s) have been deleted."
@@ -971,23 +971,23 @@ msgstr "Preise wurden in den Papierkorb verschoben."
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/index.php:362
 msgid "Price has been moved to the trash"
-msgstr ""
+msgstr "Preis wurde in den Papierkorb verschoben"
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/index.php:412
 msgid "Price Types have been moved to the trash."
-msgstr ""
+msgstr "Preistypen wurden in den Papierkorb verschoben"
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/index.php:418
 msgid "Price Type has been moved to the trash"
-msgstr ""
+msgstr "Preistyp wurde in den Papierkorb verschoben"
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/index.php:441
 msgid "Price Types hava been restored from trash."
-msgstr ""
+msgstr "Preistypen wurden aus dem Papierkorb wiederhergestellt."
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/index.php:447
 msgid "Price Type has been restored from trash."
-msgstr ""
+msgstr "Preistyp wurde aus dem Papierkorb wiederhergestellt."
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:52
 msgid "Whether this is an Event Price, Discount, Surcharge, or Tax. Default items will apply to ALL new events you create."
@@ -1050,35 +1050,35 @@ msgstr "Steuer"
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:175
 msgid "Choosing a basic type allows us to quickly configure a bunch of other options for you.<br/>All events need to have at least one Base Price type option.<br/>Discounts reduce the price of an event, Surcharges increase the price.<br/>Taxes are applied to the final total."
-msgstr ""
+msgstr "Wenn Sie einen Basistyp wählen, ermöglicht dies uns eine Reihe von Einstellungen für Sie zu konfigurieren.<br/>Alle Veranstaltungen haben mindestens einen Preis des Basispreistyps.<br/>Rabatte reduzieren den Basispreis einer Veranstaltung, Zuschläge erhöhen ihn.<br/>Steuern werden auf den Endpreis angerechnet."
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:184
 msgid "A name for this Price Type."
-msgstr ""
+msgstr "Einen Namen für diesen Preistyp."
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:189
 msgid "Apply to Members Only"
-msgstr ""
+msgstr "Nur für Mitglieder anwenden"
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:200
 msgid "Whether this Price Type will <b>only</b> be available to members that are logged into the site."
-msgstr ""
+msgstr "Ob dieser Preistyp <b>ausschließlich</b> Mitgliedern, die in der Seite eingeloggt sind, zur Verfügung stehen soll."
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:205
 msgid "Raise or Lower Price?"
-msgstr ""
+msgstr "Preis erhöhen/senken?"
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:210
 msgid "Raise"
-msgstr ""
+msgstr "Erhöhen"
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:214
 msgid "Lower"
-msgstr ""
+msgstr "Niedriger"
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:216
 msgid "Whether this Price Type applies a discount that will lower the final price or a surcharge that will raise the final price. (Use raise for base prices)"
-msgstr ""
+msgstr "Ob dieser Preistyp einen Rabatt darstellt, der den finalen Preis mindert, oder einen Zuschlag, der den finalen Preis erhöht. (Verwende Erhöhen für Basispreise)"
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:221
 msgid "Is this a Tax?"
@@ -1106,23 +1106,23 @@ msgstr "Betrag"
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:248
 msgid "Whether this Price Type will be applied as a percentage or applied as a set dollar amount."
-msgstr ""
+msgstr "Ob dieser Preistyp als Prozentsatz oder als absoluten Betrag angewendet wird."
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:253
 msgid "Apply to ALL New Events? "
-msgstr ""
+msgstr "Auf ALLE neuen Veranstaltungen anwenden?"
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:264
 msgid "Setting this to \"Yes\" will make this a <b>Default</b> Price Type that will then be applied to <b>ALL</b> new events."
-msgstr ""
+msgstr "Wählen Sie hier \"Ja\", wird dies ein <b>Standard</b> Preistyp, der anschließend auf <b>ALLE</b> neuen Veranstaltungen angewendet wird."
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:269
 msgid "Order of Application "
-msgstr ""
+msgstr "Reihenfolge der Anmeldung"
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:273
 msgid "The order that Price Types are applied. ."
-msgstr ""
+msgstr "Die Reihenfolge, in der Preistypen angewendet werden."
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/postboxes.php:274
 msgid "Price types are applied sequentially according to their Order, where higher ordered Price Types will affect lower ordered Price Types.<br/>Price types with equal Orders will be applied in parrallel to whatever total preceeds them and will not affect each other. Actual Prices will be set to \"0\" so that they are processed first. Taxes will be always be applied last but their order will still determine if they are applied in parralel or as compound taxes (one tax on top of the other)."
@@ -1130,27 +1130,27 @@ msgstr ""
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/pricing.php:27
 msgid "Manage Event Pricing"
-msgstr ""
+msgstr "Veranstaltungspreise"
 
 #: ../../event-espresso.trunk/includes/admin_screens/pricing/pricing.php:40
 msgid "Global Prices"
-msgstr ""
+msgstr "Globale Preise"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/Transactions.class.php:160
 msgid "Transaction Number"
-msgstr ""
+msgstr "Transaktionsnummer"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/Transactions.class.php:166
 msgid "Transaction Status"
-msgstr ""
+msgstr "Transaktionsstatus"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/Transactions.class.php:176
 msgid "Attendees Registered in this Transaction"
-msgstr ""
+msgstr "Teilnehmer, die mit dieser Transaktion angemeldet sind"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/Transactions.class.php:177
 msgid "Primary Registrant"
-msgstr ""
+msgstr "Primärer Teilnehmer"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/Transactions.class.php:254
 msgid "Gateway Response Message"
@@ -1158,75 +1158,75 @@ msgstr ""
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/Transactions.class.php:265
 msgid "Invoice Number"
-msgstr ""
+msgstr "Rechnungsnummer"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/Transactions.class.php:270
 msgid "Registration Session"
-msgstr ""
+msgstr "Anmeldungssession"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/Transactions.class.php:274
 msgid "Transaction placed from IP"
-msgstr ""
+msgstr "Transaktion abgesendet von IP"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/Transactions.class.php:278
 msgid "Registrant User Agent"
-msgstr ""
+msgstr "User Agent des sich Anmeldenden"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/edit_txn_details_meta_box.template.php:8
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/view_txn_details_meta_box.template.php:16
 msgid "Transaction Items"
-msgstr ""
+msgstr "Transaktionsartikel"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/edit_txn_details_meta_box.template.php:14
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/view_txn_details_meta_box.template.php:22
 msgid "Line Item ID"
-msgstr ""
+msgstr "ID des EInzelpostens"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/edit_txn_details_meta_box.template.php:17
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/view_txn_details_meta_box.template.php:25
 msgid "Ticket Option"
-msgstr ""
+msgstr "Ticketoption"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/edit_txn_details_meta_box.template.php:18
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/view_txn_attendees_meta_box.template.php:11
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/view_txn_details_meta_box.template.php:26
 msgid "Price Paid"
-msgstr ""
+msgstr "bezahlter Preis"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/edit_txn_details_meta_box.template.php:20
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/view_txn_details_meta_box.template.php:28
 msgid "Line Total"
-msgstr ""
+msgstr "Zeilensumme"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/edit_txn_details_meta_box.template.php:42
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/view_txn_details_meta_box.template.php:50
 msgid "Grand Total"
-msgstr ""
+msgstr "Gesamtsumme"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/transaction_details_wrapper.template.php:5
 msgid "Transaction "
-msgstr ""
+msgstr "Transaktion"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/transaction_details_wrapper.template.php:7
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/transactions_overview.template.php:6
 msgid "Transactions Overview"
-msgstr ""
+msgstr "Transaktionsübersicht"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/transaction_details_wrapper.template.php:9
 msgid "Transaction # "
-msgstr ""
+msgstr "Transaktions#"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/transaction_details_wrapper.template.php:11
 msgid "Transaction Status : "
-msgstr ""
+msgstr "Transaktionsstatus:"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/transactions_overview.template.php:16
 msgid "Display Transactions from "
-msgstr ""
+msgstr "Zeige Transaktionen von"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/transactions_overview.template.php:18
 msgid "until"
-msgstr ""
+msgstr "bis"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/view_txn_attendees_meta_box.template.php:8
 msgid "#"
@@ -1234,55 +1234,55 @@ msgstr "#"
 
 #: ../../event-espresso.trunk/includes/admin_screens/transactions/templates/view_txn_details_meta_box.template.php:70
 msgid "Transaction Session Details"
-msgstr ""
+msgstr "Transaktionssession-Details"
 
 #: ../../event-espresso.trunk/includes/classes/EE_Single_Page_Checkout.class.php:769
 msgid "no attendee details submitted"
-msgstr ""
+msgstr "Es wurden keine Teilnehmerdetails übermittelt"
 
 #: ../../event-espresso.trunk/includes/classes/EE_Single_Page_Checkout.class.php:1310
 msgid "You're registration has been completed successfully."
-msgstr ""
+msgstr "Ihre Anmeldung wurde erfolgreich abgeschlossen."
 
 #: ../../event-espresso.trunk/includes/classes/EE_Single_Page_Checkout.class.php:1336
 msgid "We're sorry, but the transaction was declined for the following reasons: <br />"
-msgstr ""
+msgstr "Es tut uns Leid, aber die Transaktion wurde aus den folgenden Gründen abgelehnt: <br />"
 
 #: ../../event-espresso.trunk/includes/classes/EE_Single_Page_Checkout.class.php:1342
 msgid "We're sorry, but an error occured and the transaction could not be completed. Please try again. If problems persist, contact the site administrator."
-msgstr ""
+msgstr "Es tut uns Leid, aber es ist ein Fehler aufgetreten und die Transaktion konnte nicht abgeschlossen werden. Bitte versuchen Sie es noch einmal. Sollte das Problem weiterhin auftreten, bitte kontaktieren Sie den Administrator der Webseite."
 
 #: ../../event-espresso.trunk/includes/event_management/add_new_event.php:113
 #: ../../event-espresso.trunk/includes/event_management/edit_event.php:99
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:1009
 msgid "Save And Close"
-msgstr ""
+msgstr "Speichern und schließen"
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:180
 msgid "View Post"
-msgstr ""
+msgstr "Zeige Artikel"
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:256
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:315
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:559
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:727
 msgid "End Date"
-msgstr ""
+msgstr "Enddatum"
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:258
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:317
 msgid "End Time"
-msgstr ""
+msgstr "Endzeit"
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:260
 msgid "Reg Limit"
-msgstr ""
+msgstr "Teilnehmerlimit"
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:291
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:292
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:375
 msgid "Remove this Event Time"
-msgstr ""
+msgstr "Entferne diese Veranstaltungszeit"
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:293
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:375
@@ -1292,19 +1292,19 @@ msgstr ""
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:438
 msgid "There are currently no Prices set for this Event. Please see the Event Pricing section for more details."
-msgstr ""
+msgstr "Es existierten derzeit kein Preisset für diese Veranstaltung. Bitte gehen Sie für mehr Informationen auf die Verwaltungsseite für die Veranstaltungspreise."
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:441
 msgid "Please enter at lease one Event Price for this Event, or one Default Event Price to ensure that this Event displays and functions properly. Default Event Prices can be set on the <a href=\""
-msgstr ""
+msgstr "Bitte geben Sie mindestens einen Preis für diese Veranstaltung ein, oder einen Standardpreis für die Veranstaltung um sicherzustellen, dass die Veranstaltung richtig angezeigt wird und alle Funktionen korrekt arbeiten. Standard-Veranstaltungspreise können eingestellt werden unter <a href=\""
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:445
 msgid "All Prices, Discounts and Surcharges that are Currently Active for This Event"
-msgstr ""
+msgstr "Alle Preise, Rabatte und Zuschläge, die derzeit für diese Veranstaltung aktiv sind."
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:467
 msgid "inactive price - edit advanced settings to reactivate"
-msgstr ""
+msgstr "Inaktiver Preis - Bearbeite zum Reaktivieren die erweiterten Einstellungen"
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:476
 msgid "close"
@@ -1317,22 +1317,22 @@ msgstr "Bearbeiten: "
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:489
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:666
 msgid "Whether this is an Event Price, Discount, or Surcharge."
-msgstr ""
+msgstr "Ob dies ein Veranstaltungspreis, Rabatt oder Zuschlag ist."
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:525
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:696
 msgid "Registration Limit"
-msgstr ""
+msgstr "Teilnehmerlimit"
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:528
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:699
 msgid "The maximum number of attendees that can be registratered at this Price Level. Leave blank for no limit."
-msgstr ""
+msgstr "Die maximale Anzahl an Teilnehmern, die sich auf diesem Preislevel registrieren kann. Frei lassen für unbegrenzte Anzahl."
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:546
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:714
 msgid "If set to \"Yes\", then you will be able to set the dates for when this price will become active / inactive."
-msgstr ""
+msgstr "Falls auf \"Ja\" gestellt, ist es Ihnen möglich einzustellen, bei welchem Datum dieser Preis aktiv/inaktiv wird."
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:756
 msgid "cancel"
@@ -1340,15 +1340,15 @@ msgstr "Abbrechen"
 
 #: ../../event-espresso.trunk/includes/event_management/event_functions.php:937
 msgid "Dates &amp; Times"
-msgstr ""
+msgstr "Datum &amp; Uhrzeit"
 
 #: ../../event-espresso.trunk/includes/process-registration/ticket_selector.php:268
 msgid "An error occured. No tickets were added for the event.<br/>Please click the back button on your browser and try again."
-msgstr ""
+msgstr "Es ist ein Fehler aufgetreten. Es wurden keine Tickets für die Veranstaltung hinzugefügt.<br/>Bitte klicken Sie auf den Zurück-Button Ihres Browsers und versuchen Sie es erneut."
 
 #: ../../event-espresso.trunk/templates/reg_page_checkout/registration_page_step_1.template.php:119
 msgid "show&nbsp;event&nbsp;questions"
-msgstr ""
+msgstr "Zeige&nbsp;Veranstaltungsfragen"
 
 #: ../../event-espresso.trunk/templates/reg_page_checkout/registration_page_step_2.template.php:60
 msgid "Sub Total: "
@@ -1360,11 +1360,11 @@ msgstr "Dies ist eine kostenlose Veranstaltung, natürlich stellen wir Ihnen auc
 
 #: ../../espresso-calendar.trunk/calendar_help.php:318
 msgid "If enabled, calendar will use jQuery qTip to add tooltip pop-ups for each event with the event details displayed inside (including any images in the event description, resized to fit the tooltip window)."
-msgstr ""
+msgstr "Falls aktiviert, verwendet der Kalender den jQuery qTip verwenden um Tooltip-Popups für jede Veranstaltung mit dargestellten Veranstaltungsdetails anzeigen (inklusive Bildern aus der Veranstaltungsbeschreibung, angepasst an die Größe des Tooltipfensters)."
 
 #: ../../espresso-calendar.trunk/calendar_help.php:321
 msgid "Click here for more information about qTip."
-msgstr ""
+msgstr "Klicken Sie hier für mehr Informationen über qTip."
 
 #: ../../espresso-calendar.trunk/calendar_help.php:327
 msgid "Enable Images In Calendar"
@@ -1372,11 +1372,11 @@ msgstr "Bilder im Kalender aktivieren"
 
 #: ../../espresso-calendar.trunk/calendar_help.php:330
 msgid "Activate this to enable image thumbnails (pulled from the Featured Image box in the event) on your calendar.  <span style=\"color: red; font-weight: bold;\">Note:</span> This may not look good on all themes or may require additional styling.  If you have any problems, please consult our documentation or ask for support in the forums if you need help updating your CSS to work best for your theme."
-msgstr ""
+msgstr "Aktiviere diese Option, um Thumbnails (vom dem Bild aus der Featured Image Box der Veranstaltung) in Ihrem Kalender zu verwenden. <span style=\"color: red; font-weight: bold;\">Hinweis:</span> Dies sieht möglicherweise nicht auf allen Themes gut aus oder erfordert zusätzliches Styling. Falls Probleme auftreten, werfen Sie bitte zuerst einen Blick auf die Dokumentation, oder fragen Sie in den Foren um Unterstützung, falls sie Hilfe benötigen, Ihr CSS an Ihr Theme anzupassen."
 
 #: ../../espresso-calendar.trunk/calendar_help.php:333
 msgid "If you are having trouble with this option turned on, consider disabling the calendar images and instead activating Show Tooltips, and adding an image into the event description.  The image in the event description (and any text) will display in the tooltip pop-up."
-msgstr ""
+msgstr "Falls Probleme auftreten, nachdem Sie diese Option aktiviert haben, besteht auch die Möglichkeit, die Kalenderbilder zu deaktivieren und stattdessen 'Zeige Tooltips' zu aktivieren, und ein Bild in die Veranstaltungsbeschreibung hinzuzufügen. Dadurch wird das Bild (und jeder Text) aus der Beschreibung im Tooltip-Popup anzeigt."
 
 #: ../../espresso-calendar.trunk/calendar_help.php:336
 msgid "More information"
@@ -2022,7 +2022,7 @@ msgstr "Anti-Spam Maßnahme: Bitte geben Sie den folgenden Text ein"
 
 #: ../includes/shortcodes.php:406
 msgid "Submit"
-msgstr "Absenden"
+msgstr "Kostenpflichtig bestellen"
 
 #: ../gateways/gateway_display.php:72
 msgid "Please choose a payment option:"
