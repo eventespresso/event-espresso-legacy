@@ -96,7 +96,7 @@ class PluginUpdateEngineChecker {
 		extract( $options, EXTR_SKIP );
 		$this->optionName = $optionName;
 		$this->checkPeriod = (int) $checkPeriod;
-		$this->api_secret_key = $apikey;
+		$this->api_secret_key = trim($apikey);
 		$this->lang_domain = $lang_domain;
 		$this->plugin_path = $plugin_path;
 		$this->option_key = $option_key;
@@ -208,11 +208,18 @@ class PluginUpdateEngineChecker {
 
 	function trigger_update_check() {
 		//we're just using this to trigger a PUE ping whenever an option matching the given $this->option_key is saved..
-		if ( isset($_REQUEST['page'] ) && $_REQUEST['page'] == $this->options_page_slug )
-			return array_walk( $_REQUEST, array(&$this, 'maybe_trigger_update'), $this->option_key);
-		else {
+		//if ( isset($_REQUEST['page'] ) && $_REQUEST['page'] == $this->options_page_slug ) {
+			$triggered = false;
+			if ( !empty($_POST) ) {
+				foreach ( $_POST as $key => $value ) {
+					$triggered = $this->maybe_trigger_update($value, $key, $this->option_key);
+				}
+				
+			}
+			return $triggered;
+		/*} else {
 			return false;
-		}
+		}*/
 	}
 
 	function maybe_trigger_update($value, $key, $site_key_search_string) {
@@ -270,6 +277,7 @@ class PluginUpdateEngineChecker {
 		if ( !empty($queryArgs) ){
 			$url = add_query_arg($queryArgs, $url);
 		}
+
 		$result = wp_remote_get(
 			$url,
 			$options
@@ -406,11 +414,14 @@ class PluginUpdateEngineChecker {
 		}
 		if ( !empty($allPlugins) ) {
 			foreach ( $allPlugins as $loc => $details ) {
-					if ( preg_match('/'.$this->slug.'/', $loc) ) {
+					//prepare string for match.
+					$slug_match = str_replace('-','\-',$this->slug);
+					if ( !empty($slug_match) && preg_match('/(^'.$slug_match.')(?=\/)/', $loc) ) {
 						update_option('pue_file_loc_'.$this->slug, $loc);
 						return $allPlugins[$loc]['Version'];
 					}
-				} 
+				}
+			delete_option('pue_file_loc_'.$this->slug, $loc); 
 		}
 		return ''; //this should never happen
 	}
