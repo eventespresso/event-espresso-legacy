@@ -94,6 +94,9 @@ if (!function_exists('event_espresso_get_event_details')) {
 			$allow_override = 1;
 		}
 		
+		//If using the [ESPRESSO_VENUE_EVENTS] shortcode
+		$sql .= isset($use_venue_id) && $use_venue_id == true ? " AND v.id = '".$venue_id."' " : '';
+		
 		$sql .= $show_secondary == 'false' ? " AND e.event_status != 'S' " : '';
 		$sql .= $show_deleted == 'false' ? " AND e.event_status != 'D' " : " AND e.event_status = 'D' ";
 		if  ($show_deleted == 'true'){
