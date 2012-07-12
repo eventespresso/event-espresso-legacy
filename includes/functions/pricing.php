@@ -342,12 +342,12 @@ function espresso_attendee_price($atts) {
     /**
      * Check if the attendee is from old age i.e. before 3.1.10
      * */
-    $ice_age = true;
-    $ice_row = $wpdb->get_row($wpdb->prepare("select * from ".EVENTS_ATTENDEE_COST_TABLE." inner join on ".EVENTS_ATTENDEE_TABLE." where registration_id = '%s'",$registration_id));
-    if ( $ice_row !== NULL )
-    {
+   // $ice_age = true;
+   // $ice_row = $wpdb->get_row($wpdb->prepare("select * from ".EVENTS_ATTENDEE_COST_TABLE." inner join ".EVENTS_ATTENDEE_TABLE." on  where registration_id = '%s'",$registration_id));
+    //if ( $ice_row !== NULL )
+    //{
         $ice_age = false;
-    }
+   // }
 
 
     /**
@@ -391,14 +391,14 @@ function espresso_attendee_price($atts) {
         }
         else
         {
-            if($ice_age)
+           /* if($ice_age)
             {
                 $sql = "select amount_pd from ".EVENTS_ATTENDEE_TABLE."  where attendee_session = '%s' order by id limit 1";
                 $total_cost = $wpdb->get_var($wpdb->prepare($sql,$attendee_session));
                 return number_format($total_cost, 2, '.', '');
             }
             else
-            {
+            {*/
                 $primary_registration_id = $registration_id;
                 $rs = $wpdb->get_row($wpdb->prepare("select primary_registration_id from ".EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE." where registration_id = '%s' limit 0,1 ",$registration_id));
                 if ( $rs !== NULL )
@@ -408,7 +408,7 @@ function espresso_attendee_price($atts) {
                 $sql = "select sum(amount_pd) as total from " . EVENTS_ATTENDEE_TABLE . " where registration_id = '%s' ";
                 $total_cost = $wpdb->get_var($wpdb->prepare($sql,$primary_registration_id));
                 return number_format($total_cost, 2, '.', '');
-            }
+            //}
         }
     }
 
