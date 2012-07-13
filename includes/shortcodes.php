@@ -397,7 +397,7 @@ function ee_create_autocomplete_search(){
 		<?php 
 			$sql = "SELECT e.*, ese.start_time, ese.end_time, p.event_cost ";
 			isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= ", v.name venue_name, v.address venue_address, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta " : '';
-			$sql .= " FROM " . EVENTS_DETAIL_TABLE . " E ";
+			$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
 			//$sql .= " JOIN " . EVENTS_CATEGORY_REL_TABLE . " r ON r.cat_id = c.id ";
 			//$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " e ON e.id = r.event_id ";
 			isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " vr ON vr.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = vr.venue_id " : '';
