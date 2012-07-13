@@ -184,6 +184,22 @@ table.price_list td{
  }
 /* End pagination css */
 
+/* Autocomplete */
+input#ee_autocomplete, input#ee_fes_autocomplete{
+	width:400px;
+}
+input#ee_autocomplete{
+	margin-left:15px;
+}
+ul.ui-autocomplete{
+	width:400px;
+	background:#E0E0E0;
+}
+ul.ui-autocomplete li{
+	list-style:none;
+	padding: 5px 10px;
+}
+
 /*
 	Colors and other definitions from what's inherited from the theme's form styles
 	added in 3.1.18.P by Chris Reynolds

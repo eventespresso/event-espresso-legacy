@@ -595,3 +595,18 @@ p.register-link-footer { clear: left; padding-top: 10px; }
 	background:url('../../../images/ajax-loader-large.gif') center no-repeat;
  }
 /* End pagination css */
+
+/* Autocomplete */
+input#ee_autocomplete, input#ee_fes_autocomplete{
+	width:400px;
+}
+input#ee_autocomplete{
+	margin-left:15px;
+}
+ul.ui-autocomplete{
+	width:400px;
+}
+ul.ui-autocomplete li{
+	list-style:none;
+	padding: 5px 10px;
+}
