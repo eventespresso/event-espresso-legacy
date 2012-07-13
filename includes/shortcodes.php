@@ -401,12 +401,12 @@ function ee_create_autocomplete_search(){
 			//$sql .= " JOIN " . EVENTS_CATEGORY_REL_TABLE . " r ON r.cat_id = c.id ";
 			//$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " e ON e.id = r.event_id ";
 			isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " vr ON vr.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = vr.venue_id " : '';
-			$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id= e.id ";
-			$sql .= " JOIN " . EVENTS_PRICES_TABLE . " p ON p.event_id=e.id ";
+			//$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id= e.id ";
+			//$sql .= " JOIN " . EVENTS_PRICES_TABLE . " p ON p.event_id=e.id ";
 			//$sql .= " WHERE c.category_identifier = '" . $category_identifier . "' ";
-			$sql .= " AND e.is_active = 'Y' ";
+			$sql .= " WHERE e.is_active = 'Y' ";
 			$sql .= " AND e.event_status != 'D' ";
-										
+			//echo '<p>$sql = '.$sql.'</p>';							
 			$events = $wpdb->get_results($sql);
 			$num_rows = $wpdb->num_rows;
 										
@@ -445,7 +445,7 @@ function ee_create_autocomplete_search(){
 			
 		</script>
 	<?php
-	
+	//echo '<p>$sql = '.$sql.'</p>';	
 	//Load scripts
 	add_action('wp_footer', 'ee_load_jquery_autocomplete_scripts');	
 	$buffer = ob_get_contents();
