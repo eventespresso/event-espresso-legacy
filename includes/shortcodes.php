@@ -376,22 +376,25 @@ function ee_create_autocomplete_search(){
 	global $wpdb, $espresso_manager, $current_user, $org_options;
 	ob_start();
 	?>
-	<form name="form" method="post" action="<?php echo $_SERVER["REQUEST_URI"] ?>">
-	<input id="autocomplete" />
-		<input id="event_id" name="event_id" type="hidden">
+	<div class="ui-widget">
+		<form name="form" method="post" action="<?php echo $_SERVER["REQUEST_URI"] ?>">
+			<input id="ee_autocomplete" class="ui-autocomplete-input ui-corner-all" />
+			<input id="event_id" name="event_id" type="hidden">
 		</form>
+	</div>
 	<script type="text/javascript" charset="utf-8">
 			//<![CDATA[
 			jQuery(document).ready(function() {
-	//Auto complete
-				jQuery("input#autocomplete").autocomplete({
+				//jQuery('#ee_autocomplete').css('width','400px');
+				//jQuery('.ui-autocomplete li').css(['width','400px');
+				//Auto complete
+				jQuery("input#ee_autocomplete").autocomplete({
+					
 					source: [
+						//Examples:
 						//"c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"
 						//{ label: "Choice1", value: "value1" }
-						<?php 
-								
-				
-			
+		<?php 
 			$sql = "SELECT e.*, ese.start_time, ese.end_time, p.event_cost ";
 			isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= ", v.name venue_name, v.address venue_address, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta " : '';
 			$sql .= " FROM " . EVENTS_DETAIL_TABLE . " E ";
@@ -402,6 +405,7 @@ function ee_create_autocomplete_search(){
 			$sql .= " JOIN " . EVENTS_PRICES_TABLE . " p ON p.event_id=e.id ";
 			//$sql .= " WHERE c.category_identifier = '" . $category_identifier . "' ";
 			$sql .= " AND e.is_active = 'Y' ";
+			$sql .= " AND e.event_status != 'D' ";
 										
 			$events = $wpdb->get_results($sql);
 			$num_rows = $wpdb->num_rows;
@@ -416,7 +420,7 @@ function ee_create_autocomplete_search(){
 					echo '{ url:"?page_id=4&ee='.$event->id.'", value: "'.stripslashes_deep($event->event_name) . $venue_name .'", id: "'.$event->id.'" },';
 				}
 			}
-			?>
+		?>
 							],
 							success: function(data) {
 							  response(jQuery.map(data, function(item) {
@@ -424,13 +428,13 @@ function ee_create_autocomplete_search(){
 									url: item.url,
 									value: item.name
 								}
-							  }))
-							}
-,
-    select: function( event, ui ) {
-      window.location.href = ui.item.url;
-    },
-    minLength: 2
+							  }
+							))
+							},
+							select: function( event, ui ) {
+								window.location.href = ui.item.url;
+							},
+							minLength: 2
 
 
 				});
