@@ -395,7 +395,7 @@ function ee_create_autocomplete_search(){
 						//"c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"
 						//{ label: "Choice1", value: "value1" }
 		<?php 
-			$sql = "SELECT e.*, ese.start_time, ese.end_time, p.event_cost ";
+			$sql = "SELECT e.*, v.city venue_city, v.state venue_state";
 			isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= ", v.name venue_name, v.address venue_address, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta " : '';
 			$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
 			//$sql .= " JOIN " . EVENTS_CATEGORY_REL_TABLE . " r ON r.cat_id = c.id ";
