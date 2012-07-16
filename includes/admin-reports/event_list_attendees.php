@@ -264,24 +264,24 @@ function event_list_attendees() {
 					$phone = $attendee->phone;
 					$quantity = $attendee->quantity > 1 ? '<br />(' . __('Total Attendees', 'event_espresso') . ': ' . $attendee->quantity . ')' : '';
 					//if ($temp_reg_id == '') {
-						$id = $attendee->id;
+					$id = $attendee->id;
 						//$temp_reg_id = $registration_id;
 						//echo 'Temp Reg. Id: '.$registration_id.'<br />';
 		
-						$attended = $attendee->checked_in;
-						$ticket_scanned = $attendee->checked_in_quantity;
-						$amount_pd = $attendee->amount_pd;
-						$payment_status = $attendee->payment_status;
-						$payment_date = $attendee->payment_date;
-						$date = $attendee->date;
-						$event_id = $attendee->event_id;
-						$coupon_code = $attendee->coupon_code;
-						$txn_id = $attendee->txn_id;
-						$txn_type = $attendee->txn_type;
-						$price_option = $attendee->price_option;
-						$event_time = $attendee->event_time;
-						$event_name = $attendee->event_name;
-						$event_date = $attendee->start_date;
+					$attended = $attendee->checked_in;
+					$ticket_scanned = $attendee->checked_in_quantity;
+					$amount_pd = $attendee->amount_pd;
+					$payment_status = $attendee->payment_status;
+					$payment_date = $attendee->payment_date;
+					$date = $attendee->date;
+					$event_id = $attendee->event_id;
+					$coupon_code = $attendee->coupon_code;
+					$txn_id = $attendee->txn_id;
+					$txn_type = $attendee->txn_type;
+					$price_option = $attendee->price_option;
+					$event_time = $attendee->event_time;
+					$event_name = $attendee->event_name;
+					$event_date = $attendee->start_date;
 						
 						
                 ?>
@@ -315,7 +315,9 @@ function event_list_attendees() {
                     <a href="admin.php?page=events&amp;event_admin_reports=resend_email&amp;registration_id=<?php echo $registration_id ?>&amp;event_id=<?php echo $event_id ?>&amp;form_action=resend_email" title="<?php _e('Resend Registration Details', 'event_espresso'); ?>"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>images/icons/email_link.png" width="16" height="16" alt="<?php _e('Resend Registration Details', 'event_espresso'); ?>" /></a>
                     
                     <a href="<?php echo home_url(); ?>/?download_invoice=true&amp;admin=true&amp;registration_id=<?php echo $registration_id ?>" target="_blank"  title="<?php _e('Download Invoice', 'event_espresso'); ?>"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>images/icons/page_white_acrobat.png" width="16" height="16" alt="<?php _e('Download Invoice', 'event_espresso'); ?>" /></a>
+					<?php echo $ticketing_installed == true ? '<a href="'.espresso_ticket_url($id, $registration_id).'" target="_blank"  title="'. __('Download Ticket', 'event_espresso').'"><img src="'. EVENT_ESPRESSO_PLUGINFULLURL .'images/icons/ticket-arrow-icon.png" width="16" height="16" alt="'. __('Download Ticket', 'event_espresso').'" /></a>' : ''; ?>
           <?php 
+				
 				if ($org_options["use_attendee_pre_approval"] == "Y") { 
 			?>
           <br/>
