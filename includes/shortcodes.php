@@ -170,7 +170,11 @@ if (!function_exists('espresso_event_time_sc')) {
 		$event_id = "{$event_id}";
 		$type = "{$type}";
 		$format = "{$format}";
-		return espresso_event_time($event_id, $type, $format);
+		ob_start();
+		espresso_event_time($event_id, $type, $format);
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		return $buffer;
 	}
 
 }
@@ -189,7 +193,11 @@ if (!function_exists('espresso_reg_page_sc')) {
 		$load_espresso_scripts = true; //This tells the plugin to load the required scripts
 		extract(shortcode_atts(array('event_id' => '0'), $atts));
 		$event_id = "{$event_id}";
-		return register_attendees(NULL, $event_id);
+		ob_start();
+		register_attendees(NULL, $event_id);
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		return $buffer;
 	}
 
 }
@@ -208,9 +216,11 @@ if (!function_exists('espresso_reg_form_sc')) {
 		$load_espresso_scripts = true; //This tells the plugin to load the required scripts
 		extract(shortcode_atts(array('event_id' => '0'), $atts));
 		$event_id = "{$event_id}";
-		
-		return register_attendees(NULL, $event_id, true);
-			
+		ob_start();
+		register_attendees(NULL, $event_id, true);
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		return $buffer;
 	}
 
 }
@@ -247,8 +257,11 @@ if (!function_exists('espresso_price_dd_sc')) {
 		global $wpdb, $org_options;
 		extract(shortcode_atts(array('event_id' => '0'), $atts));
 		$event_id = "{$event_id}";
-		$data = event_espresso_price_dropdown($event_id);
-		return $data['category_name'];
+		ob_start();
+		event_espresso_price_dropdown($event_id);
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		return $buffer;
 	}
 
 }
@@ -266,8 +279,11 @@ if (!function_exists('get_espresso_price_sc')) {
 		extract(shortcode_atts(array('event_id' => '0', 'number' => '0'), $atts));
 		$event_id = "{$event_id}";
 		$number = "{$number}";
-
-		return espresso_return_single_price($event_id, $number);
+		ob_start();
+		espresso_return_single_price($event_id, $number);
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		return $buffer;
 	}
 
 }
@@ -449,8 +465,8 @@ function ee_create_autocomplete_search(){
 	//Load scripts
 	add_action('wp_footer', 'ee_load_jquery_autocomplete_scripts');	
 	$buffer = ob_get_contents();
-		ob_end_clean();
-		return $buffer;		
+	ob_end_clean();
+	return $buffer;		
 }
 add_shortcode('EVENT_SEARCH', 'ee_create_autocomplete_search');
 

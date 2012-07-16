@@ -248,13 +248,13 @@ if (!function_exists('register_attendees')) {
                 //'registration' => event_espresso_add_question_groups($question_groups),
                 //'additional_attendees' => $allow_multiple == "Y" && $number_available_spaces > 1 ? event_espresso_additional_attendees($event_id, $additional_limit, $number_available_spaces, '', false, $event_meta) : '<input type="hidden" name="num_people" id="num_people-' . $event_id . '" value="1">',
             );
-            //print_r($all_meta);
-//This function gets the status of the event.
-                $is_active = array();
-                $is_active = event_espresso_get_is_active(0, $all_meta);
-
-				//echo '<p>'.print_r(event_espresso_get_is_active($event_id, $all_meta)).'</p>';;
-
+			
+			//print_r($all_meta);
+			//This function gets the status of the event.
+			$is_active = array();
+			$is_active = event_espresso_get_is_active(0, $all_meta);
+			//echo '<p>'.print_r(event_espresso_get_is_active($event_id, $all_meta)).'</p>';;
+			
             if ($org_options['use_captcha'] == 'Y' && $_REQUEST['edit_details'] != 'true') {
                 ?>
                 <script type="text/javascript">
@@ -297,7 +297,7 @@ if (!function_exists('register_attendees')) {
                     }
                 }//End if ($num_attendees >= $reg_limit) (Shows the regsitration form if enough spaces exist)
             } else {//If there are no results from the query, display this message
-                _e('<h3>This event has expired or is no longer available.</h3>', 'event_espresso');
+                 echo '<h3>'.__('This event has expired or is no longer available.', 'event_espresso').'</h3>';
             }
 
             echo espresso_registration_footer();
