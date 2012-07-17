@@ -2,12 +2,10 @@
 
 if (!function_exists('event_form_build')) {
 
-	function event_form_build($question, $answer = "", $event_id = null, $multi_reg = 0, $extra = array(), $class = 'my_class') {
+	function event_form_build($question, $answer = "", $event_id = null, $multi_reg = 0, $extra = array(), $class = 'my_class', $disabled = '') {
 		if ($question->admin_only == 'Y' && empty($extra['admin_only'])) {
 			return;
 		}
-		//$class = 'class="'.$class.'"';
-        	$disabled = '';
 		$required = '';
 		$attendee_number = isset($extra['attendee_number']) ? $extra['attendee_number'] : '\' + (attendee_num+2) + \'';
 		$price_id = isset($extra['price_id']) ? $extra['price_id'] : 0;
@@ -44,7 +42,7 @@ if (!function_exists('event_form_build')) {
 
 		$label = '<label for="' . $field_name . '">' . $question->question . $required_label . '</label> ';
 		//If the members addon is installed, get the users information if available
-		if (get_option('events_members_active') == 'true') {
+		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true ) {
 			global $current_user;
 			global $user_email;
 			require_once(EVENT_ESPRESSO_MEMBERS_DIR . "user_vars.php"); //Load Members functions
@@ -116,6 +114,7 @@ if (!function_exists('event_form_build')) {
 				}
 
 				if (is_array($answer)) $answer = '';
+				if ($answer == '') $disabled = '';
 				$html .= '<p class="event_form_field">' . $label;
 				
 				$html .= '<input type="text" ' . $required . ' id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '"  name="' . $field_name . $multi_name_adjust . '" size="40" value="' . $answer . '" ' . $disabled . ' /></p>';

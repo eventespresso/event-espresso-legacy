@@ -612,7 +612,7 @@ function espresso_registration_footer() {
 //Gets the current page url. Used for redirecting back to a page
 function event_espresso_cur_pageURL() {
 	$pageURL = 'http';
-	if ($_SERVER["HTTPS"] == "on") {
+	if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {
 		$pageURL .= "s";
 	}
 	$pageURL .= "://";
@@ -637,8 +637,16 @@ if (!function_exists('event_espresso_management_capability')) {
 //Build the form questions. This function can be overridden using the custom files addon
 if (!function_exists('event_espresso_add_question_groups')) {
 
-	function event_espresso_add_question_groups($question_groups, $answer = '', $event_id = null, $multi_reg = 0, $meta = array()) {
-		global $wpdb;
+	function event_espresso_add_question_groups($question_groups, $answer = '', $event_id = null, $multi_reg = 0, $meta = array(), $class = 'my_class') {
+		global $wpdb, $member_options;
+		
+		//If memebers addon is installed, check to see if we want to disable the form fields for members
+		$disabled = '';
+		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true ) {
+			if ( is_user_logged_in() && $member_options['autofilled_editable'] == 'Y' )
+			$disabled = 'disabled="disabled"';
+		}
+				
 		$event_id = empty($_REQUEST['event_id']) ? $event_id : $_REQUEST['event_id'];
 		if (count($question_groups) > 0) {
 			$questions_in = '';
@@ -698,7 +706,7 @@ if (!function_exists('event_espresso_add_question_groups')) {
 							$group_name = $question->group_name;
 						}
 
-						$html .= event_form_build($question, $answer, $event_id, $multi_reg, $meta);
+						$html .= event_form_build($question, $answer, $event_id, $multi_reg, $meta, $class, $disabled);
 					}
 					$html .= $counter == $num_rows ? '</div>' : '';
 				}
