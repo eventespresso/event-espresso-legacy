@@ -116,19 +116,19 @@ function event_list_attendees() {
           <?php _e('Attended', 'event_espresso'); ?>
           </span> <span class="sorting-indicator"></span> </th>
         <?php } ?>
-        <th class="manage-column column-title" id="event" scope="col" title="Click to Sort" style="width: 8%;"> <span>
+        <th class="manage-column column-title" id="event" scope="col" title="Click to Sort" style="width: 13%;"> <span>
           <?php _e('Option', 'event_espresso'); ?>
           </span> <span class="sorting-indicator"></span> </th>
         <th align="center" class="manage-column column-date" id="amount" style="width: 10%;" title="Click to Sort" scope="col"> <span>
           <?php _e('Payment', 'event_espresso'); ?>
           </span> <span class="sorting-indicator"></span> </th>
-        <th class="manage-column column-date" id="payment_type" scope="col" title="Click to Sort" style="width: 10%;"> <span>
+        <th class="manage-column column-date" id="payment_type" scope="col" title="Click to Sort" style="width: 8%;"> <span>
           <?php _e('Type', 'event_espresso'); ?>
           </span> <span class="sorting-indicator"></span> </th>
         <th class="manage-column column-date" id="coupon" scope="col" title="Click to Sort" style="width: 10%;"> <span>
           <?php _e('Coupon', 'event_espresso'); ?>
           </span> <span class="sorting-indicator"></span> </th>
-        <th class="manage-column column-date" id="txn_id" scope="col" title="Click to Sort" style="width: 13%;"> <span>
+        <th class="manage-column column-date" id="txn_id" scope="col" title="Click to Sort" style="width: 10%;"> <span>
           <?php _e('Transaction ID', 'event_espresso'); ?>
           </span> <span class="sorting-indicator"></span> </th>
         <th class="manage-column column-date" id="action" scope="col" title="" style="width: 12%;"><?php _e('Action', 'event_espresso'); ?></th>
