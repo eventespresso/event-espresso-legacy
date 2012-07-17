@@ -40,9 +40,9 @@ function espresso_version() {
 global $espresso_check_for_updates;
 $espresso_check_for_updates = true;
 
-function ee_init_session() {
+function ee_init_session($admin_override = false) {
 	//Keep sessions from loading in the WP admin
-	if ( is_admin() )
+	if ( is_admin() && (!isset($_REQUEST['events']) && !isset($_REQUEST['event_admin_reports'])) )
 		return;
 	global $org_options;
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
