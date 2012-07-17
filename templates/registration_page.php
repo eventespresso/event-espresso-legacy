@@ -286,9 +286,11 @@ if (!function_exists('register_attendees')) {
 
                     <?php
                 } else {
+					global $member_options;
+					//echo "<pre>".print_r($member_options,true)."</pre>";
                     //If enough spaces exist then show the form
                     //Check to see if the Members plugin is installed.
-                    if (!is_user_logged_in() && get_option('events_members_active') == 'true' && $member_only == 'Y') {
+                    if ( !is_user_logged_in() && get_option('events_members_active') == 'true' && ($member_only == 'Y' || $member_options['member_only_all'] == 'Y') ) {
                         event_espresso_user_login();
                     } else {
                         //Serve up the registration form
