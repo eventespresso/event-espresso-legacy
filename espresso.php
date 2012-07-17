@@ -41,6 +41,9 @@ global $espresso_check_for_updates;
 $espresso_check_for_updates = true;
 
 function ee_init_session() {
+	//Keep sessions from loading in the WP admin
+	if ( is_admin() )
+		return;
 	global $org_options;
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	if (!isset($_SESSION)) {
