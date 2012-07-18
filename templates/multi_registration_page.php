@@ -166,7 +166,7 @@ if (!function_exists('multi_register_attendees')) {
 				} else {
 					//If enough spaces exist then show the form
 					//Check to see if the Members plugin is installed.
-					if (!is_user_logged_in() && get_option('events_members_active') == 'true' && $member_only == 'Y') {
+					if (!is_user_logged_in() && defined('EVENTS_MEMBER_REL_TABLE') && $member_only == 'Y') {
 						event_espresso_user_login();
 					} else {
 						//Serve up the registration form

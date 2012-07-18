@@ -14,7 +14,7 @@ function update_event($recurrence_arr = array()) {
      * Will clean up in V 1.2.0
      *
      */
-    if (get_option('event_espresso_re_active') == 1) {
+    if (defined('EVENT_ESPRESSO_RECURRENCE_TABLE')) {
         require_once(EVENT_ESPRESSO_RECURRENCE_FULL_PATH . "functions/re_functions.php");
 
         if ($_POST['recurrence_id'] > 0) {
@@ -445,7 +445,7 @@ function update_event($recurrence_arr = array()) {
         }
 
         ############# MailChimp Integration ###############
-        if (get_option('event_mailchimp_active') == 'true' && $espresso_premium == true) {
+        if (defined('EVENTS_MAILCHIMP_ATTENDEE_REL_TABLE') && $espresso_premium == true) {
             MailChimpController::update_event_list_rel($event_id);
         }
         if (function_exists('espresso_fb_createevent') == 'true' && $espresso_premium == true) {

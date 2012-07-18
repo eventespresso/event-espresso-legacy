@@ -159,7 +159,7 @@ function add_new_event() {
 
 				########## END #################################
 
-				if (get_option('events_members_active') == 'true' && $espresso_premium == true) {
+				if (defined('EVENTS_MEMBER_REL_TABLE') && $espresso_premium == true) {
                 ?>
 		<div id="member-options" class="postbox">
 			<div class="handlediv" title="Click to toggle"><br />
@@ -174,7 +174,7 @@ function add_new_event() {
 		<!-- /event-category -->
 		<?php  }
 
-      if (get_option('event_mailchimp_active') == 'true' && $espresso_premium == true) {
+      if (defined('EVENTS_MAILCHIMP_ATTENDEE_REL_TABLE') && $espresso_premium == true) {
            MailChimpView::event_list_selection();
 				} ?>
 		
@@ -209,7 +209,7 @@ function add_new_event() {
 		</div>
 		<?php	}
 
-			if (get_option('events_groupons_active') == 'true' && $espresso_premium == true) { ?>
+			if (defined('EVENTS_GROUPON_CODES_TABLE') && $espresso_premium == true) { ?>
 		<div id="groupon-options" class="postbox">
 			<div class="handlediv" title="Click to toggle"><br />
 			</div>
@@ -346,7 +346,7 @@ function add_new_event() {
 								<?php /* ?> <p>
                 <br /> <?php echo __('Event Visible On:','event_espresso') . ' <input type="text" size="15" id="visible_on" class="datepicker" name="visible_on" value="" />'; ?> <br />
                                   </p><?php */ ?>
-								<?php echo get_option('event_espresso_re_active') == 1 ? '' : '<p class="recurring-available"><a class="inform" href="http://eventespresso.com/?p=3319" target="_blank" title="Visit eventespresso.com for full details">' . __('Recurring Event Manager Now Available!', 'event_espresso') . '</a></p>'; ?></td>
+								<?php echo defined('EVENT_ESPRESSO_RECURRENCE_TABLE') ? '' : '<p class="recurring-available"><a class="inform" href="http://eventespresso.com/?p=3319" target="_blank" title="Visit eventespresso.com for full details">' . __('Recurring Event Manager Now Available!', 'event_espresso') . '</a></p>'; ?></td>
 							<?php // ADDED TIME REGISTRATION LIMITS  ?>
 							<td class="b"><fieldset id="add-register-times">
 									<legend>
@@ -378,13 +378,13 @@ function add_new_event() {
         /**
          * Load the recurring events form if the add-on has been installed and activated.
          */
-		if (get_option('event_espresso_re_active') == 1 && $espresso_premium == true) {
+		if (defined('EVENT_ESPRESSO_RECURRENCE_TABLE') && $espresso_premium == true) {
 			require_once(EVENT_ESPRESSO_RECURRENCE_FULL_PATH . "functions/re_view_functions.php");
 			event_espresso_re_form();
         }
 	?>
 			<div id="event-pricing" class="postbox">
-				<?php (get_option('events_members_active') == 'true')? $members_active = 'class="members-active"' : $members_active = ''; ?>
+				<?php (defined('EVENTS_MEMBER_REL_TABLE'))? $members_active = 'class="members-active"' : $members_active = ''; ?>
 				<div class="handlediv" title="Click to toggle"><br />
 				</div>
 				<h3 class="hndle"> <span>
@@ -396,7 +396,7 @@ function add_new_event() {
 							<td id="standard-pricing" class="a"><?php event_espresso_multi_price_update($event_id); //Standard pricing ?></td>
 							<?php
 		//If the members addon is installed, define member only event settings
-		if  (get_option('events_members_active') == 'true' && $espresso_premium == true) { ?>
+		if  (defined('EVENTS_MEMBER_REL_TABLE') && $espresso_premium == true) { ?>
 							<td id="member-pricing" class="b"><?php echo event_espresso_member_only_pricing(); //Show the the member only pricing options. ?></td>
 							<?php
 		}

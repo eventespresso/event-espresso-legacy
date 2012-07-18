@@ -874,6 +874,7 @@ function espresso_news_dashboard_widgets() {
 add_action('wp_dashboard_setup', 'espresso_news_dashboard_widgets');
 
 function event_espresso_display_right_column() {
+	global $espresso_premium;
 	ob_start();
 	?>
 			<div id="submitdiv" class="postbox">
