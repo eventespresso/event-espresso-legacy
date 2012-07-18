@@ -343,7 +343,7 @@ function edit_event($event_id = 0) {
 		<?php
 	}
 
-	if (get_option('event_mailchimp_active') == 'true' && $espresso_premium == true) {
+	if (defined('EVENTS_MAILCHIMP_ATTENDEE_REL_TABLE') && $espresso_premium == true) {
 		MailChimpView::event_list_selection();
 	}
 	?>
@@ -382,7 +382,7 @@ function edit_event($event_id = 0) {
 		<?php
 	}
 
-	if (get_option('events_groupons_active') == 'true' && $espresso_premium == true) {
+	if (defined('EVENTS_GROUPON_CODES_TABLE') && $espresso_premium == true) {
 		?>
 		<div id="groupon-options" class="postbox">
 			<div class="handlediv" title="Click to toggle"><br>
@@ -530,7 +530,7 @@ function edit_event($event_id = 0) {
 		/**
 		 * Load the recurring events form if the add-on has been installed.	*
 		 */
-		if (get_option('event_espresso_re_active') == 1 && $espresso_premium == true) {
+		if (defined('EVENT_ESPRESSO_RECURRENCE_TABLE') && $espresso_premium == true) {
 			require_once(EVENT_ESPRESSO_RECURRENCE_FULL_PATH . "functions/re_view_functions.php");
 			//For now, only the recurring events will show the form
 			if ($recurrence_id > 0)

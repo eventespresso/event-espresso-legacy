@@ -372,7 +372,7 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 		/**
 		 * End
 		 */
-		if (get_option('event_mailchimp_active') == 'true' && $espresso_premium == true) {
+		if (defined('EVENTS_MAILCHIMP_ATTENDEE_REL_TABLE') && $espresso_premium == true) {
 			MailChimpController::list_subscribe($event_id, $attendee_id, $fname, $lname, $email);
 		}
 
@@ -461,7 +461,7 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 							/**
 							 * End
 							 */
-							if (get_option('event_mailchimp_active') == 'true' && $espresso_premium == true) {
+							if (defined('EVENTS_MAILCHIMP_ATTENDEE_REL_TABLE') && $espresso_premium == true) {
 								MailChimpController::list_subscribe($event_id, $mailchimp_attendee_id, $v, $att_data_source['x_attendee_lname'][$k], $att_data_source['x_attendee_email'][$k]);
 							}
 							//Added by Imon
@@ -541,7 +541,7 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 
 
 		//Add member data if needed
-		if (get_option('events_members_active') == 'true') {
+		if (defined('EVENTS_MEMBER_REL_TABLE')) {
 			require_once(EVENT_ESPRESSO_MEMBERS_DIR . "member_functions.php"); //Load Members functions
 			require(EVENT_ESPRESSO_MEMBERS_DIR . "user_vars.php"); //Load Members functions
 			if ($userid != 0) {

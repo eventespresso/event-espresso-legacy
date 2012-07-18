@@ -113,7 +113,7 @@ if (!class_exists('Event_Espresso_Widget')) {
 
                 //End
 
-                if (!is_user_logged_in() && get_option('events_members_active') == 'true' && !empty($member_only) && $member_only == 'Y') {
+                if (!is_user_logged_in() && defined('EVENTS_MEMBER_REL_TABLE') && !empty($member_only) && $member_only == 'Y') {
                     //Display a message if the user is not logged in.
                     //_e('Member Only Event. Please ','event_espresso') . event_espresso_user_login_link() . '.';
                 } else {
