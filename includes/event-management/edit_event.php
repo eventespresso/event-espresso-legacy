@@ -327,7 +327,7 @@ function edit_event($event_id = 0) {
 	}
 	########## END #################################
 
-	if (get_option('events_members_active') == 'true' && $espresso_premium == true) {
+	if (defined('EVENT_ESPRESSO_MEMBERS_DIR') && $espresso_premium == true) {
 		?>
 		<div  id="member-options" class="postbox">
 			<div class="handlediv" title="Click to toggle"><br>
@@ -538,7 +538,7 @@ function edit_event($event_id = 0) {
 		}
 		?>
 		<div id="event-pricing" class="postbox">
-					<?php (get_option('events_members_active') == 'true') ? $members_active = 'class="members-active"' : $members_active = ''; ?>
+					<?php (defined('EVENT_ESPRESSO_MEMBERS_DIR')) ? $members_active = 'class="members-active"' : $members_active = ''; ?>
 			<div class="handlediv" title="Click to toggle"><br>
 			</div>
 			<h3 class="hndle"> <span>
@@ -550,7 +550,7 @@ function edit_event($event_id = 0) {
 						<td id="standard-pricing" class="a"><?php event_espresso_multi_price_update($event_id); //Standard pricing ?></td>
 						<?php
 						//If the members addon is installed, define member only event settings
-						if (get_option('events_members_active') == 'true' && $espresso_premium == true) {
+						if (defined('EVENT_ESPRESSO_MEMBERS_DIR') && $espresso_premium == true) {
 							?>
 							<td id="member-pricing" class="b"><?php echo event_espresso_member_only_pricing($event_id); //Show the the member only pricing options.  ?></td>
 	<?php } ?>
