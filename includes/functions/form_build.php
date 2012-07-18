@@ -52,7 +52,7 @@ if (!function_exists('event_form_build')) {
 		$html = '';
 		switch ($question->question_type) {
 			case "TEXT" :
-				if (get_option('events_members_active') == 'true' && (empty($_REQUEST['event_admin_reports']) || $_REQUEST['event_admin_reports'] != 'add_new_attendee')) {
+				if (defined('EVENT_ESPRESSO_MEMBERS_DIR') && (empty($_REQUEST['event_admin_reports']) || $_REQUEST['event_admin_reports'] != 'add_new_attendee')) {
 					if (!empty($question->system_name)) {
 						switch ($question->system_name) {
 							case $question->system_name == 'fname':

@@ -227,7 +227,7 @@ if (!function_exists('event_espresso_price_dropdown')) {
             foreach ($results as $result) {
 
                 // Addition for Early Registration discount
-                if ($early_price_data = early_discount_amount($event_id, $result->event_cost) != false) {
+                if ($early_price_data = early_discount_amount($event_id, $result->event_cost)) {
                     $result->event_cost = $early_price_data['event_price'];
                     $message = sprintf(__(' (including %s early discount) ', 'event_espresso'), $early_price_data['early_disc']);
                 }
