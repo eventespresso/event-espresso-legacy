@@ -134,6 +134,7 @@ function event_espresso_txn() {
 		wp_mail($org_options['contact_email'], $subject, $body);
 		return;
 	}
+	
 	foreach ($active_gateways as $gateway => $path) {
 		event_espresso_require_gateway($gateway . "/init.php");
 	}
@@ -165,7 +166,9 @@ function deal_with_ideal() {
 	if (!empty($_POST['bank_id'])) {
 		$active_gateways = get_option('event_espresso_active_gateways', array());
 		if (!empty($active_gateways['ideal'])) {
-			event_espresso_require_gateway($gateway . '/init.php');
+			foreach ($active_gateways as $gateway => $path) {
+				event_espresso_require_gateway($gateway . "/init.php");
+			}
 			$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
 			espresso_process_ideal($payment_data);
 		}
