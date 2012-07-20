@@ -33,7 +33,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.24.3.P';
+	return '3.1.25.P';
 }
 
 //This tells the system to check for updates to the paid version
