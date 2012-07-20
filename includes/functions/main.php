@@ -643,7 +643,7 @@ if (!function_exists('event_espresso_add_question_groups')) {
 		//If memebers addon is installed, check to see if we want to disable the form fields for members
 		$disabled = '';
 		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true ) {
-			if ( is_user_logged_in() && $member_options['autofilled_editable'] == 'Y' )
+			if ( is_user_logged_in() && $member_options['autofilled_editable'] == 'N' )
 			$disabled = 'disabled="disabled"';
 		}
 				
