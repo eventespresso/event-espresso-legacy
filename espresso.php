@@ -7,7 +7,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.24.3.P
+  Version: 3.1.25.P
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
