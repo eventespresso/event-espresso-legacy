@@ -32,49 +32,51 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 
 <?php
 		$counter = 1; //Counter that will keep track of the first events
-		foreach ( $result as $r ):
-
-		$num_attendees = get_number_of_attendees_reg_limit( $r->id, 'num_attendees' ); //Get the number of attendees
-		$available_spaces = get_number_of_attendees_reg_limit( $r->id, 'available_spaces' ); //Gets a count of the available spaces
-		$number_available_spaces = get_number_of_attendees_reg_limit( $r->id, 'number_available_spaces' ); //Gets the number of available spaces
-		//echo "<pre>$r->id, $num_attendees,$available_spaces,$number_available_spaces</pre>";
-?>
-		<div class="multi_reg_cart_block event-display-boxes ui-widget"  id ="multi_reg_cart_block-<?php echo $r->id ?>">
-
-			<h3 class="event_title ui-widget-header ui-corner-top"><?php echo stripslashes_deep( $r->event_name ) ?> <span class="remove-cart-item"> <img class="ee_delete_item_from_cart" id="cart_link_<?php echo $r->id ?>" alt="Remove this item from your cart" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>images/icons/remove.gif" /> </span> </h3>
-				<div class="event-data-display ui-widget-content ui-corner-bottom">
-					<table id="cart-reg-details" class="event-display-tables">
-						<thead>
-							<tr>
-								<th><?php _e( 'Date', 'event_espresso' ); ?></th>
-								<th><?php _e( 'Time', 'event_espresso' ); ?></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><?php echo event_date_display( $r->start_date, get_option( 'date_format' ) ) ?>
-								<?php /*_e( ' to ', 'event_espresso' ); ?> <?php echo event_date_display( $r->end_date, get_option( 'date_format' ) )*/ ?></td>
-								<td><?php echo event_espresso_time_dropdown( $r->id, 0, 1, $_SESSION['espresso_session']['events_in_session'][$r->id]['start_time_id'] ); ?></td>
-							</tr>
-							<tr>
-								<td colspan="2"><?php echo event_espresso_group_price_dropdown( $r->id, 0, 1, $_SESSION['espresso_session']['events_in_session'][$r->id]['price_id']); ?></td>
-							</tr>
-						</tbody>
-					</table>
-			<?php
-				//Coupons
-				if ( function_exists( 'event_espresso_coupon_registration_page' ) ){
-							// echo event_espresso_coupon_registration_page( $r->use_coupon_code, $r->id, 1 );
-				}//End coupons display
-				?>
-
-				<input type="hidden" name="event_name[<?php echo $r->id; ?>]" value="<?php echo $r->event_name; ?>" />
-			</div><!-- / .event-data-display -->
-		</div><!-- / .event-display-boxes -->
-
-		<?php
-		$counter++;
- 		endforeach;
+		foreach ( $result as $r ){
+			//If the event is still active, then show it.
+			if (event_espresso_get_status($r->id) == 'ACTIVE') {
+				$num_attendees = get_number_of_attendees_reg_limit( $r->id, 'num_attendees' ); //Get the number of attendees
+				$available_spaces = get_number_of_attendees_reg_limit( $r->id, 'available_spaces' ); //Gets a count of the available spaces
+				$number_available_spaces = get_number_of_attendees_reg_limit( $r->id, 'number_available_spaces' ); //Gets the number of available spaces
+				//echo "<pre>$r->id, $num_attendees,$available_spaces,$number_available_spaces</pre>";
+		?>
+				<div class="multi_reg_cart_block event-display-boxes ui-widget"  id ="multi_reg_cart_block-<?php echo $r->id ?>">
+		
+					<h3 class="event_title ui-widget-header ui-corner-top"><?php echo stripslashes_deep( $r->event_name ) ?> <span class="remove-cart-item"> <img class="ee_delete_item_from_cart" id="cart_link_<?php echo $r->id ?>" alt="Remove this item from your cart" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>images/icons/remove.gif" /> </span> </h3>
+						<div class="event-data-display ui-widget-content ui-corner-bottom">
+							<table id="cart-reg-details" class="event-display-tables">
+								<thead>
+									<tr>
+										<th><?php _e( 'Date', 'event_espresso' ); ?></th>
+										<th><?php _e( 'Time', 'event_espresso' ); ?></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><?php echo event_date_display( $r->start_date, get_option( 'date_format' ) ) ?>
+										<?php /*_e( ' to ', 'event_espresso' ); ?> <?php echo event_date_display( $r->end_date, get_option( 'date_format' ) )*/ ?></td>
+										<td><?php echo event_espresso_time_dropdown( $r->id, 0, 1, $_SESSION['espresso_session']['events_in_session'][$r->id]['start_time_id'] ); ?></td>
+									</tr>
+									<tr>
+										<td colspan="2"><?php echo event_espresso_group_price_dropdown( $r->id, 0, 1, $_SESSION['espresso_session']['events_in_session'][$r->id]['price_id']); ?></td>
+									</tr>
+								</tbody>
+							</table>
+					<?php
+						//Coupons
+						if ( function_exists( 'event_espresso_coupon_registration_page' ) ){
+									// echo event_espresso_coupon_registration_page( $r->use_coupon_code, $r->id, 1 );
+						}//End coupons display
+						?>
+		
+						<input type="hidden" name="event_name[<?php echo $r->id; ?>]" value="<?php echo $r->event_name; ?>" />
+					</div><!-- / .event-data-display -->
+				</div><!-- / .event-display-boxes -->
+		
+				<?php
+				$counter++;
+			}
+		}
 		?>
 		<div class="event-display-boxes ui-widget">
 			<div class="mer-event-submit ui-widget-content ui-corner-all">
