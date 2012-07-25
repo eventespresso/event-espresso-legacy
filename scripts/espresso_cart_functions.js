@@ -52,7 +52,7 @@ jQuery(document).ready(function() {
 
         delete_item : function(params){
 
-alert( 'params = ' + params.toSource() );
+		//alert( 'params = ' + params.toSource() );
 
             var _eecart = this;
             _eecart.progress(params.loader_container);
