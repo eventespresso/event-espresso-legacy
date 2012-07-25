@@ -102,7 +102,7 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 				<?php do_action( 'action_hook_espresso_shopping_cart_before_total' ); ?>				
 				<a href="#" id="event_espresso_refresh_total"><?php _e( 'Refresh Total', 'event_espresso' ); ?></a>
 				<span class="event_total_price">
-					<?php _e( 'Total (' . $org_options['currency_symbol'] . '): <span id="event_total_price">' . $_SESSION['espresso_session']['grand_total'], 'event_espresso' ). '</span>'; ?>			
+					<?php _e( 'Total ', 'event_espresso' ) . $org_options['currency_symbol'];?> <span id="event_total_price"><?php echo $_SESSION['espresso_session']['grand_total'];?></span>
 				</span>
 				<?php do_action( 'action_hook_espresso_shopping_cart_after_total' ); ?>
 			</div>
