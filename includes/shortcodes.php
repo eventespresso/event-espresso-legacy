@@ -700,7 +700,7 @@ if (!function_exists('espresso_venue_details_sc')) {
 
 		//Map image class
 		$map_image_class = isset($map_image_class) ? 'class="' . $map_image_class . '"' : 'class="venue_map_image"';
-		$map_image_wrapper_class = isset($map_image_wrapper_class) ? 'class="' . $map_image_wrapper_class . '"' : 'class="map_image_wrapper"';
+		$map_image_wrapper_class = isset($map_image_wrapper_class) ? 'class="' . $map_image_wrapper_class . '">' : 'class="map_image_wrapper">';
 		$map_image_wrapper_start = isset($map_image_wrapper) ? '<' . $map_image_wrapper . ' ' . $map_image_wrapper_class : '<p ' . $map_image_wrapper_class;
 		$map_image_wrapper_end = isset($map_image_wrapper) ? '</' . $map_image_wrapper . '>' : '</p>';
 
