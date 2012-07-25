@@ -46,6 +46,8 @@ if (!function_exists('add_event_espresso_menus')) {
         //EventCategories
         add_submenu_page('event_espresso', __('Event Espresso - Manage Event Categories', 'event_espresso'), __('Categories', 'event_espresso'), apply_filters('espresso_management_capability', 'administrator', $espresso_manager['espresso_manager_categories']), 'event_categories', 'event_espresso_categories_config_mnu');
 
+		do_action( 'action_hook_espresso_add_new_ee_submenu' );
+
         //Discounts
         if (function_exists('event_espresso_discount_config_mnu') && $espresso_premium == true) {
             add_submenu_page('event_espresso', __('Event Espresso - Promotional Codes', 'event_espresso'), __('Promotional Codes', 'event_espresso'), apply_filters('espresso_management_capability', 'administrator', $espresso_manager['espresso_manager_discounts']), 'discounts', 'event_espresso_discount_config_mnu');

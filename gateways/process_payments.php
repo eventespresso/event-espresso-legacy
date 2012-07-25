@@ -67,6 +67,7 @@ function espresso_get_total_cost($payment_data) {
 	}
 	$payment_data['total_cost'] = number_format($payment_data['total_cost'], 2, '.', '');
 	$payment_data['quantity'] = $total_quantity;
+	//printr( $payment_data, '$payment_data' );
 	return $payment_data;
 }
 

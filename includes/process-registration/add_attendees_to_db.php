@@ -132,6 +132,8 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 			$coupon_code = '';
 			$price_type = isset($data_source['price_id']) ? espresso_ticket_information(array('type' => 'ticket', 'price_option' => $data_source['price_id'])) : '';
 		}
+		
+		//$event_cost = apply_filters( 'filter_hook_espresso_cart_grand_total', $event_cost ); 
 
 		//Display the confirmation page
 		if (!empty($data_source['confirm_registration'])) {
@@ -225,7 +227,8 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 		$payment_date = empty($payment_date) ? '' : $payment_date;
 		$coupon_code = empty($coupon_code) ? '' : $coupon_code;
 
-		$sql = array('registration_id' => $registration_id,
+		$columns_and_values = array(
+				'registration_id' => $registration_id,
 				'attendee_session' => $_SESSION['espresso_session']['id'],
 				'lname' => $lname,
 				'fname' => $fname,
@@ -251,16 +254,16 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 				'payment_date' => $payment_date,
 				'event_id' => $event_id,
 				'quantity' => $num_people);
-		$sql_data = array('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',
+		
+		$data_formats = array('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',
 				'%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d');
 
-		//Debugging output
-		/* echo 'Debug: <br />';
-		  print_r($sql);
-		  echo '<br />';
-		  print 'Number of vars: ' . count ($sql);
-		  echo '<br />';
-		  print 'Number of cols: ' . count($sql_data); */
+//		 echo 'Debug: <br />';
+//		  printr($columns_and_values, '$columns_and_values' );
+//		  echo '<br />';
+//		  print 'Number of vars: ' . count ($columns_and_values);
+//		  echo '<br />';
+//		  print 'Number of cols: ' . count($data_formats); 
 
 		if ($num_rows > 0 && $loop_number == 1) {
 			if (!isset($data_source['admin'])) {
@@ -292,7 +295,7 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 		$loop_number++;
 
 		//Add new or updated data
-		if ( !$wpdb->prepare($wpdb->insert(EVENTS_ATTENDEE_TABLE, $sql, $sql_data)) ) {
+		if ( !$wpdb->prepare($wpdb->insert(EVENTS_ATTENDEE_TABLE, $columns_and_values, $data_formats )) ) {
 			$error = true;
 		}
 
@@ -314,24 +317,31 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 		}
 
 		//Add a record for the primary attendee
-		$sql = array('attendee_id' => $attendee_id, 'meta_key' => 'primary_attendee', 'meta_value' => 1);
-		$sql_data = array('%s', '%s', '%s');
-		//Debugging output
-		/* echo 'Debug: <br />';
-		  print_r($sql);
-		  echo '<br />';
-		  print 'Number of vars: ' . count ($sql);
-		  echo '<br />';
-		  print 'Number of cols: ' . count($sql_data); */
-		if ( !$wpdb->prepare($wpdb->insert(EVENTS_ATTENDEE_META_TABLE, $sql, $sql_data)) ) {
+		$columns_and_values = array('attendee_id' => $attendee_id, 'meta_key' => 'primary_attendee', 'meta_value' => 1);
+		$data_formats = array('%s', '%s', '%s');
+		
+//		 echo 'Debug: <br />';
+//		  printr($columns_and_values, '$columns_and_values' );
+//		  echo '<br />';
+//		  print 'Number of vars: ' . count ($columns_and_values);
+//		  echo '<br />';
+//		  print 'Number of cols: ' . count($data_formats); 
+		
+		if ( !$wpdb->prepare($wpdb->insert(EVENTS_ATTENDEE_META_TABLE, $columns_and_values, $data_formats )) ) {
 			$error = true;
 		}
 
-		/**
-		 * Adding attenddee specific cost to events_attendee_cost table
-		 */
-		if (!isset($data_source['admin'])) {
 
+//		Adding attenddee specific cost to events_attendee_cost table
+		 
+		if ( isset($data_source['admin'])) {
+//			echo  '$data_source[\'event_cost\'] = '.$data_source['event_cost']; 
+//			return; 
+			$attendee_quantity = 1;
+			$attendee_cost = $data_source['event_cost'];
+
+		} else {
+		
 			if (isset($att_data_source['price_id'])) {
 				$attendee_price_id = $att_data_source['price_id'];
 				$events_prices = $wpdb->get_row("select * from " . EVENTS_PRICES_TABLE . "  where id = $attendee_price_id ");
@@ -343,10 +353,10 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 				$events_prices = $wpdb->get_row($wpdb->prepare("select * from " . EVENTS_PRICES_TABLE . " where event_id = $event_id"));
 				$attendee_price_id = $events_prices->id;
 			}
-			/*
-			 * Added for seating chart add-on
-			 * If a seat was selected then price of that seating will be used instead of event price
-			 */
+			
+//			 * Added for seating chart add-on
+//			 * If a seat was selected then price of that seating will be used instead of event price
+			 
 			$attendee_quantity = 1;
 			if (isset($data_source['seat_id'])) {
 				$attendee_cost = seating_chart::get_purchase_price($booking_id);
@@ -357,17 +367,23 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 					$attendee_quantity = $data_source['num_people'];
 				}
 			}
-		} else {
-			/* echo  '$data_source[\'event_cost\'] = '.$data_source['event_cost'];
-			  return; */
-			$attendee_quantity = 1;
-			$attendee_cost = $data_source['event_cost'];
+
+			$attendee_cost = apply_filters('filter_hook_espresso_attendee_cost', $attendee_cost );
+
 		}
+
+		//echo '<h1>$attendee_cost : ' . $attendee_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h1>';
+
+
+		
 		$attendee_cost_data = array("attendee_id" => $attendee_id, "quantity" => $attendee_quantity, "cost" => $attendee_cost);
 		/* echo '$attendee_cost_data = ';
 		  print_r($attendee_cost_data);
 		  return; */
 		$wpdb->prepare($wpdb->insert(EVENTS_ATTENDEE_COST_TABLE, $attendee_cost_data));
+
+
+
 
 		/**
 		 * End
@@ -596,6 +612,7 @@ if (!function_exists('event_espresso_add_attendees_to_db_multi')) {
 		$event_name = $count_of_events . ' ' . $org_options['organization'] . __(' events', 'event_espresso');
 
 		$event_cost = $_SESSION['espresso_session']['grand_total'];
+		$event_cost = apply_filters( 'filter_hook_espresso_cart_grand_total', $event_cost ); 
 		$multi_reg = true;
 
 		// If there are events in the session, add them one by one to the attendee table

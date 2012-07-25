@@ -392,8 +392,12 @@ if (!function_exists('event_espresso_delete_item_from_session')) {
 			unset($_SESSION['espresso_session']['coupon_code']);
 			unset($_SESSION['espresso_session']['events_in_session']);
 			unset($_SESSION['espresso_session']['grand_total']);
-		} else
+			do_action( 'action_hook_espresso_zero_vlm_dscnt_in_session' );
+			
+		} else {
 			$_SESSION['espresso_session']['events_in_session'] = $events_in_session;
+		}
+			
 
 
 		echo event_espresso_json_response();
@@ -853,6 +857,7 @@ if (!function_exists('event_espresso_clear_session')) {
 	function event_espresso_clear_session() {
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$_SESSION['espresso_session'] = '';
+		do_action( 'action_hook_espresso_zero_vlm_dscnt_in_session' ); 
 	}
 
 }
