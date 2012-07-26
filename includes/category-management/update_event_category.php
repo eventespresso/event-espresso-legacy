@@ -7,9 +7,9 @@ function update_event_category(){
 	$category_desc = esc_html($_REQUEST['category_desc']); 
 	$display_category_desc = $_REQUEST['display_desc'];
 	
-	$category_meta['use_pickers'] = $_REQUEST['use_pickers'];
-	$category_meta['event_background'] = $_REQUEST['event_background'];
-	$category_meta['event_text_color'] = $_REQUEST['event_text_color'];
+	$category_meta['use_pickers'] = isset($_REQUEST['use_pickers']) && !empty($_REQUEST['use_pickers']) ? $_REQUEST['use_pickers'] : '';
+	$category_meta['event_background'] = isset($_REQUEST['event_background']) && !empty($_REQUEST['event_background']) ? $_REQUEST['event_background'] : '' ;
+	$category_meta['event_text_color'] = isset($_REQUEST['event_text_color']) && !empty($_REQUEST['event_text_color']) ? $_REQUEST['event_text_color'] : '' ;
 	//echo "<pre>".print_r($_POST,true)."</pre>";
 	$category_meta = serialize($category_meta);
 	
