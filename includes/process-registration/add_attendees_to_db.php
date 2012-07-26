@@ -375,6 +375,9 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 		if (defined('EVENTS_MAILCHIMP_ATTENDEE_REL_TABLE') && $espresso_premium == true) {
 			MailChimpController::list_subscribe($event_id, $attendee_id, $fname, $lname, $email);
 		}
+		
+		//Defining the $base_questions variable in case there are no additional attendee questions
+		$base_questions = $questions;
 
 		//Since main attendee and additional attendees may have different questions,
 		//$attendee_number check for 2 because is it statically set at 1 first and is incremented for the primary attendee above, hence 2
@@ -389,6 +392,11 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 			}
 		} else {
 			$questions = $event_meta['add_attendee_question_groups'];
+			
+			if ( empty($questions) ){
+				$questions = $base_questions;
+			}
+			
 			//Debug
 			//echo "<pre>".print_r($questions,true)."</pre>";
 
