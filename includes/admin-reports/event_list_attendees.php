@@ -315,7 +315,7 @@ function event_list_attendees() {
                     <a href="admin.php?page=events&amp;event_admin_reports=resend_email&amp;registration_id=<?php echo $registration_id ?>&amp;event_id=<?php echo $event_id ?>&amp;form_action=resend_email" title="<?php _e('Resend Registration Details', 'event_espresso'); ?>"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>images/icons/email_link.png" width="16" height="16" alt="<?php _e('Resend Registration Details', 'event_espresso'); ?>" /></a>
                     
                     <a href="<?php echo home_url(); ?>/?download_invoice=true&amp;admin=true&amp;registration_id=<?php echo $registration_id ?>" target="_blank"  title="<?php _e('Download Invoice', 'event_espresso'); ?>"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>images/icons/page_white_acrobat.png" width="16" height="16" alt="<?php _e('Download Invoice', 'event_espresso'); ?>" /></a>
-					<?php echo $ticketing_installed == true ? '<a href="'.espresso_ticket_url($id, $registration_id).'" target="_blank"  title="'. __('View/Download Ticket', 'event_espresso').'"><img src="'. EVENT_ESPRESSO_PLUGINFULLURL .'images/icons/ticket-arrow-icon.png" width="16" height="16" alt="'. __('Download Ticket', 'event_espresso').'" /></a>' : ''; ?>
+					<?php echo $ticketing_installed == true && function_exists('espresso_ticket_url') ? '<a href="'.espresso_ticket_url($id, $registration_id).'" target="_blank"  title="'. __('View/Download Ticket', 'event_espresso').'"><img src="'. EVENT_ESPRESSO_PLUGINFULLURL .'images/icons/ticket-arrow-icon.png" width="16" height="16" alt="'. __('Download Ticket', 'event_espresso').'" /></a>' : ''; ?>
           <?php 
 				
 				if ($org_options["use_attendee_pre_approval"] == "Y") { 
