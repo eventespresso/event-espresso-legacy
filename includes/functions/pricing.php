@@ -146,6 +146,7 @@ if (!function_exists('event_espresso_get_final_price')) {
 		if (empty($surcharge))
 			$surcharge = 0;
 		$event_cost = $event_cost + $surcharge;
+		
 		return empty($event_cost) ? 0 : $event_cost;
 	}
 

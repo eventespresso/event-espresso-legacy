@@ -21,9 +21,11 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 
 
 			$sql = "SELECT e.* FROM " . EVENTS_DETAIL_TABLE . " e ";
+			$sql = apply_filters( 'filter_hook_espresso_shopping_cart_SQL_select', $sql );
 			$sql .= " WHERE e.id in ($events_IN) ";
 			$sql .= " AND e.event_status != 'D' ";
 			$sql .= " ORDER BY e.start_date ";
+//echo '<h4>$sql : ' . $sql . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 			$result = $wpdb->get_results( $sql );
 ?>
@@ -70,6 +72,8 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 						?>
 		
 						<input type="hidden" name="event_name[<?php echo $r->id; ?>]" value="<?php echo $r->event_name; ?>" />
+						<?php do_action_ref_array( 'action_hook_espresso_add_to_multi_reg_cart_block', array( $r ) ); ?>
+						
 					</div><!-- / .event-data-display -->
 				</div><!-- / .event-display-boxes -->
 		
@@ -94,11 +98,13 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 				<input onkeydown="if(event.keyCode==13) {document.getElementById('event_espresso_refresh_total').focus(); return false;}" type="text" name="event_espresso_coupon_code" id ="event_espresso_coupon_code" value="<?php echo $_SESSION['espresso_session']['coupon_code']; ?>"/>
 			</div><?php */?>
 
-			<div id="event_espresso_total_wrapper" class="clearfix event-data-display">
-					<a href="#" id="event_espresso_refresh_total"><?php _e( 'Refresh Total', 'event_espresso' ); ?></a>
+			<div id="event_espresso_total_wrapper" class="clearfix event-data-display">			
+				<?php do_action( 'action_hook_espresso_shopping_cart_before_total' ); ?>				
+				<a href="#" id="event_espresso_refresh_total"><?php _e( 'Refresh Total', 'event_espresso' ); ?></a>
 				<span class="event_total_price">
-					<?php _e( 'Total (' . $org_options['currency_symbol'] . '): <span id="event_total_price">' . $_SESSION['espresso_session']['grand_total'], 'event_espresso' ). '</span>'; ?>
+					<?php _e( 'Total ', 'event_espresso' ) . $org_options['currency_symbol'];?> <span id="event_total_price"><?php echo $_SESSION['espresso_session']['grand_total'];?></span>
 				</span>
+				<?php do_action( 'action_hook_espresso_shopping_cart_after_total' ); ?>
 			</div>
 
 			<input type="submit" class="submit btn_event_form_submit ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" name="Continue" id="event_espresso_continue_registration" value="<?php _e( 'Finish Registration', 'event_espresso' ); ?>" />

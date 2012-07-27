@@ -52,6 +52,8 @@ jQuery(document).ready(function() {
 
         delete_item : function(params){
 
+		//alert( 'params = ' + params.toSource() );
+
             var _eecart = this;
             _eecart.progress(params.loader_container);
             var data = {
@@ -115,12 +117,14 @@ jQuery(document).ready(function() {
 
         return false;
 
-
     });
+ 
+
+
 
     jQuery('.ee_delete_item_from_cart').live('click',function(){
-
-        var data = {
+ 
+       var data = {
             item_type: 'event',
             id : jQuery(this).attr('id'),
             loader_container: jQuery(this).parent(),
@@ -128,12 +132,14 @@ jQuery(document).ready(function() {
 
         }
 
-        EECART.delete_item(data);
-
+         EECART.delete_item(data);
+	 
         return false;
 
-
     });
+ 
+
+
 
     jQuery('#event_espresso_refresh_total').click(function(){
 
