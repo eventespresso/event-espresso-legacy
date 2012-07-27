@@ -50,6 +50,7 @@ function edit_event_category(){
 			echo select_input('display_desc', $values, $display_category_desc);
    		?>
 				</p>
+				<?php global $espresso_premium; if ($espresso_premium == true){?>
 				<table class="form-table">
 					<tbody>
 						<tr>
@@ -79,6 +80,7 @@ function edit_event_category(){
 						</tr>
 					</tbody>
 				</table>
+				<?php }?>
 				<div id="categorydescriptiondivrich" class="postarea">
 					<p class="section-heading">
 						<?php _e('Category Description','event_espresso'); ?>

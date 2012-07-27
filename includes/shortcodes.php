@@ -57,6 +57,61 @@ if (!function_exists('show_event_category')) {
 add_shortcode('EVENT_ESPRESSO_CATEGORY', 'show_event_category');
 
 /*
+ From: http://eventespresso.com/topic/show-categories/
+  Event Categories
+  Displays a list of events by category
+  [EVENT_ESPRESSO_CATEGORIES cats="1,2,3,4" links="76,79,86,88"]>
+ cats = the categorie id you want to show       links = the page that this category is shown on
+ */
+if (!function_exists('show_categories')) {
+    function show_categories($args) {
+        global $wpdb;
+    
+        define("EVENTS_CATEGORY_TABLE", $wpdb->prefix . "events_category_detail");        
+        $catsToShow = explode(",", $args['cats']);
+        $pageLinks = explode(",", $args['links']);
+        $whereCondition = '';
+        if($catsToShow){
+            foreach($catsToShow as $catKey => $cat){
+                if($catKey == 0)
+                    $whereCondition .= "WHERE id='".$cat."'";
+                else
+                    $whereCondition .= "OR id='".$cat."'";
+            }
+        }
+        
+        //$html = print_r($catsToShow);
+        //Category sql
+        $sql .= 'SELECT * FROM `'.$wpdb->prefix . 'events_category_detail` '.$whereCondition;
+        
+        $categories = $wpdb->get_results($sql);
+        if($categories){        
+        //$html = print_r($categories);    
+            foreach($categories as $fullKey => $category){
+                $html  .= '<div class="cat-box"> ';
+                
+                $teaserText = htmlspecialchars_decode($category->category_desc);      //Gets text and limits it by a word count
+                $teaserText = preg_replace("/<p[^>]*?>/", "", $teaserText);
+                $teaserText = str_replace("</p>", "<br />", $teaserText); 
+                $intro = strip_tags($teaserText, '<br>'); // use if you want to strip all tags out of the first paragraph
+                $wordLimit = 150;      
+                $intro = substr($intro, 0, $wordLimit);
+                 //echo '<p>'.$intro.' ....</p>';
+                
+                $html .= '<div class="catInfo"><h3>'.$category->category_name.'</h3><p>'.$intro.'</p></div>';
+                $html .= '<div class="linkBox"><a href='.get_permalink($pageLinks[$fullKey]).' title="'.$category->category_name.'" >View Information</a></div>';
+                $html .= '</div>';
+            }
+            return $html;
+        }else{
+            return 'Something Went wrong, please make sure the shortcode is entered correctly';    
+        }
+        
+    }
+}
+add_shortcode('EVENT_ESPRESSO_CATEGORIES', 'show_categories');
+
+/*
  *
  * List of Attendees
  * Displays a lsit of attendees

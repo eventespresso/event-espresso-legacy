@@ -4,51 +4,51 @@
 function organization_config_mnu() {
 	global $org_options, $espresso_premium, $espresso_check_for_updates;
 	if (isset($_POST['update_org'])) {
-		$org_options['organization'] = stripslashes_deep($_POST['org_name']);
-		$org_options['organization_street1'] = $_POST['org_street1'];
-		$org_options['organization_street2'] = $_POST['org_street2'];
-		$org_options['organization_city'] = $_POST['org_city'];
-		$org_options['organization_state'] = $_POST['org_state'];
-		$org_options['organization_zip'] = $_POST['org_zip'];
-		$org_options['organization_country'] = $_POST['org_country'];
-		$org_options['contact_email'] = $_POST['email'];
-		$org_options['expire_on_registration_end'] = $_POST['expire_on_registration_end'];
-		$org_options['event_page_id'] = $_POST['event_page_id'];
-		$org_options['return_url'] = $_POST['return_url'];
-		$org_options['cancel_return'] = $_POST['cancel_return'];
-		$org_options['notify_url'] = $_POST['notify_url'];
-		$org_options['events_in_dasboard'] = $_POST['events_in_dasboard'];
-		$org_options['default_mail'] = $_POST['default_mail'];
-		$org_options['payment_subject'] = $_POST['payment_subject'];
-		$org_options['payment_message'] = esc_html($_POST['payment_message']);
-		$org_options['message'] = esc_html($_POST['success_message']);
-		$org_options['email_before_payment'] = $_POST['email_before_payment'];
-		$org_options['email_fancy_headers'] = $_POST['email_fancy_headers'];
-		$org_options['use_captcha'] = $_POST['use_captcha'];
-		$org_options['recaptcha_publickey'] = $_POST['recaptcha_publickey'];
-		$org_options['recaptcha_privatekey'] = $_POST['recaptcha_privatekey'];
-		$org_options['recaptcha_theme'] = $_POST['recaptcha_theme'];
-		$org_options['recaptcha_width'] = $_POST['recaptcha_width'];
-		$org_options['recaptcha_language'] = $_POST['recaptcha_language'];
-		$org_options['espresso_dashboard_widget'] = $_POST['espresso_dashboard_widget'];
-		$org_options['time_reg_limit'] = $_POST['time_reg_limit'];
-		$org_options['use_attendee_pre_approval'] = $_POST['use_attendee_pre_approval'];
+		$org_options['organization'] = isset($_POST['org_name']) && !empty($_POST['org_name']) ? stripslashes_deep($_POST['org_name']) : '';
+		$org_options['organization_street1'] = isset($_POST['org_street1']) && !empty($_POST['org_street1']) ? $_POST['org_street1'] : '';
+		$org_options['organization_street2'] = isset($_POST['org_street2']) && !empty($_POST['org_street2']) ? $_POST['org_street2'] : '';
+		$org_options['organization_city'] = isset($_POST['org_city']) && !empty($_POST['org_city']) ? $_POST['org_city'] : '';
+		$org_options['organization_state'] = isset($_POST['org_state']) && !empty($_POST['org_state']) ? $_POST['org_state'] : '';
+		$org_options['organization_zip'] = isset($_POST['org_zip']) && !empty($_POST['org_zip']) ? $_POST['org_zip'] : '';
+		$org_options['organization_country'] = isset($_POST['org_country']) && !empty($_POST['org_country']) ? $_POST['org_country'] : '';
+		$org_options['contact_email'] = isset($_POST['email']) && !empty($_POST['email']) ? $_POST['email'] : '';
+		$org_options['expire_on_registration_end'] = isset($_POST['expire_on_registration_end']) && !empty($_POST['expire_on_registration_end']) ? $_POST['expire_on_registration_end'] : '';
+		$org_options['event_page_id'] = isset($_POST['event_page_id']) && !empty($_POST['event_page_id']) ? $_POST['event_page_id'] : '';
+		$org_options['return_url'] = isset($_POST['return_url']) && !empty($_POST['return_url']) ? $_POST['return_url'] : '';
+		$org_options['cancel_return'] = isset($_POST['cancel_return']) && !empty($_POST['cancel_return']) ? $_POST['cancel_return'] : '';
+		$org_options['notify_url'] = isset($_POST['notify_url']) && !empty($_POST['notify_url']) ? $_POST['notify_url'] : '';
+		$org_options['events_in_dasboard'] = isset($_POST['events_in_dasboard']) && !empty($_POST['events_in_dasboard']) ? $_POST['events_in_dasboard'] : '';
+		$org_options['default_mail'] = isset($_POST['default_mail']) && !empty($_POST['default_mail']) ? $_POST['default_mail'] : '';
+		$org_options['payment_subject'] = isset($_POST['payment_subject']) && !empty($_POST['payment_subject']) ? $_POST['payment_subject'] : '';
+		$org_options['payment_message'] = isset($_POST['payment_message']) && !empty($_POST['payment_message']) ? esc_html($_POST['payment_message']) : '';
+		$org_options['message'] = isset($_POST['success_message']) && !empty($_POST['success_message']) ? esc_html($_POST['success_message']) : '';
+		$org_options['email_before_payment'] = isset($_POST['email_before_payment']) && !empty($_POST['email_before_payment']) ? $_POST['email_before_payment'] : '';
+		$org_options['email_fancy_headers'] = isset($_POST['email_fancy_headers']) && !empty($_POST['email_fancy_headers']) ? $_POST['email_fancy_headers'] : '';
+		$org_options['use_captcha'] = isset($_POST['use_captcha']) && !empty($_POST['use_captcha']) ? $_POST['use_captcha'] : '';
+		$org_options['recaptcha_publickey'] = isset($_POST['recaptcha_publickey']) && !empty($_POST['recaptcha_publickey']) ? $_POST['recaptcha_publickey'] : '';
+		$org_options['recaptcha_privatekey'] = isset($_POST['recaptcha_privatekey']) && !empty($_POST['recaptcha_privatekey']) ? $_POST['recaptcha_privatekey'] : '';
+		$org_options['recaptcha_theme'] = isset($_POST['recaptcha_theme']) && !empty($_POST['recaptcha_theme']) ? $_POST['recaptcha_theme'] : '';
+		$org_options['recaptcha_width'] = isset($_POST['recaptcha_width']) && !empty($_POST['recaptcha_width']) ? $_POST['recaptcha_width'] : '';
+		$org_options['recaptcha_language'] = isset($_POST['recaptcha_language']) && !empty($_POST['recaptcha_language']) ? $_POST['recaptcha_language'] : '';
+		$org_options['espresso_dashboard_widget'] = isset($_POST['espresso_dashboard_widget']) && !empty($_POST['espresso_dashboard_widget']) ? $_POST['espresso_dashboard_widget'] : '';
+		$org_options['time_reg_limit'] = isset($_POST['time_reg_limit']) && !empty($_POST['time_reg_limit']) ? $_POST['time_reg_limit'] : '';
+		$org_options['use_attendee_pre_approval'] = isset($_POST['use_attendee_pre_approval']) && !empty($_POST['use_attendee_pre_approval']) ? $_POST['use_attendee_pre_approval'] : '';
 		if (!empty($_POST['event_ssl_active']))
-			$org_options['event_ssl_active'] = $_POST['event_ssl_active'];
-		$org_options['show_pending_payment_options'] = $_POST['show_pending_payment_options'];
-		$org_options['use_venue_manager'] = $_POST['use_venue_manager'];
-		$org_options['use_personnel_manager'] = $_POST['use_personnel_manager'];
-		$org_options['use_event_timezones'] = $_POST['use_event_timezones'];
-		$org_options['full_logging'] = $_POST['full_logging'];
-		$org_options['surcharge'] = $_POST['surcharge'];
-		$org_options['surcharge_type'] = $_POST['surcharge_type'];
-		$org_options['surcharge_text'] = $_POST['surcharge_text'];
-		$org_options['show_reg_footer'] = $_POST['show_reg_footer'];
-		$org_options['affiliate_id'] = $_POST['affiliate_id'];
-		$org_options['site_license_key'] = $_POST['site_license_key'];
-		$org_options['default_payment_status'] = $_POST['default_payment_status'];
+			$org_options['event_ssl_active'] = isset($_POST['event_ssl_active']) && !empty($_POST['event_ssl_active']) ? $_POST['event_ssl_active'] : '';
+		$org_options['show_pending_payment_options'] = isset($_POST['show_pending_payment_options']) && !empty($_POST['show_pending_payment_options']) ? $_POST['show_pending_payment_options'] : '';
+		$org_options['use_venue_manager'] = isset($_POST['use_venue_manager']) && !empty($_POST['use_venue_manager']) ? $_POST['use_venue_manager'] : '';
+		$org_options['use_personnel_manager'] = isset($_POST['use_personnel_manager']) && !empty($_POST['use_personnel_manager']) ? $_POST['use_personnel_manager'] : '';
+		$org_options['use_event_timezones'] = isset($_POST['use_event_timezones']) && !empty($_POST['use_event_timezones']) ? $_POST['use_event_timezones'] : '';
+		$org_options['full_logging'] = isset($_POST['full_logging']) && !empty($_POST['full_logging']) ? $_POST['full_logging'] : '';
+		$org_options['surcharge'] = isset($_POST['surcharge']) && !empty($_POST['surcharge']) ? $_POST['surcharge'] : '';
+		$org_options['surcharge_type'] = isset($_POST['surcharge_type']) && !empty($_POST['surcharge_type']) ? $_POST['surcharge_type'] : '';
+		$org_options['surcharge_text'] = isset($_POST['surcharge_text']) && !empty($_POST['surcharge_text']) ? $_POST['surcharge_text'] : '';
+		$org_options['show_reg_footer'] = isset($_POST['show_reg_footer']) && !empty($_POST['show_reg_footer']) ? $_POST['show_reg_footer'] : '';
+		$org_options['affiliate_id'] = isset($_POST['affiliate_id']) && !empty($_POST['affiliate_id']) ? $_POST['affiliate_id'] : '';
+		$org_options['site_license_key'] = isset($_POST['site_license_key']) && !empty($_POST['site_license_key']) ? $_POST['site_license_key'] : '';
+		$org_options['default_payment_status'] = isset($_POST['default_payment_status']) && !empty($_POST['default_payment_status']) ? $_POST['default_payment_status'] : '';
 		
-		$org_options['default_logo_url'] = $_REQUEST['upload_image'];
+		$org_options['default_logo_url'] = isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ? $_REQUEST['upload_image'] : '';
 			 
 		$currency_format = getCountryFullData($org_options['organization_country']);
 		switch ($currency_format['iso_code_3']) {
@@ -588,7 +588,7 @@ function organization_config_mnu() {
 						<?php
 					}
 
-					if ($espresso_check_for_updates == true) {
+					if ($espresso_check_for_updates == true && $espresso_premium == true) {
 						?>
 
 						<li><a name="license_key" id="license_key"></a>

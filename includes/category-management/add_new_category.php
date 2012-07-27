@@ -35,7 +35,7 @@ function add_new_event_category() {
 											);				
 										echo select_input('display_desc', $values, 'N');
 										?>
-										
+				<?php global $espresso_premium; if ($espresso_premium == true){?>						
 				<table class="form-table">
 					<tbody>
 						<tr>
@@ -65,6 +65,7 @@ function add_new_event_category() {
 						</tr>
 					</tbody>
 				</table>
+				<?php }?>
 				<div id="categorydescriptiondivrich" class="postarea">
 					<p id="add-category-desc" class="section-heading">
 						<?php _e('Category Description', 'event_espresso'); ?>

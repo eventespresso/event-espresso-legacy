@@ -8,10 +8,16 @@ function add_cat_to_db(){
 		$display_category_desc=$_REQUEST['display_desc'];
 		if (!function_exists('espresso_member_data'))
 			$current_user->ID = 1;
-	
-		$sql=array('category_name'=>$category_name, 'category_identifier'=>$category_identifier, 'category_desc'=>$category_desc, 'display_desc'=>$display_category_desc, 'wp_user'=>$current_user->ID);
 		
-		$sql_data = array('%s','%s','%s','%s','%d');
+		$category_meta['use_pickers'] = isset($_REQUEST['use_pickers']) && !empty($_REQUEST['use_pickers']) ? $_REQUEST['use_pickers'] : '';
+		$category_meta['event_background'] = isset($_REQUEST['event_background']) && !empty($_REQUEST['event_background']) ? $_REQUEST['event_background'] : '' ;
+		$category_meta['event_text_color'] = isset($_REQUEST['event_text_color']) && !empty($_REQUEST['event_text_color']) ? $_REQUEST['event_text_color'] : '' ;
+		//echo "<pre>".print_r($_POST,true)."</pre>";
+		$category_meta = serialize($category_meta);
+	
+		$sql=array('category_name'=>$category_name, 'category_identifier'=>$category_identifier, 'category_desc'=>$category_desc, 'display_desc'=>$display_category_desc, 'category_meta'=>$category_meta, 'wp_user'=>$current_user->ID);
+		
+		$sql_data = array('%s','%s','%s','%s','%s','%d');
 	
 		if ($wpdb->insert( EVENTS_CATEGORY_TABLE, $sql, $sql_data )){?>
 		<div id="message" class="updated fade"><p><strong><?php _e('The category has been added.', 'event_espresso'); ?></strong></p></div>
