@@ -701,9 +701,9 @@ if (!function_exists('event_espresso_add_question_groups')) {
 
 						if ($group_name != $question->group_name) {
 							$html .= '<div class="event_questions" id="' . $question->group_identifier . '">';
-							$html .= $question->show_group_name != 0 ? "<h4 class=\"reg-quest-title section-title\">$question->group_name</h4>" : '';
-							$html .= $question->show_group_description != 0 && $question->group_description == true ? '<p class="quest-group-descript">' . $question->group_description . '</p>' : '';
-							$group_name = $question->group_name;
+							$html .= $question->show_group_name != 0 ? "<h4 class=\"reg-quest-title section-title\">".stripslashes_deep($question->group_name)."</h4>" : '';
+							$html .= $question->show_group_description != 0 && $question->group_description == true ? '<p class="quest-group-descript">' . stripslashes_deep($question->group_description) . '</p>' : '';
+							$group_name = stripslashes_deep($question->group_name);
 						}
 
 						$html .= event_form_build($question, $answer, $event_id, $multi_reg, $meta, $class, $disabled);
