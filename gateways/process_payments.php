@@ -93,10 +93,10 @@ function espresso_update_attendee_payment_status_in_db($payment_data) {
 	global $wpdb;
 	$payment_data['payment_date'] = date(get_option('date_format'));
 	$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET amount_pd = '" . $payment_data['total_cost'] . "' WHERE id ='" . $payment_data['attendee_id'] . "' ";
-	$wpdb->query($sql);
+	$wpdb->query($wpdb->prepare($sql));
 
 	$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET payment_status = '" . $payment_data['payment_status'] . "', txn_type = '" . $payment_data['txn_type'] . "', txn_id = '" . $payment_data['txn_id'] . "', payment_date ='" . $payment_data['payment_date'] . "', transaction_details = '" . $payment_data['txn_details'] . "' WHERE attendee_session ='" . $payment_data['attendee_session'] . "' ";
-	$wpdb->query($sql);
+	$wpdb->query($wpdb->prepare($sql));
 	return $payment_data;
 }
 
