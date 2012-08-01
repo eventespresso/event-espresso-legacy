@@ -221,12 +221,18 @@ add_shortcode('LISTATTENDEES', 'event_espresso_list_attendees');
 if (!function_exists('espresso_event_time_sc')) {
 
 	function espresso_event_time_sc($atts) {
+		 global $this_event_id;
+	
 		extract(shortcode_atts(array('event_id' => '0', 'type' => '', 'format' => ''), $atts));
-		$event_id = "{$event_id}";
-		$type = "{$type}";
-		$format = "{$format}";
+		
+		$event_id = isset($this_event_id) && !empty($this_event_id) ? $this_event_id : $event_id;
+		
+		if ( empty($event_id) ){
+			return;
+		}
+
 		ob_start();
-		espresso_event_time($event_id, $type, $format);
+		echo espresso_event_time($event_id, $type, $format);
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		return $buffer;
