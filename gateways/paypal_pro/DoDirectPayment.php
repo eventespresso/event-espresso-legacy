@@ -187,7 +187,7 @@ function GetErrors($DataArray) {
 }
 
 function DisplayErrors($Errors) {
-	echo '<p><strong class="credit_card_failure">Attention: your transaction was declined for the following reason(s):</strong><br />';
+	echo '<p><strong class="credit_card_failure">Attention: Your transaction was declined for the following reason(s):</strong><br />';
 	foreach ($Errors as $ErrorVar => $ErrorVal) {
 		$CurrentError = $Errors[$ErrorVar];
 		foreach ($CurrentError as $CurrentErrorVar => $CurrentErrorVal) {
