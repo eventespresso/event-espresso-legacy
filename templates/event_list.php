@@ -30,6 +30,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		//echo $sql; 
 		global $wpdb, $org_options, $events_in_session;
 		$multi_reg = false;
+			$category_name = '';
 		if (function_exists('event_espresso_multi_reg_init')) {
 			$multi_reg = true;
 		}
@@ -125,11 +126,6 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		$offset = ($current_page-1)*$events_per_page;
 		$events = array_slice($events,$offset,$events_per_page);
-	   
-	   if ($display_desc == 'Y') {
-			echo '<p id="events_category_name-' . $category_id . '" class="events_category_name">' . stripslashes_deep($category_name) . '</p>';
-			echo espresso_format_content($category_desc);
-		}
 		
 		//Debug
 		//var_dump($events);
@@ -202,6 +198,10 @@ if (!function_exists('event_espresso_get_event_details')) {
 		if ( count($events) < 1) {
 			//echo $sql;
 			echo __('No events available...', 'event_espresso');
+		}
+		 if ($display_desc == 'Y') {
+			echo '<p id="events_category_name-' . $category_id . '" class="events_category_name">' . stripslashes_deep($category_name) . '</p>';
+			echo espresso_format_content($category_desc);
 		}
 		foreach ($events as $event) {
 			
