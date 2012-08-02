@@ -127,7 +127,7 @@ function espresso_process_paypal_pro($payment_data) {
 	);
 	$PayPalResult = $PayPal->DoDirectPayment($PayPalRequestData);
 	$payment_data['payment_status'] = 'Incomplete';
-	$payment_data['txn_type'] = 'PalPal Pro';
+	$payment_data['txn_type'] = 'PayPal Pro';
 	$payment_data['txn_id'] = 0;
 	$payment_data['txn_details'] = serialize($_REQUEST);
 	$payment_data = apply_filters('filter_hook_espresso_prepare_event_link', $payment_data);
