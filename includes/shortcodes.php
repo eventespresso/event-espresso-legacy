@@ -280,7 +280,7 @@ if (!function_exists('get_espresso_price_sc')) {
 		$event_id = "{$event_id}";
 		$number = "{$number}";
 		ob_start();
-		espresso_return_single_price($event_id, $number);
+		echo espresso_return_single_price($event_id, $number);
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		return $buffer;
