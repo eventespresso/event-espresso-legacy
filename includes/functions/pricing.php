@@ -197,6 +197,7 @@ if (!function_exists('event_espresso_price_dropdown')) {
         $surcharge_text = isset($org_options['surcharge_text']) ? $org_options['surcharge_text'] : __('Surcharge', 'event_espresso');
 
         $results = $wpdb->get_results("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' ORDER BY id ASC");
+
         if ($wpdb->num_rows > 1) {
             $html .= $label == 1 ? '<label for="event_cost">' . __('Choose an Option: ', 'event_espresso') . '</label>' : '';
             $html .= '<select name="price_option' . $multi_name_adjust . '" id="price_option-' . $event_id . '">';
@@ -242,14 +243,16 @@ if (!function_exists('event_espresso_price_dropdown')) {
                     }
                 }
                 $message = isset($message) ? $message : '';
-                $html .= '<span class="event_price_label">' . __('Price:', 'event_espresso') . '</span> <span class="event_price_value">' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . $surcharge . '</span>';
-                $html .= '<input type="hidden" name="price_id' . $multi_name_adjust . '" id="price_id-' . $result->id . '" value="' . $result->id . '" />';
-            }
-        } else if ($wpdb->num_rows == 0) {
-            $html .= '<span class="free_event">' . __('Free Event', 'event_espresso') . '</span>';
-            $html .= '<input type="hidden" name="payment' . $multi_name_adjust . '" id="payment-' . $event_id . '" value="' . __('free event', 'event_espresso') . '" />';
-        }
 
+                if ( $result->event_cost != '0.00' ) {
+                    $html .= '<span class="event_price_label">' . __('Price:', 'event_espresso') . '</span> <span class="event_price_value">' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . $surcharge . '</span>';
+                    $html .= '<input type="hidden" name="price_id' . $multi_name_adjust . '" id="price_id-' . $result->id . '" value="' . $result->id . '" />';
+                } else {
+                    $html .= '<span class="free_event">' . __('Free Event', 'event_espresso') . '</span>';
+                    $html .= '<input type="hidden" name="payment' . $multi_name_adjust . '" id="payment-' . $event_id . '" value="' . __('free event', 'event_espresso') . '" />';
+                }
+            }
+        }
         return $html;
     }
 
