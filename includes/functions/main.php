@@ -532,7 +532,7 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 				return $number_available_spaces;
 				break;
 			case 'available_spaces' :
-				if ($reg_limit >= 999) {
+				if ($reg_limit >= 99999) {
 					$number_available_spaces = "Unlimited";
 				}
 				return $number_available_spaces;
