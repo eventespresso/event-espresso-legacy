@@ -319,7 +319,7 @@ if (!function_exists('espresso_price_dd_sc')) {
 		extract(shortcode_atts(array('event_id' => '0'), $atts));
 		$event_id = "{$event_id}";
 		ob_start();
-		event_espresso_price_dropdown($event_id);
+		echo event_espresso_price_dropdown($event_id);
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		return $buffer;
