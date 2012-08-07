@@ -21,13 +21,12 @@ $this_event_id = $event_id;
 		?>
 	</h3>
 
-
 	<div class="multi_regis_form_fields event-data-display ui-widget-content ui-corner-bottom" id="multi_regis_form_fields-<?php echo $event_id . '-' . $meta['price_id']; ?>">
 
 		<?php
 		if ($display_desc == "Y" && $org_options['display_description_on_multi_reg_page'] != 'N') {//Show the description or not
 			?>
-			<div class="event_description"><?php echo wpautop(do_shortcode($event_desc)); //Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.     ?></div>
+			<div class="event_description"><?php echo wpautop(do_shortcode($event_desc)); //Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.        ?></div>
 			<?php
 		}//End display description
 		//print_r( event_espresso_get_is_active($event_id));
@@ -71,16 +70,21 @@ $this_event_id = $event_id;
 				//This will be the main attendee
 				//$meta['attendee_number'] = 1;
 				?>
-				<div class="event-display-boxes">
-					<?php
-					echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $attendee_number . '</h3>';
+				<div id="multi_regis_wrapper_attendee-primary">
+					<div class="event-display-boxes">
+						<?php
+						echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $attendee_number . '</h3>';
 
-					$meta['attendee_number'] = $price_group_att_counter;
-					//echo "Attendee # ".$attendee_number;
+						$meta['attendee_number'] = $price_group_att_counter;
+						//echo "Attendee # ".$attendee_number;
 
-					echo event_espresso_copy_dd($event_id, $meta);
-					echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
-					?>
+						echo event_espresso_copy_dd($event_id, $meta);
+						?>
+						<button type="button" id="copy_to_all_button" value="<?php echo $event_id . '|' . $meta['price_id']; ?>">Copy to all</button>
+						<?php
+						echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
+						?>
+					</div>
 				</div>
 				<?php
 				if ($meta['attendee_number'] == 1 || $increase_attende_num) {
@@ -128,20 +132,21 @@ $this_event_id = $event_id;
 								//echo 'price_group_att_counter = '.$price_group_att_counter;
 								$meta['attendee_number'] = $price_group_att_counter;
 								?>
-
-								<div class="event-display-boxes">
-									<?php
-									echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $i . '</h3>';
-									echo event_espresso_copy_dd($event_id, $meta);
-									echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
-									?>
+								<div class="multi_regis_wrapper_attendee-additional">
+									<div class="event-display-boxes">
+										<?php
+										echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $i . '</h3>';
+										echo event_espresso_copy_dd($event_id, $meta);
+										echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
+										?>
+									</div>
 								</div>
 								<?php
 							}
 						}
 					}
 				} else {
-
+					
 				}//End allow multiple
 				break;
 		}//End Switch statement to check the status of the event
