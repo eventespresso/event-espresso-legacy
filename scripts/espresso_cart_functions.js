@@ -366,7 +366,7 @@ jQuery(document).ready(function() {
         var from_attendee_no = '1';
 
         jQuery('.multi_regis_wrapper_attendee-additional .event_form_field :input').each(function(){
-            console.log(jQuery(this).attr('id') + ' > ' + jQuery(this).val());
+            // console.log(jQuery(this).attr('id') + ' > ' + jQuery(this).val());
             var val = jQuery(this).val();
             var name = jQuery(this).attr('name');
             var input_type = jQuery(this).attr('type');
