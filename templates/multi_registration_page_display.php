@@ -63,14 +63,14 @@ $this_event_id = $event_id;
 				//echo "additional_attendee_reg_info = ".$meta['additional_attendee_reg_info'];
 				//echo "Attendee # ".$meta['attendee_number'];
 				$attendee_number = $meta['attendee_number'];
-
+				$is_primary = $event_counter == 1 ? 'primary' : 'additional';
 
 				$price_group_att_counter = 1; //this will keep track of the attendee number inside each event inside each price type
 				//Outputs the custom form questions.
 				//This will be the main attendee
 				//$meta['attendee_number'] = 1;
 				?>
-				<div id="multi_regis_wrapper_attendee-primary">
+				<div class="multi_regis_wrapper_attendee-<?php echo $is_primary; ?>">
 					<div class="event-display-boxes">
 						<?php
 						echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $attendee_number . '</h3>';
@@ -79,9 +79,11 @@ $this_event_id = $event_id;
 						//echo "Attendee # ".$attendee_number;
 
 						echo event_espresso_copy_dd($event_id, $meta);
-						?>
-						<button type="button" id="copy_to_all_button" value="<?php echo $event_id . '|' . $meta['price_id']; ?>">Copy to all</button>
-						<?php
+						if ($event_counter == 1) {
+							?>
+							<button type="button" id="copy_to_all_button" value="<?php echo $event_id . '|' . $meta['price_id']; ?>">Copy to all</button>
+							<?php
+						}
 						echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
 						?>
 					</div>

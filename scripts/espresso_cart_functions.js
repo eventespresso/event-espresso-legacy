@@ -378,7 +378,7 @@ jQuery(document).ready(function() {
 
             var copy_from = jQuery(":input[name='" + copy_field_name + "']");
 
-            // console.log(jQuery(this).attr('name') + ' > ' + copy_field_name + ' > ' + copy_from.val());
+            //console.log(jQuery(this).attr('name') + ' > ' + copy_field_name + ' > ' + copy_from.val());
             switch (input_type)
             {
                 case 'text':
