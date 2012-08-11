@@ -126,7 +126,7 @@ if (!function_exists('event_form_build')) {
 				break;
 			case "SINGLE" :
 				$values = explode(",", $question->response);
-				$answers = explode(",", $answer);
+				//$answers = explode(",", $answer);
 				$html .= '<fieldset class="single-radio">';
 				$html .= $legend;
 
@@ -143,7 +143,7 @@ if (!function_exists('event_form_build')) {
 				break;
 			case "MULTIPLE" :
 				$values = explode(",", $question->response);
-				$answers = explode(",", $answer);
+				//$answers = explode(",", $answer);
 				$html .= '<fieldset class="multi-checkbox">';
 				$html .= $legend;
 				//$html .= '</p>';
@@ -161,7 +161,7 @@ if (!function_exists('event_form_build')) {
 			case "DROPDOWN" :
 				$dd_type = $question->system_name == 'state' ? 'name="state"' : 'name="' . $field_name . $multi_name_adjust . '"';
 				$values = explode(",", $question->response);
-				$answers = explode(",", $answer);
+				//$answers = explode(",", $answer);
 				$html .= '<p class="event_form_field" class="' . $class . '">' . $label;
 				$html .= '<select ' . $dd_type . ' ' . $required . ' id="DROPDOWN_' . $question->id . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '">';
 				$html .= '<option value="">' . __('Select One', 'event_espresso') . "</option>";
