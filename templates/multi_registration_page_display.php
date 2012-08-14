@@ -64,23 +64,43 @@ $this_event_id = $event_id;
 				//echo "additional_attendee_reg_info = ".$meta['additional_attendee_reg_info'];
 				//echo "Attendee # ".$meta['attendee_number'];
 				$attendee_number = $meta['attendee_number'];
-
+				$is_primary = $event_counter == 1 ? 'primary' : 'additional';
 
 				$price_group_att_counter = 1; //this will keep track of the attendee number inside each event inside each price type
-				//Outputs the custom form questions.
-				//This will be the main attendee
-				//$meta['attendee_number'] = 1;
+				
+				//Outputs registration forms
 				?>
-				<div class="event-display-boxes">
-					<?php
-					echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $attendee_number . '</h3>';
-
-					$meta['attendee_number'] = $price_group_att_counter;
-					//echo "Attendee # ".$attendee_number;
-
-					echo event_espresso_copy_dd($event_id, $meta);
-					echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
-					?>
+				<div class="multi_regis_wrapper_attendee-<?php echo $is_primary; ?>">
+					<div class="event-display-boxes">
+						<?php
+						
+						echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $attendee_number . '</h3>';
+						
+						//This will be the main attendee
+						//$meta['attendee_number'] = 1;
+						
+						$meta['attendee_number'] = $price_group_att_counter;
+						//echo "Attendee # ".$attendee_number;
+						
+						//Displays the copy from dropdown
+						if ($event_counter > 1) {
+							echo event_espresso_copy_dd($event_id, $meta);
+						}
+						
+						//Outputs the form questions.
+						echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
+						
+						//Displays the copy to all button
+						if ($event_counter == 1) {
+							?>
+							<div class="event-messages ui-state-highlight">
+								<p class="instruct"><?php _e('Copy above information to all forms?', 'event_espresso'); ?> <button type="button" id="copy_to_all_button" value="<?php echo $event_id . '|' . $meta['price_id']; ?>"><?php _e('Yes', 'event_espresso'); ?></button></p>
+							</div>
+							<?php
+						}
+						
+						?>
+					</div>
 				</div>
 				<?php
 				if ($meta['attendee_number'] == 1 || $increase_attende_num) {
@@ -128,20 +148,22 @@ $this_event_id = $event_id;
 								//echo 'price_group_att_counter = '.$price_group_att_counter;
 								$meta['attendee_number'] = $price_group_att_counter;
 								?>
-
-								<div class="event-display-boxes">
-									<?php
-									echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $i . '</h3>';
-									echo event_espresso_copy_dd($event_id, $meta);
-									echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
-									?>
+								<hr class="hr_additional_attendee" />
+								<div class="multi_regis_wrapper_attendee-additional">
+									<div class="event-display-boxes">
+										<?php
+										echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $i . '</h3>';
+										echo event_espresso_copy_dd($event_id, $meta);
+										echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
+										?>
+									</div>
 								</div>
 								<?php
 							}
 						}
 					}
 				} else {
-
+					
 				}//End allow multiple
 				break;
 		}//End Switch statement to check the status of the event
