@@ -125,7 +125,7 @@ function replace_shortcodes($message, $data) {
 		foreach ($data->event->event_meta as $k => $v) {
 			if (!empty($k) && !is_array($v)) {
 				array_push($SearchValues, "[" . $k . "]");
-				array_push($ReplaceValues, stripslashes_deep($v));
+				array_push($ReplaceValues, stripslashes_deep(rtrim($v, ",")) );
 			}
 		}
 	}
