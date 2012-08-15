@@ -24,7 +24,7 @@ if (!function_exists('add_event_espresso_menus')) {
 		
 		//Seating chart management
 		if ( defined('ESPRESSO_SEATING_CHART') ){
-			add_submenu_page('event_espresso', __('Event Espresso - Seating Chart','event_espresso'), __('Seating chart','event_espresso'), 'administrator', 'seating_chart', 'event_espresso_manage_seating_chart');
+			add_submenu_page('event_espresso', __('Event Espresso - Seating Chart','event_espresso'), __('Seating Chart','event_espresso'), apply_filters('espresso_management_capability', 'administrator', $espresso_manager['espresso_manager_seating']), 'seating_chart', 'event_espresso_manage_seating_chart');
 		}
 		
         //Venues
