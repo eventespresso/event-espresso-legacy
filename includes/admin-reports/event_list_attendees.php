@@ -12,9 +12,14 @@ function event_list_attendees() {
     if (!empty($_POST['delete_customer'])) {
         if (is_array($_POST['checkbox'])) {
             while (list($key, $value) = each($_POST['checkbox'])):
-                $del_id = $key;
-                $sql = "DELETE FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id = '$del_id'";
-                $wpdb->query($sql);
+                $sql = "DELETE FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id = '%d'";
+                $wpdb->query($wpdb->prepare($sql, $key));
+								$sql = "DELETE FROM " . EVENTS_ATTENDEE_META_TABLE . " WHERE attendee_id = '%d'";
+								$wpdb->query($wpdb->prepare($sql, $key));
+								$sql = "DELETE FROM " . EVENTS_ATTENDEE_COST_TABLE . " WHERE attendee_id = '%d'";
+								$wpdb->query($wpdb->prepare($sql, $key));
+								$sql = "DELETE FROM " . EVENTS_ANSWER_TABLE . " WHERE attendee_id = '%d'";
+								$wpdb->query($wpdb->prepare($sql, $key));
             endwhile;
         }
         ?>

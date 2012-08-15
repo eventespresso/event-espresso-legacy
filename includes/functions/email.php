@@ -116,7 +116,7 @@ function replace_shortcodes($message, $data) {
 
 			//Output the answer
 			array_push($SearchValues, "[" . 'answer_' . $k . "]");
-			array_push($ReplaceValues, $v);
+			array_push($ReplaceValues, stripslashes_deep(rtrim($v, ",")) );
 		}
 	}
 	//Get the event meta
@@ -125,7 +125,7 @@ function replace_shortcodes($message, $data) {
 		foreach ($data->event->event_meta as $k => $v) {
 			if (!empty($k) && !is_array($v)) {
 				array_push($SearchValues, "[" . $k . "]");
-				array_push($ReplaceValues, stripslashes_deep(rtrim($v, ",")) );
+				array_push($ReplaceValues, stripslashes_deep($v));
 			}
 		}
 	}
