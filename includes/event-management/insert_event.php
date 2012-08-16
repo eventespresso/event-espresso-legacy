@@ -418,6 +418,7 @@ function add_event_to_db($recurrence_arr = array()) {
             $sql = array('post_id' => $post_id, 'post_type' => $post_type);
 
             add_post_meta($post_id, 'event_id', $last_event_id);
+			add_post_meta($post_id, 'event_meta', $event_meta);
             add_post_meta($post_id, 'event_identifier', $event_identifier);
             add_post_meta($post_id, 'event_start_date', $start_date);
             add_post_meta($post_id, 'event_end_date', $end_date);

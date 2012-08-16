@@ -523,6 +523,7 @@ function update_event($recurrence_arr = array()) {
                     if ($post_id > 0) {
                         $post_id = wp_update_post($my_post);
                         update_post_meta($post_id, 'event_id', $event_id);
+						update_post_meta($post_id, 'event_meta', $event_meta);
                         update_post_meta($post_id, 'event_identifier', $event_identifier);
                         update_post_meta($post_id, 'event_start_date', $start_date);
                         update_post_meta($post_id, 'event_end_date', $end_date);
@@ -553,6 +554,7 @@ function update_event($recurrence_arr = array()) {
                     } else {
                         $post_id = wp_insert_post($my_post);
                         add_post_meta($post_id, 'event_id', $event_id);
+						add_post_meta($post_id, 'event_meta', $event_meta);
                         add_post_meta($post_id, 'event_identifier', $event_identifier);
                         add_post_meta($post_id, 'event_start_date', $start_date);
                         add_post_meta($post_id, 'event_end_date', $end_date);
