@@ -27,7 +27,7 @@ $this_event_id = $event_id;
 		<?php
 		if ($display_desc == "Y" && $org_options['display_description_on_multi_reg_page'] != 'N') {//Show the description or not
 			?>
-			<div class="event_description"><?php echo wpautop(do_shortcode($event_desc)); //Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.      ?></div>
+			<div class="event_description"><?php echo wpautop(do_shortcode($event_desc)); //Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.     ?></div>
 			<?php
 		}//End display description
 		//print_r( event_espresso_get_is_active($event_id));
@@ -67,115 +67,106 @@ $this_event_id = $event_id;
 				$is_primary = $event_counter == 1 ? 'primary' : 'additional';
 
 				$price_group_att_counter = 1; //this will keep track of the attendee number inside each event inside each price type
+				
 				//Outputs registration forms
 				?>
 				<div class="multi_regis_wrapper_attendee-<?php echo $is_primary; ?>">
 					<div class="event-display-boxes">
 						<?php
+						
 						echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $attendee_number . '</h3>';
-
+						
 						//This will be the main attendee
 						//$meta['attendee_number'] = 1;
-
+						
 						$meta['attendee_number'] = $price_group_att_counter;
 						//echo "Attendee # ".$attendee_number;
+						
 						//Displays the copy from dropdown
 						if ($event_counter > 1) {
 							echo event_espresso_copy_dd($event_id, $meta);
 						}
-
+						
 						//Outputs the form questions.
 						echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
-
+						
 						//Displays the copy to all button
 						if ($event_counter == 1) {
-							if ($org_options['use_captcha'] == 'Y' && $_REQUEST['edit_details'] != 'true' && !is_user_logged_in()) {
-								if (!function_exists('recaptcha_get_html')) {
-									require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/recaptchalib.php');
-								}//End require captcha library
-								# the response from reCAPTCHA
-								$resp = null;
-								# the error code from reCAPTCHA, if any
-								$error = null;
-								?>
-								<p class="event_form_field" id="captcha-<?php echo $event_id; ?>">
-								<?php _e('Anti-Spam Measure: Please enter the following phrase', 'event_espresso'); ?>
-								<?php echo recaptcha_get_html($org_options['recaptcha_publickey'], $error, is_ssl() ? true : false); ?> </p>
-								<?php }
-								?>
+							?>
 							<div class="event-messages ui-state-highlight">
 								<p class="instruct"><?php _e('Copy above information to all forms?', 'event_espresso'); ?> <button type="button" id="copy_to_all_button" value="<?php echo $event_id . '|' . $meta['price_id']; ?>"><?php _e('Yes', 'event_espresso'); ?></button></p>
 							</div>
-			<?php
-		}
-		?>
+							<?php
+						}
+						
+						?>
 					</div>
 				</div>
-						<?php
-						if ($meta['attendee_number'] == 1 || $increase_attende_num) {
-							$meta['attendee_number']++;
-							$attendee_number++;
-						}
+				<?php
+				if ($meta['attendee_number'] == 1 || $increase_attende_num) {
+					$meta['attendee_number']++;
+					$attendee_number++;
+				}
 
-						//Outputs the shopping cart items
-						if (function_exists('event_espresso_add_cart_item_groups')) {
-							echo event_espresso_add_cart_item_groups($item_groups);
-						}
+				//Outputs the shopping cart items
+				if (function_exists('event_espresso_add_cart_item_groups')) {
+					echo event_espresso_add_cart_item_groups($item_groups);
+				}
 
-						//Coupons
-						if (function_exists('event_espresso_coupon_registration_page')) {
-							// echo event_espresso_coupon_registration_page( $use_coupon_code, $event_id );
-						}//End coupons display
-						//Groupons
-						if (function_exists('event_espresso_groupon_registration_page')) {
-							//echo event_espresso_groupon_registration_page( $use_groupon_code, $event_id );
-						}//End groupons display
-						//Multiple Attendees
-						if ($allow_multiple == "Y") {
+				//Coupons
+				if (function_exists('event_espresso_coupon_registration_page')) {
+					// echo event_espresso_coupon_registration_page( $use_coupon_code, $event_id );
+				}//End coupons display
+				//Groupons
+				if (function_exists('event_espresso_groupon_registration_page')) {
+					//echo event_espresso_groupon_registration_page( $use_groupon_code, $event_id );
+				}//End groupons display
+				//Multiple Attendees
+				if ($allow_multiple == "Y") {
 
-							//This returns the additional attendee form fields.
-							//
+					//This returns the additional attendee form fields.
+					//
                         if ($meta['attendee_quantity'] > 1) {
-								//echo 'attendee_quantity = '.$meta['attendee_quantity'];
-								//If the "Personal Information only" question is selected in the event
-								//then only show the registration form for the first attendee
-								if ($event_meta['additional_attendee_reg_info'] == 1) {
-									echo '<input name="num_people" type="hidden" value="' . $meta['attendee_quantity'] . '" />';
-								} else {
+						//echo 'attendee_quantity = '.$meta['attendee_quantity'];
+						//If the "Personal Information only" question is selected in the event
+						//then only show the registration form for the first attendee
+						if ($event_meta['additional_attendee_reg_info'] == 1) {
+							echo '<input name="num_people" type="hidden" value="' . $meta['attendee_quantity'] . '" />';
+						} else {
 
-									//this is a check for events that have been made before additional attendee questions functionality
-									if (is_array($add_attendee_question_groups)) {
-										$question_groups = $add_attendee_question_groups;
-									}
+							//this is a check for events that have been made before additional attendee questions functionality
+							if (is_array($add_attendee_question_groups)) {
+								$question_groups = $add_attendee_question_groups;
+							}
 
-									//The offset of 2 since this is attendee 2 and on
-									//adding 1 since the primary attendee is added
-									//in the above function call (c.a. line 104)
-									//Used for "Attendee #" display
-									for ($i = $attendee_number, $cnt = $meta['attendee_quantity'] + $attendee_number - 1; $i < $cnt; $i++) {
-										$price_group_att_counter++;
-										//echo 'price_group_att_counter = '.$price_group_att_counter;
-										$meta['attendee_number'] = $price_group_att_counter;
-										?>
+							//The offset of 2 since this is attendee 2 and on
+							//adding 1 since the primary attendee is added
+							//in the above function call (c.a. line 104)
+							//Used for "Attendee #" display
+							for ($i = $attendee_number, $cnt = $meta['attendee_quantity'] + $attendee_number - 1; $i < $cnt; $i++) {
+								$price_group_att_counter++;
+								//echo 'price_group_att_counter = '.$price_group_att_counter;
+								$meta['attendee_number'] = $price_group_att_counter;
+								?>
 								<hr class="hr_additional_attendee" />
 								<div class="multi_regis_wrapper_attendee-additional">
 									<div class="event-display-boxes">
-								<?php
-								echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $i . '</h3>';
-								echo event_espresso_copy_dd($event_id, $meta);
-								echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
-								?>
+										<?php
+										echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $i . '</h3>';
+										echo event_espresso_copy_dd($event_id, $meta);
+										echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
+										?>
 									</div>
 								</div>
-										<?php
-									}
-								}
+								<?php
 							}
-						} else {
-							
-						}//End allow multiple
-						break;
-				}//End Switch statement to check the status of the event
-				?>
+						}
+					}
+				} else {
+					
+				}//End allow multiple
+				break;
+		}//End Switch statement to check the status of the event
+		?>
 	</div>
 </div>
