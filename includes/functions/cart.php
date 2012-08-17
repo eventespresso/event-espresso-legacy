@@ -460,7 +460,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 					$err = '';
 					ob_start();
 					//will be used if sj is off or they somehow select more than allotted attendees
-					$show_checkout_button = true;
+					$show_checkout_button = false;
 					$counter = 1;
 					foreach ($result as $r) {
 
@@ -525,7 +525,8 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 								//Dispaly an error instead of the continue button
 								if ($total_attendees_per_event > $attendee_limit || $total_attendees_per_event == 0) {
 									$attendee_overflow = true;
-									$show_checkout_button = false;
+								} elseif ($total_attendees_per_event < $attendee_limit) {
+									$show_checkout_button = true;
 								}
 							}
 	
