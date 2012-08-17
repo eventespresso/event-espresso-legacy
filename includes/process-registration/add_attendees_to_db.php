@@ -162,15 +162,13 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 			$_SESSION['espresso_session']['id'] = uniqid('', true);
 		} else {
 
-			static $been_here;
-			if ($org_options['use_captcha'] == 'Y' && !is_user_logged_in() && empty($been_here)) {//Recaptcha portion
-				$been_here = 1;
+			if ($org_options['use_captcha'] == 'Y' && !is_user_logged_in()) {//Recaptcha portion
 				//require_once('includes/recaptchalib.php');
 				if (!function_exists('recaptcha_check_answer')) {
 					require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/recaptchalib.php');
 				}
-				$resp = recaptcha_check_answer($org_options['recaptcha_privatekey'], $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
-				if (!$resp->is_valid) {
+				$resp = recaptcha_check_answer($org_options['recaptcha_privatekey'], $_SERVER["REMOTE_ADDR"], $data_source["recaptcha_challenge_field"], $data_source["recaptcha_response_field"]);
+				if (!$resp->is_valid && !$multi_reg) {
 					echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, you did not enter the correct anti-spam phrase. Please click your browser\'s back button and try again.', 'event_espresso') . '</strong></p></div>';
 					//var_dump($data_source);
 					//echo '<div class="payment">';
