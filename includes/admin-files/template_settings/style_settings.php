@@ -64,7 +64,7 @@ $files_color = array();
 		<label>
 			<?php _e('Enable legacy style sheets?','event_espresso'); ?>
 		</label>
-		<?php echo select_input('enable_default_style', $values, isset($org_options['enable_default_style']) ? $org_options['enable_default_style'] : ''); ?> <a class="thickbox"  href="#TB_inline?height=400&width=500&inlineId=enable_styles_info" target="_blank"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>images/question-frame.png" width="16" height="16" /></a> </li>
+		<?php echo select_input('enable_default_style', $values, isset($org_options['enable_default_style']) ? $org_options['enable_default_style'] : 'N'); ?> <a class="thickbox" href="#TB_inline?height=400&width=500&inlineId=enable_styles_info" target="_blank"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>images/question-frame.png" width="16" height="16" /></a> </li>
 	<li>
 		<label>
 			<?php _e('Remove the legacy style sheets option?','event_espresso'); ?>
