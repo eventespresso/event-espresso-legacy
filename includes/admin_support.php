@@ -344,7 +344,7 @@ function event_espresso_support() {
 											<li><span class="highlight">[LISTATTENDEES staff_id="staff_id_number"]</span> //Show a list of events that are assigned to a staff member</li>
 										</ul>
 										<p>
-	<?php _e('For more information about the attendee listing shortcodes and customizations. Please view the <a href="http://eventespresso.com/forums/2010/10/attendee-listing-shortcodes/">Attendee Listing Shortcodes</a> page.', 'event_espresso'); ?>
+	<?php _e('For more information about the attendee listing shortcodes and customizations. Please view the <a href="http://eventespresso.com/wiki/shortcodes-template-variables/">Attendee Listing Shortcodes</a> page.', 'event_espresso'); ?>
 										</p>
 									</div>
 									<div class="shortcode-box">
