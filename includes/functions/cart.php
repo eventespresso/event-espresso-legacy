@@ -822,7 +822,7 @@ if (!function_exists('event_espresso_cart_link')) {
 			echo "<span id='moving_to_cart'>{$moving_to_cart}</span>";
 			echo "<script language='javascript'>window.location='" . $registration_cart_url . "';</script>";
 		} else {
-			echo $separator . ' <a class="' . $registration_cart_class . '" id="cart_link_' . $event_id . '" href="' . $registration_cart_url . '" title="' . stripslashes_deep($event_name) . '" moving_to_cart="' . urlencode($moving_to_cart) . '" direct_to_cart="' . $direct_to_cart . '" >' . $registration_cart_anchor . '</a>';
+			echo $separator . ' <a class="ee_view_cart ' . $registration_cart_class . '" id="cart_link_' . $event_id . '" href="' . $registration_cart_url . '" title="' . stripslashes_deep($event_name) . '" moving_to_cart="' . urlencode($moving_to_cart) . '" direct_to_cart="' . $direct_to_cart . '" >' . $registration_cart_anchor . '</a>';
 		}
 
 		$buffer = ob_get_contents();
