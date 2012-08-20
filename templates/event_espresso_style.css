@@ -71,7 +71,7 @@
 /**
 	Form styles
 */
-.event_espresso_form_wrapper form legend { background: #ffffff; padding: 0 5px; }
+.event_espresso_form_wrapper form legend { padding: 0 5px; }
 .event_espresso_form_wrapper form fieldset div { padding: 0.25em 0; }
 .event_espresso_form_wrapper label,
 .event_espresso_form_wrapper span.label {
