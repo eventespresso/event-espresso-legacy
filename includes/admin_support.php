@@ -218,8 +218,8 @@ function event_espresso_support() {
 							<div class="inside">
 								<div class="padding">
 									<dl id="themes">
-										<dt><a href="http://www.shareasale.com/r.cfm?B=258340&amp;U=471857&amp;M=27087" target="_blank">PlatformPro</a> by Pagelines</dt>
-										<dt><a href="http://www.woothemes.com/amember/go.php?r=28039&amp;i=b16" target="_blank">Diarise</a> by WooThemes</dt>
+										<dt><a href="http://www.pagelines.com/" target="_blank">PageLines Framework</a> by Pagelines</dt>
+										<dt><a href="http://www.woothemes.com/" target="_blank">Diarise</a> by WooThemes</dt>
 									</dl>
 								</div>
 							</div>
