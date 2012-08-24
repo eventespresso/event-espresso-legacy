@@ -13,7 +13,7 @@ define("USAEPAY_VERSION", "1.6.8");
  * USAePay Transaction Class
  *
  */
-class umTransaction {
+class EE_umTransaction {
 	
 	// Required for all transactions
 	var $key;			// Source key
@@ -220,7 +220,7 @@ class umTransaction {
 	
 	
 	// Constructor
-	function umTransaction()
+	function EE_umTransaction()
 	{
 		// Set default values.
 		$this->command="sale";
