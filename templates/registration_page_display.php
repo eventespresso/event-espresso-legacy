@@ -184,10 +184,8 @@ if ($reg_form_only == false) {
 							if ($seating_chart_id !== false) {
 								?>
 								<div class="event_questions" id="event_seating_chart">
-									<h3 style="clear:both"><?php _e('Seating chart', 'event_espresso'); ?></h3>
-									<p></p>
 									<p class="event_form_field">
-										<label style="height:60px;"><?php _e('Select a Seat:', 'event_espresso'); ?></label>
+										<label><?php _e('Select a Seat:', 'event_espresso'); ?></label>
 										<input type="text" name="seat_id" value="" class="ee_s_select_seat required" title="<?php _e('Please select a seat.', 'event_espresso'); ?>" event_id="<?php echo $event_id; ?>" readonly="readonly"  />
 										<?php
 										$seating_chart = $wpdb->get_row("select * from " . EVENTS_SEATING_CHART_TABLE . " where id = $seating_chart_id");
