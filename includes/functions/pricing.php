@@ -187,7 +187,7 @@ if (!function_exists('early_discount_amount')) {
  * @params int $atts
  *  - bool multi_reg If this is a mutliple regsitration, then it cahnges the registration proerties
  *  - bool show_label Show the label above the dropdown
- *  - var value pass the price id to show a selected price by default
+ *  - var current_value pass the price id to show a selected price by default
 */
 
 if (!function_exists('event_espresso_price_dropdown')) {
@@ -199,21 +199,28 @@ if (!function_exists('event_espresso_price_dropdown')) {
 		//echo "<pre>".print_r($atts,true)."</pre>";
 		extract($atts);
         global $wpdb, $org_options;
-        $html = '';
-
+       	
+		$html = '';
+		
+		$label = $label == '' ? __('Choose an Option: ', 'event_espresso') : $label;
+		
 		//Will make the name an array and put the time id as a key so we know which event this belongs to
         $multi_name_adjust = isset($multi_reg) && $multi_reg == true ? "[$event_id]" : '';
-        $surcharge_text = isset($org_options['surcharge_text']) ? $org_options['surcharge_text'] : __('Surcharge', 'event_espresso');
+       
+	    $surcharge_text = isset($org_options['surcharge_text']) ? $org_options['surcharge_text'] : __('Surcharge', 'event_espresso');
 
         $results = $wpdb->get_results("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' ORDER BY id ASC");
 
         if ($wpdb->num_rows > 1) {
-            $html .= isset($show_label) && $show_label == false ? '' : '<label for="event_cost">' . __('Choose an Option: ', 'event_espresso') . '</label>';
-            $html .= '<select name="price_option' . $multi_name_adjust . '" id="price_option-' . $event_id . '">';
+           //Create the label for the drop down
+			$html .= $show_label == 1 ? '<label for="event_cost">' . $label . '</label>' : '';
+	
+			//Create a dropdown of prices
+			$html .= '<select name="price_option' . $multi_name_adjust . '" id="price_option-' . $event_id . '">';
 
             foreach ($results as $result) {
 
-                $selected = isset($value) && $value == $result->id ? ' selected="selected" ' : '';
+                $selected = isset($current_value) && $current_value == $result->id ? ' selected="selected" ' : '';
 
                 // Addition for Early Registration discount
                 if ($early_price_data = early_discount_amount($event_id, $result->event_cost)) {
