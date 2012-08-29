@@ -294,8 +294,10 @@ function update_event($recurrence_arr = array()) {
 		 * End
 		 */
 		 
-		if (isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) )
+		if (isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ){
 			 $event_meta['event_thumbnail_url'] = $_REQUEST['upload_image'];
+			 $event_thumbnail_url = $event_meta['event_thumbnail_url'];
+		}
 			
         if ($_REQUEST['emeta'] != '') {
             foreach ($_REQUEST['emeta'] as $k => $v) {
@@ -528,7 +530,7 @@ function update_event($recurrence_arr = array()) {
                         update_post_meta($post_id, 'event_start_date', $start_date);
                         update_post_meta($post_id, 'event_end_date', $end_date);
                         update_post_meta($post_id, 'event_location', $event_location);
-						update_post_meta($post_id, 'event_thumbnail_url', $event_meta['event_thumbnail_url']);
+						update_post_meta($post_id, 'event_thumbnail_url', $event_thumbnail_url);
                         update_post_meta($post_id, 'virtual_url', $virtual_url);
                         update_post_meta($post_id, 'virtual_phone', $virtual_phone);
                         //
@@ -559,7 +561,7 @@ function update_event($recurrence_arr = array()) {
                         add_post_meta($post_id, 'event_start_date', $start_date);
                         add_post_meta($post_id, 'event_end_date', $end_date);
                         add_post_meta($post_id, 'event_location', $event_location);
-						add_post_meta($post_id, 'event_thumbnail_url', $event_meta['event_thumbnail_url']);
+						add_post_meta($post_id, 'event_thumbnail_url', $event_thumbnail_url);
                         add_post_meta($post_id, 'virtual_url', $virtual_url);
                         add_post_meta($post_id, 'virtual_phone', $virtual_phone);
                         //
