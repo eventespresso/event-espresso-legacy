@@ -128,15 +128,21 @@ add_shortcode('EVENT_ESPRESSO_CATEGORIES', 'show_categories');
  */
 if (!function_exists('event_espresso_attendee_list')) {
 
-	function event_espresso_attendee_list($event_identifier='NULL', $category_identifier='NULL', $show_gravatar='false', $show_expired='false', $show_secondary='false', $show_deleted='false', $show_recurrence='true', $limit='0', $paid_only='false', $sort_by='last name') {
+	function event_espresso_attendee_list($event_id='NULL', $event_identifier='NULL', $category_identifier='NULL', $show_gravatar='false', $show_expired='false', $show_secondary='false', $show_deleted='false', $show_recurrence='true', $limit='0', $paid_only='false', $sort_by='last name') {
+		
+		global $this_event_id;
+		
 		$show_expired = $show_expired == 'false' ? " AND e.start_date >= '" . date('Y-m-d') . "' " : '';
 		$show_secondary = $show_secondary == 'false' ? " AND e.event_status != 'S' " : '';
 		$show_deleted = $show_deleted == 'false' ? " AND e.event_status != 'D' " : '';
 		$show_recurrence = $show_recurrence == 'false' ? " AND e.recurrence_id = '0' " : '';
 		$sort = $sort_by == 'last name' ? " ORDER BY lname " : '';
 		$limit = $limit > 0 ? " LIMIT 0," . $limit . " " : '';
-		if ($event_identifier != 'NULL') {
+		if ($event_identifier != 'NULL' || $event_id != 'NULL' || (isset($this_event_id) && !empty($this_event_id)) ) {
 			$type = 'event';
+			if (isset($this_event_id) && !empty($this_event_id)){
+				$event_id = $this_event_id;
+			}
 		} else if ($category_identifier != 'NULL') {
 			$type = 'category';
 		}
@@ -144,7 +150,11 @@ if (!function_exists('event_espresso_attendee_list')) {
 		if (!empty($type) && $type == 'event') {
 			$sql = "SELECT e.* FROM " . EVENTS_DETAIL_TABLE . " e ";
 			$sql .= " WHERE e.is_active = 'Y' ";
-			$sql .= " AND e.event_identifier = '" . $event_identifier . "' ";
+			if ($event_id != 'NULL'){
+				$sql .= " AND e.id = '" . $event_id . "' ";
+			}else{
+				$sql .= " AND e.event_identifier = '" . $event_identifier . "' ";
+			}
 			$sql .= $show_secondary;
 			$sql .= $show_expired;
 			$sql .= $show_deleted;
@@ -181,10 +191,11 @@ if (!function_exists('event_espresso_list_attendees')) {
 
 	function event_espresso_list_attendees($atts) {
 		//echo $atts;
-		extract(shortcode_atts(array('event_identifier' => 'NULL', 'category_identifier' => 'NULL', 'event_category_id' => 'NULL', 'show_gravatar' => 'NULL', 'show_expired' => 'NULL', 'show_secondary' => 'NULL', 'show_deleted' => 'NULL', 'show_recurrence' => 'NULL', 'limit' => 'NULL', 'paid_only' => 'NULL'), $atts));
+		extract(shortcode_atts(array('event_id' => 'NULL', 'event_identifier' => 'NULL', 'category_identifier' => 'NULL', 'event_category_id' => 'NULL', 'show_gravatar' => 'NULL', 'show_expired' => 'NULL', 'show_secondary' => 'NULL', 'show_deleted' => 'NULL', 'show_recurrence' => 'NULL', 'limit' => 'NULL', 'paid_only' => 'NULL'), $atts));
 		global $load_espresso_scripts;
 		$load_espresso_scripts = true; //This tells the plugin to load the required scripts
 		//get the event identifiers
+		$event_id = "{$event_id}";
 		$event_identifier = "{$event_identifier}";
 		
 		$show_gravatar = "{$show_gravatar}";
@@ -202,7 +213,7 @@ if (!function_exists('event_espresso_list_attendees')) {
 		$paid_only = "{$paid_only}";
 
 		ob_start();
-		event_espresso_attendee_list($event_identifier, $category_identifier, $show_gravatar, $show_expired, $show_secondary, $show_deleted, $show_recurrence, $limit, $paid_only);
+		event_espresso_attendee_list($event_id, $event_identifier, $category_identifier, $show_gravatar, $show_expired, $show_secondary, $show_deleted, $show_recurrence, $limit, $paid_only);
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		return $buffer;
