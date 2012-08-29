@@ -202,7 +202,7 @@ if (!function_exists('event_espresso_price_dropdown')) {
        	
 		$html = '';
 		
-		$label = $label == '' ? __('Choose an Option: ', 'event_espresso') : $label;
+		$label = $label == '' ? '<span class="section-title">'.__('Choose an Option: ', 'event_espresso').'</span>' : $label;
 		
 		//Will make the name an array and put the time id as a key so we know which event this belongs to
         $multi_name_adjust = isset($multi_reg) && $multi_reg == true ? "[$event_id]" : '';

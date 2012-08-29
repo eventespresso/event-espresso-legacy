@@ -144,8 +144,32 @@ if ($reg_form_only == false) {
 							?>
 						</p>
 						
-						<p class="event_prices"><?php do_action( 'espresso_price_select', $event_id, array('show_label'=>true) );?></p>
+						
+						
 						<?php
+						/*
+						 * Added for seating chart addon
+						 */
+						$display_price_dropdown = true;
+						if (defined('ESPRESSO_SEATING_CHART')) {
+							$seating_chart_id = seating_chart::check_event_has_seating_chart($event_id);
+							if ($seating_chart_id !== false) {
+								$display_price_dropdown = false;
+							}
+						}
+
+						if ($display_price_dropdown == true) {
+							?>
+							<p class="event_prices"><?php do_action( 'espresso_price_select', $event_id, array('show_label'=>true) );?></p>
+							<?php
+						} else {
+							?>
+							<p class="event_prices"><?php do_action( 'espresso_seating_price_select_action', $event_id, array('show_label'=>true) );?></p>
+							<?php
+						}
+
+						
+						
 						/*
 						 * Seating chart selector
 						 */
