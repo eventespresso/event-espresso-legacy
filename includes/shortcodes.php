@@ -494,7 +494,7 @@ function ee_create_autocomplete_search(){
 
 					$venue_name = !empty($event->venue_name) ?' @' . stripslashes_deep($event->venue_name)  . ' - ' . $venue_city . $venue_state . ''  : '';
 					//An Array of Objects with label and value properties:
-					echo '{ url:"?page_id=4&ee='.$event->id.'", value: "'.stripslashes_deep($event->event_name) . $venue_name .'", id: "'.$event->id.'" },';
+					echo '{ url:"'.espresso_reg_url($event->id).'", value: "'.stripslashes_deep($event->event_name) . $venue_name .'", id: "'.$event->id.'" },';
 				}
 			}
 		?>
