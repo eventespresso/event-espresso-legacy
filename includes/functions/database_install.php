@@ -30,6 +30,7 @@ function events_data_tables_install() {
 		$adress2 = false;
 		$city = false;
 		$state = false;
+		$country = false;
 		$zip = false;
 		$phone = false;
 
@@ -55,6 +56,9 @@ function events_data_tables_install() {
 					break;
 				case 'state':
 					$state = true;
+					break;
+				case 'country':
+					$country = true;
 					break;
 				case 'zip':
 					$zip = true;
@@ -86,11 +90,11 @@ function events_data_tables_install() {
 		if ($state == false)
 			$wpdb->insert($wpdb->prefix . "events_question", array('question' => 'State', 'system_name' => 'state', 'sequence' => '5'), array('%s', '%s', '%s'));
 
+		if ($country == false)
+			$wpdb->insert($wpdb->prefix . "events_question", array('question' => 'Country', 'system_name' => 'country', 'sequence' => '6'), array('%s', '%s', '%s'));
+			
 		if ($zip == false)
 			$wpdb->insert($wpdb->prefix . "events_question", array('question' => 'Zip', 'system_name' => 'zip', 'sequence' => '6'), array('%s', '%s', '%s'));
-
-		if ($zip == false)
-			$wpdb->insert($wpdb->prefix . "events_question", array('question' => 'Country', 'system_name' => 'country', 'sequence' => '6'), array('%s', '%s', '%s'));
 
 		if ($phone == false)
 			$wpdb->insert($wpdb->prefix . "events_question", array('question' => 'Phone', 'system_name' => 'phone', 'sequence' => '7'), array('%s', '%s', '%s'));
