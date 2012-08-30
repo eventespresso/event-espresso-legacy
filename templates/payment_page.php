@@ -5,7 +5,7 @@
 	if ($event_cost == '0.00') {
 		unset($_SESSION['espresso_session']['id']);
 		?>
-	  <h2><?php echo $fname ?>,</h2>
+	  <h2><?php echo $fname ?> <?php echo $lname ?>,</h2>
 <div class="event-messages ui-state-highlight">
 			<span class="ui-icon ui-icon-alert"></span>	  
 <p class="instruct">
