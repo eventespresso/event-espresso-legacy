@@ -166,9 +166,7 @@ if ($reg_form_only == false) {
 							?>
 							<p class="event_prices"><?php do_action( 'espresso_seating_price_select_action', $event_id, array('show_label'=>true) );?></p>
 							<?php
-						}
-
-						
+						}						
 						
 						/*
 						 * Seating chart selector
