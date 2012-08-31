@@ -336,8 +336,6 @@ if (!function_exists('event_espresso_calculate_total')) {
 				$event_total_cost += $event_individual_cost[$event_id];
 			}
 
-			$_SESSION['espresso_session']['pre_discount_total'] = number_format($event_total_cost, 2, '.', '');
-
 			if (function_exists('event_espresso_coupon_payment_page') && isset($_POST['event_espresso_coupon_code'])) {
 
 				if (isset($_POST['event_espresso_coupon_code'])) {
@@ -350,6 +348,7 @@ if (!function_exists('event_espresso_calculate_total')) {
 			}
 			$grand_total = number_format($event_total_cost, 2, '.', '');
 
+			$_SESSION['espresso_session']['pre_discount_total'] = $grand_total;
 			$_SESSION['espresso_session']['grand_total'] = $grand_total;
 			event_espresso_update_item_in_session($update_section);
 		}

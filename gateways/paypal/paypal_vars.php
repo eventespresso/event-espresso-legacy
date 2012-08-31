@@ -75,7 +75,7 @@ function espresso_itemize_paypal_items($myPaypal, $attendee_id) {
 	$session_id = $wpdb->get_var($sql);
 	$sql = "SELECT ac.cost, ac.quantity, ed.event_name, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage FROM " . EVENTS_ATTENDEE_COST_TABLE . " ac JOIN " . EVENTS_ATTENDEE_TABLE . " a ON ac.attendee_id=a.id JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
 	$sql .= " LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
-	$sql .= " WHERE attendee_session='" . $session_id . "'";
+	$sql .= " WHERE attendee_session='" . $session_id . "' ORDER BY a.id ASC";
 	$items = $wpdb->get_results($sql);
 	$coupon_amount = empty($items[0]->coupon_code_price) ? 0 : $items[0]->coupon_code_price;
 	$is_coupon_pct = (!empty($items[0]->use_percentage) && $items[0]->use_percentage=='Y') ? true : false;
