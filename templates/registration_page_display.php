@@ -159,12 +159,13 @@ if ($reg_form_only == false) {
 						}
 
 						if ($display_price_dropdown == true) {
+							$price_label = '<span class="section-title">'.__('Choose an Option: ', 'event_espresso').'</span>';
 							?>
-							<p class="event_prices"><?php do_action( 'espresso_price_select', $event_id, array('show_label'=>true) );?></p>
+							<p class="event_prices"><?php do_action( 'espresso_price_select', $event_id, array('show_label'=>true, 'label'=>$price_label) );?></p>
 							<?php
 						} else {
 							?>
-							<p class="event_prices"><?php do_action( 'espresso_seating_price_select_action', $event_id, array('show_label'=>true) );?></p>
+							<p class="event_prices"><?php do_action( 'espresso_seating_price_select_action', $event_id, array('show_label'=>true, 'label'=>$price_label) );?></p>
 							<?php
 						}						
 						
