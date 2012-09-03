@@ -178,6 +178,26 @@ function events_data_tables_install() {
 		}
 	}
 
+	function espresso_questions_update() {
+		global $wpdb;
+		
+		//question groups
+		$sql = "SHOW COLUMNS FROM `" . EVENTS_QST_GROUP_TABLE . "` LIKE 'is_global';";
+		$testg = $wpdb->query($sql);
+		if ( empty($testg) ) {
+			$sql = "ALTER TABLE " . EVENTS_QST_GROUP_TABLE . " ADD `is_global` tinyint( 1 ) NOT NULL DEFAULT '0' AFTER `system_group`;";
+			$wpdb->query($sql);
+		}
+
+		//questions
+		$sql = "SHOW COLUMNS FROM `" . EVENTS_QUESTION_TABLE . "` like 'is_global';";
+		$test = $wpdb->query($sql);
+		if ( empty($test) ) {
+			$sql = "ALTER TABLE " . EVENTS_QUESTION_TABLE . " ADD `is_global` tinyint( 1 ) NOT NULL DEFAULT '0' AFTER `admin_only`;";
+			$wpdb->query($sql);
+		}
+	}
+
 	function espresso_added_by_admin_session_id_fix() {
 		global $wpdb;
 		$sql = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE attendee_session=''";
@@ -692,6 +712,7 @@ function events_data_tables_install() {
 	event_espresso_update_attendee_data();
 	espresso_update_attendee_qty();
 	espresso_answer_fix();
+	espresso_questions_update();
 	espresso_added_by_admin_session_id_fix();
 	espresso_add_cancel_shortcode();
 }
