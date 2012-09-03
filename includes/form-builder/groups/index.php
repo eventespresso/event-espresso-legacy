@@ -18,7 +18,7 @@ function event_espresso_question_groups_config_mnu() {
 	if (function_exists('espresso_is_admin') && espresso_is_admin() == true) {
 		$sql .= " WHERE ";
 		if (espresso_member_data('id') == 0 || espresso_member_data('id') == 1) {
-			$sql .= " (wp_user = '0' OR wp_user = '1') ";
+			$sql .= " (wp_user = '0' OR wp_user = '1') AND ";
 		} else {
 			$sql .= " wp_user = '" . espresso_member_data('id') . "' ";
 		}
@@ -143,7 +143,7 @@ function event_espresso_question_groups_config_mnu() {
 							}
 						} else {
 							// Not admin
-							$sql .= " WHERE wp_user = '" . espresso_member_data('id') . "' ";
+							$sql .= " WHERE wp_user = '" . espresso_member_data('id') . "' OR is_global = '1' ";
 						}
 					} else {
 						$sql .= " WHERE (wp_user = '0' OR wp_user = '1') ";
@@ -177,7 +177,8 @@ function event_espresso_question_groups_config_mnu() {
 							<tr>
 								<td class="checkboxcol">
 									<input name="row_id" type="hidden" value="<?php echo $group_id ?>" />
-									<?php if ($system_group == 0) : ?>
+									<?php if ( $system_group == 0 || ( 
+									function_exists('espresso_is_admin') && !espresso_is_admin() && espresso_member_data('id') != $group->wp_user ) ) : ?>
 										<input style="margin:7px 0 22px 8px; vertical-align:top;" name="checkbox[<?php echo $group_id ?>]" type="checkbox"  title="Delete <?php echo empty($question_name) ? '' : $question_name ?>">
 									<?php else: ?>
 										<span><?php echo '<img style="margin:7px 0 22px 8px; vertical-align:top;" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/lock.png" alt="System Group" title="System Group" />'; ?></span>
@@ -186,8 +187,9 @@ function event_espresso_question_groups_config_mnu() {
 
 								<td class="post-title page-title column-title"><strong><a href="admin.php?page=form_groups&amp;action=edit_group&amp;group_id=<?php echo $group_id ?>"><?php echo $group_name ?></a></strong>
 									<div class="row-actions">
-										<span class="edit"><a href="admin.php?page=form_groups&amp;action=edit_group&amp;group_id=<?php echo $group_id ?>"><?php _e('Edit', 'event_espresso'); ?></a> | </span>
-			<?php if ($system_group == 0) : ?><span class="delete"><a onclick="return confirmDelete();" class="submitdelete"  href="admin.php?page=form_groups&amp;action=delete_group&amp;group_id=<?php echo $group_id ?>"><?php _e('Delete', 'event_espresso'); ?></a></span><?php endif; ?>
+										<?php if ( !function_exists('espresso_is_admin') || ( function_exists('espresso_is_admin') && !espresso_is_admin() && espresso_member_data('id' != $group->wp_user ) ) ) : ?>
+										<span class="edit"><a href="admin.php?page=form_groups&amp;action=edit_group&amp;group_id=<?php echo $group_id ?>"><?php _e('Edit', 'event_espresso'); ?></a> | <?php endif; ?></span>
+			<?php if ($system_group == 0 || (function_exists('espresso_is_admin') && !espresso_is_admin() && espresso_member_data('id' != $group->wp_user) ) ) : ?><span class="delete"><a onclick="return confirmDelete();" class="submitdelete"  href="admin.php?page=form_groups&amp;action=delete_group&amp;group_id=<?php echo $group_id ?>"><?php _e('Delete', 'event_espresso'); ?></a></span><?php endif; ?>
 									</div>
 								</td>
 								<?php if (function_exists('espresso_is_admin') && espresso_is_admin() == true) { ?>
