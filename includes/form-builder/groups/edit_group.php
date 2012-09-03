@@ -5,7 +5,7 @@ function event_espresso_form_group_edit() {
     
     
     global $wpdb;
-    $g_sql = "SELECT qg.id, qg.group_name, qg.group_order, qg.group_identifier, qg.group_description, qg.show_group_name, qg.show_group_description, qg.wp_user ";
+    $g_sql = "SELECT qg.id, qg.group_name, qg.group_order, qg.group_identifier, qg.group_description, qg.show_group_name, qg.show_group_description, qg.wp_user, qg.is_global ";
     $g_sql .= " FROM  " . EVENTS_QST_GROUP_TABLE . " qg ";
     $g_sql .= " WHERE ";
     $g_sql .= " qg.id = '" . $_REQUEST['group_id'] . "' ";
@@ -25,12 +25,13 @@ function event_espresso_form_group_edit() {
             $show_group_name = $group->show_group_name;
             $show_group_description = $group->show_group_description;
             $wp_user = $group->wp_user;
+            $group_is_global = $group->is_global;
         }
     }
     
     if ( function_exists( 'espresso_member_data' ) ) {
         if (function_exists( 'espresso_is_admin' ) ) {  
-            // If the user doesn't have admin access get only user's own question groups 
+            // If the user doesn't have admin access get only user's own question groups.
             if ( !espresso_is_admin() ) { 
                 if ( espresso_member_data('id') != $wp_user ) {
                     echo '<h2>' . __('Sorry, you do not have permission to edit this question group.', 'event_espresso') . '</h2>';
@@ -83,7 +84,10 @@ function event_espresso_form_group_edit() {
                                         <label for="show_group_description"><?php _e('Show group description on registration page?', 'event_espresso'); ?></label>
                                         <input type="checkbox" name="show_group_description" id="show_group_description" value="1" <?php if ($show_group_description != 0): ?> checked="checked"<?php endif; ?> />
                                     </li>
-
+                                    <li>
+                                        <label for="is_global"><?php _e('Global Group?', 'event_espresso'); ?></label>
+                                        <input type="checkbox" name="is_global" id="is_global" value="1" <?php if ($group_is_global != 0): ?> checked="checked"<?php endif; ?> />
+                                    </li>
                                 </ul>
 																</fieldset>
                             </td>
@@ -95,7 +99,7 @@ function event_espresso_form_group_edit() {
 																	 <li><p><?php _e('Selected Questions for group<span class="info"> Uncheck box to remove question from group</span>', 'event_espresso') ?></p></li>
                                     <?php
 //Questions that are already associated with this group
-                                    $q_sql = "SELECT q.id, q.question, qgr.id as rel_id, q.system_name, qg.system_group ";
+                                    $q_sql = "SELECT q.id, q.question, qgr.id as rel_id, q.system_name, qg.system_group, q.is_global ";
                                     $q_sql .= " FROM " . EVENTS_QUESTION_TABLE . " q ";
                                     $q_sql .= " JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr ";
                                     $q_sql .= " on q.id = qgr.question_id ";
@@ -104,11 +108,8 @@ function event_espresso_form_group_edit() {
                                     $q_sql .= " WHERE qg.id = " . $_REQUEST['group_id'];
                                     if (function_exists('espresso_member_data')) {
                                         $q_sql .= " AND ";
-                                        if ($wp_user == 0 || $wp_user == 1) {
-                                            $q_sql .= " (qg.wp_user = '0' OR qg.wp_user = '1') ";
-                                        } else {
-                                            $q_sql .= " qg.wp_user = '" . $wp_user . "' ";
-                                        }
+                                        $q_sql .= " qg.wp_user = '" . $wp_user . "' OR qg.is_global = '1' ";
+                            
                                     }
                                     $q_sql .= " ORDER BY q.sequence, q.id ASC ";
                                     //echo $q_sql;
@@ -139,11 +140,9 @@ function event_espresso_form_group_edit() {
                                         $q_sql2 .= " q.id not in($questions_in_group) AND ";
                                     }
                                     if (function_exists('espresso_member_data')) {
-                                        if ($wp_user == 0 || $wp_user == 1) {
-                                            $q_sql2 .= " q.wp_user = '0' OR q.wp_user = '1' ";
-                                        } else {
-                                            $q_sql2 .= " q.wp_user = '" . $wp_user . "' ";
-                                        }
+                                       
+                                        $q_sql2 .= " q.wp_user = '" . $wp_user . "' OR q.is_global = 1 ";
+                                        
                                     } else {
                                         $q_sql2 .= " (q.wp_user = '0' OR q.wp_user = '1') ";
                                     }
