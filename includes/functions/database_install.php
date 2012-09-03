@@ -187,6 +187,7 @@ function events_data_tables_install() {
 		if ( empty($testg) ) {
 			$sql = "ALTER TABLE " . EVENTS_QST_GROUP_TABLE . " ADD `is_global` tinyint( 1 ) NOT NULL DEFAULT '0' AFTER `system_group`;";
 			$wpdb->query($sql);
+			$wpdb->update($wpdb->prefix . "events_qst_group", array('is_global' => 1), array('system_group' => 1), array('%d'), array('%d') );
 		}
 
 		//questions
@@ -194,6 +195,8 @@ function events_data_tables_install() {
 		$test = $wpdb->query($sql);
 		if ( empty($test) ) {
 			$sql = "ALTER TABLE " . EVENTS_QUESTION_TABLE . " ADD `is_global` tinyint( 1 ) NOT NULL DEFAULT '0' AFTER `admin_only`;";
+			$wpdb->query($sql);
+			$sql = "UPDATE " . $wpdb->prefix . "events_question SET is_global = '1' WHERE system_name != ''";
 			$wpdb->query($sql);
 		}
 	}
