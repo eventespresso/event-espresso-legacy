@@ -340,12 +340,12 @@ function espresso_event_question_groups($question_groups=array(), $add_attendee_
 			
 			// If permission addon is active
             if ( function_exists( 'espresso_member_data' ) ) {
-				$rs_sql .= " AND qg.wp_user = '" . espresso_member_data('id') . "' ";
+				$rs_sql .= " AND qg.wp_user = '" . espresso_member_data('id') . "' OR is_global = '1' ";
             }else{
 				$rs_sql .= " AND (wp_user = '0' OR wp_user = '1') ";
 			}
 			
-			$rs_sql .= " ORDER BY qg.group_order ";
+			$rs_sql .= " ORDER BY qg.group_order GROUP BY qg.id ";
 			
             $rs = $wpdb->get_results( $rs_sql );
             if ( count( $rs ) > 0 ) {
@@ -380,7 +380,7 @@ function espresso_event_question_groups($question_groups=array(), $add_attendee_
                // if (function_exists( 'espresso_is_admin' ) ) {  
                     // If the user doesn't have admin access get only user's own question groups 
                    // if ( espresso_is_admin() !== true ) { 
-                        $sql .= " AND wp_user = '" . espresso_member_data('id') . "' ";
+                        $sql .= " AND wp_user = '" . espresso_member_data('id') . "' OR is_global = '1'";
                    // }
                // } 
             }else{
@@ -405,7 +405,7 @@ function espresso_event_question_groups($question_groups=array(), $add_attendee_
                     $sql .= " (wp_user = '0' OR wp_user = '1') ";
                 } else {
                     //$sql .= " wp_user = '" . $wp_user . "' ";
-					$sql .= " (wp_user = '" . $wp_user . "' OR wp_user = '0' OR wp_user = '1')";
+					$sql .= " (wp_user = '" . $wp_user . "' OR wp_user = '0' OR wp_user = '1') OR is_global = '1'";
                 } 
             }else{
                 $sql .= " WHERE wp_user = '0' OR wp_user = '1' ";
