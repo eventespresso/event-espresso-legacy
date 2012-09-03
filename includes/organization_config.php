@@ -282,7 +282,7 @@ function organization_config_mnu() {
 										}
 										?>
 										<p>
-											<?php _e('The following shortcodes and page settinngs are required for Event Espresso to function properly. These shortcodes should not be replaced with any other shortcodes. Please view <a href="admin.php?page=support#shortcodes">this page</a> for a list of optional shortcodes.', 'event_espresso'); ?>
+											<?php _e('The following shortcodes and page settings are required for Event Espresso to function properly. These shortcodes should not be replaced with any other shortcodes. Please view <a href="admin.php?page=support#shortcodes">this page</a> for a list of optional shortcodes.', 'event_espresso'); ?>
 										</p>
 										<p>
 											<label for="event_page_id">
