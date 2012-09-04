@@ -111,7 +111,7 @@ function event_espresso_form_group_edit() {
                                         $q_sql .= " qg.wp_user = '" . $wp_user . "' OR qg.is_global = '1' ";
                             
                                     }
-                                    $q_sql .= " ORDER BY q.sequence, q.id ASC ";
+                                    $q_sql .= " GROUP BY q.id ORDER BY q.sequence, q.id ASC ";
                                     //echo $q_sql;
                                     $questions = $wpdb->get_results($q_sql);
                                     $questions_in_group = '';

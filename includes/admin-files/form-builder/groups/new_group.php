@@ -62,7 +62,7 @@ function event_espresso_form_group_new(){
         	}else{
         		$sql .= " (wp_user = '0' OR wp_user = '1') ";
         	}
-        	$sql .= " ORDER BY sequence, id ASC ";
+        	$sql .= " GROUP BY id ORDER BY sequence, id ASC ";
         	$questions = $wpdb->get_results($sql);
         	if ($wpdb->num_rows > 0) {
         		foreach ($questions as $question) {
