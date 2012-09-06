@@ -132,7 +132,7 @@ if (!function_exists('event_espresso_get_final_price')) {
 					if ($early_price_data = early_discount_amount($event_id, $event_cost)) {
 						$event_cost = $early_price_data['event_price'];
 					}
-					$surcharge = number_format($result->surcharge, 2, '.', ''); //by default it’s 0. if flat rate, will just be formatted and atted to the total
+					$surcharge = number_format($result->surcharge, 2, '.', ''); //by default it's 0. if flat rate, will just be formatted and atted to the total
 					if ($result->surcharge > 0 && $result->surcharge_type == 'pct') { //if >0 and is percent, calculate surcharg amount to be added to total
 						$surcharge = number_format($event_cost * $result->surcharge / 100, 2, '.', '');
 					}
@@ -181,30 +181,46 @@ if (!function_exists('early_discount_amount')) {
 
 }
 
-//Creates dropdowns if multiple prices are associated with an event
+/* 
+ Creates dropdowns if multiple prices are associated with an event
+ * @params int $event_id
+ * @params int $atts
+ *  - bool multi_reg If this is a mutliple regsitration, then it cahnges the registration proerties
+ *  - bool show_label Show the label above the dropdown
+ *  - var current_value pass the price id to show a selected price by default
+*/
+
 if (!function_exists('event_espresso_price_dropdown')) {
 
-    function event_espresso_price_dropdown($event_id, $label = 1, $multi_reg = 0, $value = '') {
+    function event_espresso_price_dropdown($event_id, $atts) {
 			do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		//Attention:
 		//If changes to this function are not appearing, you may have the members addon installed and will need to update the function there.
-
+		//echo "<pre>".print_r($atts,true)."</pre>";
+		extract($atts);
         global $wpdb, $org_options;
-        $html = '';
-
+       	
+		$html = '';
+		
+		$label = $label == '' ? '<span class="section-title">'.__('Choose an Option: ', 'event_espresso').'</span>' : $label;
+		
 		//Will make the name an array and put the time id as a key so we know which event this belongs to
-        $multi_name_adjust = $multi_reg == 1 ? "[$event_id]" : '';
-        $surcharge_text = isset($org_options['surcharge_text']) ? $org_options['surcharge_text'] : __('Surcharge', 'event_espresso');
+        $multi_name_adjust = isset($multi_reg) && $multi_reg == true ? "[$event_id]" : '';
+       
+	    $surcharge_text = isset($org_options['surcharge_text']) ? $org_options['surcharge_text'] : __('Surcharge', 'event_espresso');
 
         $results = $wpdb->get_results("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' ORDER BY id ASC");
 
         if ($wpdb->num_rows > 1) {
-            $html .= $label == 1 ? '<label for="event_cost">' . __('Choose an Option: ', 'event_espresso') . '</label>' : '';
-            $html .= '<select name="price_option' . $multi_name_adjust . '" id="price_option-' . $event_id . '">';
+           //Create the label for the drop down
+			$html .= $show_label == 1 ? '<label for="event_cost">' . $label . '</label>' : '';
+	
+			//Create a dropdown of prices
+			$html .= '<select name="price_option' . $multi_name_adjust . '" id="price_option-' . $event_id . '">';
 
             foreach ($results as $result) {
 
-                $selected = $value == $result->id ? ' selected="selected" ' : '';
+                $selected = isset($current_value) && $current_value == $result->id ? ' selected="selected" ' : '';
 
                 // Addition for Early Registration discount
                 if ($early_price_data = early_discount_amount($event_id, $result->event_cost)) {
@@ -253,10 +269,13 @@ if (!function_exists('event_espresso_price_dropdown')) {
                 }
             }
         }
-        return $html;
+       	echo $html;
+		return;
     }
-
+	add_action('espresso_price_select', 'event_espresso_price_dropdown', 20, 2);
 }
+
+
 
 //This function gets the first price id associated with an event and displays a hidden field.
 function espresso_hidden_price_id($event_id) {
@@ -321,129 +340,126 @@ if (!function_exists('espresso_payment_type')) {
  *
  * @return float|null  the price paid for an event by attendee id or the registration id, if information not found then it will return null
  */
-function espresso_attendee_price($atts) {
-	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-    global $wpdb;
-    isset($atts) ? extract($atts) : '';
-
-    /**
-     * If the registration_id is empty, then retrieve it
-     * */
-    $generated_registration_id = false;
-    if (!isset($registration_id))
-    {
-        if (!isset($attendee_id))
-        {
-            return;
-        }
-        else
-        {
-            $registration_id = espresso_registration_id($attendee_id);
-        }
-    }
-
-
-    /**
-     * Check if the attendee is from old age i.e. before 3.1.10
-     * */
-   // $ice_age = true;
-   // $ice_row = $wpdb->get_row($wpdb->prepare("select * from ".EVENTS_ATTENDEE_COST_TABLE." inner join ".EVENTS_ATTENDEE_TABLE." on  where registration_id = '%s'",$registration_id));
-    //if ( $ice_row !== NULL )
-    //{
-        $ice_age = false;
-   // }
-
-
-    /**
-     * Found use of single price only in payment option in attendee record edit page for admin.
-     * */
-    if (isset($single_price) && $single_price = true && isset($attendee_id) && $attendee_id > 0 ) {
-        $sql = '';
-        $sql = "SELECT cost amount_pd FROM " . EVENTS_ATTENDEE_COST_TABLE . " eac ";
-        $sql .= " WHERE eac.attendee_id ='%d' LIMIT 0,1";
-
-        $res = $wpdb->get_results($wpdb->prepare($sql,$attendee_id));
-        if ($wpdb->num_rows >= 1 && $wpdb->last_result[0]->amount_pd != NULL) {
-            $total_cost = $wpdb->last_result[0]->amount_pd;
-            return number_format($total_cost, 2, '.', '');
-        }
-    }
-
-    /**
-     * Return the total amount paid for this registration
-     * */
-    if (isset($reg_total) && $reg_total = true) {
-        $sql = "select amount_pd as total from " . EVENTS_ATTENDEE_TABLE . " where registration_id = '%s' order by id limit 1";
-        $total_cost = $wpdb->get_var($wpdb->prepare($sql,$registration_id));
-        return number_format($total_cost, 2, '.', '');
-    }
-
-
-    /**
-     * Return the total amount paid for a session. Uses the registration id.
-     * */
-    if (isset($session_total) && $session_total = true) {
-        $attendee_session = $wpdb->get_var($wpdb->prepare("select attendee_session from ".EVENTS_ATTENDEE_TABLE." where registration_id = '%s' ",$registration_id));
-        if (trim($attendee_session == ''))
-        {
-            /**
-             * If attendee_session is empty then return only single attendee information
-             * */
-            $total_cost = 0;
-            $total_cost = $wpdb->get_var($wpdb->prepare("select sum(amount_pd) as amount_pd from ".EVENTS_ATTENDEE_TABLE." where registration_id = '%s'",$registration_id));
-            return number_format($total_cost, 2, '.', '');
-        }
-        else
-        {
-           /* if($ice_age)
-            {
-                $sql = "select amount_pd from ".EVENTS_ATTENDEE_TABLE."  where attendee_session = '%s' order by id limit 1";
-                $total_cost = $wpdb->get_var($wpdb->prepare($sql,$attendee_session));
-                return number_format($total_cost, 2, '.', '');
-            }
-            else
-            {*/
-                $primary_registration_id = $registration_id;
-                $rs = $wpdb->get_row($wpdb->prepare("select primary_registration_id from ".EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE." where registration_id = '%s' limit 0,1 ",$registration_id));
-                if ( $rs !== NULL )
-                {
-                    $primary_registration_id = $rs->primary_registration_id;
-                }
-                $sql = "select sum(amount_pd) as total from " . EVENTS_ATTENDEE_TABLE . " where registration_id = '%s' ";
-                $total_cost = $wpdb->get_var($wpdb->prepare($sql,$primary_registration_id));
-                return number_format($total_cost, 2, '.', '');
-            //}
-        }
-    }
-
-
-    /**
-     * Returnt the amount paid for an individual attendee
-     * */
-    if (isset($attendee_id) && $attendee_id > 0) {
-        $sql = '';
-        $sql = "SELECT cost amount_pd, quantity FROM " . EVENTS_ATTENDEE_COST_TABLE . " WHERE attendee_id ='" . $attendee_id . "' ORDER BY attendee_id  LIMIT 0,1";
-        $res = $wpdb->get_results($sql);
-        if ($wpdb->num_rows >= 1 && $wpdb->last_result[0]->amount_pd != NULL) {
-            $total_cost = $wpdb->last_result[0]->amount_pd * $wpdb->last_result[0]->quantity;
-            return number_format($total_cost, 2, '.', '');
-        }
-    }
-
-    /**
-     * If no results are returned above or the registration id was passed, then get the price by looking in EVENTS_ATTENDEE_TABLE
-     * */
-    $sql = '';
-    $sql = "SELECT amount_pd FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id ='" . $registration_id . "' ORDER BY id LIMIT 0,1";
-    $wpdb->get_results($sql);
-    if ($wpdb->num_rows >= 1) {
-        return number_format($wpdb->last_result[0]->amount_pd, 2, '.', '');
-    }
-    return NULL;
+if (!function_exists('espresso_attendee_price')) {
+	function espresso_attendee_price($atts) {
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+		global $wpdb;
+		isset($atts) ? extract($atts) : '';
+	
+		/**
+		 * If the registration_id is empty, then retrieve it
+		 * */
+		$generated_registration_id = false;
+		if (!isset($registration_id)){
+			if (!isset($attendee_id)){
+				return;
+			}else{
+				$registration_id = espresso_registration_id($attendee_id);
+			}
+		}
+	
+	
+		/**
+		 * Check if the attendee is from old age i.e. before 3.1.10
+		 * */
+	   // $ice_age = true;
+	   // $ice_row = $wpdb->get_row($wpdb->prepare("select * from ".EVENTS_ATTENDEE_COST_TABLE." inner join ".EVENTS_ATTENDEE_TABLE." on  where registration_id = '%s'",$registration_id));
+		//if ( $ice_row !== NULL )
+		//{
+			$ice_age = false;
+	   // }
+	
+	
+		/**
+		 * Found use of single price only in payment option in attendee record edit page for admin.
+		 * */
+		if (isset($single_price) && $single_price = true && isset($attendee_id) && $attendee_id > 0 ) {
+			$sql = '';
+			$sql = "SELECT cost amount_pd FROM " . EVENTS_ATTENDEE_COST_TABLE . " eac ";
+			$sql .= " WHERE eac.attendee_id ='%d' LIMIT 0,1";
+	
+			$res = $wpdb->get_results($wpdb->prepare($sql,$attendee_id));
+			if ($wpdb->num_rows >= 1 && $wpdb->last_result[0]->amount_pd != NULL) {
+				$total_cost = $wpdb->last_result[0]->amount_pd;
+				return number_format($total_cost, 2, '.', '');
+			}
+		}
+	
+		/**
+		 * Return the total amount paid for this registration
+		 * */
+		if (isset($reg_total) && $reg_total = true) {
+			$sql = "select amount_pd as total from " . EVENTS_ATTENDEE_TABLE . " where registration_id = '%s' order by id limit 1";
+			$total_cost = $wpdb->get_var($wpdb->prepare($sql,$registration_id));
+			return number_format($total_cost, 2, '.', '');
+		}
+	
+	
+		/**
+		 * Return the total amount paid for a session. Uses the registration id.
+		 * */
+		if (isset($session_total) && $session_total = true) {
+			$attendee_session = $wpdb->get_var($wpdb->prepare("select attendee_session from ".EVENTS_ATTENDEE_TABLE." where registration_id = '%s' ",$registration_id));
+			if (trim($attendee_session == ''))
+			{
+				/**
+				 * If attendee_session is empty then return only single attendee information
+				 * */
+				$total_cost = 0;
+				$total_cost = $wpdb->get_var($wpdb->prepare("select sum(amount_pd) as amount_pd from ".EVENTS_ATTENDEE_TABLE." where registration_id = '%s'",$registration_id));
+				return number_format($total_cost, 2, '.', '');
+			}
+			else
+			{
+			   /* if($ice_age)
+				{
+					$sql = "select amount_pd from ".EVENTS_ATTENDEE_TABLE."  where attendee_session = '%s' order by id limit 1";
+					$total_cost = $wpdb->get_var($wpdb->prepare($sql,$attendee_session));
+					return number_format($total_cost, 2, '.', '');
+				}
+				else
+				{*/
+					$primary_registration_id = $registration_id;
+					$rs = $wpdb->get_row($wpdb->prepare("select primary_registration_id from ".EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE." where registration_id = '%s' limit 0,1 ",$registration_id));
+					if ( $rs !== NULL )
+					{
+						$primary_registration_id = $rs->primary_registration_id;
+					}
+					$sql = "select sum(amount_pd) as total from " . EVENTS_ATTENDEE_TABLE . " where registration_id = '%s' ";
+					$total_cost = $wpdb->get_var($wpdb->prepare($sql,$primary_registration_id));
+					return number_format($total_cost, 2, '.', '');
+				//}
+			}
+		}
+	
+	
+		/**
+		 * Returnt the amount paid for an individual attendee
+		 * */
+		if (isset($attendee_id) && $attendee_id > 0) {
+			$sql = '';
+			$sql = "SELECT cost amount_pd, quantity FROM " . EVENTS_ATTENDEE_COST_TABLE . " WHERE attendee_id ='" . $attendee_id . "' ORDER BY attendee_id  LIMIT 0,1";
+			$res = $wpdb->get_results($sql);
+			if ($wpdb->num_rows >= 1 && $wpdb->last_result[0]->amount_pd != NULL) {
+				$total_cost = $wpdb->last_result[0]->amount_pd * $wpdb->last_result[0]->quantity;
+				return number_format($total_cost, 2, '.', '');
+			}
+		}
+	
+		/**
+		 * If no results are returned above or the registration id was passed, then get the price by looking in EVENTS_ATTENDEE_TABLE
+		 * */
+		$sql = '';
+		$sql = "SELECT amount_pd FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id ='" . $registration_id . "' ORDER BY id LIMIT 0,1";
+		$wpdb->get_results($sql);
+		if ($wpdb->num_rows >= 1) {
+			return number_format($wpdb->last_result[0]->amount_pd, 2, '.', '');
+		}
+		return NULL;
+	}
 }
 
-function get_reg_total_price($registration_id)
-{
+function get_reg_total_price($registration_id){
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 }
 

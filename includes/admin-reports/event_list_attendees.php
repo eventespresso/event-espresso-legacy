@@ -292,7 +292,7 @@ function event_list_attendees() {
                 ?>
                   <tr>
                     <td class="check-column" style="padding:7px 0 22px 7px; vertical-align:top;"><input name="checkbox[<?php echo $id ?>]" type="checkbox"  title="Delete <?php echo $fname ?><?php echo $lname ?>"></td>
-                    <td class="row-title"  nowrap="nowrap"><a href="admin.php?page=events&amp;event_admin_reports=edit_attendee_record&amp;event_id=<?php echo $event_id; ?>&amp;registration_id=<?php echo $registration_id; ?>&amp;form_action=edit_attendee&amp;id=<?php echo $id ?>" title="<?php echo'ID#:'.$id.' [ REG#: ' . $registration_id.' ]'; ?>"><?php echo $fname ?> <?php echo $lname ?>
+                    <td class="row-title"  nowrap="nowrap"><a href="admin.php?page=events&amp;event_admin_reports=edit_attendee_record&amp;event_id=<?php echo $event_id; ?>&amp;registration_id=<?php echo $registration_id; ?>&amp;form_action=edit_attendee&amp;id=<?php echo $id ?>" title="<?php echo 'ID#:'.$id.' [ REG#: ' . $registration_id.' ] Email: '.$attendee->email; ?>"><?php echo $fname ?> <?php echo $lname ?> <?php echo $email ?>
                       <?php /*?><ul>
                          <?php echo $attendees_group ?>
                       </ul><?php */?>

@@ -48,7 +48,7 @@ function espresso_get_total_cost($payment_data) {
 	$sql = "SELECT ac.cost, ac.quantity, dc.coupon_code_price, dc.use_percentage  FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 	$sql .= " JOIN " . EVENTS_ATTENDEE_COST_TABLE . " ac ON a.id=ac.attendee_id ";
 	$sql .= " LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
-	$sql .= " WHERE a.attendee_session='" . $payment_data['attendee_session'] . "'";
+	$sql .= " WHERE a.attendee_session='" . $payment_data['attendee_session'] . "' ORDER BY a.id ASC";
 	$tickets = $wpdb->get_results($sql, ARRAY_A);
 	$total_cost = 0;
 	$total_quantity = 0;

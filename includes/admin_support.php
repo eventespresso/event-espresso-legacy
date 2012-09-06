@@ -218,8 +218,8 @@ function event_espresso_support() {
 							<div class="inside">
 								<div class="padding">
 									<dl id="themes">
-										<dt><a href="http://www.shareasale.com/r.cfm?B=258340&amp;U=471857&amp;M=27087" target="_blank">PlatformPro</a> by Pagelines</dt>
-										<dt><a href="http://www.woothemes.com/amember/go.php?r=28039&amp;i=b16" target="_blank">Diarise</a> by WooThemes</dt>
+										<dt><a href="http://www.pagelines.com/" target="_blank">PageLines Framework</a> by Pagelines</dt>
+										<dt><a href="http://www.woothemes.com/" target="_blank">Diarise</a> by WooThemes</dt>
 									</dl>
 								</div>
 							</div>
@@ -344,7 +344,7 @@ function event_espresso_support() {
 											<li><span class="highlight">[LISTATTENDEES staff_id="staff_id_number"]</span> //Show a list of events that are assigned to a staff member</li>
 										</ul>
 										<p>
-	<?php _e('For more information about the attendee listing shortcodes and customizations. Please view the <a href="http://eventespresso.com/forums/2010/10/attendee-listing-shortcodes/">Attendee Listing Shortcodes</a> page.', 'event_espresso'); ?>
+	<?php _e('For more information about the attendee listing shortcodes and customizations. Please view the <a href="http://eventespresso.com/wiki/shortcodes-template-variables/">Attendee Listing Shortcodes</a> page.', 'event_espresso'); ?>
 										</p>
 									</div>
 									<div class="shortcode-box">
@@ -518,7 +518,26 @@ function event_espresso_support() {
 									if (!$is_mysql_valid) {
 										echo '<p class="red_alert">' . __('Your version of MySQL is out of date, please update to the latest version of MySQL. <br>Required version of MySQL:', 'event_espresso') . ' ' . $mysql_req_version . '</p>';
 									}
-									?>
+									
+									
+									if (event_espresso_verify_attendee_data() == true) {
+														?>
+									  <a name="attendee_data" id="attendee_data"></a>
+									  <p class="red_text"><strong>
+										<?php _e('Attendee information is outdated', 'event_espresso'); ?>
+										</strong></p>
+									  <p>
+										<?php _e('Due to recent changes in the way attendee information is handled, attendee data may appear to be missing from some events. In order to reassign attendees to events, please run the attendee update script by pressing the button below.', 'event_espresso'); ?>
+									  </p>
+									  <form action="<?php echo $_SERVER["REQUEST_URI"] ?>" method="post" name="form" id="form">
+										<p>
+										  <input type="hidden" name="action" value="event_espresso_update_attendee_data" />
+										  <input class="button-primary" type="submit" name="event_espresso_update_attendee_data_button" value="<?php _e('Run Attendee Update Script', 'event_espresso'); ?>" id="event_espresso_update_attendee_data_button"/>
+										</p>
+									  </form>
+								  <?php
+									}
+                                  ?>
 									<div class="localhost-information">
 										<dl>
 											<dt>

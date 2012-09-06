@@ -190,7 +190,8 @@ if ($amount_pd != $total_cost) {
 	}
 	$pdf->InvoiceTotals($text, $discount, $left, $right);
 }
-$pdf->InvoiceTotals("Total due:", $amount_pd, $left, $right);
+$text = __("Total due:", 'event_espresso');
+$pdf->InvoiceTotals($text, $amount_pd, $left, $right);
 $pdf->Ln(10);
 
 //Build the payment link and instructions
