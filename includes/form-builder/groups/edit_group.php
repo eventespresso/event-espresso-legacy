@@ -108,16 +108,18 @@ function event_espresso_form_group_edit() {
                                     $q_sql .= " WHERE qg.id = " . $_REQUEST['group_id'];
                                     if (function_exists('espresso_member_data')) {
                                         $q_sql .= " AND ";
-                                        $q_sql .= " qg.wp_user = '" . $wp_user . "' OR qg.is_global = '1' ";
+                                        $q_sql .= " qg.wp_user = '" . $wp_user . "' OR ( qg.is_global = '1' AND qg.wp_user = '" . $wp_user . "' ) ";
                             
                                     }
                                     $q_sql .= " GROUP BY q.id ORDER BY q.sequence, q.id ASC ";
+                                    
                                     //echo $q_sql;
                                     $questions = $wpdb->get_results($q_sql);
                                     $questions_in_group = '';
                                     if ($wpdb->num_rows > 0) {
 
                                         foreach ($questions as $question) {
+                                            
                                             $questions_in_group .= $question->id . ',';
                                             $checked = (!is_null($question->rel_id)) ? 'checked="checked"' : '';
 
@@ -141,12 +143,13 @@ function event_espresso_form_group_edit() {
                                     }
                                     if (function_exists('espresso_member_data')) {
                                        
-                                        $q_sql2 .= " q.wp_user = '" . $wp_user . "' OR q.is_global = 1 ";
+                                        $q_sql2 .= " q.wp_user = '" . $wp_user . "' OR ( q.is_global = '1' AND q.id NOT IN ($questions_in_group) ) ";
                                         
                                     } else {
                                         $q_sql2 .= " (q.wp_user = '0' OR q.wp_user = '1') ";
                                     }
-                                    $q_sql2 .= " ORDER BY id ASC ";
+                                    $q_sql2 .= " GROUP BY q.id ORDER BY id ASC ";
+                                
                                     $questions = $wpdb->get_results($q_sql2);
 
                                     if ($wpdb->num_rows > 0) {
