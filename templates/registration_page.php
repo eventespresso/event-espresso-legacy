@@ -255,7 +255,7 @@ if (!function_exists('register_attendees')) {
 			$is_active = event_espresso_get_is_active(0, $all_meta);
 			//echo '<p>'.print_r(event_espresso_get_is_active($event_id, $all_meta)).'</p>';;
 			
-            if ($org_options['use_captcha'] == 'Y' && $_REQUEST['edit_details'] != 'true') {
+            if ($org_options['use_captcha'] == 'Y' && empty($_REQUEST['edit_details'])) {
                 ?>
                 <script type="text/javascript">
                     var RecaptchaOptions = {
