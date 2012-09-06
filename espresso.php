@@ -222,7 +222,10 @@ define("EVENTS_ATTENDEE_COST_TABLE", $wpdb->prefix . "events_attendee_cost");
 setlocale(LC_TIME, get_locale());
 
 //Get language files
-load_plugin_textdomain('event_espresso', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+function espresso_load_language_files() {
+	load_plugin_textdomain('event_espresso', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+}
+add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
 
 //Addons
 //Ticketing
