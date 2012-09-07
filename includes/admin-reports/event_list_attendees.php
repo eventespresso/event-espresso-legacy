@@ -366,9 +366,7 @@ function event_list_attendees() {
     <?php _e('Import Events', 'event_espresso'); ?>
     </a> 
 	
-	<a style="margin-left:5px" class="button-secondary" href="admin.php?page=espresso_attendee_import">
-    <?php _e('Import Attendees', 'event_espresso'); ?>
-    </a>
+	<?php if (function_exists('espresso_attendee_import') && $espresso_premium == true) {?><a style="margin-left:5px" class="button-secondary" href="admin.php?page=espresso_attendee_import"><?php _e('Import Attendees', 'event_espresso'); ?></a><?php } ?>
 	
 	<a class="button-secondary" style="margin-left:5px" href="#" onclick="window.location='<?php echo get_bloginfo('wpurl') . "/wp-admin/admin.php?event_espresso&amp;event_id=" . $_REQUEST['event_id'] . "&amp;export=report&action=payment&amp;type=excel"; echo $_REQUEST['event_id'] == '' ? '&amp;all_events=true' : ''; ?>'" title="<?php _e('Export to Excel', 'event_espresso'); ?>">
     <?php _e('Export to Excel', 'event_espresso'); ?>
