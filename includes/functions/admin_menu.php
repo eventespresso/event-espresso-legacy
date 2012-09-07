@@ -102,6 +102,11 @@ if (!function_exists('add_event_espresso_menus')) {
 		if (function_exists('espresso_reports') && $espresso_premium == true) {
 			add_submenu_page('event_espresso', __('Event Espresso - Reports','event_espresso'), __('Reports','event_espresso'), 'administrator', 'espresso_reports', 'espresso_reports');
 		}
+		
+		//Attendee Import
+		if (function_exists('espresso_attendee_import') && $espresso_premium == true) {
+			add_submenu_page('event_espresso', __('Event Espresso - Attendee Import Tool','event_espresso'), __('Attendee Import','event_espresso'), 'administrator', 'espresso_attendee_import', 'espresso_attendee_import');
+		}
 
 
         //Social Media Settings
