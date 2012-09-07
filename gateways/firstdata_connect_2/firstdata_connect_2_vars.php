@@ -15,6 +15,13 @@ function espresso_display_firstdata_connect_2($payment_data) {
 	$fdggutil->set_cancelUrl($org_options['notify_url']);
 	$fdggutil->set_attendee_id($payment_data['attendee_id']);
 	$fdggutil->set_registration_id($payment_data['registration_id']);
+	$fdggutil->set_name($payment_data['fname'].' '.$payment_data['lname']);
+	$fdggutil->set_address($payment_data['address']);
+	$fdggutil->set_city($payment_data['city']);
+	$fdggutil->set_state($payment_data['state']);
+	$country_data = getCountryFullData($org_options['organization_country']);
+	$fdggutil->set_country($country_data['iso_code_2']);
+	$fdggutil->set_zip($payment_data['zip']);
 	$fdggutil->set_dateTime();
 	$button_url = $firstdata_connect_2_settings['button_url'];
 	if (!empty($firstdata_connect_2_settings['bypass_payment_page']) && $firstdata_connect_2_settings['bypass_payment_page'] == 'Y') {
