@@ -205,8 +205,10 @@ function add_event_to_db($recurrence_arr = array()) {
 		$event_meta['default_payment_status'] = !empty($_REQUEST['default_payment_status']) ? $_REQUEST['default_payment_status'] : '';
 
 		
-		if (isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) )
-			 $event_meta['event_thumbnail_url'] = $_REQUEST['upload_image'];
+		if (isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ){
+			$event_meta['event_thumbnail_url'] = $_REQUEST['upload_image'];
+			$event_thumbnail_url = $event_meta['event_thumbnail_url'];
+		}
 			
 			
         if ( isset($_REQUEST['emeta']) && !empty($_REQUEST['emeta']) ) {
@@ -214,9 +216,7 @@ function add_event_to_db($recurrence_arr = array()) {
                 $event_meta[$v] = strlen(trim($_REQUEST['emetad'][$k])) > 0 ? $_REQUEST['emetad'][$k] : '';
             }
         }
-		
-		
-			
+					
         //echo strlen(trim($_REQUEST['emetad'][$k]));
       	//print_r($_REQUEST['emeta'] );
 
@@ -418,11 +418,12 @@ function add_event_to_db($recurrence_arr = array()) {
             $sql = array('post_id' => $post_id, 'post_type' => $post_type);
 
             add_post_meta($post_id, 'event_id', $last_event_id);
+			add_post_meta($post_id, 'event_meta', $event_meta);
             add_post_meta($post_id, 'event_identifier', $event_identifier);
             add_post_meta($post_id, 'event_start_date', $start_date);
             add_post_meta($post_id, 'event_end_date', $end_date);
             add_post_meta($post_id, 'event_location', $event_location);
-			add_post_meta($post_id, 'event_thumbnail_url', $event_meta['event_thumbnail_url']);
+			add_post_meta($post_id, 'event_thumbnail_url', $event_thumbnail_url);
             add_post_meta($post_id, 'virtual_url', $virtual_url);
             add_post_meta($post_id, 'virtual_phone', $virtual_phone);
             add_post_meta($post_id, 'event_address', $address);

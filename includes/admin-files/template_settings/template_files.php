@@ -20,9 +20,9 @@
                 }
                 ?>
                 <?php
-                $files = array('attendee_list.php', 'event_list.php', 'event_list_display.php', 'event_post.php', 'payment_page.php', 'registration_page.php', 'registration_page_display.php', 'confirmation_display.php', 'return_payment.php', 'widget.php');
+                $files = array('attendee_list.php', 'event_list.php', 'event_list_display.php', 'event_post.php', 'payment_page.php', 'registration_page.php', 'registration_page_display.php', 'confirmation_display.php', 'return_payment.php', 'widget.php', 'shopping_cart.php');
                 //echo EVENT_ESPRESSO_TEMPLATE_DIR . $files[3];
-               if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[0]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[1]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[2]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[3]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[4]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[5]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[6]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[7]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[8]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[9])) {
+               if ( file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[0]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[1]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[2]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[3]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[4]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[5]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[6]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[7]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[8]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[9]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[10]) ) {
                    ?>
                     <p>
     <?php _e("Modifying your event listings and registration pages is easy."); ?>
@@ -70,6 +70,9 @@
                                         break;
                                     case 'widget.php':
                                         $info = __('(creates a widget for use in your theme)', 'event_espresso');
+                                        break;
+									case 'shopping_cart.php':
+                                        $info = __('(this is the shopping cart page)', 'event_espresso');
                                         break;
                                     default:
                                         $info = '';

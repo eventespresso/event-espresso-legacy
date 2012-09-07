@@ -890,15 +890,15 @@ function event_espresso_display_right_column() {
 							echo '<h4 style="margin:0">' . __('From the Blog', 'event_espresso') . '</h4>';
 
 							// Get RSS Feed(s)
-							@wp_widget_rss_output('http://eventespresso.com/feed/', array('show_date' => 0, 'items' => 6));
+							@wp_widget_rss_output('http://eventespresso.com/feed/', array('show_date' => 0, 'items' => 5));
 
-							echo '<h4 style="margin:0">' . __('From the Forums', 'event_espresso') . '</h4>';
+							/*echo '<h4 style="margin:0">' . __('From the Forums', 'event_espresso') . '</h4>';
 
 							if ($espresso_premium == true){
 								@wp_widget_rss_output('http://eventespresso.com/forum/event-espresso-support/feed', array('show_date' => 0, 'items' => 4));
 							}else{
 								@wp_widget_rss_output('http://eventespresso.com/forum/event-espresso-public/feed', array('show_date' => 0, 'items' => 4));
-							}
+							}*/
 							?>
 						</div>
 					</div>
@@ -913,27 +913,36 @@ function event_espresso_display_right_column() {
 				<div class="inside">
 					<div class="padding">
 						<ul class="infolinks">
-							<li><a href="http://eventespresso.com/support/installation/" target="_blank">
-									<?php _e('Installation &amp; Usage Guide', 'event_espresso'); ?>
+							<li>
+								<?php echo '<a href="http://eventespresso.com/wiki/installation/" target="_blank">'.__('Installation', 'event_espresso') . '</a>  &amp; <a href="http://eventespresso.com/wiki/setting-up-event-espresso/" target="_blank">' . __('Usage Guide').'</a>'; ?>
+								</li>
+							<li><a href="http://eventespresso.com/wiki/put-custom-templates/" target="_blank">
+									<?php _e('Template Customization', 'event_espresso'); ?>
 								</a></li>
-							<li><a href="http://eventespresso.com/forums/2010/09/css-classes/" target="_blank">
-									<?php _e('Customization Forums', 'event_espresso'); ?>
+							<li><a href="http://eventespresso.com/support/forums/" target="_blank">
+									<?php _e('Support Forums', 'event_espresso'); ?>
 								</a></li>
-							<li><a href="http://eventespresso.com/forums/category/premium-plugin-support/" target="_blank">
-									<?php _e('Plugin Support Forums', 'event_espresso'); ?>
-								</a></li>
-							<li><a href="http://eventespresso.com/forums/category/general/features-requests/" target="_blank">
-									<?php _e('Feature Request Forums', 'event_espresso'); ?>
-								</a></li>
-							<li><a href="http://eventespresso.com/forums/category/premium-plugin-support/bug-reports/" target="_blank">
-									<?php _e('Bug Submission Forums', 'event_espresso'); ?>
-								</a></li>
-							<li><a href="http://eventespresso.com/forums/category/premium-plugin-support/news-and-updates/changelogs/" target="_blank">
+							
+							<li><a href="http://eventespresso.com/wiki/change-log/" target="_blank">
 									<?php _e('Changelog', 'event_espresso'); ?>
 								</a></li>
-							<li><a href="http://eventespresso.com/download/plugins-and-addons/">
-									<?php _e('Plugins and Addons', 'event_espresso'); ?>
+							<li><a href="http://eventespresso.com/about/" target="_blank">
+									<?php _e('Meet the Team', 'event_espresso'); ?>
 								</a></li>
+							<li><a href="http://eventespresso.com/rich-features/sponsor-new-features/" target="_blank">
+									<?php _e('Sponsor New Features!', 'event_espresso'); ?>
+								</a></li>
+							<li>
+									<?php echo '<a href="http://eventespresso.com/pricing/" target="_blank">'.__('Plugins', 'event_espresso'). '</a> &amp; <a href="http://eventespresso.com/add-ons/" target="_blank">' .__('Addons', 'event_espresso').'</a>'; ?><br />
+									<br />
+									<ol>
+						<li><a href="http://eventespresso.com/product/espresso-ticketing/" target="_blank">Ticket Scanning</a></li>
+						<li><a href="http://eventespresso.com/product/espresso-multiple/" target="_blank">Multiple Event Registration</a></li>
+						<li><a href="http://eventespresso.com/product/espresso-recurring/" target="_blank">Recurring Events</a></li>
+						<li><a href="http://eventespresso.com/product/espresso-members/" target="_blank">WP User Integration</a></li>
+						<li><a href="http://eventespresso.com/product/espresso-seating/" target="_blank">Seating Chart</a></li>
+					</ol>
+								</li>
 						</ul>
 					</div>
 				</div>
@@ -976,26 +985,34 @@ function event_espresso_get_right_column() {
 	@wp_widget_rss_output('http://eventespresso.com/feed/', array('show_date' => 0, 'items' => 6));
 	$output .= ob_get_contents();
 	ob_end_clean();
-	$output .= '<h4 style="margin:0">' . __('From the Forums', 'event_espresso') . '</h4>';
+	/*$output .= '<h4 style="margin:0">' . __('From the Forums', 'event_espresso') . '</h4>';
 	ob_start();
 	if ($espresso_premium == true){
 		@wp_widget_rss_output('http://eventespresso.com/forum/event-espresso-support/feed', array('show_date' => 0, 'items' => 4));
 	}else{
 		@wp_widget_rss_output('http://eventespresso.com/forum/event-espresso-public/feed', array('show_date' => 0, 'items' => 4));
-	}
+	}*/
 		
 	$output .= ob_get_contents();
 	ob_end_clean();
 	$output .= '</div></div></div></div><div id="submitdiv2" class="postbox " >';
 	$output .= '<div title="Click to toggle" class="handlediv"><br /></div><h3 class="hndle">' . __('Helpful Plugin Links', 'event_espresso') . '</h3>';
 	$output .= '<div class="inside"><div class="padding"><ul class="infolinks">';
-	$output .= '<li><a href="http://eventespresso.com/support/installation/" target="_blank">' . __('Installation &amp; Usage Guide', 'event_espresso') . '</a></li>';
-	$output .= '<li><a href="http://eventespresso.com/forums/2010/09/css-classes/" target="_blank">' . __('Customization Forums', 'event_espresso') . '</a></li>';
-	$output .= '<li><a href="http://eventespresso.com/forums/category/premium-plugin-support/" target="_blank">' . __('Plugin Support Forums', 'event_espresso') . '</a></li>';
-	$output .= '<li><a href="http://eventespresso.com/forums/category/general/features-requests/" target="_blank">' . __('Feature Request Forums', 'event_espresso') . '</a></li>';
-	$output .= '<li><a href="http://eventespresso.com/forums/category/premium-plugin-support/bug-reports/" target="_blank">' . __('Bug Submission Forums', 'event_espresso') . '</a></li>';
-	$output .= '<li><a href="http://eventespresso.com/forums/category/premium-plugin-support/news-and-updates/changelogs/" target="_blank">' . __('Changelog', 'event_espresso') . '</a></li>';
-	$output .= '<li><a href="http://eventespresso.com/download/plugins-and-addons/">' . __('Plugins and Addons', 'event_espresso') . '</a></li>';
+	$output .= '<li><a href="http://eventespresso.com/wiki/installation/" target="_blank">' . __('Installation', 'event_espresso') . '</a>  &amp; <a href="http://eventespresso.com/wiki/setting-up-event-espresso/" target="_blank">' . __('Usage Guide').'</a></li>';
+	$output .= '<li><a href="http://eventespresso.com/wiki/put-custom-templates/" target="_blank">' . __('Template Customization', 'event_espresso') . '</a></li>';
+	$output .= '<li><a href="http://eventespresso.com/support/forums/" target="_blank">' . __('Support Forums', 'event_espresso') . '</a></li>';
+	$output .= '<li><a href="http://eventespresso.com/rich-features/sponsor-new-features/" target="_blank">' . __('Sponsor New Features!', 'event_espresso') . '</a></li>';
+	$output .= '<li><a href="http://eventespresso.com/support/forums/" target="_blank">' . __('Bug Submission Forums', 'event_espresso') . '</a></li>';
+	$output .= '<li><a href="http://eventespresso.com/wiki/change-log/" target="_blank">' . __('Changelog', 'event_espresso') . '</a></li>';
+	$output .= '<li><a href="http://eventespresso.com/add-ons/">' . __('Plugins and Addons', 'event_espresso') . '</a>
+					<ol>
+						<li><a href="http://eventespresso.com/product/espresso-ticketing/" target="_blank">Ticket Scanning</a></li>
+						<li><a href="http://eventespresso.com/product/espresso-multiple/" target="_blank">Multiple Event Registration</a></li>
+						<li><a href="http://eventespresso.com/product/espresso-recurring/" target="_blank">Recurring Events</a></li>
+						<li><a href="http://eventespresso.com/product/espresso-members/" target="_blank">WP User Integration</a></li>
+						<li><a href="http://eventespresso.com/product/espresso-seating/" target="_blank">Seating Chart</a></li>
+					</ol>
+				</li>';
 	$output .= '</ul></div></div></div>';
 	global $espresso_premium;
 	if ($espresso_premium != true) {

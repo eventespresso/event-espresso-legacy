@@ -2,6 +2,8 @@
 
 function replace_shortcodes($message, $data) {
 	global $wpdb, $org_options;
+	$payment_data = espresso_get_total_cost(array('attendee_session'=>$data->attendee->attendee_session));
+	$event_cost = $payment_data['total_cost'];
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	$SearchValues = array(
 			"[event_id]",
@@ -73,8 +75,8 @@ function replace_shortcodes($message, $data) {
 			$data->location, //For the "[venue_address]" shortcode shows the venue address
 			//Payment details
 			$data->attendee->txn_id,
-			$org_options['currency_symbol'] . espresso_attendee_price(array('registration_id' => $data->attendee->registration_id, 'session_total' => true)),
-			$org_options['currency_symbol'] . espresso_attendee_price(array('registration_id' => $data->attendee->registration_id, 'session_total' => true)),
+			$org_options['currency_symbol'] . $event_cost,
+			$org_options['currency_symbol'] . $event_cost,
 			$data->attendee->price_option,
 			$data->ticket_link,
 			empty($data->certificate_link) ? '' : $data->certificate_link,
@@ -116,7 +118,7 @@ function replace_shortcodes($message, $data) {
 
 			//Output the answer
 			array_push($SearchValues, "[" . 'answer_' . $k . "]");
-			array_push($ReplaceValues, $v);
+			array_push($ReplaceValues, stripslashes_deep(rtrim($v, ",")) );
 		}
 	}
 	//Get the event meta

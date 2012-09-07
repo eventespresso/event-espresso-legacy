@@ -354,6 +354,59 @@ jQuery(document).ready(function() {
 
 
     });
+		
+		jQuery('#copy_to_all_button').click(function(){
+        /*
+         * Copies info from one section of the form to another.  Will help the user so
+         * they don't have to enter info again.
+         */
+				var val = jQuery(this).val().split('|');
+				var from_event_id = val[0];
+        var from_price_id = val[1];
+        var from_attendee_no = '1';
+
+        jQuery('.multi_regis_wrapper_attendee-additional .event_form_field :input').each(function(){
+            // console.log(jQuery(this).attr('id') + ' > ' + jQuery(this).val());
+            var val = jQuery(this).val();
+            var name = jQuery(this).attr('name');
+            var input_type = jQuery(this).attr('type');
+
+
+            var copy_field_name = name.replace(/(\[\d+\])(\[\d+\])(\[\d+\])/,"[" + from_event_id + "][" + from_price_id + "][" + from_attendee_no + "]");
+
+            // alert(copy_field_name);
+
+            var copy_from = jQuery(":input[name='" + copy_field_name + "']");
+
+            //console.log(jQuery(this).attr('name') + ' > ' + copy_field_name + ' > ' + copy_from.val());
+            switch (input_type)
+            {
+                case 'text':
+                case 'textarea':
+                    jQuery(this).val(copy_from.val());
+                    break;
+                case 'radio':
+                case 'checkbox':
+
+                    if (copy_from.attr('checked') && val == copy_from.val())
+                        jQuery(this).attr("checked", "checked");
+
+                    break;
+                default:
+                    jQuery(this).val(copy_from.val());
+            }
+
+
+
+        //console.log(jQuery('#multi_regis_form_fields-' + to + " input[name='" + new_name + "']").val());
+
+        //
+
+        });
+
+
+
+    });
 
     function event_espresso_do_ajax(data, callback){
 

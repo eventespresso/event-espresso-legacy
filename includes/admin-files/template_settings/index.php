@@ -196,7 +196,7 @@ function event_espresso_manage_templates() {
 												</label>
 												<?php //echo apply_filters('filter_hook_espresso_help', 'themeroller_info'); ?>
 											</th>
-											<td><select id="style-themeroller" class="chzn-select wide" name="themeroller_style">
+											<td><select id="style-themeroller" class="wide" name="themeroller_style">
 													<option <?php espresso_themeroller_style_is_selected($fname_themeroller) ?> value=""> -
 														<?php _e('Default', 'event_espresso'); ?>
 													</option>

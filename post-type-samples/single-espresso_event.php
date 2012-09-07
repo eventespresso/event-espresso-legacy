@@ -44,9 +44,8 @@ get_header(); ?>
                 $show_venue = '0'; // set this to 1 if you want to display the venue (this assumes you have venues set up so the default is to set this to 0 for off)
                 $show_attendees = '1'; // display number of attendees? set this to 0 if you don't want the attendee numbers. to change how they are displayed, change the shortcode in the $event_attendees variable above
                 //the_meta(); //this function displays all the meta values for the post -- more info here: http://codex.wordpress.org/Function_Reference/the_meta
-				//This gets the data that is entered into the custom write panels
-				//http://wefunction.com/2009/10/revisited-creating-custom-write-panels-in-wordpress/
-				//$event_meta = get_post_meta( $post->ID, 'event_meta', true );
+				//This gets the data that is entered into the event meta fields
+				$event_meta = unserialize(get_post_meta( $post->ID, 'event_meta', true ));
 				?>
 
 				<?php // uncomment the following lines if you want prev/next post links -- personally, I don't think those really have a place for events, so I'm commenting this out

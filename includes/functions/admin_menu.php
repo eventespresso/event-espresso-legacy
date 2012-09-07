@@ -24,7 +24,7 @@ if (!function_exists('add_event_espresso_menus')) {
 		
 		//Seating chart management
 		if ( defined('ESPRESSO_SEATING_CHART') ){
-			add_submenu_page('event_espresso', __('Event Espresso - Seating Chart','event_espresso'), __('Seating chart','event_espresso'), 'administrator', 'seating_chart', 'event_espresso_manage_seating_chart');
+			add_submenu_page('event_espresso', __('Event Espresso - Seating Chart','event_espresso'), __('Seating Chart','event_espresso'), apply_filters('espresso_management_capability', 'administrator', $espresso_manager['espresso_manager_seating']), 'seating_chart', 'event_espresso_manage_seating_chart');
 		}
 		
         //Venues
@@ -101,6 +101,11 @@ if (!function_exists('add_event_espresso_menus')) {
 		//Reports
 		if (function_exists('espresso_reports') && $espresso_premium == true) {
 			add_submenu_page('event_espresso', __('Event Espresso - Reports','event_espresso'), __('Reports','event_espresso'), 'administrator', 'espresso_reports', 'espresso_reports');
+		}
+		
+		//Attendee Import
+		if (function_exists('espresso_attendee_import') && $espresso_premium == true) {
+			add_submenu_page('event_espresso', __('Event Espresso - Attendee Import Tool','event_espresso'), __('Attendee Import','event_espresso'), 'administrator', 'espresso_attendee_import', 'espresso_attendee_import');
 		}
 
 

@@ -174,6 +174,7 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 		$event_cost = $event_price_x_attendees;
 		
 	} else {
+		$event_discount_label = '';
 		$event_cost = $event_original_cost;
 	}
 

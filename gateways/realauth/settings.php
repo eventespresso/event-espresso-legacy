@@ -107,7 +107,7 @@ function event_espresso_display_realauth_settings() {
 							</li>
 							<li>
 								<label for="currency_format"><?php _e('Country Currency', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=realauth_currency_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a></label>
-								<select name="currency_format" data-placeholder="Choose a currency..." class="chzn-select wide">
+								<select name="currency_format" data-placeholder="Choose a currency..." class="wide">
 									<option value="<?php echo $realauth_settings['currency_format']; ?>"><?php echo $realauth_settings['currency_format']; ?></option>									<option value="EUR"><?php _e('Euro', 'event_espresso'); ?></option>
 									<option value="GBP"><?php _e('Pound Sterling', 'event_espresso'); ?></option>
 									<option value="USD"><?php _e('U.S. Dollar', 'event_espresso'); ?></option>

@@ -28,6 +28,11 @@ function espresso_process_authnet($payment_data) {
 		$myAuthorize->enableTestMode();
 		$email_transaction_dump = true;
 	}
+	
+	if ($authnet_settings['use_md5']) {
+		$myAuthorize->enableUseMD5();
+		$myAuthorize->setMD5Value($authnet_settings['authnet_md5_value']);
+	}
 
 // Specify your authorize login and secret
 	$myAuthorize->setUserInfo($authnet_login_id, $authnet_transaction_key);
@@ -53,12 +58,15 @@ function espresso_process_authnet($payment_data) {
 		//Be sure to echo something to the screen so authent knows that the ipn works
 		//store the results in reusable variables
 		if ($myAuthorize->ipnData['x_response_code'] == 1) {
+			$myAuthorize->logResults(true);
 			?>
 			<h2><?php _e('Thank You!', 'event_espresso'); ?></h2>
 			<p><?php _e('Your transaction has been processed.', 'event_espresso'); ?></p>
 			<?php
 			$payment_data['payment_status'] = 'Completed';
 		} else {
+			$myAuthorize->lastError = $respmsg;
+			$myAuthorize->logResults(false);
 			?>
 			<h2 style="color:#F00;"><?php _e('There was an error processing your transaction!', 'event_espresso'); ?></h2>
 			<p><strong>Error:</strong> (Payment was declined)</p>
@@ -80,9 +88,11 @@ function espresso_process_authnet($payment_data) {
 			wp_mail($payment_data['contact'], $subject, $body);
 		}
 	} else {
+		$myAuthorize->lastError = 'MD5 mismatch';
+		$myAuthorize->logResults(false);
 		?>
 		<h2 style="color:#F00;"><?php _e('There was an error processing your transaction!', 'event_espresso'); ?></h2>
-		<p><strong>Error:</strong> (IPN response did not validate) ?></p>
+		<p><strong>Error:</strong> (IPN response did not validate) </p>
 		<?php
 		if (is_writable('authorize.txt'))
 			file_put_contents('authorize.txt', "FAILURE\n\n" . $myAuthorize->ipnData);

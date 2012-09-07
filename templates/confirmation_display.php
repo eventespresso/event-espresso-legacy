@@ -51,12 +51,9 @@ $attendee_num = 1;
 				 }else{
 					$price_range = seating_chart::get_price_range($event_id);
 					$price = "";
-					if ( $price_range['min'] != $price_range['max'] )
-					{
+					if ( $price_range['min'] != $price_range['max'] ){
 						$price = $org_options['currency_symbol']. number_format($price_range['min'], 2) . ' - ' . $org_options['currency_symbol']. number_format($price_range['max'], 2);
-					}
-					else
-					{
+					}else{
 						$price = $org_options['currency_symbol']. number_format($price_range['min'], 2);
 					}
 				 ?>

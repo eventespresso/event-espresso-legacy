@@ -294,8 +294,10 @@ function update_event($recurrence_arr = array()) {
 		 * End
 		 */
 		 
-		if (isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) )
+		if (isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ){
 			 $event_meta['event_thumbnail_url'] = $_REQUEST['upload_image'];
+			 $event_thumbnail_url = $event_meta['event_thumbnail_url'];
+		}
 			
         if ($_REQUEST['emeta'] != '') {
             foreach ($_REQUEST['emeta'] as $k => $v) {
@@ -523,11 +525,12 @@ function update_event($recurrence_arr = array()) {
                     if ($post_id > 0) {
                         $post_id = wp_update_post($my_post);
                         update_post_meta($post_id, 'event_id', $event_id);
+						update_post_meta($post_id, 'event_meta', $event_meta);
                         update_post_meta($post_id, 'event_identifier', $event_identifier);
                         update_post_meta($post_id, 'event_start_date', $start_date);
                         update_post_meta($post_id, 'event_end_date', $end_date);
                         update_post_meta($post_id, 'event_location', $event_location);
-						update_post_meta($post_id, 'event_thumbnail_url', $event_meta['event_thumbnail_url']);
+						update_post_meta($post_id, 'event_thumbnail_url', $event_thumbnail_url);
                         update_post_meta($post_id, 'virtual_url', $virtual_url);
                         update_post_meta($post_id, 'virtual_phone', $virtual_phone);
                         //
@@ -553,11 +556,12 @@ function update_event($recurrence_arr = array()) {
                     } else {
                         $post_id = wp_insert_post($my_post);
                         add_post_meta($post_id, 'event_id', $event_id);
+						add_post_meta($post_id, 'event_meta', $event_meta);
                         add_post_meta($post_id, 'event_identifier', $event_identifier);
                         add_post_meta($post_id, 'event_start_date', $start_date);
                         add_post_meta($post_id, 'event_end_date', $end_date);
                         add_post_meta($post_id, 'event_location', $event_location);
-						add_post_meta($post_id, 'event_thumbnail_url', $event_meta['event_thumbnail_url']);
+						add_post_meta($post_id, 'event_thumbnail_url', $event_thumbnail_url);
                         add_post_meta($post_id, 'virtual_url', $virtual_url);
                         add_post_meta($post_id, 'virtual_phone', $virtual_phone);
                         //

@@ -7,12 +7,12 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.26.P
+  Version: 3.1.27.P
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
 
-  Copyright (c) 2008-2011 Event Espresso  All Rights Reserved.
+  Copyright (c) 2008-2012 Event Espresso  All Rights Reserved.
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.25.P';
+	return '3.1.27.P';
 }
 
 //This tells the system to check for updates to the paid version
@@ -222,7 +222,10 @@ define("EVENTS_ATTENDEE_COST_TABLE", $wpdb->prefix . "events_attendee_cost");
 setlocale(LC_TIME, get_locale());
 
 //Get language files
-load_plugin_textdomain('event_espresso', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+function espresso_load_language_files() {
+	load_plugin_textdomain('event_espresso', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+}
+add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
 
 //Addons
 //Ticketing

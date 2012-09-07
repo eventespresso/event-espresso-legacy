@@ -64,36 +64,36 @@ if (!function_exists('event_espresso_show_attendess')) {
 
 		<div class="event-data-display ui-widget-content ui-corner-bottom">
 
-	<!--<?php echo wpautop($event_desc); ?>-->
+		<?php //echo wpautop($event_desc); ?>
 			<ol class="attendee_list">
-<?php
-	$a_sql = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id='" . $event_id . "'";
-	$a_sql .= $paid_only == 'true'? " AND (payment_status='Completed' OR payment_status='Pending') ":'';
-	$a_sql .= $sort;
-	//echo $a_sql;
-	$attendees = $wpdb->get_results($a_sql);
-	foreach ($attendees as $attendee){
-		$id = $attendee->id;
-		$lname = $attendee->lname;
-		$fname = $attendee->fname;
-		$city = $attendee->city;
-		$state = $attendee->state;
-		$country = $attendee->state;
-		$email = $attendee->email;
-		$gravatar = $show_gravatar == 'true'? get_avatar( $email, $size = '100', $default = 'http://www.gravatar.com/avatar/' ) : '';
-		$city_state = $city != '' || $state != '' ? '<br />' . ($city != '' ? $city :'') . ($state != '' ? ', ' . $state :' ') :'';
-
-		//These are example variables to show answers to questions
-		//$custom_question_1 = '<br />'.do_shortcode('[EE_ANSWER q="12" a="'.$id.'"]');
-		//$custom_question_2 = '<br />'.do_shortcode('[EE_ANSWER q="13" a="'.$id.'"]');
-
-?>
-		<li class="attendee_details"> <span class="espresso_attendee"><?php echo $gravatar ?><?php echo stripslashes_deep($fname . ' ' . $lname) . $city_state .'</p>'; ?> </span>
-			<div class="clear"></div>
-		</li>
-<?php
-	}
-?>
+				<?php
+					$a_sql = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id='" . $event_id . "'";
+					$a_sql .= $paid_only == 'true'? " AND (payment_status='Completed' OR payment_status='Pending') ":'';
+					$a_sql .= $sort;
+					//echo $a_sql;
+					$attendees = $wpdb->get_results($a_sql);
+					foreach ($attendees as $attendee){
+						$id = $attendee->id;
+						$lname = $attendee->lname;
+						$fname = $attendee->fname;
+						$city = $attendee->city;
+						$state = $attendee->state;
+						$country = $attendee->state;
+						$email = $attendee->email;
+						$gravatar = $show_gravatar == 'true'? get_avatar( $email, $size = '100', $default = 'http://www.gravatar.com/avatar/' ) : '';
+						$city_state = $city != '' || $state != '' ? '<br />' . ($city != '' ? $city :'') . ($state != '' ? ', ' . $state :' ') :'';
+				
+						//These are example variables to show answers to questions
+						//$custom_question_1 = '<br />'.do_shortcode('[EE_ANSWER q="12" a="'.$id.'"]');
+						//$custom_question_2 = '<br />'.do_shortcode('[EE_ANSWER q="13" a="'.$id.'"]');
+				
+				?>
+						<li class="attendee_details"> <span class="espresso_attendee"><?php echo $gravatar ?><?php echo stripslashes_deep($fname . ' ' . $lname) . $city_state .'</p>'; ?> </span>
+							<div class="clear"></div>
+						</li>
+				<?php
+					}
+				?>
 			</ol>
 	</div>
 </div>

@@ -30,6 +30,9 @@ class EE_Authorize extends PaymentGateway {
 	 * @param none
 	 * @return void
 	 */
+	
+	private $use_md5 = false;
+	private $md5_value = '';
 
 	public function __construct() {
 		parent::__construct();
@@ -41,7 +44,14 @@ class EE_Authorize extends PaymentGateway {
 		$this->addField('x_Show_Form', 'PAYMENT_FORM');
 		$this->addField('x_Relay_Response', 'TRUE');
 	}
+	
+	public function enableUseMD5() {
+		$this->use_md5 = true;
+	}
 
+	public function setMD5Value($md5_value) {
+		$this->md5_value = $md5_value;
+	}
 	/**
 	 * Enables the test mode
 	 *
@@ -84,7 +94,12 @@ class EE_Authorize extends PaymentGateway {
 						$this->fields['x_Invoice_num'] . '^' .
 						$this->fields['x_fp_timestamp'] . '^' .
 						$this->fields['x_Amount'] . '^';
-		$this->addField('x_fp_hash', $this->hmac($this->secret, $data));
+		if (phpversion() >='5.1.2') {
+			$fingerprint = hash_hmac("md5", $data, $this->secret);
+		} else {
+			$fingerprint = bin2hex(mhash(MHASH_MD5, $data, $this->secret));
+		}
+		$this->addField('x_fp_hash', $fingerprint);
 	}
 
 	/**
@@ -97,47 +112,13 @@ class EE_Authorize extends PaymentGateway {
 		foreach ($_POST as $field => $value) {
 			$this->ipnData["$field"] = $value;
 		}
-		$invoice = intval($this->ipnData['x_invoice_num']);
-		$pnref = $this->ipnData['x_trans_id'];
-		$amount = doubleval($this->ipnData['x_amount']);
-		$result = intval($this->ipnData['x_response_code']);
-		$respmsg = $this->ipnData['x_response_reason_text'];
-		$md5source = $this->secret . $this->login . $this->ipnData['x_trans_id'] . $this->ipnData['x_amount'];
-		$md5 = md5($md5source);
-		if ($result == '1') {
-			// Valid IPN transaction.
-			$this->logResults(true);
-			return true;
-		} else if ($result != '1') {
-			$this->lastError = $respmsg;
-			$this->logResults(false);
-			return false;
-		} else if (strtoupper($md5) != $this->ipnData['x_MD5_Hash']) {
-			$this->lastError = 'MD5 mismatch';
-			$this->logResults(false);
-			return false;
+		if ($this->use_md5) {
+			$md5source = $this->md5_value . $this->login . $this->ipnData['x_trans_id'] . $this->ipnData['x_amount'];
+			$md5 = md5($md5source);
+			if (strtoupper($md5) != $this->ipnData['x_MD5_Hash']) {
+				return false;
+			}
 		}
+		return true;
 	}
-
-	/**
-	 * RFC 2104 HMAC implementation for php.
-	 *
-	 * @author Lance Rushing
-	 * @param string key
-	 * @param string date
-	 * @return string encoded hash
-	 */
-	private function hmac($key, $data) {
-		$b = 64; // byte length for md5
-		if (strlen($key) > $b) {
-			$key = pack("H*", md5($key));
-		}
-		$key = str_pad($key, $b, chr(0x00));
-		$ipad = str_pad('', $b, chr(0x36));
-		$opad = str_pad('', $b, chr(0x5c));
-		$k_ipad = $key ^ $ipad;
-		$k_opad = $key ^ $opad;
-		return md5($k_opad . pack("H*", md5($k_ipad . $data)));
-	}
-
 }
