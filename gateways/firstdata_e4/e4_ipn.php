@@ -28,7 +28,7 @@ function espresso_process_firstdata_e4($payment_data) {
 		$email_transaction_dump = true;
 	}
 
-	$payment_data['txn_type'] = 'E-xact';
+	$payment_data['txn_type'] = 'FirstData E4';
 	$payment_data['payment_status'] = "Incomplete";
 	if (!empty($_REQUEST['x_trans_id'])) {
 		$payment_data['txn_id'] = $_REQUEST['x_trans_id'];
