@@ -8,7 +8,6 @@ function event_espresso_insert_group(){
 	$group_description= $_REQUEST['group_description'];
 	$show_group_name = isset($_POST['show_group_name']) && $_POST['show_group_name'] !=''?1:0;
 	$show_group_description = isset($_POST['show_group_description']) && $_POST['show_group_description'] != ''?1:0;
-	$is_global = isset($_POST['is_global']) && $_POST['is_global'] != ''?1:0;
 
 	if (!function_exists('espresso_member_data'))
 			$current_user->ID = 1;
@@ -20,9 +19,8 @@ function event_espresso_insert_group(){
 		'group_order'=>$group_order,
 		'show_group_name' => $show_group_name,
 		'show_group_description' => $show_group_description,
-		'is_global' => $is_global,
 		'wp_user'=>$current_user->ID);
-	$sql_data = array('%s','%s','%s','%d','%d','%d','%d', '%d');
+	$sql_data = array('%s','%s','%s','%d','%d','%d','%d');
 	if (!$wpdb->insert( EVENTS_QST_GROUP_TABLE, $sql, $sql_data)){
 		$error = true;
 	}

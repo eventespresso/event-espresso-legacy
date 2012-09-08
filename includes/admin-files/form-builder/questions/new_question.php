@@ -88,14 +88,6 @@ function event_espresso_form_builder_new(){
 		  				<input name="sequence" id="sequence" size="50" value="<?php if(isset($sequence)) echo $sequence; ?>" type="text" />
 						</td>
 					</tr>
-					<tr>
-						<th>
-							<label for="is_global"><?php   _e('Global?','event_espresso'); ?></label>
-						</th>
-						<td>
-		  				<input type="checkbox" name="is_global" id="is_global" value="1" />
-						</td>
-					</tr>
 				</tbody>
 			</table>
 		<p class="submit-footer">

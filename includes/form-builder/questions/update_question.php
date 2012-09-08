@@ -10,7 +10,6 @@ function event_espresso_form_builder_update(){
 	$required = $_POST['required'];
 	$required_text = $_POST['required_text'];
 	$admin_only = $_POST['admin_only'];
-	$is_global = isset($_POST['is_global']) && $_POST['is_global'] != '' ? 1 : 0;
 
-	$wpdb->query("UPDATE " . EVENTS_QUESTION_TABLE . " SET question_type = '" . $question_type . "', question = '" . $question_text . "', response = '" . $values . "', required = '" . $required . "',admin_only = '" . $admin_only . "', required_text = '" . $required_text . "', sequence = '" . $sequence . "', is_global = '" . $is_global . "' WHERE id = '" . $question_id . "'");
+	$wpdb->query("UPDATE " . EVENTS_QUESTION_TABLE . " SET question_type = '" . $question_type . "', question = '" . $question_text . "', response = '" . $values . "', required = '" . $required . "',admin_only = '" . $admin_only . "', required_text = '" . $required_text . "', sequence = '" . $sequence . "' WHERE id = '" . $question_id . "'");
 }

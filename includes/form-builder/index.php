@@ -148,7 +148,7 @@ function event_espresso_questions_config_mnu() {
 							}
 						} else {
 							// Not admin
-							$sql .= " WHERE wp_user = '" . espresso_member_data('id') . "' OR is_global = '1' ";
+							$sql .= " WHERE wp_user = '" . espresso_member_data('id') . "' ";
 						}
 					} else {
 						$sql .= " WHERE (wp_user = '0' OR wp_user = '1') ";
@@ -179,12 +179,10 @@ function event_espresso_questions_config_mnu() {
 							$sequence = $question->sequence;
 							$admin_only = $question->admin_only;
 							$wp_user = $question->wp_user == 0 ? 1 : $question->wp_user;
-							
 							?>
 							<tr style="cursor: move" id="<?php echo $question_id ?>">
 								<td class="checkboxcol"><input name="row_id" type="hidden" value="<?php echo $question_id ?>" />
-									<?php if ($system_name == '' && !function_exists('espresso_is_admin') ||  ( $system_name == '' &&
-									function_exists('espresso_is_admin') && !espresso_is_admin() && espresso_member_data('id') == $question->wp_user ) || ( $system_name == '' && function_exists('espresso_is_admin') && espresso_is_admin() ) ) : ?>
+									<?php if ($system_name == '') : ?>
 										<input  style="margin:7px 0 22px 8px; vertical-align:top;" name="checkbox[<?php echo $question_id ?>]" type="checkbox"  title="Delete <?php echo $question_name ?>">
 									<?php else: ?>
 										<span><?php echo '<img style="margin:7px 0 22px 8px; vertical-align:top;" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/lock.png" alt="System Questions" title="System Questions" />'; ?></span>
@@ -193,13 +191,12 @@ function event_espresso_questions_config_mnu() {
 
 								<td class="post-title page-title column-title"><strong><a href="admin.php?page=form_builder&amp;action=edit_question&amp;question_id=<?php echo $question_id ?>"><?php echo $question_name ?></a></strong>
 									<div class="row-actions">
-										<?php if ( !function_exists('espresso_is_admin') || ( function_exists('espresso_is_admin') && !espresso_is_admin() && espresso_member_data('id') == $question->wp_user  ) || (function_exists('espresso_is_admin') && espresso_is_admin()) ) : ?>
-										<span class="edit"><a href="admin.php?page=form_builder&amp;action=edit_question&amp;question_id=<?php echo $question_id ?>"><?php _e('Edit', 'event_espresso'); ?></a> | <?php endif; ?> </span>
-										<?php if ( $system_name == '' && !function_exists('espresso_is_admin') || ( $system_name == '' && function_exists('espresso_is_admin') && !espresso_is_admin() && espresso_member_data('id') == $question->wp_user  ) || ($system_name == '' && function_exists('espresso_is_admin') && espresso_is_admin()) ) : ?><span class="delete"><a onclick="return confirmDelete();" class="submitdelete"  href="admin.php?page=form_builder&amp;action=delete_question&amp;question_id=<?php echo $question_id ?>"><?php _e('Delete', 'event_espresso'); ?></a></span><?php endif; ?>
+										<span class="edit"><a href="admin.php?page=form_builder&amp;action=edit_question&amp;question_id=<?php echo $question_id ?>"><?php _e('Edit', 'event_espresso'); ?></a> | </span>
+										<?php if ($system_name == ''): ?><span class="delete"><a onclick="return confirmDelete();" class="submitdelete"  href="admin.php?page=form_builder&amp;action=delete_question&amp;question_id=<?php echo $question_id ?>"><?php _e('Delete', 'event_espresso'); ?></a></span><?php endif; ?>
 									</div>
 								</td>
 								<td class="author column-author"><?php echo $values ?></td>
-								<?php if (function_exists('espresso_is_admin') && espresso_is_admin() ) { ?>
+								<?php if (function_exists('espresso_is_admin') && espresso_is_admin() == true) { ?>
 									<td><?php echo espresso_user_meta($wp_user, 'user_firstname') != '' ? espresso_user_meta($wp_user, 'user_firstname') . ' ' . espresso_user_meta($wp_user, 'user_lastname') . ' (<a href="user-edit.php?user_id=' . $wp_user . '">' . espresso_user_meta($wp_user, 'user_nicename') . '</a>)' : espresso_user_meta($wp_user, 'display_name') . ' (<a href="user-edit.php?user_id=' . $wp_user . '">' . espresso_user_meta($wp_user, 'user_nicename') . '</a>)'; ?></td>
 								<?php } ?>
 								<td class="author column-author"><?php echo $question_type ?></td>
