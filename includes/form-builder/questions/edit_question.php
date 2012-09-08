@@ -16,6 +16,7 @@ function event_espresso_form_builder_edit(){
 			$required_text = $question->required_text;
 			$admin_only = $question->admin_only;
 			$system_name = $question->system_name;
+			$is_global = $question->is_global;
 			if ($question->system_name !=''){
 				$system_question = true;
 			} else {
@@ -153,6 +154,14 @@ function event_espresso_form_builder_edit(){
 		  			<input name="sequence" id="sequence" size="50" value="<?php echo $sequence; ?>" type="text" />
 					</td>
 				</tr>
+				<tr>
+						<th>
+							<label for="is_global"><?php   _e('Global?','event_espresso'); ?></label>
+						</th>
+						<td>
+		  				<input type="checkbox" name="is_global" id="is_global" value="1" <?php if ($is_global != 0): ?> checked="checked"<?php endif; ?> />
+						</td>
+					</tr>
 			</tbody>
 		</table>
 		<p class="submit-footer">

@@ -12,11 +12,12 @@ function event_espresso_form_builder_insert(){
 	$required = !empty($_POST['required']) ? $_POST['required']:'N';
 	$admin_only = !empty($_POST['admin_only']) ? $_POST['admin_only']:'N';
    	$sequence = $_POST['sequence'] ?  $_POST['sequence']:'0';
+   	$is_global = isset($_POST['is_global']) && $_POST['is_global'] != ''?1:0;
 	if (!function_exists('espresso_member_data'))
 			$current_user->ID = 1;
 
-		if ($wpdb->query("INSERT INTO " . EVENTS_QUESTION_TABLE . " (question_type, question, response, required, admin_only, sequence,wp_user)"
-				. " VALUES ('" . $question_type . "', '" . $question . "', '" . $question_values . "', '" . $required . "', '" . $admin_only . "', " . $sequence . ",'".$current_user->ID."')")){?>
+		if ($wpdb->query("INSERT INTO " . EVENTS_QUESTION_TABLE . " (question_type, question, response, required, admin_only, sequence,wp_user,is_global)"
+				. " VALUES ('" . $question_type . "', '" . $question . "', '" . $question_values . "', '" . $required . "', '" . $admin_only . "', " . $sequence . ",'".$current_user->ID."','" . $is_global . "')")){?>
 		<div id="message" class="updated fade"><p><strong>The question <?php echo htmlentities2($_REQUEST['question']);?> has been added.</strong></p></div>
 	<?php }else { ?>
 		<div id="message" class="error"><p><strong>The question <?php echo htmlentities2($_REQUEST['question']);?> was not saved. <?php //$wpdb->print_error(); ?>.</strong></p></div>

@@ -12,11 +12,12 @@ function event_espresso_form_group_update($group_id) {
     $show_group_description = isset($_POST['show_group_description']) && $_POST['show_group_description'] != '' ? 1 : 0;
 
     $group_identifier = empty($_REQUEST['group_identifier']) ? $group_identifier = sanitize_title_with_dashes($group_name . '-' . time()) : $group_identifier = sanitize_title_with_dashes($_REQUEST['group_identifier']);
+    $is_global = isset($_POST['is_global']) && $_POST['is_global'] != '' ? 1 : 0;
 
     $sql = "UPDATE " . EVENTS_QST_GROUP_TABLE .
             " SET group_name = '" . $group_name . "', group_order = '" . $group_order . "', group_identifier = '" . $group_identifier . "', group_description = '" . $group_description . "',
                    show_group_name = " . $show_group_name . ",
-                   show_group_description = " . $show_group_description . "
+                   show_group_description = " . $show_group_description . ", is_global = " . $is_global . "
                  WHERE id = '" . $group_id . "'";
     $wpdb->query($sql);
 

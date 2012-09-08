@@ -40,6 +40,10 @@ function event_espresso_form_group_new(){
             <label for="show_group_description"><?php _e('Show group description on registration page?','event_espresso'); ?></label>
             <input type="checkbox" name="show_group_description" id="show_group_description" value="1" checked="checked" />
           </li>
+           <li>
+              <label for="is_global"><?php _e('Global Group?', 'event_espresso'); ?></label>
+              <input type="checkbox" name="is_global" id="is_global" value="1" />
+          </li>
         </ul>
        </fieldset>
       </td>
@@ -54,15 +58,11 @@ function event_espresso_form_group_new(){
         	$sql = "SELECT * FROM " . EVENTS_QUESTION_TABLE;
         	$sql .= " WHERE ";
         	if (function_exists('espresso_member_data')) {
-        		if (espresso_member_data('id') == 0 || espresso_member_data('id') == 1){
-        			$sql .= " (wp_user = '0' OR wp_user = '1') ";
-        		}else{
-        			$sql .= " wp_user = '" . espresso_member_data('id') ."' ";
-        		}
+        			$sql .= " wp_user = '" . espresso_member_data('id') ."' OR is_global = '1' ";
         	}else{
         		$sql .= " (wp_user = '0' OR wp_user = '1') ";
         	}
-        	$sql .= " ORDER BY sequence, id ASC ";
+        	$sql .= " GROUP BY id ORDER BY sequence, id ASC ";
         	$questions = $wpdb->get_results($sql);
         	if ($wpdb->num_rows > 0) {
         		foreach ($questions as $question) {
