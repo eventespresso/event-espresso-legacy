@@ -41,7 +41,7 @@ function espresso_display_2checkout($payment_data) {
 	} else {
 		$home = home_url();
 	}
-	$my2checkout->addField('x_Receipt_Link_URL', str_replace('http:', 'https:', $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=2co'));
+	$my2checkout->addField('x_Receipt_Link_URL', $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=2co');
 	$my2checkout->addField('total', number_format($event_cost, 2, '.', ''));
 	$my2checkout->addField('tco_currency', $twocheckout_cur);
 

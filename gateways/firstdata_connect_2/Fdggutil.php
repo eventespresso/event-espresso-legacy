@@ -11,6 +11,12 @@ class Fdggutil {
 	private $returnUrl;
 	private $cancelUrl;
 	private $attendee_id;
+	private $attendee_name;
+	private $attendee_address;
+	private $attendee_city;
+	private $attendee_state;
+	private $attendee_country;
+	private $attendee_zip;
 	private $registration_id;
 
 	public function Fdggutil($storename, $sharedSecret) {
@@ -54,6 +60,25 @@ class Fdggutil {
 		$this->attendee_id = $attendee_id;
 	}
 
+	public function set_name($attendee_name) {
+		$this->attendee_name = $attendee_name;
+	}
+	public function set_address($attendee_address) {
+		$this->attendee_address = $attendee_address;
+	}
+	public function set_city($attendee_city) {
+		$this->attendee_city = $attendee_city;
+	}
+	public function set_state($attendee_state) {
+		$this->attendee_state = $attendee_state;
+	}
+	public function set_country($attendee_country) {
+		$this->attendee_country = $attendee_country;
+	}
+	public function set_zip($attendee_zip) {
+		$this->attendee_zip = $attendee_zip;
+	}
+	
 	public function set_registration_id($registration_id) {
 		$this->registration_id = $registration_id;
 	}
@@ -93,7 +118,12 @@ class Fdggutil {
 		$out .= '<input size="50" type="hidden" name="storename" value="' . $this->storename . '"/>';
 		$out .= '<input size="50" type="hidden" name="chargetotal" value="' . $this->chargetotal . '"/>';
 		$out .= '<input size="50" type="hidden" name="subtotal" value="' . $this->chargetotal . '"/>';
-		$out .= '<input size="50" type="hidden" name="trxOrigin" value="ECI"/>';
+		$out .= '<input size="50" type="hidden" name="bname" value="' . $this->attendee_name . '"/>';
+		$out .= '<input size="50" type="hidden" name="baddr1" value="' . $this->attendee_address . '"/>';
+		$out .= '<input size="50" type="hidden" name="bcity" value="' . $this->attendee_city . '"/>';
+		$out .= '<input size="50" type="hidden" name="bstate" value="' . $this->attendee_state . '"/>';
+		$out .= '<input size="50" type="hidden" name="bcountry" value="' . $this->attendee_country . '"/>';
+		$out .= '<input size="50" type="hidden" name="bzip" value="' . $this->attendee_zip . '"/>';
 		$out .= '<input size="50" type="hidden" name="responseSuccessURL" value="' . $home . '/?page_id=' . $this->returnUrl . '&id=' . $this->attendee_id . '&r_id=' . $this->registration_id . '&type=fdc2"/>';
 		$out .= '<input size="50" type="hidden" name="responseFailURL" value="' . $home . '/?page_id=' . $this->cancelUrl . '&id=' . $this->attendee_id . '&r_id=' . $this->registration_id . '"/>';
 		return $out;
