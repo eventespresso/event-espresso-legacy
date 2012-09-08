@@ -44,7 +44,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 									, 'show_recurrence' => 'true'
 									, 'limit' => '0'
 									, 'order_by' => 'NULL'
-									, 'direction' => 'ASC'
+									, 'sort' => 'ASC'
 									, 'css_class' => 'NULL'
 									, 'current_page' => 1
 									, 'events_per_page' => 50
@@ -107,7 +107,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		//echo '<p>'.$order_by.'</p>';
 		$sql .= $show_recurrence == 'false' ? " AND e.recurrence_id = '0' " : '';
 		$sql .= " GROUP BY e.id ";
-		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$direction." " : " ORDER BY date(start_date), id ASC ";
+		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$sort." " : " ORDER BY date(start_date), id ASC ";
 		$sql .= $limit > 0 ? ' LIMIT 0, '.$limit : '';  
 		
 		//echo $sql;

@@ -430,10 +430,11 @@ function event_espresso_edit_list() {
 			<?php } else { ?>
 				<input name="delete_event" type="submit" class="button-secondary" id="delete_event" value="<?php _e('Delete Events(s)', 'event_espresso'); ?>" style="margin:10px 0 0 10px;" onclick="return confirmDelete();" />
 
-				<a  style="margin-left:5px"class="button-primary" href="admin.php?page=events&amp;action=csv_import"><?php _e('Import CSV', 'event_espresso'); ?></a>
+				<a  style="margin-left:5px"class="button-secondary" href="admin.php?page=events&amp;action=csv_import"><?php _e('Import Events', 'event_espresso'); ?></a>
+				<?php if (function_exists('espresso_attendee_import') && $espresso_premium == true) {?><a style="margin-left:5px" class="button-secondary" href="admin.php?page=espresso_attendee_import"><?php _e('Import Attendees', 'event_espresso'); ?></a><?php } ?>
 
-				<a class="button-primary" href="#" onclick="window.location='<?php echo get_bloginfo('wpurl') . "/wp-admin/admin.php?event_espresso&amp;id=" . $event_id . "&amp;export=report&action=payment&amp;type=excel&all_events=true"; ?>'" title="<?php _e('Export to Excel', 'event_espresso'); ?>"><?php _e('Export All Attendee Data', 'event_espresso'); ?></a>
-				<a class="button-primary" href="#" onclick="window.location='<?php echo get_bloginfo('wpurl') . "/wp-admin/admin.php?event_espresso&amp;id=" . $event_id . "&amp;export=report&action=event&amp;type=excel&all_events=true"; ?>'" title="<?php _e('Export to Excel', 'event_espresso'); ?>"><?php _e('Export All Event Data', 'event_espresso'); ?></a>
+				<a style="margin-left:5px" class="button-secondary" href="#" onclick="window.location='<?php echo get_bloginfo('wpurl') . "/wp-admin/admin.php?event_espresso&amp;id=" . $event_id . "&amp;export=report&action=payment&amp;type=excel&all_events=true"; ?>'" title="<?php _e('Export to Excel', 'event_espresso'); ?>"><?php _e('Export All Attendee Data', 'event_espresso'); ?></a>
+				<a class="button-secondary" href="#" onclick="window.location='<?php echo get_bloginfo('wpurl') . "/wp-admin/admin.php?event_espresso&amp;id=" . $event_id . "&amp;export=report&action=event&amp;type=excel&all_events=true"; ?>'" title="<?php _e('Export to Excel', 'event_espresso'); ?>"><?php _e('Export All Event Data', 'event_espresso'); ?></a>
 				<a style="margin-left:5px" class="button-primary" href="admin.php?page=events&amp;action=add_new_event"><?php _e('Add New Event', 'event_espresso'); ?></a>
 			<?php } ?>  </div>
 	</form>

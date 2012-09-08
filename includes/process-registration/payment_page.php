@@ -174,6 +174,7 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 		$event_cost = $event_price_x_attendees;
 		
 	} else {
+		$event_discount_label = '';
 		$event_cost = $event_original_cost;
 	}
 
@@ -365,7 +366,7 @@ function event_espresso_pay() {
 			die(__('There was a problem finding your Registration ID', 'event_espresso'));
 		if ($payment_data['payment_status'] != 'Completed') {
 			$payment_data = apply_filters('filter_hook_espresso_thank_you_get_payment_data', $payment_data);
-			espresso_log::singleton()->log(array('file' => __FILE__, 'function' => __FUNCTION__, 'status' => 'Payment for: '. $payment_data['lname'] . ', ' . $payment_data['fname'] . '|| registration id: ' . $payment_data['registration_id'] . '|| transaction details: ' . $payment_data['txn_details']));
+			espresso_log::singleton()->log(array('file' => __FILE__, 'function' => __FUNCTION__, 'status' => 'Payment for: '. $payment_data['lname'] . ', ' . $payment_data['fname'] . '|| attendee_session id: ' . $payment_data['attendee_session'] . '|| registration id: ' . $payment_data['registration_id'] . '|| transaction details: ' . $payment_data['txn_details']));
 			$payment_data = apply_filters('filter_hook_espresso_update_attendee_payment_data_in_db', $payment_data);
 			do_action('action_hook_espresso_email_after_payment', $payment_data);
 		}

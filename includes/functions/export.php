@@ -248,11 +248,16 @@ if (!function_exists('espresso_export_stuff')){
 				$question_groups = unserialize($question_groups);
 				$event_meta = unserialize($event_meta);
 				
-				if (isset($event_meta['add_attendee_question_groups']))
-				{
-					$add_attendee_question_groups = $event_meta['add_attendee_question_groups'];
-					if ( !empty($add_attendee_question_groups) )
-					{
+				if (isset($event_meta['add_attendee_question_groups'])){
+					
+					if ( is_serialized(  $event_meta['add_attendee_question_groups'] ) ){
+						$add_attendee_question_groups = unserialize($event_meta['add_attendee_question_groups']);
+					}else{
+						$add_attendee_question_groups = $event_meta['add_attendee_question_groups'];
+					}
+					
+					
+					if ( !empty($add_attendee_question_groups) ){
 						$question_groups = array_unique(array_merge((array) $question_groups, (array) $add_attendee_question_groups));
 					}
 				}
