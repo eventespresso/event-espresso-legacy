@@ -1553,34 +1553,19 @@ function espresso_pre_3_4_layout($main_post_content = '', $sidebar_content = '',
  * @pram bool $user_filters if true (default) filters will be run.  If false then no filters are run.
  * @return array|bool  returns an array of question objects if there are values and false if none.
  */
-function espresso_get_user_questions($user_id = null, $set_system = true, $use_filters = true ) {
+function espresso_get_user_questions($user_id = null, $use_filters = true ) {
 	global $wpdb;
-	$has_system = false;
 
 	//first let's satisfy the query.
 	$sql = "SELECT * FROM " . EVENTS_QUESTION_TABLE;
-	$sql .= " WHERE ";
-  	$sql .= apply_filters('espresso_get_user_questions', " WHERE (wp_user = '0' OR wp_user = '1') ");
+	if ( !empty($user_id) ) {
+  		$sql .= $use_filters ? apply_filters('espresso_get_user_questions_where', " WHERE (wp_user = '0' OR wp_user = '1') ") : " WHERE (wp_user = '0' OR wp_user = '1') ";
+  	}
 	$sql .= " ORDER BY sequence, id ASC ";
 
-	$questions = $wpdb->get_results($sql);
+	$questions = $wpdb->get_results( $wpdb->prepare($sql) );
 
-	$logged_in_user = espresso_member_data('id');
-
-
-
-	//okay now let's loop through and make sure there are system questions for the logged in user (catches admins running a no-user-id query) and if there AREN'T then we need to generate them and rerun the query so it get's returned.
-	foreach ( $questions as $question ) {
-		if ( $question->user_id == $logged_in_user && !empty($question->system_name ) ) 
-			$has_system = true;			
-	}
-
-	//let's move the system question generation in here if there are no system questions for the logged in user.
-	if ( !$has_system ) {
-		$questions = espresso_set_default_user_questions_groups($logged_in_user);
-	}
-
-	return $questions;
+	return ( $use_filters) ? apply_filters('espresso_get_user_questions_questions', $questions, $user_id) : $questions;
 }
 
 /**
@@ -1595,7 +1580,6 @@ function espresso_set_default_user_questions_groups($user_id, $return_type = 'qu
 	$user_id = (int) $user_id;
 
 	//let's check and see if there are any system groups first.
-	$
 	
 }
 
@@ -1606,15 +1590,15 @@ function espresso_set_default_user_questions_groups($user_id, $return_type = 'qu
  * @param bool $system if true return just system groups, if false return ALL groups (including system);
  * @return array          array of group objects
  */
-function espresso_get_user_question_groups($user_id = null, $set_system = true) {
+function espresso_get_user_question_groups($user_id = null, $use_filters = true) {
 	global $wpdb;
 	$sql = "SELECT * FROM " . EVENTS_QST_GROUP_TABLE;
-	$sql .= " WHERE ";
-  	$sql .= !empty($user_id) ? " wp_user = '" . $user_id . "'" : "1=1"; 
-  	$sql .= $system ? " AND system_group = '1' " : "";
+	if ( !empty($user_id) ) {
+  		$sql .= $use_filters ? apply_filters('espresso_get_user_question_groups_where', " WHERE (wp_user = '0' OR wp_user = '1' ) ") : " WHERE (wp_user = '0' OR wp_user = '1' ) ";
+  	} 
 	$sql .= " ORDER BY group_order, id ASC ";
 
-	$results = $wpdb->get_results($sql);
+	$groups = $wpdb->get_results( $wpdb->prepare($sql) );
 
-	return ($wpdb->num_rows > 0) ? $results : false;
+	return $use_filters ? apply_filters('espresso_get_user_groups_groups', $groups, $user_id) : $groups;		
 }
