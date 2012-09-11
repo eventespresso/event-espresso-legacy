@@ -50,27 +50,10 @@ function event_espresso_form_group_new(){
           <li><p><?php _e('Select questions to add to group:','event_espresso'); ?></p></li>
   
             <?php
-          //first we need to get all system questions (make sure that the user actually has some)
-          $user_id = espresso_member_data('id');
-          $system_questions = espresso_get_user_questions($user_id, true);
+          //first we need to get all system questions (make sure that the user actually has some);
+          $questions = espresso_get_user_questions();
 
-          if ( !$system_questions ) {
-            //no system questions? BUT there should be so let's get the original ones and make a duplicate for this user.
-            $system_questions = espresso_get_user_questions(1,true);
-
-            if ( !$system_questions ) {
-               $system_questions = espresso_get_user_questions(0,true);
-            }
-
-            if ( !$system_questions ) {
-              echo '<li>' . __('Something is broken with the questions or question groups. We cannot find any system questions for your user. Please contact Event Espresso Support for further instructions.', 'event_espresso') . '</li>';
-            }
-
-            //okay we have system questions.  Let's make sure they get attached to the user.
-            
-            
-          }
-        	if ($wpdb->num_rows > 0) {
+        	if ( count($questions) > 0) {
         		foreach ($questions as $question) {
         			echo '<li><label><input type="checkbox" name="question_id[]" value="' . $question->id . '" id="question_id_' . $question->id . '" />' . stripslashes($question->question) . '</label></li>';
         		}

@@ -12,19 +12,8 @@ function event_espresso_question_groups_config_mnu() {
 	}
 
 	// get counts
-	$sql = "SELECT id FROM " . EVENTS_QST_GROUP_TABLE;
-	$wpdb->get_results($sql);
-	$total_question_groups = $wpdb->num_rows;
-	if (function_exists('espresso_is_admin') && espresso_is_admin() == true) {
-		$sql .= " WHERE ";
-		if (espresso_member_data('id') == 0 || espresso_member_data('id') == 1) {
-			$sql .= " (wp_user = '0' OR wp_user = '1') ";
-		} else {
-			$sql .= " wp_user = '" . espresso_member_data('id') . "' ";
-		}
-	}
-	$wpdb->get_results($sql);
-	$total_self_question_groups = $wpdb->num_rows;
+	$total_question_groups = count(espresso_get_user_question_groups(null, false));
+	$total_self_question_groups = count(espresso_get_user_question_groups(get_current_user_id(), true, true) );
 	?>
 	<div class="wrap">
 		<div id="icon-options-event" class="icon32"> </div>
@@ -128,42 +117,8 @@ function event_espresso_question_groups_config_mnu() {
 				</thead>
 				<tbody>
 					<?php
-					$sql = "SELECT * FROM  " . EVENTS_QST_GROUP_TABLE;
-
-					if (function_exists('espresso_is_admin') && function_exists('espresso_member_data')) {
-						if (espresso_is_admin()) {
-							// If admin
-							if (!isset($_REQUEST['all'])) {
-								// If all wasn't selected
-								if (espresso_member_data('id') == 0 || espresso_member_data('id') == 1) {
-									$sql .= " WHERE (wp_user = '0' OR wp_user = '1') ";
-								} else {
-									$sql .= " WHERE wp_user = '" . espresso_member_data('id') . "' ";
-								}
-							}
-						} else {
-							// Not admin
-							$sql .= " WHERE wp_user = '" . espresso_member_data('id') . "' ";
-						}
-					} else {
-						$sql .= " WHERE (wp_user = '0' OR wp_user = '1') ";
-					}
-					/*
-					  if (function_exists('espresso_member_data') && !isset($_REQUEST['all'])) {
-					  if (espresso_member_data('id') == 0 || espresso_member_data('id') == 1) {
-					  $sql .= " (wp_user = '0' OR wp_user = '1') ";
-					  } else {
-					  $sql .= " wp_user = '" . espresso_member_data('id') . "' ";
-					  }
-					  }else{
-					  $sql .= " (wp_user = '0' OR wp_user = '1') ";
-					  }
-					 * 
-					 */
-					$sql .= " ORDER BY group_order ";
-
-					$groups = $wpdb->get_results($sql);
-					if ($wpdb->num_rows > 0) {
+					$groups = espresso_get_user_question_groups(get_current_user_id());
+					if ( count($groups) > 0 && is_array($groups) ) {
 						foreach ($groups as $group) {
 							$group_id = $group->id;
 							$group_name = stripslashes($group->group_name);

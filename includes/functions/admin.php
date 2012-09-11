@@ -1549,23 +1549,53 @@ function espresso_pre_3_4_layout($main_post_content = '', $sidebar_content = '',
  * used to get the questions for a given user_id (and system questions only if indicated)
  * 
  * @param  int  $user_id user_id to be retrieved.
- * @param bool $set_system true means we'll setup default system questions/groups if there are no system questions set up for the current user.  If false then we just return false if there are no system questions set up for the current user.
- * @pram bool $user_filters if true (default) filters will be run.  If false then no filters are run.
+ * @param bool $use_filters if true (default) filters will be run.  If false then no filters are run.
+ * @param bool $num used to indicate that this is being used in the context of retrieving the number of rows (if true).
  * @return array|bool  returns an array of question objects if there are values and false if none.
  */
-function espresso_get_user_questions($user_id = null, $use_filters = true ) {
+function espresso_get_user_questions($user_id = null, $question_id = null, $use_filters = true, $num = false ) {
 	global $wpdb;
 
 	//first let's satisfy the query.
-	$sql = "SELECT * FROM " . EVENTS_QUESTION_TABLE;
+	$sql = "SELECT * FROM " . EVENTS_QUESTION_TABLE . " AS q ";
 	if ( !empty($user_id) ) {
-  		$sql .= $use_filters ? apply_filters('espresso_get_user_questions_where', " WHERE (wp_user = '0' OR wp_user = '1') ") : " WHERE (wp_user = '0' OR wp_user = '1') ";
+  		$sql .= $use_filters ? apply_filters('espresso_get_user_questions_where', " WHERE (q.wp_user = '0' OR q.wp_user = '1') ", $user_id, $num) : " WHERE (q.wp_user = '0' OR q.wp_user = '1') ";
   	}
+
+  	if ( !empty($question_id) ) {
+		$sql .= " WHERE q.id = '" . $question_id . "' ";
+	}
+
 	$sql .= " ORDER BY sequence, id ASC ";
 
 	$questions = $wpdb->get_results( $wpdb->prepare($sql) );
 
-	return ( $use_filters) ? apply_filters('espresso_get_user_questions_questions', $questions, $user_id) : $questions;
+	return ( $use_filters) ? apply_filters('espresso_get_user_questions_questions', $questions, $user_id, $num) : $questions;
+}
+
+function espresso_get_user_questions_for_group( $group_id, $user_id = null, $use_filters = true ) {
+	global $wpdb;
+	$setup_questions = array();
+
+	$sql = " SELECT q.id, q.question, qgr.id as rel_id, q.system_name, qg.system_group, qg.id AS group_id ";
+	$sql .= " FROM " . EVENTS_QUESTION_TABLE . " AS q ";
+    $sql .= " JOIN " . EVENTS_QST_GROUP_REL_TABLE . " AS qgr ";
+    $sql .= " on q.id = qgr.question_id ";
+    $sql .= " LEFT JOIN " . EVENTS_QST_GROUP_TABLE . " AS qg ";
+    $sql .= " on qg.id = qgr.group_id ";
+    $sql .= $use_filters ? apply_filters('espresso_get_user_questions_for_group', " WHERE q.wp_user = '0' OR q.wp_user = '1' ", $group_id, $user_id, $questions_in_group) : " WHERE q.wp_user = '0' OR q.wp_user = '1' ";
+    $sql .= " ORDER BY q.sequence, q.id ASC ";
+
+    $questions = $wpdb->get_results($wpdb->prepare($sql) );
+
+    foreach ( $questions as $question ) {
+    	if ( $question->group_id == $group_id ) {
+    		$setup_questions['questions_in_group'][] = $question;
+    	} else {
+    		$setup_questions['remaining_questions'][] = $question;
+    	}
+    }
+    return $setup_questions;
 }
 
 /**
@@ -1586,19 +1616,24 @@ function espresso_set_default_user_questions_groups($user_id, $return_type = 'qu
 /**
  * utility function to get user question groups.
  * @param  int $user_id
- * @param bool $set_system true means we'll setup default system questions/groups if there are no system question groups set up for the current user.  If false then we just return false if there are no system question groups set up for the current user.
- * @param bool $system if true return just system groups, if false return ALL groups (including system);
+ * @param bool $use_filters if true (default) filters will be run.  If false then no filters are run.
+ * @param bool $num used to indicate that this is being used in the context of retrieving the number of rows (if true).
  * @return array          array of group objects
  */
-function espresso_get_user_question_groups($user_id = null, $use_filters = true) {
+function espresso_get_user_question_groups($user_id = null, $use_filters = true, $num = false, $group_id = null) {
 	global $wpdb;
-	$sql = "SELECT * FROM " . EVENTS_QST_GROUP_TABLE;
+	$sql = "SELECT * FROM " . EVENTS_QST_GROUP_TABLE . " AS qg ";
 	if ( !empty($user_id) ) {
-  		$sql .= $use_filters ? apply_filters('espresso_get_user_question_groups_where', " WHERE (wp_user = '0' OR wp_user = '1' ) ") : " WHERE (wp_user = '0' OR wp_user = '1' ) ";
+  		$sql .= $use_filters ? apply_filters('espresso_get_user_question_groups_where', " WHERE (qg.wp_user = '0' OR qg.wp_user = '1' ) ", $user_id, $num) : " WHERE (qg.wp_user = '0' OR qg.wp_user = '1' ) ";
+  	}
+
+  	if ( !empty($group_id) ) {
+  		$sql .= " WHERE qg.id = '" . $group_id . "' ";
   	} 
-	$sql .= " ORDER BY group_order, id ASC ";
+
+	$sql .= ( empty($group_id) ) ? " ORDER BY id ASC " : " ORDER BY group_order ";
 
 	$groups = $wpdb->get_results( $wpdb->prepare($sql) );
 
-	return $use_filters ? apply_filters('espresso_get_user_groups_groups', $groups, $user_id) : $groups;		
+	return $use_filters ? apply_filters('espresso_get_user_groups_groups', $groups, $user_id, $num) : $groups;		
 }
