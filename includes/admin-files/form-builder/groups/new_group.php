@@ -1,7 +1,6 @@
 <?php
 //Function to add a new group of questions
 function event_espresso_form_group_new(){
-	global $wpdb;
 ?>
 <div id="add-edit-new-group" class="metabox-holder">
  <div class="postbox">
@@ -51,19 +50,26 @@ function event_espresso_form_group_new(){
           <li><p><?php _e('Select questions to add to group:','event_espresso'); ?></p></li>
   
             <?php
-        	$sql = "SELECT * FROM " . EVENTS_QUESTION_TABLE;
-        	$sql .= " WHERE ";
-        	if (function_exists('espresso_member_data')) {
-        		if (espresso_member_data('id') == 0 || espresso_member_data('id') == 1){
-        			$sql .= " (wp_user = '0' OR wp_user = '1') ";
-        		}else{
-        			$sql .= " wp_user = '" . espresso_member_data('id') ."' ";
-        		}
-        	}else{
-        		$sql .= " (wp_user = '0' OR wp_user = '1') ";
-        	}
-        	$sql .= " ORDER BY sequence, id ASC ";
-        	$questions = $wpdb->get_results($sql);
+          //first we need to get all system questions (make sure that the user actually has some)
+          $user_id = espresso_member_data('id');
+          $system_questions = espresso_get_user_questions($user_id, true);
+
+          if ( !$system_questions ) {
+            //no system questions? BUT there should be so let's get the original ones and make a duplicate for this user.
+            $system_questions = espresso_get_user_questions(1,true);
+
+            if ( !$system_questions ) {
+               $system_questions = espresso_get_user_questions(0,true);
+            }
+
+            if ( !$system_questions ) {
+              echo '<li>' . __('Something is broken with the questions or question groups. We cannot find any system questions for your user. Please contact Event Espresso Support for further instructions.', 'event_espresso') . '</li>';
+            }
+
+            //okay we have system questions.  Let's make sure they get attached to the user.
+            
+            
+          }
         	if ($wpdb->num_rows > 0) {
         		foreach ($questions as $question) {
         			echo '<li><label><input type="checkbox" name="question_id[]" value="' . $question->id . '" id="question_id_' . $question->id . '" />' . stripslashes($question->question) . '</label></li>';

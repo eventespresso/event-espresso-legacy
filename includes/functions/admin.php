@@ -1543,3 +1543,78 @@ function espresso_pre_3_4_layout($main_post_content = '', $sidebar_content = '',
 	</div> <!-- poststuff -->
 	<?php
 }
+
+/**
+ * [espresso_get_user_questions]
+ * used to get the questions for a given user_id (and system questions only if indicated)
+ * 
+ * @param  int  $user_id user_id to be retrieved.
+ * @param bool $set_system true means we'll setup default system questions/groups if there are no system questions set up for the current user.  If false then we just return false if there are no system questions set up for the current user.
+ * @pram bool $user_filters if true (default) filters will be run.  If false then no filters are run.
+ * @return array|bool  returns an array of question objects if there are values and false if none.
+ */
+function espresso_get_user_questions($user_id = null, $set_system = true, $use_filters = true ) {
+	global $wpdb;
+	$has_system = false;
+
+	//first let's satisfy the query.
+	$sql = "SELECT * FROM " . EVENTS_QUESTION_TABLE;
+	$sql .= " WHERE ";
+  	$sql .= apply_filters('espresso_get_user_questions', " WHERE (wp_user = '0' OR wp_user = '1') ");
+	$sql .= " ORDER BY sequence, id ASC ";
+
+	$questions = $wpdb->get_results($sql);
+
+	$logged_in_user = espresso_member_data('id');
+
+
+
+	//okay now let's loop through and make sure there are system questions for the logged in user (catches admins running a no-user-id query) and if there AREN'T then we need to generate them and rerun the query so it get's returned.
+	foreach ( $questions as $question ) {
+		if ( $question->user_id == $logged_in_user && !empty($question->system_name ) ) 
+			$has_system = true;			
+	}
+
+	//let's move the system question generation in here if there are no system questions for the logged in user.
+	if ( !$has_system ) {
+		$questions = espresso_set_default_user_questions_groups($logged_in_user);
+	}
+
+	return $questions;
+}
+
+/**
+ * [espresso_set_default_user_questions_groups]
+ * This function is used when a user doesn't have system questions or groups associated with their id (when there are bugs from previous versions).  This will take care of fixing that by saving system questions/groups for their user_id.  NOTE, if there are no system questions then it means that the system group has not been set up for this user either. 
+ * @param  int $user_id          
+ * @param array $return_type whether we should return the new question groups or the questions
+ * @return array returns the new array of question objects (for the given user
+ */
+function espresso_set_default_user_questions_groups($user_id, $return_type = 'questions') {
+	global $wpdb;
+	$user_id = (int) $user_id;
+
+	//let's check and see if there are any system groups first.
+	$
+	
+}
+
+/**
+ * utility function to get user question groups.
+ * @param  int $user_id
+ * @param bool $set_system true means we'll setup default system questions/groups if there are no system question groups set up for the current user.  If false then we just return false if there are no system question groups set up for the current user.
+ * @param bool $system if true return just system groups, if false return ALL groups (including system);
+ * @return array          array of group objects
+ */
+function espresso_get_user_question_groups($user_id = null, $set_system = true) {
+	global $wpdb;
+	$sql = "SELECT * FROM " . EVENTS_QST_GROUP_TABLE;
+	$sql .= " WHERE ";
+  	$sql .= !empty($user_id) ? " wp_user = '" . $user_id . "'" : "1=1"; 
+  	$sql .= $system ? " AND system_group = '1' " : "";
+	$sql .= " ORDER BY group_order, id ASC ";
+
+	$results = $wpdb->get_results($sql);
+
+	return ($wpdb->num_rows > 0) ? $results : false;
+}
