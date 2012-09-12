@@ -39,9 +39,29 @@ function espresso_process_beanstream($payment_data) {
 	curl_setopt($ch, CURLOPT_URL,'https://www.beanstream.com/scripts/process_transaction.asp');
 	curl_setopt($ch, CURLOPT_POSTFIELDS,$post_data);
 	$txnResult = curl_exec($ch);
-	echo "Result:<br>";
-	echo $txnResult;
 	curl_close($ch);
+	
+	$payment_data['payment_status'] = 'Incomplete';
+	$payment_data['txn_type'] = 'Beanstream';
+	$payment_data['txn_id'] = 0;
+	$payment_data['txn_details'] = serialize($_REQUEST);
+	
+	if(!empty($txnResult)) {
+		$temp_results = explode('&', $txnResult);
+		$results = array();
+		foreach ($temp_results as $temp_result) {
+			$temp_temp_result = explode('=', $temp_result);
+			$results[$temp_temp_result[0]] = $temp_temp_result[1];
+		}
+		$payment_data['txn_id'] = $results['trnId'];
+		$payment_data['txn_details'] = serialize($results);
+		if ($results['trnApproved'] == 1) {
+			$payment_data['payment_status'] = 'Completed';
+		} else {
+			echo '<p><strong class="credit_card_failure">Attention: Your transaction was declined for the following reason(s):</strong><br />';
+			echo $results['messageText'];
+		}
+	}
 	
 	return $payment_data;
 }
