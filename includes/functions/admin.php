@@ -1641,6 +1641,7 @@ function espresso_get_user_question_groups($user_id = null, $use_filters = true,
 function espresso_get_question_groups_for_event( $existing_question_groups = array(), $limit = null, $use_filters = true ) {
 	global $wpdb;
 	$event_groups = array();
+	$selected = $unselected = array();
 	$sql = "SELECT qg.* FROM " . EVENTS_QST_GROUP_TABLE . " AS qg ";
 	$sql .= $use_filters ? apply_filters('espresso_get_question_groups_for_event_where', " WHERE (qg.wp_user = '0' OR qg.wp_user = '1' ) ", $existing_question_groups ) : " WHERE (qg.wp_user = '0' OR qg.wp_user = '1' ) ";
 	$sql .= " GROUP BY qg.id ORDER BY qg.system_group, qg.group_order "; 
