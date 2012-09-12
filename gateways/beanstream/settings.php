@@ -5,6 +5,7 @@ function event_espresso_beanstream_payment_settings() {
 	if (!$espresso_premium)
 		return;
 	if (isset($_POST['update_beanstream'])) {
+		$beanstream_settings['merchant_id'] = $_POST['merchant_id'];
 		$beanstream_settings['beanstream_use_sandbox'] = empty($_POST['beanstream_use_sandbox']) ? false : true;
 		$beanstream_settings['header'] = $_POST['header'];
 		$beanstream_settings['force_ssl_return'] = empty($_POST['force_ssl_return']) ? false : true;
@@ -14,6 +15,7 @@ function event_espresso_beanstream_payment_settings() {
 	}
 	$beanstream_settings = get_option('event_espresso_beanstream_settings');
 	if (empty($beanstream_settings)) {
+		$beanstream_settings['merchant_id'] = '';
 		$beanstream_settings['beanstream_use_sandbox'] = false;
 		$beanstream_settings['header'] = 'Payment Transactions by Beanstream';
 		$beanstream_settings['force_ssl_return'] = false;
@@ -75,6 +77,12 @@ function event_espresso_display_beanstream_settings() {
 			<tr>
 				<td valign="top">
 					<ul>
+						<li>
+							<label for="merchant_id">
+								<?php _e('Beanstream Merchant ID', 'event_espresso'); ?>
+							</label>
+							<input type="text" name="merchant_id" size="35" value="<?php echo $beanstream_settings['merchant_id']; ?>">
+						</li>
 						<li>
 							<label for="beanstream_use_sandbox">
 								<?php _e('Use Beanstream in Sandbox Mode', 'event_espresso'); ?>

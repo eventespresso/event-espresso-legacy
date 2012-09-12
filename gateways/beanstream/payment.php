@@ -45,12 +45,91 @@ function espresso_display_beanstream($data) {
 	        <input name="city" type="text" id="ppp_city" class="required" value="<?php echo $city ?>" />
 				</p>
 				<p>
-	        <label for="state"><?php _e('State', 'event_espresso'); ?></label>
-	        <input name="state" type="text" id="ppp_state" class="required" value="<?php echo $state ?>" />
+					<label for="state">
+						<?php _e('State / Province', 'event_espresso'); ?>
+					</label>
+					<?php
+					$values = array(
+							array('id' => 'AB', 'text' => __('Alberta', 'event_espresso')),
+							array('id' => 'AK', 'text' => __('Alaska', 'event_espresso')),
+							array('id' => 'AL', 'text' => __('Alabama', 'event_espresso')),
+							array('id' => 'AS', 'text' => __('American Somoa', 'event_espresso')),
+							array('id' => 'AR', 'text' => __('Arkansas', 'event_espresso')),
+							array('id' => 'AZ', 'text' => __('Arizona', 'event_espresso')),
+							array('id' => 'BC', 'text' => __('British Columbia', 'event_espresso')),
+							array('id' => 'CA', 'text' => __('California', 'event_espresso')),
+							array('id' => 'CO', 'text' => __('Colorado', 'event_espresso')),
+							array('id' => 'CT', 'text' => __('Connecticut', 'event_espresso')),
+							array('id' => 'DC', 'text' => __('District of Columbia', 'event_espresso')),
+							array('id' => 'DE', 'text' => __('Delaware', 'event_espresso')),
+							array('id' => 'FL', 'text' => __('Florida', 'event_espresso')),
+							array('id' => 'GA', 'text' => __('Georgia', 'event_espresso')),
+							array('id' => 'GU', 'text' => __('Guam', 'event_espresso')),
+							array('id' => 'HI', 'text' => __('Hawaii', 'event_espresso')),
+							array('id' => 'IA', 'text' => __('Iowa', 'event_espresso')),
+							array('id' => 'ID', 'text' => __('Idaho', 'event_espresso')),
+							array('id' => 'IL', 'text' => __('Illinois', 'event_espresso')),
+							array('id' => 'IN', 'text' => __('Indiana', 'event_espresso')),
+							array('id' => 'KS', 'text' => __('Kansas', 'event_espresso')),
+							array('id' => 'KY', 'text' => __('Kentucky', 'event_espresso')),
+							array('id' => 'LA', 'text' => __('Louisiana', 'event_espresso')),
+							array('id' => 'MA', 'text' => __('Massachusetts', 'event_espresso')),
+							array('id' => 'MB', 'text' => __('Manitoba', 'event_espresso')),
+							array('id' => 'MD', 'text' => __('Maryland', 'event_espresso')),
+							array('id' => 'ME', 'text' => __('Maine', 'event_espresso')),
+							array('id' => 'MI', 'text' => __('Michigan', 'event_espresso')),
+							array('id' => 'FM', 'text' => __('Micronesia', 'event_espresso')),
+							array('id' => 'MN', 'text' => __('Minnesota', 'event_espresso')),
+							array('id' => 'MO', 'text' => __('Missouri', 'event_espresso')),
+							array('id' => 'MS', 'text' => __('Mississippi', 'event_espresso')),
+							array('id' => 'MT', 'text' => __('Montana', 'event_espresso')),
+							array('id' => 'NB', 'text' => __('New Brunswick', 'event_espresso')),
+							array('id' => 'NC', 'text' => __('North Carolina', 'event_espresso')),
+							array('id' => 'ND', 'text' => __('North Dakota', 'event_espresso')),
+							array('id' => 'NE', 'text' => __('Nebraska', 'event_espresso')),
+							array('id' => 'NL', 'text' => __('Newfoundland/Labrador', 'event_espresso')),
+							array('id' => 'NH', 'text' => __('New Hampshire', 'event_espresso')),
+							array('id' => 'NJ', 'text' => __('New Jersey', 'event_espresso')),
+							array('id' => 'NM', 'text' => __('New Mexico', 'event_espresso')),
+							array('id' => 'NS', 'text' => __('Nova Scotia', 'event_espresso')),
+							array('id' => 'NT', 'text' => __('Northwest Territories', 'event_espresso')),
+							array('id' => 'NU', 'text' => __('Nunavut', 'event_espresso')),
+							array('id' => 'NV', 'text' => __('Nevada', 'event_espresso')),
+							array('id' => 'NY', 'text' => __('New York', 'event_espresso')),
+							array('id' => 'OH', 'text' => __('Ohio', 'event_espresso')),
+							array('id' => 'OK', 'text' => __('Oklahoma', 'event_espresso')),
+							array('id' => 'ON', 'text' => __('Ontario', 'event_espresso')),
+							array('id' => 'OR', 'text' => __('Oregon', 'event_espresso')),
+							array('id' => 'PA', 'text' => __('Pennsylvania', 'event_espresso')),
+							array('id' => 'PE', 'text' => __('Prince Edward Island', 'event_espresso')),
+							array('id' => 'PR', 'text' => __('Puerto Rico', 'event_espresso')),
+							array('id' => 'QC', 'text' => __('Quebec', 'event_espresso')),
+							array('id' => 'RI', 'text' => __('Rhode Island', 'event_espresso')),
+							array('id' => 'SC', 'text' => __('South Carolina', 'event_espresso')),
+							array('id' => 'SD', 'text' => __('South Dakota', 'event_espresso')),
+							array('id' => 'SK', 'text' => __('Saskatchewan', 'event_espresso')),
+							array('id' => 'TN', 'text' => __('Tennessee', 'event_espresso')),
+							array('id' => 'TX', 'text' => __('Texas', 'event_espresso')),
+							array('id' => 'UT', 'text' => __('Utah', 'event_espresso')),
+							array('id' => 'VA', 'text' => __('Virginia', 'event_espresso')),
+							array('id' => 'VI', 'text' => __('Virgin Islands', 'event_espresso')),
+							array('id' => 'VT', 'text' => __('Vermont', 'event_espresso')),
+							array('id' => 'WA', 'text' => __('Washington', 'event_espresso')),
+							array('id' => 'WI', 'text' => __('Wisconsin', 'event_espresso')),
+							array('id' => 'WV', 'text' => __('West Virginia', 'event_espresso')),
+							array('id' => 'WY', 'text' => __('Wyoming', 'event_espresso')),
+							array('id' => 'YT', 'text' => __('Yukon', 'event_espresso')),
+							array('id' => '--', 'text' => __('Outside U.S./Canada', 'event_espresso')));
+					echo select_input('state', $values, 'AB');
+					?>
 				</p>
 				<p>
 	        <label for="zip"><?php _e('Zip', 'event_espresso'); ?></label>
 	        <input name="zip" type="text" id="ppp_zip" class="required" value="<?php echo $zip ?>" />
+				</p>
+				<p>
+	        <label for="phone"><?php _e('Phone', 'event_espresso'); ?></label>
+	        <input name="phone" type="text" id="ppp_phone" class="required" value="<?php echo $phone ?>" />
 				</p>
 				<p class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></p>
 				<p>
@@ -77,7 +156,7 @@ function espresso_display_beanstream($data) {
 	        <select id="ppp_exp-year" name ="expyear" class="required">
 
 						<?php
-						$curr_year = date("Y");
+						$curr_year = date("y");
 						for ($i = 0; $i < 10; $i++) {
 							$disp_year = $curr_year + $i;
 							echo "<option value='$disp_year'>$disp_year</option>";
