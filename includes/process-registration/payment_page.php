@@ -143,7 +143,7 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 
 	if (function_exists('event_espresso_coupon_payment_page') && (!empty($_REQUEST['coupon_code']) || !empty($coupon_code))) {
 		
-		$coupon_data = event_espresso_coupon_payment_page($use_coupon_code, $event_id, $event_original_cost, $attendee_id, $num_people);
+		$coupon_data = event_espresso_coupon_payment_page( $use_coupon_code, $event_id, $event_original_cost, $attendee_id, FALSE );
 		$event_cost = $coupon_data['event_cost'];
 		/*
 		 * at this point , the $event_cost is correct
@@ -152,24 +152,26 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 		 */
 
 		//$event_price_x_attendees = number_format($event_cost, 2, '.', '');
-		$coupon_code = $_REQUEST['coupon_code'];
+		$coupon_code = wp_strip_all_tags( $_REQUEST['coupon_code'] );
 		
-		if ( $coupon_data['valid'] == true ){
+		if ( $coupon_data['valid'] == TRUE ){
 			$event_price_x_attendees = $event_price_x_attendees - $event_cost;
 			if ( $coupon_data['percentage'] ) {
 				$event_discount_label = $event_original_cost > $event_cost ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_original_cost - $event_cost, 2, ".", ",") . ' (' . $coupon_data['discount'] . ')'. __(' applied', 'event_espresso') . ')' : '';
-			}else{
+			} else {
 				$event_discount_label = $event_original_cost > $event_cost ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_original_cost - $event_cost, 2, ".", ",") . __(' applied', 'event_espresso') . ')' : '';
 				$event_price_x_attendees = $event_cost;
 			}
 		}
 		
-	} elseif (function_exists('event_espresso_groupon_payment_page') && ($_REQUEST['groupon_code'] != '' || $coupon_code != '')) {
+	} 
+	
+	if (function_exists('event_espresso_groupon_payment_page') && ($_REQUEST['groupon_code'] != '' || $groupon_code != '')) {
 		
 		$groupon_data = event_espresso_groupon_payment_page( $use_groupon_code, $event_id, $event_original_cost, $attendee_id, FALSE );
-		$groupon_code = $_REQUEST['groupon_code'];
+		$groupon_code = wp_strip_all_tags( $_REQUEST['groupon_code'] );
 		$event_cost = $groupon_data['event_cost'];
-		if ( $groupon_data['valid'] == true ){
+		if ( $groupon_data['valid'] == TRUE ){
 			$event_price_x_attendees = number_format($event_price_x_attendees - $event_price, 2, ".", ",");
 			$event_discount_label = $event_original_cost > $event_cost ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_price, 2, ".", ",") . __(' applied', 'event_espresso') . ')' : '';
 		}
