@@ -87,11 +87,9 @@ jQuery(document).ready(function() {
 
             var data = "action=event_espresso_calculate_total&" + jQuery("#event_espresso_shopping_cart").serialize();
 
-
             event_espresso_do_ajax(data,function(r){
-
-                jQuery('#event_total_price').html(r.grand_total);
-
+				jQuery('#event_total_price').html(r.grand_total);
+				jQuery('#event_espresso_notifications').html(r.msg);
             });
 
 
@@ -214,16 +212,18 @@ jQuery(document).ready(function() {
     }
 
 
-    jQuery('#event_espresso_shopping_cart :input[id^="price_option-"], .price_id, #event_espresso_coupon_code ').change(function(){
 
+	//Couppon codes
+    jQuery('#event_espresso_shopping_cart :input[id^="price_option-"], .price_id, #event_espresso_coupon_code, #event_espresso_groupon_code').on( 'change', function(){
+	
         var me = jQuery(this);
-
-        if (me.attr('type') == "select-one"){ //only run the code if a select is modified
+		//alert( 'me id = ' + me.attr("id") + "\n" +  'me type = ' + me.prop("type") );
+			
+        if (me.prop('type') == "select-one"){ //only run the code if a select is modified
 
             //all selects have an id
             var id = me.attr("id");
-            var id = id.replace(/\D+/,"");
-
+            id = id.replace(/\D+/,"");
             //maximum attendees in a hidden field in each block
             var max_attendees = jQuery('#max_attendees-' + id).val();
 
@@ -234,6 +234,7 @@ jQuery(document).ready(function() {
             jQuery('#event_espresso_shopping_cart :input[name^="price_id[' + id + ']"]').each(function(){
 
                 num_selected_attendees += Number(jQuery(this).val());
+
 
             });
 

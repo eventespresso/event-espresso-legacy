@@ -67,6 +67,8 @@ function ee_init_session($admin_override = false) {
 		//echo "<pre>".print_r($_SESSION,true)."</pre>";
 		$_SESSION['espresso_session']['events_in_session'] = '';
 		$_SESSION['espresso_session']['coupon_code'] = '';
+		$_SESSION['espresso_session']['groupon_code'] = '';
+		$_SESSION['espresso_session']['groupon_used'] = '';
 		$_SESSION['espresso_session']['grand_total'] = '';
 		do_action( 'action_hook_espresso_zero_vlm_dscnt_in_session' ); 
 	}
@@ -750,8 +752,9 @@ if (!function_exists('event_espresso_run')) {
 				event_espresso_shopping_cart();
 				break;
 			case "load_checkout_page":
-				if ($_POST)
-					event_espresso_calculate_total('details');
+				if ($_POST) {
+					event_espresso_calculate_total( 'details', FALSE );
+				}					
 				event_espresso_load_checkout_page();
 				break;
 			case "post_multi_attendee":

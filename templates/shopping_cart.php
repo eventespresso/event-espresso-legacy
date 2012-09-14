@@ -72,6 +72,7 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 						?>
 		
 						<input type="hidden" name="event_name[<?php echo $r->id; ?>]" value="<?php echo $r->event_name; ?>" />
+						<input type="hidden" name="use_groupon[<?php echo $r->id; ?>]" value="<?php echo $r->use_groupon_code; ?>" />
 						<?php do_action_ref_array( 'action_hook_espresso_add_to_multi_reg_cart_block', array( $r ) ); ?>
 						
 					</div><!-- / .event-data-display -->
@@ -81,6 +82,7 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 				$counter++;
 			}
 		}
+		echo $_SESSION['espresso_session']['groupon_used'];
 		?>
 		<div class="event-display-boxes ui-widget">
 			<div class="mer-event-submit ui-widget-content ui-corner-all">
@@ -91,12 +93,22 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			//Coupon code display
 			//Uncomment the following code at your own risk. Just beware that all coupon codes will work for everyting in the cart. 
 			?>
-			<?php /*?><div id="event_espresso_coupon_wrapper" class="clearfix event-data-display">
+			<div id="event_espresso_coupon_wrapper" class="clearfix event-data-display">
 				<label class="coupon-code" for="event_espresso_coupon_code">
 					<?php _e( 'Enter Coupon Code ', 'event_espresso' ); ?>
 				</label>
 				<input onkeydown="if(event.keyCode==13) {document.getElementById('event_espresso_refresh_total').focus(); return false;}" type="text" name="event_espresso_coupon_code" id ="event_espresso_coupon_code" value="<?php echo $_SESSION['espresso_session']['coupon_code']; ?>"/>
-			</div><?php */?>
+			</div>
+			
+			<div id="event_espresso_coupon_wrapper" class="clearfix event-data-display" style="padding:5px; margin:5px;">
+				<label class="coupon-code" for="event_espresso_groupon_code">
+					<?php _e( 'Enter Voucher Code ', 'event_espresso' ); ?>
+				</label>
+				<input onkeydown="if(event.keyCode==13) {document.getElementById('event_espresso_refresh_total').focus(); return false;}" type="text" name="event_espresso_groupon_code" id ="event_espresso_groupon_code" value="<?php echo $_SESSION['espresso_session']['groupon_code']; ?>"/>
+			</div>
+
+			<div id="event_espresso_notifications" class="clearfix event-data-display" style="padding:5px; margin:5px;">
+			</div>
 
 			<div id="event_espresso_total_wrapper" class="clearfix event-data-display">			
 				<?php do_action( 'action_hook_espresso_shopping_cart_before_total' ); ?>				

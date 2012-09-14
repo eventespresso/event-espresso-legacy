@@ -109,14 +109,18 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 		$questions = unserialize($questions->question_groups);
 		//echo '<p>$data_source[price_select] = '.$data_source['price_select'].'</p>';
 		//$payment = $data_source['payment'];
+		
 		//Figure out if the person has registered using a price selection
 		if ($multi_reg) {
+		
 			$event_cost = $_SESSION['espresso_session']['grand_total'];
 			$amount_pd = $attendee_number == 1 ? $event_cost : 0.00;
 			$coupon_code = $attendee_number == 1 ? $_SESSION['espresso_session']['coupon_code'] : '';
 			$price_type = (isset($data_source['price_type'])) ? $data_source['price_type'] : espresso_ticket_information(array('type' => 'ticket', 'price_option' => $data_source['price_id']));
 			$attendee_number++;
+			
 		} elseif (isset($data_source['price_select']) && $data_source['price_select'] == true) {
+		
 			$price_options = explode('|', $data_source['price_option'], 2);
 			$price_id = $price_options[0];
 			$price_type = $price_options[1];
@@ -126,14 +130,18 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 			  echo '$price_id = '.$price_id.'<br />';
 			  echo '$event_cost = '.$event_cost;
 			  return; */
+			
 		} else {
+		
 			$event_cost = isset($data_source['price_id']) ? event_espresso_get_final_price($data_source['price_id'], $event_id) : 0.00;
 			do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line 131: event_cost=' . $event_cost);
 			$coupon_code = '';
 			$price_type = isset($data_source['price_id']) ? espresso_ticket_information(array('type' => 'ticket', 'price_option' => $data_source['price_id'])) : '';
+			
 		}
 
 		//$event_cost = apply_filters( 'filter_hook_espresso_cart_grand_total', $event_cost ); 
+		
 		//Display the confirmation page
 		if (!empty($data_source['confirm_registration'])) {
 			$registration_id = $data_source['registration_id'];
@@ -152,6 +160,7 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 		$txn_type = "";
 
 		if (isset($data_source['admin'])) {
+		
 			$payment_status = "Completed";
 			$payment = "Admin";
 			$txn_type = __('Added by Admin', 'event_espresso');
@@ -159,6 +168,7 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 			$amount_pd = $data_source["event_cost"] == '' ? 0.00 : $data_source["event_cost"];
 			$registration_id = uniqid('', true);
 			$_SESSION['espresso_session']['id'] = uniqid('', true);
+			
 		} else {
 
 			if ($org_options['use_captcha'] == 'Y' && !is_user_logged_in()) {//Recaptcha portion
@@ -184,7 +194,7 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 			//print_r( $event_meta);
 			$default_payment_status = $event_meta['default_payment_status'] != '' && ($org_options['default_payment_status'] != $event_meta['default_payment_status']) ? $event_meta['default_payment_status'] : $org_options['default_payment_status'];
 
-			$payment_status = ($multi_reg && $data_source['cost'] == 0) ? "Completed" : $default_payment_status;
+			$payment_status = ($multi_reg && $data_source['cost'] == 0.00 ) ? "Completed" : $default_payment_status;
 			$payment = '';
 		}
 
@@ -216,6 +226,15 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 		} else {
 			$num_people = 1;
 		}
+		
+		if ( isset( $data_source['groupon'] )) {	
+			//$amount_pd = $data_source['groupon']['discount'];
+			$amount_pd = 0.00;
+			$data_source['cost'] = 0.00;
+			$coupon_code = $data_source['groupon']['code'];
+			$payment_date = date(get_option('date_format'));
+			add_filter('filter_hook_espresso_attendee_cost', '__return_zero' );
+		}
 
 		$start_time = empty($start_time) ? '' : $start_time;
 		$end_time = empty($end_time) ? '' : $end_time;
@@ -240,6 +259,7 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 				'phone' => $phone,
 				'payment' => $payment,
 				'amount_pd' => $amount_pd,
+				'total_cost' => $data_source['cost'],
 				'txn_type' => $txn_type,
 				'coupon_code' => $coupon_code,
 				'event_time' => $start_time,
@@ -252,7 +272,8 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 				'payment_status' => $payment_status,
 				'payment_date' => $payment_date,
 				'event_id' => $event_id,
-				'quantity' => $num_people);
+				'quantity' => $num_people
+		);
 
 		$data_formats = array('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',
 				'%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d');
@@ -299,6 +320,13 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 		}
 
 		$attendee_id = $wpdb->insert_id;
+
+
+		// update groupon table
+		if ( isset( $data_source['groupon'] )) {	
+			$groupon_used = "UPDATE " . EVENTS_GROUPON_CODES_TABLE . " SET groupon_status='0', attendee_id='" . $attendee_id . "', date='" . $payment_date . "' WHERE id = '" . $data_source['groupon']['id'] . "'";
+			$wpdb->query($groupon_used);	
+		}
 
 		/*
 		 * Added for seating chart addon
@@ -570,10 +598,11 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 			}
 		}
 
-		//This shows the payment page
 		if (isset($data_source['admin'])) {
 			return $attendee_id;
 		}
+		
+		//This shows the payment page
 		if (!$multi_reg) {
 			return events_payment_page($attendee_id);
 		}
@@ -582,6 +611,10 @@ if (!function_exists('event_espresso_add_attendees_to_db')) {
 	}
 
 }
+
+
+
+
 
 
 
@@ -629,22 +662,23 @@ if (!function_exists('event_espresso_add_attendees_to_db_multi')) {
 			//echo '<pre>$events_in_session - '.print_r($events_in_session, true).'</pre>';
 
 			reset($events_in_session);
-			foreach ($events_in_session as $key => $_event_id) {
+			foreach ($events_in_session as $event_id => $event) {
 				//Debug
-				//echo '<p>$_event_id - '. $_event_id.'</p>';
-				//echo '<pre>'.print_r($_event_id, true).'</pre>';
+				//echo '<p>$event - '. $event.'</p>';
+				//echo '<pre>'.print_r($event, true).'</pre>';
 
-				$event_meta = event_espresso_get_event_meta($key);
-				$event_attendees = $_event_id['event_attendees'];
-				$session_vars['data'] = $_event_id;
+				$event_meta = event_espresso_get_event_meta($event_id);
+				$event_attendees = $event['event_attendees'];
+				
+				$session_vars['data'] = $event;
 				//Debug
-				//echo '<p>$_event_id - '. $_event_id.'</p>';
+				//echo '<p>$event - '. $event.'</p>';
 				//echo '<pre>'.print_r($session_vars['data'], true).'</pre>';
 
 				if (is_array($event_attendees)) {
 					$counter = 1;
 					foreach ($event_attendees as $k_price_id => $v_attendees) { //foreach price type in event attendees
-						$session_vars['data'] = $_event_id;
+						$session_vars['data'] = $event;
 						//Debug
 						//echo '<pre>$session_vars[\'data\' - ]'.print_r($session_vars['data'], true).'</pre>';
 
@@ -653,16 +687,16 @@ if (!function_exists('event_espresso_add_attendees_to_db_multi')) {
 							//Added by Imon
 							$vval['price_id'] = $k_price_id;
 							$session_vars['event_attendees'] = $vval; //this has all the attendee information, name, questions....
-							$session_vars['data']['price_type'] = $_event_id['price_id'][$k_price_id]['price_type'];
+							$session_vars['data']['price_type'] = $event['price_id'][$k_price_id]['price_type'];
 							if (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) {
 
 								//Getting he wrong number of attendees at this point
 								//Debug
 								//echo '<p>$_REQUEST[\'num_people\'] - '.$_REQUEST['num_people'].'</p>';
-								//echo '<p>$_event_id[\'price_id\'][$k_price_id] - '.$_event_id['price_id'][$k_price_id].'</p>';
-								//echo '<pre>$_event_id[\'price_id\'][$k_price_id] - '.print_r($_event_id['price_id'][$k_price_id]['attendee_quantity'], true).'</pre>';
+								//echo '<p>$event[\'price_id\'][$k_price_id] - '.$event['price_id'][$k_price_id].'</p>';
+								//echo '<pre>$event[\'price_id\'][$k_price_id] - '.print_r($event['price_id'][$k_price_id]['attendee_quantity'], true).'</pre>';
 								//echo '<pre>'.print_r($_POST, true).'</pre>';
-								$num_people = $_event_id['price_id'][$k_price_id]['attendee_quantity'];
+								$num_people = $event['price_id'][$k_price_id]['attendee_quantity'];
 								$session_vars['data']['num_people'] = empty($num_people) || $num_people == 0 ? 1 : $num_people;
 
 								//Debug
@@ -670,10 +704,10 @@ if (!function_exists('event_espresso_add_attendees_to_db_multi')) {
 							}
 
 							//Debug
-							/* echo $key.'<br />';
+							/* echo $event_id.'<br />';
 							  echo '<pre>$session_vars - '.print_r($session_vars, true).'</pre>';
 							  echo '<br />'; */
-							$tmp_registration_id = event_espresso_add_attendees_to_db($key, $session_vars);
+							$tmp_registration_id = event_espresso_add_attendees_to_db($event_id, $session_vars);
 							//Debug
 							//echo 'tmp_registration_id =' . $tmp_registration_id.'<br />';
 
@@ -713,8 +747,11 @@ if (!function_exists('event_espresso_add_attendees_to_db_multi')) {
 					$event_cost = $sub_total - $coupon_amount;
 				}
 			}
+			
+			$event_cost = $event_cost < 0 ? 0.00 : $event_cost;
+			
 			//Post the gateway page with the payment options
-			if ($event_cost != '0.00') {
+			if ( $event_cost != 0.00 ) {
 				//find first registrant's name, email, count of registrants
 				$sql = "SELECT id, fname, lname, email, address, city, state, zip, event_id, registration_id,
 						(SELECT count( id )
@@ -752,7 +789,7 @@ if (!function_exists('event_espresso_add_attendees_to_db_multi')) {
 				<?php foreach ($items as $item) { ?>
 					<tr>
 						<td width="70%">
-						<?php echo $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname ?>
+						<?php echo $item->price_option . ' for ' . $item->event_name . "\n\t" . '. Attendee: '. $item->fname . ' ' . $item->lname ?>
 						</td>
 						<td width="10%">
 						<?php echo $org_options['currency_symbol'] . number_format($item->cost, 2) ?>
@@ -771,6 +808,8 @@ if (!function_exists('event_espresso_add_attendees_to_db_multi')) {
 						</td>
 						<td colspan="">
 						<?php echo $org_options['currency_symbol'] . number_format($sub_total, 2); ?>
+						</td>
+					</tr>
 				<?php
 				if (!empty($coupon_amount)) {
 					if ($is_coupon_pct) {

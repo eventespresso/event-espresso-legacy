@@ -17,7 +17,7 @@ if (!function_exists('event_espresso_coupon_payment_page')) {
 				}
 
         $today = date("m-d-Y");
-        if (!empty($use_coupon_code)) {
+        if (!empty($use_coupon_code) && $use_coupon_code == 'Y') {
             if (!empty($_REQUEST['coupon_code']) || !empty($_POST['event_espresso_coupon_code'])) {
 
                 $coupon_code = !empty($_POST['event_espresso_coupon_code']) ? $_POST['event_espresso_coupon_code'] : $_REQUEST['coupon_code'];

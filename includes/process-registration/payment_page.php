@@ -142,6 +142,7 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 
 
 	if (function_exists('event_espresso_coupon_payment_page') && (!empty($_REQUEST['coupon_code']) || !empty($coupon_code))) {
+		
 		$coupon_data = event_espresso_coupon_payment_page($use_coupon_code, $event_id, $event_original_cost, $attendee_id, $num_people);
 		$event_cost = $coupon_data['event_cost'];
 		/*
@@ -163,8 +164,9 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 			}
 		}
 		
-	} else if (function_exists('event_espresso_groupon_payment_page') && ($_REQUEST['groupon_code'] != '' || $coupon_code != '')) {
-		$groupon_data = event_espresso_groupon_payment_page($use_groupon_code, $event_id, $event_original_cost, $attendee_id);
+	} elseif (function_exists('event_espresso_groupon_payment_page') && ($_REQUEST['groupon_code'] != '' || $coupon_code != '')) {
+		
+		$groupon_data = event_espresso_groupon_payment_page( $use_groupon_code, $event_id, $event_original_cost, $attendee_id, FALSE );
 		$groupon_code = $_REQUEST['groupon_code'];
 		$event_cost = $groupon_data['event_cost'];
 		if ( $groupon_data['valid'] == true ){
