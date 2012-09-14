@@ -89,7 +89,12 @@ jQuery(document).ready(function() {
 
             event_espresso_do_ajax(data,function(r){
 				jQuery('#event_total_price').html(r.grand_total);
-				jQuery('#event_espresso_notifications').html(r.msg);
+				if ( r.msg != undefined && r.msg != '' ) {
+					jQuery('#event_espresso_notifications').hide().html(r.msg).css({ 'padding':'1em', 'margin':'2em 10px 2em', 'border':'2px solid #eee', 'border-radius':'3px' }).fadeIn();
+				} else {
+					jQuery('#event_espresso_notifications').fadeOut();
+				}
+				
             });
 
 
