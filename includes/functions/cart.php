@@ -128,7 +128,6 @@ if (!function_exists('event_espresso_return_session_var')) {
 		if (is_null($k))
 			return;
 
-
 		return array_key_exists($k, $_SESSION) ? $_SESSION[$k] : null;
 	}
 
@@ -136,34 +135,31 @@ if (!function_exists('event_espresso_return_session_var')) {
 
 /**
  * Updates item information in the session
- *
- * @param $_POST
- *
- * @return true
+ * @param  mixed 		$update_section 
+ * @return 	true
  */
 if (!function_exists('event_espresso_update_item_in_session')) {
 
-
-	function event_espresso_update_item_in_session($update_section = null) {
-		global $wpdb;
+	function event_espresso_update_item_in_session( $update_section = FALSE ) {
+	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-		/*
-		 * - grab the event sessions
-		 * - loop through the events and for each one
-		 * -- update the pricing, time options
-		 * -- update the attendee information
-		 */
+		global $wpdb;
 
-
+		// grab the event sessions
+		// loop through the events and for each one
+		// - update the pricing, time options
+		//-  update the attendee information
+		 
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
 
-		if (!is_array($events_in_session))
+		if ( ! is_array( $events_in_session )) {
 			return false;
+		}
+			
 		//holds the updated infromation
 		$updated_events_in_session = $events_in_session;
-		//$updated_events_in_session = array( );
 
-		if ($update_section == 'details') {
+		if ( $update_section == 'details' ) {
 
 			foreach ($events_in_session as $k => $v) {
 
@@ -231,11 +227,8 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 					$_SESSION['espresso_session']['groupon_code'] = $wpdb->escape($_POST['event_espresso_groupon_code']);
 				}
 			}
-		}
-
-
-
-		if ($update_section == 'attendees') {
+			
+		} elseif ( $update_section == 'attendees' ) {
 			//show the empty cart error
 			if (event_espresso_invoke_cart_error($events_in_session))
 				return false;
@@ -292,17 +285,24 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 if (!function_exists('event_espresso_calculate_total')) {
 
 
-	function event_espresso_calculate_total( $update_section = null, $mer = TRUE ) {
-		//print_r($_POST);
-		global $wpdb;
-		$notifications = '';
-		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
+	function event_espresso_calculate_total( $update_section = FALSE, $mer = TRUE ) {
+
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+		
+		//print_r($_POST);
+		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
+		$coupon_events = array();
+		$coupon_notifications = '';
+		$groupon_events = array();
+		$groupon_notifications = '';
+		
 		if (is_array($events_in_session)) {
 
 			$event_total_cost = 0;
 
-			foreach ($events_in_session as $event_id => $v ) {
+			foreach ( $events_in_session as $event_id => $event ) {
+			
+				$event_id = absint( $event_id );
 				$event_cost = 0;
 				$event_individual_cost[$event_id] = 0;
 
@@ -336,16 +336,30 @@ if (!function_exists('event_espresso_calculate_total')) {
 					do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line '. __LINE__ .': event_cost='.$event_cost );
 					$event_individual_cost[$event_id] = number_format( $event_cost, 2, '.', '' );
 				}
-				
+
+
+				// check for coupon 
+				if (function_exists('event_espresso_coupon_payment_page') && isset($_POST['event_espresso_coupon_code'])) {
+					$use_coupon = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';
+					if ( $coupon_results = event_espresso_coupon_payment_page( $use_coupon, $event_id, $event_individual_cost[$event_id], FALSE, $mer ) ) {
+						$event_individual_cost[$event_id] = number_format( $coupon_results['event_cost'], 2, '.', '' );
+						$coupon_notifications = $coupon_results['msg'] != '' ? $coupon_results['msg'] : '';
+						if ( $coupon_results['valid'] ) {
+							$coupon_events[] = $event['event_name'];
+						}						
+					}					
+				}
+
+			
 				// check for groupon
 				if (function_exists('event_espresso_groupon_payment_page') && isset($_POST['event_espresso_groupon_code']) ) {
 					$use_groupon = isset( $_POST['use_groupon'][$event_id] ) ? $_POST['use_groupon'][$event_id] : 'N';
-					$event_total_cost_array = event_espresso_groupon_payment_page( $use_groupon, $event_id, $event_individual_cost[$event_id], NULL, $mer );
-					if ( $event_total_cost_array !== FALSE ) {
-						$event_individual_cost[$event_id] = number_format( $event_total_cost_array['event_cost'], 2, '.', '' );
-						if ( $event_total_cost_array['msg'] != '' ) {
-							$notifications = $event_total_cost_array['msg'];
-						}						
+					if ( $groupon_results = event_espresso_groupon_payment_page( $use_groupon, $event_id, $event_individual_cost[$event_id], FALSE, $mer ) ) {
+						$event_individual_cost[$event_id] = number_format( $groupon_results['event_cost'], 2, '.', '' );
+						$groupon_notifications = $groupon_results['msg'] != '' ? $groupon_results['msg'] : '';
+						if ( $groupon_results['valid'] ) {
+							$groupon_events[] = $event['event_name'];
+						}
 					}
 				}
 
@@ -353,29 +367,35 @@ if (!function_exists('event_espresso_calculate_total')) {
 				$event_total_cost += $event_individual_cost[$event_id];
 
 			}
-
-			if (function_exists('event_espresso_coupon_payment_page') && isset($_POST['event_espresso_coupon_code'])) {
-				if (isset($_POST['event_espresso_coupon_code'])) {
-					$event_total_cost_array = event_espresso_coupon_payment_page('Y', NULL, $event_total_cost, NULL);
-					//Returns an array
-					//array('event_cost'=>$event_cost, 'valid'=>$valid, 'percentage'=>$percentage, 'discount'=>$discount_type_price);
-					$event_total_cost = $event_total_cost_array['event_cost'];
-				}
-			}
 			
 			$grand_total = number_format($event_total_cost, 2, '.', '');
 
 			$_SESSION['espresso_session']['pre_discount_total'] = $grand_total;
 			$_SESSION['espresso_session']['grand_total'] = $grand_total;
-			event_espresso_update_item_in_session($update_section);
+			event_espresso_update_item_in_session( $update_section );
+			
 		}
-		//}
-		if ($update_section == null) {
-			echo event_espresso_json_response(array('grand_total' => $grand_total, 'msg' => $notifications ));
+			
+		$coupon_count = count( $coupon_events );
+		if ( ! strpos( $coupon_notifications, 'event_espresso_invalid_coupon' ) && $coupon_count > 0 ) {
+			$events = implode( $coupon_events, '<br/>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;' );
+			$coupon_notifications .= '&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;' . $events . '</p>';
+		}
+
+		$groupon_count = count( $groupon_events );
+		if ( ! strpos( $groupon_notifications, 'event_espresso_invalid_groupon' ) && $groupon_count > 0 ) {
+			$events = implode( $groupon_events, '<br/>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;' );
+			$groupon_notifications .= '&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;' . $events . '</p>';
+		}
+	
+		$coupon_notifications = $coupon_count && $groupon_count ? $coupon_notifications . '<br/>' : $coupon_notifications;
+
+		if ( ! $update_section ) {
+			echo event_espresso_json_response(array('grand_total' => $grand_total, 'msg' => $coupon_notifications . $groupon_notifications ));
 			die();
 		}
+		
 	}
-
 }
 
 
@@ -415,11 +435,8 @@ if (!function_exists('event_espresso_delete_item_from_session')) {
 		} else {
 			$_SESSION['espresso_session']['events_in_session'] = $events_in_session;
 		}
-			
-
 
 		echo event_espresso_json_response();
-
 		die();
 	}
 
