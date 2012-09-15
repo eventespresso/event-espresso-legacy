@@ -14,6 +14,7 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 				$percentage = FALSE;
 				$discount_type_price = '';
 				$msg = '';
+				$error = '';
 				$event_id = absint( $event_id );
 				
                $coupon_code = ! empty( $_POST['event_espresso_coupon_code'] ) ? wp_strip_all_tags( $_POST['event_espresso_coupon_code'] ) : wp_strip_all_tags( $_REQUEST['coupon_code'] );
@@ -93,12 +94,12 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 				
 					$valid = FALSE;
 					if ( $mer ) {
-						$msg = '<p id="event_espresso_invalid_coupon" style="margin:0;">' . __('Sorry, promotional code ', 'event_espresso') . '<strong>' . $coupon_code . '</strong>' . __(' is invalid or expired.', 'event_espresso') . '</p>';
+						$error = '<p id="event_espresso_invalid_coupon" style="margin:0;"><font color="red">' . __('Sorry, promotional code ', 'event_espresso') . '<strong>' . $coupon_code . '</strong>' . __(' is invalid or expired.', 'event_espresso') . '</font></p>';
 					}
 					
                 }
 				
-				return array( 'event_cost'=>$event_cost, 'valid'=>$valid, 'percentage'=>$percentage, 'discount'=>$discount_type_price, 'msg' => $msg );
+				return array( 'event_cost'=>$event_cost, 'valid'=>$valid, 'percentage'=>$percentage, 'discount'=>$discount_type_price, 'msg' => $msg, 'error' => $error );
 
 			}
         }

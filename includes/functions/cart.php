@@ -291,10 +291,14 @@ if (!function_exists('event_espresso_calculate_total')) {
 		
 		//print_r($_POST);
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
+		
 		$coupon_events = array();
 		$coupon_notifications = '';
+		$coupon_errors = '';
+		
 		$groupon_events = array();
 		$groupon_notifications = '';
+		$groupon_errors = '';
 		
 		if (is_array($events_in_session)) {
 
@@ -343,7 +347,8 @@ if (!function_exists('event_espresso_calculate_total')) {
 					$use_coupon = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';
 					if ( $coupon_results = event_espresso_coupon_payment_page( $use_coupon, $event_id, $event_individual_cost[$event_id], FALSE, $mer ) ) {
 						$event_individual_cost[$event_id] = number_format( $coupon_results['event_cost'], 2, '.', '' );
-						$coupon_notifications = $coupon_results['msg'] != '' ? $coupon_results['msg'] : '';
+						$coupon_notifications .= ( $coupon_results['msg'] != $coupon_notifications ) && ! empty( $coupon_results['msg'] ) ? $coupon_results['msg'] : '';
+						$coupon_errors .= ( $coupon_results['error'] != $coupon_errors ) && ! empty( $coupon_results['error'] ) ? $coupon_results['error'] : '';
 						if ( $coupon_results['valid'] ) {
 							$coupon_events[] = $event['event_name'];
 						}						
@@ -356,7 +361,8 @@ if (!function_exists('event_espresso_calculate_total')) {
 					$use_groupon = isset( $_POST['use_groupon'][$event_id] ) ? $_POST['use_groupon'][$event_id] : 'N';
 					if ( $groupon_results = event_espresso_groupon_payment_page( $use_groupon, $event_id, $event_individual_cost[$event_id], FALSE, $mer ) ) {
 						$event_individual_cost[$event_id] = number_format( $groupon_results['event_cost'], 2, '.', '' );
-						$groupon_notifications = $groupon_results['msg'] != '' ? $groupon_results['msg'] : '';
+						$groupon_notifications .= ( $groupon_results['msg'] != $groupon_notifications ) && ! empty( $groupon_results['msg'] ) ? $groupon_results['msg'] : '';
+						$groupon_errors .= ( $groupon_results['error'] != $groupon_errors ) && ! empty( $groupon_results['error'] ) ? $groupon_results['error'] : '';
 						if ( $groupon_results['valid'] ) {
 							$groupon_events[] = $event['event_name'];
 						}
@@ -376,22 +382,38 @@ if (!function_exists('event_espresso_calculate_total')) {
 			
 		}
 			
+//		echo '$coupon_notifications = ' . $coupon_notifications . '<br/>';
+//		echo '$coupon_errors = ' . $coupon_errors . '<br/>';
+//		echo '$groupon_notifications = ' . $groupon_notifications . '<br/>';
+//		echo '$groupon_errors = ' . $groupon_errors . '<br/>';	
+
 		$coupon_count = count( $coupon_events );
 		if ( ! strpos( $coupon_notifications, 'event_espresso_invalid_coupon' ) && $coupon_count > 0 ) {
 			$events = implode( $coupon_events, '<br/>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;' );
 			$coupon_notifications .= '&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;' . $events . '</p>';
+			$coupon_errors = FALSE;
 		}
 
 		$groupon_count = count( $groupon_events );
 		if ( ! strpos( $groupon_notifications, 'event_espresso_invalid_groupon' ) && $groupon_count > 0 ) {
 			$events = implode( $groupon_events, '<br/>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;' );
 			$groupon_notifications .= '&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;' . $events . '</p>';
+			$groupon_errors = FALSE;
 		}
-	
-		$coupon_notifications = $coupon_count && $groupon_count ? $coupon_notifications . '<br/>' : $coupon_notifications;
 
+		// add space between $coupon_notifications and  $coupon_errors ( if any $coupon_errors exist )
+		$coupon_notifications = $coupon_count && $coupon_errors ? $coupon_notifications . '<br/>' : $coupon_notifications;
+		// combine $coupon_notifications & $coupon_errors
+		$coupon_notifications .= $coupon_errors;
+		// add space between $coupon_notifications and $groupon_notifications ( if any $groupon_notifications exist )
+		$coupon_notifications = ( $coupon_count || $coupon_errors ) && ( $groupon_count || $groupon_errors )  ? $coupon_notifications . '<br/>' : $coupon_notifications;
+		// add space between $groupon_notifications and  $groupon_errors ( if any $groupon_errors exist )
+		$groupon_notifications = $groupon_count && $groupon_errors ? $groupon_notifications . '<br/>' : $groupon_notifications;
+		// ALL together now!!!
+		$notifications = $coupon_notifications . $groupon_notifications . $groupon_errors;
+		
 		if ( ! $update_section ) {
-			echo event_espresso_json_response(array('grand_total' => $grand_total, 'msg' => $coupon_notifications . $groupon_notifications ));
+			echo event_espresso_json_response(array('grand_total' => $grand_total, 'msg' => $notifications ));
 			die();
 		}
 		
