@@ -753,7 +753,8 @@ if (!function_exists('event_espresso_run')) {
 				break;
 			case "load_checkout_page":
 				if ($_POST) {
-					event_espresso_calculate_total( 'details', FALSE );
+					//event_espresso_calculate_total( 'details', FALSE );
+					event_espresso_update_item_in_session( 'details' );
 				}					
 				event_espresso_load_checkout_page();
 				break;
