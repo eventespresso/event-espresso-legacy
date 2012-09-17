@@ -614,7 +614,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 						echo $output;
 						
 						//Recaptcha portion
-						if ($org_options['use_captcha'] == 'Y' && $_REQUEST['edit_details'] != 'true' ) { 
+						if ( $org_options['use_captcha'] == 'Y' && $_REQUEST['edit_details'] != 'true' && ! is_user_logged_in()  ) { 
 							// this is probably superfluous because it's already being loaded elsewhere...trying to cover all my bases ~c  ?>
 							<script type="text/javascript">
 								var RecaptchaOptions = {
