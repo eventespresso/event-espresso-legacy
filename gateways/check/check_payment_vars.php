@@ -12,7 +12,7 @@ function espresso_display_check($payment_data) {
 	<div class="event_espresso_attention event-messages ui-state-highlight">
 		<span class="ui-icon ui-icon-alert"></span>
 		<p><strong><?php _e('Attention!', 'event_espresso'); ?></strong><br />
-	<?php _e('Since you are using the check payment option, please make note of the information below, then', 'event_espresso'); ?>
+	<?php _e('If you wish to pay by check or money order, then please make note of the information below, and ', 'event_espresso'); ?>
 			<a id="finalize_check" href="<?php echo home_url() . '/?page_id=' . $org_options['return_url']; ?>&amp;payment_type=cash_check&amp;id=<?php echo $attendee_id . '&r_id=' . $registration_id ?>&type=check" class="inline-link" title="<?php _e('Finalize your registration', 'event_espresso'); ?>"><?php _e('click here to finalize your registration', 'event_espresso'); ?></a>
 		</p>
 	</div>
