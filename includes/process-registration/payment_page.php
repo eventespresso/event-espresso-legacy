@@ -67,26 +67,24 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 		$num_people = $quantity;
 	}
 
-	$events = $wpdb->get_results("SELECT * FROM " . EVENTS_DETAIL_TABLE . " WHERE id ='" . $event_id . "'");
-	foreach ($events as $event) {
-//$event_id = $event->id;
-		$event_name = stripslashes_deep($event->event_name);
-		$event_desc = stripslashes_deep($event->event_desc);
-		$event_description = stripslashes_deep($event->event_desc);
-		$event_identifier = $event->event_identifier;
-		$send_mail = $event->send_mail;
-		$active = $event->is_active;
-		$conf_mail = $event->conf_mail;
+	$event = $wpdb->get_row("SELECT * FROM " . EVENTS_DETAIL_TABLE . " WHERE id ='" . $event_id . "'");
+	
+	$event_name = stripslashes_deep($event->event_name);
+	$event_desc = stripslashes_deep($event->event_desc);
+	$event_description = stripslashes_deep($event->event_desc);
+	$event_identifier = $event->event_identifier;
+	$send_mail = $event->send_mail;
+	$active = $event->is_active;
+	$conf_mail = $event->conf_mail;
 //$alt_email = $event->alt_email; //This is used to get the alternate email address that a payment can be made to using PayPal
-		if (function_exists('event_espresso_coupon_payment_page')) {
-			$use_coupon_code = $event->use_coupon_code;
-		}
-		if (function_exists('event_espresso_groupon_payment_page')) {
-			$use_groupon_code = $event->use_groupon_code;
-		}
+	if (function_exists('event_espresso_coupon_payment_page')) {
+		$use_coupon_code = $event->use_coupon_code;
+	}
+	if (function_exists('event_espresso_groupon_payment_page')) {
+		$use_groupon_code = $event->use_groupon_code;
 	}
 
-	$attendee_name = stripslashes_deep($attendee_first . ' ' . $attendee_last);
+$attendee_name = stripslashes_deep($attendee_first . ' ' . $attendee_last);
 
 //Figure out if the person has registered using a price selection
 	if (!empty($_REQUEST['price_select']) && $_REQUEST['price_select'] == true) {
@@ -169,6 +167,8 @@ function events_payment_page($attendee_id, $price_id = 0, $coupon_code = '', $gr
 	if (function_exists('event_espresso_groupon_payment_page') && ($_REQUEST['groupon_code'] != '' || $groupon_code != '')) {
 		
 		$groupon_data = event_espresso_groupon_payment_page( $use_groupon_code, $event_id, $event_original_cost, $attendee_id, FALSE );
+//printr( $groupon_data, '$groupon_data  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+		
 		$groupon_code = wp_strip_all_tags( $_REQUEST['groupon_code'] );
 		$event_cost = $groupon_data['event_cost'];
 		if ( $groupon_data['valid'] == TRUE ){
