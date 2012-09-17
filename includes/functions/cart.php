@@ -360,6 +360,7 @@ if (!function_exists('event_espresso_calculate_total')) {
 				if (function_exists('event_espresso_groupon_payment_page') && isset($_POST['event_espresso_groupon_code']) ) {
 					$use_groupon = isset( $_POST['use_groupon'][$event_id] ) ? $_POST['use_groupon'][$event_id] : 'N';
 					if ( $groupon_results = event_espresso_groupon_payment_page( $use_groupon, $event_id, $event_individual_cost[$event_id], FALSE, $mer ) ) {
+						//printr( $groupon_results, '$groupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 						$event_individual_cost[$event_id] = number_format( $groupon_results['event_cost'], 2, '.', '' );
 						$groupon_notifications .= ( $groupon_results['msg'] != $groupon_notifications ) && ! empty( $groupon_results['msg'] ) ? $groupon_results['msg'] : '';
 						$groupon_errors .= ( $groupon_results['error'] != $groupon_errors ) && ! empty( $groupon_results['error'] ) ? $groupon_results['error'] : '';
@@ -375,6 +376,7 @@ if (!function_exists('event_espresso_calculate_total')) {
 			}
 			
 			$grand_total = number_format($event_total_cost, 2, '.', '');
+			//echo '<h4>$grand_total : ' . $grand_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 			$_SESSION['espresso_session']['pre_discount_total'] = $grand_total;
 			$_SESSION['espresso_session']['grand_total'] = $grand_total;
@@ -476,6 +478,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 		global $wpdb, $org_options;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
+		$event_count = count( $events_in_session );
 
 		if (event_espresso_invoke_cart_error($events_in_session))
 			return false;
@@ -489,7 +492,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 
 		$response['html'] = '';
 		//if the counte of event in the session >0, ok to process
-		if (count($events_in_session) > 0) {
+		if ( $event_count > 0 ) {
 			//for each one of the events in session, grab the event ids, drop into temp array, impode to construct SQL IN clasue (IN(1,5,7))
 			foreach ($events_in_session as $event) {
 				// echo $event['id'];
@@ -573,7 +576,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 										$meta['price_type'] = $val['price_type']; //will be used to keep track of the attendee in the group
 										$meta['attendee_quantity'] = $val['attendee_quantity'];
 										$total_attendees_per_event += $val['attendee_quantity'];
-										multi_register_attendees(null, $event_id, $meta);
+										multi_register_attendees( null, $event_id, $meta, $r );
 										$meta['attendee_number'] += $val['attendee_quantity'];
 									}
 								}
@@ -609,26 +612,50 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 					if ($show_checkout_button) {
 
 						echo $output;
-						?>
+						
+						//Recaptcha portion
+						if ($org_options['use_captcha'] == 'Y' && $_REQUEST['edit_details'] != 'true' ) { 
+							// this is probably superfluous because it's already being loaded elsewhere...trying to cover all my bases ~c  ?>
+							<script type="text/javascript">
+								var RecaptchaOptions = {
+									theme : '<?php echo $org_options['recaptcha_theme'] == '' ? 'red' : $org_options['recaptcha_theme']; ?>',
+									lang : '<?php echo $org_options['recaptcha_language'] == '' ? 'en' : $org_options['recaptcha_language']; ?>'
+								};
+							</script>
+						<?php
+							if ( ! function_exists( 'recaptcha_get_html' )) {
+								require_once( EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/recaptchalib.php' );
+							}//End require captcha library
+							# the response from reCAPTCHA
+							$resp = true;
+							# the error code from reCAPTCHA, if any
+							$error = null;
+							?>
+							<p class="event_form_field" id="captcha-<?php echo $event_id; ?>">
+								<?php _e('Anti-Spam Measure: Please enter the following phrase', 'event_espresso'); ?>
+								<?php echo recaptcha_get_html($org_options['recaptcha_publickey'], $error, is_ssl() ? true : false); ?> 
+							</p>
+			<?php } //End use captcha	?>
+			
 		<div class="event-display-boxes ui-widget">
 			<div class="mer-event-submit ui-widget-content ui-corner-all">
 				<input type="submit" class="submit btn_event_form_submit ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" name="payment_page" value="<?php _e('Confirm and go to payment page', 'event_espresso'); ?>" />
 				<?php echo '<span> - '; _e('OR', 'event_espresso'); echo ' - </span>';
 					} ?> <a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=show_shopping_cart" class="btn_event_form_submit inline-link">
 				<?php _e('Edit Cart', 'event_espresso'); ?>
-				</a> </div>
+				</a> 
+			</div>
 		</div>
+		
 	</form>
 </div>
+
 <script>
-				jQuery(function(){
-
-					//Registration form validation
-					jQuery('#event_espresso_checkout_form').validate();
-
-
-				});
-			</script>
+	jQuery(function(){
+		//Registration form validation
+		jQuery('#event_espresso_checkout_form').validate();
+	});
+</script>
 <?php
 		}
 
