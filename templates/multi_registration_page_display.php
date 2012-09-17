@@ -91,7 +91,7 @@ $this_event_id = $event_id;
 						echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
 						
 						//Displays the copy to all button
-						if ($event_counter == 1) {
+						if ( $event_counter == 1 && $event_count > 1 ) {
 							?>
 							<div class="event-messages ui-state-highlight">
 								<p class="instruct"><?php _e('Copy above information to all forms?', 'event_espresso'); ?> <button type="button" id="copy_to_all_button" value="<?php echo $event_id . '|' . $meta['price_id']; ?>"><?php _e('Yes', 'event_espresso'); ?></button></p>
@@ -113,14 +113,7 @@ $this_event_id = $event_id;
 					echo event_espresso_add_cart_item_groups($item_groups);
 				}
 
-				//Coupons
-				if (function_exists('event_espresso_coupon_registration_page')) {
-					// echo event_espresso_coupon_registration_page( $use_coupon_code, $event_id );
-				}//End coupons display
-				//Groupons
-				if (function_exists('event_espresso_groupon_registration_page')) {
-					//echo event_espresso_groupon_registration_page( $use_groupon_code, $event_id );
-				}//End groupons display
+
 				//Multiple Attendees
 				if ($allow_multiple == "Y") {
 
