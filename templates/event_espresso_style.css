@@ -8,6 +8,10 @@
 	Multi registration form style
 */
 
+.payment_container {
+	margin:1em 0 2em;
+}
+
 #event_espresso_checkout_form {
 	margin: 5px 0;
 	padding: 5px;
