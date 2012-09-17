@@ -132,11 +132,11 @@ function event_espresso_venue_config_mnu(){
 								<?php if (function_exists('espresso_is_admin')&&espresso_is_admin()==true && $espresso_premium == true){ ?>
 								<td><?php
 					$last_locale_id = $wpdb->get_var("SELECT locale_id FROM ".EVENTS_LOCALE_REL_TABLE." WHERE venue_id='".$venue_id."'");
-					$results = $wpdb->get_results("SELECT * FROM " . EVENTS_LOCALE_TABLE . " WHERE id = '".$last_locale_id."'");
-					if ( count($results) > 0) {
-						foreach ($results as $result){
-							$locale_id= $result->id;
-							$name=stripslashes($result->name);
+					$locales = $wpdb->get_results("SELECT * FROM " . EVENTS_LOCALE_TABLE . " WHERE id = '".$last_locale_id."'");
+					if ( count($locales) > 0) {
+						foreach ($locales as $locale){
+							$locale_id= $locale->id;
+							$name=stripslashes($locale->name);
 							echo $name;
 						}
 					}
