@@ -25,11 +25,17 @@ function edit_attendee_record() {
 		 */
 
 		//Update the payment amount for the attendee
-		if (!empty($_REQUEST['attendee_payment']) && $_REQUEST['attendee_payment'] == 'update_payment') {
-			$attendee_cost_data = array("attendee_id" => $ext_attendee_id, "quantity" => $attendee_quantity, "cost" => $attendee_cost);
-			$wpdb->insert(EVENTS_ATTENDEE_COST_TABLE, $attendee_cost_data);
-			$c_sql = "UPDATE " . EVENTS_ATTENDEE_COST_TABLE . " SET cost = '" . $_REQUEST['amount_pd'] . "', quantity = '" . $_REQUEST['quantity'] . "' WHERE attendee_id = '" . $_REQUEST['id'] . "' ";
-			$wpdb->query($c_sql);
+		if (!empty($_REQUEST['attendee_payment']) && $_REQUEST['attendee_payment'] == 'update_price') {
+			//$attendee_cost_data = array("attendee_id" => $ext_attendee_id, "quantity" => $attendee_quantity, "cost" => $attendee_cost);
+			//$wpdb->insert(EVENTS_ATTENDEE_COST_TABLE, $attendee_cost_data);
+			
+			//new
+			$set_cols_and_values = array( 'final_price'=>$_REQUEST['final_price'], 'quantity'=>$_REQUEST['quantity']);
+			$set_format = array( '%f', '%d' );
+			$where_cols_and_values = array( 'id'=> $_REQUEST['id'] );
+			$where_format = array( '%d' );
+			$wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
+			
 			/*
 			 * Calculate total cost from attendee cost table
 			 */
@@ -243,7 +249,7 @@ function edit_attendee_record() {
 				$payment_status = $result->payment_status;
 				$txn_type = $result->txn_type;
 				$txn_id = $result->txn_id;
-				$amount_pd = $result->amount_pd;
+				$amount_pd = $result->final_price;
 				$quantity = $result->quantity;
 				$payment_date = $result->payment_date;
 				$event_id = $result->event_id;
@@ -427,7 +433,7 @@ function edit_attendee_record() {
 									if (!$ice_age) {
 										?>
 						<h4>
-							<?php _e('Payment Information', 'event_espresso'); ?>
+							<?php _e('Ticket Prices', 'event_espresso'); ?>
 						</h4>
 						<form method="POST" action="<?php echo $_SERVER['REQUEST_URI'] ?>&status=saved" class="espresso_form">
 							<fieldset>
@@ -459,11 +465,16 @@ function edit_attendee_record() {
 									<li>
 										<p><strong>
 											<?php _e('This Registration Total:', 'event_espresso'); ?>
+											</strong> <?php echo $org_options['currency_symbol'] ?><?php echo espresso_attendee_price(array('attendee_id' => $id)); ?></p>
+									</li>
+									<li>
+										<p><strong>
+											<?php _e('Total Amount Paid to Date:', 'event_espresso'); ?>
 											</strong> <?php echo $org_options['currency_symbol'] ?><?php echo espresso_attendee_price(array('attendee_id' => $id, 'reg_total' => true)); ?></p>
 									</li>
 									<li>
 										<div  <?php if (isset($_REQUEST['show_payment']) && $_REQUEST['show_payment'] == 'true') echo ' class="yellow_inform"'; ?>><strong>
-											<?php _e('This Attendee:', 'event_espresso'); ?>
+											<?php _e('Attendee Fee:', 'event_espresso'); ?>
 											</strong>
 											<table width="100%" border="0">
 												<tr>
@@ -479,7 +490,7 @@ function edit_attendee_record() {
 												</tr>
 												<tr>
 													<td align="left" valign="top"><?php echo $org_options['currency_symbol'] ?>
-														<input name="amount_pd" type="text" value ="<?php echo espresso_attendee_price(array('attendee_id' => $id, 'single_price' => true)); ?>" /></td>
+														<input name="final_price" type="text" value ="<?php echo espresso_attendee_price(array('attendee_id' => $id, 'single_price' => true)); ?>" /></td>
 													<td align="left" valign="top"> X
 														<input name="quantity" type="text" value ="<?php echo!empty($quantity) ? $quantity : 1; ?>"  /></td>
 													<td align="left" valign="top"><?php echo $org_options['currency_symbol'] ?><?php echo espresso_attendee_price(array('attendee_id' => $id)); ?></td>
@@ -488,7 +499,7 @@ function edit_attendee_record() {
 										</div>
 									</li>
 									<li>
-										<input type="submit" name="Submit" class="button-primary action"  value="Update Payment" />
+										<input type="submit" name="submit_ticket_prices" class="button-primary action"  value="Update Price" />
 									</li>
 								</ul>
 							</fieldset>
@@ -496,7 +507,7 @@ function edit_attendee_record() {
 							<input type="hidden" name="registration_id" value="<?php echo $registration_id ?>" />
 							<input type="hidden" name="form_action" value="edit_attendee" />
 							<input type="hidden" name="event_id" value="<?php echo $event_id ?>" />
-							<input type="hidden" name="attendee_payment" value="update_payment" />
+							<input type="hidden" name="attendee_payment" value="update_price" />
 						</form>
 						<?php
 		} // !$has_seating_chart
