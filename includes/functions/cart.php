@@ -321,22 +321,23 @@ if (!function_exists('event_espresso_calculate_total')) {
 				 * - from a dropdown >> price_id[event_id][price_id]
 				 * - from a radio >> price_id[event_id] with a value of price_id
 				 */
-				$price_id = $_POST['price_id'][$event_id];
+				$event_price = $_POST['price_id'][$event_id];
 
-				if (is_array($price_id)) {
+				if ( is_array( $event_price )) {
 				
-					foreach ($price_id as $_price_id => $val) {
-						$attendee_quantitiy = absint($val);
+					foreach ( $event_price as $_price_id => $qty ) {
+					
+						$attendee_quantitiy = absint( $qty );
 
 						if ($attendee_quantitiy > 0) {
-							$event_cost = event_espresso_get_final_price($_price_id, $event_id);
+							$event_cost = event_espresso_get_final_price( $_price_id, $event_id );
 							do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line '. __LINE__ .': event_cost='.$event_cost);
 							$event_individual_cost[$event_id] += number_format( $event_cost * $attendee_quantitiy, 2, '.', '' );
 						}
 					}
 					
 				} else {
-					$event_cost = event_espresso_get_final_price( $price_id, $event_id );
+					$event_cost = event_espresso_get_final_price( $event_price, $event_id );
 					do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line '. __LINE__ .': event_cost='.$event_cost );
 					$event_individual_cost[$event_id] = number_format( $event_cost, 2, '.', '' );
 				}
@@ -346,10 +347,11 @@ if (!function_exists('event_espresso_calculate_total')) {
 				if (function_exists('event_espresso_coupon_payment_page') && isset($_POST['event_espresso_coupon_code'])) {
 					$use_coupon = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';
 					if ( $coupon_results = event_espresso_coupon_payment_page( $use_coupon, $event_id, $event_individual_cost[$event_id], FALSE, $mer ) ) {
-						$event_individual_cost[$event_id] = number_format( $coupon_results['event_cost'], 2, '.', '' );
+						//printr( $coupon_results, '$coupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 						$coupon_notifications .= ( $coupon_results['msg'] != $coupon_notifications ) && ! empty( $coupon_results['msg'] ) ? $coupon_results['msg'] : '';
 						$coupon_errors .= ( $coupon_results['error'] != $coupon_errors ) && ! empty( $coupon_results['error'] ) ? $coupon_results['error'] : '';
 						if ( $coupon_results['valid'] ) {
+							$event_individual_cost[$event_id] = number_format( $coupon_results['event_cost'], 2, '.', '' );
 							$coupon_events[] = $event['event_name'];
 						}						
 					}					
@@ -361,14 +363,15 @@ if (!function_exists('event_espresso_calculate_total')) {
 					$use_groupon = isset( $_POST['use_groupon'][$event_id] ) ? $_POST['use_groupon'][$event_id] : 'N';
 					if ( $groupon_results = event_espresso_groupon_payment_page( $use_groupon, $event_id, $event_individual_cost[$event_id], FALSE, $mer ) ) {
 						//printr( $groupon_results, '$groupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-						$event_individual_cost[$event_id] = number_format( $groupon_results['event_cost'], 2, '.', '' );
 						$groupon_notifications .= ( $groupon_results['msg'] != $groupon_notifications ) && ! empty( $groupon_results['msg'] ) ? $groupon_results['msg'] : '';
 						$groupon_errors .= ( $groupon_results['error'] != $groupon_errors ) && ! empty( $groupon_results['error'] ) ? $groupon_results['error'] : '';
 						if ( $groupon_results['valid'] ) {
+							$event_individual_cost[$event_id] = number_format( $groupon_results['event_cost'], 2, '.', '' );
 							$groupon_events[] = $event['event_name'];
 						}
 					}
 				}
+				
 
 				$_SESSION['espresso_session']['events_in_session'][$event_id]['cost'] = $event_individual_cost[$event_id];
 				$event_total_cost += $event_individual_cost[$event_id];
@@ -454,6 +457,7 @@ if (!function_exists('event_espresso_delete_item_from_session')) {
 			unset($_SESSION['espresso_session']['groupon_used']);
 			unset($_SESSION['espresso_session']['events_in_session']);
 			unset($_SESSION['espresso_session']['grand_total']);
+			unset($_SESSION['espresso_session']['pre_discount_total']);
 			do_action( 'action_hook_espresso_zero_vlm_dscnt_in_session' );
 			
 		} else {
