@@ -17,10 +17,10 @@ function attendee_edit_record() {
 		if ($wpdb->num_rows == 0) {
 			$sql = " UPDATE " . EVENTS_ATTENDEE_TABLE . " SET quantity = IF(quantity IS NULL ,NULL,IF(quantity > 0,IF(quantity-1>0,quantity-1,1),0)) WHERE registration_id ='$registration_id'";
 			$wpdb->query($sql);
-			$sql = " UPDATE " . EVENTS_ATTENDEE_COST_TABLE . " SET quantity = IF(quantity IS NULL ,NULL,IF(quantity > 0,IF(quantity-1>0,quantity-1,1),0)) WHERE attendee_id ='$id'";
-			$wpdb->query($sql);
+//			$sql = " UPDATE " . EVENTS_ATTENDEE_COST_TABLE . " SET quantity = IF(quantity IS NULL ,NULL,IF(quantity > 0,IF(quantity-1>0,quantity-1,1),0)) WHERE attendee_id ='$id'";
+//			$wpdb->query($sql);
 			event_espresso_cleanup_multi_event_registration_id_group_data();
-			event_espresso_cleanup_attendee_cost_data();
+//			event_espresso_cleanup_attendee_cost_data();
 		}
 		return events_payment_page($_REQUEST['primary'], $_REQUEST['p_id']);
 	}
