@@ -703,25 +703,12 @@ function events_data_tables_install() {
 			foreach ( $results as $result ) {
 				$wpdb->update( 
 						EVENTS_ATTENDEE_TABLE, 
-						array( 'orig_price' => $result->cost ), 
+						array( 'orig_price' => $result->cost,  'final_price' => $result->cost ), 
 						array( 'id' => $result->attendee_id ),
-						array( '%f' ),
+						array( '%f', '%f' ),
 						array( '%d' )
 				);
 			}
-
-			//copy cost to final_price
-			$SQL = "SELECT id, total_cost FROM " . EVENTS_ATTENDEE_TABLE;
-			$results = $wpdb->get_results($SQL);
-			foreach ( $results as $result ) {
-				$wpdb->update( 
-						EVENTS_ATTENDEE_TABLE, 
-						array( 'final_price' => $result->total_cost ), 
-						array( 'id' => $result->id ),
-						array( '%f' ),
-						array( '%d' )
-				);
-			}		
 			
 		}
 	}
