@@ -2,7 +2,7 @@
 	
 if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 	//This entire function can be overridden using the "Custom Files" addon
-	function event_espresso_add_attendees_to_db( $event_id = NULL, $session_vars = NULL ) {
+	function event_espresso_add_attendees_to_db( $event_id = NULL, $session_vars = NULL, $skip_check = FALSE ) {
 	
 		//echo '<h3>'. __CLASS__ . '->' . __FUNCTION__ . ' <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h3>';
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
@@ -31,7 +31,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$event_id = $data_source['event_id'];
 		}
 		
-		$skip_check = $multi_reg || isset( $data_source['admin'] ) ? TRUE : FALSE;
+		$skip_check = $skip_check || isset( $data_source['admin'] ) ? TRUE : FALSE;
 			
 		if ( espresso_verify_recaptcha( $skip_check )) {
 
@@ -701,7 +701,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 								/* echo $event_id.'<br />';
 								  echo '<pre>$session_vars - '.print_r($session_vars, true).'</pre>';
 								  echo '<br />'; */
-								$tmp_registration_id = event_espresso_add_attendees_to_db($event_id, $session_vars);
+								$tmp_registration_id = event_espresso_add_attendees_to_db( $event_id, $session_vars, TRUE );
 								//Debug
 								//echo 'tmp_registration_id =' . $tmp_registration_id.'<br />';
 
@@ -724,26 +724,31 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 					}
 				}
 				global $wpdb;
-				$sql = "SELECT ac.cost, ac.quantity, ed.event_name, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage FROM " . EVENTS_ATTENDEE_COST_TABLE . " ac JOIN " . EVENTS_ATTENDEE_TABLE . " a ON ac.attendee_id=a.id JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
+				$sql = "SELECT ac.cost, ac.quantity, ed.event_name, a.total_cost, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage FROM " . EVENTS_ATTENDEE_COST_TABLE . " ac JOIN " . EVENTS_ATTENDEE_TABLE . " a ON ac.attendee_id=a.id JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
 				$sql .= " LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
 				$sql .= " WHERE attendee_session='" . $current_session_id . "' ORDER BY a.id ASC";
 				$items = $wpdb->get_results($sql);
 				$sub_total = 0;
-				$coupon_amount = ! empty($items[0]->coupon_code_price) ? $items[0]->coupon_code_price : 0;
+				$discounted_total = 0;
+				$discount_amount = 0;
+				//$coupon_amount = ! empty($items[0]->coupon_code_price) ? $items[0]->coupon_code_price : 0;
 				$is_coupon_pct = ! empty( $items[0]->use_percentage ) && $items[0]->use_percentage == 'Y' ? TRUE : FALSE;
 				
 				//printr( $items, '$items  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 			
 				foreach ($items as $item) {
 					$sub_total += $item->quantity * $item->cost;
+					$discounted_total += $item->total_cost;
 				}
-				if ( $coupon_amount ) {
-					if ( $is_coupon_pct ) {
-						$event_cost = $sub_total * (1 - ($coupon_amount / 100));
-					} else {
-						$event_cost = $sub_total - $coupon_amount;
-					}
-				}
+				$discount_amount = $sub_total - $discounted_total;
+				//$event_cost = $sub_total - $discount_amount;
+				$event_cost = $discounted_total;
+				
+//echo '<h4>$sub_total : ' . $sub_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//echo '<h4>$discounted_total : ' . $discounted_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//echo '<h4>$discount_amount : ' . $discount_amount . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//echo '<h4>$event_cost : ' . $event_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+				
 				
 				$event_cost = $event_cost < 0 ? 0.00 : $event_cost;
 				//echo '<h4>$event_cost : ' . $event_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
@@ -787,7 +792,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 					<?php foreach ($items as $item) { ?>
 						<tr>
 							<td width="70%">
-							<?php echo $item->price_option . ' for ' . $item->event_name . '.<br/>Attendee: '. $item->fname . ' ' . $item->lname ?>
+							<?php echo stripslashes( $item->price_option ) . __(' for ', 'event_espresso') . stripslashes( $item->event_name ) . '.<br/>&nbsp;&nbsp;&nbsp;&nbsp;' .  __('Attendee: ', 'event_espresso'). $item->fname . ' ' . $item->lname ?>
 							</td>
 							<td width="10%">
 							<?php echo $org_options['currency_symbol'] . number_format($item->cost, 2) ?>
@@ -795,58 +800,26 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 							<td width="10%">
 							<?php echo 'x ' . $item->quantity ?>
 							</td>
-							<td width="10%">
+							<td width="10%" style="text-align:right;">
 							<?php echo $org_options['currency_symbol'] . number_format( $item->cost*$item->quantity, 2) ?>
 							</td>
 						</tr>
 					<?php } ?>
 						<tr>
-							<td colspan="3">
-							<?php _e('Sub-Total:','event_espresso'); ?>
-							</td>
-							<td colspan="">
-							<?php echo $org_options['currency_symbol'] . number_format($sub_total, 2); ?>
-							</td>
+							<td colspan="3"><?php _e('Sub-Total:','event_espresso'); ?></td>
+							<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] . number_format($sub_total, 2); ?></td>
 						</tr>
 					<?php
-					if (!empty($coupon_amount)) {
-						if ($is_coupon_pct) {
+					if (!empty($discount_amount)) {
 							?>
 						<tr>
-							<td colspan="3">
-							<?php _e('Percentage Discount of ','event_espresso');
-							 echo $coupon_amount;
-							  _e('% applied.','event_espresso'); ?>
-							 </td>
-							 <td colspan="">
-							 <?php echo '-' . $org_options['currency_symbol'] . number_format($sub_total * ($coupon_amount / 100), 2); ?>
-							 </td>
-							</tr>
-							 <?php
-						} else {
-							?>
+							<td colspan="3"><?php _e('Total Discounts:','event_espresso'); ?></td>
+							 <td colspan="" style="text-align:right"><?php echo '-' . $org_options['currency_symbol'] . number_format( $discount_amount, 2 ); ?></td>
+						</tr>
+					<?php } ?>
 						<tr>
-							<td colspan="3">
-							<?php _e('Discount of ','event_espresso');
-							 echo $org_options['currency_symbol'] .  number_format($coupon_amount, 2);
-							  _e(' applied.','event_espresso'); ?>
-							 </td>
-							 <td colspan="">
-							 <?php echo '-' . $org_options['currency_symbol'] .  number_format($coupon_amount, 2); ?>
-							 </td>
-							</tr>
-							 <?php
-						}
-					} ?>
-						<tr>
-							<td colspan="3">
-							<strong class="event_espresso_name">
-							<?php _e('Amount due: ', 'event_espresso'); ?>
-						</strong>
-							</td>
-							<td colspan="">
-							<?php echo $org_options['currency_symbol'] ?><?php echo number_format($event_cost,2); ?>
-							</td>
+							<td colspan="3"><strong class="event_espresso_name"><?php _e('Amount due: ', 'event_espresso'); ?></strong></td>
+							<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] ?><?php echo number_format($event_cost,2); ?></td>
 						</tr>
 					</table>
 
@@ -861,7 +834,8 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 					if ($org_options['email_before_payment'] == 'Y') {
 						event_espresso_email_confirmations(array('session_id' => $_SESSION['espresso_session']['id'], 'send_admin_email' => 'true', 'send_attendee_email' => 'true', 'multi_reg' => true));
 					}
-				} elseif ($event_cost == '0.00') {
+					
+				} elseif ( $event_cost == 0.00 ) {
 					?>
 
 					<p><?php _e('Thank you! Your registration is confirmed for', 'event_espresso'); ?> <strong><?php echo stripslashes_deep($event_name) ?></strong></p>
