@@ -702,6 +702,22 @@ function events_data_tables_install() {
 		}
 	}
 
+
+	function espresso_copy_data_from_attendee_table() {
+		global $wpdb;
+		$sql = "SELECT id, total_cost FROM " . EVENTS_ATTENDEE_TABLE;
+		$results = $wpdb->get_results($sql);
+		foreach ( $results as $result ) {
+			$wpdb->update( 
+					EVENTS_ATTENDEE_TABLE, 
+					array( 'final_price' => $result->total_cost ), 
+					array( 'id' => $result->id ),
+					array( '%f' ),
+					array( '%d' )
+			);
+		}
+	}
+
 	events_organization_tbl_install();
 	event_espresso_install_system_names();
 	event_espresso_create_upload_directories();
@@ -712,4 +728,5 @@ function events_data_tables_install() {
 	espresso_added_by_admin_session_id_fix();
 	espresso_add_cancel_shortcode();
 	espresso_copy_data_from_attendee_cost_table();
+	espresso_copy_data_from_attendee_table();
 }
