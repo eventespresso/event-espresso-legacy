@@ -357,6 +357,8 @@ function events_data_tables_install() {
 					  txn_type VARCHAR(45) DEFAULT NULL,
 					  txn_id VARCHAR(45) DEFAULT NULL,
 					  amount_pd decimal(20,2) DEFAULT '0.00',
+					  orig_price decimal(20,2) DEFAULT '0.00',
+					  final_price decimal(20,2) DEFAULT '0.00',
 					  total_cost decimal(20,2) DEFAULT '0.00',
 					  price_option VARCHAR(100) DEFAULT NULL,
 					  coupon_code VARCHAR(45) DEFAULT NULL,
