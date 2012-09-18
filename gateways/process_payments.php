@@ -22,7 +22,7 @@ function espresso_prepare_payment_data_for_gateways($payment_data) {
 	global $wpdb, $org_options;
 	$sql = "SELECT ea.email, ea.event_id, ea.registration_id, ea.txn_type, ed.start_date,";
 	$sql .= " ea.attendee_session, ed.event_name, ea.lname, ea.fname, ea.total_cost,";
-	$sql .= "	ea.payment_status, ea.payment_date, ea.address, ea.city, ea.txn_id,";
+	$sql .= " ea.payment_status, ea.payment_date, ea.address, ea.city, ea.txn_id,";
 	$sql .= " ea.zip, ea.state, ea.phone FROM " . EVENTS_ATTENDEE_TABLE . " ea";
 	$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=ea.event_id";
 	$sql .= " WHERE ea.id='" . $payment_data['attendee_id'] . "'";
