@@ -45,27 +45,31 @@ add_filter('filter_hook_espresso_prepare_payment_data_for_gateways', 'espresso_p
  */
 function espresso_get_total_cost($payment_data) {
 	global $wpdb;
-	$sql = "SELECT ac.cost, ac.quantity, dc.coupon_code_price, dc.use_percentage  FROM " . EVENTS_ATTENDEE_TABLE . " a ";
-	$sql .= " JOIN " . EVENTS_ATTENDEE_COST_TABLE . " ac ON a.id=ac.attendee_id ";
+	$sql = "SELECT a.final_price, a.quantity, dc.coupon_code_price, dc.use_percentage  FROM " . EVENTS_ATTENDEE_TABLE . " a ";
+//	$sql = "SELECT ac.cost, ac.quantity, dc.coupon_code_price, dc.use_percentage  FROM " . EVENTS_ATTENDEE_TABLE . " a ";
+//	$sql .= " JOIN " . EVENTS_ATTENDEE_COST_TABLE . " ac ON a.id=ac.attendee_id ";
 	$sql .= " LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
 	$sql .= " WHERE a.attendee_session='" . $payment_data['attendee_session'] . "' ORDER BY a.id ASC";
 	$tickets = $wpdb->get_results($sql, ARRAY_A);
 	$total_cost = 0;
 	$total_quantity = 0;
+	
 	foreach ($tickets as $ticket) {
-		$total_cost += $ticket['quantity'] * $ticket['cost'];
+		$total_cost += $ticket['quantity'] * $ticket['final_price'];
 		$total_quantity += $ticket['quantity'];
 	}
-	if (!empty($tickets[0]['coupon_code_price'])) {
-		if ($tickets[0]['use_percentage'] == 'Y') {
-			$payment_data['total_cost'] = $total_cost * (1 - ($tickets[0]['coupon_code_price'] / 100));
-		} else {
-			$payment_data['total_cost'] = $total_cost - $tickets[0]['coupon_code_price'];
-		}
-	} else {
-		$payment_data['total_cost'] = $total_cost;
-	}
-	$payment_data['total_cost'] = number_format($payment_data['total_cost'], 2, '.', '');
+	
+//	if (!empty($tickets[0]['coupon_code_price'])) {
+//		if ($tickets[0]['use_percentage'] == 'Y') {
+//			$payment_data['total_cost'] = $total_cost * (1 - ($tickets[0]['coupon_code_price'] / 100));
+//		} else {
+//			$payment_data['total_cost'] = $total_cost - $tickets[0]['coupon_code_price'];
+//		}
+//	} else {
+//		$payment_data['total_cost'] = $total_cost;
+//	}
+	
+	$payment_data['total_cost'] = number_format( $total_cost, 2, '.', '' );
 	$payment_data['quantity'] = $total_quantity;
 	//printr( $payment_data, '$payment_data' );
 	return $payment_data;
