@@ -739,7 +739,7 @@ if (!function_exists('event_espresso_run')) {
 
 		switch ($regevent_action) {
 			case "post_attendee":
-				event_espresso_add_attendees_to_db();
+				event_espresso_add_attendees_to_db( NULL, NULL, TRUE );
 				break;
 			case "register":
 				register_attendees();
