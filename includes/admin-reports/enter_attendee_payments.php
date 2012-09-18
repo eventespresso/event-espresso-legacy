@@ -29,6 +29,8 @@ function enter_attendee_payments() {
                 $amount_pd = isset($_REQUEST[ 'amount_pd' ]) ? $_REQUEST[ 'amount_pd' ]:'';
                 $payment_date = isset($_REQUEST[ 'payment_date' ]) ? $_REQUEST[ 'payment_date' ]:'';
                 $coupon_code = isset($_REQUEST[ 'coupon_code' ]) ? $_REQUEST[ 'coupon_code' ]:'';
+				
+				$payment_date = date_i18n('Y-m-d', strtotime($payment_date));
 
                 //Added/updated by Imon
 				//Update payment status information for primary attendee
