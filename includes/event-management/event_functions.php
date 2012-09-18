@@ -180,7 +180,8 @@ function event_espresso_multi_price_update($event_id) {
         function addPriceInput(divName){
             var next_counter = counter_static(price_counter);
             var newdiv =  document.createElement("li");
-            newdiv.innerHTML = "<p><label for='add-price-type-" + (next_counter) + "'><?php _e('Name', 'event_espresso'); ?> " + (next_counter) + "</label> <input type='text' size='10' name='price_type[]' /> <label for='add-price" + (next_counter) + "'><?php _e('Price', 'event_espresso'); ?></label> <input id='add-price-" + (next_counter) + "' type='text' size='5' name='event_cost[]' /></p><p><label for='add-surcharge-" + (next_counter) + "' ><?php _e('Surcharge', 'event_espresso'); ?></label> <input size='5' id='add-surcharge-" + (next_counter) + "' type='text'  name='surcharge[]' value='<?php echo $org_options['surcharge'] ?>' /></p> <p><label for='add-surcharge-type-" + (next_counter) + "'><?php _e('Surcharge Type', 'event_espresso'); ?> <select id='add-surcharge-type-" + (next_counter) + "' name='surcharge_type[]'><option value = 'flat_rate' <?php selected($org_options['surcharge_type'], 'flat_rate') ?>><?php _e('Flat Rate', 'event_espresso'); ?></option><option value = 'pct' <?php selected($org_options['surcharge_type'], 'pct') ?>><?php _e('Percent', 'event_espresso'); ?></option></select></p> <?php echo "<img class='remove-item' title='" . __('Remove this Price', 'event_espresso') . "' onclick='this.parentNode.parentNode.removeChild(this.parentNode);' src='" . EVENT_ESPRESSO_PLUGINFULLURL . "images/icons/remove.gif' alt='" . __('Remove Price', 'event_espresso') . '\' />'; ?>";
+            newdiv.innerHTML = "<p><label for='add-price-type-" + (next_counter) + "'><?php _e('Name', 'event_espresso'); ?> " + (next_counter) + "</label> <input type='text' size='10' name='price_type[]' /> <label for='add-price" + (next_counter) + "'><?php _e('Price', 'event_espresso'); ?></label> <input id='add-price-" + (next_counter) + "' type='text' size='5' name='event_cost[]' /></p><p><label for='add-surcharge-" + (next_counter) + "' ><?php _e('Surcharge', 'event_espresso'); ?></label> <input size='5' id='add-surcharge-" + (next_counter) + "' type='text'  name='surcharge[]' value='<?php echo $org_options['surcharge'] ?>' /></p> <p><label for='add-surcharge-type-" + (next_counter) + "'><?php _e('Surcharge Type', 'event_espresso'); ?> <select id='add-surcharge-type-" + (next_counter) + "' name='surcharge_type[]'><option value = 'flat_rate' <?php selected($org_options['surcharge_type'], 'flat_rate') ?>><?php _e('Flat Rate', 'event_espresso'); ?></option><option value = 'pct' <?php selected($org_options['surcharge_type'], 'pct') ?>><?php _e('Percent', 'event_espresso'); ?></option></select></p>";
+            newdiv.innerHTML += "<?php echo '<img class=\"remove-item\" title=\"' . __('Remove this Price', 'event_espresso') . '\" onclick=\"this.parentNode.parentNode.removeChild(this.parentNode);\" src=\"' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif\" alt=\"' . __('Remove Price', 'event_espresso') . '\" />'; ?>";
             document.getElementById(divName).appendChild(newdiv);
             counter++;
         }
@@ -331,110 +332,21 @@ function espresso_event_question_groups($question_groups=array(), $add_attendee_
 			<?php _e('to your event. The personal information group is required for all events.', 'event_espresso'); ?>
 		</p>
 		<?php
-            $g_limit = $espresso_premium != true ? 'LIMIT 0,2' : '';
-            
-            $rs_question_groups = array();
-            // Get all system question groups regardless of the user id 
-			
-			$rs_sql ="SELECT qg.* FROM " . EVENTS_QST_GROUP_TABLE . " qg WHERE qg.system_group = 1 ";
-			
-			// If permission addon is active
-            if ( function_exists( 'espresso_member_data' ) ) {
-				$rs_sql .= " AND qg.wp_user = '" . espresso_member_data('id') . "' ";
-            }else{
-				$rs_sql .= " AND (wp_user = '0' OR wp_user = '1') ";
-			}
-			
-			$rs_sql .= " ORDER BY qg.group_order ";
-			
-            $rs = $wpdb->get_results( $rs_sql );
-            if ( count( $rs ) > 0 ) {
-                foreach( $rs as $row ) {
-                    $rs_question_groups[] = $row;
-                }
-            }
-            
-            // If previously question groups were assigned; it is required for event edit form
-            if ( count( $question_groups ) > 0 ) {
-                $sql  = " SELECT qg.* FROM " . EVENTS_QST_GROUP_TABLE . " qg WHERE qg.system_group <> 1 " ;
-                $sql .= " AND qg.id IN ( " . implode( ',', $question_groups ) . " ) ORDER BY qg.group_order ";
-                $rs = $wpdb->get_results( $sql );
-                if ( count ( $rs ) > 0 ) {
-                    foreach( $rs as $row ) {
-                        $rs_question_groups[] = $row;
-                    }
-                }
-            }
-            
-            // Get non system question groups
-            $sql  = " SELECT qg.* FROM " . EVENTS_QST_GROUP_TABLE . "  qg WHERE qg.system_group <> 1 ";
-            
-            // Excluded already existing question groups
-            if ( count( $question_groups ) > 0 ) {
-                $sql .= " AND qg.id NOT IN ( " . implode( ',', $question_groups ) . " ) ";
-            }
-            
-            
-            // If permission addon is active
-            if ( function_exists( 'espresso_member_data' ) ) {
-               // if (function_exists( 'espresso_is_admin' ) ) {  
-                    // If the user doesn't have admin access get only user's own question groups 
-                   // if ( espresso_is_admin() !== true ) { 
-                        $sql .= " AND wp_user = '" . espresso_member_data('id') . "' ";
-                   // }
-               // } 
-            }else{
-				$sql .= " AND (wp_user = '0' OR wp_user = '1') ";
-			}
-            $sql .= " ORDER BY qg.group_order ";
-            $rs = $wpdb->get_results( $sql );
-            if ( count( $rs ) > 0 ) {
-                foreach( $rs as $row ) {
-                    $rs_question_groups[] = $row;
-                }
-            }
-            
-            
-            /*
-            $sql = "SELECT qg.* FROM " . EVENTS_QST_GROUP_TABLE . " qg JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr ON qg.id = qgr.group_id ";
-            if (function_exists('espresso_member_data')) { 
-                $results = $wpdb->get_results("SELECT wp_user FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'");
-                $wp_user = ( $results && $wpdb->last_result[0]->wp_user != '' ) ? $wpdb->last_result[0]->wp_user : espresso_member_data('id');
-                $sql .= " WHERE ";
-                if ($wp_user == 0 || $wp_user == 1) {
-                    $sql .= " (wp_user = '0' OR wp_user = '1') ";
-                } else {
-                    //$sql .= " wp_user = '" . $wp_user . "' ";
-					$sql .= " (wp_user = '" . $wp_user . "' OR wp_user = '0' OR wp_user = '1')";
-                } 
-            }else{
-                $sql .= " WHERE wp_user = '0' OR wp_user = '1' ";
-			}
-            $sql .= " GROUP BY qg.id ORDER BY qg.group_order $g_limit ";
-            $q_groups = $wpdb->get_results($sql);
-             * 
-             */
-            
-            // If not premium limit to only 2 question groups.
-            if ( !$espresso_premium ) 
-                $rs_question_groups = array_slice ( $rs_question_groups, 0, 2 );
-            
-            //$num_rows = $wpdb->num_rows;
-            $num_rows = count( $rs_question_groups );
-            $html = '';
-            if ($num_rows > 0) {
-                // foreach ($q_groups as $question_group) {
-                foreach ($rs_question_groups as $question_group) {        
+            $g_limit = $espresso_premium != true ? '2' : null;
+
+            $event_question_groups = espresso_get_question_groups_for_event( $question_groups, $g_limit );
+
+            if ( count($event_question_groups) > 0 ) {
+                foreach ( $event_question_groups as $question_group ) {        
                     $question_group_id = $question_group->id;
                     $question_group_description = $question_group->group_description;
                     $group_name = $question_group->group_name;
-                    //$checked = $question_group->system_group == 1 ? ' checked="checked" ' : '';
                     $checked = (is_array($question_groups) && array_key_exists($question_group_id, $question_groups)) || ($question_group->system_group == 1) ? ' checked="checked" ' : '';
                     $visibility = $question_group->system_group == 1 ? 'style="visibility:hidden"' : '';
                     $group_id = isset($group_id) ? $group_id : '';
                     $html .= '<p id="event-question-group-' . $question_group_id . '"><input value="' . $question_group_id . '" type="checkbox" ' . $checked . $visibility . ' name="question_groups[' . $question_group_id . ']" ' . $checked . ' /> <a href="admin.php?page=form_groups&amp;action=edit_group&amp;group_id=' . $question_group_id . '" title="edit" target="_blank">' . $group_name . '</a></p>';
                 }
-                if ($num_rows > 10) {
+                if (count($event_question_groups['selected']) > 10) {
                     $top_div = '<div style="height:250px;overflow:auto;">';
                     $bottom_div = '</div>';
                 } else {
@@ -448,6 +360,7 @@ function espresso_event_question_groups($question_groups=array(), $add_attendee_
             }
             if ($espresso_premium != true)
                 echo __('Need more questions?', 'event_espresso') . ' <a href="http://eventespresso.com/download/" target="_blank">' . __('Upgrade Now!', 'event_espresso') . '</a>';
+
             ?>
 	</div>
 </div>
@@ -475,10 +388,9 @@ function espresso_event_question_groups($question_groups=array(), $add_attendee_
 		<?php
                 // $add_attendee_question_groups = isset($add_attendee_question_groups) ? $add_attendee_question_groups : '';
 
-                reset($rs_question_groups);
                 $html = '';
-                if ($num_rows > 0) {
-                    foreach ($rs_question_groups as $question_group) {
+                if (count($event_question_groups) > 0) {
+                    foreach ($event_question_groups as $question_group) {
                         $question_group_id = $question_group->id;
                         $question_group_description = $question_group->group_description;
                         $group_name = $question_group->group_name;

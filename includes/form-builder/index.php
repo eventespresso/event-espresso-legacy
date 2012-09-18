@@ -13,19 +13,8 @@ function event_espresso_questions_config_mnu() {
 	}
 
 	// get counts
-	$sql = "SELECT id FROM " . EVENTS_QUESTION_TABLE;
-	$wpdb->get_results($sql);
-	$total_questions = $wpdb->num_rows;
-	if (function_exists('espresso_is_admin') && espresso_is_admin() == true) {
-		$sql .= " WHERE ";
-		if (espresso_member_data('id') == 0 || espresso_member_data('id') == 1) {
-			$sql .= " (wp_user = '0' OR wp_user = '1') ";
-		} else {
-			$sql .= " wp_user = '" . espresso_member_data('id') . "' ";
-		}
-	}
-	$wpdb->get_results($sql);
-	$total_self_questions = $wpdb->num_rows;
+	$total_questions = count(espresso_get_user_questions(null,null,false));
+	$total_self_questions = count( espresso_get_user_questions(get_current_user_id(), null, true, true) );
 	?>
 	<div class="wrap">
 		<div id="icon-options-event" class="icon32"> </div>
@@ -133,42 +122,9 @@ function event_espresso_questions_config_mnu() {
 				</thead>
 				<tbody>
 					<?php
-					$sql = "SELECT * FROM " . EVENTS_QUESTION_TABLE;
-
-					if (function_exists('espresso_is_admin') && function_exists('espresso_member_data')) {
-						if (espresso_is_admin()) {
-							// If admin
-							if (!isset($_REQUEST['all'])) {
-								// If all wasn't selected
-								if (espresso_member_data('id') == 0 || espresso_member_data('id') == 1) {
-									$sql .= " WHERE (wp_user = '0' OR wp_user = '1') ";
-								} else {
-									$sql .= " WHERE wp_user = '" . espresso_member_data('id') . "' ";
-								}
-							}
-						} else {
-							// Not admin
-							$sql .= " WHERE wp_user = '" . espresso_member_data('id') . "' ";
-						}
-					} else {
-						$sql .= " WHERE (wp_user = '0' OR wp_user = '1') ";
-					}
-
-					/*
-					  if (function_exists('espresso_member_data') && !isset($_REQUEST['all'])) {
-					  if (espresso_member_data('id') == 0 || espresso_member_data('id') == 1) {
-					  $sql .= " (wp_user = '0' OR wp_user = '1') ";
-					  } else {
-					  $sql .= " wp_user = '" . espresso_member_data('id') . "' ";
-					  }
-					  }else{
-					  $sql .= " (wp_user = '0' OR wp_user = '1') ";
-					  }
-					 * 
-					 */
-					$sql .= " ORDER BY sequence";
-					$questions = $wpdb->get_results($sql);
-					if ($wpdb->num_rows > 0) {
+					$questions = espresso_get_user_questions( get_current_user_id() );
+				
+					if ( count( $questions ) > 0) {
 						foreach ($questions as $question) {
 							$question_id = $question->id;
 							$question_name = stripslashes($question->question);

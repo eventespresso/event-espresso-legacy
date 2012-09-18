@@ -1543,3 +1543,134 @@ function espresso_pre_3_4_layout($main_post_content = '', $sidebar_content = '',
 	</div> <!-- poststuff -->
 	<?php
 }
+
+/**
+ * [espresso_get_user_questions]
+ * used to get the questions for a given user_id (and system questions only if indicated)
+ * 
+ * @param  int  $user_id user_id to be retrieved.
+ * @param bool $use_filters if true (default) filters will be run.  If false then no filters are run.
+ * @param bool $num used to indicate that this is being used in the context of retrieving the number of rows (if true).
+ * @return array|bool  returns an array of question objects if there are values and false if none.
+ */
+function espresso_get_user_questions($user_id = null, $question_id = null, $use_filters = true, $num = false, $limit = null ) {
+	global $wpdb;
+
+	//first let's satisfy the query.
+	$sql = "SELECT * FROM " . EVENTS_QUESTION_TABLE . " AS q ";
+	if ( !empty($user_id) ) {
+  		$sql .= $use_filters ? apply_filters('espresso_get_user_questions_where', " WHERE (q.wp_user = '0' OR q.wp_user = '1') ", $user_id, $num) : " WHERE (q.wp_user = '0' OR q.wp_user = '1') ";
+  	}
+
+  	if ( !empty($question_id) ) {
+		$sql .= " WHERE q.id = '" . $question_id . "' ";
+	}
+
+	$sql .= " ORDER BY sequence, id ASC ";
+
+	$questions = $wpdb->get_results( $wpdb->prepare($sql) );
+
+	return ( $use_filters) ? apply_filters('espresso_get_user_questions_questions', $questions, $user_id, $num) : $questions;
+}
+
+function espresso_get_user_questions_for_group( $group_id, $user_id = null, $use_filters = true ) {
+	global $wpdb;
+	$setup_questions = $q_attached = array();
+
+	$sql = " SELECT q.id, q.question, qgr.id as rel_id, q.system_name, qg.system_group, qg.id AS group_id ";
+	$sql .= " FROM " . EVENTS_QUESTION_TABLE . " AS q ";
+    $sql .= " JOIN " . EVENTS_QST_GROUP_REL_TABLE . " AS qgr ";
+    $sql .= " on q.id = qgr.question_id ";
+    $sql .= " LEFT JOIN " . EVENTS_QST_GROUP_TABLE . " AS qg ";
+    $sql .= " on qg.id = qgr.group_id ";
+    $sql .= $use_filters ? apply_filters('espresso_get_user_questions_for_group', " WHERE q.wp_user = '0' OR q.wp_user = '1' ", $group_id, $user_id, $questions_in_group) : " WHERE q.wp_user = '0' OR q.wp_user = '1' ";
+    $sql .= " ORDER BY q.sequence, q.id ASC ";
+
+    $questions = $wpdb->get_results($wpdb->prepare($sql) );
+
+    foreach ( $questions as $question ) {
+  		$q_attached[] = $question->id;
+    	if ( $question->group_id == $group_id ) {
+    		$setup_questions['questions_in_group'][] = $question;
+    	} else {
+    		$setup_questions['remaining_questions'][] = $question;
+    	}
+    }
+
+    //okay it's possible that we'll have questions not included in this group but we still need to display them.
+    if ( !empty($q_attached) ) {
+	    $e_sql = "SELECT q.id, q.question, q.system_name FROM " . EVENTS_QUESTION_TABLE . " AS q WHERE q.id NOT IN (" . implode(',',$q_attached) . ")";
+	    $ex_questions = $wpdb->get_results($e_sql);
+	    $setup_questions['remaining_questions'] = array_merge($setup_questions['remaining_questions'], $ex_questions);
+	}
+	
+    return $setup_questions;
+}
+
+/**
+ * [espresso_set_default_user_questions_groups]
+ * This function is used when a user doesn't have system questions or groups associated with their id (when there are bugs from previous versions).  This will take care of fixing that by saving system questions/groups for their user_id.  NOTE, if there are no system questions then it means that the system group has not been set up for this user either. 
+ * @param  int $user_id          
+ * @param array $return_type whether we should return the new question groups or the questions
+ * @return array returns the new array of question objects (for the given user
+ */
+function espresso_set_default_user_questions_groups($user_id, $return_type = 'questions') {
+	global $wpdb;
+	$user_id = (int) $user_id;
+
+	//let's check and see if there are any system groups first.
+	
+}
+
+/**
+ * utility function to get user question groups.
+ * @param  int $user_id
+ * @param bool $use_filters if true (default) filters will be run.  If false then no filters are run.
+ * @param bool $num used to indicate that this is being used in the context of retrieving the number of rows (if true).
+ * @return array          array of group objects
+ */
+function espresso_get_user_question_groups($user_id = null, $use_filters = true, $num = false, $group_id = null ) {
+	global $wpdb;
+	$sql = "SELECT * FROM " . EVENTS_QST_GROUP_TABLE . " AS qg ";
+	if ( !empty($user_id) ) {
+  		$sql .= $use_filters ? apply_filters('espresso_get_user_question_groups_where', " WHERE (qg.wp_user = '0' OR qg.wp_user = '1' ) ", $user_id, $num) : " WHERE (qg.wp_user = '0' OR qg.wp_user = '1' ) ";
+  	}
+
+  	if ( !empty($group_id) ) {
+  		$sql .= " WHERE qg.id = '" . $group_id . "' ";
+  	} 
+
+	$sql .= ( empty($group_id) ) ? " ORDER BY id ASC " : " ORDER BY group_order ";
+
+	$groups = $wpdb->get_results( $wpdb->prepare($sql) );
+
+	return $use_filters ? apply_filters('espresso_get_user_groups_groups', $groups, $user_id, $num) : $groups;		
+}
+
+function espresso_get_question_groups_for_event( $existing_question_groups = array(), $limit = null, $use_filters = true ) {
+	global $wpdb;
+	$event_groups = array();
+	$selected = $unselected = array();
+	$sql = "SELECT qg.* FROM " . EVENTS_QST_GROUP_TABLE . " AS qg ";
+	$sql .= $use_filters ? apply_filters('espresso_get_question_groups_for_event_where', " WHERE (qg.wp_user = '0' OR qg.wp_user = '1' ) ", $existing_question_groups ) : " WHERE (qg.wp_user = '0' OR qg.wp_user = '1' ) ";
+	$sql .= " GROUP BY qg.id ORDER BY qg.system_group, qg.group_order "; 
+
+	$question_groups = $wpdb->get_results( $wpdb->prepare($sql) );
+
+	//let's setup data.
+	$count_row = 0;  
+	if ( count($question_groups) > 0 ) {
+		foreach ( $question_groups  as $group ) {
+			if ( $group->system_group == 1 || in_array($group->id, $existing_question_groups) )
+				$selected[] = $group;
+			else
+				$unselected[] = $group;
+			$count_row++;
+		}
+		$event_groups = array_merge($selected, $unselected);
+		$event_groups = empty($limit) ? $event_groups : array_slice( $event_groups, 0 , 2 );
+	}
+
+	return ($use_filters) ? apply_filters('espresso_get_question_groups_for_event_groups', $event_groups, $existing_question_groups) : $event_groups;
+
+}

@@ -3,9 +3,8 @@
 function event_espresso_form_builder_edit(){
 	global $wpdb;
 	$question_id = $_REQUEST['question_id'];
-	$sql = "SELECT * FROM " . EVENTS_QUESTION_TABLE . " WHERE id = '" . $question_id . "'";
-	$questions = $wpdb->get_results($sql);
-	if ($wpdb->num_rows > 0) {
+	$questions = espresso_get_user_questions(null, $question_id);
+	if ( count($questions) > 0 ) {
 		foreach ($questions as $question) {
 			$question_id = $question->id;
 			$question_name = stripslashes($question->question);
@@ -28,7 +27,7 @@ function event_espresso_form_builder_edit(){
                     // If the user doesn't have admin access get only user's own question groups 
                     if ( !espresso_is_admin() ) { 
                         if ( espresso_member_data('id') != $wp_user ) {
-                            echo '<h2>' . __('Sorry, you do not have permission to edit this question group.', 'event_espresso') . '</h2>';
+                            echo '<h2>' . __('Sorry, you do not have permission to edit this question.', 'event_espresso') . '</h2>';
                             return;
                         }
                     }
