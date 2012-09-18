@@ -687,34 +687,42 @@ function events_data_tables_install() {
 			KEY `attendee_id` (`attendee_id`)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
+
+
 	function espresso_copy_data_from_attendee_cost_table() {
 		global $wpdb;
-		$sql = "SELECT * FROM " . EVENTS_ATTENDEE_COST_TABLE;
-		$results = $wpdb->get_results($sql);
-		foreach ( $results as $result ) {
-			$wpdb->update( 
-					EVENTS_ATTENDEE_TABLE, 
-					array( 'orig_price' => $result->cost ), 
-					array( 'id' => $result->attendee_id ),
-					array( '%f' ),
-					array( '%d' )
-			);
-		}
-	}
+		
+		$SQL = "select sum(final_price) as final_price from ".EVENTS_ATTENDEE_TABLE;
+		$sum = $wpdb->get_var($SQL);
+		// if the orig_price and final_price fields were JUST created, then they should sum to 0
+		if ( (float)$sum->final_price == 0 ) {
+			
+			//copy cost to orig_price
+			$SQL = "SELECT * FROM " . EVENTS_ATTENDEE_COST_TABLE;			
+			$results = $wpdb->get_results($SQL);
+			foreach ( $results as $result ) {
+				$wpdb->update( 
+						EVENTS_ATTENDEE_TABLE, 
+						array( 'orig_price' => $result->cost ), 
+						array( 'id' => $result->attendee_id ),
+						array( '%f' ),
+						array( '%d' )
+				);
+			}
 
-
-	function espresso_copy_data_from_attendee_table() {
-		global $wpdb;
-		$sql = "SELECT id, total_cost FROM " . EVENTS_ATTENDEE_TABLE;
-		$results = $wpdb->get_results($sql);
-		foreach ( $results as $result ) {
-			$wpdb->update( 
-					EVENTS_ATTENDEE_TABLE, 
-					array( 'final_price' => $result->total_cost ), 
-					array( 'id' => $result->id ),
-					array( '%f' ),
-					array( '%d' )
-			);
+			//copy cost to final_price
+			$SQL = "SELECT id, total_cost FROM " . EVENTS_ATTENDEE_TABLE;
+			$results = $wpdb->get_results($SQL);
+			foreach ( $results as $result ) {
+				$wpdb->update( 
+						EVENTS_ATTENDEE_TABLE, 
+						array( 'final_price' => $result->total_cost ), 
+						array( 'id' => $result->id ),
+						array( '%f' ),
+						array( '%d' )
+				);
+			}		
+			
 		}
 	}
 
@@ -728,5 +736,4 @@ function events_data_tables_install() {
 	espresso_added_by_admin_session_id_fix();
 	espresso_add_cancel_shortcode();
 	espresso_copy_data_from_attendee_cost_table();
-	espresso_copy_data_from_attendee_table();
 }
