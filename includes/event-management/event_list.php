@@ -224,7 +224,7 @@ function event_espresso_edit_list() {
 			$sql .= " AND e.wp_user = '" . espresso_member_data('id') . "' ";
 		}
 		
-		$sql .= ") ORDER BY start_date  ASC $records_to_show ";
+		$sql .= ") ORDER BY e.start_date DESC $records_to_show ";
 		
 		//Debug
 		//echo $sql;
