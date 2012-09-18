@@ -73,7 +73,10 @@ function espresso_itemize_paypal_items($myPaypal, $attendee_id) {
 	global $wpdb;
 	$sql = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id='" . $attendee_id . "'";
 	$session_id = $wpdb->get_var($sql);
-	$sql = "SELECT ac.cost, ac.quantity, ed.event_name, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage FROM " . EVENTS_ATTENDEE_COST_TABLE . " ac JOIN " . EVENTS_ATTENDEE_TABLE . " a ON ac.attendee_id=a.id JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
+	$sql = "SELECT a.final_price, a.quantity, ed.event_name, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage ";
+	//$sql .= " FROM " . EVENTS_ATTENDEE_COST_TABLE . " ac ";
+	$sql .= " JOIN " . EVENTS_ATTENDEE_TABLE . " a ON ac.attendee_id=a.id ";
+	$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
 	$sql .= " LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
 	$sql .= " WHERE attendee_session='" . $session_id . "' ORDER BY a.id ASC";
 	$items = $wpdb->get_results($sql);
@@ -82,7 +85,7 @@ function espresso_itemize_paypal_items($myPaypal, $attendee_id) {
 	foreach ($items as $key=>$item) {
 		$item_num=$key+1;
 		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname);
-		$myPaypal->addField('amount_' . $item_num, $item->cost);
+		$myPaypal->addField('amount_' . $item_num, $item->final_price);
 		$myPaypal->addField('quantity_' . $item_num, $item->quantity);
 	}
 	if (!empty($coupon_amount)) {
