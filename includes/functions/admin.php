@@ -1575,7 +1575,7 @@ function espresso_get_user_questions($user_id = null, $question_id = null, $use_
 
 function espresso_get_user_questions_for_group( $group_id, $user_id = null, $use_filters = true ) {
 	global $wpdb;
-	$setup_questions = array();
+	$setup_questions = $q_attached = array();
 
 	$sql = " SELECT q.id, q.question, qgr.id as rel_id, q.system_name, qg.system_group, qg.id AS group_id ";
 	$sql .= " FROM " . EVENTS_QUESTION_TABLE . " AS q ";
@@ -1589,12 +1589,21 @@ function espresso_get_user_questions_for_group( $group_id, $user_id = null, $use
     $questions = $wpdb->get_results($wpdb->prepare($sql) );
 
     foreach ( $questions as $question ) {
+  		$q_attached[] = $question->id;
     	if ( $question->group_id == $group_id ) {
     		$setup_questions['questions_in_group'][] = $question;
     	} else {
     		$setup_questions['remaining_questions'][] = $question;
     	}
     }
+
+    //okay it's possible that we'll have questions not included in this group but we still need to display them.
+    if ( !empty($q_attached) ) {
+	    $e_sql = "SELECT q.id, q.question, q.system_name FROM " . EVENTS_QUESTION_TABLE . " AS q WHERE q.id NOT IN (" . implode(',',$q_attached) . ")";
+	    $ex_questions = $wpdb->get_results($e_sql);
+	    $setup_questions['remaining_questions'] = array_merge($setup_questions['remaining_questions'], $ex_questions);
+	}
+	
     return $setup_questions;
 }
 
