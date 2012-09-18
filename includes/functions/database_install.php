@@ -687,6 +687,21 @@ function events_data_tables_install() {
 			KEY `attendee_id` (`attendee_id`)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
+	function espresso_copy_data_from_attendee_cost_table() {
+		global $wpdb;
+		$sql = "SELECT * FROM " . EVENTS_ATTENDEE_COST_TABLE;
+		$results = $wpdb->get_results($sql);
+		foreach ( $results as $result ) {
+			$wpdb->update( 
+					EVENTS_ATTENDEE_TABLE, 
+					array( 'orig_price' => $result->cost ), 
+					array( 'id' => $result->attendee_id ),
+					array( '%f' ),
+					array( '%d' )
+			);
+		}
+	}
+
 	events_organization_tbl_install();
 	event_espresso_install_system_names();
 	event_espresso_create_upload_directories();
@@ -696,4 +711,5 @@ function events_data_tables_install() {
 	espresso_answer_fix();
 	espresso_added_by_admin_session_id_fix();
 	espresso_add_cancel_shortcode();
+	espresso_copy_data_from_attendee_cost_table();
 }
