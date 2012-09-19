@@ -6,6 +6,8 @@
 if (!function_exists('register_attendees')) {
 
     function register_attendees($single_event_id = NULL, $event_id_sc =0, $reg_form_only = false) {
+		//Declare the $data object
+		$data = new stdClass;
 		
 		//Run code for the seating chart addon
 		if ( function_exists('espresso_seating_version') ){
@@ -73,7 +75,7 @@ if (!function_exists('register_attendees')) {
             $sql .= " WHERE post_id = '" . $_REQUEST['post_event_id'] . "' ";
             $sql .= " LIMIT 0,1";
         }
-		$data = new stdClass;
+		
         $data->event = $wpdb->get_row($sql, OBJECT);
         //print_r($data->event);
 
