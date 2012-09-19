@@ -12,10 +12,10 @@ function edit_attendee_record() {
 		$registration_id = isset($_REQUEST['registration_id']) ? $_REQUEST['registration_id'] : '';
 
 		$multi_reg = false;
-		$check = $wpdb->get_row("select * from " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " where registration_id = '$registration_id' ");
+		$check = $wpdb->get_row("SELECT * FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE registration_id = '$registration_id' ");
 		if ($check !== NULL) {
 			$registration_id = $check->primary_registration_id;
-			$registration_ids = $wpdb->get_results("select distinct primary_registration_id, registration_id from " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " where primary_registration_id = '$registration_id' ", ARRAY_A);
+			$registration_ids = $wpdb->get_results("SELECT distinct primary_registration_id, registration_id FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE primary_registration_id = '$registration_id' ", ARRAY_A);
 			$multi_reg = true;
 		}
 
@@ -37,26 +37,29 @@ function edit_attendee_record() {
 			$wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
 			
 			//Calculate total cost from attendee cost table
-			$event_cost = 0;
+			/*$event_cost = 0;
+			 
+			
 			if ($multi_reg) {
 				foreach ($registration_ids as $reg_ids) {
 					$event_cost += $wpdb->get_var($wpdb->prepare("select ea.registration_id, sum(eac.cost * eac.quantity) from " . EVENTS_ATTENDEE_COST_TABLE . " eac inner join " . EVENTS_ATTENDEE_TABLE . " ea on eac.attendee_id = ea.id where ea.registration_id = '%s' group by ea.registration_id ", $reg_ids['registration_id']), 1, 0);
 				}
 			} else {
 				$event_cost = $wpdb->get_var($wpdb->prepare("select ea.registration_id, sum(eac.cost * eac.quantity) from " . EVENTS_ATTENDEE_COST_TABLE . " eac inner join " . EVENTS_ATTENDEE_TABLE . " ea on eac.attendee_id = ea.id where ea.registration_id = '%s' group by ea.registration_id ", $registration_id), 1, 0);
-			}
+			} 
 			$a_sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET quantity = '%d' WHERE id = '%d' ";
 			$wpdb->query($wpdb->prepare($a_sql, $_REQUEST['quantity'], $_REQUEST['id']));
-			/*
-			 * Get primary attendee id to update the amount_pd
-			 */
+			
+			//Get primary attendee id to update the amount_pd
 			$primary_attendee_id = $wpdb->get_var($wpdb->prepare("select id from " . EVENTS_ATTENDEE_TABLE . " where registration_id = '%s' order by id limit 1 ", $registration_id));
 			$a_sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET amount_pd = '%f' WHERE id = '%d' ";
 			$wpdb->query($wpdb->prepare($a_sql, $event_cost, $primary_attendee_id));
+			
+			*/
 		}
 
 
-		$r = $wpdb->get_row("SELECT id from " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id ='$registration_id' ORDER BY id ");
+		$r = $wpdb->get_row("SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id ='$registration_id' ORDER BY id ");
 
 		$primary_attendee = !empty($r->id) ? $r->id : $id;
 
@@ -108,7 +111,8 @@ function edit_attendee_record() {
 			$event_id = isset($_POST['event_id']) ? $_POST['event_id'] : '';
 			$txn_type = isset($_POST['txn_type']) ? $_POST['txn_type'] : '';
 
-			$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET fname='$fname', lname='$lname', address='$address',address2='$address2', city='$city', state='$state', zip='$zip', phone='$phone', email='$email'";//, txn_type='$txn_type' ";
+			$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET fname='$fname', lname='$lname', address='$address',address2='$address2', city='$city', state='$state', zip='$zip', phone='$phone', email='$email'";
+			
 			if ($update_time == true)
 				$sql .= ", event_time='$start_time', end_time='$end_time' ";
 			$sql .= " WHERE id ='$id' ";
@@ -454,7 +458,7 @@ function edit_attendee_record() {
 									<?php } ?>
 									<li>
 										<p><strong>
-											<?php _e('This Registration Total:', 'event_espresso'); ?>
+											<?php _e('Attendee Total:', 'event_espresso'); ?>
 											</strong> <?php echo $org_options['currency_symbol'] ?><?php echo espresso_attendee_price(array('attendee_id' => $id)); ?></p>
 									</li>
 									<li>
@@ -482,7 +486,7 @@ function edit_attendee_record() {
 													<td align="left" valign="top"><?php echo $org_options['currency_symbol'] ?>
 														<input name="final_price" type="text" value ="<?php echo espresso_attendee_price(array('attendee_id' => $id, 'single_price' => true)); ?>" /></td>
 													<td align="left" valign="top"> X
-														<input name="quantity" type="text" value ="<?php echo!empty($quantity) ? $quantity : 1; ?>"  /></td>
+														<input name="quantity" type="text" value ="<?php echo !empty($quantity) ? $quantity : 1; ?>"  /></td>
 													<td align="left" valign="top"><?php echo $org_options['currency_symbol'] ?><?php echo espresso_attendee_price(array('attendee_id' => $id)); ?></td>
 												</tr>
 											</table>
@@ -500,7 +504,7 @@ function edit_attendee_record() {
 							<input type="hidden" name="attendee_payment" value="update_price" />
 						</form>
 						<?php
-		} // !$has_seating_chart
+		}
 		?></td>
 				</tr>
 			</table>
