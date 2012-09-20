@@ -4,24 +4,13 @@
 //There should be a copy of this file in your wp-content/uploads/espresso/ folder.
 global $this_event_id;
 $this_event_id = $event_id;
+$num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$event_id]['attendee_quantitiy'] . __(' attendees', 'event_espresso');
 ?>
 <div id="event_espresso_registration_form" class="event-display-boxes multi-reg-page ui-widget">
 
-	<?php
-	$num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$event_id]['attendee_quantitiy'] . __(' attendees', 'event_espresso');
-	?>
 	<h3 class="event_title ui-widget-header ui-corner-top" id="event_title-<?php echo $event_id; ?>">
-		<?php echo stripslashes_deep($event_name) ?>
-		<?php echo $is_active['status'] == 'EXPIRED' ? ' - <span class="expired_event">Event Expired</span>' : ''; ?>
-		-
-		<?php echo _e('Price Type:') . ' ' . $meta['price_type'] ?>
-		-
-		<?php
-		printf(_n('%d attendee', '%d attendees', $meta['attendee_quantity'], 'event_espresso'), $meta['attendee_quantity']);
-		?>
+		<?php echo stripslashes_deep($event_name) ?> <?php echo $is_active['status'] == 'EXPIRED' ? ' - <span class="expired_event">Event Expired</span>' : ''; ?>
 	</h3>
-
-
 	<div class="multi_regis_form_fields event-data-display ui-widget-content ui-corner-bottom" id="multi_regis_form_fields-<?php echo $event_id . '-' . $meta['price_id']; ?>">
 
 		<?php
@@ -75,6 +64,7 @@ $this_event_id = $event_id;
 						<?php
 						
 						echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $attendee_number . '</h3>';
+						echo '<p>'.__('Price Type:') . ' ' . $meta['price_type'].'</p>';
 						
 						//This will be the main attendee
 						//$meta['attendee_number'] = 1;
