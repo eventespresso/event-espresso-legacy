@@ -812,7 +812,7 @@ if (!function_exists('event_espresso_cart_link')) {
 		
 			if ($view_cart || (is_array($events_in_session) && array_key_exists($event_id, $events_in_session))) {
 				$registration_cart_url = get_option('siteurl') . '/?page_id=' . $event_page_id . '&regevent_action=show_shopping_cart';
-				$registration_cart_anchor = __("Complete Registration", 'event_espresso');
+				$registration_cart_anchor = __("View Cart", 'event_espresso');
 			} else { //show them the add to cart link
 					$registration_cart_url = isset($externalURL) && $externalURL != '' ? $externalURL : get_option('siteurl') . '/?page_id=' . $event_page_id . '&regevent_action=add_event_to_cart&event_id=' . $event_id . '&name_of_event=' . stripslashes_deep($event_name);
 					$registration_cart_anchor = $anchor;
