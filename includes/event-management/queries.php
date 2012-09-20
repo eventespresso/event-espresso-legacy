@@ -11,10 +11,9 @@ function espresso_total_events(){
 	$days_this_month = date('t', strtotime($curdate));
 	
 	$group = '0';
-	if (function_exists('espresso_member_data')&&espresso_member_data('role')=='espresso_group_admin'){
+	if ( function_exists('espresso_member_data') && current_user_can('espresso_group_admin') ) {
 		$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
 		if ($group > 0){
-			$group = unserialize($group);
 			$group = implode(",",$group);
 		}
 	}
@@ -118,7 +117,6 @@ function espresso_total_events_this_month(){
 		$asql1 = "(";
 		if (function_exists('espresso_member_data')&&espresso_member_data('role')=='espresso_group_admin'){
 			$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-			$group = unserialize($group);
 			$asql1 .= "SELECT SUM(a.quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE. " a ";
 			$asql1 .= " JOIN ". EVENTS_DETAIL_TABLE ." e ON e.id=a.event_id ";
 			if (!empty($group)){
@@ -163,7 +161,6 @@ function espresso_total_events_this_month(){
 		$asql2 = "(";
 		if (function_exists('espresso_member_data')&&espresso_member_data('role')=='espresso_group_admin'){
 			$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-			$group = unserialize($group);
 			$asql2 .= "SELECT SUM(a.quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE. " a ";
 			$asql2 .= " LEFT JOIN ". EVENTS_DETAIL_TABLE ." e ON e.id=a.event_id ";
 			if (!empty($group)){
@@ -211,7 +208,6 @@ function espresso_total_events_this_month(){
 		$asql3 = "(";
 		if (function_exists('espresso_member_data')&&espresso_member_data('role')=='espresso_group_admin'){
 			$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-			$group = unserialize($group);
 			$asql3 .= "SELECT SUM(a.quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE. " a ";
 			$asql3 .= " LEFT JOIN ". EVENTS_DETAIL_TABLE ." e ON e.id=a.event_id ";
 			if (!empty($group)){

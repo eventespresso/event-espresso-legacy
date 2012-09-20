@@ -98,7 +98,6 @@ function event_espresso_venue_config_mnu(){
 		if(	$espresso_manager['event_manager_venue'] == "Y" ){
 			//	show only venues inside their assigned locales.
             $group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-            $group = unserialize($group);
 			$sql .= " LEFT JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = v.id "; 
 			$sql .= " WHERE l.locale_id IN (" . implode(",", $group) . ")";
 			$sql .= ") UNION ( ";

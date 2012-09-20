@@ -33,7 +33,6 @@ if (!function_exists('espresso_event_export')){
 		if ( function_exists('espresso_member_data') && espresso_member_data('role')=='espresso_group_admin' ) { 
 		
 			$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-			$group = unserialize($group);
 			
 			$sql = "(SELECT e.id event_id, e.event_name, e.event_identifier, e.reg_limit, e.registration_start, ";
 			$sql .= " e.start_date, e.is_active, e.recurrence_id, e.registration_startT, ";
@@ -318,7 +317,6 @@ if (!function_exists('espresso_export_stuff')){
 						$sql = "(";
 						if (function_exists('espresso_member_data')&&espresso_member_data('role')=='espresso_group_admin'){
 							$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-							$group = unserialize($group);
 							$group = implode(",",$group);
 							$sql .= "SELECT ed.event_name, ed.start_date, a.id, a.registration_id, a.payment, a.date, a.payment_status, a.txn_type, a.txn_id";
 							$sql .= ", a.amount_pd, a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity";
