@@ -365,7 +365,7 @@ function edit_event($event_id = 0) {
 	?>
 	<!-- /event-promotions -->
 
-	<?php echo espresso_event_question_groups($question_groups, $event_meta['add_attendee_question_groups'], $event_id) ?>
+	<?php echo espresso_event_question_groups($question_groups, $event_meta['add_attendee_question_groups'], $event) ?>
 	<!-- /event-questions -->
 
 	<?php

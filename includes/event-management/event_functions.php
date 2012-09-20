@@ -334,7 +334,7 @@ function espresso_event_question_groups($question_groups=array(), $add_attendee_
 		<?php
             $g_limit = $espresso_premium != true ? '2' : null;
 
-            $event_question_groups = espresso_get_question_groups_for_event( $question_groups, $g_limit );
+            $event_question_groups = espresso_get_question_groups_for_event( $question_groups, $g_limit, true, $event_id );
 
             if ( count($event_question_groups) > 0 ) {
                 foreach ( $event_question_groups as $question_group ) {        

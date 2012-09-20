@@ -51,7 +51,7 @@ function event_espresso_form_group_new(){
   
             <?php
           //first we need to get all system questions (make sure that the user actually has some);
-          $questions = espresso_get_user_questions();
+          $questions = espresso_get_user_questions(get_current_user_id());
 
         	if ( count($questions) > 0) {
         		foreach ($questions as $question) {

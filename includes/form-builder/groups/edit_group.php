@@ -88,7 +88,7 @@ function event_espresso_form_group_edit() {
 																	 <li><p><?php _e('Selected Questions for group<span class="info"> Uncheck box to remove question from group</span>', 'event_espresso') ?></p></li>
                                     <?php
 //Questions that are already associated with this group
-                                    $questions = espresso_get_user_questions_for_group( $_REQUEST['group_id'], get_current_user_id() );
+                                    $questions = espresso_get_user_questions_for_group( $_REQUEST['group_id'], $wp_user );
                                     if ( count($questions['questions_in_group']) > 0 ) {
                                         foreach ($questions['questions_in_group'] as $question) {
                                             $checked = (!is_null($question->rel_id)) ? 'checked="checked"' : '';
