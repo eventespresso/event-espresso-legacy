@@ -457,6 +457,8 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 	<form id="event_espresso_checkout_form" method="post" action="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=post_multi_attendee">
 		<?php
 					$err = '';
+					$edit_cart_link = '<a href="?page_id='.$org_options['event_page_id'].'&regevent_action=show_shopping_cart" rel="nofollow" class="btn_event_form_submit inline-link">'.__('Edit Cart', 'event_espresso').'</a>';
+	
 					ob_start();
 					//will be used if sj is off or they somehow select more than allotted attendees
 					$show_checkout_button = true;
@@ -554,14 +556,12 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 						?>
 		<div class="event-display-boxes ui-widget">
 			<div class="mer-event-submit ui-widget-content ui-corner-all">
-				<input type="submit" class="submit btn_event_form_submit ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" name="payment_page" value="<?php _e('Confirm and go to payment page', 'event_espresso'); ?>" />
-				<?php echo '<span> - '; _e('OR', 'event_espresso'); echo ' - </span>'; ?>
+				<input type="submit" class="submit btn_event_form_submit ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" name="payment_page" value="<?php _e('Confirm and go to payment page', 'event_espresso'); ?>" /><?php echo '<span> - '. __('OR', 'event_espresso').' - </span> '.$edit_cart_link; ?>
+				
 	        </div>
     	</div>
-                <?php } ?>
-	<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=show_shopping_cart" rel="nofollow" class="btn_event_form_submit inline-link">
-    	<?php _e('Edit Cart', 'event_espresso'); ?>
-	</a>
+             <?php }else{ echo $edit_cart_link; } ?>
+	
 	</form>
 </div>
 <script>
@@ -796,7 +796,7 @@ if (!function_exists('event_espresso_cart_link')) {
 		extract(shortcode_atts(
 										array(
 								'event_id' => $this_event_id,
-								'anchor' => __('Add to cart', 'event_espresso'),
+								'anchor' => __('Register', 'event_espresso'),
 								'event_name' => ' ',
 								'separator' => NULL,
 								'view_cart' => FALSE,
@@ -812,7 +812,7 @@ if (!function_exists('event_espresso_cart_link')) {
 		
 			if ($view_cart || (is_array($events_in_session) && array_key_exists($event_id, $events_in_session))) {
 				$registration_cart_url = get_option('siteurl') . '/?page_id=' . $event_page_id . '&regevent_action=show_shopping_cart';
-				$registration_cart_anchor = __("View Cart", 'event_espresso');
+				$registration_cart_anchor = __("Complete Registration", 'event_espresso');
 			} else { //show them the add to cart link
 					$registration_cart_url = isset($externalURL) && $externalURL != '' ? $externalURL : get_option('siteurl') . '/?page_id=' . $event_page_id . '&regevent_action=add_event_to_cart&event_id=' . $event_id . '&name_of_event=' . stripslashes_deep($event_name);
 					$registration_cart_anchor = $anchor;
