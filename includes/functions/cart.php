@@ -1,4 +1,5 @@
-<?php
+<?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');		
 /**
  * Event Espresso Multi Event Registration Functions
  *
@@ -220,7 +221,7 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 				//$updated_events_in_session[$event_id]['event_name'] = $wpdb->escape( $_POST['event_name'][$event_id] );
 
 				if (isset($_POST['event_espresso_coupon_code'])) {
-					$_SESSION['espresso_session']['coupon_code'] = $wpdb->escape($_POST['event_espresso_coupon_code']);
+					$_SESSION['espresso_session']['event_espresso_coupon_code'] = $wpdb->escape($_POST['event_espresso_coupon_code']);
 				}
 				
 				if (isset($_POST['event_espresso_groupon_code'])) {
@@ -344,9 +345,23 @@ if (!function_exists('event_espresso_calculate_total')) {
 
 
 				// check for coupon 
-				if (function_exists('event_espresso_coupon_payment_page') && isset($_POST['event_espresso_coupon_code'])) {
-					$use_coupon = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';
-					if ( $coupon_results = event_espresso_coupon_payment_page( $use_coupon, $event_id, $event_individual_cost[$event_id], FALSE, $mer ) ) {
+//				if (function_exists('event_espresso_coupon_payment_page') && isset($_POST['event_espresso_coupon_code'])) {
+//					$use_coupon = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';
+//					if ( $coupon_results = event_espresso_coupon_payment_page( $use_coupon, $event_id, $event_individual_cost[$event_id], FALSE, $mer ) ) {
+//						//printr( $coupon_results, '$coupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+//						$coupon_notifications .= ( $coupon_results['msg'] != $coupon_notifications ) && ! empty( $coupon_results['msg'] ) ? $coupon_results['msg'] : '';
+//						$coupon_errors .= ( $coupon_results['error'] != $coupon_errors ) && ! empty( $coupon_results['error'] ) ? $coupon_results['error'] : '';
+//						if ( $coupon_results['valid'] ) {
+//							$event_individual_cost[$event_id] = number_format( $coupon_results['event_cost'], 2, '.', '' );
+//							$coupon_events[] = $event['event_name'];
+//						}						
+//					}					
+//				}
+
+			
+				// check for coupon 
+				if ( function_exists( 'event_espresso_process_coupon' )) {
+					if ( $coupon_results = event_espresso_process_coupon( $event_id, $event_individual_cost, FALSE, $mer )) {
 						//printr( $coupon_results, '$coupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 						$coupon_notifications .= ( $coupon_results['msg'] != $coupon_notifications ) && ! empty( $coupon_results['msg'] ) ? $coupon_results['msg'] : '';
 						$coupon_errors .= ( $coupon_results['error'] != $coupon_errors ) && ! empty( $coupon_results['error'] ) ? $coupon_results['error'] : '';
@@ -452,7 +467,7 @@ if (!function_exists('event_espresso_delete_item_from_session')) {
 
 		if (count($events_in_session) == 0) {
 
-			unset($_SESSION['espresso_session']['coupon_code']);
+			unset($_SESSION['espresso_session']['event_espresso_coupon_code']);
 			unset($_SESSION['espresso_session']['groupon_code']);
 			unset($_SESSION['espresso_session']['groupon_used']);
 			unset($_SESSION['espresso_session']['events_in_session']);

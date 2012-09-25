@@ -3,7 +3,7 @@ function update_event_discount() {
 	global $wpdb, $current_user;
 	$wpdb->show_errors();
 		
-	$sql=array('coupon_code'=>$_REQUEST['coupon_code'],'coupon_code_price'=>$_REQUEST['coupon_code_price'], 'coupon_code_description'=>$_REQUEST['coupon_code_description'], 'use_percentage'=>$_REQUEST['use_percentage']); 
+	$sql=array('coupon_code'=>$_REQUEST['event_espresso_coupon_code'],'coupon_code_price'=>$_REQUEST['coupon_code_price'], 'coupon_code_description'=>$_REQUEST['coupon_code_description'], 'use_percentage'=>$_REQUEST['use_percentage']); 
 		
 	$update_id = array('id'=> $_REQUEST['discount_id']);
 		

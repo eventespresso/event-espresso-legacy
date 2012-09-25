@@ -175,11 +175,13 @@ if ($reg_form_only == false) {
 						do_action('espresso_seating_chart_select', $event_id);
 						
 						//Coupons
+						?><input type="hidden" name="use_coupon[<?php echo $event_id; ?>]" value="<?php echo $use_coupon_code; ?>" /><?php
 						if (function_exists('event_espresso_coupon_registration_page')) {
 							echo event_espresso_coupon_registration_page($use_coupon_code, $event_id);
 						}//End coupons display
 						
 						//Groupons
+						?><input type="hidden" name="use_groupon[<?php echo $event_id; ?>]" value="<?php echo $use_groupon_code; ?>" /><?php
 						if (function_exists('event_espresso_groupon_registration_page')) {
 							echo event_espresso_groupon_registration_page($use_groupon_code, $event_id);
 						}//End groupons display

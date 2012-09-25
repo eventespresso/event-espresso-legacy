@@ -5,10 +5,11 @@
 function add_attendee_questions($questions, $registration_id, $attendee_id = 0, $extra = array()) {
 
 	if (array_key_exists('session_vars', $extra)) {
-
 		$response_source = $extra['session_vars'];
-	} else
+	} else {
 		$response_source = $_POST;
+	}
+		
 
 	array_walk_recursive( $response_source, 'sanitize_text_field' );
 	

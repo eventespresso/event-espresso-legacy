@@ -1,4 +1,6 @@
-<?php
+<?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	
+
 
 //Install/update data tables in the Wordpress database
 //This fixes some tables that may have been named wrong in an earlier version of the plugin
@@ -339,6 +341,7 @@ function events_data_tables_install() {
 	$table_name = "events_attendee";
 	$sql = " id int(11) unsigned NOT NULL AUTO_INCREMENT,
 					  registration_id VARCHAR(23) DEFAULT '0',
+					  is_primary tinyint(1) DEFAULT '0',
 					  lname VARCHAR(45) DEFAULT NULL,
 					  fname VARCHAR(45) DEFAULT NULL,
 					  address VARCHAR(45) DEFAULT NULL,
@@ -352,17 +355,17 @@ function events_data_tables_install() {
 					  email VARCHAR(45) DEFAULT NULL,
 					  phone VARCHAR(45) DEFAULT NULL,
 					  date timestamp NOT NULL default CURRENT_TIMESTAMP,
+					  price_option VARCHAR(100) DEFAULT NULL,
+					  orig_price decimal(20,2) DEFAULT '0.00',
+					  final_price decimal(20,2) DEFAULT '0.00',
+					  quantity tinyint(1) DEFAULT '0',
+					  total_cost decimal(20,2) DEFAULT '0.00',
+					  amount_pd decimal(20,2) DEFAULT '0.00',
+					  coupon_code VARCHAR(45) DEFAULT NULL,
 					  payment VARCHAR(45) DEFAULT NULL,
 					  payment_status VARCHAR(45) DEFAULT 'Incomplete',
 					  txn_type VARCHAR(45) DEFAULT NULL,
 					  txn_id VARCHAR(45) DEFAULT NULL,
-					  amount_pd decimal(20,2) DEFAULT '0.00',
-					  orig_price decimal(20,2) DEFAULT '0.00',
-					  final_price decimal(20,2) DEFAULT '0.00',
-					  total_cost decimal(20,2) DEFAULT '0.00',
-					  price_option VARCHAR(100) DEFAULT NULL,
-					  coupon_code VARCHAR(45) DEFAULT NULL,
-					  quantity VARCHAR(5) DEFAULT '0',
 					  payment_date VARCHAR(45) DEFAULT NULL,
 					  event_id VARCHAR(45) DEFAULT NULL,
 					  event_time VARCHAR(15) DEFAULT NULL,
@@ -626,13 +629,6 @@ function events_data_tables_install() {
 	$table_name = "events_multi_event_registration_id_group";
 	$sql = "primary_registration_id varchar(255) DEFAULT NULL,
 			registration_id varchar(255) DEFAULT NULL  ";
-	event_espresso_run_install($table_name, $table_version, $sql);
-
-	$table_name = "events_attendee_cost";
-	$sql = "attendee_id int(11) DEFAULT NULL,
-			cost decimal(20,2) DEFAULT '0.00',
-			quantity int(11) DEFAULT NULL,
-			KEY `attendee_id` (`attendee_id`)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_question";

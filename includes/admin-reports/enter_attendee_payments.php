@@ -28,7 +28,7 @@ function enter_attendee_payments() {
                 //$quantity = isset($_REQUEST[ 'quantity' ]) ? $_REQUEST[ 'quantity' ]:'';
                 $amount_pd = isset($_REQUEST[ 'amount_pd' ]) ? $_REQUEST[ 'amount_pd' ]:'';
                 $payment_date = isset($_REQUEST[ 'payment_date' ]) ? $_REQUEST[ 'payment_date' ]:'';
-                $coupon_code = isset($_REQUEST[ 'coupon_code' ]) ? $_REQUEST[ 'coupon_code' ]:'';
+                $coupon_code = isset($_REQUEST[ 'event_espresso_coupon_code' ]) ? $_REQUEST[ 'event_espresso_coupon_code' ]:'';
 				
 				$payment_date = date_i18n('Y-m-d', strtotime($payment_date));
 

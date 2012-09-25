@@ -1,9 +1,12 @@
-<?php
-if (!defined('EVENT_ESPRESSO_VERSION'))
-	exit('No direct script access allowed');
+<?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	
+
 
 function edit_attendee_record() {
+
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 	global $wpdb, $org_options;
+	
 	$attendee_num = 1;
 	if ($_REQUEST['form_action'] == 'edit_attendee') {
 
@@ -36,7 +39,9 @@ function edit_attendee_record() {
 			$where_format = array( '%d' );
 			$wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
 			
-			//Calculate total cost from attendee cost table
+			/*
+			 * Calculate total cost from attendee cost table
+			 */
 			/*$event_cost = 0;
 			 
 			
@@ -83,7 +88,9 @@ function edit_attendee_record() {
 				event_espresso_cleanup_attendee_cost_data();
 			}
 		} else if (!empty($_REQUEST['attendee_action']) && $_REQUEST['attendee_action'] == 'update_attendee') {
-			//Update the attendee information
+			/*
+			 * Update the attendee information
+			 */
 			$update_time = false;
 			if (isset($_POST['start_time_id'])) {
 				$times_sql = "SELECT ese.start_time, ese.end_time ";
@@ -118,7 +125,9 @@ function edit_attendee_record() {
 			$sql .= " WHERE id ='$id' ";
 			$wpdb->query($sql);
 			
-			//Added for seating chart addon
+			/*
+			 * Added for seating chart addon
+			 */
 			$booking_id = 0;
 			if (defined('ESPRESSO_SEATING_CHART')) {
 				if (seating_chart::check_event_has_seating_chart($event_id) !== false) {
@@ -262,7 +271,9 @@ function edit_attendee_record() {
 				$start_date = $result->start_date;
 				$event_time = $result->event_time;
 				
-				//Added for seating chart addon
+				/*
+				* Added for seating chart addon
+				*/
 				$booking_info = "";
 				if ( defined('ESPRESSO_SEATING_CHART') ){
 					$seating_chart_id = seating_chart::check_event_has_seating_chart($event_id);
@@ -273,7 +284,9 @@ function edit_attendee_record() {
 						}
 					}
 				}
-				//End
+				/*
+				*End
+				*/
 
 				$event_date = event_date_display($start_date . ' ' . $event_time, get_option('date_format') . ' g:i a');
 

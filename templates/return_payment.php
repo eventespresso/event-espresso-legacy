@@ -1,4 +1,5 @@
-<?php
+<?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	
 /* WARNING MODIFY THIS AT YOUR OWN RISK  */
 /* Return to Payments template page. Currently this just shows the return to paayment information data block. */
 

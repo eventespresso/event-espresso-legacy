@@ -69,12 +69,6 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 									</tr>
 								</tbody>
 							</table>
-					<?php
-						//Coupons
-						if ( function_exists( 'event_espresso_coupon_registration_page' ) ){
-									// echo event_espresso_coupon_registration_page( $r->use_coupon_code, $r->id, 1 );
-						}//End coupons display
-						?>
 		
 						<input type="hidden" name="event_name[<?php echo $r->id; ?>]" value="<?php echo $r->event_name; ?>" />
 						<input type="hidden" name="use_coupon[<?php echo $r->id; ?>]" value="<?php echo $r->use_coupon_code; ?>" />
@@ -105,7 +99,7 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 				<input type="text" 
 							name="event_espresso_coupon_code" 
 							id ="event_espresso_coupon_code" 
-							value="<?php echo $_SESSION['espresso_session']['coupon_code']; ?>"
+							value="<?php echo $_SESSION['espresso_session']['event_espresso_coupon_code']; ?>"
 							onkeydown="if(event.keyCode==13) {document.getElementById('event_espresso_refresh_total').focus(); return false;}" 
 						/>
 			</div>
