@@ -130,6 +130,9 @@ function events_payment_page( $attendee_id = FALSE, $price_id = 0, $coupon_code 
 
 	// update total cost for primary attendee
 	$total_cost = $final_price * (int)$num_people;
+	
+//	echo '<h4>$attendee_id : ' . $attendee_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//	echo '<h4>$total_cost : ' . $total_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 	espresso_update_primary_attendee_total_cost( $attendee_id, $total_cost, __FILE__ );			
 
 	$display_cost = $total_cost > 0 ? $org_options['currency_symbol'] . $total_cost : __('Free', 'event_espresso');

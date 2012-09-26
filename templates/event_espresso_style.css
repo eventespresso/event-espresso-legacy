@@ -54,12 +54,20 @@
 /**
 	Errors and notices
 */
-.event_espresso_error { margin: 0 0 10px 0; padding: 5px 10px; border: #ff6666 1px solid; background-color:  #ffcccc; color: #000;}
-.event_espresso_error p { margin: 0; color: #333; }
-.event_espresso_error p em { color: #C00; font-style: normal; font-weight: bold; display: block;}
+.event_espresso_error {
+	padding: 1em 2em 1.25em; margin: 0 0 1em 0; 
+	background-color:#FFEEEE; border: #FF0000 1px solid; border-radius:3px;
+	color: #000; text-shadow:1px 1px #fff;
+} 	/* #ffcccc  */
+.event_espresso_error p { margin: 0; color: #333; text-shadow:1px 1px #fff; }
+.event_espresso_error p em { color: #cc0000; font-style: normal; font-weight: bold; display: block;}
 
-.event_espresso_attention { margin: 0 0 10px 0; padding: 5px 10px; border: #FC6 1px solid; background-color: #FFC; }
-.event_espresso_attention p { margin: 0; }
+.event_espresso_attention {
+	padding:1em 2em 1.25em; margin: 0 0 1em 0;
+	background-color: #FFC; border: #FC6 1px solid; border-radius:3px;
+	color: #000; text-shadow:1px 1px #fff;
+}
+.event_espresso_attention p { margin: 0; text-shadow:1px 1px #fff; }
 .event_espresso_attention p em { color: #C00; font-style: normal; font-weight: bold;display: block; }
 
 .event_espresso_form_wrapper label.error,
@@ -101,6 +109,9 @@
 .btn_event_form_submit:hover {
 }
 
+/*.espresso_confirm_registration {
+	text-align: right;
+}*/
 .espresso_confirm_registration #confirm, .espresso_confirm_registration #confirm2{
 	width: auto;
 }
@@ -148,6 +159,10 @@ table.price_list{
 
 table.price_list td{
 	padding: 5px;
+}
+
+.event_espresso_value {
+	margin-left:1em;
 }
 
 /* For the event list page pagination */
