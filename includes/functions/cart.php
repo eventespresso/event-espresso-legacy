@@ -833,16 +833,22 @@ if (!function_exists('event_espresso_multi_additional_attendees')) {
 //Need to verify
 //Doesn't look like this function is used anywhere in the plugin
 	function event_espresso_multi_additional_attendees($additional_limit, $available_spaces, $event_id = null) {
+	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-		if ($additional_limit == 0)
+		
+		if ($additional_limit == 0) {
 			return;
+		}
+			
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
-		?>
+?>
+
 <div class="event_espresso_add_attendee_wrapper-<?php echo $event_id; ?>">
 	<?php
+			$i = 1;
 			while (($i < $additional_limit) && ($i < $available_spaces)) {
 				$i++;
-				?>
+?>
 	<div class="additional_attendees-<?php echo $event_id . '-' . $i; ?>">
 		<p class="event_form_field additional_header" id="">
 			<?php _e('Additional Attendee', 'event_espresso'); ?>
@@ -998,6 +1004,7 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 			//echo $label==1?'<label for="event_cost">' . __('Choose an Option: ','event_espresso') . '</label>':'';
 			//echo '<input type="radio" name="price_option' . $multi_name_adjust . '" id="price_option-' . $event_id . '">';
 			?>
+			
 <table class="price_list">
 	<?php
 			$available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');
@@ -1030,31 +1037,40 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 								$message = '';
 							echo $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . ' ' . $surcharge;
 							?></td>
-		<td class="selection"><?php
+		<td class="selection">
+			<?php		
 				if ($result->allow_multiple == 'Y') {
-					$attendee_limit = $result->additional_limit + 1;
+				
+					$attendee_limit = $result->additional_limit;
 
-					if ($available_spaces != 'Unlimited')
+					if ($available_spaces != 'Unlimited') {
 						$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
-
-					event_espresso_multi_qty_dd($event_id, $result->id, $attendee_limit, empty($_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['attendee_quantity']) ? '' : $_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['attendee_quantity']);
-				}
-				else {
+					}		
+									
+					$att_qty = empty($_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['attendee_quantity']) ? '' : $_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['attendee_quantity'];
+					
+					event_espresso_multi_qty_dd( $event_id, $result->id,  $attendee_limit, $att_qty );
+				
+				} else {
 
 					$checked = (($wpdb->num_rows == 1) || (array_key_exists($result->id, $_SESSION['espresso_session']['events_in_session'][$event_id]['price_id']) && isset($_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['attendee_quantity']))) ? ' checked="checked"' : '';
-					?>
+			?>
 			<input type="radio" class="price_id" name="price_id[<?php echo $event_id; ?>]" <?php echo $checked; ?> value="<?php echo $result->id; ?>" />
 			<?php
-							}
-							?></td>
+				}
+			?>
+		</td>
 	</tr>
 	<?php
 			}
 			?>
 	<tr>
-		<td colspan="3" class="reg-allowed-limit"><?php printf(__("You can register a maximum of %d attendees for this event.", 'event_espresso'), $attendee_limit); ?></td>
+		<td colspan="3" class="reg-allowed-limit">
+			<?php printf(__("You can register a maximum of %d attendees for this event.", 'event_espresso'), $attendee_limit); ?>
+		</td>
 	</tr>
 </table>
+
 <input type="hidden" id="max_attendees-<?php echo $event_id; ?>" class="max_attendees" value= "<?php echo $attendee_limit; ?>" />
 <?php
 		} else if ($wpdb->num_rows == 0) {

@@ -94,7 +94,12 @@ $this_event_id = $event_id;
 						if ( $event_counter == 1 && $event_count > 1 ) {
 							?>
 							<div class="event-messages ui-state-highlight">
-								<p class="instruct"><?php _e('Copy above information to all forms?', 'event_espresso'); ?> <button type="button" id="copy_to_all_button" value="<?php echo $event_id . '|' . $meta['price_id']; ?>"><?php _e('Yes', 'event_espresso'); ?></button></p>
+								<p class="instruct" style="position:relative;padding:1em;">
+									<span class="copy-all-button-wrapper" style="position:relative;z-index:10;">									
+										<?php _e('Copy above information to all forms?', 'event_espresso'); ?> <button type="button" class="copy-all-button" value="<?php echo $event_id . '|' . $meta['price_id']; ?>"><?php _e('Yes', 'event_espresso'); ?></button>										
+									</span>
+									<span class="copy-all-button-success" style="display:none;position:absolute; top:.2em; left:0;padding:1em; border-radius:3px;z-index:1;background:#DCF3D9;"></span>
+								</p>
 							</div>
 							<?php
 						}

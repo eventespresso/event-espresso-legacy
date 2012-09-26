@@ -1,28 +1,28 @@
 <?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
 do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');		
 
-//Payment Page/PayPal Buttons - Used to display the payment options and the payment link in the email. Used with the [ESPRESSO_PAYMENTS] tag
-//This is the initial PayPal button
+
 function events_payment_page( $attendee_id = FALSE, $price_id = 0, $coupon_code = '', $groupon_code = '') {
 
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');	
 	
 	if ( ! $attendee_id ) {
 		wp_die( __('An error occured. No Attendee was received.', 'event_espresso') );
-	}	
+	}
+	
 	global $wpdb, $org_options;
 
 	$num_people = 0;
 
-	$Organization = $org_options['organization'];
-	$Organization_street1 = $org_options['organization_street1'];
-	$Organization_street2 = $org_options['organization_street2'];
-	$Organization_city = $org_options['organization_city'];
-	$Organization_state = $org_options['organization_state'];
-	$Organization_zip = $org_options['organization_zip'];
-	$contact = $org_options['contact_email'];
-	$registrar = $org_options['contact_email'];
-	$currency_format = getCountryFullData($org_options['organization_country']);
+//	$Organization = $org_options['organization'];
+//	$Organization_street1 = $org_options['organization_street1'];
+//	$Organization_street2 = $org_options['organization_street2'];
+//	$Organization_city = $org_options['organization_city'];
+//	$Organization_state = $org_options['organization_state'];
+//	$Organization_zip = $org_options['organization_zip'];
+//	$contact = $org_options['contact_email'];
+//	$registrar = $org_options['contact_email'];
+//	$currency_format = getCountryFullData($org_options['organization_country']);
 
 	$message = $org_options['message'];
 	$return_url = $org_options['return_url'];
@@ -74,9 +74,8 @@ function events_payment_page( $attendee_id = FALSE, $price_id = 0, $coupon_code 
 	}
 	
 	// get # of attendees
-	//$SQL = "SELECT COUNT(registration_id) FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id =%s";
 	$SQL = "SELECT COUNT(quantity) FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id =%s";
-	$num_people = $wpdb->get_var($wpdb->prepare( $SQL, $registration_id ));
+	$num_people = $wpdb->get_var( $wpdb->prepare( $SQL, $registration_id ));
 
 	//If we are using the number of attendees dropdown
 	if ( $quantity > 1 && $quantity > $num_people ) {
@@ -92,10 +91,6 @@ function events_payment_page( $attendee_id = FALSE, $price_id = 0, $coupon_code 
 	$send_mail = isset( $event->send_mail ) ? $event->send_mail : '';
 	$active = isset( $event->is_active ) ? $event->is_active : TRUE;
 	$conf_mail = isset( $event->conf_mail ) ? $event->conf_mail : '';
-
-
-//Test the early discount amount to make sure we are getting the right amount
-//print_r(early_discount_amount($event_id, $final_price));
 
  	$final_price = (float)$final_price;
     $event_price_x_attendees = $event_price_x_attendees = number_format( $final_price * $num_people, 2, '.', '' );
@@ -118,55 +113,6 @@ function events_payment_page( $attendee_id = FALSE, $price_id = 0, $coupon_code 
 	 
 	} 
 
-
-
-//	if (function_exists('event_espresso_coupon_payment_page') && (!empty($_REQUEST['event_espresso_coupon_code']) || !empty($coupon_code))) {
-//		
-//		$coupon_data = event_espresso_coupon_payment_page( $use_coupon_code, $event_id, $event_original_cost, $attendee_id, FALSE );
-//		$final_price = $coupon_data['event_cost'];
-//		/*
-//		 * at this point , the $final_price is correct
-//		 * The next line divided by the number of people and reassigned it to the same $even_cost var, making the event cost less
-//		 * I renamed it to another variable
-//		 */
-//
-//		//$event_price_x_attendees = number_format($final_price, 2, '.', '');
-//		$coupon_code = wp_strip_all_tags( $_REQUEST['event_espresso_coupon_code'] );
-//		
-//		if ( $coupon_data['valid'] == TRUE ){
-//			$event_price_x_attendees = $event_price_x_attendees - $final_price;
-//			if ( $coupon_data['percentage'] ) {
-//				$event_discount_label = $event_original_cost > $final_price ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_original_cost - $final_price, 2, ".", ",") . ' (' . $coupon_data['discount'] . ')'. __(' applied', 'event_espresso') . ')' : '';
-//			} else {
-//				$event_discount_label = $event_original_cost > $final_price ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_original_cost - $final_price, 2, ".", ",") . __(' applied', 'event_espresso') . ')' : '';
-//				$event_price_x_attendees = $final_price;
-//			}
-//		}
-//		
-//	} 
-	
-	
-	
-//	if (function_exists('event_espresso_groupon_payment_page') && ($_REQUEST['groupon_code'] != '' || $groupon_code != '')) {
-//		
-//		$groupon_data = event_espresso_groupon_payment_page( $use_groupon_code, $event_id, $event_original_cost, $attendee_id, FALSE );
-////printr( $groupon_data, '$groupon_data  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-//		
-//		$groupon_code = wp_strip_all_tags( $_REQUEST['groupon_code'] );
-//		$final_price = $groupon_data['event_cost'];
-//		if ( $groupon_data['valid'] == TRUE ){
-//			$event_price_x_attendees = number_format($event_price_x_attendees - $event_price, 2, ".", ",");
-//			$event_discount_label = $event_original_cost > $final_price ? ' (' . __('Discount of ', 'event_espresso') . $org_options['currency_symbol'] . number_format($event_price, 2, ".", ",") . __(' applied', 'event_espresso') . ')' : '';
-//		}
-//		$final_price = $event_price_x_attendees;
-//		
-//	} else {
-//		$event_discount_label = '';
-//		$final_price = $event_original_cost;
-//	}
-
-
-
 	$final_price = (float)$final_price;
 
 	if ( $final_price == 0 ) {
@@ -182,8 +128,11 @@ function events_payment_page( $attendee_id = FALSE, $price_id = 0, $coupon_code 
 		}
 	}
 
+	// update total cost for primary attendee
+	$total_cost = $final_price * (int)$num_people;
+	espresso_update_primary_attendee_total_cost( $attendee_id, $total_cost, __FILE__ );			
 
-	$display_cost = (float)$final_price > (float)0 ? $org_options['currency_symbol'] . $final_price * (int)$num_people : __('Free', 'event_espresso');
+	$display_cost = $total_cost > 0 ? $org_options['currency_symbol'] . $total_cost : __('Free', 'event_espresso');
 
 //Pull in the template
 	if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . "confirmation_display.php")) {
@@ -273,37 +222,37 @@ function espresso_confirm_registration() {
 		_e('No ID Supplied', 'event_espresso');
 	}
 
+	$sql .= " AND is_primary = 1 ";
 	$sql .= " ORDER BY id ";
 	$sql .= " LIMIT 0,1 "; //Get the first attendees details
 
 
-	$attendees = $wpdb->get_results($sql);
-//global $attendee_id;
+	if ( ! $attendee = $wpdb->get_row( $wpdb->prepare( $sql ))) {
+		wp_die(__('An error occured. The primary attendee could not be found.', 'event_espresso'));
+	}
 
-	foreach ($attendees as $attendee) {
-		$attendee_id = $attendee->id;
-		$attendee_email = $attendee->email;
-		$lname = $attendee->lname;
-		$fname = $attendee->fname;
-		$address = $attendee->address;
-		$address2 = $attendee->address2;
-		$city = $attendee->city;
-		$state = $attendee->state;
-		$zip = $attendee->zip;
-		$payment_status = $attendee->payment_status;
-		$txn_type = $attendee->txn_type;
-		$amount_pd = (float)$attendee->amount_pd;
-		$total_cost = (float)$attendee->total_cost;
-		$payment_date = $attendee->payment_date;
-		$phone = $attendee->phone;
-		$event_time = $attendee->event_time;
-		$end_time = $attendee->end_time;
-		$date = $attendee->date;
-		$pre_approve = $attendee->pre_approve;
-		$session_id = $attendee->attendee_session;
-		if ( $attendee->is_primary ) {
-			$event_cost = $total_cost;
-		}
+	$attendee_id = $attendee->id;
+	$attendee_email = $attendee->email;
+	$lname = $attendee->lname;
+	$fname = $attendee->fname;
+	$address = $attendee->address;
+	$address2 = $attendee->address2;
+	$city = $attendee->city;
+	$state = $attendee->state;
+	$zip = $attendee->zip;
+	$payment_status = $attendee->payment_status;
+	$txn_type = $attendee->txn_type;
+	$amount_pd = (float)$attendee->amount_pd;
+	$total_cost = (float)$attendee->total_cost;
+	$payment_date = $attendee->payment_date;
+	$phone = $attendee->phone;
+	$event_time = $attendee->event_time;
+	$end_time = $attendee->end_time;
+	$date = $attendee->date;
+	$pre_approve = $attendee->pre_approve;
+	$session_id = $attendee->attendee_session;
+	if ( $attendee->is_primary ) {
+		$event_cost = $total_cost;
 	}
 
 	$pre_approval_check = is_attendee_approved($event_id, $attendee_id);
@@ -362,38 +311,58 @@ function event_espresso_pay() {
 	foreach ($active_gateways as $gateway => $path) {
 		event_espresso_require_gateway($gateway . "/init.php");
 	}
-	$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
-	if (espresso_return_reg_id() != false && empty($payment_data['attendee_id'])) {
-		$sql = "SELECT id FROM `" . EVENTS_ATTENDEE_TABLE . "` WHERE registration_id='" . espresso_return_reg_id() . "' ORDER BY id LIMIT 1";
-		//echo $sql;
-		$payment_data['attendee_id'] = $wpdb->get_var($sql);
+	$payment_data['attendee_id'] = apply_filters( 'filter_hook_espresso_transactions_get_attendee_id', $payment_data['attendee_id'] );
+	$REG_ID = espresso_return_reg_id();
+	
+	if ( $REG_ID != false && empty($payment_data['attendee_id'] )) {
+	
+		$SQL = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id='" . $REG_ID . "' ORDER BY id LIMIT 1";
+		$payment_data['attendee_id'] = $wpdb->get_var( $wpdb->get_var( $SQL ));
+		
 		$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_prepare_event_link', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
-	} elseif (!empty($payment_data['attendee_id'])) {
+		
+	} elseif ( ! empty( $payment_data['attendee_id'] )) {
+	
 		$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_prepare_event_link', $payment_data);
-		if (espresso_return_reg_id() == false || $payment_data['registration_id'] != espresso_return_reg_id())
-			die(__('There was a problem finding your Registration ID', 'event_espresso'));
+		
+		if ( $REG_ID == false || $payment_data['registration_id'] != $REG_ID ) {
+			wp_die(__('There was a problem finding your Registration ID', 'event_espresso'));
+		}
+			
 		if ($payment_data['payment_status'] != 'Completed') {
+		
 			$payment_data = apply_filters('filter_hook_espresso_thank_you_get_payment_data', $payment_data);
-			espresso_log::singleton()->log(array('file' => __FILE__, 'function' => __FUNCTION__, 'status' => 'Payment for: '. $payment_data['lname'] . ', ' . $payment_data['fname'] . '|| attendee_session id: ' . $payment_data['attendee_session'] . '|| registration id: ' . $payment_data['registration_id'] . '|| transaction details: ' . $payment_data['txn_details']));
+			
+			$payment_details = array(
+							'file' => __FILE__, 
+							'function' => __FUNCTION__, 
+							'status' => 'Payment for: '. $payment_data['lname'] . ', ' . $payment_data['fname'] . '|| attendee_session id: ' . $payment_data['attendee_session'] . '|| registration id: ' . $payment_data['registration_id'] . '|| transaction details: ' . $payment_data['txn_details']
+					);
+			espresso_log::singleton()->log( $payment_details );
+			
 			$payment_data = apply_filters('filter_hook_espresso_update_attendee_payment_data_in_db', $payment_data);
 			do_action('action_hook_espresso_email_after_payment', $payment_data);
+			
 		}
 	}
 
 
 	if (!empty($payment_data['attendee_id'])) {
+	
 		extract($payment_data);
+		//printr( $payment_data, '$payment_data  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+		
 		if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . "payment_overview.php")) {
 			require_once(EVENT_ESPRESSO_TEMPLATE_DIR . "payment_overview.php"); //This is the path to the template file if available
 		} else {
 			require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "templates/payment_overview.php");
 		}
 
-		if ($payment_data['payment_status'] != "Completed") {
+		if ( $payment_status != "Completed" ) {
 			echo '<a name="payment_options" id="payment_options"></a>';
 			if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . "return_payment.php")) {
 				require_once(EVENT_ESPRESSO_TEMPLATE_DIR . "return_payment.php"); //This is the path to the template file if available

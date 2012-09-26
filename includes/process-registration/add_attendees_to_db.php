@@ -38,7 +38,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 	
 		wp_verify_nonce( $data_source['reg_form_nonce'] );
 		
-//		printr( $data_source, '$data_source  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+//		echo '<h1>$attendee_number : ' . $attendee_number . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h1>';
+//		printr( $data_source, '$data_source  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );			
 //		printr( $att_data_source, '$att_data_source  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 	
 		$skip_check = $skip_check || isset( $data_source['admin'] ) ? TRUE : FALSE;
@@ -79,13 +80,11 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$zip = isset($att_data_source['zip']) ? $att_data_source['zip'] : '';
 			$phone = isset($att_data_source['phone']) ? $att_data_source['phone'] : '';
 			$email = isset($att_data_source['email']) ? $att_data_source['email'] : '';
-			
+
 
 			$questions = $wpdb->get_row($wpdb->prepare("SELECT question_groups, event_meta FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'"));
 			$event_meta = unserialize($questions->event_meta);
 			$questions = unserialize($questions->question_groups);
-			//echo '<p>$data_source[price_select] = '.$data_source['price_select'].'</p>';
-			//$payment = $data_source['payment'];
 
 			// Adding attenddee specific cost to events_attendee table
 			if (isset($data_source['admin'])) {
@@ -105,7 +104,15 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 //echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 					
-			} elseif (isset($data_source['price_select']) && $data_source['price_select'] == true) {
+			} elseif ( isset( $att_data_source['price_id'] ) && ! empty( $att_data_source['price_id'] )) {
+			
+				$final_price = isset( $att_data_source['price_id'] ) ? event_espresso_get_final_price( $att_data_source['price_id'], $event_id ) : 0.00;
+				$orig_price = event_espresso_get_orig_price( $att_data_source['price_id'] );
+				$price_type = isset( $att_data_source['price_id'] ) ? espresso_ticket_information( array( 'type' => 'ticket', 'price_option' => $att_data_source['price_id'] )) : '';
+//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+				
+			} elseif ( isset( $data_source['price_select'] ) && $data_source['price_select'] == TRUE ) {
 				
 				//Figure out if the person has registered using a price selection
 				$price_options = explode( '|', $data_source['price_option'], 2 );
@@ -135,7 +142,6 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			
 				$event_cost = $_SESSION['espresso_session']['grand_total'];
 				$coupon_code = $attendee_number == 1 ? $_SESSION['espresso_session']['event_espresso_coupon_code'] : '';
-				$attendee_number++;
 				
 			} 
 			
@@ -165,15 +171,16 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$payment = "Admin";
 				$txn_type = __('Added by Admin', 'event_espresso');
 				$payment_date = date("m-d-Y");
-//				$amount_pd = $data_source['cost'] == '' ? 0.00 : $data_source['cost'];
+				$amount_pd = $data_source['cost'] != '' ? $data_source['cost'] : 0.00;
 				$registration_id = uniqid('', true);
 				$_SESSION['espresso_session']['id'] = uniqid('', true);
+
 				
 			} else {
 
 				//print_r( $event_meta);
 				$default_payment_status = $event_meta['default_payment_status'] != '' ? $event_meta['default_payment_status'] : $org_options['default_payment_status'];
-				$payment_status = ( $multi_reg && $data_source['final_price'] == 0.00 ) ? "Completed" : $default_payment_status;
+				$payment_status = ( $multi_reg && $data_source['cost'] == 0.00 ) ? "Completed" : $default_payment_status;
 				$payment = '';
 				
 			}
@@ -183,7 +190,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$times_sql .= "LEFT JOIN " . EVENTS_DETAIL_TABLE . " e ON ese.event_id = e.id WHERE ";
 			$times_sql .= "e.id=%d";
 			if (!empty($data_source['start_time_id'])) {
-				$times_sql .= " AND ese.id='" . $data_source['start_time_id'];
+				$times_sql .= " AND ese.id=" . $data_source['start_time_id'];
 			}
 
 			$times = $wpdb->get_results($wpdb->prepare( $times_sql, $event_id ));
@@ -241,10 +248,12 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$orig_price = number_format( (float)$orig_price, 2, '.', '' );
 			$final_price = number_format( (float)$final_price, 2, '.', '' );
 			$total_cost = $total_cost + $final_price;
+			
 //echo '<h4>$amount_pd : ' . $amount_pd . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //echo '<h4>$total_cost : ' . $total_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4><br /><br /><br />';
+//echo '<h4>$payment_status : ' . $payment_status . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4><br /><br /><br />';
 
 			$columns_and_values = array(
 					'registration_id' => $registration_id,
@@ -324,8 +333,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			}
 			$loop_number++;
 
-			//Add new or updated data
-			if ( ! $wpdb->prepare($wpdb->insert( EVENTS_ATTENDEE_TABLE, $columns_and_values, $data_formats ))) {
+			// save the attendee details - FINALLY !!!
+			if ( ! $wpdb->insert( EVENTS_ATTENDEE_TABLE, $columns_and_values, $data_formats )) {
 				$error = true;
 			}
 
@@ -357,16 +366,18 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 					}
 				}
 			}
-
+			
 			//Add a record for the primary attendee
-			$columns_and_values = array('attendee_id' => $attendee_id, 'meta_key' => 'primary_attendee', 'meta_value' => 1);
-			$data_formats = array('%s', '%s', '%s');
+			if ( $attendee_number == 1 ) {
+				
+				$columns_and_values = array('attendee_id' => $primary_att_id, 'meta_key' => 'primary_attendee', 'meta_value' => 1);
+				$data_formats = array('%s', '%s', '%s');
+			
+				if (!$wpdb->prepare($wpdb->insert(EVENTS_ATTENDEE_META_TABLE, $columns_and_values, $data_formats))) {
+					$error = true;
+				}
 
-			// save the attendee FINALLY !!!
-			if (!$wpdb->prepare($wpdb->insert(EVENTS_ATTENDEE_META_TABLE, $columns_and_values, $data_formats))) {
-				$error = true;
 			}
-
 
 
 			if (defined('EVENTS_MAILCHIMP_ATTENDEE_REL_TABLE') && $espresso_premium == true) {
@@ -378,7 +389,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 
 			//Since main attendee and additional attendees may have different questions,
 			//$attendee_number check for 2 because is it statically set at 1 first and is incremented for the primary attendee above, hence 2
-			$questions = ($attendee_number > 2 && isset($event_meta['add_attendee_question_groups'])) ? $event_meta['add_attendee_question_groups'] : $questions;
+			$questions = ( $attendee_number > 1 && isset($event_meta['add_attendee_question_groups'])) ? $event_meta['add_attendee_question_groups'] : $questions;
 
 			add_attendee_questions($questions, $registration_id, $attendee_id, array('session_vars' => $att_data_source));
 
@@ -392,15 +403,15 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				}
 
 
-				if (isset($att_data_source['x_attendee_fname'])) {
-					$amount_pd = 0.00; //additional attendee can't hold this info
-					foreach ($att_data_source['x_attendee_fname'] as $k => $v) {
-						if (trim($v) != '' && trim($att_data_source['x_attendee_lname'][$k]) != '') {
+				if ( isset( $att_data_source['x_attendee_fname'] )) {
+					foreach ( $att_data_source['x_attendee_fname'] as $k => $v ) {
+					
+						if ( trim($v) != '' && trim( $att_data_source['x_attendee_lname'][$k] ) != '' ) {
 
 							// Added for seating chart addon
 							$seat_check = true;
 							$x_booking_id = 0;
-							if (defined('ESPRESSO_SEATING_CHART')) {
+							if ( defined('ESPRESSO_SEATING_CHART')) {
 								if (seating_chart::check_event_has_seating_chart($event_id) !== false) {
 									if (!isset($att_data_source['x_seat_id'][$k]) || trim($att_data_source['x_seat_id'][$k]) == '') {
 										$seat_check = false;
@@ -447,7 +458,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								);
 								
 								$format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%f', '%f', '%f' );
-								$wpdb->prepare($wpdb->insert( EVENTS_ATTENDEE_TABLE, $data, $format ));
+								$wpdb->insert( EVENTS_ATTENDEE_TABLE, $data, $format );
 								
 								//Added by Imon
 								$ext_attendee_id = $wpdb->insert_id;
@@ -471,7 +482,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 										'zip' => empty($att_data_source['x_attendee_zip'][$k]) ? '' : $att_data_source['x_attendee_zip'][$k],
 										'phone' => empty($att_data_source['x_attendee_phone'][$k]) ? '' : $att_data_source['x_attendee_phone'][$k],
 										'payment' => $payment,
-										'amount_pd' => $amount_pd,
+										'amount_pd' => (float)0.00,
 										'event_time' => $start_time,
 										'end_time' => $end_time,
 										'start_date' => $start_date,
@@ -484,25 +495,24 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 										'event_id' => $event_id,
 										'quantity' => (int)$num_people
 								);
-								$questions_in = '';
-
+								
 								if ( ! is_array($questions) && !empty($questions)) {
 									$questions = unserialize($questions);
 								}
 
-								foreach ($questions as $g_id)
+								$questions_in = '';
+								foreach ($questions as $g_id) {
 									$questions_in .= $g_id . ',';
-
+								}
 								$questions_in = substr($questions_in, 0, -1);
 
-								$questions_list = $wpdb->get_results($wpdb->prepare("SELECT q.*, qg.group_name
-															FROM " . EVENTS_QUESTION_TABLE . " q
-															JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr
-															on q.id = qgr.question_id
-															JOIN " . EVENTS_QST_GROUP_TABLE . " qg
-															on qg.id = qgr.group_id
-															WHERE qgr.group_id in (" . $questions_in
-																. ") ORDER BY q.id ASC"));
+								$SQL = "SELECT q.*, qg.group_name FROM " . EVENTS_QUESTION_TABLE . " q ";
+								$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
+								$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
+								$SQL .= "WHERE qgr.group_id in ( %s ) ";
+								$SQL .= "ORDER BY q.id ASC";
+								
+								$questions_list = $wpdb->get_results($wpdb->prepare( $SQL, $questions_in ));
 								foreach ($questions_list as $question_list) {
 									if ($question_list->system_name != '') {
 										$ext_att_data_source[$question_list->system_name] = $att_data_source['x_attendee_' . $question_list->system_name][$k];
@@ -533,41 +543,41 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				require_once(EVENT_ESPRESSO_MEMBERS_DIR . "member_functions.php"); //Load Members functions
 				require(EVENT_ESPRESSO_MEMBERS_DIR . "user_vars.php"); //Load Members functions
 				if ($userid != 0) {
-					event_espresso_add_user_to_event($event_id, $userid, $attendee_id);
+					event_espresso_add_user_to_event( $event_id, $userid, $attendee_id );
 				}
 			}
+
+			$attendee_number++;
 
 			if (isset($data_source['admin'])) {
 				return $attendee_id;
 			}
 			
-			// update total cost for primary attendee
-			if ( $primary_att_id !== FALSE && ! $multi_reg ) {
-				espresso_update_primary_attendee_total_cost( $attendee_id, $total_cost );
-			}
-			
+
 			//This shows the payment page
 			if ( ! $multi_reg) {
 				return events_payment_page( $attendee_id );
 			}
-
+			
 			return $registration_id;
 						
-		}
-		
+		}		
 	}
 }
 
 
 
-function espresso_update_primary_attendee_total_cost( $attendee_id, $total_cost ) {
+function espresso_update_primary_attendee_total_cost( $attendee_id, $total_cost, $source ) {
 	
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, array( '$total_cost' => $total_cost ));		
 	global $wpdb;
 	$set_cols_and_values = array( 'total_cost'=>number_format( (float)$total_cost, 2, '.', '' ));
 	$set_format = array( '%s', '%f', '%s', '%s' );
 	$where_cols_and_values = array( 'id'=> $attendee_id );
 	$where_format = array( '%d' );						
-	$wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format  );				
+	if ( ! $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format  )) {
+		wp_die( __('An error occured. The primary attende\'s data could not be updated. ' . "\n( " . basename( $source ) . ' )', 'event_espresso'));
+	}				
 				
 }
 
@@ -576,7 +586,7 @@ function espresso_update_primary_attendee_total_cost( $attendee_id, $total_cost 
 //    @                   @     @@@@@      @@@@
 //    @@           @ @     @                     @          @
 //    @    @    @    @     @@@             @@@@
-//    @        @        @     @                    @        @
+//    @        @        @     @                      @        @
 //    @                    @     @@@@@     @           @
 
 
@@ -675,7 +685,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				//$coupon_amount = ! empty($attendees[0]->coupon_code_price) ? $attendees[0]->coupon_code_price : 0;
 				$is_coupon_pct = ! empty( $attendees[0]->use_percentage ) && $attendees[0]->use_percentage == 'Y' ? TRUE : FALSE;
 				
-			
+				//printr( $attendees, '$attendees  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 				foreach ($attendees as $attendee) {
 					if ( $attendee->is_primary ) {
 						$primary_attendee_id = $attendee->id;
@@ -686,6 +696,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				$discount_amount = $sub_total - $discounted_total;
 				$total_cost = $discounted_total;
 				
+//echo '<h4>$attendee->id : ' . $attendee->id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //echo '<h4>$attendee->orig_price : ' . $attendee->orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //echo '<h4>$attendee->final_price : ' . $attendee->final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //echo '<h4>$attendee->quantity : ' . (int)$attendee->quantity . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
@@ -693,11 +704,10 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 //echo '<h4>$discounted_total : ' . $discounted_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //echo '<h4>$discount_amount : ' . $discount_amount . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //echo '<h4>$total_cost : ' . $total_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-				
-				
+								
 				$total_cost = $total_cost < 0 ? 0.00 : (float)$total_cost;
 				
-				espresso_update_primary_attendee_total_cost( $primary_attendee_id, $total_cost );
+				espresso_update_primary_attendee_total_cost( $primary_attendee_id, $total_cost, __FILE__ );
 				//echo '<h4>$total_cost : ' . $total_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				
 				//Post the gateway page with the payment options
@@ -736,9 +746,10 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 						<tr>
 							<td width="70%">
 							<?php echo stripslashes( $attendee->price_option ) . __(' for ', 'event_espresso') . stripslashes( $attendee->event_name ) . '.<br/>&nbsp;&nbsp;&nbsp;&nbsp;' .  __('Attendee: ', 'event_espresso'). $attendee->fname . ' ' . $attendee->lname ?>
+							<?php echo $attendee->final_price < $attendee->orig_price ? '<br />&nbsp;&nbsp;&nbsp;&nbsp;' . $org_options['currency_symbol'] . number_format($attendee->orig_price - $attendee->final_price, 2) . __(' discount per registration','event_espresso') : ''; ?>
 							</td>
 							<td width="10%">
-							<?php echo $org_options['currency_symbol'] . number_format($attendee->final_price, 2) ?>
+							<?php echo $org_options['currency_symbol'] . number_format($attendee->final_price, 2); ?>
 							</td>
 							<td width="10%">
 							<?php echo 'x ' . (int)$attendee->quantity ?>
@@ -749,7 +760,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 						</tr>
 					<?php } ?>
 						<tr>
-							<td colspan="3"><?php _e('Sub-Total:','event_espresso'); ?></td>
+							<td colspan="3"><?php _e('Before Discounts:','event_espresso'); ?></td>
 							<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] . number_format($sub_total, 2); ?></td>
 						</tr>
 					<?php

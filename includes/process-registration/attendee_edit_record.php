@@ -233,9 +233,10 @@ function attendee_edit_record() {
 						$SQL .= "GROUP BY q.question ";
 						$SQL .= "ORDER BY qg.id, q.id ASC";
 
+
 						if ( $questions_2 = $wpdb->get_results( $wpdb->prepare( $SQL, $questions_in, $existing_questions ))) {
 							//Merge the existing questions with any missing questions
-							$questions = array_merge( $questions, $questions_2 );
+							array_merge( $questions, $questions_2 );
 						}
 
 						//Output the questions
@@ -250,11 +251,12 @@ function attendee_edit_record() {
 							
 								$question_displayed[] = $question->id;
 								
-								//if new group, close prev fieldset
+								// if question group has changed, close prev group tags
 								echo ( $group_name != '' && $group_name != $question->group_name ) ? '
 					</fieldset>
 				</div>' : '';
-
+								
+								// new group ?
 								if ( $group_name != $question->group_name ) {
 								
 									$question->group_identifier = ! empty( $question->group_identifier ) ? ' id="' . $question->group_identifier . '"' : '';								
@@ -264,8 +266,8 @@ function attendee_edit_record() {
 				<div class="event_questions"' . $question->group_identifier . '>
 					<fieldset>';
 									echo $question->show_group_name != 0 ? '
-						<h4 class="section-title">' . $question->group_name . '</h4>' : '';
-									echo $question->show_group_description != 0 ? '
+						<h3 class="section-title">' . $question->group_name . '</h3>' : '';
+									echo $question->show_group_description != 0 && $question->group_description != '' ? '
 						<p>
 							' . $question->group_description . '
 						</p>' : '';

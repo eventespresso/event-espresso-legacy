@@ -95,14 +95,16 @@ add_filter('filter_hook_espresso_get_total_cost', 'espresso_get_total_cost');
  */
 function espresso_update_attendee_payment_status_in_db($payment_data) {
 	global $wpdb;
+	
 	$payment_data['payment_date'] = date(get_option('date_format'));
-	$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET amount_pd = '%f' WHERE id ='%d' ";
-	$wpdb->query($wpdb->prepare($sql, array(
-			$payment_data['total_cost'],
-			$payment_data['attendee_id']
-	)));
-	$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET payment_status = '%s', txn_type = '%s', txn_id = '%s', payment_date ='%s', transaction_details = '%s' WHERE attendee_session ='%s' ";
-	$wpdb->query($wpdb->prepare($sql, array(
+	
+	$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET amount_pd = '%f' WHERE id ='%d' ";
+	$wpdb->query( $wpdb->prepare( $SQL, $payment_data['total_cost'], $payment_data['attendee_id'] ));
+	
+	$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . " ";
+	$SQL .= "SET payment_status = '%s', txn_type = '%s', txn_id = '%s', payment_date ='%s', transaction_details = '%s' ";
+	$SQL .= "WHERE attendee_session ='%s' ";
+	$wpdb->query($wpdb->prepare( $SQL, array(	
 			$payment_data['payment_status'],
 			$payment_data['txn_type'],
 			$payment_data['txn_id'],
@@ -112,7 +114,6 @@ function espresso_update_attendee_payment_status_in_db($payment_data) {
 	)));
 	return $payment_data;
 }
-
 add_filter('filter_hook_espresso_update_attendee_payment_data_in_db', 'espresso_update_attendee_payment_status_in_db');
 
 /**

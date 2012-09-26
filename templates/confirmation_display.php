@@ -87,10 +87,9 @@ $attendee_num = 1;
 									echo "(" . $x_attendee['email']  . ") ";
 								}
 								//Create edit link
-								/* //removing edit links for now...will fix edit attendee page in 3.2 cb #830
 								echo '<a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$x_attendee['id'].'&amp;regevent_action=register&amp;form_action=edit_attendee&amp;primary='.$attendee_id.'&amp;p_id='.$p_id.'&amp;coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'&amp;attendee_num='.$attendee_num.'">'. __('Edit', 'event_espresso').'</a>';
 								//Create delete link
-								echo ' | <a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$x_attendee['id'].'&amp;regevent_action=register&amp;form_action=edit_attendee&amp;primary='.$attendee_id.'&amp;delete_attendee=true&amp;p_id='.$p_id.'&amp;coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'">'. __('Delete', 'event_espresso').'</a>'; */
+								echo ' | <a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$x_attendee['id'].'&amp;regevent_action=register&amp;form_action=edit_attendee&amp;primary='.$attendee_id.'&amp;delete_attendee=true&amp;p_id='.$p_id.'&amp;coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'">'. __('Delete', 'event_espresso').'</a>';
 							}
 						}
 ?>

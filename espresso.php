@@ -754,15 +754,10 @@ if (!function_exists('event_espresso_run')) {
 			$regevent_action = "register";
 			$_REQUEST['event_id'] = $_REQUEST['ee'];
 		}
-		if (isset($_REQUEST['edit_attendee'])) {
-			$regevent_action = "register";
-		}
-			
 
 		if ((isset($_REQUEST['form_action']) && $_REQUEST['form_action'] == 'edit_attendee') || (isset($_REQUEST['edit_attendee']) && $_REQUEST['edit_attendee'] == 'true')) {
             $regevent_action = "edit_attendee";
-        }
-		
+        }		
 
 		switch ($regevent_action) {
 		

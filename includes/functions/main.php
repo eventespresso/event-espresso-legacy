@@ -137,7 +137,7 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			$html = '<span class="espresso_additional_limit">';
 			$html .= $show_label == true ? '<label for="num_people">' . $label . '</label>' : '';
 			$html .= '<select name="num_people" id="num_people-' . $event_id . '" style="width:70px;">';
-			while (($i <= $additional_limit) && ($i < $available_spaces)) {
+			while (($i < $additional_limit) && ($i < $available_spaces)) {
 				$i++;
 				$html .= '<option value="' . $i . '">' . $i . '</option>';
 			}
@@ -147,7 +147,7 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			$html .= '</span>';
 			$buffer = '';
 		} else {
-			while (($i <= $additional_limit) && ($i < $available_spaces)) {
+			while (($i < $additional_limit) && ($i < $available_spaces)) {
 				$i++;
 			}
 			$i = $i - 1;

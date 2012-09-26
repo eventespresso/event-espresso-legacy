@@ -212,21 +212,31 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 	$answer_id = $question->id;
 	//echo $answer_id;
 
-	if (isset($question->q_id))
+	if (isset($question->q_id)) {
 		$question->id = $question->q_id;
+	}
+		
 	if ($question->admin_only == 'Y' && $show_admin_only == false) {
 		return;
 	}
+	
 	$field_name = ($question->system_name != '') ? $question->system_name : 'TEXT_' . $question->id;
-	echo '<label for="' . $field_name . '">' . $question->question . $required_label . '</label><br>';
+	echo '<label for="' . $field_name . '">' . $question->question . $required_label . '</label>';
+	
 	switch ($question->question_type) {
+	
 		case "TEXT" :
+		
 			echo '<input type="text" ' . $required . ' id="' . $field_name . '"  name="' . $field_name . '" size="40"  value="' . $edits . '" />';
 			break;
+			
 		case "TEXTAREA" :
+		
 			echo '<textarea id="TEXTAREA_' . $question->id . '" ' . $required . ' name="TEXTAREA_' . $question->id . '"  cols="30" rows="5">' . $edits . '</textarea>';
 			break;
+			
 		case "SINGLE" :
+		
 			$values = explode(",", $question->response);
 			$answers = explode(",", $edits);
 			echo '<ul>';
@@ -236,7 +246,9 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 			}
 			echo "</ul>";
 			break;
+			
 		case "MULTIPLE" :
+		
 			$values = explode(",", $question->response);
 			$answers = explode(",", $edits);
 			//echo '<p>New True ID= '.$question->id.'</p>';
@@ -249,7 +261,9 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 			echo "</ul>";
 			//echo '<input name="'.$answer_id.'" type="hidden" value="'.$answer_id.'" />';
 			break;
+			
 		case "DROPDOWN" :
+		
 			$dd_type = $question->system_name == 'state' ? 'name="state"' : 'name="DROPDOWN_' . $question->id . '"';
 			$values = explode(",", $question->response);
 			//$answers = explode ( ",", $edits );
@@ -261,7 +275,9 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 			}
 			echo "</select>";
 			break;
+			
 		default :
 			break;
+			
 	}
 }
