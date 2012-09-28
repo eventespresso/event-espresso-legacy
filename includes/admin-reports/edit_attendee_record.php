@@ -57,11 +57,14 @@ function edit_attendee_record() {
 			if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'edit_attendee_' . $registration_id . '_update_price_nonce' )) {
 				wp_die( $failed_nonce_msg );
 			}
-												
-			$upd_price = number_format( abs( sanitize_text_field( $_REQUEST['final_price'] )), 2, '.', '' );
+
+			$upd_price = (float)number_format( abs( sanitize_text_field( $_REQUEST['final_price'] )), 2, '.', '' );
 			$upd_qty = absint( $_REQUEST['quantity'] );			
 			
-			$set_cols_and_values = array( 'final_price'=>$upd_price, 'quantity'=> $upd_qty );
+			$set_cols_and_values = array( 
+				'final_price'=>$upd_price, 
+				'quantity'=> $upd_qty
+			);
 			$set_format = array( '%f', '%d' );
 			$where_cols_and_values = array( 'id'=> $id );
 			$where_format = array( '%d' );
@@ -75,7 +78,8 @@ function edit_attendee_record() {
 				// now we need to gather all the ticket prices for all attendees for the entire registraion and calculate a new total cost
 				$upd_total = 0;
 				$SQL = "SELECT payment_status, amount_pd, final_price, quantity, is_primary FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id = %s";
-				if ( $tickets = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ))) {			
+				if ( $attendee_tickets = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ))) {			
+					// loop thru tickets
 					foreach ( $attendee_tickets as $attendee_ticket ) {
 						// calculate total for each attendee and add to total cost
 						$upd_total += $attendee_ticket->final_price * $attendee_ticket->quantity;
@@ -97,6 +101,11 @@ function edit_attendee_record() {
 				} elseif ( $upd_total < $amount_pd ) {
 					$upd_payment_status = __('Refund','event_espresso');
 				}
+				
+//				echo '<h4>$amount_pd : ' . $amount_pd . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//				echo '<h4>$payment_status : ' . $payment_status . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//				echo '<h4>$upd_total : ' . $upd_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//				echo '<h4>$upd_payment_status : ' . $upd_payment_status . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				
 				// compare old payment status with new payment status and update if things have changed
 				if ( $upd_payment_status != $payment_status ) {
@@ -634,14 +643,12 @@ function edit_attendee_record() {
 											<strong class="att-tckt-prc-lbl"><?php _e('Date Paid:', 'event_espresso'); ?></strong> 
 											<?php echo !empty($payment_date) ? event_date_display($payment_date) : 'N/A' ?>
 									</li>
-									<?php if ($multi_reg == true) { ?>
 									<li>
 											<strong class="att-tckt-prc-lbl">
-											<?php _e('Multiple Event Total:', 'event_espresso'); ?>
+											<?php _e('Total Amount Owing:', 'event_espresso'); ?>
 											</strong>
 											<?php echo $org_options['currency_symbol'] ?><?php echo $total_cost; ?>
 									</li>
-									<?php } ?>
 									<li>
 											<strong class="att-tckt-prc-lbl"><?php _e('Total Amount Paid to Date:', 'event_espresso'); ?></strong> 
 											<?php echo $org_options['currency_symbol'] ?><?php echo espresso_attendee_price(array('attendee_id' => $id, 'reg_total' => true)); ?>
