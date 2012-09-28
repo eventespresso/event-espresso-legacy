@@ -162,7 +162,7 @@ if (!function_exists('espresso_get_time_reg_limit')) {
 
 //Creates a dropdown if multiple times are associated with an event
 if (!function_exists('event_espresso_time_dropdown')) {
-    function event_espresso_time_dropdown($event_id = 'NULL', $label = 1, $multi_reg = 0, $value = '') {
+    function event_espresso_time_dropdown( $event_id = 'NULL', $label = 1, $multi_reg = 0, $value = '' ) {
         global $wpdb, $org_options;
 		$html = '';
 

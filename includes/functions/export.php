@@ -271,23 +271,21 @@ if (!function_exists('espresso_export_stuff')){
 						$question_filter = array();//will be used to keep track of newly added and deleted questions
 		
 						if (count($question_groups) > 0){
-							$questions_in = '';
 							$question_sequence = array();
 		
-							/*foreach ($question_groups as $g_id) 
-							{
+							$questions_in = '';
+							foreach ($question_groups as $g_id) {
 								$questions_in .= $g_id . ',';
-							}*/
-							$questions_in = implode(",",$question_groups);
-		
-							/*$questions_in = substr($questions_in,0,-1);*/
+							}		
+							$questions_in = substr($questions_in,0,-1);
+							
 							$group_name = '';
 							$counter = 0;
 		
 							$quest_sql = "SELECT q.id, q.question FROM " . EVENTS_QUESTION_TABLE . " q ";
 							$quest_sql .= " JOIN " .  EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 							$quest_sql .= " JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
-							$quest_sql .= " WHERE qgr.group_id in ( " . $questions_in . ") ";
+							$quest_sql .= " WHERE qgr.group_id in ( $questions_in ) ";
 							if(  function_exists('espresso_member_data') && ( espresso_member_data('role')=='espresso_event_manager' || espresso_member_data('role')=='espresso_group_admin') ){
 								$quest_sql .= " AND qg.wp_user = '" . espresso_member_data('id') ."' ";
 							}		

@@ -118,11 +118,11 @@ function attendee_edit_record() {
 			$SQL = "SELECT q.*, q.id q_id, qg.group_name FROM " . EVENTS_QUESTION_TABLE . " q ";
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
-			$SQL .= "WHERE qgr.group_id in (%s) ";
+			$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
 			$SQL .= "AND q.admin_only = 'N' ";
 			$SQL .= "ORDER BY qg.id, q.sequence ASC";
 			
-			$questions = $wpdb->get_results( $wpdb->prepare( $SQL, $questions_in ));
+			$questions = $wpdb->get_results( $wpdb->prepare( $SQL ));
 
 			$SQL = "SELECT question_id, answer FROM " . EVENTS_ANSWER_TABLE . " ans WHERE ans.attendee_id = %d";
 			$answers = $wpdb->get_results( $wpdb->prepare( $SQL, $id ));
@@ -224,13 +224,13 @@ function attendee_edit_record() {
 					$SQL .= "LEFT JOIN " . EVENTS_ANSWER_TABLE . " at on q.id = at.question_id ";
 					$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 					$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
-					$SQL .= "WHERE qgr.group_id in ( %s ) ";
+					$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
 					$SQL .= "AND ( at.attendee_id IS NULL OR at.attendee_id = %d ) ";
 					$SQL .= "AND q.admin_only != 'Y' ";
 					$SQL .= $FILTER;
 					$SQL .= "ORDER BY qg.id, q.id ASC";
 
-					if ( $questions = $wpdb->get_results( $wpdb->prepare( $SQL, $questions_in, $id )) ) {
+					if ( $questions = $wpdb->get_results( $wpdb->prepare( $SQL, $id )) ) {
 
 						$existing_questions = '';
 						foreach ( $questions as $question ) {
@@ -241,13 +241,13 @@ function attendee_edit_record() {
 						$SQL = "SELECT q.* FROM " . EVENTS_QUESTION_TABLE . " q ";
 						$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr ON q.id = qgr.question_id ";
 						$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg ON qg.id = qgr.group_id ";
-						$SQL .= "WHERE qgr.group_id IN ( %s ) ";
+						$SQL .= "WHERE qgr.group_id IN ( $questions_in ) ";
 						$SQL .= "AND q.id NOT IN ( %s ) ";
 						$SQL .= "GROUP BY q.question ";
 						$SQL .= "ORDER BY qg.id, q.id ASC";
 
 
-						if ( $questions_2 = $wpdb->get_results( $wpdb->prepare( $SQL, $questions_in, $existing_questions ))) {
+						if ( $questions_2 = $wpdb->get_results( $wpdb->prepare( $SQL, $existing_questions ))) {
 							//Merge the existing questions with any missing questions
 							array_merge( $questions, $questions_2 );
 						}

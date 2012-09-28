@@ -679,8 +679,7 @@ if (!function_exists('event_espresso_add_question_groups')) {
 					FROM " . EVENTS_QUESTION_TABLE . " q
 					JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr ON q.id = qgr.question_id
 					JOIN " . EVENTS_QST_GROUP_TABLE . " qg ON qg.id = qgr.group_id
-					WHERE qgr.group_id in ( " . $questions_in . ")
-					" . $FILTER . "
+					WHERE qgr.group_id in ( $questions_in ) $FILTER
 					ORDER BY qg.group_order ASC, qg.id, q.sequence, q.id ASC";
 			//echo $sql;
 

@@ -509,10 +509,10 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								$SQL = "SELECT q.*, qg.group_name FROM " . EVENTS_QUESTION_TABLE . " q ";
 								$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 								$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
-								$SQL .= "WHERE qgr.group_id in ( %s ) ";
+								$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
 								$SQL .= "ORDER BY q.id ASC";
 								
-								$questions_list = $wpdb->get_results($wpdb->prepare( $SQL, $questions_in ));
+								$questions_list = $wpdb->get_results($wpdb->prepare( $SQL ));
 								foreach ($questions_list as $question_list) {
 									if ($question_list->system_name != '') {
 										$ext_att_data_source[$question_list->system_name] = $att_data_source['x_attendee_' . $question_list->system_name][$k];

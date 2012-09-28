@@ -239,12 +239,20 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 		
 			$values = explode(",", $question->response);
 			$answers = explode(",", $edits);
-			echo '<ul>';
+			echo '
+	<ul>';
 			foreach ($values as $key => $value) {
 				$checked = in_array(trim($value), $answers) ? ' checked="checked"' : "";
-				echo '<li><input id="SINGLE_' . $question->id . '_' . $key . '" ' . $required . ' name="SINGLE_' . $question->id . '"  type="radio" value="' . trim($value) . '" ' . $checked . '/> ' . trim($value) . '</li>';
+				echo '
+		<li>
+			<label class="radio-btn-lbl">
+				<input id="SINGLE_' . $question->id . '_' . $key . '" ' . $required . ' name="SINGLE_' . $question->id . '"  type="radio" value="' . trim($value) . '" ' . $checked . '/>
+				<span>' . trim($value) . '</span>
+			</label>
+		</li>';
 			}
-			echo "</ul>";
+			echo '
+	</ul>';
 			break;
 			
 		case "MULTIPLE" :
@@ -252,13 +260,21 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 			$values = explode(",", $question->response);
 			$answers = explode(",", $edits);
 			//echo '<p>New True ID= '.$question->id.'</p>';
-			echo '<ul>';
+			echo '
+	<ul>';
 			foreach ($values as $key => $value) {
 				$checked = in_array(trim($value), $answers) ? " checked=\"checked\"" : "";
 				/* 	echo "<label><input type=\"checkbox\"$required id=\"MULTIPLE_$question->id_$key\" name=\"MULTIPLE_$question->id_$key\"  value=\"$value\"$checked /> $value</label><br/>\n"; */
-				echo '<li><input id="' . trim($value) . '" ' . $required . ' name="MULTIPLE_' . $question->id . '[]"  type="checkbox" value="' . trim($value) . '" ' . $checked . '/> ' . trim($value) . '</li>';
+				echo '
+		<li>
+			<label class="radio-btn-lbl">
+				<input id="' . trim($value) . '" ' . $required . ' name="MULTIPLE_' . $question->id . '[]"  type="checkbox" value="' . trim($value) . '" ' . $checked . '/>
+				<span>' . trim($value) . '</span>
+			</label>
+		</li>';
 			}
-			echo "</ul>";
+			echo '
+	</ul>';
 			//echo '<input name="'.$answer_id.'" type="hidden" value="'.$answer_id.'" />';
 			break;
 			
