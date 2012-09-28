@@ -7,10 +7,8 @@ function edit_attendee_record() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 	global $wpdb, $org_options;
 	
-	$attendee_num = 1;
 	$notifications['success'] = array(); 
 	$notifications['error']	 = array(); 
-	$is_additional_attendee = FALSE;
 	
 	$failed_nonce_msg = '
 <div id="message" class="error">
@@ -19,6 +17,9 @@ function edit_attendee_record() {
 		<span style="font-size:.9em;">' . __( 'Please press the back button on your browser to return to the previous page.', 'event_espresso') . '</span>
 	</p>
 </div>';
+
+	$attendee_num = 1;
+	$is_additional_attendee = FALSE;
 
 	// **************************************************************************
 	// **************************** EDIT ATTENDEE  ****************************
@@ -446,7 +447,7 @@ function edit_attendee_record() {
 			}
 		}
 
-
+		// display success messages
 		if ( ! empty( $notifications['success'] )) { 
 			$success_msg = implode( $notifications['success'], '<br />' );
 		?>
@@ -457,7 +458,10 @@ function edit_attendee_record() {
 	</p>
 </div>
 
-		<?php } elseif ( ! empty( $notifications['error'] )) {
+		<?php
+		 } 
+		// display error messages
+		if ( ! empty( $notifications['error'] )) {
 			$error_msg = implode( $notifications['error'], '<br />' );
 		?>
 				
@@ -523,16 +527,17 @@ function edit_attendee_record() {
 													}
 
 													//pull the list of questions that are relevant to this event
-													$q_sql_2 = "SELECT q.*, at.*, qg.group_name, qg.show_group_description, qg.show_group_name FROM " . EVENTS_QUESTION_TABLE . " q
-					LEFT JOIN " . EVENTS_ANSWER_TABLE . " at on q.id = at.question_id
-					JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id
-					JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id
-					WHERE qgr.group_id in ( $questions_in )
-					AND (at.attendee_id IS NULL OR at.attendee_id = '" . $id . "')
-					" . $FILTER . "
-					ORDER BY qg.id, q.id ASC";
+													$SQL = "SELECT q.*, at.*, qg.group_name, qg.show_group_description, qg.show_group_name ";
+													$SQL .= "FROM " . EVENTS_QUESTION_TABLE . " q ";
+													$SQL .= "LEFT JOIN " . EVENTS_ANSWER_TABLE . " at on q.id = at.question_id ";
+													$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
+													$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
+													$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
+													$SQL .= "AND ( at.attendee_id IS NULL OR at.attendee_id = %d ) ";
+													$SQL .= $FILTER . " ";
+													$SQL .= "ORDER BY qg.id, q.id ASC";
 
-													$questions = $wpdb->get_results($q_sql_2);
+													$questions = $wpdb->get_results( $wpdb->prepare( $SQL, $id ));
 													$num_rows = $wpdb->num_rows;
 
 													if ($num_rows > 0) {
