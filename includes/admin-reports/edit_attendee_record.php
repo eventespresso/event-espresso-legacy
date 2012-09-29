@@ -33,7 +33,7 @@ function edit_attendee_record() {
 		// check for multi reg, additional attendees, and verify reg id for primary attendee
 		$SQL = "SELECT * FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE registration_id = %s";
 		$check = $wpdb->get_row( $wpdb->prepare( $SQL, $registration_id ));
-		if ( $check !== NULL ) {
+		if ( $check ) {
 			$registration_id = $check->primary_registration_id;
 			$SQL = "SELECT distinct primary_registration_id, registration_id ";
 			$SQL .= "FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " ";
@@ -136,8 +136,8 @@ function edit_attendee_record() {
 				} 	
 				
 				// let's base our success on the lack of errors
-				$notifications['success'][] = empty( $notifications['error'] ) ? __('All attendee ticket price details have been successfully updated.', 'event_espresso') : __('One or more errors may have prevented some attendee ticket price details from being successfully updated.', 'event_espresso'); 	
-				
+				$notifications['success'][] = empty( $notifications['error'] ) ? __('All attendee ticket price details have been successfully updated.', 'event_espresso') : __('Some attendee ticket price details were successfully updated, but the following error(s) may have prevented others from being updated:', 'event_espresso'); 	
+			
 			}			
 		}
 		
@@ -160,7 +160,7 @@ function edit_attendee_record() {
 			if ( $del_results === FALSE ) {
 				$notifications['error'][] = __('An error occured. The attendee could not be deleted.', 'event_espresso'); 
 			} elseif ( $del_results === 0 ) { 
-				$notifications['error'][] = __('The attendee record in the db could not be found and was therefore not deleted.', 'event_espresso'); 
+				$notifications['error'][] = __('The attendee record in the database could not be found and was therefore not deleted.', 'event_espresso'); 
 			} else {
 
 				if (defined('ESPRESSO_SEATING_CHART')) {
@@ -174,7 +174,7 @@ function edit_attendee_record() {
 				$SQL = "SELECT id from " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id = %s";
 				$attendees = $wpdb->query( $wpdb->prepare( $SQL, $registration_id ));
 				if ( $attendees === FALSE ) {
-					$notifications['error'][] = __('An error occured while attempting to retrieve additional attendee data from the db.', 'event_espresso'); 
+					$notifications['error'][] = __('An error occured while attempting to retrieve additional attendee data from the database.', 'event_espresso'); 
 				} else {
 					// update quantities for attendees
 					$SQL = " UPDATE " . EVENTS_ATTENDEE_TABLE . " SET quantity = IF(quantity IS NULL ,NULL,IF(quantity > 0,IF(quantity-1>0,quantity-1,1),0)) ";
@@ -366,61 +366,64 @@ function edit_attendee_record() {
 
 		$counter = 0;
 		$additional_attendees = NULL;
-
-		// use reg id or attendee id ?
-		$WHERE = (isset($_REQUEST['registration_id'])) ? "registration_id ='" . $_REQUEST['registration_id'] . "'" : "id = " . $_REQUEST['id'];
-		// or get the primary attendee ?
-		if (isset($_REQUEST['attendee_num']) && $_REQUEST['attendee_num'] > 1 && isset($_REQUEST['registration_id']) && isset($_REQUEST['id'])) {
-			$WHERE = " t1.registration_id ='" . $_REQUEST['registration_id'] . "' AND t1.id = " . $_REQUEST['id'];
-		}
 		
-		$SQL = "SELECT t1.*, t2.event_name, t2.question_groups, t2.event_meta, t2.additional_limit FROM " . EVENTS_ATTENDEE_TABLE . " t1 ";
-		$SQL .= "JOIN " . EVENTS_DETAIL_TABLE . " t2 ON t1.event_id = t2.id ";
-		$SQL .= "WHERE $WHERE ORDER BY t1.id";
-		$results = $wpdb->get_results( $wpdb->prepare( $SQL ));
-			 
-
-		foreach ($results as $result) {
-			if ($counter == 0) {
-				$id = $result->id;
-				$registration_id = $result->registration_id;
-				$lname = $result->lname;
-				$fname = $result->fname;
-				$address = $result->address;
-				$address2 = $result->address2;
-				$city = $result->city;
-				$state = $result->state;
-				$zip = $result->zip;
-				$email = $result->email;
-				$hear = isset($result->hear) ? $result->hear : '';
-				$payment = $result->payment;
-				$phone = $result->phone;
-				$date = $result->date;
-				$payment_status = $result->payment_status;
-				$txn_type = $result->txn_type;
-				$txn_id = $result->txn_id;
-				$quantity = $result->quantity;
-				$payment_date = $result->payment_date;
-				$event_id = $result->event_id;
-				$event_name = $result->event_name;
-				$question_groups = unserialize($result->question_groups);
-				$question_groups = unserialize($result->question_groups);
-				$event_meta = unserialize($result->event_meta);
-				$coupon_code = $result->coupon_code;
-				$quantity = $result->quantity;
+		$SQL = "SELECT att.*, evt.event_name, evt.question_groups, evt.event_meta, evt.additional_limit FROM " . EVENTS_ATTENDEE_TABLE . " att ";
+		$SQL .= "JOIN " . EVENTS_DETAIL_TABLE . " evt ON att.event_id = evt.id ";
+		// are we looking for an additional attendee ?
+		if ( isset( $_REQUEST['attendee_num'] ) && $_REQUEST['attendee_num'] > 1 && isset( $_REQUEST['id'] )) {
+			$SQL .= "WHERE  att.id = " . sanitize_text_field( $_REQUEST['id'] );
+		} else {
+			// check for multi reg & additional attendees by first finding primary attendee
+			$SQL2 = "SELECT primary_registration_id FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE registration_id = %s";
+			if ( $primary_registration_id = $wpdb->get_var( $wpdb->prepare( $SQL2, sanitize_text_field( $_REQUEST['registration_id'] )))) {
+				// now find all registrations
+				$SQL3 = "SELECT registration_id FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE primary_registration_id = %s";
+				$reg_ids = $wpdb->get_col( $wpdb->prepare( $SQL3, $primary_registration_id ));
+				$reg_ids = "'" . implode("','", $reg_ids) . "'";
+			} else {
+				$reg_ids = sanitize_text_field( $_REQUEST['registration_id'] );
+			}		
+			$SQL .= "WHERE registration_id IN ( $reg_ids ) ORDER BY att.id";
+		}
+		$attendees = $wpdb->get_results( $wpdb->prepare( $SQL ));
+		
+		foreach ($attendees as $attendee) {
+			if ( $counter == 0 ) {
+				$id = $attendee->id;
+				$registration_id = $attendee->registration_id;
+				$lname = $attendee->lname;
+				$fname = $attendee->fname;
+				$address = $attendee->address;
+				$address2 = $attendee->address2;
+				$city = $attendee->city;
+				$state = $attendee->state;
+				$zip = $attendee->zip;
+				$email = $attendee->email;
+				$payment = $attendee->payment;
+				$phone = $attendee->phone;
+				$date = $attendee->date;
+				$payment_status = $attendee->payment_status;
+				$txn_type = $attendee->txn_type;
+				$txn_id = $attendee->txn_id;
+				$quantity = $attendee->quantity;
+				$payment_date = $attendee->payment_date;
+				$event_id = $attendee->event_id;
+				$event_name = $attendee->event_name;
+				$question_groups = unserialize($attendee->question_groups);
+				$question_groups = unserialize($attendee->question_groups);
+				$event_meta = unserialize($attendee->event_meta);
+				$coupon_code = $attendee->coupon_code;
 				$is_additional_attendee = ($primary_attendee != $id) ? true : false;
-				$attendee_limit = $result->additional_limit;
-				$amount_pd = $result->amount_pd;
-				$total_cost = $result->total_cost;
-				$orig_price = $result->orig_price;
-				$final_price = $result->final_price;
+				$attendee_limit = $attendee->additional_limit;
+				$amount_pd = $attendee->amount_pd;
+				$total_cost = $attendee->total_cost;
+				$orig_price = $attendee->orig_price;
+				$final_price = $attendee->final_price;
 
-				$start_date = $result->start_date;
-				$event_time = $result->event_time;
+				$start_date = $attendee->start_date;
+				$event_time = $attendee->event_time;
 				
-				/*
-				* Added for seating chart addon
-				*/
+				// Added for seating chart addon
 				$booking_info = "";
 				if ( defined('ESPRESSO_SEATING_CHART') ){
 					$seating_chart_id = seating_chart::check_event_has_seating_chart($event_id);
@@ -431,19 +434,18 @@ function edit_attendee_record() {
 						}
 					}
 				}
-				/*
-				*End
-				*/
+
 
 				$event_date = event_date_display($start_date . ' ' . $event_time, get_option('date_format') . ' g:i a');
 
 				if ( $is_additional_attendee && isset($event_meta['add_attendee_question_groups']) && $event_meta['add_attendee_question_groups'] != NULL ) {
 					$question_groups = $event_meta['add_attendee_question_groups'];
 				}
+				
+				$counter++;
 
-				$counter = 1;
 			} else {
-				$additional_attendees[$result->id] = array('full_name' => $result->fname . ' ' . $result->lname, 'email' => $result->email, 'phone' => $result->phone);
+				$additional_attendees[$attendee->id] = array('full_name' => $attendee->fname . ' ' . $attendee->lname, 'email' => $attendee->email, 'phone' => $attendee->phone);
 			}
 		}
 
@@ -592,8 +594,7 @@ function edit_attendee_record() {
 									'registration_id' => $registration_id,
 									'id' => $att,
 									'attendee_num' => $attendee_num,
-									'event_id' => $event_id,
-									'event_id' => $event_id,
+									'event_id' => $event_id
 								);
 								// add url params
 								$edit_attendee_link = add_query_arg( $edit_att_url_params, 'admin.php?page=events' );
@@ -611,8 +612,7 @@ function edit_attendee_record() {
 									'registration_id' => $registration_id,
 									'id' => $att,
 									'attendee_num' => $attendee_num,
-									'event_id' => $event_id,
-									'event_id' => $event_id,
+									'event_id' => $event_id
 								);
 								// add url params
 								$delete_attendee_link = add_query_arg( $delete_att_url_params, 'admin.php?page=events' );

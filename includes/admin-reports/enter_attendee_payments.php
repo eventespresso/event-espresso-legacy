@@ -2,97 +2,190 @@
 function enter_attendee_payments() {
 
     global $wpdb, $org_options;
-    $event_id = $_REQUEST[ 'event_id' ];
-    $today = date( "d-m-Y" );
+ 
+	$notifications['success'] = array(); 
+	$notifications['error']	 = array(); 
+	
+	$failed_nonce_msg = '
+<div id="message" class="error">
+	<p>
+		<strong>' . __( 'An Error Occurred. The request failed to pass a security check.', 'event_espresso' ) . '</strong><br/>
+		<span style="font-size:.9em;">' . __( 'Please press the back button on your browser to return to the previous page.', 'event_espresso') . '</span>
+	</p>
+</div>';
 
-//Added by Imon
+
 	$multi_reg = FALSE;
-	$registration_id = $_REQUEST['registration_id'];
+	$event_id = isset($_REQUEST['event_id']) ? absint( $_REQUEST['event_id'] ) : '';
+	$registration_id = sanitize_text_field( $_REQUEST['registration_id'] );
 	$registration_ids = array();
+	//echo '<h4>$registration_id : ' . $registration_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+
+	$SQL = "SELECT * FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE registration_id =%s LIMIT 1";	
 	
-	$SQL = "SELECT * FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE registration_id =%s ORDER BY id LIMIT 1";	
-	
-	if ( $check = $wpdb->get_row($wpdb->prepare( $SQL, $registration_id ))) {	
+	if ( $check = $wpdb->get_row( $wpdb->prepare( $SQL, $registration_id ))) {	
+		//printr( $check, '$check  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		$registration_id = $check->primary_registration_id;
 		$SQL = "SELECT * FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE primary_registration_id =%s";
 		$registration_ids = $wpdb->get_results($wpdb->prepare( $SQL, $registration_id ), ARRAY_A );
 		$registration_ids = $registration_ids !== FALSE ? $registration_ids : array();
-		$multi_reg = TRUE;		
+		$multi_reg = TRUE;
 	}
-	
-    switch ( $_REQUEST[ 'form_action' ] ) {
- 
-        //Add payment info
-        case 'payment':
-	 
-            if ( isset($_REQUEST[ 'attendee_action' ]) && $_REQUEST[ 'attendee_action' ] == 'post_payment' ){
-                //Added by Imon
-				$primary_row = $wpdb->get_row("select id from ".EVENTS_ATTENDEE_TABLE." where registration_id = '$registration_id' order by id limit 0,1 ");
-				$primary_attendee_id = $primary_row->id; // GET the primary attendee id because amount paid info is kept with the primary attendee
-                $payment_status = isset($_REQUEST[ 'payment_status' ]) ? $_REQUEST[ 'payment_status' ]:'';
-                $txn_type = isset($_REQUEST[ 'txn_type' ]) ? $_REQUEST[ 'txn_type' ]:'';
-                $txn_id = isset($_REQUEST[ 'txn_id' ]) ? $_REQUEST[ 'txn_id' ]:'';
-                //$quantity = isset($_REQUEST[ 'quantity' ]) ? $_REQUEST[ 'quantity' ]:'';
-                $amount_pd = isset($_REQUEST[ 'amount_pd' ]) ? $_REQUEST[ 'amount_pd' ]:'';
-                $payment_date = isset($_REQUEST[ 'payment_date' ]) ? $_REQUEST[ 'payment_date' ]:'';
-                $coupon_code = isset($_REQUEST[ 'event_espresso_coupon_code' ]) ? $_REQUEST[ 'event_espresso_coupon_code' ]:'';
-				
-				$payment_date = date_i18n('Y-m-d', strtotime($payment_date));
+	//echo '<h4>$registration_id : ' . $registration_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+	//printr( $registration_ids, '$registration_ids  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 
-                //Added/updated by Imon
-				//Update payment status information for primary attendee
-				$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET payment_status = '$payment_status', txn_type = '$txn_type', txn_id = '$txn_id', amount_pd = '$amount_pd', payment_date ='$payment_date',  coupon_code ='$coupon_code' WHERE registration_id ='" . $registration_id . "' and id = $primary_attendee_id ";
+	switch ( $_REQUEST[ 'form_action' ] ) {
 
-				$wpdb->query( $sql );
+		//Add payment info
+		case 'payment':
 
-				if ( count($registration_ids) > 0 ) {
-				
-					foreach($registration_ids as $reg_id) {
-						// Update payment status information for all attendees
-						$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET payment_status = '$payment_status', txn_type = '$txn_type', txn_id = '$txn_id', payment_date ='$payment_date', coupon_code ='$coupon_code' WHERE registration_id ='" . $reg_id['registration_id']. "' ";
-						$wpdb->query( $sql );
-					}
-					
-				} else {
-					// Update payment status information for all attendees
-					$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET payment_status = '$payment_status', txn_type = '$txn_type', txn_id = '$txn_id', payment_date ='$payment_date', coupon_code ='$coupon_code' WHERE registration_id ='" . $registration_id . "' ";
-					$wpdb->query( $sql );
+			if ( isset($_REQUEST[ 'attendee_action' ]) && $_REQUEST[ 'attendee_action' ] == 'post_payment' ){
+
+				if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'payment_' . $registration_id . '_post_payment_nonce' )) {
+					wp_die( $failed_nonce_msg );
 				}
 
-                //Send Payment Recieved Email
-                if ( $_REQUEST[ 'send_payment_rec' ] == "send_message" ) {
+				// get the primary attendee id because amount paid info is kept with the primary attendee
+				$SQL = "SELECT id, payment_status FROM ".EVENTS_ATTENDEE_TABLE." WHERE registration_id =%s AND is_primary = 1 ORDER BY id LIMIT 0,1 ";
+				$primary_att = $wpdb->get_row( $wpdb->prepare( $SQL, $registration_id ));
+				if ( ! $primary_att ) {
+					$notifications['error'][] = __('An error occured. The primary attendee details could not be retrieved from the database.', 'event_espresso'); 
+				} else {
 
-                    //event_espresso_send_payment_notification( $id );
-					if ( count($registration_ids) > 0 ) {
-
-						$reg_attendees = array();
-
-						foreach($registration_ids as $reg_id) {			
+					$txn_type = isset($_POST[ 'txn_type' ]) ? $_POST[ 'txn_type' ] : FALSE;
+					$txn_id = isset($_POST[ 'txn_id' ]) ? $_POST[ 'txn_id' ] : FALSE;
+					$payment_date = isset($_POST[ 'payment_date' ]) ? date_i18n('Y-m-d', strtotime( $_POST[ 'payment_date' ] )) : FALSE;
+					$coupon_code = isset($_POST[ 'event_espresso_coupon_code' ]) ? $_POST[ 'event_espresso_coupon_code' ] : '';
+					$total_owing = isset($_POST[ 'total_owing' ]) ? (float)number_format( abs( sanitize_text_field( $_POST[ 'total_owing' ] )), 2, '.', '' ) : 0.00;
+					$amount_pd = isset($_POST[ 'amount_pd' ]) ? (float)number_format( abs( sanitize_text_field( $_POST[ 'amount_pd' ] )), 2, '.', '' ) : 0.00;
+					$new_payment = isset($_POST[ 'new_payment' ]) ? (float)number_format( sanitize_text_field( $_POST[ 'new_payment' ] ), 2, '.', '' ) : 0.00;
 					
-							$SQL = 'SELECT * FROM ' . EVENTS_ATTENDEE_TABLE . ' WHERE registration_id =%s';
-							$more_reg_attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $reg_id['registration_id'] ), OBJECT_K );
-			
-							foreach ( $more_reg_attendees as $another_reg_attendee ) {
-								$reg_attendees[ $another_reg_attendee->email ] = $another_reg_attendee;			
+					// if making a payment, we are going to require the txn type and txn id
+					if ( $new_payment != 0.00  ) {						
+						$fail = FALSE;
+						if ( ! $txn_type ) {
+							$notifications['error'][] = __('You must enter a Transaction Type when making a payment.', 'event_espresso'); 
+							$fail = TRUE;
+						}
+						if ( ! $txn_id ) {
+							$notifications['error'][] = __('You must enter a Transaction ID when making a payment.', 'event_espresso'); 
+							$fail = TRUE;
+						}
+						if ( $fail ) {
+							break;
+						}					
+					}
+					
+					$upd_total = $amount_pd + $new_payment;
+
+					// compare new total_cost with amount_pd
+					if ( $upd_total == $total_owing ) {
+						$upd_payment_status = __('Completed','event_espresso');
+					} elseif ( $upd_total < $total_owing ) {
+						$upd_payment_status = __('Pending','event_espresso');
+					} elseif ( $upd_total > $total_owing ) {
+						$upd_payment_status = __('Refund','event_espresso');
+					}					
+					
+					//Update payment status information for primary attendee
+					$set_cols_and_values = array( 
+							'payment_status' => $upd_payment_status,
+							'txn_type' => $txn_type,
+							'txn_id' => $txn_id,
+							'payment_date' => $payment_date,
+							'coupon_code' => $coupon_code,
+							'amount_pd' => $upd_total
+					);
+					$set_format = array( '%s', '%s', '%s', '%s', '%s', '%f' );
+					$where_cols_and_values = array( 'id'=> $primary_att->id );
+					$where_format = array( '%d' );
+					// run the update
+					$upd_success = $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
+					// if there was an actual error
+					if ( $upd_success === FALSE ) {
+						$notifications['error'][] = __('An error occured. The attendee payment details could not be updated.', 'event_espresso'); 
+					} else {
+
+						if ( count($registration_ids) > 0 ) {
+						
+							foreach($registration_ids as $reg_id) {
+								// Update payment status information for all attendees
+								// remove amount_pd from update data, since that only applies to the primary attendee
+								unset( $set_cols_and_values['amount_pd'] );
+								$set_format = array( '%s', '%s', '%s', '%s', '%s' );
+								$where_cols_and_values = array( 'registration_id'=> $reg_id['registration_id'] );
+								$where_format = array( '%d' );
+								// run the update
+								$upd_success = $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
+								// if there was an actual error
+								if ( $upd_success === FALSE ) {
+									$notifications['error'][] = __('An error occured. The payment details for the additional attendees could not be updated.', 'event_espresso'); 
+								} 
 							}
 							
-						}
+						} else {
 						
-						foreach ( $reg_attendees as $reg_attendee ){
-							event_espresso_send_payment_notification( array( 'registration_id'=>$reg_attendee->registration_id ));
+							// Update payment status information for all attendees
+							// remove amount_pd from update data, since that only applies to the primary attendee
+							unset( $set_cols_and_values['amount_pd'] );
+							$set_format = array( '%s', '%s', '%s', '%s', '%s' );
+							$where_cols_and_values = array( 'registration_id'=> $registration_id );
+							$where_format = array( '%d' );
+							// run the update
+							$upd_success = $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
+							// if there was an actual error
+							if ( $upd_success === FALSE ) {
+								$notifications['error'][] = __('An error occured. The payment details for the additional attendees could not be updated.', 'event_espresso'); 
+							} 
+
 						}
 
-						
-					} else {
-						event_espresso_send_payment_notification(array('registration_id'=>$registration_id));
+		                //Send Payment Recieved Email
+		                if ( $_REQUEST[ 'send_payment_rec' ] == "send_message" ) {
+
+		                    //event_espresso_send_payment_notification( $id );
+							if ( count($registration_ids) > 0 ) {
+
+								$reg_attendees = array();
+
+								foreach($registration_ids as $reg_id) {			
+							
+									$SQL = 'SELECT * FROM ' . EVENTS_ATTENDEE_TABLE . ' WHERE registration_id =%s';
+									$more_reg_attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $reg_id['registration_id'] ), OBJECT_K );
+					
+									foreach ( $more_reg_attendees as $another_reg_attendee ) {
+										$reg_attendees[ $another_reg_attendee->email ] = $another_reg_attendee;			
+									}
+									
+								}
+								
+								foreach ( $reg_attendees as $reg_attendee ){
+									event_espresso_send_payment_notification( array( 'registration_id'=>$reg_attendee->registration_id ));
+								}
+
+								
+							} else {
+								event_espresso_send_payment_notification(array('registration_id'=>$registration_id));
+							}
+		                }
+					
 					}
-                }
-            }
+
+						// let's base our success on the lack of errors
+						$notifications['success'][] = empty( $notifications['error'] ) ? __('All attendee payment details have been successfully updated.', 'event_espresso') : __('Some attendee payment details were successfully updated, but the following error(s) may have prevented others from being updated:', 'event_espresso'); 	
+				 					
+				}
+
+		   }
 		 
             break;
 
         //Send Invoice
         case 'send_invoice':
+
+			if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'send_invoice_' . $registration_id . '_nonce' )) {
+				wp_die( $failed_nonce_msg );
+			}
 
 			if ( $org_options["use_attendee_pre_approval"] == "Y" ) {
 			
@@ -137,11 +230,13 @@ function enter_attendee_payments() {
 				} else {
 					event_espresso_send_invoice( $registration_id , $_REQUEST[ 'invoice_subject' ], $_REQUEST[ 'invoice_message' ] );
 				}
-				echo '<div id="message" class="updated fade"><p><strong>'.__('Invoice Sent', 'event_espresso').'</strong></p></div>';
+				
+				$notifications['success'][] = __('Invoice Sent.', 'event_espresso'); 	
 			}
 			
             break;
     }
+ 
 
 	$SQL = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id ='%s' ORDER BY id LIMIT 1";
     $attendee = $wpdb->get_row($wpdb->prepare( $SQL, $registration_id ));
@@ -196,40 +291,63 @@ function enter_attendee_payments() {
 	$event_date = event_date_display($start_date .' '.$event_time, get_option('date_format') . ' g:i a');
 //	$total_paid = espresso_attendee_price(array('registration_id'=>$_REQUEST['registration_id'], 'session_total'=>true));
 
-	if ( isset($_REQUEST[ 'status' ]) && $_REQUEST[ 'status' ] == 'saved' ){ ?>
 
+	// display success messages
+	if ( ! empty( $notifications['success'] )) { 
+		$success_msg = implode( $notifications['success'], '<br />' );
+	?>
+			
 <div id="message" class="updated fade">
-	<p><strong>
-		<?php _e( 'Payment details saved for', 'event_espresso' ); ?>
-		<?php echo $fname ?> <?php echo $lname ?>.
-		<?php if ( isset($_REQUEST[ 'send_payment_rec' ]) && $_REQUEST[ 'send_payment_rec' ] == "send_message" ){ ?>
-		<?php _e( 'Payment notification has been sent.', 'event_espresso' ); ?>
-		<?php } ?>
-		</strong></p>
+<p>
+	<strong><?php echo $success_msg; ?></strong>
+</p>
 </div>
-<?php
 
-	}
-?>
+	<?php
+	 } 
+	// display error messages
+	if ( ! empty( $notifications['error'] )) {
+		$error_msg = implode( $notifications['error'], '<br />' );
+	?>
+			
+<div id="message" class="error">
+<p>
+	<strong><?php echo $error_msg; ?></strong>
+</p>
+</div>
+
+	<?php } ?>
+		
+		
 <div class="metabox-holder">
 	<div class="postbox">
-		<?php
-		if ( !$multi_reg ){
-	?>
+		<?php 
+			// create attendee list link
+			$list_att_url_params = array( 
+				'event_admin_reports' => 'list_attendee_payments',
+				'event_id' => $event_id
+			);
+			// add url params
+			$list_attendee_link = add_query_arg( $list_att_url_params, 'admin.php?page=events' );
+		?>
+		<?php if ( !$multi_reg ) { ?>
 		<h3>
 			<?php _e( 'Name:', 'event_espresso' ); ?>
 			<b><?php echo $fname ?> <?php echo $lname ?></b>&nbsp;&nbsp;|&nbsp;&nbsp;
 			<?php _e( 'ID:', 'event_espresso' ); ?>
 			<?php echo $id ?>&nbsp;&nbsp;|&nbsp;&nbsp;
 			<?php _e( 'Registered For:', 'event_espresso' ); ?>
-			<a href="admin.php?page=events&event_admin_reports=list_attendee_payments&event_id=<?php echo $event_id ?>"><?php echo stripslashes_deep($event_name) ?></a> - <?php echo $event_date; ?></h3>
-		<?php
-		}else{
-	?>
-		<h3> <?php echo __('Multiple Registration Payment for ', 'event_espresso'); ?> <a href="admin.php?page=events&event_admin_reports=list_attendee_payments&event_id=<?php echo $event_id ?>"><?php echo stripslashes_deep($event_name) ?></a> - <?php echo $event_date; ?> </h3>
-		<?php
-		}
-		?>
+			<a href="<?php echo $list_attendee_link ?>"><?php echo stripslashes_deep($event_name) ?></a> - <?php echo $event_date; ?>
+		</h3>
+			
+		<?php } else { ?>
+		
+		<h3>
+			<?php echo __('Multiple Registration Payment for ', 'event_espresso'); ?> <a href="<?php echo $list_attendee_link ?>"><?php echo stripslashes_deep($event_name) ?></a> - <?php echo $event_date; ?>
+		</h3>
+		
+		<?php } ?>
+		
 		<div class="inside">
 			<table width="100%" border="0">
 				<tr>
@@ -242,34 +360,52 @@ function enter_attendee_payments() {
 				</tr>
 				<tr>
 					<td valign="top">
-<?php
-
-			if ( count($registration_ids) > 0 ){
-			
-				echo '<p><strong>'.__('Registration Ids:', 'event_espresso').'</strong></p>';
-				echo '<ul>';
-				foreach($registration_ids as $reg_id){
-					//TODO:Display cost per registration id. At the moment it is not possible to display price per registration id because discount is calculated for total amount [IMON]
-	                echo '<li># '.$reg_id['registration_id'].'&nbsp;&nbsp;<a href="admin.php?page=events&event_admin_reports=edit_attendee_record&event_id=' . $event_id . '&registration_id=' . $reg_id['registration_id'] . '&form_action=edit_attendee">'.__('View/Edit Registration', 'event_espresso').'</a></li>';
-				}
+						<?php 
+							// create edit attendee link
+							$edit_att_url_params = array( 
+								'event_admin_reports' => 'edit_attendee_record',
+								'form_action' => 'edit_attendee',
+								'registration_id' => $registration_id,
+								'event_id' => $event_id
+							);
+							// add url params
+							$edit_attendee_link = add_query_arg( $edit_att_url_params, 'admin.php?page=events' );
+						?>						
+						<?php if ( count($registration_ids) > 0 ) { ?>
 				
-			} else {
-			
-				echo '<p><strong>'.__('Registration Id:', 'event_espresso').'</strong></p>';
-	            //TODO:Display cost per registration id. At the moment it is not possible to display price per registration id because discount is calculated for total amount [IMON]
-				echo '<p># ' . $registration_id . '&nbsp;&nbsp;<a href="admin.php?page=events&event_admin_reports=edit_attendee_record&event_id=' . $event_id . '&registration_id=' . $registration_id . '&form_action=edit_attendee">'.__('View/Edit Registration', 'event_espresso').'</a></p>';
-			}
-			
-			echo '</ul><hr style="width:90%; margin:20px 0;" align="left" />';
-?>
-						<form method="POST" action="<?php echo $_SERVER[ 'REQUEST_URI' ] ?>&status=saved" class="espresso_form">
+						<p>
+							<strong><?php _e('Registration Ids:', 'event_espresso');?></strong>
+						</p>
+						<ul>
+							<?php foreach( $registration_ids as $reg_id ) { ?>					
+		                		<li>
+								#&nbsp;<?php echo $reg_id['registration_id']; ?>&nbsp;&nbsp;
+								<a href="<?php echo $edit_attendee_link; ?>"><?php _e('View / Edit Registration', 'event_espresso');?></a>
+							</li>				
+							<?php } ?>
+						</ul>
+						
+						<?php } else { ?>
+				
+						<p>
+							<strong><?php _e('Registration Id:', 'event_espresso');?></strong>
+						</p>
+						<p>
+							#&nbsp;<?php echo $registration_id;?>&nbsp;&nbsp;<a href="<?php echo $edit_attendee_link; ?>"><?php _e('View/Edit Registration', 'event_espresso');?></a>
+						</p>
+						
+						<?php } ?>
+				
+						<hr style="width:90%; margin:20px 0;" align="left" />
+
+						<form method="POST" action="<?php echo $_SERVER[ 'REQUEST_URI' ] ?>" class="espresso_form">
 							<fieldset>
 								<ul>
 									<li>
 										<label>
 											<?php _e( 'Payment Date:', 'event_espresso' ); ?>
 										</label>
-										<input type="text" class="medium-text" name="payment_date" size="45" value ="<?php echo !empty($payment_date) ? event_date_display($payment_date): event_date_display($today) ?>" />
+										<input type="text" class="medium-text" name="payment_date" size="45" value ="<?php echo !empty($payment_date) ? event_date_display($payment_date): event_date_display( date( "d-m-Y" )) ?>" />
 									</li>
 									<li>
 										<label for="payment_status">
@@ -277,12 +413,12 @@ function enter_attendee_payments() {
 										</label>
 										<?php
 												$values=array(
-													array('id'=>'','text'=> __('None','event_espresso')),
+													array('id'=>'','text'=> __('- please select -','event_espresso')),
 													array('id'=>'Completed','text'=> __('Completed','event_espresso')),
 													array('id'=>'Pending','text'=> __('Pending','event_espresso')),
 													array('id'=>'Payment Declined','text'=> __('Payment Declined','event_espresso')),
 													array('id'=>'Incomplete','text'=> __('Incomplete','event_espresso')),
-													array('id'=>'Refund','text'=> __('Refund','event_espresso'))
+													array('id'=>'Refund','text'=> __('Overpaid','event_espresso'))
 												);
 												echo select_input('payment_status', $values, $payment_status);
 										?>
@@ -292,16 +428,17 @@ function enter_attendee_payments() {
 											<?php _e( 'Total Amount Owing:', 'event_espresso' ); ?> ( <?php echo $org_options[ 'currency_symbol' ]; ?> )
 										</label>
 										<?php 
-											$amount_owing = (float)( $total_cost - $amount_pd ) > 0 ? number_format( $total_cost - $amount_pd, 2, '.', '' ) : 0.00 ;
+											$amount_owing = number_format( $total_cost - $amount_pd, 2, '.', '' );
 											if ( $amount_owing == 0.00 ) {
-												$amount_owing_class = ' full-payment';
+												$amnt_class = ' full-payment';
 											} elseif ( $amount_owing < $total_cost ) {
-												$amount_owing_class = ' part-payment';
+												$amnt_class = ' part-payment';
 											} elseif ( $amount_owing == $total_cost ) {
-												$amount_owing_class = ' no-payment';
+												$amnt_class = ' no-payment';
 											} 
 										?>									
-										<input class="medium-text algn-rght<?php echo $amount_owing_class;?>" type="text" name="total_owing" disabled="true" value ="<?php echo $amount_owing; ?>" />&nbsp;&nbsp;
+										<input class="small-text algn-rght<?php echo $amnt_class;?>" type="text" name="ttl_ow" disabled="true" value ="<?php echo $amount_owing; ?>" />
+										<input type="hidden" name="total_owing" value ="<?php echo $amount_owing; ?>" />&nbsp;&nbsp;
 										<a href="admin.php?page=events&event_admin_reports=edit_attendee_record&event_id=<?php echo $event_id;?>&registration_id=<?php echo $registration_id;?>&form_action=edit_attendee&show_payment=true">
 											<?php  _e('Edit Ticket Price(s)', 'event_espresso');?>
 										</a>
@@ -310,13 +447,14 @@ function enter_attendee_payments() {
 										<label>
 											<?php _e( 'Total Amount Paid to Date:', 'event_espresso' ); ?> ( <?php echo $org_options[ 'currency_symbol' ]; ?> )
 										</label>										
-										<input class="medium-text algn-rght<?php echo $amount_owing_class;?>" type="text" name="amount_pd" disabled="true" value ="<?php echo $amount_pd; ?>" />
+										<input class="small-text algn-rght<?php echo $amnt_class;?>" type="text" name="amnt_pd" disabled="true" value ="<?php echo $amount_pd; ?>" />
+										<input type="hidden" name="amount_pd" value ="<?php echo $amount_pd; ?>" />
 									</li>
 									<li>
 										<label>
 											<?php _e( 'Enter New Payment Amount:', 'event_espresso' ); ?> ( <?php echo $org_options[ 'currency_symbol' ]; ?> )
 										</label>										
-										<input class="medium-text algn-rght" type="text" name="new_payment" value ="" />
+										<input class="small-text algn-rght" type="text" name="new_payment" value ="" />
 									</li>
 									<li>
 										<label>
@@ -341,7 +479,7 @@ function enter_attendee_payments() {
 									</li>
 									<li>
 										<label>
-											<?php _e( 'Transaction ID:', 'event_espresso' ); ?>
+											<?php _e( 'Transaction ID: ', 'event_espresso' );?> <span class="smaller-text"><?php _e( '( or cheque #, gateway response, etc )', 'event_espresso' ); ?></span>
 										</label>
 										<input type="text" name="txn_id" size="45" value ="<?php echo $txn_id; ?>" />
 									</li>
@@ -370,11 +508,16 @@ function enter_attendee_payments() {
 							<input type="hidden" name="attendee_pay" value="paynow">
 							<input type="hidden" name="event_id" value="<?php echo $event_id ?>">
 							<input type="hidden" name="attendee_action" value="post_payment">
-						</form></td>
-					<td valign="top"><form class="espresso_form" method='post' action="<?php echo $_SERVER[ 'REQUEST_URI' ] ?>&status=invoiced">
+							<?php wp_nonce_field( 'payment_' . $registration_id . '_post_payment_nonce' ); ?>
+						</form>
+					</td>
+					<td valign="top">
+						<form class="espresso_form" method='post' action="<?php echo $_SERVER[ 'REQUEST_URI' ] ?>">
 							<input type="hidden" name="id" value="<?php echo $id ?>">
 							<input type="hidden" name="form_action" value="send_invoice">
 							<input type="hidden" name="event_id" value="<?php echo $event_id ?>">
+							<input type="hidden" name="registration_id" value="<?php echo $registration_id ?>">
+							<?php wp_nonce_field( 'send_invoice_' . $registration_id . '_nonce' ); ?>
 							<ul>
 								<li>
 									<?php _e('Use a ', 'event_espresso'); ?>
@@ -442,7 +585,8 @@ function enter_attendee_payments() {
 									<input type="submit" class="button-primary action"   name="Submit" value="Send Invoice">
 								</li>
 							</ul>
-						</form></td>
+						</form>
+					</td>
 				</tr>
 			</table>
 			<p>

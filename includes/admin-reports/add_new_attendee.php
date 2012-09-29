@@ -142,6 +142,7 @@ function add_new_attendee($event_id){
             <input class="btn_event_form_submit" id="event_form_field-<?php echo $event_id;?>" type="submit" name="Submit" value="<?php _e('Submit','event_espresso');?>" />
           </p>
           <?php echo event_espresso_additional_attendees($event_id, $additional_limit, $number_available_spaces, __('Number of Tickets', 'event_espresso'), true, 'admin'); ?>
+	      </div>
         </form>
       </div>
     </div>
