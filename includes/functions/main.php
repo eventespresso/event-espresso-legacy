@@ -1076,20 +1076,7 @@ if (!function_exists('event_espresso_cleanup_multi_event_registration_id_group_d
 
 }
 
-//Function to clean up left out data from attendee cost table
-//if (!function_exists('event_espresso_cleanup_attendee_cost_data')) {
-//
-//	/**
-//	 * event_espresso_cleanup_attendee_cost_data()
-//	 *
-//	 * Usage: event_espresso_cleanup_attendee_cost_data()
-//	 */
-//	function event_espresso_cleanup_attendee_cost_data() {
-//		global $wpdb;
-//		$wpdb->query(" delete eac from " . EVENTS_ATTENDEE_COST_TABLE . " eac left join " . EVENTS_ATTENDEE_TABLE . "  ea on eac.attendee_id = ea.id where ea.id is null ");
-//	}
-//
-//}
+
 
 function espresso_check_scripts() {
 	if (function_exists('wp_script_is')) {
