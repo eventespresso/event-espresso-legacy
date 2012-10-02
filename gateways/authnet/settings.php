@@ -152,7 +152,7 @@ function event_espresso_display_authnet_settings() {
 							<label for="use_md5">
 								<?php _e('Use md5 check to secure payment response', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=authnet_md5"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input name="use_md5" type="checkbox" value="1" <?php echo $authnet_settings['use_md5'] ? 'checked="checked"' : '' ?> />
+							<input name="use_md5" type="checkbox" value="1" <?php echo isset($authnet_settings['use_md5']) && $authnet_settings['use_md5'] ? 'checked="checked"' : '' ?> />
 						</li>
 						<li>
 							<label for="authnet_md5_value">
