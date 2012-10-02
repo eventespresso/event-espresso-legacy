@@ -421,6 +421,7 @@ function enter_attendee_payments() {
 													array('id'=>'Refund','text'=> __('Overpaid','event_espresso'))
 												);
 												echo select_input('payment_status', $values, $payment_status);
+										
 										?>
 									</li>
 									<li>
@@ -467,16 +468,17 @@ function enter_attendee_payments() {
 											<?php _e( 'Transaction Type:', 'event_espresso' ); ?>
 										</label>
 										<?php
-												$txn_values=array(
-													array('id' => '', 'text' => __('N/A', 'event_espresso')),
-													array('id' => 'web_accept', 'text' => espresso_payment_type('web_accept')),
-													array('id' => 'CC', 'text' => __('Credit Card', 'event_espresso')),
-													array('id' => 'INV', 'text' => espresso_payment_type('INV')),
-													array('id' => 'OFFLINE', 'text' => espresso_payment_type('OFFLINE')),
-												);
-												echo select_input('txn_type', $txn_values, $txn_type);
+//												$txn_values=array(
+//													array('id' => '', 'text' => __('N/A', 'event_espresso')),
+//													array('id' => 'web_accept', 'text' => espresso_payment_type('web_accept')),
+//													array('id' => 'CC', 'text' => __('Credit Card', 'event_espresso')),
+//													array('id' => 'INV', 'text' => espresso_payment_type('INV')),
+//													array('id' => 'OFFLINE', 'text' => espresso_payment_type('OFFLINE')),
+//												);
+//												echo select_input('txn_type', $txn_values, $txn_type);
 										?>
-									</li>
+											<input type="text" class="medium-text" name="txn_type" size="45" value ="<?php echo $txn_type; ?>" />
+										</li>
 									<li>
 										<label>
 											<?php _e( 'Transaction ID: ', 'event_espresso' );?> <span class="smaller-text"><?php _e( '( or cheque #, gateway response, etc )', 'event_espresso' ); ?></span>
