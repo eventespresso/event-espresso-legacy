@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.28.P
+  Version: 3.1.28.363
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,13 +32,13 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.28.327';
+	return '3.1.28.363';
 }
 
 function espresso_footer_session() {
 	$exclude = array();
 	if ( ! in_array( $_REQUEST['action'], $exclude ) && ! empty( $_SESSION ) && ! is_admin()) {
-		echo '<h3>$_SESSION</h3><pre style="height:auto;border:2px solid lightblue;">' . print_r( $_SESSION, TRUE ) . '</pre><br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>';
+		//echo '<h3>$_SESSION</h3><pre style="height:auto;border:2px solid lightblue;">' . print_r( $_SESSION, TRUE ) . '</pre><br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>';
 	}	
 }
 add_action( 'shutdown', 'espresso_footer_session' );
@@ -240,9 +240,10 @@ add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
 
 //Addons
 //Ticketing
-if ( file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "/ticketing/template.php") || function_exists('espresso_ticketing_version') ) {
+if ( file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "ticketing/template.php") || function_exists('espresso_ticketing_version') ) {
 	global $ticketing_installed;
 	$ticketing_installed = true;
+	//echo '<h1>IN !!!</h1>'; die();
 }
 
 //Seating chart
