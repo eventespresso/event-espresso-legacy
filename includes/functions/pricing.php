@@ -143,20 +143,52 @@ if (!function_exists('event_espresso_get_orig_price')) {
 		}
 
 		$event_cost = 0.00;
-		$SQL = "SELECT id, event_cost, surcharge, surcharge_type FROM " . EVENTS_PRICES_TABLE . " WHERE id=%d ORDER BY id ASC LIMIT 1";
-		
-
-		$price_id = absint( $price_id );
-
-
-		if ( $result = $wpdb->get_row( $wpdb->prepare( $SQL, $price_id ))) {		
+		$SQL = "SELECT event_cost FROM " . EVENTS_PRICES_TABLE . " WHERE id=%d ORDER BY id ASC LIMIT 1";
+		if ( $event_cost = $wpdb->get_var( $wpdb->prepare( $SQL, absint( $price_id ) ))) {		
 			// if price is anything other than zero
-			if ( $result->event_cost > 0 ) {			
-				$event_cost = $result->event_cost;
+			if ( ! $event_cost > 0 ) {			
+				$event_cost = 0.00;
 			} 
 		}
 		
-		return (float)$event_cost;
+		return (float)number_format( $event_cost, 2, '.', '' );
+	}
+
+}
+
+
+
+
+/*
+  Returns the orig price of an event before modifiers are applied
+ *
+ * @params int $price_id
+ */
+if (!function_exists('event_espresso_get_orig_price_and_surcharge')) {
+	function event_espresso_get_orig_price_and_surcharge( $price_id = FALSE ) {
+		
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+
+		if ( ! $price_id ) {
+			return FALSE;
+		}
+		
+		global $wpdb;
+		
+		if ( is_array( $price_id )) {
+			$price_id = key( $price_id );
+		}
+
+		$SQL = "SELECT id, event_cost, surcharge, surcharge_type FROM " . EVENTS_PRICES_TABLE . " WHERE id=%d ORDER BY id ASC LIMIT 1";
+		if ( $result = $wpdb->get_row( $wpdb->prepare( $SQL, absint( $price_id ) ))) {		
+			// if price is anything other than zero
+			if ( ! (float)$result->event_cost > 0 ) {			
+				$result->event_cost = 0.00;
+			}
+		}
+		
+		return $result;
+		
 	}
 
 }
@@ -182,27 +214,28 @@ if (!function_exists('event_espresso_get_final_price')) {
 
 		global $wpdb;
 
-		$event_cost = event_espresso_get_orig_price( $price_id );
+		$result = event_espresso_get_orig_price_and_surcharge( $price_id );
+		$result->event_cost = (float)$result->event_cost;
 
 		// if price is anything other than zero
-		if ( $event_cost > 0.00 ) {
+		if ( $result->event_cost > 0.00 ) {
 	
 			// Addition for Early Registration discount
-			if ( $early_price_data = early_discount_amount( $event_id, $event_cost )) {
-				$event_cost = $early_price_data['event_price'];
+			if ( $early_price_data = early_discount_amount( $event_id, $result->event_cost )) {
+				$result->event_cost = $early_price_data['event_price'];
 			}
 			
 			// calculate surcharge
 			// if >0 and is percent, calculate surcharge amount, if flat rate, will just be formatted, surcharge by default is 0. 
-			$surcharge = ( $result->surcharge > 0 ) && ( $result->surcharge_type == 'pct' ) ? $event_cost * $result->surcharge / 100 : $result->surcharge;
+			$surcharge = ( $result->surcharge > 0 ) && ( $result->surcharge_type == 'pct' ) ? $result->event_cost * $result->surcharge / 100 : $result->surcharge;
 			$surcharge = number_format( $surcharge, 2, '.', '' ); 
 
 		} 
 
 		$surcharge = ! empty($surcharge) ? (float)$surcharge : 0;
-		$event_cost = $event_cost + $surcharge;
+		$event_cost = $result->event_cost + $surcharge;
 		
-		return $event_cost;
+		return (float)number_format( $event_cost, 2, '.', '' ); 
 	}
 
 }
