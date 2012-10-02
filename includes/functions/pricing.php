@@ -218,9 +218,9 @@ if (!function_exists('early_discount_amount')) {
 		global $wpdb, $org_options;
 
 		$event_id = absint( $event_id );
-		$SQL = "SELECT early_disc, early_disc_date, early_disc_percentage FROM " . EVENTS_DETAIL_TABLE . " WHERE id='" . $event_id . "' LIMIT 1";
+		$SQL = "SELECT early_disc, early_disc_date, early_disc_percentage FROM " . EVENTS_DETAIL_TABLE . " WHERE id=%d LIMIT 1";
 
-        $eventdata = $wpdb->get_row( $wpdb->prepare( $SQL, $price_id ));
+        $eventdata = $wpdb->get_row( $wpdb->prepare( $SQL, $event_id ));
 	 
         if ((strlen($eventdata->early_disc) > 0) && (strtotime($eventdata->early_disc_date) > strtotime(date("Y-m-d")))) {
 	 
