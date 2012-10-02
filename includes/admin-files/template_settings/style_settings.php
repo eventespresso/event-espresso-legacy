@@ -45,7 +45,7 @@ $files_color = array();
 	   echo  'selected="selected"';
 	   return; 
 	}
-		('N' == $org_options['enable_default_style'] || file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "templates/event_espresso_style.css"))? $disabled = 'disabled="disabled"' : $disabled = '';
+		($org_options['enable_default_style'] == 'N' || file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "templates/event_espresso_style.css"))? $disabled = 'disabled="disabled"' : $disabled = '';
 		(!empty($disabled))? $styled = 'style="color: #ccc;"' : $styled = '';
 ?>
 <?php // var_dump($org_options['selected_style']); 

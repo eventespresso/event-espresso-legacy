@@ -236,7 +236,7 @@ function events_data_tables_install() {
 					'expire_on_registration_end' => 'Y',
 					'email_before_payment' => 'N',
 					'email_fancy_headers' => 'N',
-					'enable_default_style' => 'Y',
+					'enable_default_style' => 'N',
 					'event_ssl_active' => 'N',
 					'use_venue_manager' => 'Y',
 			);
@@ -328,7 +328,7 @@ function events_data_tables_install() {
 					'email_before_payment' => 'N',
 					'use_personnel_manager' => 'Y',
 					'use_venue_manager' => 'Y',
-					'enable_default_style' => 'Y',
+					'enable_default_style' => 'N',
 					'selected_style' => 'event_espresso_style.css',
 					'show_pending_payment_options' => 'Y',
 					'show_reg_footer' => 'Y'

@@ -9,7 +9,7 @@ function event_espresso_manage_templates() {
 		$org_options['display_address_in_event_list'] = !empty($_POST['display_address_in_event_list']) ? $_POST['display_address_in_event_list'] : 'N';
 		$org_options['display_address_in_regform'] = !empty($_POST['display_address_in_regform']) ? $_POST['display_address_in_regform'] : 'N';
 		$org_options['use_custom_post_types'] = !empty($_POST['use_custom_post_types']) ? $_POST['use_custom_post_types'] : 'N';
-		$org_options['enable_default_style'] = !empty($_POST['enable_default_style']) ? $_POST['enable_default_style'] : '';
+		$org_options['enable_default_style'] = !empty($_POST['enable_default_style']) ? $_POST['enable_default_style'] : 'N';
 		$org_options['selected_style'] = !empty($_POST['selected_style']) ? $_POST['selected_style'] : '';
 		$org_options['style_color'] = !empty($_POST['style_color']) ? $_POST['style_color'] : '';
 		$org_options['style_settings']['enable_default_style'] = !empty($_POST['enable_themeroller_style']) ? $_POST['enable_themeroller_style'] : 'N';
