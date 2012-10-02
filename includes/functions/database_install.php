@@ -688,40 +688,46 @@ function events_data_tables_install() {
 	function espresso_copy_data_from_attendee_cost_table() {
 		global $wpdb;
 		
-		$SQL = "SELECT SUM(final_price) AS final_price FROM ".EVENTS_ATTENDEE_TABLE;
-		$sum = $wpdb->get_var($SQL);
-		
-		// if the orig_price and final_price fields were JUST created, then they should sum to 0
-		if ( (float)$sum->final_price == 0 ) {
-
-			// get primary attendee reg IDs
-			$SQL = "SELECT DISTINCT primary_registration_id FROM ".EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE;
-			$results = $wpdb->get_var($SQL);
+		// get primary attendee reg IDs
+		$SQL = "SELECT DISTINCT primary_registration_id FROM " . $wpdb->prefix . "events_multi_event_registration_id_group";
+		if ( $results = $wpdb->get_var($SQL)) {
 			// now set "is_primary" to true 
 			foreach ( $results as $result ) {
 				$wpdb->update( 
-						EVENTS_ATTENDEE_TABLE, 
+						$wpdb->prefix . "events_attendee", 
 						array( 'is_primary' => 1 ), 
 						array( 'registration_id' => $result->primary_registration_id ),
 						array( '%s' ),
 						array( '%s' )
 				);
-			}		
-			
-			//copy cost to orig_price
-			$SQL = "SELECT * FROM " . EVENTS_ATTENDEE_COST_TABLE;			
-			$results = $wpdb->get_results($SQL);
-			foreach ( $results as $result ) {
-				$wpdb->update( 
-						EVENTS_ATTENDEE_TABLE, 
-						array( 'orig_price' => $result->cost,  'final_price' => $result->cost ), 
-						array( 'id' => $result->attendee_id ),
-						array( '%f', '%f' ),
-						array( '%d' )
-				);
+			}				
+		}
+	
+				
+		$SQL = "SELECT SUM(final_price) AS final_price FROM " . $wpdb->prefix . "events_attendee";
+		if ( $sum = $wpdb->get_var($SQL) ) {
+
+			// if the orig_price and final_price fields were JUST created, then they should sum to 0
+			if ( (float)$sum->final_price == 0 ) {
+		
+				//copy cost to orig_price
+				$SQL = "SELECT * FROM " . $wpdb->prefix . "events_attendee_cost";			
+				$results = $wpdb->get_results($SQL);
+				foreach ( $results as $result ) {
+					$wpdb->update( 
+							$wpdb->prefix . "events_attendee", 
+							array( 'orig_price' => $result->cost,  'final_price' => $result->cost ), 
+							array( 'id' => $result->attendee_id ),
+							array( '%f', '%f' ),
+							array( '%d' )
+					);
+				}
+				
 			}
 			
 		}
+		
+
 	}
 
 	events_organization_tbl_install();
