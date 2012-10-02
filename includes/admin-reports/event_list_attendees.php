@@ -16,8 +16,6 @@ function event_list_attendees() {
                 $wpdb->query($wpdb->prepare($sql, $key));
 								$sql = "DELETE FROM " . EVENTS_ATTENDEE_META_TABLE . " WHERE attendee_id = '%d'";
 								$wpdb->query($wpdb->prepare($sql, $key));
-								$sql = "DELETE FROM " . EVENTS_ATTENDEE_COST_TABLE . " WHERE attendee_id = '%d'";
-								$wpdb->query($wpdb->prepare($sql, $key));
 								$sql = "DELETE FROM " . EVENTS_ANSWER_TABLE . " WHERE attendee_id = '%d'";
 								$wpdb->query($wpdb->prepare($sql, $key));
             endwhile;
@@ -103,7 +101,7 @@ function event_list_attendees() {
         <th class="manage-column column-cb check-column" id="cb" scope="col" style="width: 4%;"><input type="checkbox"></th>
         <th class="manage-column column-title" id="name" scope="col" title="Click to Sort"style="width: 10%;"> <span>
           <?php _e('Attendee Name', 'event_espresso'); ?>
-          <span> <span class="sorting-indicator"></span> </th>
+          </span> <span class="sorting-indicator"></span> </th>
         <th class="manage-column column-date" id="registrationid" scope="col" title="Click to Sort" style="width: 10%;"> <span>
           <?php _e('Reg ID', 'event_espresso'); ?>
           </span> <span class="sorting-indicator"></span> </th>
