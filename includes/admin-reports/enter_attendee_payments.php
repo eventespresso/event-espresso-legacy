@@ -56,9 +56,9 @@ function enter_attendee_payments() {
 					$txn_id = isset($_POST[ 'txn_id' ]) ? $_POST[ 'txn_id' ] : FALSE;
 					$payment_date = isset($_POST[ 'payment_date' ]) ? date_i18n('Y-m-d', strtotime( $_POST[ 'payment_date' ] )) : FALSE;
 					$coupon_code = isset($_POST[ 'event_espresso_coupon_code' ]) ? $_POST[ 'event_espresso_coupon_code' ] : '';
-					$total_owing = isset($_POST[ 'total_owing' ]) ? (float)number_format( abs( sanitize_text_field( $_POST[ 'total_owing' ] )), 2, '.', '' ) : 0.00;
-					$amount_pd = isset($_POST[ 'amount_pd' ]) ? (float)number_format( abs( sanitize_text_field( $_POST[ 'amount_pd' ] )), 2, '.', '' ) : 0.00;
-					$new_payment = isset($_POST[ 'new_payment' ]) ? (float)number_format( sanitize_text_field( $_POST[ 'new_payment' ] ), 2, '.', '' ) : 0.00;
+					$total_owing = isset($_POST[ 'total_owing' ]) ? (float)number_format( (float)abs( (float)sanitize_text_field( $_POST[ 'total_owing' ] )), 2, '.', '' ) : 0.00;
+					$amount_pd = isset($_POST[ 'amount_pd' ]) ? (float)number_format( (float)abs( (float)sanitize_text_field( $_POST[ 'amount_pd' ] )), 2, '.', '' ) : 0.00;
+					$new_payment = isset($_POST[ 'new_payment' ]) ? (float)number_format( (float)sanitize_text_field( $_POST[ 'new_payment' ] ), 2, '.', '' ) : 0.00;
 					
 					// if making a payment, we are going to require the txn type and txn id
 					if ( $new_payment != 0.00  ) {						
