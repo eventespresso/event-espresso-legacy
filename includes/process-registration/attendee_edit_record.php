@@ -104,6 +104,10 @@ function attendee_edit_record() {
 			if (isset($event_meta['add_attendee_question_groups']) && $event_meta['add_attendee_question_groups'] != NULL) {
 				$question_groups = $event_meta['add_attendee_question_groups'];
 			}
+			
+			if ( !is_array($question_groups) && !empty($question_groups)) {
+				$question_groups = unserialize($question_groups);
+			}
 
 			$questions_in = '';
 			foreach ($question_groups as $g_id) {
