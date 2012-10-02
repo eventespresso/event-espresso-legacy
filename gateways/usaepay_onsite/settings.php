@@ -17,6 +17,11 @@ function espresso_usaepay_onsite_payment_settings() {
 	}
 	$settings = get_option('espresso_usaepay_onsite_settings');
 	if (empty($settings)) {
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_onsite/logo.jpg")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/usaepay_onsite/logo.jpg";
+		} else {
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/usaepay_onsite/logo.jpg";
+		}
 		$settings['key'] = '';
 		$settings['button_url'] = $button_url;
 		$settings['use_sandbox'] = false;
