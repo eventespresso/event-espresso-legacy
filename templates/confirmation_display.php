@@ -112,7 +112,7 @@ $attendee_num = 1;
 						<?php _e('Total Price:','event_espresso'); ?>
 					</th>
 					<td>
-						<span class="event_espresso_value"><?php echo $display_cost;  echo $event_discount_label;?></span>
+						<span class="event_espresso_value"><?php echo $display_cost;  //echo $event_discount_label;?></span>
 					</td>
 				</tr>
 			</table>
