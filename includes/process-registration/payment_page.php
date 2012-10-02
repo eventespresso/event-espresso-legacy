@@ -310,6 +310,8 @@ function event_espresso_pay() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 	global $wpdb, $org_options;
 
+	$payment_data= array( 'attendee_id' => '' );
+
 	$active_gateways = get_option('event_espresso_active_gateways', array());
 	foreach ($active_gateways as $gateway => $path) {
 		event_espresso_require_gateway($gateway . "/init.php");
