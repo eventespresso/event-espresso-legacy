@@ -383,7 +383,7 @@ function edit_attendee_record() {
 			} else {
 				$reg_ids = sanitize_text_field( $_REQUEST['registration_id'] );
 			}		
-			$SQL .= "WHERE registration_id IN ( $reg_ids ) ORDER BY att.id";
+			$SQL .= " WHERE registration_id IN ( '$reg_ids' ) ORDER BY att.id";
 		}
 		$attendees = $wpdb->get_results( $wpdb->prepare( $SQL ));
 		
