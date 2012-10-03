@@ -22,7 +22,7 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
  
-		global $espresso_premium;		
+		global $espresso_premium,$org_options;		
 		if ( ! $espresso_premium ) {
 			return FALSE;
 		}
@@ -157,7 +157,7 @@ function espresso_update_attendee_coupon_info( $attendee_id = FALSE, $event_id, 
 		if ( $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format )) {
 
 			//Get Registration ID
-			$reg_ID = "SELECT registration_id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id = %d";
+			$SQL = "SELECT registration_id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id = %d";
 			if ( $registration_ID = $wpdb->get_var( $wpdb->prepare( $SQL, $attendee_id ))) {
 
 				// Update OTHER attendees that share the same registration ID
