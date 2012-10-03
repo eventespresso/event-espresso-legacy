@@ -301,14 +301,14 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 					$tmp_session = wp_strip_all_tags( $_SESSION['espresso_session']['id'] );
 
 					$SQL = "SELECT id, registration_id FROM " . EVENTS_ATTENDEE_TABLE;
-					$SQL .= "WHERE attendee_session = %d";
+					$SQL .= " WHERE attendee_session = %d";
 					$SQL .= $incomplete_filter;
 					
 					if ( $rem_attendee_ids = $wpdb->get_results($wpdb->prepare( $SQL, $tmp_session ))) {
 						foreach ( $rem_attendee_ids as $v ) {
 							if ( defined('ESPRESSO_SEATING_CHART')) {						
 								$SQL = "DELETE FROM " . EVENTS_SEATING_CHART_EVENT_SEAT_TABLE ;
-								$SQL .= "WHERE attendee_id = %d";
+								$SQL .= " WHERE attendee_id = %d";
 								$wpdb->query($wpdb->prepare( $SQL, $v->id ));
 							}
 						}						
@@ -325,7 +325,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				//Added by Imon
 				// First delete attempt might fail if there is no data in answer table. So, second attempt without joining answer table is taken bellow -
 				$SQL = " DELETE FROM " . EVENTS_ATTENDEE_TABLE;
-				$SQL .= "WHERE attendee_session = %s ";
+				$SQL .= " WHERE attendee_session = %s ";
 				$SQL .= $incomplete_filter;
 				$wpdb->query($wpdb->prepare( $SQL, $tmp_session ));
 
