@@ -85,18 +85,15 @@ function espresso_itemize_paypal_items($myPaypal, $attendee_id) {
 	
 	$items = $wpdb->get_results( $wpdb->prepare( $SQL, $session_id ));
 	
-	$coupon_amount = ! empty( $items[0]->coupon_code_price ) ? $items[0]->coupon_code_price : 0 ;
-	$is_coupon_pct = ( ! empty($items[0]->use_percentage) && $items[0]->use_percentage=='Y' ) ? TRUE : FALSE;
-	
 	$total_orig_price = 0;
 	$total_final_price = 0;
 	
 	foreach ($items as $key=>$item) {
-		$total_orig_price += $item->orig_price;
-		$total_final_price += $item->final_price;
+		$total_orig_price += $item->orig_price * $item->quantity;
+		$total_final_price += $item->final_price * $item->quantity;
 		$item_num=$key+1;
 		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname);
-		$myPaypal->addField('amount_' . $item_num, $item->final_price);
+		$myPaypal->addField('amount_' . $item_num, $item->orig_price);
 		$myPaypal->addField('quantity_' . $item_num, $item->quantity);
 	}
 	
