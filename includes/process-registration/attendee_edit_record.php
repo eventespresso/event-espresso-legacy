@@ -58,36 +58,31 @@ function attendee_edit_record() {
 			$display_attendee_form = TRUE;
 
 			foreach ($results as $result) {
-			
-				if ( $result->is_primary ) {
+							
+				$id = $result->id;
+				$registration_id = $result->registration_id;
+				$lname = $result->lname;
+				$fname = $result->fname;
+				$address = $result->address;
+				$city = $result->city;
+				$state = $result->state;
+				$zip = $result->zip;
+				$email = $result->email;
+				$payment = $result->payment;
+				$phone = $result->phone;
+				$date = $result->date;
+				$payment_status = $result->payment_status;
+				$txn_type = $result->txn_type;
+				$txn_id = $result->txn_id;
+				$amount_pd = $result->amount_pd;
+				$quantity = $result->quantity;
+				$payment_date = $result->payment_date;
+				$event_id = $result->event_id;
+				$event_name = stripslashes_deep($result->event_name);
+				$question_groups = unserialize($result->question_groups);
+				$event_meta = unserialize($result->event_meta);
+				$counter = 1;
 				
-					$id = $result->id;
-					$registration_id = $result->registration_id;
-					$lname = $result->lname;
-					$fname = $result->fname;
-					$address = $result->address;
-					$city = $result->city;
-					$state = $result->state;
-					$zip = $result->zip;
-					$email = $result->email;
-					$payment = $result->payment;
-					$phone = $result->phone;
-					$date = $result->date;
-					$payment_status = $result->payment_status;
-					$txn_type = $result->txn_type;
-					$txn_id = $result->txn_id;
-					$amount_pd = $result->amount_pd;
-					$quantity = $result->quantity;
-					$payment_date = $result->payment_date;
-					$event_id = $result->event_id;
-					$event_name = stripslashes_deep($result->event_name);
-					$question_groups = unserialize($result->question_groups);
-					$event_meta = unserialize($result->event_meta);
-					$counter = 1;
-					
-				} else {
-					$additional_attendees[$result->id] = array('full_name' => $result->fname . ' ' . $result->lname, 'email' => $result->email, 'phone' => $result->phone);
-				}
 			}
 
 			$response_source = $_POST;
@@ -165,8 +160,10 @@ function attendee_edit_record() {
 								
 							case "MULTIPLE" :					
 								$post_val = '';
-								for ( $i = 0; $i < count( $response_source[$question->question_type . '_' . $question->id] ); $i++ ) {
-									$post_val .= trim( $response_source[$question->question_type . '_' . $question->id][$i] ) . ',';
+								if (!empty($response_source[$question->question_type . '_' . $question->id])) {
+									for ( $i = 0; $i < count( $response_source[$question->question_type . '_' . $question->id] ); $i++ ) {
+										$post_val .= trim( $response_source[$question->question_type . '_' . $question->id][$i] ) . ',';
+									}
 								}
 								$post_val = substr( $post_val, 0, -1 );
 								break;
@@ -198,16 +195,17 @@ function attendee_edit_record() {
 		
 ?>
 
-	<div id="event_espresso_registration_form" class="event-display-boxes">
-		<div class="event_espresso_form_wrapper event-data-display">
+	<div id="event_espresso_registration_form" class="event-display-boxes ui-widget">
+		<h3 class="event_title ui-widget-header ui-corner-top">
+			<?php _e('Edit Registration','event_espresso'); ?>
+		</h3>
+		<div class="event_espresso_form_wrapper event-data-display ui-widget-content ui-corner-bottom">
 
 <?php if ( $display_attendee_form ) : ?>
 
-			<h3 class="section-heading">
-				<?php echo __('Edit Your Registration Details', 'event_espresso'); ?>
-			</h3>		
+			
 			<p>
-				<strong><?php _e('Event:', 'event_espresso'); ?> <?php echo $event_name; ?></strong>
+				<strong><?php _e('Event:', 'event_espresso'); ?></strong> <?php echo $event_name; ?>
 			</p>
 			
 			<form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>" class="espresso_form" id="registration_form">
