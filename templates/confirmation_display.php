@@ -39,7 +39,7 @@ $attendee_num = 1;
 							<?php echo empty($price_type) ? __('Price per attendee:','event_espresso') : __('Type/Price per attendee:','event_espresso'); ?>
 						</th>
 						<td>
-							<span class="event_espresso_value"><?php echo empty($price_type) ? $org_options['currency_symbol'] . $final_price : stripslashes_deep($price_type) . ' / ' .$org_options['currency_symbol'].$final_price;?></span>
+							<span class="event_espresso_value"><?php echo empty($price_type) ? $org_options['currency_symbol'] . number_format($final_price,2) : stripslashes_deep($price_type) . ' / ' .$org_options['currency_symbol'].number_format($final_price,2);?></span>
 						</td>
 					</tr>
 <?php
@@ -68,7 +68,6 @@ $attendee_num = 1;
 					<td  valign="top">
 						<span class="event_espresso_value"><?php echo stripslashes_deep($attendee_name)?> (<?php echo $attendee_email?>) 
 <?php 
-						 //removing edit links for now...will fix edit attendee page in 3.2 cb #830 
 						echo '<a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$attendee_id.'&amp;regevent_action=register&amp;form_action=edit_attendee&amp;primary='.$attendee_id.'&amp;event_id='.$event_id.'&amp;coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'&amp;attendee_num='.$attendee_num.'">'. __('Edit', 'event_espresso').'</a>';  // removed p_id='.$p_id.'&amp;
 						
 						//Create additional attendees

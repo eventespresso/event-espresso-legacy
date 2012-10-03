@@ -4,24 +4,15 @@
 //There should be a copy of this file in your wp-content/uploads/espresso/ folder.
 global $this_event_id;
 $this_event_id = $event_id;
+$num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$event_id]['attendee_quantitiy'] . __(' attendees', 'event_espresso');
+$attendee_quantity = ' x '.sprintf(_n('%d attendee', '%d attendees', $meta['attendee_quantity'], 'event_espresso'), $meta['attendee_quantity']);
+	
 ?>
 <div id="event_espresso_registration_form" class="event-display-boxes multi-reg-page ui-widget">
 
-	<?php
-	$num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$event_id]['attendee_quantitiy'] . __(' attendees', 'event_espresso');
-	?>
 	<h3 class="event_title ui-widget-header ui-corner-top" id="event_title-<?php echo $event_id; ?>">
-		<?php echo stripslashes_deep($event_name) ?>
-		<?php echo $is_active['status'] == 'EXPIRED' ? ' - <span class="expired_event">Event Expired</span>' : ''; ?>
-		-
-		<?php echo _e('Price Type:') . ' ' . $meta['price_type'] ?>
-		-
-		<?php
-		printf(_n('%d attendee', '%d attendees', $meta['attendee_quantity'], 'event_espresso'), $meta['attendee_quantity']);
-		?>
+		<?php echo stripslashes_deep($event_name) ?> <?php echo $is_active['status'] == 'EXPIRED' ? ' - <span class="expired_event">Event Expired</span>' : ''; ?>
 	</h3>
-
-
 	<div class="multi_regis_form_fields event-data-display ui-widget-content ui-corner-bottom" id="multi_regis_form_fields-<?php echo $event_id . '-' . $meta['price_id']; ?>">
 
 		<?php
@@ -73,12 +64,11 @@ $this_event_id = $event_id;
 				<div class="multi_regis_wrapper_attendee-<?php echo $is_primary; ?>">
 					<div class="event-display-boxes">
 						<?php
-						
+						echo '<h4 class="section-heading"><strong>'.__('Price Type:') . '</strong> ' . $meta['price_type'].$attendee_quantity.'</h4>';
 						echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $attendee_number . '</h3>';
-						
+		
 						//This will be the main attendee
 						//$meta['attendee_number'] = 1;
-						
 						$meta['attendee_number'] = $price_group_att_counter;
 						//echo "Attendee # ".$attendee_number;
 						
@@ -91,7 +81,7 @@ $this_event_id = $event_id;
 						echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
 						
 						//Displays the copy to all button
-						if ( $event_counter == 1 && $event_count > 1 ) {
+						if ( $event_counter == 1 && $event_count > 1 || ($meta['attendee_quantity'] > 1 && $event_meta['additional_attendee_reg_info'] > 1) ) {
 							?>
 							<div class="event-messages ui-state-highlight">
 								<p class="instruct" style="position:relative;padding:1em;">

@@ -69,7 +69,7 @@ $data['registration_id'] = $registration_id;
 $data['phone'] = $phone;
 //This file builds the gateways that are available
 echo '<div id="onsite-payments" class="event-display-boxes ui-widget">';
-echo '<h3 class="section-heading ui-widget-header ui-corner-top">' . __('Please choose a payment option:', 'event_espresso') . '</h3>';
+echo '<h3 class="section-heading ui-widget-header ui-corner-top">' . __('Choose a payment option', 'event_espresso') . '</h3>';
 echo '<div class="event-data-display ui-widget-content ui-corner-bottom">';
 
 do_action('action_hook_espresso_display_onsite_payment_header');

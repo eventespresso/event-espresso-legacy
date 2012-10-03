@@ -135,7 +135,7 @@ function events_payment_page( $attendee_id = FALSE, $price_id = 0, $coupon_code 
 //	echo '<h4>$total_cost : ' . $total_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 	espresso_update_primary_attendee_total_cost( $attendee_id, $total_cost, __FILE__ );			
 
-	$display_cost = $total_cost > 0 ? $org_options['currency_symbol'] . $total_cost : __('Free', 'event_espresso');
+	$display_cost = $total_cost > 0 ? $org_options['currency_symbol'] . number_format($total_cost,2) : __('Free', 'event_espresso');
 
 //Pull in the template
 	if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . "confirmation_display.php")) {

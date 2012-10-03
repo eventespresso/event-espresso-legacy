@@ -3,10 +3,13 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 //Confirmation Page Template
 ?>
 
-<div id="espresso_confirmation_display" class="event-display-boxes ui-widget ui-corner-all ui-widget-content">
-	<div class="event-data-display">
+<div class="espresso_payment_overview event-display-boxes ui-widget" >
+  <h3 class="section-heading ui-widget-header ui-corner-top">
+		<?php _e('Payment Overview', 'event_espresso'); ?>
+  </h3>
+	<div class="event-data-display ui-widget-content ui-corner-bottom" >
 <?php
-	if ( $total_cost == 0 ) :
+	if ( $total_cost == 0 ) {
 		unset($_SESSION['espresso_session']['id']);
 ?>
 		<h2><?php echo $fname ?> <?php echo $lname ?>,</h2>
@@ -25,7 +28,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 			<?php _e('A confirmation email has been sent with additional details of your registration.', 'event_espresso'); ?>
 	  	</p>
 
-<?php else : ?>
+<?php }else{ ?>
 
 		<h2><?php echo $fname ?> <?php echo $lname ?>,</h2>
 	  
@@ -38,7 +41,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 		
 	  	<p>
 			<span class="event_espresso_name section-title"><?php _e('Amount due: ', 'event_espresso'); ?></span> 
-			<span class="event_espresso_value"><?php echo isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : ''; ?><?php echo $total_cost; ?></span>
+			<span class="event_espresso_value"><?php echo isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : ''; ?><?php echo number_format($total_cost,2); ?></span>
 		</p>
 	  	
 		<p>
@@ -50,7 +53,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 		</p>
 
 <?php
-	endif;
+}
 	echo apply_filters( 'filter_hook_espresso_display_add_to_calendar_by_attendee_id', $attendee_id );
 ?>
 	
