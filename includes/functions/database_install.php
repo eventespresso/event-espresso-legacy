@@ -706,7 +706,7 @@ function events_data_tables_install() {
 	
 				
 		$SQL = "SELECT SUM(final_price) AS final_price FROM " . $wpdb->prefix . "events_attendee";
-		$sum = $wpdb->get_var($SQL)
+		$sum = $wpdb->get_var($SQL);
 		if ( $sum !== FALSE && ! empty( $sum )) {
 
 			// if the orig_price and final_price fields were JUST created, then they should sum to 0
