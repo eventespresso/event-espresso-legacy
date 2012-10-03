@@ -133,15 +133,31 @@ function events_payment_page( $attendee_id = FALSE, $price_id = 0, $coupon_code 
 	
 //	echo '<h4>$attendee_id : ' . $attendee_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //	echo '<h4>$total_cost : ' . $total_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-	espresso_update_primary_attendee_total_cost( $attendee_id, $total_cost, __FILE__ );			
+	espresso_update_primary_attendee_total_cost( $attendee_id, $total_cost, __FILE__ );
+	
+	if ( $org_options['skip_confirmation_page'] == 'Y' ) {	
 
-	$display_cost = $total_cost > 0 ? $org_options['currency_symbol'] . number_format($total_cost,2) : __('Free', 'event_espresso');
+		$redirect_url = home_url().'/?page_id='.$org_options['event_page_id'] . '&regevent_action=confirm_registration';				
+		$_POST['regevent_action'] = 'confirm_registration';
+		$_POST['confirm'] = 'Confirm Registration';
+		$_POST['confirm_registration'] = TRUE;
+		$_POST['attendee_id'] = $attendee_id;
+		$_POST['event_id'] = $event_id;
+		$_POST['registration_id'] = $registration_id;
 
-//Pull in the template
-	if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . "confirmation_display.php")) {
-		require_once(EVENT_ESPRESSO_TEMPLATE_DIR . "confirmation_display.php"); //This is the path to the template file if available
+		espresso_confirm_registration();
+
 	} else {
-		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "templates/confirmation_display.php");
+
+		$display_cost = $total_cost > 0 ? $org_options['currency_symbol'] . number_format($total_cost,2) : __('Free', 'event_espresso');
+
+	//Pull in the template
+		if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . "confirmation_display.php")) {
+			require_once(EVENT_ESPRESSO_TEMPLATE_DIR . "confirmation_display.php"); //This is the path to the template file if available
+		} else {
+			require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "templates/confirmation_display.php");
+		}
+			
 	}
 	
 }

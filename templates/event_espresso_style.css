@@ -25,18 +25,26 @@
 }
 
 .multi_reg_cart_block{
-	margin:5px;
-	padding:5px;
+	padding:5px; margin:5px; 
 }
-
 
 #event_espresso_coupon_wrapper {
-	margin:5px;
-	padding:5px;
+	padding:5px; margin:5px 10px 5px 5px; text-align: right;;
 }
 #event_espresso_total_wrapper {
-	margin:5px;
-	padding:5px;
+	padding:5px; margin:5px; 
+}
+#event_espresso_edit_cart {
+	clear:both; padding:5px; margin:5px 5px 1em 5px; font-size:.9em;
+}
+#event_espresso_edit_cart_or_reg {
+	clear:both; padding:5px; margin:5px 5px 1em 5px; text-align:right;font-size:.9em;
+}
+#event_espresso_refresh_total {
+	clear:both; padding:5px; margin:5px 4px 1em 5px; text-align:right;font-size:.9em;
+}
+#event_espresso_submit_cart {
+	clear:both; padding:5px; margin:5px; text-align:right;
 }
 
 #event_espresso_shopping_cart table{
@@ -109,9 +117,9 @@
 .btn_event_form_submit:hover {
 }
 
-/*.espresso_confirm_registration {
+.espresso_confirm_registration {
 	text-align: right;
-}*/
+}
 .espresso_confirm_registration #confirm, .espresso_confirm_registration #confirm2{
 	width: auto;
 }

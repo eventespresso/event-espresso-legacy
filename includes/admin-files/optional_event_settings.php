@@ -68,10 +68,17 @@ $values=array(
             <?php echo select_input('use_event_timezones', $values, isset($org_options['use_event_timezones']) ? $org_options['use_event_timezones'] : ''); ?> <br />
           </li>
           <li>
+            <label for="skip_confirmation_page">
+              <?php _e('Skip Confirmation Page during Registration Process?','event_espresso'); ?>
+            </label>
+            <?php echo select_input('skip_confirmation_page', $values, isset($org_options['skip_confirmation_page']) ? $org_options['skip_confirmation_page'] : ''); ?> 
+		 </li>
+         <li>
             <label for="use_attendee_pre_approval">
               <?php _e('Enable attendee pre-approval feature?','event_espresso'); ?>
             </label>
-            <?php echo select_input('use_attendee_pre_approval', $values, isset($org_options['use_attendee_pre_approval']) ? $org_options['use_attendee_pre_approval'] : ''); ?> </li>
+            <?php echo select_input('use_attendee_pre_approval', $values, isset($org_options['use_attendee_pre_approval']) ? $org_options['use_attendee_pre_approval'] : ''); ?> 
+		 </li>
           <li>
             <label>
               <?php _e('Show payment options for "Pending Payments" on the Payment Overview page?','event_espresso'); ?>

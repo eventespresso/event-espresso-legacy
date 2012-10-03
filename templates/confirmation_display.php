@@ -119,7 +119,7 @@ $attendee_num = 1;
 		</div>
 		
 		<p class="espresso_confirm_registration">
-			<input class="btn_event_form_submit ui-priority-primary ui-widget-content ui-corner-all" type="submit" name="confirm" id="confirm" value="<?php _e('Confirm Registration', 'event_espresso'); ?>" />
+			<input class="btn_event_form_submit ui-priority-primary ui-widget-content ui-corner-all" type="submit" name="confirm" id="confirm" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
 		</p>
 		
 		<?php if ($display_questions != '') { ?>
@@ -145,7 +145,7 @@ $attendee_num = 1;
 			<!-- / .event-display-boxes -->   
 			
 			<p class="espresso_confirm_registration">
-				<input class="btn_event_form_submit ui-priority-primary ui-widget-content ui-corner-all" type="submit" name="confirm2" id="confirm2" value="<?php _e('Confirm Registration', 'event_espresso'); ?>" />
+				<input class="btn_event_form_submit ui-priority-primary ui-widget-content ui-corner-all" type="submit" name="confirm2" id="confirm2" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
 			</p>
 			
 		<?php	} ?>

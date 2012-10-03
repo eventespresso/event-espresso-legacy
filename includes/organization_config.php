@@ -32,6 +32,7 @@ function organization_config_mnu() {
 		$org_options['recaptcha_language'] = isset($_POST['recaptcha_language']) && !empty($_POST['recaptcha_language']) ? $_POST['recaptcha_language'] : '';
 		$org_options['espresso_dashboard_widget'] = isset($_POST['espresso_dashboard_widget']) && !empty($_POST['espresso_dashboard_widget']) ? $_POST['espresso_dashboard_widget'] : '';
 		$org_options['time_reg_limit'] = isset($_POST['time_reg_limit']) && !empty($_POST['time_reg_limit']) ? $_POST['time_reg_limit'] : '';
+		$org_options['skip_confirmation_page'] = isset($_POST['skip_confirmation_page']) ? $_POST['skip_confirmation_page'] : 'N';
 		$org_options['use_attendee_pre_approval'] = isset($_POST['use_attendee_pre_approval']) && !empty($_POST['use_attendee_pre_approval']) ? $_POST['use_attendee_pre_approval'] : '';
 		if (!empty($_POST['event_ssl_active']))
 			$org_options['event_ssl_active'] = isset($_POST['event_ssl_active']) && !empty($_POST['event_ssl_active']) ? $_POST['event_ssl_active'] : '';
@@ -398,6 +399,7 @@ function organization_config_mnu() {
 									</div>
 								</div>
 							</div>
+						</div>
 					</li>
 					<li>
 						<div class="metabox-holder">

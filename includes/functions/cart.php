@@ -658,11 +658,16 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 			
 		<div class="event-display-boxes ui-widget">
 			<div class="mer-event-submit ui-widget-content ui-corner-all">
-				<input type="submit" class="submit btn_event_form_submit ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" name="payment_page" value="<?php _e('Confirm and go to payment page', 'event_espresso'); ?>" />
-				<?php echo '<span> - '; _e('OR', 'event_espresso'); echo ' - </span>';
-					} ?> <a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=show_shopping_cart" class="btn_event_form_submit inline-link">
-				<?php _e('Edit Cart', 'event_espresso'); ?>
-				</a> 
+				<input type="submit" class="submit btn_event_form_submit ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" name="payment_page" value="<?php _e('Confirm and go to payment page', 'event_espresso'); ?>&nbsp;&raquo;" /><br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;<span> - <?php _e('or', 'event_espresso'); ?> - </span>
+		<?php } ?> 
+				<p id="event_espresso_edit_cart">
+					<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=show_shopping_cart" class="btn_event_form_submit inline-link">
+						<?php _e('Edit Cart', 'event_espresso'); ?>
+					</a> 
+				</p>
+
+
 			</div>
 		</div>
 		
