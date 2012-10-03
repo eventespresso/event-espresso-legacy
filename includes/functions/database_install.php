@@ -703,30 +703,34 @@ function events_data_tables_install() {
 				);
 			}				
 		}
-	
 				
 		$SQL = "SELECT SUM(final_price) AS final_price FROM " . $wpdb->prefix . "events_attendee";
 		$sum = $wpdb->get_var($SQL);
-		if ( $sum !== FALSE && ! empty( $sum )) {
 
+		if ( $sum !== FALSE && ! empty( $sum )) {
 			// if the orig_price and final_price fields were JUST created, then they should sum to 0
-			if ( (float)$sum->final_price == 0 ) {
-		
-				//copy cost to orig_price
-				$SQL = "SELECT * FROM " . $wpdb->prefix . "events_attendee_cost";			
-				$results = $wpdb->get_results($SQL);
-				foreach ( $results as $result ) {
-					$wpdb->update( 
-							$wpdb->prefix . "events_attendee", 
-							array( 'orig_price' => $result->cost,  'final_price' => $result->cost ), 
-							array( 'id' => $result->attendee_id ),
-							array( '%f', '%f' ),
-							array( '%d' )
-					);
-				}
-				
-			}
-			
+			if ( (float)$sum == 290 ) {
+				// first check if the events_attendee_cost table even exists
+				$SQL = "SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_SCHEMA = '".DB_NAME."' AND TABLE_NAME LIKE '" . $wpdb->prefix . "events_attendee_cost'";
+				$cost_tbl = $wpdb->get_col($SQL);
+
+				if ( $cost_tbl!== FALSE && ! empty( $cost_tbl )) {
+					echo '<h1>IN !!!</h1>';
+					//copy cost to orig_price
+					$SQL = "SELECT * FROM " . $wpdb->prefix . "events_attendee_cost";			
+					$results = $wpdb->get_results($SQL);
+
+					foreach ( $results as $result ) {
+						$wpdb->update( 
+								$wpdb->prefix . "events_attendee", 
+								array( 'orig_price' => $result->cost,  'final_price' => $result->cost ), 
+								array( 'id' => $result->attendee_id ),
+								array( '%f', '%f' ),
+								array( '%d' )
+						);
+					}
+				} 				
+			}			
 		}
 		
 
