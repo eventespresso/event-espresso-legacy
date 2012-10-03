@@ -88,7 +88,7 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 							break;
 						case "MULTIPLE" :
 							$value_string = '';
-							if ($question->admin_only != 'Y') {
+							if (!empty($response_source[$question->question_type . '_' . $question->id]) && $question->admin_only != 'Y') {
 								for ($i = 0; $i < count($response_source[$question->question_type . '_' . $question->id]); $i++) {
 
 								$value_string .= trim($response_source[$question->question_type . '_' . $question->id][$i]) . ",";
