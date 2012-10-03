@@ -97,9 +97,6 @@ if ($payment_status != 'Completed') {
   $organization_name = $wpdb->last_result[0]->answer;//question_id = '9' */
 
 
-//Create a payment link
-$payment_link = home_url() . "/?page_id=" . $org_options['return_url'] . "&id=" . $attendee_id;
-
 //Instanciation of inherited class
 $pdf = new PDF();
 $pdf->AliasNbPages();
@@ -200,8 +197,12 @@ if (isset($invoice_payment_settings['pdf_instructions'])) {
 } else {
 	$pdf->MultiCell(100, 5, pdftext(''), 0, 'L'); //Set instructions
 }
+
+//Create a payment link
+$payment_link = home_url() . "/?page_id=" . $org_options['return_url'] . "&r_id=" . $registration_id;
+
 $pdf->SetFont('Arial', 'BU', 20);
-//$pdf->Cell(200,20,'Pay Online',0,1,'C',0,$payment_link);//Set payment link
+$pdf->Cell(200,20,'Pay Online',0,1,'C',0,$payment_link);//Set payment link
 
 $pdf->Output('Invoice_' . $attendee_id . '_' . $event_identifier . '.pdf', 'D');
 exit;
