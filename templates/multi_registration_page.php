@@ -14,18 +14,18 @@ if (!function_exists('multi_register_attendees')) {
 
 		//The following variables are used to get information about your organization
 		$event_page_id = $org_options['event_page_id'];
-		$Organization = stripslashes_deep($org_options['organization']);
-		$Organization_street1 = $org_options['organization_street1'];
-		$Organization_street2 = $org_options['organization_street2'];
-		$Organization_city = $org_options['organization_city'];
-		$Organization_state = $org_options['organization_state'];
-		$Organization_zip = $org_options['organization_zip'];
-		$contact = $org_options['contact_email'];
-		$registrar = $org_options['contact_email'];
-		$currency_format = $org_options['currency_format'];
+		$Organization = isset($org_options['organization']) && !empty($org_options['organization']) ? stripslashes_deep($org_options['organization']) : '';
+		$Organization_street1 = isset($org_options['organization_street1']) && !empty($org_options['organization_street1']) ? $org_options['organization_street1'] : '';
+		$Organization_street2 = isset($org_options['organization_street2']) && !empty($org_options['organization_street2']) ? $org_options['organization_street2'] : '';
+		$Organization_city = isset($org_options['organization_city']) && !empty($org_options['organization_city']) ? $org_options['organization_city'] : '';
+		$Organization_state = isset($org_options['organization_state']) && !empty($org_options['organization_state']) ? $org_options['organization_state'] : '';
+		$Organization_zip = isset($org_options['organization_zip']) && !empty($org_options['organization_zip']) ? $org_options['organization_zip'] : '';
+		$contact = isset($org_options['contact_email']) && !empty($org_options['contact_email']) ? $org_options['contact_email'] : '';
+		$registrar = isset($org_options['contact_email']) && !empty($org_options['contact_email']) ? $org_options['contact_email']: '';
+		$currency_format = isset($org_options['currency_format']) && !empty($org_options['currency_format']) ?  $org_options['currency_format']: '';
 
-		$message = $org_options['message'];
-		$paypal_id = $org_options['paypal_id'];
+		$message = isset($org_options['message']) && !empty($org_options['message']) ? $org_options['message'] : '';
+		$paypal_id = isset($org_options['paypal_id']) && !empty($org_options['paypal_id']) ? $org_options['paypal_id'] : '';
 
 		if ( ! $event ) {
 		
