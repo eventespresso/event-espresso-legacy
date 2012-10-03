@@ -216,6 +216,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			// check for coupon 
 			if ( function_exists( 'event_espresso_process_coupon' )) {
 				if ( $coupon_results = event_espresso_process_coupon( $event_id, $final_price, FALSE, $multi_reg )) {
+					$coupon_notifications = !empty($coupon_notifications) ? $coupon_notifications : '';
+					$coupon_errors = !empty($coupon_errors) ? $coupon_errors : '';
 					//printr( $coupon_results, '$coupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 					$coupon_notifications .= ( $coupon_results['msg'] != $coupon_notifications ) && ! empty( $coupon_results['msg'] ) ? $coupon_results['msg'] : '';
 					$coupon_errors .= ( $coupon_results['error'] != $coupon_errors ) && ! empty( $coupon_results['error'] ) ? $coupon_results['error'] : '';
