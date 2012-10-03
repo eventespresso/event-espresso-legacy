@@ -282,7 +282,7 @@ if (!function_exists('register_attendees')) {
 
                     <?php
                 } else {
-					global $member_options;
+					$member_options = get_option('events_member_settings');
 					//echo "<pre>".print_r($member_options,true)."</pre>";
                     //If enough spaces exist then show the form
                     //Check to see if the Members plugin is installed.

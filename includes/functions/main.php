@@ -638,11 +638,12 @@ if (!function_exists('event_espresso_management_capability')) {
 if (!function_exists('event_espresso_add_question_groups')) {
 
 	function event_espresso_add_question_groups($question_groups, $answer = '', $event_id = null, $multi_reg = 0, $meta = array(), $class = 'my_class') {
-		global $wpdb, $member_options;
+		global $wpdb;
 		
 		//If memebers addon is installed, check to see if we want to disable the form fields for members
 		$disabled = '';
 		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true ) {
+			$member_options = get_option('events_member_settings');
 			if ( is_user_logged_in() && $member_options['autofilled_editable'] == 'N' )
 			$disabled = 'disabled="disabled"';
 		}
