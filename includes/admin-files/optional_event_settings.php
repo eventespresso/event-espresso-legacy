@@ -30,7 +30,7 @@ $values=array(
               </option>
             </select>
             <label for="surcharge_text">
-              <?php _e('Display text (eg. Surcharge or Service Fee:)','event_espresso'); ?>
+              <?php _e('Display text (eg. Surcharge or Service Fee):','event_espresso'); ?>
             </label>
             <input type="text" name="surcharge_text" value="<?php echo isset($org_options['surcharge_text'])? $org_options['surcharge_text']:__('Surcharge', 'event_espresso');?>" />
           </li>
