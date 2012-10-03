@@ -88,12 +88,8 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			<div class="mer-event-submit ui-widget-content ui-corner-all">
 				<input type="hidden" name="event_name[<?php echo $r->id; ?>]" value="<?php echo stripslashes_deep( $r->event_name ); ?>" />
 				<input type="hidden" name="regevent_action" value="load_checkout_page" />
-			
-			<?php 
-			//Coupon code display
-			//Uncomment the following code AT YOUR OWN RISK. Just beware that all coupon codes will work for everyting in the cart. 
-			?>			
-			<?php if ( function_exists( 'event_espresso_coupon_payment_page' )) : ?>
+					
+			<?php if ( function_exists( 'event_espresso_coupon_payment_page' ) && isset($org_options['allow_mer_discounts']) && $org_options['allow_mer_discounts'] == 'Y' ) : //Discount code display ?>
 			<div id="event_espresso_coupon_wrapper" class="clearfix event-data-display">
 				<label class="coupon-code" for="event_espresso_coupon_code"><?php _e( 'Enter Coupon Code ', 'event_espresso' ); ?></label>
 				<input type="text" 
@@ -105,7 +101,7 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			</div>
 			<?php endif; ?>
 			
-			<?php if ( function_exists( 'event_espresso_groupon_payment_page' )) : ?>
+			<?php if ( function_exists( 'event_espresso_groupon_payment_page' ) && isset($org_options['allow_mer_vouchers']) && $org_options['allow_mer_vouchers'] == 'Y' ) : //Voucher code display ?>
 			<div id="event_espresso_coupon_wrapper" class="clearfix event-data-display" style="padding:5px; margin:5px;">
 				<label class="coupon-code" for="event_espresso_groupon_code"><?php _e( 'Enter Voucher Code ', 'event_espresso' ); ?></label>
 				<input type="text" 
@@ -117,20 +113,19 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			</div>
 			<?php endif; ?>
 
-			<div id="event_espresso_notifications" class="clearfix event-data-display" style="">
-			</div>
-
-			<div id="event_espresso_total_wrapper" class="clearfix event-data-display">			
+			<div id="event_espresso_total_wrapper" class="clearfix event-data-display">	
+					
 				<?php do_action( 'action_hook_espresso_shopping_cart_before_total' ); ?>				
 				<span class="event_total_price">
 					<?php _e( 'Total ', 'event_espresso' ) . $org_options['currency_symbol'];?> <span id="event_total_price"><?php echo $_SESSION['espresso_session']['grand_total'];?></span>
 				</span>
 				<?php do_action( 'action_hook_espresso_shopping_cart_after_total' ); ?>
-			</div>
-
-			<p id="event_espresso_refresh_total">
+				<p id="event_espresso_refresh_total">
 				<a id="event_espresso_refresh_total" style="cursor:pointer;"><?php _e( 'Refresh Total', 'event_espresso' ); ?></a>
 			</p>
+			</div>
+
+			
 			<p id="event_espresso_submit_cart">
 				<input type="submit" class="submit btn_event_form_submit ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" name="Continue" id="event_espresso_continue_registration" value="<?php _e( 'Enter Attendee Information', 'event_espresso' ); ?>&nbsp;&raquo;" />
 			</p>

@@ -85,6 +85,22 @@ $values=array(
             </label>
             <?php echo select_input('show_pending_payment_options', $values, isset($org_options['show_pending_payment_options']) ? $org_options['show_pending_payment_options'] : ''); ?> <br />
           </li>
+		  <?php if ( function_exists( 'event_espresso_coupon_payment_page' ) ) : ?>
+		  <li>
+            <label>
+              <?php _e('Allow discounts in the shopping cart?','event_espresso'); ?>
+            </label>
+            <?php echo select_input('allow_mer_discounts', $values, isset($org_options['allow_mer_discounts']) ? $org_options['allow_mer_discounts'] : ''); ?> <br />
+          </li>
+		  <?php endif; ?>
+		  <?php if ( function_exists( 'event_espresso_groupon_payment_page' ) ) : ?>
+		   <li>
+            <label>
+              <?php _e('Allow voucher codes in the shopping cart?','event_espresso'); ?>
+            </label>
+            <?php echo select_input('allow_mer_vouchers', $values, isset($org_options['allow_mer_vouchers']) ? $org_options['allow_mer_vouchers'] : ''); ?> <br />
+          </li>
+		  <?php endif; ?>
           <li>
             <label>
               <?php _e('Use the Venue Manager?','event_espresso'); ?>

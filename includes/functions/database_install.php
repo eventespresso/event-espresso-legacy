@@ -331,7 +331,10 @@ function events_data_tables_install() {
 					'enable_default_style' => 'N',
 					'selected_style' => 'event_espresso_style.css',
 					'show_pending_payment_options' => 'Y',
-					'show_reg_footer' => 'Y'
+					'show_reg_footer' => 'Y',
+					'skip_confirmation_page' => 'N',
+					'allow_mer_discounts' => 'N',
+					'allow_mer_vouchers' => 'N'
 			);
 
 			add_option('events_organization_settings', $org_options);
