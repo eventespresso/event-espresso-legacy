@@ -122,7 +122,7 @@ function attendee_edit_record() {
 			$SQL = "SELECT q.*, q.id q_id, qg.group_name FROM " . EVENTS_QUESTION_TABLE . " q ";
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
-			$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
+			$SQL .= "WHERE qgr.group_id in ( '$questions_in' ) ";
 			$SQL .= "AND q.admin_only = 'N' ";
 			$SQL .= "ORDER BY qg.id, q.sequence ASC";
 			
@@ -228,7 +228,7 @@ function attendee_edit_record() {
 					$SQL .= "LEFT JOIN " . EVENTS_ANSWER_TABLE . " at on q.id = at.question_id ";
 					$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 					$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
-					$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
+					$SQL .= "WHERE qgr.group_id in ( '$questions_in' ) ";
 					$SQL .= "AND ( at.attendee_id IS NULL OR at.attendee_id = %d ) ";
 					$SQL .= "AND q.admin_only != 'Y' ";
 					$SQL .= $FILTER;
@@ -245,7 +245,7 @@ function attendee_edit_record() {
 						$SQL = "SELECT q.* FROM " . EVENTS_QUESTION_TABLE . " q ";
 						$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr ON q.id = qgr.question_id ";
 						$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg ON qg.id = qgr.group_id ";
-						$SQL .= "WHERE qgr.group_id IN ( $questions_in ) ";
+						$SQL .= "WHERE qgr.group_id IN ( '$questions_in' ) ";
 						$SQL .= "AND q.id NOT IN ( %s ) ";
 						$SQL .= "GROUP BY q.question ";
 						$SQL .= "ORDER BY qg.id, q.id ASC";
