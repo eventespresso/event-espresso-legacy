@@ -10,7 +10,7 @@ $attendee_num = 1;
 	<form id="form1" name="form1" method="post" action="<?php echo home_url()?>/?page_id=<?php echo $event_page_id?>">
 		<div class="event-conf-block event-display-boxes ui-widget" >
 		<h3 class="event_title ui-widget-header ui-corner-top">
-			<?php _e('Please verify your registration details:','event_espresso'); ?>
+			<?php _e('Verify Registration','event_espresso'); ?>
 		</h3>
 		<div class="event-data-display ui-widget-content ui-corner-bottom">
 			<table class="event-display-tables grid"  id="event_espresso_attendee_verify">
@@ -87,9 +87,9 @@ $attendee_num = 1;
 									echo "(" . $x_attendee['email']  . ") ";
 								}
 								//Create edit link
-								echo '<a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$x_attendee['id'].'&amp;regevent_action=register&amp;form_action=edit_attendee&amp;primary='.$attendee_id.'&amp;p_id='.$p_id.'&amp;coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'&amp;attendee_num='.$attendee_num.'">'. __('Edit', 'event_espresso').'</a>';
+								echo '<a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$x_attendee['id'].'&amp;regevent_action=register&amp;form_action=edit_attendee&amp;primary='.$attendee_id.'&amp;p_id='.$attendee_id.'&amp;coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'&amp;attendee_num='.$attendee_num.'&amp;event_id='.$event_id.'">'. __('Edit', 'event_espresso').'</a>';
 								//Create delete link
-								echo ' | <a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$x_attendee['id'].'&amp;regevent_action=register&amp;form_action=edit_attendee&amp;primary='.$attendee_id.'&amp;delete_attendee=true&amp;p_id='.$p_id.'&amp;coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'">'. __('Delete', 'event_espresso').'</a>';
+								echo ' | <a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$x_attendee['id'].'&amp;regevent_action=register&amp;form_action=edit_attendee&amp;primary='.$attendee_id.'&amp;delete_attendee=true&amp;p_id='.$attendee_id.'&amp;coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'&amp;event_id='.$event_id.'">'. __('Delete', 'event_espresso').'</a>';
 							}
 						}
 ?>
@@ -125,7 +125,7 @@ $attendee_num = 1;
 		<?php if ($display_questions != '') { ?>
 		
 		<div id="additional-conf-info" class="event-display-boxes">
-				<h3 class="event_title ui-widget-header ui-corner-top"><?php _e('Additional Information for:', 'event_espresso'); ?> <?php echo stripslashes_deep($attendee_name)?></h3>
+				<h3 class="event_title ui-widget-header ui-corner-top"><?php echo stripslashes_deep($attendee_name)?></h3>
 				<div id="additional-conf-info" class="event-data-display ui-widget-content ui-corner-bottom">
 					<table id="event_espresso_attendee_verify_questions" class="event-display-tables grid">
 					<?php foreach ($questions as $question) { ?>
