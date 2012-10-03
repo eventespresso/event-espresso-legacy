@@ -53,10 +53,10 @@ if (empty($attendee_email)) {
 } else {
 	$data['attendee_email'] = $attendee_email;
 }
-$data['address'] = $address;
-$data['city'] = $city;
-$data['state'] = $state;
-$data['zip'] = $zip;
+$data['address'] = isset($address) && !empty($address) ? $address : '';
+$data['city'] = isset($city) && !empty($city) ? $city : '';
+$data['state'] = isset($state) && !empty($state) ? $state : '';
+$data['zip'] = isset($zip) && !empty($zip) ? $zip : '';
 if (empty($event_cost)) {
 	$data['event_cost'] = $total_cost;
 } else {
@@ -64,9 +64,9 @@ if (empty($event_cost)) {
 }
 $data['attendee_id'] = $attendee_id;
 $data['event_id'] = $event_id;
-$data['event_name'] = $event_name;
+$data['event_name'] = isset($event_name) && !empty($event_name) ? $event_name : '';
 $data['registration_id'] = $registration_id;
-$data['phone'] = $phone;
+$data['phone'] = isset($phone) && !empty($phone) ? $phone : '';
 //This file builds the gateways that are available
 echo '<div id="onsite-payments" class="event-display-boxes ui-widget">';
 echo '<h3 class="section-heading ui-widget-header ui-corner-top">' . __('Choose a payment option', 'event_espresso') . '</h3>';
