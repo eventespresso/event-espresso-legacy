@@ -690,7 +690,8 @@ function events_data_tables_install() {
 		
 		// get primary attendee reg IDs
 		$SQL = "SELECT DISTINCT primary_registration_id FROM " . $wpdb->prefix . "events_multi_event_registration_id_group";
-		if ( $results = $wpdb->get_var($SQL)) {
+		$results = $wpdb->get_var($SQL);
+		if ( $results !== FALSE && ! empty( $results )) {
 			// now set "is_primary" to true 
 			foreach ( $results as $result ) {
 				$wpdb->update( 
@@ -705,7 +706,8 @@ function events_data_tables_install() {
 	
 				
 		$SQL = "SELECT SUM(final_price) AS final_price FROM " . $wpdb->prefix . "events_attendee";
-		if ( $sum = $wpdb->get_var($SQL) ) {
+		$sum = $wpdb->get_var($SQL)
+		if ( $sum !== FALSE && ! empty( $sum )) {
 
 			// if the orig_price and final_price fields were JUST created, then they should sum to 0
 			if ( (float)$sum->final_price == 0 ) {
