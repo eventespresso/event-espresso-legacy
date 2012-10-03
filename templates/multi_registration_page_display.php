@@ -58,7 +58,7 @@ $attendee_quantity = ' x '.sprintf(_n('%d attendee', '%d attendees', $meta['atte
 				$is_primary = $event_counter == 1 ? 'primary' : 'additional';
 
 				$price_group_att_counter = 1; //this will keep track of the attendee number inside each event inside each price type
-				
+				wp_nonce_field('reg_nonce', 'reg_form_nonce');
 				//Outputs registration forms
 				?>
 				<div class="multi_regis_wrapper_attendee-<?php echo $is_primary; ?>">
@@ -102,12 +102,6 @@ $attendee_quantity = ' x '.sprintf(_n('%d attendee', '%d attendees', $meta['atte
 					$meta['attendee_number']++;
 					$attendee_number++;
 				}
-
-				//Outputs the shopping cart items
-				if (function_exists('event_espresso_add_cart_item_groups')) {
-					echo event_espresso_add_cart_item_groups($item_groups);
-				}
-
 
 				//Multiple Attendees
 				if ($allow_multiple == "Y") {

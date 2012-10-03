@@ -35,6 +35,10 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 		} else {
 			$event_id = absint( $data_source['event_id'] );
 		}
+		
+		if (isset($_POST['reg_form_nonce']) && !empty($_POST['reg_form_nonce']) ){
+			$data_source['reg_form_nonce'] = $_POST['reg_form_nonce'];
+		}
 	
 		wp_verify_nonce( $data_source['reg_form_nonce'] );
 		
