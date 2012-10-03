@@ -118,7 +118,7 @@ $values=array(
                           <p>
                             <?php _e('Promote Event Espresso and earn cash!', 'event_espresso'); ?>
                           </p>
-                          <p>Get paid by helping other event mangers understand the power of Event Espresso by becoming an affiliate.</p><ol><li>Go to the <a href="https://www.e-junkie.com/affiliates/?cl=113214&amp;ev=5649f286f0" target="_blank">e-junkie site</a> to get your affiliate link</li><li>All affiliates get 20% from each sale</li><li>Payments are made only through paypal</li><li>Payments are sent at the beginning of each month for the sales of  the previous month</li><li>Payments will be made regardless of the sales volume. There is no  minimum limit</li><li>You can create your own banner or use the ones below</li></ol>
+                          <p>Get paid by helping other event mangers understand the power of Event Espresso by becoming an affiliate.</p><ol><li>Go to the <a href="http://eventespresso.com/wp-content/plugins/wp-affiliate-platform/affiliates/register.php" target="_blank">affiliate sign up page</a> to get your affiliate link</li><li>All affiliates get 20% from each sale</li><li>Payments are made only through paypal</li><li>Payments are sent at the beginning of each month for the sales of  the previous month</li><li>Payments will be made regardless of the sales volume. There is no  minimum limit</li><li>You can create your own banner or use the ones below</li></ol>
                         <p>
                             <a href="http://eventespresso.com/affiliates/" target="_blank"><?php _e('Banners and More Info >>', 'event_espresso'); ?></a>
                           </p>
