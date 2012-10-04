@@ -32,7 +32,7 @@
 .payment-option-closed { display: inline-block; }
 
 .payment-option-lnk {
-	display: inline-block; position: relative; width:140px; height:47px; padding:18px; margin:0 0 1em; 
+	display: inline-block; position: relative; width:140px; height:47px; padding:15px; margin:0 0 1em; 
 	border:1px solid #ddd; border-radius:3px; 
 	text-align: center; line-height:1em; vertical-align: middle; cursor:pointer;
 
