@@ -18,10 +18,10 @@ function event_espresso_firstdata_e4_payment_settings() {
 	}
 	$firstdata_e4_settings = get_option('event_espresso_firstdata_e4_settings');
 	if (empty($firstdata_e4_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_e4/standard_button.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/firstdata_e4/standard_button.gif";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_e4/firstdata-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/firstdata_e4/firstdata-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/firstdata_e4/standard_button.gif";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/firstdata_e4/firstdata-logo.png";
 		}
 		$firstdata_e4_settings['firstdata_e4_login_id'] = '';
 		$firstdata_e4_settings['firstdata_e4_transaction_key'] = '';

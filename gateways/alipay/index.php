@@ -22,7 +22,7 @@ function espresso_display_alipay($payment_data) {
 //echo "<pre>", print_r( $parameter ), "</pre>";
 	$link = $alipay->create_url();
 
-	$link_anchor = isset($alipay_settings['button_url']) ? "<img style='width:79px; height48px;' src='" . $alipay_settings['button_url'] . "' alt='" . __('Pay using Alipay', 'event espresso') . "' />" : __('Pay using Alipay', 'event espresso');
+	$link_anchor = isset($alipay_settings['button_url']) ? "<img src='" . $alipay_settings['button_url'] . "' alt='" . __('Pay using Alipay', 'event espresso') . "' />" : __('Pay using Alipay', 'event espresso');
 
 	$ee_images_url = EVENT_ESPRESSO_PLUGINFULLURL;
 	print <<<EOT
