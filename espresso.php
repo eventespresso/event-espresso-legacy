@@ -616,7 +616,7 @@ if (!function_exists('espresso_load_jquery')) {
 //End Javascript files
 //Load the style sheets for the reegistration pages
 
-//This is the old style settings. Will be deprecated soon.
+//This is the old style settings. Will be deprecated/removed soon.
 add_action('wp_print_styles', 'add_event_espresso_stylesheet');
 if (!function_exists('add_event_espresso_stylesheet')) {
 
@@ -656,6 +656,7 @@ if (!function_exists('add_event_espresso_stylesheet')) {
 
 }
 
+//Themeroller stuff
 add_action('wp_print_styles', 'add_espresso_themeroller_stylesheet');
 function add_espresso_themeroller_stylesheet() {
 
@@ -664,15 +665,6 @@ function add_espresso_themeroller_stylesheet() {
 
 	//Load the ThemeRoller styles if enabled
 	if (!empty($org_options['style_settings']['enable_default_style']) && $org_options['style_settings']['enable_default_style'] == 'Y') {
-
-		/*if (!empty($org_options['style_settings']['use_grid_layout']) && $org_options['style_settings']['use_grid_layout'] == 'Y') {
-			if (file_exists(EVENT_ESPRESSO_UPLOAD_DIR . 'css/grid_layout.css')) {
-				wp_register_style('espresso_grid_layout', EVENT_ESPRESSO_UPLOAD_URL . 'css/grid_layout.css');
-			} else {
-				wp_register_style('espresso_grid_layout', EVENT_ESPRESSO_PLUGINFULLURL . 'templates/css/grid_layout.css');
-			}
-			wp_enqueue_style('espresso_grid_layout');
-		}*/
 
 		//Define the path to the ThemeRoller files
 		if (file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "themeroller/index.php")) {
@@ -708,11 +700,18 @@ function add_espresso_themeroller_stylesheet() {
 			wp_register_style('espresso_themeroller', $themeroller_style_path . $org_options['themeroller']['themeroller_style'] . '/style.css');
 			wp_enqueue_style('espresso_themeroller');
 		}
+	}else{
+		//Load a default style sheet
+		$event_espresso_style_sheet = EVENT_ESPRESSO_PLUGINFULLURL . 'templates/espresso_default.css';
+
+		if (file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "templates/espresso_default.css")) {
+			$event_espresso_style_sheet = EVENT_ESPRESSO_UPLOAD_URL . 'templates/espresso_default.css';
+		}
+
+		wp_register_style('event_espresso_style_sheets', $event_espresso_style_sheet);
+		wp_enqueue_style('event_espresso_style_sheets');
 	}
 }
-
-
-//End styles
 
 /**
  * Add a settings link to the Plugins page, so people can go straight from the plugin page to the
