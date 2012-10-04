@@ -11,7 +11,7 @@ jQuery(document).ready(function($) {
 		var item_to_display = $(this).attr("rel"); 
 		// display the target's div container - use slideToggle or removeClass
 		$('#'+item_to_display+'-dv').slideToggle( 500, function() {
-			$('#'+item_to_display+'-dv').parent().css({ 'display' : 'block' }); 
+			$(this).parent().css({ 'display' : 'block' }); 
 		}); 
 		return false;
 	});
@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
 		var item_to_hide = $(this).attr("rel"); 
 		// hide the target's div container - use slideToggle or addClass
 		$('#'+item_to_hide+'-dv').slideToggle( 500, function() {
-			$('#'+item_to_hide+'-dv').parent().css({ 'display' : 'inline-block' });
+			$(this).parent().css({ 'display' : 'inline-block' });
 		}); 
 		return false;
 	});	
