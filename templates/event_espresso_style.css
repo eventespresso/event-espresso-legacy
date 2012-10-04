@@ -9,7 +9,7 @@
 */
 
 .payment_container, .payment-option-dv { position: relative; margin:0 .25em .25em 0;  }
-
+.payment-option-closed { display: inline-block; }
 
 .payment-option-lnk {
 	display: inline-block; position: relative; width:140px; height:47px; padding:20px; margin:0 0 1em; 
@@ -18,12 +18,12 @@
 
 }
 .payment-option-lnk:hover {
-	top:-1px; border-color:#ccc; text-decoration:none;
+	top:-1px; border-color:#d5d5d5; text-decoration:none;
 	-webkit-box-shadow: 4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025); 
 	-moz-box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025); 
 	box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025);	
 }
-.payment-option-lnk img { width:140px; height:47px; padding:0; margin:0; }
+.payment-option-lnk img { max-width:140px !important; width:140px; height:47px; padding:0; margin:0; }
 .payment-option-lnk.algn-vrt { display: table !important; height:30px; }
 .payment-option-lnk.algn-vrt .vrt-cell { display: table-cell !important; vertical-align: middle; }
 
