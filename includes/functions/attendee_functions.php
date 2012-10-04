@@ -61,6 +61,7 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 			global $email_questions; //Make a global variable to hold the answers to the questions to be sent in the admin email.
 			$email_questions = '<p>' . __('Form Questions:', 'event_espresso') . '<br />';
 			foreach ($questions as $question) {
+				$question_type = !empty($response_source[$question->question_type . '_' . $question->id]) ? $response_source[$question->question_type . '_' . $question->id] :'';
 				if (!in_array($question->id, $question_displayed)) {
 					$question_displayed[] = $question->id;
 					switch ($question->question_type) {
@@ -68,7 +69,7 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 						case "TEXTAREA" :
 						case "DROPDOWN" :
 							if ($question->admin_only != 'Y') {
-								$post_val = ($question->system_name != '') ? $response_source[$question->system_name] : $response_source[$question->question_type . '_' . $question->id];
+								$post_val = ($question->system_name != '') ? $response_source[$question->system_name] : $question_type;
 							} else {
 								$post_val = '';
 							}
@@ -78,7 +79,7 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 							break;
 						case "SINGLE" :
 							if ($question->admin_only != 'Y') {
-								$post_val = ($question->system_name != '') ? $response_source[$question->system_name] : $response_source[$question->question_type . '_' . $question->id];
+								$post_val = ($question->system_name != '') ? $response_source[$question->system_name] : $question_type;
 							} else {
 								$post_val = '';
 							}
@@ -90,8 +91,7 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 							$value_string = '';
 							if (!empty($response_source[$question->question_type . '_' . $question->id]) && $question->admin_only != 'Y') {
 								for ($i = 0; $i < count($response_source[$question->question_type . '_' . $question->id]); $i++) {
-
-								$value_string .= trim($response_source[$question->question_type . '_' . $question->id][$i]) . ",";
+									$value_string .= trim($response_source[$question->question_type . '_' . $question->id][$i]) . ",";
 								}
 							}
 
