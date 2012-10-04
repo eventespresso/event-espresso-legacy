@@ -20,10 +20,10 @@ function event_espresso_authnet_payment_settings() {
 	}
 	$authnet_settings = get_option('event_espresso_authnet_settings');
 	if (empty($authnet_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/btn_cc_vmad.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/authnet/btn_cc_vmad.gif";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/authnet-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/authnet/authnet-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/btn_cc_vmad.gif";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/authnet-logo.png";
 		}
 		$authnet_settings['active'] = false;
 		$authnet_settings['authnet_login_id'] = '';

@@ -6,13 +6,8 @@ function espresso_display_eway($payment_data) {
 	include_once ('Eway.php');
 	echo '<!-- Event Espresso eWay Gateway Version ' . $eway_gateway_version . '-->';
 	echo '
-<div id="eway-payment-option-dv" class="payment-option-dv">
-
-	<a id="eway-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="eway-payment-option-form" style="cursor:pointer;">
-		<img width="140" height="47" alt="" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/eway/eway-logo.png">
-	</a>	
-
-	<div id="eway-payment-option-form-dv" class="hide-if-js">';
+ <div id="eway-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+	<img class="off-site-payment-gateway-img" width="16" height="16" src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png" alt="click to visit this payment gateway">';
 	$myeway = new eway(); // initiate an instance of the class
 	global $org_options;
 //global $attendee_id;
@@ -71,10 +66,10 @@ function espresso_display_eway($payment_data) {
 		$myeway->submitPayment(); //Enable auto redirect to payment site
 	} else {
 		if (empty($eway_settings['button_url'])) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "eway/eway_logo.png")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_URL . "eway/eway_logo.png";
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "eway/eway-logo.png")) {
+				$button_url = EVENT_ESPRESSO_GATEWAY_URL . "eway/eway-logo.png";
 			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/eway/eway_logo.png";
+				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/eway/eway-logo.png";
 			}
 		} else {
 			$button_url = $eway_settings['button_url'];
@@ -88,12 +83,6 @@ function espresso_display_eway($payment_data) {
 	}
 
 	echo '
-		<br/>
-		<p class="choose-diff-pay-option-pg">
-			<a class="hide-the-displayed" rel="eway-payment-option-form" style="cursor:pointer;">' . __('Choose a different payment option', 'event_espresso') . '</a>
-		</p>
-
-	</div>
 </div>';
 	
 }
