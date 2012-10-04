@@ -7,7 +7,7 @@ function espresso_display_aim($data) {
 <div id="aim-payment-option-dv" class="payment-option-dv">
 
 	<a id="aim-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="aim-payment-option-form" style="cursor:pointer;">
-		<img width="150" height="50" alt="" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/aim/logo.png">
+		<img width="140" height="47" alt="" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/aim/logo.png">
 	</a>	
 
 	<div id="aim-payment-option-form-dv" class="hide-if-js">
