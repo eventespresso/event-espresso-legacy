@@ -1,7 +1,15 @@
-/* Event Espresso Default CSS Document */
+/********************************************/
+/****			-==ATTENTION==-			****/
+/**** 	MOVE THIS FILE BEFORE EDITING 	***/
+
+/*** Please move this file to: 'wp-content/uploads/espresso/templates directory before editing ****/
+
+/**
+	Multi registration form style
+*/
 
 .payment_container, .payment-option-dv { position: relative; margin:0 .25em .25em 0;  }
-
+.payment-option-closed { display: inline-block !important; }
 
 .payment-option-lnk {
 	display: inline-block; position: relative; width:140px; height:47px; padding:20px; margin:0 0 1em; 
@@ -10,12 +18,12 @@
 
 }
 .payment-option-lnk:hover {
-	top:-1px; border-color:#ccc; text-decoration:none;
+	top:-1px; border-color:#d5d5d5; text-decoration:none;
 	-webkit-box-shadow: 4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025); 
 	-moz-box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025); 
 	box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025);	
 }
-.payment-option-lnk img { width:140px; height:47px; padding:0; margin:0; }
+.payment-option-lnk img { max-width:140px !important; width:140px; height:47px; padding:0; margin:0; }
 .payment-option-lnk.algn-vrt { display: table !important; height:30px; }
 .payment-option-lnk.algn-vrt .vrt-cell { display: table-cell !important; vertical-align: middle; }
 
@@ -34,9 +42,6 @@
 	padding:5px;
 }
 
-/**
-* Multi registration form style
-*/
 .multi_reg_cart_block{
 	padding:5px; margin:5px; 
 }
@@ -67,6 +72,10 @@
 #event_espresso_registration_form {
 	margin: 10px 3px;
 }
+/**
+* End Multi registration form style
+*/
+
 
 /**
 	Errors and notices
@@ -93,6 +102,9 @@
 .event_espresso_form_wrapper span.label em,
 .event_espresso_form_wrapper legend em { font-style: normal; color: #C00; padding-left: 3px;}
 .event_espresso_form_wrapper input.error { border-color: #C00; background-color: #FEF; }
+/**
+	End errors and notices
+*/
 
 /**
 	Form styles
@@ -215,7 +227,8 @@ table.price_list td{
 	height:400px;
 	background:url('../images/ajax-loader-large.gif') center no-repeat;
  }
- 
+/* End pagination css */
+
 /* Autocomplete */
 input#ee_autocomplete, input#ee_fes_autocomplete{
 	width:400px;
@@ -231,3 +244,29 @@ ul.ui-autocomplete li{
 	list-style:none;
 	padding: 5px 10px;
 }
+
+/*
+	Colors and other definitions from what's inherited from the theme's form styles
+	added in 3.1.18.P by Chris Reynolds
+	Uncomment these lines if you want to use these styles
+*/
+/*
+#event_espresso_checkout_form { border: 2px solid #e8e8e8; }
+.multi_reg_cart_block { border: 2px solid #d1d1d1; }
+#event_espresso_coupon_wrapper { border: 2px solid #d1d1d1; }
+#event_espresso_total_wrapper { border: 2px solid #d1d1d1; }
+#event_espresso_registration_form { background-color:  #f4f3f2; }
+table.price_list tr{ background-color: #c7e9c8; }
+.pending_event{ border:2px solid yellow; padding:5px; }
+.expired_event{ color:#F00; }
+.event_espresso_form_wrapper input:focus,
+.event_espresso_form_wrapper input.error:focus,
+.event_espresso_form_wrapper textarea:focus {   background-color: #FFC; border-color: #FC6; }
+*/
+
+
+/********************************************/
+/****			-==ATTENTION==-			****/
+/**** 	MOVE THIS FILE BEFORE EDITING 	***/
+
+/*** Please move this file to: 'wp-content/uploads/espresso/templates directory before editing ****/
