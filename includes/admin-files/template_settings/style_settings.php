@@ -1,4 +1,7 @@
 <?php
+/*
+* This file is deprecated, but may still be in use by some users. I plan on removing this someday!
+*/
 // read our style dir and build an array of files
 $dhandle = opendir(EVENT_ESPRESSO_PLUGINFULLPATH . 'templates/css/');
 $files = array();

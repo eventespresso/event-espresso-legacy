@@ -180,16 +180,6 @@ function event_espresso_manage_templates() {
 													<?php _e('This option enables the style settings below.', 'event_espresso'); ?>
 												</span></td>
 										</tr>
-										<?php /* ?><tr>
-										  <th> <label>
-										  <?php _e('Use Grid Layout', 'event_espresso'); ?>
-										  <?php echo apply_filters('filter_hook_espresso_help', 'use_grid_info'); ?> </label>
-										  </th>
-										  <td><?php echo select_input('use_grid_layout', $values, $org_options['style_settings']['use_grid_layout'], 'id="use_grid_layout"'); ?><br />
-										  <span class="description">
-										  <?php _e('Displays event list in a grid layout.', 'event_espresso'); ?>
-										  </span></td>
-										  </tr><?php */ ?>
 										<tr>
 											<th> <label>
 													<?php _e('ThemeRoller Style ', 'event_espresso'); ?>
@@ -197,7 +187,7 @@ function event_espresso_manage_templates() {
 												<?php //echo apply_filters('filter_hook_espresso_help', 'themeroller_info'); ?>
 											</th>
 											<td><select id="style-themeroller" class="wide" name="themeroller_style">
-													<option <?php espresso_themeroller_style_is_selected($fname_themeroller) ?> value=""> -
+													<option <?php espresso_themeroller_style_is_selected($fname_themeroller) ?> value="smoothness"> -
 														<?php _e('Default', 'event_espresso'); ?>
 													</option>
 													<?php foreach ($files_themeroller as $fname_themeroller) { ?>
