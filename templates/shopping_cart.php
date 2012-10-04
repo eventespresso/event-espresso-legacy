@@ -34,6 +34,15 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 <?php
 		$counter = 1; //Counter that will keep track of the first events
 		foreach ( $result as $r ){
+			
+			//Check to see if the Members plugin is installed.
+			if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && !is_user_logged_in() ) {
+				$member_options = get_option('events_member_settings');
+				if ($r->member_only == 'Y' || $member_options['member_only_all'] == 'Y'){
+					event_espresso_user_login();
+					return;
+				}
+			}
 			//If the event is still active, then show it.
 			if (event_espresso_get_status($r->id) == 'ACTIVE') {
 				$num_attendees = get_number_of_attendees_reg_limit( $r->id, 'num_attendees' ); //Get the number of attendees
