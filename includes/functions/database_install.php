@@ -239,6 +239,26 @@ function events_data_tables_install() {
 					'enable_default_style' => 'N',
 					'event_ssl_active' => 'N',
 					'use_venue_manager' => 'Y',
+					'enable_default_style' => 'N',
+					'selected_style' => 'event_espresso_style.css',
+					'show_pending_payment_options' => 'Y',
+					'show_reg_footer' => 'Y',
+					'skip_confirmation_page' => 'N',
+					'allow_mer_discounts' => 'N',
+					'allow_mer_vouchers' => 'N',
+					'display_short_description_in_event_list' => 'N',
+					'display_description_on_multi_reg_page' => 'N',
+					'display_address_in_event_list' => 'N',
+					'display_address_in_regform' => 'Y',
+					'use_custom_post_types' => 'N',
+					'themeroller' => array(
+						'themeroller_style' => 'smoothness',
+					),
+					'style_settings' => array(
+						'disable_legacy_styles' => 'Y',
+						'enable_default_style' => 'Y',
+						'css_name' => '',
+					),
 			);
 
 			add_option('events_organization_settings', $new_org_options);

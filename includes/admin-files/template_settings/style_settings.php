@@ -41,7 +41,7 @@ $files_color = array();
 	function espresso_style_is_selected($name) {
 	   global $org_options;
 	   $input_item = $name;
-			 $option_selections = array($org_options['selected_style'], $org_options['style_color']  );
+			 $option_selections = array(isset($org_options['selected_style']) && !empty($org_options['selected_style']) ? $org_options['selected_style'] : '', isset($org_options['style_color']) && !empty($org_options['style_color']) ? $org_options['style_color'] : ''  );
 	   if (!in_array( $input_item, $option_selections )  )
 	   return false;
 	   else
