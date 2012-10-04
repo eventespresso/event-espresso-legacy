@@ -18,10 +18,10 @@ function event_espresso_realauth_payment_settings() {
 	}
 	$realauth_settings = get_option('event_espresso_realauth_settings');
 	if (empty($realauth_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/realauth/logo.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/realauth/logo.gif";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/realauth/realex-payments-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/realauth/realex-payments-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/realauth/logo.gif";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/realauth/realex-payments-logo.png";
 		}
 		$realauth_settings['merchant_id'] = '';
 		$realauth_settings['shared_secret'] = '';

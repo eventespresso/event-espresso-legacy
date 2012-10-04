@@ -11,6 +11,8 @@ $eway_gateway_version = '1.0';
 
 class eway extends PaymentGateway {
 
+	var $eway_settings = NULL;
+
     /**
      * Initialize the eWay gateway
      *
@@ -20,8 +22,8 @@ class eway extends PaymentGateway {
     public function __construct() {
         parent::__construct();
         // Some default values of the class
-        $eway_settings = get_option('event_espresso_eway_settings');
-        switch ($eway_settings['region']) {
+        $this->eway_settings = get_option('event_espresso_eway_settings');
+        switch ($this->eway_settings['region']) {
             case 'NZ':
                 $this->gatewayUrl = 'https://nz.ewaygateway.com/Request/';
                 break;
@@ -75,7 +77,7 @@ class eway extends PaymentGateway {
             $this->gatewayUrl = explode("?", $responseurl);
             parse_str($this->gatewayUrl[1]);
             $this->gatewayUrl[1] = $value;
-        } elseif ( $eway_settings['use_sandbox'] != '' ) {
+        } elseif ( $this->eway_settings['use_sandbox'] != '' ) {
             echo "ERROR\n";
 						echo $error["set_host"] ? "Success" : "Failure";
             echo " Setting host: " . $posturl . "\n";
@@ -84,7 +86,7 @@ class eway extends PaymentGateway {
         }
     }
 
-		public function submitPayment() {
+		public function submitPayment( $fields = FASLE ) {
             $this->prepareSubmit();
             echo "<html>\n";
             echo "<head><title>Processing Payment...</title></head>\n";

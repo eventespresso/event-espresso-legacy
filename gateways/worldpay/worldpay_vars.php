@@ -30,16 +30,16 @@ function espresso_display_worldpay($payment_data) {
 		$myworldpay->submitPayment(); //Enable auto redirect to payment site
 	} else {
 		if (empty($worldpay_settings['button_url'])) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/worldpay/WorldPaylogoBluetrans.png")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/worldpay/WorldPaylogoBluetrans.png";
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/worldpay/worldpay-logo.png")) {
+				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/worldpay/worldpay-logo.png";
 			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/worldpay/WorldPaylogoBluetrans.png";
+				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/worldpay/worldpay-logo.png";
 			}
 		} elseif (file_exists($worldpay_settings['button_url'])) {
 			$button_url = $worldpay_settings['button_url'];
 		} else {
 			//If no other buttons exist, then use the default location
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/worldpay/WorldPaylogoBluetrans.png";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/worldpay/worldpay-logo.png";
 		}
 		$myworldpay->submitButton($button_url, 'worldpay'); //Display payment button
 	}

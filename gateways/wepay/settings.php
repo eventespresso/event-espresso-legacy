@@ -54,10 +54,10 @@ function event_espresso_wepay_payment_settings() {
 		}
 	}
 	if (empty($wepay_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/wepay/logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/wepay/logo.png";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/wepay/wepay-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/wepay/wepay-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/wepay/logo.png";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/wepay/wepay-logo.png";
 		}
 		$wepay_settings['wepay_client_id'] = '';
 		$wepay_settings['wepay_client_secret'] = '';

@@ -4,8 +4,7 @@ function espresso_display_paytrace($payment_data) {
 	extract($payment_data);
 	global $org_options;
 	$paytrace_settings = get_option('event_espresso_paytrace_settings');
-	?>
-	<div class="event-display-boxes"><?php
+
 	if ($paytrace_settings['force_ssl_return']) {
 		$home = str_replace('http://', 'https://', home_url());
 	} else {
@@ -13,7 +12,14 @@ function espresso_display_paytrace($payment_data) {
 	}
 	if ($paytrace_settings['display_header']) {
 		?>
-			<h3 class="payment_header"><?php echo $paytrace_settings['header']; ?></h3><?php } ?>
+<div id="paytrace-payment-option-dv" class="payment-option-dv">
+
+	<a id="paytrace-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="paytrace-payment-option-form" style="cursor:pointer;">
+		<img width="140" height="47" alt="" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/paytrace/paytrace-logo.png">
+	</a>	
+
+	<div id="paytrace-payment-option-form-dv" class="hide-if-js">
+		<h3 class="payment_header"><?php echo $paytrace_settings['header']; ?></h3><?php } ?>
 		<p class="section-title"><?php _e('Billing Information', 'event_espresso') ?></p>
 		<div class = "event_espresso_form_wrapper">
 			<form id="paytrace_payment_form" name="paytrace_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
@@ -81,7 +87,13 @@ function espresso_display_paytrace($payment_data) {
 				<input name="paytrace_submit" id="paytrace_submit" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
 			</form>
 		</div>
+		<br/>
+		<p class="choose-diff-pay-option-pg">
+			<a class="hide-the-displayed" rel="paytrace-payment-option-form" style="cursor:pointer;"><?php _e('Choose a different payment option', 'event_espresso'); ?></a>
+		</p>
+
 	</div>
+</div>	
 	<?php
 }
 

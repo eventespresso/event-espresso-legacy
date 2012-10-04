@@ -19,10 +19,10 @@ function event_espresso_mwarrior_payment_settings() {
 	}
 	$mwarrior_settings = get_option('event_espresso_mwarrior_settings');
 	if (empty($mwarrior_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/mwarrior/btn_checkout.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/mwarrior/btn_checkout.png";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/mwarrior/mwarrior-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/mwarrior/mwarrior-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/mwarrior/btn_checkout.png";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/mwarrior/mwarrior-logo.png";
 		}
 		$mwarrior_settings['mwarrior_id'] = '';
 		$mwarrior_settings['mwarrior_apikey'] = '';

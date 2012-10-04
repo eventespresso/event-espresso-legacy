@@ -9,10 +9,21 @@ function espresso_display_stripe($payment_data) {
 		} else {
 			$home = home_url();
 		}
-		if ($stripe_settings['display_header']) {
-			?>
-			<h3 class="payment_header"><?php echo $stripe_settings['header']; ?></h3><?php } ?>
-	<div class="event-display-boxes">
+?>
+
+<div id="stripe-payment-option-dv" class="payment-option-dv">
+
+	<a id="stripe-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="stripe-payment-option-form" style="cursor:pointer;">
+		<img width="140" height="47" alt="" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/stripe/stripe-logo.png">
+	</a>	
+
+	<div id="stripe-payment-option-form-dv" class="hide-if-js">
+
+<?php
+		if ($stripe_settings['display_header']) { ?>			
+		<h3 class="payment_header"><?php echo $stripe_settings['header']; ?></h3>
+<?php } ?>
+
 		<p class="section-title"><?php _e('Billing Information', 'event_espresso') ?></p>
 		<div class = "event_espresso_form_wrapper">
 			<form id="stripe_payment_form" name="stripe_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
@@ -88,7 +99,15 @@ function espresso_display_stripe($payment_data) {
 				<input name="stripe_submit" id="stripe_submit" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
 			</form>
 		</div>
+		<br/>
+		<p class="choose-diff-pay-option-pg">
+			<a class="hide-the-displayed" rel="stripe-payment-option-form" 
+
+style="cursor:pointer;"><?php _e('Choose a different payment option', 'event_espresso'); ?></a>
+		</p>
+
 	</div>
+</div>
 	<?php
 }
 

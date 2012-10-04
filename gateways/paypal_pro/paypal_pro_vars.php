@@ -8,7 +8,7 @@ function espresso_display_paypal_pro($data) {
 <div id="paypal_pro-payment-option-dv" class="payment-option-dv">
 
 	<a id="paypal_pro-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="paypal_pro-payment-option-form" style="cursor:pointer;">
-		<img width="150" height="50" alt="" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/paypal_pro/PayPalPro-logo.png">
+		<img width="140" height="47" alt="" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/paypal_pro/PayPalPro-logo.png">
 	</a>	
 
 	<div id="paypal_pro-payment-option-form-dv" class="hide-if-js">	

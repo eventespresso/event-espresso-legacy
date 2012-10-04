@@ -127,7 +127,7 @@ function espresso_display_beanstream($data) {
 								array('id' => 'WY', 'text' => __('Wyoming', 'event_espresso')),
 								array('id' => 'YT', 'text' => __('Yukon', 'event_espresso')),
 								array('id' => '--', 'text' => __('Outside U.S./Canada', 'event_espresso')));
-						echo select_input('state', $values, 'AB');
+						echo select_input( 'state', $values, 'AB' );
 						?>
 					</p>
 					<p>

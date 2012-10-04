@@ -80,7 +80,8 @@ function espresso_display_quickpay($payment_data) {
 	$sandbox = ($quickpay_settings['use_sandbox']) ? '1' : '';
 	$md5check = md5($protocol . $msgtype . $merchant . $language . $ordernumber . $amount . $currency . $continueurl . $cancelurl . $callbackurl . $autocapture . $cardtypelock . $sandbox . $md5secret);
 	?>
-<li>
+ <div id="quickpay-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+	<img class="off-site-payment-gateway-img" width="16" height="16" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL;?>/images/icons/external-link.png" alt="click to visit this payment gateway">
 	<form id="quickpay_form" name="quickpay_form" action="<?php echo $payurl; ?>" method="post">
 		<input type="hidden" name="protocol" value="<?php echo $protocol; ?>" />
 		<input type="hidden" name="msgtype" value="<?php echo $msgtype; ?>" />
@@ -96,9 +97,9 @@ function espresso_display_quickpay($payment_data) {
 		<input type="hidden" name="cardtypelock" value="<?php echo $cardtypelock; ?>" />
 		<?php if ($quickpay_settings['use_sandbox']) { ?><input type="hidden" name="testmode" value="1" /><?php } ?>
 		<input type="hidden" name="md5check" value="<?php echo $md5check; ?>" />
-		<input class="espresso_payment_button_quickpay" id="espresso_payment_button_quickpay" value="Payvalue" type="image" alt="Pay using QuickPay" src="<?php echo $button_url; ?>" />
+		<input id="quickpay-payment-option-lnk" class="payment-option-lnk" value="Payvalue" type="image" alt="Pay using QuickPay" src="<?php echo $button_url; ?>" />
 	</form>
-</li>
+</div>
 	<?php
 }
 

@@ -5,7 +5,6 @@ function espresso_display_usaepay_onsite($data) {
 	$usaepay_onsite_settings = get_option('event_espresso_usaepay_onsite_settings');
 	$use_sandbox = $usaepay_onsite_settings['usaepay_onsite_use_sandbox'];
 	?>
-	<div class="event-display-boxes">
 		<?php
 		if ($use_sandbox) {
 			echo '<div id="sandbox-panel"><h2 class="section-title">' . __('PayPal Sandbox Mode', 'event_espreso') . '</h2><p>Test Master Card # 5424180818927383</p>';
@@ -18,9 +17,19 @@ function espresso_display_usaepay_onsite($data) {
 		} else {
 			$home = home_url();
 		}
+?>
+<div id="usaepay_onsite-payment-option-dv" class="payment-option-dv">
+
+	<a id="usaepay_onsite-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="usaepay_onsite-payment-option-form" style="cursor:pointer;">
+		<img width="140" height="47" alt="" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/usaepay_onsite/usaepay-logo.png">
+	</a>	
+
+	<div id="usaepay_onsite-payment-option-form-dv" class="hide-if-js">
+<?php		
 		if ($usaepay_onsite_settings['display_header']) {
-			?>
-			<h3 class="payment_header"><?php echo $usaepay_onsite_settings['header']; ?></h3><?php } ?>
+	?>
+		<h3 class="payment_header"><?php echo $usaepay_onsite_settings['header']; ?></h3>
+<?php } ?>
 		<p class="section-title"><?php _e('Billing Information', 'event_espresso') ?></p>
 		<div class = "event_espresso_form_wrapper">
 			<form id="usaepay_onsite_payment_form" name="usaepay_onsite_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
@@ -118,7 +127,17 @@ function espresso_display_usaepay_onsite($data) {
 				})
 			});
 		</script>
+
+
+		<br/>
+		<p class="choose-diff-pay-option-pg">
+			<a class="hide-the-displayed" rel="usaepay_onsite-payment-option-form" style="cursor:pointer;"><?php _e('Choose a different payment option', 
+
+'event_espresso'); ?></a>
+		</p>
+
 	</div>
+</div>
 	<?php
 }
 

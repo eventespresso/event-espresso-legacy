@@ -17,10 +17,10 @@ function event_espresso_worldpay_payment_settings() {
 	}
 	$worldpay_settings = get_option('event_espresso_worldpay_settings');
 	if (empty($worldpay_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/worldpay/WorldPaylogoBluetrans.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/worldpay/WorldPaylogoBluetrans.png";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/worldpay/worldpay-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/worldpay/worldpay-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/worldpay/WorldPaylogoBluetrans.png";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/worldpay/worldpay-logo.png";
 		}
 		$worldpay_settings['worldpay_id'] = '';
 		$worldpay_settings['image_url'] = '';

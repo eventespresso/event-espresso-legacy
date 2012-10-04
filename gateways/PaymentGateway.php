@@ -120,7 +120,7 @@ if (!class_exists('PaymentGateway')) {
          * @param string value of buttn text
          * @return void
          */
-        public function submitPayment() {
+        public function submitPayment( $fields = FASLE ) {
             $this->prepareSubmit();
             echo "<html>\n";
             echo "<head><title>Processing Payment...</title></head>\n";
@@ -199,7 +199,7 @@ if (!class_exists('PaymentGateway')) {
 						}
         }
 
-        public function dump_fields() {
+        public function dump_fields( $fields = FALSE ) {
             // Used for debugging, this function will output all the field/value pairs
             // that are currently defined in the instance of the class using the
             // add_field() function.
