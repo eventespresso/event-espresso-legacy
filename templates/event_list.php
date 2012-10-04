@@ -309,10 +309,6 @@ if (!function_exists('event_espresso_get_event_details')) {
 
 			//This can be used in place of the registration link if you are usign the external URL feature
 			$registration_url = $externalURL != '' ? $externalURL : espresso_reg_url($event_id);
-			if (!is_user_logged_in() && defined('EVENTS_MEMBER_REL_TABLE') && $member_only == 'Y') {
-				//Display a message if the user is not logged in.
-				//_e('Member Only Event. Please ','event_espresso') . event_espresso_user_login_link() . '.';
-			} else {
 				//Serve up the event list
 				//As of version 3.0.17 the event list details have been moved to event_list_display.php
 
@@ -348,7 +344,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 							break;
 					}
 				}
-			}
+			
 		}
 		echo "</div>";
 		echo "</div>";

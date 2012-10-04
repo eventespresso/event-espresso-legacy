@@ -136,13 +136,20 @@ $this_event_id = $event_id;
 			$cart_link = false;
 		}
 		if ($display_reg_form == 'Y') {
+			//Check to see if the Members plugin is installed.
+			$member_options = get_option('events_member_settings');
+			if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && !is_user_logged_in() && ($member_only == 'Y' || $member_options['member_only_all'] == 'Y') ) {
+				echo __('Member Only Event', 'event_espresso');
+			}else{
 			?>
-
-			<p id="register_link-<?php echo $event_id ?>" class="register-link-footer">
-				<a class="a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Register', 'event_espresso'); ?></a>
-				<?php echo isset($cart_link) && $externalURL == '' ? $cart_link : ''; ?>
-			</p>
-		<?php } else { ?>
+				<p id="register_link-<?php echo $event_id ?>" class="register-link-footer">
+					<a class="a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Register', 'event_espresso'); ?></a>
+					<?php echo isset($cart_link) && $externalURL == '' ? $cart_link : ''; ?>
+				</p>
+	<?php 
+			}
+		} else { 
+	?>
 			<p id="register_link-<?php echo $event_id ?>" class="register-link-footer">
 				<a class="a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('View Details', 'event_espresso'); ?></a> <?php echo isset($cart_link) && $externalURL == '' ? $cart_link : ''; ?>
 			</p>
