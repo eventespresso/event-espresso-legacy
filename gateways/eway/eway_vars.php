@@ -5,6 +5,14 @@ function espresso_display_eway($payment_data) {
 // Setup class
 	include_once ('Eway.php');
 	echo '<!-- Event Espresso eWay Gateway Version ' . $eway_gateway_version . '-->';
+	echo '
+<div id="eway-payment-option-dv" class="payment-option-dv">
+
+	<a id="eway-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="eway-payment-option-form" style="cursor:pointer;">
+		<img width="140" height="47" alt="" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/eway/eway-logo.png">
+	</a>	
+
+	<div id="eway-payment-option-form-dv" class="hide-if-js">';
 	$myeway = new eway(); // initiate an instance of the class
 	global $org_options;
 //global $attendee_id;
@@ -59,7 +67,6 @@ function espresso_display_eway($payment_data) {
 	$myeway->addField('MerchantOption3', '');
 	$myeway->addField('ModifiableCustomerDetails', 'false');
 
-
 	if ($eway_settings['bypass_payment_page'] == 'Y') {
 		$myeway->submitPayment(); //Enable auto redirect to payment site
 	} else {
@@ -79,6 +86,16 @@ function espresso_display_eway($payment_data) {
 		echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3>';
 		$myeway->dump_fields(); // for debugging, output a table of all the fields
 	}
+
+	echo '
+		<br/>
+		<p class="choose-diff-pay-option-pg">
+			<a class="hide-the-displayed" rel="eway-payment-option-form" style="cursor:pointer;">' . __('Choose a different payment option', 'event_espresso') . '</a>
+		</p>
+
+	</div>
+</div>';
+	
 }
 
 add_action('action_hook_espresso_display_offsite_payment_gateway', 'espresso_display_eway');

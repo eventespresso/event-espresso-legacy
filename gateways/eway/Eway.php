@@ -70,11 +70,12 @@ class eway extends PaymentGateway {
         $responsemode = fetch_data($response, '<result>', '</result>');
         $responseurl = fetch_data($response, '<uri>', '</uri>');
 
-        if ($responsemode == "True") {
+  
+      if ($responsemode == "True") {
             $this->gatewayUrl = explode("?", $responseurl);
             parse_str($this->gatewayUrl[1]);
             $this->gatewayUrl[1] = $value;
-        } else {
+        } elseif ( $eway_settings['use_sandbox'] != '' ) {
             echo "ERROR\n";
 						echo $error["set_host"] ? "Success" : "Failure";
             echo " Setting host: " . $posturl . "\n";
@@ -101,10 +102,10 @@ class eway extends PaymentGateway {
 
     public function submitButton($button_url, $gateway) {
         $this->prepareSubmit();
-        echo '<li><form method="get" name="payment_form" action="' . $this->gatewayUrl[0] . '">';
-        echo '<td><input type="hidden" value="' . $this->gatewayUrl[1] . '" name="value"></td>';
-        echo '<td><input class="espresso_payment_buttoneway" type="image" alt="Pay using eWay" src="' . $button_url . '" /></td>';
-        echo '</form></li>';
+        echo '<form method="get" name="payment_form" action="' . $this->gatewayUrl[0] . '">';
+        echo '<input type="hidden" value="' . $this->gatewayUrl[1] . '" name="value">';
+        echo '<input class="espresso_payment_buttoneway" type="image" alt="Pay using eWay" src="' . $button_url . '" />';
+        echo '</form>';
     }
 
     /**
