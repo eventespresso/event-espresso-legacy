@@ -10,6 +10,18 @@ function espresso_display_invoice($payment_data) {
 		echo '<!--Event Espresso Default Gateway Version ' . $default_gateway_version . '-->';
 	if (isset($invoice_payment_settings['invoice_title'])) {
 		?>
+<div id="invoice-payment-option-dv" class="payment-option-dv">
+
+	<a id="invoice-payment-option-lnk" class="payment-option-lnk algn-vrt display-the-hidden" rel="invoice-payment-option-form" style="display: table-cell">
+		<div class="vrt-cell">
+			<div>
+				<?php echo stripslashes( $invoice_payment_settings['invoice_title'] ) ?>
+			</div>
+		</div>
+	</a>
+	<br/>
+
+	<div id="invoice-payment-option-form-dv" class="hide-if-js">		
 		<div class="event-display-boxes">
 			<?php
 			echo '<h4 id="invoice_title" class="payment_type_title section-heading">' . stripslashes_deep($invoice_payment_settings['invoice_title']) . '</h4>';
@@ -28,6 +40,13 @@ function espresso_display_invoice($payment_data) {
 
 			</div>
 		</div>
+		<br/>
+		<p class="choose-diff-pay-option-pg">
+			<a class="hide-the-displayed" rel="invoice-payment-option-form" style="cursor:pointer;"><?php _e('Choose a different payment option', 'event_espresso'); ?></a>
+		</p>
+
+	</div>
+</div>		
 		<?php
 	}
 }

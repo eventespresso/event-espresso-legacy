@@ -4,7 +4,13 @@ function espresso_display_aim($data) {
 	extract($data);
 	global $org_options;
 	?>
-	<div class="event-display-boxes">
+<div id="aim-payment-option-dv" class="payment-option-dv">
+
+	<a id="aim-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="aim-payment-option-form" style="cursor:pointer;">
+		<img width="150" height="50" alt="" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/aim/logo.png">
+	</a>	
+
+	<div id="aim-payment-option-form-dv" class="hide-if-js">
 		<?php
 		$authnet_aim_settings = get_option('event_espresso_authnet_aim_settings');
 		$use_sandbox = $authnet_aim_settings['use_sandbox'] || $authnet_aim_settings['test_transactions'];
@@ -72,9 +78,13 @@ function espresso_display_aim($data) {
 				<input name="aim_submit" id="aim_submit" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
 			</div>
 		</form>
+		<br/>
+		<p class="choose-diff-pay-option-pg">
+			<a class="hide-the-displayed" rel="aim-payment-option-form" style="cursor:pointer;"><?php _e('Choose a different payment option', 'event_espresso'); ?></a>
+		</p>
 
 	</div>
+</div>
 	<?php
 }
-
 add_action('action_hook_espresso_display_onsite_payment_gateway', 'espresso_display_aim');

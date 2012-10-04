@@ -39,8 +39,11 @@ function espresso_version() {
 function espresso_footer_session() {
 	$exclude = array();
 	if ( isset($_REQUEST['action']) && !in_array( $_REQUEST['action'], $exclude ) && !empty( $_SESSION ) && !is_admin()) {
-		//echo '<h3>$_SESSION</h3><pre style="height:auto;border:2px solid lightblue;">' . print_r( $_SESSION, TRUE ) . '</pre><br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>';
+		printr( $_GET, '$_GET  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+		printr( $_POST, '$_POST  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+		echo '<h3>$_SESSION</h3><pre style="height:auto;border:2px solid lightblue;">' . print_r( $_SESSION, TRUE ) . '</pre><br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>';
 	}	
+
 }
 add_action( 'shutdown', 'espresso_footer_session' );
 
