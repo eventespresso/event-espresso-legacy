@@ -616,8 +616,8 @@ if (!function_exists('espresso_load_jquery')) {
 //End Javascript files
 //Load the style sheets for the reegistration pages
 
-//This is the old style settings
-	add_action('wp_print_styles', 'add_event_espresso_stylesheet');
+//This is the old style settings. Will be deprecated soon.
+add_action('wp_print_styles', 'add_event_espresso_stylesheet');
 if (!function_exists('add_event_espresso_stylesheet')) {
 
 	function add_event_espresso_stylesheet() {
@@ -700,7 +700,7 @@ function add_espresso_themeroller_stylesheet() {
 			wp_enqueue_style('espresso_themeroller_base');
 
 			//Load the smoothness style by default<br />
-			if (!isset($org_options['themeroller']['themeroller_style']) || empty($org_options['themeroller']['themeroller_style'])) {
+			if (!isset($org_options['themeroller']['themeroller_style']) || empty($org_options['themeroller']['themeroller_style']) || $org_options['themeroller']['themeroller_style'] == 'N' ) {
 				$org_options['themeroller']['themeroller_style'] = 'smoothness';
 			}
 
