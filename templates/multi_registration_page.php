@@ -189,10 +189,10 @@ if (!function_exists('multi_register_attendees')) {
 					// event_espresso_clear_session();
 					
 				} else {
-				
+					$member_options = get_option('events_member_settings');
 					//If enough spaces exist then show the form
 					//Check to see if the Members plugin is installed.
-					if ( ! is_user_logged_in() && defined('EVENTS_MEMBER_REL_TABLE') && $member_only == 'Y' ) {
+					if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && !is_user_logged_in() && ($member_only == 'Y' || $member_options['member_only_all'] == 'Y') ) {
 						event_espresso_user_login();
 					} else {
 					
