@@ -6,6 +6,8 @@ if (!function_exists('multi_register_attendees')) {
 
 		global $wpdb, $org_options;
 		
+		
+		
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
 		$event_count = count($events_in_session);
 		
@@ -189,21 +191,11 @@ if (!function_exists('multi_register_attendees')) {
 					// event_espresso_clear_session();
 					
 				} else {
-					$member_options = get_option('events_member_settings');
-					//If enough spaces exist then show the form
-					//Check to see if the Members plugin is installed.
-					if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && !is_user_logged_in() && ($member_only == 'Y' || $member_options['member_only_all'] == 'Y') ) {
-						event_espresso_user_login();
-					} else {
-					
-						//Serve up the registration form
-						//As of version 3.0.17 the registration details have been moved to registration_form.php
-						include('multi_registration_page_display.php');
-						
-
-						$event_counter++;
-						echo '<input type="hidden" name="regevent_action" value="post_multi_attendee" />';
-					}
+					 //If enough spaces exists then serve up the registration form
+					//As of version 3.0.17 the registration details have been moved to registration_form.php
+					include('multi_registration_page_display.php');
+					$event_counter++;
+					echo '<input type="hidden" name="regevent_action" value="post_multi_attendee" />';
 				}//End if ($num_attendees >= $reg_limit) (Shows the regsitration form if enough spaces exist)
 			}//End ($available_spaces == "Unlimited" || $available_spaces >= $number_available_spaces)
 		}//End Build the registration page
