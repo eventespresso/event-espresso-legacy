@@ -757,14 +757,16 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 		<table>
 			<?php foreach ($attendees as $attendee) { ?>
 			<tr><td colspan="4"><?php echo '<strong>'.stripslashes_deep($attendee->event_name ) . '</strong>'?></td></tr>
-			<tr><td colspan="4"><?php echo stripslashes_deep($attendee->fname . ' ' . $attendee->lname) ?></td></tr>
+			
 			<tr>
 				<td width="70%"><?php echo stripslashes_deep( $attendee->price_option ) ?> <?php echo $attendee->final_price < $attendee->orig_price ? '<br />&nbsp;&nbsp;&nbsp;&nbsp;' . $org_options['currency_symbol'] . number_format($attendee->orig_price - $attendee->final_price, 2) . __(' discount per registration','event_espresso') : ''; ?></td>
 				<td width="10%"><?php echo $org_options['currency_symbol'] . number_format($attendee->final_price, 2); ?></td>
 				<td width="10%"><?php echo 'x ' . (int)$attendee->quantity ?></td>
 				<td width="10%" style="text-align:right;"><?php echo $org_options['currency_symbol'] . number_format( $attendee->final_price * (int)$attendee->quantity, 2) ?></td>
 			</tr>
+			<tr><td colspan="4"><?php echo stripslashes_deep($attendee->fname . ' ' . $attendee->lname) ?></td></tr>
 			<?php } ?>
+			
 			<tr>
 				<td colspan="3"><?php _e('Before Discounts:','event_espresso'); ?></td>
 				<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] . number_format($sub_total, 2); ?></td>
@@ -868,8 +870,6 @@ function espresso_verify_recaptcha( $skip_check = FALSE ) {
 	}
 				
 }
-
-
 
 
 // function for applying htmlentities via array_walk_recursive()
