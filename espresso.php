@@ -701,6 +701,13 @@ function add_espresso_themeroller_stylesheet() {
 			wp_enqueue_style('espresso_themeroller');
 		}
 	}else{
+		
+		if (isset($org_options['enable_default_style']) && $org_options['enable_default_style'] != 'Y')
+			return;
+		
+		if (!empty($org_options['style_settings']['enable_default_style']) && $org_options['style_settings']['enable_default_style'] == 'Y')
+			return;
+				
 		//Load a default style sheet
 		$event_espresso_style_sheet = EVENT_ESPRESSO_PLUGINFULLURL . 'templates/css/espresso_default.css';
 
