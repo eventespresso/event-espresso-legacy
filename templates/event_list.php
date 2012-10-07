@@ -106,6 +106,10 @@ if (!function_exists('event_espresso_get_event_details')) {
 		}
 		//echo '<p>'.$order_by.'</p>';
 		$sql .= $show_recurrence == 'false' ? " AND e.recurrence_id = '0' " : '';
+		
+		//Search query
+		$sql .= isset($_REQUEST['ee_search']) && $_REQUEST['ee_search'] == 'true' && isset($_REQUEST['ee_name']) && !empty($_REQUEST['ee_name']) ? " AND e.event_name LIKE '%".$_REQUEST['ee_name']."%' " : '';
+		
 		$sql .= " GROUP BY e.id ";
 		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$sort." " : " ORDER BY date(start_date), id ASC ";
 		$sql .= $limit > 0 ? ' LIMIT 0, '.$limit : '';  
