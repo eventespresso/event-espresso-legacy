@@ -63,7 +63,7 @@
                                         $info = __('(displays your registration form)', 'event_espresso');
                                         break;
                                     case 'confirmation_display.php':
-                                        $info = __('(displays a confimration page for free events)', 'event_espresso');
+                                        $info = __('(displays a confirmation page for free events)', 'event_espresso');
                                         break;
                                     case 'return_payment.php':
                                         $info = __('(page that is displayed when returning to pay)', 'event_espresso');
