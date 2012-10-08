@@ -227,12 +227,12 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 	
 		case "TEXT" :
 		
-			echo '<input type="text" ' . $required . ' id="' . $field_name . '"  name="' . $field_name . '" size="40"  value="' . $edits . '" />';
+			echo '<input type="text" ' . $required . ' id="' . $field_name . '"  name="' . $field_name . '" size="40"  value="' . stripslashes( $edits ) . '" />';
 			break;
 			
 		case "TEXTAREA" :
 		
-			echo '<textarea id="TEXTAREA_' . $question->id . '" ' . $required . ' name="TEXTAREA_' . $question->id . '"  cols="30" rows="5">' . $edits . '</textarea>';
+			echo '<textarea id="TEXTAREA_' . $question->id . '" ' . $required . ' name="TEXTAREA_' . $question->id . '"  cols="30" rows="5">' . stripslashes( $edits ) . '</textarea>';
 			break;
 			
 		case "SINGLE" :
@@ -242,17 +242,19 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 			echo '
 	<ul>';
 			foreach ($values as $key => $value) {
-				$checked = in_array(trim($value), $answers) ? ' checked="checked"' : "";
+				$checked = in_array( trim( stripslashes( $value )), $answers ) ? ' checked="checked"' : "";
 				echo '
 		<li>
 			<label class="radio-btn-lbl">
-				<input id="SINGLE_' . $question->id . '_' . $key . '" ' . $required . ' name="SINGLE_' . $question->id . '"  type="radio" value="' . trim($value) . '" ' . $checked . '/>
-				<span>' . trim($value) . '</span>
+				<input id="SINGLE_' . $question->id . '_' . $key . '" ' . $required . ' name="SINGLE_' . $question->id . '"  type="radio" value="' . trim( stripslashes( $value )) . '" ' . $checked . '/>
+				<span>' . trim( stripslashes( $value )) . '</span>
 			</label>
 		</li>';
 			}
 			echo '
-	</ul>';
+	</ul>
+	<br/>
+';
 			break;
 			
 		case "MULTIPLE" :
@@ -263,18 +265,20 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 			echo '
 	<ul>';
 			foreach ($values as $key => $value) {
-				$checked = in_array(trim($value), $answers) ? " checked=\"checked\"" : "";
+				$checked = in_array( trim( stripslashes( $value )), $answers) ? " checked=\"checked\"" : "";
 				/* 	echo "<label><input type=\"checkbox\"$required id=\"MULTIPLE_$question->id_$key\" name=\"MULTIPLE_$question->id_$key\"  value=\"$value\"$checked /> $value</label><br/>\n"; */
 				echo '
 		<li>
 			<label class="radio-btn-lbl">
-				<input id="' . trim($value) . '" ' . $required . ' name="MULTIPLE_' . $question->id . '[]"  type="checkbox" value="' . trim($value) . '" ' . $checked . '/>
-				<span>' . trim($value) . '</span>
+				<input id="' . $question->id . '_' . trim( stripslashes( $key )) . '" ' . $required . ' name="MULTIPLE_' . $question->id . '[]"  type="checkbox" value="' . trim( stripslashes( $value )) . '" ' . $checked . '/>
+				<span>' . trim( stripslashes( $value )) . '</span>
 			</label>
 		</li>';
 			}
 			echo '
-	</ul>';
+	</ul>
+	<br/>
+';
 			//echo '<input name="'.$answer_id.'" type="hidden" value="'.$answer_id.'" />';
 			break;
 			

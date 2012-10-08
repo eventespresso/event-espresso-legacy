@@ -112,15 +112,38 @@
 .event_espresso_form_wrapper form legend { padding: 0 5px; }
 .event_espresso_form_wrapper form fieldset div { padding: 0.25em 0; }
 .event_espresso_form_wrapper label,
-.event_espresso_form_wrapper span.label {
-	display: block;
-	margin-right: 10px;
-	padding-right: 10px;
-	position: relative;
+.event_espresso_form_wrapper span.label { display: inline-block; width:150px; padding:0 10px 0 0; text-align: right; }
+.event_espresso_form_wrapper input { margin:0 0 1em; }
+
+.event_espresso_form_wrapper ul { list-style: none; margin:0 0 0 160px; }
+.event_espresso_form_wrapper ul li { display: inline-block; margin-right:2em; }
+
+select.small { width:25px; }
+select.med { width: 100px; }
+select.wide { width: 175px; }
+
+.event_espresso_form_wrapper .radio-btn-lbl { display: inline-block; width:125px; text-align: left; vertical-align: middle; }
+.event_espresso_form_wrapper .radio-btn-lbl span {
+	position: relative; top:0px; margin-left:5px;   vertical-align: middle;
+	font-size:.9em; line-height:1em;
 }
+.event_espresso_form_wrapper .radio-btn-lbl input { position: relative; top:7px; vertical-align: middle; }
+.event_espresso_form_wrapper .radio-btn-lbl + .radio-btn-lbl { margin-left:1em; }
 
+.smaller-text { font-size:.7em; }
+.small-text { font-size:.85em; }
+.big-text { font-size:1.2em; }
+.bigger-text { font-size:1.5em; }
 
-.event_espresso_form_wrapper div.buttonrow { margin-left: 180px; }
+.laquo { line-height:.9em; vertical-align: top; }
+
+@media (max-width: 880px) {
+	.event_espresso_form_wrapper label,
+	.event_espresso_form_wrapper span.label { display: block; width:auto; padding:0; text-align: left; }
+	.event_espresso_form_wrapper ul { margin:0 0 0 1em; }
+}
+/*
+.event_espresso_form_wrapper div.buttonrow { margin-left: 180px; } 
 .submit {
 	margin:5px;
 	padding: 0.3em;
@@ -165,7 +188,7 @@
 
 .event_espresso_form_wrapper .copy_dropdown_wrapper{
 	padding: 10px;
-}
+}*/
 
 .recaptchatable #recaptcha_response_field {left:0 !important;}
 
@@ -245,24 +268,7 @@ ul.ui-autocomplete li{
 	padding: 5px 10px;
 }
 
-/*
-	Colors and other definitions from what's inherited from the theme's form styles
-	added in 3.1.18.P by Chris Reynolds
-	Uncomment these lines if you want to use these styles
-*/
-/*
-#event_espresso_checkout_form { border: 2px solid #e8e8e8; }
-.multi_reg_cart_block { border: 2px solid #d1d1d1; }
-#event_espresso_coupon_wrapper { border: 2px solid #d1d1d1; }
-#event_espresso_total_wrapper { border: 2px solid #d1d1d1; }
-#event_espresso_registration_form { background-color:  #f4f3f2; }
-table.price_list tr{ background-color: #c7e9c8; }
-.pending_event{ border:2px solid yellow; padding:5px; }
-.expired_event{ color:#F00; }
-.event_espresso_form_wrapper input:focus,
-.event_espresso_form_wrapper input.error:focus,
-.event_espresso_form_wrapper textarea:focus {   background-color: #FFC; border-color: #FC6; }
-*/
+
 
 
 /********************************************/

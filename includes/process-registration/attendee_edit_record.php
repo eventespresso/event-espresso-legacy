@@ -46,64 +46,47 @@ function attendee_edit_record() {
 		$counter = 0;
 		$additional_attendees = NULL;
 
-		$SQL = "SELECT  t1.*, t2.event_name, t2.question_groups, t2.event_meta FROM " . EVENTS_ATTENDEE_TABLE . " t1 ";
-		$SQL .= "JOIN " . EVENTS_DETAIL_TABLE . " t2 ON t1.event_id = t2.id ";
-		$SQL .= "WHERE t1.id = %d AND t1.registration_id = %s ";
-		$SQL .= "ORDER BY t1.id";
+		$SQL = "SELECT  att.*, evt.event_name, evt.question_groups, evt.event_meta ";
+		$SQL .= "FROM " . EVENTS_ATTENDEE_TABLE . " att ";
+		$SQL .= "JOIN " . EVENTS_DETAIL_TABLE . " evt ON att.event_id = evt.id ";
+		$SQL .= "WHERE att.id = %d AND att.registration_id = %s ";
+		$SQL .= "ORDER BY att.id";
 
-		$results = $wpdb->get_results( $wpdb->prepare( $SQL, $id, $registration_id ));
+		$attendee = $wpdb->get_row( $wpdb->prepare( $SQL, $id, $registration_id ));
+		//printr( $attendee, '$attendee  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		
-		if ( ! empty( $results )) {
+		if ( $attendee !== FALSE ) {
 		
 			$display_attendee_form = TRUE;
 
-			foreach ($results as $result) {
-							
-				$id = $result->id;
-				$registration_id = $result->registration_id;
-				$lname = $result->lname;
-				$fname = $result->fname;
-				$address = $result->address;
-				$city = $result->city;
-				$state = $result->state;
-				$zip = $result->zip;
-				$email = $result->email;
-				$payment = $result->payment;
-				$phone = $result->phone;
-				$date = $result->date;
-				$payment_status = $result->payment_status;
-				$txn_type = $result->txn_type;
-				$txn_id = $result->txn_id;
-				$amount_pd = $result->amount_pd;
-				$quantity = $result->quantity;
-				$payment_date = $result->payment_date;
-				$event_id = $result->event_id;
-				$event_name = stripslashes_deep($result->event_name);
-				$question_groups = unserialize($result->question_groups);
-				$event_meta = unserialize($result->event_meta);
-				$counter = 1;
-				
-			}
+			$id = $attendee->id;
+			$registration_id = $attendee->registration_id;
+			$lname = $attendee->lname;
+			$fname = $attendee->fname;
+			$address = $attendee->address;
+			$city = $attendee->city;
+			$state = $attendee->state;
+			$zip = $attendee->zip;
+			$email = $attendee->email;
+			$payment = $attendee->payment;
+			$phone = $attendee->phone;
+			$date = $attendee->date;
+			$payment_status = $attendee->payment_status;
+			$txn_type = $attendee->txn_type;
+			$txn_id = $attendee->txn_id;
+			$amount_pd = $attendee->amount_pd;
+			$quantity = $attendee->quantity;
+			$payment_date = $attendee->payment_date;
+			$event_id = $attendee->event_id;
+			$event_name = stripslashes_deep($attendee->event_name);
+			$question_groups = maybe_unserialize($attendee->question_groups);
+			$event_meta = maybe_unserialize($attendee->event_meta);
 
-			$response_source = $_POST;
-			$SQL = "SELECT question_groups, event_meta FROM " . EVENTS_DETAIL_TABLE . " WHERE id = %d";
-			
-			if ( $questions = $wpdb->get_row( $wpdb->prepare( $SQL, $event_id ))) {
-				$question_groups = maybe_unserialize($questions->question_groups);
-				$event_meta = maybe_unserialize($questions->event_meta);
-			} else {
-				$question_groups = array();
-				$event_meta = array();
-			}
-
-			if (isset($event_meta['add_attendee_question_groups']) && $event_meta['add_attendee_question_groups'] != NULL) {
+			if ( ! $attendee->is_primary && isset($event_meta['add_attendee_question_groups']) && $event_meta['add_attendee_question_groups'] != NULL ) {
 				$question_groups = $event_meta['add_attendee_question_groups'];
 			}
+			//printr( $question_groups, '$question_groups  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );	
 			
-			if ( !is_array($question_groups) && !empty($question_groups)) {
-				$question_groups = unserialize($question_groups);
-			}
-
 			$questions_in = '';
 			foreach ($question_groups as $g_id) {
 				$questions_in .= $g_id . ',';
@@ -114,18 +97,19 @@ function attendee_edit_record() {
 			$counter = 0;
 
 			//pull the list of questions that are relevant to this event
-			$SQL = "SELECT q.*, q.id q_id, qg.group_name FROM " . EVENTS_QUESTION_TABLE . " q ";
+			$SQL = "SELECT q.*, q.id AS q_id, qg.group_name FROM " . EVENTS_QUESTION_TABLE . " q ";
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
-			$SQL .= "WHERE qgr.group_id in ( '$questions_in' ) ";
+			$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
 			$SQL .= "AND q.admin_only = 'N' ";
-			$SQL .= "ORDER BY qg.id, q.sequence ASC";
+			$SQL .= "ORDER BY qg.group_order, qg.id, q.sequence ASC";
 			
 			$questions = $wpdb->get_results( $wpdb->prepare( $SQL ));
+//			echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//			printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 
 			$SQL = "SELECT question_id, answer FROM " . EVENTS_ANSWER_TABLE . " ans WHERE ans.attendee_id = %d";
 			$answers = $wpdb->get_results( $wpdb->prepare( $SQL, $id ));
-
 
 			$answer_a = array();
 			foreach ($answers as $answer) {
@@ -133,7 +117,7 @@ function attendee_edit_record() {
 			}
 			
 			// Update the attendee information
-			if ( ! empty( $_REQUEST['attendee_action'] ) && $_REQUEST['attendee_action'] == 'update_attendee' ) {
+			if ( isset( $_REQUEST['attendee_action'] ) && $_REQUEST['attendee_action'] == 'update_attendee' ) {
 
 				$fname = ! empty($_POST['fname']) ? $_POST['fname'] : '';
 				$lname = ! empty($_POST['lname']) ? $_POST['lname'] : '';
@@ -146,8 +130,8 @@ function attendee_edit_record() {
 					
 				$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET fname=%s, lname=%s, address=%s, city=%s, state=%s, zip=%s, phone=%s, email=%s WHERE id =%d";
 				$wpdb->query( $wpdb->prepare( $SQL, $fname, $lname, $address, $city, $state, $zip, $phone, $email, $id ));
-
-				if ( $questions ) {
+				
+				if ( $questions ) {				
 					foreach ( $questions as $question ) {			
 						switch ( $question->question_type ) {
 						
@@ -155,14 +139,14 @@ function attendee_edit_record() {
 							case "TEXTAREA" :
 							case "DROPDOWN" :
 							case "SINGLE" :					
-								$post_val = ($question->system_name != '') ? $response_source[$question->system_name] : $response_source[$question->question_type . '_' . $question->q_id];
+								$post_val = ($question->system_name != '') ? $_POST[$question->system_name] : $_POST[$question->question_type . '_' . $question->q_id];
 								break;
 								
 							case "MULTIPLE" :					
 								$post_val = '';
-								if (!empty($response_source[$question->question_type . '_' . $question->id])) {
-									for ( $i = 0; $i < count( $response_source[$question->question_type . '_' . $question->id] ); $i++ ) {
-										$post_val .= trim( $response_source[$question->question_type . '_' . $question->id][$i] ) . ',';
+								if (!empty($_POST[$question->question_type . '_' . $question->id])) {
+									for ( $i = 0; $i < count( $_POST[$question->question_type . '_' . $question->id] ); $i++ ) {
+										$post_val .= trim( $_POST[$question->question_type . '_' . $question->id][$i] ) . ',';
 									}
 								}
 								$post_val = substr( $post_val, 0, -1 );
@@ -176,14 +160,17 @@ function attendee_edit_record() {
 						} else {
 							$sql = "INSERT INTO " . EVENTS_ANSWER_TABLE . " ( registration_id, answer, attendee_id, question_id ) VALUES ( %s, %s, %d, %d )";
 							$wpdb->query( $wpdb->prepare( $SQL, $registration_id, $post_val, $id, $question->q_id ));
-						}		
+						}	
+						
+						//echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';	
 								
 					}
 				}
 
-				//If this is not an attendee returing to edit thier details, then we need to return to the payment page
+				//If this is not an attendee returing to edit their details, then we need to return to the payment page
 				if ( ! isset($_REQUEST['single'] )) {
 					return events_payment_page( $_REQUEST['primary'], $_REQUEST['p_id'] );
+					exit();
 				}
 					
 			}
@@ -192,7 +179,7 @@ function attendee_edit_record() {
 			$display_attendee_form = FALSE;			
 		}
 		
-		
+
 ?>
 
 	<div id="event_espresso_registration_form" class="event-display-boxes ui-widget">
@@ -208,7 +195,7 @@ function attendee_edit_record() {
 				<strong><?php _e('Event:', 'event_espresso'); ?></strong> <?php echo $event_name; ?>
 			</p>
 			
-			<form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>" class="espresso_form" id="registration_form">
+			<form method="post" action="<?php echo home_url() ?>/?page_id=<?php echo $org_options['event_page_id']; ?>" class="espresso_form" id="registration_form">
 <?php
 				if ( count( $question_groups ) > 0 ) {
 					
@@ -226,33 +213,39 @@ function attendee_edit_record() {
 					$SQL .= "LEFT JOIN " . EVENTS_ANSWER_TABLE . " at on q.id = at.question_id ";
 					$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 					$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
-					$SQL .= "WHERE qgr.group_id in ( '$questions_in' ) ";
+					$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
 					$SQL .= "AND ( at.attendee_id IS NULL OR at.attendee_id = %d ) ";
 					$SQL .= "AND q.admin_only != 'Y' ";
 					$SQL .= $FILTER;
-					$SQL .= "ORDER BY qg.id, q.id ASC";
+					$SQL .= "ORDER BY qg.group_order, qg.id, q.sequence ASC";
 
 					if ( $questions = $wpdb->get_results( $wpdb->prepare( $SQL, $id )) ) {
 
-						$existing_questions = '';
-						foreach ( $questions as $question ) {
-							$existing_questions .= $question->question_id . ',';
-						}
-						$existing_questions = substr( $existing_questions, 0, -1 );
-
-						$SQL = "SELECT q.* FROM " . EVENTS_QUESTION_TABLE . " q ";
-						$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr ON q.id = qgr.question_id ";
-						$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg ON qg.id = qgr.group_id ";
-						$SQL .= "WHERE qgr.group_id IN ( '$questions_in' ) ";
-						$SQL .= "AND q.id NOT IN ( %s ) ";
-						$SQL .= "GROUP BY q.question ";
-						$SQL .= "ORDER BY qg.id, q.id ASC";
-
-
-						if ( $questions_2 = $wpdb->get_results( $wpdb->prepare( $SQL, $existing_questions ))) {
-							//Merge the existing questions with any missing questions
-							array_merge( $questions, $questions_2 );
-						}
+//						printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+//						echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+						
+//						$existing_questions = '';
+//						foreach ( $questions as $question ) {
+//							$existing_questions .= $question->question_id . ',';
+//						}
+//						$existing_questions = substr( $existing_questions, 0, -1 );
+//
+//						$SQL = "SELECT q.* FROM " . EVENTS_QUESTION_TABLE . " q ";
+//						$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr ON q.id = qgr.question_id ";
+//						$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg ON qg.id = qgr.group_id ";
+//						$SQL .= "WHERE qgr.group_id IN ( $questions_in ) ";
+//						$SQL .= "AND q.id NOT IN ( $existing_questions ) ";
+//						$SQL .= "GROUP BY q.question ";
+//						$SQL .= "ORDER BY qg.id, q.id ASC";
+//
+//						if ( $questions_2 = $wpdb->get_results( $wpdb->prepare( $SQL ))) {
+//							//Merge the existing questions with any missing questions
+//							$questions = array_merge( $questions, $questions_2 );
+//						}
+						
+//						printr( $questions_2, '$questions_2  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+//						echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+						
 
 						//Output the questions
 						$question_displayed = array();
@@ -289,12 +282,7 @@ function attendee_edit_record() {
 									$group_name = $question->group_name;
 								}
 
-	                        echo '
-						<p>
-							';
-	                        echo event_form_build_edit( $question, $question->answer, $show_admin_only = false );
-	                        echo '
-						</p>';
+	                        	echo event_form_build_edit( $question, $question->answer, $show_admin_only = false );
 
 								$counter++;
 								echo $counter == $total_questions ? '
@@ -306,14 +294,24 @@ function attendee_edit_record() {
 					}
 					//end questions display
 				}
+				
+//	registration_id=1-5072fa1b52696
+//	id=318
+//	regevent_action=register
+//	form_action=edit_attendee
+//	primary=318
+//	event_id=1
+//	coupon_code=
+//	groupon_code=
+//	attendee_num=1				
+				
 ?>
 
 				<input type="hidden" name="id" value="<?php echo $id ?>" />
 				<input type="hidden" name="r_id" value="<?php echo $registration_id ?>" />
 				<input type="hidden" name="event_id" value="<?php echo $event_id ?>" />
-				<input type="hidden" name="form_action" value="edit_attendee" />
 				<input type="hidden" name="attendee_action" value="update_attendee" />
-				<input type="hidden" name="regevent_action" value="register" />
+				<input type="hidden" name="regevent_action" value="edit_attendee" />
 				<input type="hidden" name="primary" value="<?php echo $_REQUEST['primary'] ?>" />
 				<br/>
 				

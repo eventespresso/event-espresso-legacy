@@ -410,7 +410,6 @@ function edit_attendee_record() {
 				$event_id = $attendee->event_id;
 				$event_name = $attendee->event_name;
 				$question_groups = unserialize($attendee->question_groups);
-				$question_groups = unserialize($attendee->question_groups);
 				$event_meta = unserialize($attendee->event_meta);
 				$coupon_code = $attendee->coupon_code;
 				$is_additional_attendee = ($primary_attendee != $id) ? true : false;
