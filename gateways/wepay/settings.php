@@ -216,7 +216,7 @@ function event_espresso_display_wepay_settings($need_to_reauthorize) {
 	<?php } ?>
 	<div id="wepay_sandbox_info" style="display:none">
 		<h2><?php _e('WePay Sandbox', 'event_espresso'); ?></h2>
-		<p><?php _e('In addition to using the WePay Sandbox fetaure. The debugging feature will also output the form varibales to the payment page, send an email to the admin that contains the all WePay variables.', 'event_espresso'); ?></p>
+		<p><?php _e('In addition to using the WePay Sandbox feature. The debugging feature will also output the form varibales to the payment page, send an email to the admin that contains the all WePay variables.', 'event_espresso'); ?></p>
 		<hr />
 		<p><?php _e('The WePay Sandbox is a testing environment that is a duplicate of the live WePay site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live WePay environment. Create and manage test accounts, and view emails and API credentials for those test accounts.', 'event_espresso'); ?></p>
 	</div>
