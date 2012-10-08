@@ -4,7 +4,7 @@
     <div id="enable_styles_info" class="pop-help" >
         <div class="TB-ee-frame">
     			<h2><?php _e('Enable Built In Styles', 'event_espresso'); ?></h2>
-				<h3><em class="important"><?php _e('Please do nto use these styles. Use the Themeroller styles instead!!', 'event_espresso'); ?></em></h3>
+				<h3><em class="important"><?php _e('Please do not use these styles. Use the Themeroller styles instead!!', 'event_espresso'); ?></em></h3>
         	<p>
        		 <?php _e('Enabling Styles tells Event Espresso to use it\'s built in stylesheets for styling the template files.', 'event_espresso'); ?>
           </p>
@@ -25,7 +25,7 @@
 			<div id="alternative_styles_info" class="pop-help" >
        <div class="TB-ee-frame">
     		<h2><?php _e('Legacy Espresso Stylesheets', 'event_espresso'); ?></h2>
-			<h3><em class="important"><?php _e('Please do nto use these styles. Use the Themeroller styles instead!!', 'event_espresso'); ?></em></h3>
+			<h3><em class="important"><?php _e('Please do not use these styles. Use the Themeroller styles instead!!', 'event_espresso'); ?></em></h3>
 						<?php if($disabled) : ?>
     			<em class="important">
 							<?php _e('You currently either have <i>Enable Built in style sheets</i> disabled or have a copy of the default espresso stylesheet copied to your uploads folder, and the alternative stylesheets selections are therefore disabled.', 'event_espresso'); ?>
