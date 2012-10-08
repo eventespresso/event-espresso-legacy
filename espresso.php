@@ -700,10 +700,8 @@ function add_espresso_themeroller_stylesheet() {
 			wp_register_style('espresso_themeroller', $themeroller_style_path . $org_options['themeroller']['themeroller_style'] . '/style.css');
 			wp_enqueue_style('espresso_themeroller');
 		}
-	}else{
 		
-		if (isset($org_options['enable_default_style']) && $org_options['enable_default_style'] != 'Y')
-			return;
+	}else{
 		
 		if (!empty($org_options['style_settings']['enable_default_style']) && $org_options['style_settings']['enable_default_style'] == 'Y')
 			return;
