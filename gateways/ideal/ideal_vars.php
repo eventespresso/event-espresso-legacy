@@ -52,19 +52,28 @@ function espresso_process_ideal($payment_data) {
 
 	<div id="ideal-payment-option-form-dv" class="hide-if-js">	
 		<div class="event-display-boxes">
+		<div class = "event_espresso_form_wrapper">
 			<form id="ideal-mollie-form" class="ee-forms" method="post" action="<?php echo $home . '/?page_id=' . $org_options['notify_url']; ?>">
-				<select id ="bank_id" name="bank_id" class="required">
-					<option value=''>Kies uw bank</option>
+			
+				<fieldset id="ideal-billing-info-dv">
+					<h4 class="section-title"><?php _e('Select Bank', 'event_espresso') ?></h4>
+					<p>
+						<select id ="bank_id" name="bank_id" class="required">
+							<option value=''>Kies uw bank</option>
 
-					<?php foreach ($bank_array as $bank_id => $bank_name) { ?>
-						<option value="<?php echo $bank_id ?>"><?php echo $bank_name ?></option>
-					<?php } ?>
+							<?php foreach ($bank_array as $bank_id => $bank_name) { ?>
+								<option value="<?php echo $bank_id ?>"><?php echo $bank_name ?></option>
+							<?php } ?>
 
-				</select>
+						</select>
+					</p>
+				</fieldset>
 				<input name="amount" type="hidden" value="<?php echo $amount; ?>" />
 				<input name="ideal" type="hidden" value="1" />
 				<input name="id" type="hidden" value="<?php echo $payment_data['attendee_id']; ?>" />
-				<input id="submit_ideal" type="submit" class="btn_event_form_submit payment-submit" name="submit" value="Betaal via iDEAL" />
+				<p class="event_form_submit">
+					<input id="submit_ideal" type="submit" class="submit-payment-btn" name="submit" value="Betaal via iDEAL" />
+				</p>
 			</form>
 		</div>
 
@@ -73,6 +82,7 @@ function espresso_process_ideal($payment_data) {
 			<a class="hide-the-displayed" rel="ideal-payment-option-form" style="cursor:pointer;"><?php _e('Choose a different payment option', 'event_espresso'); ?></a>
 		</p>
 
+	</div>
 	</div>
 </div>
 <?php
