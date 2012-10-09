@@ -134,7 +134,7 @@ if (!function_exists('event_espresso_additional_attendees')) {
 		$i = 0;
 		if (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) {
 			$label = $label == '' ? __('Number of Tickets', 'event_espresso') : $label;
-			$html = '<span class="espresso_additional_limit">';
+			$html = '<p class="espresso_additional_limit highlight-bg">';
 			$html .= $show_label == true ? '<label for="num_people">' . $label . '</label>' : '';
 			$html .= '<select name="num_people" id="num_people-' . $event_id . '" style="width:70px;">';
 			while (($i < $additional_limit) && ($i < $available_spaces)) {
@@ -144,7 +144,7 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			$html .= '</select>';
 			//$html .= '<br />';
 			$html .= '<input type="hidden" name="espresso_addtl_limit_dd" value="true">';
-			$html .= '</span>';
+			$html .= '</p>';
 			$buffer = '';
 		} else {
 			while (($i < $additional_limit) && ($i < $available_spaces)) {
@@ -697,10 +697,10 @@ if (!function_exists('event_espresso_add_question_groups')) {
 						$questions_displayed[] = $question->id;
 
 						//if new group, close fieldset
-						$html .= ($group_name != '' && $group_name != $question->group_name) ? '</div>' : '';
+						$html .= ($group_name != '' && $group_name != $question->group_name) ? '</fieldset>' : '';
 
 						if ($group_name != $question->group_name) {
-							$html .= '<div class="event_questions" id="' . $question->group_identifier . '">';
+							$html .= '<fieldset class="event_questions" id="' . $question->group_identifier . '">';
 							$html .= $question->show_group_name != 0 ? "<h4 class=\"reg-quest-title section-title\">".stripslashes_deep($question->group_name)."</h4>" : '';
 							$html .= $question->show_group_description != 0 && $question->group_description == true ? '<p class="quest-group-descript">' . stripslashes_deep($question->group_description) . '</p>' : '';
 							$group_name = stripslashes_deep($question->group_name);
@@ -708,7 +708,7 @@ if (!function_exists('event_espresso_add_question_groups')) {
 
 						$html .= event_form_build($question, $answer, $event_id, $multi_reg, $meta, $class, $disabled);
 					}
-					$html .= $counter == $num_rows ? '</div>' : '';
+					$html .= $counter == $num_rows ? '</fieldset>' : '';
 				}
 			}//end questions display
 		} else {
