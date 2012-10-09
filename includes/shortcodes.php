@@ -398,56 +398,11 @@ add_shortcode('ATTENDEE_NUMBERS', 'espresso_attendees_data_sc');
 if (!function_exists('display_event_list_sc')) {
 
 	function display_event_list_sc($attributes) {
-//		global $wpdb, $org_options;
 		global $load_espresso_scripts;
 		$load_espresso_scripts = true; //This tells the plugin to load the required scripts
-//      $events_per_page = 50;
-//      $num_page_links_to_display = 10;
-//		extract(shortcode_atts(array('category_identifier' => 'NULL', 'show_expired' => 'false', 'show_secondary' => 'false', 'show_deleted' => 'false', 'show_recurrence' => 'false', 'limit' => '0', 'order_by' => 'NULL', 'css_class' => 'NULL', 'events_per_page' => 50, 'num_page_links_to_display'=>10), $atts));
-//
-//		if ($category_identifier != 'NULL') {
-//			$type = 'category';
-//		}
-//
-//		$show_expired = $show_expired == 'false' ? " AND (e.start_date >= '" . date('Y-m-d') . "' OR e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
-//		$show_secondary = $show_secondary == 'false' ? " AND e.event_status != 'S' " : '';
-//		$show_deleted = $show_deleted == 'false' ? " AND e.event_status != 'D' " : '';
-//		$show_recurrence = $show_recurrence == 'false' ? " AND e.recurrence_id = '0' " : '';
-//		$limit = $limit > 0 ? " LIMIT 0," . $limit . " " : '';
-//		$order_by = $order_by != 'NULL' ? " ORDER BY " . $order_by . " ASC " : " ORDER BY date(start_date), id ASC ";
-//
-//		if (!empty($type) && $type == 'category') {
-//			$sql = "SELECT e.*, ese.start_time, ese.end_time, p.event_cost ";
-//			isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= ", v.name venue_name, v.address venue_address, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta " : '';
-//			$sql .= " FROM " . EVENTS_CATEGORY_TABLE . " c ";
-//			$sql .= " JOIN " . EVENTS_CATEGORY_REL_TABLE . " r ON r.cat_id = c.id ";
-//			$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " e ON e.id = r.event_id ";
-//			isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " vr ON vr.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = vr.venue_id " : '';
-//			$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id= e.id ";
-//			$sql .= " JOIN " . EVENTS_PRICES_TABLE . " p ON p.event_id=e.id ";
-//			$sql .= " WHERE c.category_identifier = '" . $category_identifier . "' ";
-//			$sql .= " AND e.is_active = 'Y' ";
-//		} else {
-//			$sql = "SELECT e.*, ese.start_time, ese.end_time, p.event_cost ";
-//			isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= ", v.name venue_name, v.address venue_address, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta " : '';
-//			$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
-//			isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id " : '';
-//			$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id= e.id ";
-//			$sql .= " JOIN " . EVENTS_PRICES_TABLE . " p ON p.event_id=e.id ";
-//			$sql .= " WHERE e.is_active = 'Y' ";
-//		}
-//
-//		$sql .= $show_expired;
-//		$sql .= $show_secondary;
-//		$sql .= $show_deleted;
-//		$sql .= $show_recurrence;
-//		$sql .= " GROUP BY e.id ";
-//		$sql .= $order_by;
-//		$sql .= $limit;
 		//template located in event_list_dsiplay.php
 		ob_start();
 		//echo $sql;
-		//event_espresso_get_event_details($sql, $css_class, $allow_override = 1, $events_per_page, $num_page_links_to_display);
         event_espresso_get_event_details($attributes);
 		$buffer = ob_get_contents();
 		ob_end_clean();
