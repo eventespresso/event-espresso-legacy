@@ -27,8 +27,7 @@ function espresso_process_beanstream($payment_data) {
 	$data['ordCity'] = 'ordCity='.$_POST['city'];
 	$data['ordProvince'] = 'ordProvince='.$_POST['state'];
 	$data['ordPostalCode'] = 'ordPostalCode='.$_POST['zip'];
-	$country_data = getCountryFullData($org_options['organization_country']);
-	$data['ordCountry'] = 'ordCountry='.$country_data['iso_code_2'];
+	$data['ordCountry'] = 'ordCountry='.$_POST['country'];
 	$post_data = implode('&', $data);
 	
 	$ch = curl_init();
