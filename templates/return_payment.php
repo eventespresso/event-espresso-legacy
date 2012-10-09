@@ -16,6 +16,9 @@ if ($payment_status == "Completed") {
 if ($payment_status == "Pending") {
 
 	if ($org_options['show_pending_payment_options'] == 'Y') {
+
+		wp_register_script( 'espresso_payment_page', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_payment_page.js', array( 'jquery' ), '1.0', TRUE );
+		wp_enqueue_script( 'espresso_payment_page' );	
 ?>
 		<div class="event_espresso_attention">
 			<strong class="payment_details payment_pending"><?php _e('Pending Payment', 'event_espresso');?></strong><br />
@@ -38,6 +41,10 @@ if ($payment_status == "Pending") {
 }
 
 if ( $payment_status == "Incomplete" || $payment_status == "Payment Declined" || $payment_status == "" ) {
+
+	wp_register_script( 'espresso_payment_page', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_payment_page.js', array( 'jquery' ), '1.0', TRUE );
+	wp_enqueue_script( 'espresso_payment_page' );	
+
 	//Check the number of available sapce against this registration
 	if ( get_number_of_attendees_reg_limit( $event_id, 'number_available_spaces' ) < $quantity ) {
 ?>
