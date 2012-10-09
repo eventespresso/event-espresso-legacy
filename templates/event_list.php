@@ -27,8 +27,15 @@ if (!function_exists('event_espresso_get_event_details_ajx')) {
 if (!function_exists('event_espresso_get_event_details')) {
 
 	function event_espresso_get_event_details( $attributes ) {
-		//echo $sql; 
+
 		global $wpdb, $org_options, $events_in_session;
+		
+		$event_page_id = $org_options['event_page_id'];
+		$currency_symbol = isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : '';
+		$ee_search = isset($_REQUEST['ee_search']) && $_REQUEST['ee_search'] == 'true' && isset($_REQUEST['ee_name']) && !empty($_REQUEST['ee_name']) ? true : false;
+		$ee_search_string = isset($_REQUEST['ee_name']) && !empty($_REQUEST['ee_name']) ? $_REQUEST['ee_name'] : '';
+		
+		//Check for Multi Event Registration
 		$multi_reg = false;
 			$category_name = '';
 		if (function_exists('event_espresso_multi_reg_init')) {
@@ -60,7 +67,10 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		// now extract shortcode attributes
 		extract($attributes);
-		$sql = "SELECT e.*, ese.start_time, ese.end_time, p.event_cost ";
+		
+		//Create the query
+		$DISTINCT = $ee_search == true ? "DISTINCT" : '';
+		$sql = "SELECT $DISTINCT e.*, ese.start_time, ese.end_time, p.event_cost ";
 		
 		//Category sql
 		$sql .= ($category_identifier != NULL && !empty($category_identifier))? ", c.category_name, c.category_desc, c.display_desc, c.category_identifier": '';
@@ -108,7 +118,11 @@ if (!function_exists('event_espresso_get_event_details')) {
 		$sql .= $show_recurrence == 'false' ? " AND e.recurrence_id = '0' " : '';
 		
 		//Search query
-		$sql .= isset($_REQUEST['ee_search']) && $_REQUEST['ee_search'] == 'true' && isset($_REQUEST['ee_name']) && !empty($_REQUEST['ee_name']) ? " AND e.event_name LIKE '%".$_REQUEST['ee_name']."%' " : '';
+		if ( $ee_search == true ){
+			$sql .= " AND e.event_name LIKE '%$ee_search_string%' ";
+			//str_replace( $words_to_strip, '', $string )
+			
+		}
 		
 		$sql .= " GROUP BY e.id ";
 		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$sort." " : " ORDER BY date(start_date), id ASC ";
@@ -116,9 +130,10 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		//echo $sql;
 		//echo 'This page is located in ' . get_option( 'upload_path' );
-		$event_page_id = $org_options['event_page_id'];
-		$currency_symbol = isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : '';
-		$events = $wpdb->get_results($sql);
+		
+		$events = $wpdb->get_results($wpdb->prepare($sql));
+		echo $wpdb->last_query;
+		die();
 		$category_id = isset($wpdb->last_result[0]->id) ? $wpdb->last_result[0]->id : '';
 		$category_name = isset($wpdb->last_result[0]->category_name) ? $wpdb->last_result[0]->category_name : '';
 		$category_identifier = isset($wpdb->last_result[0]->category_identifier) ? $wpdb->last_result[0]->category_identifier : '';
@@ -134,6 +149,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		//Debug
 		//var_dump($events);
+		
 		if ( $use_wrapper ) {
 			echo "<div id='event_wrapper'>";
 		}
