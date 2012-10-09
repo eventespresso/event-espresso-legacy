@@ -8,7 +8,7 @@ function espresso_display_beanstream($data) {
 <div id="beanstream-payment-option-dv" class="payment-option-dv">
 
 	<a id="beanstream-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="beanstream-payment-option-form" style="cursor:pointer;">
-		<img width="140" height="47" alt="" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/beanstream/beanstream-logo.png">
+		<img alt="Pay using Beanstream" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/beanstream/beanstream-logo.png">
 	</a>	
 
 	<div id="beanstream-payment-option-form-dv" class="hide-if-js">	

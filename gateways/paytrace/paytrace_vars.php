@@ -15,7 +15,7 @@ function espresso_display_paytrace($payment_data) {
 <div id="paytrace-payment-option-dv" class="payment-option-dv">
 
 	<a id="paytrace-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="paytrace-payment-option-form" style="cursor:pointer;">
-		<img width="140" height="47" alt="" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/paytrace/paytrace-logo.png">
+		<img alt="Pay using PayTrace" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/paytrace/paytrace-logo.png">
 	</a>	
 
 	<div id="paytrace-payment-option-form-dv" class="hide-if-js">

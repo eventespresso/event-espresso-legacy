@@ -14,7 +14,7 @@ function espresso_display_stripe($payment_data) {
 <div id="stripe-payment-option-dv" class="payment-option-dv">
 
 	<a id="stripe-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="stripe-payment-option-form" style="cursor:pointer;">
-		<img width="140" height="47" alt="" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/stripe/stripe-logo.png">
+		<img alt="Pay using Stripe" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/stripe/stripe-logo.png">
 	</a>	
 
 	<div id="stripe-payment-option-form-dv" class="hide-if-js">
