@@ -191,7 +191,7 @@ if (!function_exists('event_espresso_coupon_registration_page')) {
 
             $output ='
 	<p class="event_form_field coupon_code" id="coupon_code-' . $event_id . '">
-		<label for="coupon_code">' . __('Enter Promotional/Discount Code', 'event_espresso') . ':</label>
+		<label for="coupon_code" class="long-label">' . __('Enter Promotional / Discount Code', 'event_espresso') . ':</label>
 		<input type="text" tabIndex="9" maxLength="25" size="35" name="event_espresso_coupon_code'. $multi_reg_adjust . '" id="coupon_code-' . $event_id . '">
 	</p>';
 			
