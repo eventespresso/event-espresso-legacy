@@ -139,7 +139,7 @@ $this_event_id = $event_id;
 			//Check to see if the Members plugin is installed.
 			$member_options = get_option('events_member_settings');
 			if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && !is_user_logged_in() && ($member_only == 'Y' || $member_options['member_only_all'] == 'Y') ) {
-				echo __('Member Only Event', 'event_espresso');
+				echo '<p class="ee_member_only">'.__('Member Only Event', 'event_espresso').'</p>';
 			}else{
 			?>
 				<p id="register_link-<?php echo $event_id ?>" class="register-link-footer">
