@@ -182,7 +182,7 @@ function attendee_edit_record() {
 
 ?>
 
-	<div id="event_espresso_registration_form" class="event-display-boxes ui-widget">
+	<div id="edit-attendee-record-dv" class="event-display-boxes ui-widget">
 		<h3 class="event_title ui-widget-header ui-corner-top">
 			<?php _e('Edit Registration','event_espresso'); ?>
 		</h3>
@@ -282,7 +282,7 @@ function attendee_edit_record() {
 									$group_name = $question->group_name;
 								}
 
-	                        	echo event_form_build_edit( $question, $question->answer, $show_admin_only = false );
+								echo event_form_build_edit( $question, $question->answer, $show_admin_only = false );
 
 								$counter++;
 								echo $counter == $total_questions ? '
@@ -313,11 +313,9 @@ function attendee_edit_record() {
 				<input type="hidden" name="attendee_action" value="update_attendee" />
 				<input type="hidden" name="regevent_action" value="edit_attendee" />
 				<input type="hidden" name="primary" value="<?php echo $_REQUEST['primary'] ?>" />
-				<br/>
 				
-				<p class="espresso_confirm_registration">
-					<input class="btn_event_form_submit" type="submit" name="submit" value="<?php _e('Update Record', 'event_espresso'); ?>" />
-					<br/><br/>
+				<p class="event_form_submit">
+					<input class="event-form-submit-btn" type="submit" name="submit" value="<?php _e('Update Record', 'event_espresso'); ?>" />
 				</p>
 				
 			</form>
