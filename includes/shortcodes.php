@@ -421,7 +421,7 @@ function ee_create_autocomplete_search(){
 	$url = add_query_arg($array, get_permalink($org_options['event_page_id']));
 	ob_start();
 	?>
-	<div class="ui-widget">
+	<div id="espresso-search-form-dv" class="ui-widget">
 		<form name="form" method="post" action="<?php echo $url ?>">
 			<input id="ee_autocomplete" name="ee_name" class="ui-autocomplete-input ui-corner-all" />
 			<input id="ee_search_submit" name="ee_search_submit" class="ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" type="submit" value="Search" />
