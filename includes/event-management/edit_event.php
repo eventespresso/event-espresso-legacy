@@ -283,7 +283,7 @@ function edit_event($event_id = 0) {
 					<select name="seating_chart_id" id="seating_chart_id" style="float:none;">
 						<option value="0" <?php if ($seating_chart_id == 0) {
 			echo 'selected="selected"';
-		} ?> >None</option>
+		} ?> ><?php _e('None', 'event_espresso'); ?></option>
 						<?php
 						$seating_charts = $wpdb->get_results("select * from " . EVENTS_SEATING_CHART_TABLE . " order by name");
 						foreach ($seating_charts as $seating_chart) {
@@ -295,6 +295,10 @@ function edit_event($event_id = 0) {
 		}
 		?>
 					</select>
+					<?php do_action('espresso_seating_chart_select', $event_id); ?>
+					<?php do_action('ee_seating_chart_js'); ?>
+					<?php do_action('ee_seating_chart_css'); ?>
+					<?php do_action('ee_seating_chart_flush_expired_seats'); ?>
 				</p>
 			</div>
 		</div>
