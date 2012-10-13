@@ -169,7 +169,7 @@ if (!function_exists('event_espresso_get_orig_price_and_surcharge')) {
 		
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 
-		if ( ! $price_id ) {
+		if ( $price_id === FALSE ) {
 			return FALSE;
 		}
 		
@@ -181,6 +181,7 @@ if (!function_exists('event_espresso_get_orig_price_and_surcharge')) {
 
 		$SQL = "SELECT id, event_cost, surcharge, surcharge_type FROM " . EVENTS_PRICES_TABLE . " WHERE id=%d ORDER BY id ASC LIMIT 1";
 		if ( $result = $wpdb->get_row( $wpdb->prepare( $SQL, absint( $price_id ) ))) {		
+//		echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 			// if price is anything other than zero
 			if ( ! (float)$result->event_cost > 0 ) {			
 				$result->event_cost = 0.00;
@@ -204,7 +205,7 @@ if (!function_exists('event_espresso_get_orig_price_and_surcharge')) {
  */
 if (!function_exists('event_espresso_get_final_price')) {
 
-	function event_espresso_get_final_price( $price_id = FALSE, $event_id = FALSE ) {
+	function event_espresso_get_final_price( $price_id = FALSE, $event_id = FALSE, $orig_price = FALSE ) {
 	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 
@@ -214,7 +215,7 @@ if (!function_exists('event_espresso_get_final_price')) {
 
 		global $wpdb;
 
-		$result = event_espresso_get_orig_price_and_surcharge( $price_id );
+		$result = $orig_price !== FALSE ? $orig_price : event_espresso_get_orig_price_and_surcharge( $price_id );
 		$result->event_cost = (float)$result->event_cost;
 
 		// if price is anything other than zero
