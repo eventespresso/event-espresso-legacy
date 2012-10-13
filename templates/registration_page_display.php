@@ -97,7 +97,7 @@ if ($reg_form_only == false) {
 		default: //This will display the registration form
 ?>
 	<div class="event_espresso_form_wrapper">
-		<form method="post" action="<?php echo home_url() ?>/?page_id=<?php echo $event_page_id ?>" id="registration_form">
+		<form method="post" action="<?php echo get_permalink( $event_page_id );?>" id="registration_form">
 	<?php
 				
 			//This hides the date/times and location when usign custom post types or the ESPRESSO_REG_FORM shortcode
