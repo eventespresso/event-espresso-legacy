@@ -121,6 +121,8 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 						/>
 			</div>
 			<?php endif; ?>
+			
+             <div id="event_espresso_notifications" class="clearfix event-data-display" style=""></div> 			
 
 			<div id="event_espresso_total_wrapper" class="clearfix event-data-display">	
 					
