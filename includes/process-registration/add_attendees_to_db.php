@@ -149,7 +149,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 
 			if ($multi_reg) {			
 				$event_cost = $_SESSION['espresso_session']['grand_total'];
-				$coupon_code = $attendee_number == 1 ? $_SESSION['espresso_session']['event_espresso_coupon_code'] : '';				
+				//$coupon_code = $attendee_number == 1 ? $_SESSION['espresso_session']['event_espresso_coupon_code'] : '';				
 			} 
 			
 			do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line '. __LINE__ .' : attendee_cost=' . $final_price);
@@ -223,14 +223,11 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			// check for coupon 
 			if ( function_exists( 'event_espresso_process_coupon' )) {
 				if ( $coupon_results = event_espresso_process_coupon( $event_id, $final_price, $multi_reg )) {
-					$coupon_notifications = !empty($coupon_notifications) ? $coupon_notifications : '';
-					$coupon_errors = !empty($coupon_errors) ? $coupon_errors : '';
-//					printr( $coupon_results, '$coupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-					$coupon_notifications .= ( $coupon_results['msg'] != $coupon_notifications ) && ! empty( $coupon_results['msg'] ) ? $coupon_results['msg'] : '';
-					$coupon_errors .= ( $coupon_results['error'] != $coupon_errors ) && ! empty( $coupon_results['error'] ) ? $coupon_results['error'] : '';
+					//printr( $coupon_results, '$coupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 					if ( $coupon_results['valid'] ) {
 						$final_price = number_format( $coupon_results['event_cost'], 2, '.', '' );
-					}						
+						$coupon_code = $coupon_results['code'];
+					}					
 				}					
 			} 
 
@@ -352,8 +349,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			// save attendee id for the primary attendee
 			$primary_att_id = $attendee_number == 1 ? $attendee_id : FALSE;
 	
-			if ( function_exists( 'espresso_update_attendee_coupon_info' ) && ! empty( $coupon_code )) {
-				espresso_update_attendee_coupon_info( $attendee_id, $event_id, $final_price, $coupon_code, $primary_att_id );
+			if ( function_exists( 'espresso_update_attendee_coupon_info' ) && $primary_att_id && ! empty( $coupon_code )) {
+				espresso_update_attendee_coupon_info( $primary_att_id, $final_price, $coupon_code  );
 			} 
 
 			// update groupon table
@@ -564,7 +561,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 
 			//This shows the payment page
 			if ( ! $multi_reg) {
-				return events_payment_page( $attendee_id );
+				return events_payment_page( $attendee_id ); 
 			}
 			
 			return $registration_id;
