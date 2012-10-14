@@ -93,7 +93,7 @@ function events_payment_page( $attendee_id = FALSE, $price_id = 0, $coupon_code 
 	$conf_mail = isset( $event->conf_mail ) ? $event->conf_mail : '';
 
  	$final_price = (float)$final_price;
-    $event_price_x_attendees = $event_price_x_attendees = number_format( $final_price * $num_people, 2, '.', '' );
+    $event_price_x_attendees = number_format( $final_price * $num_people, 2, '.', '' );
     $event_original_cost = $orig_price;
 	
 
@@ -180,22 +180,24 @@ function espresso_confirm_registration() {
 	}
 
 
-//Get the questions for the attendee
-	$questions = $wpdb->get_results("SELECT ea.answer, eq.question
-						FROM " . EVENTS_ANSWER_TABLE . " ea
-						LEFT JOIN " . EVENTS_QUESTION_TABLE . " eq ON eq.id = ea.question_id
-						WHERE ea.registration_id = '" . $registration_id . "' AND system_name IS NULL ORDER BY eq.sequence asc ");
-//echo $wpdb->last_query;
+	//Get the questions for the attendee
+	$SQL = "SELECT ea.answer, eq.question FROM " . EVENTS_ANSWER_TABLE . " ea ";
+	$SQL .= "LEFT JOIN " . EVENTS_QUESTION_TABLE . " eq ON eq.id = ea.question_id ";
+	$SQL .= "WHERE ea.registration_id = %s ";
+	$SQL .= "AND system_name IS NULL ORDER BY eq.sequence asc ";
+	$questions = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ));
+	//echo $wpdb->last_query;
+	
 	$display_questions = '';
 	foreach ($questions as $question) {
 		$display_questions .= '<p class="espresso_questions"><strong>' . $question->question . '</strong>:<br /> ' . str_replace(',', '<br />', $question->answer) . '</p>';
 	}
 
-//Get the event information
-	$events = $wpdb->get_results("SELECT ed.* FROM " . EVENTS_DETAIL_TABLE . " ed
-						JOIN " . EVENTS_ATTENDEE_TABLE . " ea
-						ON ed.id = ea.event_id
-						WHERE ea.registration_id='" . $registration_id . "'");
+	//Get the event information
+	$SQL = "SELECT ed.*  FROM " . EVENTS_DETAIL_TABLE . " ed ";
+	$SQL .= "JOIN " . EVENTS_ATTENDEE_TABLE . " ea ON ed.id = ea.event_id ";
+	$SQL .= "WHERE ea.registration_id=%s";
+	$events = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ));
 
 	foreach ($events as $event) {
 		$event_id = $event->id;
@@ -231,22 +233,22 @@ function espresso_confirm_registration() {
 	$event_link = '<a href="' . $event_url . '">' . $event_name . '</a>';
 
 
-	$sql = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE;
+	$SQL = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE;
 
 	if ($registration_id != '') {
-		$sql .= " WHERE registration_id = '" . $registration_id . "' ";
+		$SQL .= " WHERE registration_id = '" . $registration_id . "' ";
 	} elseif ($attendee_id != '') {
-		$sql .= " WHERE id = '" . $attendee_id . "' ";
+		$SQL .= " WHERE id = '" . $attendee_id . "' ";
 	} else {
 		_e('No ID Supplied', 'event_espresso');
 	}
 
-	$sql .= " AND is_primary = 1 ";
-	$sql .= " ORDER BY id ";
-	$sql .= " LIMIT 0,1 "; //Get the first attendees details
+	$SQL .= " AND is_primary = 1 ";
+	$SQL .= " ORDER BY id ";
+	$SQL .= " LIMIT 0,1 "; //Get the first attendees details
 
 
-	if ( ! $attendee = $wpdb->get_row( $wpdb->prepare( $sql ))) {
+	if ( ! $attendee = $wpdb->get_row( $wpdb->prepare( $SQL ))) {
 		wp_die(__('An error occured. The primary attendee could not be found.', 'event_espresso'));
 	}
 
