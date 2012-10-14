@@ -381,7 +381,7 @@ function edit_attendee_record() {
 				$reg_ids = $wpdb->get_col( $wpdb->prepare( $SQL3, $primary_registration_id ));
 				$reg_ids = "'" . implode("','", $reg_ids) . "'";
 			} else {
-				$reg_ids = sanitize_text_field( $_REQUEST['registration_id'] );
+				$reg_ids = "'" . sanitize_text_field( $_REQUEST['registration_id'] ) . "'";
 			}		
 			$SQL .= " WHERE registration_id IN ( $reg_ids ) ORDER BY att.id";
 		}
@@ -473,6 +473,14 @@ function edit_attendee_record() {
 </div>
 
 		<?php } ?>
+		
+<div>		
+	<p>
+		<a href="admin.php?page=events&event_id=<?php echo $event_id; ?>&event_admin_reports=list_attendee_payments">
+			<strong>&laquo;&nbsp;<?php _e('Back to Attendees List', 'event_espresso'); ?></strong>
+		</a>
+	</p>
+</div>
 
 <div class="metabox-holder">
 	<div class="postbox">
@@ -730,9 +738,6 @@ function edit_attendee_record() {
 					</td>
 				</tr>
 			</table>
-			<p><strong><a href="admin.php?page=events&event_id=<?php echo $event_id; ?>&event_admin_reports=list_attendee_payments"> &lt;&lt;
-				<?php _e('Back to List', 'event_espresso'); ?>
-				</a> </strong> </p>
 		</div>
 	</div>
 </div>
