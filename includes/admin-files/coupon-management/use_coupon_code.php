@@ -178,36 +178,32 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 
 
 
-function espresso_update_attendee_coupon_info( $attendee_id = FALSE, $event_id = FALSE, $final_price = FALSE, $coupon_code = FALSE, $primary_att_id = FALSE ) {
+function espresso_update_attendee_coupon_info( $primary_att_id = FALSE, $final_price = FALSE, $coupon_code = FALSE ) {
 
-	if ( ! $attendee_id || ! $event_id || ! $final_price || ! $coupon_code ) {
+	if ( ! $primary_att_id || ! $final_price || ! $coupon_code ) {
 		return FALSE;
 	}
-//	echo '<h4>$attendee_id : ' . $attendee_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//	echo '<h4>$event_id : ' . $event_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//	echo '<h4>$primary_att_id : ' . $primary_att_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //	echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 	
 		global $wpdb;
 		
 		$set_cols_and_values = array( 'coupon_code' => $coupon_code, 'final_price' => $final_price );
 		$set_format = array( '%s', '%f', '%s', '%s' );
-		$where_cols_and_values = array( 'id' => $attendee_id );
+		$where_cols_and_values = array( 'id' => $primary_att_id );
 		$where_format = array( '%d' );
 
 		if ( $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format )) {
 			
-			// if $primary_att_id and $attendee_id are the same, then this is the primary attendee
-			if ( $attendee_id === $primary_att_id ) {
-				//Get Registration ID
-				$SQL = "SELECT registration_id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id = %d";
-				if ( $registration_ID = $wpdb->get_var( $wpdb->prepare( $SQL, $attendee_id ))) {
-					// Update OTHER attendees that share the same registration ID
-					$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . ' ';
-					$SQL .= "SET amount_pd = %f, coupon_code = %s ";
-					$SQL .= "WHERE registration_id = %d AND id != %d";
-					$wpdb->query( $wpdb->prepare( $SQL, 0.00, $coupon_code, $registration_ID, $attendee_id ));
-				}				
-			}
+			//Get Registration ID
+			$SQL = "SELECT registration_id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id = %d";
+			if ( $registration_ID = $wpdb->get_var( $wpdb->prepare( $SQL, $primary_att_id ))) {
+				// Update OTHER attendees that share the same registration ID
+				$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . ' ';
+				$SQL .= "SET amount_pd = %f, coupon_code = %s ";
+				$SQL .= "WHERE registration_id = %d AND id != %d";
+				$wpdb->query( $wpdb->prepare( $SQL, 0.00, $coupon_code, $registration_ID, $primary_att_id ));
+			}				
 		}		
 
 }
@@ -216,8 +212,7 @@ function espresso_update_attendee_coupon_info( $attendee_id = FALSE, $event_id =
 
 
 
-function event_espresso_coupon_hidden_fields( $event_id, $multi_reg = FALSE ) {
-}
+
 
 
 
