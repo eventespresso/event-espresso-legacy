@@ -317,7 +317,14 @@ function enter_attendee_payments() {
 </div>
 
 	<?php } ?>
-		
+
+<div>
+	<p>				
+		<a href="admin.php?page=events&event_id=<?php echo $event_id; ?>&event_admin_reports=list_attendee_payments">
+			 <strong><span class="laquo big-text">&laquo;&nbsp;</span><?php _e('Back to Attendees List', 'event_espresso'); ?></strong>
+		</a>				
+	</p>
+</div>		
 		
 <div class="metabox-holder">
 	<div class="postbox">
@@ -591,13 +598,7 @@ function enter_attendee_payments() {
 					</td>
 				</tr>
 			</table>
-			<p>
-				<strong>
-					<a href="admin.php?page=events&event_id=<?php echo $event_id; ?>&event_admin_reports=list_attendee_payments">
-						 <span class="laquo big-text">&laquo;</span>&nbsp;<?php _e('Back to Attendees List', 'event_espresso'); ?>
-					</a>
-				</strong>
-			</p>
+
 		</div>
 	</div>
 </div>
