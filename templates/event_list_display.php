@@ -117,7 +117,7 @@ $this_event_id = $event_id;
 		//echo event_espresso_get_status($event_id);
 		//print_r( event_espresso_get_is_active($event_id));
 
-		if ($multi_reg && event_espresso_get_status($event_id) == 'ACTIVE') {
+		if ($multi_reg && event_espresso_get_status($event_id) == 'ACTIVE' && $display_reg_form == 'Y') {
 
 			$params = array(
 				//REQUIRED, the id of the event that needs to be added to the cart
