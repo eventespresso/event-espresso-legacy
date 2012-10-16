@@ -611,7 +611,7 @@ function organization_config_mnu() {
 													<label for="site_license_key">
 		<?php _e('Site License Key:', 'event_espresso'); ?>
 													</label>
-													<input type="text" name="site_license_key" size="45" value="<?php echo stripslashes_deep($org_options['site_license_key']); ?>" />
+													<input type="text" name="site_license_key" size="45" value="<?php echo isset( $org_options['site_license_key'] ) ? stripslashes_deep($org_options['site_license_key']) : ''; ?>" />
 												</li>
 
 											</ul>
