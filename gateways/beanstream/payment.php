@@ -125,8 +125,8 @@ function espresso_display_beanstream($data) {
 					?>
 				</p>
 				<p>
-					<label for="state">
-					<?php _e('State / Province', 'event_espresso'); ?>
+					<label for="country">
+					<?php _e('Country', 'event_espresso'); ?>
 					</label>
 					<?php
 					$values = array(
@@ -367,7 +367,8 @@ function espresso_display_beanstream($data) {
 							array('id' => 'YE', 'text' => __('Yemen', 'event_espresso')),
 							array('id' => 'ZM', 'text' => __('Zambia', 'event_espresso')),
 							array('id' => 'ZW', 'text' => __('Zimbabwe', 'event_espresso')));
-					echo select_input('country', $values, getCountryFullData($org_options['organization_country']));
+					$current_country = getCountryFullData($org_options['organization_country']);
+					echo select_input('country', $values, $current_country['iso_code_2']);
 					?>
 				</p>
 				<p>
