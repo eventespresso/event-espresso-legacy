@@ -66,7 +66,7 @@ if ($reg_form_only == false) {
 		</p>
 		<p class="event_full">
 			<strong>
-				<?php echo  __('Please ', 'event_espresso') . '<a href="contact" title="' . __('contact us ', 'event_espresso') . '">' . __('contact us ', 'event_espresso') . '</a>' . __('if you would like to know if spaces are still available.', 'event_espresso'); ?>
+				<?php  _e('Please ', 'event_espresso');?><a href="contact" title="<?php  _e('contact us ', 'event_espresso');?>"><?php  _e('contact us ', 'event_espresso');?></a><?php  _e('if you would like to know if spaces are still available.', 'event_espresso'); ?>
 			</strong>
 		</p>
 	</div>
@@ -265,17 +265,17 @@ if ($reg_form_only == false) {
 					<input class="btn_event_form_submit ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="event_form_field-<?php echo $event_id; ?>" type="submit" name="Submit" value="<?php _e('Submit', 'event_espresso'); ?>">
 				</p>
 				
-	<?php
-				}
+	<?php } ?>
+
+	    </form>
+	</div>
+	
+<?php 
 				break;
 				
 			}
 			//End Switch statement to check the status of the event
-	?>
 
-	    </form>
-	</div>
-<?php 
 		if (isset($ee_style['event_espresso_form_wrapper_close'])) {
 			echo $ee_style['event_espresso_form_wrapper_close']; 
 		}			
