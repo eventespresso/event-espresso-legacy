@@ -192,7 +192,7 @@ function event_espresso_display_eway_settings() {
 	</form>
 	<div id="eway_sandbox_info" style="display:none">
 		<h2><?php _e('eWay Sandbox', 'event_espresso'); ?></h2>
-		<p><?php _e('In addition to using the eWay Sandbox feature. The debugging feature will also output the form variablesto the payment page, send an email to the admin that contains the all eWay variables.', 'event_espresso'); ?></p>
+		<p><?php _e('In addition to using the eWay Sandbox feature. The debugging feature will also output the form variables to the payment page, send an email to the admin that contains the all eWay variables.', 'event_espresso'); ?></p>
 		<hr />
 		<p><?php _e('The eWay Sandbox is a testing environment that is a duplicate of the live eWay site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live eWay environment. Create and manage test accounts, and view emails and API credentials for those test accounts.', 'event_espresso'); ?></p>
 	</div>
