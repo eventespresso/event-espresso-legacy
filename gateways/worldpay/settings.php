@@ -230,7 +230,7 @@ function event_espresso_display_worldpay_settings() {
 
 	<div id="worldpay_sandbox_info" style="display:none">
 		<h2><?php _e('WorldPay Sandbox', 'event_espresso'); ?></h2>
-		<p><?php _e('In addition to using the WorldPay Sandbox fetaure. The debugging feature will also output the form varibales to the payment page, send an email to the admin that contains the all WorldPay variables.', 'event_espresso'); ?></p>
+		<p><?php _e('In addition to using the WorldPay Sandbox feature. The debugging feature will also output the form variables to the payment page, send an email to the admin that contains the all WorldPay variables.', 'event_espresso'); ?></p>
 		<hr />
 		<p><?php _e('The WorldPay Sandbox is a testing environment that is a duplicate of the live WorldPay site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live WorldPay environment. Create and manage test accounts, and view emails and API credentials for those test accounts.', 'event_espresso'); ?></p>
 	</div>

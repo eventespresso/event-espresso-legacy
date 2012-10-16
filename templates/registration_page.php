@@ -7,7 +7,7 @@ if (!function_exists('register_attendees')) {
 
     function register_attendees($single_event_id = NULL, $event_id_sc =0, $reg_form_only = false) {
 		//Declare the $data object
-		$data = new stdClass;
+		$data = (object)array( 'event' => NULL );
 		
 		//Run code for the seating chart addon
 		if ( function_exists('espresso_seating_version') ){

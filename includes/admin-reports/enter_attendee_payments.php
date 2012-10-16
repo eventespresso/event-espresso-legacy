@@ -306,7 +306,7 @@ function enter_attendee_payments() {
                 </li>
                 <li>
                   <label>
-                    <?php _e( 'Do you want to send a payment recieved notice to registrant?', 'event_espresso' ); ?>
+                    <?php _e( 'Do you want to send a payment received notice to registrant?', 'event_espresso' ); ?>
                   </label>
                   <input type="radio" name="send_payment_rec" value="send_message">
                   <?php _e( 'Yes', 'event_espresso' ); ?>

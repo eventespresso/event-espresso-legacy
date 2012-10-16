@@ -35,7 +35,7 @@ $status_display_not_open = $status['status'] == 'REGISTRATION_NOT_OPEN' ? ' - ' 
 $status_display_open = $status['status'] == 'REGISTRATION_OPEN' ? ' - ' . $status['display_custom'] : '';
 
 //You can also display a custom message. For example, this is a custom registration not open message:
-$status_display_custom_closed = $status['status'] == 'REGISTRATION_CLOSED' ? ' - <span class="espresso_closed">' . __('Regsitration is Closed', 'event_espresso') . '</span>' : '';
+$status_display_custom_closed = $status['status'] == 'REGISTRATION_CLOSED' ? ' - <span class="espresso_closed">' . __('Regsitration is closed', 'event_espresso') . '</span>' : '';
 global $this_event_id;
 $this_event_id = $event_id;
 ?>
