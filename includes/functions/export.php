@@ -464,6 +464,8 @@ if (!function_exists('espresso_export_stuff')){
 											}
 										}
 									}
+								} else {
+									$participant->seatingchart_tag = '';
 								}
 	
 								echo $attendees_group
@@ -507,10 +509,15 @@ if (!function_exists('espresso_export_stuff')){
                                         /*if (array_key_exists($k, $answers))
                                         {*/
                                             $search = array("\r", "\n", "\t");
-                                            $clean_answer = str_replace($search, " ", $answers[$k]->answer);
-											$clean_answer = str_replace("&#039;", "'", $clean_answer);
-                                            $clean_answer = escape_csv_val($clean_answer);
-                                            echo $s . $clean_answer;
+											if ( isset( $answers[$k] )) {
+	                                            $clean_answer = str_replace($search, " ", $answers[$k]->answer);
+												$clean_answer = str_replace("&#039;", "'", $clean_answer);
+	                                            $clean_answer = escape_csv_val($clean_answer);
+	                                            echo $s . $clean_answer;												
+											} else {
+												echo $s;
+											}
+
                                         /*} 
                                         else 
                                         {
