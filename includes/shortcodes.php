@@ -428,70 +428,40 @@ function ee_create_autocomplete_search(){
 			<input id="event_id" name="event_id" type="hidden">
 		</form>
 	</div>
-	<script type="text/javascript" charset="utf-8">
-			//<![CDATA[
-			jQuery(document).ready(function() {
-				//jQuery('#ee_autocomplete').css('width','400px');
-				//jQuery('.ui-autocomplete li').css(['width','400px');
-				//Auto complete
-				jQuery("input#ee_autocomplete").autocomplete({
-					
-					source: [
-						//Examples:
-						//"c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"
-						//{ label: "Choice1", value: "value1" }
-		<?php 
-			$sql = "SELECT e.*, v.city venue_city, v.state venue_state";
-			isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= ", v.name venue_name, v.address venue_address, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta " : '';
-			$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
-			//$sql .= " JOIN " . EVENTS_CATEGORY_REL_TABLE . " r ON r.cat_id = c.id ";
-			//$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " e ON e.id = r.event_id ";
-			isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " vr ON vr.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = vr.venue_id " : '';
-			//$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id= e.id ";
-			//$sql .= " JOIN " . EVENTS_PRICES_TABLE . " p ON p.event_id=e.id ";
-			//$sql .= " WHERE c.category_identifier = '" . $category_identifier . "' ";
-			$sql .= " WHERE e.is_active = 'Y' ";
-			$sql .= " AND e.event_status != 'D' ";
-			//echo '<p>$sql = '.$sql.'</p>';							
-			$events = $wpdb->get_results($sql);
-			$num_rows = $wpdb->num_rows;
-										
-			if ($num_rows > 0) {
-				foreach ($events as $event){
-					$venue_city = !empty($event->venue_city) ? stripslashes_deep($event->venue_city)  : '';
-					$venue_state = !empty($event->venue_state) ?  (!empty($event->venue_city) ? ', ' : '') .stripslashes_deep($event->venue_state)  : '';
+<?php 
+	$ee_autocomplete_params = array();
+	$SQL = "SELECT e.*, v.city venue_city, v.state venue_state";
+	if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
+		$SQL .= ", v.name venue_name, v.address venue_address, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta ";		
+	}
+	$SQL .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
+	if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
+		$SQL .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " vr ON vr.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = vr.venue_id ";
+	}
+	$SQL .= " WHERE e.is_active = 'Y' ";
+	$SQL .= " AND e.event_status != 'D' ";
+	//echo '<p>$sql = '.$sql.'</p>';							
+	$events = $wpdb->get_results($sql);
+	$num_rows = $wpdb->num_rows;
+								
+	if ($num_rows > 0) {
+		foreach ($events as $event){
+			$venue_city = !empty($event->venue_city) ? stripslashes_deep($event->venue_city)  : '';
+			$venue_state = !empty($event->venue_state) ?  (!empty($event->venue_city) ? ', ' : '') .stripslashes_deep($event->venue_state)  : '';
 
-					$venue_name = !empty($event->venue_name) ?' @' . stripslashes_deep($event->venue_name)  . ' - ' . $venue_city . $venue_state . ''  : '';
-					//An Array of Objects with label and value properties:
-					echo '{ url:"'.espresso_reg_url($event->id).'", value: "'.stripslashes_deep($event->event_name) . $venue_name .'", id: "'.$event->id.'" },';
-				}
-			}
-		?>
-							],
-							success: function(data) {
-							  response(jQuery.map(data, function(item) {
-								return {
-									url: item.url,
-									value: item.name
-								}
-							  }
-							))
-							},
-							select: function( event, ui ) {
-								window.location.href = ui.item.url;
-							},
-							minLength: 2
-
-
-				});
-						//End auto complete
-			});
-		
-			//]]>
-			
-		</script>
-	<?php
-	//echo '<p>$sql = '.$sql.'</p>';	
+			$venue_name = !empty($event->venue_name) ?' @' . stripslashes_deep($event->venue_name)  . ' - ' . $venue_city . $venue_state . ''  : '';
+			//An Array of Objects with label and value properties:
+			$ee_autocomplete_params[] = array( 
+							'url' => espresso_reg_url($event->id), 
+							'value' => stripslashes_deep($event->event_name) . $venue_name, 
+							'id' => $event->id
+					);
+			//echo '{ url:"'.espresso_reg_url($event->id).'", value: "'.stripslashes_deep($event->event_name) . $venue_name .'", id: "'.$event->id.'" },';
+		}
+	}
+	wp_register_script('espresso_autocomplete', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/espresso_autocomplete.js"), array( 'jquery-ui-autocomplete' ), '1.0.0', TRUE );
+	wp_enqueue_script('espresso_autocomplete');
+	wp_localize_script( 'espresso_autocomplete', 'ee_autocomplete_params', $ee_autocomplete_params );
 	//Load scripts
 	add_action('wp_footer', 'ee_load_jquery_autocomplete_scripts');	
 	$buffer = ob_get_contents();
