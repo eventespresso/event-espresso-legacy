@@ -149,9 +149,10 @@ function organization_config_mnu() {
 															<?php _e('Add a Default Logo', 'event_espresso'); ?>
 															<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=espresso_default_logo_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a></label>
 															<div id="default-logo-image">
+															<?php $org_options['default_logo_url'] = isset( $org_options['default_logo_url'] ) ? $org_options['default_logo_url'] : ''; ?>
 															<input id="upload_image" type="hidden" size="36" name="upload_image" value="<?php echo $org_options['default_logo_url'] ?>" />
 															<input id="upload_image_button" type="button" value="Upload Image" />
-															<?php if ($org_options['default_logo_url'] != '') { ?>
+															<?php if ( $org_options['default_logo_url'] != '') { ?>
 																<p class="default-logo-thumb"><img src="<?php echo $org_options['default_logo_url'] ?>" alt="" /><br />
 																<a id="remove-image" href="#" title="Remove this image" onclick="return false;"><?php _e('Remove Image', 'event_espresso'); ?></a></p>
 															<?php } ?>
