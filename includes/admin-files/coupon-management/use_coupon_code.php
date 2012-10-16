@@ -9,6 +9,8 @@ if ( ! function_exists( 'event_espresso_process_coupon' )) {
 //		echo '<h4>$mer : ' . $mer . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //		printr( $_POST, '$_POST  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 //		printr( $_SESSION, '$_SESSION  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+		$use_coupon_code = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';				
+
 		if ( $mer ) {
 			if ( isset( $_SESSION['espresso_session']['events_in_session'][$event_id]['coupon'] )) {
 				$coupon_code = isset( $_SESSION['espresso_session']['events_in_session'][$event_id]['coupon']['code'] ) ? wp_strip_all_tags( $_SESSION['espresso_session']['events_in_session'][$event_id]['coupon']['code'] ) : FALSE;
@@ -21,11 +23,11 @@ if ( ! function_exists( 'event_espresso_process_coupon' )) {
 	
 //		echo '<h4>$coupon_code : ' . $coupon_code . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
  
-		if ( $coupon_code ) {		
+//		if ( $coupon_code ) {		
 			return event_espresso_coupon_payment_page( $event_id, $event_cost, $mer, $use_coupon_code );
-		} else {
-			return FALSE;
-		}
+//		} else {
+//			return FALSE;
+//		}
 	}
 }
 
@@ -45,13 +47,13 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 //		echo '<h4>$event_id : ' . $event_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //		echo '<h4>$event_cost : ' . $event_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		
-		if ( ! $coupon_code ) {
+//		if ( ! $coupon_code ) {
 			$coupon_code = isset( $_POST['event_espresso_coupon_code'] ) ? wp_strip_all_tags( $_POST['event_espresso_coupon_code'] ) : FALSE;
 			if ( $coupon_code === FALSE ) {
 				$coupon_code = isset( $_SESSION['espresso_session']['event_espresso_coupon_code'] ) ? wp_strip_all_tags( $_SESSION['espresso_session']['event_espresso_coupon_code'] ) : FALSE;
 			}
 //			echo '<h4>$coupon_code : ' . $coupon_code . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';			
-		}
+//		}
 		
 		if ( ! $use_coupon_code ) {
 			$use_coupon_code = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';			
