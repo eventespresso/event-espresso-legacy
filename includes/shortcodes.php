@@ -441,7 +441,7 @@ function ee_create_autocomplete_search(){
 	$SQL .= " WHERE e.is_active = 'Y' ";
 	$SQL .= " AND e.event_status != 'D' ";
 	//echo '<p>$sql = '.$sql.'</p>';							
-	$events = $wpdb->get_results($sql);
+	$events = $wpdb->get_results($SQL);
 	$num_rows = $wpdb->num_rows;
 								
 	if ($num_rows > 0) {
