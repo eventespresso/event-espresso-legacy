@@ -430,9 +430,9 @@ function ee_create_autocomplete_search(){
 	</div>
 <?php 
 	$ee_autocomplete_params = array();
-	$SQL = "SELECT e.*, v.city venue_city, v.state venue_state";
+	$SQL = "SELECT e.*";
 	if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
-		$SQL .= ", v.name venue_name, v.address venue_address, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta ";		
+		$SQL .= ", v.city venue_city, v.state venue_state, v.name venue_name, v.address venue_address, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta ";		
 	}
 	$SQL .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
 	if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
