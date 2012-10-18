@@ -96,8 +96,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$attendee_quantity = 1;
 				$final_price = $data_source['cost'];
 				$orig_price = $data_source['cost'];
-//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+				//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+				//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				
 			} elseif (isset($data_source['seat_id'])) {
 			
@@ -105,17 +105,23 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				// If a seat was selected then price of that seating will be used instead of event price
 				$final_price = seating_chart::get_purchase_price($data_source['seat_id']);
 				$orig_price = $data_source['cost'];
-//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+				//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+				//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 					
 			} elseif ( isset( $att_data_source['price_id'] ) && ! empty( $att_data_source['price_id'] )) {
 			
-				$orig_price = event_espresso_get_orig_price_and_surcharge( $att_data_source['price_id'] );
-				$final_price = isset( $att_data_source['price_id'] ) ? event_espresso_get_final_price( $att_data_source['price_id'], $event_id, $orig_price ) : 0.00;
-				$price_type = isset( $att_data_source['price_id'] ) ? espresso_ticket_information( array( 'type' => 'ticket', 'price_option' => $att_data_source['price_id'] )) : '';
-				$orig_price = (float)number_format( $orig_price->event_cost + $orig_price->surcharge, 2, '.', '' ); 
-//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+				if ( $att_data_source['price_id'] == 'free' ) {
+					$orig_price = 0.00;
+					$final_price = 0.00;
+					$price_type =  __('Free Event', 'event_espresso');		
+				} else {
+					$orig_price = event_espresso_get_orig_price_and_surcharge( $att_data_source['price_id'] );
+					$final_price = isset( $att_data_source['price_id'] ) ? event_espresso_get_final_price( $att_data_source['price_id'], $event_id, $orig_price ) : 0.00;
+					$price_type = isset( $att_data_source['price_id'] ) ? espresso_ticket_information( array( 'type' => 'ticket', 'price_option' => $att_data_source['price_id'] )) : '';
+					$orig_price = (float)number_format( $orig_price->event_cost + $orig_price->surcharge, 2, '.', '' ); 
+					//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+					//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+				}
 				
 			} elseif ( isset( $data_source['price_select'] ) && $data_source['price_select'] == TRUE ) {
 				
@@ -126,18 +132,24 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$orig_price = event_espresso_get_orig_price_and_surcharge( $price_id );
 				$final_price = event_espresso_get_final_price( $price_id, $event_id, $orig_price );
 				$orig_price = (float)number_format( $orig_price->event_cost + $orig_price->surcharge, 2, '.', '' ); 
-//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+				//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+				//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				
 			} else {
 			
-				$orig_price = event_espresso_get_orig_price_and_surcharge( $data_source['price_id'] );
-				$final_price = isset( $data_source['price_id'] ) ? event_espresso_get_final_price( $data_source['price_id'], $event_id, $orig_price ) : 0.00;
-				$price_type = isset($data_source['price_id']) ? espresso_ticket_information(array('type' => 'ticket', 'price_option' => $data_source['price_id'])) : '';
-				$orig_price = (float)number_format( $orig_price->event_cost + $orig_price->surcharge, 2, '.', '' ); 
-//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-				
+				if ( $data_source['price_id'] == 'free' ) {
+					$orig_price = 0.00;
+					$final_price = 0.00;
+					$price_type =  __('Free Event', 'event_espresso');		
+				} else {
+					$orig_price = event_espresso_get_orig_price_and_surcharge( $data_source['price_id'] );
+					$final_price = isset( $data_source['price_id'] ) ? event_espresso_get_final_price( $data_source['price_id'], $event_id, $orig_price ) : 0.00;
+					$price_type = isset($data_source['price_id']) ? espresso_ticket_information(array('type' => 'ticket', 'price_option' => $data_source['price_id'])) : '';
+					$orig_price = (float)number_format( $orig_price->event_cost + $orig_price->surcharge, 2, '.', '' ); 
+					//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+					//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';					
+				}
+			
 			}
 
 			$final_price = apply_filters( 'filter_hook_espresso_attendee_cost', $final_price );
