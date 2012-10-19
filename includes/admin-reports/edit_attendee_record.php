@@ -47,6 +47,8 @@ function edit_attendee_record() {
 		if ( $r = $wpdb->get_row( $wpdb->prepare( $SQL, $registration_id ))) {
 			$primary_attendee = !empty($r->id) ? $r->id : $id;
 			$is_additional_attendee = ($primary_attendee != $id) ? TRUE : FALSE;
+		} else {
+			$primary_attendee = FALSE;
 		}
 
 
