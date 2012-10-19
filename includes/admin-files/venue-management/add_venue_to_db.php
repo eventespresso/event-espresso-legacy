@@ -15,7 +15,7 @@ function add_venue_to_db(){
 		
 		if ( empty( $venue_name )) {
 		
-			$error = urlencode( __( 'The venue name is a required field.','event_espresso' )); 
+			$error = urlencode( __( 'An error occured. The venue name is a required field.','event_espresso' )); 
 			$redirect = add_query_arg( array( 'action' => 'add_new_venue', 'form_error' => $error ), admin_url( 'admin.php?page=event_venues' ));
 			wp_safe_redirect( $redirect );
 			
@@ -58,7 +58,7 @@ function add_venue_to_db(){
 					if ( $wpdb->insert( EVENTS_LOCALE_REL_TABLE, $cols_and_values, $data_format )) {
 						$success[] =  __('The locale has been added.','event_espresso');
 					} else {
-						$error[] = __('The locale was not saved.','event_espresso'); 
+						$error[] = __('An error occured. The locale was not saved.','event_espresso'); 
 					}
 				}
 				
@@ -68,7 +68,7 @@ function add_venue_to_db(){
 				
 			} else {
 				//$locale is empty
-				$error[] = __('The venue  was not saved.','event_espresso'); 
+				$error[] = __('An error occured. The venue  was not saved.','event_espresso'); 
 			}
 			
 		}
