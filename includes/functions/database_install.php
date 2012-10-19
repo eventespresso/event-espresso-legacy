@@ -141,7 +141,7 @@ function events_data_tables_install() {
 
 	function event_espresso_update_shortcodes() {
 		global $wpdb;
-		$wpdb->query("SELECT id FROM " . $wpdb->prefix . "posts " . " WHERE (post_content LIKE '%{ESPRESSO_EVENTS}%' AND `post_type` = 'page') OR (post_content LIKE '%{ESPRESSO_PAYMENTS}%'  AND `post_type` = 'page') OR (post_content LIKE '%{ESPRESSO_TXN_PAGE}%'  AND `post_type` = 'page') ");
+		$wpdb->query("SELECT id FROM " . $wpdb->prefix . "posts " . " WHERE (post_content LIKE '%{ESPRESSO_EVENTS}%' AND post_type = 'page') OR (post_content LIKE '%{ESPRESSO_PAYMENTS}%'  AND post_type = 'page') OR (post_content LIKE '%{ESPRESSO_TXN_PAGE}%'  AND post_type = 'page') ");
 
 		if ($wpdb->num_rows > 0) {
 			$wpdb->query("UPDATE " . $wpdb->prefix . "posts SET post_content = REPLACE(post_content,'{ESPRESSO_EVENTS}','[ESPRESSO_EVENTS]')");
@@ -149,7 +149,7 @@ function events_data_tables_install() {
 			$wpdb->query("UPDATE " . $wpdb->prefix . "posts SET post_content = REPLACE(post_content,'{ESPRESSO_TXN_PAGE}','[ESPRESSO_TXN_PAGE]')");
 		}
 
-		$wpdb->query("SELECT id FROM " . $wpdb->prefix . "posts " . " WHERE (post_content LIKE '%{EVENTREGIS}%' AND `post_type` = 'page') OR (post_content LIKE '%{EVENTREGPAY}%' AND `post_type` = 'page') OR (post_content LIKE '%{EVENTPAYPALTXN}%' AND `post_type` = 'page') ");
+		$wpdb->query("SELECT id FROM " . $wpdb->prefix . "posts " . " WHERE (post_content LIKE '%{EVENTREGIS}%' AND post_type = 'page') OR (post_content LIKE '%{EVENTREGPAY}%' AND post_type = 'page') OR (post_content LIKE '%{EVENTPAYPALTXN}%' AND post_type = 'page') ");
 
 		if ($wpdb->num_rows > 0) {
 			$wpdb->query("UPDATE " . $wpdb->prefix . "posts SET post_content = REPLACE(post_content,'{EVENTREGIS}','[ESPRESSO_EVENTS]')");
@@ -170,12 +170,12 @@ function events_data_tables_install() {
 
 	function espresso_answer_fix() {
 		global $wpdb;
-		$sql = "SHOW COLUMNS FROM `" . EVENTS_ANSWER_TABLE . "` LIKE 'id';";
+		$sql = "SHOW COLUMNS FROM " . EVENTS_ANSWER_TABLE . " LIKE 'id';";
 		$test = $wpdb->query($sql);
 		if (empty($test)) {
 			$sql = "ALTER TABLE " . EVENTS_ANSWER_TABLE . " DROP PRIMARY KEY";
 			$wpdb->query($sql);
-			$sql = "ALTER TABLE  `" . EVENTS_ANSWER_TABLE . "` ADD  `id` INT( 11 ) unsigned NOT NULL AUTO_INCREMENT FIRST , ADD PRIMARY KEY (  `id` )";
+			$sql = "ALTER TABLE  " . EVENTS_ANSWER_TABLE . " ADD  id INT( 11 ) unsigned NOT NULL AUTO_INCREMENT FIRST , ADD PRIMARY KEY (  id )";
 			$wpdb->query($sql);
 		}
 	}
@@ -362,7 +362,7 @@ function events_data_tables_install() {
 	}
 
 	$table_name = "events_attendee";
-	$sql = " id int(11) unsigned NOT NULL AUTO_INCREMENT,
+	$sql = "id int(11) unsigned NOT NULL AUTO_INCREMENT,
 					  registration_id VARCHAR(23) DEFAULT '0',
 					  is_primary tinyint(1) DEFAULT '0',
 					  lname VARCHAR(45) DEFAULT NULL,
@@ -402,8 +402,8 @@ function events_data_tables_install() {
 					  checked_in_quantity INT(11) DEFAULT '0',
 					  hashSalt VARCHAR(250) DEFAULT NULL,
 					PRIMARY KEY  (id),
-					KEY `registration_id` (`registration_id`),
-					KEY `event_id` (`event_id`)";
+					KEY registration_id (registration_id),
+					KEY event_id (event_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_attendee_meta";
@@ -413,7 +413,7 @@ function events_data_tables_install() {
 			  meta_value longtext,
 			  date_added datetime DEFAULT NULL,
   			  PRIMARY KEY  (ameta_id),
-			  KEY `attendee_id` (`attendee_id`)";
+			  KEY attendee_id (attendee_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_detail";
@@ -479,21 +479,21 @@ function events_data_tables_install() {
 					likes int(22) DEFAULT NULL,
 					ticket_id int(22) DEFAULT '0',
 					submitted datetime NOT NULL,
-				 PRIMARY KEY  (`id`),
-				 KEY `event_code` (`event_code`),
-				 KEY `wp_user` (`wp_user`),
-				 KEY `event_name` (`event_name`),
-				 KEY `city` (`city`),
-				 KEY `state` (`state`),
-				 KEY `start_date` (`start_date`),
-				 KEY `end_date` (`end_date`),
-				 KEY `registration_start` (`registration_start`),
-				 KEY `registration_end` (`registration_end`),
-				 KEY `reg_limit` (`reg_limit`),
-				 KEY `event_status` (`event_status`),
-				 KEY `recurrence_id` (`recurrence_id`),
-				 KEY `submitted` (`submitted`),
-  				 KEY `likes` (`likes`)";
+				 PRIMARY KEY  (id),
+				 KEY event_code (event_code),
+				 KEY wp_user (wp_user),
+				 KEY event_name (event_name),
+				 KEY city (city),
+				 KEY state (state),
+				 KEY start_date (start_date),
+				 KEY end_date (end_date),
+				 KEY registration_start (registration_start),
+				 KEY registration_end (registration_end),
+				 KEY reg_limit (reg_limit),
+				 KEY event_status (event_status),
+				 KEY recurrence_id (recurrence_id),
+				 KEY submitted (submitted),
+  				 KEY likes (likes)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_meta";
@@ -503,8 +503,8 @@ function events_data_tables_install() {
 			  meta_value longtext,
 			  date_added datetime DEFAULT NULL,
   			  PRIMARY KEY  (emeta_id),
-			  KEY `event_id` (`event_id`),
-			  KEY `meta_key` (`meta_key`)";
+			  KEY event_id (event_id),
+			  KEY meta_key (meta_key)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_email";
@@ -513,8 +513,8 @@ function events_data_tables_install() {
 				email_subject VARCHAR(250) DEFAULT NULL,
 				email_text TEXT,
 				wp_user int(22) DEFAULT '1',
-				UNIQUE KEY id (id),
-				KEY `wp_user` (`wp_user`)";
+				PRIMARY KEY  (id),
+				KEY wp_user (wp_user)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_category_detail";
@@ -525,9 +525,9 @@ function events_data_tables_install() {
 				category_meta TEXT,
 				display_desc VARCHAR (4) DEFAULT NULL,
 				wp_user int(22) DEFAULT '1',
-				UNIQUE KEY id (id),
-				KEY `category_identifier` (`category_identifier`),
-				KEY `wp_user` (`wp_user`)";
+				PRIMARY KEY  (id),
+				KEY category_identifier (category_identifier),
+				KEY wp_user (wp_user)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_category_rel";
@@ -535,7 +535,7 @@ function events_data_tables_install() {
 				event_id int(11) DEFAULT NULL,
 				cat_id int(11) DEFAULT NULL,
 				PRIMARY KEY  (id),
-			  	KEY `event_id` (`event_id`)";
+			  	KEY event_id (event_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_venue";
@@ -550,9 +550,9 @@ function events_data_tables_install() {
 				country VARCHAR(250) DEFAULT NULL,
 				meta TEXT,
 				wp_user int(22) DEFAULT '1',
-				UNIQUE KEY id (id),
-			  	KEY `identifier` (`identifier`),
-				KEY `wp_user` (`wp_user`)";
+				PRIMARY KEY  (id),
+			  	KEY identifier (identifier),
+				KEY wp_user (wp_user)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_venue_rel";
@@ -560,25 +560,25 @@ function events_data_tables_install() {
 				event_id int(11) DEFAULT NULL,
 				venue_id int(11) DEFAULT NULL,
 				PRIMARY KEY  (id),
-			  	KEY `event_id` (`event_id`)";
+			  	KEY event_id (event_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_locale";
-	$sql = "`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-			  `name` varchar(250) DEFAULT NULL,
-			  `identifier` varchar(26) DEFAULT '0',
-			  `wp_user` int(22) DEFAULT '1',
-			  UNIQUE KEY `id` (`id`),
-			  KEY `identifier` (`identifier`),
-			  KEY `wp_user` (`wp_user`)";
+	$sql = "id int(11) unsigned NOT NULL AUTO_INCREMENT,
+			  name varchar(250) DEFAULT NULL,
+			  identifier varchar(26) DEFAULT '0',
+			  wp_user int(22) DEFAULT '1',
+			  PRIMARY KEY  (id),
+			  KEY identifier (identifier),
+			  KEY wp_user (wp_user)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_locale_rel";
-	$sql = "`id` int(11) NOT NULL AUTO_INCREMENT,
-				`venue_id` int(11) DEFAULT NULL,
-				`locale_id` int(11) DEFAULT NULL,
-				PRIMARY KEY  (`id`),
-			  	KEY `venue_id` (`venue_id`)";
+	$sql = "id int(11) NOT NULL AUTO_INCREMENT,
+				venue_id int(11) DEFAULT NULL,
+				locale_id int(11) DEFAULT NULL,
+				PRIMARY KEY  (id),
+			  	KEY venue_id (venue_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_personnel";
@@ -589,9 +589,9 @@ function events_data_tables_install() {
 				email TEXT,
 				meta TEXT,
 				wp_user int(22) DEFAULT '1',
-				UNIQUE KEY id (id),
-			  	KEY `identifier` (`identifier`),
-			  	KEY `wp_user` (`wp_user`)";
+				PRIMARY KEY  (id),
+			  	KEY identifier (identifier),
+			  	KEY wp_user (wp_user)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_personnel_rel";
@@ -599,8 +599,8 @@ function events_data_tables_install() {
 				event_id int(11) DEFAULT NULL,
 				person_id int(11) DEFAULT NULL,
 				PRIMARY KEY  (id),
-			  	KEY `event_id` (`event_id`),
-			  	KEY `person_id` (`person_id`)";
+			  	KEY event_id (event_id),
+			  	KEY person_id (person_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_discount_rel";
@@ -608,7 +608,7 @@ function events_data_tables_install() {
 				event_id int(11) DEFAULT NULL,
 				discount_id int(11) DEFAULT NULL,
 				PRIMARY KEY  (id),
-			  	KEY `event_id` (`event_id`)";
+			  	KEY event_id (event_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_start_end";
@@ -618,7 +618,7 @@ function events_data_tables_install() {
 				end_time varchar(10) DEFAULT NULL,
 				reg_limit int (15) DEFAULT '0',
 				PRIMARY KEY  (id),
-			  	KEY `event_id` (`event_id`)";
+			  	KEY event_id (event_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_prices";
@@ -633,7 +633,7 @@ function events_data_tables_install() {
 				max_qty int(7) DEFAULT '0',
 				max_qty_members int(7) DEFAULT '0',
 				PRIMARY KEY  (id),
-			  	KEY `event_id` (`event_id`)";
+			  	KEY event_id (event_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_discount_codes";
@@ -645,13 +645,15 @@ function events_data_tables_install() {
 				each_attendee VARCHAR(1) DEFAULT NULL,
 				wp_user int(22) DEFAULT '1',
 				PRIMARY KEY  (id),
-			  	KEY `coupon_code` (`coupon_code`),
-			  	KEY `wp_user` (`wp_user`)";
+			  	KEY coupon_code (coupon_code),
+			  	KEY wp_user (wp_user)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_multi_event_registration_id_group";
 	$sql = "primary_registration_id varchar(255) DEFAULT NULL,
-			registration_id varchar(255) DEFAULT NULL  ";
+			registration_id varchar(255) DEFAULT NULL,
+			KEY primary_registration_id (primary_registration_id),
+			KEY registration_id (registration_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_question";
@@ -666,9 +668,9 @@ function events_data_tables_install() {
 			admin_only ENUM( 'Y', 'N' ) NOT NULL DEFAULT 'N',
 			wp_user int(22) DEFAULT '1',
 			PRIMARY KEY  (id),
-			KEY `wp_user` (`wp_user`),
-			KEY `system_name` (`system_name`),
-			KEY `admin_only` (`admin_only`)";
+			KEY wp_user (wp_user),
+			KEY system_name (system_name),
+			KEY admin_only (admin_only)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_qst_group";
@@ -682,8 +684,8 @@ function events_data_tables_install() {
 				system_group TINYINT( 1 ) NOT NULL DEFAULT '0',
 				wp_user int(22) DEFAULT '1',
 				PRIMARY KEY  (id),
-			  	KEY `system_group` (`system_group`),
-			  	KEY `wp_user` (`wp_user`)";
+			  	KEY system_group (system_group),
+			  	KEY wp_user (wp_user)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_qst_group_rel";
@@ -691,8 +693,8 @@ function events_data_tables_install() {
 				group_id int(11)  NOT NULL,
 				question_id int(11) NOT NULL,
 				PRIMARY KEY  (id),
-			  	KEY `group_id` (`group_id`),
-			  	KEY `question_id` (`question_id`)";
+			  	KEY group_id (group_id),
+			  	KEY question_id (question_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_answer";
@@ -702,61 +704,142 @@ function events_data_tables_install() {
 			question_id int(11) NOT NULL default '0',
 			answer text NOT NULL,
 			PRIMARY KEY  (id),
-			KEY `registration_id` (`registration_id`),
-			KEY `attendee_id` (`attendee_id`)";
+			KEY registration_id (registration_id),
+			KEY attendee_id (attendee_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 
 
 	function espresso_copy_data_from_attendee_cost_table() {
 		global $wpdb;
+
 		
-		// get primary attendee reg IDs
-		$SQL = "SELECT DISTINCT primary_registration_id FROM " . $wpdb->prefix . "events_multi_event_registration_id_group";
-		$results = $wpdb->get_var($SQL);
-		if ( $results !== FALSE && ! empty( $results )) {
-			// now set "is_primary" to true 
-			foreach ( $results as $result ) {
-				$wpdb->update( 
-						$wpdb->prefix . "events_attendee", 
-						array( 'is_primary' => 1 ), 
-						array( 'registration_id' => $result->primary_registration_id ),
-						array( '%s' ),
-						array( '%s' )
-				);
-			}				
-		}
-				
-		$SQL = "SELECT SUM(final_price) AS final_price FROM " . $wpdb->prefix . "events_attendee";
-		$sum = $wpdb->get_var($SQL);
+		$data_migrated_version = get_option( 'espresso_data_migrated' );
+		if ( $data_migrated_version != '3.1.28' ) {
 
-		if ( $sum !== FALSE && ! empty( $sum )) {
-			// if the orig_price and final_price fields were JUST created, then they should sum to 0
-			if ( (float)$sum == 290 ) {
-				// first check if the events_attendee_cost table even exists
-				$SQL = "SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_SCHEMA = '".DB_NAME."' AND TABLE_NAME LIKE '" . $wpdb->prefix . "events_attendee_cost'";
-				$cost_tbl = $wpdb->get_col($SQL);
+			// copy attendee costs to orig_price
+			$SQL = "SELECT * FROM " . $wpdb->prefix . "events_attendee_cost";			
+			if ( $results = $wpdb->get_results($SQL)) {
+				foreach ( $results as $result ) {
+					$wpdb->update( 
+							$wpdb->prefix . "events_attendee", 
+							array( 'orig_price' => $result->cost,  'final_price' => $result->cost ), 
+							array( 'id' => $result->attendee_id ),
+							array( '%f', '%f' ),
+							array( '%d' )
+					);
+				}						
+			}
 
-				if ( $cost_tbl!== FALSE && ! empty( $cost_tbl )) {
-					echo '<h1>IN !!!</h1>';
-					//copy cost to orig_price
-					$SQL = "SELECT * FROM " . $wpdb->prefix . "events_attendee_cost";			
-					$results = $wpdb->get_results($SQL);
 
-					foreach ( $results as $result ) {
-						$wpdb->update( 
-								$wpdb->prefix . "events_attendee", 
-								array( 'orig_price' => $result->cost,  'final_price' => $result->cost ), 
-								array( 'id' => $result->attendee_id ),
-								array( '%f', '%f' ),
-								array( '%d' )
-						);
+			// get  reg IDs for all multi registration attendees that are NOT the primary attendee
+			$SQL = "SELECT registration_id FROM " . $wpdb->prefix . "events_multi_event_registration_id_group WHERE registration_id != primary_registration_id";
+			$non_primary_registrants = $wpdb->get_results($SQL);
+			if ( $non_primary_registrants !== FALSE && ! empty( $non_primary_registrants )) {
+				// now grab ALL attendees 
+				$SQL = "SELECT registration_id, is_primary, final_price, quantity, total_cost, amount_pd, payment_status FROM " . $wpdb->prefix . "events_attendee";
+				$attendees = $wpdb->get_results($SQL);
+				if ( $attendees !== FALSE && ! empty( $attendees )) {
+					// loop thru attendees
+					foreach ( $attendees as $attendee ) {
+						// check for non-primary attendees
+						if ( in_array( $attendee->registration_id, $non_primary_registrants )) {
+							// set "is_primary" to false 
+							$wpdb->update( 
+									$wpdb->prefix . "events_attendee", 
+									array( 'is_primary' => 0,  'amount_pd' => 0.00 ), 
+									array( 'registration_id' => $attendee->registration_id ),
+									array( '%d', '%f' ),
+									array( '%s' )
+							);	
+							
+						} else {
+							
+							//calculate new total
+							$total_cost = $attendee->final_price * $attendee->quantity;
+							// but keep the old one if it exists
+							$total_cost = $attendee->total_cost != '0.00' ? $attendee->total_cost : $total_cost;
+							//calculate new amount paid
+							$amount_pd = $attendee->payment_status == 'Completed' ? $total_cost : 0.00;
+							// but keep the old one if it exists
+							$amount_pd = $attendee->amount_pd != '0.00' ? $attendee->amount_pd : $amount_pd;
+							// update
+							$wpdb->update( 
+									$wpdb->prefix . "events_attendee", 
+									array( 'is_primary' => 1,  'total_cost' => $total_cost,  'amount_pd' => $amount_pd ), 
+									array( 'registration_id' => $attendee->registration_id ),
+									array( '%d', '%f', '%f' ),
+									array( '%s' )
+							);		
+													
+						}			
 					}
-				} 				
-			}			
-		}
-		
+				}				
+			}
 
+
+			$SQL = "SELECT DISTINCT primary_registration_id FROM " . $wpdb->prefix . "events_multi_event_registration_id_group";
+			$primary_registrants = $wpdb->get_results($SQL);
+			if ( $primary_registrants !== FALSE && ! empty( $primary_registrants )) {	
+				// now calculate a new event total for each primary_registrant
+				foreach ( $primary_registrants as $primary_registrant ) {		
+					//echo '<h4>primary_registration_id : ' . $primary_registrant->primary_registration_id . '</h4>';			
+					// total cost for all attendees for a registration
+					$reg_total = 0;
+					// first get all reg IDs associated with the primary reg
+					$SQL = "SELECT * FROM " . $wpdb->prefix . "events_multi_event_registration_id_group ";
+					$SQL .= "WHERE primary_registration_id = %s";
+					if ( $registrations = $wpdb->get_results( $wpdb->prepare( $SQL, $primary_registrant->primary_registration_id ))) {
+						// find payment info for those registrations in the attendee table
+						foreach ( $registrations as $registration ) {				
+							//echo '<h4>registration_id : ' . $registration->registration_id . '</h4>';			
+							$SQL = "SELECT registration_id, is_primary, final_price, quantity, payment_status FROM " . $wpdb->prefix . "events_attendee ";
+							$SQL .= "WHERE registration_id = %s";							
+							if ( $attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $registration->registration_id ))) {
+								// cycle thru attendees
+								foreach ( $attendees as $attendee ) {
+									//printr( $attendee, '$attendee  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+									// calculate attendee total
+									$att_total = $attendee->final_price * $attendee->quantity;
+									// add to total for the entire registration
+									$reg_total += $att_total;
+									
+									// while we are here, update total cost and zero out amount paid for non-primary attendees
+									if ( $primary_registrant->primary_registration_id != $attendee->registration_id || ! $attendee->is_primary ) {
+										$wpdb->update( 
+												$wpdb->prefix . "events_attendee", 
+												array( 'total_cost' => $att_total,  'amount_pd' => 0.00 ), 
+												array( 'registration_id' => $attendee->registration_id ),
+												array( '%f', '%f' ),
+												array( '%s' )
+										);		
+														
+									} else {
+										$txn_complete = $attendee->payment_status == 'Completed' ? TRUE : FALSE;
+									}				
+								}	
+							}
+							
+							
+						}
+					}	
+					
+					$amount_pd = $txn_complete ? $reg_total : 0.00;
+					//echo '<h4>txn completed</h4>';	
+					$wpdb->update( 
+							$wpdb->prefix . "events_attendee", 
+							array( 'total_cost' => $reg_total, 'amount_pd' => $amount_pd ), 
+							array( 'registration_id' => $primary_registrant->primary_registration_id ),
+							array( '%f', '%f' ),
+							array( '%s' )
+					);	
+											
+				}	// end foreach ( $primary_registrants as $primary_registrant )
+			}	// if ( $primary_registrants !== FALSE && ! empty( $primary_registrants ))
+			
+			add_option( 'espresso_data_migrated', '3.1.28' );
+			
+		}
 	}
 
 	events_organization_tbl_install();
