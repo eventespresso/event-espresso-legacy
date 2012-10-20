@@ -1248,7 +1248,7 @@ textarea {
 }
 form.espresso_form legend, form.espresso_form label, #new-question-form label, #edit-new-question-form label, #add-edit-new-event-email label {
 	display:block; padding:2px 2px 0 2px;
-	font-size:.9em; font-weight:bold; text-align: left;
+	font-size:.9em; font-size:1em; font-weight:bold; text-align: left;
 }
 form.espresso_form label.inline {
 	display: inline-block; float:left; width: 100px; margin-left:0;
@@ -1265,6 +1265,23 @@ form.espresso_form input.small-text {
 }
 form.espresso_form .quicktags-toolbar input {width: auto;}
 
+.span_event_date_label,
+.span_event_time_label,
+.event_price_label,
+.event_espresso_form_wrapper label,
+.event_espresso_form_wrapper span.label {
+	display: inline-block; width:100px; padding:0 10px 0 0; 
+	text-align: right; line-height:1em; vertical-align: middle; 
+}
+.span_event_date_value,
+.span_event_time_value { display: inline; padding:0; margin:0; text-align: left; font-size:1.1em; font-weight: bold; }
+
+.espresso_add_subtract_attendees { padding:0 0 0 110px; }
+.espresso_confirm_registration { padding:0 0 1em 110px; }
+.event_form_submit { padding:1em 0 2em 110px; }
+
+.additional-attendee-lnk { display: inline-block; margin:0 0 .5em; }
+.additional-attendee-lnk img { margin:1px .5em -2px 0; }
 
 .espresso_form .button-secondary,
 .espresso_form .button-primary {
