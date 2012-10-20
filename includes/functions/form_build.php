@@ -40,7 +40,7 @@ if (!function_exists('event_form_build')) {
 
 		$required_label = isset($required_label) ? $required_label : '';
 
-		$label = '<label for="' . $field_name . '">' . $question->question . $required_label . '</label> ';
+		$label = '<label for="' . $field_name . '" class="' . $class . '">' . $question->question . $required_label . '</label> ';
 		//If the members addon is installed, get the users information if available
 		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true ) {
 			global $current_user;
