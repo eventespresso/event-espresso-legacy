@@ -115,7 +115,7 @@ function espresso_reg_sessionid($registration_id) {
 
 if (!function_exists('event_espresso_additional_attendees')) {
 
-	function event_espresso_additional_attendees($event_id = 0, $additional_limit = 2, $available_spaces = 999, $label = '', $show_label = true, $event_meta = '') {
+	function event_espresso_additional_attendees( $event_id = 0, $additional_limit = 2, $available_spaces = 999, $label = '', $show_label = true, $event_meta = '', $qstn_class = '' ) {
 		$event_id = $event_id == 0 ? $_REQUEST['event_id'] : $event_id;
 
 		if ($event_meta == 'admin') {
@@ -133,6 +133,7 @@ if (!function_exists('event_espresso_additional_attendees')) {
 
 		$i = 0;
 		if (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) {
+		
 			$label = $label == '' ? __('Number of Tickets', 'event_espresso') : $label;
 			$html = '<p class="espresso_additional_limit highlight-bg">';
 			$html .= $show_label == true ? '<label for="num_people">' . $label . '</label>' : '';
@@ -146,7 +147,9 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			$html .= '<input type="hidden" name="espresso_addtl_limit_dd" value="true">';
 			$html .= '</p>';
 			$buffer = '';
+			
 		} else {
+		
 			while (($i < $additional_limit) && ($i < $available_spaces)) {
 				$i++;
 			}
@@ -190,14 +193,15 @@ if (!function_exists('event_espresso_additional_attendees')) {
 				if(!empty($admin)) {
 					$meta['admin_only'] = true;
 				}
-				$htm .= event_espresso_add_question_groups($event_meta['add_attendee_question_groups'], '', null, 0, $meta);
+				$htm .= event_espresso_add_question_groups( $event_meta['add_attendee_question_groups'], '', null, 0, $meta, $qstn_class );
 			}
-			$htm .= '<a onclick="return false;" href="#" class="add" rel=".clone" title="' . __('Add an Additonal Attendee', 'event_espresso') . '"><img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add an Additonal Attendee', 'event_espresso') . '" /></a>';
-			$htm .= '<a onclick="return false;" style="" class="remove" href="#" ><img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Attendee', 'event_espresso') . '" /></a>';
-			$htm .= '</div>';
+			$htm .= '<div class="espresso_add_subtract_attendees">';
+			$htm .= '<a onclick="return false;" style="" class="remove additional-attendee-lnk" href="#" ><img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Attendee', 'event_espresso') . '" />' . __('Remove the above Attendee:', 'event_espresso') . '</a><br/>';
+			$htm .= '<a onclick="return false;" href="#" class="add additional-attendee-lnk" rel=".clone" title="' . __('Add an Additonal Attendee', 'event_espresso') . '"><img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add an Additonal Attendee', 'event_espresso') . '" />' . __('Add an Additonal Attendee:', 'event_espresso') . '</a>';
+			$htm .= '</div></div>';
 			//ob_start();
 			//END STOP DO NOT ADD LINE BREAKS TO THIS SCRIPT
-			$html .= '<script type="text/javascript">$jaer = jQuery.noConflict();var attendee_num = 0;var additional_limit = '.$additional_limit.';var first_add_button = null;var selector = \'div#additional_attendee_\' + attendee_num;function markup(attendee_num) {return \''.stripslashes($htm).'\';}function remove_add() {attendee_num -= 1;selector = \'div#additional_attendee_\' + attendee_num;$jaer(selector).remove();if (attendee_num != 0) {var temp_selector = \'div#additional_attendee_\' + (attendee_num - 1);$jaer(temp_selector + \' a.add\').on(\'click\',add_add);$jaer(temp_selector + \' a.remove\').on(\'click\',remove_add);} else {first_add_button.on(\'click\',add_add);}}function add_add() {if (attendee_num == additional_limit) return;$jaer(this).parent().after(markup(attendee_num));$jaer(selector + \' a.add\').on(\'click\',add_add);$jaer(selector + \' a.remove\').on(\'click\',remove_add);$jaer(this).off(\'click\', add_add);if (attendee_num != 0) {var temp_selector = \'div#additional_attendee_\' + (attendee_num - 1);$jaer(temp_selector + \' a.remove\').off(\'click\', remove_add);}attendee_num += 1;selector = \'div#additional_attendee_\' + attendee_num;}jQuery(document).ready(function($jaer) {$jaer(\'a.add\').on(\'click\',add_add);first_add_button = $jaer(\'a.add\');});</script>';
+			$html .= '<script type="text/javascript">$jaer = jQuery.noConflict();var attendee_num = 0;var additional_limit = '.$additional_limit.';var first_add_button = null;var selector = \'div#additional_attendee_\' + attendee_num;function markup(attendee_num) {return \''.stripslashes($htm).'\';}function remove_add() {attendee_num -= 1;selector = \'div#additional_attendee_\' + attendee_num;$jaer(selector).remove();if (attendee_num != 0) {var temp_selector = \'div#additional_attendee_\' + (attendee_num - 1);$jaer(temp_selector + \' a.add\').on(\'click\',add_add);$jaer(temp_selector + \' a.remove\').on(\'click\',remove_add);} else {first_add_button.on(\'click\',add_add);}}function add_add() {if (attendee_num == additional_limit) return;$jaer(this).parent().parent().after(markup(attendee_num));$jaer(selector + \' a.add\').on(\'click\',add_add);$jaer(selector + \' a.remove\').on(\'click\',remove_add);$jaer(this).off(\'click\', add_add);if (attendee_num != 0) {var temp_selector = \'div#additional_attendee_\' + (attendee_num - 1);$jaer(temp_selector + \' a.remove\').off(\'click\', remove_add);}attendee_num += 1;selector = \'div#additional_attendee_\' + attendee_num;}jQuery(document).ready(function($jaer) {$jaer(\'a.add\').on(\'click\',add_add);first_add_button = $jaer(\'a.add\');});</script>';
 			//END STOP DO NOT ADD LINE BREAKS TO THIS SCRIPT
 			//$buffer = ob_get_contents();
 			//ob_end_clean();
