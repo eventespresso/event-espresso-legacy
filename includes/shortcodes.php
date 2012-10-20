@@ -728,7 +728,7 @@ if (!function_exists('espresso_venue_details_sc')) {
 
 		$FROM = " FROM ";
 		$order_by = isset($order_by) && $order_by != '' ? " ORDER BY " . $order_by . " ASC " : " ORDER BY name ASC ";
-		$limit = $limit > 0 ? " LIMIT 0," . $limit . " " : '';
+		$limit = isset( $limit ) && $limit > 0 ? " LIMIT 0," . $limit . " " : '';
 
 		$using_id = false;
 		//Find the event id
