@@ -131,6 +131,9 @@
 	display: inline-block; width:150px; padding:0 10px 0 0; 
 	text-align: right; font-size:.9em; line-height:1em; vertical-align: middle; 
 }
+.span_event_date_value,
+.span_event_time_value { display: inline; padding:0; margin:0; text-align: left; }
+
 .event_espresso_form_wrapper input, 
 .event_espresso_form_wrapper select {
 	padding: 3px; margin:0; vertical-align: middle; /*border-radius:3px; */
@@ -159,8 +162,12 @@ select.wide { width: 175px; }
 .event_espresso_form_wrapper .checkbox-lbl + .checkbox-lbl,
 .event_espresso_form_wrapper .radio-btn-lbl + .radio-btn-lbl { margin-left:1em; }
 
+.espresso_add_subtract_attendees { padding:0 0 0 160px; }
 .espresso_confirm_registration { padding:0 0 1em 160px; }
 .event_form_submit { padding:1em 0 2em 160px; }
+
+.additional-attendee-lnk { display: inline-block; margin:0 0 .5em; }
+.additional-attendee-lnk img { margin:1px .5em -2px 0; }
 
 .smaller-text { font-size:.7em; }
 .small-text { font-size:.85em; }
