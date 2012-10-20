@@ -36,9 +36,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$event_id = absint( $data_source['event_id'] );
 		}
 		
-		if (isset($_POST['reg_form_nonce']) && !empty($_POST['reg_form_nonce']) ){
-			$data_source['reg_form_nonce'] = $_POST['reg_form_nonce'];
-		}
+		$data_source['reg_form_nonce'] = isset( $_POST['reg_form_nonce'] ) && !empty( $_POST['reg_form_nonce'] ) ? $_POST['reg_form_nonce'] : NULL;
 	
 		wp_verify_nonce( $data_source['reg_form_nonce'] );
 		
@@ -94,8 +92,9 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			if (isset($data_source['admin'])) {
 			
 				$attendee_quantity = 1;
-				$final_price = $data_source['cost'];
-				$orig_price = $data_source['cost'];
+				$final_price = $data_source['event_cost'];
+				$orig_price = $data_source['event_cost'];
+				$price_type =  __('Admin', 'event_espresso');		
 				//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				
@@ -190,7 +189,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$payment = "Admin";
 				$txn_type = __('Added by Admin', 'event_espresso');
 				$payment_date = date("m-d-Y");
-				$amount_pd = $data_source['cost'] != '' ? $data_source['cost'] : 0.00;
+				$amount_pd = $data_source['event_cost'] != '' ? $data_source['event_cost'] : 0.00;
 				$registration_id = uniqid('', true);
 				$_SESSION['espresso_session']['id'] = uniqid('', true);
 
