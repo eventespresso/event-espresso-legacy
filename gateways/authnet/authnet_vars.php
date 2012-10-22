@@ -5,7 +5,7 @@ function espresso_display_authnet($payment_data) {
 // Setup class
 	include_once ('Authorize.php');
 
-	global $org_options;
+	global $org_options, $wpdb;
 	$myAuthorize = new EE_Authorize(); // initiate an instance of the class
 	echo '<!--Event Espresso Authorize.net Gateway Version ' . $myAuthorize->gateway_version . '-->';
 	$authnet_settings = get_option('event_espresso_authnet_settings');
@@ -47,6 +47,22 @@ function espresso_display_authnet($payment_data) {
 	$myAuthorize->addField('x_City', $city);
 	$myAuthorize->addField('x_State', $state);
 	$myAuthorize->addField('x_Zip', $zip);
+	
+	$sql = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id='" . $attendee_id . "'";
+	$session_id = $wpdb->get_var($sql);
+	$sql = "SELECT ac.cost, ac.quantity, ed.event_name, a.price_option, a.fname, a.lname FROM " . EVENTS_ATTENDEE_COST_TABLE . " ac JOIN " . EVENTS_ATTENDEE_TABLE . " a ON ac.attendee_id=a.id JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
+	$sql .= " WHERE attendee_session='" . $session_id . "' ORDER BY a.id ASC";
+	$items = $wpdb->get_results($sql);
+	foreach ($items as $key=>$item) {
+		$item_num=$key+1;
+		$myAuthorize->addLineItem($item_num,
+						$item->event_name,
+						$item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname,
+						$item->quantity,
+						$item->cost,
+						FALSE);
+	}
+	
 
 
 //Enable this function if you want to send payment notification before the person has paid.

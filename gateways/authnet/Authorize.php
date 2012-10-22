@@ -30,7 +30,6 @@ class EE_Authorize extends PaymentGateway {
 	 * @param none
 	 * @return void
 	 */
-	
 	private $use_md5 = false;
 	private $md5_value = '';
 
@@ -44,7 +43,7 @@ class EE_Authorize extends PaymentGateway {
 		$this->addField('x_Show_Form', 'PAYMENT_FORM');
 		$this->addField('x_Relay_Response', 'TRUE');
 	}
-	
+
 	public function enableUseMD5() {
 		$this->use_md5 = true;
 	}
@@ -52,6 +51,7 @@ class EE_Authorize extends PaymentGateway {
 	public function setMD5Value($md5_value) {
 		$this->md5_value = $md5_value;
 	}
+
 	/**
 	 * Enables the test mode
 	 *
@@ -94,12 +94,89 @@ class EE_Authorize extends PaymentGateway {
 						$this->fields['x_Invoice_num'] . '^' .
 						$this->fields['x_fp_timestamp'] . '^' .
 						$this->fields['x_Amount'] . '^';
-		if (phpversion() >='5.1.2') {
+		if (phpversion() >= '5.1.2') {
 			$fingerprint = hash_hmac("md5", $data, $this->secret);
 		} else {
 			$fingerprint = bin2hex(mhash(MHASH_MD5, $data, $this->secret));
 		}
 		$this->addField('x_fp_hash', $fingerprint);
+	}
+
+	/**
+	 * Add a line item.
+	 *
+	 * @param string $item_id
+	 * @param string $item_name
+	 * @param string $item_description
+	 * @param string $item_quantity
+	 * @param string $item_unit_price
+	 * @param string $item_taxable
+	 */
+	public function addLineItem($item_id, $item_name, $item_description, $item_quantity, $item_unit_price, $item_taxable) {
+		$line_item = "";
+		$delimiter = "";
+		foreach (func_get_args() as $key => $value) {
+			$line_item .= $delimiter . $value;
+			$delimiter = "<|>";
+		}
+		$this->_additional_line_items[] = $line_item;
+	}
+
+	/**
+	 * Submit Payment Button
+	 *
+	 * Generates a form with hidden elements from the fields array
+	 * and displays the payment button that goes to the payment form.
+	 *
+	 * @param string value of button url
+	 * @param string type of gateway
+	 * @return void
+	 */
+	public function submitButton($button_url, $gateway) {
+		$this->prepareSubmit();
+		global $gateway_name;
+		echo '<li><form  method="post" name="payment_form" action="' . $this->gatewayUrl . '">';
+		foreach ($this->fields as $name => $value) {
+			echo "<input type=\"hidden\" name=\"$name\" value=\"$value\"/>\n";
+		}
+		foreach ($this->_additional_line_items as $value) {
+			echo "<input type=\"hidden\" name=\"x_line_item\" value=\"$value\"/>\n";
+		}
+		echo '<input class="espresso_payment_button_' . $gateway . '" type="image" alt="Pay using ' . $gateway_name . '" src="' . $button_url . '" />';
+		echo '</form></li>';
+	}
+
+	/**
+	 * Submit Payment Request (redirect)
+	 *
+	 * Generates a form with hidden elements from the fields array
+	 * and submits it to the payment gateway URL. The user is presented
+	 * a redirecting message along with a button to click.
+	 *
+	 * @param string value of buttn text
+	 * @return void
+	 */
+	public function submitPayment() {
+		$this->prepareSubmit();
+		echo "<html>\n";
+		echo "<head><title>Processing Payment...</title></head>\n";
+		echo "<body onLoad=\"document.forms['gateway_form'].submit();\">\n";
+		echo "<p style=\"text-align:center;\"><h2>Please wait, your order is being processed and you";
+		echo " will be redirected to the payment website.</h2></p>\n";
+		echo "<form method=\"POST\" name=\"gateway_form\" ";
+		echo "action=\"" . $this->gatewayUrl . "\">\n";
+		foreach ($this->fields as $name => $value) {
+			echo "<input type=\"hidden\" name=\"$name\" value=\"$value\"/>\n";
+			//echo 'Field name: ' . $name . ' Field value : ' . $value . '<br>';
+		}
+		foreach ($this->_additional_line_items as $value) {
+			echo "<input type=\"hidden\" name=\"x_line_item\" value=\"$value\"/>\n";
+		}
+		echo "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to ";
+		echo "the payment website within 5 seconds...<br/><br/>\n";
+		echo "<input type=\"submit\" value=\"Click Here\"></p>\n";
+		echo "</form>\n";
+		echo "</body></html>\n";
 	}
 
 	/**
@@ -121,4 +198,5 @@ class EE_Authorize extends PaymentGateway {
 		}
 		return true;
 	}
+
 }
