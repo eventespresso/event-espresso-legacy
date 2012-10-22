@@ -44,7 +44,25 @@ class espresso_log {
 	public function log($message) {
 		if (is_writable($this->file)) {
 			$fh = fopen($this->file, 'a') or die("Cannot open file! " . $this->file);
-			fwrite($fh, '[' . date("m.d.y H:i:s") . ']' . '[' . basename($message['file']) . ']' . '[' . $message['function'] . ']' . ' [' . $message['status'] . ']//end ' . "\n");
+			
+			$message['file'] = ! empty( $message['file'] ) ? basename( $message['file'] ) : '';
+			$message['function'] = ! empty( $message['function'] ) ? '  -> ' . basename( $message['function'] ) : '';
+			
+			if ( is_array( $message['status'] )) {
+				$msg = '';
+				foreach ( $message['status'] as $key => $value ) {
+					$msg .= ' & ' . $key . ' = ' . $value ;
+				}
+				$message['status'] = "\n\tVARS : " . ltrim( $msg, ' & ' );				
+			} else {
+				$message['status'] = ! empty( $message['status'] ) ? "\n\t" . $message['status'] : '';
+			}			
+			
+			if ( ! empty( $message['file'] )) {
+				fwrite( $fh, '[ ' . date("Y-m-d H:i:s") . ' ]  ' . $message['file'] . $message['function'] . $message['status'] . "\n" );
+			} else {
+				fwrite( $fh, "\n\n" );
+			}
 			fclose($fh);
 		} else {
 			global $notices;

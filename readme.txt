@@ -82,6 +82,8 @@ If you have not done so already, please submit your payment in the amount of [co
 
 Click here to review your payment information [payment_url].
 
+[edit_attendee_link]
+
 Thank You.
 
  

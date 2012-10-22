@@ -1,6 +1,15 @@
 <?php
 function add_new_event_venue(){
 	global $wpdb,$current_user;
+	
+		if ( isset( $_REQUEST['form_error'] )) : 
+?>
+		<div id="message" class="error">
+			<p><strong><?php echo sanitize_text_field( urldecode( $_REQUEST['form_error'] ));?></strong></p>
+		</div>
+		
+<?php	
+		endif;	
 ?>
 <div id="add-edit-venue" class="metabox-holder">
   <div class="postbox">

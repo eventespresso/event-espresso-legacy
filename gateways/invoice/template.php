@@ -97,9 +97,6 @@ if ($payment_status != 'Completed') {
   $organization_name = $wpdb->last_result[0]->answer;//question_id = '9' */
 
 
-//Create a payment link
-$payment_link = home_url() . "/?page_id=" . $org_options['return_url'] . "&id=" . $attendee_id;
-
 //Instanciation of inherited class
 $pdf = new PDF();
 $pdf->AliasNbPages();
@@ -150,20 +147,20 @@ $pdf->Ln(10);
 $attendees = array();
 $total_cost = 0.00;
 foreach ($registration_ids as $reg_id) {
-	$sql = "select ea.registration_id, ed.event_name, ed.start_date, ed.event_identifier, ea.fname, ea.lname, eac.quantity, eac.cost from " . EVENTS_ATTENDEE_TABLE . " ea
-				inner join " . EVENTS_ATTENDEE_COST_TABLE . " eac on ea.id = eac.attendee_id
-				inner join " . EVENTS_DETAIL_TABLE . " ed on ea.event_id = ed.id
-				where ea.registration_id = '" . $reg_id['registration_id'] . "' order by ed.event_name ";
+	$sql = "select ea.registration_id, ed.event_name, ed.start_date, ed.event_identifier, ea.fname, ea.lname, ea.quantity, ea.final_price from " . EVENTS_ATTENDEE_TABLE . " ea ";
+	//$sql .= " inner join " . EVENTS_ATTENDEE_COST_TABLE . " eac on ea.id = eac.attendee_id ";
+	$sql .= " inner join " . EVENTS_DETAIL_TABLE . " ed on ea.event_id = ed.id ";
+	$sql .= " where ea.registration_id = '" . $reg_id['registration_id'] . "' order by ed.event_name ";
 
 	$tmp_attendees = $wpdb->get_results($sql, ARRAY_A);
 
 	foreach ($tmp_attendees as $tmp_attendee) {
-		$sub_total = $tmp_attendee["cost"] * $tmp_attendee["quantity"];
+		$sub_total = $tmp_attendee["final_price"] * $tmp_attendee["quantity"];
 		$attendees[] = $pdf->LoadData(array(
 				pdftext($tmp_attendee["event_name"] . "[" . date('m-d-Y', strtotime($tmp_attendee['start_date'])) . "]") . ' >> '
 				. pdftext(html_entity_decode($tmp_attendee["fname"], ENT_QUOTES, "UTF-8") . " " . html_entity_decode($tmp_attendee["lname"], ENT_QUOTES, "UTF-8")) . ';'
 				. pdftext($tmp_attendee["quantity"]) . ';'
-				. doubleval($tmp_attendee["cost"]) . ';'
+				. doubleval($tmp_attendee["final_price"]) . ';'
 				. doubleval($sub_total)
 						)
 		);
@@ -200,8 +197,12 @@ if (isset($invoice_payment_settings['pdf_instructions'])) {
 } else {
 	$pdf->MultiCell(100, 5, pdftext(''), 0, 'L'); //Set instructions
 }
+
+//Create a payment link
+$payment_link = home_url() . "/?page_id=" . $org_options['return_url'] . "&r_id=" . $registration_id;
+
 $pdf->SetFont('Arial', 'BU', 20);
-//$pdf->Cell(200,20,'Pay Online',0,1,'C',0,$payment_link);//Set payment link
+$pdf->Cell(200,20,'Pay Online',0,1,'C',0,$payment_link);//Set payment link
 
 $pdf->Output('Invoice_' . $attendee_id . '_' . $event_identifier . '.pdf', 'D');
 exit;

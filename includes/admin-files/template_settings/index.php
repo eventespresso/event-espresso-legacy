@@ -9,7 +9,7 @@ function event_espresso_manage_templates() {
 		$org_options['display_address_in_event_list'] = !empty($_POST['display_address_in_event_list']) ? $_POST['display_address_in_event_list'] : 'N';
 		$org_options['display_address_in_regform'] = !empty($_POST['display_address_in_regform']) ? $_POST['display_address_in_regform'] : 'N';
 		$org_options['use_custom_post_types'] = !empty($_POST['use_custom_post_types']) ? $_POST['use_custom_post_types'] : 'N';
-		$org_options['enable_default_style'] = !empty($_POST['enable_default_style']) ? $_POST['enable_default_style'] : '';
+		$org_options['enable_default_style'] = !empty($_POST['enable_default_style']) ? $_POST['enable_default_style'] : 'N';
 		$org_options['selected_style'] = !empty($_POST['selected_style']) ? $_POST['selected_style'] : '';
 		$org_options['style_color'] = !empty($_POST['style_color']) ? $_POST['style_color'] : '';
 		$org_options['style_settings']['enable_default_style'] = !empty($_POST['enable_themeroller_style']) ? $_POST['enable_themeroller_style'] : 'N';
@@ -180,16 +180,6 @@ function event_espresso_manage_templates() {
 													<?php _e('This option enables the style settings below.', 'event_espresso'); ?>
 												</span></td>
 										</tr>
-										<?php /* ?><tr>
-										  <th> <label>
-										  <?php _e('Use Grid Layout', 'event_espresso'); ?>
-										  <?php echo apply_filters('filter_hook_espresso_help', 'use_grid_info'); ?> </label>
-										  </th>
-										  <td><?php echo select_input('use_grid_layout', $values, $org_options['style_settings']['use_grid_layout'], 'id="use_grid_layout"'); ?><br />
-										  <span class="description">
-										  <?php _e('Displays event list in a grid layout.', 'event_espresso'); ?>
-										  </span></td>
-										  </tr><?php */ ?>
 										<tr>
 											<th> <label>
 													<?php _e('ThemeRoller Style ', 'event_espresso'); ?>
@@ -197,7 +187,7 @@ function event_espresso_manage_templates() {
 												<?php //echo apply_filters('filter_hook_espresso_help', 'themeroller_info'); ?>
 											</th>
 											<td><select id="style-themeroller" class="wide" name="themeroller_style">
-													<option <?php espresso_themeroller_style_is_selected($fname_themeroller) ?> value=""> -
+													<option <?php espresso_themeroller_style_is_selected($fname_themeroller) ?> value="smoothness"> -
 														<?php _e('Default', 'event_espresso'); ?>
 													</option>
 													<?php foreach ($files_themeroller as $fname_themeroller) { ?>

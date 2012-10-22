@@ -232,14 +232,14 @@ function event_espresso_display_paypal_settings() {
 			</tr>
 		</table>
 		<p><strong style="color:#F00"><?php _e('Attention!', 'event_espresso'); ?></strong><br /><?php _e('For PayPal IPN to work, you need a Business or Premier account.', 'event_espresso'); ?>
-		<p>
+		</p>
 			<input type="hidden" name="update_paypal" value="update_paypal">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update PayPal Settings', 'event_espresso') ?>" id="save_paypal_settings" />
 		</p>
 	</form>
 	<div id="paypal_sandbox_info" style="display:none">
 		<h2><?php _e('PayPal Sandbox', 'event_espresso'); ?></h2>
-		<p><?php _e('In addition to using the PayPal Sandbox fetaure. The debugging feature will also output the form varibales to the payment page, send an email to the admin that contains the all PayPal variables.', 'event_espresso'); ?></p>
+		<p><?php _e('In addition to using the PayPal Sandbox feature. The debugging feature will also output the form variables to the payment page, send an email to the admin that contains the all PayPal variables.', 'event_espresso'); ?></p>
 		<hr />
 		<p><?php _e('The PayPal Sandbox is a testing environment that is a duplicate of the live PayPal site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live PayPal environment. Create and manage test accounts, and view emails and API credentials for those test accounts.', 'event_espresso'); ?></p>
 	</div>

@@ -73,17 +73,17 @@ function espresso_display_authnet($payment_data) {
 		$myAuthorize->submitPayment(); //Enable auto redirect to payment site
 	} else {
 		if (empty($authnet_settings['button_url'])) {
-			//$button_url = EVENT_ESPRESSO_GATEWAY_URL . "authnet/btn_cc_vmad.gif";
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/btn_cc_vmad.gif")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/btn_cc_vmad.gif";
+			//$button_url = EVENT_ESPRESSO_GATEWAY_URL . "authnet/authnet-logo.png";
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/authnet-logo.png")) {
+				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/authnet-logo.png";
 			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/btn_cc_vmad.gif";
+				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/authnet-logo.png";
 			}
 		} elseif (file_exists($authnet_settings['button_url'])) {
 			$button_url = $authnet_settings['button_url'];
 		} else {
 			//If no other buttons exist, then use the default location
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/btn_cc_vmad.gif";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/authnet-logo.png";
 		}
 		$myAuthorize->submitButton($button_url, 'authnet'); //Display payment button
 	}

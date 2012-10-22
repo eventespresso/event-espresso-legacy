@@ -13,10 +13,10 @@ function espresso_usaepay_offsite_payment_settings() {
 	}
 	$settings = get_option('espresso_usaepay_offsite_settings');
 	if (empty($settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_offsite/logo.jpg")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_offsite/logo.jpg";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_offsite/usaepay-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_offsite/usaepay-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/usaepay_offsite/logo.jpg";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/usaepay_offsite/usaepay-logo.png";
 		}
 		$settings['key'] = '';
 		$settings['button_url'] = $button_url;
