@@ -7,6 +7,8 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 if (!function_exists('register_attendees')) {
 
     function register_attendees($single_event_id = NULL, $event_id_sc =0, $reg_form_only = false) {
+		//Declare the $data object
+		$data = (object)array( 'event' => NULL );
 		
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 		//Run code for the seating chart addon
@@ -75,7 +77,7 @@ if (!function_exists('register_attendees')) {
             $sql .= " WHERE post_id = '" . $_REQUEST['post_event_id'] . "' ";
             $sql .= " LIMIT 0,1";
         }
-
+		
         $data->event = $wpdb->get_row( $wpdb->prepare( $sql ), OBJECT);
         $num_rows = $wpdb->num_rows;
 

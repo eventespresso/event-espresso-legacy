@@ -30,7 +30,7 @@ function add_event_to_db($recurrence_arr = array()) {
 	if ( $use_fes == false )
 		$wpdb->show_errors();
 
-    static $recurrence_id;
+    static $recurrence_id = null;
 
     if (defined('EVENT_ESPRESSO_RECURRENCE_TABLE')) {
         require_once(EVENT_ESPRESSO_RECURRENCE_FULL_PATH . "functions/re_functions.php");
@@ -195,7 +195,7 @@ function add_event_to_db($recurrence_arr = array()) {
 		}
 
         $question_groups = empty($_REQUEST['question_groups']) ? serialize(array(1)) : serialize($_REQUEST['question_groups']);
-        $add_attendee_question_groups = empty($_REQUEST['add_attendee_question_groups']) ? serialize(array(1)) : serialize($_REQUEST['add_attendee_question_groups']);
+        $add_attendee_question_groups = empty($_REQUEST['add_attendee_question_groups']) ? '' : $_REQUEST['add_attendee_question_groups'];
 
         $event_meta['venue_id'] = isset($_REQUEST['venue_id']) ? $_REQUEST['venue_id'][0] : 0;
         $event_meta['additional_attendee_reg_info'] = !empty($_REQUEST['additional_attendee_reg_info']) ? $_REQUEST['additional_attendee_reg_info'] : '2';
@@ -221,6 +221,7 @@ function add_event_to_db($recurrence_arr = array()) {
       	//print_r($_REQUEST['emeta'] );
 
         $event_meta = serialize($event_meta);
+
 
         ############ Added by wp-developers ######################
         $require_pre_approval = 0;

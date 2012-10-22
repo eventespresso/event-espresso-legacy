@@ -147,7 +147,6 @@ function event_list_attendees() {
     $sql_a = "(";
     if (function_exists('espresso_member_data') && espresso_member_data('role') == 'espresso_group_admin') {
         $group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-        $group = unserialize($group);
         $group = implode(",", $group);
         $sql_a .= "SELECT a.*, e.id event_id, e.event_name, checked_in FROM " . EVENTS_ATTENDEE_TABLE . " a ";
         $sql_a .= " LEFT JOIN " . EVENTS_DETAIL_TABLE . " e ON e.id=a.event_id ";

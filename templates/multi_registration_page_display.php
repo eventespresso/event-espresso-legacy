@@ -103,6 +103,11 @@ $attendee_quantity = ' x '.sprintf(_n('%d attendee', '%d attendees', $meta['atte
 					$attendee_number++;
 				}
 
+				//Outputs the shopping cart items
+				if (function_exists('event_espresso_add_cart_item_groups')) {
+					echo event_espresso_add_cart_item_groups($item_groups);
+				}
+
 				//Multiple Attendees
 				if ($allow_multiple == "Y") {
 

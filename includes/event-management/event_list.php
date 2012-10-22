@@ -96,7 +96,6 @@ function event_espresso_edit_list() {
 			$is_regional_manager = true;
 			$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
 			if ( $group != '0' && !empty($group) ){
-				$group = unserialize($group);
 				
 				$sql = "(SELECT e.id event_id, e.event_name, e.event_identifier, e.reg_limit, e.registration_start, ";
 				$sql .= " e.start_date, e.is_active, e.recurrence_id, e.registration_startT, e.wp_user ";
@@ -224,7 +223,7 @@ function event_espresso_edit_list() {
 			$sql .= " AND e.wp_user = '" . espresso_member_data('id') . "' ";
 		}
 		
-		$sql .= ") ORDER BY e.start_date DESC $records_to_show ";
+		$sql .= ") ORDER BY start_date DESC $records_to_show ";
 		
 		//Debug
 		//echo $sql;

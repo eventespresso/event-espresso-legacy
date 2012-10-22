@@ -5,16 +5,9 @@ function event_espresso_form_group_edit() {
     
     
     global $wpdb;
-    $g_sql = "SELECT qg.id, qg.group_name, qg.group_order, qg.group_identifier, qg.group_description, qg.show_group_name, qg.show_group_description, qg.wp_user ";
-    $g_sql .= " FROM  " . EVENTS_QST_GROUP_TABLE . " qg ";
-    $g_sql .= " WHERE ";
-    $g_sql .= " qg.id = '" . $_REQUEST['group_id'] . "' ";
-    $g_sql .= " ORDER BY id ASC ";
-    //echo $g_sql;
-
-    $groups = $wpdb->get_results($g_sql);
+    $groups = espresso_get_user_question_groups(null, false, false, $_REQUEST['group_id']);
     
-    if ($wpdb->num_rows > 0) {
+    if ( count($groups) > 0 ) {
         foreach ($groups as $group) {
             $group_id = $group->id;
             $group_order = $group->group_order;
@@ -95,36 +88,16 @@ function event_espresso_form_group_edit() {
 																	 <li><p><?php _e('Selected Questions for group<span class="info"> Uncheck box to remove question from group</span>', 'event_espresso') ?></p></li>
                                     <?php
 //Questions that are already associated with this group
-                                    $q_sql = "SELECT q.id, q.question, qgr.id as rel_id, q.system_name, qg.system_group ";
-                                    $q_sql .= " FROM " . EVENTS_QUESTION_TABLE . " q ";
-                                    $q_sql .= " JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr ";
-                                    $q_sql .= " on q.id = qgr.question_id ";
-                                    $q_sql .= " JOIN " . EVENTS_QST_GROUP_TABLE . " qg ";
-                                    $q_sql .= " on qg.id = qgr.group_id ";
-                                    $q_sql .= " WHERE qg.id = " . $_REQUEST['group_id'];
-                                    if (function_exists('espresso_member_data')) {
-                                        $q_sql .= " AND ";
-                                        if ($wp_user == 0 || $wp_user == 1) {
-                                            $q_sql .= " (qg.wp_user = '0' OR qg.wp_user = '1') ";
-                                        } else {
-                                            $q_sql .= " qg.wp_user = '" . $wp_user . "' ";
-                                        }
-                                    }
-                                    $q_sql .= " ORDER BY q.sequence, q.id ASC ";
-                                    //echo $q_sql;
-                                    $questions = $wpdb->get_results($q_sql);
-                                    $questions_in_group = '';
-                                    if ($wpdb->num_rows > 0) {
-
-                                        foreach ($questions as $question) {
-                                            $questions_in_group .= $question->id . ',';
+                                    $questions = espresso_get_user_questions_for_group( $_REQUEST['group_id'], $wp_user );
+                                    if ( count($questions['questions_in_group']) > 0 ) {
+                                        foreach ($questions['questions_in_group'] as $question) {
                                             $checked = (!is_null($question->rel_id)) ? 'checked="checked"' : '';
 
                                             $visibility = (preg_match("/fname|lname|email/", $question->system_name) == 1 && $question->system_group == 1 ) ? 'style="visibility:hidden"' : '';
 
                                             echo '<li><label><input ' . $checked . ' type="checkbox" ' . $visibility . ' name="question_id[' . $question->id . ']" value="' . $question->id . '" id="question_id_' . $question->id . '" />' . stripslashes($question->question) . '</label></li>';
                                         }
-                                        $questions_in_group = substr($questions_in_group, 0, -1);
+                                        
                                     }
                                     ?>
                                     
@@ -133,26 +106,10 @@ function event_espresso_form_group_edit() {
 																			<li><p><?php _e('Add further questions to group', 'event_espresso') ?></p></li>
                                     <?php
 //Questions that are NOT part of this group.
-// @todo Make this happen with one query above
-                                    $q_sql2 = "SELECT q.id, q.question FROM " . EVENTS_QUESTION_TABLE . " q WHERE ";
-                                    if ($questions_in_group != '') {
-                                        $q_sql2 .= " q.id not in($questions_in_group) AND ";
-                                    }
-                                    if (function_exists('espresso_member_data')) {
-                                        if ($wp_user == 0 || $wp_user == 1) {
-                                            $q_sql2 .= " q.wp_user = '0' OR q.wp_user = '1' ";
-                                        } else {
-                                            $q_sql2 .= " q.wp_user = '" . $wp_user . "' ";
-                                        }
-                                    } else {
-                                        $q_sql2 .= " (q.wp_user = '0' OR q.wp_user = '1') ";
-                                    }
-                                    $q_sql2 .= " ORDER BY id ASC ";
-                                    $questions = $wpdb->get_results($q_sql2);
 
-                                    if ($wpdb->num_rows > 0) {
+                                    if ( count($questions['remaining_questions']) > 0) {
 
-                                        foreach ($questions as $question) {
+                                        foreach ($questions['remaining_questions'] as $question) {
                                             $checked = '';
                                             echo '<li><label><input ' . $checked . ' type="checkbox" name="question_id[' . $question->id . ']" value="' . $question->id . '" id="question_id_' . $question->id . '" />' . stripslashes($question->question) . '</label></li>';
                                         }

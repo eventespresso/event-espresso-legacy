@@ -4,7 +4,7 @@
     <div id="enable_styles_info" class="pop-help" >
         <div class="TB-ee-frame">
     			<h2><?php _e('Enable Built In Styles', 'event_espresso'); ?></h2>
-				<h3><em class="important"><?php _e('Please do nto use these styles. Use the Themeroller styles instead!!', 'event_espresso'); ?></em></h3>
+				<h3><em class="important"><?php _e('Please do not use these styles. Use the Themeroller styles instead!!', 'event_espresso'); ?></em></h3>
         	<p>
        		 <?php _e('Enabling Styles tells Event Espresso to use it\'s built in stylesheets for styling the template files.', 'event_espresso'); ?>
           </p>
@@ -25,7 +25,7 @@
 			<div id="alternative_styles_info" class="pop-help" >
        <div class="TB-ee-frame">
     		<h2><?php _e('Legacy Espresso Stylesheets', 'event_espresso'); ?></h2>
-			<h3><em class="important"><?php _e('Please do nto use these styles. Use the Themeroller styles instead!!', 'event_espresso'); ?></em></h3>
+			<h3><em class="important"><?php _e('Please do not use these styles. Use the Themeroller styles instead!!', 'event_espresso'); ?></em></h3>
 						<?php if($disabled) : ?>
     			<em class="important">
 							<?php _e('You currently either have <i>Enable Built in style sheets</i> disabled or have a copy of the default espresso stylesheet copied to your uploads folder, and the alternative stylesheets selections are therefore disabled.', 'event_espresso'); ?>
@@ -34,7 +34,7 @@
         	<p><?php _e('These two drop down options provide a choice of stylesheets with various stylings.', 'event_espresso'); ?></p>
     			<p><?php _e('These options are available as long as you have not copied the main stylesheet <i>event_espresso_style.css</i> to the uploads folder to customize yourself.', 'event_espresso'); ?></p>
     			<p><?php _e('By default the general espresso stylesheet will be loaded if you have selected <i>Yes</i> in the <i>Enable built in style sheets</i> option, You may then choose to select from one of the alternative base stylesheets along with an optional sheet to select a color scheme.', 'event_espresso'); ?></p>
-						<p><?php _e('These selections replace the deafault espresso stylesheet and offer enhanced styling for your event pages details', 'events_espreso') ?></p>
+						<p><?php _e('These selections replace the default espresso stylesheet and offer enhanced styling for your event pages details.', 'events_espreso') ?></p>
 
 					</div>
     </div>

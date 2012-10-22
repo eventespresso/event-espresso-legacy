@@ -618,6 +618,8 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 	<form id="event_espresso_checkout_form" method="post" action="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=post_multi_attendee">
 		<?php
 					$err = '';
+					$edit_cart_link = '<a href="?page_id='.$org_options['event_page_id'].'&regevent_action=show_shopping_cart" rel="nofollow" class="btn_event_form_submit inline-link">'.__('Edit Cart', 'event_espresso').'</a>';
+	
 					ob_start();
 					//will be used if sj is off or they somehow select more than allotted attendees
 					$show_checkout_button = true;
@@ -990,7 +992,7 @@ if (!function_exists('event_espresso_cart_link')) {
 		extract(shortcode_atts(
 										array(
 								'event_id' => $this_event_id,
-								'anchor' => __('Add to cart', 'event_espresso'),
+								'anchor' => __('Register', 'event_espresso'),
 								'event_name' => ' ',
 								'separator' => NULL,
 								'view_cart' => FALSE,

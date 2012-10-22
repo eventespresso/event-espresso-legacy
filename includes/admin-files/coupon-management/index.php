@@ -56,7 +56,7 @@ function event_espresso_discount_config_mnu() {
 							<th class="manage-column column-creator" id="creator" scope="col" title="Click to Sort" style="width:10%;"><?php _e('Creator', 'event_espresso'); ?></th>
 	<?php } ?>
 						<th class="manage-column column-author" id="start" scope="col" title="Click to Sort" style="width:20%;"><?php _e('Amount', 'event_espresso'); ?></th>
-						<th class="manage-column column-date" id="begins" scope="col" title="Click to Sort" style="width:20%;"><?php _e('Percentaage', 'event_espresso'); ?></th>
+						<th class="manage-column column-date" id="begins" scope="col" title="Click to Sort" style="width:20%;"><?php _e('Percentage', 'event_espresso'); ?></th>
 					</tr>
 				</thead>
 				<tbody>

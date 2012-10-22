@@ -2,16 +2,16 @@
 # This file is distributed under the same license as the Event Espresso package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2012-09-06 17:11-0700\n"
+"PO-Revision-Date: 2012-09-18 15:19-0700\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: GlotPress/0.1\n"
+"X-Generator: Poedit 1.5.3\n"
 "Project-Id-Version: Event Espresso\n"
 "POT-Creation-Date: \n"
 "Last-Translator: Chris Reynolds <chris@jazzsequence.com>\n"
-"Language-Team: David Kartuzinski, DJP, Jessica <support@eventespresso.com>\n"
+"Language-Team: support@eventespresso.com <David Kartuzinski, DJP, Jessica>\n"
 "Language: fr_FR\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
@@ -9716,16 +9716,22 @@ msgid ""
 "address and allows you to enter a static Google map url that you can obtain "
 "from a google map lookup."
 msgstr ""
+"La deuxième option peut être utile si vous avez besoin d'obtenir une adresse "
+"plus précise ou besoin d'essayer de localiser une adresse qui peut être "
+"différente de l'adresse de lieu et vous permet d'entrer une url statique de "
+"carte Google que vous pouvez obtenir à partir d'une recherche google map ."
 
 #: ../../../event-espresso/trunk/includes/admin-files/venue-management/venue_help.php:19
 msgid "To obtain your map url you need to visit"
-msgstr ""
+msgstr "Pour obtenir votre carte url, vous devez visiter"
 
 #: ../../../event-espresso/trunk/includes/admin-files/venue-management/venue_help.php:19
 msgid ""
 "Using the search box you can enter an address and refine it until you get "
 "the correct address displayed"
 msgstr ""
+"Utilisation de la boîte de recherche, vous pouvez entrer une adresse et "
+"l'affiner jusqu'à ce que vous obtenir l'adresse correcte d'affichage"
 
 #: ../../../event-espresso/trunk/includes/admin-files/venue-management/venue_help.php:21
 msgid ""
@@ -9733,6 +9739,10 @@ msgid ""
 "open a drop down box that provides a copy &amp; paste link, copy this url "
 "link into the static map url input field."
 msgstr ""
+"Une fois que vous avez la carte que vous voulez, vous pouvez cliquer sur le "
+"lien haut de la carte à droite pour ouvrir un menu déroulant qui fournit une "
+"copie et coller le lien, copiez ce lien URL dans le champ de saisie carte "
+"url statique."
 
 #: ../includes/admin-reports/add_new_attendee.php:12
 #: ../../../event-espresso/trunk/includes/admin-reports/add_new_attendee.php:14
@@ -9757,6 +9767,8 @@ msgstr "Passer outre le prix sélectionne au dessus ?"
 #: ../../../event-espresso/trunk/includes/admin-reports/charts.php:15
 msgid "Graphical reporting charts are now available in the premium versions."
 msgstr ""
+"Les tableaux de rapports graphiques sont maintenant disponibles dans les "
+"versions haut de gamme."
 
 #: ../gateways/payment_gateways.php:51 ../includes/admin-reports/charts.php:14
 #: ../includes/admin-reports/event_list_attendees.php:71
@@ -9770,7 +9782,7 @@ msgstr ""
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/templates/reg_admin_overview.template.php:23
 #: ../../../event-espresso/trunk/includes/lite-files/event_management.php:13
 msgid "Upgrade Now!"
-msgstr ""
+msgstr "Mettre à niveau Maintenant!"
 
 #: ../includes/admin-reports/edit_attendee_record.php:295
 #: ../../../event-espresso/trunk/includes/admin-reports/edit_attendee_record.php:366
@@ -9958,17 +9970,17 @@ msgstr "Inscrit pour : "
 #: ../includes/admin-reports/enter_attendee_payments.php:211
 #: ../../../event-espresso/trunk/includes/admin-reports/enter_attendee_payments.php:181
 msgid "Multiple Registration Payment for "
-msgstr ""
+msgstr "Enregistrement Multiple de Paiement pour"
 
 #: ../includes/admin-reports/enter_attendee_payments.php:223
 #: ../../../event-espresso/trunk/includes/admin-reports/enter_attendee_payments.php:192
 msgid "Invoice/Payment Reminder"
-msgstr ""
+msgstr "Rapel de Facture / Paiement"
 
 #: ../includes/admin-reports/enter_attendee_payments.php:230
 #: ../../../event-espresso/trunk/includes/admin-reports/enter_attendee_payments.php:198
 msgid "Registration Ids:"
-msgstr ""
+msgstr "Inscription Ids:"
 
 #: ../includes/admin-reports/enter_attendee_payments.php:234
 #: ../includes/admin-reports/enter_attendee_payments.php:239
@@ -10047,7 +10059,7 @@ msgstr "Créer un courriel personnalisé : "
 #: ../includes/admin-reports/enter_attendee_payments.php:345
 #: ../../../event-espresso/trunk/includes/admin-reports/enter_attendee_payments.php:315
 msgid "Invoice Subject"
-msgstr ""
+msgstr "Sujet de la Facture"
 
 #: ../includes/admin-reports/enter_attendee_payments.php:347
 #: ../../../event-espresso/trunk/includes/admin-reports/enter_attendee_payments.php:317
@@ -10083,7 +10095,7 @@ msgstr "(Si refusé, la facture ne sera pas envoyée.)"
 
 #: ../../../event-espresso/trunk/includes/admin-reports/enter_attendee_payments.php:396
 msgid "No transaction detials available at this time."
-msgstr ""
+msgstr "Pas de détails de transaction disponibles en ce moment."
 
 #: ../includes/admin-reports/event_list_attendees.php:24
 #: ../../../event-espresso/trunk/includes/admin-reports/event_list_attendees.php:19
@@ -10093,17 +10105,19 @@ msgstr "Ce(s) visiteur(s) a (ont) été supprimés avec succès de l'événement
 #: ../includes/admin-reports/event_list_attendees.php:46
 #: ../../../event-espresso/trunk/includes/admin-reports/event_list_attendees.php:48
 msgid "Scanned tickets cannot be redeemed/un-redeemed here."
-msgstr ""
+msgstr "Billets scannés ne peuvent pas être rachetées / non-utilisés ici."
 
 #: ../includes/admin-reports/event_list_attendees.php:57
 #: ../../../event-espresso/trunk/includes/admin-reports/event_list_attendees.php:56
 msgid "Customer(s) attendance data successfully updated for this event."
 msgstr ""
+"Les données des clients de fréquentation (s) à jour avec succès pour cet "
+"événement."
 
 #: ../includes/admin-reports/event_list_attendees.php:71
 #: ../../../event-espresso/trunk/includes/admin-reports/event_list_attendees.php:93
 msgid "Advanced filters are available in the premium versions."
-msgstr ""
+msgstr "Les filtres avancés sont disponibles dans les versions haut de gamme."
 
 #: ../includes/admin-reports/event_list_attendees.php:100
 #: ../../../event-espresso/trunk/includes/admin-reports/event_list_attendees.php:121
@@ -10194,7 +10208,7 @@ msgstr "Renvoyer les informations d'inscription"
 #: ../../../event-espresso/trunk/includes/admin-reports/event_list_attendees.php:361
 #: ../../../event-espresso/trunk/includes/admin-reports/event_list_attendees.php:362
 msgid "Download Invoice"
-msgstr ""
+msgstr "Télécharger Facture"
 
 #: ../includes/admin-reports/event_list_attendees.php:319
 #: ../../../event-espresso/trunk/includes/admin-reports/event_list_attendees.php:288
@@ -10886,42 +10900,42 @@ msgstr "Depuis le Blog"
 #: ../includes/functions/admin.php:895 ../includes/functions/admin.php:979
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_screen.php:150
 msgid "From the Forums"
-msgstr ""
+msgstr "Des forums"
 
 #: ../includes/functions/admin.php:917 ../includes/functions/admin.php:992
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_screen.php:164
 msgid "Installation &amp; Usage Guide"
-msgstr ""
+msgstr "Installation et Guide d'Utilisation"
 
 #: ../includes/functions/admin.php:920 ../includes/functions/admin.php:993
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_screen.php:167
 msgid "Customization Forums"
-msgstr ""
+msgstr "Forums de Personnalisation"
 
 #: ../includes/functions/admin.php:923 ../includes/functions/admin.php:994
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_screen.php:170
 msgid "Plugin Support Forums"
-msgstr ""
+msgstr "Support Forums Plugin"
 
 #: ../includes/functions/admin.php:926 ../includes/functions/admin.php:995
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_screen.php:173
 msgid "Feature Request Forums"
-msgstr ""
+msgstr "Forums Demande de Fonctionnalité"
 
 #: ../includes/functions/admin.php:929 ../includes/functions/admin.php:996
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_screen.php:176
 msgid "Bug Submission Forums"
-msgstr ""
+msgstr "Forums de Soumission de Bugs"
 
 #: ../includes/functions/admin.php:932 ../includes/functions/admin.php:997
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_screen.php:179
 msgid "Changelog"
-msgstr ""
+msgstr "Modifications"
 
 #: ../includes/functions/admin.php:935 ../includes/functions/admin.php:998
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_screen.php:182
 msgid "Plugins and Addons"
-msgstr ""
+msgstr "Plugins et Addons"
 
 #: ../includes/admin_support.php:11
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:44
@@ -10942,7 +10956,7 @@ msgstr "Problèmes d'inscription"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:282
 msgid "Paypal IPN Problems"
-msgstr ""
+msgstr "Paypal IPN problèmes"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:285
 msgid "Email Problems"
@@ -10962,32 +10976,33 @@ msgstr "Paiements incomplets"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:297
 msgid "Problems After Upgrading"
-msgstr ""
+msgstr "Problèmes après mise à niveau"
 
 #: ../includes/admin_support.php:90
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:315
 msgid "For the latest installation instructions please visit:"
 msgstr ""
+"Pour les dernières instructions d'installation s'il vous plaît visitez:"
 
 #: ../includes/admin_support.php:112
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:328
 msgid "Become a Partner"
-msgstr ""
+msgstr "Devenir un Partenaire"
 
 #: ../includes/admin_support.php:134
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:342
 msgid "Event Espresso Job Board"
-msgstr ""
+msgstr "Job Board événement Espresso"
 
 #: ../includes/admin_support.php:138
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:346
 msgid "WP Candy Pros"
-msgstr ""
+msgstr "Avantages Bonbons WP"
 
 #: ../includes/admin_support.php:259
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:426
 msgid "For more information, please visit:"
-msgstr ""
+msgstr "Pour plus d'informations, s'il vous plaît visitez:"
 
 #: ../includes/admin_support.php:265
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:432
@@ -11013,11 +11028,15 @@ msgid ""
 "download/plugins-and-addons/multiple-event-registration/\" target=\"_blank"
 "\">Multiple Event Registration addon</a>."
 msgstr ""
+"Affiche une «Ajouter au panier Event\" lien qui peut être ajouté aux détails "
+"de l'événement, une page ou après. Nécessite l'<a href=\"http://"
+"eventespresso.com/download/plugins-and-addons/multiple-event-registration/\" "
+"target=\"_blank\">  Inscription Multiple à l'événement addon</a>."
 
 #: ../includes/admin_support.php:281
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:448
 msgid "Additonal Examples:"
-msgstr ""
+msgstr "Exemples Additionels"
 
 #: ../includes/admin_support.php:284
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:451
@@ -11025,6 +11044,8 @@ msgid ""
 "(Used to redirect to the shopping cart page. Must be added to an event "
 "description.)"
 msgstr ""
+"(Utilisé pour rediriger vers la page du panier. Doit être ajouté à une "
+"description de l'événement.)"
 
 #: ../includes/admin_support.php:287
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:454
@@ -11032,6 +11053,8 @@ msgid ""
 "(Same as above, but uses the event_id paramter and can be added to a page or "
 "post.)"
 msgstr ""
+"Comme ci-dessus, mais utilise le paramètre event_id et peut être ajouté à "
+"une page ou un article.)"
 
 #: ../includes/admin_support.php:292
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:459
@@ -11046,18 +11069,18 @@ msgstr "Retourne une liste des évènements"
 #: ../includes/admin_support.php:309
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:475
 msgid "Order by parameters:"
-msgstr ""
+msgstr "Trier par paramètres:"
 
 #: ../includes/admin_support.php:312
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:478
 msgid "(comma separated)"
-msgstr ""
+msgstr "(séparés par une virgule)"
 
 #: ../includes/admin_support.php:325 ../includes/admin_support.php:596
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:491
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:751
 msgid "Attention:"
-msgstr ""
+msgstr "Attention:"
 
 #: ../includes/admin_support.php:327
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:493
@@ -11066,6 +11089,9 @@ msgid ""
 "[ESPRESSO_EVENTS] shortcode. Replacing the [ESPRESSO_EVENTS] shortcode will "
 "break your registration pages."
 msgstr ""
+"L'[EVENT_LIST] shortcode ne doit pas être utilisé comme un remplacement pour "
+"le shortcode [ESPRESSO_EVENTS]. Remplacement de la [ESPRESSO_EVENTS] "
+"shortcode brisera vos pages d'inscription."
 
 #: ../includes/admin_support.php:332
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:498
@@ -11080,22 +11106,26 @@ msgid ""
 "forums/2010/10/attendee-listing-shortcodes/\">Attendee Listing Shortcodes</"
 "a> page."
 msgstr ""
+"Pour plus d'informations sur les shortcodes d'inscription des participants "
+"et les personnalisations. S'il vous plaît voir les shortcodes d'inscription "
+"<a href=\"http://eventespresso.com/forums/2010/10/attendee-listing-"
+"shortcodes/\"> Présence </a>."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:517
 msgid "Venue Shortcodes (premium version only)"
-msgstr ""
+msgstr "Shortcodes Lieu (version premium uniquement)"
 
 #: ../includes/admin_support.php:355 ../includes/admin_support.php:426
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:520
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:585
 msgid "As of Event Espresso version 3.1"
-msgstr ""
+msgstr "Depuis la version 3.1 de l'événement Espresso"
 
 #: ../includes/admin_support.php:360 ../includes/admin_support.php:431
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:525
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:590
 msgid "Event Description Example:"
-msgstr ""
+msgstr "Exemple Description de l'Evénement:"
 
 #: ../includes/admin_support.php:363
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:528
@@ -11104,18 +11134,21 @@ msgid ""
 "needed. Just add <span class=\"highlight\">[ESPRESSO_VENUE]</span> to your "
 "event description."
 msgstr ""
+"Si vous voulez afficher dans les détails du lieu d'un événement, le lieu id "
+"n'est pas nécessaire. Il suffit d'ajouter <span class=\"highlight\"> "
+"[ESPRESSO_VENUE] </span> à votre description de l'événement."
 
 #: ../includes/admin_support.php:366 ../includes/admin_support.php:437
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:531
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:596
 msgid "Example with Optional Parameters:"
-msgstr ""
+msgstr "Exemple avec des Paramètres Optionnels:"
 
 #: ../includes/admin_support.php:370 ../includes/admin_support.php:441
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:535
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:600
 msgid "Page/Post Example:"
-msgstr ""
+msgstr "Exemple de Page / Message:"
 
 #: ../includes/admin_support.php:373
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:538
@@ -11123,29 +11156,35 @@ msgid ""
 "You can display the details of any venue to a page, post or event by adding "
 "the id of the venue to the shortcode."
 msgstr ""
+"Vous pouvez afficher les détails d'un lieu sur une page, par courrier ou "
+"événement en ajoutant l'identifiant du lieu du shortcode."
 
 #: ../includes/admin_support.php:377 ../includes/admin_support.php:447
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:542
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:606
 msgid "Page/Post Example #2:"
-msgstr ""
+msgstr "Page / Poste Exemple n ° 2:"
 
 #: ../includes/admin_support.php:380
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:545
 msgid "If you want to display all available venues on a page, post, or event:"
 msgstr ""
+"Si vous voulez afficher tous les sites disponibles sur une page, affiche, ou "
+"un événement:"
 
 #: ../includes/admin_support.php:385
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:549
 msgid ""
 "Add the event id to the shortcode to display all the venues for an event:"
 msgstr ""
+"Ajouter l'ID d'événement au shortcode pour afficher tous les lieux d'un "
+"événement:"
 
 #: ../includes/admin_support.php:391 ../includes/admin_support.php:454
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:554
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:614
 msgid "Available parameters:"
-msgstr ""
+msgstr "Les paramètres disponibles:"
 
 #: ../includes/admin_support.php:412
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:574
@@ -11154,7 +11193,7 @@ msgstr "Montre tous les évènements dans un lieu:"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:582
 msgid "Staff Shortcodes (premium version only)"
-msgstr ""
+msgstr "Shortcodes personnel (version premium uniquement)"
 
 #: ../includes/admin_support.php:434
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:593
@@ -11163,6 +11202,10 @@ msgid ""
 "is not needed. Just add <span class=\"highlight\">[ESPRESSO_STAFF]</span> to "
 "your event description."
 msgstr ""
+"Si vous souhaitez afficher une liste des membres du personnel au sein d'un "
+"événement, l'identifiant personnel n'est pas nécessaire. Il suffit d'ajouter "
+"<span class=\"highlight\"> [ESPRESSO_STAFF] </span> à votre description de "
+"l'événement."
 
 #: ../includes/admin_support.php:444
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:603
@@ -11170,6 +11213,9 @@ msgid ""
 "You can display the details of any staff member to a page, post or event by "
 "adding the id of the staff member to the shortcode."
 msgstr ""
+"Vous pouvez voir les détails de tout membre du personnel d'une page, par "
+"courrier ou événement en ajoutant l'identifiant du membre du personnel au "
+"shortcode."
 
 #: ../includes/admin_support.php:450
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:609
@@ -11178,25 +11224,28 @@ msgid ""
 "page, post or event add the event id to the  <span class=\"highlight\">"
 "[ESPRESSO_STAFF]</span> shortcode."
 msgstr ""
+"Si vous souhaitez afficher une liste des membres du personnel affectés à un "
+"événement, à une page, par courrier ou événement ajouter l'ID d'événement à "
+"<span class=\"highlight\"> [ESPRESSO_STAFF] </span> shortcode."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:633
 msgid "Calendar Shortcodes (premium version only)"
-msgstr ""
+msgstr "Calendrier shortcodes (version premium uniquement)"
 
 #: ../includes/admin_support.php:481
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:645
 msgid "Category Shortcodes"
-msgstr ""
+msgstr "Catégorie Shortcodes"
 
 #: ../includes/admin_support.php:513
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:666
 msgid "This version of Event Espresso requires WordPress version"
-msgstr ""
+msgstr "Cette version de l'espresso événement nécessite la version WordPress"
 
 #: ../includes/admin_support.php:513
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:666
 msgid "Please upgrade to the latest version of WordPress."
-msgstr ""
+msgstr "S'il vous plaît mettre à niveau vers la dernière version de WordPress."
 
 #: ../includes/admin_support.php:516
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:669
@@ -11204,6 +11253,8 @@ msgid ""
 "Your version of PHP is out of date, please update to the latest version of "
 "PHP. <br>Required version of PHP:"
 msgstr ""
+"Votre version de PHP est obsolète, s'il vous plaît mettre à jour à la "
+"dernière version de PHP. <br> version de PHP:"
 
 #: ../includes/admin_support.php:519
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:672
@@ -11211,78 +11262,84 @@ msgid ""
 "Your version of MySQL is out of date, please update to the latest version of "
 "MySQL. <br>Required version of MySQL:"
 msgstr ""
+"Votre version de MySQL n'est pas à jour, s'il vous plaît mettre à jour à la "
+"dernière version de MySQL. <br> la version requise de MySQL:"
 
 #: ../includes/admin_support.php:525
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:678
 msgid "WordPress Version:"
-msgstr ""
+msgstr "Version Wordpress:"
 
 #: ../includes/admin_support.php:529
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:682
 msgid "PHP Version:"
-msgstr ""
+msgstr "Version PHP:"
 
 #: ../includes/admin_support.php:533
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:686
 msgid "MySQL Version:"
-msgstr ""
+msgstr "Version MonSQL"
 
 #: ../includes/admin_support.php:539
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:692
 msgid "WordPress Address (URL):"
-msgstr ""
+msgstr "Adresse Wordpress(URL)"
 
 #: ../includes/admin_support.php:543
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:696
 msgid "WordPress Content Directory:"
-msgstr ""
+msgstr "Répertoire de Contenu WordPress:"
 
 #: ../includes/admin_support.php:547
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:700
 msgid "Site address (URL):"
-msgstr ""
+msgstr "Adresse du site(URL):"
 
 #: ../includes/admin_support.php:551
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:704
 msgid "Event Espresso Plugin URL:"
-msgstr ""
+msgstr "URL Plugin Event Espresso:"
 
 #: ../includes/admin_support.php:555
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:708
 msgid "Event Espresso Plugin Path:"
-msgstr ""
+msgstr "Chemin Plugin Event Espresso:"
 
 #: ../includes/admin_support.php:559
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:712
 msgid "Event Espresso Upload URL:"
-msgstr ""
+msgstr "Téléchargement de l'URL Event Espresso"
 
 #: ../includes/admin_support.php:563
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:716
 msgid "Event Espresso Upload Path:"
-msgstr ""
+msgstr "Chemin de téléchargement Espresso Event"
 
 #: ../includes/admin_support.php:567
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:720
 msgid "Event Espresso Template Path:"
-msgstr ""
+msgstr "Chemin Modèle d'Evénement Espresso:"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:724
 msgid ""
 "If you are having problems with regsitrations, display, etc. You should "
 "backup and remove these files immediately."
 msgstr ""
+"Si vous rencontrez des problèmes avec registrations, affichage, etc Vous "
+"devez sauvegarder et supprimer ces fichiers immédiatement."
 
 #: ../includes/admin_support.php:571
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:728
 msgid "Event Espresso Gateway Path:"
-msgstr ""
+msgstr "Chemin Passerelle événement Espresso:"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:732
 msgid ""
 "If you are having problems with payments. You should backup and remove these "
 "files immediately."
 msgstr ""
+"Si vous rencontrez des problèmes avec les paiements. Vous devez sauvegarder "
+"et supprimer ces fichiers immédiatement."
 
 #: ../includes/admin_support.php:598
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:753
@@ -11294,12 +11351,19 @@ msgid ""
 "include a list (or screenshot) of all <a href=\"plugins.php?"
 "plugin_status=active\">active plugins</a>."
 msgstr ""
+"Lors de la demande de soutien. S'il vous plaît copiez et collez les détails "
+"affichés à l'information <a href=\"admin.php?page=support#details"
+"\">Information Importante</a> ci-dessus. Cela nous aidera à déterminer les "
+"problèmes potentiels avec votre serveur, installation de WordPress, et / ou "
+"le plugin Espresso événement. S'il vous plaît également inclure une liste "
+"(ou capture d'écran) de tous les <a href=\"plugins.php?plugin_status=active"
+"\"> plugins actifs </a>."
 
 #: ../includes/admin_support.php:602
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:756
 #: ../../../espresso-calendar/trunk/calendar_help.php:339
 msgid "Premium Support Options"
-msgstr ""
+msgstr "Options de support Premium"
 
 #: ../includes/admin_support.php:605
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:759
@@ -11308,11 +11372,14 @@ msgid ""
 "support beyond the complimentary support included with all Event Espresso "
 "products."
 msgstr ""
+"Nous offrons le support premium pour les clients qui désirent ou nécessitent "
+"un niveau de soutien au-delà de l'assistance gratuite fournie avec tous les "
+"produits Espresso événements."
 
 #: ../includes/admin_support.php:608
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:762
 msgid "Support Tokens"
-msgstr ""
+msgstr "Jetons de Soutien"
 
 #: ../includes/admin_support.php:611
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:765
@@ -11325,6 +11392,14 @@ msgid ""
 "support token consists of the PayPal Transaction ID you received from  "
 "PayPal at the time of your purchase."
 msgstr ""
+"Un jeton de support peut être utilisé pour obtenir un soutien prioritaire "
+"pour un seul incident. Il peut être utilisé pour programmer assistance par "
+"téléphone ou messagerie instantanée pour un seul incident (jusqu'à 30 "
+"minutes), ou pour recevoir la priorité e-mail. Un jeton de support peut être "
+"utilisé pour \"comment\" des questions, des problèmes techniques, "
+"\"meilleures pratiques\" pour des questions ou des conseils de développement "
+"personnalisé. Un jeton de soutien se compose de l'ID de transaction de "
+"PayPal que vous avez reçu de PayPal au moment de votre achat."
 
 #: ../includes/admin_support.php:614
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:768
@@ -11334,16 +11409,20 @@ msgid ""
 "a>. Tokens can be purchased one at a time, or in blocks of three at a "
 "discount."
 msgstr ""
+"<strong> Vous pouvez acheter des jetons de soutien</strong> sur la page <a "
+"href=\"http://eventespresso.com/support/premium-support-options/\"> Premium "
+"Support </a>. Les jetons peuvent être achetés un à la fois, ou en blocs de "
+"trois à un prix inférieur."
 
 #: ../includes/admin_support.php:628
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:782
 msgid "Installation &amp; Consulting"
-msgstr ""
+msgstr "Installation & Consulting"
 
 #: ../includes/admin_support.php:668
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:821
 msgid "Registration page just refreshes?"
-msgstr ""
+msgstr "Page d'enregistrement est simplement actualisée?"
 
 #: ../includes/admin_support.php:671
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:824
@@ -11352,15 +11431,18 @@ msgid ""
 "&quot; (in the Organization Settings page) to whatever page you have the "
 "shortcode"
 msgstr ""
+"Habituellement c'est parce que vous devez pointer la \"page d'inscription "
+"principal:\" (dans la page Paramètres Organisation) à n'importe quelle page "
+"vous avez le shortcode"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:826
 msgid "on."
-msgstr ""
+msgstr "sur."
 
 #: ../includes/admin_support.php:676
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:829
 msgid "Paypal IPN Problem?"
-msgstr ""
+msgstr "Paypal IPN problème?"
 
 #: ../includes/admin_support.php:679
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:832
@@ -11368,6 +11450,8 @@ msgid ""
 "Four things to check with PayPal when payments notifications are not being "
 "sent to Event Espresso."
 msgstr ""
+"Quatre choses à vérifier avec PayPal lorsque les notifications de paiement "
+"ne sont pas envoyés à Espresso événement."
 
 #: ../includes/admin_support.php:683
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:836
@@ -11375,35 +11459,39 @@ msgid ""
 "Make sure you have a standard or a business PayPal account, personal "
 "accounts don't work."
 msgstr ""
+"Assurez-vous d'avoir une norme ou un compte Business PayPal, les comptes "
+"personnels ne fonctionnent pas."
 
 #: ../includes/admin_support.php:686
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:839
 msgid "Turn on your IPN."
-msgstr ""
+msgstr "Allumez votre IPN."
 
 #: ../includes/admin_support.php:689
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:842
 msgid "Make sure your PayPal account is verified."
-msgstr ""
+msgstr "Assurez-vous que votre compte PayPal est vérifié."
 
 #: ../includes/admin_support.php:692
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:845
 msgid "Make sure your Event Espresso pages are not protected or private."
 msgstr ""
+"Assurez-vous que vos pages Espresso événements ne sont pas protégées ou "
+"privées."
 
 #: ../includes/admin_support.php:696
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:849
 msgid "More information can be found here:"
-msgstr ""
+msgstr "Plus d'informations peuvent être trouvées ici:"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:854
 msgid "Why are emails are not being sent when somone registers?"
-msgstr ""
+msgstr "Pourquoi les e-mails ne sont pas envoyés lorsque quelqu'un enregistre?"
 
 #: ../includes/admin_support.php:704
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:857
 msgid "Check your email settings on the"
-msgstr ""
+msgstr "Vérifiez vos paramètres de messagerie électronique sur le"
 
 #: ../includes/admin_support.php:709
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:862
@@ -11411,28 +11499,33 @@ msgid ""
 "If you're using WP SMTP with Gmail, also check your spam box to make sure "
 "Gmail isn't filtering the confirmation emails as spam."
 msgstr ""
+"Si vous utilisez SMTP WP avec Gmail, vérifiez également votre boîte de spam "
+"pour s'assurer que Gmail n'est pas le filtrage des e-mails de confirmation "
+"comme spam."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:864
 msgid "Send a Test Email"
-msgstr ""
+msgstr "Envoyer un  Email d'Essai"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:875
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:885
 msgid "Optional"
-msgstr ""
+msgstr "Optionel"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:880
 msgid "Message"
-msgstr ""
+msgstr "Message"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:891
 msgid "Send Test"
-msgstr ""
+msgstr "Envoyer un Test"
 
 #: ../includes/admin_support.php:713
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:896
 msgid "My events are not importing correctly when I use the CSV upload tool."
 msgstr ""
+"Mes événements ne sont pas importer correctement lorsque j'utilise l'outil "
+"CSV téléchargement."
 
 #: ../includes/admin_support.php:717
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:900
@@ -11444,18 +11537,25 @@ msgid ""
 "eventespresso.com/forums/2011/08/import-csv-malfunction\" target=\"_blank"
 "\">this forum post</a>."
 msgstr ""
+"Vérifiez votre fichier CSV pour les apostrophes dans le titre ou la "
+"description. L'utilisation d'Excel (ou n'importe quel autre tableur ou une "
+"application) rechercher et remplacer toutes les apostrophes avec <tt> \\ "
+"&#039;</tt>. C'est l'entité HTML pour ' et c'est ainsi que les titres sont "
+"inscrits dans la base de données. Pour plus d'informations, consultez <a "
+"href=\"http://eventespresso.com/forums/2011/08/import-csv-malfunction\" "
+"target=\"_blank\"> ce post sur le forum </a>."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:904
 msgid "Translating Event Espresso"
-msgstr ""
+msgstr "Traduire Espresso événement"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:924
 msgid "Problems with Incomplete Payments"
-msgstr ""
+msgstr "Problèmes avec les paiements incomplets"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:934
 msgid "Problems after upgrading?"
-msgstr ""
+msgstr "Problèmes après la mise à niveau?"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:937
 msgid ""
@@ -11464,6 +11564,11 @@ msgid ""
 "or are wrong.  Pressing the &quot;Run Upgrade Script&quot; button below "
 "should fix all of these problems."
 msgstr ""
+"Si vous venez juste de passer de la version gratuite de ce plugin, vos dates "
+"d'événements, les heures et les catégories peuvent être hors d'ordre, "
+"manquant, montrant une erreur, ou se trompent. En appuyant sur la «mise à "
+"niveau Exécuter le script\" bouton ci-dessous devrait résoudre tous ces "
+"problèmes."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:941
 msgid "Run Upgrade Script"
@@ -11479,6 +11584,13 @@ msgid ""
 "should fix the problem. If it doesn't then send a support request using the "
 "help and support button above."
 msgstr ""
+"Si vous avez cliqué sur le bouton ci-dessus et les dates des événements qui "
+"doivent être périmées, montrant une erreur ou semblent être hors d'ordre. "
+"Allez dans le \"<a href=\"admin.php?page=events\"> gestion </a>\" et cliquez "
+"sur «Modifier cet événement» puis cliquez sur le bouton «l'événement Mise à "
+"jour\" sur chaque événement qui affiche une date incorrecte(s). Ce processus "
+"devrait résoudre le problème. Si ce n'est pas le cas, alors envoyer une "
+"demande de support en utilisant le bouton d'aide et de soutien ci-dessus."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin_support.php:952
 msgid "Attendee information is outdated"
@@ -11736,7 +11848,7 @@ msgstr ""
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:293
 msgid "View an example?"
-msgstr ""
+msgstr "Voir un exemple?"
 
 #: ../includes/organization_config.php:230
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:298
@@ -11746,12 +11858,12 @@ msgstr "Les évènements expirent à la date de fin d'inscription ?"
 #: ../includes/organization_config.php:146
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:203
 msgid "Add a Default Logo"
-msgstr ""
+msgstr "Ajouter un Logo par Défaut"
 
 #: ../includes/organization_config.php:158
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:215
 msgid "Default Logo"
-msgstr ""
+msgstr "Logo par Défaut"
 
 #: ../includes/organization_config.php:160
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:217
@@ -11759,6 +11871,8 @@ msgid ""
 "The default logo will be used in your custom invoice, ticketing, "
 "certificates, and payment templates."
 msgstr ""
+"Le logo sera utilisé par défaut dans votre facture personnalisée, de la "
+"billetterie, des certificats et des modèles de paiement."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:321
 msgid ""
@@ -11767,11 +11881,16 @@ msgid ""
 "shortcodes. Please view <a href=\"admin.php?page=support#shortcodes\">this "
 "page</a> for a list of optional shortcodes."
 msgstr ""
+"Les numéros courts et les paramètres suivants sont requis pour la page de "
+"l'événement Espresso pour fonctionner correctement. Ces numéros courts ne "
+"devraient pas être remplacés par d'autres numéros courts. S'il vous plaît "
+"consulter <a href=\"admin.php?page=support#shortcodes\">cette page </a> pour "
+"une liste des numéros courts en option."
 
 #: ../includes/organization_config.php:268
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:330
 msgid "The Secure Payment System has been removed."
-msgstr ""
+msgstr "Le Système de Paiement Sécurisé a été supprimé."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:331
 msgid ""
@@ -11779,6 +11898,10 @@ msgid ""
 "href=\"http://ee-updates.s3.amazonaws.com/espresso-https.1.0.zip\" title="
 "\"Install Now\">Event Espresso SSL/HTTPS</a> plugin now."
 msgstr ""
+"Si votre site utilise SSL pour gérer les transactions sécurisées. S'il vous "
+"plaît installer le   <a href=\"http://ee-updates.s3.amazonaws.com/espresso-"
+"https.1.0.zip\" title=\"Install Now\">événement Espresso SSL / HTTPS </a> "
+"plug-in maintenant."
 
 #: ../includes/organization_config.php:269
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:331
@@ -11787,11 +11910,14 @@ msgid ""
 "ssl-encryption-on-your-event-espresso-site/\" target=\"_blank\">More "
 "information here</a>."
 msgstr ""
+"<a href=\"http://eventespresso.com/forums/2011/09/use-wordpress-https-for-"
+"ssl-encryption-on-your-event-espresso-site/\" target=\"_blank\">Plus "
+"d'information ici</a>."
 
 #: ../includes/organization_config.php:276
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:334
 msgid "Turn off this message?"
-msgstr ""
+msgstr "Désactiver ce message?"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:345
 msgid "Main registration page"
@@ -11826,14 +11952,14 @@ msgstr "Publié"
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:448
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:488
 msgid "Shortcode Problem"
-msgstr ""
+msgstr "shortcode Problème"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:370
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:411
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:452
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:492
 msgid "Shortcode OK"
-msgstr ""
+msgstr "Shortcode OK"
 
 #: ../includes/organization_config.php:293
 #: ../includes/organization_config.php:314
@@ -11851,12 +11977,14 @@ msgid ""
 "This page can be hidden from navigation if desired, <br />but should always "
 "contain the %s shortcode."
 msgstr ""
+"Cette page peut être cachée à la navigation si vous le souhaitez, <br /> "
+"mais doit toujours contenir shortcode%s."
 
 #: ../includes/organization_config.php:323
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:386
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config_help.php:10
 msgid "Auto Return URL"
-msgstr ""
+msgstr "URL de Retour Automatique"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:422
 msgid ""
@@ -11864,10 +11992,13 @@ msgid ""
 "public (not password protected),<br />\n"
 "and should always contain the %s shortcode."
 msgstr ""
+"Cette page doit cachés de votre navigation, <br /> mais toujours visible au "
+"public (non protégé par mot), <br /> \n"
+" et doit toujours contenir le shortcode%s."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:427
 msgid "Payment Notification URL"
-msgstr ""
+msgstr "URL de Notification de Paiement"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:463
 msgid ""
@@ -11875,12 +12006,15 @@ msgid ""
 "the public (not password protected),<br /> and should always contain the %s "
 "shortcode."
 msgstr ""
+"Cette page doit être cachée de votre navigation, <br />mais toujours visible "
+"au public (non protégé par mot), <br /> et doit toujours contenir le "
+"shortcode %s."
 
 #: ../includes/organization_config.php:353
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:467
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config_help.php:24
 msgid "Cancel Return URL"
-msgstr ""
+msgstr "Annuler le Renvoi de l'URL"
 
 #: ../includes/organization_config.php:348
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:503
@@ -11889,39 +12023,42 @@ msgid ""
 "and the %s shortcode. This page should hidden %s from your navigation, but "
 "still viewable to the public (not password protected.)"
 msgstr ""
+"Cela devrait être une page de votre site qui contient un message annulé%s et "
+"shortcode %s. Cette page doit cachée %s de votre navigation, mais toujours "
+"visible au public (non protégé par mot.)"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:506
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:509
 msgid "Pretty Permalinks"
-msgstr ""
+msgstr "Jolis Permaliens"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:520
 msgid "Activate \"Pretty\" Permalinks"
-msgstr ""
+msgstr "Activer \"Pretty\" Permaliens"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:523
 msgid "makes URLs look like:"
-msgstr ""
+msgstr "rend l' URL qui ressemblera à:"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:527
 msgid "Must have"
-msgstr ""
+msgstr "Doit avoir"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:529
 msgid "WordPress Permalinks"
-msgstr ""
+msgstr "WordPress Permaliens"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:531
 msgid "turned on, and mod_rewrite (or similar) active on server"
-msgstr ""
+msgstr "activée, et mod_rewrite (ou similaire) active sur le serveur"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:554
 msgid "Email Server Options:"
-msgstr ""
+msgstr "Envoyer Options du serveur:"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:560
 msgid "Use Personalized Email Headers"
-msgstr ""
+msgstr "Utilisez les En-têtes d'E-mail Personnalisé"
 
 #: ../includes/organization_config.php:442
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:567
@@ -11931,28 +12068,30 @@ msgstr "Courriel de Confirmation de Paiement :"
 #: ../includes/organization_config.php:418
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:573
 msgid "Send payment confirmation emails?"
-msgstr ""
+msgstr "Envoyer des emails de confirmation de paiement?"
 
 #: ../includes/organization_config.php:473
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:580
 msgid "Default Registration Confirmation Email:"
-msgstr ""
+msgstr "Courrier de Confirmation par défaut d'inscription:"
 
 #: ../includes/organization_config.php:423
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:586
 msgid "Send registration confirmation emails before payment is received?"
 msgstr ""
+"Envoyer des courriers de confirmation d'inscription avant que le paiement "
+"soit reçu?"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:602
 msgid "Please purchase a %s to gain access to this feature."
-msgstr ""
+msgstr "S'il vous plaît acheter un %s pour accéder à cette fonctionnalité."
 
 #: ../includes/organization_config.php:539
 #: ../includes/organization_config.php:581
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:602
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:611
 msgid "support license"
-msgstr ""
+msgstr "licence de support"
 
 #: ../includes/organization_config.php:582
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:603
@@ -11961,47 +12100,51 @@ msgid ""
 "or bogus registrations) by using a %s to ensure that only humans perform "
 "certain actions."
 msgstr ""
+"reCAPTCHA aide à prévenir les abus automatique de votre site (comme le spam "
+"de commentaires ou de fausses inscriptions) en utilisant un %s pour "
+"s'assurer que seuls les humains effectuent certaines actions. "
 
 #: ../includes/organization_config.php:539
 #: ../includes/organization_config.php:581
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:611
 msgid "Please purchase a"
-msgstr ""
+msgstr "S'il vous plaît acheter un"
 
 #: ../includes/organization_config.php:539
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:611
 msgid "to gain access to these features."
-msgstr ""
+msgstr "pour accéder à ces fonctionnalités."
 
 #: ../includes/organization_config.php:541
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:613
 msgid "Additional features include:"
-msgstr ""
+msgstr "Les dispositifs additionnels incluent:"
 
 #: ../includes/organization_config.php:545
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:617
 msgid "Upcoming events widget in the admin dashboard"
-msgstr ""
+msgstr "Manifestation Upcoming widget dans l'interface d'administration"
 
 #: ../includes/organization_config.php:548
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:620
 msgid "Registration limits on time slots"
-msgstr ""
+msgstr "Limites d'inscription sur les créneaux horaires"
 
 #: ../includes/organization_config.php:551
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:623
 msgid "Ability to display short descriptions in the event listings"
 msgstr ""
+"Possibilité d'afficher une courte description dans la liste des événements"
 
 #: ../includes/organization_config.php:554
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:626
 msgid "Custom post types for events"
-msgstr ""
+msgstr "Types de poste personnalisés pour les événements"
 
 #: ../includes/organization_config.php:557
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:629
 msgid "Attendee pre-approval feature"
-msgstr ""
+msgstr "Fonction de pré-approbation de Présence"
 
 #: ../includes/organization_config.php:560
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config.php:632
@@ -12016,12 +12159,12 @@ msgstr "Rapports graphiques"
 #: ../gateways/payment_gateways.php:16
 #: ../../../event-espresso/trunk/includes/admin_screens/payment_gateways.php:40
 msgid "Manage Payment Gateways"
-msgstr ""
+msgstr "Gérer les Passerelles de Paiement"
 
 #: ../gateways/payment_gateways.php:51
 #: ../../../event-espresso/trunk/includes/admin_screens/payment_gateways.php:31
 msgid "Need more payment options?"
-msgstr ""
+msgstr "Besoin d'options de paiement?"
 
 #: ../includes/form-builder/groups/index.php:31
 #: ../../../event-espresso/trunk/includes/admin_screens/question_groups.php:188
@@ -12065,7 +12208,7 @@ msgstr "Aperçu des groupes de questions"
 #: ../includes/form-builder/groups/index.php:226
 #: ../../../event-espresso/trunk/includes/admin_screens/question_groups.php:203
 msgid "Question Groups are pre-populated groups of "
-msgstr ""
+msgstr " Les Groupes question sont pré-remplis sous groupes de"
 
 #: ../includes/event-management/event_functions.php:329
 #: ../includes/event-management/event_functions.php:471
@@ -12074,7 +12217,7 @@ msgstr ""
 #: ../../../event-espresso/trunk/includes/admin_screens/question_groups.php:203
 #: ../../../event-espresso/trunk/includes/admin_screens/events/event_functions.php:75
 msgid "questions"
-msgstr ""
+msgstr "questions"
 
 #: ../includes/form-builder/groups/index.php:226
 #: ../../../event-espresso/trunk/includes/admin_screens/question_groups.php:203
@@ -12083,6 +12226,10 @@ msgid ""
 "your customized regsistration forms. The personal information group is "
 "required for all events and is shown by default on all registration forms."
 msgstr ""
+"qui peut être ajouté à vos événements. Ces groupes de questions sont ce qui "
+"rend vos formulaires personnalisés de registration. Le groupe de "
+"renseignements personnels est nécessaire pour tous les événements et est "
+"affiché par défaut sur ​​tous les formulaires d'inscription."
 
 #: ../includes/form-builder/groups/index.php:227
 #: ../../../event-espresso/trunk/includes/admin_screens/question_groups.php:204
@@ -13156,6 +13303,10 @@ msgid ""
 "in your event listings template. You may need to customize your "
 "event_listing.php file to make this work. For more information, please"
 msgstr ""
+"Si un événement est mis en place comme un «événement de liste d'attente», il "
+"peut être configuré pour ne pas apparaître dans votre modèle d'annonces "
+"d'événement. Vous devrez peut-être personnaliser votre fichier event_listing."
+"php pour faire ce travail. Pour plus d'informations, s'il vous plaît"
 
 #: ../includes/event-management/index.php:176
 #: ../includes/event-management/index.php:190
@@ -13164,12 +13315,12 @@ msgstr ""
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:120
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:127
 msgid "visit the forums"
-msgstr ""
+msgstr "visiter les forums"
 
 #: ../includes/event-management/index.php:179
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:92
 msgid "Off-site Registration Page"
-msgstr ""
+msgstr "Page d'Inscription Hors site"
 
 #: ../includes/event-management/index.php:180
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:95
@@ -13177,11 +13328,13 @@ msgid ""
 "If an off-site registration page is entered, it will override your "
 "registration page and send attendees to the URL that is entered."
 msgstr ""
+"Si une page d'inscription hors-site est entrée, elle remplacera votre page "
+"d'inscription et sera envoyée aux participants de l'URL qui est entré."
 
 #: ../includes/event-management/index.php:187
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:107
 msgid "Event Status Types"
-msgstr ""
+msgstr "Types d'Etat d'Evénement"
 
 #: ../includes/event-management/index.php:190
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:118
@@ -13189,6 +13342,9 @@ msgid ""
 "This type of event can be hidden and used as a waiting list for a primary "
 "event. Template customizations may be required. For more information, please"
 msgstr ""
+"Ce type d'événement peut être caché et utilisé comme une liste d'attente "
+"pour un événement primaire. Un modèle de personnalisations peut être "
+"nécessaire. Pour plus d'informations, s'il vous plaît"
 
 #: ../includes/event-management/index.php:191
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:125
@@ -13197,6 +13353,9 @@ msgid ""
 "display a registration page. Template customizations are required. For more "
 "information, please"
 msgstr ""
+"Ce type d'événement peut être programmé pour apparaître dans vos listes "
+"d'événements et afficher une page d'inscription. Personnalisations de "
+"modèles sont nécessaires. Pour plus d'informations, s'il vous plait"
 
 #: ../includes/event-management/index.php:192
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:132
@@ -13204,6 +13363,9 @@ msgid ""
 "This is event type will not appear in the event listings and will not "
 "dispaly a registrations page. Deleted events can still be accessed in the"
 msgstr ""
+"Ce type d'événement n'apparaît pas dans la liste des événements et ne "
+"représentera pas une page d'inscriptions. Les événements supprimés sont "
+"toujours accessibles dans la"
 
 #: ../includes/event-management/index.php:192
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:134
@@ -13219,28 +13381,38 @@ msgid ""
 "The event will automatically turn the registration form on and off between "
 "these dates and times."
 msgstr ""
+"L'événement aura automatiquement le formulaire d'inscription et de compromis "
+"entre ces dates et heures."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:155
 msgid ""
 "If the date of your event occurs before the regisration end date. Then the "
 "registation form will be displayed and also accept registrations."
 msgstr ""
+"Si la date de votre événement se produit avant la date de fin de "
+"l'inscription. Alors la forme d'enregistrement s'affichera et acceptera "
+"également les inscriptions."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:158
 msgid ""
 "All events require registration start/end dates and start/end times in order "
 "to display properly on your pages."
 msgstr ""
+"Tous les événements nécessitent un enregistrement de début / fin des dates "
+"et des fois de démarrage / arrêt afin de s'afficher correctement sur ​​vos "
+"pages."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:173
 msgid "This is the date of the event."
-msgstr ""
+msgstr "Il s'agit de la date de l'événement."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:176
 msgid ""
 "All events require a start and end date in order to display properly on your "
 "pages."
 msgstr ""
+"Tous les événements nécessitent une date de début et de fin, afin de "
+"s'afficher correctement sur ​​vos pages."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:191
 msgid ""
@@ -13248,12 +13420,17 @@ msgid ""
 "for event/class organizers to manage several different sessions in their "
 "events."
 msgstr ""
+"Chaque événement peut avoir un nombre illimité de démarrage / fin. Ceci est "
+"utile pour les organisateurs d'événements / classe pour gérer plusieurs "
+"sessions différentes dans leurs manifestations."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:194
 msgid ""
 "All events require a start and end time in order to display properly on your "
 "pages."
 msgstr ""
+"Tous les événements nécessitent un temps de début et de fin, afin de "
+"s'afficher correctement sur ​​vos pages."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/events/help.php:197
 msgid "Event times can be entered in the format of: 09:00/21:00  or 9am/9pm "

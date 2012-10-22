@@ -165,7 +165,7 @@ function event_espresso_display_firstdata_connect_2_settings() {
 	</form>
 	<div id="sandbox_info_firstdata_connect_2" style="display:none">
 		<h2><?php _e('First Data Sandbox', 'event_espresso'); ?></h2>
-		<p><?php _e('In addition to using the First Data Sandbox fetaure. The debugging feature will also output the form varibales to the payment page, send an email to the admin that contains the all First Data variables.', 'event_espresso'); ?></p>
+		<p><?php _e('In addition to using the First Data Sandbox feature. The debugging feature will also output the form variables to the payment page, send an email to the admin that contains the all First Data variables.', 'event_espresso'); ?></p>
 		<hr />
 		<p><?php _e('The First Data Sandbox is a testing environment that is a duplicate of the live First Data site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live environment. Create and manage test accounts, and view emails and API credentials for those test accounts.', 'event_espresso'); ?></p>
 	</div>

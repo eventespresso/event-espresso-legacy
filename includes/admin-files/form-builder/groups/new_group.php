@@ -1,7 +1,6 @@
 <?php
 //Function to add a new group of questions
 function event_espresso_form_group_new(){
-	global $wpdb;
 ?>
 <div id="add-edit-new-group" class="metabox-holder">
  <div class="postbox">
@@ -51,20 +50,10 @@ function event_espresso_form_group_new(){
           <li><p><?php _e('Select questions to add to group:','event_espresso'); ?></p></li>
   
             <?php
-        	$sql = "SELECT * FROM " . EVENTS_QUESTION_TABLE;
-        	$sql .= " WHERE ";
-        	if (function_exists('espresso_member_data')) {
-        		if (espresso_member_data('id') == 0 || espresso_member_data('id') == 1){
-        			$sql .= " (wp_user = '0' OR wp_user = '1') ";
-        		}else{
-        			$sql .= " wp_user = '" . espresso_member_data('id') ."' ";
-        		}
-        	}else{
-        		$sql .= " (wp_user = '0' OR wp_user = '1') ";
-        	}
-        	$sql .= " ORDER BY sequence, id ASC ";
-        	$questions = $wpdb->get_results($sql);
-        	if ($wpdb->num_rows > 0) {
+          //first we need to get all system questions (make sure that the user actually has some);
+          $questions = espresso_get_user_questions(get_current_user_id());
+
+        	if ( count($questions) > 0) {
         		foreach ($questions as $question) {
         			echo '<li><label><input type="checkbox" name="question_id[]" value="' . $question->id . '" id="question_id_' . $question->id . '" />' . stripslashes($question->question) . '</label></li>';
         		}
