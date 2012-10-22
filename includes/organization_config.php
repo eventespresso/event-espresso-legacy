@@ -32,6 +32,9 @@ function organization_config_mnu() {
 		$org_options['recaptcha_language'] = isset($_POST['recaptcha_language']) && !empty($_POST['recaptcha_language']) ? $_POST['recaptcha_language'] : '';
 		$org_options['espresso_dashboard_widget'] = isset($_POST['espresso_dashboard_widget']) && !empty($_POST['espresso_dashboard_widget']) ? $_POST['espresso_dashboard_widget'] : '';
 		$org_options['time_reg_limit'] = isset($_POST['time_reg_limit']) && !empty($_POST['time_reg_limit']) ? $_POST['time_reg_limit'] : '';
+		$org_options['skip_confirmation_page'] = isset($_POST['skip_confirmation_page']) ? $_POST['skip_confirmation_page'] : 'N';
+		$org_options['allow_mer_discounts'] = isset($_POST['allow_mer_discounts']) ? $_POST['allow_mer_discounts'] : 'N';
+		$org_options['allow_mer_vouchers'] = isset($_POST['allow_mer_vouchers']) ? $_POST['allow_mer_vouchers'] : 'N';
 		$org_options['use_attendee_pre_approval'] = isset($_POST['use_attendee_pre_approval']) && !empty($_POST['use_attendee_pre_approval']) ? $_POST['use_attendee_pre_approval'] : '';
 		if (!empty($_POST['event_ssl_active']))
 			$org_options['event_ssl_active'] = isset($_POST['event_ssl_active']) && !empty($_POST['event_ssl_active']) ? $_POST['event_ssl_active'] : '';
@@ -146,9 +149,10 @@ function organization_config_mnu() {
 															<?php _e('Add a Default Logo', 'event_espresso'); ?>
 															<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=espresso_default_logo_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a></label>
 															<div id="default-logo-image">
+															<?php $org_options['default_logo_url'] = isset( $org_options['default_logo_url'] ) ? $org_options['default_logo_url'] : ''; ?>
 															<input id="upload_image" type="hidden" size="36" name="upload_image" value="<?php echo $org_options['default_logo_url'] ?>" />
 															<input id="upload_image_button" type="button" value="Upload Image" />
-															<?php if ($org_options['default_logo_url'] != '') { ?>
+															<?php if ( $org_options['default_logo_url'] != '') { ?>
 																<p class="default-logo-thumb"><img src="<?php echo $org_options['default_logo_url'] ?>" alt="" /><br />
 																<a id="remove-image" href="#" title="Remove this image" onclick="return false;"><?php _e('Remove Image', 'event_espresso'); ?></a></p>
 															<?php } ?>
@@ -398,6 +402,7 @@ function organization_config_mnu() {
 									</div>
 								</div>
 							</div>
+						</div>
 					</li>
 					<li>
 						<div class="metabox-holder">
@@ -606,7 +611,7 @@ function organization_config_mnu() {
 													<label for="site_license_key">
 		<?php _e('Site License Key:', 'event_espresso'); ?>
 													</label>
-													<input type="text" name="site_license_key" size="45" value="<?php echo stripslashes_deep($org_options['site_license_key']); ?>" />
+													<input type="text" name="site_license_key" size="45" value="<?php echo isset( $org_options['site_license_key'] ) ? stripslashes_deep($org_options['site_license_key']) : ''; ?>" />
 												</li>
 
 											</ul>

@@ -1,4 +1,5 @@
-<?php
+<?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');		
 //As of version 3.0.17
 //This is a logic file for displaying a registration form for an event on a page. This file will do all of the backend data retrieval functions.
 //There should be a copy of this file in your wp-content/uploads/espresso/ folder.
@@ -9,6 +10,7 @@ if (!function_exists('register_attendees')) {
 		//Declare the $data object
 		$data = (object)array( 'event' => NULL );
 		
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 		//Run code for the seating chart addon
 		if ( function_exists('espresso_seating_version') ){
 			do_action('ee_seating_chart_css');
@@ -16,11 +18,6 @@ if (!function_exists('register_attendees')) {
 			do_action('ee_seating_chart_flush_expired_seats');
 		}
         
-		if ((isset($_REQUEST['form_action']) && $_REQUEST['form_action'] == 'edit_attendee') || (isset($_REQUEST['edit_attendee']) && $_REQUEST['edit_attendee'] == 'true')) {
-            require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/process-registration/attendee_edit_record.php');
-            attendee_edit_record();
-            return;
-        }
         global $wpdb, $org_options;
 
         if (isset($_REQUEST['ee']) && $_REQUEST['ee'] != '') {
@@ -53,15 +50,20 @@ if (!function_exists('register_attendees')) {
 
         //Build event queries
         $sql = "SELECT e.*, ese.start_time, ese.end_time ";
-        isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= ", v.name venue_name, v.address venue_address, v.address2 venue_address2, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta " : '';
+		if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
+	 		$sql .= ", v.name venue_name, v.address venue_address, v.address2 venue_address2, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta ";
+		}
         $sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
 		$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id = e.id ";
 
-        isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id " : '';
+		if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
+			$sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id ";
+		}
 		$sql.= " WHERE e.is_active='Y' ";
 		$sql.= " AND e.event_status != 'D' ";
 
-		if ($single_event_id != NULL) {//Get the ID of a single event
+		//Get the ID of a single event
+		if ($single_event_id != NULL) {
 			//If a single event needs to be displayed, get its ID
             $sql .= " AND event_identifier = '" . $single_event_id . "' ";
         } else {
@@ -76,14 +78,12 @@ if (!function_exists('register_attendees')) {
             $sql .= " LIMIT 0,1";
         }
 		
-        $data->event = $wpdb->get_row($sql, OBJECT);
-        //print_r($data->event);
-
+        $data->event = $wpdb->get_row( $wpdb->prepare( $sql ), OBJECT);
         $num_rows = $wpdb->num_rows;
 
         //Build the registration page
         if ($num_rows > 0) {
-            do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+
             //These are the variables that can be used throughout the registration page
             //foreach ($events as $event) {
             global $this_event_id;
@@ -193,14 +193,10 @@ if (!function_exists('register_attendees')) {
 
 
             //If the coupon code system is intalled then use it
-            if (function_exists('event_espresso_coupon_registration_page')) {
-                $use_coupon_code = $data->event->use_coupon_code;
-            }
+            $use_coupon_code = $data->event->use_coupon_code;
 
             //If the groupon code addon is installed, then use it
-            if (function_exists('event_espresso_groupon_payment_page')) {
-                $use_groupon_code = $data->event->use_groupon_code;
-            }
+            $use_groupon_code = $data->event->use_groupon_code;
 
             //Set a default value for additional limit
             if ($additional_limit == '') {
@@ -282,13 +278,13 @@ if (!function_exists('register_attendees')) {
                 $num_attendees = get_number_of_attendees_reg_limit($event_id, 'num_attendees'); //Get the number of attendees. Please visit http://eventespresso.com/forums/?p=247 for available parameters for the get_number_of_attendees_reg_limit() function.
                 if (($num_attendees >= $reg_limit) && ($allow_overflow == 'Y' && $overflow_event_id != 0)) {
                     ?>
-                        <p id="register_link-<?php echo $overflow_event_id ?>" class="register-link-footer"><a class="a_register_link" id="a_register_link-<?php echo $overflow_event_id ?>" href="<?php echo espresso_reg_url($overflow_event_id); ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Join Waiting List', 'event_espresso'); ?></a></p>
+                        <p id="register_link-<?php echo $overflow_event_id ?>" class="register-link-footer"><a class="a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="a_register_link-<?php echo $overflow_event_id ?>" href="<?php echo espresso_reg_url($overflow_event_id); ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Join Waiting List', 'event_espresso'); ?></a></p>
                     <?php } ?>
                 </div>
 
                     <?php
                 } else {
-					global $member_options;
+					$member_options = get_option('events_member_settings');
 					//echo "<pre>".print_r($member_options,true)."</pre>";
                     //If enough spaces exist then show the form
                     //Check to see if the Members plugin is installed.

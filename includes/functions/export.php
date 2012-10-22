@@ -33,7 +33,7 @@ if (!function_exists('espresso_event_export')){
 		if ( function_exists('espresso_member_data') && espresso_member_data('role')=='espresso_group_admin' ) { 
 		
 			$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-			$group = unserialize($group);
+			$group = maybe_unserialize($group);
 			
 			$sql = "(SELECT e.id event_id, e.event_name, e.event_identifier, e.reg_limit, e.registration_start, ";
 			$sql .= " e.start_date, e.is_active, e.recurrence_id, e.registration_startT, ";
@@ -281,7 +281,7 @@ if (!function_exists('espresso_export_stuff')){
 					
 				}
 		
-				$basic_header = array(__('Group','event_espresso'),__('ID','event_espresso'), __('Reg ID','event_espresso'), __('Payment Method','event_espresso'), __('Reg Date','event_espresso'), __('Pay Status','event_espresso'), __('Type of Payment','event_espresso'), __('Transaction ID','event_espresso'), __('Payment','event_espresso'), __('Coupon Code','event_espresso'), __('# Attendees','event_espresso'), __('Date Paid','event_espresso'), __('Event Name','event_espresso'), __('Price Option','event_espresso'), __('Event Date','event_espresso'), __('Event Time','event_espresso'), __('Website Check-in','event_espresso'), __('Tickets Scanned','event_espresso'), __('Seat Tag','event_espresso') );
+				$basic_header = array(__('Group','event_espresso'),__('ID','event_espresso'), __('Reg ID','event_espresso'), __('Payment Method','event_espresso'), __('Reg Date','event_espresso'), __('Pay Status','event_espresso'), __('Type of Payment','event_espresso'), __('Transaction ID','event_espresso'), __('Price','event_espresso'), __('Coupon Code','event_espresso'), __('# Attendees','event_espresso'), __('Amount Paid','event_espresso'), __('Date Paid','event_espresso'), __('Event Name','event_espresso'), __('Price Option','event_espresso'), __('Event Date','event_espresso'), __('Event Time','event_espresso'), __('Website Check-in','event_espresso'), __('Tickets Scanned','event_espresso'), __('Seat Tag','event_espresso') );
 		
 				$question_groups = maybe_unserialize($question_groups);
 				$event_meta = maybe_unserialize($event_meta);
@@ -312,23 +312,21 @@ if (!function_exists('espresso_export_stuff')){
 						$question_filter = array();//will be used to keep track of newly added and deleted questions
 		
 						if (count($question_groups) > 0){
-							$questions_in = '';
 							$question_sequence = array();
 		
-							/*foreach ($question_groups as $g_id) 
-							{
+							$questions_in = '';
+							foreach ($question_groups as $g_id) {
 								$questions_in .= $g_id . ',';
-							}*/
-							$questions_in = implode(",",$question_groups);
-
-							/*$questions_in = substr($questions_in,0,-1);*/
+							}		
+							$questions_in = substr($questions_in,0,-1);
+							
 							$group_name = '';
 							$counter = 0;
 		
 							$quest_sql = "SELECT q.id, q.question FROM " . EVENTS_QUESTION_TABLE . " q ";
 							$quest_sql .= " JOIN " .  EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 							$quest_sql .= " JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
-							$quest_sql .= " WHERE qgr.group_id in ( " . $questions_in . ") ";
+							$quest_sql .= " WHERE qgr.group_id in ( $questions_in ) ";
 							if(  function_exists('espresso_member_data') && ( espresso_member_data('role')=='espresso_event_manager' || espresso_member_data('role')=='espresso_group_admin' )){
 								$quest_sql .= " AND qg.wp_user = '" . espresso_member_data('id') ."' ";
 							}		
@@ -363,11 +361,11 @@ if (!function_exists('espresso_export_stuff')){
 						if ( $espresso_member ){
 						
 							$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-							$group = unserialize($group);
+							$group = maybe_unserialize($group);
 							$group = implode(",",$group);
 							$sql .= "(SELECT ed.event_name, ed.start_date, a.id, a.registration_id, a.payment, a.date, a.payment_status, a.txn_type, a.txn_id";
 							$sql .= ", a.amount_pd, a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity";
-							$sql .= ", a.payment_date, a.event_time, a.price_option, ac.cost a_cost, ac.quantity a_quantity";
+							$sql .= ", a.payment_date, a.event_time, a.price_option, a.final_price a_final_price, a.amount_pd a_amount_pd, a.quantity a_quantity";
 							$sql .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 							$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=a.event_id ";
 							if ($group !=''){
@@ -378,14 +376,13 @@ if (!function_exists('espresso_export_stuff')){
 							$sql .= $group !='' ? " AND  l.locale_id IN (" . $group . ") " : '';
 							$sql .= ") UNION (";
 						}		
-						
-						$sql .= "SELECT ed.event_name, ed.start_date, a.id, a.registration_id, a.payment, a.date, a.payment_status, a.txn_type, a.txn_id, ";
-						$sql .= "a.amount_pd, a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity, ac.cost a_cost, ac.quantity a_quantity";
+						$sql .= "SELECT ed.event_name, ed.start_date, a.id, a.registration_id, a.payment, a.date, a.payment_status, a.txn_type, a.txn_id";
+						$sql .= ", a.amount_pd, a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity, a.final_price a_final_price, a.amount_pd a_amount_pd, a.quantity a_quantity";
 		
 						$sql .= ", a.payment_date, a.event_time, a.price_option";
 						$sql .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 						$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=a.event_id ";
-						$sql .= " JOIN " . EVENTS_ATTENDEE_COST_TABLE . " ac ON a.id=ac.attendee_id ";
+						//$sql .= " JOIN " . EVENTS_ATTENDEE_COST_TABLE . " ac ON a.id=ac.attendee_id ";
 						$sql .= $event_id ? " WHERE ed.id = '" . $event_id . "' " : '';
 
 						if(  function_exists('espresso_member_data') && ( espresso_member_data('role')=='espresso_event_manager' || espresso_member_data('role')=='espresso_group_admin') ){
@@ -471,24 +468,15 @@ if (!function_exists('espresso_export_stuff')){
 								echo $attendees_group
 								. $s . $participant->id
 								. $s . $participant->registration_id
-								/*. $s . escape_csv_val(stripslashes($participant->lname))
-								. $s . escape_csv_val(stripslashes($participant->fname))
-								. $s . stripslashes($participant->email)
-								. $s . escape_csv_val(stripslashes($participant->address))
-								. $s . escape_csv_val(stripslashes($participant->address2))
-								. $s . escape_csv_val(stripslashes($participant->city))
-								. $s . escape_csv_val(stripslashes($participant->state))
-								. $s . escape_csv_val(stripslashes($participant->country))
-								. $s . escape_csv_val(stripslashes($participant->zip))
-								. $s . escape_csv_val(stripslashes($participant->phone))*/
 								. $s . escape_csv_val(stripslashes($participant->payment))
 								. $s . event_date_display($participant->date, 'Y-m-d')
 								. $s . stripslashes($participant->payment_status)
 								. $s . stripslashes($participant->txn_type)
 								. $s . stripslashes($participant->txn_id)
-								. $s . $participant->a_cost * $participant->a_quantity
+								. $s . $participant->a_final_price * $participant->a_quantity
 								. $s . escape_csv_val($participant->coupon_code)
 								. $s . $participant->quantity
+								. $s . $participant->a_amount_pd
 								. $s . event_date_display($participant->payment_date, 'Y-m-d')
 								. $s . escape_csv_val($participant->event_name)
 								. $s . $participant->price_option

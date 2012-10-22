@@ -17,10 +17,10 @@ function event_espresso_firstdata_connect_2_payment_settings() {
 	}
 	$firstdata_connect_2_settings = get_option('event_espresso_firstdata_connect_2_settings');
 	if (empty($firstdata_connect_2_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_connect_2/standard_button.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/firstdata_connect_2/standard_button.gif";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_connect_2/firstdata-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/firstdata_connect_2/firstdata-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/firstdata_connect_2/standard_button.gif";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/firstdata_connect_2/firstdata-logo.png";
 		}
 		$firstdata_connect_2_settings['storename'] = '';
 		$firstdata_connect_2_settings['sharedSecret'] = '';

@@ -232,7 +232,7 @@ function event_espresso_display_paypal_settings() {
 			</tr>
 		</table>
 		<p><strong style="color:#F00"><?php _e('Attention!', 'event_espresso'); ?></strong><br /><?php _e('For PayPal IPN to work, you need a Business or Premier account.', 'event_espresso'); ?>
-		<p>
+		</p>
 			<input type="hidden" name="update_paypal" value="update_paypal">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update PayPal Settings', 'event_espresso') ?>" id="save_paypal_settings" />
 		</p>

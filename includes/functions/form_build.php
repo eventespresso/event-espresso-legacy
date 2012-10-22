@@ -40,7 +40,7 @@ if (!function_exists('event_form_build')) {
 
 		$required_label = isset($required_label) ? $required_label : '';
 
-		$label = '<label for="' . $field_name . '">' . $question->question . $required_label . '</label> ';
+		$label = '<label for="' . $field_name . '" class="' . $class . '">' . $question->question . $required_label . '</label> ';
 		//If the members addon is installed, get the users information if available
 		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true ) {
 			global $current_user;
@@ -127,36 +127,36 @@ if (!function_exists('event_form_build')) {
 			case "SINGLE" :
 				$values = explode(",", $question->response);
 				//$answers = explode(",", $answer);
-				$html .= '<fieldset class="single-radio">';
+				$html .= '<div class="single-radio">';
 				$html .= $legend;
 
-				$html .= '<ul class="event_form_field">';
+				$html .= '<ul class="options-list-radio event_form_field">';
 				foreach ($values as $key => $value) {
 					//old way $checked = in_array ( $value, $answers ) ? ' checked="checked"' : "";
 					$value = trim($value);
 					$checked = ( $value == $answer ) ? ' checked="checked"' : "";
-					$html .= '<li><label for="SINGLE_' . $question->id . '_' . $key . '_' . $attendee_number . '" class="' . $class . '"><input id="SINGLE_' . $question->id . '_' . $key . '_' . $attendee_number . '" ' . $required . ' name="' . $field_name . $multi_name_adjust . '"  type="radio" value="' . $value . '" ' . $checked . ' /> ' . $value . '</label></li>';
+					$html .= '<li><label for="SINGLE_' . $question->id . '_' . $key . '_' . $attendee_number . '" class="' . $class . ' radio-btn-lbl"><input id="SINGLE_' . $question->id . '_' . $key . '_' . $attendee_number . '" ' . $required . ' name="' . $field_name . $multi_name_adjust . '"  type="radio" value="' . $value . '" ' . $checked . ' /> <span>' . $value . '</span></label></li>';
 					//echo $label;
 				}
 				$html .= '</ul>';
-				$html .= '</fieldset>';
+				$html .= '</div>';
 				break;
 			case "MULTIPLE" :
 				$values = explode(",", $question->response);
 				//$answers = explode(",", $answer);
-				$html .= '<fieldset class="multi-checkbox">';
+				$html .= '<div class="multi-checkbox">';
 				$html .= $legend;
 				//$html .= '</p>';
-				$html .= '<ul class="event_form_field">';
+				$html .= '<ul class="options-list-check event_form_field">';
 				foreach ($values as $key => $value) {
 					$value = trim($value);
 					$checked = (is_array($answer) && in_array($value, $answer)) ? ' checked="checked"' : "";
 					//$checked = ( $value == $answer ) ? ' checked="checked"' : "";
 					/* 	$html .= "<label><input type=\"checkbox\"$required id=\"MULTIPLE_$question->id_$key\" name=\"MULTIPLE_$question->id_$key\"  value=\"$value\"$checked /> $value</label><br/>\n"; */
-					$html .= '<li><label for="' . str_replace(' ', '', $value) . '-' . $event_id . '_' . $attendee_number . '" class="' . $class . '"><input id="' . str_replace(' ', '', $value) . '-' . $event_id . '_' . $attendee_number . '" ' . $required . 'name="' . $field_name . $multi_name_adjust . '[]"  type="checkbox" value="' . $value . '" ' . $checked . '/> ' . $value . '</label></li>';
+					$html .= '<li><label for="' . str_replace(' ', '', $value) . '-' . $event_id . '_' . $attendee_number . '" class="' . $class . ' checkbox-lbl"><input id="' . str_replace(' ', '', $value) . '-' . $event_id . '_' . $attendee_number . '" ' . $required . 'name="' . $field_name . $multi_name_adjust . '[]"  type="checkbox" value="' . $value . '" ' . $checked . '/> <span>' . $value . '</span></label></li>';
 				}
 				$html .= '</ul>';
-				$html .= '</fieldset>';
+				$html .= '</div>';
 				break;
 			case "DROPDOWN" :
 				$dd_type = $question->system_name == 'state' ? 'name="state"' : 'name="' . $field_name . $multi_name_adjust . '"';
@@ -184,15 +184,10 @@ if (!function_exists('event_form_build')) {
 }
 
 function event_form_build_edit($question, $edits, $show_admin_only = false, $class = 'my_class') {
+	
 	$required = '';
-	/* if ($question->required == "Y") {
-	  $required = ' class="required"';
-	  } */
+	$form_input = '';
 
-	/**
-	 * Temporary client side email validation solution by Abel, will be replaced
-	 * in the next version with a full validation suite.
-	 */
 	$email_validate = $question->system_name == 'email' ? 'email' : '';
 
 	if ($question->required == "Y") {
@@ -201,6 +196,7 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 	} else {
 		$required = 'class="' . $class . '"';
 	}
+	
 	$required_label = isset($required_label) ? $required_label : '';
 
 	//echo '<p>$required = '.$required.'</p>';
@@ -212,56 +208,96 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 	$answer_id = $question->id;
 	//echo $answer_id;
 
-	if (isset($question->q_id))
+	if (isset($question->q_id)) {
 		$question->id = $question->q_id;
+	}
+		
 	if ($question->admin_only == 'Y' && $show_admin_only == false) {
 		return;
 	}
+	
 	$field_name = ($question->system_name != '') ? $question->system_name : 'TEXT_' . $question->id;
-	echo '<label for="' . $field_name . '">' . $question->question . $required_label . '</label><br>';
+	$label = '<label for="' . $field_name . '">' . $question->question . $required_label . '</label>';
+	
 	switch ($question->question_type) {
+	
 		case "TEXT" :
-			echo '<input type="text" ' . $required . ' id="' . $field_name . '"  name="' . $field_name . '" size="40"  value="' . $edits . '" />';
+			$form_input .= '<p class="event_form_field">' . $label;
+			$form_input .= '<input type="text" ' . $required . ' id="' . $field_name . '"  name="' . $field_name . '" size="40"  value="' . stripslashes( $edits ) . '" />';
+			$form_input .= '</p>';
 			break;
-		case "TEXTAREA" :
-			echo '<textarea id="TEXTAREA_' . $question->id . '" ' . $required . ' name="TEXTAREA_' . $question->id . '"  cols="30" rows="5">' . $edits . '</textarea>';
+			
+		case "TEXTAREA" :		
+			$form_input .= '<p class="event_form_field">' . $label;
+			$form_input .= '<textarea id="TEXTAREA_' . $question->id . '" ' . $required . ' name="TEXTAREA_' . $question->id . '"  cols="30" rows="5">' . stripslashes( $edits ) . '</textarea>';
+			$form_input .= '</p>';
 			break;
+			
 		case "SINGLE" :
+		
 			$values = explode(",", $question->response);
 			$answers = explode(",", $edits);
-			echo '<ul>';
+			$form_input .= $label;
+			$form_input .= '
+	<ul class="edit-options-list-radio">';
 			foreach ($values as $key => $value) {
-				$checked = in_array(trim($value), $answers) ? ' checked="checked"' : "";
-				echo '<li><input id="SINGLE_' . $question->id . '_' . $key . '" ' . $required . ' name="SINGLE_' . $question->id . '"  type="radio" value="' . trim($value) . '" ' . $checked . '/> ' . trim($value) . '</li>';
+				$checked = in_array( trim( stripslashes( $value )), $answers ) ? ' checked="checked"' : "";
+				$form_input .= '
+		<li>
+			<label class="radio-btn-lbl">
+				<input id="SINGLE_' . $question->id . '_' . $key . '" ' . $required . ' name="SINGLE_' . $question->id . '"  type="radio" value="' . trim( stripslashes( $value )) . '" ' . $checked . '/>
+				<span>' . trim( stripslashes( $value )) . '</span>
+			</label>
+		</li>';
 			}
-			echo "</ul>";
+			$form_input .= '
+	</ul>';
 			break;
+			
 		case "MULTIPLE" :
+		
 			$values = explode(",", $question->response);
 			$answers = explode(",", $edits);
-			//echo '<p>New True ID= '.$question->id.'</p>';
-			echo '<ul>';
+			//$form_input .= '<p>New True ID= '.$question->id.'</p>';
+			$form_input .= $label;
+			$form_input .= '
+	<ul class="edit-options-list-check">';
 			foreach ($values as $key => $value) {
-				$checked = in_array(trim($value), $answers) ? " checked=\"checked\"" : "";
-				/* 	echo "<label><input type=\"checkbox\"$required id=\"MULTIPLE_$question->id_$key\" name=\"MULTIPLE_$question->id_$key\"  value=\"$value\"$checked /> $value</label><br/>\n"; */
-				echo '<li><input id="' . trim($value) . '" ' . $required . ' name="MULTIPLE_' . $question->id . '[]"  type="checkbox" value="' . trim($value) . '" ' . $checked . '/> ' . trim($value) . '</li>';
+				$checked = in_array( trim( stripslashes( $value )), $answers) ? " checked=\"checked\"" : "";
+				/* 	$form_input .= "<label><input type=\"checkbox\"$required id=\"MULTIPLE_$question->id_$key\" name=\"MULTIPLE_$question->id_$key\"  value=\"$value\"$checked /> $value</label><br/>\n"; */
+				$form_input .= '
+		<li>
+			<label class="checkbox-lbl">
+				<input id="' . $question->id . '_' . trim( stripslashes( $key )) . '" ' . $required . ' name="MULTIPLE_' . $question->id . '[]"  type="checkbox" value="' . trim( stripslashes( $value )) . '" ' . $checked . '/>
+				<span>' . trim( stripslashes( $value )) . '</span>
+			</label>
+		</li>';
 			}
-			echo "</ul>";
-			//echo '<input name="'.$answer_id.'" type="hidden" value="'.$answer_id.'" />';
+			$form_input .= '
+	</ul>';
+			//$form_input .= '<input name="'.$answer_id.'" type="hidden" value="'.$answer_id.'" />';
 			break;
+			
 		case "DROPDOWN" :
+		
 			$dd_type = $question->system_name == 'state' ? 'name="state"' : 'name="DROPDOWN_' . $question->id . '"';
 			$values = explode(",", $question->response);
 			//$answers = explode ( ",", $edits );
-			echo '<select ' . $dd_type . ' ' . $required . ' ' . $required . ' id="DROPDOWN_' . $question->id . '"  />';
-			echo '<option value="' . $edits . '">' . $edits . '</option>';
+			$form_input .= '<p class="event_form_field">' . $label;
+			$form_input .= '<select ' . $dd_type . ' ' . $required . ' ' . $required . ' id="DROPDOWN_' . $question->id . '"  />';
+			$form_input .= '<option value="' . $edits . '">' . $edits . '</option>';
 			foreach ($values as $key => $value) {
 				//$checked = in_array ( $value, $answers ) ? " selected =\" selected\"" : "";
-				echo '<option value="' . trim($value) . '" /> ' . trim($value) . '</option>';
+				$form_input .= '<option value="' . trim($value) . '" /> ' . trim($value) . '</option>';
 			}
-			echo "</select>";
+			$form_input .= "</select>";
+			$form_input .= '</p>';
 			break;
+			
 		default :
 			break;
+			
 	}
+	
+	return $form_input;
 }

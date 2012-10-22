@@ -77,7 +77,8 @@ function ee_core_load_pue_update() {
 
 function ee_load_jquery_autocomplete_scripts(){
 	wp_enqueue_script('jquery-ui-core');
-	wp_register_script('jquery-ui-autocomplete', plugins_url( 'js/jquery.ui.autocomplete.min.js', __FILE__ ), array( 'jquery-ui-widget', 'jquery-ui-position' ), '1.8.2', true );
+	wp_register_script('jquery-ui-autocomplete', plugins_url( 'js/jquery.ui.autocomplete.min.js', __FILE__ ), array( 'jquery-ui-widget', 'jquery-ui-position' ), '1.8.2', TRUE );
 	wp_enqueue_script('jquery-ui-autocomplete');
 	wp_enqueue_script('jquery-ui-datepicker');
+
 }

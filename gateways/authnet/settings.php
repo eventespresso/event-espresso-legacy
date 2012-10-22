@@ -20,10 +20,10 @@ function event_espresso_authnet_payment_settings() {
 	}
 	$authnet_settings = get_option('event_espresso_authnet_settings');
 	if (empty($authnet_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/btn_cc_vmad.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/authnet/btn_cc_vmad.gif";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/authnet-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/authnet/authnet-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/btn_cc_vmad.gif";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/authnet-logo.png";
 		}
 		$authnet_settings['active'] = false;
 		$authnet_settings['authnet_login_id'] = '';
@@ -152,7 +152,7 @@ function event_espresso_display_authnet_settings() {
 							<label for="use_md5">
 								<?php _e('Use md5 check to secure payment response', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=authnet_md5"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input name="use_md5" type="checkbox" value="1" <?php echo $authnet_settings['use_md5'] ? 'checked="checked"' : '' ?> />
+							<input name="use_md5" type="checkbox" value="1" <?php echo isset($authnet_settings['use_md5']) && $authnet_settings['use_md5'] ? 'checked="checked"' : '' ?> />
 						</li>
 						<li>
 							<label for="authnet_md5_value">

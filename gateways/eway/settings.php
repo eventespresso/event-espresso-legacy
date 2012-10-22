@@ -29,10 +29,10 @@ function event_espresso_eway_payment_settings() {
 	}
 	$eway_settings = get_option('event_espresso_eway_settings');
 	if (empty($eway_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/eway/eway_logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/eway/eway_logo.png";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/eway/eway-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/eway/eway-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/eway/eway_logo.png";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/eway/eway-logo.png";
 		}
 		$eway_settings['eway_id'] = '';
 		$eway_settings['eway_username'] = '';

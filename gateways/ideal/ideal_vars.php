@@ -44,23 +44,48 @@ function espresso_process_ideal($payment_data) {
 		echo '<p>Er is een fout opgetreden bij het ophalen van de banklijst: ', $iDEAL->getErrorMessage(), '</p>';
 	}
 	?>
-	<div class="event-display-boxes">
-		<form id="ideal-mollie-form" class="ee-forms" method="post" action="<?php echo $home . '/?page_id=' . $org_options['notify_url']; ?>">
-			<select id ="bank_id" name="bank_id" class="required">
-				<option value=''>Kies uw bank</option>
+<div id="ideal-payment-option-dv" class="payment-option-dv">
 
-				<?php foreach ($bank_array as $bank_id => $bank_name) { ?>
-					<option value="<?php echo $bank_id ?>"><?php echo $bank_name ?></option>
-				<?php } ?>
+	<a id="ideal-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="ideal-payment-option-form" style="cursor:pointer;">
+		<img alt="Pay using iDeal Mollie" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/ideal/ideal-mollie-logo.png">
+	</a>	
 
-			</select>
-			<input name="amount" type="hidden" value="<?php echo $amount; ?>" />
-			<input name="ideal" type="hidden" value="1" />
-			<input name="id" type="hidden" value="<?php echo $payment_data['attendee_id']; ?>" />
-			<input id="submit_ideal" type="submit" class="btn_event_form_submit payment-submit" name="submit" value="Betaal via iDEAL" />
-		</form>
+	<div id="ideal-payment-option-form-dv" class="hide-if-js">	
+		<div class="event-display-boxes">
+		<div class = "event_espresso_form_wrapper">
+			<form id="ideal-mollie-form" class="ee-forms" method="post" action="<?php echo $home . '/?page_id=' . $org_options['notify_url']; ?>">
+			
+				<fieldset id="ideal-billing-info-dv">
+					<h4 class="section-title"><?php _e('Select Bank', 'event_espresso') ?></h4>
+					<p>
+						<select id ="bank_id" name="bank_id" class="required">
+							<option value=''>Kies uw bank</option>
+
+							<?php foreach ($bank_array as $bank_id => $bank_name) { ?>
+								<option value="<?php echo $bank_id ?>"><?php echo $bank_name ?></option>
+							<?php } ?>
+
+						</select>
+					</p>
+				</fieldset>
+				<input name="amount" type="hidden" value="<?php echo $amount; ?>" />
+				<input name="ideal" type="hidden" value="1" />
+				<input name="id" type="hidden" value="<?php echo $payment_data['attendee_id']; ?>" />
+				<p class="event_form_submit">
+					<input id="submit_ideal" type="submit" class="submit-payment-btn" name="submit" value="Betaal via iDEAL" />
+				</p>
+			</form>
+		</div>
+
+		<br/>
+		<p class="choose-diff-pay-option-pg">
+			<a class="hide-the-displayed" rel="ideal-payment-option-form" style="cursor:pointer;"><?php _e('Choose a different payment option', 'event_espresso'); ?></a>
+		</p>
+
 	</div>
-	<?php
+	</div>
+</div>
+<?php
 }
 
 

@@ -73,7 +73,7 @@ function event_espresso_time_editor($event_id = 0) {
     if ($espresso_premium != true)
         return;
     ?>
-<input type="button" class="button" id="add-time" value="<?php _e('Add Additional Time', 'event_espresso'); ?>" onClick="addTimeInput('dynamicTimeInput');">
+<input type="button" class="button" id="add-time" value="<?php _e('Add Additional Time', 'event_espresso'); ?>" onClick="addTimeInput('dynamicTimeInput');" />
 <script type="text/javascript">
         //Dynamic form fields
         var counter = <?php echo $time_counter++ ?>;

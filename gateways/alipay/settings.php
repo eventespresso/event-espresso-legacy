@@ -13,10 +13,10 @@ function event_espresso_alipay_settings() {
 	}
 	$authnet_aim_settings = get_option('event_espresso_alipay_settings');
 	if (empty($authnet_aim_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/alipay/new_logo.jpg")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/alipay/new_logo.jpg";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/alipay/alipay-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/alipay/alipay-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/alipay/new_logo.jpg";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/alipay/alipay-logo.png";
 		}
 		$alipay_settings['alipay_partner_id'] = '';
 		$alipay_settings['alipay_security_code'] = '';

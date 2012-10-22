@@ -1,232 +1,240 @@
 <?php
-function copy_event($recurrence_arr = array()){
-global $wpdb, $current_user;
-	$event_id = array_key_exists('event_id', $recurrence_arr)?$recurrence_arr['event_id']:$_REQUEST ['event_id'];
+function copy_event( $recurrence_array = array() ){
 
-	 $results = $wpdb->get_results("SELECT * FROM ". EVENTS_DETAIL_TABLE ." WHERE id ='" . $event_id . "'");
-
-		foreach ($results as $result){
-				$event_id= $result->id;
-				$display_reg_form=$result->display_reg_form;
-				$event_name=$result->event_name;
-				$event_desc=$result->event_desc;
-				$display_desc=$result->display_desc;
-				$event_identifier= substr($result->event_identifier, 0,13).uniqid('-');
-				$reg_limit = $result->reg_limit;
-				$allow_multiple = $result->allow_multiple;
-				$additional_limit = $result->additional_limit;
-
-                                $registration_start = array_key_exists('registration_start', $recurrence_arr)?$recurrence_arr['registration_start']:$result->registration_start;;
-                                $registration_end = array_key_exists('registration_end', $recurrence_arr)?$recurrence_arr['registration_end']:$result->registration_end;
-                                $start_date = array_key_exists('start_date', $recurrence_arr)?$recurrence_arr['start_date']:$result->start_date;
-                                $end_date = array_key_exists('end_date', $recurrence_arr)?$recurrence_arr['end_date']:$result->end_date;
-
-                                $start_time = $result->start_time;
-				$end_time = $result->end_time;
-
-				$is_active=$result->is_active;
-
-				$address=stripslashes_deep($result->address);
-				$address2=stripslashes_deep($result->address2);
-				$city=stripslashes_deep($result->city);
-				$state=stripslashes_deep($result->state);
-				$zip=stripslashes_deep($result->zip);
-				$country=stripslashes_deep($result->country);
-
-				$phone=$result->phone;
-
-				$send_mail= $result->send_mail;
-				$conf_mail= $result->conf_mail;
-				$email_id = $result->email_id;
-				$use_coupon_code= $result->use_coupon_code;
-				
-				$question_groups = $result->question_groups;
-				$allow_overflow = $result->allow_overflow;
-				$overflow_event_id = $result->overflow_event_id;
+	global $wpdb, $current_user;
 	
-				$event_code=uniqid($current_user->ID.'-');
-				
-				$registration_startT =  $result->registration_startT;
-				$registration_endT =  $result->registration_endT;
-				
-				$event_status = $result->event_status;
-				
-				$virtual_url = $result->virtual_url;
-				$virtual_phone = $result->virtual_phone;
-				
-				$member_only = $result->member_only;
-				$post_id = $result->post_id;
-				$post_type = $result->post_type;
-				$post_type = $result->post_type;
-				$externalURL = $result->externalURL;
-				$early_disc = $result->early_disc;
-				$early_disc_date = $result->early_disc_date;
-				$early_disc_percentage = $result->early_disc_percentage;
-				
-				$venue_title = $result->venue_title;
-				$venue_url = $result->venue_url;
-				$venue_phone = $result->venue_phone;
-				$venue_image = $result->venue_image;
-				$event_meta = $result->event_meta;
-				$require_pre_approval = $result->require_pre_approval;
-				$timezone_string = $result->timezone_string;
-				
-				
-		$sql=array('event_code' => $event_code, 'event_name'=>$event_name, 'event_desc'=>$event_desc, 'display_desc'=>$display_desc, 'display_reg_form'=>$display_reg_form, 'event_identifier'=>$event_identifier, 'address'=>$address, 'address2'=>$address2, 'city' => $city, 'state' => $state, 'zip' => $zip, 'country' => $country, 'phone'=>$phone, 'virtual_url'=>$virtual_url, 'virtual_phone'=>$virtual_phone, 'registration_start'=>$registration_start, 'registration_end'=>$registration_end, 'start_date'=>$start_date, 'end_date'=>$end_date, 'allow_multiple'=>$allow_multiple, 'send_mail'=>$send_mail, 'is_active'=>$is_active, 'event_status'=>$event_status, 'conf_mail'=>$conf_mail, 'use_coupon_code'=>$use_coupon_code, 'member_only'=>$member_only,'externalURL' => $externalURL, 'early_disc' => $early_disc, 'early_disc_date' => $early_disc_date, 'early_disc_percentage' => $early_disc_percentage, 'alt_email' => $alt_email, 'question_groups' => $question_groups, 'post_type' => $post_type, 'registration_startT' => $registration_startT, 'registration_endT' => $registration_endT, 'venue_title' => $venue_title, 'venue_url' => $venue_url, 'venue_phone' => $venue_phone, 'venue_image' => $venue_image,'event_meta' => $event_meta, 'require_pre_approval' => $require_pre_approval, 'timezone_string' => $timezone_string, 'submitted' => date('Y-m-d H:i:s', time()), 'reg_limit'=>$reg_limit, 'additional_limit'=>$additional_limit, 'recurrence_id'=>$recurrence_id, 'email_id' => $email_id, 'wp_user' => $current_user->ID,'post_id' => $post_id);
-		}
-		
-		$sql_data = array('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',
-						  '%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',
-						  '%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s', '%s', '%s', '%s','%d','%d','%d','%d', '%d', '%d');
-		
-		/*//check the counts to make sure the data is matched up correctly
-		echo 'SQL Count ';		
-		print count ($sql);
-		echo '<br />SQL Data Count ';	
-		print count($sql_data);
-		
-		//Output the data
-		echo '<br />SQL Values: ';	
-		print_r($sql);*/
+	$success = array();
+	$errors = array();
 	
-	//Add groupon reference if installed
-		if (function_exists('event_espresso_add_event_to_db_groupon')) {
-			$sql = event_espresso_add_event_to_db_groupon($sql, $_REQUEST['use_groupon_code']);
-			//print count ($sql);
-			$sql_data = array_merge((array)$sql_data, (array)'%s');
-			//print count($sql_data);
-			if (!$wpdb->insert( EVENTS_DETAIL_TABLE, $sql, $sql_data)){
-				$error = true;
-			}
-		}else{
-			if (!$wpdb->insert( EVENTS_DETAIL_TABLE, $sql, $sql_data)){
-				$error = true;
+//	$event_id = array_key_exists( 'event_id', $recurrence_array )? $recurrence_array['event_id'] : absint( $_REQUEST ['event_id'] );
+	$event_id = absint( $_REQUEST ['event_id'] );
+	
+	$SQL = "SELECT * FROM ". EVENTS_DETAIL_TABLE ." WHERE id = %d";
+	if ( $event = $wpdb->get_row( $wpdb->prepare( $SQL, $event_id ))){
+	
+		//printr( $event, '$event  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' ); die();
+				
+		$columns_and_values = array(
+		
+				'event_code' 					=> uniqid( $current_user->ID.'-' ), 
+				'event_name'					=> $event->event_name, 
+				'event_desc'					=> $event->event_desc, 
+				'display_desc'					=> $event->display_desc, 
+				'display_reg_form'			=> $event->display_reg_form, 
+				'event_identifier'			=> substr( $event->event_identifier, 0, 13 ) . uniqid('-'), 
+				'start_date'						=> $event->start_date, 
+				'end_date'						=> $event->end_date, 
+				'registration_start'			=> $event->registration_start, 
+				'registration_end'			=> $event->registration_end, 
+//				'start_date'						=> array_key_exists( 'start_date', $recurrence_array ) ? $recurrence_array['start_date'] : $event->start_date, 
+//				'end_date'						=> array_key_exists( 'end_date', $recurrence_array ) ? $recurrence_array['end_date'] : $event->end_date, 
+//				'registration_start'			=> array_key_exists( 'registration_start', $recurrence_array ) ? $recurrence_array['registration_start'] : $event->registration_start, 
+//				'registration_end'			=> array_key_exists( 'registration_end', $recurrence_array ) ? $recurrence_array['registration_end'] : $event->registration_end, 
+				
+//				'registration_startT' 		=> array_key_exists( 'registration_startT', $recurrence_array ) ? $recurrence_array['registration_startT'] : $event->registration_startT, 
+//				'registration_endT' 		=> array_key_exists( 'registration_endT', $recurrence_array ) ? $recurrence_array['registration_endT'] : $event->registration_endT, 
+				'registration_startT' 		=> $event->registration_startT, 
+				'registration_endT' 		=> $event->registration_endT, 
+				'phone'							=> $event->phone, 
+				'virtual_url'						=> $event->virtual_url,				
+				'virtual_phone'				=> $event->virtual_phone, 
+				'reg_limit'						=> $event->reg_limit, 
+				'allow_multiple'				=> $event->allow_multiple, 
+				'additional_limit'			=> $event->additional_limit,
+				'send_mail'						=> $event->send_mail, 
+				'is_active'							=> $event->is_active, 
+				
+				'event_status'					=> $event->event_status, 
+				'conf_mail'						=> $event->conf_mail, 
+				'use_coupon_code'			=> $event->use_coupon_code, 
+				'use_groupon_code'		=> $event->use_groupon_code,				
+				'coupon_id'						=> $event->coupon_id,
+				'member_only'				=> $event->member_only,				
+				'post_id' 							=> $event->post_id,
+				'post_type' 						=> $event->post_type,				 
+				'externalURL' 					=> $event->externalURL, 
+				'early_disc' 						=> $event->early_disc,
+				
+				'early_disc_date' 			=> $event->early_disc_date, 
+				'early_disc_percentage' 	=> $event->early_disc_percentage,				
+				'question_groups' 			=> $event->question_groups, 
+				'allow_overflow' 				=> $event->allow_overflow, 
+				'overflow_event_id' 		=> $event->overflow_event_id, 
+				'recurrence_id'				=> $event->recurrence_id, 
+				'email_id' 						=> $event->email_id, 
+				'alt_email' 						=> $event->alt_email,
+				'event_meta' 					=> $event->event_meta, 
+				'wp_user' 						=> $current_user->ID,
+				
+				'require_pre_approval' 	=> $event->require_pre_approval, 
+				'timezone_string' 			=> $event->timezone_string, 
+				'submitted' 					=> date('Y-m-d H:i:s', time()), 
+				'ticket_id' 						=> $event->ticket_id
+
+		);
+		
+		$data_formats = array(
+				'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', 
+				'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', 
+				'%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s', 
+				'%s', '%s', '%s', '%s', '%d', '%d', '%d', '%s', '%s', '%d', 
+				'%d', '%s', '%s', '%d'		
+		);
+		
+	}
+
+	
+	if ( $wpdb->insert( EVENTS_DETAIL_TABLE, $columns_and_values, $data_formats )) {
+
+		$new_id = $wpdb->insert_id;
+
+		$SQL = "SELECT * FROM ". EVENTS_CATEGORY_REL_TABLE ." WHERE event_id = %d ORDER BY id";
+		if ( $event_categories = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ))){
+			foreach ( $event_categories as $category ) {
+				if( ! empty( $category->cat_id )) {
+					$columns_and_values = array( 'event_id' => $new_id, 'cat_id' => $category->cat_id );
+					$data_formats = array( '%d', '%d'	);
+					if ( ! $wpdb->insert( EVENTS_CATEGORY_REL_TABLE, $columns_and_values, $data_formats )) {
+						$error[] = __('An error occured. Event category ID#','event_espresso') . $category->cat_id . __(' was not saved.','event_espresso');
+					}
+				}
 			}
 		}
 
-	$new_id = $wpdb->insert_id;
 
-	$event_categories = $wpdb->get_results("SELECT * FROM ". EVENTS_CATEGORY_REL_TABLE ." WHERE event_id = '".$event_id."' ORDER BY id");
-		foreach ($event_categories as $category){
-					if ($category->event_id != ''){
-
-						foreach (array($category->event_id) as $k=>$v){
-							if($v != '') {
-								$insert_cat = "INSERT INTO ".EVENTS_CATEGORY_REL_TABLE." (event_id, cat_id) VALUES ('".$new_id."', '".$category->cat_id."')";
-								if (!$wpdb->query($insert_cat)){
-									$error = true;
-								}
-							}
-						}
+		$SQL = "SELECT * FROM ". EVENTS_VENUE_REL_TABLE ." WHERE event_id = %d ORDER BY id";
+		if ( $event_venues = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ))){
+			foreach ( $event_venues as $venue ) {
+				if( ! empty( $venue->venue_id )) {
+					$columns_and_values = array( 'event_id' => $new_id, 'venue_id' => $venue->venue_id );
+					$data_formats = array( '%d', '%d'	);
+					if ( ! $wpdb->insert( EVENTS_VENUE_REL_TABLE, $columns_and_values, $data_formats )) {
+						$error[] = __('An error occured. Event venue ID#','event_espresso') . $venue->venue_id . __(' was not saved.','event_espresso');
 					}
 				}
-	$event_venues = $wpdb->get_results("SELECT * FROM ". EVENTS_VENUE_REL_TABLE ." WHERE event_id = '".$event_id."' ORDER BY id");
-		foreach ($event_venues as $venue){
-					if ($venue->event_id != ''){
+			}
+		}
 
-						foreach (array($venue->event_id) as $k=>$v){
-							if($v != '') {
-								$insert_venue = "INSERT INTO ".EVENTS_VENUE_REL_TABLE." (event_id, venue_id) VALUES ('".$new_id."', '".$venue->venue_id."')";
-								if (!$wpdb->query($insert_venue)){
-									$error = true;
-								}
-							}
-						}
+
+		$SQL = "SELECT * FROM ". EVENTS_PERSONNEL_REL_TABLE ." WHERE event_id = %d ORDER BY id";
+		if ( $event_persons = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ))){
+			foreach ( $event_persons as $person ) {
+				if( ! empty( $person->person_id )) {
+					$columns_and_values = array( 'event_id' => $new_id, 'person_id' => $person->person_id );
+					$data_formats = array( '%d', '%d'	);
+					if ( ! $wpdb->insert( EVENTS_PERSONNEL_REL_TABLE, $columns_and_values, $data_formats )) {
+						$error[] = __('An error occured. Event person ID#','event_espresso') . $person->person_id . __(' was not saved.','event_espresso');
 					}
 				}
-				
-	$event_persons = $wpdb->get_results("SELECT * FROM ". EVENTS_PERSONNEL_REL_TABLE ." WHERE event_id = '".$event_id."' ORDER BY id");
-		foreach ($event_persons as $person){
-					if ($person->event_id != ''){
+			}
+		}
 
-						foreach (array($person->event_id) as $k=>$v){
-							if($v != '') {
-								$insert_person = "INSERT INTO ".EVENTS_PERSONNEL_REL_TABLE." (event_id, person_id) VALUES ('".$new_id."', '".$person->person_id."')";
-								if (!$wpdb->query($insert_person)){
-									$error = true;
-								}
-							}
-						}
+
+		$SQL = "SELECT * FROM ". EVENTS_DISCOUNT_REL_TABLE ." WHERE event_id = %d ORDER BY id";
+		if ( $event_discounts = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ))){
+			foreach ( $event_discounts as $discount ) {
+				if( ! empty( $discount->discount_id )) {
+					$columns_and_values = array( 'event_id' => $new_id, 'discount_id' => $discount->discount_id );
+					$data_formats = array( '%d', '%d'	);
+					if ( ! $wpdb->insert( EVENTS_DISCOUNT_REL_TABLE, $columns_and_values, $data_formats )) {
+						$error[] = __('An error occured. Event discount ID#','event_espresso') . $discount->discount_id . __(' was not saved.','event_espresso');
 					}
 				}
-						
-	$event_discounts = $wpdb->get_results("SELECT * FROM ". EVENTS_DISCOUNT_REL_TABLE ." WHERE event_id = '".$event_id."' ORDER BY id");
-		foreach ($event_discounts as $discount){
-					if ($discount->event_id != ''){
+			}
+		}
 
-						foreach (array($discount->event_id) as $k=>$v){
-							if($v != '') {
-								$insert_discount = "INSERT INTO ".EVENTS_DISCOUNT_REL_TABLE." (event_id, discount_id) VALUES ('".$new_id."', '".$discount->discount_id."')";
-								if (!$wpdb->query($insert_discount)){
-									$error = true;
-								}
-							}
-						}
+
+		$SQL = "SELECT * FROM ". EVENTS_START_END_TABLE ." WHERE event_id = %d ORDER BY id";
+		if ( $event_times = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ))){
+			foreach ( $event_times as $event_time ) {
+				if ( ! empty( $event_time )) {
+					$columns_and_values = array( 
+							'event_id' => $new_id, 
+							'start_time' => $event_time->start_time, 
+							'end_time' => $event_time->end_time, 
+							'reg_limit' => $event_time->reg_limit 
+					);
+					$data_formats = array( '%d', '%s', '%s', '%d'	);
+					if ( ! $wpdb->insert( EVENTS_START_END_TABLE, $columns_and_values, $data_formats )) {
+						$error[] = __('An error occured. Event time details with ID#','event_espresso') . $event_time->id . __(' were not saved.','event_espresso');
 					}
 				}
+			}
+		}
 
-	$event_times = $wpdb->get_results("SELECT * FROM ". EVENTS_START_END_TABLE ." WHERE event_id = '".$event_id."' ORDER BY id");
-		foreach ($event_times as $event_time){
-					if ($event_time->start_time != ''){
 
-						foreach (array($event_time->start_time) as $k=>$v){
-							if($v != '') {
-								$sql3="INSERT INTO ".EVENTS_START_END_TABLE." (event_id, start_time, end_time) VALUES ('".$new_id."', '".$v."', '".$event_time->end_time."')";
-								//echo "$sql3 <br>";
-								if (!$wpdb->query($sql3)){
-									$error = true;
-								}
-							}
-						}
+		$SQL = "SELECT * FROM ". EVENTS_PRICES_TABLE ." WHERE event_id = %d ORDER BY id";
+		if ( $event_prices = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ))){
+			foreach ( $event_prices as $event_price ) {
+				if ( ! empty( $event_price )) {
+					$columns_and_values = array( 
+							'event_id' => $new_id, 
+							'price_type' => $event_price->price_type, 
+							'event_cost' => $event_price->event_cost, 
+							'surcharge' => $event_price->surcharge, 
+							'surcharge_type' => $event_price->surcharge_type, 
+							'member_price' => $event_price->member_price, 
+							'member_price_type' => $event_price->member_price_type, 
+							'max_qty' => $event_price->max_qty, 
+							'max_qty_members' => $event_price->max_qty_members 
+					);
+					$data_formats = array( '%d', '%s', '%f', '%f', '%s', '%f', '%s', '%d', '%d' );
+					if ( ! $wpdb->insert( EVENTS_PRICES_TABLE, $columns_and_values, $data_formats )) {
+						$error[] = __('An error occured. Event price details with ID#','event_espresso') . $event_price->id . __(' were not saved.','event_espresso');
 					}
 				}
-	$event_prices = $wpdb->get_results("SELECT * FROM ". EVENTS_PRICES_TABLE ." WHERE event_id = '".$event_id."' ORDER BY id");
-		foreach ($event_prices as $event_price){
-					if ($event_price->event_cost != ''){
-						foreach (array($event_price->event_cost) as $k=>$v){
-							if($v != '') {
-								$prices_sql="INSERT INTO ".EVENTS_PRICES_TABLE." (event_id, event_cost, surcharge, price_type, member_price, member_price_type) VALUES ('".$new_id."', '".$v."', $event_price->surcharge, '".$event_price->price_type."', '".$event_price->member_price."', '".$event_price->member_price_type."')";
-								//echo "$sql6 <br>";
-								if (!$wpdb->query($prices_sql)){
-									$error = true;
-								}
-							}
-						}
-					}
-				}
+			}
+		}
 
-	if ($error != true){?>
-		<div id="message" class="updated fade"><p><strong><?php _e('The event','event_espresso'); ?> <a href="<?php echo $_SERVER["REQUEST_URI"]?>#event-id-<?php echo $wpdb->insert_id;?>"><?php echo stripslashes($event_name)?></a> <?php _e('has been added.','event_espresso'); ?></strong></p></div>
-<?php }else { ?>
-		<div id="message" class="error"><p><strong><?php _e('There was an error in your submission, please try again. The event was not saved!','event_espresso'); ?><?php  print $wpdb->print_error(); ?>.</strong></p></div>
-<?php }
 
-/*
- * With the recursion of this function, additional recurring events will be added
- */
-static $counter = 1;
-         if ( count( $recurrence_arr) > 0 ) {
-             
+/*		static $counter = 1;
+        if ( count( $recurrence_array ) > 0 ) {             
             //$recurrence_dates = array_shift($recurrence_dates); //Remove the first item from the array since it will be added after this recursion
-            foreach ($recurrence_arr as $r_a){
-
-                echo_f($event_id, $r_a['start_date'] );
-
+            foreach ( $recurrence_array as $recurrence ){
                 copy_event(
                         array(
-                            'event_id'     => $event_id,
-                            'recurrence_id'     => $recurrence_id,
-                            'start_date'        =>$r_a['start_date'],
-                            'registration_start'=>$r_a['registration_start'],
-                            'registration_end'  =>$r_a['registration_end']
+                            'event_id'     			=>$event_id,
+                            'recurrence_id'     	=>$event->recurrence_id,
+                            'start_date'        		=>$recurrence['start_date'],
+                            'end_date'        		=>$recurrence['end_date'],
+                            'registration_start'	=>$recurrence['registration_start'],
+                            'registration_end'  	=>$recurrence['registration_end']
                         ));
-
                 $counter ++;
                 if ($counter >20) exit();
             }
-        }
-/*
- * End recursion, as part of recurring events.
- */
-        
+        }*/
+		// End recursion, as part of recurring events.
+			
+	} else {
+		$error[] = __('An error occured. The venue  was not saved.','event_espresso'); 
+	}
+
+	if ( empty( $error )) {
+		$event_url = add_query_arg( array( 'action' => 'edit', 'event_id' => $event_id ), admin_url( 'admin.php?page=events' ));
+		$success[] =  __('The event','event_espresso') . ' <a href="' . $event_url . '">' . stripslashes( $event->event_name ) . '</a> ' . __('has been successfully copied.','event_espresso');
+	}
+
+	if ( ! empty( $success )) : 
+?>
+	<div id="message" class="updated fade">
+	<?php foreach ( $success as $msg ) { ?>
+		<p><strong><?php echo $msg;?></strong></p>
+	<?php } ?>
+	</div>
+	
+<?php	
+	endif;
+		
+	if ( ! empty( $error )) : 
+?>
+	<div id="message" class="error">
+	<?php foreach ( $error as $msg ) { ?>
+		<p><strong><?php echo $msg;?></strong></p>
+	<?php } ;?>
+	</div>
+	
+<?php	
+		endif;
+		        
 }

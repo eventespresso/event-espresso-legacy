@@ -130,11 +130,17 @@ class Fdggutil {
 	}
 
 	public function submitButton($button_url) {
-		$out = '<li><form  method="post" name="payment_form" action="' . $this->gatewayUrl . '">';
+		$out = '
+		 <div id="firstdata_connect_2-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+			<img class="off-site-payment-gateway-img" width="16" height="16" src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png" alt="click to visit this payment gateway">
+			<form  method="post" name="payment_form" action="' . $this->gatewayUrl . '">';
 		$out .= $this->submitForm();
-		$out .= '<input class="espresso_payment_button_firstdata_connect_2" type="image" ';
+		$out .= '<input id="firstdata_connect_2-payment-option-lnk" class="payment-option-lnk" type="image" ';
 		$out .= 'alt="Pay using firstdata_connect_2" src="' . $button_url . '" />';
-		$out .= '</form></li>';
+		$out .= '
+		 	</form>
+		</div>';
+
 		return $out;
 	}
 

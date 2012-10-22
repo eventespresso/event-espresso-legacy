@@ -87,11 +87,14 @@ jQuery(document).ready(function() {
 
             var data = "action=event_espresso_calculate_total&" + jQuery("#event_espresso_shopping_cart").serialize();
 
-
             event_espresso_do_ajax(data,function(r){
-
-                jQuery('#event_total_price').html(r.grand_total);
-
+				jQuery('#event_total_price').html(r.grand_total);
+				if ( r.msg != undefined && r.msg != '' ) {
+					jQuery('#event_espresso_notifications').hide().html(r.msg).css({ 'padding':'1em', 'margin':'2em 10px 2em', 'border':'2px solid #eee', 'border-radius':'3px' }).fadeIn();
+				} else {
+					jQuery('#event_espresso_notifications').fadeOut();
+				}
+				
             });
 
 
@@ -214,16 +217,18 @@ jQuery(document).ready(function() {
     }
 
 
-    jQuery('#event_espresso_shopping_cart :input[id^="price_option-"], .price_id, #event_espresso_coupon_code ').change(function(){
 
+	//Couppon codes
+    jQuery('#event_espresso_shopping_cart :input[id^="price_option-"], .price_id, #event_espresso_coupon_code, #event_espresso_groupon_code').on( 'change', function(){
+	
         var me = jQuery(this);
-
-        if (me.attr('type') == "select-one"){ //only run the code if a select is modified
+		//alert( 'me id = ' + me.attr("id") + "\n" +  'me type = ' + me.prop("type") );
+			
+        if (me.prop('type') == "select-one"){ //only run the code if a select is modified
 
             //all selects have an id
             var id = me.attr("id");
-            var id = id.replace(/\D+/,"");
-
+            id = id.replace(/\D+/,"");
             //maximum attendees in a hidden field in each block
             var max_attendees = jQuery('#max_attendees-' + id).val();
 
@@ -234,6 +239,7 @@ jQuery(document).ready(function() {
             jQuery('#event_espresso_shopping_cart :input[name^="price_id[' + id + ']"]').each(function(){
 
                 num_selected_attendees += Number(jQuery(this).val());
+
 
             });
 
@@ -355,58 +361,63 @@ jQuery(document).ready(function() {
 
     });
 		
-		jQuery('#copy_to_all_button').click(function(){
-        /*
-         * Copies info from one section of the form to another.  Will help the user so
-         * they don't have to enter info again.
-         */
-				var val = jQuery(this).val().split('|');
-				var from_event_id = val[0];
-        var from_price_id = val[1];
-        var from_attendee_no = '1';
-
-        jQuery('.multi_regis_wrapper_attendee-additional .event_form_field :input').each(function(){
-            // console.log(jQuery(this).attr('id') + ' > ' + jQuery(this).val());
-            var val = jQuery(this).val();
-            var name = jQuery(this).attr('name');
-            var input_type = jQuery(this).attr('type');
 
 
-            var copy_field_name = name.replace(/(\[\d+\])(\[\d+\])(\[\d+\])/,"[" + from_event_id + "][" + from_price_id + "][" + from_attendee_no + "]");
+   /*
+     * Copies info from one section of the form to another.  Will help the user so
+     * they don't have to enter info again.
+     */
+	jQuery('.copy-all-button').on( 'click', function() {
+	
+		var btn_clkd = jQuery(this);
+		var val = btn_clkd.val().split('|');
+		var from_event_id = val[0];
+		var from_price_id = val[1];
+		var from_attendee_no = '1';
+		
+		jQuery('.multi_regis_wrapper_attendee-additional .event_form_field :input').each(function(){
+	        // console.log(jQuery(this).attr('id') + ' > ' + jQuery(this).val());
+	        var val = jQuery(this).val();
+	        var name = jQuery(this).attr('name');
+	        var input_type = jQuery(this).attr('type');
 
-            // alert(copy_field_name);
+	        var copy_field_name = name.replace(/(\[\d+\])(\[\d+\])(\[\d+\])/,"[" + from_event_id + "][" + from_price_id + "][" + from_attendee_no + "]");
+	        // alert(copy_field_name);
 
-            var copy_from = jQuery(":input[name='" + copy_field_name + "']");
-
-            //console.log(jQuery(this).attr('name') + ' > ' + copy_field_name + ' > ' + copy_from.val());
-            switch (input_type)
-            {
-                case 'text':
-                case 'textarea':
-                    jQuery(this).val(copy_from.val());
-                    break;
-                case 'radio':
-                case 'checkbox':
-
-                    if (copy_from.attr('checked') && val == copy_from.val())
-                        jQuery(this).attr("checked", "checked");
-
-                    break;
-                default:
-                    jQuery(this).val(copy_from.val());
-            }
-
-
-
-        //console.log(jQuery('#multi_regis_form_fields-' + to + " input[name='" + new_name + "']").val());
-
-        //
+	        var copy_from = jQuery(":input[name='" + copy_field_name + "']");
+	        //console.log(jQuery(this).attr('name') + ' > ' + copy_field_name + ' > ' + copy_from.val());
+		 
+	        switch (input_type) {
+		 
+	            case 'text':
+	            case 'textarea':
+	                jQuery(this).val(copy_from.val());
+	                break;
+				 
+	            case 'radio':
+	            case 'checkbox':
+	                if (copy_from.attr('checked') && val == copy_from.val())
+	                    jQuery(this).attr("checked", "checked");
+	                break;
+				 
+	            default:
+	                jQuery(this).val(copy_from.val());
+				 
+			}
+        		//console.log(jQuery('#multi_regis_form_fields-' + to + " input[name='" + new_name + "']").val());
 
         });
-
-
+	 	
+		btn_hght = btn_clkd.parent('.copy-all-button-wrapper').innerHeight();
+		btn_wdth = btn_clkd.parent('.copy-all-button-wrapper').innerWidth();
+		btn_clkd.parent().next('.copy-all-button-success').css({ 'height' : btn_hght, 'width' : btn_wdth }).fadeIn(100).fadeOut(2000);
 
     });
+
+
+
+
+
 
     function event_espresso_do_ajax(data, callback){
 
