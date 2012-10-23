@@ -113,7 +113,7 @@
 	
 		$chargeResponse = new PayChoiceChargeResponse();
 		$chargeResponse->transactionGuid = $xml["TransactionGuid"];
-		$chargeResponse->errorCode = $xml["ErrorCode"];
+		$chargeResponse->errorCode = (array)$xml["ErrorCode"];
 		$chargeResponse->errorDescription = $xml["ErrorDescription"];
 		$chargeResponse->approved = $xml["StatusCode"] == "0" ? true : false;
 		$chargeResponse->status = $xml["Status"];
