@@ -2,12 +2,12 @@
 # This file is distributed under the same license as the Event Espresso package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2012-09-06 17:08-0700\n"
+"PO-Revision-Date: 2012-10-23 16:10-0700\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/0.1\n"
+"X-Generator: Poedit 1.5.3\n"
 "Project-Id-Version: Event Espresso\n"
 "POT-Creation-Date: \n"
 "Last-Translator: Chris Reynolds <chris@jazzsequence.com>\n"
@@ -32,10 +32,13 @@ msgstr "Alle Anwender"
 #: ../../../espresso-permissions/trunk/espresso-permissions.php:400
 msgid "Access to selected admin pages below and personal events/attendees."
 msgstr ""
+"Zugang zu unten ausgewählten Adminseiten und persönlichen Veranstaltungen/"
+"Teilnehmern."
 
 #: ../../../espresso-permissions-pro/trunk/espresso-permissions-pro.php:283
 msgid "Minimum level required to use the Front Event Manager page?"
 msgstr ""
+"Mindestlevel erforderlich, um die Front-Eventmanager Seite zu benutzen?"
 
 #: ../../../espresso-permissions-pro/trunk/espresso-permissions-pro.php:278
 msgid "Espresso Master Admin"
@@ -51,13 +54,16 @@ msgstr "Espresso Event Manager"
 
 #: ../../../espresso-permissions-pro/trunk/espresso-permissions-pro.php:264
 msgid "Regional managers are in charge only of their staff?"
-msgstr ""
+msgstr "Regionalmanager können nur Ihre eigenen Mitarbeiter verwalten?"
 
 #: ../../../espresso-permissions/trunk/espresso-permissions.php:397
 msgid ""
 "Access to selected admin pages below, personal events/attendees, and any "
 "events/attendees that are located within the assigned locale/region."
 msgstr ""
+"Zugang zu unten ausgewählten Adminseiten, persönlichen Veranstaltungen/"
+"Teilnehmern und allen Veranstaltungen/Teilnehmer, die in unten ausgewählten "
+"Bereichen/Regionen liegen."
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:41
 msgid "Transaction Total"
@@ -102,6 +108,10 @@ msgid ""
 "not found it then uses the copy found in the main \"wp-content/event-"
 "espresso/templates/css/themeroller/\" directory."
 msgstr ""
+"Wenn Sie diese Option aktivieren, sucht Event Espresso zuerst im \"wp-"
+"content/uploads/espresso/themeroller/\"-Ordner nach einer Kopie des "
+"Stylesheets, falls es dort keine Kopie findet verwendet es die im "
+"Hauptordner \"wp-content/event-espresso/templates/css/themeroller/\"."
 
 #: ../includes/admin-files/template_settings/templates_help.php:69
 msgid ""
@@ -110,6 +120,11 @@ msgid ""
 "stylesheets however are not available if you have copied the default "
 "stylesheet to the uploads directory to customize yourself."
 msgstr ""
+"Falls Event Espresso die Originalkopie des Stylesheets verwendet, haben Sie "
+"die Möglichkeit von einer Reihe alternativen Sheets auszuwählen. Diese "
+"zusätzlichen Stylesheets sind allerdings nicht verfügbar, wenn Sie die "
+"Standardstylesheets in den uploads-Ordner kopiert haben um sie selbst "
+"anzupassen."
 
 #: ../includes/admin-files/template_settings/templates_help.php:74
 msgid ""
@@ -155,6 +170,8 @@ msgid ""
 "Upload your desired ThemeRoller styles to the \"wp-content/uploads/espresso/"
 "themeroller/\" directory on your server."
 msgstr ""
+"Laden Sie das gewünschte ThemeRoller Style in den \"wp-content/uploads/"
+"espresso/themeroller/\"-Ordner auf Ihren Server hoch."
 
 #: ../includes/admin-files/template_settings/templates_help.php:94
 msgid ""
@@ -162,6 +179,10 @@ msgid ""
 "in the \"wp-content/uploads/espresso/themeroller/\" directory. This will "
 "tell Event Espresso that you want to use custom ThemeRoller CSS files."
 msgstr ""
+"Dieser Schritt ist sehr wichtig. Stellen Sie sicher, dass eine leere \"index."
+"php\"-Datei in dem  \"wp-content/uploads/espresso/themeroller/\"-Ordner "
+"liegt. Dies weist Event Espresso darauf hin, dass Sie eigene ThemeRoller CSS "
+"Dateien verwenden wollen."
 
 #: ../includes/admin-files/template_settings/templates_help.php:95
 msgid ""
@@ -169,6 +190,10 @@ msgid ""
 "file. Also make sure your custom ThemeRoller CSS files look something like "
 "this \"wp-content/uploads/espresso/themeroller/my-custom-theme/style.css\"."
 msgstr ""
+"Stellen Sie sicher, dass die Datei \"wp-content/uploads/espresso/themeroller/"
+"index.php\" existiert. Außerdem müssen Ihre eigene ThemeRoller CSS Dateien "
+"aussehen wie etwa diese \"wp-content/uploads/espresso/themeroller/my-custom-"
+"theme/style.css\"."
 
 #: ../includes/admin-reports/event_list_attendees.php:319
 msgid "View/Download Ticket"
@@ -176,7 +201,7 @@ msgstr "Ticket anzeigen/herunterladen"
 
 #: ../includes/functions/admin_menu.php:93
 msgid "Event Espresso - Ticket Customization"
-msgstr ""
+msgstr "Event Espresso - Ticketanpassung"
 
 #: ../includes/functions/admin_menu.php:93
 #: ../../../espresso-permissions/trunk/espresso-permissions.php:502
@@ -269,11 +294,11 @@ msgstr "Rechnungsnummer"
 
 #: ../../../event-espresso/trunk/gateways/Invoice/lib/templates/index.php:62
 msgid "Bill To:"
-msgstr ""
+msgstr "Rechnungsadresse:"
 
 #: ../../../event-espresso/trunk/gateways/Invoice/lib/templates/index.php:80
 msgid "Ship To:"
-msgstr ""
+msgstr "Lieferadresse:"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Standard/EE_Paypal_Standard.class.php:381
 msgid ""
@@ -321,26 +346,26 @@ msgstr ""
 #: ../../../event-espresso/trunk/includes/admin-reports/event_list_attendees.php:125
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/Registrations_List_Table.class.php:71
 msgid "Registration Code"
-msgstr ""
+msgstr "Registrierungscode"
 
 #: ../../../event-espresso/trunk/includes/admin-reports/event_list_attendees.php:129
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/Registrations_List_Table.class.php:68
 msgid "Registration Date"
-msgstr ""
+msgstr "Registrierungsdatum"
 
 #: ../../../event-espresso/trunk/includes/admin-reports/event_list_attendees.php:137
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/Registrations_List_Table.class.php:74
 msgid "Event Date & Time"
-msgstr ""
+msgstr "Veranstaltungstag & -Zeit"
 
 #: ../../../event-espresso/trunk/includes/admin-reports/event_list_attendees.php:149
 msgid "TXN ID"
-msgstr ""
+msgstr "TXN ID"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin.php:236
 #: ../../../event-espresso/trunk/includes/admin_screens/admin.php:271
 msgid " has been successfully deleted."
-msgstr ""
+msgstr "wurde erfolgreich gelöscht."
 
 #: ../../../event-espresso/trunk/includes/admin_screens/admin.php:239
 msgid "An error occured. The event could not be moved to the trash."
@@ -442,7 +467,7 @@ msgstr ""
 
 #: ../../../event-espresso/trunk/includes/admin_screens/events/event_functions.php:863
 msgid "Tickets Left"
-msgstr ""
+msgstr "Tickets übrig"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:166
 msgid "Only?"
@@ -450,40 +475,40 @@ msgstr ""
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:167
 msgid "reduces price"
-msgstr ""
+msgstr "reduziert den Preis"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:168
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:169
 msgid "Applied"
-msgstr ""
+msgstr "Angewendet"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:168
 msgid "as a Tax"
-msgstr ""
+msgstr "als eine Steuer"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:169
 msgid "as "
-msgstr ""
+msgstr "als"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:169
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:169
 msgid "$"
-msgstr ""
+msgstr "$"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:170
 msgid "Add as a Default"
-msgstr ""
+msgstr "Als Standard hinzufügen"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:170
 msgid "Price to New Events?"
-msgstr ""
+msgstr "Preis für neue Veranstaltungen?"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:171
 msgid "Order of"
-msgstr ""
+msgstr "Bestellung von"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:171
 msgid "Application"
@@ -491,11 +516,11 @@ msgstr ""
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/pricing.php:33
 msgid "Default Prices"
-msgstr ""
+msgstr "Standardpreise"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/pricing.php:33
 msgid "Added to New Events"
-msgstr ""
+msgstr "Hinzugefügt für neue Veranstaltungen"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/pricing.php:51
 msgid "Price Types"
@@ -636,7 +661,7 @@ msgstr "Bearbeite Veranstaltung #"
 
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/Registrations_List_Table.class.php:196
 msgid "zip"
-msgstr ""
+msgstr "PLZ"
 
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/Registrations_List_Table.class.php:227
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/Registrations_List_Table.class.php:228
@@ -655,20 +680,21 @@ msgstr ""
 
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/templates/reg_admin_details_wrapper.template.php:4
 msgid "Registration # "
-msgstr ""
+msgstr "Registrierung #"
 
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/templates/reg_admin_details_wrapper.template.php:6
 msgid "Registration Status : "
-msgstr ""
+msgstr "Registrierungsstatus:"
 
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/templates/reg_admin_overview.template.php:15
 msgid "Display Registrations from "
-msgstr ""
+msgstr "Zeige Registrierungen von"
 
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/templates/reg_admin_overview.template.php:22
 msgid ""
 "Advanced filters are available in the premium version of Event Espresso."
 msgstr ""
+"In der Premiumversion von Event Espresso sind zusätzliche Filter verfügbar."
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/Transactions_Admin_Page.core.php:224
 msgid "TXN Details"
@@ -721,11 +747,11 @@ msgstr "Zahlungserinnerung senden"
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:51
 msgid "view additional transaction session details"
-msgstr ""
+msgstr "Zeige zusätzliche Details der Transaktionssession"
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:58
 msgid "hide additional transaction session details"
-msgstr ""
+msgstr "Verstecke zusätzliche Details der Transaktionssession"
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:96
 msgid "Method"
@@ -744,17 +770,17 @@ msgstr "Antwort des Gateways"
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:99
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:337
 msgid "TXN ID / CHQ #"
-msgstr ""
+msgstr "TXN ID / CHQ #"
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:100
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:368
 msgid "P.O. / S.O. #"
-msgstr ""
+msgstr "P.O. / S.O. #"
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:101
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:375
 msgid "Notes / Extra Accounting"
-msgstr ""
+msgstr "Hinweise"
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:102
 msgid "Details"
@@ -771,27 +797,29 @@ msgstr "Bei dieser Transaktion wurde zuviel gezahlt!"
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:178
 msgid "Payments Total"
-msgstr ""
+msgstr "Gesamtsumme der Zahlungen"
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:184
 msgid ""
 "No payments have been applied to this transaction yet. Click \"Apply Payment"
 "\" below to make a payment."
 msgstr ""
+"Keine Zahlungen wurden bisher auf diese Transaktion angewendet. Klicken Sie "
+"unten auf \"Zahlung anwenden\" um eine Zahlung zu tätigen."
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:252
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:389
 msgid "Apply Payment"
-msgstr ""
+msgstr "Zahlung anwenden"
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:257
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:399
 msgid "Apply Refund"
-msgstr ""
+msgstr "Rückzahlung anwenden"
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:267
 msgid "Apply a Payment to Transaction #"
-msgstr ""
+msgstr "Zahlung anwenden auf Transaktion #"
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:272
 msgid "Edit Payment #"
@@ -863,16 +891,16 @@ msgstr ""
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_txn_details.template.php:394
 msgid "Save Payment Details"
-msgstr ""
+msgstr "Zahlungsdetails speichern"
 
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_wrapper.template.php:12
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_wrapper.template.php:16
 msgid "Total Amount Due : "
-msgstr ""
+msgstr "Gesamte fällige Summe:"
 
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:220
 msgid "Start Time: "
-msgstr ""
+msgstr "Startzeit:"
 
 #: ../../../event-espresso/trunk/includes/functions/wp_hooks.php:13
 msgid ""
@@ -904,39 +932,45 @@ msgstr "Gateway NICHT deaktiviert!"
 
 #: ../../../event-espresso/trunk/includes/models/EEM_Payment.model.php:190
 msgid "No Transaction ID was supplied."
-msgstr ""
+msgstr "Keine Transaktions-ID wurde angewendet."
 
 #: ../../../event-espresso/trunk/includes/models/EEM_Payment.model.php:220
 msgid "A vaild payment object was not supplied."
-msgstr ""
+msgstr "Es wurde kein gültiges Zahlungsobjekt übermittelt."
 
 #: ../../../event-espresso/trunk/includes/models/EEM_Payment.model.php:243
 msgid "The payment has been "
-msgstr ""
+msgstr "Die Zahlung wurde"
 
 #: ../../../event-espresso/trunk/includes/models/EEM_Payment.model.php:251
 msgid "An error occured. The payment was "
-msgstr ""
+msgstr "Es ist ein Fehler aufgetreten. Die Zahlung wurde"
 
 #: ../../../event-espresso/trunk/includes/models/EEM_Payment.model.php:300
 msgid "No Payment ID was supplied."
-msgstr ""
+msgstr "Keine Zahlungs-ID übermittelt."
 
 #: ../../../event-espresso/trunk/includes/models/EEM_Payment.model.php:311
 msgid "An error occured. The payment has not been deleted succesfully."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Die Zahlung wurde nicht erfolgreich gelöscht."
 
 #: ../../../event-espresso/trunk/includes/models/EEM_Payment.model.php:317
 msgid ""
 "An error occured. The database record for the payment could not be located "
 "for deletion."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Der Datenbankeintrag für die Zahlung konnte "
+"nicht zum Löschen gefunden werden."
 
 #: ../../../event-espresso/trunk/includes/process-registration/thank_you_page.php:51
 msgid ""
 "Oops! Don't quite know how you ended up here, but it doesn't appear that you "
 "have registered for anything. Thanks for visiting the site anyways. "
 msgstr ""
+"Ups! Wir wissen zwar nicht genau, wie Sie auf diese Seite gestoßen sind, "
+"aber es scheint, als hätten Sie sich für nichts registriert. Trotzdem aber "
+"Danke für den Besuch dieser Seite."
 
 #: ../../../event-espresso/trunk/includes/process-registration/thank_you_page.php:53
 msgid "If you were looking to register, you might want to have a look here:  "
@@ -949,7 +983,7 @@ msgstr "Warenkorb leeren"
 
 #: ../../../event-espresso/trunk/templates/reg_page_checkout/registration_page_wrapper.template.php:37
 msgid "There is currently nothing in the Event Queue"
-msgstr ""
+msgstr "Der Event-Puffer ist derzeit leer."
 
 #: ../../../event-espresso/trunk/templates/reg_page_checkout/registration_page_wrapper.template.php:38
 msgid ""
@@ -1069,11 +1103,11 @@ msgstr "Sitz hinzufügen"
 
 #: ../../../espresso-seating/trunk/template/seating_chart_seat_list.php:124
 msgid "Seat List"
-msgstr ""
+msgstr "Sitzliste"
 
 #: ../../../espresso-seating/trunk/template/seating_chart_seat_list.php:136
 msgid "Bulk Edit"
-msgstr ""
+msgstr "Massenbearbeitung"
 
 #: ../../../espresso-seating/trunk/template/seating_chart_seat_list.php:187
 msgid ""
@@ -1093,7 +1127,7 @@ msgstr "Tag"
 #: ../../../espresso-seating/trunk/template/seating_chart_seat_list.php:234
 #: ../../../espresso-seating/trunk/template/seating_chart_seat_list.php:235
 msgid "Edit this item"
-msgstr ""
+msgstr "Bearbeite dieses Element"
 
 #: ../../../espresso-seating/trunk/template/seating_chart_seat_list.php:235
 msgid "Quick Edit"
@@ -1101,7 +1135,7 @@ msgstr "Schnellbearbeitung"
 
 #: ../../../espresso-seating/trunk/template/seating_chart_seat_list.php:236
 msgid "Move this item to the Trash"
-msgstr ""
+msgstr "Dieses Element in den Müll verschieben"
 
 #: ../../../espresso-seating/trunk/template/seating_chart_seat_list.php:236
 msgid "Trash"
