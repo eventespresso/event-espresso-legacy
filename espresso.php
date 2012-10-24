@@ -411,6 +411,13 @@ if (is_admin()) {
 	register_activation_hook(__FILE__, 'events_data_tables_install');
 	register_activation_hook(__FILE__, 'espresso_update_active_gateways');
 
+	$data_migrated_version = get_option( 'espresso_data_migrated' );	
+	if ( $data_migrated_version != espresso_version()) {
+		add_action('admin_init', 'events_data_tables_install' );
+	}
+	
+
+	
 	//Premium funtions. If this is a paid version, then we need to include these files.
 	//Premium upgrade options if the piad plugin is not installed
 	require_once("includes/premium_upgrade.php");
