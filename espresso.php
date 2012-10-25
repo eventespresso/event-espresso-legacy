@@ -119,9 +119,13 @@ $reg_page_ids = array(
 		'cancel_return' => $org_options['cancel_return'],
 		'notify_url' => $org_options['notify_url']
 );
-if (is_ssl())
-	$find = str_replace('https://', '', site_url()); else
+
+if (is_ssl()) {
+	$find = str_replace('https://', '', site_url());
+} else {
 	$find = str_replace('http://', '', site_url());
+}	 
+	
 $find = str_replace($_SERVER['SERVER_NAME'], '', $find);
 $uri_string = str_replace($find, '', $_SERVER['REQUEST_URI']);
 $uri_string = isset($_SERVER['QUERY_STRING'])?str_replace($_SERVER['QUERY_STRING'], '', $uri_string):$uri_string;
@@ -129,16 +133,29 @@ $uri_string = rtrim($uri_string, '?');
 $uri_string = trim($uri_string, '/');
 $this_page = basename($uri_string);
 $uri_segments = explode('/', $uri_string);
+
 foreach ($uri_segments as $uri_segment) {
-	$seg_page_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment));
-	if ($wpdb->num_rows > 0) {
-		if (in_array($seg_page_id, $reg_page_ids)) {
-			$this_is_a_reg_page = TRUE;
+	if ( $uri_segment != '' ) {
+		$seg_page_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment));
+		if ($wpdb->num_rows > 0) {
+			if (in_array($seg_page_id, $reg_page_ids)) {
+				$this_is_a_reg_page = TRUE;
+			}
+		}		
+	} else {
+		if ( get_option('show_on_front') == 'page' ) {
+			$frontpage = get_option('page_on_front');
+			if ( in_array( $frontpage, $reg_page_ids )) {
+				$this_is_a_reg_page = TRUE;
+			}
 		}
 	}
+
 }
 if (isset($_REQUEST['page_id']) || is_admin())
 	$this_is_a_reg_page = TRUE;
+	
+
 
 //This will (should) make sure everything is loaded via SSL
 //So that the "..not everything is secure.." message doesn't appear
