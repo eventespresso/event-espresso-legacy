@@ -402,8 +402,7 @@ function espresso_prepare_admin_email($data) {
 	$admin_attendee_link = espresso_edit_attendee($data->attendee->registration_id, $data->attendee->id, $data->attendee->event_id, 'admin', $data->attendee->fname . ' ' . $data->attendee->lname);
 
 	//Group registration check
-	if ($data->attendee->quantity > 0 && !$data->multi_reg)
-		$primary_attendee = $data->primary_attendee == true ? "<p><strong>" . __('Primary Attendee', 'event_espresso') . "</strong></p>" : '';
+	$primary_attendee = $data->attendee->quantity > 0 && !$data->multi_reg && $data->primary_attendee == true ? "<p><strong>" . __('Primary Attendee', 'event_espresso') . "</strong></p>" : '';
 
 	//Build the email title
 	$admin_message = "<h3>" . __('Registration Summary:', 'event_espresso') . "</h3>";

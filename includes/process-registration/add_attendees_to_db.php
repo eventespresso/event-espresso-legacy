@@ -241,15 +241,14 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 					}					
 				}					
 			} 
-
 			
-			if ( isset( $data_source['groupon'] )) {	
-				//$amount_pd = $data_source['groupon']['discount'];
-				$amount_pd = 0.00;
-				$data_source['final_price'] = 0.00;
-				$coupon_code = $data_source['groupon']['code'];
-				$payment_date = date(get_option('date_format'));
-				add_filter('filter_hook_espresso_attendee_cost', '__return_zero' );
+			// check for groupon 
+			$use_groupon =  isset( $data_source['use_groupon'][ $event_id ] ) && function_exists( 'espresso_apply_goupon_to_attendee' ) ? $data_source['use_groupon'][ $event_id ] == 'Y' : 'N';
+			if ( $use_groupon && isset( $data_source['groupon'] )) {	
+				if ( $new_att_price_data = espresso_apply_goupon_to_attendee( $event_id, $final_price, $data_source['groupon'] )) {
+					extract( $new_att_price_data );
+					$data_source['groupon'] = $groupon;
+				}			
 			}
 
 			$start_time = empty($start_time) ? '' : $start_time;
@@ -365,7 +364,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			} 
 
 			// update groupon table
-			if ( isset( $data_source['groupon'] )) {	
+			if ( isset( $data_source['groupon']['id'] )) {	
 				$groupon_used = "UPDATE " . EVENTS_GROUPON_CODES_TABLE . " SET groupon_status='0', attendee_id='" . $attendee_id . "', date='" . $payment_date . "' WHERE id = '" . $data_source['groupon']['id'] . "'";
 				$wpdb->query($groupon_used);	
 			}
@@ -697,6 +696,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $current_session_id ));
 				//printr( $attendees, '$attendees  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 				
+				$final_total = 0;
 				$sub_total = 0;
 				$discounted_total = 0;
 				$discount_amount = 0;
@@ -707,23 +707,26 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				foreach ($attendees as $attendee) {
 					if ( $attendee->is_primary ) {
 						$primary_attendee_id = $attendee->id;
-						$final_total = $attendee->total_cost;
+						
 					}
+					$final_total += $attendee->final_price;
 					$sub_total += (int)$attendee->quantity * $attendee->orig_price;
 					$discounted_total += (int)$attendee->quantity * $attendee->final_price;
+
+					//echo '<h2>$attendee->id : ' . $attendee->id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h2>';
+					//echo '<h4>$attendee->orig_price : ' . $attendee->orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+					//echo '<h4>$attendee->final_price : ' . $attendee->final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+					//echo '<h4>$attendee->quantity : ' . (int)$attendee->quantity . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+					//echo '<h4>$sub_total : ' . $sub_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+					//echo '<h4>$discounted_total : ' . $discounted_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+
 				}
 				$discount_amount = $sub_total - $discounted_total;
 				$total_cost = $discounted_total;
 				
-//echo '<h4>$attendee->id : ' . $attendee->id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//echo '<h4>$attendee->orig_price : ' . $attendee->orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//echo '<h4>$attendee->final_price : ' . $attendee->final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//echo '<h4>$attendee->quantity : ' . (int)$attendee->quantity . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//echo '<h4>$sub_total : ' . $sub_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//echo '<h4>$discounted_total : ' . $discounted_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //echo '<h4>$discount_amount : ' . $discount_amount . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //echo '<h4>$total_cost : ' . $total_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//echo '<h4>$final_total : ' . $final_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//echo '<h4>$final_total : ' . $final_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4><br/>';
 								
 				$total_cost = $total_cost < 0 ? 0.00 : (float)$total_cost;
 				
@@ -873,7 +876,30 @@ function espresso_verify_recaptcha( $skip_check = FALSE ) {
 			require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/recaptchalib.php');
 		}
 		
-		$resp = recaptcha_check_answer( $org_options['recaptcha_privatekey'], $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"] );
+		$recaptcha_privatekey = isset( $org_options["recaptcha_privatekey"] ) ? $org_options["recaptcha_privatekey"] : FALSE;
+		$remote_addr = isset( $_SERVER["REMOTE_ADDR"] ) ? $_SERVER["REMOTE_ADDR"] : FALSE;
+		$recaptcha_challenge_field = isset( $_POST["recaptcha_challenge_field"] ) ? $_POST["recaptcha_challenge_field"] : FALSE;
+		$recaptcha_response_field = isset( $_POST["recaptcha_response_field"] ) ? $_POST["recaptcha_response_field"] : FALSE;
+		
+		// check private key
+		if ( ! $recaptcha_privatekey ) {
+			echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, it appears that the ReCaptcha anti-spam settings are not correct. Please contact the site admin or click your browser\'s back button and try again.', 'event_espresso') . '</strong></p></div>';
+			return FALSE;			
+		}
+		
+		// check $remote_addr
+		if ( ! $remote_addr ) {
+			echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, an error occured and the anti-spam settings could not be verified. Please contact the site admin or click your browser\'s back button and try again.', 'event_espresso') . '</strong></p></div>';
+			return FALSE;			
+		}
+		
+		// check $recaptcha_challenge_field
+		if ( ! $recaptcha_challenge_field ) {
+			echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, an error occured and the anti-spam fields could not be verified. Please contact the site admin or click your browser\'s back button and try again.', 'event_espresso') . '</strong></p></div>';
+			return FALSE;			
+		}
+		
+		$resp = recaptcha_check_answer( $recaptcha_privatekey, $remote_addr, $recaptcha_challenge_field, $recaptcha_response_field );
 //		printr( $resp, '$resp  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 
 		if ( $resp->is_valid ) {
