@@ -138,10 +138,12 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 					$event_cost = (float)$event_cost > 0.00 ? (float)$event_cost : 0.00;
 //					echo '<h4>$discount : ' . $discount . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //					echo '<h4>$event_cost : ' . $event_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//					echo '<h4>$mer : ' . $mer . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 					do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line '. __LINE__ .' : $event_cost=' . $event_cost );
 					
 					if ( $mer ) {
+					
 						$coupon_details = array();					
 						$coupon_details['id'] = $coupon_id;
 						$coupon_details['code'] = $coupon_code;
@@ -156,7 +158,16 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 						$msg .= '<strong>' . __('Promotional code ', 'event_espresso') . $coupon_code . '</strong> ( ' . $discount_type_price . __(' discount', 'event_espresso') . ' )<br/>';
 	          		    $msg .= __('has being successfully applied to the following events', 'event_espresso') . ':<br/>';
 						
-					}								
+					} else {
+					
+						$msg = '<div id="event_espresso_notifications" class="clearfix event-data-display" style="">';
+						$msg .= '<p id="event_espresso_valid_coupon" style="margin:0;">';
+						$msg .= '<strong>' . __('Promotional code ', 'event_espresso') . $coupon_code . '</strong> ( ' . $discount_type_price . __(' discount', 'event_espresso') . ' )<br/>';
+	          		    $msg .= __('has being successfully applied to your registration', 'event_espresso');
+	          		    $msg .= '</p></div>';
+						echo $msg;
+						
+					}							
 
 	            } else {
 				

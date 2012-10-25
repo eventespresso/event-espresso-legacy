@@ -241,15 +241,26 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 					}					
 				}					
 			} 
+
+			// check for groupon 
+			if ( function_exists( 'event_espresso_process_groupon' )) {
+				if ( $groupon_results = event_espresso_process_groupon( $event_id, $final_price, $multi_reg )) {
+					//printr( $groupon_results, '$groupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+					if ( $groupon_results['valid'] ) {
+						$final_price = number_format( $groupon_results['event_cost'], 2, '.', '' );
+						$coupon_code = $groupon_results['code'];
+					}					
+				}					
+			} 
 			
 			// check for groupon 
-			$use_groupon =  isset( $data_source['use_groupon'][ $event_id ] ) && function_exists( 'espresso_apply_goupon_to_attendee' ) ? $data_source['use_groupon'][ $event_id ] == 'Y' : 'N';
-			if ( $use_groupon && isset( $data_source['groupon'] )) {	
-				if ( $new_att_price_data = espresso_apply_goupon_to_attendee( $event_id, $final_price, $data_source['groupon'] )) {
-					extract( $new_att_price_data );
-					$data_source['groupon'] = $groupon;
-				}			
-			}
+//			$use_groupon =  isset( $data_source['use_groupon'][ $event_id ] ) && function_exists( 'espresso_apply_goupon_to_attendee' ) ? $data_source['use_groupon'][ $event_id ] == 'Y' : 'N';
+//			if ( $use_groupon && isset( $data_source['groupon'] )) {	
+//				if ( $new_att_price_data = espresso_apply_goupon_to_attendee( $event_id, $final_price, $data_source['groupon'] )) {
+//					extract( $new_att_price_data );
+//					$data_source['groupon'] = $groupon;
+//				}			
+//			}
 
 			$start_time = empty($start_time) ? '' : $start_time;
 			$end_time = empty($end_time) ? '' : $end_time;
@@ -315,13 +326,13 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 					$tmp_session = wp_strip_all_tags( $_SESSION['espresso_session']['id'] );
 
 					$SQL = "SELECT id, registration_id FROM " . EVENTS_ATTENDEE_TABLE . ' ';
-					$SQL .= "WHERE attendee_session = %s";
+					$SQL .= "WHERE attendee_session = %s ";
 					$SQL .= $incomplete_filter;
 					
 					if ( $rem_attendee_ids = $wpdb->get_results($wpdb->prepare( $SQL, $tmp_session ))) {
 						foreach ( $rem_attendee_ids as $v ) {
 							if ( defined('ESPRESSO_SEATING_CHART')) {						
-								$SQL = "DELETE FROM " . EVENTS_SEATING_CHART_EVENT_SEAT_TABLE ;
+								$SQL = "DELETE FROM " . EVENTS_SEATING_CHART_EVENT_SEAT_TABLE . ' ';
 								$SQL .= "WHERE attendee_id = %d";
 								$wpdb->query($wpdb->prepare( $SQL, $v->id ));
 							}
@@ -330,7 +341,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 
 					$SQL = "DELETE t1, t2 FROM " . EVENTS_ATTENDEE_TABLE . "  t1 ";
 					$SQL .= "JOIN  " . EVENTS_ANSWER_TABLE . " t2 on t1.id = t2.attendee_id ";
-					$SQL .= "WHERE t1.attendee_session = %s";
+					$SQL .= "WHERE t1.attendee_session = %s ";
 					$SQL .= $incomplete_filter;
 					$wpdb->query($wpdb->prepare( $SQL, $tmp_session ));
 					

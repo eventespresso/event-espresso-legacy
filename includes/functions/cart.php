@@ -476,7 +476,7 @@ function espresso_filter_groupon_results( $groupon_results, $event_id, $mer ) {
 	if (function_exists('event_espresso_groupon_payment_page') && isset($_POST['event_espresso_groupon_code'])) {	
 		$use_groupon_code = isset( $_POST['use_groupon'][$event_id] ) ? $_POST['use_groupon'][$event_id] : 'N';				
 		if ( $results = event_espresso_groupon_payment_page( $event_id, $groupon_results['event_cost'], $mer, $use_groupon_code ) ) {
-			//printr( $results, '$results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+//			printr( $results, '$results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 			$groupon_results['valid'] = $results['valid'];
 			$groupon_results['error'] = $results['error'];
 			$groupon_results['msg'] = $results['msg'];
@@ -512,8 +512,10 @@ function espresso_filter_coupon_results( $coupon_results, $event_id, $mer ) {
 //	echo '<h4>$event_id : ' . $event_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //	echo '<h4>$mer : ' . $mer . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 	if (function_exists('event_espresso_coupon_payment_page') && isset($_POST['event_espresso_coupon_code'])) {	
-		$use_coupon_code = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';				
+		$use_coupon_code = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';		
+		//echo '<h4>$use_coupon_code : ' . $use_coupon_code . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';		
 		if ( $results = event_espresso_coupon_payment_page( $event_id, $coupon_results['event_cost'], $mer, $use_coupon_code ) ) {
+			//printr( $results, '$results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 			$coupon_results['valid'] = $results['valid'];
 			$coupon_results['error'] = $results['error'];
 			$coupon_results['msg'] = $results['msg'];
@@ -1013,7 +1015,7 @@ if (!function_exists('event_espresso_cart_link')) {
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
 
 		extract(shortcode_atts(
-										array(
+					array(
 								'event_id' => $this_event_id,
 								'anchor' => __('Register', 'event_espresso'),
 								'event_name' => ' ',
@@ -1022,7 +1024,9 @@ if (!function_exists('event_espresso_cart_link')) {
 								'event_page_id' => $org_options['event_page_id'], //instead of sending it in as a var, grab the id here.
 								'direct_to_cart' => 0,
 								'moving_to_cart' => "Please wait redirecting to cart page"
-										), $atts));
+							), 
+							$atts
+		));
 
 		$registration_cart_class = '';
 		ob_start();

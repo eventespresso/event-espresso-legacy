@@ -96,13 +96,13 @@ $attendee_num = 1;
 						</span>
 					</td>
 				</tr>
-				<?php if ($num_people > 1) { ?>
+				<?php if ($attendee_num > 1) { ?>
 				<tr>
 					<th scope="row" class="header">
 						<?php _e('Total Registrants:','event_espresso'); ?>
 					</th>
 					<td>
-						<span class="event_espresso_value"><?php echo (int)$num_people; ?></span>
+						<span class="event_espresso_value"><?php echo (int)$attendee_num; ?></span>
 					</td>
 				</tr>
 				<?php } ?>
