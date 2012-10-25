@@ -1,7 +1,7 @@
 <?php
 function enter_attendee_payments() {
 
-    global $wpdb, $org_options;
+	global $wpdb, $org_options;
  
 	$notifications['success'] = array(); 
 	$notifications['error']	 = array(); 
@@ -15,9 +15,10 @@ function enter_attendee_payments() {
 </div>';
 
 
+
 	$multi_reg = FALSE;
-	$event_id = isset($_REQUEST['event_id']) ? absint( $_REQUEST['event_id'] ) : '';
-	$registration_id = sanitize_text_field( $_REQUEST['registration_id'] );
+	$event_id = isset($_POST['event_id']) ? absint( $_POST['event_id'] ) : isset($_REQUEST['event_id']) ? absint( $_REQUEST['event_id'] ) : '';
+	$registration_id = isset( $_POST['registration_id'] ) ? sanitize_text_field( $_POST['registration_id'] ) : isset( $_REQUEST['registration_id'] ) ? sanitize_text_field( $_REQUEST['registration_id'] ) : FALSE;
 	$registration_ids = array();
 	//echo '<h4>$registration_id : ' . $registration_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
@@ -39,11 +40,13 @@ function enter_attendee_payments() {
 		//Add payment info
 		case 'payment':
 
-			if ( isset($_REQUEST[ 'attendee_action' ]) && $_REQUEST[ 'attendee_action' ] == 'post_payment' ){
+			if ( isset($_POST[ 'attendee_action' ]) && $_POST[ 'attendee_action' ] == 'post_payment' ){
 
 				if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'payment_' . $registration_id . '_post_payment_nonce' )) {
 					wp_die( $failed_nonce_msg );
 				}
+				
+				$attendee_emails = array();
 
 				// get the primary attendee id because amount paid info is kept with the primary attendee
 				$SQL = "SELECT id, payment_status FROM ".EVENTS_ATTENDEE_TABLE." WHERE registration_id =%s AND is_primary = 1 ORDER BY id LIMIT 0,1 ";
@@ -55,7 +58,7 @@ function enter_attendee_payments() {
 					$txn_type = isset($_POST[ 'txn_type' ]) ? $_POST[ 'txn_type' ] : FALSE;
 					$txn_id = isset($_POST[ 'txn_id' ]) ? $_POST[ 'txn_id' ] : FALSE;
 					$payment_date = isset($_POST[ 'payment_date' ]) ? date_i18n('Y-m-d', strtotime( $_POST[ 'payment_date' ] )) : FALSE;
-					$coupon_code = isset($_POST[ 'event_espresso_coupon_code' ]) ? $_POST[ 'event_espresso_coupon_code' ] : '';
+					$coupon_code = isset($_POST[ 'coupon_code' ]) ? $_POST[ 'coupon_code' ] : '';
 					$total_owing = isset($_POST[ 'total_owing' ]) ? (float)number_format( (float)abs( (float)sanitize_text_field( $_POST[ 'total_owing' ] )), 2, '.', '' ) : 0.00;
 					$amount_pd = isset($_POST[ 'amount_pd' ]) ? (float)number_format( (float)abs( (float)sanitize_text_field( $_POST[ 'amount_pd' ] )), 2, '.', '' ) : 0.00;
 					$new_payment = isset($_POST[ 'new_payment' ]) ? (float)number_format( (float)sanitize_text_field( $_POST[ 'new_payment' ] ), 2, '.', '' ) : 0.00;
@@ -121,6 +124,8 @@ function enter_attendee_payments() {
 								if ( $upd_success === FALSE ) {
 									$notifications['error'][] = __('An error occured. The payment details for the additional attendees could not be updated.', 'event_espresso'); 
 								} 
+								
+								$attendee_emails[] = array( 'registration_id'=>$reg_id['registration_id'] );
 							}
 							
 						} else {
@@ -141,29 +146,14 @@ function enter_attendee_payments() {
 						}
 
 		                //Send Payment Recieved Email
-		                if ( $_REQUEST[ 'send_payment_rec' ] == "send_message" ) {
-
+						$send_payment_rec = isset( $_POST[ 'send_payment_rec' ] ) ? $_POST[ 'send_payment_rec' ] : FALSE; 
+		                if ( $send_payment_rec == "send_message" ) {
 		                    //event_espresso_send_payment_notification( $id );
-							if ( count($registration_ids) > 0 ) {
-
-								$reg_attendees = array();
-
-								foreach($registration_ids as $reg_id) {			
-							
-									$SQL = 'SELECT * FROM ' . EVENTS_ATTENDEE_TABLE . ' WHERE registration_id =%s';
-									$more_reg_attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $reg_id['registration_id'] ), OBJECT_K );
-					
-									foreach ( $more_reg_attendees as $another_reg_attendee ) {
-										$reg_attendees[ $another_reg_attendee->email ] = $another_reg_attendee;			
-									}
-									
-								}
-								
-								foreach ( $reg_attendees as $reg_attendee ){
-									event_espresso_send_payment_notification( array( 'registration_id'=>$reg_attendee->registration_id ));
-								}
-
-								
+							if ( count($attendee_emails) > 0 ) {								
+printr( $attendee_emails, '$attendee_emails  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' ); die();    
+								foreach ( $attendee_emails as $attendee_email ){
+									event_espresso_send_payment_notification( $attendee_email );
+								}								
 							} else {
 								event_espresso_send_payment_notification(array('registration_id'=>$registration_id));
 							}
@@ -183,13 +173,13 @@ function enter_attendee_payments() {
         //Send Invoice
         case 'send_invoice':
 
-			if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'send_invoice_' . $registration_id . '_nonce' )) {
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'send_invoice_' . $registration_id . '_nonce' )) {
 				wp_die( $failed_nonce_msg );
 			}
 
 			if ( $org_options["use_attendee_pre_approval"] == "Y" ) {
 			
-				$pre_approve = $_REQUEST['pre_approve'];
+				$pre_approve = $_POST['pre_approve'];
 				if ( count($registration_ids) > 0 ) {
 					foreach($registration_ids as $reg_id) {
 						$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET pre_approve = %s WHERE registration_id = %s";
@@ -223,12 +213,12 @@ function enter_attendee_payments() {
 						}
 						
 						foreach ( $reg_attendees as $reg_attendee ){
-							event_espresso_send_invoice( $reg_attendee->registration_id, $_REQUEST[ 'invoice_subject' ], $_REQUEST[ 'invoice_message' ] );
+							event_espresso_send_invoice( $reg_attendee->registration_id, $_POST[ 'invoice_subject' ], $_POST[ 'invoice_message' ] );
 						}
 
 					
 				} else {
-					event_espresso_send_invoice( $registration_id , $_REQUEST[ 'invoice_subject' ], $_REQUEST[ 'invoice_message' ] );
+					event_espresso_send_invoice( $registration_id , $_POST[ 'invoice_subject' ], $_POST[ 'invoice_message' ] );
 				}
 				
 				$notifications['success'][] = __('Invoice Sent.', 'event_espresso'); 	
@@ -514,7 +504,6 @@ function enter_attendee_payments() {
 							<input type="hidden" name="id" value="<?php echo $id ?>">
 							<input type="hidden" name="registration_id" value="<?php echo $registration_id ?>">
 							<input type="hidden" name="form_action" value="payment">
-							<input type="hidden" name="attendee_pay" value="paynow">
 							<input type="hidden" name="event_id" value="<?php echo $event_id ?>">
 							<input type="hidden" name="attendee_action" value="post_payment">
 							<?php wp_nonce_field( 'payment_' . $registration_id . '_post_payment_nonce' ); ?>
