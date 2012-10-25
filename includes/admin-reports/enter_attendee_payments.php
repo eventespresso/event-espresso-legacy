@@ -114,7 +114,7 @@ function enter_attendee_payments() {
 								unset( $set_cols_and_values['amount_pd'] );
 								$set_format = array( '%s', '%s', '%s', '%s', '%s' );
 								$where_cols_and_values = array( 'registration_id'=> $reg_id['registration_id'] );
-								$where_format = array( '%d' );
+								$where_format = array( '%s' );
 								// run the update
 								$upd_success = $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
 								// if there was an actual error
