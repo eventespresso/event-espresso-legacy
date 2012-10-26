@@ -131,10 +131,11 @@ function events_payment_page( $attendee_id = FALSE, $notifications ) {
 	// update total cost for primary attendee
 	$total_cost = $final_price * (int)$num_people;
 
-//	if ( function_exists( 'espresso_update_attendee_coupon_info' ) && $attendee_id && ! empty( $attendee->coupon_code )) {
-//		espresso_update_attendee_coupon_info( $attendee_id, $attendee->coupon_code  );
-//	} 	
 
+	if ( function_exists( 'espresso_update_attendee_coupon_info' ) && $attendee_id && ! empty( $attendee->coupon_code )) {
+		espresso_update_attendee_coupon_info( $attendee_id, $attendee->coupon_code  );
+	} 	
+					
 	if ( function_exists( 'espresso_update_groupon' ) && $attendee_id && ! empty( $attendee->coupon_code )) {
 		espresso_update_groupon( $attendee_id, $attendee->coupon_code  );
 	} 	
