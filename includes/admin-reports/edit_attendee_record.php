@@ -665,7 +665,7 @@ function edit_attendee_record() {
 									</li>
 									<li>
 											<strong class="att-tckt-prc-lbl"><?php _e('Total Amount Paid to Date:', 'event_espresso'); ?></strong> 
-											<?php echo $org_options['currency_symbol'] ?><?php echo espresso_attendee_price(array('attendee_id' => $id, 'reg_total' => true)); ?>
+											<?php echo $org_options['currency_symbol'] . $amount_pd; ?><?php //echo espresso_attendee_price(array('attendee_id' => $id, 'reg_total' => true)); ?>
 									</li>
 									<li>
 										<h6 class="qrtr-margin"><strong><?php _e('Attendee Ticket Fees:', 'event_espresso'); ?></strong></h6>
