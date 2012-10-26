@@ -173,7 +173,17 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 				
 					$valid = FALSE;
 					if ( $mer ) {
+					
 						$error = '<p id="event_espresso_invalid_coupon" style="margin:0;color:red;">' . __('Sorry, promotional code ', 'event_espresso') . '<strong>' . $coupon_code . '</strong>' . __(' is invalid, expired, or can not be used for the event(s) you are applying it to.', 'event_espresso') . '</p>';
+						
+					} else {
+					
+						$msg = '<div id="event_espresso_notifications" class="clearfix event-data-display" style="">';
+						$msg .= '<p id="event_espresso_invalid_coupon" style="margin:0;color:red;">';
+						$msg .= __('Sorry, promotional code ', 'event_espresso') . '<strong>' . $coupon_code . '</strong>' . __(' is either invalid, expired, or can not be used for the event(s) you are applying it to.', 'event_espresso');
+	          		    $msg .= '</p></div>';
+						echo $msg;
+						
 					}
 					
 	            }
