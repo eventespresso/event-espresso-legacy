@@ -2,7 +2,11 @@ jQuery(document).ready(function() {
 
     // clear firefox and safari cache
     jQuery(window).unload( function() {}); 
-	jQuery('#event_espresso_notifications').hide();
+	
+	if ( ! jQuery('#event_espresso_notifications').hasClass('no-hide') ) {
+		jQuery('#event_espresso_notifications').hide();
+	}
+	
 
     jQuery.ajaxSetup({
         cache: false,
