@@ -59,19 +59,9 @@ function ee_init_session($admin_override = false) {
 					|| !isset($_SESSION['espresso_session']['id'])
 					|| $_SESSION['espresso_session']['id'] == array()) {
 
-		$_SESSION['espresso_session'] = '';
-		//Debug
-		//echo "<pre>espresso_session - ".print_r($_SESSION['espresso_session'],true)."</pre>";
 		$_SESSION['espresso_session'] = array();
-		//Debug
-		//echo "<pre>espresso_session array - ".print_r($_SESSION['espresso_session'],true)."</pre>";
 		$_SESSION['espresso_session']['id'] = session_id() . '-' . uniqid('', true);
-		//Debug
-		//echo "<pre>".print_r($_SESSION,true)."</pre>";
 		$_SESSION['espresso_session']['events_in_session'] = '';
-		$_SESSION['espresso_session']['event_espresso_coupon_code'] = '';
-		$_SESSION['espresso_session']['groupon_code'] = '';
-		$_SESSION['espresso_session']['groupon_used'] = '';
 		$_SESSION['espresso_session']['grand_total'] = '';
 		do_action( 'action_hook_espresso_zero_vlm_dscnt_in_session' ); 
 	}
