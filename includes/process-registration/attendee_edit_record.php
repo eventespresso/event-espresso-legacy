@@ -37,7 +37,7 @@ function attendee_edit_record() {
 			}
 			
 			if ( isset( $_REQUEST['primary'] ) && isset( $_REQUEST['p_id'] )) {
-				return events_payment_page( $_REQUEST['primary'], $_REQUEST['p_id'] );
+				return events_payment_page( $_REQUEST['primary']/*, $_REQUEST['p_id']*/ );
 			}
 			
 		}
@@ -169,7 +169,7 @@ function attendee_edit_record() {
 
 				//If this is not an attendee returing to edit their details, then we need to return to the payment page
 				if ( ! isset($_REQUEST['single'] )) {
-					return events_payment_page( $_REQUEST['primary'], $_REQUEST['p_id'] );
+					return events_payment_page( $_REQUEST['primary']/*, $_REQUEST['p_id']*/ );
 					exit();
 				}
 					
