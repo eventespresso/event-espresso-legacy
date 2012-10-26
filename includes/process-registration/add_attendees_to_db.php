@@ -25,6 +25,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 		$data_source = $_POST;
 		$att_data_source = $_POST;
 		$multi_reg = FALSE;
+		$notifications = array( 'coupons' => '', 'groupons' => '' );
+
 		
 		if ( ! is_null($event_id) && ! is_null($session_vars)) {
 			//event details, ie qty, price, start..
@@ -238,7 +240,10 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 					if ( $coupon_results['valid'] ) {
 						$final_price = number_format( $coupon_results['event_cost'], 2, '.', '' );
 						$coupon_code = $coupon_results['code'];
-					}					
+					}
+					if ( ! $multi_reg && ! empty( $coupon_results['msg'] )) {
+						$notifications['coupons'] = $coupon_results['msg'];
+					}
 				}					
 			} 
 
@@ -249,7 +254,10 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 					if ( $groupon_results['valid'] ) {
 						$final_price = number_format( $groupon_results['event_cost'], 2, '.', '' );
 						$coupon_code = $groupon_results['code'];
-					}					
+					}
+					if ( ! $multi_reg && ! empty( $groupon_results['msg'] )) {
+						$notifications['groupons'] = $groupon_results['msg'];
+					}
 				}					
 			} 
 			
@@ -369,16 +377,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			
 			// save attendee id for the primary attendee
 			$primary_att_id = $attendee_number == 1 ? $attendee_id : FALSE;
-	
-			if ( function_exists( 'espresso_update_attendee_coupon_info' ) && $primary_att_id && ! empty( $coupon_code )) {
-				espresso_update_attendee_coupon_info( $primary_att_id, $final_price, $coupon_code  );
-			} 
 
-			// update groupon table
-			if ( isset( $data_source['groupon']['id'] )) {	
-				$groupon_used = "UPDATE " . EVENTS_GROUPON_CODES_TABLE . " SET groupon_status='0', attendee_id='" . $attendee_id . "', date='" . $payment_date . "' WHERE id = '" . $data_source['groupon']['id'] . "'";
-				$wpdb->query($groupon_used);	
-			}
 
 			// Added for seating chart addon
 			$booking_id = 0;
@@ -582,10 +581,10 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 
 			//This shows the payment page
 			if ( ! $multi_reg) {
-				return events_payment_page( $attendee_id ); 
+				return events_payment_page( $attendee_id, $notifications ); 
 			}
 			
-			return $registration_id;
+			return array( 'registration_id' => $registration_id, 'notifications' => $notifications );
 						
 		}		
 	}
@@ -599,7 +598,7 @@ function espresso_update_primary_attendee_total_cost( $attendee_id, $total_cost,
 	global $wpdb;
 	
 	$set_cols_and_values = array( 'total_cost'=>number_format( (float)$total_cost, 2, '.', '' ));
-	$set_format = array( '%s', '%f', '%s', '%s' );
+	$set_format = array( '%f' );
 	$where_cols_and_values = array( 'id'=> $attendee_id );
 	$where_format = array( '%d' );		
 	
@@ -678,7 +677,10 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 								}
 
 								// ADD ATTENDEE TO DB
-								$tmp_registration_id = event_espresso_add_attendees_to_db( $event_id, $session_vars, TRUE );
+								$return_data = event_espresso_add_attendees_to_db( $event_id, $session_vars, TRUE );
+								
+								$tmp_registration_id = $return_data['registration_id'];
+								$notifications = $return_data['notifications'];
 
 								if ($primary_registration_id === NULL) {
 									$primary_registration_id = $tmp_registration_id;
@@ -699,7 +701,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				}
 				
 
-				$SQL = "SELECT a.id, a.is_primary, a.orig_price, a.final_price, a.quantity, ed.event_name, a.total_cost, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage ";
+				$SQL = "SELECT a.*, ed.id AS event_id, ed.event_name, dc.coupon_code_price, dc.use_percentage ";
 				$SQL .= "FROM " . EVENTS_ATTENDEE_TABLE . " a JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
 				$SQL .= "LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
 				$SQL .= "WHERE attendee_session=%s ORDER BY a.id ASC";
@@ -707,6 +709,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $current_session_id ));
 				//printr( $attendees, '$attendees  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 				
+				$quantity = 0;
 				$final_total = 0;
 				$sub_total = 0;
 				$discounted_total = 0;
@@ -716,13 +719,24 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				
 				//printr( $attendees, '$attendees  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 				foreach ($attendees as $attendee) {
+				
 					if ( $attendee->is_primary ) {
-						$primary_attendee_id = $attendee->id;
-						
+						$primary_attendee_id = $attendee_id = $attendee->id;
+						$coupon_code = $attendee->coupon_code;
+						$event_id = $attendee->event_id;
+						$fname = $attendee->fname;
+						$lname = $attendee->lname;
+						$address = $attendee->address;
+						$city = $attendee->city;
+						$state = $attendee->state;
+						$zip = $attendee->zip;
+						$attendee_email = $attendee->email;
+						$registration_id = $attendee->registration_id;
 					}
 					$final_total += $attendee->final_price;
 					$sub_total += (int)$attendee->quantity * $attendee->orig_price;
 					$discounted_total += (int)$attendee->quantity * $attendee->final_price;
+					$quantity += (int)$attendee->quantity;
 
 					//echo '<h2>$attendee->id : ' . $attendee->id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h2>';
 					//echo '<h4>$attendee->orig_price : ' . $attendee->orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
@@ -741,32 +755,30 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 								
 				$total_cost = $total_cost < 0 ? 0.00 : (float)$total_cost;
 				
+				if ( function_exists( 'espresso_update_attendee_coupon_info' ) && $primary_attendee_id && ! empty( $attendee->coupon_code )) {
+					espresso_update_attendee_coupon_info( $primary_attendee_id, $attendee->coupon_code  );
+				} 	
+					
+				if ( function_exists( 'espresso_update_groupon' ) && $primary_attendee_id && ! empty( $coupon_code )) {
+					espresso_update_groupon( $primary_attendee_id, $coupon_code  );
+				} 
+
 				espresso_update_primary_attendee_total_cost( $primary_attendee_id, $total_cost, __FILE__ );
 				//echo '<h4>$total_cost : ' . $total_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+
+
+				if ( ! empty( $notifications['coupons'] ) || ! empty( $notifications['groupons'] )) {
+					echo '<div id="event_espresso_notifications" class="clearfix event-data-display no-hide">';
+					echo $notifications['coupons'];
+					// add space between $coupon_notifications and  $groupon_notifications ( if any $groupon_notifications exist )
+					echo ! empty( $notifications['coupons'] ) && ! empty( $notifications['groupons'] ) ? '<br/>' : '';
+					echo $notifications['groupons'];
+					echo '</div>';	
+				}						
 				
 				//Post the gateway page with the payment options
 				if ( $total_cost > 0 ) {
-					//find first registrant's name, email, count of registrants
-					$SQL = "SELECT id, fname, lname, email, address, city, state, zip, event_id, registration_id, ";
-					$SQL .= "	(SELECT COUNT( id ) FROM " . EVENTS_ATTENDEE_TABLE . " WHERE attendee_session = %s ) AS quantity ";
-					$SQL .= "FROM " . EVENTS_ATTENDEE_TABLE . " ";
-					$SQL .= "WHERE event_id = %d ";
-					$SQL .= "AND attendee_session = %s LIMIT 1";
-
-					$result = $wpdb->get_row( $wpdb->prepare( $SQL, $current_session_id, $first_event_id, $current_session_id ));
-					
-					$event_id = $result->event_id;
-					$attendee_id = $result->id;
-					$fname = $result->fname;
-					$lname = $result->lname;
-					$address = $result->address;
-					$city = $result->city;
-					$state = $result->state;
-					$zip = $result->zip;
-					$attendee_email = $result->email;
-					$registration_id = $result->registration_id;
-					$quantity = espresso_count_attendees_for_registration($result->registration_id);
-					?>
+?>
 
 <div class="espresso_payment_overview event-display-boxes ui-widget" >
   <h3 class="section-heading ui-widget-header ui-corner-top">
