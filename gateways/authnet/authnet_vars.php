@@ -50,17 +50,19 @@ function espresso_display_authnet($payment_data) {
 	
 	$sql = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id='" . $attendee_id . "'";
 	$session_id = $wpdb->get_var($sql);
-	$sql = "SELECT ac.cost, ac.quantity, ed.event_name, a.price_option, a.fname, a.lname FROM " . EVENTS_ATTENDEE_COST_TABLE . " ac JOIN " . EVENTS_ATTENDEE_TABLE . " a ON ac.attendee_id=a.id JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
+	$sql = "SELECT a.final_price, a.quantity, ed.event_name, a.price_option, a.fname, a.lname FROM " . EVENTS_ATTENDEE_TABLE . " a JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
 	$sql .= " WHERE attendee_session='" . $session_id . "' ORDER BY a.id ASC";
 	$items = $wpdb->get_results($sql);
 	foreach ($items as $key=>$item) {
 		$item_num=$key+1;
-		$myAuthorize->addLineItem($item_num,
-						$item->event_name,
-						$item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname,
-						$item->quantity,
-						$item->cost,
-						FALSE);
+		$myAuthorize->addLineItem(
+				$item_num,
+				$item->event_name,
+				$item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname,
+				$item->quantity,
+				$item->final_price,
+				FALSE
+		);
 	}
 	
 
