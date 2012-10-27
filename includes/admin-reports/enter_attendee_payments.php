@@ -125,7 +125,7 @@ function enter_attendee_payments() {
 									$notifications['error'][] = __('An error occured. The payment details for the additional attendees could not be updated.', 'event_espresso'); 
 								} 
 								
-								$attendee_emails[] = array( 'registration_id'=>$reg_id['registration_id'] );
+								$attendees_to_email[] = array( 'registration_id'=>$reg_id['registration_id'] );
 							}
 							
 						} else {
@@ -149,13 +149,19 @@ function enter_attendee_payments() {
 						$send_payment_rec = isset( $_POST[ 'send_payment_rec' ] ) ? $_POST[ 'send_payment_rec' ] : FALSE; 
 		                if ( $send_payment_rec == "send_message" ) {
 		                    //event_espresso_send_payment_notification( $id );
-							if ( count($attendee_emails) > 0 ) {								
-printr( $attendee_emails, '$attendee_emails  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' ); die();    
-								foreach ( $attendee_emails as $attendee_email ){
-									event_espresso_send_payment_notification( $attendee_email );
+							if ( count($attendees_to_email) > 0 ) {								
+								//printr( $attendees_to_email, '$attendees_to_email  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' ); wp_die();    
+								foreach ( $attendees_to_email as $attendee_to_email ){
+									$result = event_espresso_send_payment_notification( $attendee_to_email );
+									if ( ! empty( $result )) {
+										$notifications['error'][] = $result;
+									}
 								}								
 							} else {
-								event_espresso_send_payment_notification(array('registration_id'=>$registration_id));
+								$result = event_espresso_send_payment_notification(array('registration_id'=>$registration_id));
+								if ( ! empty( $result )) {
+									$notifications['error'][] = $result;
+								}
 							}
 		                }
 					
