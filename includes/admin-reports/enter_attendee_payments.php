@@ -46,7 +46,7 @@ function enter_attendee_payments() {
 					wp_die( $failed_nonce_msg );
 				}
 				
-				$attendee_emails = array();
+				$attendees_to_email = array();
 
 				// get the primary attendee id because amount paid info is kept with the primary attendee
 				$SQL = "SELECT id, payment_status FROM ".EVENTS_ATTENDEE_TABLE." WHERE registration_id =%s AND is_primary = 1 ORDER BY id LIMIT 0,1 ";
