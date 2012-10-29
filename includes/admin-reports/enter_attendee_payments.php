@@ -77,18 +77,22 @@ function enter_attendee_payments() {
 						if ( $fail ) {
 							break;
 						}					
-					}
 					
-					$upd_total = $amount_pd + $new_payment;
+						$upd_total = $amount_pd + $new_payment;  
 
-					// compare new total_cost with amount_pd
-					if ( $upd_total == $total_owing ) {
-						$upd_payment_status = __('Completed','event_espresso');
-					} elseif ( $upd_total < $total_owing ) {
-						$upd_payment_status = __('Pending','event_espresso');
-					} elseif ( $upd_total > $total_owing ) {
-						$upd_payment_status = __('Refund','event_espresso');
-					}					
+						// compare new total_cost with amount_pd
+						if ( $upd_total == $total_owing ) {
+							$upd_payment_status = __('Completed','event_espresso');
+						} elseif ( $upd_total < $total_owing ) {
+							$upd_payment_status = __('Pending','event_espresso');
+						} elseif ( $upd_total > $total_owing ) {
+							$upd_payment_status = __('Refund','event_espresso');
+						}					
+
+					} else {
+						$upd_payment_status = isset($_POST[ 'payment_status' ]) ? $_POST[ 'payment_status' ] : __('Pending','event_espresso');
+						$upd_total = $amount_pd;
+					}
 					
 					//Update payment status information for primary attendee
 					$set_cols_and_values = array( 
