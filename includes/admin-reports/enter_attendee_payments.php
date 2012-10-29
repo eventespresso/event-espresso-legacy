@@ -61,7 +61,7 @@ function enter_attendee_payments() {
 					$coupon_code = isset($_POST[ 'coupon_code' ]) ? $_POST[ 'coupon_code' ] : '';
 					$total_owing = isset($_POST[ 'total_owing' ]) ? (float)number_format( (float)abs( (float)sanitize_text_field( $_POST[ 'total_owing' ] )), 2, '.', '' ) : 0.00;
 					$amount_pd = isset($_POST[ 'amount_pd' ]) ? (float)number_format( (float)abs( (float)sanitize_text_field( $_POST[ 'amount_pd' ] )), 2, '.', '' ) : 0.00;
-					$new_payment = isset($_POST[ 'new_payment' ]) ? (float)number_format( (float)sanitize_text_field( $_POST[ 'new_payment' ] ), 2, '.', '' ) : 0.00;
+					$new_payment = isset($_POST[ 'new_payment' ]) && $_POST[ 'new_payment' ] != '' ? (float)number_format( (float)sanitize_text_field( $_POST[ 'new_payment' ] ), 2, '.', '' ) : 0.00;
 					
 					// if making a payment, we are going to require the txn type and txn id
 					if ( $new_payment != 0.00  ) {						
@@ -76,7 +76,7 @@ function enter_attendee_payments() {
 						}
 						if ( $fail ) {
 							break;
-						}					
+						}
 					
 						$upd_total = $amount_pd + $new_payment;  
 
