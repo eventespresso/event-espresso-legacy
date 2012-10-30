@@ -330,6 +330,7 @@ function edit_attendee_record() {
 					if ( in_array( $question->q_id, $answer_a )) {
 						// existing answer
 						$set_cols_and_values = array( 'answer'=>$post_val );
+						//echo "<pre>".print_r($set_cols_and_values,true)."</pre>";
 						$set_format = array( '%s' );
 						$where_cols_and_values = array( 'attendee_id'=> $id, 'question_id' => $question->q_id );
 						$where_format = array( '%d', '%d' );
@@ -559,9 +560,9 @@ function edit_attendee_record() {
 															$counter++;
 															if (!in_array($question->id, $question_displayed)) {
 																$question_displayed[] = $question->id;
-																echo '<p>';
-																echo event_form_build_edit($question, empty($question->answer) ? '' : $question->answer, $show_admin_only = true);
-																echo "</p>";
+																//echo '<p>';
+																echo event_form_build_edit($question, empty($question->answer) ? '' : stripslashes_deep($question->answer), $show_admin_only = true);
+																//echo "</p>";
 
 
 																#echo $counter == $num_rows ? '</fieldset>' : '';
