@@ -2,15 +2,11 @@ jQuery(document).ready(function($) {
 
 	var additional_limit = espresso_add_reg_attendees.additional_limit;
 
-
-
 	function markup( attendee_num ) {
 		var attendee_form = espresso_add_reg_attendees.attendee_form;
 		attendee_form = attendee_form.replace( /XXXXXX/g, attendee_num );
 		return attendee_form;
 	}
-
-
 
 	$( '#registration_form' ).on( 'click', '.add-additional-attendee-lnk', function(e) {
 		// grab this attendee's form #'
@@ -32,8 +28,6 @@ jQuery(document).ready(function($) {
 		e.preventDefault();
 	});	
 
-
-
 	$( '#registration_form' ).on( 'click', '.remove-additional-attendee-lnk', function(e){
 		// grab this attendee's form #'
 		var att_nmbr = parseInt( $(this).attr('rel') );
@@ -46,7 +40,5 @@ jQuery(document).ready(function($) {
 		// don't process link
 		e.preventDefault();
 	});
-
-	
 	
 });
