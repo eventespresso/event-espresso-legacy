@@ -204,21 +204,7 @@ if ($reg_form_only == false) {
 	?>
 				</div>
 				
-	<?php
-					//Multiple Attendees
-					if ( $allow_multiple == "Y" && $number_available_spaces > 1 ) {
-					
-						//This returns the additional attendee form fields. Can be overridden in the custom files addon.
-						echo event_espresso_additional_attendees($event_id, $additional_limit, $number_available_spaces, __('Number of Tickets', 'event_espresso'), true, $event_meta);
-				
-					} else {
-				
-	?>
-				<input type="hidden" name="num_people" id="num_people-<?php echo $event_id; ?>" value="1">
-	<?php
-					}
-					//End allow multiple
-					
+	<?php					
 					//Coupons
 	?>
 				<input type="hidden" name="use_coupon[<?php echo $event_id; ?>]" value="<?php echo $use_coupon_code; ?>" />
@@ -241,6 +227,17 @@ if ($reg_form_only == false) {
 				<input type="hidden" name="event_id" id="event_id-<?php echo $event_id; ?>" value="<?php echo $event_id; ?>">
 				
 	<?php
+					//Multiple Attendees
+					if ( $allow_multiple == "Y" && $number_available_spaces > 1 ) {					
+						//This returns the additional attendee form fields. Can be overridden in the custom files addon.
+						echo event_espresso_additional_attendees($event_id, $additional_limit, $number_available_spaces, __('Number of Tickets', 'event_espresso'), true, $event_meta);
+					} else {				
+	?>
+				<input type="hidden" name="num_people" id="num_people-<?php echo $event_id; ?>" value="1">
+	<?php
+					}					
+					//End allow multiple	
+					
 					wp_nonce_field('reg_nonce', 'reg_form_nonce');
 					
 					//Recaptcha portion

@@ -7,14 +7,15 @@ if (!function_exists('event_form_build')) {
 			return;
 		}
 		$required = '';
-		$attendee_number = isset($extra['attendee_number']) ? $extra['attendee_number'] : '\' + (attendee_num+2) + \'';
+		$attendee_number = isset($extra['attendee_number']) ? $extra['attendee_number'] : 3;
 		$price_id = isset($extra['price_id']) ? $extra['price_id'] : 0;
 		$multi_name_adjust = $multi_reg == 1 ? "[$event_id][$price_id][$attendee_number]" : '';
-
+		
+		// XXXXXX will get replaced with the attendee number
 		if (!empty($extra["x_attendee"])) {
-			$field_name = ($question->system_name != '') ? "x_attendee_" . $question->system_name . "[\' + attendee_num + \']" : "x_attendee_" . $question->question_type . '_' . $question->id . '[\' + attendee_num + \']';
+			$field_name = ($question->system_name != '') ? "x_attendee_" . $question->system_name . "[XXXXXX]" : "x_attendee_" . $question->question_type . '_' . $question->id . '[XXXXXX]';
 			$email_validate = $question->system_name == 'email' ? 'email' : '';
-			$question->system_name = "x_attendee_" . $question->system_name . "[\' + attendee_num + \']";
+			$question->system_name = "x_attendee_" . $question->system_name . "[XXXXXX]";
 			//$question->required = 'N';
 		} else {
 			$field_name = ($question->system_name != '') ? $question->system_name : $question->question_type . '_' . $question->id;
