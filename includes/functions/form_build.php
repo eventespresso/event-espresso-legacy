@@ -223,13 +223,13 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 	
 		case "TEXT" :
 			$form_input .= '<p class="event_form_field">' . $label;
-			$form_input .= '<input type="text" ' . $required . ' id="' . $field_name . '"  name="' . $field_name . '" size="40"  value="' . stripslashes( $edits ) . '" />';
+			$form_input .= '<input type="text" ' . $required . ' id="' . $field_name . '"  name="' . $field_name . '" size="40"  value="' . stripslashes_deep( $edits ) . '" />';
 			$form_input .= '</p>';
 			break;
 			
 		case "TEXTAREA" :		
 			$form_input .= '<p class="event_form_field">' . $label;
-			$form_input .= '<textarea id="TEXTAREA_' . $question->id . '" ' . $required . ' name="TEXTAREA_' . $question->id . '"  cols="30" rows="5">' . stripslashes( $edits ) . '</textarea>';
+			$form_input .= '<textarea id="TEXTAREA_' . $question->id . '" ' . $required . ' name="TEXTAREA_' . $question->id . '"  cols="30" rows="5">' . stripslashes_deep( $edits ) . '</textarea>';
 			$form_input .= '</p>';
 			break;
 			
@@ -241,12 +241,12 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 			$form_input .= '
 	<ul class="edit-options-list-radio">';
 			foreach ($values as $key => $value) {
-				$checked = in_array( trim( stripslashes( $value )), $answers ) ? ' checked="checked"' : "";
+				$checked = in_array( trim( stripslashes_deep( $value )), $answers ) ? ' checked="checked"' : "";
 				$form_input .= '
 		<li>
 			<label class="radio-btn-lbl">
-				<input id="SINGLE_' . $question->id . '_' . $key . '" ' . $required . ' name="SINGLE_' . $question->id . '"  type="radio" value="' . trim( stripslashes( $value )) . '" ' . $checked . '/>
-				<span>' . trim( stripslashes( $value )) . '</span>
+				<input id="SINGLE_' . $question->id . '_' . $key . '" ' . $required . ' name="SINGLE_' . $question->id . '"  type="radio" value="' . trim( stripslashes_deep( $value )) . '" ' . $checked . '/>
+				<span>' . trim( stripslashes_deep( $value )) . '</span>
 			</label>
 		</li>';
 			}
@@ -263,13 +263,13 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 			$form_input .= '
 	<ul class="edit-options-list-check">';
 			foreach ($values as $key => $value) {
-				$checked = in_array( trim( stripslashes( $value )), $answers) ? " checked=\"checked\"" : "";
+				$checked = in_array( trim( stripslashes_deep( $value )), $answers) ? " checked=\"checked\"" : "";
 				/* 	$form_input .= "<label><input type=\"checkbox\"$required id=\"MULTIPLE_$question->id_$key\" name=\"MULTIPLE_$question->id_$key\"  value=\"$value\"$checked /> $value</label><br/>\n"; */
 				$form_input .= '
 		<li>
 			<label class="checkbox-lbl">
-				<input id="' . $question->id . '_' . trim( stripslashes( $key )) . '" ' . $required . ' name="MULTIPLE_' . $question->id . '[]"  type="checkbox" value="' . trim( stripslashes( $value )) . '" ' . $checked . '/>
-				<span>' . trim( stripslashes( $value )) . '</span>
+				<input id="' . $question->id . '_' . trim( stripslashes_deep( $key )) . '" ' . $required . ' name="MULTIPLE_' . $question->id . '[]"  type="checkbox" value="' . trim( stripslashes_deep( $value )) . '" ' . $checked . '/>
+				<span>' . trim( stripslashes_deep( $value )) . '</span>
 			</label>
 		</li>';
 			}
@@ -285,10 +285,10 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 			//$answers = explode ( ",", $edits );
 			$form_input .= '<p class="event_form_field">' . $label;
 			$form_input .= '<select ' . $dd_type . ' ' . $required . ' ' . $required . ' id="DROPDOWN_' . $question->id . '"  />';
-			$form_input .= '<option value="' . $edits . '">' . $edits . '</option>';
+			$form_input .= '<option value="' . stripslashes_deep($edits) . '">' . stripslashes_deep($edits) . '</option>';
 			foreach ($values as $key => $value) {
 				//$checked = in_array ( $value, $answers ) ? " selected =\" selected\"" : "";
-				$form_input .= '<option value="' . trim($value) . '" /> ' . trim($value) . '</option>';
+				$form_input .= '<option value="' . trim(stripslashes_deep($value)) . '" /> ' . trim(stripslashes_deep($value)) . '</option>';
 			}
 			$form_input .= "</select>";
 			$form_input .= '</p>';
