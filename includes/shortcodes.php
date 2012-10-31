@@ -594,7 +594,7 @@ if (!function_exists('espresso_staff_sc')) {
 				$html .= $inside_wrapper_before;
 				
 				if ($show_staff_roles != false) {
-					$person_title = $person_role != '' ? ' - ' . stripslashes_deep($person_role) : '';
+					$person_title = isset($person_role) && !empty($person_role) ? ' - ' . stripslashes_deep($person_role) : '';
 				}
 				
 				$html .= $name_wrapper_start . stripslashes_deep($person_name) . $name_wrapper_end . $person_title;
@@ -602,27 +602,27 @@ if (!function_exists('espresso_staff_sc')) {
 
 				//Build the image
 				if ($show_image != false) {
-					$html .= $meta['image'] != '' ? $image_wrapper_start . '<img id="staff_image_' . $person_id . '" ' . $image_class . ' src="' . stripslashes_deep($meta['image']) . '" />' . $image_wrapper_end : '';
+					$html .= isset($meta['image']) && !empty($meta['image']) ? $image_wrapper_start . '<img id="staff_image_' . $person_id . '" ' . $image_class . ' src="' . stripslashes_deep($meta['image']) . '" />' . $image_wrapper_end : '';
 				}
 
 				//Build the description
 				if ($show_description != false) {
-					$html .= $meta['description'] != '' ? html_entity_decode(stripslashes_deep($meta['description'])) : '';
+					$html .= isset($meta['description']) && !empty($meta['description']) ? html_entity_decode(stripslashes_deep($meta['description'])) : '';
 				}
 
 				//Build the additional details
 				if ($show_staff_details != false) {
 					$html .= $inside_wrapper_before;
-					$html .= isset($meta['organization']) ? __('Company:', 'event_espresso') . ' ' . stripslashes_deep($meta['organization']) . '<br />' : '';
+					$html .= isset($meta['organization']) && !empty($meta['organization']) ? __('Company:', 'event_espresso') . ' ' . stripslashes_deep($meta['organization']) . '<br />' : '';
 					if ($show_staff_titles != false) {
-						$html .= isset($meta['title']) ? __('Title:', 'event_espresso') . ' ' . stripslashes_deep($meta['title']) . '<br />' : '';
+						$html .= isset($meta['title']) && !empty($meta['title']) ? __('Title:', 'event_espresso') . ' ' . stripslashes_deep($meta['title']) . '<br />' : '';
 					}
-					$html .= isset($meta['industry']) ? __('Industry:', 'event_espresso') . ' ' . stripslashes_deep($meta['industry']) . '<br />' : '';
-					$html .= isset($meta['city']) ? __('City:', 'event_espresso') . ' ' . stripslashes_deep($meta['city']) . '<br />' : '';
-					$html .= isset($meta['country']) ? __('Country:', 'event_espresso') . ' ' . stripslashes_deep($meta['country']) . '<br />' : '';
-					$html .= isset($meta['website']) ? __('Website:', 'event_espresso') . ' <a href="' . stripslashes_deep($meta['website']) . '" target="_blank">' . stripslashes_deep($meta['website']) . '</a><br />' : '';
-					$html .= isset($meta['twitter']) ? __('Twitter:', 'event_espresso') . ' <a href="http://twitter.com/#!/' . stripslashes_deep($meta['twitter']) . '" target="_blank">@' . stripslashes_deep($meta['twitter']) . '</a><br />' : '';
-					$html .= isset($meta['phone']) ? __('Phone:', 'event_espresso') . ' ' . stripslashes_deep($meta['phone']) . '<br />' : '';
+					$html .= isset($meta['industry']) && !empty($meta['industry']) ? __('Industry:', 'event_espresso') . ' ' . stripslashes_deep($meta['industry']) . '<br />' : '';
+					$html .= isset($meta['city']) && !empty($meta['city']) ? __('City:', 'event_espresso') . ' ' . stripslashes_deep($meta['city']) . '<br />' : '';
+					$html .= isset($meta['country']) && !empty($meta['country']) ? __('Country:', 'event_espresso') . ' ' . stripslashes_deep($meta['country']) . '<br />' : '';
+					$html .= isset($meta['website']) && !empty($meta['website']) ? __('Website:', 'event_espresso') . ' <a href="' . stripslashes_deep($meta['website']) . '" target="_blank">' . stripslashes_deep($meta['website']) . '</a><br />' : '';
+					$html .= isset($meta['twitter']) && !empty($meta['twitter']) ? __('Twitter:', 'event_espresso') . ' <a href="http://twitter.com/#!/' . stripslashes_deep($meta['twitter']) . '" target="_blank">@' . stripslashes_deep($meta['twitter']) . '</a><br />' : '';
+					$html .= isset($meta['phone']) && !empty($meta['phone']) ? __('Phone:', 'event_espresso') . ' ' . stripslashes_deep($meta['phone']) . '<br />' : '';
 					$html .= $inside_wrapper_after;
 				}
 
