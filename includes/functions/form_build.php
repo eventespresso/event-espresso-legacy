@@ -309,9 +309,11 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 			$form_input .= '<p class="event_form_field">' . $label;
 			$form_input .= '<select ' . $dd_type . ' ' . $required . ' ' . $required . ' id="DROPDOWN_' . $question->id . '"  />';
 			$form_input .= '<option value="' . stripslashes_deep($edits) . '">' . stripslashes_deep($edits) . '</option>';
+			
 			foreach ($values as $key => $value) {
+				$value = trim( htmlentities( stripslashes( $value ), ENT_QUOTES, 'UTF-8' ));
 				//$checked = in_array ( $value, $answers ) ? " selected =\" selected\"" : "";
-				$form_input .= '<option value="' . trim(stripslashes_deep($value)) . '" /> ' . trim(stripslashes_deep($value)) . '</option>';
+				$form_input .= '<option value="' . $value . '" /> ' . html_entity_decode( $value, ENT_QUOTES, 'UTF-8' ) . '</option>';
 			}
 			$form_input .= "</select>";
 			$form_input .= '</p>';
