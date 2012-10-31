@@ -223,29 +223,7 @@ function attendee_edit_record() {
 
 //						printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 //						echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-						
-//						$existing_questions = '';
-//						foreach ( $questions as $question ) {
-//							$existing_questions .= $question->question_id . ',';
-//						}
-//						$existing_questions = substr( $existing_questions, 0, -1 );
-//
-//						$SQL = "SELECT q.* FROM " . EVENTS_QUESTION_TABLE . " q ";
-//						$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr ON q.id = qgr.question_id ";
-//						$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg ON qg.id = qgr.group_id ";
-//						$SQL .= "WHERE qgr.group_id IN ( $questions_in ) ";
-//						$SQL .= "AND q.id NOT IN ( $existing_questions ) ";
-//						$SQL .= "GROUP BY q.question ";
-//						$SQL .= "ORDER BY qg.id, q.id ASC";
-//
-//						if ( $questions_2 = $wpdb->get_results( $wpdb->prepare( $SQL ))) {
-//							//Merge the existing questions with any missing questions
-//							$questions = array_merge( $questions, $questions_2 );
-//						}
-						
-//						printr( $questions_2, '$questions_2  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-//						echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-						
+			
 
 						//Output the questions
 						$question_displayed = array();
@@ -269,7 +247,7 @@ function attendee_edit_record() {
 								
 									$question->group_identifier = ! empty( $question->group_identifier ) ? ' id="' . $question->group_identifier . '"' : '';								
 									$question->group_description = ! empty( $question->group_description ) ? $question->group_description : '';
-										
+
 									echo '
 				<div class="event_questions"' . $question->group_identifier . '>
 					<fieldset>';
@@ -282,7 +260,7 @@ function attendee_edit_record() {
 									$group_name = $question->group_name;
 								}
 
-								echo event_form_build_edit( $question, $question->answer, $show_admin_only = false );
+								echo event_form_build_edit( $question, trim( htmlentities( stripslashes( $question->answer ), ENT_QUOTES, 'UTF-8' )), $show_admin_only = FALSE );
 
 								$counter++;
 								echo $counter == $total_questions ? '

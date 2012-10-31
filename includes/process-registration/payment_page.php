@@ -2,7 +2,7 @@
 do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');		
 
 
-function events_payment_page( $attendee_id = FALSE, $notifications ) {
+function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');	
 	

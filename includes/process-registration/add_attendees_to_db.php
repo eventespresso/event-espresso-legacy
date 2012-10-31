@@ -829,7 +829,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 			<?php _e('Edit Cart', 'event_espresso'); ?>
 			</a>
 			<?php _e(' or ', 'event_espresso'); ?>
-			<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=load_checkout_page">
+			<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&registration_id=<?php echo $registration_id; ?>&id=<?php echo $attendee_id; ?>&regevent_action=edit_attendee&primary=<?php echo $primary_attendee_id; ?>&event_id=<?php echo $event_id; ?>&attendee_num=1">
 			<?php _e('Edit Registrant Information', 'event_espresso'); ?>
 			</a> 
 		</p>
