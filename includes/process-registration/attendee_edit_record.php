@@ -260,7 +260,7 @@ function attendee_edit_record() {
 									$group_name = $question->group_name;
 								}
 
-								echo event_form_build_edit( $question, trim( htmlentities( stripslashes( $question->answer ), ENT_QUOTES, 'UTF-8' )), $show_admin_only = FALSE );
+								echo event_form_build_edit( $question, trim( stripslashes_deep( $question->answer ) ), $show_admin_only = FALSE );
 
 								$counter++;
 								echo $counter == $total_questions ? '

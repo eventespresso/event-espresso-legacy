@@ -140,10 +140,10 @@ if (!function_exists('event_form_build')) {
 				$values = explode(",", $question->response);
 				foreach ($values as $key => $value) {
 
-					$value = trim( htmlentities( stripslashes( $value ), ENT_QUOTES, 'UTF-8' ));
+					$value = trim( stripslashes_deep( $value ));
 					$checked = ( $value == $answer ) ? ' checked="checked"' : "";
 					
-					$html .= '<li><label for="SINGLE_' . $question->id . '_' . $key . '_' . $attendee_number . '" class="' . $class . ' radio-btn-lbl"><input id="SINGLE_' . $question->id . '_' . $key . '_' . $attendee_number . '" ' . $required . ' name="' . $field_name . $multi_name_adjust . '"  type="radio" value="' . $value . '" ' . $checked . ' /> <span>' . html_entity_decode( $value, ENT_QUOTES, 'UTF-8' ) . '</span></label></li>';
+					$html .= '<li><label for="SINGLE_' . $question->id . '_' . $key . '_' . $attendee_number . '" class="' . $class . ' radio-btn-lbl"><input id="SINGLE_' . $question->id . '_' . $key . '_' . $attendee_number . '" ' . $required . ' name="' . $field_name . $multi_name_adjust . '"  type="radio" value="' . $value . '" ' . $checked . ' /> <span>' . $value . '</span></label></li>';
 
 				}
 				
@@ -160,10 +160,10 @@ if (!function_exists('event_form_build')) {
 				$values = explode(",", $question->response);
 				foreach ($values as $key => $value) {
 				
-					$value = trim( htmlentities( stripslashes( $value ), ENT_QUOTES, 'UTF-8' ));
+					$value = trim( stripslashes_deep( $value ) );
 					$checked = (is_array($answer) && in_array($value, $answer)) ? ' checked="checked"' : "";
 
-					$html .= '<li><label for="' . str_replace(' ', '', $value) . '-' . $event_id . '_' . $attendee_number . '" class="' . $class . ' checkbox-lbl"><input id="' . str_replace(' ', '', $value) . '-' . $event_id . '_' . $attendee_number . '" ' . $required . 'name="' . $field_name . $multi_name_adjust . '[]"  type="checkbox" value="' . $value . '" ' . $checked . '/> <span>' . html_entity_decode( $value, ENT_QUOTES, 'UTF-8' ) . '</span></label></li>';
+					$html .= '<li><label for="' . str_replace(' ', '', $value) . '-' . $event_id . '_' . $attendee_number . '" class="' . $class . ' checkbox-lbl"><input id="' . str_replace(' ', '', $value) . '-' . $event_id . '_' . $attendee_number . '" ' . $required . 'name="' . $field_name . $multi_name_adjust . '[]"  type="checkbox" value="' . $value . '" ' . $checked . '/> <span>' . $value . '</span></label></li>';
 					
 				}
 				
@@ -181,9 +181,9 @@ if (!function_exists('event_form_build')) {
 				$values = explode(",", $question->response);
 				foreach ($values as $key => $value) {
 				
-					$value = trim( htmlentities( stripslashes( $value ), ENT_QUOTES, 'UTF-8' ));
+					$value = trim( stripslashes_deep( $value ) );
 					$selected = ( $value == $answer ) ? ' selected="selected"' : "";
-					$html .= '<option value="' . $value . '" ' . $selected . '> ' . html_entity_decode( $value, ENT_QUOTES, 'UTF-8' ) . '</option>';
+					$html .= '<option value="' . $value . '" ' . $selected . '> ' . $value . '</option>';
 					
 				}
 				
@@ -236,7 +236,7 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 	
 	$field_name = ($question->system_name != '') ? $question->system_name : 'TEXT_' . $question->id;
 	$label = '<label for="' . $field_name . '">' . $question->question . $required_label . '</label>';
-	
+	$replace_vals = array("'",'"');
 	switch ($question->question_type) {
 	
 		case "TEXT" :
@@ -259,15 +259,14 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 			$form_input .= '
 	<ul class="edit-options-list-radio">';
 			foreach ($values as $key => $value) {
-			
-				$value = trim( htmlentities( stripslashes( $value ), ENT_QUOTES, 'UTF-8' ));
+				$value = trim( stripslashes_deep( str_replace("&#039;", "'",$value) ) );
 				$checked = in_array( $value, $answers ) ? ' checked="checked"' : '';
 				
 				$form_input .= '
 		<li>
 			<label class="radio-btn-lbl">
 				<input id="SINGLE_' . $question->id . '_' . $key . '" ' . $required . ' name="SINGLE_' . $question->id . '"  type="radio" value="' . $value . '" ' . $checked . '/>
-				<span>' . html_entity_decode( $value, ENT_QUOTES, 'UTF-8' ) . '</span>
+				<span>' . $value . '</span>
 			</label>
 		</li>';
 			}
@@ -285,14 +284,14 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 	<ul class="edit-options-list-check">';
 			foreach ($values as $key => $value) {
 			
-				$value = trim( htmlentities( stripslashes( $value ), ENT_QUOTES, 'UTF-8' ));
+				$value = trim( stripslashes_deep( str_replace("&#039;", "'",$value) ) );
 				$checked = in_array( $value, $answers) ? ' checked="checked"' : '';
 				
 				$form_input .= '
 		<li>
 			<label class="checkbox-lbl">
 				<input id="' . $question->id . '_' . trim( stripslashes_deep( $key )) . '" ' . $required . ' name="MULTIPLE_' . $question->id . '[]"  type="checkbox" value="' . $value . '" ' . $checked . '/>
-				<span>' . html_entity_decode( $value, ENT_QUOTES, 'UTF-8' ) . '</span>
+				<span>' . $value . '</span>
 			</label>
 		</li>';
 			}
@@ -311,9 +310,9 @@ function event_form_build_edit($question, $edits, $show_admin_only = false, $cla
 			$form_input .= '<option value="' . stripslashes_deep($edits) . '">' . stripslashes_deep($edits) . '</option>';
 			
 			foreach ($values as $key => $value) {
-				$value = trim( htmlentities( stripslashes( $value ), ENT_QUOTES, 'UTF-8' ));
+				$value = trim( stripslashes_deep( $value ) );
 				//$checked = in_array ( $value, $answers ) ? " selected =\" selected\"" : "";
-				$form_input .= '<option value="' . $value . '" /> ' . html_entity_decode( $value, ENT_QUOTES, 'UTF-8' ) . '</option>';
+				$form_input .= '<option value="' . $value . '" /> ' . $value . '</option>';
 			}
 			$form_input .= "</select>";
 			$form_input .= '</p>';

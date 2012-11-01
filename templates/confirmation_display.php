@@ -134,7 +134,7 @@ $attendee_num = 1;
 								<?php echo $question->question ?>
 							</th>
 							<td>
-								<span class="event_espresso_value"><?php echo html_entity_decode( $question->answer, ENT_QUOTES, 'UTF-8' ) ?></span>
+								<span class="event_espresso_value"><?php echo $question->answer ?></span>
 							</td>
 						</tr>
 					<?php } ?>

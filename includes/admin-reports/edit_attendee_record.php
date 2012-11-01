@@ -561,7 +561,7 @@ function edit_attendee_record() {
 															if (!in_array($question->id, $question_displayed)) {
 																$question_displayed[] = $question->id;
 																//echo '<p>';
-																echo event_form_build_edit( $question, empty($question->answer) ? '' : htmlentities( stripslashes( $question->answer ), ENT_QUOTES, 'UTF-8' ), $show_admin_only = TRUE );
+																echo event_form_build_edit($question, empty($question->answer) ? '' : stripslashes_deep($question->answer), $show_admin_only = true);
 																//echo "</p>";
 
 
