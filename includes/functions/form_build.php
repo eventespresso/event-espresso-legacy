@@ -25,7 +25,8 @@ if (!function_exists('event_form_build')) {
 		/**
 		 * Temporary client side email validation solution by Abel, will be replaced in the next version with a full validation suite.
 		 */
-
+		
+		$question->question = htmlspecialchars( stripslashes( $question->question ), ENT_QUOTES );
 
 		if ($question->required == "Y") {
 			$required = ' title="' . $question->required_text . '" class="required ' . $email_validate . ' ' . $class . '"';
@@ -41,7 +42,7 @@ if (!function_exists('event_form_build')) {
 
 		$required_label = isset($required_label) ? $required_label : '';
 
-		$label = '<label for="' . $field_name . '" class="' . $class . '">' . stripslashes( $question->question ) . $required_label . '</label> ';
+		$label = '<label for="' . $field_name . '" class="' . $class . '">' . $question->question . $required_label . '</label> ';
 		//If the members addon is installed, get the users information if available
 		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true ) {
 			global $current_user;
@@ -64,77 +65,102 @@ if (!function_exists('event_form_build')) {
 			
 				if (defined('EVENT_ESPRESSO_MEMBERS_DIR') && (empty($_REQUEST['event_admin_reports']) || $_REQUEST['event_admin_reports'] != 'add_new_attendee')) {
 					if (!empty($question->system_name)) {
+					
+						$answer = htmlspecialchars( stripslashes( $answer ), ENT_QUOTES );
+						
 						switch ($question->system_name) {
 							case $question->system_name == 'fname':
+							
 								if ($attendee_number === 1)
 									$answer = $current_user->first_name;
 								
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
+								
 								break;
 							case $question->system_name == 'lname':
+							
 								if ($attendee_number === 1)
 									$answer = $current_user->last_name;
 								
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
+
 								break;
 							case $question->system_name == 'email':
+
 								if ($attendee_number === 1)
 									$answer = $user_email;
 								
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
+
 								break;
 							case $question->system_name == 'address':
+
 								if ($attendee_number === 1)
 									$answer = esc_attr(get_user_meta($userid, 'event_espresso_address', true));
 								
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
+
 								break;
 							case $question->system_name == 'city':
+
 								if ($attendee_number === 1)
 									$answer = esc_attr(get_user_meta($userid, 'event_espresso_city', true));
 								
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
+
 								break;
 							case $question->system_name == 'state':
+
 								if ($attendee_number === 1)
 									$answer = esc_attr(get_user_meta($userid, 'event_espresso_state', true));
 								
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
+
 								break;
 							case $question->system_name == 'zip':
+
 								if ($attendee_number === 1)
 									$answer = esc_attr(get_user_meta($userid, 'event_espresso_zip', true));
 								
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
+
 								break;
 							case $question->system_name == 'phone':
+
 								if ($attendee_number === 1)
 									$answer = esc_attr(get_user_meta($userid, 'event_espresso_phone', true));
 								
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
+
 								break;
 							case $question->system_name == 'country':
+
 								if ($attendee_number === 1)
 									$answer = esc_attr(get_user_meta($userid, 'event_espresso_country', true));
 								
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
+
 								break;
 						}
 					}
 				}
 
-				if (is_array($answer)) $answer = '';
-				if ($answer == '') $disabled = '';
-				$html .= '<p class="event_form_field">' . $label;
+				if (is_array($answer)) { 
+					$answer = '';
+				}
+				if ($answer == '') {
+					$disabled = '';
+				}
 				
-				$html .= '<input type="text" ' . $required . ' id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '"  name="' . $field_name . $multi_name_adjust . '" size="40" value="' . $answer . '" ' . $disabled . ' /></p>';
+				$html .= '<p class="event_form_field">' . $label;
+				$html .= '<input type="text" ' . $required . ' id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '"  name="' . $field_name . $multi_name_adjust . '" size="40" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES ) . '" ' . $disabled . ' /></p>';
 				
 				break;
 			case "TEXTAREA" :
 			
 				if (is_array($answer)) $answer = '';
 				$html .= '<p class="event_form_field event-quest-group-textarea">' . $label;
-				$html .= '<textarea id=""' . $required . ' name="' . $field_name . $multi_name_adjust . '"  cols="30" rows="5">' . $answer . '</textarea></p>';
+				$html .= '<textarea id=""' . $required . ' name="' . $field_name . $multi_name_adjust . '"  cols="30" rows="5">' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES ) . '</textarea></p>';
 				
 				break;
 			case "SINGLE" :
@@ -145,12 +171,12 @@ if (!function_exists('event_form_build')) {
 				
 				$values = explode(",", $question->response);
 				$answer = trim( stripslashes( str_replace( '&#039;', "'", $answer )));
-				$answer = htmlentities( $answer, ENT_QUOTES );
+				$answer = htmlspecialchars( $answer, ENT_QUOTES );
 			
 				foreach ($values as $key => $value) {
 
 					$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-					$value = htmlentities( $value, ENT_QUOTES );
+					$value = htmlspecialchars( $value, ENT_QUOTES );
 					$checked = ( $value == $answer ) ? ' checked="checked"' : "";
 					$value_id = 'SINGLE_' . $question->id . '_' . $key . '_' . $attendee_number;
 					
@@ -177,11 +203,11 @@ if (!function_exists('event_form_build')) {
 				if ( is_array( $answer )) {
 					foreach ( $answer as $key => $value ) {
 						$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-						$answer[$key] = htmlentities( $value, ENT_QUOTES );
+						$answer[$key] = htmlspecialchars( $value, ENT_QUOTES );
 					}					
 				} else {
 					$answer = trim( stripslashes( str_replace( '&#039;', "'", $answer )));
-					$answer = htmlentities( $answer, ENT_QUOTES );
+					$answer = htmlspecialchars( $answer, ENT_QUOTES );
 				}
 
 				
@@ -189,7 +215,7 @@ if (!function_exists('event_form_build')) {
 				foreach ($values as $key => $value) {
 					
 					$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-					$value = htmlentities( $value, ENT_QUOTES );
+					$value = htmlspecialchars( $value, ENT_QUOTES );
 					$checked = (is_array($answer) && in_array($value, $answer)) ? ' checked="checked"' : "";
 					$value_id = str_replace(' ', '', $value) . '-' . $event_id . '_' . $attendee_number;
 
@@ -218,15 +244,15 @@ if (!function_exists('event_form_build')) {
 						<option value="">' . __('Select One', 'event_espresso') . "</option>";
 				
 				$answer = trim( stripslashes( str_replace( '&#039;', "'", $answer )));
-				$answer = htmlentities( $answer, ENT_QUOTES );
+				//$answer = htmlspecialchars( $answer, ENT_QUOTES );
 
 				$values = explode( ',', $question->response );
 				foreach ( $values as $key => $value ) {
 					$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-					$value = htmlentities( $value, ENT_QUOTES );
+					//$value = htmlspecialchars( $value, ENT_QUOTES );
 					$selected = ( $value == $answer ) ? ' selected="selected"' : "";
 					$html .= '
-						<option value="' . $value . '"' . $selected . '> ' . stripslashes( $value ) . '</option>';					
+						<option value="' . htmlspecialchars( $value, ENT_QUOTES ) . '"' . $selected . '> ' . htmlspecialchars( $value, ENT_QUOTES ) . '</option>';					
 				}
 				
 				$html .= '
@@ -288,13 +314,13 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 	
 		case "TEXT" :
 			$form_input .= '<p class="event_form_field">' . $label;
-			$form_input .= '<input type="text" ' . $required . ' id="' . $field_name . '"  name="' . $field_name . '" size="40"  value="' . stripslashes( $answer ) . '" />';
+			$form_input .= '<input type="text" ' . $required . ' id="' . $field_name . '"  name="' . $field_name . '" size="40"  value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES ) . '" />';
 			$form_input .= '</p>';
 			break;
 			
 		case "TEXTAREA" :		
 			$form_input .= '<p class="event_form_field">' . $label;
-			$form_input .= '<textarea id="TEXTAREA_' . $question->id . '" ' . $required . ' name="TEXTAREA_' . $question->id . '"  cols="30" rows="5">' . stripslashes( $answer ) . '</textarea>';
+			$form_input .= '<textarea id="TEXTAREA_' . $question->id . '" ' . $required . ' name="TEXTAREA_' . $question->id . '"  cols="30" rows="5">' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES ) . '</textarea>';
 			$form_input .= '</p>';
 			break;
 			
@@ -305,7 +331,7 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 
 			foreach ( $answers as $key => $value ) {
 				$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-				$answers[$key] = htmlentities( $value, ENT_QUOTES );
+				$answers[$key] = htmlspecialchars( $value, ENT_QUOTES );
 			}
 
 			$form_input .= $label;
@@ -313,7 +339,7 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 	<ul class="edit-options-list-radio">';
 			foreach ($values as $key => $value) {
 				$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-				$value = htmlentities( $value, ENT_QUOTES );
+				$value = htmlspecialchars( $value, ENT_QUOTES );
 				$checked = in_array( $value, $answers ) ? ' checked="checked"' : '';
 				
 				$form_input .= '
@@ -335,7 +361,7 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 
 			foreach ( $answers as $key => $value ) {
 				$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-				$answers[$key] = htmlentities( $value, ENT_QUOTES );
+				$answers[$key] = htmlspecialchars( $value, ENT_QUOTES );
 			}
 			
 			$form_input .= $label;
@@ -344,7 +370,7 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 			foreach ($values as $key => $value) {
 			
 				$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-				$value = htmlentities( $value, ENT_QUOTES );
+				$value = htmlspecialchars( $value, ENT_QUOTES );
 				$checked = in_array( $value, $answers) ? ' checked="checked"' : '';
 				
 				$form_input .= '
@@ -357,7 +383,7 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 			}
 			$form_input .= '
 	</ul>';
-			//$form_input .= '<input name="'.$answer_id.'" type="hidden" value="'.$answer_id.'" />';
+
 			break;
 			
 		case "DROPDOWN" :
@@ -367,28 +393,31 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 
 			foreach ( $values as $key => $value ) {
 				$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-				$values[$key] = htmlentities( $value, ENT_QUOTES );
+				//$values[$key] = htmlspecialchars( $value, ENT_QUOTES );
 			}
 
 			$answer = trim( stripslashes( str_replace( '&#039;', "'", $answer )));
-			$answer = htmlentities( $answer, ENT_QUOTES );
+			//$answer = htmlspecialchars( $answer, ENT_QUOTES );
 
 			$form_input .= '
 			<p class="event_form_field">' . $label;
 			$form_input .= '
 				<select ' . $dd_type . ' ' . $required . ' ' . $required . ' id="DROPDOWN_' . $question->id . '"  />';
 				
-			if ( ! in_array( $answer, $values )) {
-				$form_input .= '
-					<option value="' . $answer . '">' . stripslashes($answer) . '</option>';				
-			}
+//			if ( ! in_array( $answer, $values )) {
+//				$form_input .= '
+//					<option value="' . $answer . '">' . $answer . '</option>';				
+//			}
 			
 			foreach ($values as $key => $value) {
+//echo '<h4>$value : ' . $value . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-				$value = htmlentities( $value, ENT_QUOTES );
+				//$value = htmlspecialchars( $value, ENT_QUOTES );
+//echo '<h4>$value : ' . $value . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//echo '<h4>$answer : ' . $answer . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				$selected = ( $value == $answer ) ? ' selected="selected"' : "";
 				$form_input .= '
-					<option value="' . $value . '"' . $selected . '/> ' . $value . '</option>';
+					<option value="' . htmlspecialchars( $value, ENT_QUOTES ) . '"' . $selected . '/> ' . htmlspecialchars( $value, ENT_QUOTES ) . '</option>';
 			}
 			$form_input .= '
 				</select>';

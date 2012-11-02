@@ -109,8 +109,8 @@ function replace_shortcodes($message, $data) {
 	//echo '<p>'.print_r($questions).'</p>';
 	if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->question != NULL) {
 		foreach ($questions as $q) {
-			$k = $q['question'];
-			$v = $q['answer'];
+			$k = stripslashes( $q['question'] );
+			$v = stripslashes( $q['answer'] );
 
 			//Output the question
 			array_push($SearchValues, "[" . 'question_' . $k . "]");
@@ -118,7 +118,7 @@ function replace_shortcodes($message, $data) {
 
 			//Output the answer
 			array_push($SearchValues, "[" . 'answer_' . $k . "]");
-			array_push($ReplaceValues, stripslashes_deep(rtrim($v, ",")) );
+			array_push($ReplaceValues, rtrim($v, ",") );
 		}
 	}
 	//Get the event meta

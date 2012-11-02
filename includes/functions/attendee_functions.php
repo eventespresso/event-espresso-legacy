@@ -13,50 +13,33 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 
 	array_walk_recursive( $response_source, 'sanitize_text_field' );
 	
-	/* echo 'Debug: <br />';
-	  print_r( $questions );
-	  echo '<br>';
-	  echo $registration_id;
-	  echo '<br>';
-	  echo $attendee_id;
-	  echo '<br>'; */
-	$question_groups = $questions; //unserialize($questions->question_groups);
+	//printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+
+	$question_groups = maybe_unserialize( $questions ); 
 	global $wpdb, $org_options;
 	$wpdb->show_errors();
-	//print_r($question_groups);
 
-	/**
-	 * Added this check because in some cases question groups are being sent as serialized
-	 */
-	if (!is_array($question_groups) && !empty($question_groups)) {
-		$question_groups = unserialize($question_groups);
-	}
 
 	if (count($question_groups) > 0) {
 		$questions_in = '';
 
-		//Debug
-		//echo "<pre question_groups - >".print_r($question_groups,true)."</pre>";
 
-		foreach ($question_groups as $g_id)
+		foreach ($question_groups as $g_id) {
 			$questions_in .= $g_id . ',';
+		}			
 
 		$questions_in = substr($questions_in, 0, -1);
 		$group_name = '';
 		$counter = 0;
 
-		$questions = $wpdb->get_results("SELECT q.*, qg.group_name
-														FROM " . EVENTS_QUESTION_TABLE . " q
-														JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr
-														on q.id = qgr.question_id
-														JOIN " . EVENTS_QST_GROUP_TABLE . " qg
-														on qg.id = qgr.group_id
-														WHERE qgr.group_id in (" . $questions_in . ") ORDER BY q.id ASC");
-		//. ") AND q.system_name IS NULL ORDER BY id ASC");
+		$SQL = "SELECT q.*, qg.group_name FROM " . EVENTS_QUESTION_TABLE . " q ";
+		$SQL .= "	JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
+		$SQL .= "	JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
+		$SQL .= "	WHERE qgr.group_id in (%s) ORDER BY q.id ASC";
 
-		$num_rows = $wpdb->num_rows;
+		$questions = $wpdb->get_results( $wpdb->prepare( $SQL, $questions_in ));
 
-		if ($num_rows > 0) {
+		if ( $questions !== FALSE ) {
 			$question_displayed = array();
 			global $email_questions; //Make a global variable to hold the answers to the questions to be sent in the admin email.
 			$email_questions = '<p>' . __('Form Questions:', 'event_espresso') . '<br />';
@@ -68,38 +51,34 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 						case "TEXT" :
 						case "TEXTAREA" :
 						case "DROPDOWN" :
-							if ($question->admin_only != 'Y') {
-								$post_val = ($question->system_name != '') ? $response_source[$question->system_name] : $question_type;
-							} else {
-								$post_val = '';
-							}
-							$wpdb->query("INSERT into " . EVENTS_ANSWER_TABLE . " (registration_id, attendee_id, question_id, answer)
-															values ('" . $registration_id . "', '" . $attendee_id . "', '" . $question->id . "', '" . $post_val . "')");
-							$email_questions .= $question->question . ': ' . $post_val . '<br />';
-							break;
 						case "SINGLE" :
+
 							if ($question->admin_only != 'Y') {
 								$post_val = ($question->system_name != '') ? $response_source[$question->system_name] : $question_type;
 							} else {
 								$post_val = '';
 							}
-							$wpdb->query("INSERT into " . EVENTS_ANSWER_TABLE . " (registration_id, attendee_id, question_id, answer)
-															values ('" . $registration_id . "', '" . $attendee_id . "', '" . $question->id . "', '" . $post_val . "')");
-							$email_questions .= $question->question . ': ' . $post_val . '<br />';
+							
 							break;
 						case "MULTIPLE" :
-							$value_string = '';
+						
+							$post_val = '';
 							if (!empty($response_source[$question->question_type . '_' . $question->id]) && $question->admin_only != 'Y') {
 								for ($i = 0; $i < count($response_source[$question->question_type . '_' . $question->id]); $i++) {
-									$value_string .= trim($response_source[$question->question_type . '_' . $question->id][$i]) . ",";
+									$post_val .= trim($response_source[$question->question_type . '_' . $question->id][$i]) . ",";
 								}
 							}
-
-							$wpdb->query("INSERT INTO " . EVENTS_ANSWER_TABLE . " (registration_id, attendee_id, question_id, answer)
-															VALUES ('" . $registration_id . "', '" . $attendee_id . "', '" . $question->id . "', '" . $value_string . "')");
-							$email_questions .= $question->question . ': ' . $value_string . '<br />';
+							
 							break;
 					}
+					
+					$post_val = html_entity_decode( $post_val, ENT_QUOTES );
+
+					$SQL = "INSERT INTO " . EVENTS_ANSWER_TABLE . " ( registration_id, answer, attendee_id, question_id ) VALUES ( %s, %s, %d, %d )";
+					$wpdb->query( $wpdb->prepare( $SQL, $registration_id, $post_val, $attendee_id, $question->id ));
+
+					$email_questions .= $question->question . ': ' . $post_val . '<br />';
+					
 				}
 			}
 			$email_questions .= '</p>';

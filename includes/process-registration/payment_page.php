@@ -70,6 +70,13 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 
 	$display_questions = '';
 	foreach ($questions as $question) {
+	
+		$question->question = trim( stripslashes( str_replace( '&#039;', "'", $question->question )));
+		$question->question = htmlspecialchars( $question->question, ENT_QUOTES );
+
+		$question->answer = trim( stripslashes( str_replace( '&#039;', "'", $question->answer )));
+		$question->answer = htmlspecialchars( $question->answer, ENT_QUOTES );
+
 		$display_questions .= '<p>' . $question->question . ':<br /> ' . str_replace(',', '<br />', $question->answer) . '</p>';
 	}
 	
@@ -213,6 +220,13 @@ function espresso_confirm_registration() {
 	
 	$display_questions = '';
 	foreach ($questions as $question) {
+	
+		$question->question = trim( stripslashes( str_replace( '&#039;', "'", $question->question )));
+		$question->question = htmlspecialchars( $question->question, ENT_QUOTES );
+
+		$question->answer = trim( stripslashes( str_replace( '&#039;', "'", $question->answer )));
+		$question->answer = htmlspecialchars( $question->answer, ENT_QUOTES );
+
 		$display_questions .= '<p class="espresso_questions"><strong>' . $question->question . '</strong>:<br /> ' . str_replace(',', '<br />', $question->answer) . '</p>';
 	}
 
@@ -277,12 +291,12 @@ function espresso_confirm_registration() {
 
 	$attendee_id = $attendee->id;
 	$attendee_email = $attendee->email;
-	$lname = $attendee->lname;
-	$fname = $attendee->fname;
-	$address = $attendee->address;
-	$address2 = $attendee->address2;
-	$city = $attendee->city;
-	$state = $attendee->state;
+	$lname = htmlspecialchars( stripslashes( $attendee->lname ), ENT_QUOTES );
+	$fname = htmlspecialchars( stripslashes( $attendee->fname ), ENT_QUOTES );
+	$address = htmlspecialchars( stripslashes( $attendee->address ), ENT_QUOTES );
+	$address2 = htmlspecialchars( stripslashes( $attendee->address2 ), ENT_QUOTES );
+	$city = htmlspecialchars( stripslashes( $attendee->city ), ENT_QUOTES );
+	$state = htmlspecialchars( stripslashes( $attendee->state ), ENT_QUOTES );
 	$zip = $attendee->zip;
 	$payment_status = $attendee->payment_status;
 	$txn_type = $attendee->txn_type;

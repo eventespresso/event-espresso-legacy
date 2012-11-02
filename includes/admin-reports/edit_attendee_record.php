@@ -302,35 +302,42 @@ function edit_attendee_record() {
 			
 			if ($questions) {
 				foreach ($questions as $question) {
+					
+					//printr( $question, '$question  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 				
 					switch ($question->question_type) {
+					
 						case "TEXT" :
 						case "TEXTAREA" :
 						case "SINGLE" :
-							$post_val = ( $question->system_name != '' ) ? $_POST[ $question->system_name ] : $_POST[ $question->question_type . '_' . $question->a_id ];
-							$post_val = sanitize_text_field( stripslashes( $post_val ));
-							break;
 						case "DROPDOWN" :
-							$post_val = ( $question->system_name != '' ) ? $_POST[ $question->system_name ] : $_POST[ $question->question_type . '_' . $question->a_id ];
+						
+							if ( $question->system_name != '' ) {
+								$post_val = isset( $_POST[ $question->system_name ] ) ? $_POST[ $question->system_name ] : '';
+							} else {
+								$post_val = isset( $_POST[ $question->question_type . '_' . $question->a_id ] ) ? $_POST[ $question->question_type . '_' . $question->a_id ] : '';
+							}
 							$post_val = sanitize_text_field( stripslashes( $post_val ));
+							
 							break;
 						case "MULTIPLE" :
+						
 							$post_val = '';
 							for ( $i = 0; $i < count( $_POST[ $question->question_type . '_' . $question->a_id ] ); $i++ ) {
 								$post_val .= trim( $_POST[ $question->question_type . '_' . $question->a_id ][$i] ) . ",";
 							}
 							$post_val = sanitize_text_field( substr( stripslashes( $post_val ), 0, -1 ));
+							
 							break;
 					}
 					
-					$post_val = html_entity_decode( $post_val, ENT_QUOTES );
 //					echo '<h4>$post_val : ' . $post_val . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //					echo '<h4>$question->id : ' . $question->q_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //					printr( $answer_a, '$answer_a  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 					
 					if ( in_array( $question->q_id, $answer_a )) {
 						// existing answer
-						$set_cols_and_values = array( 'answer'=> $post_val );
+						$set_cols_and_values = array( 'answer'=> html_entity_decode( $post_val, ENT_QUOTES ));
 						//echo "<pre>".print_r($set_cols_and_values,true)."</pre>";
 						$set_format = array( '%s' );
 						$where_cols_and_values = array( 'attendee_id'=> $id, 'question_id' => $question->q_id );

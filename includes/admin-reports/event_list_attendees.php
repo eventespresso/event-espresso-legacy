@@ -256,11 +256,11 @@ function event_list_attendees() {
 				
 					//echo 'Reg. Id: '.$registration_id.'<br />';
 					$registration_id = $attendee->registration_id;
-					$lname = $attendee->lname;
-					$fname = $attendee->fname;
-					$address = $attendee->address;
-					$city = $attendee->city;
-					$state = $attendee->state;
+					$lname = htmlspecialchars( stripslashes( $attendee->lname ), ENT_QUOTES );
+					$fname = htmlspecialchars( stripslashes( $attendee->fname ), ENT_QUOTES );
+					$address = htmlspecialchars( stripslashes( $attendee->address ), ENT_QUOTES );
+					$city = htmlspecialchars( stripslashes( $attendee->city ), ENT_QUOTES );
+					$state = htmlspecialchars( stripslashes( $attendee->state ), ENT_QUOTES );
 					$zip = $attendee->zip;
 					$email = '<span style="visibility:hidden">' . $attendee->email . '</span>';
 					$phone = $attendee->phone;

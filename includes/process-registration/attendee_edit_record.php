@@ -160,7 +160,7 @@ function attendee_edit_record() {
 							$SQL = "UPDATE " . EVENTS_ANSWER_TABLE . " SET answer = %s WHERE attendee_id = %d AND question_id =%d";
 							$wpdb->query( $wpdb->prepare( $SQL, $post_val, $id, $question->q_id ));
 						} else {
-							$sql = "INSERT INTO " . EVENTS_ANSWER_TABLE . " ( registration_id, answer, attendee_id, question_id ) VALUES ( %s, %s, %d, %d )";
+							$SQL = "INSERT INTO " . EVENTS_ANSWER_TABLE . " ( registration_id, answer, attendee_id, question_id ) VALUES ( %s, %s, %d, %d )";
 							$wpdb->query( $wpdb->prepare( $SQL, $registration_id, $post_val, $id, $question->q_id ));
 						}	
 						
