@@ -29,10 +29,10 @@
 	if ( file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[0]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[1]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[2]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[3]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[4]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[5]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[6]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[7]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[8]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[9]) || file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . $files[10]) ) {
 	   ?>
 	   <div class="red_alert"><p>
-    <?php _e('Remember, if updates are made or features are added to these templates in the future. You will need to make the updates to your customized templates.', 'event_espresso'); ?>
+    <?php _e('Remember: If updates are made or features are added to these templates in the future, you will need to make the updates to your customized templates.', 'event_espresso'); ?>
 		        </p>
 				<p>
-				<?php _e('If you are having issues with these file, please use this button to rename the templates directory.', 'event_espresso'); ?><br />
+				<?php _e('If you are having issues with these files, please use this button to rename the templates directory.', 'event_espresso'); ?><br />
 				</p>
 				<p><form method="post" name="ee_rename_form" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
 			<input style="border:#333 1px solid" name="ee_rename_folder" type="submit" value="<?php _e('Rename Templates Directory', 'event_espresso'); ?>" />
