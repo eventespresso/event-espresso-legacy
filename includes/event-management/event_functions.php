@@ -335,7 +335,8 @@ function espresso_event_question_groups($question_groups=array(), $add_attendee_
             $g_limit = $espresso_premium != true ? '2' : null;
 
             $event_question_groups = espresso_get_question_groups_for_event( $question_groups, $g_limit, true, $event_id );
-
+			
+			$html = '';
             if ( count($event_question_groups) > 0 ) {
                 foreach ( $event_question_groups as $question_group ) {        
                     $question_group_id = $question_group->id;
@@ -346,7 +347,7 @@ function espresso_event_question_groups($question_groups=array(), $add_attendee_
                     $group_id = isset($group_id) ? $group_id : '';
                     $html .= '<p id="event-question-group-' . $question_group_id . '"><input value="' . $question_group_id . '" type="checkbox" ' . $checked . $visibility . ' name="question_groups[' . $question_group_id . ']" ' . $checked . ' /> <a href="admin.php?page=form_groups&amp;action=edit_group&amp;group_id=' . $question_group_id . '" title="edit" target="_blank">' . $group_name . '</a></p>';
                 }
-                if (count($event_question_groups['selected']) > 10) {
+                if ( isset( $event_question_groups['selected'] ) && count( $event_question_groups['selected']) > 10 ) {
                     $top_div = '<div style="height:250px;overflow:auto;">';
                     $bottom_div = '</div>';
                 } else {
@@ -400,7 +401,7 @@ function espresso_event_question_groups($question_groups=array(), $add_attendee_
 
                         $html .= '<p id="event-question-group-' . $question_group_id . '"><input value="' . $question_group_id . '" type="checkbox" ' . $visibility . ' name="add_attendee_question_groups[' . $question_group_id . ']" ' . $checked . ' /> <a href="admin.php?page=form_groups&amp;action=edit_group&amp;group_id=' . $question_group_id . '" title="edit" target="_blank">' . $group_name . "</a></p>";
                     }
-                    if ($num_rows > 10) {
+                    if (count($event_question_groups) > 10) {
                         $top_div = '<div style="height:250px;overflow:auto;">';
                         $bottom_div = '</div>';
                     }
