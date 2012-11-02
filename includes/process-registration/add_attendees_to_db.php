@@ -694,8 +694,9 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 									$tmp_data = array( 'primary_registration_id' => $primary_registration_id, 'registration_id' => $tmp_registration_id );
 									$wpdb->insert( EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE, $tmp_data, array( '%s', '%s' ));
 								}
-							}
 							$counter++;
+
+							}
 						}
 					}
 				}

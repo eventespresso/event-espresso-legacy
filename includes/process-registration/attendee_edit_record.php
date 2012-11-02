@@ -154,6 +154,8 @@ function attendee_edit_record() {
 								
 						}
 						
+						$post_val = html_entity_decode( $post_val, ENT_QUOTES );
+						
 						if ( in_array( $question->q_id, $answer_a )) {
 							$SQL = "UPDATE " . EVENTS_ANSWER_TABLE . " SET answer = %s WHERE attendee_id = %d AND question_id =%d";
 							$wpdb->query( $wpdb->prepare( $SQL, $post_val, $id, $question->q_id ));
@@ -260,7 +262,7 @@ function attendee_edit_record() {
 									$group_name = $question->group_name;
 								}
 
-								echo event_form_build_edit( $question, trim( stripslashes_deep( $question->answer ) ), $show_admin_only = FALSE );
+								echo event_form_build_edit( $question, $question->answer, $show_admin_only = FALSE );
 
 								$counter++;
 								echo $counter == $total_questions ? '

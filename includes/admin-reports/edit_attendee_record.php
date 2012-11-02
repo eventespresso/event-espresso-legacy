@@ -308,28 +308,29 @@ function edit_attendee_record() {
 						case "TEXTAREA" :
 						case "SINGLE" :
 							$post_val = ( $question->system_name != '' ) ? $_POST[ $question->system_name ] : $_POST[ $question->question_type . '_' . $question->a_id ];
-							$post_val = sanitize_text_field( $post_val );
+							$post_val = sanitize_text_field( stripslashes( $post_val ));
 							break;
 						case "DROPDOWN" :
 							$post_val = ( $question->system_name != '' ) ? $_POST[ $question->system_name ] : $_POST[ $question->question_type . '_' . $question->a_id ];
-							$post_val = sanitize_text_field( $post_val );
+							$post_val = sanitize_text_field( stripslashes( $post_val ));
 							break;
 						case "MULTIPLE" :
 							$post_val = '';
 							for ( $i = 0; $i < count( $_POST[ $question->question_type . '_' . $question->a_id ] ); $i++ ) {
 								$post_val .= trim( $_POST[ $question->question_type . '_' . $question->a_id ][$i] ) . ",";
 							}
-							$post_val = sanitize_text_field( substr( $post_val, 0, -1 ));
+							$post_val = sanitize_text_field( substr( stripslashes( $post_val ), 0, -1 ));
 							break;
 					}
 					
+					$post_val = html_entity_decode( $post_val, ENT_QUOTES );
 //					echo '<h4>$post_val : ' . $post_val . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //					echo '<h4>$question->id : ' . $question->q_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //					printr( $answer_a, '$answer_a  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 					
 					if ( in_array( $question->q_id, $answer_a )) {
 						// existing answer
-						$set_cols_and_values = array( 'answer'=>$post_val );
+						$set_cols_and_values = array( 'answer'=> $post_val );
 						//echo "<pre>".print_r($set_cols_and_values,true)."</pre>";
 						$set_format = array( '%s' );
 						$where_cols_and_values = array( 'attendee_id'=> $id, 'question_id' => $question->q_id );
@@ -561,7 +562,7 @@ function edit_attendee_record() {
 															if (!in_array($question->id, $question_displayed)) {
 																$question_displayed[] = $question->id;
 																//echo '<p>';
-																echo event_form_build_edit($question, empty($question->answer) ? '' : stripslashes_deep($question->answer), $show_admin_only = true);
+																echo event_form_build_edit($question, $question->answer, $show_admin_only = true);
 																//echo "</p>";
 
 

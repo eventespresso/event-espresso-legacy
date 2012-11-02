@@ -92,6 +92,7 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			}
 		}
 		//echo $_SESSION['espresso_session']['groupon_used'];
+//		printr( $_SESSION, '$_SESSION  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		?>
 		<div class="event-display-boxes ui-widget">
 			<div class="mer-event-submit ui-widget-content ui-corner-all">
