@@ -127,6 +127,6 @@
 	    <p class="fugue f-warn">
     <?php printf(__("Your template files have not been moved. If you would like to customize your template files, please follow <a href='%s' target=\"_blank\">this tutorial</a>.", 'event_espresso'), "http://eventespresso.com/wiki/put-custom-templates/"); ?>
 	    </p>
-	    <p class="updated"><?php printf(__("Click here to <a href='%s'>Move your files</a> to a safe place.", 'event_espresso'), wp_nonce_url("admin.php?event_espresso_admin_action=copy_templates", 'copy_templates')); ?> </p>
+	    <?php /*?><p class="updated"><?php printf(__("Click here to <a href='%s'>Move your files</a> to a safe place.", 'event_espresso'), wp_nonce_url("admin.php?event_espresso_admin_action=copy_templates", 'copy_templates')); ?> </p><?php */?>
 	    <?php
 	}
