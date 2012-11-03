@@ -416,7 +416,7 @@ class PluginUpdateEngineChecker {
 			foreach ( $allPlugins as $loc => $details ) {
 					//prepare string for match.
 					$slug_match = str_replace('-','\-',$this->slug);
-					if ( !empty($slug_match) && preg_match('/(?<=)(^'.$this->slug.')((?=\/)|(?=\.))/', $loc) ) {
+					if ( !empty($slug_match) && preg_match('/(?<=)(^'.$slug_match.')((?=\/)|(?=\.))/', $loc) ) {
 						update_option('pue_file_loc_'.$this->slug, $loc);
 						return $allPlugins[$loc]['Version'];
 					}
