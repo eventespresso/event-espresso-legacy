@@ -71,73 +71,55 @@ if (!function_exists('event_form_build')) {
 						switch ($question->system_name) {
 							case $question->system_name == 'fname':
 							
-								if ($attendee_number === 1)
-									$answer = $current_user->first_name;
-								
+								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( $current_user->first_name ), ENT_QUOTES ) : $answer;
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 								
 								break;
 							case $question->system_name == 'lname':
-							
-								if ($attendee_number === 1)
-									$answer = $current_user->last_name;
 								
+								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( $current_user->last_name ), ENT_QUOTES ) : $answer;
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 
 								break;
 							case $question->system_name == 'email':
-
-								if ($attendee_number === 1)
-									$answer = $user_email;
 								
+								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( $user_email ), ENT_QUOTES ) : $answer;
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 
 								break;
 							case $question->system_name == 'address':
-
-								if ($attendee_number === 1)
-									$answer = esc_attr(get_user_meta($userid, 'event_espresso_address', true));
 								
+								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_address', TRUE ) ), ENT_QUOTES ) : $answer;
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 
 								break;
 							case $question->system_name == 'city':
-
-								if ($attendee_number === 1)
-									$answer = esc_attr(get_user_meta($userid, 'event_espresso_city', true));
 								
+								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_city', TRUE ) ), ENT_QUOTES ) : $answer;
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 
 								break;
 							case $question->system_name == 'state':
-
-								if ($attendee_number === 1)
-									$answer = esc_attr(get_user_meta($userid, 'event_espresso_state', true));
 								
+								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_state', TRUE ) ), ENT_QUOTES ) : $answer;
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 
 								break;
 							case $question->system_name == 'zip':
-
-								if ($attendee_number === 1)
-									$answer = esc_attr(get_user_meta($userid, 'event_espresso_zip', true));
 								
+								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_zip', TRUE ) ), ENT_QUOTES ) : $answer;
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 
 								break;
 							case $question->system_name == 'phone':
-
-								if ($attendee_number === 1)
-									$answer = esc_attr(get_user_meta($userid, 'event_espresso_phone', true));
 								
+								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_phone', TRUE ) ), ENT_QUOTES ) : $answer;
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 
 								break;
 							case $question->system_name == 'country':
-
-								if ($attendee_number === 1)
-									$answer = esc_attr(get_user_meta($userid, 'event_espresso_country', true));
 								
+								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_country', TRUE ) ), ENT_QUOTES ) : $answer;
 								$html .= $answer == '' ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 
 								break;
@@ -244,15 +226,17 @@ if (!function_exists('event_form_build')) {
 						<option value="">' . __('Select One', 'event_espresso') . "</option>";
 				
 				$answer = trim( stripslashes( str_replace( '&#039;', "'", $answer )));
-				//$answer = htmlspecialchars( $answer, ENT_QUOTES );
+				$answer = htmlspecialchars( $answer, ENT_QUOTES );
 
 				$values = explode( ',', $question->response );
 				foreach ( $values as $key => $value ) {
 					$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-					//$value = htmlspecialchars( $value, ENT_QUOTES );
+					$value = htmlspecialchars( $value, ENT_QUOTES );
 					$selected = ( $value == $answer ) ? ' selected="selected"' : "";
+//					$html .= '
+//						<option value="' . htmlspecialchars( $value, ENT_QUOTES ) . '"' . $selected . '> ' . htmlspecialchars( $value, ENT_QUOTES ) . '</option>';					
 					$html .= '
-						<option value="' . htmlspecialchars( $value, ENT_QUOTES ) . '"' . $selected . '> ' . htmlspecialchars( $value, ENT_QUOTES ) . '</option>';					
+						<option value="' . $value . '"' . $selected . '> ' . $value . '</option>';					
 				}
 				
 				$html .= '
@@ -391,33 +375,30 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 			$dd_type = $question->system_name == 'state' ? 'name="state"' : 'name="DROPDOWN_' . $question->id . '"';
 			$values = explode(",", $question->response);
 
-			foreach ( $values as $key => $value ) {
-				$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-				//$values[$key] = htmlspecialchars( $value, ENT_QUOTES );
-			}
+//			foreach ( $values as $key => $value ) {
+//				$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
+//				//$values[$key] = htmlspecialchars( $value, ENT_QUOTES );
+//			}
 
 			$answer = trim( stripslashes( str_replace( '&#039;', "'", $answer )));
-			//$answer = htmlspecialchars( $answer, ENT_QUOTES );
+			$answer = htmlspecialchars( $answer, ENT_QUOTES );
 
 			$form_input .= '
 			<p class="event_form_field">' . $label;
 			$form_input .= '
 				<select ' . $dd_type . ' ' . $required . ' ' . $required . ' id="DROPDOWN_' . $question->id . '"  />';
-				
-//			if ( ! in_array( $answer, $values )) {
-//				$form_input .= '
-//					<option value="' . $answer . '">' . $answer . '</option>';				
-//			}
 			
 			foreach ($values as $key => $value) {
 //echo '<h4>$value : ' . $value . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-				//$value = htmlspecialchars( $value, ENT_QUOTES );
+				$value = htmlspecialchars( $value, ENT_QUOTES );
 //echo '<h4>$value : ' . $value . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //echo '<h4>$answer : ' . $answer . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				$selected = ( $value == $answer ) ? ' selected="selected"' : "";
+//				$form_input .= '
+//					<option value="' . htmlspecialchars( $value, ENT_QUOTES ) . '"' . $selected . '/> ' . htmlspecialchars( $value, ENT_QUOTES ) . '</option>';
 				$form_input .= '
-					<option value="' . htmlspecialchars( $value, ENT_QUOTES ) . '"' . $selected . '/> ' . htmlspecialchars( $value, ENT_QUOTES ) . '</option>';
+					<option value="' . $value . '"' . $selected . '/> ' . $value . '</option>';
 			}
 			$form_input .= '
 				</select>';
