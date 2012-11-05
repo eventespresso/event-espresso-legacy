@@ -669,7 +669,7 @@ if (!function_exists('event_espresso_add_question_groups')) {
 
 			$FILTER = '';
 			if (isset($_REQUEST['regevent_action']))
-				$FILTER = " AND q.admin_only = 'N' ";
+				$FILTER = " AND q.admin_only != 'Y' ";
 
 			//echo 'additional_attendee_reg_info = '.$meta['additional_attendee_reg_info'].'<br />';
 			//Only personal inforamation for the additional attendees in each group

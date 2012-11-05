@@ -85,10 +85,10 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$phone = isset($att_data_source['phone']) ? $att_data_source['phone'] : '';
 			$email = isset($att_data_source['email']) ? $att_data_source['email'] : '';
 
-
-			$questions = $wpdb->get_row($wpdb->prepare("SELECT question_groups, event_meta FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'"));
-			$event_meta = unserialize($questions->event_meta);
-			$questions = unserialize($questions->question_groups);
+			$SQL = "SELECT question_groups, event_meta FROM " . EVENTS_DETAIL_TABLE . " WHERE id = %d";
+			$questions = $wpdb->get_row( $wpdb->prepare( $SQL, $event_id ));
+			$event_meta = maybe_unserialize( $questions->event_meta );
+			$questions = maybe_unserialize( $questions->question_groups );
 
 			// Adding attenddee specific cost to events_attendee table
 			if (isset($data_source['admin'])) {
@@ -416,7 +416,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			//$attendee_number check for 2 because is it statically set at 1 first and is incremented for the primary attendee above, hence 2
 			$questions = ( $attendee_number > 1 && isset($event_meta['add_attendee_question_groups'])) ? $event_meta['add_attendee_question_groups'] : $questions;
 
-			add_attendee_questions($questions, $registration_id, $attendee_id, array('session_vars' => $att_data_source));
+			add_attendee_questions( $questions, $registration_id, $attendee_id, array( 'session_vars' => $att_data_source ));
 
 			//Add additional attendees to the database
 			if ($event_meta['additional_attendee_reg_info'] > 1) {

@@ -101,7 +101,7 @@ function attendee_edit_record() {
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
 			$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
-			$SQL .= "AND q.admin_only = 'N' ";
+			$SQL .= "AND q.admin_only != 'Y' ";
 			$SQL .= "ORDER BY qg.group_order, qg.id, q.sequence ASC";
 			
 			$questions = $wpdb->get_results( $wpdb->prepare( $SQL ));

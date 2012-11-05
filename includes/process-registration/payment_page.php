@@ -62,12 +62,14 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	//Get the questions for the attendee
 	$SQL = "SELECT ea.answer, eq.question ";
 	$SQL .= "	FROM " . EVENTS_ANSWER_TABLE . " ea ";
-	$SQL .= "	LEFT JOIN " . EVENTS_QUESTION_TABLE . " eq ON eq.id = ea.question_id ";
-	$SQL .= "	WHERE ea.attendee_id = %d and eq.admin_only = 'N' ";
+	$SQL .= "LEFT JOIN " . EVENTS_QUESTION_TABLE . " eq ON eq.id = ea.question_id ";
+	$SQL .= "	WHERE ea.attendee_id = %d and eq.admin_only != 'Y' ";
 	$SQL .= "	ORDER BY eq.sequence asc ";
 	
 	$questions = $wpdb->get_results($wpdb->prepare( $SQL, $attendee_id ));
-
+//	echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//	printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+	
 	$display_questions = '';
 	foreach ($questions as $question) {
 	
