@@ -337,11 +337,11 @@ function edit_attendee_record() {
 					
 					if ( in_array( $question->q_id, $answer_a )) {
 						// existing answer
-						$set_cols_and_values = array( 'answer'=> html_entity_decode( $post_val, ENT_QUOTES ));
+						$set_cols_and_values = array( 'answer'=> html_entity_decode( trim( $post_val ), ENT_QUOTES ));
 						//echo "<pre>".print_r($set_cols_and_values,true)."</pre>";
 						$set_format = array( '%s' );
-						$where_cols_and_values = array( 'attendee_id'=> $id, 'question_id' => $question->q_id );
-						$where_format = array( '%d', '%d' );
+						$where_cols_and_values = array( 'question_id' => $question->q_id );
+						$where_format = array( '%d' );
 						// run the update
 						$upd_success = $wpdb->update( EVENTS_ANSWER_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
 						//echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
@@ -352,7 +352,7 @@ function edit_attendee_record() {
 							'registration_id'=>$registration_id,
 							'attendee_id'=>$id,
 							'question_id'=> $question->q_id,
-							'answer'=>$post_val
+							'answer'=>html_entity_decode( trim( $post_val ), ENT_QUOTES )
 						);
 						$set_format = array( '%s', '%d', '%d', '%s'  );
 						// run the insert
