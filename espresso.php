@@ -184,7 +184,9 @@ foreach ($_REQUEST as $key => $value) {
 		$value = substr($value, 0, 4) . "-XXXX-XXXX-XXXX";
 	}
 }
-do_action( 'action_hook_espresso_log', __FILE__, __FUNCTION__, $_REQUEST );
+if ( isset( $GLOBALS['pagenow'] ) && ! in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php' ))) {
+	do_action( 'action_hook_espresso_log', __FILE__, __FUNCTION__, $_REQUEST );
+}
 
 //Set the default time zone
 //If the default time zone is set up in the WP Settings, then we will use that as the default.
