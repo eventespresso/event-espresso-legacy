@@ -71,11 +71,16 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 							
 							break;
 					}
-					
-					$post_val = html_entity_decode( $post_val, ENT_QUOTES );
 
-					$SQL = "INSERT INTO " . EVENTS_ANSWER_TABLE . " ( registration_id, answer, attendee_id, question_id ) VALUES ( %s, %s, %d, %d )";
-					$wpdb->query( $wpdb->prepare( $SQL, $registration_id, $post_val, $attendee_id, $question->id ));
+					$columns_and_values = array(
+						'registration_id' => $registration_id, 
+						'attendee_id' => $attendee_id, 
+						'question_id' => $question->id,
+						'answer' => html_entity_decode( trim( $post_val ), ENT_QUOTES )
+					);
+					$data_formats = array( '%s', '%d',  '%d', '%s' );
+				
+					$wpdb->prepare( $wpdb->insert( EVENTS_ANSWER_TABLE, $columns_and_values, $data_formats ));
 
 					$email_questions .= $question->question . ': ' . $post_val . '<br />';
 					
