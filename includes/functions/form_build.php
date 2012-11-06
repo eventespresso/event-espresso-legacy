@@ -31,10 +31,10 @@ if (!function_exists('event_form_build')) {
 		if ($question->required == "Y") {
 			$required = ' title="' . $question->required_text . '" class="required ' . $email_validate . ' ' . $class . '"';
 			$required_label = "<em>*</em>";
-			$legend = '<legend class="event_form_field required">' . $question->question . '<em>*</em></legend>';
+			$legend = '<legend class="event_form_field required">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . '<em>*</em></legend>';
 		} else {
 			$required = 'class="' . $class . '"';
-			$legend = '<legend class="event_form_field">' . $question->question . '</legend>';
+			$legend = '<legend class="event_form_field">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))). '</legend>';
 		}
 		if (is_array($answer) && array_key_exists($event_id, $answer) && $attendee_number === 1) {
 			$answer = empty($answer[$event_id]['event_attendees'][$price_id][$attendee_number][$field_name]) ? '' : $answer[$event_id]['event_attendees'][$price_id][$attendee_number][$field_name];
@@ -42,7 +42,7 @@ if (!function_exists('event_form_build')) {
 
 		$required_label = isset($required_label) ? $required_label : '';
 
-		$label = '<label for="' . $field_name . '" class="' . $class . '">' . $question->question . $required_label . '</label> ';
+		$label = '<label for="' . $field_name . '" class="' . $class . '">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '</label> ';
 		//If the members addon is installed, get the users information if available
 		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true ) {
 			global $current_user;
@@ -286,7 +286,7 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 	}
 	
 	$field_name = ($question->system_name != '') ? $question->system_name : 'TEXT_' . $question->id;
-	$label = '<label for="' . $field_name . '">' . stripslashes( $question->question ) . $required_label . '</label>';
+	$label = '<label for="' . $field_name . '">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '</label>';
 	
 	if ( is_array( $answer )) {
 		array_walk( $answer, 'trim' );
