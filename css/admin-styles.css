@@ -1247,28 +1247,28 @@ textarea {
 	resize: vertical;
 }
 
-#espresso-admin-add-new-attendee-frm fieldset {
+#registration_form fieldset {
 	padding:.5em 2em; margin:0 0 2em; border:1px groove #e8e8e8; border-radius:3px;
 }
 
-#espresso-admin-add-new-attendee-frm label.inline,
-#espresso-admin-add-new-attendee-frm p.event_form_field label.inline { width: 120px; }
-#espresso-admin-add-new-attendee-frm .single-radio label.inline,
-#espresso-admin-add-new-attendee-frm .multi-checkbox label.inline { width: auto; }
-#espresso-admin-add-new-attendee-frm .single-radio label.inline input,
-#espresso-admin-add-new-attendee-frm .multi-checkbox label.inline input { width: auto; }
-#espresso-admin-add-new-attendee-frm .span_event_date_label,
-#espresso-admin-add-new-attendee-frm .span_event_time_label,
-#espresso-admin-add-new-attendee-frm .event_price_label,
-#espresso-admin-add-new-attendee-frm .event_espresso_form_wrapper label,
-#espresso-admin-add-new-attendee-frm .event_espresso_form_wrapper span.label { width:120px; }
-#espresso-admin-add-new-attendee-frm .espresso_additional_limit { margin:0 0 2em; }
-#espresso-admin-add-new-attendee-frm legend,
-#espresso-admin-add-new-attendee-frm .espresso_additional_limit label { 
+#registration_form label.inline,
+#registration_form p.event_form_field label.inline { width: 120px; }
+#registration_form .single-radio label.inline,
+#registration_form .multi-checkbox label.inline { width: auto; }
+#registration_form .single-radio label.inline input,
+#registration_form .multi-checkbox label.inline input { width: auto; }
+#registration_form .span_event_date_label,
+#registration_form .span_event_time_label,
+#registration_form .event_price_label,
+#registration_form .event_espresso_form_wrapper label,
+#registration_form .event_espresso_form_wrapper span.label { width:120px; }
+#registration_form .espresso_additional_limit { margin:0 0 2em; }
+#registration_form legend,
+#registration_form .espresso_additional_limit label { 
 	display: inline-block; float:left; width: 120px; margin-left:0;
 	text-align: right; vertical-align:middle;}
 
-	
+
 
 .espresso_form ul,
 .espresso_form li { display: inline-block; margin:0 0 1em .5em; }
@@ -1305,10 +1305,11 @@ textarea {
 .span_event_date_value,
 .span_event_time_value { display: inline; padding:0; margin:0; text-align: left; font-size:1.1em; font-weight: bold; }
 
-.espresso_add_subtract_attendees { padding:0 0 0 110px; }
+
+.espresso_add_subtract_attendees { padding:0 0 1em 130px; cursor: pointer; }
 .espresso_confirm_registration { padding:0 0 1em 110px; }
 .event_form_submit { padding:1em 0 2em 110px; }
-#espresso-admin-add-new-attendee-frm p.event_form_submit { padding:1em 0 2em 130px; }
+#registration_form p.event_form_submit { padding:1em 0 2em 130px; }
 
 .additional-attendee-lnk { display: inline-block; margin:0 0 .5em; }
 .additional-attendee-lnk img { margin:1px .5em -2px 0; }

@@ -85,7 +85,7 @@ function add_new_attendee($event_id){
   <div class="postbox">
     <div id="espresso-admin-add-new-attendee-dv">
 
-        <form method="post" action="<?php echo $_SERVER['REQUEST_URI']?>" onsubmit="return validateForm(this)"  id="espresso-admin-add-new-attendee-frm" class="espresso_form">
+        <form method="post" action="<?php echo $_SERVER['REQUEST_URI']?>" onsubmit="return validateForm(this)"  id="registration_form" class="espresso_form">
 			<?php wp_nonce_field('reg_nonce', 'reg_form_nonce');?>
           <h3 class="h3_event_title" id="h3_event_title-<?php echo $event_id;?>"><?php echo $event_name?></h3>
            <div  class="padding">
@@ -117,7 +117,6 @@ function add_new_attendee($event_id){
 			  <?php
 						echo event_espresso_add_question_groups( $question_groups, '', null, 0, array('admin_only'=>true), 'inline' );
 
-						echo event_espresso_additional_attendees( $event_id, $additional_limit, $number_available_spaces, __('Number of Tickets', 'event_espresso'), true, 'admin', 'inline' );
 						
 						//Coupons
 						if (function_exists('event_espresso_coupon_registration_page')) {
@@ -142,8 +141,11 @@ function add_new_attendee($event_id){
 	            <input type="hidden" name="event_id" id="event_id-<?php echo $event_id;?>" value="<?php echo $event_id;?>" />
 	            <input type="hidden" name="admin" value="true" />
 	          </p>
+			 
+			<?php echo event_espresso_additional_attendees( $event_id, $additional_limit, $number_available_spaces, __('Number of Tickets', 'event_espresso'), true, 'admin', 'inline' );  ?>
+			
 	          <p class="event_form_submit" id="event_form_submit-<?php echo $event_id;?>">
-	            <input class="event_form_submit button-primary" id="event_form_field-<?php echo $event_id;?>" type="submit" name="Submit" value="<?php _e('Submit','event_espresso');?>" />
+	            <input class="btn_event_form_submit button-primary" id="event_form_field-<?php echo $event_id;?>" type="submit" name="Submit" value="<?php _e('Submit','event_espresso');?>" />
 	          </p>
 	      </div>
 	      </div>
