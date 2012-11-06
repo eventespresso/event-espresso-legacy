@@ -337,7 +337,7 @@ function edit_attendee_record() {
 					
 					if ( in_array( $question->q_id, $answer_a )) {
 						// existing answer
-						$set_cols_and_values = array( 'answer'=> html_entity_decode( trim( $post_val ), ENT_QUOTES ));
+						$set_cols_and_values = array( 'answer'=> html_entity_decode( trim( $post_val ), ENT_QUOTES, 'UTF-8' ));
 						//echo "<pre>".print_r($set_cols_and_values,true)."</pre>";
 						$set_format = array( '%s' );
 						$where_cols_and_values = array( 'question_id' => $question->q_id );
@@ -352,7 +352,7 @@ function edit_attendee_record() {
 							'registration_id'=>$registration_id,
 							'attendee_id'=>$id,
 							'question_id'=> $question->q_id,
-							'answer'=>html_entity_decode( trim( $post_val ), ENT_QUOTES )
+							'answer'=>html_entity_decode( trim( $post_val ), ENT_QUOTES, 'UTF-8' )
 						);
 						$set_format = array( '%s', '%d', '%d', '%s'  );
 						// run the insert

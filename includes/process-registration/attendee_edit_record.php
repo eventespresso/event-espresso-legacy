@@ -154,7 +154,7 @@ function attendee_edit_record() {
 								
 						}
 						
-						$post_val = html_entity_decode( $post_val, ENT_QUOTES );
+						$post_val = html_entity_decode( $post_val, ENT_QUOTES, 'UTF-8' );
 						
 						if ( in_array( $question->q_id, $answer_a )) {
 							$SQL = "UPDATE " . EVENTS_ANSWER_TABLE . " SET answer = %s WHERE attendee_id = %d AND question_id =%d";

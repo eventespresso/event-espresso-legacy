@@ -75,15 +75,16 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$event_cost = isset($data_source['cost']) && $data_source['cost'] != '' ? $data_source['cost'] : 0.00;
 			$final_price = $event_cost;
 
-			$fname = isset($att_data_source['fname']) ? $att_data_source['fname'] : '';
-			$lname = isset($att_data_source['lname']) ? $att_data_source['lname'] : '';
-			$address = isset($att_data_source['address']) ? $att_data_source['address'] : '';
-			$address2 = isset($att_data_source['address2']) ? $att_data_source['address2'] : '';
-			$city = isset($att_data_source['city']) ? $att_data_source['city'] : '';
-			$state = isset($att_data_source['state']) ? $att_data_source['state'] : '';
-			$zip = isset($att_data_source['zip']) ? $att_data_source['zip'] : '';
-			$phone = isset($att_data_source['phone']) ? $att_data_source['phone'] : '';
-			$email = isset($att_data_source['email']) ? $att_data_source['email'] : '';
+			$fname = isset($att_data_source['fname']) ? html_entity_decode( trim( $att_data_source['fname'] ), ENT_QUOTES, 'UTF-8' ) : '';
+			$lname = isset($att_data_source['lname']) ? html_entity_decode( trim( $att_data_source['lname'] ), ENT_QUOTES, 'UTF-8' ) : '';
+			$address = isset($att_data_source['address']) ? html_entity_decode( trim( $att_data_source['address'] ), ENT_QUOTES, 'UTF-8' ) : '';
+			$address2 = isset($att_data_source['address2']) ? html_entity_decode( trim( $att_data_source['address2'] ), ENT_QUOTES, 'UTF-8' ) : '';
+			$city = isset($att_data_source['city']) ? html_entity_decode( trim( $att_data_source['city'] ), ENT_QUOTES, 'UTF-8' ) : '';
+			$state = isset($att_data_source['state']) ? html_entity_decode( trim( $att_data_source['state'] ), ENT_QUOTES, 'UTF-8' ) : '';
+			$zip = isset($att_data_source['zip']) ? html_entity_decode( trim( $att_data_source['zip'] ), ENT_QUOTES, 'UTF-8' ) : '';
+			$phone = isset($att_data_source['phone']) ? html_entity_decode( trim( $att_data_source['phone'] ), ENT_QUOTES, 'UTF-8' ) : '';
+			$email = isset($att_data_source['email']) ? html_entity_decode( trim( $att_data_source['email'] ), ENT_QUOTES, 'UTF-8' ) : '';
+
 
 			$SQL = "SELECT question_groups, event_meta FROM " . EVENTS_DETAIL_TABLE . " WHERE id = %d";
 			$questions = $wpdb->get_row( $wpdb->prepare( $SQL, $event_id ));
