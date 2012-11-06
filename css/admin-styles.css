@@ -1247,39 +1247,39 @@ textarea {
 	resize: vertical;
 }
 
-#registration_form fieldset {
+#espresso-admin-add-new-attendee-dv fieldset {
 	padding:.5em 2em; margin:0 0 2em; border:1px groove #e8e8e8; border-radius:3px;
 }
 
-#registration_form label.inline,
-#registration_form p.event_form_field label.inline { width: 120px; }
-#registration_form .single-radio label.inline,
-#registration_form .multi-checkbox label.inline { width: auto; }
-#registration_form .single-radio label.inline input,
-#registration_form .multi-checkbox label.inline input { width: auto; }
-#registration_form .span_event_date_label,
-#registration_form .span_event_time_label,
-#registration_form .event_price_label,
-#registration_form .event_espresso_form_wrapper label,
-#registration_form .event_espresso_form_wrapper span.label { width:120px; }
-#registration_form .espresso_additional_limit { margin:0 0 2em; }
-#registration_form legend,
-#registration_form .espresso_additional_limit label { 
+#espresso-admin-add-new-attendee-dv label.inline,
+#espresso-admin-add-new-attendee-dv p.event_form_field label.inline { width: 120px; }
+#espresso-admin-add-new-attendee-dv .single-radio label.inline,
+#espresso-admin-add-new-attendee-dv .multi-checkbox label.inline { width: auto; }
+#espresso-admin-add-new-attendee-dv .single-radio label.inline input,
+#espresso-admin-add-new-attendee-dv .multi-checkbox label.inline input { width: auto; }
+#espresso-admin-add-new-attendee-dv .span_event_date_label,
+#espresso-admin-add-new-attendee-dv .span_event_time_label,
+#espresso-admin-add-new-attendee-dv .event_price_label,
+#espresso-admin-add-new-attendee-dv .event_espresso_form_wrapper label,
+#espresso-admin-add-new-attendee-dv .event_espresso_form_wrapper span.label { width:120px; }
+#espresso-admin-add-new-attendee-dv .espresso_additional_limit { margin:0 0 2em; }
+#espresso-admin-add-new-attendee-dv legend,
+#espresso-admin-add-new-attendee-dv .espresso_additional_limit label { 
 	display: inline-block; float:left; width: 120px; margin-left:0;
 	text-align: right; vertical-align:middle;}
 
 
 
-.espresso_form ul,
-.espresso_form li { display: inline-block; margin:0 0 1em .5em; }
-.espresso_form li + li {  margin-left:2em; }
-.espresso_form .single-radio label.inline,
-.espresso_form .multi-checkbox label.inline { width: auto; }
-.espresso_form .single-radio label.inline input,
-.espresso_form .multi-checkbox label.inline input { width: auto; }
-.espresso_form p.event_form_field { margin:0 0 2em; }
-.espresso_form p.event_form_field +  p.event_form_field { margin:-1em 0 2em; }
-.espresso_form p.event_form_field label.inline { width: 100px; }
+#espresso-admin-add-new-attendee-dv ul,
+#espresso-admin-add-new-attendee-dv li { display: inline-block; margin:0 0 1em .5em; }
+#espresso-admin-add-new-attendee-dv li + li {  margin-left:2em; }
+#espresso-admin-add-new-attendee-dv .single-radio label.inline,
+#espresso-admin-add-new-attendee-dv .multi-checkbox label.inline { width: auto; }
+#espresso-admin-add-new-attendee-dv .single-radio label.inline input,
+#espresso-admin-add-new-attendee-dv .multi-checkbox label.inline input { width: auto; }
+#espresso-admin-add-new-attendee-dv p.event_form_field { margin:0 0 2em; }
+#espresso-admin-add-new-attendee-dv p.event_form_field +  p.event_form_field { margin:-1em 0 2em; }
+#espresso-admin-add-new-attendee-dv p.event_form_field label.inline { width: 100px; }
 
 .espresso_form legend, .espresso_form label, #new-question-form label, #edit-new-question-form label, #add-edit-new-event-email label {
 	display:block; padding:2px 2px 0 2px;
@@ -1309,7 +1309,7 @@ textarea {
 .espresso_add_subtract_attendees { padding:0 0 1em 130px; cursor: pointer; }
 .espresso_confirm_registration { padding:0 0 1em 110px; }
 .event_form_submit { padding:1em 0 2em 110px; }
-#registration_form p.event_form_submit { padding:1em 0 2em 130px; }
+#espresso-admin-add-new-attendee-dv p.event_form_submit { padding:1em 0 2em 130px; }
 
 .additional-attendee-lnk { display: inline-block; margin:0 0 .5em; }
 .additional-attendee-lnk img { margin:1px .5em -2px 0; }
