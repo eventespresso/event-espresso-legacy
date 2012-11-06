@@ -4,11 +4,7 @@ if ( ! function_exists( 'event_espresso_process_coupon' )) {
 	function event_espresso_process_coupon( $event_id, $event_cost, $mer ) {
 	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
-//		echo '<h4>$event_id : ' . $event_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//		echo '<h4>$event_cost : ' . $event_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//		echo '<h4>$mer : ' . $mer . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//		printr( $_POST, '$_POST  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-//		printr( $_SESSION, '$_SESSION  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+
 		$use_coupon_code = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';				
 
 		if ( $mer ) {
@@ -20,14 +16,9 @@ if ( ! function_exists( 'event_espresso_process_coupon' )) {
 		} else {
 			$coupon_code = isset( $_POST['event_espresso_coupon_code'] ) ? wp_strip_all_tags( $_POST['event_espresso_coupon_code'] ) : '';
 		}
-	
-//		echo '<h4>$coupon_code : ' . $coupon_code . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
- 
-//		if ( $coupon_code ) {		
-			return event_espresso_coupon_payment_page( $event_id, $event_cost, $mer, $use_coupon_code );
-//		} else {
-//			return FALSE;
-//		}
+
+		return event_espresso_coupon_payment_page( $event_id, $event_cost, $mer, $use_coupon_code );
+
 	}
 }
 
@@ -47,13 +38,11 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 //		echo '<h4>$event_id : ' . $event_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //		echo '<h4>$event_cost : ' . $event_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		
-//		if ( ! $coupon_code ) {
-			$coupon_code = isset( $_POST['event_espresso_coupon_code'] ) ? wp_strip_all_tags( $_POST['event_espresso_coupon_code'] ) : FALSE;
-			if ( $coupon_code === FALSE ) {
-				$coupon_code = isset( $_SESSION['espresso_session']['event_espresso_coupon_code'] ) ? wp_strip_all_tags( $_SESSION['espresso_session']['event_espresso_coupon_code'] ) : FALSE;
-			}
-//			echo '<h4>$coupon_code : ' . $coupon_code . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';			
-//		}
+		$coupon_code = isset( $_POST['event_espresso_coupon_code'] ) ? wp_strip_all_tags( $_POST['event_espresso_coupon_code'] ) : FALSE;
+		if ( $coupon_code === FALSE ) {
+			$coupon_code = isset( $_SESSION['espresso_session']['event_espresso_coupon_code'] ) ? wp_strip_all_tags( $_SESSION['espresso_session']['event_espresso_coupon_code'] ) : FALSE;
+		}
+//		echo '<h4>$coupon_code : ' . $coupon_code . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';			
 		
 		if ( ! $use_coupon_code ) {
 			$use_coupon_code = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';			
@@ -73,7 +62,6 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 						
 				
 				if ( isset( $_SESSION['espresso_session']['events_in_session'][ $event_id ] ) && isset( $_SESSION['espresso_session']['events_in_session'][ $event_id ]['coupon']['code'] )) {
-					//printr( $_SESSION, '$_SESSION  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 					// check if coupon has already been added to session
 					if ( $_SESSION['espresso_session']['events_in_session'][ $event_id ]['coupon']['code'] == $coupon_code ) {
 						// grab values from session
@@ -113,13 +101,7 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 							
 					$discount_type_price = $use_percentage == 'Y' ? number_format( $coupon_amount, 1, '.', '' ) . '%' : $org_options['currency_symbol'] . number_format( $coupon_amount, 2, '.', '' );
 					$discount = 0;
-	
-				//	   [id] => 1
-				//    [code] => AAAA
-				//    [coupon_code_price] => 10.00
-				//    [coupon_code_description] => 10% Discount
-				//    [use_percentage] => Y
-				//    [discount] => 5.5
+
 //				echo '<h4>$coupon_code : ' . $coupon_code . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //				echo '<h4>$coupon_amount : ' . $coupon_amount . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //				echo '<h4>$use_percentage : ' . $use_percentage . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
@@ -138,10 +120,12 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 					$event_cost = (float)$event_cost > 0.00 ? (float)$event_cost : 0.00;
 //					echo '<h4>$discount : ' . $discount . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //					echo '<h4>$event_cost : ' . $event_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//					echo '<h4>$mer : ' . $mer . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 					do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line '. __LINE__ .' : $event_cost=' . $event_cost );
 					
 					if ( $mer ) {
+					
 						$coupon_details = array();					
 						$coupon_details['id'] = $coupon_id;
 						$coupon_details['code'] = $coupon_code;
@@ -156,13 +140,29 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 						$msg .= '<strong>' . __('Promotional code ', 'event_espresso') . $coupon_code . '</strong> ( ' . $discount_type_price . __(' discount', 'event_espresso') . ' )<br/>';
 	          		    $msg .= __('has being successfully applied to the following events', 'event_espresso') . ':<br/>';
 						
-					}								
+					} else {
+					
+						$msg = '<p id="event_espresso_valid_coupon" style="margin:0;">';
+						$msg .= '<strong>' . __('Promotional code ', 'event_espresso') . $coupon_code . '</strong> ( ' . $discount_type_price . __(' discount', 'event_espresso') . ' )<br/>';
+	          		    $msg .= __('has being successfully applied to your registration', 'event_espresso');
+	          		    $msg .= '</p>';
+						
+					}							
 
 	            } else {
 				
 					$valid = FALSE;
 					if ( $mer ) {
+					
 						$error = '<p id="event_espresso_invalid_coupon" style="margin:0;color:red;">' . __('Sorry, promotional code ', 'event_espresso') . '<strong>' . $coupon_code . '</strong>' . __(' is invalid, expired, or can not be used for the event(s) you are applying it to.', 'event_espresso') . '</p>';
+						
+					} else {
+					
+						$msg = '<p id="event_espresso_invalid_coupon" style="margin:0;color:red;">';
+						$msg .= __('Sorry, promotional code ', 'event_espresso') . '<strong>' . $coupon_code . '</strong>';
+						$msg .= __(' is either invalid, expired, or can not be used for the event(s) you are applying it to.', 'event_espresso');
+	          		    $msg .= '</p>';
+						
 					}
 					
 	            }
@@ -180,9 +180,9 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 
 
 
-function espresso_update_attendee_coupon_info( $primary_att_id = FALSE, $final_price = FALSE, $coupon_code = FALSE ) {
+function espresso_update_attendee_coupon_info( $primary_att_id = FALSE, $coupon_code = FALSE ) {
 
-	if ( ! $primary_att_id || ! $final_price || ! $coupon_code ) {
+	if ( ! $primary_att_id || ! $coupon_code ) {
 		return FALSE;
 	}
 //	echo '<h4>$primary_att_id : ' . $primary_att_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
@@ -190,8 +190,8 @@ function espresso_update_attendee_coupon_info( $primary_att_id = FALSE, $final_p
 	
 		global $wpdb;
 		
-		$set_cols_and_values = array( 'coupon_code' => $coupon_code, 'final_price' => $final_price );
-		$set_format = array( '%s', '%f', '%s', '%s' );
+		$set_cols_and_values = array( 'coupon_code' => $coupon_code );
+		$set_format = array( '%s' );
 		$where_cols_and_values = array( 'id' => $primary_att_id );
 		$where_format = array( '%d' );
 

@@ -717,19 +717,24 @@ function events_data_tables_install() {
 		$data_migrated_version = get_option( 'espresso_data_migrated' );
 		if ( $data_migrated_version != espresso_version()) {
 
-			// copy attendee costs to orig_price
-			$SQL = "SELECT * FROM " . $wpdb->prefix . "events_attendee_cost";			
-			if ( $results = $wpdb->get_results($SQL)) {
-				foreach ( $results as $result ) {
-					$wpdb->update( 
-							$wpdb->prefix . "events_attendee", 
-							array( 'orig_price' => $result->cost,  'final_price' => $result->cost ), 
-							array( 'id' => $result->attendee_id ),
-							array( '%f', '%f' ),
-							array( '%d' )
-					);
-				}						
+			// check for events_attendee_cost table
+			$SQL = "SELECT *  FROM information_schema.tables WHERE table_name = '" . $wpdb->prefix . "events_attendee_cost' LIMIT 1";
+			if ( $wpdb->get_row($SQL)) {
+				// copy attendee costs to orig_price
+				$SQL = "SELECT * FROM " . $wpdb->prefix . "events_attendee_cost";			
+				if ( $results = $wpdb->get_results($SQL)) {
+					foreach ( $results as $result ) {
+						$wpdb->update( 
+								$wpdb->prefix . "events_attendee", 
+								array( 'orig_price' => $result->cost,  'final_price' => $result->cost ), 
+								array( 'id' => $result->attendee_id ),
+								array( '%f', '%f' ),
+								array( '%d' )
+						);
+					}						
+				}
 			}
+
 
 
 			// get  reg IDs for all multi registration attendees that are NOT the primary attendee

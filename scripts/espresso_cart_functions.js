@@ -2,6 +2,11 @@ jQuery(document).ready(function() {
 
     // clear firefox and safari cache
     jQuery(window).unload( function() {}); 
+	
+	if ( ! jQuery('#event_espresso_notifications').hasClass('no-hide') ) {
+		jQuery('#event_espresso_notifications').hide();
+	}
+	
 
     jQuery.ajaxSetup({
         cache: false,
@@ -90,7 +95,7 @@ jQuery(document).ready(function() {
             event_espresso_do_ajax(data,function(r){
 				jQuery('#event_total_price').html(r.grand_total);
 				if ( r.msg != undefined && r.msg != '' ) {
-					jQuery('#event_espresso_notifications').hide().html(r.msg).css({ 'padding':'1em', 'margin':'2em 10px 2em', 'border':'2px solid #eee', 'border-radius':'3px' }).fadeIn();
+					jQuery('#event_espresso_notifications').hide().html(r.msg).fadeIn();
 				} else {
 					jQuery('#event_espresso_notifications').fadeOut();
 				}

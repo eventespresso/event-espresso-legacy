@@ -91,7 +91,8 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 				$counter++;
 			}
 		}
-		echo $_SESSION['espresso_session']['groupon_used'];
+		//echo $_SESSION['espresso_session']['groupon_used'];
+//		printr( $_SESSION, '$_SESSION  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		?>
 		<div class="event-display-boxes ui-widget">
 			<div class="mer-event-submit ui-widget-content ui-corner-all">
@@ -104,19 +105,19 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 				<input type="text" 
 							name="event_espresso_coupon_code" 
 							id ="event_espresso_coupon_code" 
-							value="<?php echo $_SESSION['espresso_session']['event_espresso_coupon_code']; ?>"
+							value="<?php echo isset( $_SESSION['espresso_session']['event_espresso_coupon_code'] ) ? $_SESSION['espresso_session']['event_espresso_coupon_code'] : ''; ?>"
 							onkeydown="if(event.keyCode==13) {document.getElementById('event_espresso_refresh_total').focus(); return false;}" 
 						/>
 			</div>
 			<?php endif; ?>
 			
 			<?php if ( function_exists( 'event_espresso_groupon_payment_page' ) && isset($org_options['allow_mer_vouchers']) && $org_options['allow_mer_vouchers'] == 'Y' ) : //Voucher code display ?>
-			<div id="event_espresso_coupon_wrapper" class="clearfix event-data-display" style="padding:5px; margin:5px;">
+			<div id="event_espresso_coupon_wrapper" class="clearfix event-data-display" >
 				<label class="coupon-code" for="event_espresso_groupon_code"><?php _e( 'Enter Voucher Code ', 'event_espresso' ); ?></label>
 				<input type="text" 
 							name="event_espresso_groupon_code" 
 							id ="event_espresso_groupon_code" 
-							value="<?php echo $_SESSION['espresso_session']['groupon_code']; ?>"
+							value="<?php echo isset( $_SESSION['espresso_session']['groupon_code'] ) ? $_SESSION['espresso_session']['groupon_code'] : ''; ?>"
 							onkeydown="if(event.keyCode==13) {document.getElementById('event_espresso_refresh_total').focus(); return false;}" 
 						/>
 			</div>

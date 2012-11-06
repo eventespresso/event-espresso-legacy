@@ -216,8 +216,15 @@ if (!function_exists('event_espresso_get_final_price')) {
 		global $wpdb;
 
 		$result = $orig_price !== FALSE ? $orig_price : event_espresso_get_orig_price_and_surcharge( $price_id );
-		$result->event_cost = (float)$result->event_cost;
+		
+		if ( isset( $result->event_cost )) {
+			$result->event_cost = (float)$result->event_cost;
+		} else {
+			$result = new stdClass();
+			$result->event_cost = (float)$orig_price;
+		}
 
+		
 		// if price is anything other than zero
 		if ( $result->event_cost > 0.00 ) {
 	

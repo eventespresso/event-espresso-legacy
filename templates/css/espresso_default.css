@@ -47,6 +47,11 @@
 	padding:5px; margin:5px; 
 }
 
+#event_espresso_notifications {
+    display: block; margin: 2em 10px; padding: 1em;
+	border: 2px solid #EEEEEE; border-radius: 3px 3px 3px 3px;
+}
+
 #event_espresso_coupon_wrapper {
 	padding:5px; margin:5px 10px 5px 5px; text-align: right;;
 }
@@ -162,11 +167,15 @@ select.wide { width: 175px; }
 .event_espresso_form_wrapper .checkbox-lbl + .checkbox-lbl,
 .event_espresso_form_wrapper .radio-btn-lbl + .radio-btn-lbl { margin-left:1em; }
 
+
+#additional_header { padding:0 0 0 160px; margin:2em 0 1em; }
+.event_espresso_form_wrapper .additional-attendee-nmbr-h4 { margin:3em 0 -1em; }
+
 .espresso_add_subtract_attendees { padding:0 0 0 160px; }
 .espresso_confirm_registration { padding:0 0 1em 160px; }
 .event_form_submit { padding:1em 0 2em 160px; }
 
-.additional-attendee-lnk { display: inline-block; margin:0 0 .5em; }
+.additional-attendee-lnk { display: inline-block; margin:0 0 .5em; cursor: pointer; }
 .additional-attendee-lnk img { margin:1px .5em -2px 0; }
 
 .smaller-text { font-size:.7em; }

@@ -2,7 +2,7 @@
 do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');		
 
 
-function events_payment_page( $attendee_id = FALSE, $price_id = 0, $coupon_code = '', $groupon_code = '') {
+function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');	
 	
@@ -62,14 +62,23 @@ function events_payment_page( $attendee_id = FALSE, $price_id = 0, $coupon_code 
 	//Get the questions for the attendee
 	$SQL = "SELECT ea.answer, eq.question ";
 	$SQL .= "	FROM " . EVENTS_ANSWER_TABLE . " ea ";
-	$SQL .= "	LEFT JOIN " . EVENTS_QUESTION_TABLE . " eq ON eq.id = ea.question_id ";
-	$SQL .= "	WHERE ea.attendee_id = %d and eq.admin_only = 'N' ";
+	$SQL .= "LEFT JOIN " . EVENTS_QUESTION_TABLE . " eq ON eq.id = ea.question_id ";
+	$SQL .= "	WHERE ea.attendee_id = %d and eq.admin_only != 'Y' ";
 	$SQL .= "	ORDER BY eq.sequence asc ";
 	
 	$questions = $wpdb->get_results($wpdb->prepare( $SQL, $attendee_id ));
-
+//	echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//	printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+	
 	$display_questions = '';
 	foreach ($questions as $question) {
+	
+		$question->question = trim( stripslashes( str_replace( '&#039;', "'", $question->question )));
+		$question->question = htmlspecialchars( $question->question, ENT_QUOTES, 'UTF-8' );
+
+		$question->answer = trim( stripslashes( str_replace( '&#039;', "'", $question->answer )));
+		$question->answer = htmlspecialchars( $question->answer, ENT_QUOTES, 'UTF-8' );
+
 		$display_questions .= '<p>' . $question->question . ':<br /> ' . str_replace(',', '<br />', $question->answer) . '</p>';
 	}
 	
@@ -130,10 +139,33 @@ function events_payment_page( $attendee_id = FALSE, $price_id = 0, $coupon_code 
 
 	// update total cost for primary attendee
 	$total_cost = $final_price * (int)$num_people;
+
+
+	if ( function_exists( 'espresso_update_attendee_coupon_info' ) && $attendee_id && ! empty( $attendee->coupon_code )) {
+		espresso_update_attendee_coupon_info( $attendee_id, $attendee->coupon_code  );
+	} 	
+					
+	if ( function_exists( 'espresso_update_groupon' ) && $attendee_id && ! empty( $attendee->coupon_code )) {
+		espresso_update_groupon( $attendee_id, $attendee->coupon_code  );
+	} 	
+	
 	
 //	echo '<h4>$attendee_id : ' . $attendee_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //	echo '<h4>$total_cost : ' . $total_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 	espresso_update_primary_attendee_total_cost( $attendee_id, $total_cost, __FILE__ );
+
+
+	if ( ! empty( $notifications['coupons'] ) || ! empty( $notifications['groupons'] )) {
+		echo '<div id="event_espresso_notifications" class="clearfix event-data-display no-hide">';
+		echo $notifications['coupons'];
+		// add space between $coupon_notifications and  $groupon_notifications ( if any $groupon_notifications exist )
+		echo ! empty( $notifications['coupons'] ) && ! empty( $notifications['groupons'] ) ? '<br/>' : '';
+		echo $notifications['groupons'];
+		echo '</div>';	
+	}
+	
+
+	
 	
 	if ( $org_options['skip_confirmation_page'] == 'Y' ) {	
 
@@ -149,9 +181,9 @@ function events_payment_page( $attendee_id = FALSE, $price_id = 0, $coupon_code 
 
 	} else {
 
-		$display_cost = $total_cost > 0 ? $org_options['currency_symbol'] . number_format($total_cost,2) : __('Free', 'event_espresso');
+		$display_cost = $total_cost > 0 ? $org_options['currency_symbol'] . number_format( $total_cost, 2, '.', '' ) : __('Free', 'event_espresso');
 
-	//Pull in the template
+	 	// Pull in the template
 		if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . "confirmation_display.php")) {
 			require_once(EVENT_ESPRESSO_TEMPLATE_DIR . "confirmation_display.php"); //This is the path to the template file if available
 		} else {
@@ -190,6 +222,13 @@ function espresso_confirm_registration() {
 	
 	$display_questions = '';
 	foreach ($questions as $question) {
+	
+		$question->question = trim( stripslashes( str_replace( '&#039;', "'", $question->question )));
+		$question->question = htmlspecialchars( $question->question, ENT_QUOTES, 'UTF-8' );
+
+		$question->answer = trim( stripslashes( str_replace( '&#039;', "'", $question->answer )));
+		$question->answer = htmlspecialchars( $question->answer, ENT_QUOTES, 'UTF-8' );
+
 		$display_questions .= '<p class="espresso_questions"><strong>' . $question->question . '</strong>:<br /> ' . str_replace(',', '<br />', $question->answer) . '</p>';
 	}
 
@@ -254,12 +293,12 @@ function espresso_confirm_registration() {
 
 	$attendee_id = $attendee->id;
 	$attendee_email = $attendee->email;
-	$lname = $attendee->lname;
-	$fname = $attendee->fname;
-	$address = $attendee->address;
-	$address2 = $attendee->address2;
-	$city = $attendee->city;
-	$state = $attendee->state;
+	$lname = htmlspecialchars( stripslashes( $attendee->lname ), ENT_QUOTES, 'UTF-8' );
+	$fname = htmlspecialchars( stripslashes( $attendee->fname ), ENT_QUOTES, 'UTF-8' );
+	$address = htmlspecialchars( stripslashes( $attendee->address ), ENT_QUOTES, 'UTF-8' );
+	$address2 = htmlspecialchars( stripslashes( $attendee->address2 ), ENT_QUOTES, 'UTF-8' );
+	$city = htmlspecialchars( stripslashes( $attendee->city ), ENT_QUOTES, 'UTF-8' );
+	$state = htmlspecialchars( stripslashes( $attendee->state ), ENT_QUOTES, 'UTF-8' );
 	$zip = $attendee->zip;
 	$payment_status = $attendee->payment_status;
 	$txn_type = $attendee->txn_type;
@@ -395,6 +434,7 @@ function event_espresso_pay() {
 		}
 	}
 	$_REQUEST['page_id'] = $org_options['return_url'];
+	unset( $_SESSION['espresso_session']['id'] );
 	ee_init_session();
 }
 

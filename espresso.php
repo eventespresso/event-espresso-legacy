@@ -59,19 +59,9 @@ function ee_init_session($admin_override = false) {
 					|| !isset($_SESSION['espresso_session']['id'])
 					|| $_SESSION['espresso_session']['id'] == array()) {
 
-		$_SESSION['espresso_session'] = '';
-		//Debug
-		//echo "<pre>espresso_session - ".print_r($_SESSION['espresso_session'],true)."</pre>";
 		$_SESSION['espresso_session'] = array();
-		//Debug
-		//echo "<pre>espresso_session array - ".print_r($_SESSION['espresso_session'],true)."</pre>";
 		$_SESSION['espresso_session']['id'] = session_id() . '-' . uniqid('', true);
-		//Debug
-		//echo "<pre>".print_r($_SESSION,true)."</pre>";
 		$_SESSION['espresso_session']['events_in_session'] = '';
-		$_SESSION['espresso_session']['event_espresso_coupon_code'] = '';
-		$_SESSION['espresso_session']['groupon_code'] = '';
-		$_SESSION['espresso_session']['groupon_used'] = '';
 		$_SESSION['espresso_session']['grand_total'] = '';
 		do_action( 'action_hook_espresso_zero_vlm_dscnt_in_session' ); 
 	}
@@ -119,9 +109,13 @@ $reg_page_ids = array(
 		'cancel_return' => $org_options['cancel_return'],
 		'notify_url' => $org_options['notify_url']
 );
-if (is_ssl())
-	$find = str_replace('https://', '', site_url()); else
+
+if (is_ssl()) {
+	$find = str_replace('https://', '', site_url());
+} else {
 	$find = str_replace('http://', '', site_url());
+}	 
+	
 $find = str_replace($_SERVER['SERVER_NAME'], '', $find);
 $uri_string = str_replace($find, '', $_SERVER['REQUEST_URI']);
 $uri_string = isset($_SERVER['QUERY_STRING'])?str_replace($_SERVER['QUERY_STRING'], '', $uri_string):$uri_string;
@@ -129,16 +123,29 @@ $uri_string = rtrim($uri_string, '?');
 $uri_string = trim($uri_string, '/');
 $this_page = basename($uri_string);
 $uri_segments = explode('/', $uri_string);
+
 foreach ($uri_segments as $uri_segment) {
-	$seg_page_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment));
-	if ($wpdb->num_rows > 0) {
-		if (in_array($seg_page_id, $reg_page_ids)) {
-			$this_is_a_reg_page = TRUE;
+	if ( $uri_segment != '' ) {
+		$seg_page_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment));
+		if ($wpdb->num_rows > 0) {
+			if (in_array($seg_page_id, $reg_page_ids)) {
+				$this_is_a_reg_page = TRUE;
+			}
+		}		
+	} else {
+		if ( get_option('show_on_front') == 'page' ) {
+			$frontpage = get_option('page_on_front');
+			if ( in_array( $frontpage, $reg_page_ids )) {
+				$this_is_a_reg_page = TRUE;
+			}
 		}
 	}
+
 }
 if (isset($_REQUEST['page_id']) || is_admin())
 	$this_is_a_reg_page = TRUE;
+	
+
 
 //This will (should) make sure everything is loaded via SSL
 //So that the "..not everything is secure.." message doesn't appear

@@ -139,7 +139,7 @@ if (!function_exists('multi_register_attendees')) {
 			$add_attendee_question_groups = $event_meta['add_attendee_question_groups'];
 
 
-			if ($org_options['use_captcha'] == 'Y' && $_REQUEST['edit_details'] != 'true') {
+			if ($org_options['use_captcha'] == 'Y' && isset( $_REQUEST['edit_details'] ) && $_REQUEST['edit_details'] != 'true') {
 				?>
 				<script type="text/javascript">
 					var RecaptchaOptions = {

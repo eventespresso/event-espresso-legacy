@@ -68,7 +68,7 @@ $attendee_num = 1;
 					<td  valign="top">
 						<span class="event_espresso_value"><?php echo stripslashes_deep($attendee_name)?> (<?php echo $attendee_email?>) 
 <?php 
-						echo '<a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$attendee_id.'&amp;regevent_action=edit_attendee&amp;primary='.$attendee_id.'&amp;event_id='.$event_id.'&amp;coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'&amp;attendee_num='.$attendee_num.'">'. __('Edit', 'event_espresso').'</a>';  // removed p_id='.$p_id.'&amp;
+						echo '<a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$attendee_id.'&amp;regevent_action=edit_attendee&amp;primary='.$attendee_id.'&amp;event_id='.$event_id.'&amp;attendee_num='.$attendee_num.'">'. __('Edit', 'event_espresso').'</a>';  // removed p_id='.$p_id.'&amp; coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'&amp;
 						
 						//Create additional attendees
 						$sql = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE;
@@ -87,22 +87,22 @@ $attendee_num = 1;
 									echo "(" . $x_attendee['email']  . ") ";
 								}
 								//Create edit link
-								echo '<a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$x_attendee['id'].'&amp;regevent_action=register&amp;form_action=edit_attendee&amp;primary='.$attendee_id.'&amp;p_id='.$attendee_id.'&amp;coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'&amp;attendee_num='.$attendee_num.'&amp;event_id='.$event_id.'">'. __('Edit', 'event_espresso').'</a>';
+								echo '<a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$x_attendee['id'].'&amp;regevent_action=register&amp;form_action=edit_attendee&amp;primary='.$attendee_id.'&amp;p_id='.$attendee_id.'&amp;attendee_num='.$attendee_num.'&amp;event_id='.$event_id.'">'. __('Edit', 'event_espresso').'</a>'; // removed coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'&amp;
 								//Create delete link
-								echo ' | <a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$x_attendee['id'].'&amp;regevent_action=register&amp;form_action=edit_attendee&amp;primary='.$attendee_id.'&amp;delete_attendee=true&amp;p_id='.$attendee_id.'&amp;coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'&amp;event_id='.$event_id.'">'. __('Delete', 'event_espresso').'</a>';
+								echo ' | <a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$x_attendee['id'].'&amp;regevent_action=register&amp;form_action=edit_attendee&amp;primary='.$attendee_id.'&amp;delete_attendee=true&amp;p_id='.$attendee_id.'&amp;event_id='.$event_id.'">'. __('Delete', 'event_espresso').'</a>'; // removed coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'&amp;
 							}
 						}
 ?>
 						</span>
 					</td>
 				</tr>
-				<?php if ($num_people > 1) { ?>
+				<?php if ($attendee_num > 1) { ?>
 				<tr>
 					<th scope="row" class="header">
 						<?php _e('Total Registrants:','event_espresso'); ?>
 					</th>
 					<td>
-						<span class="event_espresso_value"><?php echo (int)$num_people; ?></span>
+						<span class="event_espresso_value"><?php echo (int)$attendee_num; ?></span>
 					</td>
 				</tr>
 				<?php } ?>
@@ -131,10 +131,10 @@ $attendee_num = 1;
 					<?php foreach ($questions as $question) { ?>
 						<tr>
 							<th scope="row" class="header">
-								<?php echo $question->question ?>
+								<?php echo $question->question; ?>
 							</th>
 							<td>
-								<span class="event_espresso_value"><?php echo $question->answer ?></span>
+								<span class="event_espresso_value"><?php echo $question->answer; ?></span>
 							</td>
 						</tr>
 					<?php } ?>

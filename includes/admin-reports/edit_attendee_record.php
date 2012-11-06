@@ -302,24 +302,32 @@ function edit_attendee_record() {
 			
 			if ($questions) {
 				foreach ($questions as $question) {
+					
+					//printr( $question, '$question  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 				
 					switch ($question->question_type) {
+					
 						case "TEXT" :
 						case "TEXTAREA" :
 						case "SINGLE" :
-							$post_val = ( $question->system_name != '' ) ? $_POST[ $question->system_name ] : $_POST[ $question->question_type . '_' . $question->a_id ];
-							$post_val = sanitize_text_field( $post_val );
-							break;
 						case "DROPDOWN" :
-							$post_val = ( $question->system_name != '' ) ? $_POST[ $question->system_name ] : $_POST[ $question->question_type . '_' . $question->a_id ];
-							$post_val = sanitize_text_field( $post_val );
+						
+							if ( $question->system_name != '' ) {
+								$post_val = isset( $_POST[ $question->system_name ] ) ? $_POST[ $question->system_name ] : '';
+							} else {
+								$post_val = isset( $_POST[ $question->question_type . '_' . $question->a_id ] ) ? $_POST[ $question->question_type . '_' . $question->a_id ] : '';
+							}
+							$post_val = sanitize_text_field( stripslashes( $post_val ));
+							
 							break;
 						case "MULTIPLE" :
+						
 							$post_val = '';
 							for ( $i = 0; $i < count( $_POST[ $question->question_type . '_' . $question->a_id ] ); $i++ ) {
 								$post_val .= trim( $_POST[ $question->question_type . '_' . $question->a_id ][$i] ) . ",";
 							}
-							$post_val = sanitize_text_field( substr( $post_val, 0, -1 ));
+							$post_val = sanitize_text_field( substr( stripslashes( $post_val ), 0, -1 ));
+							
 							break;
 					}
 					
@@ -329,10 +337,11 @@ function edit_attendee_record() {
 					
 					if ( in_array( $question->q_id, $answer_a )) {
 						// existing answer
-						$set_cols_and_values = array( 'answer'=>$post_val );
+						$set_cols_and_values = array( 'answer'=> html_entity_decode( trim( $post_val ), ENT_QUOTES, 'UTF-8' ));
+						//echo "<pre>".print_r($set_cols_and_values,true)."</pre>";
 						$set_format = array( '%s' );
-						$where_cols_and_values = array( 'attendee_id'=> $id, 'question_id' => $question->q_id );
-						$where_format = array( '%d', '%d' );
+						$where_cols_and_values = array( 'question_id' => $question->q_id );
+						$where_format = array( '%d' );
 						// run the update
 						$upd_success = $wpdb->update( EVENTS_ANSWER_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
 						//echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
@@ -343,7 +352,7 @@ function edit_attendee_record() {
 							'registration_id'=>$registration_id,
 							'attendee_id'=>$id,
 							'question_id'=> $question->q_id,
-							'answer'=>$post_val
+							'answer'=>html_entity_decode( trim( $post_val ), ENT_QUOTES, 'UTF-8' )
 						);
 						$set_format = array( '%s', '%d', '%d', '%s'  );
 						// run the insert
@@ -559,9 +568,9 @@ function edit_attendee_record() {
 															$counter++;
 															if (!in_array($question->id, $question_displayed)) {
 																$question_displayed[] = $question->id;
-																echo '<p>';
-																echo event_form_build_edit($question, empty($question->answer) ? '' : $question->answer, $show_admin_only = true);
-																echo "</p>";
+																//echo '<p>';
+																echo event_form_build_edit($question, $question->answer, $show_admin_only = true);
+																//echo "</p>";
 
 
 																#echo $counter == $num_rows ? '</fieldset>' : '';
@@ -665,7 +674,7 @@ function edit_attendee_record() {
 									</li>
 									<li>
 											<strong class="att-tckt-prc-lbl"><?php _e('Total Amount Paid to Date:', 'event_espresso'); ?></strong> 
-											<?php echo $org_options['currency_symbol'] ?><?php echo espresso_attendee_price(array('attendee_id' => $id, 'reg_total' => true)); ?>
+											<?php echo $org_options['currency_symbol'] . $amount_pd; ?><?php //echo espresso_attendee_price(array('attendee_id' => $id, 'reg_total' => true)); ?>
 									</li>
 									<li>
 										<h6 class="qrtr-margin"><strong><?php _e('Attendee Ticket Fees:', 'event_espresso'); ?></strong></h6>

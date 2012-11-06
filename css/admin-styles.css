@@ -1212,7 +1212,7 @@ th.sorting_desc span.sorting-indicator {
 legend {
 	font-size: 14px;
 	font-weight: bold;
-	margin-bottom: 10px;
+	margin-bottom: .5em;
 }
 label {
 	color: #555;
@@ -1237,33 +1237,62 @@ label {
 	width: auto;
 	margin-right: 5px;
 }
-form.espresso_form {
+.espresso_form {
 	color: #333;
 }
-form.espresso_form legend {
+.espresso_form legend {
 	padding-left: 0;
 }
 textarea {
 	resize: vertical;
 }
-form.espresso_form legend, form.espresso_form label, #new-question-form label, #edit-new-question-form label, #add-edit-new-event-email label {
+
+#espresso-admin-add-new-attendee-dv fieldset {
+	padding:.5em 2em; margin:0 0 2em; border:1px groove #e8e8e8; border-radius:3px;
+}
+
+#espresso-admin-add-new-attendee-dv label.inline,
+#espresso-admin-add-new-attendee-dv p.event_form_field label.inline { width: 120px; }
+#espresso-admin-add-new-attendee-dv .single-radio label.inline,
+#espresso-admin-add-new-attendee-dv .multi-checkbox label.inline { width: auto; }
+#espresso-admin-add-new-attendee-dv .single-radio label.inline input,
+#espresso-admin-add-new-attendee-dv .multi-checkbox label.inline input { width: auto; }
+#espresso-admin-add-new-attendee-dv .span_event_date_label,
+#espresso-admin-add-new-attendee-dv .span_event_time_label,
+#espresso-admin-add-new-attendee-dv .event_price_label,
+#espresso-admin-add-new-attendee-dv .event_espresso_form_wrapper label,
+#espresso-admin-add-new-attendee-dv .event_espresso_form_wrapper span.label { width:120px; }
+#espresso-admin-add-new-attendee-dv .espresso_additional_limit { margin:0 0 2em; }
+#espresso-admin-add-new-attendee-dv legend,
+#espresso-admin-add-new-attendee-dv .espresso_additional_limit label { 
+	display: inline-block; float:left; width: 120px; margin-left:0;
+	text-align: right; vertical-align:middle;}
+
+
+
+#espresso-admin-add-new-attendee-dv ul,
+#espresso-admin-add-new-attendee-dv li { display: inline-block; margin:0 0 1em .5em; }
+#espresso-admin-add-new-attendee-dv li + li {  margin-left:2em; }
+#espresso-admin-add-new-attendee-dv .single-radio label.inline,
+#espresso-admin-add-new-attendee-dv .multi-checkbox label.inline { width: auto; }
+#espresso-admin-add-new-attendee-dv .single-radio label.inline input,
+#espresso-admin-add-new-attendee-dv .multi-checkbox label.inline input { width: auto; }
+#espresso-admin-add-new-attendee-dv p.event_form_field { margin:0 0 2em; }
+#espresso-admin-add-new-attendee-dv p.event_form_field +  p.event_form_field { margin:-1em 0 2em; }
+#espresso-admin-add-new-attendee-dv p.event_form_field label.inline { width: 100px; }
+
+.espresso_form legend, .espresso_form label, #new-question-form label, #edit-new-question-form label, #add-edit-new-event-email label {
 	display:block; padding:2px 2px 0 2px;
 	font-size:.9em; font-size:1em; font-weight:bold; text-align: left;
 }
-form.espresso_form label.inline {
+.espresso_form label.inline {
 	display: inline-block; float:left; width: 100px; margin-left:0;
 	text-align: right; vertical-align:middle;
 }
-form.espresso_form input {
-	width:175px;
-}
-form.espresso_form .medium-text {
-	max-width:240px; min-width:200px;
-}
-form.espresso_form input.small-text {
-	max-width:120px; min-width:100px; font-size:1em !important;
-}
-form.espresso_form .quicktags-toolbar input {width: auto;}
+.espresso_form input { width:175px; }
+.espresso_form .medium-text { max-width:240px; min-width:200px; }
+.espresso_form input.small-text { max-width:120px; min-width:100px; font-size:1em !important; }
+.espresso_form .quicktags-toolbar input {width: auto;}
 
 .span_event_date_label,
 .span_event_time_label,
@@ -1276,9 +1305,11 @@ form.espresso_form .quicktags-toolbar input {width: auto;}
 .span_event_date_value,
 .span_event_time_value { display: inline; padding:0; margin:0; text-align: left; font-size:1.1em; font-weight: bold; }
 
-.espresso_add_subtract_attendees { padding:0 0 0 110px; }
+
+.espresso_add_subtract_attendees { padding:0 0 1em 130px; cursor: pointer; }
 .espresso_confirm_registration { padding:0 0 1em 110px; }
 .event_form_submit { padding:1em 0 2em 110px; }
+#espresso-admin-add-new-attendee-dv p.event_form_submit { padding:1em 0 2em 130px; }
 
 .additional-attendee-lnk { display: inline-block; margin:0 0 .5em; }
 .additional-attendee-lnk img { margin:1px .5em -2px 0; }
@@ -1288,24 +1319,28 @@ form.espresso_form .quicktags-toolbar input {width: auto;}
     width:auto !important;
 }
 
-form.espresso_form input#payment_subject {
+.espresso_form input#payment_subject {
 	width: 250px;
 }
-form.espresso_form input[type=radio] {
+
+
+.espresso_form input[type=select],
+.espresso_form input[type=check],
+.espresso_form input[type=radio] {
 	width:auto;  vertical-align: middle; cursor: pointer;
 }
-#wpcontent form.espresso_form select option {
+#wpcontent .espresso_form select option {
 	padding-right:1em;
 }
-form.espresso_form .inline_input {
+.espresso_form .inline_input {
 }
-form.espresso_form fieldset {
+.espresso_form fieldset {
 	border: none;
 }
-form.espresso_form fieldset fieldset {
+.espresso_form fieldset fieldset {
 	background: none;
 }
-form.espresso_form fieldset li {
+.espresso_form fieldset li {
 	padding: 0 0 .5em;
 }
 label.error {
@@ -1323,8 +1358,11 @@ select.small {width:25px;}
 select.med {width: 100px}
 select.wide {width: 175px;}
 
+.inside table checkbox-lbl, .checkbox-lbl,
 .inside table .radio-btn-lbl, .radio-btn-lbl { display: inline; }
+.inside table .checkbox-lbl span, .checkbox-lbl span,
 .inside table .radio-btn-lbl span, .radio-btn-lbl span { position: relative; top:1px; margin-left:5px;   vertical-align: middle; }
+.inside table .checkbox-lbl + .checkbox-lbl, .checkbox-lbl + .checkbox-lbl,
 .inside table .radio-btn-lbl + .radio-btn-lbl, .radio-btn-lbl + .radio-btn-lbl { margin-left:1em; }
 
 .smaller-text { font-size:.7em; }
@@ -1335,6 +1373,8 @@ select.wide {width: 175px;}
 .laquo { line-height:.9em; vertical-align: top; }
 
 .inside table .espresso_form ul ul li { display: inline-block; margin-right:2em; }
+
+
 
 /*___ General settings ___*/
 

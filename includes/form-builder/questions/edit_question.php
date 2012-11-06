@@ -58,7 +58,7 @@ function event_espresso_form_builder_edit(){
 		  				<label for="question"><?php _e('Question','event_espresso'); ?></label>
 						</th>
 						<td>
-		  				<input name="question" id="question" size="50" value="<?php echo $question_name; ?>" type="text">
+		  				<input name="question" id="question" size="50" value="<?php echo htmlspecialchars( $question_name, ENT_QUOTES, 'UTF-8' ); ?>" type="text">
 						</td>
 					</tr>
 					<tr>
@@ -88,7 +88,7 @@ function event_espresso_form_builder_edit(){
 		  			<label for="values"><?php _e('Values','event_espresso'); ?></label>
 					</th>
 					<td>
-		  			<input name="values" id="values" size="50" value="<?php echo $question_values; ?>" type="text" />
+		  			<input name="values" id="values" size="50" value="<?php echo htmlspecialchars( $question_values, ENT_QUOTES, 'UTF-8' ); ?>" type="text" />
 					<br />
 						<span class="description"><?php _e('A comma seperated list of values. Eg. black, blue, red', 'event_espresso'); ?></span>
 					</td>
@@ -138,7 +138,7 @@ function event_espresso_form_builder_edit(){
 						</label>
 					</th>
 					<td>
-						<input name="required_text" id="required_text" size="50" value="<?php echo $required_text; ?>" type="text" /><br />
+						<input name="required_text" id="required_text" size="50" value="<?php echo htmlspecialchars( $required_text, ENT_QUOTES, 'UTF-8' ); ?>" type="text" /><br />
 						<span class="description"><?php _e('Text displayed if not completed.', 'event_espresso'); ?></span>
 					</td>
 				</tr>

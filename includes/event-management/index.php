@@ -173,7 +173,7 @@ function event_espresso_manage_events() {
 	<div id="secondary_info" style="display:none">
 		<h2><?php _e('Waitlist Events', 'event_espresso'); ?></h2>
 		<p><?php _e('These types of events can be used as a overflow or waiting list events.', 'event_espresso'); ?></p>
-		<p><?php _e('If an event is set up as an "Waitlist Event," it can be set to not appear in your event listings template. You may need to customize your event_listing.php file to make this work. For more information, please', 'event_espresso'); ?> <a href="http://eventespresso.com/forums/?p=512" target="_blank"><?php _e('visit the forums', 'event_espresso'); ?></a>.
+		<p><?php _e('If an event is set up as an "Waitlist Event," it can be set to not appear in your event listings template. You may need to customize your event_listing.php file to make this work. For more information, please', 'event_espresso'); ?> <a href="http://eventespresso.com/forums/?p=512" target="_blank"><?php _e('visit the forums', 'event_espresso'); ?></a>.</p>
 	</div>
 	<div id="external_URL_info" style="display:none">
 		<h2><?php _e('Off-site Registration Page', 'event_espresso'); ?></h2>

@@ -162,29 +162,34 @@ if ($reg_form_only == false) {
 	<?php
 
 					// Added for seating chart addon
-					$display_price_dropdown = true;
+					$display_price_dropdown = TRUE;
 
 					if (defined('ESPRESSO_SEATING_CHART')) {
 						$seating_chart_id = seating_chart::check_event_has_seating_chart($event_id);
-						if ($seating_chart_id !== false) {
-							$display_price_dropdown = false;
+						if ($seating_chart_id !== FALSE) {
+							$display_price_dropdown = FALSE;
 						}
 					}
 
-					if ($display_price_dropdown == true) {
+					if ($display_price_dropdown == TRUE) {
 						$price_label = '<span class="section-title">'.__('Choose an Option: ', 'event_espresso').'</span>';
 	?>
 				<p class="event_prices">
-					<?php do_action( 'espresso_price_select', $event_id, array('show_label'=>true, 'label'=>$price_label) );?>
+					<?php do_action( 'espresso_price_select', $event_id, array('show_label'=>TRUE, 'label'=>$price_label) );?>
 				</p>
 	<?php
 					} else {
 	?>
 				<p class="event_prices">
-					<?php do_action( 'espresso_seating_price_select_action', $event_id, array('show_label'=>true, 'label'=>$price_label) );?>
+					<?php do_action( 'espresso_seating_price_select_action', $event_id, array('show_label'=>TRUE, 'label'=>$price_label) );?>
 				</p>
 	<?php
+
+					// Seating chart selector
+					do_action('espresso_seating_chart_select', $event_id);
+							
 					}						
+					
 							
 
 	?>
@@ -199,29 +204,12 @@ if ($reg_form_only == false) {
 	?>
 				</div>
 				
-	<?php
-					//Multiple Attendees
-					if ( $allow_multiple == "Y" && $number_available_spaces > 1 ) {
-					
-						//This returns the additional attendee form fields. Can be overridden in the custom files addon.
-						echo event_espresso_additional_attendees($event_id, $additional_limit, $number_available_spaces, __('Number of Tickets', 'event_espresso'), true, $event_meta);
-				
-					} else {
-				
-	?>
-				<input type="hidden" name="num_people" id="num_people-<?php echo $event_id; ?>" value="1">
-	<?php
-					}
-					//End allow multiple
-					
-					// Seating chart selector
-					do_action('espresso_seating_chart_select', $event_id);
-							
+	<?php					
 					//Coupons
 	?>
 				<input type="hidden" name="use_coupon[<?php echo $event_id; ?>]" value="<?php echo $use_coupon_code; ?>" />
 	<?php
-					if (function_exists('event_espresso_coupon_registration_page')) {
+					if ( $use_coupon_code == 'Y' && function_exists( 'event_espresso_coupon_registration_page' )) {
 						echo event_espresso_coupon_registration_page($use_coupon_code, $event_id);
 					}
 					//End coupons display
@@ -230,7 +218,7 @@ if ($reg_form_only == false) {
 	?>
 				<input type="hidden" name="use_groupon[<?php echo $event_id; ?>]" value="<?php echo $use_groupon_code; ?>" />
 	<?php
-					if (function_exists('event_espresso_groupon_registration_page')) {
+					if ( $use_groupon_code == 'Y' && function_exists( 'event_espresso_groupon_registration_page' )) {
 						echo event_espresso_groupon_registration_page($use_groupon_code, $event_id);
 					}
 					//End groupons display					
@@ -239,6 +227,17 @@ if ($reg_form_only == false) {
 				<input type="hidden" name="event_id" id="event_id-<?php echo $event_id; ?>" value="<?php echo $event_id; ?>">
 				
 	<?php
+					//Multiple Attendees
+					if ( $allow_multiple == "Y" && $number_available_spaces > 1 ) {					
+						//This returns the additional attendee form fields. Can be overridden in the custom files addon.
+						echo event_espresso_additional_attendees($event_id, $additional_limit, $number_available_spaces, __('Number of Tickets', 'event_espresso'), true, $event_meta);
+					} else {				
+	?>
+				<input type="hidden" name="num_people" id="num_people-<?php echo $event_id; ?>" value="1">
+	<?php
+					}					
+					//End allow multiple	
+					
 					wp_nonce_field('reg_nonce', 'reg_form_nonce');
 					
 					//Recaptcha portion
