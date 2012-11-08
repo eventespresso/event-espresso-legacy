@@ -1120,12 +1120,15 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 		//Will make the name an array and put the time id as a key so we
 		//know which event this belongs to
 		$multi_name_adjust = $multi_reg == 1 ? "[$event_id]" : '';
-
-		$results = $wpdb->get_results("SELECT ept.id, ept.event_cost, ept.surcharge, ept.surcharge_type, ept.price_type, edt.allow_multiple, edt.additional_limit
-                                               FROM " . EVENTS_PRICES_TABLE . " ept
-                                               JOIN " . EVENTS_DETAIL_TABLE . "  edt
-                                                   ON ept.event_id =  edt.id
-                                                   WHERE event_id='" . $event_id . "' ORDER BY ept.id ASC");
+		
+		$SQL = "SELECT ept.id, ept.event_cost, ept.surcharge, ept.surcharge_type, ept.price_type, edt.allow_multiple, edt.additional_limit ";
+		$SQL .= "FROM " . EVENTS_PRICES_TABLE . " ept ";
+		$SQL .= "JOIN " . EVENTS_DETAIL_TABLE . "  edt ON ept.event_id =  edt.id ";
+		$SQL .= "WHERE event_id=%d ORDER BY ept.id ASC";
+		// filter SQL statement
+		$SQL = apply_filters( 'filter_hook_espresso_group_price_dropdown_sql', $SQL );
+		// get results
+		$results = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ));
 
 		if ($wpdb->num_rows > 0) {
 
