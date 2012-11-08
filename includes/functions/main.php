@@ -931,13 +931,7 @@ function is_multi($array) {
 
 //escape the commas in csv file export
 function escape_csv_val($val) {
-
-	$type = ($_REQUEST['type']) ? $_REQUEST['type'] : '';
-	if (preg_match('/,/', $val) && $type == 'csv') {
-		return '"' . $val . '"';
-	}
-
-	return $val;
+	return "\"" . eregi_replace("\"", "\"\"", $val) . "\"";
 }
 
 //return field(s) from a table
