@@ -363,11 +363,12 @@ if (!function_exists('event_espresso_calculate_total')) {
 							if ( $coupon_results['valid'] ) {
 								$coupon_events = apply_filters( 'filter_hook_espresso_cart_coupon_events_array', $coupon_events, $event['event_name'] );
 							}
+							$event_cost = $coupon_results['event_cost'];
 							
 							if (function_exists('event_espresso_groupon_payment_page') && isset($_POST['event_espresso_groupon_code'])) {	
 
 								// Process Groupons
-								$groupon_results['event_cost'] = $coupon_results['event_cost'];
+								$groupon_results['event_cost'] = $event_cost;
 								$groupon_results = apply_filters( 'filter_hook_espresso_groupon_results', $groupon_results, $event_id, $mer );
 								$groupon_notifications = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $groupon_notifications, $groupon_results['msg'] );
 								$groupon_errors = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $groupon_errors, $groupon_results['error'] );
@@ -375,13 +376,14 @@ if (!function_exists('event_espresso_calculate_total')) {
 									$groupon_events = apply_filters( 'filter_hook_espresso_cart_groupon_events_array', $groupon_events, $event['event_name'] );
 								}
 								//printr( $groupon_results, '$groupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-								
-								// now sum up costs so far
-								$event_individual_cost[$event_id] += number_format( $groupon_results['event_cost'] * $attendee_quantity, 2, '.', '' );
-
-								do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line '. __LINE__ .': event_cost='.$groupon_results['event_cost']);
+								$event_cost = $groupon_results['event_cost'];
 							
-							}
+							} 
+							
+							// now sum up costs so far
+							$event_individual_cost[$event_id] += number_format( $event_cost * $attendee_quantity, 2, '.', '' );
+							do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line '. __LINE__ .': event_cost='.$event_cost );
+							
 						}
 					}
 					 
@@ -395,12 +397,13 @@ if (!function_exists('event_espresso_calculate_total')) {
 					if ( $coupon_results['valid'] ) {
 						$coupon_events = apply_filters( 'filter_hook_espresso_cart_coupon_events_array', $coupon_events, $event['event_name'] );
 					}
+					$event_cost = $coupon_results['event_cost'];
 
 
 					if (function_exists('event_espresso_groupon_payment_page') && isset($_POST['event_espresso_groupon_code'])) {	
 
 						// Process groupons
-						$groupon_results['event_cost'] = $coupon_results['event_cost'];
+						$groupon_results['event_cost'] = $event_cost;
 						$groupon_results = apply_filters( 'filter_hook_espresso_groupon_results', $groupon_results, $event_id, $mer );
 						$groupon_notifications = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $groupon_notifications, $groupon_results['msg'] );
 						$groupon_errors = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $groupon_errors, $groupon_results['error'] );
@@ -408,13 +411,15 @@ if (!function_exists('event_espresso_calculate_total')) {
 							$groupon_events = apply_filters( 'filter_hook_espresso_cart_groupon_events_array', $groupon_events, $event['event_name'] );
 						}
 						//printr( $groupon_results, '$groupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-						
-						// now sum up costs so far
-						$event_individual_cost[$event_id] += number_format( $groupon_results['event_cost'], 2, '.', '' );
-						//echo '<h4>event_cost : ' . $event_individual_cost[$event_id] . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-						do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line '. __LINE__ .': event_cost='.$groupon_results['event_cost'] );
+						$event_cost = $groupon_results['event_cost'];
 						
 					}
+					
+					// now sum up costs so far
+					$event_individual_cost[$event_id] += number_format( $event_cost, 2, '.', '' );
+					//echo '<h4>event_cost : ' . $event_individual_cost[$event_id] . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+					do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line '. __LINE__ .': event_cost='.$event_cost );
+					
 				}
 
 
