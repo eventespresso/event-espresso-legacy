@@ -390,7 +390,7 @@ require_once("includes/functions/admin.php");
 
 //Admin only files
 if (is_admin()) {
-
+	do_action('action_hook_espresso_include_admin_files_start');
 	if ($espresso_premium != true)
 		require_once("includes/test_drive_pro.php");
 	
@@ -508,7 +508,7 @@ if (is_admin()) {
 
 	//Load scripts and styles for the admin
 	if (isset($_REQUEST['page'])) {
-		$espresso_pages = array(
+		$espresso_pages = apply_filters('filter_hook_espresso_admin_pages_list',array(
 				'event_espresso',
 				'discounts',
 				'groupons',
@@ -535,7 +535,7 @@ if (is_admin()) {
 				'roles',
 				'event_locales',
 				'event_groups'
-		);
+		));
 		if (in_array($_REQUEST['page'], $espresso_pages)) {
 			add_action('admin_print_scripts', 'event_espresso_config_page_scripts');
 			add_action('admin_print_styles', 'event_espresso_config_page_styles');
