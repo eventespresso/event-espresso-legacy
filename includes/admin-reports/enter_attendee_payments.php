@@ -57,7 +57,7 @@ function enter_attendee_payments() {
 
 					$txn_type = isset($_POST[ 'txn_type' ]) ? $_POST[ 'txn_type' ] : FALSE;
 					$txn_id = isset($_POST[ 'txn_id' ]) ? $_POST[ 'txn_id' ] : FALSE;
-					$payment_date = isset($_POST[ 'payment_date' ]) ? date_i18n('Y-m-d', strtotime( $_POST[ 'payment_date' ] )) : FALSE;
+					$payment_date = isset($_POST[ 'payment_date' ]) ? date_i18n( get_option('date_format'), strtotime( $_POST[ 'payment_date' ] )) : FALSE;
 					$coupon_code = isset($_POST[ 'coupon_code' ]) ? $_POST[ 'coupon_code' ] : '';
 					$total_owing = isset($_POST[ 'total_owing' ]) ? (float)number_format( (float)abs( (float)sanitize_text_field( $_POST[ 'total_owing' ] )), 2, '.', '' ) : 0.00;
 					$amount_pd = isset($_POST[ 'amount_pd' ]) ? (float)number_format( (float)abs( (float)sanitize_text_field( $_POST[ 'amount_pd' ] )), 2, '.', '' ) : 0.00;

@@ -21,7 +21,7 @@ class Realauth {
 	}
 
 	public function set_timestamp() {
-				$this->timestamp = date("YmdHis");
+				$this->timestamp = date(get_option('date_format'));
 				global $wpdb;
 				$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET payment_date ='" . $this->timestamp . "' ";
 				$sql .= "WHERE id='" . $this->attendee_id . "'";

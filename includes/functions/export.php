@@ -465,7 +465,7 @@ if (!function_exists('espresso_export_stuff')){
 								. $s . $participant->att_id
 								. $s . $participant->registration_id
 								. $s . escape_csv_val(stripslashes($participant->payment))
-								. $s . event_date_display($participant->date, 'Y-m-d')
+								. $s . event_date_display($participant->date, get_option('date_format'))
 								. $s . stripslashes($participant->payment_status)
 								. $s . stripslashes($participant->txn_type)
 								. $s . stripslashes($participant->txn_id)
@@ -473,10 +473,10 @@ if (!function_exists('espresso_export_stuff')){
 								. $s . escape_csv_val($participant->coupon_code)
 								. $s . $participant->quantity
 								. $s . $participant->amount_pd
-								. $s . event_date_display($participant->payment_date, 'Y-m-d')
+								. $s . event_date_display($participant->payment_date, get_option('date_format'))
 								. $s . escape_csv_val($participant->event_name)
 								. $s . $participant->price_option
-								. $s . event_date_display($participant->start_date, 'Y-m-d')
+								. $s . event_date_display($participant->start_date, get_option('date_format'))
 								. $s . event_date_display($participant->event_time, get_option('time_format'))
 								. $s . $participant->checked_in
 								. $s . $participant->checked_in_quantity
