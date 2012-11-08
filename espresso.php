@@ -390,7 +390,7 @@ require_once("includes/functions/admin.php");
 
 //Admin only files
 if (is_admin()) {
-	do_action('action_hook_espresso_include_admin_files_start');
+	do_action('action_hook_espresso_include_admin_files_start'); 
 	if ($espresso_premium != true)
 		require_once("includes/test_drive_pro.php");
 	
