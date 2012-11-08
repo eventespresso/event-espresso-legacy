@@ -715,7 +715,7 @@ function events_data_tables_install() {
 
 		
 		$data_migrated_version = get_option( 'espresso_data_migrated' );
-		if ( $data_migrated_version != espresso_version()) {
+		if ( $data_migrated_version != '3.1.28.P' && $data_migrated_version != '3.1.28.1.P' ) {
 
 			// check for events_attendee_cost table
 			$SQL = "SELECT *  FROM information_schema.tables WHERE table_name = '" . $wpdb->prefix . "events_attendee_cost' LIMIT 1";
@@ -842,7 +842,7 @@ function events_data_tables_install() {
 				}	// end foreach ( $primary_registrants as $primary_registrant )
 			}	// if ( $primary_registrants !== FALSE && ! empty( $primary_registrants ))
 			
-			add_option( 'espresso_data_migrated', espresso_version());
+			add_option( 'espresso_data_migrated', '3.1.28.1.P' );
 			
 		}
 	}
