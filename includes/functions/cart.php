@@ -1026,8 +1026,15 @@ if (!function_exists('event_espresso_cart_link')) {
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		global $org_options, $this_event_id;
 
+		if( ! isset( $_SESSION['espresso_session']['events_in_session'] )) {
+			$_SESSION['espresso_session'] = array();
+			$_SESSION['espresso_session']['id'] = session_id() . '-' . uniqid('', true);
+			$_SESSION['espresso_session']['events_in_session'] = '';
+			$_SESSION['espresso_session']['grand_total'] = '';
+		}
+		
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
-
+		
 		extract(shortcode_atts(
 					array(
 								'event_id' => $this_event_id,
