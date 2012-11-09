@@ -182,17 +182,19 @@ $right = 30;
 $pdf->ImprovedTable($header, $attendees, $w, $alling);
 
 $pdf->Ln();
-if ( $total_amount_pd != $total_cost ) {
-	$pdf->InvoiceTotals(__('Total:', 'event_espresso'), $total_cost, $left, $right);
-	$discount = $total_orig_cost - $total_cost;
-	$total_owing = $total_cost - $total_amount_pd;
-	if ($discount < 0) {
-		$text = __('Discount:', 'event_espresso');
-	} else {
-		$text = __('Extra:', 'event_espresso');
-	}
-	$pdf->InvoiceTotals($text, $discount, $left, $right);
-}
+//if ( $total_amount_pd != $total_cost ) {
+$pdf->InvoiceTotals(__('Total:', 'event_espresso'), $total_cost, $left, $right);
+$text = __('Amount Paid:', 'event_espresso');
+$pdf->InvoiceTotals($text, $total_amount_pd, $left, $right);	
+//	$discount = $total_orig_cost - $total_cost;
+//	if ($discount > 0) {
+//		$text = __('Discount:', 'event_espresso');
+//	} else {
+//		$text = __('Discount:', 'event_espresso');
+//		$pdf->InvoiceTotals($text, $discount, $left, $right);
+//	}
+//}
+$total_owing = $total_cost - $total_amount_pd;
 $text = __("Total due:", 'event_espresso');
 $pdf->InvoiceTotals($text, $total_owing, $left, $right);
 $pdf->Ln(10);
