@@ -146,8 +146,10 @@ $pdf->Ln(10);
 //Added by Imon
 $attendees = array();
 $total_cost = 0.00;
+$total_orig_cost = 0.00;
+$total_amount_pd = 0.00;
 foreach ($registration_ids as $reg_id) {
-	$sql = "select ea.registration_id, ed.event_name, ed.start_date, ed.event_identifier, ea.fname, ea.lname, ea.quantity, ea.final_price from " . EVENTS_ATTENDEE_TABLE . " ea ";
+	$sql = "select ea.registration_id, ed.event_name, ed.start_date, ed.event_identifier, ea.fname, ea.lname, ea.quantity, ea.orig_price, ea.final_price, ea.amount_pd from " . EVENTS_ATTENDEE_TABLE . " ea ";
 	//$sql .= " inner join " . EVENTS_ATTENDEE_COST_TABLE . " eac on ea.id = eac.attendee_id ";
 	$sql .= " inner join " . EVENTS_DETAIL_TABLE . " ed on ea.event_id = ed.id ";
 	$sql .= " where ea.registration_id = '" . $reg_id['registration_id'] . "' order by ed.event_name ";
@@ -156,6 +158,7 @@ foreach ($registration_ids as $reg_id) {
 
 	foreach ($tmp_attendees as $tmp_attendee) {
 		$sub_total = $tmp_attendee["final_price"] * $tmp_attendee["quantity"];
+		$orig_total = $tmp_attendee["orig_price"] * $tmp_attendee["quantity"];
 		$attendees[] = $pdf->LoadData(array(
 				pdftext($tmp_attendee["event_name"] . "[" . date('m-d-Y', strtotime($tmp_attendee['start_date'])) . "]") . ' >> '
 				. pdftext(html_entity_decode($tmp_attendee["fname"], ENT_QUOTES, "UTF-8") . " " . html_entity_decode($tmp_attendee["lname"], ENT_QUOTES, "UTF-8")) . ';'
@@ -163,8 +166,10 @@ foreach ($registration_ids as $reg_id) {
 				. doubleval($tmp_attendee["final_price"]) . ';'
 				. doubleval($sub_total)
 						)
-		);
+		);	 
 		$total_cost += $sub_total;
+		$total_orig_cost += $orig_total;
+		$total_amount_pd += $tmp_attendee["amount_pd"];
 		$event_identifier = $tmp_attendee["event_identifier"];
 	}
 }
@@ -177,9 +182,10 @@ $right = 30;
 $pdf->ImprovedTable($header, $attendees, $w, $alling);
 
 $pdf->Ln();
-if ($amount_pd != $total_cost) {
+if ( $total_amount_pd != $total_cost ) {
 	$pdf->InvoiceTotals(__('Total:', 'event_espresso'), $total_cost, $left, $right);
-	$discount = $amount_pd - $total_cost;
+	$discount = $total_orig_cost - $total_cost;
+	$total_owing = $total_cost - $total_amount_pd;
 	if ($discount < 0) {
 		$text = __('Discount:', 'event_espresso');
 	} else {
@@ -188,7 +194,7 @@ if ($amount_pd != $total_cost) {
 	$pdf->InvoiceTotals($text, $discount, $left, $right);
 }
 $text = __("Total due:", 'event_espresso');
-$pdf->InvoiceTotals($text, $amount_pd, $left, $right);
+$pdf->InvoiceTotals($text, $total_owing, $left, $right);
 $pdf->Ln(10);
 
 //Build the payment link and instructions
