@@ -17,13 +17,12 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
  * @return JSON object
  */
 if (!function_exists('event_espresso_add_item_to_session')) {
-
-
 	function event_espresso_add_item_to_session() {
+	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		global $wpdb;
 		// echo "<pre>", print_r( $_POST ), "</pre>";
-		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
+		$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
 
 		/*
 		 * added the cart_link_# to the page to prevent element id conflicts on the html page
@@ -44,9 +43,10 @@ if (!function_exists('event_espresso_add_item_to_session')) {
 
 				event_espresso_add_event_process((int) $event, $event_title);
 			}
-		} else { //one event per click
+			
+		} else { 
+			//one event per click
 			$id = str_replace('cart_link_', '', $id);
-
 			event_espresso_add_event_process($id, $_POST['name']);
 		}
 
@@ -56,9 +56,10 @@ if (!function_exists('event_espresso_add_item_to_session')) {
 		//echo '<a href="' . site_url() . '/events/?regevent_action=show_shopping_cart">' . __( 'View Cart', 'event_espresso' ) . '</a>';
 
 		die();
+		
 	}
-
 }
+
 
 
 /**
@@ -70,13 +71,11 @@ if (!function_exists('event_espresso_add_item_to_session')) {
  * @return true
  */
 if (!function_exists('event_espresso_add_event_process')) {
-
-
 	function event_espresso_add_event_process($event_id, $event_name) {
+	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
 
-		$events_in_session[$event_id] = array(
+		$_SESSION['espresso_session']['events_in_session'][$event_id] = array(
 				'id' => $event_id,
 				'event_name' => stripslashes_deep($event_name),
 				'attendee_quantitiy' => 1,
@@ -86,14 +85,12 @@ if (!function_exists('event_espresso_add_event_process')) {
 				'event_attendees' => array()
 		);
 
-
-		$_SESSION['espresso_session']['events_in_session'] = $events_in_session;
-
-
 		return true;
+		
 	}
-
 }
+
+
 
 /**
  * Convert passed array to json object
@@ -103,16 +100,17 @@ if (!function_exists('event_espresso_add_event_process')) {
  * @return JSON object
  */
 if (!function_exists('event_espresso_json_response')) {
-
-
 	function event_espresso_json_response($params = array()) {
+	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$params['code'] = 1;
 
 		return json_encode($params);
+		
 	}
-
 }
+
+
 
 /**
  * Return an individual Session variable
@@ -122,17 +120,18 @@ if (!function_exists('event_espresso_json_response')) {
  * @return value of session key
  */
 if (!function_exists('event_espresso_return_session_var')) {
-
-
 	function event_espresso_return_session_var($k = null) {
+	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if (is_null($k))
 			return;
 
 		return array_key_exists($k, $_SESSION) ? $_SESSION[$k] : null;
+		
 	}
-
 }
+
+
 
 /**
  * Updates item information in the session
@@ -140,7 +139,6 @@ if (!function_exists('event_espresso_return_session_var')) {
  * @return 	true
  */
 if (!function_exists('event_espresso_update_item_in_session')) {
-
 	function event_espresso_update_item_in_session( $update_section = FALSE ) {
 	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
@@ -151,7 +149,7 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 		// - update the pricing, time options
 		//-  update the attendee information
 		 
-		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
+		$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
 
 		if ( ! is_array( $events_in_session )) {
 			return false;
@@ -162,10 +160,9 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 
 		if ( $update_section == 'details' ) {
 
-			foreach ($events_in_session as $k => $v) {
+			foreach ($events_in_session as $event_id => $v) {
 
 				$event_cost = 0;
-				$event_id = $k;
 				$event_individual_cost[$event_id] = 0;
 				$updated_events_in_session[$event_id]['id'] = $event_id;
 				/*
@@ -271,9 +268,10 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 		return true;
 
 		die();
+		
 	}
-
 }
+
 
 
 /**
@@ -284,14 +282,14 @@ if (!function_exists('event_espresso_update_item_in_session')) {
  * @return JSON (grand total)
  */
 if (!function_exists('event_espresso_calculate_total')) {
-
-
 	function event_espresso_calculate_total( $update_section = FALSE, $mer = TRUE ) {
 
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		
 		//print_r($_POST);
-		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
+		$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
+		
+		$grand_total = 0.00;
 		
 		$coupon_events = array();
 		$coupon_notifications = '';
@@ -474,12 +472,14 @@ if (!function_exists('event_espresso_calculate_total')) {
 		$notifications = $coupon_notifications . $groupon_notifications . $groupon_errors;
 		
 		if ( ! $update_section ) {
-			echo event_espresso_json_response(array('grand_total' => $grand_total, 'msg' => $notifications ));
+			echo event_espresso_json_response(array('grand_total' => number_format( $grand_total, 2, '.', '' ), 'msg' => $notifications ));
 			die();
 		}
 		
 	}
 }
+
+
 
 /*
  * filter for applying groupons
@@ -503,12 +503,11 @@ function espresso_filter_groupon_results( $groupon_results, $event_id, $mer ) {
 }
 
 
+
 function espresso_filter_cart_groupon_events_array( $groupon_events, $event_name ) {
 	$groupon_events[] = $event_name;
 	return $groupon_events;
 }
-
-
 
 
 
@@ -542,22 +541,11 @@ function espresso_filter_coupon_results( $coupon_results, $event_id, $mer ) {
 }
 
 
+
 function espresso_filter_cart_coupon_events_array( $coupon_events, $event_name ) {
 	$coupon_events[] = $event_name;
 	return $coupon_events;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -569,12 +557,10 @@ function espresso_filter_cart_coupon_events_array( $coupon_events, $event_name )
  * @return JSON 0 or 1
  */
 if (!function_exists('event_espresso_delete_item_from_session')) {
-
-
 	function event_espresso_delete_item_from_session() {
+	
 		global $wpdb;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
 
 		/*
 		 * added the cart_link_# to the page to prevent element id conflicts on the html page
@@ -583,9 +569,9 @@ if (!function_exists('event_espresso_delete_item_from_session')) {
 		$id = $_POST['id'];
 		$id = str_replace('cart_link_', '', $id);
 
-		unset($events_in_session[$id]);
+		unset( $_SESSION['espresso_session']['events_in_session'][$id] );
 
-		if (count($events_in_session) == 0) {
+		if ( count( $_SESSION['espresso_session']['events_in_session'] ) == 0) {
 
 			unset($_SESSION['espresso_session']['event_espresso_coupon_code']);
 			unset($_SESSION['espresso_session']['groupon_code']);
@@ -595,15 +581,17 @@ if (!function_exists('event_espresso_delete_item_from_session')) {
 			unset($_SESSION['espresso_session']['pre_discount_total']);
 			do_action( 'action_hook_espresso_zero_vlm_dscnt_in_session' );
 			
-		} else {
+		} /*else {
 			$_SESSION['espresso_session']['events_in_session'] = $events_in_session;
-		}
+		}*/
 
 		echo event_espresso_json_response();
 		die();
+		
 	}
-
 }
+
+
 
 /**
  * Loads the registration form based on information in the session
@@ -611,12 +599,12 @@ if (!function_exists('event_espresso_delete_item_from_session')) {
  * @return HTML form
  */
 if (!function_exists('event_espresso_load_checkout_page')) {
-
-
 	function event_espresso_load_checkout_page() {
+	
 		global $wpdb, $org_options;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
+		$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
+//		printr( $events_in_session, '$events_in_session  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		$event_count = count( $events_in_session );
 
 		if (event_espresso_invoke_cart_error($events_in_session))
@@ -809,17 +797,16 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 		//echo json_encode( $response );
 		//die();
 	}
-
 }
-?>
-<?php
+
+
 
 /**
- * NOT USED.  Returns the "Copy from " dropdown.
+ * Returns the "Copy from " dropdown.
  */
 function event_espresso_copy_dd($event_id, $meta) {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	$events_in_session = $_SESSION['espresso_session']['events_in_session'];
+	$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
 	$count_of_events = count($events_in_session);
 
 
@@ -862,6 +849,8 @@ function event_espresso_copy_dd($event_id, $meta) {
 	return "<a href='#' class='event_espresso_copy_link' id='event_espresso_copy_link-$event_id'> Copy from above</a>";
 }
 
+
+
 /**
  * Add event or item (planned for shopping cart) to the session
  *
@@ -870,12 +859,11 @@ function event_espresso_copy_dd($event_id, $meta) {
  * @return JSON object
  */
 if (!function_exists('event_espresso_confirm_and_pay')) {
-
-
 	function event_espresso_confirm_and_pay() {
+	
 		global $wpdb;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
+		$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
 
 
 		foreach ($events_in_session as $k => $v) {
@@ -910,9 +898,10 @@ if (!function_exists('event_espresso_confirm_and_pay')) {
 		//echo "<pre>" , print_r($_POST) , "</pre>";
 
 		die();
+		
 	}
-
 }
+
 
 
 /**
@@ -926,9 +915,8 @@ if (!function_exists('event_espresso_confirm_and_pay')) {
  * @return Dropdown
  */
 if (!function_exists('event_espresso_multi_qty_dd')) {
-
-
 	function event_espresso_multi_qty_dd($event_id, $price_id, $qty, $value = '') {
+	
 		$counter = 0;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		?>
@@ -941,9 +929,10 @@ if (!function_exists('event_espresso_multi_qty_dd')) {
 	<?php endfor; ?>
 </select>
 <?php
-	}
 
+	}
 }
+
 
 
 /**
@@ -956,9 +945,6 @@ if (!function_exists('event_espresso_multi_qty_dd')) {
  * @return JSON object
  */
 if (!function_exists('event_espresso_multi_additional_attendees')) {
-
-//Need to verify
-//Doesn't look like this function is used anywhere in the plugin
 	function event_espresso_multi_additional_attendees($additional_limit, $available_spaces, $event_id = null) {
 	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
@@ -967,7 +953,7 @@ if (!function_exists('event_espresso_multi_additional_attendees')) {
 			return;
 		}
 			
-		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
+		$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
 ?>
 
 <div class="event_espresso_add_attendee_wrapper-<?php echo $event_id; ?>">
@@ -1003,12 +989,12 @@ if (!function_exists('event_espresso_multi_additional_attendees')) {
 	</div>
 	<?php
 			}
-			$i = $i - 1;
+			$i--;
 			?>
 </div>
 <?php
-	}
 
+	}
 }
 
 
@@ -1020,48 +1006,46 @@ if (!function_exists('event_espresso_multi_additional_attendees')) {
  * @return JSON object
  */
 if (!function_exists('event_espresso_cart_link')) {
-
-
 	function event_espresso_cart_link($atts) {
+	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		global $org_options, $this_event_id;
 
-		if( ! isset( $_SESSION['espresso_session']['events_in_session'] )) {
-			$_SESSION['espresso_session'] = array();
-			$_SESSION['espresso_session']['id'] = session_id() . '-' . uniqid('', true);
-			$_SESSION['espresso_session']['events_in_session'] = '';
-			$_SESSION['espresso_session']['grand_total'] = '';
-		}
+		$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
 		
-		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
-		
-		extract(shortcode_atts(
-					array(
-								'event_id' => $this_event_id,
-								'anchor' => __('Register', 'event_espresso'),
-								'event_name' => ' ',
-								'separator' => NULL,
-								'view_cart' => FALSE,
-								'event_page_id' => $org_options['event_page_id'], //instead of sending it in as a var, grab the id here.
-								'direct_to_cart' => 0,
-								'moving_to_cart' => "Please wait redirecting to cart page"
-							), 
-							$atts
-		));
+		extract(
+			shortcode_atts(
+				array(
+					'event_id' => $this_event_id,
+					'anchor' => __('Register', 'event_espresso'),
+					'event_name' => ' ',
+					'separator' => NULL,
+					'view_cart' => FALSE,
+					'event_page_id' => $org_options['event_page_id'], //instead of sending it in as a var, grab the id here.
+					'direct_to_cart' => 0,
+					'moving_to_cart' => "Please wait redirecting to cart page"
+				), 
+				$atts
+			)
+		);
 
 		$registration_cart_class = '';
 		ob_start();
 
 		// if event is already in session, return the view cart link
+		if ($view_cart || (is_array($events_in_session) && array_key_exists($event_id, $events_in_session))) {
 		
-			if ($view_cart || (is_array($events_in_session) && array_key_exists($event_id, $events_in_session))) {
-				$registration_cart_url = get_option('siteurl') . '/?page_id=' . $event_page_id . '&regevent_action=show_shopping_cart';
-				$registration_cart_anchor = __("View Cart", 'event_espresso');
-			} else { //show them the add to cart link
-					$registration_cart_url = isset($externalURL) && $externalURL != '' ? $externalURL : get_option('siteurl') . '/?page_id=' . $event_page_id . '&regevent_action=add_event_to_cart&event_id=' . $event_id . '&name_of_event=' . stripslashes_deep($event_name);
-					$registration_cart_anchor = $anchor;
-					$registration_cart_class = 'ee_add_item_to_cart';
-			}
+			$registration_cart_url = get_option('siteurl') . '/?page_id=' . $event_page_id . '&regevent_action=show_shopping_cart';
+			$registration_cart_anchor = __("View Cart", 'event_espresso');
+			
+		} else {
+		
+			//show them the add to cart link
+			$registration_cart_url = isset($externalURL) && $externalURL != '' ? $externalURL : get_option('siteurl') . '/?page_id=' . $event_page_id . '&regevent_action=add_event_to_cart&event_id=' . $event_id . '&name_of_event=' . stripslashes_deep($event_name);
+			$registration_cart_anchor = $anchor;
+			$registration_cart_class = 'ee_add_item_to_cart';
+			
+		}
 
 		if ($view_cart && $direct_to_cart == 1) {
 			echo "<span id='moving_to_cart'>{$moving_to_cart}</span>";
@@ -1073,15 +1057,17 @@ if (!function_exists('event_espresso_cart_link')) {
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		return $buffer;
+		
 	}
-
 }
 add_shortcode('ESPRESSO_CART_LINK', 'event_espresso_cart_link');
 
+
+
+
 if (!function_exists('event_espresso_invoke_cart_error')) {
-
-
 	function event_espresso_invoke_cart_error($events_in_session) {
+	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if (!is_array($events_in_session)) {
 
@@ -1090,30 +1076,30 @@ if (!function_exists('event_espresso_invoke_cart_error')) {
 		}
 		return false;
 	}
-
 }
 
 
+
+
 if (!function_exists('event_espresso_clear_session')) {
-
-//Need to verify
-//This function should probably be invoked when a payment is confirmed or when the attendee confirms the registration on free events.
-//Right now it only seems to be used in th add_attendees_to_db.php when an attendee confirms a paid registration, but I am not sure it is working.
-	function event_espresso_clear_session() {
+	function event_espresso_clear_session( $return_events_in_session = FALSE ) {
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-		$_SESSION['espresso_session'] = '';
+		$_SESSION['espresso_session'] = array();
+		$_SESSION['espresso_session']['id'] = session_id() . '-' . uniqid('', true);
+		$_SESSION['espresso_session']['events_in_session'] = '';
+		$_SESSION['espresso_session']['grand_total'] = '';
 		do_action( 'action_hook_espresso_zero_vlm_dscnt_in_session' ); 
+		
+		return $return_events_in_session ? $_SESSION['espresso_session']['events_in_session'] : NULL;
 	}
-
 }
 
 
 
 //Creates dropdowns if multiple prices are associated with an event
 if (!function_exists('event_espresso_group_price_dropdown')) {
-
-
 	function event_espresso_group_price_dropdown($event_id, $label = 1, $multi_reg = 0, $value = '') {
+	
 		global $wpdb, $org_options;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		/*
@@ -1216,6 +1202,6 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 			echo '<span class="free_event">' . __('Free Event', 'event_espresso') . '</span>';
 			echo '<input type="hidden" name="payment' . $multi_name_adjust . '" id="payment-' . $event_id . '" value="' . __('free event', 'event_espresso') . '">';
 		}
+		
 	}
-
 }
