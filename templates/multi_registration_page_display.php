@@ -84,7 +84,7 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 						}
 						
 						//Outputs the form questions.
-						echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
+						echo event_espresso_add_question_groups($question_groups, $events_in_session[$event_id], $event_id, 1, $meta);
 						
 						//Displays the copy to all button
 						if ( $event_counter == 1 && $event_count > 1 || ($meta['attendee_quantity'] > 1 && $event_meta['additional_attendee_reg_info'] > 1) ) {
@@ -147,7 +147,7 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 										<?php
 										echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $i . '</h3>';
 										echo event_espresso_copy_dd($event_id, $meta);
-										echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
+										echo event_espresso_add_question_groups($question_groups, $events_in_session[$event_id], $event_id, 1, $meta);
 										?>
 									</div>
 								</div>
