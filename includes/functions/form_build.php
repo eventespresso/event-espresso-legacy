@@ -36,8 +36,9 @@ if (!function_exists('event_form_build')) {
 			$required = 'class="' . $class . '"';
 			$legend = '<legend class="event_form_field">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))). '</legend>';
 		}
-		if (is_array($answer) && array_key_exists($event_id, $answer) && $attendee_number === 1) {
-			$answer = empty($answer[$event_id]['event_attendees'][$price_id][$attendee_number][$field_name]) ? '' : $answer[$event_id]['event_attendees'][$price_id][$attendee_number][$field_name];
+		
+		if (is_array($answer) && array_key_exists('event_attendees', $answer) /*&& $attendee_number === 1*/) {
+			$answer = isset($answer['event_attendees'][$price_id][$attendee_number][$field_name]) ? $answer['event_attendees'][$price_id][$attendee_number][$field_name] : '';
 		}
 
 		$required_label = isset($required_label) ? $required_label : '';
@@ -54,7 +55,7 @@ if (!function_exists('event_form_build')) {
 		$html = '';
 		
 		if ( is_array( $answer )) {
-			array_walk( $answer, 'trim' );
+			array_walk_recursive( $answer, 'trim' );
 		} else {
 			$answer = trim( $answer );
 		}
