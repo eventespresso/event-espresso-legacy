@@ -7,7 +7,6 @@ $this_event_id = $event_id;
 $num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$event_id]['attendee_quantitiy'] . __(' attendees', 'event_espresso');
 $attendee_quantity = ' x '.sprintf(_n('%d attendee', '%d attendees', $meta['attendee_quantity'], 'event_espresso'), $meta['attendee_quantity']);
 $display_description_on_multi_reg_page = isset( $org_options['display_description_on_multi_reg_page'] ) ? $org_options['display_description_on_multi_reg_page'] : 'N';
-	
 ?>
 <div id="event_espresso_registration_form" class="event-display-boxes multi-reg-page ui-widget">
 

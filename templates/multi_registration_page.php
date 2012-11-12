@@ -119,9 +119,11 @@ if (!function_exists('multi_register_attendees')) {
 			$question_groups = unserialize($event->question_groups);
 			$item_groups = unserialize($event->item_groups);
 
+			$event_meta = maybe_unserialize($event->event_meta);
+			//printr( $event_meta, '$event_meta  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 			//This function gets the status of the event.
-			$is_active = array();
-			$is_active = event_espresso_get_status($event_id);
+			//$is_active = event_espresso_get_status($event_id, $event_meta);
+			$is_active = event_espresso_get_is_active($event_id, $event_meta);
 
 			//If the coupon code system is intalled then use it
 			$use_coupon_code = function_exists('event_espresso_coupon_registration_page') ? $event->use_coupon_code : FALSE;
@@ -133,8 +135,6 @@ if (!function_exists('multi_register_attendees')) {
 			if ( $additional_limit == '' ) {
 				$additional_limit = '5';
 			}
-
-			$event_meta = unserialize($event->event_meta);
 
 			$add_attendee_question_groups = $event_meta['add_attendee_question_groups'];
 

@@ -653,10 +653,21 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 					$counter = 1;
 					foreach ($result as $r) {
 
-
-
 						$event_id = $r->id;
 						$event_meta = unserialize($r->event_meta);
+						
+						$event_meta['is_active'] = $r->is_active;
+						$event_meta['event_status'] = $r->event_status;
+						$event_meta['start_time'] = empty($r->start_time) ? '' : $r->start_time;
+						$event_meta['start_date'] = $r->start_date;
+
+						$event_meta['registration_startT'] = $r->registration_startT;
+						$event_meta['registration_start'] = $r->registration_start;
+
+						$event_meta['registration_endT'] = $r->registration_endT;
+						$event_meta['registration_end'] = $r->registration_end;		
+						
+						$r->event_meta = serialize( $event_meta );		
 						
 						//If the event is still active, then show it.
 						if (event_espresso_get_status($event_id) == 'ACTIVE') {
@@ -771,13 +782,11 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 				<input type="submit" class="submit btn_event_form_submit ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" name="payment_page" value="<?php _e('Confirm and go to payment page', 'event_espresso'); ?>&nbsp;&raquo;" /><br/>
 				<span style="padding-left:20px"> - <?php _e('or', 'event_espresso'); ?> - </span>
 		<?php } ?> 
-				<p id="event_espresso_edit_cart">
+				<!--<p id="event_espresso_edit_cart">-->
 					<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=show_shopping_cart" class="btn_event_form_submit inline-link">
 						<?php _e('Edit Cart', 'event_espresso'); ?>
 					</a> 
-				</p>
-
-
+				<!--</p>-->
 			</div>
 		</div>
 		
