@@ -180,6 +180,9 @@ if (!function_exists('event_espresso_get_orig_price_and_surcharge')) {
 		}
 
 		$SQL = "SELECT id, event_cost, surcharge, surcharge_type FROM " . EVENTS_PRICES_TABLE . " WHERE id=%d ORDER BY id ASC LIMIT 1";
+		// filter SQL statement
+		$SQL = apply_filters( 'filter_hook_espresso_orig_price_and_surcharge_sql', $SQL );
+		// get results
 		if ( $result = $wpdb->get_row( $wpdb->prepare( $SQL, absint( $price_id ) ))) {		
 //		echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 			// if price is anything other than zero
@@ -187,7 +190,7 @@ if (!function_exists('event_espresso_get_orig_price_and_surcharge')) {
 				$result->event_cost = 0.00;
 			}
 		}
-		
+		//printr( $result, '$result  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		return $result;
 		
 	}
@@ -242,6 +245,8 @@ if (!function_exists('event_espresso_get_final_price')) {
 
 		$surcharge = ! empty($surcharge) ? (float)$surcharge : 0;
 		$event_cost = $result->event_cost + $surcharge;
+		
+//		echo '<h4>$event_cost : ' . $event_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		
 		return (float)number_format( $event_cost, 2, '.', '' ); 
 	}

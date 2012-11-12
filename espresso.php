@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.28.2.P
+  Version: 3.1.28.1.P
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,7 +32,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.28.2.P';
+	return '3.1.28.1.P';
 }
 
 //This tells the system to check for updates to the paid version
@@ -421,7 +421,7 @@ if (is_admin()) {
 	register_activation_hook(__FILE__, 'espresso_update_active_gateways');
 
 	$data_migrated_version = get_option( 'espresso_data_migrated' );	
-	if ( $data_migrated_version != '3.1.28.P' && $data_migrated_version != '3.1.28.1.P' ) {
+	if ( $data_migrated_version != espresso_version()) {
 		add_action('admin_init', 'events_data_tables_install' );
 	}
 	

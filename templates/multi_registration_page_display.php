@@ -7,7 +7,6 @@ $this_event_id = $event_id;
 $num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$event_id]['attendee_quantitiy'] . __(' attendees', 'event_espresso');
 $attendee_quantity = ' x '.sprintf(_n('%d attendee', '%d attendees', $meta['attendee_quantity'], 'event_espresso'), $meta['attendee_quantity']);
 $display_description_on_multi_reg_page = isset( $org_options['display_description_on_multi_reg_page'] ) ? $org_options['display_description_on_multi_reg_page'] : 'N';
-	
 ?>
 <div id="event_espresso_registration_form" class="event-display-boxes multi-reg-page ui-widget">
 
@@ -84,7 +83,7 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 						}
 						
 						//Outputs the form questions.
-						echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
+						echo event_espresso_add_question_groups($question_groups, $events_in_session[$event_id], $event_id, 1, $meta);
 						
 						//Displays the copy to all button
 						if ( $event_counter == 1 && $event_count > 1 || ($meta['attendee_quantity'] > 1 && $event_meta['additional_attendee_reg_info'] > 1) ) {
@@ -147,7 +146,7 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 										<?php
 										echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $i . '</h3>';
 										echo event_espresso_copy_dd($event_id, $meta);
-										echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
+										echo event_espresso_add_question_groups($question_groups, $events_in_session[$event_id], $event_id, 1, $meta);
 										?>
 									</div>
 								</div>

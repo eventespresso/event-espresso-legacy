@@ -126,7 +126,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 
 	if ( $final_price == 0 ) {
 		$payment_status = __('Completed', 'event_espresso');
-		$today = date("m-d-Y");
+		$today = date(get_option('date_format'));
 		$data = array('amount_pd' => $final_price, 'payment_status' => $payment_status, 'payment_date' => $today);
 		$format = array('%f', '%s', '%s');
 		$update_id = array('id' => $attendee_id);
