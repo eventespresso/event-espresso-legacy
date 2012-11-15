@@ -421,7 +421,7 @@ if (is_admin()) {
 	register_activation_hook(__FILE__, 'espresso_update_active_gateways');
 
 	$data_migrated_version = get_option( 'espresso_data_migrated' );	
-	if ( $data_migrated_version != espresso_version()) {
+	if ( ! $data_migrated_version ) {
 		add_action('admin_init', 'events_data_tables_install' );
 	}
 	

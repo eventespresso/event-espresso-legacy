@@ -715,7 +715,7 @@ function events_data_tables_install() {
 
 		
 		$data_migrated_version = get_option( 'espresso_data_migrated' );
-		if ( $data_migrated_version != espresso_version()) {
+		if ( ! $data_migrated_version ) {
 
 			// check for events_attendee_cost table
 			$SQL = "SELECT *  FROM information_schema.tables WHERE table_name = '" . $wpdb->prefix . "events_attendee_cost' LIMIT 1";
