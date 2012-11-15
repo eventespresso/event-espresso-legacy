@@ -452,18 +452,18 @@ function event_list_attendees() {
 		</a>
 		<?php } ?>
 		
-		<a class="button-secondary" style="margin-left:5px" href="#" onclick="window.location='<?php echo get_bloginfo('wpurl') . "/wp-admin/admin.php?event_espresso&amp;event_id=" . $_REQUEST['event_id'] . "&amp;export=report&action=payment&amp;type=excel"; echo $_REQUEST['event_id'] == '' ? '&amp;all_events=true' : ''; ?>'" title="<?php _e('Export to Excel', 'event_espresso'); ?>">
+		<a class="button-secondary" style="margin-left:5px" href="#" onclick="window.location='<?php echo get_bloginfo('wpurl') . "/wp-admin/admin.php?event_espresso&amp;export=report&action=payment&amp;type=excel&amp;"; echo $EVT_ID  ? "event_id=" . $EVT_ID : "all_events=true"; ?>'" title="<?php _e('Export to Excel', 'event_espresso'); ?>">
 	    	<?php _e('Export to Excel', 'event_espresso'); ?>
 	    </a> 
 		
-		<?php if( isset($_REQUEST['event_id'] )) { ?>
-		<a style="margin-left:5px"  class="button-secondary"  href="admin.php?page=events&amp;event_admin_reports=add_new_attendee&amp;event_id=<?php echo $_REQUEST['event_id'];?>">
+		<?php if( $EVT_ID ) { ?>
+		<a style="margin-left:5px"  class="button-secondary"  href="admin.php?page=events&amp;event_admin_reports=add_new_attendee&amp;event_id=<?php echo $EVT_ID;?>">
 			<?php _e('Add Attendee', 'event_espresso')?>
 		</a>
 		<?php } ?> 
 		
-		<?php if ( isset($_REQUEST['event_id'] )) { ?>
-		<a style="margin-left:5px" class="button-primary" href="admin.php?page=events&amp;action=edit&amp;event_id=<?php $_REQUEST['event_id']?>">
+		<?php if ( $EVT_ID ) { ?>
+		<a style="margin-left:5px" class="button-primary" href="admin.php?page=events&amp;action=edit&amp;event_id=<?php $EVT_ID?>">
 			<?php _e('Edit Event', 'event_espresso')?>
 		</a>
 		<?php } ?> 
