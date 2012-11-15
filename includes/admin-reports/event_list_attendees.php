@@ -503,7 +503,7 @@ function event_list_attendees() {
 <?php 
 
 
-$hide = $EVT_ID ? '5' : '3';
+$hide = $EVT_ID ? '1,5' : '1,3';
 $hide .= $ticketing_installed ? ',11,12' : ',10,11'; 
 
 ?>
