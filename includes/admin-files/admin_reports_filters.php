@@ -1,7 +1,9 @@
 <?php
 global $espresso_premium;
-if ($espresso_premium != true)
+if ($espresso_premium != true) {
 	return;
+}
+$total_events = espresso_total_events();
 ?>
 <ul class="subsubsub">
 	<li><h3><?php echo __('Filters', 'event_espresso'); ?></h3></li>

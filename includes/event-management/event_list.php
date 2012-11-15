@@ -51,13 +51,13 @@ function event_espresso_edit_list() {
 	}
 
 	require_once('queries.php');
-	$total_events = espresso_total_events();
 	$records_to_show = '';
 
 	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php')) {
 		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php');
 	} else {
-		echo '<p><strong>' . __('Advanced filters are now available in the premium versions.', 'event_espresso') . '</strong> <a href="http://eventespresso.com/download/" target="_blank">' . __('Upgrade Now!', 'event_espresso') . '</a></p>';		
+		echo '<p><strong>' . __('Advanced filters are now available in the premium versions.', 'event_espresso') . '</strong> <a href="http://eventespresso.com/download/" target="_blank">' . __('Upgrade Now!', 'event_espresso') . '</a></p>';
+		$total_events = espresso_total_events();
 	}
 
 	if ($total_events > 0) {
