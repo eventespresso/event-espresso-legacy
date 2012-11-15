@@ -219,7 +219,7 @@ function event_list_attendees() {
 		<input name="start_rec" value="<?php echo $start_rec ?>" class="textfield" type="hidden">
 		<?php
 			if ( $start_rec > 0 && $max_rows < 100000 ) {
-				$prev_rows = $start_rec > $max_rows ? $start_rec - $max_rows : 0;
+				$prev_rows = $start_rec > $max_rows ? ( $start_rec - $max_rows - 1 ) : 0;
 				$prev_rows_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID, 'max_rows' => $max_rows, 'start_rec' => $prev_rows ), EVT_ADMIN_URL ); 
 		?>
 		<a id="attendee-admin-load-prev-rows-btn" href="<?php echo $prev_rows_url; ?>" title="load prev rows" class="button-secondary">
