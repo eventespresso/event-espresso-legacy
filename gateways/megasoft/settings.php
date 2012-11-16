@@ -1,6 +1,6 @@
 <?php
 
-function event_espresso_aim_payment_settings() {
+function event_espresso_megasoft_payment_settings() {
 	global $espresso_premium, $active_gateways;;
 	if (!$espresso_premium)
 		return;
@@ -28,7 +28,7 @@ function event_espresso_aim_payment_settings() {
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_megasoft'])
 					&& (!empty($_REQUEST['activate_megasoft'])
-					|| array_key_exists('aim', $active_gateways))) {
+					|| array_key_exists('megasoft', $active_gateways))) {
 		$postbox_style = '';
 	} else {
 		$postbox_style = 'closed';
@@ -44,19 +44,19 @@ function event_espresso_aim_payment_settings() {
 				<div class="padding">
 					<?php
 					if (isset($_REQUEST['activate_megasoft']) && $_REQUEST['activate_megasoft'] == 'true') {
-						$active_gateways['aim'] = dirname(__FILE__);
+						$active_gateways['megasoft'] = dirname(__FILE__);
 						update_option('event_espresso_active_gateways', $active_gateways);
 					}
 					if (isset($_REQUEST['deactivate_megasoft']) && $_REQUEST['deactivate_megasoft'] == 'true') {
-						unset($active_gateways['aim']);
+						unset($active_gateways['megasoft']);
 						update_option('event_espresso_active_gateways', $active_gateways);
 					}
 					echo '<ul>';
-					if (array_key_exists('aim', $active_gateways)) {
-						echo '<li id="deactivate_aim" style="width:30%;" onclick="location.href=\'' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=payment_gateways&deactivate_megasoft=true\';" class="red_alert pointer"><strong>' . __('Deactivate Megasoft Gateway?', 'event_espresso') . '</strong></li>';
+					if (array_key_exists('megasoft', $active_gateways)) {
+						echo '<li id="deactivate_megasoft" style="width:30%;" onclick="location.href=\'' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=payment_gateways&deactivate_megasoft=true\';" class="red_alert pointer"><strong>' . __('Deactivate Megasoft Gateway?', 'event_espresso') . '</strong></li>';
 							event_espresso_display_megasoft_settings();
 					} else {
-						echo '<li id="activate_aim" style="width:30%;" onclick="location.href=\'' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=payment_gateways&activate_megasoft=true\';" class="green_alert pointer"><strong>' . __('Activate Megasoft Gateway?', 'event_espresso') . '</strong></li>';
+						echo '<li id="activate_megasoft" style="width:30%;" onclick="location.href=\'' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=payment_gateways&activate_megasoft=true\';" class="green_alert pointer"><strong>' . __('Activate Megasoft Gateway?', 'event_espresso') . '</strong></li>';
 					}
 					echo '</ul>';
 					?>

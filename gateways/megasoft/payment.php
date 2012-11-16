@@ -13,7 +13,7 @@ function espresso_display_megasoft($data) {
 	<div id="megasoft-payment-option-form-dv" class="hide-if-js">
 		<?php
 		$megasoft_settings = get_option('event_espresso_megasoft_settings');
-		$use_sandbox = $megasoft_settings['use_sandbox'] || $megasoft_settings['test_transactions'];
+		$use_sandbox = $megasoft_settings['use_sandbox'];
 		if ($use_sandbox) {
 			echo '<p>Test credit card # 4007000000027</p>';
 			echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3>';
@@ -89,8 +89,6 @@ function espresso_display_megasoft($data) {
 						<input type="text" name="ccv_code" id="megasoft_ccv_code" />
 					</p>
 				</fieldset>
-					
-				<input name="amount" type="hidden" value="<?php echo number_format($event_cost, 2) ?>" />
 				<input name="invoice_num" type="hidden" value="<?php echo event_espresso_session_id() ?>" />
 				<input name="megasoft" type="hidden" value="true" />
 				<input name="cust_id" type="hidden" value="<?php echo $attendee_id ?>" />
