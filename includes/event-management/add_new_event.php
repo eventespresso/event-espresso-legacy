@@ -205,7 +205,7 @@ function add_new_event() {
 			<h3 class="hndle"> <span>
 				<?php _e('Event Staff / Speakers', 'event_espresso'); ?>
 				</span> </h3>
-			<div class="inside"> <?php echo espresso_personnel_cb($event_id); ?> </div>
+			<div class="inside"> <?php echo espresso_personnel_cb(); ?> </div>
 		</div>
 		<?php	}
 
