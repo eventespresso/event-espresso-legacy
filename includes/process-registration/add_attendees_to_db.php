@@ -120,9 +120,10 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 					$orig_price = event_espresso_get_orig_price_and_surcharge( $att_data_source['price_id'] );
 					$final_price = isset( $att_data_source['price_id'] ) ? event_espresso_get_final_price( $att_data_source['price_id'], $event_id, $orig_price ) : 0.00;
 					$price_type = isset( $att_data_source['price_id'] ) ? espresso_ticket_information( array( 'type' => 'ticket', 'price_option' => $att_data_source['price_id'] )) : '';
-					$orig_price = (float)number_format( $orig_price->event_cost + $orig_price->surcharge, 2, '.', '' ); 
-					//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-					//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+					$surcharge = event_espresso_calculate_surcharge( $orig_price->event_cost , $orig_price->surcharge, $orig_price->surcharge_type );
+					$orig_price = (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' ); 			
+//					echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//					echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				}
 				
 			} elseif ( isset( $data_source['price_select'] ) && $data_source['price_select'] == TRUE ) {
@@ -133,7 +134,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$price_type = $price_options[1];
 				$orig_price = event_espresso_get_orig_price_and_surcharge( $price_id );
 				$final_price = event_espresso_get_final_price( $price_id, $event_id, $orig_price );
-				$orig_price = (float)number_format( $orig_price->event_cost + $orig_price->surcharge, 2, '.', '' ); 
+				$surcharge = event_espresso_calculate_surcharge( $orig_price->event_cost , $orig_price->surcharge, $orig_price->surcharge_type );
+				$orig_price = (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' ); 
 				//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				
@@ -147,7 +149,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 					$orig_price = event_espresso_get_orig_price_and_surcharge( $data_source['price_id'] );
 					$final_price = isset( $data_source['price_id'] ) ? event_espresso_get_final_price( $data_source['price_id'], $event_id, $orig_price ) : 0.00;
 					$price_type = isset($data_source['price_id']) ? espresso_ticket_information(array('type' => 'ticket', 'price_option' => $data_source['price_id'])) : '';
-					$orig_price = (float)number_format( $orig_price->event_cost + $orig_price->surcharge, 2, '.', '' ); 
+					$surcharge = event_espresso_calculate_surcharge( $orig_price->event_cost , $orig_price->surcharge, $orig_price->surcharge_type );
+					$orig_price = (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' ); 
 					//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 					//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';					
 				}
@@ -711,102 +714,48 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				
 				$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $current_session_id ));
 				//printr( $attendees, '$attendees  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-?>
-
-<div class="espresso_payment_overview event-display-boxes ui-widget" >
-  <h3 class="section-heading ui-widget-header ui-corner-top">
-		<?php _e('Payment Overview', 'event_espresso'); ?>
-  </h3>
-	<div class="event-data-display ui-widget-content ui-corner-bottom" >
-
-		<div class="event-messages ui-state-highlight"> <span class="ui-icon ui-icon-alert"></span>
-			<p class="instruct">
-				<?php _e('Your registration is not complete until payment is received.', 'event_espresso'); ?>
-			</p>
-		</div>
-		<p><?php echo $org_options['email_before_payment'] == 'Y' ? __('A confirmation email has been sent with additional details of your registration.', 'event_espresso') : ''; ?></p>
-		<table>
-
-<?php				
+				
 				$quantity = 0;
+				$final_total = 0;
 				$sub_total = 0;
-				$total_surcharges = 0;
-				$total_discounts = 0;
-				$total_cost = 0;
-		
+				$discounted_total = 0;
+				$discount_amount = 0;
+				//$coupon_amount = ! empty($attendees[0]->coupon_code_price) ? $attendees[0]->coupon_code_price : 0;
+				$is_coupon_pct = ! empty( $attendees[0]->use_percentage ) && $attendees[0]->use_percentage == 'Y' ? TRUE : FALSE;
+				
 				//printr( $attendees, '$attendees  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-				foreach ( $attendees as $attendee ) {
+				foreach ($attendees as $attendee) {
 				
 					if ( $attendee->is_primary ) {
 						$primary_attendee_id = $attendee_id = $attendee->id;
 						$coupon_code = $attendee->coupon_code;
+						$event_id = $attendee->event_id;
+						$fname = $attendee->fname;
+						$lname = $attendee->lname;
+						$address = $attendee->address;
+						$city = $attendee->city;
+						$state = $attendee->state;
+						$zip = $attendee->zip;
+						$attendee_email = $attendee->email;
 						$registration_id = $attendee->registration_id;
 					}
-					$event_id = $attendee->event_id;
-					$fname = $attendee->fname;
-					$lname = $attendee->lname;
-					$address = $attendee->address;
-					$city = $attendee->city;
-					$state = $attendee->state;
-					$zip = $attendee->zip;
-					$attendee_email = $attendee->email;
-					
-					if ( $attendee->final_price > $attendee->orig_price ) {
-					
-						// TICKET PRICE had SURCHARGE ADDED
-						$adjustment = abs( $attendee->final_price - $attendee->orig_price );
-						$_adjustment = $org_options['currency_symbol'] . number_format( $adjustment, 2 );
-						$attendee->adjustments = '<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:.8em;">' . __('includes','event_espresso') . ' ' . $_adjustment . ' ' . __('surcharge per registration','event_espresso') . '</span>';
-						// totals
-						$total_surcharges += (int)$attendee->quantity * ( $adjustment );
-						
-					} elseif ( $attendee->final_price < $attendee->orig_price ) {
-					
-						// TICKET PRICE was DISCOUNTED
-						$adjustment = abs( $attendee->orig_price - $attendee->final_price );
-						$_adjustment = $org_options['currency_symbol'] . number_format( $adjustment, 2 );
-						$attendee->adjustments = '<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:.8em;">' . __('includes','event_espresso') . ' ' . $_adjustment . ' ' . __('discount per registration','event_espresso') . '</span>';
-						// totals
-						$total_discounts += (int)$attendee->quantity * ( $adjustment );
-//						$sub_total += (int)$attendee->quantity * $attendee->final_price;
-						
-					} else {
-					
-						// TICKET PRICE NOT ADJUSTED 
-						$attendee->adjustments = '';	
-											
-					}
-					
+					$final_total += $attendee->final_price;
 					$sub_total += (int)$attendee->quantity * $attendee->orig_price;
-					$total_cost += (int)$attendee->quantity * $attendee->final_price;
+					$discounted_total += (int)$attendee->quantity * $attendee->final_price;
+					$quantity += (int)$attendee->quantity;
 
-//					echo '<h2>$attendee->id : ' . $attendee->id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h2>';
-//					echo '<h4>$attendee->orig_price : ' . $attendee->orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//					echo '<h4>$attendee->final_price : ' . $attendee->final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//					echo '<h4>$attendee->quantity : ' . (int)$attendee->quantity . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//					echo '<h4>$sub_total : ' . $sub_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//					echo '<h4>$adjusted_total : ' . $discounted_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-
-?>
-
-			<tr>
-				<td width="70%">
-					<?php echo '<strong>'.stripslashes_deep($attendee->event_name ) . '</strong>'?>&nbsp;-&nbsp;<?php echo stripslashes_deep( $attendee->price_option ) ?> 
-					<?php echo $attendee->adjustments; ?><br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Attendee:','event_espresso') . ' ' . stripslashes($attendee->fname . ' ' . $attendee->lname) ?>
-				</td>
-				<td width="10%"><?php echo $org_options['currency_symbol'] . number_format($attendee->orig_price, 2); ?></td>
-				<td width="10%"><?php echo 'x ' . (int)$attendee->quantity ?></td>
-				<td width="10%" style="text-align:right;"><?php echo $org_options['currency_symbol'] . number_format( $attendee->orig_price * (int)$attendee->quantity, 2) ?></td>
-			</tr>
-
-<?php		
+					//echo '<h2>$attendee->id : ' . $attendee->id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h2>';
+					//echo '<h4>$attendee->orig_price : ' . $attendee->orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+					//echo '<h4>$attendee->final_price : ' . $attendee->final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+					//echo '<h4>$attendee->quantity : ' . (int)$attendee->quantity . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+					//echo '<h4>$sub_total : ' . $sub_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+					//echo '<h4>$discounted_total : ' . $discounted_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 				}
+				$discount_amount = $sub_total - $discounted_total;
+				$total_cost = $discounted_total;
 				
-//echo '<h4>$adjustments : ' . $adjustments . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//echo '<h4>$discount_amount : ' . $discount_amount . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //echo '<h4>$total_cost : ' . $total_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //echo '<h4>$final_total : ' . $final_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4><br/>';
 								
@@ -834,23 +783,44 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				}						
 				
 				//Post the gateway page with the payment options
-				if ( $total_cost > 0 ) {		
-					if ( $sub_total != $total_cost ) {	?>
+				if ( $total_cost > 0 ) {
+?>
+
+<div class="espresso_payment_overview event-display-boxes ui-widget" >
+  <h3 class="section-heading ui-widget-header ui-corner-top">
+		<?php _e('Payment Overview', 'event_espresso'); ?>
+  </h3>
+	<div class="event-data-display ui-widget-content ui-corner-bottom" >
+
+		<div class="event-messages ui-state-highlight"> <span class="ui-icon ui-icon-alert"></span>
+			<p class="instruct">
+				<?php _e('Your registration is not complete until payment is received.', 'event_espresso'); ?>
+			</p>
+		</div>
+		<p><?php echo $org_options['email_before_payment'] == 'Y' ? __('A confirmation email has been sent with additional details of your registration.', 'event_espresso') : ''; ?></p>
+		<table>
+			<?php foreach ($attendees as $attendee) { ?>
+			<tr>
+				<td width="70%">
+					<?php echo '<strong>'.stripslashes_deep($attendee->event_name ) . '</strong>'?>&nbsp;-&nbsp;<?php echo stripslashes_deep( $attendee->price_option ) ?> <?php echo $attendee->final_price < $attendee->orig_price ? '<br />&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:.8em;">' . $org_options['currency_symbol'] . number_format($attendee->orig_price - $attendee->final_price, 2) . __(' discount per registration','event_espresso') . '</span>' : ''; ?><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Attendee:','event_espresso') . ' ' . stripslashes_deep($attendee->fname . ' ' . $attendee->lname) ?>
+				</td>
+				<td width="10%"><?php echo $org_options['currency_symbol'] . number_format($attendee->final_price, 2); ?></td>
+				<td width="10%"><?php echo 'x ' . (int)$attendee->quantity ?></td>
+				<td width="10%" style="text-align:right;"><?php echo $org_options['currency_symbol'] . number_format( $attendee->final_price * (int)$attendee->quantity, 2) ?></td>
+			</tr>
+			<?php } ?>
+			
 			<tr>
 				<td colspan="3"><?php _e('Sub-Total:','event_espresso'); ?></td>
 				<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] . number_format($sub_total, 2); ?></td>
 			</tr>
-			<?php } ?>
-			<?php if ( $total_discounts ) { ?>
+			<?php
+					if (!empty($discount_amount)) {
+							?>
 			<tr>
 				<td colspan="3"><?php _e('Total Discounts:','event_espresso'); ?></td>
-				<td colspan="" style="text-align:right"><?php echo '-' . $org_options['currency_symbol'] . number_format( $total_discounts, 2 ); ?></td>
-			</tr>
-			<?php } ?>
-			<?php if ( $total_surcharges ) { ?>
-			<tr>
-				<td colspan="3"><?php _e('Total Surcharges:','event_espresso'); ?></td>
-				<td colspan="" style="text-align:right"><?php echo '-' . $org_options['currency_symbol'] . number_format( $total_surcharges, 2 ); ?></td>
+				<td colspan="" style="text-align:right"><?php echo '-' . $org_options['currency_symbol'] . number_format( $discount_amount, 2 ); ?></td>
 			</tr>
 			<?php } ?>
 			<tr>
