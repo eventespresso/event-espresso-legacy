@@ -80,7 +80,7 @@ function espresso_process_paypal_pro($payment_data) {
 			'shippingamt' => '', // Total shipping costs for the order.  If you specify shippingamt, you must also specify itemamt.
 			'handlingamt' => '', // Total handling costs for the order.  If you specify handlingamt, you must also specify itemamt.
 			'taxamt' => '', // Required if you specify itemized cart tax details. Sum of tax for all items on the order.  Total sales tax.
-			'desc' => stripslashes_deep($r->event_name), // Description of the order the customer is purchasing.  127 char max.
+			'desc' => stripslashes_deep($event_name), // Description of the order the customer is purchasing.  127 char max.
 			'custom' => '', // Free-form field for your own use.  256 char max.
 			'invnum' => '', // Your own invoice or tracking number
 			'notifyurl' => '' // URL for receiving Instant Payment Notifications.  This overrides what your profile is set to use.
@@ -88,8 +88,8 @@ function espresso_process_paypal_pro($payment_data) {
 
 	$OrderItems = array();
 	$Item = array(
-			'l_name' => stripslashes_deep($r->event_name), // Item Name.  127 char max.
-			'l_desc' => stripslashes_deep($r->event_name), // Item description.  127 char max.
+			'l_name' => stripslashes_deep($event_name), // Item Name.  127 char max.
+			'l_desc' => stripslashes_deep($event_name), // Item description.  127 char max.
 			'l_amt' => $_POST['amount'], // Cost of individual item.
 			'l_number' => '', // Item Number.  127 char max.
 			'l_qty' => '1', // Item quantity.  Must be any positive integer.

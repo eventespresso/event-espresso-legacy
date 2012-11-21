@@ -38,7 +38,7 @@ function espresso_display_paypal($payment_data) {
 		$item_num=$key+1;
 		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname);
 		$myPaypal->addField('amount_' . $item_num, $item->orig_price);
-		$myPaypal->addField('quantity_' . $item_num, $item->quantity);
+		$myPaypal->addField('quantity_' . $item_num, absint($item->quantity));
 	}
 	
 	$total_discount = (float)$total_orig_price - (float)$total_final_price;
