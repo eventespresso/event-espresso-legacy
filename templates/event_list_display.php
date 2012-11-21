@@ -73,7 +73,7 @@ $this_event_id = $event_id;
 
 		<p id="event_date-<?php echo $event_id ?>"><span class="section-title"><?php _e('Date:', 'event_espresso'); ?></span>  <?php echo event_date_display($start_date, get_option('date_format')) ?> 
 			<?php //Add to calendar button
-			echo apply_filters('filter_hook_espresso_display_ical', $all_meta, __('Add to my Calendar', 'event_espresso'), '<img alt="'.__('Add to my Calendar', 'event_espresso').'" src="'.EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/calendar_link.png">');?>
+			echo apply_filters('filter_hook_espresso_display_ical', $all_meta);?>
 		</p>
 	</div>
 	<?php
