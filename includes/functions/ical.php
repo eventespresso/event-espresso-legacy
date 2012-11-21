@@ -39,14 +39,29 @@ if (!function_exists('espresso_ical')) {
 	}
 }
 
+/*
+  Displays a link to download an .ics (iCal) file.
+
+  Example usage in a template file:
+  echo apply_filters('filter_hook_espresso_display_ical', $all_meta);
+  (Note: the $all_meta variable (array) is populated in the event_list.php and registration_page.php files.)
+  
+  Advanced usage using the title and image parameter:
+  echo apply_filters('filter_hook_espresso_display_ical', $all_meta, __('Add to my Calendar', 'event_espresso'), '<img alt="'.__('Add to my Calendar', 'event_espresso').'" src="'.EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/calendar_link.png">');
+
+  Parameters:
+  meta - the generated meta from an event template file
+  title - the text to display in the title tag attribute of the link
+  image - adds html to display an image (or text)
+*/
 if (!function_exists('espresso_ical_prepare_by_meta')) {
-	function espresso_ical_prepare_by_meta($meta, $text = '', $image = '') {
+	function espresso_ical_prepare_by_meta($meta, $title = '', $image = '') {
 		global $org_options, $wpdb;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$contact = ($data->alt_email == '') ? $org_options['contact_email'] : $data->alt_email . ',' . $org_options['contact_email'];
 		$start_date = strtotime($meta['start_date'] . ' ' . $meta['start_time']);
 		$end_date = strtotime($meta['end_date'] . ' ' . $meta['end_time']);
-		$text = empty($text) ? __('Add to my Calendar', 'event_espresso') : $text;
+		$title = empty($text) ? __('Add to my Calendar', 'event_espresso') : $title;
 		$image = empty($image) ? '<img src="'.EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/calendar_link.png">' : $image;
 		$array = array(
 			'iCal' => 'true', 
@@ -69,7 +84,7 @@ if (!function_exists('espresso_ical_prepare_by_meta')) {
 			'reg_url' => espresso_reg_url($meta['event_id']),
 		);
 		$url = add_query_arg( $array, site_url() );
-		$html = '<a  href="' . wp_kses($url) . '" target="_blank" id="espresso_ical_' . $meta['event_id'] . '" class="espresso_ical_link" title="' . $text . '">' . $image . '</a>';
+		$html = '<a  href="' . wp_kses($url) . '" target="_blank" id="espresso_ical_' . $meta['event_id'] . '" class="espresso_ical_link" title="' . $title . '">' . $image . '</a>';
 		return $html;
 	}
 }
