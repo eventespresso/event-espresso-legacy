@@ -52,8 +52,7 @@ $this_event_id = $event_id;
 		<?php //echo $status_display_custom_closed; //Turn this on to display the closed message. ?>
 	</h3>
 <div class="event-data-display ui-widget-content ui-corner-bottom">
-	<?php
-		/* Venue details. Un-comment to display. */ ?>
+	<?php /* Venue details. Un-comment to display. */ ?>
 	<?php //echo $venue_title != ''?'<p id="event_venue_name-'.$event_id.'" class="event_venue_name">'.stripslashes_deep($venue_title).'</p>':'' ?>
 	<?php //echo $venue_address != ''?'<p id="event_venue_address-'.$event_id.'" class="event_venue_address">'.stripslashes_deep($venue_address).'</p>':''?>
 	<?php //echo $venue_address2 != ''?'<p id="event_venue_address2-'.$event_id.'" class="event_venue_address2">'.stripslashes_deep($venue_address2).'</p>':''?>
@@ -81,7 +80,7 @@ $this_event_id = $event_id;
 	if (!empty($event_desc) && isset($org_options['display_short_description_in_event_list']) && $org_options['display_short_description_in_event_list'] == 'Y') {
 		?>
 		<div class="event-desc">
-			<p><?php echo espresso_format_content($event_desc); ?></p>
+			<?php echo espresso_format_content($event_desc); ?>
 		</div>
 		<?php
 	}
