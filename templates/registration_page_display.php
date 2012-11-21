@@ -19,8 +19,7 @@ if ($reg_form_only == false) {
 }
 ?>
  <div class="event_espresso_form_wrapper event-data-display ui-widget-content <?php echo $ui_corner ?>">
-
-	<?php echo apply_filters('filter_hook_espresso_display_add_to_calendar_by_event_id', $event_id); ?>
+	
 	<?php /* Venue details. Un-comment first and last lines & any venue details you wish to display or use the provided shortcodes. */ ?>
 	<?php // echo '<div id="venue-details-display">'; ?>
 	<?php // echo '<p class="section-title">' . __('Venue Details', 'event_espresso') . '</p>'; ?>
@@ -40,6 +39,7 @@ if ($reg_form_only == false) {
 	</p>
 	<div class="event_description clearfix">
 		<?php echo espresso_format_content($event_desc); //Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.   ?>
+		
 	</div>
 	<?php
 	}//End display description
@@ -139,9 +139,8 @@ if ($reg_form_only == false) {
 					<?php echo event_date_display($end_date, get_option('date_format')); ?>
 					</span> 
 	<?php endif; ?>
-	
+					<?php echo apply_filters('filter_hook_espresso_display_ical', $all_meta); ?>
 				</p>
-
 	<?php
 				}
 
@@ -278,8 +277,7 @@ if ($reg_form_only == false) {
 		if (isset($ee_style['event_espresso_form_wrapper_close'])) {
 			echo $ee_style['event_espresso_form_wrapper_close']; 
 		}			
-		echo '<p class="edit-link-footer">' . espresso_edit_this($event_id) . '</p>' 
 ?>
-
+<p class="edit-link-footer"><?php echo espresso_edit_this($event_id) ?></p>
 </div>
 </div>

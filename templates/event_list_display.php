@@ -53,7 +53,6 @@ $this_event_id = $event_id;
 	</h3>
 <div class="event-data-display ui-widget-content ui-corner-bottom">
 	<?php
-		echo apply_filters('filter_hook_espresso_display_add_to_calendar_by_event_id', $event_id);
 		/* Venue details. Un-comment to display. */ ?>
 	<?php //echo $venue_title != ''?'<p id="event_venue_name-'.$event_id.'" class="event_venue_name">'.stripslashes_deep($venue_title).'</p>':'' ?>
 	<?php //echo $venue_address != ''?'<p id="event_venue_address-'.$event_id.'" class="event_venue_address">'.stripslashes_deep($venue_address).'</p>':''?>
@@ -72,7 +71,10 @@ $this_event_id = $event_id;
 				<p id="p_event_price-<?php echo $event_id ?>" class="event_price"><?php echo __('Free Event', 'event_espresso'); ?></p>
 			<?php } ?>
 
-		<p id="event_date-<?php echo $event_id ?>"><span class="section-title"><?php _e('Date:', 'event_espresso'); ?></span>  <?php echo event_date_display($start_date, get_option('date_format')) ?></p>
+		<p id="event_date-<?php echo $event_id ?>"><span class="section-title"><?php _e('Date:', 'event_espresso'); ?></span>  <?php echo event_date_display($start_date, get_option('date_format')) ?> 
+			<?php //Add to calendar button
+			echo apply_filters('filter_hook_espresso_display_ical', $all_meta, __('Add to my Calendar', 'event_espresso'), '<img alt="'.__('Add to my Calendar', 'event_espresso').'" src="'.EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/calendar_link.png">');?>
+		</p>
 	</div>
 	<?php
 //Show short descriptions
@@ -95,7 +97,7 @@ $this_event_id = $event_id;
 
 	//Social media buttons
 	do_action('espresso_social_display_buttons', $event_id);
-
+	
 	$num_attendees = get_number_of_attendees_reg_limit($event_id, 'num_attendees'); //Get the number of attendees. Please visit http://eventespresso.com/forums/?p=247 for available parameters for the get_number_of_attendees_reg_limit() function.
 	if ($num_attendees >= $reg_limit) {
 		?>
@@ -109,7 +111,7 @@ $this_event_id = $event_id;
 			?>			<p id="available_spaces-<?php echo $event_id ?>" class="spaces-available"><span class="section-title"><?php _e('Available Spaces:', 'event_espresso') ?></span> <?php echo get_number_of_attendees_reg_limit($event_id, 'available_spaces') ?></p>
 			<?php
 		}
-
+		
 		/**
 		 * Load the multi event link.
 		 * */
@@ -154,9 +156,11 @@ $this_event_id = $event_id;
 			<p id="register_link-<?php echo $event_id ?>" class="register-link-footer">
 				<a class="a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('View Details', 'event_espresso'); ?></a> <?php echo isset($cart_link) && $externalURL == '' ? $cart_link : ''; ?>
 			</p>
+			
 		<?php
 		}
 	}
 	?>
+	
 </div><!-- / .event-data-display -->
 </div><!-- / .event-display-boxes -->
