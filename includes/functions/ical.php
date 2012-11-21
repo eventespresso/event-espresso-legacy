@@ -55,7 +55,7 @@ if (!function_exists('espresso_ical')) {
   image - adds html to display an image (or text)
 */
 if (!function_exists('espresso_ical_prepare_by_meta')) {
-	function espresso_ical_prepare_by_meta($meta, $title = '', $image = '') {
+	function espresso_ical_prepare_by_meta($meta, $title = '', $image = '', $link_only = FALSE) {
 		global $org_options, $wpdb;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if ($org_options['display_ical_download'] == 'N'){
@@ -66,6 +66,9 @@ if (!function_exists('espresso_ical_prepare_by_meta')) {
 		$end_date = strtotime($meta['end_date'] . ' ' . $meta['end_time']);
 		$title = empty($text) ? __('Add to my Calendar', 'event_espresso') : $title;
 		$image = empty($image) ? '<img src="'.EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/calendar_link.png">' : $image;
+		if ($link_only == TRUE){
+			$image = $title;
+		}
 		$array = array(
 			'iCal' => 'true', 
 			'currentyear' => date('Y'),
@@ -91,7 +94,7 @@ if (!function_exists('espresso_ical_prepare_by_meta')) {
 		return $html;
 	}
 }
-add_filter('filter_hook_espresso_display_ical', 'espresso_ical_prepare_by_meta',100,3);
+add_filter('filter_hook_espresso_display_ical', 'espresso_ical_prepare_by_meta',100,4);
 
 
 

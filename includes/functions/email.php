@@ -101,7 +101,17 @@ function replace_shortcodes($message, $data) {
 			$data->email_questions,
 			$data->qr_code,
 			$data->edit_attendee,
-			apply_filters('filter_hook_espresso_display_add_to_calendar_by_attendee_id', $data->attendee->id)
+			apply_filters('filter_hook_espresso_display_ical', array(
+					'event_id' => $data->attendee->event_id,
+					'event_name' => $data->event->event_name,
+					'event_desc' => wp_kses($data->event->event_desc),
+					'start_time' => empty($event->start_time) ? '' : $event->start_time,
+					'start_date' => event_date_display($data->attendee->start_date, get_option('date_format')),
+					'end_date' => event_date_display($data->attendee->end_date, get_option('date_format')),
+					'start_time' => empty($data->attendee->event_time) ? '' : $data->attendee->event_time,
+					'end_time' => empty($data->attendee->end_time) ? '' : $data->attendee->end_time,
+				), '', '', TRUE
+			)
 	);
 
 	//Get the questions and answers
