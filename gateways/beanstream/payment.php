@@ -1,4 +1,5 @@
 <?php
+
 function espresso_display_beanstream($data) {
 	extract($data);
 	global $org_options;
