@@ -40,14 +40,14 @@ function espresso_display_quickpay($payment_data) {
 			$registration_ids[] = $primary_registration_id;
 		}
 		foreach ($registration_ids as $registration_id) {
-			$sql = "select ea.registration_id, ea.id as attendee_id, ea.amount_pd, ed.id as event_id," .
-							"ed.event_name, ed.start_date, ea.fname, ea.lname, eac.quantity, eac.cost from " .
-							EVENTS_ATTENDEE_TABLE . " ea inner join " . EVENTS_ATTENDEE_COST_TABLE .
-							" eac on ea.id = eac.attendee_id inner join " . EVENTS_DETAIL_TABLE .
-							" ed on ea.event_id = ed.id where ea.registration_id = '" . $registration_id . "' order by ed.event_name ";
+			$sql = "select ea.registration_id, ea.id as attendee_id, ea.amount_pd, ed.id as event_id, ";
+			$sql .= " ed.event_name, ed.start_date, ea.fname, ea.lname, ea.quantity, ea.final_price from " . EVENTS_ATTENDEE_TABLE . " ea ";
+			//$sql .= " inner join " . EVENTS_ATTENDEE_COST_TABLE. " eac on ea.id = eac.attendee_id ";
+			$sql .= " inner join " . EVENTS_DETAIL_TABLE. " ed on ea.event_id = ed.id ";
+			$sql .= " where ea.registration_id = '" . $registration_id . "' order by ed.event_name ";
 			$tmp_attendees = $wpdb->get_results($sql, ARRAY_A);
 			foreach ($tmp_attendees as $tmp_attendee) {
-				$amount += $tmp_attendee["amount_pd"];
+				$amount += $tmp_attendee["final_price"];
 			}
 		}
 	}
@@ -80,7 +80,8 @@ function espresso_display_quickpay($payment_data) {
 	$sandbox = ($quickpay_settings['use_sandbox']) ? '1' : '';
 	$md5check = md5($protocol . $msgtype . $merchant . $language . $ordernumber . $amount . $currency . $continueurl . $cancelurl . $callbackurl . $autocapture . $cardtypelock . $sandbox . $md5secret);
 	?>
-<li>
+ <div id="quickpay-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+	<img class="off-site-payment-gateway-img" width="16" height="16" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL;?>/images/icons/external-link.png" alt="click to visit this payment gateway">
 	<form id="quickpay_form" name="quickpay_form" action="<?php echo $payurl; ?>" method="post">
 		<input type="hidden" name="protocol" value="<?php echo $protocol; ?>" />
 		<input type="hidden" name="msgtype" value="<?php echo $msgtype; ?>" />
@@ -96,9 +97,9 @@ function espresso_display_quickpay($payment_data) {
 		<input type="hidden" name="cardtypelock" value="<?php echo $cardtypelock; ?>" />
 		<?php if ($quickpay_settings['use_sandbox']) { ?><input type="hidden" name="testmode" value="1" /><?php } ?>
 		<input type="hidden" name="md5check" value="<?php echo $md5check; ?>" />
-		<input class="espresso_payment_button_quickpay" id="espresso_payment_button_quickpay" value="Payvalue" type="image" alt="Pay using QuickPay" src="<?php echo $button_url; ?>" />
+		<input id="quickpay-payment-option-lnk" class="payment-option-lnk" value="Payvalue" type="image" alt="Pay using QuickPay" src="<?php echo $button_url; ?>" />
 	</form>
-</li>
+</div>
 	<?php
 }
 

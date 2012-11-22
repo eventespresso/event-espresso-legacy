@@ -5,6 +5,9 @@ function espresso_display_eway($payment_data) {
 // Setup class
 	include_once ('Eway.php');
 	echo '<!-- Event Espresso eWay Gateway Version ' . $eway_gateway_version . '-->';
+	echo '
+ <div id="eway-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+	<img class="off-site-payment-gateway-img" width="16" height="16" src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png" alt="click to visit this payment gateway">';
 	$myeway = new eway(); // initiate an instance of the class
 	global $org_options;
 //global $attendee_id;
@@ -59,15 +62,14 @@ function espresso_display_eway($payment_data) {
 	$myeway->addField('MerchantOption3', '');
 	$myeway->addField('ModifiableCustomerDetails', 'false');
 
-
 	if ($eway_settings['bypass_payment_page'] == 'Y') {
 		$myeway->submitPayment(); //Enable auto redirect to payment site
 	} else {
 		if (empty($eway_settings['button_url'])) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "eway/eway_logo.png")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_URL . "eway/eway_logo.png";
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "eway/eway-logo.png")) {
+				$button_url = EVENT_ESPRESSO_GATEWAY_URL . "eway/eway-logo.png";
 			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/eway/eway_logo.png";
+				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/eway/eway-logo.png";
 			}
 		} else {
 			$button_url = $eway_settings['button_url'];
@@ -79,6 +81,10 @@ function espresso_display_eway($payment_data) {
 		echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3>';
 		$myeway->dump_fields(); // for debugging, output a table of all the fields
 	}
+
+	echo '
+</div>';
+	
 }
 
 add_action('action_hook_espresso_display_offsite_payment_gateway', 'espresso_display_eway');

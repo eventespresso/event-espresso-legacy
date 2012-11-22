@@ -55,22 +55,23 @@ function espresso_process_paytrace($payment_data) {
 		$line_item = "";
 		foreach ($registration_ids as $registration_id) {
 
-			$sql = "select ea.registration_id, ea.id as attendee_id, ea.amount_pd, ed.id as event_id, ed.event_name, ed.start_date, ea.fname, ea.lname, eac.quantity, eac.cost from " . EVENTS_ATTENDEE_TABLE . " ea
-				inner join " . EVENTS_ATTENDEE_COST_TABLE . " eac on ea.id = eac.attendee_id
-				inner join " . EVENTS_DETAIL_TABLE . " ed on ea.event_id = ed.id
-				where ea.registration_id = '" . $registration_id . "' order by ed.event_name ";
+			$sql = "select ea.registration_id, ea.id as attendee_id, ea.amount_pd, ed.id as event_id, ed.event_name, ed.start_date, ea.fname, ea.lname, ea.quantity, ea.final_price ";
+			$sql .= " from " . EVENTS_ATTENDEE_TABLE . " ea ";
+			//$sql .= " inner join " . EVENTS_ATTENDEE_COST_TABLE . " eac on ea.id = eac.attendee_id ";
+			$sql .= " inner join " . EVENTS_DETAIL_TABLE . " ed on ea.event_id = ed.id ";
+			$sql .= " where ea.registration_id = '" . $registration_id . "' order by ed.event_name ";
 
 			$tmp_attendees = $wpdb->get_results($sql, ARRAY_A);
 
 			$total_cost = 0;
 			foreach ($tmp_attendees as $tmp_attendee) {
-				$sub_total = $tmp_attendee["cost"] * $tmp_attendee["quantity"];
+				$sub_total = $tmp_attendee["final_price"] * $tmp_attendee["quantity"];
 				$attendees[] = array("attendee_info" => $tmp_attendee["event_name"] . "[" . date('m-d-Y', strtotime($tmp_attendee['start_date'])) . "]" . " >> " . $tmp_attendee["fname"] . " " . $tmp_attendee["lname"],
 						"quantity" => $tmp_attendee["quantity"],
-						"cost" => doubleval($tmp_attendee["cost"]),
+						"final_price" => doubleval($tmp_attendee["final_price"]),
 						"sub_total" => doubleval($sub_total));
 				$line_item .= "LINEITEM~PRODUCTID=" . $tmp_attendee['attendee_id'] . "+DESCRIPTION=" . $tmp_attendee["event_name"] . "[" . date('m-d-Y', strtotime($tmp_attendee['start_date'])) . "]" . " >> " . $tmp_attendee["fname"] . " " . $tmp_attendee["lname"] . "
-							QUANTITY=" . $tmp_attendee['quantity'] . "UNITCOST=" . $tmp_attendee['cost'] . "+AMOUNTLI=" . $sub_total . "+|";
+							QUANTITY=" . $tmp_attendee['quantity'] . "UNITCOST=" . $tmp_attendee['final_price'] . "+AMOUNTLI=" . $sub_total . "+|";
 				$amount_pd += $tmp_attendee["amount_pd"];
 				$total_cost += $sub_total;
 				if (!in_array($tmp_attendee['event_id'], $event_ids)) {

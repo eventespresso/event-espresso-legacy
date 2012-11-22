@@ -7,9 +7,9 @@ Donate link: http://eventespresso.com
 
 Tags: event management, event registration, paypal event registration, paypal ipn
 
-Requires at least: 3.0
+Requires at least: 3.3
 
-Tested up to: 3.1
+Tested up to: 3.4.2
 
 == Description ==
 
@@ -23,9 +23,9 @@ I have made several changes to this plugin in the last few months. Quite a bit h
 
 
 == Support ==
-Please visit the forums http://www.eventespresso.com/forums/
+Please visit the forums http://eventespresso.com/support/forums/
 
-Current Version: 3.0.19
+Current Version: 3.1.28.5
 
 Author: Seth Shoultes
 Author URI: http://eventespresso.com
@@ -43,7 +43,7 @@ Author URI: http://eventespresso.com
 
 5. Create a new page (not post) on your site. Put [ESPRESSO_EVENTS] in it on a line by itself.
 
-6. Note: if you are upgradings from a previous version please backup your data prior to upgrade.
+6. Note: if you are upgrading from a previous version please backup your data prior to upgrade.
 
 = License =
 
@@ -81,6 +81,8 @@ Thank you [fname] [lname] for registering for [event].  We hope that you will fi
 If you have not done so already, please submit your payment in the amount of [cost].
 
 Click here to review your payment information [payment_url].
+
+[edit_attendee_link]
 
 Thank You.
 

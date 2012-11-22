@@ -15,9 +15,37 @@ function espresso_display_paypal($payment_data) {
 	if ($use_sandbox) {
 		$myPaypal->enableTestMode();
 	}
-	add_action('action_hook_espresso_itemize_paypal_items', 'espresso_itemize_paypal_items', 10, 2);
+
 	do_action('action_hook_espresso_use_add_on_functions');
-	do_action('action_hook_espresso_itemize_paypal_items', $myPaypal, $attendee_id);
+
+	// get attendee_session
+	$SQL = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id=%d";
+	$session_id = $wpdb->get_var( $wpdb->prepare( $SQL, $attendee_id ));
+	// now get all registrations for that session
+	$SQL = "SELECT a.final_price, a.orig_price, a.quantity, ed.event_name, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage ";
+	$SQL .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
+	$SQL .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
+	$SQL .= " LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
+	$SQL .= " WHERE attendee_session=%s ORDER BY a.id ASC";
+	
+	$items = $wpdb->get_results( $wpdb->prepare( $SQL, $session_id ));
+	$total_orig_price = 0;
+	$total_final_price = 0;
+	
+	foreach ($items as $key=>$item) {
+		$total_orig_price += $item->orig_price * $item->quantity;
+		$total_final_price += $item->final_price * $item->quantity;
+		$item_num=$key+1;
+		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname);
+		$myPaypal->addField('amount_' . $item_num, $item->orig_price);
+		$myPaypal->addField('quantity_' . $item_num, absint($item->quantity));
+	}
+	
+	$total_discount = (float)$total_orig_price - (float)$total_final_price;
+	
+	if ( $total_discount > 0 ) {
+		$myPaypal->addField('discount_amount_cart', $total_discount);
+	}
 	$myPaypal->addField('business', $paypal_id);
 	if ($paypal_settings['force_ssl_return']) {
 		$home = str_replace("http://", "https://", home_url());
@@ -32,6 +60,7 @@ function espresso_display_paypal($payment_data) {
 	$myPaypal->addField('cmd', '_cart');
 	$myPaypal->addField('upload', '1');
 	
+
 	$myPaypal->addField('currency_code', $paypal_cur);
 	$myPaypal->addField('image_url', empty($paypal_settings['image_url']) ? '' : $paypal_settings['image_url']);
 	$myPaypal->addField('no_shipping ', $no_shipping);
@@ -42,7 +71,7 @@ function espresso_display_paypal($payment_data) {
 	$myPaypal->addField('city', $city);
 	$myPaypal->addField('state', $state);
 	$myPaypal->addField('zip', $zip);
-
+	
 	if (!empty($paypal_settings['bypass_payment_page']) && $paypal_settings['bypass_payment_page'] == 'Y') {
 		$myPaypal->submitPayment();
 	} else {
@@ -69,27 +98,38 @@ function espresso_display_paypal($payment_data) {
 
 add_action('action_hook_espresso_display_offsite_payment_gateway', 'espresso_display_paypal');
 
-function espresso_itemize_paypal_items($myPaypal, $attendee_id) {
-	global $wpdb;
-	$sql = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id='" . $attendee_id . "'";
-	$session_id = $wpdb->get_var($sql);
-	$sql = "SELECT ac.cost, ac.quantity, ed.event_name, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage FROM " . EVENTS_ATTENDEE_COST_TABLE . " ac JOIN " . EVENTS_ATTENDEE_TABLE . " a ON ac.attendee_id=a.id JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
-	$sql .= " LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
-	$sql .= " WHERE attendee_session='" . $session_id . "' ORDER BY a.id ASC";
-	$items = $wpdb->get_results($sql);
-	$coupon_amount = empty($items[0]->coupon_code_price) ? 0 : $items[0]->coupon_code_price;
-	$is_coupon_pct = (!empty($items[0]->use_percentage) && $items[0]->use_percentage=='Y') ? true : false;
-	foreach ($items as $key=>$item) {
-		$item_num=$key+1;
-		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname);
-		$myPaypal->addField('amount_' . $item_num, $item->cost);
-		$myPaypal->addField('quantity_' . $item_num, $item->quantity);
-	}
-	if (!empty($coupon_amount)) {
-		if ($is_coupon_pct) {
-			$myPaypal->addField('discount_rate_cart', $coupon_amount);
-		} else {
-			$myPaypal->addField('discount_amount_cart', $coupon_amount);
-		}
-	}
-}
+//function espresso_itemize_paypal_items($myPaypal, $attendee_id) {
+//
+//	global $wpdb;
+//	
+//	// get attendee_session
+//	$SQL = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id=%d";
+//	$session_id = $wpdb->get_var( $wpdb->prepare( $SQL, $attendee_id ));
+//	// now get all registrations for that session
+//	$SQL = "SELECT a.final_price, a.orig_price, a.quantity, ed.event_name, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage ";
+//	$SQL .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
+//	$SQL .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
+//	$SQL .= " LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
+//	$SQL .= " WHERE attendee_session=%s ORDER BY a.id ASC";
+//	
+//	$items = $wpdb->get_results( $wpdb->prepare( $SQL, $session_id ));
+//
+//	$total_orig_price = 0;
+//	$total_final_price = 0;
+//	
+//	foreach ($items as $key=>$item) {
+//		$total_orig_price += $item->orig_price * $item->quantity;
+//		$total_final_price += $item->final_price * $item->quantity;
+//		$item_num=$key+1;
+//		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname);
+//		$myPaypal->addField('amount_' . $item_num, $item->orig_price);
+//		$myPaypal->addField('quantity_' . $item_num, $item->quantity);
+//	}
+//	
+//	$total_discount = (float)$total_orig_price - (float)$total_final_price;
+//	
+//	if ( $total_discount > 0 ) {
+//		$myPaypal->addField('discount_amount_cart', $total_discount);
+//	}
+//	
+//}

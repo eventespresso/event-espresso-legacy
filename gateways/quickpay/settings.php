@@ -18,10 +18,10 @@ function event_espresso_quickpay_payment_settings() {
 	}
 	$quickpay_settings = get_option('event_espresso_quickpay_settings');
 	if (empty($quickpay_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/quickpay/qp-logo.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/quickpay/qp-logo.gif";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/quickpay/quickpay-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/quickpay/quickpay-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/quickpay/qp-logo.gif";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/quickpay/quickpay-logo.png";
 		}
 		$quickpay_settings['button_url'] = $button_url;
 		$quickpay_settings['quickpay_merchantid'] = '';

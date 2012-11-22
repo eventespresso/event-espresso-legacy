@@ -60,6 +60,10 @@
 .metabox-holder h6 {font-size: 1.1em;}
 .metabox-holder h4, .metabox-holder h5, .metabox-holder h6 {margin: 1em 0;}
 dt {font-weight: bold; margin: 15px 0 10px ;}
+
+.algn-left { text-align:right !important; }
+.algn-cntr { text-align:right !important; }
+.algn-rght { text-align:right !important; }
 /*___ Structure ___*/
 
 /*** 2 columns event admin area ***/
@@ -1202,10 +1206,13 @@ th.sorting_desc span.sorting-indicator {
 
 /*___ General form styles ___*/
 
+.metabox-holder .half-margin { margin: 1em 0 .5em; }
+.metabox-holder .qrtr-margin { margin: 1em 0 .25em; }
+
 legend {
 	font-size: 14px;
 	font-weight: bold;
-	margin-bottom: 10px;
+	margin-bottom: .5em;
 }
 label {
 	color: #555;
@@ -1230,58 +1237,111 @@ label {
 	width: auto;
 	margin-right: 5px;
 }
-form.espresso_form {
+.espresso_form {
 	color: #333;
 }
-form.espresso_form legend {
+.espresso_form legend {
 	padding-left: 0;
 }
 textarea {
 	resize: vertical;
 }
-form.espresso_form legend, form.espresso_form label, #new-question-form label, #edit-new-question-form label, #add-edit-new-event-email label {
-	display:block;
-	font-size:11px;
-	font-weight:bold;
-	text-align: left;
-	padding:2px;
-	text-align:left;
-}
-form.espresso_form label.inline {
-	margin-left:0;
-	float:left;
-	display: inline-block;
-	width: 100px;
-	text-align: right;
-	vertical-align:middle;
-}
-form.espresso_form input {
-	width:175px;
-}
-form.espresso_form .quicktags-toolbar input {width: auto;}
 
+#espresso-admin-add-new-attendee-dv fieldset {
+	padding:.5em 2em; margin:0 0 2em; border:1px groove #e8e8e8; border-radius:3px;
+}
+
+#espresso-admin-add-new-attendee-dv label.inline,
+#espresso-admin-add-new-attendee-dv p.event_form_field label.inline { width: 120px; }
+#espresso-admin-add-new-attendee-dv .single-radio label.inline,
+#espresso-admin-add-new-attendee-dv .multi-checkbox label.inline { width: auto; }
+#espresso-admin-add-new-attendee-dv .single-radio label.inline input,
+#espresso-admin-add-new-attendee-dv .multi-checkbox label.inline input { width: auto; }
+#espresso-admin-add-new-attendee-dv .span_event_date_label,
+#espresso-admin-add-new-attendee-dv .span_event_time_label,
+#espresso-admin-add-new-attendee-dv .event_price_label,
+#espresso-admin-add-new-attendee-dv .event_espresso_form_wrapper label,
+#espresso-admin-add-new-attendee-dv .event_espresso_form_wrapper span.label { width:120px; }
+#espresso-admin-add-new-attendee-dv .espresso_additional_limit { margin:0 0 2em; }
+#espresso-admin-add-new-attendee-dv legend,
+#espresso-admin-add-new-attendee-dv .espresso_additional_limit label { 
+	display: inline-block; float:left; width: 120px; margin-left:0;
+	text-align: right; vertical-align:middle;}
+
+
+
+#espresso-admin-add-new-attendee-dv ul,
+#espresso-admin-add-new-attendee-dv li { display: inline-block; margin:0 0 1em .5em; }
+#espresso-admin-add-new-attendee-dv li + li {  margin-left:2em; }
+#espresso-admin-add-new-attendee-dv .single-radio label.inline,
+#espresso-admin-add-new-attendee-dv .multi-checkbox label.inline { width: auto; }
+#espresso-admin-add-new-attendee-dv .single-radio label.inline input,
+#espresso-admin-add-new-attendee-dv .multi-checkbox label.inline input { width: auto; }
+#espresso-admin-add-new-attendee-dv p.event_form_field { margin:0 0 2em; }
+#espresso-admin-add-new-attendee-dv p.event_form_field +  p.event_form_field { margin:-1em 0 2em; }
+#espresso-admin-add-new-attendee-dv p.event_form_field label.inline { width: 100px; }
+
+.espresso_form legend, .espresso_form label, #new-question-form label, #edit-new-question-form label, #add-edit-new-event-email label {
+	display:block; padding:2px 2px 0 2px;
+	font-size:.9em; font-size:1em; font-weight:bold; text-align: left;
+}
+.espresso_form label.inline {
+	display: inline-block; float:left; width: 100px; margin-left:0;
+	text-align: right; vertical-align:middle;
+}
+.espresso_form input { width:175px; }
+.espresso_form .medium-text { max-width:240px; min-width:200px; }
+.espresso_form input.small-text { max-width:120px; min-width:100px; font-size:1em !important; }
+.espresso_form .quicktags-toolbar input {width: auto;}
+
+.span_event_date_label,
+.span_event_time_label,
+.event_price_label,
+.event_espresso_form_wrapper label,
+.event_espresso_form_wrapper span.label {
+	display: inline-block; width:100px; padding:0 10px 0 0; 
+	text-align: right; line-height:1em; vertical-align: middle; 
+}
+.span_event_date_value,
+.span_event_time_value { display: inline; padding:0; margin:0; text-align: left; font-size:1.1em; font-weight: bold; }
+
+
+.espresso_add_subtract_attendees { padding:0 0 1em 130px; cursor: pointer; }
+.espresso_confirm_registration { padding:0 0 1em 110px; }
+.event_form_submit { padding:1em 0 2em 110px; }
+#espresso-admin-add-new-attendee-dv p.event_form_submit { padding:1em 0 2em 130px; }
+
+.additional-attendee-lnk { display: inline-block; margin:0 0 .5em; }
+.additional-attendee-lnk img { margin:1px .5em -2px 0; }
 
 .espresso_form .button-secondary,
 .espresso_form .button-primary {
     width:auto !important;
 }
 
-form.espresso_form input#payment_subject {
+.espresso_form input#payment_subject {
 	width: 250px;
 }
-form.espresso_form input[type=radio] {
-	width:auto;
+
+
+.espresso_form input[type=select],
+.espresso_form input[type=check],
+.espresso_form input[type=radio] {
+	width:auto;  vertical-align: middle; cursor: pointer;
 }
-form.espresso_form .inline_input {
+#wpcontent .espresso_form select option {
+	padding-right:1em;
 }
-form.espresso_form fieldset {
+.espresso_form .inline_input {
+}
+.espresso_form fieldset {
 	border: none;
 }
-form.espresso_form fieldset fieldset {
+.espresso_form fieldset fieldset {
 	background: none;
 }
-form.espresso_form fieldset li {
-	padding: 0;
+.espresso_form fieldset li {
+	padding: 0 0 .5em;
 }
 label.error {
 	color: #EB7237;
@@ -1297,6 +1357,25 @@ label.error {
 select.small {width:25px;}
 select.med {width: 100px}
 select.wide {width: 175px;}
+
+.inside table checkbox-lbl, .checkbox-lbl,
+.inside table .radio-btn-lbl, .radio-btn-lbl { display: inline; }
+.inside table .checkbox-lbl span, .checkbox-lbl span,
+.inside table .radio-btn-lbl span, .radio-btn-lbl span { position: relative; top:1px; margin-left:5px;   vertical-align: middle; }
+.inside table .checkbox-lbl + .checkbox-lbl, .checkbox-lbl + .checkbox-lbl,
+.inside table .radio-btn-lbl + .radio-btn-lbl, .radio-btn-lbl + .radio-btn-lbl { margin-left:1em; }
+
+.smaller-text { font-size:.7em; }
+.small-text { font-size:.85em; }
+.big-text { font-size:1.2em; }
+.bigger-text { font-size:1.5em; }
+
+.laquo { line-height:.9em; vertical-align: top; }
+
+.inside table .espresso_form ul ul li { display: inline-block; margin-right:2em; }
+
+
+
 /*___ General settings ___*/
 
 
@@ -1638,7 +1717,7 @@ div.box-right-body ul.infolinks li a {
 .messages {
 	display: block;
 	clear: both;
-	font-size: 11px;
+	font-size: 1em;
 	font-style: normal;
 	margin: 5px 0 15px;
 }
@@ -1655,23 +1734,20 @@ div.box-right-body ul.infolinks li a {
 }
 
 .yellow_inform {
-	background-color: #ffffe0;
-	border: #e6db55 1px solid;
-	padding:4px;
+	display: inline-block; padding:1em;
+	background-color: #ffffe0; border: #e6db55 1px solid;
+	border-radius:3px;
 }
 #wpbody #post-body .attention-block {
-	background: #E9D2B7;
-	border: 1px solid #000;
-	color: #000;
-	font-size: 1.2em;
-	padding: 6px;
+	padding: 6px; background: #E9D2B7; border: 1px solid #000;
+	color: #000; font-size: 1.2em;	
 }
 .input-info {
 	background: #F0F0C7;
 	clear: both;
 	display: table;
 	font-size: 11px;
- margin-top 0;
+ 	margin-top 0;
 	padding: 0 4px;
 }
 form input.error {
@@ -1680,6 +1756,12 @@ form input.error {
 	-webkit-box-shadow: 0 0 3px #d2d2d2;
 	box-shadow: 0 0  3px #d2d2d2;
 }
+
+.espresso_form .no-payment { border: 1px solid #F00; }
+.espresso_form .part-payment { border: 1px solid #F93; }
+.espresso_form .full-payment { border: 1px solid #090; }
+
+.att-tckt-prc-lbl { margin-right:1em; }
 
 /* >Classes - general site wide
 ----------------------------------------------------------------------*/

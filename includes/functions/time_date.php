@@ -162,7 +162,7 @@ if (!function_exists('espresso_get_time_reg_limit')) {
 
 //Creates a dropdown if multiple times are associated with an event
 if (!function_exists('event_espresso_time_dropdown')) {
-    function event_espresso_time_dropdown($event_id = 'NULL', $label = 1, $multi_reg = 0, $value = '') {
+    function event_espresso_time_dropdown( $event_id = 'NULL', $label = 1, $multi_reg = 0, $value = '' ) {
         global $wpdb, $org_options;
 		$html = '';
 
@@ -195,10 +195,10 @@ if (!function_exists('event_espresso_time_dropdown')) {
         }
         $event_times = $wpdb->get_results($sql);
         if ($wpdb->num_rows == 1) {//If one result, then display the times.
-            $html .= $label == 1 ? '<span class="span_event_time_label">' . __('Start Time:', 'event_espresso') . '</span> ' : '';
+            $html .= $label == 1 ? '<span class="span_event_time_label">' . __('Start Time:', 'event_espresso') . '</span>' : '';
             foreach ($event_times as $time) {
                 $html .= '<span class="span_event_time_value">' . event_date_display($time->start_time, get_option('time_format')) . '</span>';
-                $html .= $label == 1 ? '<br /><span class="span_event_time_label">' . __('End Time: ', 'event_espresso') . '</span>' : __(' to ', 'event_espresso');
+                $html .= $label == 1 ? '<br/><span class="span_event_time_label">' . __('End Time: ', 'event_espresso') . '</span>' : __(' to ', 'event_espresso');
                 $html .= '<span class="span_event_time_value">' . event_date_display($time->end_time, get_option('time_format')) . '</span>';
                 $html .= '<input type="hidden" name="start_time_id' . $multi_name_adjust . '" id="start_time_id_' . $time->id . '" value="' . $time->id . '" />';
             }

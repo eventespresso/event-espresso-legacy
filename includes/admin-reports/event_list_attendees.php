@@ -16,8 +16,6 @@ function event_list_attendees() {
                 $wpdb->query($wpdb->prepare($sql, $key));
 								$sql = "DELETE FROM " . EVENTS_ATTENDEE_META_TABLE . " WHERE attendee_id = '%d'";
 								$wpdb->query($wpdb->prepare($sql, $key));
-								$sql = "DELETE FROM " . EVENTS_ATTENDEE_COST_TABLE . " WHERE attendee_id = '%d'";
-								$wpdb->query($wpdb->prepare($sql, $key));
 								$sql = "DELETE FROM " . EVENTS_ANSWER_TABLE . " WHERE attendee_id = '%d'";
 								$wpdb->query($wpdb->prepare($sql, $key));
             endwhile;
@@ -103,7 +101,7 @@ function event_list_attendees() {
         <th class="manage-column column-cb check-column" id="cb" scope="col" style="width: 4%;"><input type="checkbox"></th>
         <th class="manage-column column-title" id="name" scope="col" title="Click to Sort"style="width: 10%;"> <span>
           <?php _e('Attendee Name', 'event_espresso'); ?>
-          <span> <span class="sorting-indicator"></span> </th>
+          </span> <span class="sorting-indicator"></span> </th>
         <th class="manage-column column-date" id="registrationid" scope="col" title="Click to Sort" style="width: 10%;"> <span>
           <?php _e('Reg ID', 'event_espresso'); ?>
           </span> <span class="sorting-indicator"></span> </th>
@@ -258,11 +256,11 @@ function event_list_attendees() {
 				
 					//echo 'Reg. Id: '.$registration_id.'<br />';
 					$registration_id = $attendee->registration_id;
-					$lname = $attendee->lname;
-					$fname = $attendee->fname;
-					$address = $attendee->address;
-					$city = $attendee->city;
-					$state = $attendee->state;
+					$lname = htmlspecialchars( stripslashes( $attendee->lname ), ENT_QUOTES, 'UTF-8' );
+					$fname = htmlspecialchars( stripslashes( $attendee->fname ), ENT_QUOTES, 'UTF-8' );
+					$address = htmlspecialchars( stripslashes( $attendee->address ), ENT_QUOTES, 'UTF-8' );
+					$city = htmlspecialchars( stripslashes( $attendee->city ), ENT_QUOTES, 'UTF-8' );
+					$state = htmlspecialchars( stripslashes( $attendee->state ), ENT_QUOTES, 'UTF-8' );
 					$zip = $attendee->zip;
 					$email = '<span style="visibility:hidden">' . $attendee->email . '</span>';
 					$phone = $attendee->phone;

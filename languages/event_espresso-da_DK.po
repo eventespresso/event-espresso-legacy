@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Event Espresso package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2012-09-18 15:31-0700\n"
+"PO-Revision-Date: 2012-10-24 20:50-0700\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Event Espresso\n"
 "POT-Creation-Date: \n"
 "Last-Translator: Chris Reynolds <chris@jazzsequence.com>\n"
-"Language-Team: Jette Derriche, Henrik Petersen, Franz Skaaning "
+"Language-Team: Jette Derriche, Henrik Petersen, Franz Skaaning, onadventure "
 "<support@eventespresso.com>\n"
 "Language: da_DK\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -188,7 +188,7 @@ msgstr "Event titel: %s"
 
 #: ../templates/multi_registration_page_display.php:97
 msgid "Copy above information to all forms?"
-msgstr ""
+msgstr "Kopier denne information til alle bestillinger?"
 
 #: ../templates/shopping_cart.php:105
 msgid "Total "
@@ -2107,7 +2107,7 @@ msgstr ""
 
 #: ../templates/event_list.php:200
 msgid "No events available..."
-msgstr ""
+msgstr "Ingen arrangementer lige nu..."
 
 #: ../../../event-espresso/trunk/gateways/2checkout/EE_2checkout.class.php:72
 msgid "2checkout ID"
@@ -3137,7 +3137,7 @@ msgstr "Ledige pladser:"
 #: ../../../event-espresso/trunk/templates/registration_page.php:333
 #: ../../../espresso-recurring-events/trunk/recurring-event-templates/event_list_display.php:83
 msgid "Join Waiting List"
-msgstr "Venteliste"
+msgstr "Tilmeld Venteliste"
 
 #: ../templates/event_list_display.php:126
 msgid "Add to Cart"
@@ -3251,7 +3251,7 @@ msgstr "Slut dato:"
 #: ../../../event-espresso/trunk/includes/shortcodes.php:478
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/Registrations_Admin_Page.core.php:261
 msgid "Registration Details"
-msgstr "Detaljer vedr. tilmelding"
+msgstr "Tilmeldingsdetaljer"
 
 #: ../includes/admin-reports/add_new_attendee.php:144
 #: ../includes/functions/main.php:136
@@ -3298,7 +3298,7 @@ msgstr "Off-site betaling"
 
 #: ../gateways/gateway_display.php:25
 msgid "Off-line Payments"
-msgstr "Off-line betalinger"
+msgstr "Kontooverførsel"
 
 #: ../gateways/gateway_display.php:37
 #: ../gateways/bank/bank_payment_vars.php:14
@@ -3321,13 +3321,13 @@ msgstr ""
 #: ../gateways/bank/bank_payment_vars.php:16
 #: ../gateways/check/check_payment_vars.php:16
 msgid "Finalize your registration"
-msgstr "Færdiggør din tilmelding"
+msgstr "Afslut din tilmelding"
 
 #: ../gateways/gateway_display.php:39
 #: ../gateways/bank/bank_payment_vars.php:16
 #: ../gateways/check/check_payment_vars.php:16
 msgid "click here to finalize your registration"
-msgstr "klik her for at færdiggøre din tilmelding"
+msgstr "Klik her for at afslutte din tilmelding"
 
 #: ../gateways/PaymentGateway.php:207 ../gateways/wepay/Wepay.php:270
 #: ../../../event-espresso/trunk/gateways/PaymentGateway.php:222
@@ -4107,7 +4107,7 @@ msgstr "Din transaktion er behandlet"
 #: ../../../event-espresso/trunk/includes/admin-reports/enter_attendee_payments.php:245
 #: ../../../event-espresso/trunk/templates/payment_overview.php:41
 msgid "Transaction ID:"
-msgstr "Transaktion ID:"
+msgstr "Transaktions ID:"
 
 #: ../gateways/aim/aim_ipn.php:82
 msgid "There was no response from Authorize.net."
@@ -4477,17 +4477,17 @@ msgstr ""
 #: ../gateways/bank/bank_payment_vars.php:22
 #: ../../../event-espresso/trunk/gateways/bank/payment.php:11
 msgid "Name on Account:"
-msgstr ""
+msgstr "Kontoindehaver:"
 
 #: ../gateways/bank/bank_payment_vars.php:24
 #: ../../../event-espresso/trunk/gateways/bank/payment.php:13
 msgid "Account Number:"
-msgstr ""
+msgstr "Kontonummer:"
 
 #: ../gateways/bank/bank_payment_vars.php:26
 #: ../../../event-espresso/trunk/gateways/bank/payment.php:15
 msgid "Financial Institution:"
-msgstr ""
+msgstr "Bank:"
 
 #: ../../../event-espresso/trunk/gateways/bank/settings.php:21
 msgid "Electronic Funds Transfer Settings Updated!"
@@ -7775,7 +7775,7 @@ msgstr ""
 
 #: ../../../event-espresso/trunk/includes/admin-files/coupon-management/update_discount.php:25
 msgid " was updated"
-msgstr "ble opdateret"
+msgstr "blev opdateret"
 
 #: ../../../event-espresso/trunk/includes/admin-files/coupon-management/update_discount.php:27
 msgid " was not updated"
@@ -7784,12 +7784,12 @@ msgstr "blev ikke opdateret"
 #: ../includes/admin-files/coupon-management/use_coupon_code.php:80
 #: ../../../event-espresso/trunk/includes/admin-files/coupon-management/use_coupon_code.php:21
 msgid "Sorry, that promotional code is invalid or expired."
-msgstr ""
+msgstr "Den oplyste rabatkode er desværre ugyldig eller forældet."
 
 #: ../includes/admin-files/coupon-management/use_coupon_code.php:40
 #: ../../../event-espresso/trunk/includes/admin-files/coupon-management/use_coupon_code.php:74
 msgid "You are using promotional code:"
-msgstr ""
+msgstr "Du bruger rabatkode:"
 
 #: ../includes/admin-files/coupon-management/use_coupon_code.php:40
 #: ../../../event-espresso/trunk/includes/admin-files/coupon-management/use_coupon_code.php:74
@@ -7799,7 +7799,7 @@ msgstr "rabat"
 #: ../includes/admin-files/coupon-management/use_coupon_code.php:100
 #: ../../../event-espresso/trunk/includes/admin-files/coupon-management/use_coupon_code.php:152
 msgid "Enter Promotional/Discount Code"
-msgstr ""
+msgstr "Indtast evt. rabatkode"
 
 #: ../../../event-espresso/trunk/includes/admin-files/email-manager/add_email_to_db.php:21
 #: ../../../event-espresso/trunk/includes/admin-files/email-manager/add_email_to_db.php:23
@@ -8107,7 +8107,7 @@ msgstr ""
 #: ../../../event-espresso/trunk/includes/category-management/edit_event_category.php:33
 #: ../../../espresso-groupons/trunk/groupons_admin_page.php:119
 msgid "This field is required"
-msgstr ""
+msgstr "Udfyld venligst dette felt"
 
 #: ../includes/admin-files/form-builder/groups/new_group.php:25
 #: ../includes/form-builder/groups/edit_group.php:63
@@ -8397,7 +8397,7 @@ msgstr ""
 #: ../../../event-espresso/trunk/includes/admin-files/venue-management/edit_venue.php:147
 #: ../../../event-espresso/trunk/includes/classes/EE_Export.class.php:595
 msgid "Phone"
-msgstr "Tlefon"
+msgstr "Telefon"
 
 #: ../includes/admin-files/staff-management/add_new_staff.php:36
 #: ../includes/admin-files/staff-management/edit_staff.php:50
@@ -8418,7 +8418,7 @@ msgstr ""
 #: ../../../event-espresso/trunk/includes/admin-files/venue-management/add_new_venue.php:30
 #: ../../../event-espresso/trunk/includes/admin-files/venue-management/edit_venue.php:69
 msgid "Website"
-msgstr "HJemmeside"
+msgstr "Hjemmeside"
 
 #: ../includes/admin-files/staff-management/add_new_staff.php:48
 #: ../includes/admin-files/staff-management/edit_staff.php:62
@@ -9306,7 +9306,7 @@ msgstr ""
 #: ../../../event-espresso/trunk/includes/admin-reports/edit_attendee_record.php:579
 #: ../../../event-espresso/trunk/includes/functions/email.php:274
 msgid "View Your Payment Details"
-msgstr ""
+msgstr "Se detaljer for din betaling"
 
 #: ../includes/admin-reports/edit_attendee_record.php:437
 #: ../includes/admin-reports/enter_attendee_payments.php:248
@@ -9315,7 +9315,7 @@ msgstr ""
 #: ../../../event-espresso/trunk/includes/admin-reports/enter_attendee_payments.php:216
 #: ../../../event-espresso/trunk/templates/payment_overview.php:34
 msgid "Payment Status:"
-msgstr ""
+msgstr "Betalingsstatus:"
 
 #: ../includes/admin-reports/edit_attendee_record.php:438
 #: ../includes/admin-reports/enter_attendee_payments.php:289
@@ -9338,7 +9338,7 @@ msgstr ""
 #: ../../../event-espresso/trunk/includes/admin-reports/edit_attendee_record.php:586
 #: ../../../event-espresso/trunk/templates/payment_overview.php:8
 msgid "Payment Overview"
-msgstr ""
+msgstr "Betalingsoversigt"
 
 #: ../includes/admin-reports/edit_attendee_record.php:449
 #: ../includes/admin-reports/enter_attendee_payments.php:304
@@ -9430,7 +9430,7 @@ msgstr ""
 #: ../includes/admin-reports/enter_attendee_payments.php:237
 #: ../../../event-espresso/trunk/includes/admin-reports/enter_attendee_payments.php:205
 msgid "Registration Id:"
-msgstr ""
+msgstr "Tilmeldings ID:"
 
 #: ../includes/admin-files/template_settings/style_settings.php:92
 #: ../includes/admin-reports/enter_attendee_payments.php:252
@@ -12899,15 +12899,15 @@ msgstr ""
 
 #: ../includes/functions/cart.php:558
 msgid "Confirm and go to payment page"
-msgstr ""
+msgstr "Bekræft og gå til betalingssiden"
 
 #: ../includes/functions/cart.php:798
 msgid "Add to cart"
-msgstr ""
+msgstr "Læg i kurv"
 
 #: ../includes/functions/cart.php:814
 msgid "View Cart"
-msgstr ""
+msgstr "Se kurv"
 
 #: ../includes/functions/cart.php:843
 msgid ""
@@ -12916,7 +12916,7 @@ msgid ""
 "again."
 msgstr ""
 "Det ser ud som om du forsøger at opdatere siden eller din kurv er tom. Du "
-"bliver nødt til at går tilbage til eventsiden og forsøge igen."
+"bliver nødt til at gå tilbage til eventsiden og forsøge igen."
 
 #: ../includes/functions/cart.php:908 ../includes/functions/pricing.php:212
 #: ../../../event-espresso/trunk/includes/functions/pricing.php:216
@@ -12936,11 +12936,11 @@ msgstr "Du kan registrere op til %d ad gangen for denne event."
 #: ../../../event-espresso/trunk/includes/functions/pricing.php:110
 #: ../../../event-espresso/trunk/includes/functions/pricing.php:314
 msgid "Free Event"
-msgstr ""
+msgstr "Gratis arrangement"
 
 #: ../includes/functions/cart.php:959 ../includes/functions/pricing.php:252
 msgid "free event"
-msgstr ""
+msgstr "gratis arrangement"
 
 #: ../templates/multi_registration_page_display.php:11
 msgid " attendees"
@@ -12969,7 +12969,7 @@ msgstr ""
 #: ../includes/functions/email.php:424
 #: ../../../event-espresso/trunk/includes/functions/email.php:365
 msgid "Registration ID: "
-msgstr ""
+msgstr "Tilmeldings ID:"
 
 #: ../includes/functions/email.php:434
 #: ../../../event-espresso/trunk/includes/functions/email.php:375
@@ -13005,7 +13005,7 @@ msgstr ""
 #: ../../../event-espresso/trunk/includes/functions/form_build.php:146
 #: ../../../event-espresso/trunk/includes/functions/main.php:653
 msgid "Select One"
-msgstr ""
+msgstr "Vælg mulighed"
 
 #: ../includes/functions/main.php:22
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/Registrations_List_Table.class.php:234
@@ -13133,7 +13133,7 @@ msgstr ""
 #: ../../../event-espresso/trunk/includes/functions/pricing.php:222
 #: ../../../event-espresso/trunk/includes/functions/pricing.php:307
 msgid "Price:"
-msgstr ""
+msgstr "Pris:"
 
 #: ../../../event-espresso/trunk/includes/functions/pricing.php:234
 msgid "Choose number of tickets for "
@@ -13256,7 +13256,7 @@ msgstr ""
 #: ../includes/functions/time_date.php:201
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:223
 msgid "End Time: "
-msgstr ""
+msgstr "Sluttidspunkt: "
 
 #: ../includes/functions/time_date.php:201
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:223
@@ -13390,13 +13390,13 @@ msgstr ""
 #: ../includes/functions/cart.php:561
 #: ../../../event-espresso/trunk/includes/process-registration/add_attendees_to_db.php:638
 msgid "Edit Cart"
-msgstr ""
+msgstr "Opdater kurv"
 
 #: ../templates/event_list_display.php:131
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:169
 #: ../../../event-espresso/trunk/includes/process-registration/add_attendees_to_db.php:639
 msgid " or "
-msgstr ""
+msgstr " eller "
 
 #: ../../../event-espresso/trunk/includes/process-registration/add_attendees_to_db.php:640
 msgid "Edit Registrant Information"
@@ -13407,7 +13407,7 @@ msgstr ""
 #: ../../../event-espresso/trunk/includes/process-registration/add_attendees_to_db.php:643
 #: ../../../event-espresso/trunk/templates/payment_page.php:34
 msgid "Your registration is not complete until payment is received."
-msgstr ""
+msgstr "Din tilmelding er først gyldig, når din indbetaling er bekræftet."
 
 #: ../includes/process-registration/add_attendees_to_db.php:738
 #: ../templates/payment_page.php:33 ../templates/pending_approval.php:6
@@ -13415,7 +13415,7 @@ msgstr ""
 #: ../../../event-espresso/trunk/templates/payment_page.php:38
 #: ../../../event-espresso/trunk/templates/pending_approval.php:6
 msgid "Amount due: "
-msgstr ""
+msgstr "Beløb til betaling:"
 
 #: ../includes/process-registration/add_attendees_to_db.php:741
 #: ../includes/process-registration/add_attendees_to_db.php:758
@@ -13427,14 +13427,14 @@ msgstr ""
 msgid ""
 "A confirmation email has been sent with additional details of your "
 "registration."
-msgstr ""
+msgstr "En mail er blevet afsendt med detaljerne for din tilmelding."
 
 #: ../includes/process-registration/add_attendees_to_db.php:756
 #: ../templates/payment_page.php:12
 #: ../../../event-espresso/trunk/includes/process-registration/add_attendees_to_db.php:661
 #: ../../../event-espresso/trunk/templates/payment_page.php:16
 msgid "Thank you! Your registration is confirmed for"
-msgstr ""
+msgstr "Tak! Vi har registreret din tilmelding til"
 
 #: ../includes/process-registration/attendee_edit_record.php:233
 #: ../../../event-espresso/trunk/includes/process-registration/attendee_edit_record.php:226
@@ -13654,60 +13654,60 @@ msgstr ""
 #: ../templates/confirmation_display.php:12
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:16
 msgid "Please verify your registration details:"
-msgstr ""
+msgstr "Detaljer for din booking"
 
 #: ../templates/confirmation_display.php:19
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:23
 msgid "Event Name:"
-msgstr ""
+msgstr "Arrangement:"
 
 #: ../templates/confirmation_display.php:43
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:29
 msgid "Price per attendee:"
-msgstr ""
+msgstr "Pris pr. deltager"
 
 #: ../templates/confirmation_display.php:75
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:35
 msgid "Attendee Name:"
-msgstr ""
+msgstr "Deltagernavn: "
 
 #: ../templates/confirmation_display.php:115
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:75
 msgid "Total Price:"
-msgstr ""
+msgstr "Samlet pris: "
 
 #: ../includes/process-registration/payment_page.php:159
 #: ../includes/process-registration/payment_page.php:161
 #: ../includes/process-registration/payment_page.php:172
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:79
 msgid "Discount of "
-msgstr ""
+msgstr "Rabat på "
 
 #: ../includes/process-registration/payment_page.php:159
 #: ../includes/process-registration/payment_page.php:161
 #: ../includes/process-registration/payment_page.php:172
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:79
 msgid " applied"
-msgstr ""
+msgstr " anvendt"
 
 #: ../templates/confirmation_display.php:123
 #: ../templates/confirmation_display.php:144
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:87
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:107
 msgid "Confirm Registration"
-msgstr ""
+msgstr "Bekræft Tilmelding"
 
 #: ../templates/confirmation_display.php:128
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:91
 msgid "Additional Information for:"
-msgstr ""
+msgstr "Deltagerinformation for:"
 
 #: ../templates/event_list_display.php:142 ../templates/event_post.php:276
 #: ../templates/event_post.php:284
 #: ../../../event-espresso/trunk/templates/event_post.php:286
 #: ../../../event-espresso/trunk/templates/event_post.php:291
 msgid "Register"
-msgstr ""
+msgstr "Tilmeld"
 
 #: ../templates/event_post.php:276
 #: ../../../event-espresso/trunk/templates/event_post.php:286
@@ -13736,7 +13736,7 @@ msgstr "Deltager"
 #: ../templates/payment_overview.php:8
 #: ../../../event-espresso/trunk/templates/payment_overview.php:12
 msgid "Class/Event:"
-msgstr ""
+msgstr "Arrangement:"
 
 #: ../../../event-espresso/trunk/templates/payment_overview.php:19
 msgid "Registration  Details:"
@@ -13745,33 +13745,33 @@ msgstr ""
 #: ../templates/payment_overview.php:12
 #: ../../../event-espresso/trunk/templates/payment_overview.php:23
 msgid "Primary Registrant:"
-msgstr ""
+msgstr "Kontaktperson:"
 
 #: ../templates/payment_overview.php:16
 #: ../../../event-espresso/trunk/templates/payment_overview.php:26
 msgid "Payment Type:"
-msgstr ""
+msgstr "Betalingsform:"
 
 #: ../templates/payment_overview.php:16
 #: ../../../event-espresso/trunk/templates/payment_overview.php:26
 msgid "Payment Date:"
-msgstr ""
+msgstr "Betalingsdato:"
 
 #: ../templates/payment_overview.php:19
 #: ../../../event-espresso/trunk/templates/payment_overview.php:28
 msgid "Amount Paid/Owed:"
-msgstr ""
+msgstr "Beløb til betaling:"
 
 #: ../templates/payment_overview.php:32
 #: ../../../event-espresso/trunk/templates/payment_overview.php:38
 msgid "Registration ID:"
-msgstr ""
+msgstr "Tilmeldings ID:"
 
 #: ../templates/payment_page.php:16 ../templates/payment_page.php:36
 #: ../../../event-espresso/trunk/templates/payment_page.php:22
 #: ../../../event-espresso/trunk/templates/payment_page.php:41
 msgid "Your Registration ID: "
-msgstr ""
+msgstr "Dit Tilmeldings ID:"
 
 #: ../templates/pending_approval.php:4
 #: ../../../event-espresso/trunk/templates/pending_approval.php:4
@@ -13781,7 +13781,7 @@ msgstr ""
 #: ../templates/pending_approval.php:9
 #: ../../../event-espresso/trunk/templates/pending_approval.php:9
 msgid "Your Registration ID:"
-msgstr ""
+msgstr "Dit Tilmeldings ID:"
 
 #: ../templates/return_payment.php:21
 #: ../../../event-espresso/trunk/templates/return_payment.php:7
@@ -13954,6 +13954,8 @@ msgid ""
 "Since you are using the bank payment option, please make note of the "
 "information below, then"
 msgstr ""
+"Når du afslutter din tilmelding, sender vi snarest en faktura pr. email med "
+"nedenstående kontoinformation. "
 
 #: ../gateways/bank/settings.php:16
 msgid "Electronic Funds Transfer settings saved."
@@ -14123,7 +14125,7 @@ msgstr ""
 
 #: ../includes/admin_support.php:274
 msgid "Add Events to Cart"
-msgstr ""
+msgstr "Tilføj arrangement til kurv"
 
 #: ../includes/admin_support.php:352
 msgid "Venue Shortcodes"
@@ -14474,7 +14476,7 @@ msgstr ""
 
 #: ../includes/admin-files/coupon-management/edit_discount.php:53
 msgid "Promotional Code:"
-msgstr ""
+msgstr "Rabatkode:"
 
 #: ../includes/admin-files/coupon-management/edit_discount.php:75
 #: ../includes/admin-files/coupon-management/new_discount.php:26
@@ -14937,7 +14939,7 @@ msgstr ""
 
 #: ../includes/functions/time_date.php:198
 msgid "Start Time:"
-msgstr ""
+msgstr "Starttidspunkt: "
 
 #: ../templates/confirmation_display.php:43
 msgid "Type/Price per attendee:"
@@ -15837,7 +15839,7 @@ msgstr ""
 #: ../../../event-espresso/trunk/templates/event_list.php:540
 #: ../../../espresso-recurring-events/trunk/recurring-event-templates/event_list_display.php:87
 msgid "Register Now"
-msgstr ""
+msgstr "Tilmeld nu"
 
 #: ../../../espresso-groupons/trunk/event_management_functions.php:4
 #: ../../../espresso-groupons/trunk/event_management_functions.php:11

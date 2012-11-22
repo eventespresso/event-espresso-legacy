@@ -20,9 +20,9 @@ function espresso_display_2checkout($payment_data) {
 		$my2checkout->enableTestMode();
 	}
 	$session_id = $wpdb->get_var("SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id='" . $attendee_id . "'");
-	$sql = "SELECT ed.id, ed.event_name, ed.event_desc, ac.cost, ac.quantity FROM " . EVENTS_DETAIL_TABLE . " ed ";
+	$sql = "SELECT ed.id, ed.event_name, ed.event_desc, a.final_price, a.quantity FROM " . EVENTS_DETAIL_TABLE . " ed ";
 	$sql .= " JOIN " . EVENTS_ATTENDEE_TABLE . " a ON ed.id=a.event_id ";
-	$sql .= " JOIN " . EVENTS_ATTENDEE_COST_TABLE . " ac ON a.id=ac.attendee_id ";
+	//$sql .= " JOIN " . EVENTS_ATTENDEE_COST_TABLE . " ac ON a.id=ac.attendee_id ";
 	$sql .= " WHERE a.attendee_session='$session_id'";
 	$tickets = $wpdb->get_results($sql, ARRAY_A);
 	$item_num = 1;
@@ -30,7 +30,7 @@ function espresso_display_2checkout($payment_data) {
 		$my2checkout->addField('c_prod_' . $item_num, $ticket['id'] . ',' . $ticket['quantity']);
 		$my2checkout->addField('c_name_' . $item_num, $ticket['event_name']);
 		$my2checkout->addField('c_description_' . $item_num, '');
-		$my2checkout->addField('c_price_' . $item_num, $ticket['cost']);
+		$my2checkout->addField('c_price_' . $item_num, $ticket['final_price']);
 		$item_num++;
 	}
 	$my2checkout->addField('id_type', '1');

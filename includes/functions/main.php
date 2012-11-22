@@ -115,7 +115,7 @@ function espresso_reg_sessionid($registration_id) {
 
 if (!function_exists('event_espresso_additional_attendees')) {
 
-	function event_espresso_additional_attendees($event_id = 0, $additional_limit = 2, $available_spaces = 999, $label = '', $show_label = true, $event_meta = '') {
+	function event_espresso_additional_attendees( $event_id = 0, $additional_limit = 2, $available_spaces = 999, $label = '', $show_label = true, $event_meta = '', $qstn_class = '' ) {
 		$event_id = $event_id == 0 ? $_REQUEST['event_id'] : $event_id;
 
 		if ($event_meta == 'admin') {
@@ -133,74 +133,92 @@ if (!function_exists('event_espresso_additional_attendees')) {
 
 		$i = 0;
 		if (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) {
+		
 			$label = $label == '' ? __('Number of Tickets', 'event_espresso') : $label;
-			$html = '<span class="espresso_additional_limit">';
+			$html = '<p class="espresso_additional_limit highlight-bg">';
 			$html .= $show_label == true ? '<label for="num_people">' . $label . '</label>' : '';
 			$html .= '<select name="num_people" id="num_people-' . $event_id . '" style="width:70px;">';
-			while (($i <= $additional_limit) && ($i < $available_spaces)) {
+			while (($i < $additional_limit) && ($i < $available_spaces)) {
 				$i++;
 				$html .= '<option value="' . $i . '">' . $i . '</option>';
 			}
 			$html .= '</select>';
 			//$html .= '<br />';
 			$html .= '<input type="hidden" name="espresso_addtl_limit_dd" value="true">';
-			$html .= '</span>';
+			$html .= '</p>';
 			$buffer = '';
+			
 		} else {
-			while (($i <= $additional_limit) && ($i < $available_spaces)) {
-				$i++;
-			}
-			$i = $i - 1;
-			$html = '<div class="event_form_field additional_header" id="additional_header">';
+		
+//			while (($i < $additional_limit) && ($i < $available_spaces)) {
+//				$i++;
+//			}
+			$i = min( $additional_limit, $available_spaces ) - 1;
+			
+			$html = '<div id="additional_header" class="event_form_field additional_header espresso_add_subtract_attendees">';
 			// fixed for translation string, previous string untranslatable - http://events.codebasehq.com/projects/event-espresso/tickets/11
-			//$html .= '<a onclick="return false;" href="#">' . __('Add More Attendees? (click to toggle, limit ' . $i . ')', 'event_espresso') . '</a>';
-			$html .= '<a onclick="return false;" class="add" href="#">' . __('Add More Attendees? (click to toggle, limit ', 'event_espresso');
+			$html .= '<a id="add-additional-attendee-0" rel="0" class="add-additional-attendee-lnk additional-attendee-lnk">' . __('Add More Attendees? (click to toggle, limit ', 'event_espresso');
 			$html .= $i . ')</a>';
 			$html .= '</div>';
+			
+			
 			//ob_start();
-			$htm = '<div id="additional_attendee_\' + attendee_num + \'" class="clone espresso_add_attendee">';
-			$htm .= '<h4>' . __('Additional Attendee #', 'event_espresso') . '\' + (attendee_num+1) + \'</h4>';
+			$attendee_form = '<div id="additional_attendee_XXXXXX" class="espresso_add_attendee">';
+			$attendee_form .= '<h4 class="additional-attendee-nmbr-h4">' . __('Additional Attendee #', 'event_espresso') . 'XXXXXX</h4>';
 			/*
 			 * Added for seating chart addon
 			 */
 			if (defined('ESPRESSO_SEATING_CHART')) {
 				if (seating_chart::check_event_has_seating_chart($_REQUEST['event_id']) !== false) {
-					$htm .= '<p>';
-					$htm .= '<label>' . __('Select a Seat:', 'event_espresso') . '</label>';
-					$htm .= '<input type="text" name="x_seat_id[\' + attendee_num + \']" value="" class="ee_s_select_seat" event_id="' . $_REQUEST['event_id'] . '" readonly="readonly" />';
-					$htm .= '<br/>[' . __('If you do not select a seat this attendee will not be added', 'event_espresso') . ']';
-					$htm .= '</p>';
+					$attendee_form .= '<p>';
+					$attendee_form .= '<label>' . __('Select a Seat:', 'event_espresso') . '</label>';
+					$attendee_form .= '<input type="text" name="x_seat_id[XXXXXX]" value="" class="ee_s_select_seat" event_id="' . $_REQUEST['event_id'] . '" readonly="readonly" />';
+					$attendee_form .= '<br/>[' . __('If you do not select a seat this attendee will not be added', 'event_espresso') . ']';
+					$attendee_form .= '</p>';
 				}
 			}
 			if ($event_meta['additional_attendee_reg_info'] == 2) {
-				$htm .= '<p>';
-				$htm .= '<label for="x_attendee_fname">' . __('First Name:', 'event_espresso') . '</label>';
-				$htm .= '<input type="text" name="x_attendee_fname[\' + attendee_num + \']" class="input"/>';
-				$htm .= '</p>';
-				$htm .= '<p>';
-				$htm .= '<label for="x_attendee_lname">' . __('Last Name:', 'event_espresso') . '</label>';
-				$htm .= '<input type="text" name="x_attendee_lname[\' + attendee_num + \']" class="input"/>';
-				$htm .= '</p>';
-				$htm .= '<p>';
-				$htm .= '<label for="x_attendee_email">' . __('Email:', 'event_espresso') . '</label>';
-				$htm .= '<input type="text" name="x_attendee_email[\' + attendee_num + \']" class="input"/>';
-				$htm .= '</p>';
+				$attendee_form .= '<p>';
+				$attendee_form .= '<label for="x_attendee_fname">' . __('First Name:', 'event_espresso') . '</label>';
+				$attendee_form .= '<input type="text" name="x_attendee_fname[XXXXXX]" class="input"/>';
+				$attendee_form .= '</p>';
+				$attendee_form .= '<p>';
+				$attendee_form .= '<label for="x_attendee_lname">' . __('Last Name:', 'event_espresso') . '</label>';
+				$attendee_form .= '<input type="text" name="x_attendee_lname[XXXXXX]" class="input"/>';
+				$attendee_form .= '</p>';
+				$attendee_form .= '<p>';
+				$attendee_form .= '<label for="x_attendee_email">' . __('Email:', 'event_espresso') . '</label>';
+				$attendee_form .= '<input type="text" name="x_attendee_email[XXXXXX]" class="input"/>';
+				$attendee_form .= '</p>';
 			} else {
 				$meta = array("x_attendee" => true);
 				if(!empty($admin)) {
 					$meta['admin_only'] = true;
 				}
-				$htm .= event_espresso_add_question_groups($event_meta['add_attendee_question_groups'], '', null, 0, $meta);
+				$attendee_form .= event_espresso_add_question_groups( $event_meta['add_attendee_question_groups'], '', null, 0, $meta, $qstn_class );
 			}
-			$htm .= '<a onclick="return false;" href="#" class="add" rel=".clone" title="' . __('Add an Additonal Attendee', 'event_espresso') . '"><img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add an Additonal Attendee', 'event_espresso') . '" /></a>';
-			$htm .= '<a onclick="return false;" style="" class="remove" href="#" ><img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Attendee', 'event_espresso') . '" /></a>';
-			$htm .= '</div>';
-			//ob_start();
-			//END STOP DO NOT ADD LINE BREAKS TO THIS SCRIPT
-			$html .= '<script type="text/javascript">$jaer = jQuery.noConflict();var attendee_num = 0;var additional_limit = '.$additional_limit.';var first_add_button = null;var selector = \'div#additional_attendee_\' + attendee_num;function markup(attendee_num) {return \''.stripslashes($htm).'\';}function remove_add() {attendee_num -= 1;selector = \'div#additional_attendee_\' + attendee_num;$jaer(selector).remove();if (attendee_num != 0) {var temp_selector = \'div#additional_attendee_\' + (attendee_num - 1);$jaer(temp_selector + \' a.add\').on(\'click\',add_add);$jaer(temp_selector + \' a.remove\').on(\'click\',remove_add);} else {first_add_button.on(\'click\',add_add);}}function add_add() {if (attendee_num == additional_limit) return;$jaer(this).parent().after(markup(attendee_num));$jaer(selector + \' a.add\').on(\'click\',add_add);$jaer(selector + \' a.remove\').on(\'click\',remove_add);$jaer(this).off(\'click\', add_add);if (attendee_num != 0) {var temp_selector = \'div#additional_attendee_\' + (attendee_num - 1);$jaer(temp_selector + \' a.remove\').off(\'click\', remove_add);}attendee_num += 1;selector = \'div#additional_attendee_\' + attendee_num;}jQuery(document).ready(function($jaer) {$jaer(\'a.add\').on(\'click\',add_add);first_add_button = $jaer(\'a.add\');});</script>';
-			//END STOP DO NOT ADD LINE BREAKS TO THIS SCRIPT
-			//$buffer = ob_get_contents();
-			//ob_end_clean();
+			$attendee_form .= '<div class="espresso_add_subtract_attendees">';
+
+			$attendee_form .= '
+			<a id="remove-additional-attendee-XXXXXX" rel="XXXXXX" class="remove-additional-attendee-lnk additional-attendee-lnk" title="' . __('Remove the above Attendee', 'event_espresso') . '">
+				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Attendee', 'event_espresso') . '" />
+				' . __('Remove the above Attendee:', 'event_espresso') . '
+			</a><br/>';
+			
+			$attendee_form .= '
+			<a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk" title="' . __('Add an Additonal Attendee', 'event_espresso') . '">
+				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add an Additonal Attendee', 'event_espresso') . '" />
+				' . __('Add an Additonal Attendee:', 'event_espresso') . '
+			</a>';
+
+
+			$attendee_form .= '</div></div>';
+
+			wp_register_script( 'espresso_add_reg_attendees', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_add_reg_attendees.js', array('jquery'), '0.1', TRUE );
+			wp_enqueue_script( 'espresso_add_reg_attendees' );
+
+			$espresso_add_reg_attendees = array( 'additional_limit' => $additional_limit, 'attendee_form' => stripslashes( $attendee_form ));
+			wp_localize_script( 'espresso_add_reg_attendees', 'espresso_add_reg_attendees', $espresso_add_reg_attendees );		
 		}
 		return $html;
 	}
@@ -253,6 +271,7 @@ function event_espresso_get_event_meta($event_id) {
 if (!function_exists('event_espresso_get_is_active')) {
 
 	function event_espresso_get_is_active($event_id, $event_meta = '') {
+		//printr( $event_meta, '$event_meta  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		global $wpdb, $org_options;
 		//If the timezome is set in the wordpress database, then lets use it as the default timezone.
 		if (get_option('timezone_string') != '') {
@@ -398,6 +417,7 @@ if (!function_exists('event_espresso_get_is_active')) {
 if (!function_exists('event_espresso_get_status')) {
 
 	function event_espresso_get_status($event_id, $event_meta = '') {
+		//printr( $event_meta, '$event_meta  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		$event_status = event_espresso_get_is_active($event_id, $event_meta);
 		switch ($event_status['status']) {
 			case 'EXPIRED':
@@ -638,11 +658,12 @@ if (!function_exists('event_espresso_management_capability')) {
 if (!function_exists('event_espresso_add_question_groups')) {
 
 	function event_espresso_add_question_groups($question_groups, $answer = '', $event_id = null, $multi_reg = 0, $meta = array(), $class = 'my_class') {
-		global $wpdb, $member_options;
+		global $wpdb;
 		
 		//If memebers addon is installed, check to see if we want to disable the form fields for members
 		$disabled = '';
 		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true ) {
+			$member_options = get_option('events_member_settings');
 			if ( is_user_logged_in() && $member_options['autofilled_editable'] == 'N' )
 			$disabled = 'disabled="disabled"';
 		}
@@ -653,7 +674,7 @@ if (!function_exists('event_espresso_add_question_groups')) {
 
 			$FILTER = '';
 			if (isset($_REQUEST['regevent_action']))
-				$FILTER = " AND q.admin_only = 'N' ";
+				$FILTER = " AND q.admin_only != 'Y' ";
 
 			//echo 'additional_attendee_reg_info = '.$meta['additional_attendee_reg_info'].'<br />';
 			//Only personal inforamation for the additional attendees in each group
@@ -679,8 +700,7 @@ if (!function_exists('event_espresso_add_question_groups')) {
 					FROM " . EVENTS_QUESTION_TABLE . " q
 					JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr ON q.id = qgr.question_id
 					JOIN " . EVENTS_QST_GROUP_TABLE . " qg ON qg.id = qgr.group_id
-					WHERE qgr.group_id in ( " . $questions_in . ")
-					" . $FILTER . "
+					WHERE qgr.group_id in ( $questions_in ) $FILTER
 					ORDER BY qg.group_order ASC, qg.id, q.sequence, q.id ASC";
 			//echo $sql;
 
@@ -697,10 +717,10 @@ if (!function_exists('event_espresso_add_question_groups')) {
 						$questions_displayed[] = $question->id;
 
 						//if new group, close fieldset
-						$html .= ($group_name != '' && $group_name != $question->group_name) ? '</div>' : '';
+						$html .= ($group_name != '' && $group_name != $question->group_name) ? '</fieldset>' : '';
 
 						if ($group_name != $question->group_name) {
-							$html .= '<div class="event_questions" id="' . $question->group_identifier . '">';
+							$html .= '<fieldset class="event_questions" id="' . $question->group_identifier . '">';
 							$html .= $question->show_group_name != 0 ? "<h4 class=\"reg-quest-title section-title\">".stripslashes_deep($question->group_name)."</h4>" : '';
 							$html .= $question->show_group_description != 0 && $question->group_description == true ? '<p class="quest-group-descript">' . stripslashes_deep($question->group_description) . '</p>' : '';
 							$group_name = stripslashes_deep($question->group_name);
@@ -708,7 +728,7 @@ if (!function_exists('event_espresso_add_question_groups')) {
 
 						$html .= event_form_build($question, $answer, $event_id, $multi_reg, $meta, $class, $disabled);
 					}
-					$html .= $counter == $num_rows ? '</div>' : '';
+					$html .= $counter == $num_rows ? '</fieldset>' : '';
 				}
 			}//end questions display
 		} else {
@@ -913,13 +933,7 @@ function is_multi($array) {
 
 //escape the commas in csv file export
 function escape_csv_val($val) {
-
-	$type = ($_REQUEST['type']) ? $_REQUEST['type'] : '';
-	if (preg_match('/,/', $val) && $type == 'csv') {
-		return '"' . $val . '"';
-	}
-
-	return $val;
+	return "\"" . eregi_replace("\"", "\"\"", $val) . "\"";
 }
 
 //return field(s) from a table
@@ -1077,20 +1091,7 @@ if (!function_exists('event_espresso_cleanup_multi_event_registration_id_group_d
 
 }
 
-//Function to clean up left out data from attendee cost table
-if (!function_exists('event_espresso_cleanup_attendee_cost_data')) {
 
-	/**
-	 * event_espresso_cleanup_attendee_cost_data()
-	 *
-	 * Usage: event_espresso_cleanup_attendee_cost_data()
-	 */
-	function event_espresso_cleanup_attendee_cost_data() {
-		global $wpdb;
-		$wpdb->query(" delete eac from " . EVENTS_ATTENDEE_COST_TABLE . " eac left join " . EVENTS_ATTENDEE_TABLE . "  ea on eac.attendee_id = ea.id where ea.id is null ");
-	}
-
-}
 
 function espresso_check_scripts() {
 	if (function_exists('wp_script_is')) {

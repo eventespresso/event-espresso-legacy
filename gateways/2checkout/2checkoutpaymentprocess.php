@@ -38,6 +38,7 @@ function espresso_process_2checkout($payment_data) {
 	$payment_data['txn_type'] = '2CO';
 	$payment_data['txn_id'] = $_REQUEST['invoice_id'];
 	$payment_data['txn_details'] = serialize($_REQUEST);
+	
 	if ($_REQUEST['credit_card_processed'] == 'Y') {
 
 		$payment_data['payment_status'] = 'Completed';
@@ -53,7 +54,9 @@ function espresso_process_2checkout($payment_data) {
 			}
 			wp_mail($payment_data['contact'], $subject, $body);
 		}
+		
 	} else {
+	
 		$subject = 'Instant Payment Notification - Gateway Variable Dump';
 		$body = "An instant payment notification failed\n";
 		$body .= "from " . " on " . date('m/d/Y');
@@ -63,6 +66,7 @@ function espresso_process_2checkout($payment_data) {
 		}
 		//wp_mail($payment_data['contact'], $subject, $body);
 	}
+	
 	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }

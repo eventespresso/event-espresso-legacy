@@ -2,10 +2,10 @@
 function espresso_pending_registration_approval($registration_id) {
 	global $wpdb, $org_options;
 	//Get the event information
-	$events = $wpdb->get_results("SELECT ed.* FROM ". EVENTS_DETAIL_TABLE . " ed 
-					JOIN " . EVENTS_ATTENDEE_TABLE . " ea
-					ON ed.id = ea.event_id
-					WHERE ea.registration_id='".$registration_id."'");
+	$SQL = "SELECT ed.* FROM ". EVENTS_DETAIL_TABLE . " ed ";
+	$SQL .= "JOIN " . EVENTS_ATTENDEE_TABLE . " ea ON ed.id = ea.event_id ";
+	$SQL .= "WHERE ea.registration_id=%s";
+	$events = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ));
 
 	foreach ($events as $event){
 		$event_id=$event->id;
@@ -41,24 +41,24 @@ function espresso_pending_registration_approval($registration_id) {
 	$event_link = '<a href="' . $event_url . '">' . $event_name . '</a>';
 
 
-	$sql = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE;
+	$SQL = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE;
 
 	if ($registration_id != ''){
-		$sql .= " WHERE registration_id = '".$registration_id."' ";
+		$SQL .= " WHERE registration_id = '".$registration_id."' ";
 	}elseif ($attendee_id != ''){
-		$sql .= " WHERE id = '".$attendee_id."' ";
+		$SQL .= " WHERE id = '".$attendee_id."' ";
 	}else{
-		_e('No ID Supplied', 'event_espresso');
+		wp_die( _e('No ID Supplied', 'event_espresso'));
 	}
 
-	$sql .= " ORDER BY id ";
-	$sql .= " LIMIT 0,1 ";//Get the first attendees details
+	$SQL .= " ORDER BY id ";
+	$SQL .= " LIMIT 0,1 ";//Get the first attendees details
 
 
-	$attendees  = $wpdb->get_results($sql);
+	$attendee  = $wpdb->get_row($wpdb->prepare( $SQL ));
 	//global $attendee_id;
-
-	foreach ($attendees as $attendee){
+	
+	if ( $attendee !== FALSE ) {
 		$attendee_id = $attendee->id;
 		$attendee_email = $attendee->email;
 		$lname = $attendee->lname;
@@ -78,8 +78,11 @@ function espresso_pending_registration_approval($registration_id) {
 		$end_time = $attendee->end_time;
 		$date = $attendee->date;
 		$pre_approve = $attendee->pre_approve;
-		
+			
+		event_espresso_send_attendee_registration_approval_pending($registration_id);
+		require_once(EVENT_ESPRESSO_PLUGINFULLPATH."templates/pending_approval.php");		
+	} else {
+		wp_die( _e('An error occured. The primary attendee could not be located.', 'event_espresso'));		
 	}
-	event_espresso_send_attendee_registration_approval_pending($registration_id);
-	require_once(EVENT_ESPRESSO_PLUGINFULLPATH."templates/pending_approval.php");
+
 }

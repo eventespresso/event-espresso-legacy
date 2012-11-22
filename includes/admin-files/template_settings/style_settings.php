@@ -1,4 +1,7 @@
 <?php
+/*
+* This file is deprecated, but may still be in use by some users. I plan on removing this someday!
+*/
 // read our style dir and build an array of files
 $dhandle = opendir(EVENT_ESPRESSO_PLUGINFULLPATH . 'templates/css/');
 $files = array();
@@ -38,14 +41,14 @@ $files_color = array();
 	function espresso_style_is_selected($name) {
 	   global $org_options;
 	   $input_item = $name;
-			 $option_selections = array($org_options['selected_style'], $org_options['style_color']  );
+			 $option_selections = array(isset($org_options['selected_style']) && !empty($org_options['selected_style']) ? $org_options['selected_style'] : '', isset($org_options['style_color']) && !empty($org_options['style_color']) ? $org_options['style_color'] : ''  );
 	   if (!in_array( $input_item, $option_selections )  )
 	   return false;
 	   else
 	   echo  'selected="selected"';
 	   return; 
 	}
-		('N' == $org_options['enable_default_style'] || file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "templates/event_espresso_style.css"))? $disabled = 'disabled="disabled"' : $disabled = '';
+		($org_options['enable_default_style'] == 'N' || file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "templates/event_espresso_style.css"))? $disabled = 'disabled="disabled"' : $disabled = '';
 		(!empty($disabled))? $styled = 'style="color: #ccc;"' : $styled = '';
 ?>
 <?php // var_dump($org_options['selected_style']); 

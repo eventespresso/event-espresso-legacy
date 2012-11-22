@@ -2,12 +2,12 @@
 # This file is distributed under the same license as the Event Espresso package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2012-09-06 17:07-0700\n"
+"PO-Revision-Date: 2012-10-23 16:16-0700\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/0.1\n"
+"X-Generator: Poedit 1.5.3\n"
 "Project-Id-Version: Event Espresso\n"
 "POT-Creation-Date: \n"
 "Last-Translator: Chris Reynolds <chris@jazzsequence.com>\n"
@@ -1208,7 +1208,7 @@ msgstr ""
 
 #: ../templates/widget.php:16
 msgid "Event Espresso Upcoming Events Widget"
-msgstr "Event Espresso Események Widget"
+msgstr "Event Espresso Soron következő események widget"
 
 #: ../gateways/firstdata/settings.php:152
 msgid ""
@@ -1324,7 +1324,7 @@ msgstr "Add New Event Ár"
 #: ../../../event-espresso/trunk/includes/functions/email.php:761
 #: ../../../event-espresso/trunk/includes/functions/email.php:776
 msgid "Attendee name: %1$s %2$s"
-msgstr "Résztvevő neve: %1$s %2$s"
+msgstr "Résztvevő neve: %2$s %1$s"
 
 #: ../../../event-espresso/trunk/includes/functions/email.php:759
 #: ../../../event-espresso/trunk/includes/functions/email.php:774
@@ -1357,7 +1357,7 @@ msgstr[1] "résztvevő"
 
 #: ../templates/registration_page_display.php:197
 msgid "Seating Chart Image"
-msgstr "Seating Chart fényképek"
+msgstr "Ülések"
 
 #: ../includes/form-builder/groups/edit_group.php:36
 #: ../includes/form-builder/questions/edit_question.php:31
@@ -2308,7 +2308,7 @@ msgstr ""
 
 #: ../templates/event_list.php:200
 msgid "No events available..."
-msgstr "Nincs rendezvény ..."
+msgstr "Nincsenek események."
 
 #: ../../../event-espresso/trunk/gateways/2checkout/EE_2checkout.class.php:72
 msgid "2checkout ID"
@@ -2325,7 +2325,7 @@ msgstr "Kérjük, adja meg Authorize.net bejelentkezési azonosítóját"
 
 #: ../../../event-espresso/trunk/gateways/mwarrior/settings.php:191
 msgid "Bypass Payment Overview Page? "
-msgstr "Bypass Fizetés Áttekintés Page? "
+msgstr "Kihagyja a Fizetés áttekintése oldalt?"
 
 #: ../../../event-espresso/trunk/gateways/eway/settings.php:102
 msgid "eway ID"
@@ -2334,7 +2334,7 @@ msgstr "eWay ID"
 #: ../../../event-espresso/trunk/gateways/realauth/settings.php:205
 #: ../../../event-espresso/trunk/gateways/worldpay/settings.php:215
 msgid "Bypass Payment Overview Page?"
-msgstr "Bypass Fizetés Áttekintés Page?"
+msgstr "Kihagyja a Fizetés áttekintése oldalt?"
 
 #: ../../../event-espresso/trunk/gateways/eway/settings.php:173
 msgid "Use the Debugging Feature and the eway Sandbox?"
@@ -3057,8 +3057,8 @@ msgid ""
 "No payment required.<br/>Please click \"Confirm Registration\" below to "
 "complete the registration process."
 msgstr ""
-"Nem fizetés szükséges. <br/> Kérjük kattintson a  \"Confirm regisztráció \" "
-"lenti töltse ki a regisztrációs folyamatot."
+"Ingyenes résztvevő. <br/> Kérjük kattintson az alábbi  \"Regisztráció "
+"megerősítése \" feliratra a regisztráció befejezéséhez."
 
 #: ../../../event-espresso/trunk/includes/classes/EE_Single_Page_Checkout.class.php:837
 msgid "Attendee information submitted successfully."
@@ -3292,7 +3292,7 @@ msgstr "Számlázható regisztrációk:"
 
 #: ../../../event-espresso/trunk/templates/reg_page_checkout/registration_page_step_2.template.php:75
 msgid "Total Amount Due: "
-msgstr "Fizetendő teljes összeg: "
+msgstr "Fizetendő összeg összesen:"
 
 #: ../../../event-espresso/trunk/templates/reg_page_checkout/registration_page_step_2.template.php:95
 #: ../../../event-espresso/trunk/templates/reg_page_checkout/registration_page_step_2.template.php:103
@@ -3362,13 +3362,13 @@ msgstr "Összesen"
 #: ../../../event-espresso/trunk/templates/event_list.php:277
 #: ../../../event-espresso/trunk/templates/widget.php:119
 msgid "Regsitration is Closed"
-msgstr "Regsitration Lezárt"
+msgstr "A regisztráció lezárva"
 
 #: ../templates/event_list_display.php:70
 #: ../templates/registration_page_display.php:171
 #: ../../../espresso-seating/trunk/functions/actions.php:56
 msgid "Price: "
-msgstr "Ár  "
+msgstr "Ár:"
 
 #: ../templates/event_list_display.php:75
 #: ../../../event-espresso/trunk/gateways/Invoice/lib/templates/index.php:52
@@ -3390,7 +3390,7 @@ msgstr "Cím:"
 #: ../templates/event_list_display.php:109
 #: ../../../event-espresso/trunk/templates/event_list_display.php:65
 msgid "Available Spaces:"
-msgstr "Elérhető Spaces:"
+msgstr "Rendelkezésre álló helyek:"
 
 #: ../templates/event_list_display.php:104
 #: ../templates/multi_registration_page.php:161
@@ -3403,7 +3403,7 @@ msgstr "Feliratkozás a várólistára"
 
 #: ../templates/event_list_display.php:126
 msgid "Add to Cart"
-msgstr "A kosárban"
+msgstr "Hozzáadás a kosárhoz"
 
 #: ../templates/event_list_display.php:147
 msgid "View Details"
@@ -3414,19 +3414,20 @@ msgstr "Részletek megtekintése"
 #: ../../../event-espresso/trunk/templates/registration_page.php:325
 msgid ""
 "We are sorry but this event has reached the maximum number of attendees!"
-msgstr "Sajnáljuk, de ez az esemény elérte a maximális résztvevők száma!"
+msgstr "Sajnáljuk, de az esemény teltházas!"
 
 #: ../templates/multi_registration_page.php:155
 #: ../templates/registration_page.php:276
 #: ../../../event-espresso/trunk/templates/registration_page.php:326
 msgid "Please check back in the event someone cancels."
-msgstr "Kérjük, látogasson vissza abban az esetben valaki törli."
+msgstr ""
+"Kérjük, térjen vissza az oldalra, hogy valaki lemondta-e az részvételt."
 
 #: ../templates/multi_registration_page.php:156
 #: ../templates/registration_page.php:277
 #: ../../../event-espresso/trunk/templates/registration_page.php:327
 msgid "Current Number of Attendees:"
-msgstr "Jelenlegi száma Résztvevők:"
+msgstr "A résztvevők száma jelenleg:"
 
 #: ../templates/registration_page.php:302
 #: ../../../event-espresso/trunk/templates/registration_page.php:396
@@ -3493,7 +3494,7 @@ msgstr "Ön képes lesz arra, hogy regisztrálni kiindulási "
 #: ../../../event-espresso/trunk/includes/shortcodes.php:416
 #: ../../../event-espresso/trunk/templates/registration_page_display.php:139
 msgid "Start Date: "
-msgstr "Kezdés dátuma: "
+msgstr "Kezdő dátum:"
 
 #: ../gateways/invoice/template.php:117
 #: ../templates/registration_page_display.php:114
@@ -3507,13 +3508,13 @@ msgstr "Dátum: "
 #: ../../../event-espresso/trunk/includes/shortcodes.php:430
 #: ../../../event-espresso/trunk/templates/registration_page_display.php:152
 msgid "End Date: "
-msgstr "A befejezés időpontja:"
+msgstr "Befejező dátum:"
 
 #: ../templates/registration_page_display.php:224
 #: ../../../event-espresso/trunk/includes/shortcodes.php:478
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/Registrations_Admin_Page.core.php:261
 msgid "Registration Details"
-msgstr "Regisztráció Részletek"
+msgstr "A regisztráció részletei"
 
 #: ../includes/admin-reports/add_new_attendee.php:144
 #: ../includes/functions/main.php:136
@@ -3552,15 +3553,15 @@ msgstr "Kérjük, válassza ki a fizetési módot:"
 
 #: ../gateways/gateway_display.php:5
 msgid "On-site Payment Processing"
-msgstr "Helyszíni fizetés"
+msgstr "On-site fizetés"
 
 #: ../gateways/gateway_display.php:14
 msgid "Off-site Payments"
-msgstr "Off-site kifizetések"
+msgstr "Off-site fizetések"
 
 #: ../gateways/gateway_display.php:25
 msgid "Off-line Payments"
-msgstr "Off-line kifizetések"
+msgstr "Offline fizetések"
 
 #: ../gateways/gateway_display.php:37
 #: ../gateways/bank/bank_payment_vars.php:14
@@ -3576,20 +3577,20 @@ msgid ""
 "If using one of the offline payment options, please make note of the "
 "information below, then"
 msgstr ""
-"Használata esetén az egyik az offline fizetési lehetőségeket, kérjük, hogy "
-"vegye figyelembe az alábbi információkat, majd"
+"Ha Ön valamilyen offline fizetési módot választott, kérjük, hogy olvassa el "
+"az alábbi információkat, majd"
 
 #: ../gateways/gateway_display.php:39
 #: ../gateways/bank/bank_payment_vars.php:16
 #: ../gateways/check/check_payment_vars.php:16
 msgid "Finalize your registration"
-msgstr "Lezárás regisztráció"
+msgstr "Véglegesítse a regsiztrációját"
 
 #: ../gateways/gateway_display.php:39
 #: ../gateways/bank/bank_payment_vars.php:16
 #: ../gateways/check/check_payment_vars.php:16
 msgid "click here to finalize your registration"
-msgstr "kattintson ide, hogy véglegesítse a regisztráció"
+msgstr "kattintson ide, hogy véglegesítse a regisztrációját"
 
 #: ../gateways/PaymentGateway.php:207 ../gateways/wepay/Wepay.php:270
 #: ../../../event-espresso/trunk/gateways/PaymentGateway.php:222
@@ -3702,9 +3703,7 @@ msgstr ""
 #: ../../../espresso-groupons/trunk/event_management_functions.php:6
 #: ../../../espresso-groupons/trunk/event_management_functions.php:13
 msgid "Yes"
-msgstr ""
-"Igen - Részletezze, és állítását támassza alá bizonyítékokkal, pl. születés "
-"bizonyítvány / házassági okirat."
+msgstr "Igen"
 
 #: ../gateways/2checkout/settings.php:201 ../gateways/authnet/settings.php:153
 #: ../gateways/eway/settings.php:158 ../gateways/exact/settings.php:148
@@ -3913,7 +3912,7 @@ msgstr "Dán korona"
 #: ../../../event-espresso/trunk/gateways/realauth/settings.php:154
 #: ../../../event-espresso/trunk/gateways/worldpay/settings.php:162
 msgid "Euros (&#8364;)"
-msgstr "Euró (€)"
+msgstr "euró (&#8364;)"
 
 #: ../gateways/2checkout/settings.php:133 ../gateways/paypal/settings.php:130
 #: ../gateways/paypal_pro/settings.php:150
@@ -4170,7 +4169,7 @@ msgstr "Debug mód bekapcsolt állapotban van"
 #: ../../../event-espresso/trunk/gateways/stripe/payment.php:6
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/Transactions_Admin_Page.core.php:269
 msgid "Billing Information"
-msgstr "Számlázási adatok"
+msgstr "Számlázási információ"
 
 #: ../gateways/aim/aim_vars.php:27 ../gateways/firstdata/firstdata_vars.php:25
 #: ../gateways/paypal_pro/paypal_pro_vars.php:28
@@ -4204,7 +4203,7 @@ msgstr "Keresztnév"
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/Registrations_Admin_Page.core.php:504
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/Transactions_Admin_Page.core.php:557
 msgid "Last Name"
-msgstr "Vezetéknév "
+msgstr "Vezetéknév"
 
 #: ../gateways/aim/aim_vars.php:35 ../gateways/firstdata/firstdata_vars.php:33
 #: ../gateways/paypal_pro/paypal_pro_vars.php:36
@@ -4223,7 +4222,7 @@ msgstr "Vezetéknév "
 #: ../../../event-espresso/trunk/includes/classes/EE_Single_Page_Checkout.class.php:943
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/Transactions_List_Table.class.php:70
 msgid "Email Address"
-msgstr "Email cím "
+msgstr "Email cím"
 
 #: ../gateways/aim/aim_vars.php:39 ../gateways/firstdata/firstdata_vars.php:37
 #: ../gateways/paypal_pro/paypal_pro_vars.php:40
@@ -4246,7 +4245,7 @@ msgstr "Email cím "
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/Transactions_Admin_Page.core.php:563
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/templates/txn_admin_details_main_meta_box_attendees.template.php:13
 msgid "Address"
-msgstr "Cím "
+msgstr "Cím"
 
 #: ../gateways/aim/aim_vars.php:43 ../gateways/firstdata/firstdata_vars.php:41
 #: ../gateways/paypal_pro/paypal_pro_vars.php:44
@@ -4271,7 +4270,7 @@ msgstr "Cím "
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/Registrations_Admin_Page.core.php:513
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/Transactions_Admin_Page.core.php:566
 msgid "City"
-msgstr "Város "
+msgstr "Város"
 
 #: ../gateways/aim/aim_vars.php:47 ../gateways/firstdata/firstdata_vars.php:45
 #: ../gateways/paypal_pro/paypal_pro_vars.php:48
@@ -4292,7 +4291,7 @@ msgstr "Város "
 #: ../../../event-espresso/trunk/includes/core/admin/registrations/Registrations_Admin_Page.core.php:516
 #: ../../../event-espresso/trunk/includes/core/admin/transactions/Transactions_Admin_Page.core.php:569
 msgid "State"
-msgstr "Megye:"
+msgstr "Állam"
 
 #: ../gateways/aim/aim_vars.php:51 ../gateways/firstdata/firstdata_vars.php:49
 #: ../gateways/paypal_pro/paypal_pro_vars.php:52
@@ -4309,7 +4308,7 @@ msgstr "Megye:"
 #: ../../../event-espresso/trunk/includes/admin-files/venue-management/edit_venue.php:110
 #: ../../../event-espresso/trunk/includes/classes/EE_Export.class.php:595
 msgid "Zip"
-msgstr "Iranyítószám"
+msgstr "Irányítószám"
 
 #: ../gateways/aim/aim_vars.php:54 ../gateways/firstdata/firstdata_vars.php:52
 #: ../gateways/paypal_pro/paypal_pro_vars.php:55
@@ -4321,7 +4320,7 @@ msgstr "Iranyítószám"
 #: ../../../event-espresso/trunk/gateways/paytrace/payment.php:38
 #: ../../../event-espresso/trunk/gateways/stripe/payment.php:37
 msgid "Credit Card Information"
-msgstr "Hitelkártya információk"
+msgstr "Hitelkártya szám"
 
 #: ../gateways/aim/aim_vars.php:56 ../gateways/firstdata/firstdata_vars.php:66
 #: ../gateways/paypal_pro/paypal_pro_vars.php:69
@@ -4333,11 +4332,11 @@ msgstr "Hitelkártya információk"
 #: ../../../event-espresso/trunk/gateways/paytrace/payment.php:40
 #: ../../../event-espresso/trunk/gateways/stripe/payment.php:39
 msgid "Card Number"
-msgstr "Kártya száma "
+msgstr "Kártyaszám"
 
 #: ../gateways/aim/aim_vars.php:60
 msgid "Exp. Date"
-msgstr "Lejárat dátuma"
+msgstr "Lejárati dátum"
 
 #: ../gateways/aim/aim_vars.php:64
 #: ../../../event-espresso/trunk/gateways/Aim/EE_Aim.class.php:361
@@ -4356,7 +4355,7 @@ msgstr "CCV kód"
 #: ../../../event-espresso/trunk/gateways/paytrace/payment.php:71
 #: ../../../event-espresso/trunk/gateways/stripe/payment.php:78
 msgid "Complete Purchase"
-msgstr "Teljes Vásárlás"
+msgstr "Befejezett vásárlás"
 
 #: ../gateways/aim/aim_ipn.php:72 ../gateways/authnet/authnet_ipn.php:57
 #: ../gateways/exact/exact_ipn.php:59 ../gateways/mwarrior/mwarrior_ipn.php:33
@@ -4780,7 +4779,7 @@ msgstr ""
 #: ../gateways/bank/bank_payment_vars.php:22
 #: ../../../event-espresso/trunk/gateways/bank/payment.php:11
 msgid "Name on Account:"
-msgstr "Név a Számla:"
+msgstr "Számlázási név:"
 
 #: ../gateways/bank/bank_payment_vars.php:24
 #: ../../../event-espresso/trunk/gateways/bank/payment.php:13
@@ -4790,7 +4789,7 @@ msgstr "Számlaszám:"
 #: ../gateways/bank/bank_payment_vars.php:26
 #: ../../../event-espresso/trunk/gateways/bank/payment.php:15
 msgid "Financial Institution:"
-msgstr "Pénzügyi Intézmény:"
+msgstr "Számlavezető bank:"
 
 #: ../../../event-espresso/trunk/gateways/bank/settings.php:21
 msgid "Electronic Funds Transfer Settings Updated!"
@@ -4803,7 +4802,7 @@ msgstr "Elektronikus átutalás beállítások mentése nem sikerült! "
 #: ../gateways/bank/settings.php:21
 #: ../../../event-espresso/trunk/gateways/bank/settings.php:30
 msgid "Electronic Funds Transfers"
-msgstr "Elektronikus alapok átcsoportosítása"
+msgstr "Banki átutalások"
 
 #: ../gateways/bank/settings.php:22
 #: ../../../event-espresso/trunk/gateways/bank/settings.php:31
@@ -6577,7 +6576,7 @@ msgstr "Szűrők"
 #: ../../../event-espresso/trunk/includes/functions/wp_hooks.php:139
 #: ../../../event-espresso/trunk/includes/process-registration/thank_you_page.php:53
 msgid "Events"
-msgstr "Események "
+msgstr "Események"
 
 #: ../includes/admin-files/admin_reports_filters.php:12
 #: ../../../event-espresso/trunk/includes/admin-files/admin_reports_filters.php:21
@@ -9945,7 +9944,7 @@ msgstr "Szerkesztése Fizetés"
 #: ../../../event-espresso/trunk/includes/admin-reports/edit_attendee_record.php:586
 #: ../../../event-espresso/trunk/templates/payment_overview.php:8
 msgid "Payment Overview"
-msgstr "Fizetési áttekintése"
+msgstr "Fizetés áttekintése"
 
 #: ../includes/admin-reports/edit_attendee_record.php:449
 #: ../includes/admin-reports/enter_attendee_payments.php:304
@@ -12201,7 +12200,7 @@ msgstr "Grafikus Jelentések"
 #: ../gateways/payment_gateways.php:16
 #: ../../../event-espresso/trunk/includes/admin_screens/payment_gateways.php:40
 msgid "Manage Payment Gateways"
-msgstr "Kezelése Fizetési átjárók"
+msgstr "Fizetési gateway-ek kezelése"
 
 #: ../gateways/payment_gateways.php:51
 #: ../../../event-espresso/trunk/includes/admin_screens/payment_gateways.php:31
@@ -13784,15 +13783,15 @@ msgstr "Regisztrálhat legfeljebb %d attendees erre az eseményre."
 #: ../../../event-espresso/trunk/includes/functions/pricing.php:110
 #: ../../../event-espresso/trunk/includes/functions/pricing.php:314
 msgid "Free Event"
-msgstr "Ingyenes rendezvény"
+msgstr "Ingyenes esemény"
 
 #: ../includes/functions/cart.php:959 ../includes/functions/pricing.php:252
 msgid "free event"
-msgstr "ingyenes rendezvény"
+msgstr "ingyenes esemény"
 
 #: ../templates/multi_registration_page_display.php:11
 msgid " attendees"
-msgstr " résztvevők"
+msgstr "résztvevők"
 
 #: ../includes/functions/email.php:284
 #: ../../../event-espresso/trunk/includes/functions/email.php:396
@@ -14051,19 +14050,19 @@ msgstr "itt"
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:135
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:144
 msgid "hours"
-msgstr "órák"
+msgstr "óra"
 
 #: ../includes/functions/time_date.php:41
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:43
 msgid "today"
-msgstr "Mai nap"
+msgstr "ma"
 
 #: ../includes/functions/time_date.php:41
 #: ../includes/functions/time_date.php:135
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:43
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:137
 msgid "minutes"
-msgstr "percek"
+msgstr "perc"
 
 #: ../includes/functions/time_date.php:45
 #: ../includes/functions/time_date.php:91
@@ -14103,17 +14102,17 @@ msgstr "ezelőtt"
 #: ../includes/functions/time_date.php:129
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:131
 msgid "allday"
-msgstr "allday"
+msgstr "egész nap"
 
 #: ../includes/functions/time_date.php:131
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:133
 msgid "duration"
-msgstr "Időtartam"
+msgstr "időtartam"
 
 #: ../includes/functions/time_date.php:201
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:223
 msgid "End Time: "
-msgstr "befejezés ideje "
+msgstr "Befejezés időpontja:"
 
 #: ../includes/functions/time_date.php:201
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:223
@@ -14125,17 +14124,17 @@ msgstr " hogy "
 #: ../includes/functions/time_date.php:207
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:229
 msgid "Choose a Time: "
-msgstr "Válassza a Óra: "
+msgstr "Válasszon egy időpontot"
 
 #: ../includes/functions/time_date.php:219
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:241
 msgid "available spaces"
-msgstr "rendelkezésre álló terek"
+msgstr "rendelkezésre álló helyek"
 
 #: ../includes/functions/time_date.php:317
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:349
 msgid "Time:  "
-msgstr "Idő   "
+msgstr "Idő:"
 
 #: ../includes/functions/time_date.php:499
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:530
@@ -14153,7 +14152,7 @@ msgstr ""
 #: ../includes/functions/time_date.php:504
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:535
 msgid "Local time is <code>%1$s</code>"
-msgstr "Helyi idő <code> %1$s </ code>"
+msgstr "A helyi idő <code>%1$s</code>"
 
 #: ../includes/functions/time_date.php:515
 #: ../../../event-espresso/trunk/includes/functions/time_date.php:546
@@ -14232,7 +14231,7 @@ msgstr "érintett sorok: "
 #: ../includes/process-registration/add_attendees_to_db.php:158
 #: ../../../event-espresso/trunk/includes/process-registration/add_attendees_to_db.php:106
 msgid "Added by Admin"
-msgstr "Admin által hozzáadva"
+msgstr "Az adminsiztrátor által hozzáadva"
 
 #: ../includes/process-registration/add_attendees_to_db.php:172
 #: ../../../event-espresso/trunk/includes/process-registration/add_attendees_to_db.php:119
@@ -14240,13 +14239,13 @@ msgid ""
 "Sorry, you did not enter the correct anti-spam phrase. Please click your "
 "browser's back button and try again."
 msgstr ""
-"Sajnáljuk, de nem adja meg a helyes anti-spam kifejezést. Kérjük, kattintson "
-"a böngésző Vissza gombját, és próbálkozzon újra."
+"Sajnáljuk, de nem a megfelelő spam ellenes kifejezést írta be. Kérjük, "
+"menjen vissza aaz előző oldalra és próbálkozzon újból!"
 
 #: ../includes/process-registration/add_attendees_to_db.php:620
 #: ../../../event-espresso/trunk/includes/process-registration/add_attendees_to_db.php:519
 msgid " events"
-msgstr " Események "
+msgstr "események"
 
 #: ../includes/functions/cart.php:561
 #: ../../../event-espresso/trunk/includes/process-registration/add_attendees_to_db.php:638
@@ -14257,7 +14256,7 @@ msgstr "Szerkesztés Cart"
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:169
 #: ../../../event-espresso/trunk/includes/process-registration/add_attendees_to_db.php:639
 msgid " or "
-msgstr " vagy "
+msgstr "vagy"
 
 #: ../../../event-espresso/trunk/includes/process-registration/add_attendees_to_db.php:640
 msgid "Edit Registrant Information"
@@ -14268,7 +14267,7 @@ msgstr "Szerkesztése Bejegyzést Információs"
 #: ../../../event-espresso/trunk/includes/process-registration/add_attendees_to_db.php:643
 #: ../../../event-espresso/trunk/templates/payment_page.php:34
 msgid "Your registration is not complete until payment is received."
-msgstr "A regisztráció nem teljes, amíg a kifizetés nem érkezik."
+msgstr "A regisztrációt követően kérjük, rendezze a részvételi díjat!"
 
 #: ../includes/process-registration/add_attendees_to_db.php:738
 #: ../templates/payment_page.php:33 ../templates/pending_approval.php:6
@@ -14276,7 +14275,7 @@ msgstr "A regisztráció nem teljes, amíg a kifizetés nem érkezik."
 #: ../../../event-espresso/trunk/templates/payment_page.php:38
 #: ../../../event-espresso/trunk/templates/pending_approval.php:6
 msgid "Amount due: "
-msgstr "Fizetendő összeg "
+msgstr "Fizetendő összeg:"
 
 #: ../includes/process-registration/add_attendees_to_db.php:741
 #: ../includes/process-registration/add_attendees_to_db.php:758
@@ -14288,29 +14287,30 @@ msgstr "Fizetendő összeg "
 msgid ""
 "A confirmation email has been sent with additional details of your "
 "registration."
-msgstr "A visszaigazoló e-mailt küldtünk a további részleteket a regisztráció."
+msgstr ""
+"Egy visszaigazoló emailt küldtünk Önnek a regisztráció további részleteiről."
 
 #: ../includes/process-registration/add_attendees_to_db.php:756
 #: ../templates/payment_page.php:12
 #: ../../../event-espresso/trunk/includes/process-registration/add_attendees_to_db.php:661
 #: ../../../event-espresso/trunk/templates/payment_page.php:16
 msgid "Thank you! Your registration is confirmed for"
-msgstr "Köszönöm! A regisztráció megerősítést"
+msgstr "Köszönjük! A regisztrációja megerősítve:"
 
 #: ../includes/process-registration/attendee_edit_record.php:233
 #: ../../../event-espresso/trunk/includes/process-registration/attendee_edit_record.php:226
 msgid "Edit Your"
-msgstr "Szerkesztése"
+msgstr "Szerkessze a"
 
 #: ../includes/process-registration/attendee_edit_record.php:234
 #: ../../../event-espresso/trunk/includes/process-registration/attendee_edit_record.php:227
 msgid "Registration"
-msgstr "Bejegyzés"
+msgstr "regisztrációját"
 
 #: ../includes/process-registration/attendee_edit_record.php:236
 #: ../../../event-espresso/trunk/includes/process-registration/attendee_edit_record.php:229
 msgid "Event:"
-msgstr "Események "
+msgstr "Esemény:"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/organization_config_help.php:6
 msgid "Displayed on all emails and invoices."
@@ -14555,7 +14555,7 @@ msgstr "Ez az esemény már elmúlt."
 #: ../templates/attendee_list.php:62
 #: ../../../event-espresso/trunk/templates/attendee_list.php:62
 msgid "Attendee Listing For: "
-msgstr "Résztvevők Listing egység: "
+msgstr "A résztvevők listája ettől:"
 
 #: ../templates/confirmation_display.php:12
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:16
@@ -14570,7 +14570,7 @@ msgstr "Esemény neve:"
 #: ../templates/confirmation_display.php:43
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:29
 msgid "Price per attendee:"
-msgstr "Ár résztvevők:"
+msgstr "Ár résztvevőnként:"
 
 #: ../templates/confirmation_display.php:75
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:35
@@ -14580,28 +14580,28 @@ msgstr "Résztvevő neve:"
 #: ../templates/confirmation_display.php:115
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:75
 msgid "Total Price:"
-msgstr "Teljes ár "
+msgstr "Teljes ár:"
 
 #: ../includes/process-registration/payment_page.php:159
 #: ../includes/process-registration/payment_page.php:161
 #: ../includes/process-registration/payment_page.php:172
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:79
 msgid "Discount of "
-msgstr "Kedvezmény "
+msgstr "Kedvezmény"
 
 #: ../includes/process-registration/payment_page.php:159
 #: ../includes/process-registration/payment_page.php:161
 #: ../includes/process-registration/payment_page.php:172
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:79
 msgid " applied"
-msgstr " alkalmazott"
+msgstr "alkalmazva"
 
 #: ../templates/confirmation_display.php:123
 #: ../templates/confirmation_display.php:144
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:87
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:107
 msgid "Confirm Registration"
-msgstr "Még Regisztráció"
+msgstr "Regisztráció megerősítése"
 
 #: ../templates/confirmation_display.php:128
 #: ../../../event-espresso/trunk/templates/confirmation_display.php:91
@@ -14613,12 +14613,12 @@ msgstr "További információ:"
 #: ../../../event-espresso/trunk/templates/event_post.php:286
 #: ../../../event-espresso/trunk/templates/event_post.php:291
 msgid "Register"
-msgstr "Nyilvántartásban"
+msgstr "Regisztráció"
 
 #: ../templates/event_post.php:276
 #: ../../../event-espresso/trunk/templates/event_post.php:286
 msgid "View Map"
-msgstr "Térkép megtekintése "
+msgstr "Térkép megtekintése"
 
 #: ../../../event-espresso/trunk/templates/init.php:5
 msgid ""
@@ -14629,21 +14629,21 @@ msgstr ""
 
 #: ../templates/multi_registration_page.php:206
 msgid "<h3>This event has expired or is no longer available.</h3>"
-msgstr "<h3> Ez az esemény már lejárt, vagy már nem érhető el. </ h3>"
+msgstr "<h3>Ez egy lejárt esemény, amely már nem elérhető.</h3>"
 
 #: ../templates/multi_registration_page_display.php:17
 msgid "Price Type:"
-msgstr "Ár Típus:"
+msgstr "Árkategória:"
 
 #: ../templates/multi_registration_page_display.php:77
 #: ../templates/multi_registration_page_display.php:155
 msgid "Attendee "
-msgstr "Résztvevő "
+msgstr "Résztvevő"
 
 #: ../templates/payment_overview.php:8
 #: ../../../event-espresso/trunk/templates/payment_overview.php:12
 msgid "Class/Event:"
-msgstr "Osztály / Esemény:"
+msgstr "Esemény:"
 
 #: ../../../event-espresso/trunk/templates/payment_overview.php:19
 msgid "Registration  Details:"
@@ -14652,74 +14652,73 @@ msgstr "Regisztráció Részletek:"
 #: ../templates/payment_overview.php:12
 #: ../../../event-espresso/trunk/templates/payment_overview.php:23
 msgid "Primary Registrant:"
-msgstr "Elsődleges regisztráló:"
+msgstr "Elsődleges regisztrált:"
 
 #: ../templates/payment_overview.php:16
 #: ../../../event-espresso/trunk/templates/payment_overview.php:26
 msgid "Payment Type:"
-msgstr "Fizetés típusa:"
+msgstr "Fizetés módja:"
 
 #: ../templates/payment_overview.php:16
 #: ../../../event-espresso/trunk/templates/payment_overview.php:26
 msgid "Payment Date:"
-msgstr "Kifizetés dátuma:"
+msgstr "Fizetés időpontja:"
 
 #: ../templates/payment_overview.php:19
 #: ../../../event-espresso/trunk/templates/payment_overview.php:28
 msgid "Amount Paid/Owed:"
-msgstr "Kifizetett összeg / fizetendő:"
+msgstr "Fizetendő összeg:"
 
 #: ../templates/payment_overview.php:32
 #: ../../../event-espresso/trunk/templates/payment_overview.php:38
 msgid "Registration ID:"
-msgstr "Regisztráció ID:"
+msgstr "Regisztrációs azonosító:"
 
 #: ../templates/payment_page.php:16 ../templates/payment_page.php:36
 #: ../../../event-espresso/trunk/templates/payment_page.php:22
 #: ../../../event-espresso/trunk/templates/payment_page.php:41
 msgid "Your Registration ID: "
-msgstr "Ön Regisztráció azonosítója: "
+msgstr "Az Ön regisztrációs azonosítója:"
 
 #: ../templates/pending_approval.php:4
 #: ../../../event-espresso/trunk/templates/pending_approval.php:4
 msgid "Your registration is not complete until admin approves."
-msgstr "A regisztráció nem teljes, amíg admin jóváhagyja."
+msgstr "A regisztráció nem teljes, amíg az adminisztrátor vissza nem jelzett."
 
 #: ../templates/pending_approval.php:9
 #: ../../../event-espresso/trunk/templates/pending_approval.php:9
 msgid "Your Registration ID:"
-msgstr "Ön Regisztráció azonosítója:"
+msgstr "Az Ön regisztrációs azonosítója:"
 
 #: ../templates/return_payment.php:21
 #: ../../../event-espresso/trunk/templates/return_payment.php:7
 msgid "Pending Payment"
-msgstr "Függőben Fizetés"
+msgstr "Függőben lévő fizetés"
 
 #: ../templates/return_payment.php:41
 #: ../../../event-espresso/trunk/templates/return_payment.php:16
 msgid ""
 "Sorry, there are not enough spaces available to complete your registration."
-msgstr ""
-"Sajnáljuk, de nincs elég hely áll rendelkezésre, hogy a teljes regisztrációt."
+msgstr "Sajnáljuk, de nincs elég hely a regisztrációja befejezéséhez."
 
 #: ../templates/return_payment.php:42
 #: ../../../event-espresso/trunk/templates/return_payment.php:17
 msgid "Quantity in your Party:"
-msgstr "Mennyiség a fél:"
+msgstr "Az Önnel együtt érkezők száma:"
 
 #: ../templates/return_payment.php:43
 #: ../../../event-espresso/trunk/templates/return_payment.php:18
 msgid "Spaces Available:"
-msgstr "Spaces Elérhető:"
+msgstr "Rendelkezésre álló helyek:"
 
 #: ../templates/shopping_cart.php:103
 msgid "Refresh Total"
-msgstr "Frissítés összesen"
+msgstr "Összes frissítése"
 
 #: ../templates/widget.php:10
 #: ../../../event-espresso/trunk/templates/widget.php:8
 msgid "A widget to display your upcoming events."
-msgstr "A widget megjelenítéséhez a közelgő eseményekről."
+msgstr "Egy widget a soron következő események mutatására."
 
 #: ../../../event-espresso/trunk/templates/widget.php:14
 msgid "Event Espresso Widget"
@@ -14732,17 +14731,17 @@ msgstr "hamis"
 #: ../templates/widget.php:194
 #: ../../../event-espresso/trunk/templates/widget.php:203
 msgid "Event Category:"
-msgstr "Esemény kategóriája:"
+msgstr "Esemény kategória:"
 
 #: ../templates/widget.php:199
 #: ../../../event-espresso/trunk/templates/widget.php:208
 msgid "Limit:"
-msgstr "Korlátozások"
+msgstr "Korlát:"
 
 #: ../templates/widget.php:203
 #: ../../../event-espresso/trunk/templates/widget.php:212
 msgid "Optional Settings:"
-msgstr "Választható beállítások:"
+msgstr "Opcionális beállítások:"
 
 #: ../templates/widget.php:204
 #: ../../../event-espresso/trunk/templates/widget.php:213
@@ -14766,7 +14765,7 @@ msgstr "Megjelenítés Ismétlődő események?"
 #: ../class/pue/pue-client.php:382
 #: ../../../event-espresso/trunk/tpc/pue/pue-client.php:318
 msgid "Dismiss"
-msgstr "Elvet"
+msgstr "Kihagyás"
 
 #: ../gateways/payment_gateways.php:65
 #: ../../../event-espresso/trunk/includes/admin-files/gateway_developer.php:11
@@ -14836,7 +14835,7 @@ msgstr "Török líra"
 #: ../gateways/2checkout/settings.php:184
 #: ../gateways/realauth/settings.php:113
 msgid "U.S. Dollar"
-msgstr "Amerikai dollár"
+msgstr "amerikai dollár"
 
 #: ../gateways/2checkout/settings.php:187
 msgid "United Arab Emirates Dirham "
@@ -14865,19 +14864,19 @@ msgid ""
 "Since you are using the bank payment option, please make note of the "
 "information below, then"
 msgstr ""
-"Mivel Ön a bank fizetési mód, kérjük, hogy vegye figyelembe az alábbi "
-"információkat, majd"
+"Mivel Ön a bank fizetési módot választotta, kérjük, hogy olvassa el az "
+"alábbi információkat, majd"
 
 #: ../gateways/bank/settings.php:16
 msgid "Electronic Funds Transfer settings saved."
-msgstr "Elektronikus átutalás beállítások mentése megtörtént."
+msgstr "Banki átutalási beállítások elmentve."
 
 #: ../gateways/check/check_payment_vars.php:15
 msgid ""
 "Since you are using the check payment option, please make note of the "
 "information below, then"
 msgstr ""
-"Mivel Ön használja a csekket fizetési mód, kérjük, hogy vegye figyelembe az "
+"Mivel Ön a csekkes fizetési módot választotta, kérjük, hogy olvassa el az "
 "alábbi információkat, majd"
 
 #: ../gateways/check/settings.php:14
@@ -15896,7 +15895,7 @@ msgstr "További Résztvevő"
 
 #: ../includes/functions/database_install.php:207
 msgid "Payment Received for [event_name]"
-msgstr "Fizetési Kapott a [event_name]"
+msgstr "Fizetés teljesítve erre az eseményre: [event_name]"
 
 #: ../includes/functions/database_install.php:208
 msgid ""
@@ -15940,20 +15939,20 @@ msgstr "Ez nem érvényes választás!"
 
 #: ../includes/functions/time_date.php:198
 msgid "Start Time:"
-msgstr "Kezdés"
+msgstr "Kezdés időpontja:"
 
 #: ../templates/confirmation_display.php:43
 msgid "Type/Price per attendee:"
-msgstr "Típus / Ár résztvevők:"
+msgstr "Típus / ár résztvevőnként:"
 
 #: ../templates/registration_page_display.php:191
 #: ../../../espresso-seating/trunk/functions/actions.php:13
 msgid "Please select a seat."
-msgstr "Kérjük, válasszon egy helyet."
+msgstr "Kérjük, válasszon helyet!"
 
 #: ../templates/shopping_cart.php:110
 msgid "Finish Registration"
-msgstr "Befejezés Regisztráció"
+msgstr "Regisztráció befejezése"
 
 #: ../templates/widget.php:205
 msgid "Show Waitlist Events?"

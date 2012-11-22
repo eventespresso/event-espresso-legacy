@@ -109,8 +109,8 @@ function replace_shortcodes($message, $data) {
 	//echo '<p>'.print_r($questions).'</p>';
 	if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->question != NULL) {
 		foreach ($questions as $q) {
-			$k = $q['question'];
-			$v = $q['answer'];
+			$k = stripslashes( $q['question'] );
+			$v = stripslashes( $q['answer'] );
 
 			//Output the question
 			array_push($SearchValues, "[" . 'question_' . $k . "]");
@@ -118,7 +118,7 @@ function replace_shortcodes($message, $data) {
 
 			//Output the answer
 			array_push($SearchValues, "[" . 'answer_' . $k . "]");
-			array_push($ReplaceValues, stripslashes_deep(rtrim($v, ",")) );
+			array_push($ReplaceValues, rtrim($v, ",") );
 		}
 	}
 	//Get the event meta
@@ -402,8 +402,7 @@ function espresso_prepare_admin_email($data) {
 	$admin_attendee_link = espresso_edit_attendee($data->attendee->registration_id, $data->attendee->id, $data->attendee->event_id, 'admin', $data->attendee->fname . ' ' . $data->attendee->lname);
 
 	//Group registration check
-	if ($data->attendee->quantity > 0 && !$data->multi_reg)
-		$primary_attendee = $data->primary_attendee == true ? "<p><strong>" . __('Primary Attendee', 'event_espresso') . "</strong></p>" : '';
+	$primary_attendee = $data->attendee->quantity > 0 && !$data->multi_reg && $data->primary_attendee == true ? "<p><strong>" . __('Primary Attendee', 'event_espresso') . "</strong></p>" : '';
 
 	//Build the email title
 	$admin_message = "<h3>" . __('Registration Summary:', 'event_espresso') . "</h3>";
@@ -594,29 +593,31 @@ if (!function_exists('event_espresso_send_invoice')) {
 if (!function_exists('event_espresso_send_payment_notification')) {
 
 	function event_espresso_send_payment_notification($atts) {
-		global $wpdb, $org_options;
+
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+
+		global $wpdb, $org_options;
 		//Extract the attendee_id and registration_id
 		extract($atts);
 		
 		$registration_id = is_array( $registration_id ) ? $registration_id[0] : $registration_id;
 		
-		if (empty($registration_id))
+		if ( empty( $registration_id ) && isset( $attendee_id )) {
 			$registration_id = espresso_registration_id($attendee_id);
-		if (empty($registration_id))
-			return __('No ID Supplied', 'event_espresso');
+		}
+			
+		if ( empty( $registration_id )) {
+			return __('No Registration ID was supplied', 'event_espresso');
+		}			
 
 		//Get the attendee  id or registration_id and create the sql statement
-		$sql = "SELECT a.* FROM " . EVENTS_ATTENDEE_TABLE . " a ";
-		$sql .= " WHERE a.registration_id = '" . $registration_id . "' ";
-		//$sql .= "  ORDER BY id LIMIT 1 ";
-
-		$attendees = $wpdb->get_results($sql);
+		$SQL = "SELECT a.* FROM " . EVENTS_ATTENDEE_TABLE . " a ";
+		$SQL .= " WHERE a.registration_id = %s ";
+		$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ));
 
 		if ($org_options['default_mail'] == 'Y') { 
 			foreach ($attendees as $attendee) {
-				$attendee_id = $attendee->id;
-				event_espresso_email_confirmations(array('attendee_id' => $attendee_id, 'send_admin_email' => 'false', 'send_attendee_email' => 'true', 'custom_data' => array('email_type' => 'payment', 'payment_subject' => $org_options['payment_subject'], 'payment_message' => $org_options['payment_message'])));
+				event_espresso_email_confirmations(array('attendee_id' => $attendee->id, 'send_admin_email' => 'false', 'send_attendee_email' => 'true', 'custom_data' => array('email_type' => 'payment', 'payment_subject' => $org_options['payment_subject'], 'payment_message' => $org_options['payment_message'])));
 			}
 		}
 

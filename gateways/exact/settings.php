@@ -18,10 +18,10 @@ function event_espresso_exact_payment_settings() {
 	}
 	$exact_settings = get_option('event_espresso_exact_settings');
 	if (empty($exact_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/exact/btn_cc_vmad.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/exact/btn_cc_vmad.gif";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/exact/exact-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/exact/exact-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/btn_cc_vmad.gif";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/exact-logo.png";
 		}
 		$exact_settings['exact_login_id'] = '';
 		$exact_settings['exact_transaction_key'] = '';

@@ -49,6 +49,23 @@ function espresso_process_aim($payment_data) {
 		$transaction->test_request = "true";
 	}
 
+	$sql = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id='" . $attendee_id . "'";
+	$session_id = $wpdb->get_var($sql);
+	$sql = "SELECT a.final_price, a.quantity, ed.event_name, a.price_option, a.fname, a.lname FROM " . EVENTS_ATTENDEE_TABLE . " a JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
+	$sql .= " WHERE attendee_session='" . $session_id . "' ORDER BY a.id ASC";
+	$items = $wpdb->get_results($sql);
+	foreach ($items as $key=>$item) {
+		$item_num=$key+1;
+		$transaction->addLineItem(
+				$item_num,
+				$item->event_name,
+				$item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname,
+				$item->quantity,
+				$item->final_price,
+				FALSE
+		);
+	}
+	
 	$payment_data['txn_type'] = 'authorize.net AIM';
 	$payment_data['payment_status'] = 'Incomplete';
 	$payment_data['txn_id'] = 0;
