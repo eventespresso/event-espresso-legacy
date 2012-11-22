@@ -58,7 +58,7 @@ if (!function_exists('espresso_ical_prepare_by_meta')) {
 	function espresso_ical_prepare_by_meta($meta, $title = '', $image = '', $link_only = FALSE) {
 		global $org_options, $wpdb;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-		if ($org_options['display_ical_download'] == 'N'){
+		if ( !empty($org_options['display_ical_download']) && $org_options['display_ical_download'] == 'N' || !isset($org_options['display_ical_download']) ){
 			return;
 		}
 		$contact = ($data->alt_email == '') ? $org_options['contact_email'] : $data->alt_email . ',' . $org_options['contact_email'];
