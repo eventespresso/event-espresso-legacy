@@ -157,14 +157,15 @@ function event_espresso_display_eway_rapid3_settings() {
 							</label>
 							<input name="eway_rapid3_use_sandbox" type="checkbox" value="1" <?php echo $eway_rapid3_settings['eway_rapid3_use_sandbox'] ? 'checked="checked"' : '' ?> />
 							<br />
-							<?php _e('(Make sure you enter the sandbox credentials above.)', 'event_espresso'); ?>
+							<?php _e('(Make sure you enter the sandbox credentials above. Also, sandbox mode only works for AUD, so ensure you have set your region to "Autralia")', 'event_espresso'); ?>
 						</li>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $eway_rapid3_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $eway_rapid3_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> />
+						</li>
 						<li>
 							<label for="display_header">
 								<?php _e('Display a Form Header', 'event_espresso'); ?>
