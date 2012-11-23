@@ -799,51 +799,50 @@ function espresso_copy_data_from_attendee_cost_table() {
 			}
 		}
 
-
-
 		// get  reg IDs for all multi registration attendees that are NOT the primary attendee
 		$SQL = "SELECT registration_id FROM " . $wpdb->prefix . "events_multi_event_registration_id_group WHERE registration_id != primary_registration_id";
-		$non_primary_registrants = $wpdb->get_results($SQL);
-		if ( $non_primary_registrants !== FALSE && ! empty( $non_primary_registrants )) {
-			// now grab ALL attendees 
-			$SQL = "SELECT registration_id, is_primary, final_price, quantity, total_cost, amount_pd, payment_status FROM " . $wpdb->prefix . "events_attendee";
-			$attendees = $wpdb->get_results($SQL);
-			if ( $attendees !== FALSE && ! empty( $attendees )) {
-				// loop thru attendees
-				foreach ( $attendees as $attendee ) {
-					// check for non-primary attendees
-					if ( in_array( $attendee->registration_id, $non_primary_registrants )) {
-						// set "is_primary" to false 
-						$wpdb->update( 
-								$wpdb->prefix . "events_attendee", 
-								array( 'is_primary' => 0,  'amount_pd' => 0.00 ), 
-								array( 'registration_id' => $attendee->registration_id ),
-								array( '%d', '%f' ),
-								array( '%s' )
-						);	
-						
-					} else {
-						
-						//calculate new total
-						$total_cost = $attendee->final_price * $attendee->quantity;
-						// but keep the old one if it exists
-						$total_cost = $attendee->total_cost != '0.00' ? $attendee->total_cost : $total_cost;
-						//calculate new amount paid
-						$amount_pd = $attendee->payment_status == 'Completed' ? $total_cost : 0.00;
-						// but keep the old one if it exists
-						$amount_pd = $attendee->amount_pd != '0.00' ? $attendee->amount_pd : $amount_pd;
-						// update
-						$wpdb->update( 
-								$wpdb->prefix . "events_attendee", 
-								array( 'is_primary' => 1,  'total_cost' => $total_cost,  'amount_pd' => $amount_pd ), 
-								array( 'registration_id' => $attendee->registration_id ),
-								array( '%d', '%f', '%f' ),
-								array( '%s' )
-						);		
-												
-					}			
+		if ( ! $non_primary_registrants = $wpdb->get_results($SQL) ) {
+			$non_primary_registrants = array();
+		}
+
+		// now grab ALL attendees
+		$SQL = "SELECT registration_id, is_primary, final_price, quantity, total_cost, amount_pd, payment_status FROM " . $wpdb->prefix . "events_attendee";
+		$attendees = $wpdb->get_results($SQL);
+		if ( $attendees !== FALSE && ! empty( $attendees )) {
+			// loop thru attendees
+			foreach ( $attendees as $attendee ) {
+				// check for non-primary attendees
+				if ( in_array( $attendee->registration_id, $non_primary_registrants )) {
+					// set "is_primary" to false
+					$wpdb->update(
+							$wpdb->prefix . "events_attendee",
+							array( 'is_primary' => 0,  'amount_pd' => 0.00 ),
+							array( 'registration_id' => $attendee->registration_id ),
+							array( '%d', '%f' ),
+							array( '%s' )
+					);
+
+				} else {
+
+					//calculate new total
+					$total_cost = $attendee->final_price * $attendee->quantity;
+					// but keep the old one if it exists
+					$total_cost = $attendee->total_cost != '0.00' ? $attendee->total_cost : $total_cost;
+					//calculate new amount paid
+					$amount_pd = $attendee->payment_status == 'Completed' ? $total_cost : 0.00;
+					// but keep the old one if it exists
+					$amount_pd = $attendee->amount_pd != '0.00' ? $attendee->amount_pd : $amount_pd;
+					// update
+					$wpdb->update(
+							$wpdb->prefix . "events_attendee",
+							array( 'is_primary' => 1,  'total_cost' => $total_cost,  'amount_pd' => $amount_pd ),
+							array( 'registration_id' => $attendee->registration_id ),
+							array( '%d', '%f', '%f' ),
+							array( '%s' )
+					);
+					
 				}
-			}				
+			}
 		}
 
 
