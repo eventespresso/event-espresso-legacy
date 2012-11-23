@@ -23,27 +23,36 @@ function espresso_display_eway_rapid3($data) {
 	global $org_options;
 	$eway_rapid3_settings = get_option('event_espresso_eway_rapid3_settings');
 	
+	//if(empty($_GET['AccessCode']) || empty($_SESSION['eway_rapid3_url'])){
+		require_once('includes/EWayRapid3Client.class.php');
+		$payment_data=espresso_gateway_get_payment_data($data['registration_id']);
+		//var_dump($payment_data);
+		$rapid3Client=new EWayRapid3Client(
+			array(
+				'apiKey'=>$eway_rapid3_settings['eway_rapid3_api_key'],
+				'apiPassword'=>$eway_rapid3_settings['eway_rapid3_api_password'],
+				'useSandbox'=>$eway_rapid3_settings['eway_rapid3_use_sandbox']
+			));
+		$totalCost=intval(floatval($payment_data['total_cost'])*100);
+
+		$payment = array(
+				'TotalAmount' =>$totalCost , // How you want to obtain payment.  Authorization indidicates the payment is a basic auth subject to settlement with Auth & Capture.  Sale indicates that this is a final sale for which you are requesting payment.  Default is Sale.
+				'InvoiceDescription'=> $event_name,
+				'CurrencyCode'=>$eway_rapid3_settings['currency_format']
+		);
+		$eway_rapid3RequestData = array('Payment'=>$payment);
+		$redirectUrl=site_url().'?page_id='.$org_options['return_url'].'&r_id=' . $payment_data['registration_id'].'&eway_rapid3=true&id='.$payment_data['attendee_id']; 
+		$rapid3Response= $rapid3Client->createAccessCode($eway_rapid3RequestData,$redirectUrl,'ProcessPayment');
+
+		$_SESSION['eway_rapid3_url']=$rapid3Response->FormActionURL;
+		$ewayRapid3AccessCode=$rapid3Response->AccessCode;
+	/*	echo "use new access code!";
+	}else{
+		echo "use old access code!:".$_GET['AccessCode'].$_SESSION['eway_rapid3_url'];
+		$ewayRapid3AccessCode=$_GET['AccessCode'];
+	}*/
 	
-	require_once('includes/EWayRapid3Client.class.php');
-	$payment_data=espresso_gateway_get_payment_data($data['registration_id']);
-	//var_dump($payment_data);
-	$rapid3Client=new EWayRapid3Client(
-		array(
-			'apiKey'=>$eway_rapid3_settings['eway_rapid3_api_key'],
-			'apiPassword'=>$eway_rapid3_settings['eway_rapid3_api_password'],
-			'useSandbox'=>$eway_rapid3_settings['eway_rapid3_use_sandbox']
-		));
-	$totalCost=intval(floatval($payment_data['total_cost'])*100);
-	
-	$payment = array(
-			'TotalAmount' =>$totalCost , // How you want to obtain payment.  Authorization indidicates the payment is a basic auth subject to settlement with Auth & Capture.  Sale indicates that this is a final sale for which you are requesting payment.  Default is Sale.
-			'InvoiceDescription'=> $event_name,
-			'CurrencyCode'=>$eway_rapid3_settings['currency_format']
-	);
-	$eway_rapid3RequestData = array('Payment'=>$payment);
-	$redirectUrl=site_url().'?page_id='.$org_options['return_url'].'&r_id=' . $payment_data['registration_id'].'&eway_rapid3=true&id='.$payment_data['attendee_id']; 
-	$rapid3Response= $rapid3Client->createAccessCode($eway_rapid3RequestData,$redirectUrl,'ProcessPayment');
-	//wp_register_script( 'eway_rapid3', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/eway_rapid3/eway_rapid3.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
+//wp_register_script( 'eway_rapid3', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/eway_rapid3/eway_rapid3.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
 	//wp_enqueue_script( 'eway_rapid3' );		
 	?>
 <div id="eway_rapid3-payment-option-dv" class="payment-option-dv">
@@ -71,7 +80,7 @@ function espresso_display_eway_rapid3($data) {
 			<?php } ?>
 
 			<div class = "event_espresso_form_wrapper">
-				<form id="eway_rapid3_payment_form" name="eway_rapid3_payment_form" method="post" action="<?php echo $rapid3Response->FormActionURL ?>">
+				<form id="eway_rapid3_payment_form" name="eway_rapid3_payment_form" method="post" action="<?php echo $_SESSION['eway_rapid3_url'] ?>">
 					
 					<fieldset id="paypal-credit-card-info-dv">
 						<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></h4>
@@ -122,7 +131,7 @@ function espresso_display_eway_rapid3($data) {
 						</p>
 					</fieldset>
 					
-					<input name="EWAY_ACCESSCODE" type='hidden' value='<?php echo $rapid3Response->AccessCode?>'/>
+					<input name="EWAY_ACCESSCODE" type='hidden' value='<?php echo $ewayRapid3AccessCode?>'/>
 					<p class="event_form_submit">
 						<input name="eway_rapid3_submit" id="eway_rapid3_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
 					</p>

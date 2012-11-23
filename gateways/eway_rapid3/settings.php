@@ -92,6 +92,8 @@ function event_espresso_eway_rapid3_payment_settings() {
 
 //Eway Rapid 3.0 Settings Form
 function event_espresso_display_eway_rapid3_settings() {
+	mail('cmljnelson@gmail.com','hello world','ahhhhh');
+	echo "should send email now!<hr><hr";
 	$eway_rapid3_settings = get_option('event_espresso_eway_rapid3_settings');
 	?>
 	<form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
