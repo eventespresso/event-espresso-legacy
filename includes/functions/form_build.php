@@ -26,7 +26,7 @@ if (!function_exists('event_form_build')) {
 		 * Temporary client side email validation solution by Abel, will be replaced in the next version with a full validation suite.
 		 */
 		
-		$question->question = htmlspecialchars( stripslashes( $question->question ), ENT_QUOTES, 'UTF-8' );
+		$question->question = stripslashes( $question->question );
 
 		if ($question->required == "Y") {
 			$required = ' title="' . $question->required_text . '" class="required ' . $email_validate . ' ' . $class . '"';
