@@ -9,10 +9,9 @@ function event_list_attendees() {
 	if ( $EVT_ID ){
 		echo '<h1>'.espresso_event_list_attendee_title( $EVT_ID ).'</h1>'; 
 	}	
-	
 
-	$max_rows = isset( $_REQUEST['max_rows'] ) & ! empty( $_REQUEST['max_rows'] ) ? $_REQUEST['max_rows'] : 50;
-	$start_rec = isset( $_REQUEST['start_rec'] ) && ! empty($_REQUEST['start_rec']) ? $_REQUEST['start_rec'] : 0;
+	$max_rows = isset( $_REQUEST['max_rows'] ) & ! empty( $_REQUEST['max_rows'] ) ? absint( $_REQUEST['max_rows'] ) : 50;
+	$start_rec = isset( $_REQUEST['start_rec'] ) && ! empty($_REQUEST['start_rec']) ? absint( $_REQUEST['start_rec'] ) : 0;
 	$records_to_show = " LIMIT $max_rows OFFSET $start_rec ";
 	
 	//Dates
@@ -196,8 +195,6 @@ function event_list_attendees() {
     $sql_a .= $records_to_show;
 	
     $attendees = $wpdb->get_results($sql_a);
-
-	//echo $sql_a;	
     $total_attendees = $wpdb->num_rows;
 	
 	$quantity =0;
@@ -205,7 +202,7 @@ function event_list_attendees() {
 	$att_table_form_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID ), EVT_ADMIN_URL );
 ?>
 <form id="attendee-admin-list-page-select-frm" name="attendee_admin_list_page_select_frm" method="post" action="<?php echo $att_table_form_url; ?>">
-	<div id="attendee-admin-list-page-select-dv">
+	<div id="attendee-admin-list-page-select-dv" class="admin-list-page-select-dv">
 		<input name="navig" value="<?php _e('Retrieve', 'event_espresso'); ?>" type="submit" class="button-secondary">
 		<?php //_e('a max total of', 'event_espresso'); ?>
 		<?php $rows = array( 50 => 50, 100 => 100, 250 => 250, 500 => 500, 100000 => 'all' ); ?>
