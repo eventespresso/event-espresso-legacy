@@ -390,7 +390,6 @@ function events_data_tables_install() {
 					'payment_message' => $payment_message,
 					'message' => $message,
 					'country_id' => $country_id,
-					'expire_on_registration_end' => 'Y',
 					'email_before_payment' => 'N',
 					'use_personnel_manager' => 'Y',
 					'use_venue_manager' => 'Y',
