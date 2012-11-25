@@ -665,6 +665,7 @@ function events_data_tables_install() {
 			response text NULL,
 			required ENUM( 'Y', 'N' ) NOT NULL DEFAULT 'N',
 			required_text text NULL,
+			price_mod ENUM( 'Y', 'N' ) NOT NULL DEFAULT 'N',
 			admin_only ENUM( 'Y', 'N' ) NOT NULL DEFAULT 'N',
 			wp_user int(22) DEFAULT '1',
 			PRIMARY KEY  (id),

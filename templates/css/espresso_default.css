@@ -124,7 +124,7 @@
 .event_espresso_form_wrapper h5,
 .event_espresso_form_wrapper h6 { margin: 1em 0 0; font-weight: bold; }
 .event_espresso_form_wrapper p { margin: 0 0 1em; }
-.event_espresso_form_wrapper legend { width:150px; padding:0 10px 0 0;  text-align: right; }
+.event_espresso_form_wrapper legend { width:150px; padding:0 10px 0 0;  text-align: right; line-height:1.1em; }
 .event_espresso_form_wrapper fieldset { margin: 1em 0; }
 .event_espresso_form_wrapper fieldset div { padding: 0.25em 0; }
 
@@ -134,7 +134,7 @@
 .event_espresso_form_wrapper label,
 .event_espresso_form_wrapper span.label {
 	display: inline-block; width:150px; padding:0 10px 0 0; 
-	text-align: right; font-size:.9em; line-height:1em; vertical-align: middle; 
+	text-align: right; font-size:.9em; line-height:1.1em; vertical-align: middle; 
 }
 .span_event_date_value,
 .span_event_time_value { display: inline; padding:0; margin:0; text-align: left; }
@@ -154,16 +154,22 @@ select.wide { width: 175px; }
 .event_espresso_form_wrapper ul li,
 .event_espresso_form_wrapper .checkbox-lbl,
 .event_espresso_form_wrapper .radio-btn-lbl {
- 	display: inline-block; width:125px; margin-right:2em; 
+ 	display: inline-block; width: auto; min-width:125px; margin:0 2em .5em 0; 
 	text-align: left; vertical-align: middle; cursor: pointer;
 }
 .event_espresso_form_wrapper .checkbox-lbl span,
 .event_espresso_form_wrapper .radio-btn-lbl span {
-	position: relative; top:0px; margin-left:5px;  vertical-align: middle;
-	font-size:1em; line-height:1em;
+	display: inline-block; position: relative; top:-1.5px; width:80%; margin-left:5%;
+	font-size:1em; line-height:1em;  vertical-align: middle;
 }
+.event_espresso_form_wrapper .checkbox-lbl span span,
+.event_espresso_form_wrapper .radio-btn-lbl span span { 
+	display: inline; width: auto; margin:0 0 0 .5em; 
+	font-size:.9em; line-height:.9em; letter-spacing:.5px; font-weight: bold;;
+}
+
 .event_espresso_form_wrapper .checkbox-lbl input,
-.event_espresso_form_wrapper .radio-btn-lbl input { position: relative; top:0px; vertical-align: middle; }
+.event_espresso_form_wrapper .radio-btn-lbl input { float: left;; position: relative; top:0px; vertical-align: middle; }
 .event_espresso_form_wrapper .checkbox-lbl + .checkbox-lbl,
 .event_espresso_form_wrapper .radio-btn-lbl + .radio-btn-lbl { margin-left:1em; }
 
