@@ -307,6 +307,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 			$google_map_link = espresso_google_map_link(array('address' => $event_address, 'city' => $event_city, 'state' => $event_state, 'zip' => $event_zip, 'country' => $event_country, 'text' => 'Map and Directions', 'type' => 'text'));
 			global $all_meta;
 			$all_meta = array(
+				'event_id' => $event_id,
 				'event_name' => stripslashes_deep($event_name),
 				'event_desc' => stripslashes_deep($event_desc),
 				'event_address' => $event_address,
@@ -326,6 +327,8 @@ if (!function_exists('event_espresso_get_event_details')) {
 				'start_date' => event_date_display($start_date, get_option('date_format')),
 				'end_date' => event_date_display($end_date, get_option('date_format')),
 				'time' => empty($event->start_time) ? '' : $event->start_time,
+				'start_time' => empty($event->start_time) ? '' : $event->start_time,
+				'end_time' => empty($event->end_time) ? '' : $event->end_time,
 				'google_map_link' => $google_map_link,
 				'price' => empty($event->event_cost) ? '' : $event->event_cost,
 				'event_cost' => empty($event->event_cost) ? '' : $event->event_cost,

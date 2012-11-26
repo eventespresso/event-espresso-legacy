@@ -85,8 +85,9 @@ function event_espresso_manage_templates() {
 			<?php _e('Event Template Settings', 'event_espresso'); ?>
 		</h2>
 		<?php ob_start(); ?>
-		<form class="espresso_form" method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
+		
 			<div class="meta-box-sortables ui-sortables">
+			<form class="espresso_form" method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
 				<?php #### metaboxes #### ?>
 				<div class="metabox-holder">
 					<div class="postbox">
@@ -230,7 +231,10 @@ function event_espresso_manage_templates() {
 					<!-- / .postbox --> 
 				</div>
 				<!-- / .metabox-holder -->
-				<h2>
+				<input type="hidden" name="update_org" value="update" />
+		</form>
+		
+		<h2>
 					<?php _e('Developers Only', 'event_espresso') ?>
 				</h2>
 				<hr />
@@ -253,11 +257,12 @@ function event_espresso_manage_templates() {
 				</div>
 				<!-- / .metabox-holder -->
 				<?php #### finish metaboxes #### ?>
+				
+				
 			</div>
 			<!-- / .meta-box-sortables -->
 
-			<input type="hidden" name="update_org" value="update" />
-		</form>
+			
 		<?php
 		include_once('templates_help.php');
 		$main_post_content = ob_get_clean();

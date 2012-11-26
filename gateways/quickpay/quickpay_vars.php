@@ -5,7 +5,7 @@ function espresso_display_quickpay($payment_data) {
 	global $wpdb, $org_options;
 	$quickpay_settings = get_option('event_espresso_quickpay_settings');
 	$sessionid = $_SESSION['espresso_session']['id'];
-	$ordernumber = substr(md5(uniqid() . rand()), 0, 20);
+	$ordernumber = $registration_id;
 	$transaction_id = uniqid(md5(rand(1, 666)), true); // Set the transaction id to a unique value for reference in the system.
 	$button_url = $quickpay_settings['button_url'];
 	$md5secret = $quickpay_settings['quickpay_md5secret'];
