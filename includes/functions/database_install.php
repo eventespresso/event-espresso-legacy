@@ -791,8 +791,6 @@ function events_data_tables_install() {
 					//echo '<h4>primary_registration_id : ' . $primary_registrant->primary_registration_id . '</h4>';			
 					// total cost for all attendees for a registration
 					$reg_total = 0;
-					//assume txn's are complete
-					$txn_complete = TRUE;
 					// first get all reg IDs associated with the primary reg
 					$SQL = "SELECT * FROM " . $wpdb->prefix . "events_multi_event_registration_id_group ";
 					$SQL .= "WHERE primary_registration_id = %s";
