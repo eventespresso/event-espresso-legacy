@@ -136,14 +136,14 @@ if (!function_exists('event_form_build')) {
 				}
 				
 				$html .= '<p class="event_form_field">' . $label;
-				$html .= '<input type="text" ' . $required . ' id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '"  name="' . $field_name . $multi_name_adjust . '" size="40" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' /></p>';
+				$html .= '<input type="text" ' . $required . ' id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' /></p>';
 				
 				break;
 			case "TEXTAREA" :
 			
 				if (is_array($answer)) $answer = '';
 				$html .= '<p class="event_form_field event-quest-group-textarea">' . $label;
-				$html .= '<textarea id=""' . $required . ' name="' . $field_name . $multi_name_adjust . '"  cols="30" rows="5">' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '</textarea></p>';
+				$html .= '<textarea id=""' . $required . ' name="' . $field_name . $multi_name_adjust . '" rows="5">' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '</textarea></p>';
 				
 				break;
 			case "SINGLE" :
@@ -299,13 +299,13 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 	
 		case "TEXT" :
 			$form_input .= '<p class="event_form_field">' . $label;
-			$form_input .= '<input type="text" ' . $required . ' id="' . $field_name . '"  name="' . $field_name . '" size="40"  value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" />';
+			$form_input .= '<input type="text" ' . $required . ' id="' . $field_name . '"  name="' . $field_name . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" />';
 			$form_input .= '</p>';
 			break;
 			
 		case "TEXTAREA" :		
 			$form_input .= '<p class="event_form_field">' . $label;
-			$form_input .= '<textarea id="TEXTAREA_' . $question->id . '" ' . $required . ' name="TEXTAREA_' . $question->id . '"  cols="30" rows="5">' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '</textarea>';
+			$form_input .= '<textarea id="TEXTAREA_' . $question->id . '" ' . $required . ' name="TEXTAREA_' . $question->id . '" rows="5">' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '</textarea>';
 			$form_input .= '</p>';
 			break;
 			

@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.28.3.P
+  Version: 3.1.28.5.P
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,7 +32,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.28.3.P';
+	return '3.1.28.5.P';
 }
 
 //This tells the system to check for updates to the paid version
@@ -420,10 +420,6 @@ if (is_admin()) {
 	register_activation_hook(__FILE__, 'events_data_tables_install');
 	register_activation_hook(__FILE__, 'espresso_update_active_gateways');
 
-	$data_migrated_version = get_option( 'espresso_data_migrated' );	
-	if ( $data_migrated_version != espresso_version()) {
-		add_action('admin_init', 'events_data_tables_install' );
-	}
 	
 
 	
@@ -856,6 +852,9 @@ if (isset($_REQUEST['download_invoice']) && $_REQUEST['download_invoice'] == 'tr
 }
 
 if (is_admin()) {
+
+	add_action('admin_init', 'espresso_check_data_tables' );
+	
 	//Check to make sure there are no empty registration id fields in the database.
 	if (event_espresso_verify_attendee_data() == true && $_POST['action'] != 'event_espresso_update_attendee_data') {
 		add_action('admin_notices', 'event_espresso_registration_id_notice');
@@ -909,6 +908,7 @@ function espresso_export_ticket() {
 add_action('plugins_loaded', 'espresso_export_ticket', 40);
 
 
+
 function espresso_export_certificate() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	if (isset($_REQUEST['certificate_launch']) && $_REQUEST['certificate_launch'] == 'true') {
@@ -918,7 +918,22 @@ function espresso_export_certificate() {
 add_action('plugins_loaded', 'espresso_export_certificate', 30);
 
 
+
 function espresso_end_logging(){
 	do_action('action_hook_espresso_log', '', '', '');
 }
 add_action( 'shutdown', 'espresso_end_logging' );
+
+
+
+function espresso_check_data_tables() {
+	// check if db has been updated, cuz autoupdates don't trigger database install script
+	$espresso_db_update = get_option( 'espresso_db_update' );
+	if ( $espresso_db_update != EVENT_ESPRESSO_VERSION ) {
+		events_data_tables_install();
+	}
+	// check for data migration from pre 3.1.28 versions to 3.1.28
+	if ( ! get_option( 'espresso_data_migrated' ) ) {
+		espresso_copy_data_from_attendee_cost_table();
+	}	
+}

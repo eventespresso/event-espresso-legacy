@@ -321,7 +321,6 @@ if (!function_exists('event_espresso_get_is_active')) {
 		//echo time('', $timestamp);
 		//echo date(time());
 		//echo ' event date = '.date( $timestamp);
-		//$org_options['expire_on_registration_end'] = 'Y';
 		//IF the event is ongoing, then display ongoing
 		if ($is_active == "Y" && $event_status == "O") {
 			$event_status = array('status' => 'ONGOING', 'display' => '<span style="color: #090; font-weight:bold;">' . __('ONGOING', 'event_espresso') . '</span>', 'display_custom' => '<span class="espresso_ongoing">' . __('Ongoing', 'event_espresso') . '</span>');

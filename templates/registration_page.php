@@ -211,7 +211,8 @@ if (!function_exists('register_attendees')) {
 
             global $all_meta;
             $all_meta = array(
-                'event_name' => '<p class="section-title">' . stripslashes_deep($event_name) . '</span>',
+                'event_id' => $event_id,
+				'event_name' => stripslashes_deep($event_name),
                 'event_desc' => stripslashes_deep($event_desc),
                 'event_address' => $event_address,
                 'event_address2' => $event_address2,
@@ -219,7 +220,7 @@ if (!function_exists('register_attendees')) {
                 'event_state' => $event_state,
                 'event_zip' => $event_zip,
                 'event_country' => $event_country,
-                'venue_title' => '<span class="section-title">' . $venue_title . '</span>',
+                'venue_title' => $venue_title,
                 'venue_address' => $venue_address,
                 'venue_address2' => $venue_address2,
                 'venue_city' => $venue_city,
@@ -228,8 +229,8 @@ if (!function_exists('register_attendees')) {
 
 				'is_active' => $data->event->is_active,
 				'event_status' => $data->event->event_status,
-				'start_time' => $data->event->start_time,
 				'start_time' => empty($data->event->start_time) ? '' : $data->event->start_time,
+				'end_time' => empty($data->event->end_time) ? '' : $data->event->end_time,
 
 				'registration_startT' => $data->event->registration_startT,
 				'registration_start' => $data->event->registration_start,
@@ -238,8 +239,8 @@ if (!function_exists('register_attendees')) {
 				'registration_end' => $data->event->registration_end,
 'event_address' => empty($data->event->event_address) ? '' : $data->event->event_address,
 
-				'start_date' => '<span class="section-title">' . event_espresso_no_format_date($start_date, get_option('date_format')) . '</span>',
-                'end_date' => '<span class="section-title">' . event_date_display($end_date, get_option('date_format')) . '</span>',
+				'start_date' => event_espresso_no_format_date($start_date, get_option('date_format')),
+                'end_date' => event_date_display($end_date, get_option('date_format')),
                 //'time' => event_espresso_time_dropdown($event_id, 0),
                 'google_map_link' => $google_map_link,
                 //'price' => event_espresso_price_dropdown($event_id, 0),

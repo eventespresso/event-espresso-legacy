@@ -34,7 +34,7 @@ function espresso_display_paypal($payment_data) {
 	
 		$item_num=$key+1;
 		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname);
-		$myPaypal->addField('quantity_' . $item_num, $item->quantity);
+		$myPaypal->addField('quantity_' . $item_num, absint($item->quantity));
 
 		if ( $item->final_price < $item->orig_price ) {
 		
