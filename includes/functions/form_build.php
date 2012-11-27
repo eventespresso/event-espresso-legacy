@@ -31,10 +31,10 @@ if (!function_exists('event_form_build')) {
 		if ($question->required == "Y") {
 			$required = ' title="' . $question->required_text . '" class="required ' . $email_validate . ' ' . $class . '"';
 			$required_label = "<em>*</em>";
-			$legend = '<legend class="event_form_field required">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . '<em>*</em></legend>';
+			$legend = '<label class="event_form_field required">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . '<em>*</em></label>';
 		} else {
 			$required = 'class="' . $class . '"';
-			$legend = '<legend class="event_form_field">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))). '</legend>';
+			$legend = '<label class="event_form_field">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))). '</label>';
 		}
 		
 		if (is_array($answer) && array_key_exists('event_attendees', $answer) /*&& $attendee_number === 1*/) {
@@ -135,15 +135,15 @@ if (!function_exists('event_form_build')) {
 					$disabled = '';
 				}
 				
-				$html .= '<p class="event_form_field">' . $label;
-				$html .= '<input type="text" ' . $required . ' id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '"  name="' . $field_name . $multi_name_adjust . '" size="40" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' /></p>';
+				$html .= '<div class="event_form_field">' . $label;
+				$html .= '<input type="text" ' . $required . ' id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '"  name="' . $field_name . $multi_name_adjust . '" size="40" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' /></div>';
 				
 				break;
 			case "TEXTAREA" :
 			
 				if (is_array($answer)) $answer = '';
-				$html .= '<p class="event_form_field event-quest-group-textarea">' . $label;
-				$html .= '<textarea id=""' . $required . ' name="' . $field_name . $multi_name_adjust . '"  cols="30" rows="5">' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '</textarea></p>';
+				$html .= '<div class="event_form_field event-quest-group-textarea">' . $label;
+				$html .= '<textarea id=""' . $required . ' name="' . $field_name . $multi_name_adjust . '"  cols="30" rows="5">' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '</textarea></div>';
 				
 				break;
 			case "SINGLE" :
@@ -220,7 +220,7 @@ if (!function_exists('event_form_build')) {
 			
 				$dd_type = $question->system_name == 'state' ? 'name="state"' : 'name="' . $field_name . $multi_name_adjust . '"';
 				$html .= '
-				<p class="event_form_field" class="' . $class . '">' . $label;
+				<div class="event_form_field" class="' . $class . '">' . $label;
 				$html .= '
 					<select ' . $dd_type . ' ' . $required . ' id="DROPDOWN_' . $question->id . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '">';
 				$html .= '
@@ -243,7 +243,7 @@ if (!function_exists('event_form_build')) {
 				$html .= '
 				</select>';
 				$html .= '
-				</p>';
+				</div>';
 				
 				break;
 			default :
