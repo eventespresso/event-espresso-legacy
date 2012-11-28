@@ -1,6 +1,7 @@
 <?php
 if (!function_exists('espresso_ical')) {
 	function espresso_ical() {
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$name = $_REQUEST['event_summary'] . ".ics";
 		$output = "BEGIN:VCALENDAR\n" .
 						"VERSION:2.0\n" .
@@ -19,14 +20,17 @@ if (!function_exists('espresso_ical')) {
 						"STATUS:CONFIRMED\n" .
 						"URL:" . $_REQUEST['eereg_url'] . "\n" .
 						"SUMMARY:" . $_REQUEST['event_summary'] . "\n" .
-						"DESCRIPTION:" . $_REQUEST['event_description'] . "\n" .
+						"DESCRIPTION:" . !empty($_REQUEST['event_description']) ? $_REQUEST['event_description'] : '' . "\n" .
+						"LOCATION:" . !empty($_REQUEST['location']) ? $_REQUEST['location'] : '' . "\n" .
 						"END:VEVENT\n" .
 						"END:VCALENDAR";
-		if (ob_get_length())
+		if (ob_get_length()){
 			echo('Some data has already been output, can\'t send iCal file');
+		}
 		header('Content-Type: application/x-download');
-		if (headers_sent())
+		if (headers_sent()){
 			echo('Some data has already been output, can\'t send iCal file');
+		}
 		header('Content-Length: ' . strlen($output));
 		header('Content-Disposition: attachment; filename="' . $name . '"');
 		header('Cache-Control: private, max-age=0, must-revalidate');
@@ -96,6 +100,7 @@ if (!function_exists('espresso_ical_prepare_by_meta')) {
 			'eereg_url' => espresso_reg_url($meta['event_id']),
 			'site_url' => site_url(),
 			'organization' => $org_options['organization'],
+			'location' => str_replace(array('<br>','<br />'), ' ', $meta['location']),
 		);
 		$url = add_query_arg( $array, site_url() );
 		$html = '<a  href="' . wp_kses($url, '') . '" target="_blank" id="espresso_ical_' . $meta['event_id'] . '" class="espresso_ical_link" title="' . $title . '">' . $image . '</a>';
