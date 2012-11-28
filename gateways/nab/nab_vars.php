@@ -30,7 +30,7 @@ function espresso_display_nab($payment_data) {
 <div id="nab-payment-option-dv" class="payment-option-dv">
 
 	<a id="nab-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="nab-payment-option-form" style="cursor:pointer;">
-		<img alt="Pay using National Australian Bank" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/nab/nab-logo.png">
+		<img alt="Pay using a Credit Card" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/pay-by-credit-card.png">
 	</a>	
 
 	<div id="nab-payment-option-form-dv" class="hide-if-js">	

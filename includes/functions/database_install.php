@@ -2,6 +2,47 @@
 do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	
 
 
+//This function installs the tables
+function event_espresso_run_install($table_name, $table_version, $sql) {
+
+	global $wpdb;
+	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+	$wp_table_name = $wpdb->prefix . $table_name;
+
+	if ($wpdb->get_var("SHOW TABLES LIKE '" . $wp_table_name . "'") != $wp_table_name) {
+
+		$sql_create_table = "CREATE TABLE " . $wp_table_name . " ( " . $sql . " ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;";
+
+		dbDelta($sql_create_table);
+
+		//create option for table version
+		$option_name = $table_name . '_tbl_version';
+		// update_option creates new option if no existing
+		update_option( $option_name, $table_version, '', 'no' );
+
+		//create option for table name
+		$option_name = $table_name . '_tbl';
+		update_option($option_name, $wp_table_name, '', 'no' );
+
+	}
+
+	// Code here with new database upgrade info/table Must change version number to work.
+
+	$installed_ver = get_option($table_name . '_tbl_version');
+	if ($installed_ver != $table_version) {
+		$sql_create_table = "CREATE TABLE " . $wp_table_name . " ( " . $sql . " ) ;";
+		dbDelta($sql_create_table);
+		update_option($table_name . '_tbl_version', $table_version, '', 'no' );
+		//create option for table name
+		$option_name = $table_name . '_tbl';
+		update_option($option_name, $wp_table_name, '', 'no' );
+	}
+}
+
+
+
+
 //Install/update data tables in the Wordpress database
 //This fixes some tables that may have been named wrong in an earlier version of the plugin
 function event_espresso_rename_tables($old_table_name, $new_table_name) {
@@ -15,7 +56,11 @@ function event_espresso_rename_tables($old_table_name, $new_table_name) {
 	}
 }
 
+
+
+
 function events_data_tables_install() {
+
 	$table_version = EVENT_ESPRESSO_VERSION;
 
 	function event_espresso_install_system_names() {
@@ -263,6 +308,7 @@ function events_data_tables_install() {
 			);
 
 			add_option('events_organization_settings', $new_org_options);
+			
 		} else if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name) {
 			//If an earlier version is found
 			$results = $wpdb->get_results("SELECT * FROM " . EVENTS_ORGANIZATION_TABLE . " WHERE id='1'");
@@ -345,7 +391,6 @@ function events_data_tables_install() {
 					'payment_message' => $payment_message,
 					'message' => $message,
 					'country_id' => $country_id,
-					'expire_on_registration_end' => 'Y',
 					'email_before_payment' => 'N',
 					'use_personnel_manager' => 'Y',
 					'use_venue_manager' => 'Y',
@@ -711,10 +756,28 @@ function events_data_tables_install() {
 
 
 
+	events_organization_tbl_install();
+	event_espresso_install_system_names();
+	event_espresso_create_upload_directories();
+	event_espresso_update_shortcodes();
+	event_espresso_update_attendee_data();
+	espresso_update_attendee_qty();
+	espresso_answer_fix();
+	espresso_added_by_admin_session_id_fix();
+	espresso_add_cancel_shortcode();
+	espresso_copy_data_from_attendee_cost_table();
+	
+	add_option( 'espresso_db_update', EVENT_ESPRESSO_VERSION, '', 'no' );
+
+}
+
+
+
+
+
 	function espresso_copy_data_from_attendee_cost_table() {
 		global $wpdb;
 
-		
 		$data_migrated_version = get_option( 'espresso_data_migrated' );
 		if ( ! $data_migrated_version ) {
 
@@ -845,19 +908,7 @@ function events_data_tables_install() {
 				}	// end foreach ( $primary_registrants as $primary_registrant )
 			}	// if ( $primary_registrants !== FALSE && ! empty( $primary_registrants ))
 			
-			add_option( 'espresso_data_migrated', espresso_version());
+		add_option( 'espresso_data_migrated', EVENT_ESPRESSO_VERSION, '', 'no' );
 			
 		}
-	}
-
-	events_organization_tbl_install();
-	event_espresso_install_system_names();
-	event_espresso_create_upload_directories();
-	event_espresso_update_shortcodes();
-	event_espresso_update_attendee_data();
-	espresso_update_attendee_qty();
-	espresso_answer_fix();
-	espresso_added_by_admin_session_id_fix();
-	espresso_add_cancel_shortcode();
-	espresso_copy_data_from_attendee_cost_table();
 }

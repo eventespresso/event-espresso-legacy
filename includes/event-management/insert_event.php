@@ -258,11 +258,11 @@ function add_event_to_db($recurrence_arr = array()) {
             //print count ($sql);
             $sql_data = array_merge((array) $sql_data, (array) '%s');
             //print count($sql_data);
-            if ( !$wpdb->prepare($wpdb->insert(EVENTS_DETAIL_TABLE, $sql, $sql_data)) ) {
+            if ( ! $wpdb->insert(EVENTS_DETAIL_TABLE, $sql, $sql_data )) {
                 $error = true;
             }
         } else {
-            if ( !$wpdb->prepare($wpdb->insert(EVENTS_DETAIL_TABLE, $sql, $sql_data)) ) {
+            if ( ! $wpdb->insert(EVENTS_DETAIL_TABLE, $sql, $sql_data )) {
                 $error = true;
             }
         }
@@ -351,7 +351,7 @@ function add_event_to_db($recurrence_arr = array()) {
 				$_REQUEST['end_time'][$k] = !empty($_REQUEST['end_time'][$k]) ? $_REQUEST['end_time'][$k] : $end_time;
 				$sql3 = "INSERT INTO " . EVENTS_START_END_TABLE . " (event_id, start_time, end_time, reg_limit) VALUES ('" . $last_event_id . "', '" . event_date_display($v, 'H:i') . "', '" . event_date_display($_REQUEST['end_time'][$k], 'H:i') . "', " . $time_qty . ")";
 				//echo "$sql3 <br>";
-				if ( !$wpdb->query($wpdb->prepare($sql3)) ) {
+				if ( !$wpdb->query( $sql3 ) ) {
 					$error = true;
 				}
 			}
@@ -366,7 +366,7 @@ function add_event_to_db($recurrence_arr = array()) {
 
                     $sql_price = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, surcharge_type, price_type, member_price, member_price_type) VALUES ('" . $last_event_id . "', '" . $v . "', '" . $_REQUEST['surcharge'][$k] . "', '" . $_REQUEST['surcharge_type'][$k] . "', '" . $price_type . "', '" . $member_price . "', '" . $member_price_type . "')";
                     //echo "$sql3 <br>";
-                    if ( !$wpdb->query($wpdb->prepare($sql_price)) ) {
+                    if ( !$wpdb->query( $sql_price ) ) {
                         $error = true;
                     }
                 }
