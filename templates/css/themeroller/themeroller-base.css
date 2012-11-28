@@ -113,7 +113,7 @@ div.event-data-display{
 .event_description {
 	padding: 0 .4em 20px;
 }
-.section-title, .span_event_time_label, .event_price_label {
+.section-title, .span_event_time_label, .event_price_label, .span_event_date_label {
 	font-weight: bold;
 }
 #additional_header a, #event_espresso_refresh_total, .inline-link { /* floating links */
