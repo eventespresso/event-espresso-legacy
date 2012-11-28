@@ -163,7 +163,7 @@ if (!function_exists('register_attendees')) {
             $virtual_phone = stripslashes_deep($data->event->virtual_phone);
 
             //Address formatting
-            $location = ($event_address != '' ? $event_address : '') . ($event_address2 != '' ? '<br />' . $event_address2 : '') . ($event_city != '' ? '<br />' . $event_city : '') . ($event_state != '' ? ', ' . $event_state : '') . ($event_zip != '' ? '<br />' . $event_zip : '') . ($event_country != '' ? '<br />' . $event_country : '');
+           $location = (!empty($event_address) ? $event_address : '') . (!empty($event_address2) ? '<br />' . $event_address2 : '') . (!empty($event_city) ? '<br />' . $event_city : '') . (!empty($event_state)  ? ', ' . $event_state : '') . (!empty($event_zip) ? '<br />' . $event_zip : '') . (!empty($event_country) ? '<br />' . $event_country : '');
 
             //Google map link creation
             $google_map_link = espresso_google_map_link(array('address' => $event_address, 'city' => $event_city, 'state' => $event_state, 'zip' => $event_zip, 'country' => $event_country, 'text' => 'Map and Directions', 'type' => 'text'));
@@ -230,21 +230,13 @@ if (!function_exists('register_attendees')) {
 				'contact_email' => empty($data->event->alt_email) ? $org_options['contact_email'] : $data->event->alt_email,
 				'start_time' => empty($data->event->start_time) ? '' : $data->event->start_time,
 				'end_time' => empty($data->event->end_time) ? '' : $data->event->end_time,
-
 				'registration_startT' => $data->event->registration_startT,
 				'registration_start' => $data->event->registration_start,
-
 				'registration_endT' => $data->event->registration_endT,
 				'registration_end' => $data->event->registration_end,
-'event_address' => empty($data->event->event_address) ? '' : $data->event->event_address,
-
 				'start_date' => event_espresso_no_format_date($start_date, get_option('date_format')),
                 'end_date' => event_date_display($end_date, get_option('date_format')),
-                //'time' => event_espresso_time_dropdown($event_id, 0),
                 'google_map_link' => $google_map_link,
-                //'price' => event_espresso_price_dropdown($event_id, 0),
-                //'registration' => event_espresso_add_question_groups($question_groups),
-                //'additional_attendees' => $allow_multiple == "Y" && $number_available_spaces > 1 ? event_espresso_additional_attendees($event_id, $additional_limit, $number_available_spaces, '', false, $event_meta) : '<input type="hidden" name="num_people" id="num_people-' . $event_id . '" value="1">',
             );
 			
 			//print_r($all_meta);

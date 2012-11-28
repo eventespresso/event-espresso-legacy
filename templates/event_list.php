@@ -301,7 +301,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 			}
 
 			//Address formatting
-			$location = ($event_address != '' ? $event_address : '') . ($event_address2 != '' ? '<br />' . $event_address2 : '') . ($event_city != '' ? '<br />' . $event_city : '') . ($event_state != '' ? ', ' . $event_state : '') . ($event_zip != '' ? '<br />' . $event_zip : '') . ($event_country != '' ? '<br />' . $event_country : '');
+			$location = (!empty($event_address) ? $event_address : '') . (!empty($event_address2) ? '<br />' . $event_address2 : '') . (!empty($event_city) ? '<br />' . $event_city : '') . (!empty($event_state)  ? ', ' . $event_state : '') . (!empty($event_zip) ? '<br />' . $event_zip : '') . (!empty($event_country) ? '<br />' . $event_country : '');
 
 			//Google map link creation
 			$google_map_link = espresso_google_map_link(array('address' => $event_address, 'city' => $event_city, 'state' => $event_state, 'zip' => $event_zip, 'country' => $event_country, 'text' => 'Map and Directions', 'type' => 'text'));
@@ -316,6 +316,12 @@ if (!function_exists('event_espresso_get_event_details')) {
 				'event_state' => $event_state,
 				'event_zip' => $event_zip,
 				'event_country' => $venue_country,
+				'venue_title' => $venue_title,
+                'venue_address' => $venue_address,
+                'venue_address2' => $venue_address2,
+                'venue_city' => $venue_city,
+                'venue_state' => $venue_state,
+                'venue_country' => $venue_country,
 				'location' => $location,
 				'is_active' => $event->is_active,
 				'event_status' => $event->event_status,
