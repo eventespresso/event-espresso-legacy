@@ -103,8 +103,6 @@ if (!function_exists('register_attendees')) {
             $event_state = $data->event->state;
             $event_zip = $data->event->zip;
             $event_country = $data->event->country;
-
-
             $event_description = stripslashes_deep($data->event->event_desc);
             $event_identifier = $data->event->event_identifier;
             $event_cost = isset($data->event->event_cost) ? $data->event->event_cost : "0.00";
@@ -226,9 +224,10 @@ if (!function_exists('register_attendees')) {
                 'venue_city' => $venue_city,
                 'venue_state' => $venue_state,
                 'venue_country' => $venue_country,
-
+				'location' => $location,
 				'is_active' => $data->event->is_active,
 				'event_status' => $data->event->event_status,
+				'contact_email' => empty($data->event->alt_email) ? $org_options['contact_email'] : $data->event->alt_email,
 				'start_time' => empty($data->event->start_time) ? '' : $data->event->start_time,
 				'end_time' => empty($data->event->end_time) ? '' : $data->event->end_time,
 
