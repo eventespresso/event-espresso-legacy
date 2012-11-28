@@ -9,6 +9,7 @@ function event_espresso_manage_templates() {
 		$org_options['display_address_in_event_list'] = !empty($_POST['display_address_in_event_list']) ? $_POST['display_address_in_event_list'] : 'N';
 		$org_options['display_address_in_regform'] = !empty($_POST['display_address_in_regform']) ? $_POST['display_address_in_regform'] : 'N';
 		$org_options['use_custom_post_types'] = !empty($_POST['use_custom_post_types']) ? $_POST['use_custom_post_types'] : 'N';
+		$org_options['display_ical_download'] = !empty($_POST['display_ical_download']) ? $_POST['display_ical_download'] : 'Y';
 		$org_options['enable_default_style'] = !empty($_POST['enable_default_style']) ? $_POST['enable_default_style'] : 'N';
 		$org_options['selected_style'] = !empty($_POST['selected_style']) ? $_POST['selected_style'] : '';
 		$org_options['style_color'] = !empty($_POST['style_color']) ? $_POST['style_color'] : '';
@@ -134,6 +135,13 @@ function event_espresso_manage_templates() {
 													<?php _e('Use the custom post types feature?', 'event_espresso'); ?>
 												</label></th>
 											<td><?php echo select_input('use_custom_post_types', $values, isset($org_options['use_custom_post_types']) ? $org_options['use_custom_post_types'] : 'N'); ?></td>
+										</tr>
+										<tr>
+											<th><label for="display_ical_download">
+													<?php _e('Display an "Add to my Calendar" icon/link in the event templates?', 'event_espresso'); ?>
+												</label></th>
+											<td><?php echo select_input('display_ical_download', $values, isset($org_options['display_ical_download']) ? $org_options['display_ical_download'] : 'Y'); ?><br />
+												<span class="description"><?php _e('This is an ics/ical downloadable file. Can also be modified in the event template files.', 'event_espresso'); ?></span></td>
 										</tr>
 									</tbody>
 								</table>

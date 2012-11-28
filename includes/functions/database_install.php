@@ -296,6 +296,7 @@ function events_data_tables_install() {
 					'display_address_in_event_list' => 'N',
 					'display_address_in_regform' => 'Y',
 					'use_custom_post_types' => 'N',
+					'display_ical_download' => 'Y',
 					'themeroller' => array(
 						'themeroller_style' => 'smoothness',
 					),
