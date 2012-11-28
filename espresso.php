@@ -925,15 +925,74 @@ function espresso_end_logging(){
 add_action( 'shutdown', 'espresso_end_logging' );
 
 
-
+/**
+* espresso_check_data_tables
+* 
+* ensures that the database has been updated to the current version
+* and also ensures that all necessary data migration scripts have been applied
+* in order to bring the content of the database up to snuff as well
+* 
+* @since 3.1.28
+* @return void
+*/
 function espresso_check_data_tables() {
+
 	// check if db has been updated, cuz autoupdates don't trigger database install script
 	$espresso_db_update = get_option( 'espresso_db_update' );
-	if ( $espresso_db_update != EVENT_ESPRESSO_VERSION ) {
-		events_data_tables_install();
+	if( ! is_array( $espresso_db_update )) {
+		$espresso_db_update = array( $espresso_db_update );
+		update_option( 'espresso_db_update', $espresso_db_update );
 	}
-	// check for data migration from pre 3.1.28 versions to 3.1.28
-	if ( ! get_option( 'espresso_data_migrated' ) ) {
-		espresso_copy_data_from_attendee_cost_table();
+	// now check if current EE version is in list of db updates
+	if ( ! in_array( EVENT_ESPRESSO_VERSION, $espresso_db_update )) {
+		// the current db has NOT been updated so let's do that
+		events_data_tables_install();
 	}	
+	// grab list of any existing data migrations from db
+	if ( ! $existing_data_migrations = get_option( 'espresso_data_migrations' )) {
+		// or initialize as an empty array
+		$existing_data_migrations = array();
+		add_option( 'espresso_data_migrations', array(), '', 'no' );
+	}
+	// separately check for data migration from pre 3.1.28 versions to 3.1.28 
+	// because this data migration didn't use the new system for tracking migrations
+	if ( ! $attendee_cost_table_fix_3_1_28 = get_option( 'espresso_data_migrated' ) ) {
+		// what ? hasn't been done yet ? well let's get right on that
+		require_once( 'includes/functions/data_migration_scripts.php' );
+		espresso_copy_data_from_attendee_cost_table();
+		$existing_data_migrations[ EVENT_ESPRESSO_VERSION ][] = 'espresso_copy_data_from_attendee_cost_table';	
+	} else {
+		// if this option already exists, let's add it to the new array for tracking all migrations
+		$existing_data_migrations[ key( $attendee_cost_table_fix_3_1_28 ) ][] = 'espresso_copy_data_from_attendee_cost_table';
+
+	}	
+	// array of all previous data migrations to date
+	// using the espresso version as the key
+	// and the name of the callback function for the value
+	$espresso_data_migrations = array(
+		'3.1.28' => array( 'espresso_copy_data_from_attendee_cost_table' ),
+		'3.1.29' => array( 'espresso_ensure_is_primary_is_set' )
+	);
+	// if we don't need them, don't load them
+	$data_migration_scripts_loaded = FALSE;
+	// loop through all previous migrations
+	foreach ( $espresso_data_migrations as $ver => $migrations ) {
+		$migrations = is_array( $migrations ) ? $migrations : array( $migrations );
+		foreach ( $migrations as $migration_func ) {
+			foreach ( $existing_data_migrations as $data_migrations ) {
+				// make sure they have been executed
+				if ( ! in_array( $migration_func, $data_migrations )) {		
+					// ok NOW load the scripts
+					if ( ! $data_migration_scripts_loaded ) {
+						require_once( 'includes/functions/data_migration_scripts.php' );
+						$data_migration_scripts_loaded = TRUE;
+					}
+					// run the appropriate migration script
+					call_user_func( $migration_func );
+				}
+			}
+		}
+	}
+		
+
 }
