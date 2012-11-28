@@ -20,8 +20,8 @@ if (!function_exists('espresso_ical')) {
 						"STATUS:CONFIRMED\n" .
 						"URL:" . $_REQUEST['eereg_url'] . "\n" .
 						"SUMMARY:" . $_REQUEST['event_summary'] . "\n" .
-						"DESCRIPTION:" . !empty($_REQUEST['event_description']) ? $_REQUEST['event_description'] : '' . "\n" .
-						"LOCATION:" . !empty($_REQUEST['location']) ? $_REQUEST['location'] : '' . "\n" .
+						"DESCRIPTION:" . $_REQUEST['event_description'] . "\n" .
+						"LOCATION:" . $_REQUEST['location'] . "\n" .
 						"END:VEVENT\n" .
 						"END:VCALENDAR";
 		if (ob_get_length()){
