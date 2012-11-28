@@ -1613,7 +1613,7 @@ function espresso_get_question_groups_for_event( $existing_question_groups = arr
 	$sql .= $use_filters ? apply_filters('espresso_get_question_groups_for_event_where', " WHERE (qg.wp_user = '0' OR qg.wp_user = '1' ) ", $existing_question_groups, $event ) : " WHERE (qg.wp_user = '0' OR qg.wp_user = '1' ) ";
 	$sql .= " GROUP BY qg.id ORDER BY qg.system_group, qg.group_order "; 
 
-	$question_groups = $wpdb->get_results( $wpdb->prepare($sql) );
+	$question_groups = $wpdb->get_results( $sql );
 
 	//let's setup data.
 	$count_row = 0;  
