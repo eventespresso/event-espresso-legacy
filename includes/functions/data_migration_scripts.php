@@ -4,11 +4,16 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 
 function espresso_update_data_migrations_option( $func ) {
 	$existing_data_migrations = get_option( 'espresso_data_migrations' );
-	$existing_data_migrations = is_array( $existing_data_migrations ) ? $existing_data_migrations : array( array() );
+	$existing_data_migrations = is_array( $existing_data_migrations ) ? $existing_data_migrations : array( $existing_data_migrations );
 	$existing_data_migrations[ EVENT_ESPRESSO_VERSION ][] = $func;	
 	update_option( 'espresso_data_migrations', $existing_data_migrations );	
-	$existing_data_migrations = get_option( 'espresso_data_migrations' );
+//	$existing_data_migrations = get_option( 'espresso_data_migrations' );
+//	printr( $existing_data_migrations, '$existing_data_migrations  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 }
+
+
+
+
 
 /**
 * espresso_copy_data_from_attendee_cost_table
@@ -152,7 +157,6 @@ function espresso_copy_data_from_attendee_cost_table() {
 			}	// end foreach ( $primary_registrants as $primary_registrant )
 		}	// if ( $primary_registrants !== FALSE && ! empty( $primary_registrants ))
 		
-		add_option( 'espresso_data_migrated', array( EVENT_ESPRESSO_VERSION => __FUNCTION__ ), '', 'no' );
 		espresso_update_data_migrations_option( __FUNCTION__ );
 		
 	}
