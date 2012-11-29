@@ -1,0 +1,281 @@
+/*DEPRECATED-DONT-USE*/
+/*DEPRECATED-DONT-USE*/
+/*DEPRECATED-DONT-USE*/
+/*DEPRECATED-DONT-USE*/
+/*DEPRECATED-DONT-USE*/
+
+/* Please use /css/espresso_default.css instead. */
+
+
+/********************************************/
+/****			-==ATTENTION==-			****/
+/**** 	MOVE THIS FILE BEFORE EDITING 	***/
+
+/*** Please move this file to: 'wp-content/uploads/espresso/templates directory before editing ****/
+
+/**
+	Multi registration form style
+*/
+
+.payment_container, .payment-option-dv { position: relative; margin:0 .25em .25em 0;  }
+.payment-option-closed { display: inline-block; }
+
+.payment-option-lnk {
+	display: inline-block; position: relative; max-width:140px; padding:20px; margin:0 0 1em; 
+	border:1px solid #ddd; border-radius:3px;
+	text-align: center; line-height:1em; vertical-align: middle; cursor:pointer;
+
+}
+.payment-option-lnk:hover {
+	top:-1px; border-color:#d5d5d5; text-decoration:none;
+	-webkit-box-shadow: 4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025); 
+	-moz-box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025); 
+	box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025);	
+}
+.payment-option-lnk img { max-width:140px !important; padding:0; margin:0; }
+.payment-option-lnk.algn-vrt { display: table !important; height:30px; }
+.payment-option-lnk.algn-vrt .vrt-cell { display: table-cell !important; vertical-align: middle; }
+
+#event_espresso_checkout_form { margin: 5px 0; padding: 5px; }
+
+.choose-diff-pay-option-pg { margin:0 0 6em; font-size:.8em; }
+
+.off-site-payment-gateway-img { position: absolute; top:-4px; right:-5px; }
+#external-link-msg-pg { margin:0 0 4em; color:#ccc; font-size:.8em; text-align: center;; }
+#external-link-msg-pg img { position: relative; top:2px; }
+
+.event_total_price{
+	font-size: 25px;
+	float: right;
+	text-align: right;
+	padding:5px;
+}
+
+.multi_reg_cart_block{
+	padding:5px; margin:5px; 
+}
+
+#event_espresso_coupon_wrapper {
+	padding:5px; margin:5px 10px 5px 5px; text-align: right;;
+}
+#event_espresso_total_wrapper {
+	padding:5px; margin:5px; 
+}
+#event_espresso_edit_cart {
+	clear:both; padding:5px; margin:5px 5px 1em 5px; font-size:.9em;
+}
+#event_espresso_edit_cart_or_reg {
+	clear:both; padding:5px; margin:5px 5px 1em 5px; text-align:right;font-size:.9em;
+}
+#event_espresso_refresh_total {
+	clear:both; padding:5px; margin:5px 4px 1em 5px; text-align:right;font-size:.9em;
+}
+#event_espresso_submit_cart {
+	clear:both; padding:5px; margin:5px; text-align:right;
+}
+
+#event_espresso_shopping_cart table{
+	text-align: left;
+}
+
+#event_espresso_registration_form {
+	margin: 10px 3px;
+}
+/**
+* End Multi registration form style
+*/
+
+
+/**
+	Errors and notices
+*/
+.event_espresso_error {
+	padding: 1em 2em 1.25em; margin: 0 0 1em 0; 
+	background-color:#FFEEEE; border: #FF0000 1px solid; border-radius:3px;
+	color: #000; text-shadow:1px 1px #fff;
+} 	/* #ffcccc  */
+.event_espresso_error p { margin: 0; color: #333; text-shadow:1px 1px #fff; }
+.event_espresso_error p em { color: #cc0000; font-style: normal; font-weight: bold; display: block;}
+
+.event_espresso_attention {
+	padding:1em 2em 1.25em; margin: 0 0 1em 0;
+	background-color: #FFC; border: #FC6 1px solid; border-radius:3px;
+	color: #000; text-shadow:1px 1px #fff;
+}
+.event_espresso_attention p { margin: 0; text-shadow:1px 1px #fff; }
+.event_espresso_attention p em { color: #C00; font-style: normal; font-weight: bold;display: block; }
+
+.event_espresso_form_wrapper label.error,
+.event_espresso_form_wrapper span.error { color: #C00; width: auto;}
+.event_espresso_form_wrapper label em,
+.event_espresso_form_wrapper span.label em,
+.event_espresso_form_wrapper legend em { font-style: normal; color: #C00; padding-left: 3px;}
+.event_espresso_form_wrapper input.error { border-color: #C00; background-color: #FEF; }
+/**
+	End errors and notices
+*/
+
+/**
+	Form styles
+*/
+.event_espresso_form_wrapper form legend { padding: 0 5px; }
+.event_espresso_form_wrapper form fieldset div { padding: 0.25em 0; }
+.event_espresso_form_wrapper label,
+.event_espresso_form_wrapper span.label {
+	display: block;
+	margin-right: 10px;
+	padding-right: 10px;
+	position: relative;
+}
+
+
+.event_espresso_form_wrapper div.buttonrow { margin-left: 180px; }
+.submit {
+	margin:5px;
+	padding: 0.3em;
+
+}
+.event_form_field{
+	 clear: both;
+}
+.btn_event_form_submit {
+	width: auto;
+}
+.btn_event_form_submit:hover {
+}
+
+.espresso_confirm_registration {
+	text-align: right;
+}
+.espresso_confirm_registration #confirm, .espresso_confirm_registration #confirm2{
+	width: auto;
+}
+
+.espresso_confirm_registration #confirm:hover, .espresso_confirm_registration #confirm2:hover{
+}
+
+.event_espresso_form_wrapper ul{
+	margin-left:125px;
+}
+.event_espresso_form_wrapper ul li{
+	list-style: none;
+}
+
+.event_espresso_form_wrapper h1{
+	padding: 5px;
+}
+.event_espresso_form_wrapper h2{
+	padding: 5px;
+}
+
+.event_espresso_form_wrapper h3{
+	padding: 5px;
+}
+
+.event_espresso_form_wrapper .copy_dropdown_wrapper{
+	padding: 10px;
+}
+
+.recaptchatable #recaptcha_response_field {left:0 !important;}
+
+/**
+	Confirmation page display
+*/
+table#event_espresso_attendee_verify th,
+table#event_espresso_attendee_verify_questions th { text-align: right; width: 40%; }
+table#event_espresso_attendee_verify tr,
+table#event_espresso_attendee_verify_questions tr { text-align: left; width: 60%; }
+
+
+table.price_list{
+	margin: 10px auto;
+	border: 1px;
+}
+
+table.price_list td{
+	padding: 5px;
+}
+
+.event_espresso_value {
+	margin-left:1em;
+}
+
+/* For the event list page pagination */
+
+.page_navigation .no_more{
+	background-color: white;
+	color: gray;
+	cursor: default;
+}
+
+.ellipse{
+	float: left;
+}
+.page_navigation , .alt_page_navigation{
+	padding-bottom: 10px;
+}
+
+.page_navigation a, .alt_page_navigation a{
+	padding:3px 5px;
+	margin:2px;
+	/*color:white;*/
+	text-decoration:none;
+	float: left;
+	font-family: Tahoma;
+	font-size: 12px;
+	/*background-color:#DB5C04;*/
+}
+.active_page{
+	/*background-color:white !important;*/
+	color:black !important;
+ }
+ 
+ .ajx_loading {
+	
+	width:400px;
+	height:400px;
+	background:url('../images/ajax-loader-large.gif') center no-repeat;
+ }
+/* End pagination css */
+
+/* Autocomplete */
+input#ee_autocomplete, input#ee_fes_autocomplete{
+	width:400px;
+}
+input#ee_autocomplete{
+	margin-left:15px;
+}
+ul.ui-autocomplete{
+	width:400px;
+	background:#E0E0E0;
+}
+ul.ui-autocomplete li{
+	list-style:none;
+	padding: 5px 10px;
+}
+
+/*
+	Colors and other definitions from what's inherited from the theme's form styles
+	added in 3.1.18.P by Chris Reynolds
+	Uncomment these lines if you want to use these styles
+*/
+/*
+#event_espresso_checkout_form { border: 2px solid #e8e8e8; }
+.multi_reg_cart_block { border: 2px solid #d1d1d1; }
+#event_espresso_coupon_wrapper { border: 2px solid #d1d1d1; }
+#event_espresso_total_wrapper { border: 2px solid #d1d1d1; }
+#event_espresso_registration_form { background-color:  #f4f3f2; }
+table.price_list tr{ background-color: #c7e9c8; }
+.pending_event{ border:2px solid yellow; padding:5px; }
+.expired_event{ color:#F00; }
+.event_espresso_form_wrapper input:focus,
+.event_espresso_form_wrapper input.error:focus,
+.event_espresso_form_wrapper textarea:focus {   background-color: #FFC; border-color: #FC6; }
+*/
+
+
+/********************************************/
+/****			-==ATTENTION==-			****/
+/**** 	MOVE THIS FILE BEFORE EDITING 	***/
+
+/*** Please move this file to: 'wp-content/uploads/espresso/templates directory before editing ****/
