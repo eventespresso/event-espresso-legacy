@@ -36,7 +36,7 @@ function espresso_process_firstdata($payment_data) {
 
 	if(empty($firstdata_settings['use_verify_peer'])) $firstdata_settings['use_verify_peer'] = false;
 	include"lphp.php";
-	$mylphp = new lphp;
+	$mylphp = new Espresso_Linkpoint;
 	$myorder['verify_peer'] = $firstdata_settings['use_verify_peer'];
 	$myorder["debugging"] = $firstdata_settings['use_sandbox'];
 	$myorder["host"] = $myorder["debugging"] ? "staging.linkpt.net" : "secure.linkpt.net";

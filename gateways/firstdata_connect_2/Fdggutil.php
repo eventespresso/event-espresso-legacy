@@ -1,6 +1,6 @@
 <?php
 
-class Fdggutil {
+class Espresso_Fdggutil {
 
 	private $storename; // Replace with your Storenumber here
 	private $sharedSecret; //Replace with your Shared Secret here
@@ -19,7 +19,7 @@ class Fdggutil {
 	private $attendee_zip;
 	private $registration_id;
 
-	public function Fdggutil($storename, $sharedSecret) {
+	public function Espresso_Fdggutil($storename, $sharedSecret) {
 		$this->storename = $storename;
 		$this->sharedSecret = $sharedSecret;
 	}

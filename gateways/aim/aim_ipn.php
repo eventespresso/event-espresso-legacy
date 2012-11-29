@@ -30,7 +30,7 @@ function espresso_process_aim($payment_data) {
 	}
 
 //start transaction
-	$transaction = new AuthorizeNetAIM($authnet_aim_login_id, $authnet_aim_transaction_key);
+	$transaction = new Espresso_AuthorizeNetAIM($authnet_aim_login_id, $authnet_aim_transaction_key);
 	echo '<!--Event Espresso Authorize.net AIM Gateway Version ' . $transaction->gateway_version . '-->';
 	$transaction->amount = $_POST['amount'];
 	$transaction->card_num = $_POST['card_num'];

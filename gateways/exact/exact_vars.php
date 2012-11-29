@@ -6,7 +6,7 @@ function espresso_display_exact($payment_data) {
 	include_once ('Exact.php');
 
 	global $org_options;
-	$myExact = new Exact(); // initiate an instance of the class
+	$myExact = new Espresso_Exact(); // initiate an instance of the class
 	echo '<!--Event Espresso Exact.com Gateway Version ' . $myExact->gateway_version . '-->';
 	$exact_settings = get_option('event_espresso_exact_settings');
 	$exact_login_id = empty($exact_settings['exact_login_id']) ? '' : $exact_settings['exact_login_id'];

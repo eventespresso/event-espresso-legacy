@@ -1,13 +1,13 @@
 <?php
-class alipay_service {
+class Espresso_Alipay_Service {
 
 	var $gateway = "https://www.alipay.com/cooperate/gateway.do?";         
-	var $parameter;       //È«²¿ĞèÒª´«µİµÄ²ÎÊı
-	var $security_code;  	//°²È«Ğ£ÑéÂë
-	var $mysign;             //Ç©Ãû
+	var $parameter;       //È«ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½İµÄ²ï¿½ï¿½ï¿½
+	var $security_code;  	//ï¿½ï¿½È«Ğ£ï¿½ï¿½ï¿½ï¿½
+	var $mysign;             //Ç©ï¿½ï¿½
 
-	//¹¹ÔìÖ§¸¶±¦Íâ²¿·şÎñ½Ó¿Ú¿ØÖÆ
-	function alipay_service($parameter,$security_code,$sign_type = "MD5",$transport= "https") {
+	//ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½â²¿ï¿½ï¿½ï¿½ï¿½Ó¿Ú¿ï¿½ï¿½ï¿½
+	function Espresso_Alipay_Service($parameter,$security_code,$sign_type = "MD5",$transport= "https") {
 		$this->parameter      = $this->para_filter($parameter);
 		$this->security_code  = $security_code;
 		$this->sign_type      = $sign_type;
@@ -24,7 +24,7 @@ class alipay_service {
 		while (list ($key, $val) = each ($sort_array)) {
 			$arg.=$key."=".$this->charset_encode($val,$this->parameter['_input_charset'])."&";
 		}
-		$prestr = substr($arg,0,count($arg)-2);  //È¥µô×îºóÒ»¸öÎÊºÅ
+		$prestr = substr($arg,0,count($arg)-2);  //È¥ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Êºï¿½
 		$this->mysign = $this->sign($prestr.$this->security_code);
 	}
 
@@ -54,15 +54,15 @@ class alipay_service {
 		if($this->sign_type == 'MD5') {
 			$mysign = md5($prestr);
 		}elseif($this->sign_type =='DSA') {
-			//DSA Ç©Ãû·½·¨´ıºóĞø¿ª·¢
-			die("DSA Ç©Ãû·½·¨´ıºóĞø¿ª·¢£¬ÇëÏÈÊ¹ÓÃMD5Ç©Ãû·½Ê½");
+			//DSA Ç©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			die("DSA Ç©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½MD5Ç©ï¿½ï¿½Ê½");
 		}else {
-			die("Ö§¸¶±¦Ôİ²»Ö§³Ö".$this->sign_type."ÀàĞÍµÄÇ©Ãû·½Ê½");
+			die("Ö§ï¿½ï¿½ï¿½ï¿½ï¿½İ²ï¿½Ö§ï¿½ï¿½".$this->sign_type."ï¿½ï¿½ï¿½Íµï¿½Ç©ï¿½ï¿½Ê½");
 		}
 		return $mysign;
 
 	}
-	function para_filter($parameter) { //³ıÈ¥Êı×éÖĞµÄ¿ÕÖµºÍÇ©ÃûÄ£Ê½
+	function para_filter($parameter) { //ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½ĞµÄ¿ï¿½Öµï¿½ï¿½Ç©ï¿½ï¿½Ä£Ê½
 		$para = array();
 		while (list ($key, $val) = each ($parameter)) {
 			if($key == "sign" || $key == "sign_type" || $val == "")continue;
@@ -71,7 +71,7 @@ class alipay_service {
 		}
 		return $para;
 	}
-	//ÊµÏÖ¶àÖÖ×Ö·û±àÂë·½Ê½
+	//Êµï¿½Ö¶ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ë·½Ê½
 	function charset_encode($input,$_output_charset ,$_input_charset ="GBK" ) {
 		$output = "";
 		if(!isset($_output_charset) )$_output_charset  = $this->parameter['_input_charset '];

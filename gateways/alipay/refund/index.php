@@ -8,7 +8,7 @@ $parameter = array(
 "_input_charset" => $_input_charset,   
 //********************************************************************
 );
-$alipay = new alipay_service($parameter,$security_code,$sign_type);
+$alipay = new Espresso_Alipay_Service($parameter,$security_code,$sign_type);
 print_r($parameter ); 
 $link=$alipay->create_url();
 print <<<EOT

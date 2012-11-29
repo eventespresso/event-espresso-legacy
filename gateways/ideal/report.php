@@ -10,7 +10,7 @@ function espresso_process_ideal_report($payment_data) {
 	$partner_id = $ideal_mollie_settings['ideal_mollie_partner_id']; // Uw mollie partner ID
 	if (isset($_GET['transaction_id'])) {
 		$payment_data['txn_id'] = $_GET['transaction_id'];
-		$iDEAL = new iDEAL_Payment($partner_id);
+		$iDEAL = new Espresso_iDEAL_Payment($partner_id);
 		$iDEAL->checkPayment($_GET['transaction_id']);
 		if ($iDEAL->getPaidStatus() == true) {
 			$payment_data['payment_status'] = "Completed";

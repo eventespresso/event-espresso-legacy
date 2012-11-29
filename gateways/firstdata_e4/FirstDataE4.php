@@ -9,7 +9,7 @@
  */
 
 
-class E4 extends PaymentGateway {
+class Espresso_E4 extends Espresso_PaymentGateway {
 
 	public $gateway_version = '1.0';
 	/**

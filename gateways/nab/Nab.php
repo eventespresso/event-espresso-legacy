@@ -9,7 +9,7 @@
  */
 $nab_gateway_version = '1.0';
 
-class nab extends PaymentGateway {
+class nab extends Espresso_PaymentGateway {
 
 	/**
 	 * Initialize the nab gateway

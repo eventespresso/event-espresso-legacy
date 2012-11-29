@@ -6,7 +6,7 @@ function espresso_display_authnet($payment_data) {
 	include_once ('Authorize.php');
 
 	global $org_options, $wpdb;
-	$myAuthorize = new EE_Authorize(); // initiate an instance of the class
+	$myAuthorize = new Espresso_Authorize(); // initiate an instance of the class
 	echo '<!--Event Espresso Authorize.net Gateway Version ' . $myAuthorize->gateway_version . '-->';
 	$authnet_settings = get_option('event_espresso_authnet_settings');
 	$authnet_login_id = empty($authnet_settings['authnet_login_id']) ? '' : $authnet_settings['authnet_login_id'];

@@ -18,7 +18,7 @@ function espresso_display_alipay($payment_data) {
 			"total_fee" => '0.01', //number_format( $event_cost, 2 ), //the price of products
 			"currency" => "USD", // change it as the currency which you used on your website
 	);
-	$alipay = new alipay_service($parameter, $security_code, $sign_type);
+	$alipay = new Espresso_Alipay_Service($parameter, $security_code, $sign_type);
 //echo "<pre>", print_r( $parameter ), "</pre>";
 	$link = $alipay->create_url();
 
