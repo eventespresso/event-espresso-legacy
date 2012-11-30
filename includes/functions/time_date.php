@@ -181,23 +181,25 @@ if (!function_exists('event_espresso_time_dropdown')) {
 			$SQL = "SELECT ESE.*, ( ESE.reg_limit - ";
 			// count # of attendees with good registrations where event start and end times match outer query start and end times
 			$SQL .= "( SELECT count(id) FROM wp_events_attendee ATT ";
-			$SQL .= "WHERE ATT.event_id= 5 ";
+			$SQL .= "WHERE ATT.event_id= %d ";
 			$SQL .= "AND ATT.payment_status != 'Incomplete' ";
 			$SQL .= "AND ATT.payment_status != 'Refund' ";
 			$SQL .= "AND ATT.event_time = ESE.start_time ";
 			$SQL .= "AND ATT.end_time = ESE.end_time ) ";
 			$SQL .= ") AS available_spaces ";
 			$SQL .= "FROM wp_events_start_end ESE ";
-			$SQL .= "WHERE ESE.event_id= 5 ";
+			$SQL .= "WHERE ESE.event_id= %d ";
 			$SQL .= "GROUP BY ESE.id";
- 
+   			$event_times = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id, $event_id ));
+
         } else {
 			$SQL = "SELECT ESE.* FROM wp_events_start_end ESE ";
-			$SQL .= "WHERE ESE.event_id= 5 ";
+			$SQL .= "WHERE ESE.event_id= %d ";
 			$SQL .= "GROUP BY ESE.id";	 	
+  			$event_times = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ));
 	 }
 	 
-        $event_times = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ));
+	//printr( $event_times, '$event_times  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' ); 
 	 	// If one result, then display the times.
         if ($wpdb->num_rows == 1) {
             $html .= $label == 1 ? '<span class="span_event_time_label">' . __('Start Time:', 'event_espresso') . '</span>' : '';
