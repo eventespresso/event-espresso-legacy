@@ -28,6 +28,9 @@
 
 /* Managed by themeroller */
 /*___ General site wide styles for event-data / espresso_events ___*/
+.ee-featured-image{
+	float: right;
+}
 
 .payment_container, .payment-option-dv { position: relative; margin:0 .25em .25em 0;  }
 .payment-option-closed { display: inline-block; }
