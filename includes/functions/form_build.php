@@ -22,26 +22,23 @@ if (!function_exists('event_form_build')) {
 			$email_validate = $question->system_name == 'email' ? 'email' : '';
 		}
 
-		$question->question = htmlspecialchars( stripslashes( $question->question ), ENT_QUOTES, 'UTF-8' );
+		$question->question = stripslashes( $question->question );
 
 		if ($question->required == "Y") {
 			$required_title = ' title="' . $question->required_text . '"';
 			$required_class = ' required ' . $email_validate . ' ';
 			$required_label = "<em>*</em>";
-			$legend = '<legend class="event_form_field required">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . '<em>*</em></legend>';
 		} else {
 			$required_title = '';
 			$required_class = '';
-			$legend = '<legend class="event_form_field">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))). '</legend>';
+			$required_label = '';
 		}
+		$label = '<label for="' . $field_name . '" class="' . $class . '">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '</label> ';
 		
 		if (is_array($answer) && array_key_exists('event_attendees', $answer) /*&& $attendee_number === 1*/) {
 			$answer = isset($answer['event_attendees'][$price_id][$attendee_number][$field_name]) ? $answer['event_attendees'][$price_id][$attendee_number][$field_name] : '';
 		}
 
-		$required_label = isset($required_label) ? $required_label : '';
-
-		$label = '<label for="' . $field_name . '" class="' . $class . '">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '</label> ';
 		//If the members addon is installed, get the users information if available
 		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true ) {
 			global $current_user;
@@ -133,21 +130,20 @@ if (!function_exists('event_form_build')) {
 					$disabled = '';
 				}
 				
-				$html .= '<p class="event_form_field">' . $label;
-				$html .= '<input type="text" ' . $required_title . ' class="' . $required_class . $class . $text_input_class .'" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' /></p>';
+				$html .= '<div class="event_form_field">' . $label;
+				$html .= '<input type="text" ' . $required_title . ' class="' . $required_class . $class . $text_input_class .'" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' /></div>';
 				
 				break;
 			case "TEXTAREA" :
 			
 				if (is_array($answer)) $answer = '';
-				$html .= '<p class="event_form_field event-quest-group-textarea">' . $label;
-				$html .= '<textarea ' . $required_title . ' class="' . $required_class . $class . $text_input_class . '" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" rows="5">' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '</textarea></p>';
+				$html .= '<div class="event_form_field event-quest-group-textarea">' . $label;
+				$html .= '<textarea ' . $required_title . ' class="' . $required_class . $class . $text_input_class . '" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" rows="5">' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '</textarea></div>';
 				
 				break;
 			case "SINGLE" :
 			
-				$html .= '<div class="single-radio">';
-				$html .= '<p>'.$label.'</p>';
+				$html .= '<div class="single-radio">' . $label;
 				$html .= '<ul class="options-list-radio event_form_field">';
 				
 				$values = explode(",", $question->response);
@@ -177,8 +173,7 @@ if (!function_exists('event_form_build')) {
 				break;
 			case "MULTIPLE" :
 			
-				$html .= '<div class="multi-checkbox">';
-				$html .= '<p>'.$label.'</p>';
+				$html .= '<div class="multi-checkbox">' . $label;
 				$html .= '<ul class="options-list-check event_form_field">';
 
 				if ( is_array( $answer )) {
@@ -218,7 +213,7 @@ if (!function_exists('event_form_build')) {
 			
 				$dd_type = $question->system_name == 'state' ? 'name="state"' : 'name="' . $field_name . $multi_name_adjust . '"';
 				$html .= '
-				<p class="event_form_field" class="' . $class . '">' . $label;
+				<div class="event_form_field" class="' . $class . '">' . $label;
 				$html .= '
 					<select ' . $dd_type . ' ' . $required_title . ' class="' . $required_class . $class . '" id="DROPDOWN_' . $question->id . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '">';
 				$html .= '
@@ -241,7 +236,7 @@ if (!function_exists('event_form_build')) {
 				$html .= '
 				</select>';
 				$html .= '
-				</p>';
+				</div>';
 				
 				break;
 			default :
@@ -267,9 +262,9 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 	} else {
 		$required_title = '';
 		$required_class = '';
+		$required_label = '';
 	}
-	
-	$required_label = isset($required_label) ? $required_label : '';
+
 
 	//Sometimes the answer id is passed as the question id, so we need to make sure that we get the right question id.
 	$answer_id = $question->id;
@@ -376,7 +371,7 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 			$answer = htmlspecialchars( $answer, ENT_QUOTES, 'UTF-8' );
 
 			$form_input .= '
-			<p class="event_form_field">' . $label;
+			<div class="event_form_field">' . $label;
 			$form_input .= '
 				<select ' . $dd_type . ' ' . $required . ' ' . $required_title . ' class="' . $required_class . $class . '" id="DROPDOWN_' . $question->id . '"  />';
 			
@@ -393,7 +388,7 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 			$form_input .= '
 				</select>';
 			$form_input .= '
-			</p>';
+			</div>';
 			break;
 			
 		default :
