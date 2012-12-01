@@ -19,10 +19,12 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 		//Show the description ?
 		if ( $display_desc == "Y" && $display_description_on_multi_reg_page != 'N' ) {
 			?>
+			<?php //Featured image
+			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');?>
 			<div class="event_description">
-			<?php 
+			<?php
 				//Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.
-				echo wpautop(do_shortcode($event_desc)); 
+				echo espresso_format_content($event_desc); 
 			?></div>
 			<?php
 		}//End display description

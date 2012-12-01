@@ -404,7 +404,7 @@ function event_list_attendees() {
 					<?php } ?>
 				
 					<?php if ( $ticketing_installed == true && function_exists('espresso_ticket_url')) { ?>
-					<a href="'.espresso_ticket_url($id, $registration_id).'" target="_blank"  title="<?php _e('View/Download Ticket', 'event_espresso');?>">
+					<a href="<?php echo espresso_ticket_url($id, $registration_id); ?>" target="_blank"  title="<?php _e('View/Download Ticket', 'event_espresso');?>">
 						<img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>images/icons/ticket-arrow-icon.png" width="16" height="16" alt="<?php _e('Download Ticket', 'event_espresso');?>" />
 					</a>
 					<?php } 

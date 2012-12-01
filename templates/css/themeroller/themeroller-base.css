@@ -13,6 +13,7 @@
 * 3. Forms
 * 4. Tables
 * 5. Classes  - general - messages etc
+* 6. Media queries
 */
 
 /* >General events styles site wide
@@ -27,6 +28,9 @@
 
 /* Managed by themeroller */
 /*___ General site wide styles for event-data / espresso_events ___*/
+.ee-featured-image{
+	float: right;
+}
 
 .payment_container, .payment-option-dv { position: relative; margin:0 .25em .25em 0;  }
 .payment-option-closed { display: inline-block; }
@@ -195,7 +199,6 @@ span.google-map-link {
 	padding-bottom: 20px;
 }
 #event-reg-form-groups .event_questions {
-	border: 1px solid #d2d2d2;
 	margin: 10px 0;
 	padding: .5em;
 }
@@ -304,6 +307,11 @@ ul#espresso_payment_buttons li form {
 /* >Forms
 ------------------------------------------------------------------------------*/
 /* override WP styles */
+.event_form_field input.ee-reg-page-text-input,
+.event_form_field textarea.ee-reg-page-text-input {
+    width:60%;
+}
+
 .entry-content input {
 	margin: 0 0 .5em;
 }
@@ -338,11 +346,10 @@ ul#espresso_payment_buttons li form {
 .event_espresso_form_wrapper form fieldset div {
 	padding: 0.25em 0;
 }
-.event_espresso_form_wrapper label, .event_espresso_form_wrapper span.label {
-	display: block;
-	margin-right: 10px;
-	padding-right: 10px;
-	position: relative;
+.event_espresso_form_wrapper label,
+.event_espresso_form_wrapper span.label {
+	display: inline-block; width:150px; padding:0 10px 0 0; 
+	text-align: left; font-size:.9em; line-height:1em; vertical-align: top; 
 }
 .event_prices label, .event_time label {
 	display: block;
@@ -359,15 +366,7 @@ ul#espresso_payment_buttons li form {
 .event_espresso_form_wrapper p.coupon_code {
 	text-align: left;
 }
-.event_espresso_form_wrapper p.coupon_code label, .event_espresso_form_wrapper p#groupon_code- label {
-	display: block;
-	float: none;
-	width: auto;
-	text-align: left;
-}
-.event_espresso_form_wrapper p.coupon_code input, .event_espresso_form_wrapper p#groupon_code- input {
-	width: 200px;
-}
+
 .event_espresso_form_wrapper label.error, .event_espresso_form_wrapper span.error {
 	color: #C00;
 }
@@ -386,6 +385,25 @@ ul#espresso_payment_buttons li form {
 .event_espresso_form_wrapper div.buttonrow {
 	margin-left: 180px;
 }
+
+.span_event_date_label,
+.span_event_time_label,
+.event_price_label{
+	display: inline-block; width:150px; padding:0 10px 0 0; 
+	text-align: left; font-size:.9em; line-height:1em; vertical-align: middle;
+}
+.span_event_date_value,
+.span_event_time_value { display: inline-block; padding:0; margin:0; text-align: left; }
+
+.event_espresso_form_wrapper label,
+.event_espresso_form_wrapper span.label {
+	display: inline-block; width:150px; padding:0 10px 0 0; 
+	text-align: left; font-size:.9em; line-height:1em; vertical-align: top; 
+}
+.event_form_field .event-quest-group-textarea label.ee-reg-page-questions{
+	vertical-align: top; 
+}
+
 .submit {
 	margin:5px;
 	padding: 0.3em;
@@ -405,7 +423,8 @@ ul#espresso_payment_buttons li form {
 	cursor: pointer;
 }
 .event_espresso_form_wrapper ul {
-	margin-left: 125px;
+	margin-top: 5px;
+	margin-left: 10px;
 }
 .event_espresso_form_wrapper ul li {
 	list-style: none;
@@ -636,4 +655,98 @@ ul.ui-autocomplete{
 ul.ui-autocomplete li{
 	list-style:none;
 	padding: 5px 10px;
+}
+
+/* Media Queries */
+@media (max-width: 990px) {
+	 .ajx_loading {	 width:300px; height:300px; }
+	#ee_autocomplete, #ee_fes_autocomplete{ width:300px; }
+	.ui-autocomplete { width:300px; }
+	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
+}
+@media (max-width: 850px) {
+	 .ajx_loading {	 width:250px; height:250px; }
+	#ee_autocomplete, #ee_fes_autocomplete{ width:250px; }
+	.ui-autocomplete { width:250px; }
+	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
+}
+@media (max-width: 800px) {
+	 .ajx_loading {	 width:400px; height:400px; }
+	#ee_autocomplete, #ee_fes_autocomplete{ width:400px; }
+	.ui-autocomplete { width:400px; }
+	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
+	.event_form_field input.ee-reg-page-text-input,
+	.event_form_field textarea.ee-reg-page-text-input {
+		width:60%;
+		margin-top:5px;
+	}
+}
+@media (max-width: 700px) {
+	 .ajx_loading {	 width:300px; height:300px; }
+	#ee_autocomplete, #ee_fes_autocomplete{ width:300px; }
+	.ui-autocomplete { width:300px; }
+	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
+	.event_form_field input.ee-reg-page-text-input,
+	.event_form_field textarea.ee-reg-page-text-input {
+		width:60%;
+		margin-top:5px;
+	}
+}
+@media (max-width: 600px) {
+	#espresso-search-form-dv { padding:1em; }
+	.ajx_loading {	 width:250px; height:250px; }
+	#ee_autocomplete, #ee_fes_autocomplete{ width:250px; }
+	.ui-autocomplete { width:250px; }
+	.event_form_field input.ee-reg-page-text-input,
+	.event_form_field textarea.ee-reg-page-text-input {
+		width:80%;
+		margin-top:5px;
+	}
+}
+@media (max-width: 505px) {
+	#espresso-search-form-dv { padding:1em; }
+	.ajx_loading {	 width:210px; height:210px; }
+	#ee_autocomplete, #ee_fes_autocomplete{ width:210px; margin:0 0 .5em; }
+	.ui-autocomplete { width:210px; }
+	.event_form_field input.ee-reg-page-text-input,
+	.event_form_field textarea.ee-reg-page-text-input {
+		width:90%;
+		margin-top:5px;
+	}
+}
+@media (max-width: 450px) {
+	#espresso-search-form-dv { padding:1em; }
+	.ajx_loading {	 width:170px; height:170px; }
+	#ee_autocomplete, #ee_fes_autocomplete{ width:170px; }
+	.ui-autocomplete { width:170px; }
+	.event_form_field input.ee-reg-page-text-input,
+	.event_form_field textarea.ee-reg-page-text-input {
+		width:90%;
+		margin-top:5px;
+	}
+}
+@media (max-width: 410px) {
+	#espresso-search-form-dv { padding:1em; }
+	.ajx_loading {	 width:130px; height:130px; }
+	#ee_autocomplete, #ee_fes_autocomplete{ width:130px; }
+	.ui-autocomplete { width:130px; }
+	.event_form_field input.ee-reg-page-text-input,
+	.event_form_field textarea.ee-reg-page-text-input {
+		width:90%;
+		margin-top:5px;
+	}
+}
+@media (max-width: 360px) {
+	#espresso-search-form-dv { padding:1em; text-align: right; }
+	.ajx_loading {	 width:150px; height:150px; }
+	#ee_autocomplete, #ee_fes_autocomplete{ width:150px; margin:0 0 .5em; }
+	.ui-autocomplete { width:150px; }
+	.event_form_field input.ee-reg-page-text-input,
+	.event_form_field textarea.ee-reg-page-text-input {
+		width:80%;
+		margin-top:5px;
+	}
+	#event-reg-form-groups .event_questions {
+		padding: 0;
+	}
 }

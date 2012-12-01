@@ -10,6 +10,7 @@ function event_espresso_manage_templates() {
 		$org_options['display_address_in_regform'] = !empty($_POST['display_address_in_regform']) ? $_POST['display_address_in_regform'] : 'N';
 		$org_options['use_custom_post_types'] = !empty($_POST['use_custom_post_types']) ? $_POST['use_custom_post_types'] : 'N';
 		$org_options['display_ical_download'] = !empty($_POST['display_ical_download']) ? $_POST['display_ical_download'] : 'Y';
+$org_options['display_featured_image'] = !empty($_POST['display_featured_image']) ? $_POST['display_featured_image'] : 'N';
 		$org_options['enable_default_style'] = !empty($_POST['enable_default_style']) ? $_POST['enable_default_style'] : 'N';
 		$org_options['selected_style'] = !empty($_POST['selected_style']) ? $_POST['selected_style'] : '';
 		$org_options['style_color'] = !empty($_POST['style_color']) ? $_POST['style_color'] : '';
@@ -142,6 +143,13 @@ function event_espresso_manage_templates() {
 												</label></th>
 											<td><?php echo select_input('display_ical_download', $values, isset($org_options['display_ical_download']) ? $org_options['display_ical_download'] : 'Y'); ?><br />
 												<span class="description"><?php _e('This is an ics/ical downloadable file. Can also be modified in the event template files.', 'event_espresso'); ?></span></td>
+										</tr>
+<tr>
+											<th><label for="display_featured_image">
+													<?php _e('Diplay featured images in the event list and registration pages?', 'event_espresso'); ?>
+												</label></th>
+											<td><?php echo select_input('display_featured_image', $values, isset($org_options['display_featured_image']) ? $org_options['display_featured_image'] : 'N'); ?><br />
+												<span class="description"><?php _e('This setting offers an simple solution to display featured images in your event templates. Height and width attributes are set within the featured image upload tool. Some customization may be required to produce the desired results within your WordPress theme.', 'event_espresso'); ?></span></td>
 										</tr>
 									</tbody>
 								</table>

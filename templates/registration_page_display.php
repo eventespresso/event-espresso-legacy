@@ -19,6 +19,8 @@ if ($reg_form_only == false) {
 }
 ?>
  <div class="event_espresso_form_wrapper event-data-display ui-widget-content <?php echo $ui_corner ?>">
+ 	<?php //Featured image
+		echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');?>
 
 	<?php /* Venue details. Un-comment first and last lines & any venue details you wish to display or use the provided shortcodes. */ ?>
 	<?php // echo '<div id="venue-details-display">'; ?>

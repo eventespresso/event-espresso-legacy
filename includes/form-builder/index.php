@@ -139,13 +139,13 @@ function event_espresso_questions_config_mnu() {
 							<tr style="cursor: move" id="<?php echo $question_id ?>">
 								<td class="checkboxcol"><input name="row_id" type="hidden" value="<?php echo $question_id ?>" />
 									<?php if ($system_name == '') : ?>
-										<input  style="margin:7px 0 22px 8px; vertical-align:top;" name="checkbox[<?php echo $question_id ?>]" type="checkbox"  title="Delete <?php echo $question_name ?>">
+										<input  style="margin:7px 0 22px 8px; vertical-align:top;" name="checkbox[<?php echo $question_id ?>]" type="checkbox"  title="Delete <?php echo wp_strip_all_tags( $question_name ); ?>">
 									<?php else: ?>
 										<span><?php echo '<img style="margin:7px 0 22px 8px; vertical-align:top;" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/lock.png" alt="System Questions" title="System Questions" />'; ?></span>
 									<?php endif; ?>
 								</td>
 
-								<td class="post-title page-title column-title"><strong><a href="admin.php?page=form_builder&amp;action=edit_question&amp;question_id=<?php echo $question_id ?>"><?php echo $question_name ?></a></strong>
+								<td class="post-title page-title column-title"><strong><a href="admin.php?page=form_builder&amp;action=edit_question&amp;question_id=<?php echo $question_id ?>"><?php echo wp_strip_all_tags( $question_name ); ?></a></strong>
 									<div class="row-actions">
 										<span class="edit"><a href="admin.php?page=form_builder&amp;action=edit_question&amp;question_id=<?php echo $question_id ?>"><?php _e('Edit', 'event_espresso'); ?></a> | </span>
 										<?php if ($system_name == ''): ?><span class="delete"><a onclick="return confirmDelete();" class="submitdelete"  href="admin.php?page=form_builder&amp;action=delete_question&amp;question_id=<?php echo $question_id ?>"><?php _e('Delete', 'event_espresso'); ?></a></span><?php endif; ?>
