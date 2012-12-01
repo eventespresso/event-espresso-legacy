@@ -477,7 +477,7 @@ if (!function_exists('espresso_event_time')) {
 
 function eventespresso_ddtimezone($event_id = 0) {
     global $wpdb;
-    $tz_event = $wpdb->get_var($wpdb->prepare("SELECT timezone_string FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'"));
+    $tz_event = $wpdb->get_var($wpdb->prepare("SELECT timezone_string FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '%d'", $event_id));
 
     $timezone_format = _x('Y-m-d G:i:s', 'timezone date format');
 
@@ -560,7 +560,7 @@ function eventespresso_ddtimezone($event_id = 0) {
 
 function espresso_ddtimezone_simple($event_id = 0) {
     global $wpdb;
-    $tz_event = $wpdb->get_var($wpdb->prepare("SELECT timezone_string FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'"));
+    $tz_event = $wpdb->get_var($wpdb->prepare("SELECT timezone_string FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '%d'", $event_id));
 
     $timezone_format = _x('Y-m-d G:i:s', 'timezone date format');
 

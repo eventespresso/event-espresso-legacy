@@ -460,7 +460,7 @@ function event_list_attendees() {
 		<?php } ?> 
 		
 		<?php if ( $EVT_ID ) { ?>
-		<a style="margin-left:5px" class="button-primary" href="admin.php?page=events&amp;action=edit&amp;event_id=<?php $EVT_ID?>">
+		<a style="margin-left:5px" class="button-primary" href="admin.php?page=events&amp;action=edit&amp;event_id=<?php echo $EVT_ID?>">
 			<?php _e('Edit Event', 'event_espresso')?>
 		</a>
 		<?php } ?> 

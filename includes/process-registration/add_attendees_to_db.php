@@ -403,7 +403,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$columns_and_values = array('attendee_id' => $primary_att_id, 'meta_key' => 'primary_attendee', 'meta_value' => 1);
 				$data_formats = array('%s', '%s', '%s');
 			
-				if (!$wpdb->prepare($wpdb->insert(EVENTS_ATTENDEE_META_TABLE, $columns_and_values, $data_formats))) {
+				if ( !$wpdb->insert(EVENTS_ATTENDEE_META_TABLE, $columns_and_values, $data_formats) ) {
 					$error = true;
 				}
 
@@ -542,7 +542,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
 								$SQL .= "ORDER BY q.id ASC";
 								
-								$questions_list = $wpdb->get_results($wpdb->prepare( $SQL ));
+								$questions_list = $wpdb->get_results($wpdb->prepare( $SQL, NULL ));
 								foreach ($questions_list as $question_list) {
 									if ($question_list->system_name != '') {
 										$ext_att_data_source[$question_list->system_name] = $att_data_source['x_attendee_' . $question_list->system_name][$k];

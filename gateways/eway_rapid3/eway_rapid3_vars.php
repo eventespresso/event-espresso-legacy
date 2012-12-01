@@ -9,8 +9,8 @@
  */
 function espresso_gateway_get_payment_data($registrationId){
 	global $wpdb;
-	$SQL = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id='" . $registrationId . "' LIMIT 1";
-	$payment_data['attendee_id'] = $wpdb->get_var( $wpdb->prepare( $SQL ));
+	$SQL = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id='%s' LIMIT 1";
+	$payment_data['attendee_id'] = $wpdb->get_var( $wpdb->prepare( $SQL, $registrationId ) );
 	
 	$payment_data['attendee_id'] = apply_filters( 'filter_hook_espresso_transactions_get_attendee_id', $payment_data['attendee_id'] );
 	$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);

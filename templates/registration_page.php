@@ -78,7 +78,7 @@ if (!function_exists('register_attendees')) {
             $sql .= " LIMIT 0,1";
         }
 		
-        $data->event = $wpdb->get_row( $wpdb->prepare( $sql ), OBJECT);
+        $data->event = $wpdb->get_row( $wpdb->prepare( $sql, NULL ), OBJECT);
         $num_rows = $wpdb->num_rows;
 
         //Build the registration page

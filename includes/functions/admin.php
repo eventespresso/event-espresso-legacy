@@ -1522,7 +1522,7 @@ function espresso_get_user_questions($user_id = null, $question_id = null, $use_
 
 	$sql .= " ORDER BY sequence, id ASC ";
 
-	$questions = $wpdb->get_results( $wpdb->prepare($sql) );
+	$questions = $wpdb->get_results( $wpdb->prepare($sql, NULL) );
 
 	return ( $use_filters) ? apply_filters('espresso_get_user_questions_questions', $questions, $user_id, $num) : $questions;
 }
@@ -1541,7 +1541,7 @@ function espresso_get_user_questions_for_group( $group_id, $user_id = null, $use
     $sql .= " WHERE qgr.group_id = " . $group_id;
     $sql .= " ORDER BY q.sequence, q.id ASC ";
 
-    $questions = $wpdb->get_results($wpdb->prepare($sql) );
+    $questions = $wpdb->get_results($wpdb->prepare($sql, NULL) );
 
     foreach ( $questions as $question ) {
   		$q_attached[] = $question->id;
@@ -1600,7 +1600,7 @@ function espresso_get_user_question_groups($user_id = null, $use_filters = true,
 
 	$sql .= ( empty($group_id) ) ? " ORDER BY id ASC " : " ORDER BY group_order ";
 
-	$groups = $wpdb->get_results( $wpdb->prepare($sql) );
+	$groups = $wpdb->get_results( $wpdb->prepare($sql, NULL) );
 
 	return $use_filters ? apply_filters('espresso_get_user_groups_groups', $groups, $user_id, $num) : $groups;		
 }
