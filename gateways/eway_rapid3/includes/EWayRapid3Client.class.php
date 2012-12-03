@@ -47,10 +47,12 @@ class EWayRapid3Client{
 	 * @return string 
 	 */
 	private function getEndpoint($path='CreateAccessCode'){
-		if($this->useSandbox)
-			return self::BASE_URL.$path.'.json';
-		else
+		if($this->useSandbox){
 			return self::BASE_SANDBOX_URL.$path.'.json';
+		}
+		else{
+			return self::BASE_URL.$path.'.json';
+		}
 	}
 	function __construct($initVariables=array()){
 		if(empty($initVariables['apiKey']) || empty($initVariables['apiPassword']))

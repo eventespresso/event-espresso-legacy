@@ -35,7 +35,7 @@ function event_espresso_eway_rapid3_payment_settings() {
 		$eway_rapid3_settings['eway_rapid3_api_key'] = '';
 		$eway_rapid3_settings['eway_rapid3_api_username'] = '';
 		$eway_rapid3_settings['eway_rapid3_api_password'] = '';
-		$eway_rapid3_settings['currency_format'] = 'USD';
+		$eway_rapid3_settings['currency_format'] = 'AUD';
 		//$eway_rapid3_settings['eway_rapid3_api_signature'] = '';
 		$eway_rapid3_settings['eway_rapid3_api_credit_cards'] = '';
 		$eway_rapid3_settings['eway_rapid3_use_sandbox'] = false;
