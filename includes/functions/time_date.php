@@ -180,20 +180,20 @@ if (!function_exists('event_espresso_time_dropdown')) {
 			// attendee count from inner query from the individual reg limits returned by the outer query
 			$SQL = "SELECT ESE.*, ( ESE.reg_limit - ";
 			// count # of attendees with good registrations where event start and end times match outer query start and end times
-			$SQL .= "( SELECT count(id) FROM wp_events_attendee ATT ";
+			$SQL .= "( SELECT count(id) FROM " . EVENTS_START_END_TABLE . " ATT ";
 			$SQL .= "WHERE ATT.event_id= %d ";
 			$SQL .= "AND ATT.payment_status != 'Incomplete' ";
 			$SQL .= "AND ATT.payment_status != 'Refund' ";
 			$SQL .= "AND ATT.event_time = ESE.start_time ";
 			$SQL .= "AND ATT.end_time = ESE.end_time ) ";
 			$SQL .= ") AS available_spaces ";
-			$SQL .= "FROM wp_events_start_end ESE ";
+			$SQL .= "FROM " . EVENTS_START_END_TABLE . " ESE ";
 			$SQL .= "WHERE ESE.event_id= %d ";
 			$SQL .= "GROUP BY ESE.id";
    			$event_times = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id, $event_id ));
 
         } else {
-			$SQL = "SELECT ESE.* FROM wp_events_start_end ESE ";
+			$SQL = "SELECT ESE.* FROM " . EVENTS_START_END_TABLE . " ESE ";
 			$SQL .= "WHERE ESE.event_id= %d ";
 			$SQL .= "GROUP BY ESE.id";	 	
   			$event_times = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ));
