@@ -12,7 +12,7 @@ function event_espresso_config_page_styles() {
 		switch ($_REQUEST['page']) {
 			case ( 'events' ):
 			case ( 'espresso_reports' ):
-				wp_enqueue_style('jquery-ui-style', EVENT_ESPRESSO_PLUGINFULLURL . 'css/ui-lightness/jquery-ui-1.7.3.custom.css');
+				wp_enqueue_style('jquery-ui-style', EVENT_ESPRESSO_PLUGINFULLURL . 'css/jquery-ui-1.9.2.custom.min.css');
 				break;
 		}
 		if (isset($_REQUEST['event_admin_reports'])) {
@@ -50,7 +50,7 @@ function event_espresso_config_page_scripts() {
 		wp_enqueue_script('jquery-ui-tabs');
 
 		//Load datepicker script
-		wp_enqueue_script('jquery-ui-datepicker', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/ui.datepicker.min.js', array('jquery', 'jquery-ui-core'));
+		wp_enqueue_script('jquery-ui-datepicker');
 	}
 
 	if (isset($_REQUEST['event_admin_reports']) && $_REQUEST['event_admin_reports'] == 'add_new_attendee' || $_REQUEST['page'] == 'form_groups' || $_REQUEST['page'] == 'form_builder' || $_REQUEST['page'] == 'event_staff' || $_REQUEST['page'] == 'event_categories' || $_REQUEST['page'] == 'event_venues' || $_REQUEST['page'] == 'discounts' || $_REQUEST['page'] == 'groupons') {
