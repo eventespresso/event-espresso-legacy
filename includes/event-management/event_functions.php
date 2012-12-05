@@ -203,7 +203,7 @@ function event_espresso_multi_price_update($event_id) {
 //@param optional $event_id = pass the event id to get the categories assigned to the event.
 function event_espresso_get_categories($event_id = 0, $is_fes = false) {
     global $wpdb;
-	
+	$manage = '';
 	//Don't show manage link if using front-end event submission
 	if ( $is_fes == false )
 		$manage = '<p><a href="admin.php?page=event_categories" target="_blank">' . __('Manage Categories', 'event_espresso') . '</a></p>';
@@ -259,7 +259,7 @@ function event_espresso_get_categories($event_id = 0, $is_fes = false) {
 //@param optional $is_fes = Used for the front-end event submission tool. It hides the "Manage Categories" if true.
 function event_espresso_categories_dd($event_id = 0, $is_fes = false) {
     global $wpdb;
-	
+	$manage = '';
 	//Don't show manage link if using front-end event submission
 	if ( $is_fes == false )
 		$manage = '<p><a href="admin.php?page=event_categories" target="_blank">' . __('Manage Categories', 'event_espresso') . '</a></p>';
