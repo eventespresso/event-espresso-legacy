@@ -146,7 +146,7 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 										</tr>
 <tr>
 											<th><label for="display_featured_image">
-													<?php _e('Diplay featured images in the event list and registration pages?', 'event_espresso'); ?>
+													<?php _e('Display featured images in the event list and registration pages?', 'event_espresso'); ?>
 												</label></th>
 											<td><?php echo select_input('display_featured_image', $values, isset($org_options['display_featured_image']) ? $org_options['display_featured_image'] : 'N'); ?><br />
 												<span class="description"><?php _e('This setting offers an simple solution to display featured images in your event templates. Height and width attributes are set within the featured image upload tool. Some customization may be required to produce the desired results within your WordPress theme.', 'event_espresso'); ?></span></td>
