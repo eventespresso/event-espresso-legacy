@@ -39,7 +39,7 @@ function event_espresso_form_builder_update(){
 				'admin_only'		=> isset( $_POST['admin_only'] ) && ! empty( $_POST['admin_only'] ) ? wp_strip_all_tags( $_POST['admin_only'] ) : 'N'
 		);
 		
-		$set_format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%d',  );
+		$set_format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s',  );
 		$where_cols_and_values = array( 'id' => $question_id );
 		$where_format = array( '%d');
 		// run the update
