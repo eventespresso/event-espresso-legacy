@@ -32,7 +32,7 @@ function event_espresso_categories_config_mnu() {
 					$wpdb->query($sql);
 				endwhile;
 			}
-			if ($_REQUEST['action'] == 'delete_category') {
+			if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'delete_category') {
 				//Delete discount data
 				$sql = "DELETE FROM " . EVENTS_CATEGORY_TABLE . " WHERE id='" . $_REQUEST['id'] . "'";
 				$wpdb->query($sql);
