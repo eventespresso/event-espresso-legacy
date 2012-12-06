@@ -160,6 +160,7 @@
 
 .event_espresso_form_wrapper .coupon_code { margin:2em 0; }
 
+/* FEM Styles */
 .ee_fem_form_field label.date_time{
 	width:80px;
 	float:none;
@@ -172,6 +173,33 @@
 }
 .ee_fem_form_field input.ee_fem_time_value, .ee_fem_form_field input.ee_fem_date_value {
 	width: 80px;
+}
+
+ul.dynamic-price-input-form {
+	
+}
+
+.event_espresso_form_wrapper ul li {
+    margin-left: 0 !important;
+}
+
+input.price-name-input{
+	width:45% !important;
+}
+
+#ee_fem_form div.title {
+	float:left !important;
+	width:40%;
+	clear:none;
+}
+#ee_fem_form div.reg_limit {
+	float:right !important;
+	width:30%;
+	text-align:left !important;
+	clear:none;
+}
+#ee_fem_form div.reg_limit label, #ee_fem_form div.title label, #ee_fem_form p.title label{
+	text-align:left !important;
 }
 
 select.small { width:25px; }

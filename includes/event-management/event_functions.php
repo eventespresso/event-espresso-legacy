@@ -105,9 +105,9 @@ function event_espresso_multi_price_update($event_id) {
                         $price->price_type = "General Admission";
                     if (!isset($price->event_cost))
                         $price->event_cost = "0.00";
-                    echo '<label class="dynamic-price-input-label" for="add-price-type-' . $price_counter++ . '">' . __('Name', 'event_espresso') . ' ' . $price_counter++ . '</label> <input class="dynamic-price-input" size="10" id="add-price-type' . $price_counter++ . '" type="text" name="price_type[]" value="' . $price->price_type . '" /> ';
+                    echo '<label class="dynamic-price-input-label price-name" for="add-price-type-' . $price_counter++ . '">' . __('Name', 'event_espresso') . ' ' . $price_counter++ . '</label> <input class="dynamic-price-input price-name-input price-input" size="10" id="add-price-type' . $price_counter++ . '" type="text" name="price_type[]" value="' . $price->price_type . '" /> ';
                     $org_options['currency_symbol'] = isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : '';
-                    echo '<label class="dynamic-price-input-label" for="add-price">' . __('Price', 'event_espresso') . ' ' . $org_options['currency_symbol'] . '</label><input class="dynamic-price-input" size="5" id="add-price" type="text" name="event_cost[]" value="' . $price->event_cost . '" /></p> ';
+                    echo '<label class="dynamic-price-input-label" for="add-price">' . __('Price', 'event_espresso') . ' ' . $org_options['currency_symbol'] . '</label><input class="dynamic-price-input price-input" size="5" id="add-price" type="text" name="event_cost[]" value="' . $price->event_cost . '" /></p> ';
 
                     echo '<p class="dynamic-price-input-field"><label class="dynamic-price-input-label" for="add-surcharge">' . __('Surcharge', 'event_espresso') . '</label> <input class="dynamic-price-input" size="5" id="add-surcharge" type="text"  name="surcharge[]" value="' . $price->surcharge . '" /></p> ';
                     echo '<p class="dynamic-price-input-field"><label class="dynamic-price-input-label" for="surcharge-type">' . __('Surcharge Type', 'event_espresso') . '</label>';
@@ -129,14 +129,14 @@ function event_espresso_multi_price_update($event_id) {
                 ?>
 		<li class="dynamic-price-input-li" id="add-price-name">
 			<p class="event_form_field ee_fem_form_field dynamic-price-input-field">
-				<label class="dynamic-price-input-label" for="add-price-type-<?php echo $price_counter ?>">
+				<label class="dynamic-price-input-label price-name" for="add-price-type-<?php echo $price_counter ?>">
 					<?php _e('Name', 'event_espresso'); ?>
 					<?php echo $price_counter ?>:</label>
-				<input class="dynamic-price-input" size="10" id="add-price-type-<?php echo $price_counter ?>" type="text"  name="price_type[]" value="General Admission">
-				<label class="dynamic-price-input-label" for="add-event-cost">
+				<input class="dynamic-price-input price-name-input" id="add-price-type-<?php echo $price_counter ?>" type="text"  name="price_type[]" value="General Admission">
+				<label class="dynamic-price-input-label price" for="add-event-cost">
 					<?php _e('Price', 'event_espresso'); ?>
 				</label>
-				<input class="dynamic-price-input" size="5" id="add-event-cost" type="text"  name="event_cost[]" value="0.00">
+				<input class="dynamic-price-input price-input" size="5" id="add-event-cost" type="text"  name="event_cost[]" value="0.00">
 			</p>
 			<p class="event_form_field ee_fem_form_field dynamic-price-input-field">
 				<label class="dynamic-price-input-label" for="add-surcharge">
@@ -162,8 +162,7 @@ function event_espresso_multi_price_update($event_id) {
             }
             ?>
 	</ul>
-	<p> (
-		<?php _e('enter 0.00 for free events, enter 2 place decimal i.e.', 'event_espresso'); ?>
+	<p> (<?php _e('enter 0.00 for free events, enter 2 place decimal i.e.', 'event_espresso'); ?>
 		<?php echo isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : ''; ?> 7.00) </p>
 	<?php
         global $espresso_premium;
@@ -180,7 +179,7 @@ function event_espresso_multi_price_update($event_id) {
         function addPriceInput(divName){
             var next_counter = counter_static(price_counter);
             var newdiv =  document.createElement("li");
-            newdiv.innerHTML = "<p><label for='add-price-type-" + (next_counter) + "'><?php _e('Name', 'event_espresso'); ?> " + (next_counter) + "</label> <input type='text' size='10' name='price_type[]' /> <label for='add-price" + (next_counter) + "'><?php _e('Price', 'event_espresso'); ?></label> <input id='add-price-" + (next_counter) + "' type='text' size='5' name='event_cost[]' /></p><p><label for='add-surcharge-" + (next_counter) + "' ><?php _e('Surcharge', 'event_espresso'); ?></label> <input size='5' id='add-surcharge-" + (next_counter) + "' type='text'  name='surcharge[]' value='<?php echo $org_options['surcharge'] ?>' /></p> <p><label for='add-surcharge-type-" + (next_counter) + "'><?php _e('Surcharge Type', 'event_espresso'); ?> <select id='add-surcharge-type-" + (next_counter) + "' name='surcharge_type[]'><option value = 'flat_rate' <?php selected($org_options['surcharge_type'], 'flat_rate') ?>><?php _e('Flat Rate', 'event_espresso'); ?></option><option value = 'pct' <?php selected($org_options['surcharge_type'], 'pct') ?>><?php _e('Percent', 'event_espresso'); ?></option></select></p>";
+            newdiv.innerHTML = "<p><label for='add-price-type-" + (next_counter) + "'><?php _e('Name', 'event_espresso'); ?> " + (next_counter) + "</label> <input class='dynamic-price-input price-name-input' type='text' size='10' name='price_type[]' /> <label for='add-price" + (next_counter) + "'><?php _e('Price', 'event_espresso'); ?></label> <input id='add-price-" + (next_counter) + "' type='text' size='5' name='event_cost[]' /></p><p><label for='add-surcharge-" + (next_counter) + "' ><?php _e('Surcharge', 'event_espresso'); ?></label> <input size='5' id='add-surcharge-" + (next_counter) + "' type='text'  name='surcharge[]' value='<?php echo $org_options['surcharge'] ?>' /></p> <p><label for='add-surcharge-type-" + (next_counter) + "'><?php _e('Surcharge Type', 'event_espresso'); ?> <select id='add-surcharge-type-" + (next_counter) + "' name='surcharge_type[]'><option value = 'flat_rate' <?php selected($org_options['surcharge_type'], 'flat_rate') ?>><?php _e('Flat Rate', 'event_espresso'); ?></option><option value = 'pct' <?php selected($org_options['surcharge_type'], 'pct') ?>><?php _e('Percent', 'event_espresso'); ?></option></select></p>";
             newdiv.innerHTML += "<?php echo '<img class=\"remove-item\" title=\"' . __('Remove this Price', 'event_espresso') . '\" onclick=\"this.parentNode.parentNode.removeChild(this.parentNode);\" src=\"' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif\" alt=\"' . __('Remove Price', 'event_espresso') . '\" />'; ?>";
             document.getElementById(divName).appendChild(newdiv);
             counter++;

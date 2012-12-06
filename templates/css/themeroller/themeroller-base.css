@@ -357,6 +357,7 @@ ul#espresso_payment_buttons li form {
 	vertical-align: top; 
 }
 
+/* FEM Styles*/
 .ee_fem_form_field label.date_time{
 	width:80px;
 }
@@ -364,6 +365,29 @@ ul#espresso_payment_buttons li form {
 .ee_fem_form_field label.time{
 	width:50px;
 	margin-left:30px;
+}
+
+ul.dynamic-price-input-form {
+	
+}
+
+.event_espresso_form_wrapper ul li {
+    margin-left: 0 !important;
+}
+
+input.price-name-input{
+	width:45% !important;
+}
+
+#ee_fem_form div.title {
+	float:left !important;
+	width:40%;
+	clear:none;
+}
+#ee_fem_form div.reg_limit {
+	float:right !important;
+	width:30%;
+	clear:none;
 }
 
 .event_prices label, .event_time label {
