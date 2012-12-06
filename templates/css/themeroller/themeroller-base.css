@@ -367,14 +367,6 @@ ul#espresso_payment_buttons li form {
 	margin-left:30px;
 }
 
-ul.dynamic-price-input-form {
-	
-}
-
-.event_espresso_form_wrapper ul li {
-    margin-left: 0 !important;
-}
-
 input.price-name-input{
 	width:45% !important;
 }
