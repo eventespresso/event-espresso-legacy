@@ -105,7 +105,7 @@ function replace_shortcodes($message, $data) {
 					'event_id' => $data->attendee->event_id,
 					'registration_id' => $data->attendee->registration_id,
 					'event_name' => $data->event->event_name,
-					'event_desc' => wp_kses($data->event->event_desc),
+					'event_desc' => wp_kses($data->event->event_desc, ''),
 					'contact_email' => empty($data->event->alt_email) ? $org_options['contact_email'] : $data->event->alt_email,
 					'start_time' => empty($event->start_time) ? '' : $event->start_time,
 					'start_date' => event_date_display($data->attendee->start_date, get_option('date_format')),
