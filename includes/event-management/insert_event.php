@@ -8,17 +8,17 @@ function add_event_to_db($recurrence_arr = array()) {
     global $wpdb, $org_options, $current_user, $espresso_premium;
 	
 	//Set front end event manager to false
-	$use_fes = false;
+	$use_fem = false;
 	$is_espresso_event_manager = false;
 		
 	//If using the Espresso Event Manager
 	if ( isset($_REQUEST['ee_fem_action']) && $_REQUEST['ee_fem_action'] == 'ee_fem_add'){
 		//Security check using nonce
 		if ( empty($_POST['ee_fem_nonce']) || !wp_verify_nonce($_POST['ee_fem_nonce'],'espresso_form_check') ){
-			print '<h3 class="fes_error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
+			print '<h3 class="fem_error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
 			return;
 		}
-		$use_fes = true;
+		$use_fem = true;
 		if ( function_exists('espresso_member_data') && espresso_member_data('role') == 'espresso_event_manager' ){
 			global $espresso_manager;
 			$event_manager_approval = isset($espresso_manager['event_manager_approval']) && $espresso_manager['event_manager_approval'] == 'Y' ? true : false;
@@ -27,7 +27,7 @@ function add_event_to_db($recurrence_arr = array()) {
 	}
 
     //Don't show sql errors if using the front-end event manager
-	if ( $use_fes == false )
+	if ( $use_fem == false )
 		$wpdb->show_errors();
 
     static $recurrence_id = null;
@@ -102,7 +102,7 @@ function add_event_to_db($recurrence_arr = array()) {
         $is_active = !empty($_REQUEST['is_active']) ? $_REQUEST['is_active'] : 'Y';
         $event_status = !empty($_REQUEST['event_status']) ? $_REQUEST['event_status'] : 'A';
 		
-		if ( $is_espresso_event_manager == true && $use_fes == true && $event_manager_approval == true ) {
+		if ( $is_espresso_event_manager == true && $use_fem == true && $event_manager_approval == true ) {
 			$event_status = 'P';
 		}
 
@@ -486,7 +486,7 @@ function add_event_to_db($recurrence_arr = array()) {
      * End recursion, as part of recurring events.
      */
 	
-	if ( $use_fes == false )
+	if ( $use_fem == false )
 		return $last_event_id;
 }
 
