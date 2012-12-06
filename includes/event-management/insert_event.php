@@ -12,9 +12,9 @@ function add_event_to_db($recurrence_arr = array()) {
 	$is_espresso_event_manager = false;
 		
 	//If using the Espresso Event Manager
-	if ( isset($_REQUEST['ee_fes_action']) && $_REQUEST['ee_fes_action'] == 'ee_fes_add'){
+	if ( isset($_REQUEST['ee_fem_action']) && $_REQUEST['ee_fem_action'] == 'ee_fem_add'){
 		//Security check using nonce
-		if ( empty($_POST['ee_fes_nonce']) || !wp_verify_nonce($_POST['ee_fes_nonce'],'espresso_form_check') ){
+		if ( empty($_POST['ee_fem_nonce']) || !wp_verify_nonce($_POST['ee_fem_nonce'],'espresso_form_check') ){
 			print '<h3 class="fes_error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
 			return;
 		}

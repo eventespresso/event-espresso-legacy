@@ -160,17 +160,17 @@
 
 .event_espresso_form_wrapper .coupon_code { margin:2em 0; }
 
-.ee_fes_form_field label.date_time{
+.ee_fem_form_field label.date_time{
 	width:80px;
 	float:none;
 }
 
-.ee_fes_form_field label.time{
+.ee_fem_form_field label.time{
 	width:50px;
 	margin-left:30px;
 	
 }
-.ee_fes_form_field input.ee_fes_time_value, .ee_fes_form_field input.ee_fes_date_value {
+.ee_fem_form_field input.ee_fem_time_value, .ee_fem_form_field input.ee_fem_date_value {
 	width: 80px;
 }
 
@@ -278,7 +278,7 @@ table.price_list td{
 }
 
 /* Autocomplete */
-#ee_autocomplete, #ee_fes_autocomplete{ width:400px; }
+#ee_autocomplete, #ee_fem_autocomplete{ width:400px; }
 #ee_autocomplete{ }
 .ui-autocomplete {
 	list-style:none; width:400px; background:#fff; 
@@ -294,7 +294,7 @@ table.price_list td{
 /* Media Queries */
 @media (max-width: 990px) {
 	 .ajx_loading {	 width:300px; height:300px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:300px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:300px; }
 	.ui-autocomplete { width:300px; }
 	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
 }
@@ -306,13 +306,13 @@ table.price_list td{
 }*/
 @media (max-width: 850px) {
 	 .ajx_loading {	 width:250px; height:250px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:250px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:250px; }
 	.ui-autocomplete { width:250px; }
 	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
 }
 @media (max-width: 800px) {
 	 .ajx_loading {	 width:400px; height:400px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:400px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:400px; }
 	.ui-autocomplete { width:400px; }
 	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
 	.event_form_field input.ee-reg-page-text-input,
@@ -323,7 +323,7 @@ table.price_list td{
 }
 @media (max-width: 700px) {
 	 .ajx_loading {	 width:300px; height:300px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:300px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:300px; }
 	.ui-autocomplete { width:300px; }
 	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
 	.event_form_field input.ee-reg-page-text-input,
@@ -343,7 +343,7 @@ table.price_list td{
 	.event_form_submit,
 	.espresso_add_subtract_attendees { padding-left:0; }
 	.ajx_loading {	 width:250px; height:250px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:250px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:250px; }
 	.ui-autocomplete { width:250px; }
 	.event_form_field input.ee-reg-page-text-input,
 	.event_form_field textarea.ee-reg-page-text-input {
@@ -362,7 +362,7 @@ table.price_list td{
 	.event_form_submit,
 	.espresso_add_subtract_attendees { padding-left:0; }
 	.ajx_loading {	 width:210px; height:210px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:210px; margin:0 0 .5em; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:210px; margin:0 0 .5em; }
 	.ui-autocomplete { width:210px; }
 	.event_form_field input.ee-reg-page-text-input,
 	.event_form_field textarea.ee-reg-page-text-input {
@@ -382,7 +382,7 @@ table.price_list td{
 	.espresso_add_subtract_attendees { padding-left:0; }
 	#espresso-search-form-dv { padding:1em; }
 	.ajx_loading {	 width:170px; height:170px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:170px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:170px; }
 	.ui-autocomplete { width:170px; }
 	.event_form_field input.ee-reg-page-text-input,
 	.event_form_field textarea.ee-reg-page-text-input {
@@ -402,7 +402,7 @@ table.price_list td{
 	.espresso_add_subtract_attendees { padding-left:0; }
 	#espresso-search-form-dv { padding:1em; }
 	.ajx_loading {	 width:130px; height:130px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:130px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:130px; }
 	.ui-autocomplete { width:130px; }
 	.event_form_field input.ee-reg-page-text-input,
 	.event_form_field textarea.ee-reg-page-text-input {
@@ -422,7 +422,7 @@ table.price_list td{
 	.espresso_add_subtract_attendees { padding-left:0; }
 	#espresso-search-form-dv { padding:1em; text-align: right; }
 	 .ajx_loading {	 width:150px; height:150px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:150px; margin:0 0 .5em; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:150px; margin:0 0 .5em; }
 	.ui-autocomplete { width:150px; }
 	.event_form_field input.ee-reg-page-text-input,
 	.event_form_field textarea.ee-reg-page-text-input {
