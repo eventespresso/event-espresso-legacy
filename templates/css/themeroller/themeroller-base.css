@@ -348,9 +348,24 @@ ul#espresso_payment_buttons li form {
 }
 .event_espresso_form_wrapper label,
 .event_espresso_form_wrapper span.label {
-	display: inline-block; width:150px; padding:0 10px 0 0; 
-	text-align: left; font-size:.9em; line-height:1em; vertical-align: top; 
+	display: inline-block; 
+	width:150px; 
+	padding:0 10px 0 0; 
+	text-align: left; 
+	font-size:.9em; 
+	line-height:1em; 
+	vertical-align: top; 
 }
+
+.ee_fes_form_field label.date_time{
+	width:80px;
+}
+
+.ee_fes_form_field label.time{
+	width:50px;
+	margin-left:30px;
+}
+
 .event_prices label, .event_time label {
 	display: block;
 	float: none;

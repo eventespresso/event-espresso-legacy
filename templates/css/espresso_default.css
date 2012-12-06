@@ -160,6 +160,20 @@
 
 .event_espresso_form_wrapper .coupon_code { margin:2em 0; }
 
+.ee_fes_form_field label.date_time{
+	width:80px;
+	float:none;
+}
+
+.ee_fes_form_field label.time{
+	width:50px;
+	margin-left:30px;
+	
+}
+.ee_fes_form_field input.ee_fes_time_value, .ee_fes_form_field input.ee_fes_date_value {
+	width: 80px;
+}
+
 select.small { width:25px; }
 select.med { width: 100px; }
 select.wide { width: 175px; }
