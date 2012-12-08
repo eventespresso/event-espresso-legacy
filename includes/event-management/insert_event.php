@@ -97,7 +97,7 @@ function add_event_to_db($recurrence_arr = array()) {
         $event_location = ($address != '' ? $address . ' ' : '') . ($address2 != '' ? '<br />' . $address2 : '') . ($city != '' ? '<br />' . $city : '') . ($state != '' ? ', ' . $state : '') . ($zip != '' ? '<br />' . $zip : '') . ($country != '' ? '<br />' . $country : '');
         $reg_limit = !empty($_REQUEST['reg_limit']) ? $_REQUEST['reg_limit'] : '999999';
         $allow_multiple = !empty($_REQUEST['allow_multiple']) ? $_REQUEST['allow_multiple'] : 'N';
-        $additional_limit = !empty($_REQUEST['additional_limit']) ? $_REQUEST['additional_limit'] : '5';
+        $additional_limit = !empty($_REQUEST['additional_limit']) && $_REQUEST['additional_limit'] > 0 ? $_REQUEST['additional_limit'] : '5';
         $member_only = !empty($_REQUEST['member_only']) ? $_REQUEST['member_only'] : 'N';
         $is_active = !empty($_REQUEST['is_active']) ? $_REQUEST['is_active'] : 'Y';
         $event_status = !empty($_REQUEST['event_status']) ? $_REQUEST['event_status'] : 'A';

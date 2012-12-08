@@ -179,7 +179,7 @@ function update_event($recurrence_arr = array()) {
         $overflow_event_id = (empty($_REQUEST['overflow_event_id'])) ? '0' : $_REQUEST['overflow_event_id'];
         $allow_overflow = empty($_REQUEST['allow_overflow']) ? 'N' : $_REQUEST['allow_overflow'];
 
-        $additional_limit = $_REQUEST['additional_limit'];
+        $additional_limit = !empty($_REQUEST['additional_limit']) && $_REQUEST['additional_limit'] > 0 ? $_REQUEST['additional_limit'] : '5';
         //$member_only=$_REQUEST['member_only'];
         $member_only = empty($_REQUEST['member_only']) ? 'N' : $_REQUEST['member_only'];
 
