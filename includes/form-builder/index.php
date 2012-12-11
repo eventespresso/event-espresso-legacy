@@ -46,7 +46,8 @@ function event_espresso_questions_config_mnu() {
 				require_once("questions/update_question.php");
 				event_espresso_form_builder_update();
 			}
-
+			
+			$button_style = 'button-primary';
 			//Figure out which view to display
 			if (isset($_REQUEST['action'])) {
 				switch ($_REQUEST['action']) {
@@ -65,10 +66,12 @@ function event_espresso_questions_config_mnu() {
 						} else {
 							require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/pricing_table.php');
 						}
+						$button_style = 'button-secondary';
 						break;
 					case 'edit_question':
 						require_once("questions/edit_question.php");
 						event_espresso_form_builder_edit();
+						$button_style = 'button-secondary';
 						break;
 					case 'delete_question':
 						if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/form-builder/questions/delete_question.php')) {
@@ -173,9 +176,9 @@ function event_espresso_questions_config_mnu() {
 					</strong>
 					<input type="hidden" name="action" value="delete_question" />
 					<input name="delete_question" type="submit" class="button-secondary" id="delete_question" value="<?php _e('Delete Question', 'event_espresso'); ?>" style="margin-left:10px 0 0 10px;" onclick="return confirmDelete();">
-					<a  style="margin-left:5px"class="button-primary" href="admin.php?page=form_builder&amp;action=new_question"><?php _e('Add New Question', 'event_espresso'); ?></a>
-					<a  style="margin-left:5px"class="button-primary" href="admin.php?page=form_groups"><?php _e('Question Groups', 'event_espresso'); ?></a>
-					<a style="color:#FFF; text-decoration:none; margin-left:5px"class="button-primary thickbox" href="#TB_inline?height=400&width=500&inlineId=question_info">Help</a>
+					<a  style="margin-left:5px"class="button-secondary" href="admin.php?page=form_groups"><?php _e('Question Groups', 'event_espresso'); ?></a>
+					<a style="margin-left:5px"class="button-secondary thickbox" href="#TB_inline?height=400&width=500&inlineId=question_info">Help</a>
+					<a  style="margin-left:5px"class="<?php echo $button_style; ?>" href="admin.php?page=form_builder&amp;action=new_question"><?php _e('Add New Question', 'event_espresso'); ?></a>
 				</p>
 			</div>
 		</form>

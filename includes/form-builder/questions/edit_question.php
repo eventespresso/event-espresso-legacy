@@ -47,7 +47,7 @@ function event_espresso_form_builder_edit(){
 			<p class="intro"> <?php _e('Edit the question using the form below.  By default all participants will be asked for their first name, last name, and email address.','event_espresso'); ?></p>
 					<?php
 					if ($system_question == true){
-						echo '<p class="inform">'.__('Attention: This is a "System Question", some settings may be disabled.','event_espresso').'</p>';
+						echo '<p class="yellow_inform">'.__('Attention: This is a "System Question", some settings may be disabled.','event_espresso').'</p>';
 					}
 					?>
 
@@ -154,7 +154,7 @@ function event_espresso_form_builder_edit(){
 				</tr>
 			</tbody>
 		</table>
-		<p class="submit-footer">
+		<p>
 			<input name="edit_action" value="update" type="hidden">
 			<input type="hidden" name="action" value="edit_question">
 			<input name="question_id" value="<?php echo $question_id; ?>" type="hidden">

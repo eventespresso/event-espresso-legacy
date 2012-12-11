@@ -90,7 +90,7 @@ function event_espresso_form_builder_new(){
 					</tr>
 				</tbody>
 			</table>
-		<p class="submit-footer">
+		<p>
 			<input name="action" value="insert" type="hidden" />
 			<input class="button-primary" name="Submit" value="Add Question" type="submit" />
 			<?php wp_nonce_field( 'espresso_form_check', 'add_new_question' ); ?>
