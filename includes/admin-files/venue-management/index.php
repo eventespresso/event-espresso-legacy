@@ -67,10 +67,29 @@ function event_espresso_venue_config_mnu(){
         }
 	}
 
-	if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'update' ){require_once("update_venue.php");update_event_venue();}
-	if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'add' ){require_once("add_venue_to_db.php");add_venue_to_db();}
-	if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'add_new_venue'){require_once("add_new_venue.php");add_new_event_venue();}
-	if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'edit'){require_once("edit_venue.php");edit_event_venue();}
+	$button_style = 'button-primary';
+		if (isset($_REQUEST['action'])) {
+			switch ($_REQUEST['action']) {
+				case 'update':
+					require_once("update_venue.php");
+					update_event_venue();
+					break;
+				case 'add':
+					require_once("add_venue_to_db.php");
+					add_venue_to_db();
+					break;
+				case 'add_new_venue':
+					require_once("add_new_venue.php");
+					add_new_event_venue();
+					$button_style = 'button-secondary';
+					break;
+				case 'edit':
+					require_once("edit_venue.php");
+					edit_event_venue();
+					$button_style = 'button-secondary';
+					break;
+			}
+		}
 	
 ?>
 				<form id="form1" name="form1" method="post" action="<?php echo $_SERVER["REQUEST_URI"]?>">
@@ -157,7 +176,7 @@ function event_espresso_venue_config_mnu(){
 							<?php _e('Check All','event_espresso'); ?>
 							</strong>
 							<input name="delete_venue" type="submit" class="button-secondary" id="delete_venue" value="<?php _e('Delete Venue','event_espresso'); ?>" style="margin-left:10px 0 0 10px;" onclick="return confirmDelete();">
-							<a  style="margin-left:5px"class="button-primary" href="admin.php?page=event_venues&amp;action=add_new_venue">
+							<a  style="margin-left:5px"class="<?php echo $button_style; ?>" href="admin.php?page=event_venues&amp;action=add_new_venue">
 							<?php _e('Add New Venue','event_espresso'); ?>
 							</a> </p>
 					</div>
