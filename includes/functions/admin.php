@@ -729,46 +729,6 @@ function event_espresso_is_url($url) {
 	return preg_match('~^https?://~', $url);
 }
 
-/**
- * Show plugin changes
- */
-function event_espresso_plugin_update_message($url) {
-	$data = event_espresso_url_get($url);
-
-	if ($data) {
-		$matches = null;
-		if (preg_match('~==\s*Changelog\s*==\s*=\s*[0-9.]+\s*=(.*)(=\s*[0-9.]+\s*=|$)~Uis', $data, $matches)) {
-			$changelog = (array) preg_split('~[\r\n]+~', trim($matches[1]));
-
-			echo '<div style="color: #f00;">Take a minute to update, here\'s why:</div><div style="font-weight: normal;">';
-			$ul = false;
-
-			foreach ($changelog as $index => $line) {
-				if (preg_match('~^\s*\*\s*~', $line)) {
-					if (!$ul) {
-						echo '<ul style="list-style: disc; margin-left: 20px;">';
-						$ul = true;
-					}
-					$line = preg_replace('~^\s*\*\s*~', '', htmlspecialchars($line));
-					echo '<li style="width: 50%; margin: 0; float: left; ' . ($index % 2 == 0 ? 'clear: left;' : '') . '">' . $line . '</li>';
-				} else {
-					if ($ul) {
-						echo '</ul><div style="clear: left;"></div>';
-						$ul = false;
-					}
-					echo '<p style="margin: 5px 0;">' . htmlspecialchars($line) . '</p>';
-				}
-			}
-
-			if ($ul) {
-				echo '</ul><div style="clear: left;"></div>';
-			}
-
-			echo '</div>';
-		}
-	}
-}
-
 function event_espresso_admin_news($url) {
 	return wp_remote_retrieve_body(wp_remote_get($url));
 }
