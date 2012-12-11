@@ -149,9 +149,9 @@ function event_espresso_txn() {
 		return;
 	}
 	
-	foreach ($active_gateways as $gateway => $path) {
+	/*foreach ($active_gateways as $gateway => $path) {
 		event_espresso_require_gateway($gateway . "/init.php");
-	}
+	}*/
 	$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
 	if ($payment_data['attendee_id'] == "") {
 		echo "ID not supplied.";
@@ -183,9 +183,6 @@ function deal_with_ideal() {
 	if (!empty($_POST['bank_id'])) {
 		$active_gateways = get_option('event_espresso_active_gateways', array());
 		if (!empty($active_gateways['ideal'])) {
-			foreach ($active_gateways as $gateway => $path) {
-				event_espresso_require_gateway($gateway . "/init.php");
-			}
 			$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
 			espresso_process_ideal($payment_data);
 		}

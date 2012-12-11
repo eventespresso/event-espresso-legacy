@@ -1043,6 +1043,21 @@ if (!function_exists('event_espresso_require_gateway')) {
 
 }
 
+//function to include all active gateways' code
+if(!function_exists('event_espresso_init_active_gateways')){
+	/**
+	 *  initialized each active gateway. this is added onto the 'plugins_loaded' hook so taht each active gateway will be called.
+	 * before each gateway was included only on pages with important shortcodes (like transaction, or payment) but that wasn't enough power
+	 * for some gateways (eg: the google checkout gateway needed to be able to add a hook on init for all page loads, which it coudln't do before)
+	 */
+	function event_espresso_init_active_gateways(){
+		$active_gateways = apply_filters('action_filter_espresso_active_gateways', get_option('event_espresso_active_gateways', array()));
+		foreach ($active_gateways as $gateway => $path) {
+			event_espresso_require_gateway($gateway . "/init.php");
+		}
+	}
+}
+
 //Function to include a template file. Checks user templates folder first, then default template.
 if (!function_exists('event_espresso_require_file')) {
 

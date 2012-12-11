@@ -785,7 +785,6 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				//Post the gateway page with the payment options
 				if ( $total_cost > 0 ) {
 ?>
-
 <div class="espresso_payment_overview event-display-boxes ui-widget" >
   <h3 class="section-heading ui-widget-header ui-corner-top">
 		<?php _e('Payment Overview', 'event_espresso'); ?>
