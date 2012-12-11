@@ -8,7 +8,6 @@ event_espresso_require_gateway("google_checkout/google_checkout_vars.php");
 // This is for the transaction processing
 
 if (!empty($_REQUEST['type']) && $_REQUEST['type'] == 'google_checkout') {
-	echo "google checkout inited";
 	event_espresso_require_gateway("google_checkout/google_checkout_ipn.php");
 	add_filter('filter_hook_espresso_transactions_get_attendee_id', 'espresso_transactions_google_checkout_get_attendee_id');
 	add_filter('filter_hook_espresso_prepare_payment_data_for_gateways','espresso_transactions_google_checkout_prepare_payment_data');

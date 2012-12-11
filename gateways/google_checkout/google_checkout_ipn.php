@@ -34,12 +34,14 @@ function espresso_google_checkout_get_attendee_and_registration_id() {
 		return array('attendee_id'=>$GET['id'], 'registration_id'=>$_GET['r_id']);
 	}
 	list($root, $data) = espresso_google_checkout_get_response();
-	if (isset($data) && isset($data[$root]) && isset($data[$root]['shopping-cart']) && isset($data[$root]['shopping-cart']['merchant-private-data'])) {
-		$privateDataString = $data[$root]['shopping-cart']['merchant-private-data']['VALUE'];
+	if (isset($data) && isset($data[$root]) && isset($data[$root]['order-summary']) && 
+			isset($data[$root]['order-summary']['shopping-cart']) && isset($data[$root]['order-summary']['shopping-cart']['merchant-private-data'])
+			&& isset($data[$root]['order-summary']['shopping-cart']['merchant-private-data']['VALUE'])) {
+		$privateDataString = $data[$root]['order-summary']['shopping-cart']['merchant-private-data']['VALUE'];
 		$privateData = espresso_google_parse_private_data($privateDataString);
 		if (array_key_exists('attendee_id', $privateData) && array_key_exists('registration_id', $privateData))
 			return array('attendee_id' => $privateData['attendee_id'], 'registration_id' => $privateData['registration_id']);
-	}elseif (isset($data[$root]['google-order-number']['VALUE'])) {
+	}elseif (isset($data) && isset($data[$root]) && isset($data[$root]['google-order-number']) && isset($data[$root]['google-order-number']['VALUE'])) {
 		//check our database for the google serial number in this xml, as google only sends our 
 		//private merchant data during the first notification. So, during thatfirst
 		//notification, we saved an attendee row with the transaction ID=google serial number
@@ -81,10 +83,101 @@ function espresso_google_checkout_get_response() {
 	$use_sandbox = $google_checkout_settings['use_sandbox'] ? 'sandbox' : 'production';
 	$gResponse = new GoogleResponse($google_checkout_id, $google_checkout_key);
 	$gResponse->SetLogFiles('google_checkout_error_logs', 'google_checkout_notice_logs', L_ON);  //Change this to L_ON to log
+	$fakeData=false;
+	if($fakeData){
+		$xml_response=<<<HEREDOC
+<?xml version="1.0" encoding="UTF-8"?>
+<authorization-amount-notification xmlns="http://checkout.google.com/schema/2" serial-number="142933266433673-00005-6">
+  <avs-response>Y</avs-response>
+  <authorization-expiration-date>2012-12-18T18:54:49.000Z</authorization-expiration-date>
+  <cvn-response>M</cvn-response>
+  <authorization-amount currency="USD">1.0</authorization-amount>
+  <order-summary>
+    <total-refund-amount currency="USD">0.0</total-refund-amount>
+    <risk-information>
+      <eligible-for-protection>false</eligible-for-protection>
+      <avs-response>Y</avs-response>
+      <cvn-response>M</cvn-response>
+      <partial-cc-number>4478</partial-cc-number>
+      <buyer-account-age>10</buyer-account-age>
+      <ip-address>96.50.22.94</ip-address>
+      <billing-address>
+        <fax></fax>
+        <address1>AUTH+OK</address1>
+        <address2></address2>
+        <phone>250) 777-9876</phone>
+        <email>gatewaysbuyer@eventespresso.com</email>
+        <contact-name>AUTH+OK</contact-name>
+        <company-name></company-name>
+        <postal-code>V5H3S5</postal-code>
+        <country-code>CA</country-code>
+        <city>okk</city>
+        <region>BC</region>
+      </billing-address>
+    </risk-information>
+    <total-charge-amount currency="USD">0.0</total-charge-amount>
+    <purchase-date>2012-12-11T18:54:49.000Z</purchase-date>
+    <authorization>
+      <authorization-expiration-date>2012-12-18T18:54:49.000Z</authorization-expiration-date>
+      <authorization-amount currency="USD">1.0</authorization-amount>
+    </authorization>
+    <archived>false</archived>
+    <google-order-number>142933266433673</google-order-number>
+    <total-chargeback-amount currency="USD">0.0</total-chargeback-amount>
+    <buyer-marketing-preferences>
+      <email-allowed>false</email-allowed>
+    </buyer-marketing-preferences>
+    <buyer-shipping-address>
+      <fax></fax>
+      <structured-name>
+        <first-name>mikey</first-name>
+        <last-name>G</last-name>
+      </structured-name>
+      <address1>awsf</address1>
+      <address2></address2>
+      <phone>250 234-3456</phone>
+      <email>gatewaysbuyer@eventespresso.com</email>
+      <contact-name>mikey G</contact-name>
+      <company-name></company-name>
+      <postal-code>V9E2A5</postal-code>
+      <country-code>CA</country-code>
+      <city>wef</city>
+      <region>BC</region>
+    </buyer-shipping-address>
+    <fulfillment-order-state>NEW</fulfillment-order-state>
+    <financial-order-state>CHARGEABLE</financial-order-state>
+    <order-total currency="USD">1.0</order-total>
+    <buyer-id>267852635795564</buyer-id>
+    <promotions />
+    <shopping-cart>
+      <merchant-private-data>attendee_id=1,registration_id=1-50c67a6f172e1</merchant-private-data>
+      <items>
+        <item>
+          <item-name>General Admission</item-name>
+          <item-description>General Admission for test event 1. Attendee: wef fwe</item-description>
+          <quantity>1</quantity>
+          <unit-price currency="USD">1.0</unit-price>
+        </item>
+      </items>
+    </shopping-cart>
+    <order-adjustment>
+      <merchant-codes />
+      <adjustment-total currency="USD">0.0</adjustment-total>
+      <total-tax currency="USD">0.0</total-tax>
+    </order-adjustment>
+  </order-summary>
+  <google-order-number>142933266433673</google-order-number>
+  <timestamp>2012-12-11T18:55:52.456Z</timestamp>
+</authorization-amount-notification>		
+		
+HEREDOC;
+	}else{
 	$xml_response = isset($HTTP_RAW_POST_DATA) ?
 			$HTTP_RAW_POST_DATA : file_get_contents("php://input");
+	}
 	$debugInfoMsg.="message received from google:$xml_response\n\n";
 	if(strlen($xml_response)==0){//no post body
+		
 		return array("","");
 	}else{
 		if (strpos($xml_response, "xml") == FALSE) {
@@ -103,6 +196,9 @@ function espresso_google_checkout_get_response() {
 				$raw_xml = $raw_xml_array[1];
 
 				$gResponse->SendAck($serial_number, false);
+				if($google_checkout_settings['use_sandbox'])wp_mail($org_options['contact_email'],__("Event Espresso-Google Wallet debug info","event_espresso"),sprintf(__("we received these request params:%s, and are responding with an ACK to google containing the serial number %s. They, in turn, responded with payment data xml of %s","event_espresso"),print_r($_REQUEST,true),$serial_number,$raw_xml));
+				
+				
 			} else {
 				global $org_options;
 				wp_mail($org_options['contact_email'], __("Event Espresso-Google Wallet gateway IPN problem", "event_espresso"), sprintf(__("We received a message from google wallet, but were unable to get any payment data from the message:%s", "event_espresso"), print_r($xml_response, false)));
@@ -125,9 +221,6 @@ function espresso_google_checkout_get_response() {
 	if (get_magic_quotes_gpc()) {
 		$raw_xml = stripslashes($raw_xml);
 	}
-
-
-
 	$gResponseRootAndData = $gResponse->GetParsedXML($raw_xml);
 	$debugInfoMsg.="final xml response root and data:" . print_r($gResponseRootAndData, true);
 	return $gResponseRootAndData;
@@ -147,7 +240,6 @@ function espresso_process_google_checkout_ipn($payment_data) {
 				$payment_data['payment_status'] = $google_checkout_settings['default_payment_status'];
 				$payment_data['txn_details'] = serialize($_REQUEST);
 				if($google_checkout_settings['use_sandbox']){
-					//
 					wp_mail($org_options['contact_email'], __("Event Espresso-Google Wallet gateway IPN notification", "event_espresso"), sprintf(__("We received a 'new-order-notificaiton' from 
 						Google Wallet, indicating that they've begun to verify the payment info of registration %s. ", "event_espresso"), $payment_data['registration_id'], $response));
 			
@@ -164,23 +256,24 @@ function espresso_process_google_checkout_ipn($payment_data) {
 				break;
 			}
 		case "authorization-amount-notification": {
-				
-				$google_checkout_id = empty($google_checkout_settings['google_checkout_id']) ? '' : $google_checkout_settings['google_checkout_id'];
-				$google_checkout_key = empty($google_checkout_settings['google_checkout_key']) ? '' : $google_checkout_settings['google_checkout_key'];
-				$use_sandbox = $google_checkout_settings['use_sandbox'] ? 'sandbox' : 'production';
+				if($payment_data['payment_status'] != 'Completed' && $payment_data['txn_id']==$data[$root]['google-order-number']['VALUE']){//only attempt to charge if payment 
+					$google_checkout_id = empty($google_checkout_settings['google_checkout_id']) ? '' : $google_checkout_settings['google_checkout_id'];
+					$google_checkout_key = empty($google_checkout_settings['google_checkout_key']) ? '' : $google_checkout_settings['google_checkout_key'];
+					$use_sandbox = $google_checkout_settings['use_sandbox'] ? 'sandbox' : 'production';
 
-				$google_order_number = $data[$root]['google-order-number']['VALUE'];
-				//$tracking_data = array("Z12345" => "UPS", "Y12345" => "Fedex");
-				$GChargeRequest = new GoogleRequest($google_checkout_id, $google_checkout_key, $use_sandbox);
-				//$GRequest->SetCertificatePath($certificate_path);
-				//$GChargeRequest->SendChargeAndShipOrder($google_order_number, $tracking_data);
-				list($status, $response) = $GChargeRequest->SendChargeOrder($google_order_number);
-				if ($status == 200) {
-					$payment_data['payment_status'] = 'Completed';
-				} else {
-					wp_mail($org_options['contact_email'], __("Event Espresso-Google Wallet gateway IPN problem", "event_espresso"), sprintf(__("We received an 'authorization-amount-notification from Google Wallet, 
-								indicating we were ready to charge for a payment from %s, but when doing so we received this error message from Google Wallet:%s. 
-								Note, you can login to google wallet using your merchant account and manually charge it, and also manually approve the registration in Event Espresso on the event's attendee page.", "event_espresso"), $payment_data['registration_id'], print_r($data,true)));
+					$google_order_number = $data[$root]['google-order-number']['VALUE'];
+					//$tracking_data = array("Z12345" => "UPS", "Y12345" => "Fedex");
+					$GChargeRequest = new GoogleRequest($google_checkout_id, $google_checkout_key, $use_sandbox);
+					//$GRequest->SetCertificatePath($certificate_path);
+					//$GChargeRequest->SendChargeAndShipOrder($google_order_number, $tracking_data);
+					list($status, $response) = $GChargeRequest->SendChargeOrder($google_order_number);
+					if ($status == 200) {
+						$payment_data['payment_status'] = 'Completed';
+					} else {
+						wp_mail($org_options['contact_email'], __("Event Espresso-Google Wallet gateway IPN problem", "event_espresso"), sprintf(__("We received an 'authorization-amount-notification from Google Wallet, 
+									indicating we were ready to charge for a payment from %s, but when doing so we received this error message from Google Wallet. The message had status %s, and contained %s. 
+									Note, you can login to google wallet using your merchant account and manually charge it, and also manually approve the registration in Event Espresso on the event's attendee page.", "event_espresso"), $payment_data['registration_id'], $status,print_r($data,true)));
+					}
 				}
 				break;
 			}
@@ -198,7 +291,7 @@ function espresso_process_google_checkout_ipn($payment_data) {
 			}
 		case "order-state-change-notification": {
 			wp_mail($org_options['contact_email'], __("Event Espresso-Google Wallet gateway IPN Order State Changed", "event_espresso"), sprintf(__("Received an 'order-state-change-notification' form Google checkout,
-				but wasn't sure how to handle it... Here's the exact message:%s", "event_espresso"), $payment_data['registration_id'], print_r($data,true)));
+				but wasn't sure how to handle it... This could mean a payment was declined. Here's the exact message:%s", "event_espresso"), $payment_data['registration_id'], print_r($data,true)));
 				
 			
 				break;
@@ -238,23 +331,31 @@ function espresso_process_google_checkout_done_payment($payment_data){
  * during a shortcode)
  * @return type 
  */
-function espresso_google_run_transaction_code_before_shortcode() {
-	$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
-	if (isset($payment_data['attendee_id']) && isset($_GET['ipn'])) {
-		$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
-		$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
-		$payment_data = apply_filters('filter_hook_espresso_prepare_event_link', $payment_data);
-		if (espresso_return_reg_id() == false || $payment_data['registration_id'] != espresso_return_reg_id()) {
-			return;
-		}
-		$payment_data = espresso_process_google_checkout_ipn($payment_data);
-		espresso_log::singleton()->log(array('file' => __FILE__, 'function' => __FUNCTION__, 'status' => 'Payment for: ' . $payment_data['lname'] . ', ' . $payment_data['fname'] . '|| registration id: ' . $payment_data['registration_id'] . '|| transaction details: ' . $payment_data['txn_details']));
 
-		$payment_data = apply_filters('filter_hook_espresso_update_attendee_payment_data_in_db', $payment_data);
-		
-		add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');//this line shouldn't be necessary because ofa refactor I did where this
-		//is added process_payments file, but apparently it hasn't gotten integrated into trunk yet...
-		do_action('action_hook_espresso_email_after_payment', $payment_data);
-		die;
+function espresso_google_run_transaction_code_before_shortcode() {
+	if($_REQUEST['type']=='google_checkout' && $_REQUEST['ipn']=='true'){
+		event_espresso_require_gateway("process_payments.php");
+	
+		$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
+		if (isset($payment_data['attendee_id'])) {
+				
+			$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
+			$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
+			$payment_data = apply_filters('filter_hook_espresso_prepare_event_link', $payment_data);
+
+			if (espresso_return_reg_id() == false || $payment_data['registration_id'] != espresso_return_reg_id()) {
+				return;
+			}
+			$payment_data = espresso_process_google_checkout_ipn($payment_data);
+			espresso_log::singleton()->log(array('file' => __FILE__, 'function' => __FUNCTION__, 'status' => 'Payment for: ' . $payment_data['lname'] . ', ' . $payment_data['fname'] . '|| registration id: ' . $payment_data['registration_id'] . '|| transaction details: ' . $payment_data['txn_details']));
+			
+			
+			$payment_data = apply_filters('filter_hook_espresso_update_attendee_payment_data_in_db', $payment_data);
+
+			//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');//this line shouldn't be necessary because ofa refactor I did where this
+			//is added process_payments file, but apparently it hasn't gotten integrated into trunk yet...
+			do_action('action_hook_espresso_email_after_payment', $payment_data);
+			die;
+		}
 	}
 }
