@@ -239,7 +239,7 @@ table.price_list td{
 /* End pagination css */
 
 /* Autocomplete */
-input#ee_autocomplete, input#ee_fes_autocomplete{
+input#ee_autocomplete, input#ee_fem_autocomplete{
 	width:400px;
 }
 input#ee_autocomplete{

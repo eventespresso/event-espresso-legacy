@@ -18,6 +18,13 @@ function event_espresso_form_group_edit() {
             $show_group_name = $group->show_group_name;
             $show_group_description = $group->show_group_description;
             $wp_user = $group->wp_user;
+			
+			if ($group->system_group !=''){
+				$system_group = true;
+			} else {
+				$system_group = false;
+			}
+	
         }
     }
     
@@ -39,13 +46,18 @@ function event_espresso_form_group_edit() {
 					 	<div title="Click to toggle" class="handlediv"><br /></div>
             <h3 class="hndle"><?php _e('Edit Group - ', 'event_espresso'); ?><span><?php echo $group_name ?></span></h3>
              <div class="inside">
+			 <?php
+					if ($system_group == true){
+						echo '<p class="yellow_inform">'.__('Attention: This is a "System Group", some settings may be disabled.','event_espresso').'</p>';
+					}
+					?>
                 <form name="newgroup" method="post" action="<?php echo $_SERVER["REQUEST_URI"] ?>">
                     <table id="table-edit-group" class="ee-tables" border="0">
                         <tr>
                             <td class="a"  valign="top">
                                 <fieldset id="general-group-info">
-																		<legend><?php _e('Group Information', 'event_espresso') ?></legend>
-																	<ul>
+									<legend><?php _e('Group Information', 'event_espresso') ?></legend>
+								<ul>
 
                                     <li>
                                         <label for="group_name"><?php _e('Group Name:', 'event_espresso'); ?></label>
@@ -121,11 +133,11 @@ function event_espresso_form_group_edit() {
                         </tr>
                     </table>
 
-                    <p class="submit-footer">
+                    <p>
                         <input type="hidden" name="edit_action" value="update_group" />
                         <input type="hidden" name="action" value="update_group" />
                         <input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
-                        <input name="Submit" value="Update Group" type="submit" />
+                        <input class="button-primary" name="Submit" value="Update Group" type="submit" />
                     </p>
                 </form>
             </div>

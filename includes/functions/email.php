@@ -80,7 +80,7 @@ function replace_shortcodes($message, $data) {
 			$data->attendee->price_option,
 			$data->ticket_link,
 			empty($data->certificate_link) ? '' : $data->certificate_link,
-			$data->event->alt_email == '' ? $org_options['contact_email'] : $data->event->alt_email,
+			empty($data->event->alt_email) ? $org_options['contact_email'] : $data->event->alt_email,
 			//Organization details
 			$org_options['organization'],
 			$org_options['organization_street1'],
@@ -101,7 +101,20 @@ function replace_shortcodes($message, $data) {
 			$data->email_questions,
 			$data->qr_code,
 			$data->edit_attendee,
-			apply_filters('filter_hook_espresso_display_add_to_calendar_by_attendee_id', $data->attendee->id)
+			apply_filters('filter_hook_espresso_display_ical', array(
+					'event_id' => $data->attendee->event_id,
+					'registration_id' => $data->attendee->registration_id,
+					'event_name' => $data->event->event_name,
+					'event_desc' => wp_kses($data->event->event_desc, ''),
+					'contact_email' => empty($data->event->alt_email) ? $org_options['contact_email'] : $data->event->alt_email,
+					'start_time' => empty($event->start_time) ? '' : $event->start_time,
+					'start_date' => event_date_display($data->attendee->start_date, get_option('date_format')),
+					'end_date' => event_date_display($data->attendee->end_date, get_option('date_format')),
+					'start_time' => empty($data->attendee->event_time) ? '' : $data->attendee->event_time,
+					'end_time' => empty($data->attendee->end_time) ? '' : $data->attendee->end_time,
+					'location' => $data->location,
+				), '', '', TRUE
+			)
 	);
 
 	//Get the questions and answers

@@ -36,7 +36,7 @@ function add_new_event_discount(){
         </li>
         <li>
           <p>
-            <input class="button-secondary" type="submit" name="add_new_discount" value="<?php _e('Submit','event_espresso'); ?>" id="add_new_discount" />
+            <input class="button-primary" type="submit" name="add_new_discount" value="<?php _e('Submit','event_espresso'); ?>" id="add_new_discount" />
           </p>
         </li>
       </ul>

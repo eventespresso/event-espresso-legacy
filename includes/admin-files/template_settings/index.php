@@ -9,13 +9,20 @@ function event_espresso_manage_templates() {
 		$org_options['display_address_in_event_list'] = !empty($_POST['display_address_in_event_list']) ? $_POST['display_address_in_event_list'] : 'N';
 		$org_options['display_address_in_regform'] = !empty($_POST['display_address_in_regform']) ? $_POST['display_address_in_regform'] : 'N';
 		$org_options['use_custom_post_types'] = !empty($_POST['use_custom_post_types']) ? $_POST['use_custom_post_types'] : 'N';
+		$org_options['display_ical_download'] = !empty($_POST['display_ical_download']) ? $_POST['display_ical_download'] : 'Y';
+$org_options['display_featured_image'] = !empty($_POST['display_featured_image']) ? $_POST['display_featured_image'] : 'N';
 		$org_options['enable_default_style'] = !empty($_POST['enable_default_style']) ? $_POST['enable_default_style'] : 'N';
 		$org_options['selected_style'] = !empty($_POST['selected_style']) ? $_POST['selected_style'] : '';
 		$org_options['style_color'] = !empty($_POST['style_color']) ? $_POST['style_color'] : '';
 		$org_options['style_settings']['enable_default_style'] = !empty($_POST['enable_themeroller_style']) ? $_POST['enable_themeroller_style'] : 'N';
 		$org_options['style_settings']['use_grid_layout'] = !empty($_POST['use_grid_layout']) ? $_POST['use_grid_layout'] : 'N';
 		$org_options['themeroller']['themeroller_style'] = empty($_POST['themeroller_style']) ? 'N' : $_POST['themeroller_style'];
-
+		
+		//FEM Settings
+		$org_options['fem_settings']['enable_fem_category_select'] = empty($_POST['enable_fem_category_select']) ? 'N' : $_POST['enable_fem_category_select'];
+		$org_options['fem_settings']['enable_fem_pricing_section'] = empty($_POST['enable_fem_pricing_section']) ? 'N' : $_POST['enable_fem_pricing_section'];
+		
+		//Legacy styles
 		$org_options['style_settings']['disable_legacy_styles'] = !empty($_POST['disable_legacy_styles']) ? $_POST['disable_legacy_styles'] : 'Y';
 
 		if (isset($_POST['remove_css']) && $_POST['remove_css'] == 'true') {
@@ -85,8 +92,9 @@ function event_espresso_manage_templates() {
 			<?php _e('Event Template Settings', 'event_espresso'); ?>
 		</h2>
 		<?php ob_start(); ?>
-		<form class="espresso_form" method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
+		
 			<div class="meta-box-sortables ui-sortables">
+			<form class="espresso_form" method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
 				<?php #### metaboxes #### ?>
 				<div class="metabox-holder">
 					<div class="postbox">
@@ -133,6 +141,20 @@ function event_espresso_manage_templates() {
 													<?php _e('Use the custom post types feature?', 'event_espresso'); ?>
 												</label></th>
 											<td><?php echo select_input('use_custom_post_types', $values, isset($org_options['use_custom_post_types']) ? $org_options['use_custom_post_types'] : 'N'); ?></td>
+										</tr>
+										<tr>
+											<th><label for="display_ical_download">
+													<?php _e('Display an "Add to my Calendar" icon/link in the event templates?', 'event_espresso'); ?>
+												</label></th>
+											<td><?php echo select_input('display_ical_download', $values, isset($org_options['display_ical_download']) ? $org_options['display_ical_download'] : 'Y'); ?><br />
+												<span class="description"><?php _e('This is an ics/ical downloadable file. Can also be modified in the event template files.', 'event_espresso'); ?></span></td>
+										</tr>
+<tr>
+											<th><label for="display_featured_image">
+													<?php _e('Display featured images in the event list and registration pages?', 'event_espresso'); ?>
+												</label></th>
+											<td><?php echo select_input('display_featured_image', $values, isset($org_options['display_featured_image']) ? $org_options['display_featured_image'] : 'N'); ?><br />
+												<span class="description"><?php _e('This setting offers an simple solution to display featured images in your event templates. Height and width attributes are set within the featured image upload tool. Some customization may be required to produce the desired results within your WordPress theme.', 'event_espresso'); ?></span></td>
 										</tr>
 									</tbody>
 								</table>
@@ -230,7 +252,13 @@ function event_espresso_manage_templates() {
 					<!-- / .postbox --> 
 				</div>
 				<!-- / .metabox-holder -->
-				<h2>
+				
+				<?php echo do_action('action_hook_espresso_fem_template_settings'); //FEM Form ?>
+				
+				<input type="hidden" name="update_org" value="update" />
+		</form>
+		
+		<h2>
 					<?php _e('Developers Only', 'event_espresso') ?>
 				</h2>
 				<hr />
@@ -253,11 +281,12 @@ function event_espresso_manage_templates() {
 				</div>
 				<!-- / .metabox-holder -->
 				<?php #### finish metaboxes #### ?>
+				
+				
 			</div>
 			<!-- / .meta-box-sortables -->
 
-			<input type="hidden" name="update_org" value="update" />
-		</form>
+			
 		<?php
 		include_once('templates_help.php');
 		$main_post_content = ob_get_clean();

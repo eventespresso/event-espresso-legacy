@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Event Espresso package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2012-11-06 16:53-0700\n"
+"PO-Revision-Date: 2012-12-03 15:25-0700\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,11 +20,11 @@ msgstr ""
 
 #: ../gateways/gateway_display.php:25
 msgid "Off-line Payment Options"
-msgstr ""
+msgstr "Offline-Zahlungsoptionen"
 
 #: ../gateways/gateway_display.php:77
 msgid "Please choose a payment option"
-msgstr ""
+msgstr "Bitte wählen Sie eine Zahlungsmöglichkeit"
 
 #: ../gateways/2checkout/settings.php:241
 msgid ""
@@ -32,24 +32,30 @@ msgid ""
 "will also output the form variables to the payment page, send an email to "
 "the admin that contains the all 2Checkout variables."
 msgstr ""
+"Als Zusatz zur Verwendung des 2Checkout Sandbox Features. Das Debugging "
+"Feature wird zusätzlich die Formular-Variablen auf der Zahlungsseite "
+"ausgeben, und eine Email an den Admin senden, die alle 2Checkout Variablen "
+"enthält."
 
 #: ../gateways/authnet/settings.php:159
 msgid "Authorize.net MD5 Hash value"
-msgstr ""
+msgstr "Authorize.net MD5 Hash value"
 
 #: ../gateways/authnet/settings.php:153
 msgid "Use md5 check to secure payment response"
-msgstr ""
+msgstr "Verwende einen MD5 Check zum Sichern der Payment Response"
 
 #: ../gateways/authnet/settings.php:216
 msgid ""
 "Authorize.net allows you to secure the reponse from their sever to Event "
 "Espresso."
 msgstr ""
+"Authorize.net erlaubt es Ihnen, die Antwort von ihren Servern an Event "
+"Espresso abzusichern."
 
 #: ../gateways/authnet/settings.php:215
 msgid "Authorize.net MD5 Secure Response"
-msgstr ""
+msgstr "Authorize.net MD5 Secure Response"
 
 #: ../gateways/nab/nab_vars.php:58
 msgid "MasterCard"
@@ -57,7 +63,7 @@ msgstr "MasterCard"
 
 #: ../gateways/nab/nab_vars.php:55
 msgid "Card Type:"
-msgstr ""
+msgstr "Kartentyp:"
 
 #: ../gateways/paypal/settings.php:242 ../gateways/paypal_pro/settings.php:250
 msgid ""
@@ -65,58 +71,66 @@ msgid ""
 "also output the form variables to the payment page, send an email to the "
 "admin that contains the all PayPal variables."
 msgstr ""
+"Als Zusatz zur Verwendung des PayPal Sandbox Features. Das Debugging Feature "
+"wird zusätzlich die Formular-Variablen auf der Zahlungsseite ausgeben, und "
+"eine Email an den Admin senden, die alle PayPal Variablen enthält. "
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:261
 msgid "Use the Debugging Feature<br/>and the PayPal Sandbox"
-msgstr ""
+msgstr "Verwende das Debugging Feature<br/> und die PayPal Sandbox"
 
 #: ../includes/admin-files/coupon-management/use_coupon_code.php:237
 msgid "Promo Code"
-msgstr ""
+msgstr "Promo Code"
 
 #: ../includes/admin-files/optional_event_settings.php:100
 msgid "Allow voucher codes in the shopping cart?"
-msgstr ""
+msgstr "Erlaube Rabattcodes im Einkaufswagen?"
 
 #: ../includes/admin-files/coupon-management/use_coupon_code.php:165
 msgid ""
 " is invalid, expired, or can not be used for the event(s) you are applying "
 "it to."
 msgstr ""
+"ist ungültig, abgelaufen oder kann nicht für die Veranstaltung(en) verwendet "
+"werden, bei der Sie ihn anwenden wollen."
 
 #: ../includes/admin-files/optional_event_settings.php:73
 msgid "Skip Confirmation Page during Registration Process?"
 msgstr ""
+"Die Bestätigungsseite während des Registrierungsprozesses überspringen?"
 
 #: ../includes/admin-files/optional_event_settings.php:92
 msgid "Allow discounts in the shopping cart?"
-msgstr ""
+msgstr "Erlaube Rabatte für den Warenkorb?"
 
 #: ../includes/admin-files/optional_event_settings.php:34
 msgid "Display text (eg. Surcharge or Service Fee):"
-msgstr ""
+msgstr "Zeige Text (z.B. Zuschlag oder Servicegebühr):"
 
 #: ../includes/admin-files/coupon-management/use_coupon_code.php:165
 msgid "Sorry, promotional code "
-msgstr ""
+msgstr "Sorry, der Rabattcode"
 
 #: ../includes/admin-files/coupon-management/use_coupon_code.php:156
 msgid " discount"
-msgstr ""
+msgstr "Rabatt"
 
 #: ../includes/admin-files/coupon-management/use_coupon_code.php:157
 msgid "has being successfully applied to the following events"
-msgstr ""
+msgstr "wurde erfolgreich auf folgende Veranstaltungen angewandt"
 
 #: ../includes/admin-files/coupon-management/use_coupon_code.php:156
 msgid "Promotional code "
-msgstr ""
+msgstr "Rabattcode"
 
 #: ../includes/admin-files/template_settings/templates_help.php:7
 #: ../includes/admin-files/template_settings/templates_help.php:28
 msgid "Please do not use these styles. Use the Themeroller styles instead!!"
 msgstr ""
+"Bitte verwende nicht diese Styles. Nutze stattdessen die ThemeRoller "
+"Styles!!!"
 
 #: ../includes/admin-reports/edit_attendee_record.php:667
 #: ../includes/admin-reports/enter_attendee_payments.php:456
@@ -126,42 +140,44 @@ msgstr ""
 #: ../includes/admin-reports/edit_attendee_record.php:662
 #: ../includes/admin-reports/enter_attendee_payments.php:436
 msgid "Total Amount Owing:"
-msgstr ""
+msgstr "Gesamte geschuldete Summe:"
 
 #: ../includes/admin-reports/enter_attendee_payments.php:390
 msgid "View / Edit Registration"
-msgstr ""
+msgstr "Zeige/Bearbeite Registrierung"
 
 #: ../includes/event-management/copy_event.php:159
 #: ../includes/event-management/copy_event.php:183
 msgid " were not saved."
-msgstr ""
+msgstr "wurden nicht gespeichert."
 
 #: ../includes/admin-reports/event_list_attendees.php:366
 #: ../includes/event-management/event_list.php:435
 msgid "Import Attendees"
-msgstr ""
+msgstr "Importiere Teilnehmer"
 
 #: ../includes/admin-reports/event_list_attendees.php:363
 #: ../includes/event-management/event_list.php:434
 msgid "Import Events"
-msgstr ""
+msgstr "Importiere Veranstaltungen"
 
 #: ../includes/event-management/copy_event.php:159
 msgid "An error occured. Event time details with ID#"
 msgstr ""
+"Es ist ein Fehler aufgetreten. Die Details zu den Veranstaltungszeiten mit "
+"der ID#"
 
 #: ../includes/event-management/copy_event.php:112
 msgid "An error occured. Event venue ID#"
-msgstr ""
+msgstr "Es ist ein Fehler aufgetreten. Veranstaltungsort ID#"
 
 #: ../includes/event-management/copy_event.php:126
 msgid "An error occured. Event person ID#"
-msgstr ""
+msgstr "Es ist ein Fehler aufgetreten. Veranstaltungs-Person ID#"
 
 #: ../includes/event-management/copy_event.php:140
 msgid "An error occured. Event discount ID#"
-msgstr ""
+msgstr "Es ist ein Fehler aufgetreten. Veranstaltungsrabatt ID#"
 
 #: ../includes/event-management/copy_event.php:98
 #: ../includes/event-management/copy_event.php:112
@@ -172,19 +188,19 @@ msgstr "wurde nicht gespeichert."
 
 #: ../includes/event-management/copy_event.php:98
 msgid "An error occured. Event category ID#"
-msgstr ""
+msgstr "Es ist ein Fehler aufgetreten. Veranstaltungskategorie ID#"
 
 #: ../includes/functions/admin.php:930
 msgid "Meet the Team"
-msgstr ""
+msgstr "Treffe das Team"
 
 #: ../includes/functions/admin.php:917 ../includes/functions/admin.php:1001
 msgid "Usage Guide"
-msgstr ""
+msgstr "Benutzeranleitung"
 
 #: ../includes/functions/admin.php:920 ../includes/functions/admin.php:1002
 msgid "Template Customization"
-msgstr ""
+msgstr "Templateanpassung"
 
 #: ../includes/functions/admin.php:923 ../includes/functions/admin.php:1003
 msgid "Support Forums"
@@ -193,10 +209,12 @@ msgstr "Support Foren"
 #: ../includes/form-builder/questions/edit_question.php:30
 msgid "Sorry, you do not have permission to edit this question."
 msgstr ""
+"Es tut uns leid, aber Sie haben leider nicht ausreichend Rechte um diese "
+"Frage zu bearbeiten."
 
 #: ../includes/functions/admin_menu.php:108
 msgid "Event Espresso - Attendee Import Tool"
-msgstr ""
+msgstr "Event Espresso - Tool zum Importieren von Teilnehmern"
 
 #: ../includes/functions/database_install.php:216
 msgid ""
@@ -213,7 +231,7 @@ msgstr ""
 
 #: ../includes/functions/export.php:284
 msgid "Amount Paid"
-msgstr ""
+msgstr "Gezahlte Summe"
 
 #: ../includes/functions/export.php:284
 msgid "Seat Tag"
@@ -224,14 +242,16 @@ msgid ""
 "An error occured. The primary attende's data could not be updated.\n"
 "( "
 msgstr ""
+"Es ist ein Fehler aufgetreten. Die Daten des primären Teilnehmers konnten "
+"nicht aktualisiert werden."
 
 #: ../includes/functions/main.php:200
 msgid "Add an Additonal Attendee:"
-msgstr ""
+msgstr "Zusätzlichen Teilnehmer hinzufügen:"
 
 #: ../includes/functions/main.php:199
 msgid "Remove the above Attendee:"
-msgstr ""
+msgstr "Den obigen Teilnehmer entfernen:"
 
 #: ../includes/process-registration/add_attendees_to_db.php:97
 msgid "Admin"
@@ -239,11 +259,11 @@ msgstr "Admin"
 
 #: ../templates/confirmation_display.php:13
 msgid "Verify Registration"
-msgstr ""
+msgstr "Registrierung verifizieren"
 
 #: ../templates/return_payment.php:25
 msgid "Would you like to choose a different payment option?"
-msgstr ""
+msgstr "Möchten Sie eine andere Zahlungsmöglichkeit wählen?"
 
 #: ../gateways/gateway_display.php:97
 msgid ""
@@ -262,23 +282,24 @@ msgstr ""
 #: ../gateways/stripe/stripe_vars.php:114
 #: ../gateways/usaepay_onsite/usaepay_onsite_vars.php:123
 msgid "Choose a different payment option"
-msgstr ""
+msgstr "Wählen Sie eine andere Zahlungsmöglichkeit"
 
 #: ../gateways/authnet/settings.php:218
 msgid "To configure an MD5 Hash value for your account:"
-msgstr ""
+msgstr "Um einen MD5 Hash Wert für Ihr Konto zu konfigurieren:"
 
 #: ../gateways/authnet/settings.php:220
 msgid "Log on to the Merchant Interface at "
-msgstr ""
+msgstr "Loggen Sie sich in das Merchant Interface ein unter"
 
 #: ../gateways/authnet/settings.php:221
 msgid "Click Settings under Account in the main menu on the left"
 msgstr ""
+"Klicken Sie auf Settings unter Account im Hauptmenü auf der linken Seite"
 
 #: ../gateways/authnet/settings.php:222
 msgid "Click MD5-Hash in the Security Settings section"
-msgstr ""
+msgstr "Klicken Sie auf MD5-Hash in dem Security Settings Bereich"
 
 #: ../gateways/authnet/settings.php:223
 msgid ""
@@ -288,7 +309,7 @@ msgstr ""
 
 #: ../gateways/authnet/settings.php:224
 msgid "Click Submit"
-msgstr ""
+msgstr "Klicke auf Absenden"
 
 #: ../gateways/authnet/settings.php:226
 msgid "Warning:"
@@ -309,14 +330,16 @@ msgid ""
 "If you wish to pay by an Electronic Funds Transfer via your bank, please "
 "make note of the information below, then"
 msgstr ""
+"Falls Sie per Bank-Überweisung zahlen wollen, notieren Sie sich die unten "
+"stehenden Informationen, und dann"
 
 #: ../gateways/beanstream/payment.php:22
 msgid "Beanstream Sandbox Mode"
-msgstr ""
+msgstr "Beanstream Sandbox Modus"
 
 #: ../gateways/beanstream/payment.php:63
 msgid "State / Province"
-msgstr ""
+msgstr "Bundesland"
 
 #: ../gateways/beanstream/payment.php:67
 msgid "Alberta"
@@ -328,11 +351,11 @@ msgstr "Alaska"
 
 #: ../gateways/beanstream/payment.php:69
 msgid "Alabama"
-msgstr ""
+msgstr "Alabama"
 
 #: ../gateways/beanstream/payment.php:70
 msgid "American Somoa"
-msgstr ""
+msgstr "American Somoa"
 
 #: ../gateways/beanstream/payment.php:71
 msgid "Arkansas"
@@ -396,63 +419,63 @@ msgstr "Illinois"
 
 #: ../gateways/beanstream/payment.php:86
 msgid "Indiana"
-msgstr ""
+msgstr "Indiana"
 
 #: ../gateways/beanstream/payment.php:87
 msgid "Kansas"
-msgstr ""
+msgstr "Kansas"
 
 #: ../gateways/beanstream/payment.php:88
 msgid "Kentucky"
-msgstr ""
+msgstr "Kentucky"
 
 #: ../gateways/beanstream/payment.php:89
 msgid "Louisiana"
-msgstr ""
+msgstr "Louisiana"
 
 #: ../gateways/beanstream/payment.php:90
 msgid "Massachusetts"
-msgstr ""
+msgstr "Massachusetts"
 
 #: ../gateways/beanstream/payment.php:91
 msgid "Manitoba"
-msgstr ""
+msgstr "Manitoba"
 
 #: ../gateways/beanstream/payment.php:92
 msgid "Maryland"
-msgstr ""
+msgstr "Maryland"
 
 #: ../gateways/beanstream/payment.php:93
 msgid "Maine"
-msgstr ""
+msgstr "Maine"
 
 #: ../gateways/beanstream/payment.php:94
 msgid "Michigan"
-msgstr ""
+msgstr "Michigan"
 
 #: ../gateways/beanstream/payment.php:95
 msgid "Micronesia"
-msgstr ""
+msgstr "Micronesia"
 
 #: ../gateways/beanstream/payment.php:96
 msgid "Minnesota"
-msgstr ""
+msgstr "Minnesota"
 
 #: ../gateways/beanstream/payment.php:97
 msgid "Missouri"
-msgstr ""
+msgstr "Missouri"
 
 #: ../gateways/beanstream/payment.php:98
 msgid "Mississippi"
-msgstr ""
+msgstr "Mississippi"
 
 #: ../gateways/beanstream/payment.php:99
 msgid "Montana"
-msgstr ""
+msgstr "Montana"
 
 #: ../gateways/beanstream/payment.php:100
 msgid "New Brunswick"
-msgstr ""
+msgstr "New Brunswick"
 
 #: ../gateways/beanstream/payment.php:101
 msgid "North Carolina"
@@ -516,63 +539,63 @@ msgstr "Ontario"
 
 #: ../gateways/beanstream/payment.php:116
 msgid "Oregon"
-msgstr ""
+msgstr "Oregon"
 
 #: ../gateways/beanstream/payment.php:117
 msgid "Pennsylvania"
-msgstr ""
+msgstr "Pennsylvania"
 
 #: ../gateways/beanstream/payment.php:118
 msgid "Prince Edward Island"
-msgstr ""
+msgstr "Prince Edward Island"
 
 #: ../gateways/beanstream/payment.php:119
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Puerto Rico"
 
 #: ../gateways/beanstream/payment.php:120
 msgid "Quebec"
-msgstr ""
+msgstr "Quebec"
 
 #: ../gateways/beanstream/payment.php:121
 msgid "Rhode Island"
-msgstr ""
+msgstr "Rhode Island"
 
 #: ../gateways/beanstream/payment.php:122
 msgid "South Carolina"
-msgstr ""
+msgstr "South Carolina"
 
 #: ../gateways/beanstream/payment.php:123
 msgid "South Dakota"
-msgstr ""
+msgstr "South Dakota"
 
 #: ../gateways/beanstream/payment.php:124
 msgid "Saskatchewan"
-msgstr ""
+msgstr "Saskatchewan"
 
 #: ../gateways/beanstream/payment.php:125
 msgid "Tennessee"
-msgstr ""
+msgstr "Tennessee"
 
 #: ../gateways/beanstream/payment.php:126
 msgid "Texas"
-msgstr ""
+msgstr "Texas"
 
 #: ../gateways/beanstream/payment.php:127
 msgid "Utah"
-msgstr ""
+msgstr "Utah"
 
 #: ../gateways/beanstream/payment.php:128
 msgid "Virginia"
-msgstr ""
+msgstr "Virginia"
 
 #: ../gateways/beanstream/payment.php:129
 msgid "Virgin Islands"
-msgstr ""
+msgstr "Virgin Islands"
 
 #: ../gateways/beanstream/payment.php:130
 msgid "Vermont"
-msgstr ""
+msgstr "Vermont"
 
 #: ../gateways/beanstream/payment.php:131
 msgid "Washington"
@@ -600,37 +623,39 @@ msgstr "Außerhalb von U.S.A./Kanada"
 
 #: ../gateways/beanstream/settings.php:14
 msgid "Beanstream settings saved."
-msgstr ""
+msgstr "Beanstream settings saved."
 
 #: ../gateways/beanstream/settings.php:42
 msgid "Beanstream Settings"
-msgstr ""
+msgstr "Beanstream EInstellungen"
 
 #: ../gateways/beanstream/settings.php:57
 msgid "Deactivate Beanstream?"
-msgstr ""
+msgstr "Beanstream deaktivieren?"
 
 #: ../gateways/beanstream/settings.php:60
 msgid "Activate Beanstream?"
-msgstr ""
+msgstr "Beanstream aktivieren?"
 
 #: ../gateways/beanstream/settings.php:82
 msgid "Beanstream Merchant ID"
-msgstr ""
+msgstr "Beanstream Merchant ID"
 
 #: ../gateways/beanstream/settings.php:88
 msgid "Use Beanstream in Sandbox Mode"
-msgstr ""
+msgstr "Verwende Beanstream im Sandbox Modus"
 
 #: ../gateways/beanstream/settings.php:119
 msgid "Update Beanstream Settings"
-msgstr ""
+msgstr "Beanstream Einstellungen aktualisieren"
 
 #: ../gateways/check/check_payment_vars.php:29
 msgid ""
 "If you wish to pay by check or money order, then please make note of the "
 "information below, and "
 msgstr ""
+"Falls Sie es wünschen, per Check oder Zahlungsanweisung zu zahlen, notieren "
+"Sie sich die weiter unten stehenden Informationen, und"
 
 #: ../gateways/eway/settings.php:195
 msgid ""
@@ -638,6 +663,9 @@ msgid ""
 "also output the form variables to the payment page, send an email to the "
 "admin that contains the all eWay variables."
 msgstr ""
+"Als Zusatz zur Verwendung des eWay Sandbox Features. Das Debugging Feature "
+"wird zusätzlich die Formular-Variablen auf der Zahlungsseite ausgeben, und "
+"eine Email an den Admin senden, die alle eWay Variablen enthält."
 
 #: ../gateways/firstdata/settings.php:146
 #: ../gateways/firstdata_connect_2/settings.php:168
@@ -646,42 +674,48 @@ msgid ""
 "will also output the form variables to the payment page, send an email to "
 "the admin that contains the all First Data variables."
 msgstr ""
+"Als Zusatz zur Verwendung des FirstData Sandbox Features. Das Debugging "
+"Feature wird zusätzlich die Formular-Variablen auf der Zahlungsseite "
+"ausgeben, und eine Email an den Admin senden, die alle FirstData Variablen "
+"enthält."
 
 #: ../gateways/firstdata_e4/settings.php:17
 msgid "FirstData E4 settings saved."
-msgstr ""
+msgstr "FirstData E4 Einstellungen gespeichert."
 
 #: ../gateways/firstdata_e4/settings.php:52
 msgid "FirstData E4 Settings"
-msgstr ""
+msgstr "FirstData E4 Einstellungen"
 
 #: ../gateways/firstdata_e4/settings.php:67
 msgid "Deactivate FirstData E4 Gateway?"
-msgstr ""
+msgstr "Das FirstData E4 Gateway deaktivieren?"
 
 #: ../gateways/firstdata_e4/settings.php:70
 msgid "Activate FirstData E4 Gateway?"
-msgstr ""
+msgstr "Das FirstData E4 Gateway aktivieren?"
 
 #: ../gateways/firstdata_e4/settings.php:92
 msgid "FirstData E4 Payment Page ID"
-msgstr ""
+msgstr "FirstData E4 Payment Page ID"
 
 #: ../gateways/firstdata_e4/settings.php:98
 msgid "FirstData E4 Transaction Key"
-msgstr ""
+msgstr "FirstData E4 Transaction Key"
 
 #: ../gateways/firstdata_e4/settings.php:116
 msgid "(used for your business/personal logo on the FirstData E4 payment page)"
 msgstr ""
+"(wird als Ihr Geschäfts- bzw. persönliches Logo auf der FirstData E4 "
+"Zahlungsseite verwendet)"
 
 #: ../gateways/firstdata_e4/settings.php:131
 msgid "Account Uses FirstData E4.com's Development Server"
-msgstr ""
+msgstr "Das Konto verwendet den Development Server von FirstData E4"
 
 #: ../gateways/firstdata_e4/settings.php:166
 msgid "Update FirstData E4 Settings"
-msgstr ""
+msgstr "FirstData E4 Einstellungen aktualisieren"
 
 #: ../gateways/firstdata_e4/settings.php:171
 msgid ""
@@ -693,92 +727,94 @@ msgstr ""
 
 #: ../gateways/firstdata_e4/settings.php:178
 msgid "FirstData E4 Image URL (logo for payment page)"
-msgstr ""
+msgstr "URL des Bildes für FirstData E4 (Logo für die Zahlungsseite)"
 
 #: ../gateways/firstdata_e4/settings.php:185
 msgid "FirstData E4 Test Mode"
-msgstr ""
+msgstr "FirstData E4 Test Modus"
 
 #: ../gateways/ideal/ideal_vars.php:59
 msgid "Select Bank"
-msgstr ""
+msgstr "Bank wählen"
 
 #: ../gateways/invoice/template.php:190
 msgid "Total due:"
-msgstr ""
+msgstr "Fällige Gesamtsumme:"
 
 #: ../gateways/nab/nab_vars.php:59
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:247
 msgid "Amex"
-msgstr ""
+msgstr "Amex"
 
 #: ../gateways/nab/nab_vars.php:63
 msgid "Card Number:"
-msgstr ""
+msgstr "Kartennummer:"
 
 #: ../gateways/nab/nab_vars.php:67
 msgid "Card CCV:"
-msgstr ""
+msgstr "CCV der Karte:"
 
 #: ../gateways/nab/nab_vars.php:71
 msgid "Card Expires:"
-msgstr ""
+msgstr "Ablaufdatum der Karte:"
 
 #: ../gateways/nab/nab_vars.php:73
 msgid "Month"
-msgstr ""
+msgstr "Monat"
 
 #: ../gateways/nab/nab_vars.php:89
 msgid "Year"
-msgstr ""
+msgstr "Jahr"
 
 #: ../gateways/usaepay_offsite/settings.php:12
 #: ../gateways/usaepay_onsite/settings.php:16
 msgid "USAePay settings saved."
-msgstr ""
+msgstr "USAePay Einstellungen gespeichert."
 
 #: ../gateways/usaepay_offsite/settings.php:40
 msgid "USAePay Offsite Settings"
-msgstr ""
+msgstr "USAePay Offsite Einstellungen"
 
 #: ../gateways/usaepay_offsite/settings.php:55
 #: ../gateways/usaepay_onsite/settings.php:64
 msgid "Deactivate USAePay Offsite IPN?"
-msgstr ""
+msgstr "Den USAePay Offsite IPN deaktivieren?"
 
 #: ../gateways/usaepay_offsite/settings.php:58
 #: ../gateways/usaepay_onsite/settings.php:67
 msgid "Activate USAePay IPN?"
-msgstr ""
+msgstr "USAePay IPN aktivieren?"
 
 #: ../gateways/usaepay_offsite/settings.php:100
 msgid "Update USAePay Offsite Settings"
-msgstr ""
+msgstr "USAePay Offsite Einstellungen aktualisieren"
 
 #: ../gateways/usaepay_onsite/DoDirectPayment.php:60
 msgid "There was no response from USAePay."
-msgstr ""
+msgstr "Es gab keine Antwort von USAePay."
 
 #: ../gateways/usaepay_onsite/settings.php:49
 msgid "USAePay Onsite Settings"
-msgstr ""
+msgstr "USAePay Onsite Einstellungen"
 
 #: ../gateways/usaepay_onsite/settings.php:94
 msgid "Use USAePay' Development Server?"
-msgstr ""
+msgstr "Den Development Server von USAePay verwenden?"
 
 #: ../gateways/usaepay_onsite/settings.php:98
 msgid "(Make sure you enter the development server credentials above.)"
 msgstr ""
+"(Stellen Sie sicher, dass Sie oben die Logindaten des Development Servers "
+"eingegeben haben.)"
 
 #: ../gateways/usaepay_onsite/settings.php:102
 msgid "Submit a test transaction?"
-msgstr ""
+msgstr "Eine Testtransaktion absenden?"
 
 #: ../gateways/usaepay_onsite/settings.php:130
 msgid "Update USAePay Onsite Settings"
-msgstr ""
+msgstr "USAePay Onsite Einstellungen aktualisieren"
 
 #: ../gateways/wepay/settings.php:219
 msgid ""
@@ -786,6 +822,9 @@ msgid ""
 "also output the form variables to the payment page, send an email to the "
 "admin that contains the all WePay variables."
 msgstr ""
+"Als Zusatz zur Verwendung des WePay Sandbox Features. Das Debugging Feature "
+"wird zusätzlich die Formular-Variablen auf der Zahlungsseite ausgeben, und "
+"eine Email an den Admin senden, die alle WePay Variablen enthält."
 
 #: ../gateways/worldpay/settings.php:233
 msgid ""
@@ -793,6 +832,10 @@ msgid ""
 "will also output the form variables to the payment page, send an email to "
 "the admin that contains the all WorldPay variables."
 msgstr ""
+"Als Zusatz zur Verwendung des WorldPay Sandbox Features. Das Debugging "
+"Feature wird zusätzlich die Formular-Variablen auf der Zahlungsseite "
+"ausgeben, und eine Email an den Admin senden, die alle WorldPay Variablen "
+"enthält."
 
 #: ../includes/admin_support.php:347
 msgid ""
@@ -809,37 +852,42 @@ msgstr ""
 
 #: ../includes/admin-files/template_settings/template_files.php:66
 msgid "(displays a confirmation page for free events)"
-msgstr ""
+msgstr "(zeigt eine Besätigungsseite für kostenlose Veranstaltungen)"
 
 #: ../includes/admin-files/template_settings/template_files.php:75
 msgid "(this is the shopping cart page)"
-msgstr ""
+msgstr "(Dies ist die Seite des Einkaufswagens)"
 
 #: ../includes/admin-files/venue-management/add_venue_to_db.php:18
 msgid "An error occured. The venue name is a required field."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Der Name des Veranstaltungsortes ist ein "
+"Pflichtfeld"
 
 #: ../includes/admin-files/venue-management/add_venue_to_db.php:59
 msgid "The locale has been added."
-msgstr ""
+msgstr "Die Örtlichkeit wurde hinzugefügt."
 
 #: ../includes/admin-files/venue-management/add_venue_to_db.php:61
 msgid "An error occured. The locale was not saved."
-msgstr ""
+msgstr "Es ist ein Fehler aufgetreten. Die Region wurde nicht gespeichert."
 
 #: ../includes/admin-files/venue-management/add_venue_to_db.php:71
 #: ../includes/event-management/copy_event.php:210
 msgid "An error occured. The venue  was not saved."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Der Veranstaltungsort wurde nicht gespeichert."
 
 #: ../includes/admin-reports/add_new_attendee.php:93
 msgid "Event Dates and Times"
-msgstr ""
+msgstr "Datum und Uhrzeit der Veranstaltung"
 
 #: ../includes/admin-reports/edit_attendee_record.php:16
 #: ../includes/admin-reports/enter_attendee_payments.php:12
 msgid "An Error Occurred. The request failed to pass a security check."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Die Abfrage ist am Sicherheitscheck "
+"gescheitert."
 
 #: ../includes/admin-reports/edit_attendee_record.php:17
 #: ../includes/admin-reports/enter_attendee_payments.php:13
@@ -850,113 +898,142 @@ msgstr ""
 #: ../includes/admin-reports/edit_attendee_record.php:78
 msgid "An error occured. Attendee ticket price details could not be updated."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Die Details zum Preis des Teilnehmertickets "
+"konnten nicht aktualisiert werden."
 
 #: ../includes/admin-reports/edit_attendee_record.php:105
 #: ../includes/admin-reports/enter_attendee_payments.php:87
 msgid "Refund"
-msgstr ""
+msgstr "Rückerstattung"
 
 #: ../includes/admin-reports/edit_attendee_record.php:124
 msgid ""
 "An error occured while attempting to update the payment status for "
 "attendeefrom this registration."
 msgstr ""
+"Es ist ein Fehler aufgetreten, als versucht wurde den Zahlungsstatus für "
+"Teilnehmer dieser Registrierung zu aktualisieren."
 
 #: ../includes/admin-reports/edit_attendee_record.php:137
 msgid ""
 "An error occured. The primary attendee ticket total could not be updated."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Die Gesamtsumme des Tickets des primären "
+"Teilnehmers konnte nicht aktualisiert werden."
 
 #: ../includes/admin-reports/edit_attendee_record.php:141
 msgid "All attendee ticket price details have been successfully updated."
 msgstr ""
+"Alle Ticketpreisdetails der Teilnehmer wurden erfolgreich aktualisiert."
 
 #: ../includes/admin-reports/edit_attendee_record.php:141
 msgid ""
 "Some attendee ticket price details were successfully updated, but the "
 "following error(s) may have prevented others from being updated:"
 msgstr ""
+"Manche Ticketpreisdetails konnten erfolgreich aktualisiert werden, aber die "
+"folgenden Fehler haben möglicherweise verhindert, dass die Restlichen "
+"aktualisiert werden konnten:"
 
 #: ../includes/admin-reports/edit_attendee_record.php:163
 msgid "An error occured. The attendee could not be deleted."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Der Teilnehmer konnte nicht gelöscht werden."
 
 #: ../includes/admin-reports/edit_attendee_record.php:165
 msgid ""
 "The attendee record in the database could not be found and was therefore not "
 "deleted."
 msgstr ""
+"Der Teilnehmereintrag konnte nicht in der Datenbank gefunden werden und "
+"wurde daher nicht gelöscht."
 
 #: ../includes/admin-reports/edit_attendee_record.php:171
 msgid "An error occured. The attendee seating chart data could not be deleted."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Die Sitzplatzdaten des Teilnehmers konnten "
+"nicht gelöscht werden."
 
 #: ../includes/admin-reports/edit_attendee_record.php:179
 msgid ""
 "An error occured while attempting to retrieve additional attendee data from "
 "the database."
 msgstr ""
+"Es ist ein Fehler aufgetreten, als versucht wurde, die Daten für zusätzliche "
+"Teilnehmer von der Datenbank abzufragen."
 
 #: ../includes/admin-reports/edit_attendee_record.php:185
 msgid ""
 "An error occured while attempting to update additional attendee ticket "
 "quantities."
 msgstr ""
+"Es ist ein Fehler aufgetreten, als versucht wurde die Ticketanzahl der "
+"zusätzlichen Teilnehmer zu aktualisieren."
 
 #: ../includes/admin-reports/edit_attendee_record.php:193
 msgid "All attendee details have been successfully deleted."
-msgstr ""
+msgstr "Alle Teilnehmerdetails wurden erfolgreich gelöscht."
 
 #: ../includes/admin-reports/edit_attendee_record.php:193
 msgid ""
 "One or more errors may have prevented some attendee details from being "
 "successfully deleted."
 msgstr ""
+"Ein oder mehrere Fehler haben möglicherweise verhindert, dass manche "
+"Teilnehmerdetails erfolgreich gelöscht werden konnten."
 
 #: ../includes/admin-reports/edit_attendee_record.php:245
 msgid "An error occured. Attendee details could not be updated."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Teilnehmerdetails konnten nicht aktualisiert "
+"werden."
 
 #: ../includes/admin-reports/edit_attendee_record.php:359
 msgid "All attendee details have been successfully updated."
-msgstr ""
+msgstr "Alle Teilnehmerdetails wurden erfolgreich aktualisiert."
 
 #: ../includes/admin-reports/edit_attendee_record.php:359
 msgid ""
 "One or more errors may have prevented some attendee details from being "
 "successfully updated."
 msgstr ""
+"Ein oder mehrere Fehler haben möglicherweise verhindert, dass manche "
+"Teilnehmerdetails erfolgreich aktualisert werden konnten."
 
 #: ../includes/admin-reports/edit_attendee_record.php:482
 #: ../includes/admin-reports/enter_attendee_payments.php:324
 msgid "Back to Attendees List"
-msgstr ""
+msgstr "Zurück zur Teilnehmerliste"
 
 #: ../includes/admin-reports/edit_attendee_record.php:641
 msgid "Ticket Prices"
-msgstr ""
+msgstr "Ticketpreise"
 
 #: ../includes/admin-reports/edit_attendee_record.php:671
 msgid "Attendee Ticket Fees:"
-msgstr ""
+msgstr "Ticketgebühren der Teilnehmer:"
 
 #: ../includes/admin-reports/edit_attendee_record.php:724
 msgid "Original Ticket Price:"
-msgstr ""
+msgstr "Originaler Ticketpreis:"
 
 #: ../includes/admin-reports/edit_attendee_record.php:725
 msgid "ticket"
-msgstr ""
+msgstr "Ticket"
 
 #: ../includes/admin-reports/enter_attendee_payments.php:52
 msgid ""
 "An error occured. The primary attendee details could not be retrieved from "
 "the database."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Die Daten für den primären Teilnehmer konnten "
+"nicht aus der Datenbank abgefragt werden."
 
 #: ../includes/admin-reports/enter_attendee_payments.php:67
 msgid "You must enter a Transaction Type when making a payment."
 msgstr ""
+"Sie müssen einen Transaktionstyp auswählen, wenn Sie eine Zahlung ausführen "
+"wollen."
 
 #: ../includes/admin-reports/enter_attendee_payments.php:71
 msgid "You must enter a Transaction ID when making a payment."
@@ -965,6 +1042,8 @@ msgstr ""
 #: ../includes/admin-reports/enter_attendee_payments.php:106
 msgid "An error occured. The attendee payment details could not be updated."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Die Zahlungsdetails des Teilnehmers konnten "
+"nicht aktualisiert werden."
 
 #: ../includes/admin-reports/enter_attendee_payments.php:122
 #: ../includes/admin-reports/enter_attendee_payments.php:138
@@ -972,6 +1051,8 @@ msgid ""
 "An error occured. The payment details for the additional attendees could not "
 "be updated."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Die Zahlungsdetails für die zusätzlichen "
+"Teilnehmer konnten nicht aktualisiert werden."
 
 #: ../includes/admin-reports/enter_attendee_payments.php:175
 msgid "All attendee payment details have been successfully updated."
@@ -985,36 +1066,40 @@ msgstr ""
 
 #: ../includes/admin-reports/enter_attendee_payments.php:234
 msgid "Invoice Sent."
-msgstr ""
+msgstr "Rechnung abgeschickt."
 
 #: ../includes/admin-reports/enter_attendee_payments.php:245
 msgid "An error occured. The requested attendee data could not be found."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Die angeforderten Teilnehmerdaten konnten "
+"nicht gefunden werden."
 
 #: ../includes/admin-reports/enter_attendee_payments.php:279
 msgid ""
 "An error occured. The event data for this registration could not be found."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Die Veranstaltungsdaten für diese "
+"Registrierung konnten nicht gefunden werden."
 
 #: ../includes/admin-reports/enter_attendee_payments.php:423
 msgid "- please select -"
-msgstr ""
+msgstr "- Bitte wählen Sie -"
 
 #: ../includes/admin-reports/enter_attendee_payments.php:428
 msgid "Overpaid"
-msgstr ""
+msgstr "Zu viel bezahlt"
 
 #: ../includes/admin-reports/enter_attendee_payments.php:451
 msgid "Edit Ticket Price(s)"
-msgstr ""
+msgstr "Ticketpreis(e) bearbeiten"
 
 #: ../includes/admin-reports/enter_attendee_payments.php:463
 msgid "Enter New Payment Amount:"
-msgstr ""
+msgstr "Geben Sie die neue Zahlungssumme ein:"
 
 #: ../includes/admin-reports/enter_attendee_payments.php:491
 msgid "Transaction ID: "
-msgstr ""
+msgstr "Transaktions-ID:"
 
 #: ../includes/admin-reports/enter_attendee_payments.php:491
 msgid "( or cheque #, gateway response, etc )"
@@ -1022,23 +1107,26 @@ msgstr ""
 
 #: ../includes/admin-reports/enter_attendee_payments.php:497
 msgid "Email Notice"
-msgstr ""
+msgstr "Email Hinweis"
 
 #: ../includes/admin-reports/enter_attendee_payments.php:498
 msgid "Do you want to send a payment received notice to registrant?"
 msgstr ""
+"Möchten Sie eine \"Zahlung erhalten\" Nachricht an den Registrierenden "
+"senden?"
 
 #: ../includes/event-management/copy_event.php:183
 msgid "An error occured. Event price details with ID#"
 msgstr ""
+"Es ist ein Fehler aufgetreten. Details zum Veranstaltungspreis mit der ID#"
 
 #: ../includes/event-management/copy_event.php:215
 msgid "has been successfully copied."
-msgstr ""
+msgstr "wurde erfolgreich kopiert."
 
 #: ../includes/functions/admin.php:933 ../includes/functions/admin.php:1004
 msgid "Sponsor New Features!"
-msgstr ""
+msgstr "Sponsore neue Features!"
 
 #: ../includes/functions/admin.php:936
 msgid "Plugins"
@@ -1046,47 +1134,47 @@ msgstr "Plugins"
 
 #: ../includes/functions/admin_menu.php:108
 msgid "Attendee Import"
-msgstr ""
+msgstr "Teilnehmer importieren"
 
 #: ../includes/functions/admin_menu.php:113
 msgid "Event Espresso - Voucher Import Tool"
-msgstr ""
+msgstr "Event Espresso - Tool zum Importieren von Rabattcodes"
 
 #: ../includes/functions/admin_menu.php:113
 msgid "Voucher Import"
-msgstr ""
+msgstr "Rabattcodes importieren"
 
 #: ../includes/functions/cart.php:745
 msgid "or"
-msgstr ""
+msgstr "oder"
 
 #: ../includes/process-registration/add_attendees_to_db.php:773
 msgid " discount per registration"
-msgstr ""
+msgstr "Rabatt pro Registrierung"
 
 #: ../includes/process-registration/add_attendees_to_db.php:774
 msgid "Attendee:"
-msgstr ""
+msgstr "Teilnehmer:"
 
 #: ../includes/process-registration/add_attendees_to_db.php:783
 msgid "Sub-Total:"
-msgstr ""
+msgstr "Zwischensumme:"
 
 #: ../includes/process-registration/add_attendees_to_db.php:790
 msgid "Total Discounts:"
-msgstr ""
+msgstr "Gesamter Rabatt:"
 
 #: ../includes/process-registration/add_attendees_to_db.php:796
 msgid "Total Amount due: "
-msgstr ""
+msgstr "Gesamte fällige Summe:"
 
 #: ../includes/process-registration/attendee_edit_record.php:187
 msgid "Edit Registration"
-msgstr ""
+msgstr "Registierung bearbeiten"
 
 #: ../includes/process-registration/attendee_edit_record.php:326
 msgid "An error occured."
-msgstr ""
+msgstr "Es ist ein Fehler aufgetreten."
 
 #: ../includes/process-registration/attendee_edit_record.php:328
 msgid ""
@@ -1096,31 +1184,37 @@ msgstr ""
 
 #: ../includes/process-registration/attendee_edit_record.php:340
 msgid "No attendee record was found."
-msgstr ""
+msgstr "Es wurden keine Teilnehmereinträge gefunden."
 
 #: ../includes/process-registration/payment_page.php:10
 msgid "An error occured. No Attendee was received."
-msgstr ""
+msgstr "Es ist ein Fehler aufgetreten. Keine Teilnehmer erhalten."
 
 #: ../includes/process-registration/payment_page.php:179
 msgid "An error has occured. The registration ID could not be found."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Die Registrierungs-ID konnte nicht gefunden "
+"werden."
 
 #: ../includes/process-registration/payment_page.php:252
 msgid "An error occured. The primary attendee could not be found."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Der primäre Teilnehmer konnte nicht gefunden "
+"werden."
 
 #: ../includes/process-registration/pending_approval_page.php:85
 msgid "An error occured. The primary attendee could not be located."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Der primäre Teilnehmer konnte nicht "
+"lokalisiert werden."
 
 #: ../templates/event_list_display.php:38 ../templates/widget.php:112
 msgid "Regsitration is closed"
-msgstr ""
+msgstr "Die Registrierung ist geschlossen"
 
 #: ../templates/event_list_display.php:143
 msgid "Member Only Event"
-msgstr ""
+msgstr "Veranstaltung nur für Mitglieder"
 
 #: ../templates/registration_page_display.php:69
 msgid "Please "
@@ -1128,19 +1222,19 @@ msgstr "Bitte"
 
 #: ../templates/registration_page_display.php:69
 msgid "contact us "
-msgstr ""
+msgstr "Kontaktieren Sie uns"
 
 #: ../templates/registration_page_display.php:69
 msgid "if you would like to know if spaces are still available."
-msgstr ""
+msgstr "falls Sie wissen möchten, ob weitere Plätze verfügbar sind."
 
 #: ../templates/shopping_cart.php:115
 msgid "Enter Voucher Code "
-msgstr ""
+msgstr "Geben Sie hier einen Rabattcode ein"
 
 #: ../templates/shopping_cart.php:141
 msgid "Enter Attendee Information"
-msgstr ""
+msgstr "Geben Sie hier die Teilnehmerinformationen ein"
 
 #: ../../../event-espresso/trunk/gateways/Bank (1)/EE_Bank.class.php:142
 msgid ""
@@ -1148,6 +1242,9 @@ msgid ""
 "transferred to the payment overview where you can view details of how to "
 "complete your bank transfer."
 msgstr ""
+"Nachdem Sie die Details Ihrer Registrierung in Schritt 3 bestätigt haben, "
+"werden Sie zur Zahlungsübersicht weitergeleitet, wo Sie die Details einsehen "
+"können, um Ihre Banküberweisung abzuschließen."
 
 #: ../../../event-espresso/trunk/gateways/Check (1)/EE_Check.class.php:104
 msgid ""
@@ -1155,27 +1252,34 @@ msgid ""
 "transferred to the payment overview where you can view details of how to "
 "complete your payment by Check."
 msgstr ""
+"Nachdem Sie die Details Ihrer Registrierung in Schritt 3 bestätigt haben, "
+"werden Sie zur Zahlungsübersicht weitergeleitet, wo Sie die Details einsehen "
+"können, um Ihre Zahlung per Scheck abzuschließen."
 
 #: ../../../event-espresso/trunk/gateways/Invoice/EE_Invoice.class.php:91
 msgid ""
 "Will display invoices as a payemnt option <br />\ton your payemnt page. "
 "(Default: Yes)"
 msgstr ""
+"Wird eine Rechnung als Zahlungsoption <br /> auf der Zahlungsseite anzeigen. "
+"(Standard: Ja)"
 
 #: ../../../event-espresso/trunk/gateways/Invoice/EE_Invoice.class.php:149
 msgid ""
 "Load a custom/pre-made style sheet <br />to change the look of your invoices."
 msgstr ""
+"Laden Sie ein eigenes/vorgefertigtes StyleSheet <br /> um das Aussehen Ihrer "
+"Rechnungen zu verändern."
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:761
 msgid "Debug Mode Is Turned On. Payments will not be processed"
-msgstr ""
+msgstr "Der Debugmodus ist eingeschaltet. Zahlungen werden nicht verarbeitet."
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:764
 msgid "Testing Guidelines"
-msgstr ""
+msgstr "Richtlinien zum Testen"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:766
@@ -1183,21 +1287,23 @@ msgid ""
 "While testing, use only the credit card numbers listed below. Other numbers "
 "will produce an error."
 msgstr ""
+"Während des Testens, verwenden Sie bitte nur die unten stehenden "
+"Kreditkartennummern. Andere Nummern werden einen Fehler produzieren."
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:767
 msgid "Expiry Date must be a valid date in the future"
-msgstr ""
+msgstr "Das Ablaufdatum muss ein gültiges Datum in der Zukunft sein"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:768
 msgid "CVV2 can be any 3 digits"
-msgstr ""
+msgstr "Der CVV2 kann jede dreistellige Zahl sein"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:773
 msgid "Credit Card Numbers Used for Testing"
-msgstr ""
+msgstr "Kreditkartennummern, die für das Testen benutzt werden können"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:774
@@ -1205,16 +1311,18 @@ msgid ""
 "Use the following credit card numbers for testing. Any other card number "
 "produces a general failure."
 msgstr ""
+"Verwenden Sie folgende Kreditkartennummern für das Testen. Alle anderen "
+"Kartennummern produzieren einen allgemeinen Fehler."
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:781
 msgid "Test Card Type"
-msgstr ""
+msgstr "Test-Kartentyp"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:782
 msgid "Test Card Numbers"
-msgstr ""
+msgstr "Test-Kartennummern"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:794
@@ -1238,52 +1346,52 @@ msgstr ""
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:807
 msgid "Response"
-msgstr ""
+msgstr "Antwort"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:817
 msgid "Invalid amount"
-msgstr ""
+msgstr "Ungültiger Betrag"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:821
 msgid "Invalid transaction type"
-msgstr ""
+msgstr "Ungültiger Transaktionstyp"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:825
 msgid "Field format error"
-msgstr ""
+msgstr "Feldformat-Fehler"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:829
 msgid "Invalid expiry date"
-msgstr ""
+msgstr "Ungültiges Ablaufdatum"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:833
 msgid "CVV2 Mismatch"
-msgstr ""
+msgstr "CVV2 Diskrepanz"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:837
 msgid "Declined"
-msgstr ""
+msgstr "Abgelehnt"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:841 (1)/EE_Paypal_Pro.class.php:845
 msgid "Invalid account number"
-msgstr ""
+msgstr "Ungültige Kontonummer"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:993
 msgid "Credit Card #"
-msgstr ""
+msgstr "Kreditkartennummer"
 
 #: ../../../event-espresso/trunk/gateways/Paypal_Pro
 #: (1)/EE_Paypal_Pro.class.php:1004
 msgid "Credit Card Type"
-msgstr ""
+msgstr "Kreditkartentyp"
 
 #: ../../../event-espresso/trunk/gateways/eway/payment.php:17
 #: ../../../event-espresso/trunk/gateways/Eway (1)/EE_Eway.class.php:366
@@ -1292,6 +1400,9 @@ msgid ""
 "transferred to the Eway.com website where your payment will be securely "
 "processed."
 msgstr ""
+"Nachdem Sie die Details Ihrer Registrierung in Schritt 3 bestätigt haben, "
+"werden Sie zur Eway.com Webseite weitergeleitet, wo Ihre Zahlung sicher "
+"weiterverarbeitet wird."
 
 #: ../../../espresso-permissions-pro/trunk/espresso-permissions-pro.php:288
 msgid "All Users"
@@ -1501,12 +1612,18 @@ msgid ""
 "transferred to the FirstData Connect 2.0 website where your payment will be "
 "securely processed."
 msgstr ""
+"Nachdem Sie die Details Ihrer Registrierung in Schritt 3 bestätigt haben, "
+"werden Sie zur FirstData Connect 2.0 Webseite weitergeleitet, wo Ihre "
+"Zahlung sicher weiterverarbeitet wird."
 
 #: ../../../event-espresso/trunk/gateways/Invoice/EE_Invoice.class.php:271
 msgid ""
 "After confirming the details of your registration in Step 3, you will be "
 "transferred to the payment overview where you can download your invoice."
 msgstr ""
+"Nachdem Sie die Details Ihrer Registrierung in Schritt 3 bestätigt haben, "
+"werden Sie zur Zahlungsübersicht weitergeleitet, wo Sie Ihre Rechnung "
+"herunterladen können."
 
 #: ../../../event-espresso/trunk/gateways/Invoice/lib/Invoice.class.php:101
 msgid "SubTotal"
@@ -1514,7 +1631,7 @@ msgstr "Zwischensumme"
 
 #: ../../../event-espresso/trunk/gateways/Invoice/lib/Invoice.class.php:110
 msgid "Extra"
-msgstr ""
+msgstr "Extra"
 
 #: ../../../event-espresso/trunk/gateways/Invoice/lib/Invoice.class.php:137
 #: ../../../event-espresso/trunk/gateways/Invoice/lib/templates/index.php:53
@@ -1551,7 +1668,7 @@ msgstr ""
 
 #: ../../../event-espresso/trunk/includes/admin-reports/event_list_attendees.php:54
 msgid "An error occured. No ticket data was received."
-msgstr ""
+msgstr "Es ist ein Fehler aufgetreten. Keine Ticketdaten erhalten."
 
 #: ../../../event-espresso/trunk/includes/admin-reports/event_list_attendees.php:125
 msgid "Registration Code"
@@ -1678,7 +1795,7 @@ msgstr "Tickets übrig"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:166
 msgid "Only?"
-msgstr ""
+msgstr "Ausschließlich?"
 
 #: ../../../event-espresso/trunk/includes/admin_screens/pricing/EE_Price_Types_List_Table.class.php:167
 msgid "reduces price"
@@ -1912,6 +2029,9 @@ msgid ""
 "field. For example, if you do not want to modify the value of \"Section\" - "
 "leave it empty."
 msgstr ""
+"HINWEIS: Lassen Sie ein Feld frei, wenn Sie dessen Wert nicht verändern "
+"wollen. Als Beispiel, falls Sie den Wert von \"Bereich\" nicht verändern "
+"wollen, lassen Sie ihn leer."
 
 #: ../../../espresso-seating/trunk/template/seating_chart_seat_list.php:207
 msgid "Move to Trash"
@@ -1993,6 +2113,12 @@ msgid ""
 "server is missing or out of date, then you may want to bypass this check, in "
 "order to get the First Data gateway to function."
 msgstr ""
+"Zur Interaktion zwischen Ihrem Server und den Servern von FirstData gibt es "
+"eine Mögichkleit, dass SSL Zertifikat der FirstData Servern zu verifizieren. "
+"Normalerweise möchten Sie dies, da es die Sicherheit verbessert. Es kann "
+"jedoch sein, dass die CA-Datei auf Ihrem Server fehlt oder veraltet ist, und "
+"Sie deswegen diese Überprüfung übersprichen möchten, damit das FirstData "
+"Gateway funktioniert."
 
 #: ../gateways/aim/settings.php:106 ../gateways/authnet/settings.php:146
 #: ../gateways/exact/settings.php:137
@@ -2739,6 +2865,9 @@ msgid ""
 "Anytime you change your id and secret on this page and update your WePay "
 "settings, you will see a button to authorize your application."
 msgstr ""
+"Jedesmal, wenn Sie Ihre ID und das Secret auf dieser Seite ändern und die "
+"WePay Einstellungen aktualisieren, wird Ihnen ein Button zur Authorisierung "
+"Ihrer Anwendung angezeigt."
 
 #: ../gateways/wepay/settings.php:240
 msgid ""

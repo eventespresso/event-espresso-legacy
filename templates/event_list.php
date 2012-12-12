@@ -301,12 +301,13 @@ if (!function_exists('event_espresso_get_event_details')) {
 			}
 
 			//Address formatting
-			$location = ($event_address != '' ? $event_address : '') . ($event_address2 != '' ? '<br />' . $event_address2 : '') . ($event_city != '' ? '<br />' . $event_city : '') . ($event_state != '' ? ', ' . $event_state : '') . ($event_zip != '' ? '<br />' . $event_zip : '') . ($event_country != '' ? '<br />' . $event_country : '');
+			$location = (!empty($event_address) ? $event_address : '') . (!empty($event_address2) ? '<br />' . $event_address2 : '') . (!empty($event_city) ? '<br />' . $event_city : '') . (!empty($event_state)  ? ', ' . $event_state : '') . (!empty($event_zip) ? '<br />' . $event_zip : '') . (!empty($event_country) ? '<br />' . $event_country : '');
 
 			//Google map link creation
 			$google_map_link = espresso_google_map_link(array('address' => $event_address, 'city' => $event_city, 'state' => $event_state, 'zip' => $event_zip, 'country' => $event_country, 'text' => 'Map and Directions', 'type' => 'text'));
 			global $all_meta;
 			$all_meta = array(
+				'event_id' => $event_id,
 				'event_name' => stripslashes_deep($event_name),
 				'event_desc' => stripslashes_deep($event_desc),
 				'event_address' => $event_address,
@@ -314,8 +315,17 @@ if (!function_exists('event_espresso_get_event_details')) {
 				'event_city' => $event_city,
 				'event_state' => $event_state,
 				'event_zip' => $event_zip,
+				'event_country' => $venue_country,
+				'venue_title' => $venue_title,
+                'venue_address' => $venue_address,
+                'venue_address2' => $venue_address2,
+                'venue_city' => $venue_city,
+                'venue_state' => $venue_state,
+                'venue_country' => $venue_country,
+				'location' => $location,
 				'is_active' => $event->is_active,
 				'event_status' => $event->event_status,
+				'contact_email' => empty($event->alt_email) ? $org_options['contact_email'] : $event->alt_email,
 				'start_time' => empty($event->start_time) ? '' : $event->start_time,
 				'registration_startT' => $event->registration_startT,
 				'registration_start' => $registration_start,
@@ -326,6 +336,8 @@ if (!function_exists('event_espresso_get_event_details')) {
 				'start_date' => event_date_display($start_date, get_option('date_format')),
 				'end_date' => event_date_display($end_date, get_option('date_format')),
 				'time' => empty($event->start_time) ? '' : $event->start_time,
+				'start_time' => empty($event->start_time) ? '' : $event->start_time,
+				'end_time' => empty($event->end_time) ? '' : $event->end_time,
 				'google_map_link' => $google_map_link,
 				'price' => empty($event->event_cost) ? '' : $event->event_cost,
 				'event_cost' => empty($event->event_cost) ? '' : $event->event_cost,

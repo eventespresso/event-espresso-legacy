@@ -8,17 +8,17 @@ function add_event_to_db($recurrence_arr = array()) {
     global $wpdb, $org_options, $current_user, $espresso_premium;
 	
 	//Set front end event manager to false
-	$use_fes = false;
+	$use_fem = false;
 	$is_espresso_event_manager = false;
 		
 	//If using the Espresso Event Manager
-	if ( isset($_REQUEST['ee_fes_action']) && $_REQUEST['ee_fes_action'] == 'ee_fes_add'){
+	if ( isset($_REQUEST['ee_fem_action']) && $_REQUEST['ee_fem_action'] == 'ee_fem_add'){
 		//Security check using nonce
-		if ( empty($_POST['ee_fes_nonce']) || !wp_verify_nonce($_POST['ee_fes_nonce'],'espresso_form_check') ){
-			print '<h3 class="fes_error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
+		if ( empty($_POST['ee_fem_nonce']) || !wp_verify_nonce($_POST['ee_fem_nonce'],'espresso_form_check') ){
+			print '<h3 class="fem_error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
 			return;
 		}
-		$use_fes = true;
+		$use_fem = true;
 		if ( function_exists('espresso_member_data') && espresso_member_data('role') == 'espresso_event_manager' ){
 			global $espresso_manager;
 			$event_manager_approval = isset($espresso_manager['event_manager_approval']) && $espresso_manager['event_manager_approval'] == 'Y' ? true : false;
@@ -27,7 +27,7 @@ function add_event_to_db($recurrence_arr = array()) {
 	}
 
     //Don't show sql errors if using the front-end event manager
-	if ( $use_fes == false )
+	if ( $use_fem == false )
 		$wpdb->show_errors();
 
     static $recurrence_id = null;
@@ -97,12 +97,12 @@ function add_event_to_db($recurrence_arr = array()) {
         $event_location = ($address != '' ? $address . ' ' : '') . ($address2 != '' ? '<br />' . $address2 : '') . ($city != '' ? '<br />' . $city : '') . ($state != '' ? ', ' . $state : '') . ($zip != '' ? '<br />' . $zip : '') . ($country != '' ? '<br />' . $country : '');
         $reg_limit = !empty($_REQUEST['reg_limit']) ? $_REQUEST['reg_limit'] : '999999';
         $allow_multiple = !empty($_REQUEST['allow_multiple']) ? $_REQUEST['allow_multiple'] : 'N';
-        $additional_limit = !empty($_REQUEST['additional_limit']) ? $_REQUEST['additional_limit'] : '5';
+        $additional_limit = !empty($_REQUEST['additional_limit']) && $_REQUEST['additional_limit'] > 0 ? $_REQUEST['additional_limit'] : '5';
         $member_only = !empty($_REQUEST['member_only']) ? $_REQUEST['member_only'] : 'N';
         $is_active = !empty($_REQUEST['is_active']) ? $_REQUEST['is_active'] : 'Y';
         $event_status = !empty($_REQUEST['event_status']) ? $_REQUEST['event_status'] : 'A';
 		
-		if ( $is_espresso_event_manager == true && $use_fes == true && $event_manager_approval == true ) {
+		if ( $is_espresso_event_manager == true && $use_fem == true && $event_manager_approval == true ) {
 			$event_status = 'P';
 		}
 
@@ -258,11 +258,11 @@ function add_event_to_db($recurrence_arr = array()) {
             //print count ($sql);
             $sql_data = array_merge((array) $sql_data, (array) '%s');
             //print count($sql_data);
-            if ( !$wpdb->prepare($wpdb->insert(EVENTS_DETAIL_TABLE, $sql, $sql_data)) ) {
+            if ( ! $wpdb->insert(EVENTS_DETAIL_TABLE, $sql, $sql_data )) {
                 $error = true;
             }
         } else {
-            if ( !$wpdb->prepare($wpdb->insert(EVENTS_DETAIL_TABLE, $sql, $sql_data)) ) {
+            if ( ! $wpdb->insert(EVENTS_DETAIL_TABLE, $sql, $sql_data )) {
                 $error = true;
             }
         }
@@ -295,7 +295,7 @@ function add_event_to_db($recurrence_arr = array()) {
                 if ($v != '') {
                     $sql_cat = "INSERT INTO " . EVENTS_CATEGORY_REL_TABLE . " (event_id, cat_id) VALUES ('" . $last_event_id . "', '" . $v . "')";
                     //echo "$sql3 <br>";
-                    if ( !$wpdb->query($wpdb->prepare($sql_cat)) ) {
+                    if ( !$wpdb->query($wpdb->prepare($sql_cat, NULL)) ) {
                         $error = true;
                     }
                 }
@@ -307,7 +307,7 @@ function add_event_to_db($recurrence_arr = array()) {
                 if ($v != '') {
                     $sql_ppl = "INSERT INTO " . EVENTS_PERSONNEL_REL_TABLE . " (event_id, person_id) VALUES ('" . $last_event_id . "', '" . $v . "')";
                     //echo "$sql_ppl <br>";
-                    $wpdb->query($wpdb->prepare($sql_ppl));
+                    $wpdb->query($wpdb->prepare($sql_ppl, NULL));
                 }
             }
         }
@@ -327,7 +327,7 @@ function add_event_to_db($recurrence_arr = array()) {
                 if ($v != '' && $v != 0) {
                     $sql_venues = "INSERT INTO " . EVENTS_VENUE_REL_TABLE . " (event_id, venue_id) VALUES ('" . $last_event_id . "', '" . $v . "')";
                     //echo "$sql_venues <br>";
-                    $wpdb->query($wpdb->prepare($sql_venues));
+                    $wpdb->query($wpdb->prepare($sql_venues, NULL));
                 }
             }
         }
@@ -337,7 +337,7 @@ function add_event_to_db($recurrence_arr = array()) {
                 if ($v != '') {
                     $sql_cat = "INSERT INTO " . EVENTS_DISCOUNT_REL_TABLE . " (event_id, discount_id) VALUES ('" . $last_event_id . "', '" . $v . "')";
                     //echo "$sql3 <br>";
-                    if ( !$wpdb->query($wpdb->prepare($sql_cat)) ) {
+                    if ( !$wpdb->query($wpdb->prepare($sql_cat, NULL)) ) {
                         $error = true;
                     }
                 }
@@ -351,7 +351,7 @@ function add_event_to_db($recurrence_arr = array()) {
 				$_REQUEST['end_time'][$k] = !empty($_REQUEST['end_time'][$k]) ? $_REQUEST['end_time'][$k] : $end_time;
 				$sql3 = "INSERT INTO " . EVENTS_START_END_TABLE . " (event_id, start_time, end_time, reg_limit) VALUES ('" . $last_event_id . "', '" . event_date_display($v, 'H:i') . "', '" . event_date_display($_REQUEST['end_time'][$k], 'H:i') . "', " . $time_qty . ")";
 				//echo "$sql3 <br>";
-				if ( !$wpdb->query($wpdb->prepare($sql3)) ) {
+				if ( !$wpdb->query( $wpdb->prepare($sql3, NULL) ) ) {
 					$error = true;
 				}
 			}
@@ -366,14 +366,14 @@ function add_event_to_db($recurrence_arr = array()) {
 
                     $sql_price = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, surcharge_type, price_type, member_price, member_price_type) VALUES ('" . $last_event_id . "', '" . $v . "', '" . $_REQUEST['surcharge'][$k] . "', '" . $_REQUEST['surcharge_type'][$k] . "', '" . $price_type . "', '" . $member_price . "', '" . $member_price_type . "')";
                     //echo "$sql3 <br>";
-                    if ( !$wpdb->query($wpdb->prepare($sql_price)) ) {
+                    if ( !$wpdb->query( $wpdb->prepare($sql_price, NULL) ) ) {
                         $error = true;
                     }
                 }
             }
         } elseif (isset($_REQUEST['event_cost']) && $_REQUEST['event_cost'][0] == 0) {
             $sql_price = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, price_type, member_price, member_price_type) VALUES ('" . $last_event_id . "', '0.00', '0.00', '" . __('Free', 'event_espresso') . "', '0.00', '" . __('Free', 'event_espresso') . "')";
-            if ( !$wpdb->query($wpdb->prepare($sql_price)) ) {
+            if ( !$wpdb->query($wpdb->prepare($sql_price, NULL)) ) {
                 $error = true;
             }
         }
@@ -449,7 +449,7 @@ function add_event_to_db($recurrence_arr = array()) {
 
             $sql_data = array('%d', '%s');
             $update_id = array('id' => $last_event_id);
-            $wpdb->prepare($wpdb->update(EVENTS_DETAIL_TABLE, $sql, $update_id, $sql_data, array('%d')));
+            $wpdb->update(EVENTS_DETAIL_TABLE, $sql, $update_id, $sql_data, array('%d'));
         }
 
         if (empty($error)) {
@@ -486,7 +486,7 @@ function add_event_to_db($recurrence_arr = array()) {
      * End recursion, as part of recurring events.
      */
 	
-	if ( $use_fes == false )
+	if ( $use_fem == false )
 		return $last_event_id;
 }
 

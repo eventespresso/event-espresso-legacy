@@ -6,7 +6,8 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			global $wpdb, $org_options;
 			//session_destroy();
 			//echo "<pre>", print_r( $_SESSION ), "</pre>";
-			$events_in_session = $_SESSION['espresso_session']['events_in_session'];
+			$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
+			
 			if ( event_espresso_invoke_cart_error( $events_in_session ) )
 				return false;
 

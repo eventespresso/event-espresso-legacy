@@ -10,7 +10,7 @@ function espresso_display_paypal_pro($data) {
 <div id="paypal_pro-payment-option-dv" class="payment-option-dv">
 
 	<a id="paypal_pro-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="paypal_pro-payment-option-form" style="cursor:pointer;">
-		<img alt="Pay using PayPal Pro" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/paypal_pro/PayPalPro-logo.png">
+		<img alt="Pay using Credit Card" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/pay-by-credit-card.png">
 	</a>	
 
 	<div id="paypal_pro-payment-option-form-dv" class="hide-if-js">	

@@ -95,24 +95,24 @@ function event_espresso_multi_price_update($event_id) {
 	<legend>
 	<?php _e('Standard Pricing', 'event_espresso'); ?>
 	</legend>
-	<ul id="dynamicPriceInput">
+	<ul class="dynamic-price-input-form" id="dynamicPriceInput">
 		<?php
             $prices = $wpdb->get_results("SELECT price_type, event_cost, surcharge, surcharge_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id = '" . $event_id . "' ORDER BY id");
             if ($wpdb->num_rows > 0) {
                 foreach ($prices as $price) {
-                    echo '<li><p>';
+                    echo '<li class="dynamic-price-input-li"><p class="event_form_field ee_fem_form_field dynamic-price-input-field">';
                     if (!isset($price->price_type))
                         $price->price_type = "General Admission";
                     if (!isset($price->event_cost))
                         $price->event_cost = "0.00";
-                    echo '<label for="add-price-type-' . $price_counter++ . '">' . __('Name', 'event_espresso') . ' ' . $price_counter++ . '</label> <input size="10" id="add-price-type' . $price_counter++ . '" type="text" name="price_type[]" value="' . $price->price_type . '" /> ';
+                    echo '<label class="dynamic-price-input-label price-name" for="add-price-type-' . $price_counter++ . '">' . __('Name', 'event_espresso') . ' ' . $price_counter++ . '</label> <input class="dynamic-price-input price-name-input price-input" size="10" id="add-price-type' . $price_counter++ . '" type="text" name="price_type[]" value="' . $price->price_type . '" /> ';
                     $org_options['currency_symbol'] = isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : '';
-                    echo '<label for="add-price">' . __('Price', 'event_espresso') . ' ' . $org_options['currency_symbol'] . '</label><input size="5" id="add-price" type="text" name="event_cost[]" value="' . $price->event_cost . '" /></p> ';
+                    echo '<label class="dynamic-price-input-label" for="add-price">' . __('Price', 'event_espresso') . ' ' . $org_options['currency_symbol'] . '</label><input class="dynamic-price-input price-input" size="5" id="add-price" type="text" name="event_cost[]" value="' . $price->event_cost . '" /></p> ';
 
-                    echo '<p><label for="add-surcharge">' . __('Surcharge', 'event_espresso') . '</label> <input size="5" id="add-surcharge" type="text"  name="surcharge[]" value="' . $price->surcharge . '" /></p> ';
-                    echo '<p><label for="surcharge-type">' . __('Surcharge Type', 'event_espresso') . '</label>';
+                    echo '<p class="dynamic-price-input-field"><label class="dynamic-price-input-label" for="add-surcharge">' . __('Surcharge', 'event_espresso') . '</label> <input class="dynamic-price-input" size="5" id="add-surcharge" type="text"  name="surcharge[]" value="' . $price->surcharge . '" /></p> ';
+                    echo '<p class="dynamic-price-input-field"><label class="dynamic-price-input-label" for="surcharge-type">' . __('Surcharge Type', 'event_espresso') . '</label>';
                     ?>
-		<select id="surcharge-type" name="surcharge_type[]">
+		<select class="dynamic-price-input-select" id="surcharge-type" name="surcharge_type[]">
 			<option value = "flat_rate" <?php selected($price->surcharge_type, 'flat_rate') ?>>
 			<?php _e('Flat Rate', 'event_espresso'); ?>
 			</option>
@@ -127,28 +127,28 @@ function event_espresso_multi_price_update($event_id) {
                 }
             }else {
                 ?>
-		<li id="add-price-name">
-			<p>
-				<label for="add-price-type-<?php echo $price_counter ?>">
+		<li class="dynamic-price-input-li" id="add-price-name">
+			<p class="event_form_field ee_fem_form_field dynamic-price-input-field">
+				<label class="dynamic-price-input-label price-name" for="add-price-type-<?php echo $price_counter ?>">
 					<?php _e('Name', 'event_espresso'); ?>
 					<?php echo $price_counter ?>:</label>
-				<input size="10" id="add-price-type-<?php echo $price_counter ?>" type="text"  name="price_type[]" value="General Admission">
-				<label for="add-event-cost">
+				<input class="dynamic-price-input price-name-input" id="add-price-type-<?php echo $price_counter ?>" type="text"  name="price_type[]" value="General Admission">
+				<label class="dynamic-price-input-label price" for="add-event-cost">
 					<?php _e('Price', 'event_espresso'); ?>
 				</label>
-				<input size="5" id="add-event-cost" type="text"  name="event_cost[]" value="0.00">
+				<input class="dynamic-price-input price-input" size="5" id="add-event-cost" type="text"  name="event_cost[]" value="0.00">
 			</p>
-			<p>
-				<label for="add-surcharge">
+			<p class="event_form_field ee_fem_form_field dynamic-price-input-field">
+				<label class="dynamic-price-input-label" for="add-surcharge">
 					<?php _e('Surcharge', 'event_espresso'); ?>
 				</label>
-				<input size="5"  type="text"  id="add-surcharge" name="surcharge[]" value="<?php echo $org_options['surcharge'] ?>" >
+				<input class="dynamic-price-input" size="5"  type="text"  id="add-surcharge" name="surcharge[]" value="<?php echo $org_options['surcharge'] ?>" >
 			</p>
-			<p>
-				<label for="add-surcharge-type">
+			<p class="event_form_field ee_fem_form_field dynamic-price-input-field">
+				<label class="dynamic-price-input-label" for="add-surcharge-type">
 					<?php _e('Surcharge Type', 'event_espresso'); ?>
 				</label>
-				<select id="add-surcharge-type" name="surcharge_type[]">
+				<select class="dynamic-price-input-select" id="add-surcharge-type" name="surcharge_type[]">
 					<option value = "flat_rate" <?php selected($org_options['surcharge_type'], 'flat_rate') ?>>
 					<?php _e('Flat Rate', 'event_espresso'); ?>
 					</option>
@@ -156,14 +156,13 @@ function event_espresso_multi_price_update($event_id) {
 					<?php _e('Percent', 'event_espresso'); ?>
 					</option>
 				</select>
-			</p>
+			<p class="event_form_field ee_fem_form_field dynamic-price-input-field">
 			<?php echo '<img class="remove-item" title="' . __('Remove this Price', 'event_espresso') . '" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Price', 'event_espresso') . '" />'; ?> </li>
 		<?php
             }
             ?>
 	</ul>
-	<p> (
-		<?php _e('enter 0.00 for free events, enter 2 place decimal i.e.', 'event_espresso'); ?>
+	<p> (<?php _e('enter 0.00 for free events, enter 2 place decimal i.e.', 'event_espresso'); ?>
 		<?php echo isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : ''; ?> 7.00) </p>
 	<?php
         global $espresso_premium;
@@ -180,7 +179,7 @@ function event_espresso_multi_price_update($event_id) {
         function addPriceInput(divName){
             var next_counter = counter_static(price_counter);
             var newdiv =  document.createElement("li");
-            newdiv.innerHTML = "<p><label for='add-price-type-" + (next_counter) + "'><?php _e('Name', 'event_espresso'); ?> " + (next_counter) + "</label> <input type='text' size='10' name='price_type[]' /> <label for='add-price" + (next_counter) + "'><?php _e('Price', 'event_espresso'); ?></label> <input id='add-price-" + (next_counter) + "' type='text' size='5' name='event_cost[]' /></p><p><label for='add-surcharge-" + (next_counter) + "' ><?php _e('Surcharge', 'event_espresso'); ?></label> <input size='5' id='add-surcharge-" + (next_counter) + "' type='text'  name='surcharge[]' value='<?php echo $org_options['surcharge'] ?>' /></p> <p><label for='add-surcharge-type-" + (next_counter) + "'><?php _e('Surcharge Type', 'event_espresso'); ?> <select id='add-surcharge-type-" + (next_counter) + "' name='surcharge_type[]'><option value = 'flat_rate' <?php selected($org_options['surcharge_type'], 'flat_rate') ?>><?php _e('Flat Rate', 'event_espresso'); ?></option><option value = 'pct' <?php selected($org_options['surcharge_type'], 'pct') ?>><?php _e('Percent', 'event_espresso'); ?></option></select></p>";
+            newdiv.innerHTML = "<p><label for='add-price-type-" + (next_counter) + "'><?php _e('Name', 'event_espresso'); ?> " + (next_counter) + "</label> <input class='dynamic-price-input price-name-input' type='text' size='10' name='price_type[]' /> <label for='add-price" + (next_counter) + "'><?php _e('Price', 'event_espresso'); ?></label> <input id='add-price-" + (next_counter) + "' type='text' size='5' name='event_cost[]' /></p><p><label for='add-surcharge-" + (next_counter) + "' ><?php _e('Surcharge', 'event_espresso'); ?></label> <input size='5' id='add-surcharge-" + (next_counter) + "' type='text'  name='surcharge[]' value='<?php echo $org_options['surcharge'] ?>' /></p> <p><label for='add-surcharge-type-" + (next_counter) + "'><?php _e('Surcharge Type', 'event_espresso'); ?> <select id='add-surcharge-type-" + (next_counter) + "' name='surcharge_type[]'><option value = 'flat_rate' <?php selected($org_options['surcharge_type'], 'flat_rate') ?>><?php _e('Flat Rate', 'event_espresso'); ?></option><option value = 'pct' <?php selected($org_options['surcharge_type'], 'pct') ?>><?php _e('Percent', 'event_espresso'); ?></option></select></p>";
             newdiv.innerHTML += "<?php echo '<img class=\"remove-item\" title=\"' . __('Remove this Price', 'event_espresso') . '\" onclick=\"this.parentNode.parentNode.removeChild(this.parentNode);\" src=\"' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif\" alt=\"' . __('Remove Price', 'event_espresso') . '\" />'; ?>";
             document.getElementById(divName).appendChild(newdiv);
             counter++;
@@ -203,7 +202,7 @@ function event_espresso_multi_price_update($event_id) {
 //@param optional $event_id = pass the event id to get the categories assigned to the event.
 function event_espresso_get_categories($event_id = 0, $is_fes = false) {
     global $wpdb;
-	
+	$manage = '';
 	//Don't show manage link if using front-end event submission
 	if ( $is_fes == false )
 		$manage = '<p><a href="admin.php?page=event_categories" target="_blank">' . __('Manage Categories', 'event_espresso') . '</a></p>';
@@ -259,7 +258,7 @@ function event_espresso_get_categories($event_id = 0, $is_fes = false) {
 //@param optional $is_fes = Used for the front-end event submission tool. It hides the "Manage Categories" if true.
 function event_espresso_categories_dd($event_id = 0, $is_fes = false) {
     global $wpdb;
-	
+	$manage = '';
 	//Don't show manage link if using front-end event submission
 	if ( $is_fes == false )
 		$manage = '<p><a href="admin.php?page=event_categories" target="_blank">' . __('Manage Categories', 'event_espresso') . '</a></p>';
@@ -305,7 +304,7 @@ function event_espresso_categories_dd($event_id = 0, $is_fes = false) {
         return $html;
     } else {
         _e('No Categories', 'event_espresso');
-        echo $manage;
+        return;
     }
 }
 

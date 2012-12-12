@@ -123,8 +123,8 @@ class PluginUpdateEngineChecker {
 		//the following is for install key inclusion (will apply later with PUE addons.)
 		$this->install_key_arr = get_option($this->pue_install_key);
 		if ( isset($this->install_key_arr['key'] ) ) {
-			//have to account for old system using hash_hmac... this will only have to happen once.  TODO: This is specific to EE, we need to modify in a future version so that we dont' need this extraneous code.  It's here b/c we're switching to a less restrictive model for domain regulation.
-			$this->install_key = isset($this->install_key_arr['hashkey']) ? hash_hmac('md5', $this->install_key_arr['key'], $this->install_key_arr['hashkey']) : $this->install_key_arr['key'];
+			
+			$this->install_key = $this->install_key_arr['key'];
 
 			$this->download_query['pue_install_key'] = $this->install_key;
 		} else {
@@ -323,10 +323,10 @@ class PluginUpdateEngineChecker {
 		}
 
 		
-		$new_key = ( isset($pluginInfo->render_pass) ) ? $pluginInfo->render_pass : null;
-		$new_key = empty($new_key) && isset( $pluginInfo->new_install_key ) ? $pluginInfo->new_install_key : $new_key;
-		$this->install_key_arr['key'] = !empty($new_key) ? $new_key : null;
-		update_option($this->pue_install_key, $this->install_key_arr);
+		if ( isset($pluginInfo->new_install_key) ) {
+			$this->install_key_arr['key'] = $pluginInfo->new_install_key; 
+			update_option($this->pue_install_key, $this->install_key_arr);
+		}
 		
 		//need to correct the download url so it contains the custom user data (i.e. api and any other paramaters)
 		//oh let's generate the download_url otherwise it will be old news...
@@ -334,7 +334,7 @@ class PluginUpdateEngineChecker {
 		if ( !empty($this->download_query) )  {
 			$d_install_key = $this->install_key_arr['key'];
 			$this->download_query['pue_install_key'] = $d_install_key;
-			$this->download_query['new_pue_chk'] = 1;
+			$this->download_query['new_pue_check'] = 1;
 			$pluginInfo->download_url = add_query_arg($this->download_query, $pluginInfo->download_url);
 		}
 		

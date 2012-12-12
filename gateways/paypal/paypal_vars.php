@@ -22,30 +22,40 @@ function espresso_display_paypal($payment_data) {
 	$SQL = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id=%d";
 	$session_id = $wpdb->get_var( $wpdb->prepare( $SQL, $attendee_id ));
 	// now get all registrations for that session
-	$SQL = "SELECT a.final_price, a.orig_price, a.quantity, ed.event_name, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage ";
+	$SQL = "SELECT a.final_price, a.orig_price, a.quantity, ed.event_name, a.price_option, a.fname, a.lname ";
 	$SQL .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 	$SQL .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
-	$SQL .= " LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
 	$SQL .= " WHERE attendee_session=%s ORDER BY a.id ASC";
 	
 	$items = $wpdb->get_results( $wpdb->prepare( $SQL, $session_id ));
-	$total_orig_price = 0;
-	$total_final_price = 0;
+	//printr( $items, '$items  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+					
+	foreach ( $items as $key => $item ) {	
 	
-	foreach ($items as $key=>$item) {
-		$total_orig_price += $item->orig_price * $item->quantity;
-		$total_final_price += $item->final_price * $item->quantity;
 		$item_num=$key+1;
 		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname);
-		$myPaypal->addField('amount_' . $item_num, $item->orig_price);
-		$myPaypal->addField('quantity_' . $item_num, $item->quantity);
+		$myPaypal->addField('quantity_' . $item_num, absint($item->quantity));
+
+		if ( $item->final_price < $item->orig_price ) {
+		
+			$adjustment = abs( $item->orig_price - $item->final_price );
+			$myPaypal->addField('amount_' . $item_num, $item->orig_price);
+			$myPaypal->addField('discount_amount_' . $item_num, $adjustment);
+			$myPaypal->addField('discount_amount2_' . $item_num, $adjustment);
+			
+		} else {
+
+			$myPaypal->addField('amount_' . $item_num, $item->final_price);
+		}		
+	
 	}
 	
-	$total_discount = (float)$total_orig_price - (float)$total_final_price;
+
+//	$total_discount = (float)$total_orig_price - (float)$total_final_price;	
+//	if ( $total_discount > 0 ) {
+//		$myPaypal->addField('discount_amount_cart', $total_discount);
+//	}
 	
-	if ( $total_discount > 0 ) {
-		$myPaypal->addField('discount_amount_cart', $total_discount);
-	}
 	$myPaypal->addField('business', $paypal_id);
 	if ($paypal_settings['force_ssl_return']) {
 		$home = str_replace("http://", "https://", home_url());
@@ -59,7 +69,6 @@ function espresso_display_paypal($payment_data) {
 	$event_name = $wpdb->get_var('SELECT event_name FROM ' . EVENTS_DETAIL_TABLE . " WHERE id='" . $event_id . "'");
 	$myPaypal->addField('cmd', '_cart');
 	$myPaypal->addField('upload', '1');
-	
 
 	$myPaypal->addField('currency_code', $paypal_cur);
 	$myPaypal->addField('image_url', empty($paypal_settings['image_url']) ? '' : $paypal_settings['image_url']);

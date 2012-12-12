@@ -6,11 +6,11 @@ function event_newsletter($event_id=0){
 	}
 	//echo $event_id;
 	global $wpdb, $org_options;
-	wp_tiny_mce( false , // true makes the editor "teeny"
+	/*wp_tiny_mce( false , // true makes the editor "teeny"
 		array(
 			"editor_selector" => "theEditor"//This is the class name of your text field
 		)
-	);
+	);*/
 	
 	$events = $wpdb->get_results("SELECT * FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'");
 	foreach ($events as $event){

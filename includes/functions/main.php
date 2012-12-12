@@ -271,6 +271,7 @@ function event_espresso_get_event_meta($event_id) {
 if (!function_exists('event_espresso_get_is_active')) {
 
 	function event_espresso_get_is_active($event_id, $event_meta = '') {
+		//printr( $event_meta, '$event_meta  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		global $wpdb, $org_options;
 		//If the timezome is set in the wordpress database, then lets use it as the default timezone.
 		if (get_option('timezone_string') != '') {
@@ -320,7 +321,6 @@ if (!function_exists('event_espresso_get_is_active')) {
 		//echo time('', $timestamp);
 		//echo date(time());
 		//echo ' event date = '.date( $timestamp);
-		//$org_options['expire_on_registration_end'] = 'Y';
 		//IF the event is ongoing, then display ongoing
 		if ($is_active == "Y" && $event_status == "O") {
 			$event_status = array('status' => 'ONGOING', 'display' => '<span style="color: #090; font-weight:bold;">' . __('ONGOING', 'event_espresso') . '</span>', 'display_custom' => '<span class="espresso_ongoing">' . __('Ongoing', 'event_espresso') . '</span>');
@@ -416,6 +416,7 @@ if (!function_exists('event_espresso_get_is_active')) {
 if (!function_exists('event_espresso_get_status')) {
 
 	function event_espresso_get_status($event_id, $event_meta = '') {
+		//printr( $event_meta, '$event_meta  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		$event_status = event_espresso_get_is_active($event_id, $event_meta);
 		switch ($event_status['status']) {
 			case 'EXPIRED':
@@ -931,13 +932,7 @@ function is_multi($array) {
 
 //escape the commas in csv file export
 function escape_csv_val($val) {
-
-	$type = ($_REQUEST['type']) ? $_REQUEST['type'] : '';
-	if (preg_match('/,/', $val) && $type == 'csv') {
-		return '"' . $val . '"';
-	}
-
-	return $val;
+	return "\"" . eregi_replace("\"", "\"\"", $val) . "\"";
 }
 
 //return field(s) from a table
@@ -1266,3 +1261,34 @@ function espresso_build_registration_id($event_id){
 		
 //Registration id filter
 add_filter('filter_hook_espresso_registration_id', 'espresso_build_registration_id', 10, 1);
+
+/*
+  Displays a featured image in the event listings and registration pages.
+
+  Example usage in a template file:
+  echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, $event_meta['event_thumbnail_url']);
+  (Note: the $event_meta variable (array) is populated in the event_list.php and registration_page.php files.)
+  
+  Advanced usage using the class, title and align parameters:
+  echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, $event_meta['event_thumbnail_url'], 'a-custom-class', 'Title of the image');
+
+  Parameters:
+  event_id - used in the id attribute of the image
+  class - a custom css class. //Default: ee-featured-image
+  image_url - the url of the image, most likely the $event_meta['event_thumbnail_url'] variable from the event_list.php and registration_page.php files
+  title - the text to display in the title tag attribute of the image. //Default: Featured Image
+*/
+if (!function_exists('espresso_display_featured_image')) {
+	function espresso_display_featured_image($event_id, $image_url, $class = '', $title = '') {
+		global $org_options;
+		if ( !empty($org_options['display_featured_image']) && $org_options['display_featured_image'] == 'N' || !isset($org_options['display_featured_image']) ){
+			return;
+		}
+		$class = empty($class) ? 'ee-featured-image' : $class;
+		$title = empty($title) ? __('Featured Image', 'event_espresso') : $title;
+		$align = empty($align) ? 'right' : $align;
+		$output = '<div class="' . $class . '" id="espresso_featured_image-'.$event_id.'"><img title="' . $title . '" src="'.$image_url.'" /></div>';
+		return $output; 
+	}
+}
+add_filter('filter_hook_espresso_display_featured_image', 'espresso_display_featured_image',100,5);

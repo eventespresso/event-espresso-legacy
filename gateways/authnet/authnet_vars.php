@@ -57,8 +57,8 @@ function espresso_display_authnet($payment_data) {
 		$item_num=$key+1;
 		$myAuthorize->addLineItem(
 				$item_num,
-				$item->event_name,
-				$item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname,
+				substr_replace($item->event_name, '...', 28),
+				substr_replace($item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname, 0, 255),
 				$item->quantity,
 				$item->final_price,
 				FALSE
@@ -76,16 +76,16 @@ function espresso_display_authnet($payment_data) {
 	} else {
 		if (empty($authnet_settings['button_url'])) {
 			//$button_url = EVENT_ESPRESSO_GATEWAY_URL . "authnet/authnet-logo.png";
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/authnet-logo.png")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/authnet-logo.png";
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/pay-by-credit-card.png")) {
+				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/pay-by-credit-card.png";
 			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/authnet-logo.png";
+				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 			}
 		} elseif (file_exists($authnet_settings['button_url'])) {
 			$button_url = $authnet_settings['button_url'];
 		} else {
 			//If no other buttons exist, then use the default location
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/authnet-logo.png";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 		}
 		$myAuthorize->submitButton($button_url, 'authnet'); //Display payment button
 	}

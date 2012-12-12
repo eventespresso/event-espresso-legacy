@@ -180,18 +180,38 @@ if (!function_exists('event_espresso_get_orig_price_and_surcharge')) {
 		}
 
 		$SQL = "SELECT id, event_cost, surcharge, surcharge_type FROM " . EVENTS_PRICES_TABLE . " WHERE id=%d ORDER BY id ASC LIMIT 1";
+		// filter SQL statement
+		$SQL = apply_filters( 'filter_hook_espresso_orig_price_and_surcharge_sql', $SQL );
+		// get results
 		if ( $result = $wpdb->get_row( $wpdb->prepare( $SQL, absint( $price_id ) ))) {		
 //		echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 			// if price is anything other than zero
 			if ( ! (float)$result->event_cost > 0 ) {			
 				$result->event_cost = 0.00;
-			}
+			}					
 		}
 		
+		//printr( $result, '$result  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		return $result;
 		
 	}
 
+}
+
+
+
+
+/*
+ *	calculate surcharge
+ *
+ * @params int $price_id
+ * @params int $event_id
+ */
+function event_espresso_calculate_surcharge( $event_cost = 0.00, $surcharge_amount = 0.00, $surcharge_type = 'pct' ) {
+	// if >0 and is percent, calculate surcharge amount, if flat rate, will just be formatted, surcharge by default is 0. 
+	$surcharge = ( $surcharge_amount > 0 ) && ( $surcharge_type == 'pct' ) ? $event_cost * $surcharge_amount / 100 : $surcharge_amount;
+	$surcharge = number_format( $surcharge, 2, '.', '' ); 
+	return $surcharge;
 }
 
 
@@ -226,22 +246,18 @@ if (!function_exists('event_espresso_get_final_price')) {
 
 		
 		// if price is anything other than zero
-		if ( $result->event_cost > 0.00 ) {
-	
+		if ( $result->event_cost > 0.00 ) {	
 			// Addition for Early Registration discount
 			if ( $early_price_data = early_discount_amount( $event_id, $result->event_cost )) {
 				$result->event_cost = $early_price_data['event_price'];
 			}
-			
-			// calculate surcharge
-			// if >0 and is percent, calculate surcharge amount, if flat rate, will just be formatted, surcharge by default is 0. 
-			$surcharge = ( $result->surcharge > 0 ) && ( $result->surcharge_type == 'pct' ) ? $result->event_cost * $result->surcharge / 100 : $result->surcharge;
-			$surcharge = number_format( $surcharge, 2, '.', '' ); 
-
 		} 
 
+		$surcharge = event_espresso_calculate_surcharge( $result->event_cost , $result->surcharge, $result->surcharge_type );
 		$surcharge = ! empty($surcharge) ? (float)$surcharge : 0;
 		$event_cost = $result->event_cost + $surcharge;
+		
+//		echo '<h4>$event_cost : ' . $event_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		
 		return (float)number_format( $event_cost, 2, '.', '' ); 
 	}

@@ -46,10 +46,6 @@ add_filter('filter_hook_espresso_prepare_payment_data_for_gateways', 'espresso_p
 function espresso_get_total_cost($payment_data) {
 	global $wpdb;
 	$sql = "SELECT a.final_price, a.quantity FROM " . EVENTS_ATTENDEE_TABLE . " a ";
-//	$sql = "SELECT a.final_price, a.quantity, dc.coupon_code_price, dc.use_percentage  FROM " . EVENTS_ATTENDEE_TABLE . " a ";
-//	$sql = "SELECT ac.cost, ac.quantity, dc.coupon_code_price, dc.use_percentage  FROM " . EVENTS_ATTENDEE_TABLE . " a ";
-//	$sql .= " JOIN " . EVENTS_ATTENDEE_COST_TABLE . " ac ON a.id=ac.attendee_id ";
-//	$sql .= " LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
 	$sql .= " WHERE a.attendee_session='" . $payment_data['attendee_session'] . "' ORDER BY a.id ASC";
 	$tickets = $wpdb->get_results($sql, ARRAY_A);
 	$total_cost = 0;

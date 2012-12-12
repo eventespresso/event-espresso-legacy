@@ -29,7 +29,7 @@ class Fdggutil {
 	}
 
 	public function set_dateTime() {
-		$this->dateTime = date("Y:m:d-H:i:s");
+		$this->dateTime = date(get_option('date_format'));
 		global $wpdb;
 		$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET payment_date ='" . $this->dateTime . "' ";
 		$sql .= "WHERE id='" . $this->attendee_id . "'";
