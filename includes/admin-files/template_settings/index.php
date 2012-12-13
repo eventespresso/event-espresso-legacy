@@ -21,6 +21,7 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 		//FEM Settings
 		$org_options['fem_settings']['enable_fem_category_select'] = empty($_POST['enable_fem_category_select']) ? 'N' : $_POST['enable_fem_category_select'];
 		$org_options['fem_settings']['enable_fem_pricing_section'] = empty($_POST['enable_fem_pricing_section']) ? 'N' : $_POST['enable_fem_pricing_section'];
+		$org_options['fem_settings']['enable_fem_venue_section'] = empty($_POST['enable_fem_venue_section']) ? 'N' : $_POST['enable_fem_venue_section'];
 		
 		//Legacy styles
 		$org_options['style_settings']['disable_legacy_styles'] = !empty($_POST['disable_legacy_styles']) ? $_POST['disable_legacy_styles'] : 'Y';
