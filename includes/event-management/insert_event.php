@@ -360,10 +360,10 @@ function add_event_to_db($recurrence_arr = array()) {
         if ( isset($_REQUEST['event_cost']) && !empty($_REQUEST['event_cost']) ) {
             foreach ($_REQUEST['event_cost'] as $k => $v) {
                 if ($v != '') {
+					$v = (float)preg_replace('/[^0-9\.]/ui','',$v);//Removes non-integer characters
                     $price_type = $_REQUEST['price_type'][$k] != '' ? $_REQUEST['price_type'][$k] : __('General Admission', 'event_espresso');
                     $member_price_type = !empty($_REQUEST['member_price_type'][$k]) ? $_REQUEST['member_price_type'][$k] : __('Members Admission', 'event_espresso');
                     $member_price = !empty($_REQUEST['member_price'][$k]) ? $_REQUEST['member_price'][$k] : $v;
-
                     $sql_price = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, surcharge_type, price_type, member_price, member_price_type) VALUES ('" . $last_event_id . "', '" . $v . "', '" . $_REQUEST['surcharge'][$k] . "', '" . $_REQUEST['surcharge_type'][$k] . "', '" . $price_type . "', '" . $member_price . "', '" . $member_price_type . "')";
                     //echo "$sql3 <br>";
                     if ( !$wpdb->query( $wpdb->prepare($sql_price, NULL) ) ) {
