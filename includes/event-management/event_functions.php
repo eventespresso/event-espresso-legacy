@@ -166,8 +166,7 @@ function event_espresso_multi_price_update($event_id) {
             }
             ?>
 	</ul>
-	<p> (<?php _e('enter 0.00 for free events, enter 2 place decimal i.e.', 'event_espresso'); ?>
-		<?php echo isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : ''; ?> 7.00) </p>
+	<p> (<?php _e('enter 0.00 for free events, enter 2 place decimal i.e.', 'event_espresso'); ?> 7.00) </p>
 	<?php
         global $espresso_premium;
         if ($espresso_premium != true)
