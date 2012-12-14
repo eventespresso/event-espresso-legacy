@@ -176,24 +176,20 @@ if ($reg_form_only == false) {
 					if ($display_price_dropdown == TRUE) {
 						$price_label = '<span class="section-title">'.__('Choose an Option: ', 'event_espresso').'</span>';
 	?>
-				<p class="event_prices">
-					<?php do_action( 'espresso_price_select', $event_id, array('show_label'=>TRUE, 'label'=>$price_label) );?>
-				</p>
+						<p class="event_prices">
+							<?php do_action( 'espresso_price_select', $event_id, array('show_label'=>TRUE, 'label'=>$price_label) );?>
+						</p>
 	<?php
 					} else {
 	?>
-				<p class="event_prices">
-					<?php do_action( 'espresso_seating_price_select_action', $event_id, array('show_label'=>TRUE, 'label'=>$price_label) );?>
-				</p>
+						<p class="event_prices">
+							<?php do_action( 'espresso_seating_price_select_action', $event_id );?>
+						</p>
 	<?php
-
-					// Seating chart selector
-					do_action('espresso_seating_chart_select', $event_id);
+						// Seating chart selector
+						do_action('espresso_seating_chart_select', $event_id);
 							
 					}						
-					
-							
-
 	?>
 
 				<div id="event-reg-form-groups">
