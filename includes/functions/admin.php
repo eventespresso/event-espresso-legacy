@@ -286,10 +286,23 @@ function event_espresso_create_upload_directories() {
 			EVENT_ESPRESSO_TEMPLATE_DIR,
 			EVENT_ESPRESSO_GATEWAY_DIR,
 			EVENT_ESPRESSO_UPLOAD_DIR . '/logs/',
+			EVENT_ESPRESSO_UPLOAD_DIR . '/languages/',
 	);
 	foreach ($folders as $folder) {
 		wp_mkdir_p($folder);
 		@ chmod($folder, 0755);
+	}
+	
+	if (!file_exists(EVENT_ESPRESSO_UPLOAD_DIR . 'logs/.htaccess')) {
+		if (file_put_contents(EVENT_ESPRESSO_UPLOAD_DIR . 'logs/.htaccess', 'deny from all')){
+			do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'created .htaccess file that blocks direct access to logs folder');
+		}
+	}
+	
+	if (!file_exists(EVENT_ESPRESSO_UPLOAD_DIR . 'languages/index.php')) {
+		if (file_put_contents(EVENT_ESPRESSO_UPLOAD_DIR . 'languages/index.php', '')){
+			do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'created uploads/languages/index.php');
+		}
 	}
 }
 
