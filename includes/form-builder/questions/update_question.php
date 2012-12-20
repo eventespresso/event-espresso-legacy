@@ -2,14 +2,26 @@
 //Function to update questions in the database
 function event_espresso_form_builder_update(){
 
-	global $wpdb, $current_user;
+	global $wpdb, $current_user, $allowedtags;
 
 	$success = FALSE;
 	$errors = FALSE;
-	
+
 	$enum_values=array( 'Y' => 'Y', 'N' => 'N' );
 	
-	$question= isset( $_POST['question'] ) && ! empty( $_POST['question'] ) ? wp_strip_all_tags( $_POST['question'] ) : FALSE;
+	$allowedtags['a']['id'] = array();
+	$allowedtags['a']['class'] = array();
+	$allowedtags['img'] = array(
+		'id' 			=> array(),
+		'class' 		=> array(),
+		'src' 			=> array(),
+		'alt' 			=> array(),
+		'width' 	=> array(),
+		'height' 	=> array(),
+		'title' 		=> array()
+	);
+	
+	$question= isset( $_POST['question'] ) && ! empty( $_POST['question'] ) ? wp_kses( $_POST['question'], $allowedtags ) : FALSE;
 	$question_id= isset( $_POST['question_id'] ) && ! empty( $_POST['question_id'] ) ? absint( $_POST['question_id'] ) : FALSE;
 	
 	
@@ -23,7 +35,7 @@ function event_espresso_form_builder_update(){
 				'sequence' 			=> isset( $_POST['sequence'] ) && ! empty( $_POST['sequence'] ) ? absint( $_POST['sequence'] ) : 0,
 				'question_type' 	=> isset( $_POST['question_type'] ) && ! empty( $_POST['question_type'] ) ? wp_strip_all_tags( $_POST['question_type'] ) : 'TEXT', 
 				'question'			=> $question,
-				'response'			=> isset( $_POST['values'] ) && ! empty( $_POST['values'] ) ? wp_strip_all_tags( $_POST['values'] ) : '',
+				'response'			=> isset( $_POST['values'] ) && ! empty( $_POST['values'] ) ? wp_kses( $_POST['values'], $allowedtags ) : '',
 				'required'			=> isset( $_POST['required'] ) && isset( $enum_values[ $_POST['required'] ] ) ?  $enum_values[ $_POST['required'] ]  : 'N',
 				'required_text'	=> isset( $_POST['required_text'] ) && ! empty( $_POST['required_text'] ) ? wp_strip_all_tags( $_POST['required_text'] ) : '',
 				'price_mod'		=> isset( $_POST['price_mod'] ) && isset( $enum_values[ $_POST['price_mod'] ] ) ?  $enum_values[ $_POST['price_mod'] ]  : 'N',

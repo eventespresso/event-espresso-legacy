@@ -77,7 +77,7 @@ th.sorting_desc span.sorting-indicator {display:block; margin-left:3px; backgrou
 #table_filter input {width:250px; background:#fff;}
 .view_btn:hover, .edit_btn:hover, .complete_btn:hover, .shortcode_btn:hover, .excel_exp_btn:hover, .csv_exp_btn:hover, .newsletter_btn:hover  {height: 18px; margin: 2px 3px 0 0;}
 
-#attendee-admin-list-page-select-dv { margin:1em 2em 1em 0; }
+.admin-list-page-select-dv { margin:1em 2em 1em 0; }
 #form1_length { margin-right:2em; float: left; }
 
 .square-btn {
