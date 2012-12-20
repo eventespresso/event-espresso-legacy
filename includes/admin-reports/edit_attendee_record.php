@@ -288,10 +288,10 @@ function edit_attendee_record() {
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
 			$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
-			$SQL .= "AND (at.attendee_id IS NULL OR at.attendee_id = '" . $id . "') ";
+			$SQL .= "AND (at.attendee_id IS NULL OR at.attendee_id = '%d') ";
 			$SQL .= "ORDER BY qg.id, q.id ASC";		
 			
-			$questions = $wpdb->get_results( $wpdb->prepare( $SQL ));			
+			$questions = $wpdb->get_results( $wpdb->prepare( $SQL, $id ));			
 //			printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 			
 			$SQL = "SELECT id, question_id, answer FROM " . EVENTS_ANSWER_TABLE . " at WHERE at.attendee_id = %d";		
@@ -398,7 +398,7 @@ function edit_attendee_record() {
 			}		
 			$SQL .= " WHERE registration_id IN ( $reg_ids ) ORDER BY att.id";
 		}
-		$attendees = $wpdb->get_results( $wpdb->prepare( $SQL ));
+		$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, NULL ));
 		
 		foreach ($attendees as $attendee) {
 			if ( $counter == 0 ) {
@@ -631,13 +631,12 @@ function edit_attendee_record() {
 									'attendee_action' => 'delete_attendee',
 									'registration_id' => $registration_id,
 									'id' => $att,
-									'attendee_num' => $attendee_num,
 									'event_id' => $event_id
 								);
 								// add url params
 								$delete_attendee_link = add_query_arg( $delete_att_url_params, 'admin.php?page=events' );
 								// add nonce 
-								$edit_attendee_link = wp_nonce_url( $delete_attendee_link, 'edit_attendee_' . $registration_id . '_delete_attendee_nonce' );
+								$delete_attendee_link = wp_nonce_url( $delete_attendee_link, 'edit_attendee_' . $registration_id . '_delete_attendee_nonce' );
 								?>								
 								<a href="<?php echo $delete_attendee_link ?>" title="<?php _e('Delete Attendee', 'event_espresso'); ?>" onclick="return confirmDelete();">
 									<?php _e('Delete', 'event_espresso'); ?>

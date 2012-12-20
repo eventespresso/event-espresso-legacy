@@ -163,6 +163,7 @@ if (!function_exists('espresso_get_time_reg_limit')) {
 //Creates a dropdown if multiple times are associated with an event
 if (!function_exists('event_espresso_time_dropdown')) {
     function event_espresso_time_dropdown( $event_id = 'NULL', $label = 1, $multi_reg = 0, $value = '' ) {
+ 
         global $wpdb, $org_options;
 		$html = '';
 
@@ -170,31 +171,37 @@ if (!function_exists('event_espresso_time_dropdown')) {
         //know which event this belongs to
         $multi_name_adjust = $multi_reg == 1 ? "[$event_id]" : '';
 
-        $time_reg_limit = $org_options['time_reg_limit'];
-        //$time_reg_limit = 'Y';
-        //echo $num_attendees;
-        $sql = "SELECT * FROM " . EVENTS_START_END_TABLE . " WHERE event_id='" . $event_id . "' ";
-        $events = $wpdb->get_results($sql);
-        foreach ($events as $event) {
-            $timezone_string = empty($event->timezone_string) ? '' : $event->timezone_string;
-        }
+        $SQL = "SELECT timezone_string FROM " . EVENTS_DETAIL_TABLE . " WHERE id= %d ";
+        $timezone_string = $wpdb->get_var( $wpdb->prepare( $SQL, $event_id ));
 
-        //This is the initial check to see if we time slot are controlled by registration limits.
-        if ($time_reg_limit == 'Y') {
-            //$num_attendees = get_number_of_attendees_reg_limit($event_id, 'num_attendees');
-            //$sql .= " AND (reg_limit = '0' OR reg_limit >= '" .$num_attendees."') ";
+        //This is the initial check to see if time slots are controlled by registration limits.
+        if ( $org_options['time_reg_limit'] == 'Y' ) {
+			// select everything from time table plus calculate available spaces by subtracting 
+			// attendee count from inner query from the individual reg limits returned by the outer query
+			$SQL = "SELECT ESE.*, ( ESE.reg_limit - ";
+			// count # of attendees with good registrations where event start and end times match outer query start and end times
+			$SQL .= "( SELECT count(id) FROM " . EVENTS_ATTENDEE_TABLE . " ATT ";
+			$SQL .= "WHERE ATT.event_id= %d ";
+			$SQL .= "AND ATT.payment_status != 'Incomplete' ";
+			$SQL .= "AND ATT.payment_status != 'Refund' ";
+			$SQL .= "AND ATT.event_time = ESE.start_time ";
+			$SQL .= "AND ATT.end_time = ESE.end_time ) ";
+			$SQL .= ") AS available_spaces ";
+			$SQL .= "FROM " . EVENTS_START_END_TABLE . " ESE ";
+			$SQL .= "WHERE ESE.event_id= %d ";
+			$SQL .= "GROUP BY ESE.id";
+   			$event_times = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id, $event_id ));
 
-            $sql = "SELECT es.*, (es.reg_limit - count(ea.id)) as available_spaces FROM " . EVENTS_START_END_TABLE . " es
-                                left join  " . EVENTS_ATTENDEE_TABLE . " ea
-                                on
-                                es.event_id = ea.event_id
-                                and es.start_time = ea.event_time
-                                and es.end_time = ea.end_time
-                                where es.event_id= $event_id
-                                group by es.id";
-        }
-        $event_times = $wpdb->get_results($sql);
-        if ($wpdb->num_rows == 1) {//If one result, then display the times.
+        } else {
+			$SQL = "SELECT ESE.* FROM " . EVENTS_START_END_TABLE . " ESE ";
+			$SQL .= "WHERE ESE.event_id= %d ";
+			$SQL .= "GROUP BY ESE.id";	 	
+  			$event_times = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ));
+	 }
+	 
+	//printr( $event_times, '$event_times  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' ); 
+	 	// If one result, then display the times.
+        if ($wpdb->num_rows == 1) {
             $html .= $label == 1 ? '<span class="span_event_time_label">' . __('Start Time:', 'event_espresso') . '</span>' : '';
             foreach ($event_times as $time) {
                 $html .= '<span class="span_event_time_value">' . event_date_display($time->start_time, get_option('time_format')) . '</span>';
@@ -209,7 +216,7 @@ if (!function_exists('event_espresso_time_dropdown')) {
 			//$html .= $label == 0 ?'<option  value="">' .__('Select a Time', 'event_espresso') . '</option>':'';
             foreach ($event_times as $time) {
                 $selected = $value == $time->id ? ' selected="selected" ' : '';
-                switch ($time_reg_limit) {//This checks to see if the time slots are controlled by registration limits.
+                switch ( $org_options['time_reg_limit'] ) {//This checks to see if the time slots are controlled by registration limits.
                     case 'Y':
                         //If the time slot is controlled by a registration limit.
                         //Then we need to check if there are enough spaces available.
@@ -229,6 +236,8 @@ if (!function_exists('event_espresso_time_dropdown')) {
 		return $html;
     }
 }
+
+
 
 function espresso_time_id_hidden_field($event_id, $multi_reg = 0) {
     global $wpdb, $org_options;
@@ -468,7 +477,7 @@ if (!function_exists('espresso_event_time')) {
 
 function eventespresso_ddtimezone($event_id = 0) {
     global $wpdb;
-    $tz_event = $wpdb->get_var($wpdb->prepare("SELECT timezone_string FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'"));
+    $tz_event = $wpdb->get_var($wpdb->prepare("SELECT timezone_string FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '%d'", $event_id));
 
     $timezone_format = _x('Y-m-d G:i:s', 'timezone date format');
 
@@ -551,7 +560,7 @@ function eventespresso_ddtimezone($event_id = 0) {
 
 function espresso_ddtimezone_simple($event_id = 0) {
     global $wpdb;
-    $tz_event = $wpdb->get_var($wpdb->prepare("SELECT timezone_string FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'"));
+    $tz_event = $wpdb->get_var($wpdb->prepare("SELECT timezone_string FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '%d'", $event_id));
 
     $timezone_format = _x('Y-m-d G:i:s', 'timezone date format');
 

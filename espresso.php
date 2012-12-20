@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.28.4.P
+  Version: 3.1.29.2.P
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,7 +32,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.28.4.P';
+	return '3.1.29.2.P';
 }
 
 //This tells the system to check for updates to the paid version
@@ -224,6 +224,9 @@ define("EVENTS_LOCALE_REL_TABLE", $wpdb->prefix . "events_locale_rel");
 define("EVENTS_PERSONNEL_TABLE", $wpdb->prefix . "events_personnel");
 define("EVENTS_PERSONNEL_REL_TABLE", $wpdb->prefix . "events_personnel_rel");
 
+//Languages folder
+define( 'EE_LANGUAGES_LOC', '../uploads/espresso/languages/');
+
 //Added by Imon
 define("EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE", $wpdb->prefix . "events_multi_event_registration_id_group");
 //define("EVENTS_ATTENDEE_COST_TABLE", $wpdb->prefix . "events_attendee_cost");
@@ -235,7 +238,7 @@ setlocale(LC_TIME, get_locale());
 
 //Get language files
 function espresso_load_language_files() {
-	load_plugin_textdomain('event_espresso', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+	load_plugin_textdomain('event_espresso', false, EE_LANGUAGES_LOC);
 }
 add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
 
@@ -420,10 +423,6 @@ if (is_admin()) {
 	register_activation_hook(__FILE__, 'events_data_tables_install');
 	register_activation_hook(__FILE__, 'espresso_update_active_gateways');
 
-	$data_migrated_version = get_option( 'espresso_data_migrated' );	
-	if ( ! $data_migrated_version ) {
-		add_action('admin_init', 'events_data_tables_install' );
-	}
 	
 
 	
@@ -856,6 +855,9 @@ if (isset($_REQUEST['download_invoice']) && $_REQUEST['download_invoice'] == 'tr
 }
 
 if (is_admin()) {
+
+	add_action('admin_init', 'espresso_check_data_tables' );
+	
 	//Check to make sure there are no empty registration id fields in the database.
 	if (event_espresso_verify_attendee_data() == true && $_POST['action'] != 'event_espresso_update_attendee_data') {
 		add_action('admin_notices', 'event_espresso_registration_id_notice');
@@ -909,6 +911,7 @@ function espresso_export_ticket() {
 add_action('plugins_loaded', 'espresso_export_ticket', 40);
 
 
+
 function espresso_export_certificate() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	if (isset($_REQUEST['certificate_launch']) && $_REQUEST['certificate_launch'] == 'true') {
@@ -918,7 +921,94 @@ function espresso_export_certificate() {
 add_action('plugins_loaded', 'espresso_export_certificate', 30);
 
 
+
 function espresso_end_logging(){
 	do_action('action_hook_espresso_log', '', '', '');
 }
 add_action( 'shutdown', 'espresso_end_logging' );
+
+
+/**
+* espresso_check_data_tables
+* 
+* ensures that the database has been updated to the current version
+* and also ensures that all necessary data migration scripts have been applied
+* in order to bring the content of the database up to snuff as well
+* 
+* @since 3.1.28
+* @return void
+*/
+function espresso_check_data_tables() {
+
+	// check if db has been updated, cuz autoupdates don't trigger database install script
+	$espresso_db_update = get_option( 'espresso_db_update' );
+	if( ! is_array( $espresso_db_update )) {
+		$espresso_db_update = array( $espresso_db_update );
+		update_option( 'espresso_db_update', $espresso_db_update );
+	}
+	
+	// if current EE version is NOT in list of db updates, then update the db
+	if ( ! in_array( EVENT_ESPRESSO_VERSION, $espresso_db_update )) {
+		events_data_tables_install();
+	}	
+	
+	// grab list of any existing data migrations from db
+	if ( ! $existing_data_migrations = get_option( 'espresso_data_migrations' )) {
+		// or initialize as an empty array
+		$existing_data_migrations = array();
+		// and set WP option
+		add_option( 'espresso_data_migrations', array(), '', 'no' );
+	}
+	
+	// check separately if data migration from pre 3.1.28 versions to 3.1.28 has already been performed
+	// because this data migration didn't use the new system for tracking migrations
+	if ( $attendee_cost_table_fix_3_1_28 = get_option( 'espresso_data_migrated' )) {
+		// if this option already exists, let's add it to the new array for tracking all migrations
+		$existing_data_migrations[ $attendee_cost_table_fix_3_1_28 ][] = 'espresso_copy_data_from_attendee_cost_table';
+		// the delete the old tracking method
+		delete_option( 'espresso_data_migrated' );
+	}	
+
+	// array of all previous data migrations to date
+	// using the name of the callback function for the value
+	$espresso_data_migrations = array(
+		'espresso_copy_data_from_attendee_cost_table',
+		'espresso_ensure_is_primary_is_set'
+	);
+	
+	// temp array to track scripts we need to run 
+	$scripts_to_run = array();
+	// if we don't need them, don't load them
+	$load_data_migration_scripts = FALSE;
+	
+	if ( ! empty( $existing_data_migrations )) {
+	
+		// loop through all previous migrations
+		foreach ( $existing_data_migrations as $ver => $migrations ) {
+			$migrations = is_array( $migrations ) ? $migrations : array( $migrations );
+			foreach ( $migrations as $migration_func ) {
+				// make sure they have been executed
+				if ( ! in_array( $migration_func, $espresso_data_migrations )) {		
+					// ok NOW load the scripts
+					$load_data_migration_scripts = TRUE;
+					$scripts_to_run[ $migration_func ] = $migration_func;
+				} 
+			}
+		}		
+		
+	} else {
+		$load_data_migration_scripts = TRUE;
+		$scripts_to_run = $espresso_data_migrations;
+	}
+	
+
+	if ( $load_data_migration_scripts ) {
+		require_once( 'includes/functions/data_migration_scripts.php' );		
+		// run the appropriate migration script
+		foreach( $scripts_to_run as $migration_func ) {
+			call_user_func( $migration_func );		
+		}
+	}
+
+
+}

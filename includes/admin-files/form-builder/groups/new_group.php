@@ -64,9 +64,9 @@ function event_espresso_form_group_new(){
         </td>
       </tr>
     </table>
-    <p class="submit-footer">
+    <p>
       <input name="action" value="insert_group" type="hidden">
-      <input name="Submit" value="Add Group" type="submit">
+      <input class="button-primary" name="Submit" value="Add Group" type="submit">
     </p>
    </form>
   </div>

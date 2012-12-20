@@ -58,7 +58,7 @@ function event_espresso_form_builder_edit(){
 				
 				<?php
 					if ($system_question == true){
-						echo '<p class="inform">'.__('Attention: This is a "System Question", some settings may be disabled.','event_espresso').'</p>';
+						echo '<p class="yellow_inform">'.__('Attention: This is a "System Question", some settings may be disabled.','event_espresso').'</p>';
 					}
 					?>
 

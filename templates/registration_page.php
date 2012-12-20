@@ -78,7 +78,7 @@ if (!function_exists('register_attendees')) {
             $sql .= " LIMIT 0,1";
         }
 		
-        $data->event = $wpdb->get_row( $wpdb->prepare( $sql ), OBJECT);
+        $data->event = $wpdb->get_row( $wpdb->prepare( $sql, NULL ), OBJECT);
         $num_rows = $wpdb->num_rows;
 
         //Build the registration page
@@ -103,8 +103,6 @@ if (!function_exists('register_attendees')) {
             $event_state = $data->event->state;
             $event_zip = $data->event->zip;
             $event_country = $data->event->country;
-
-
             $event_description = stripslashes_deep($data->event->event_desc);
             $event_identifier = $data->event->event_identifier;
             $event_cost = isset($data->event->event_cost) ? $data->event->event_cost : "0.00";
@@ -165,7 +163,7 @@ if (!function_exists('register_attendees')) {
             $virtual_phone = stripslashes_deep($data->event->virtual_phone);
 
             //Address formatting
-            $location = ($event_address != '' ? $event_address : '') . ($event_address2 != '' ? '<br />' . $event_address2 : '') . ($event_city != '' ? '<br />' . $event_city : '') . ($event_state != '' ? ', ' . $event_state : '') . ($event_zip != '' ? '<br />' . $event_zip : '') . ($event_country != '' ? '<br />' . $event_country : '');
+           $location = (!empty($event_address) ? $event_address : '') . (!empty($event_address2) ? '<br />' . $event_address2 : '') . (!empty($event_city) ? '<br />' . $event_city : '') . (!empty($event_state)  ? ', ' . $event_state : '') . (!empty($event_zip) ? '<br />' . $event_zip : '') . (!empty($event_country) ? '<br />' . $event_country : '');
 
             //Google map link creation
             $google_map_link = espresso_google_map_link(array('address' => $event_address, 'city' => $event_city, 'state' => $event_state, 'zip' => $event_zip, 'country' => $event_country, 'text' => 'Map and Directions', 'type' => 'text'));
@@ -211,7 +209,8 @@ if (!function_exists('register_attendees')) {
 
             global $all_meta;
             $all_meta = array(
-                'event_name' => '<p class="section-title">' . stripslashes_deep($event_name) . '</span>',
+                'event_id' => $event_id,
+				'event_name' => stripslashes_deep($event_name),
                 'event_desc' => stripslashes_deep($event_desc),
                 'event_address' => $event_address,
                 'event_address2' => $event_address2,
@@ -219,32 +218,25 @@ if (!function_exists('register_attendees')) {
                 'event_state' => $event_state,
                 'event_zip' => $event_zip,
                 'event_country' => $event_country,
-                'venue_title' => '<span class="section-title">' . $venue_title . '</span>',
+                'venue_title' => $venue_title,
                 'venue_address' => $venue_address,
                 'venue_address2' => $venue_address2,
                 'venue_city' => $venue_city,
                 'venue_state' => $venue_state,
                 'venue_country' => $venue_country,
-
+				'location' => $location,
 				'is_active' => $data->event->is_active,
 				'event_status' => $data->event->event_status,
-				'start_time' => $data->event->start_time,
+				'contact_email' => empty($data->event->alt_email) ? $org_options['contact_email'] : $data->event->alt_email,
 				'start_time' => empty($data->event->start_time) ? '' : $data->event->start_time,
-
+				'end_time' => empty($data->event->end_time) ? '' : $data->event->end_time,
 				'registration_startT' => $data->event->registration_startT,
 				'registration_start' => $data->event->registration_start,
-
 				'registration_endT' => $data->event->registration_endT,
 				'registration_end' => $data->event->registration_end,
-'event_address' => empty($data->event->event_address) ? '' : $data->event->event_address,
-
-				'start_date' => '<span class="section-title">' . event_espresso_no_format_date($start_date, get_option('date_format')) . '</span>',
-                'end_date' => '<span class="section-title">' . event_date_display($end_date, get_option('date_format')) . '</span>',
-                //'time' => event_espresso_time_dropdown($event_id, 0),
+				'start_date' => event_espresso_no_format_date($start_date, get_option('date_format')),
+                'end_date' => event_date_display($end_date, get_option('date_format')),
                 'google_map_link' => $google_map_link,
-                //'price' => event_espresso_price_dropdown($event_id, 0),
-                //'registration' => event_espresso_add_question_groups($question_groups),
-                //'additional_attendees' => $allow_multiple == "Y" && $number_available_spaces > 1 ? event_espresso_additional_attendees($event_id, $additional_limit, $number_available_spaces, '', false, $event_meta) : '<input type="hidden" name="num_people" id="num_people-' . $event_id . '" value="1">',
             );
 			
 			//print_r($all_meta);

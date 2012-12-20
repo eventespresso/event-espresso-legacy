@@ -229,11 +229,7 @@ function organization_config_mnu() {
 													<?php _e('You must set the time zone for your city, or the city closest to you. UTC time will not work.', 'event_espresso'); ?>
 													<a href="http://ee-updates.s3.amazonaws.com/images/time-zone-settings-example.jpg" class="thickbox">View an example?</a> </p>
 											</li>
-											<li>
-												<label for="expire_on_registration_end">
-													<?php _e('Events expire on registration end date?', 'event_espresso'); ?>
-													<?php echo select_input('expire_on_registration_end', $values, $org_options['expire_on_registration_end']); ?> </label>
-											</li>
+											
 										</ul>
 										
 										<p>

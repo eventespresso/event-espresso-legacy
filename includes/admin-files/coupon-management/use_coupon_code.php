@@ -210,18 +210,8 @@ function espresso_update_attendee_coupon_info( $primary_att_id = FALSE, $coupon_
 
 }
 
-
-
-
-
-
-
-
-
-
-
 if (!function_exists('event_espresso_coupon_registration_page')) {
-    function event_espresso_coupon_registration_page( $use_coupon_code = 'N', $event_id, $multi_reg = FALSE ) {
+    function event_espresso_coupon_registration_page( $use_coupon_code = 'N', $event_id, $class =' ee-reg-page-text-input ', $multi_reg = FALSE ) {
 	
         global $espresso_premium;
         if ( ! $espresso_premium ) {
@@ -235,7 +225,7 @@ if (!function_exists('event_espresso_coupon_registration_page')) {
             $output ='
 	<p class="event_form_field coupon_code" id="coupon_code-' . $event_id . '">
 		<label for="coupon_code" class="inline">' . __('Promo Code', 'event_espresso') . ':</label>
-		<input type="text" tabIndex="9" maxLength="25" size="35" name="event_espresso_coupon_code'. $multi_reg_adjust . '" id="coupon_code-' . $event_id . '">
+					<input type="text" class="espresso-coupon-code ' . $class . '" name="event_espresso_coupon_code'. $multi_reg_adjust . '" id="coupon_code-' . $event_id . '">
 	</p>';
 			
         } else {

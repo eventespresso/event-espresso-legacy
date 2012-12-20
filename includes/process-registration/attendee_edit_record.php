@@ -9,6 +9,8 @@ function attendee_edit_record() {
 	
 	$id = isset( $_REQUEST['id'] ) ? absint( $_REQUEST['id'] ) : FALSE;
 	$registration_id = isset( $_REQUEST['registration_id'] ) ? wp_strip_all_tags( $_REQUEST['registration_id'] ) : FALSE;
+	$req_primary = isset( $_REQUEST['primary'] ) ? wp_strip_all_tags( $_REQUEST['primary'] ) : $id;
+	$req_p_id = isset( $_REQUEST['p_id'] ) ? wp_strip_all_tags( $_REQUEST['p_id'] ) : FALSE;
 	
 	if ( isset( $_REQUEST['r_id'] ) && ! empty( $_REQUEST['r_id'] )) {
 		$registration_id = wp_strip_all_tags( $_REQUEST['r_id'] );
@@ -36,8 +38,8 @@ function attendee_edit_record() {
 				
 			}
 			
-			if ( isset( $_REQUEST['primary'] ) && isset( $_REQUEST['p_id'] )) {
-				return events_payment_page( $_REQUEST['primary']/*, $_REQUEST['p_id']*/ );
+			if ( isset( $req_primary ) && isset( $req_p_id )) {
+				return events_payment_page( $req_primary/*, $req_p_id*/ );
 			}
 			
 		}
@@ -53,9 +55,8 @@ function attendee_edit_record() {
 		$SQL .= "ORDER BY att.id";
 
 		$attendee = $wpdb->get_row( $wpdb->prepare( $SQL, $id, $registration_id ));
-		//printr( $attendee, '$attendee  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-		
-		if ( $attendee !== FALSE ) {
+
+		if ( $attendee != FALSE ) {
 		
 			$display_attendee_form = TRUE;
 
@@ -92,6 +93,7 @@ function attendee_edit_record() {
 				$questions_in .= $g_id . ',';
 			}
 			$questions_in = substr($questions_in, 0, -1);
+//			echo '<h4>$questions_in : ' . $questions_in . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 			
 			$group_name = '';
 			$counter = 0;
@@ -104,7 +106,7 @@ function attendee_edit_record() {
 			$SQL .= "AND q.admin_only != 'Y' ";
 			$SQL .= "ORDER BY qg.group_order, qg.id, q.sequence ASC";
 			
-			$questions = $wpdb->get_results( $wpdb->prepare( $SQL ));
+			$questions = $wpdb->get_results( $wpdb->prepare( $SQL, NULL ));
 //			echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //			printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 
@@ -171,7 +173,7 @@ function attendee_edit_record() {
 
 				//If this is not an attendee returing to edit their details, then we need to return to the payment page
 				if ( ! isset($_REQUEST['single'] )) {
-					return events_payment_page( $_REQUEST['primary']/*, $_REQUEST['p_id']*/ );
+					return events_payment_page( $req_primary );
 					exit();
 				}
 					
@@ -206,17 +208,19 @@ function attendee_edit_record() {
 						$questions_in .= $g_id . ',';
 					}
 					$questions_in = substr( $questions_in, 0, -1 );
+//					echo '<h4>$questions_in : ' . $questions_in . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		
 					$FILTER = isset( $event_meta['additional_attendee_reg_info'] ) && $event_meta['additional_attendee_reg_info'] == '2' && isset($_REQUEST['attendee_num']) && $_REQUEST['attendee_num'] > 1 ? ' AND qg.system_group = 1 ' : '';
 
+			
 					//pull the list of questions that are relevant to this event
-					$SQL = "SELECT q.*, q.id q_id, at.*, qg.group_name, qg.show_group_description, qg.show_group_name ";
+					$SQL = "SELECT q.*, q.id AS q_id, at.*, qg.group_name, qg.show_group_description, qg.show_group_name ";
 					$SQL .= "FROM " . EVENTS_QUESTION_TABLE . " q ";
 					$SQL .= "LEFT JOIN " . EVENTS_ANSWER_TABLE . " at on q.id = at.question_id ";
 					$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 					$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
-					$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
-					$SQL .= "AND ( at.attendee_id IS NULL OR at.attendee_id = %d ) ";
+					$SQL .= "WHERE qg.id in ( $questions_in ) ";
+					$SQL .= "AND (  at.attendee_id IS NULL OR at.attendee_id = %d ) ";
 					$SQL .= "AND q.admin_only != 'Y' ";
 					$SQL .= $FILTER;
 					$SQL .= "ORDER BY qg.group_order, qg.id, q.sequence ASC";
@@ -292,7 +296,7 @@ function attendee_edit_record() {
 				<input type="hidden" name="event_id" value="<?php echo $event_id ?>" />
 				<input type="hidden" name="attendee_action" value="update_attendee" />
 				<input type="hidden" name="regevent_action" value="edit_attendee" />
-				<input type="hidden" name="primary" value="<?php echo $_REQUEST['primary'] ?>" />
+				<input type="hidden" name="primary" value="<?php echo $req_primary ?>" />
 				
 				<p class="event_form_submit">
 					<input class="event-form-submit-btn" type="submit" name="submit" value="<?php _e('Update Record', 'event_espresso'); ?>" />

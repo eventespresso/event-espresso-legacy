@@ -20,7 +20,7 @@ function event_espresso_form_builder_update(){
 		'height' 	=> array(),
 		'title' 		=> array()
 	);
-	
+
 	$question= isset( $_POST['question'] ) && ! empty( $_POST['question'] ) ? wp_kses( $_POST['question'], $allowedtags ) : FALSE;
 	$question_id= isset( $_POST['question_id'] ) && ! empty( $_POST['question_id'] ) ? absint( $_POST['question_id'] ) : FALSE;
 	

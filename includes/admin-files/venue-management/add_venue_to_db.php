@@ -6,6 +6,23 @@ function add_venue_to_db(){
 	$success = array();
 	$errors = array();
 	
+	//Set front end event manager to false
+	$use_fem = FALSE;
+		
+	//If using the Espresso Event Manager
+	if ( isset($_REQUEST['ee_fem_action']) && $_REQUEST['ee_fem_action'] == 'ee_fem_add'){
+		//Security check using nonce
+		if ( empty($_POST['ee_fem_nonce']) || !wp_verify_nonce($_POST['ee_fem_nonce'],'espresso_form_check') ){
+			print '<h3 class="fem_error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
+			return;
+		}
+		$use_fem = TRUE;
+	}
+
+    //Don't show sql errors if using the front-end event manager
+	if ( $use_fem == FALSE )
+		$wpdb->show_errors();
+	
 	//Check if we are adding a new venue from within the event editor
 	$venue_autocomplete = isset( $_REQUEST['add_new_venue_dynamic'] ) && $_REQUEST['add_new_venue_dynamic'] == 'true' ? TRUE : FALSE;
 	
@@ -17,7 +34,11 @@ function add_venue_to_db(){
 		
 			$error = urlencode( __( 'An error occured. The venue name is a required field.','event_espresso' )); 
 			$redirect = add_query_arg( array( 'action' => 'add_new_venue', 'form_error' => $error ), admin_url( 'admin.php?page=event_venues' ));
-			wp_safe_redirect( $redirect );
+			if ( $use_fem == TRUE ){
+				return;
+			}else{
+				wp_safe_redirect( $redirect );
+			}
 			
 		} else {
 
