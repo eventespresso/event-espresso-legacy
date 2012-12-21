@@ -8,7 +8,7 @@
 */
 
 
-class PayPal
+class Espresso_PayPal
 {
 
 	var $APIUsername = '';
