@@ -4,7 +4,7 @@ function espresso_display_mwarrior($payment_data) {
 	extract($payment_data);
 // Setup class
 	include_once ('Mwarrior.php');
-	$mwarrior = new Espresso_Mwarrior); // initiate an instance of the class
+	$mwarrior = new Espresso_Mwarrior(); // initiate an instance of the class
 	echo '<!--Event Espresso Merchant Warrior Gateway Version ' . $mwarrior->gateway_version . '-->';
 	global $org_options;
 //global $attendee_id;

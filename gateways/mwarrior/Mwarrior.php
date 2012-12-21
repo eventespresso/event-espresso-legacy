@@ -8,7 +8,7 @@
  */
 
 
-class Espresso_Mwarriorextends Espresso_PaymentGateway{
+class Espresso_Mwarrior extends Espresso_PaymentGateway{
 
 	public $gateway_version = '1.0';
 
