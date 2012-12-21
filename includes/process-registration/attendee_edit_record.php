@@ -106,7 +106,7 @@ function attendee_edit_record() {
 			$SQL .= "AND q.admin_only != 'Y' ";
 			$SQL .= "ORDER BY qg.group_order, qg.id, q.sequence ASC";
 			
-			$questions = $wpdb->get_results( $wpdb->prepare( $SQL ));
+			$questions = $wpdb->get_results( $wpdb->prepare( $SQL, NULL ));
 //			echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //			printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 

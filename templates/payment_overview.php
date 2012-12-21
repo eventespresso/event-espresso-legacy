@@ -38,7 +38,6 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	?>
 		<tr>
 			<?php
 			echo $txn_id == '' ? '' : '<td>' . __('Transaction ID:', 'event_espresso') . '</td> <td>' . $txn_id . '</td>';
-			echo apply_filters('filter_hook_espresso_display_add_to_calendar_by_attendee_id', $attendee_id);
 			?>
 		</tr>
 	</table>

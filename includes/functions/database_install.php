@@ -296,6 +296,8 @@ function events_data_tables_install() {
 					'display_address_in_event_list' => 'N',
 					'display_address_in_regform' => 'Y',
 					'use_custom_post_types' => 'N',
+					'display_ical_download' => 'Y',
+'display_featured_image' => 'N',
 					'themeroller' => array(
 						'themeroller_style' => 'smoothness',
 					),
@@ -310,7 +312,7 @@ function events_data_tables_install() {
 			
 		} else if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name) {
 			//If an earlier version is found
-			$results = $wpdb->get_results("SELECT * FROM " . EVENTS_ORGANIZATION_TABLE . " WHERE id='1'");
+			$results = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "events_organization" . " WHERE id='1'");
 			foreach ($results as $result) {
 				$org_id = $result->id;
 				$Organization = $result->organization;
@@ -390,7 +392,6 @@ function events_data_tables_install() {
 					'payment_message' => $payment_message,
 					'message' => $message,
 					'country_id' => $country_id,
-					'expire_on_registration_end' => 'Y',
 					'email_before_payment' => 'N',
 					'use_personnel_manager' => 'Y',
 					'use_venue_manager' => 'Y',
@@ -765,150 +766,7 @@ function events_data_tables_install() {
 	espresso_answer_fix();
 	espresso_added_by_admin_session_id_fix();
 	espresso_add_cancel_shortcode();
-	espresso_copy_data_from_attendee_cost_table();
 	
 	add_option( 'espresso_db_update', EVENT_ESPRESSO_VERSION, '', 'no' );
 
-}
-
-
-
-
-
-function espresso_copy_data_from_attendee_cost_table() {
-	global $wpdb;
-	
-	$data_migrated_version = get_option( 'espresso_data_migrated' );
-	if ( ! $data_migrated_version ) {
-
-		// check for events_attendee_cost table
-		$SQL = "SELECT *  FROM information_schema.tables WHERE table_name = '" . $wpdb->prefix . "events_attendee_cost' LIMIT 1";
-		if ( $wpdb->get_row($SQL)) {
-			// copy attendee costs to orig_price
-			$SQL = "SELECT * FROM " . $wpdb->prefix . "events_attendee_cost";			
-			if ( $results = $wpdb->get_results($SQL)) {
-				foreach ( $results as $result ) {
-					$wpdb->update( 
-							$wpdb->prefix . "events_attendee", 
-							array( 'orig_price' => $result->cost,  'final_price' => $result->cost ), 
-							array( 'id' => $result->attendee_id ),
-							array( '%f', '%f' ),
-							array( '%d' )
-					);
-				}						
-			}
-		}
-
-
-
-		// get  reg IDs for all multi registration attendees that are NOT the primary attendee
-		$SQL = "SELECT registration_id FROM " . $wpdb->prefix . "events_multi_event_registration_id_group WHERE registration_id != primary_registration_id";
-		$non_primary_registrants = $wpdb->get_results($SQL);
-		if ( $non_primary_registrants !== FALSE && ! empty( $non_primary_registrants )) {
-			// now grab ALL attendees 
-			$SQL = "SELECT registration_id, is_primary, final_price, quantity, total_cost, amount_pd, payment_status FROM " . $wpdb->prefix . "events_attendee";
-			$attendees = $wpdb->get_results($SQL);
-			if ( $attendees !== FALSE && ! empty( $attendees )) {
-				// loop thru attendees
-				foreach ( $attendees as $attendee ) {
-					// check for non-primary attendees
-					if ( in_array( $attendee->registration_id, $non_primary_registrants )) {
-						// set "is_primary" to false 
-						$wpdb->update( 
-								$wpdb->prefix . "events_attendee", 
-								array( 'is_primary' => 0,  'amount_pd' => 0.00 ), 
-								array( 'registration_id' => $attendee->registration_id ),
-								array( '%d', '%f' ),
-								array( '%s' )
-						);	
-						
-					} else {
-						
-						//calculate new total
-						$total_cost = $attendee->final_price * $attendee->quantity;
-						// but keep the old one if it exists
-						$total_cost = $attendee->total_cost != '0.00' ? $attendee->total_cost : $total_cost;
-						//calculate new amount paid
-						$amount_pd = $attendee->payment_status == 'Completed' ? $total_cost : 0.00;
-						// but keep the old one if it exists
-						$amount_pd = $attendee->amount_pd != '0.00' ? $attendee->amount_pd : $amount_pd;
-						// update
-						$wpdb->update( 
-								$wpdb->prefix . "events_attendee", 
-								array( 'is_primary' => 1,  'total_cost' => $total_cost,  'amount_pd' => $amount_pd ), 
-								array( 'registration_id' => $attendee->registration_id ),
-								array( '%d', '%f', '%f' ),
-								array( '%s' )
-						);		
-												
-					}			
-				}
-			}				
-		}
-
-
-		$SQL = "SELECT DISTINCT primary_registration_id FROM " . $wpdb->prefix . "events_multi_event_registration_id_group";
-		$primary_registrants = $wpdb->get_results($SQL);
-		if ( $primary_registrants !== FALSE && ! empty( $primary_registrants )) {	
-			// now calculate a new event total for each primary_registrant
-			foreach ( $primary_registrants as $primary_registrant ) {		
-				//echo '<h4>primary_registration_id : ' . $primary_registrant->primary_registration_id . '</h4>';			
-				// total cost for all attendees for a registration
-				$reg_total = 0;
-				//assume txn's are complete
-				$txn_complete = TRUE;
-				// first get all reg IDs associated with the primary reg
-				$SQL = "SELECT * FROM " . $wpdb->prefix . "events_multi_event_registration_id_group ";
-				$SQL .= "WHERE primary_registration_id = %s";
-				if ( $registrations = $wpdb->get_results( $wpdb->prepare( $SQL, $primary_registrant->primary_registration_id ))) {
-					// find payment info for those registrations in the attendee table
-					foreach ( $registrations as $registration ) {				
-						//echo '<h4>registration_id : ' . $registration->registration_id . '</h4>';			
-						$SQL = "SELECT registration_id, is_primary, final_price, quantity, payment_status FROM " . $wpdb->prefix . "events_attendee ";
-						$SQL .= "WHERE registration_id = %s";							
-						if ( $attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $registration->registration_id ))) {
-							// cycle thru attendees
-							foreach ( $attendees as $attendee ) {
-								//printr( $attendee, '$attendee  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-								// calculate attendee total
-								$att_total = $attendee->final_price * $attendee->quantity;
-								// add to total for the entire registration
-								$reg_total += $att_total;
-								
-								// while we are here, update total cost and zero out amount paid for non-primary attendees
-								if ( $primary_registrant->primary_registration_id != $attendee->registration_id || ! $attendee->is_primary ) {
-									$wpdb->update( 
-											$wpdb->prefix . "events_attendee", 
-											array( 'total_cost' => $att_total,  'amount_pd' => 0.00 ), 
-											array( 'registration_id' => $attendee->registration_id ),
-											array( '%f', '%f' ),
-											array( '%s' )
-									);		
-													
-								} else {
-									$txn_complete = $attendee->payment_status == 'Completed' ? TRUE : FALSE;
-								}				
-							}	
-						}
-						
-						
-					}
-				}	
-				
-				$amount_pd = $txn_complete ? $reg_total : 0.00;
-				//echo '<h4>txn completed</h4>';	
-				$wpdb->update( 
-						$wpdb->prefix . "events_attendee", 
-						array( 'total_cost' => $reg_total, 'amount_pd' => $amount_pd ), 
-						array( 'registration_id' => $primary_registrant->primary_registration_id ),
-						array( '%f', '%f' ),
-						array( '%s' )
-				);	
-										
-			}	// end foreach ( $primary_registrants as $primary_registrant )
-		}	// if ( $primary_registrants !== FALSE && ! empty( $primary_registrants ))
-		
-		add_option( 'espresso_data_migrated', EVENT_ESPRESSO_VERSION, '', 'no' );
-		
-	}
 }

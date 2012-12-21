@@ -23,7 +23,7 @@ function add_new_event_email(){
 					<?php 
 					if (function_exists('wp_editor')) {
 						$args = array("textarea_rows" => 5, "textarea_name" => "email_text", "editor_class" => "my_editor_custom");
-						wp_editor("My email content", "email_text", $args);
+						wp_editor("", "email_text", $args);
 					}else{
 						the_editor('', $id = 'event_desc', $prev_id = 'title', $media_buttons = true, $tab_index = 3);
 					}

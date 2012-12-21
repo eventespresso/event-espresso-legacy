@@ -25,7 +25,7 @@ function espresso_display_usaepay_onsite($data) {
 <div id="usaepay_onsite-payment-option-dv" class="payment-option-dv">
 
 	<a id="usaepay_onsite-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="usaepay_onsite-payment-option-form" style="cursor:pointer;">
-		<img alt="Pay using USAePay" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/usaepay_onsite/usaepay-logo.png">
+		<img alt="Pay using a Credit Card" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/pay-by-credit-card.png">
 	</a>	
 
 	<div id="usaepay_onsite-payment-option-form-dv" class="hide-if-js">

@@ -42,12 +42,14 @@ function event_espresso_question_groups_config_mnu() {
 
 		<div class="meta-box-sortables ui-sortables">
 			<?php
+			$button_style = 'button-primary';
 			if (isset($_REQUEST['action'])) {
 				switch ($_REQUEST['action']) {
 					case 'new_group':
 						if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/form-builder/groups/new_group.php')) {
 							require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/form-builder/groups/new_group.php');
 							event_espresso_form_group_new();
+							$button_style = 'button-secondary';
 						} else {
 							require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/pricing_table.php');
 						}
@@ -55,6 +57,7 @@ function event_espresso_question_groups_config_mnu() {
 					case 'edit_group':
 						require_once("edit_group.php");
 						event_espresso_form_group_edit();
+						$button_style = 'button-secondary';
 						break;
 					case 'insert_group':
 						if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/form-builder/groups/insert_group.php')) {
@@ -74,7 +77,7 @@ function event_espresso_question_groups_config_mnu() {
 							?>
 							<div id="message" class="updated fade">
 								<p><strong>
-					<?php _e('This function is not available in the free version of Event Espresso.', 'event_espresso'); ?>
+							<?php _e('This function is not available in the free version of Event Espresso.', 'event_espresso'); ?>
 									</strong></p>
 							</div>
 							<?php
@@ -163,9 +166,9 @@ function event_espresso_question_groups_config_mnu() {
 	<?php _e('Check All', 'event_espresso'); ?>
 					</strong>
 					<input name="delete_group" type="submit" class="button-secondary" id="delete_group" value="<?php _e('Delete Question Group', 'event_espresso'); ?>"  style="margin:10 0 0 10px;" onclick="return confirmDelete();">
-					<a  style="margin-left:5px"class="button-primary" href="admin.php?page=form_groups&amp;action=new_group"><?php _e('Add New Group', 'event_espresso'); ?></a>
-					<a  style="margin-left:5px"class="button-primary" href="admin.php?page=form_builder"><?php _e('Questions', 'event_espresso'); ?></a>
-					<a  style="color:#FFF; text-decoration:none; margin-left:5px"class="button-primary thickbox" href="#TB_inline?height=400&width=500&inlineId=group_info"><?php _e('Help', 'event_espresso'); ?></a></p>
+					<a  style="margin-left:5px"class="button-secondary" href="admin.php?page=form_builder"><?php _e('Manage Questions', 'event_espresso'); ?></a>
+					<a  style="margin-left:5px"class="button-secondary thickbox" href="#TB_inline?height=400&width=500&inlineId=group_info"><?php _e('Help', 'event_espresso'); ?></a>
+					<a  style="margin-left:5px"class="<?php echo $button_style; ?>" href="admin.php?page=form_groups&amp;action=new_group"><?php _e('Add New Group', 'event_espresso'); ?></a></p>
 			</div>
 		</form>
 		<?php

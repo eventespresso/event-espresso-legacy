@@ -5,11 +5,12 @@ if (!defined('EVENT_ESPRESSO_VERSION'))
 function edit_event($event_id = 0) {
 	global $wpdb, $org_options, $espresso_premium;
 	ob_start();
-	$events = $wpdb->get_results($wpdb->prepare("SELECT e.*, ev.id as venue_id
+	$SQL = "SELECT e.*, ev.id as venue_id
 	    FROM " . EVENTS_DETAIL_TABLE . " e
 	    LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " vr ON e.id = vr.event_id
 	    LEFT JOIN " . EVENTS_VENUE_TABLE . " ev ON vr.venue_id = ev.id
-	    WHERE e.id = %d", $event_id));
+	    WHERE e.id = %d";
+	$events = $wpdb->get_results($wpdb->prepare($SQL, $event_id));
 	if (!is_array($events) || count($events) <= 0) {
 		event_espresso_edit_list();
 		#echo "<div class='updated fade below-h2'><p>";

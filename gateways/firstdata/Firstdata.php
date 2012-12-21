@@ -49,7 +49,7 @@ function espresso_process_firstdata($payment_data) {
 	$myorder["cardnumber"] = $_POST['card_num'];
 	$myorder["cardexpmonth"] = $_POST['expmonth'];
 	$myorder["cardexpyear"] = $_POST['expyear'];
-	$myorder["chargetotal"] = $r->amount_pd;
+	$myorder["chargetotal"] = $payment_data['total_cost'];
 
 	$myorder["name"] = $_POST['first_name'] . ' ' . $_POST['last_name'];
 	$myorder["address1"] = $_POST['address'];

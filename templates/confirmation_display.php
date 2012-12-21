@@ -131,10 +131,10 @@ $attendee_num = 1;
 					<?php foreach ($questions as $question) { ?>
 						<tr>
 							<th scope="row" class="header">
-								<?php echo $question->question; ?>
+								<?php echo stripslashes( html_entity_decode( $question->question, ENT_QUOTES, 'UTF-8' )); ?>
 							</th>
 							<td>
-								<span class="event_espresso_value"><?php echo $question->answer; ?></span>
+								<span class="event_espresso_value"><?php echo stripslashes( html_entity_decode( $question->answer, ENT_QUOTES, 'UTF-8' )); ?></span>
 							</td>
 						</tr>
 					<?php } ?>

@@ -97,7 +97,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$attendee_quantity = 1;
 				$final_price = $data_source['event_cost'];
 				$orig_price = $data_source['event_cost'];
-				$price_type =  __('Admin', 'event_espresso');		
+				$price_type =  __('Admin', 'event_espresso');
 				//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				
@@ -106,7 +106,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				// Added for seating chart add-on
 				// If a seat was selected then price of that seating will be used instead of event price
 				$final_price = seating_chart::get_purchase_price($data_source['seat_id']);
-				$orig_price = $data_source['cost'];
+				$orig_price = $final_price;
+				$price_type =  $data_source['seat_id'];
 				//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 					
@@ -120,9 +121,10 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 					$orig_price = event_espresso_get_orig_price_and_surcharge( $att_data_source['price_id'] );
 					$final_price = isset( $att_data_source['price_id'] ) ? event_espresso_get_final_price( $att_data_source['price_id'], $event_id, $orig_price ) : 0.00;
 					$price_type = isset( $att_data_source['price_id'] ) ? espresso_ticket_information( array( 'type' => 'ticket', 'price_option' => $att_data_source['price_id'] )) : '';
-					$orig_price = (float)number_format( $orig_price->event_cost + $orig_price->surcharge, 2, '.', '' ); 
-					//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-					//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+					$surcharge = event_espresso_calculate_surcharge( $orig_price->event_cost , $orig_price->surcharge, $orig_price->surcharge_type );
+					$orig_price = (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' ); 			
+//					echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//					echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				}
 				
 			} elseif ( isset( $data_source['price_select'] ) && $data_source['price_select'] == TRUE ) {
@@ -133,7 +135,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$price_type = $price_options[1];
 				$orig_price = event_espresso_get_orig_price_and_surcharge( $price_id );
 				$final_price = event_espresso_get_final_price( $price_id, $event_id, $orig_price );
-				$orig_price = (float)number_format( $orig_price->event_cost + $orig_price->surcharge, 2, '.', '' ); 
+				$surcharge = event_espresso_calculate_surcharge( $orig_price->event_cost , $orig_price->surcharge, $orig_price->surcharge_type );
+				$orig_price = (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' ); 
 				//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				
@@ -147,7 +150,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 					$orig_price = event_espresso_get_orig_price_and_surcharge( $data_source['price_id'] );
 					$final_price = isset( $data_source['price_id'] ) ? event_espresso_get_final_price( $data_source['price_id'], $event_id, $orig_price ) : 0.00;
 					$price_type = isset($data_source['price_id']) ? espresso_ticket_information(array('type' => 'ticket', 'price_option' => $data_source['price_id'])) : '';
-					$orig_price = (float)number_format( $orig_price->event_cost + $orig_price->surcharge, 2, '.', '' ); 
+					$surcharge = event_espresso_calculate_surcharge( $orig_price->event_cost , $orig_price->surcharge, $orig_price->surcharge_type );
+					$orig_price = (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' ); 
 					//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 					//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';					
 				}
@@ -400,7 +404,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$columns_and_values = array('attendee_id' => $primary_att_id, 'meta_key' => 'primary_attendee', 'meta_value' => 1);
 				$data_formats = array('%s', '%s', '%s');
 			
-				if (!$wpdb->prepare($wpdb->insert(EVENTS_ATTENDEE_META_TABLE, $columns_and_values, $data_formats))) {
+				if ( !$wpdb->insert(EVENTS_ATTENDEE_META_TABLE, $columns_and_values, $data_formats) ) {
 					$error = true;
 				}
 
@@ -446,6 +450,9 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 										$x_booking_id = seating_chart::parse_booking_info($att_data_source['x_seat_id'][$k]);
 										if ($x_booking_id > 0) {
 											$seat_check = true;
+											$price_type =  $att_data_source['x_seat_id'][$k];
+											$final_price = seating_chart::get_purchase_price($att_data_source['x_seat_id'][$k]);
+											$orig_price = $final_price;
 										} else {
 											$seat_check = false; //Keeps the system from adding an additional attndee if no seat is selected
 										}
@@ -539,12 +546,12 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
 								$SQL .= "ORDER BY q.id ASC";
 								
-								$questions_list = $wpdb->get_results($wpdb->prepare( $SQL ));
+								$questions_list = $wpdb->get_results($wpdb->prepare( $SQL, NULL ));
 								foreach ($questions_list as $question_list) {
 									if ($question_list->system_name != '') {
 										$ext_att_data_source[$question_list->system_name] = $att_data_source['x_attendee_' . $question_list->system_name][$k];
 									} else {
-										$ext_att_data_source[$question_list->question_type . '_' . $question_list->id] = $att_data_source['x_attendee_' . $question_list->question_type . '_' . $question_list->id][$k];
+										$ext_att_data_source[$question_list->question_type . '_' . $question_list->id] = isset($att_data_source['x_attendee_' . $question_list->question_type . '_' . $question_list->id][$k]) && !empty($att_data_source['x_attendee_' . $question_list->question_type . '_' . $question_list->id][$k]) ? $att_data_source['x_attendee_' . $question_list->question_type . '_' . $question_list->id][$k] : '';
 									}
 								}
 
