@@ -1,10 +1,7 @@
 <?php
-
 function add_new_event_category() {
-   
-    ?>
+?>
 <!--Add event display-->
-
 <div id="add-edit-categories" class="metabox-holder">
 	<div class="postbox">
 		<h3>
@@ -29,12 +26,12 @@ function add_new_event_category() {
 					<?php _e('Display category description on event listings Page?', 'event_espresso'); ?>
 				</p>
 				<?php 
-										$values=array(					
-											array('id'=>'Y','text'=> __('Yes','event_espresso')),
-											array('id'=>'N','text'=> __('No','event_espresso'))
-											);				
-										echo select_input('display_desc', $values, 'N');
-										?>
+					$values=array(					
+						array('id'=>'Y','text'=> __('Yes','event_espresso')),
+						array('id'=>'N','text'=> __('No','event_espresso'))
+					);				
+					echo select_input('display_desc', $values, 'N');
+				?>
 				<?php global $espresso_premium; if ($espresso_premium == true){?>						
 				<table class="form-table">
 					<tbody>
@@ -43,7 +40,7 @@ function add_new_event_category() {
 									<?php _e('Use Color Pickers', 'event_espresso'); ?>
 								</label>
 							</th>
-							<td><?php echo select_input('use_pickers', $values, $category_meta['use_pickers'], 'id="espresso_use_pickers"'); ?></td>
+							<td><?php echo select_input('use_pickers', $values, isset($category_meta['use_pickers']) && !empty($category_meta['use_pickers']) ? $category_meta['use_pickers'] : '', 'id="espresso_use_pickers"'); ?></td>
 						</tr>
 						<tr class="color-picker-selections">
 							<th class="color-picker-style">
@@ -73,13 +70,13 @@ function add_new_event_category() {
 					<div class="postbox">
 						<?php 
 												
-												if (function_exists('wp_editor')){
-													$args = array("textarea_rows" => 5, "textarea_name" => "category_desc", "editor_class" => "my_editor_custom");
-													wp_editor("My category content", "category_desc", $args);
-												}else{
-													the_editor('', $id = 'category_desc', $prev_id = 'title', $media_buttons = true, $tab_index = 3);
-												}
-												//the_editor('', $id = 'category_desc', $prev_id = 'title', $media_buttons = true, $tab_index = 3);?>
+							if (function_exists('wp_editor')){
+								$args = array("textarea_rows" => 5, "textarea_name" => "category_desc", "editor_class" => "my_editor_custom");
+								wp_editor("", "category_desc", $args);
+							}else{
+								the_editor('', $id = 'category_desc', $prev_id = 'title', $media_buttons = true, $tab_index = 3);
+							}
+						?>
 						<table id="cat-descr-add-form" cellspacing="0">
 							<tbody>
 								<tr>
@@ -93,7 +90,7 @@ function add_new_event_category() {
 					</div>
 					<!-- /.postbox -->
 					<p>
-						<input class="button-secondary" type="submit" name="Submit" value="<?php _e('Submit'); ?>" id="add_new_category" />
+						<input class="button-primary" type="submit" name="Submit" value="<?php _e('Submit'); ?>" id="add_new_category" />
 					</p>
 				</div>
 				<!-- /.postarea -->
@@ -107,8 +104,4 @@ function add_new_event_category() {
 <?php wp_nonce_field('closedpostboxes', 'closedpostboxesnonce', false ); ?>
 <?php wp_nonce_field('meta-box-order', 'meta-box-order-nonce', false ); ?>
 <?php
-//espresso_tiny_mce();
 }
-
-
-

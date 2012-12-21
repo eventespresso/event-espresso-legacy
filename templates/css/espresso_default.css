@@ -169,17 +169,34 @@
 .ee_fem_form_field label.time{
 	width:50px;
 	margin-left:30px;
-	
 }
 .ee_fem_form_field input.ee_fem_time_value, .ee_fem_form_field input.ee_fem_date_value {
 	width: 80px;
 }
 
-
 input.price-name-input{
 	width:45% !important;
 }
 
+ul.dynamic-price-input-form {
+	list-style:none !important;
+}
+ul.dynamic-price-input-form, ul.dynamic-price-input-form li {
+	margin:0 !important;	
+}
+#event_title_field {
+	width:100%;
+}
+label.dynamic-price-input-label {
+	width:100px;
+}
+.ee_fem_form_field input.price-input {
+	width: 80px;
+	float:none;
+}
+.event_espresso_form_wrapper select.surcharge_type {
+	width:25%; 
+}
 #ee_fem_form div.title {
 	float:left !important;
 	width:40%;
@@ -340,7 +357,7 @@ table.price_list td{
 	.event_form_field textarea.ee-reg-page-text-input {
 		width:60%;
 		margin-top:5px;
-}
+	}
 }
 @media (max-width: 700px) {
 	 .ajx_loading {	 width:300px; height:300px; }
@@ -351,7 +368,11 @@ table.price_list td{
 	.event_form_field textarea.ee-reg-page-text-input {
 		width:60%;
 		margin-top:5px;
-}
+	}
+	.ee_fem_form_field label.time{
+		width:50px;
+		margin:0;
+	}
 }
 @media (max-width: 600px) {
 	.event_espresso_form_wrapper ul.event_form_field li,
@@ -370,7 +391,11 @@ table.price_list td{
 	.event_form_field textarea.ee-reg-page-text-input {
 		width:80%;
 		margin-top:5px;
-}
+	}
+	.ee_fem_form_field label.time{
+		width:50px;
+		margin:0;
+	}
 }
 @media (max-width: 505px) {
 	.event_espresso_form_wrapper ul.event_form_field li,
@@ -389,7 +414,11 @@ table.price_list td{
 	.event_form_field textarea.ee-reg-page-text-input {
 		width:90%;
 		margin-top:5px;
-}
+	}
+	.ee_fem_form_field label.time{
+		width:50px;
+		margin:0;
+	}
 }
 @media (max-width: 450px) {
 	.event_espresso_form_wrapper ul.event_form_field li,
@@ -409,7 +438,11 @@ table.price_list td{
 	.event_form_field textarea.ee-reg-page-text-input {
 		width:90%;
 		margin-top:5px;
-}
+	}
+	.ee_fem_form_field label.time{
+		width:50px;
+		margin:0;
+	}
 }
 @media (max-width: 410px) {
 	.event_espresso_form_wrapper ul.event_form_field li,
@@ -429,7 +462,11 @@ table.price_list td{
 	.event_form_field textarea.ee-reg-page-text-input {
 		width:90%;
 		margin-top:5px;
-}
+	}
+	.ee_fem_form_field label.time{
+		width:50px;
+		margin:0;
+	}
 }
 @media (max-width: 360px) {
 	.event_espresso_form_wrapper ul.event_form_field li,
@@ -449,6 +486,10 @@ table.price_list td{
 	.event_form_field textarea.ee-reg-page-text-input {
 		width:90%;
 		margin-top:5px;
+	}
+	.ee_fem_form_field label.time{
+		width:50px;
+		margin:0;
 	}
 }
 

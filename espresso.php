@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.29.1.P
+  Version: 3.1.29.2.P
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,7 +32,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.29.1P';
+	return '3.1.29.2.P';
 }
 
 //This tells the system to check for updates to the paid version
@@ -224,6 +224,9 @@ define("EVENTS_LOCALE_REL_TABLE", $wpdb->prefix . "events_locale_rel");
 define("EVENTS_PERSONNEL_TABLE", $wpdb->prefix . "events_personnel");
 define("EVENTS_PERSONNEL_REL_TABLE", $wpdb->prefix . "events_personnel_rel");
 
+//Languages folder
+define( 'EE_LANGUAGES_LOC', '../uploads/espresso/languages/');
+
 //Added by Imon
 define("EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE", $wpdb->prefix . "events_multi_event_registration_id_group");
 //define("EVENTS_ATTENDEE_COST_TABLE", $wpdb->prefix . "events_attendee_cost");
@@ -235,7 +238,7 @@ setlocale(LC_TIME, get_locale());
 
 //Get language files
 function espresso_load_language_files() {
-	load_plugin_textdomain('event_espresso', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+	load_plugin_textdomain('event_espresso', false, EE_LANGUAGES_LOC);
 }
 add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
 
