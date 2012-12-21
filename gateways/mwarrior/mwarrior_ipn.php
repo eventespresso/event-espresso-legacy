@@ -13,7 +13,7 @@ function espresso_process_mwarrior($payment_data) {
 	$payment_data['txn_details'] = serialize($_REQUEST);
 
 	include_once ('Mwarrior.php');
-	$mwarrior = new Mwarrior();
+	$mwarrior = new Espresso_Mwarrior);
 	echo '<!--Event Espresso Merchant Warrior Gateway Version ' . $mwarrior->gateway_version . '-->';
 	$mwarrior->ipnLog = TRUE;
 	$mwarrior_settings = get_option('event_espresso_mwarrior_settings');

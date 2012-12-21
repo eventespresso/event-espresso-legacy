@@ -1,6 +1,6 @@
 <?php
 /**
- * Mwarrior Class
+ * Espresso_MwarriorClass
  *
  * @author 		Rajinesh Ravendran (rajinesh@merchantwarrior.com)
  * @package		Event Espresso Merchant Warrior Gateway
@@ -8,7 +8,7 @@
  */
 
 
-class Mwarrior extends Espresso_PaymentGateway{
+class Espresso_Mwarriorextends Espresso_PaymentGateway{
 
 	public $gateway_version = '1.0';
 
