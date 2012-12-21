@@ -1,18 +1,18 @@
 <?php
 
 /**
- * nab Class
+ * Espresso_nab Class
  *
  * Author 		Seth Shoultes
- * @package		Event Espresso nab Gateway
+ * @package		Event Espresso Espresso_nab Gateway
  * @category	Library
  */
 $nab_gateway_version = '1.0';
 
-class nab extends Espresso_PaymentGateway {
+class Espresso_nab extends Espresso_PaymentGateway {
 
 	/**
-	 * Initialize the nab gateway
+	 * Initialize the Espresso_nab gateway
 	 *
 	 * @param none
 	 * @return void
