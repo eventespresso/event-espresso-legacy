@@ -23,7 +23,7 @@ class PayPal
 	var $PathToCertKeyPEM = '';
 	var $SSL = '';
 
-	function PayPal($DataArray)
+	function Espresso_PayPal($DataArray)
 	{
 		if(isset($DataArray['Sandbox']))
 			$this -> Sandbox = $DataArray['Sandbox'];
