@@ -1,6 +1,6 @@
 <?php
 
-class Realauth {
+class Espresso_Realauth {
 
 	private $merchant_id;
 	private $order_id;
@@ -14,7 +14,7 @@ class Realauth {
 	private $shared_secret;
 	private $reg_id;
 
-	public function Realauth($merchant_id, $shared_secret) {
+	public function Espresso_Realauth($merchant_id, $shared_secret) {
 		$this->merchant_id = $merchant_id;
 		$this->shared_secret = $shared_secret;
 		$this->gateway_Url = "https://epage.payandshop.com/epage.cgi";
