@@ -373,7 +373,7 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 			$form_input .= '
 			<div class="event_form_field">' . $label;
 			$form_input .= '
-				<select ' . $dd_type . ' ' . $required . ' ' . $required_title . ' class="' . $required_class . $class . '" id="DROPDOWN_' . $question->id . '"  />';
+				<select ' . $dd_type . ' ' . $required_title . ' class="' . $required_class . $class . '" id="DROPDOWN_' . $question->id . '"  />';
 			
 			foreach ($values as $key => $value) {
 

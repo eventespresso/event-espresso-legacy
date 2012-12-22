@@ -181,7 +181,7 @@ function edit_attendee_record() {
 					// update quantities for attendees
 					$SQL = " UPDATE " . EVENTS_ATTENDEE_TABLE . " SET quantity = IF(quantity IS NULL ,NULL,IF(quantity > 0,IF(quantity-1>0,quantity-1,1),0)) ";
 					$SQL .= "WHERE registration_id =%s";
-					if ( $wpdb->update($SQL, $registration_id ) === FALSE ) {
+					if ( $wpdb->query( $wpdb->prepare( $SQL, $registration_id )) === FALSE ) {
 						$notifications['error'][] = __('An error occured while attempting to update additional attendee ticket quantities.', 'event_espresso'); 
 					}
 					
@@ -629,13 +629,12 @@ function edit_attendee_record() {
 									'attendee_action' => 'delete_attendee',
 									'registration_id' => $registration_id,
 									'id' => $att,
-									'attendee_num' => $attendee_num,
 									'event_id' => $event_id
 								);
 								// add url params
 								$delete_attendee_link = add_query_arg( $delete_att_url_params, 'admin.php?page=events' );
 								// add nonce 
-								$edit_attendee_link = wp_nonce_url( $delete_attendee_link, 'edit_attendee_' . $registration_id . '_delete_attendee_nonce' );
+								$delete_attendee_link = wp_nonce_url( $delete_attendee_link, 'edit_attendee_' . $registration_id . '_delete_attendee_nonce' );
 								?>								
 								<a href="<?php echo $delete_attendee_link ?>" title="<?php _e('Delete Attendee', 'event_espresso'); ?>" onclick="return confirmDelete();">
 									<?php _e('Delete', 'event_espresso'); ?>

@@ -312,7 +312,7 @@ function events_data_tables_install() {
 			
 		} else if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name) {
 			//If an earlier version is found
-			$results = $wpdb->get_results("SELECT * FROM " . EVENTS_ORGANIZATION_TABLE . " WHERE id='1'");
+			$results = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "events_organization" . " WHERE id='1'");
 			foreach ($results as $result) {
 				$org_id = $result->id;
 				$Organization = $result->organization;

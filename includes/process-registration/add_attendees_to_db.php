@@ -97,7 +97,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$attendee_quantity = 1;
 				$final_price = $data_source['event_cost'];
 				$orig_price = $data_source['event_cost'];
-				$price_type =  __('Admin', 'event_espresso');		
+				$price_type =  __('Admin', 'event_espresso');
 				//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				
@@ -106,7 +106,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				// Added for seating chart add-on
 				// If a seat was selected then price of that seating will be used instead of event price
 				$final_price = seating_chart::get_purchase_price($data_source['seat_id']);
-				$orig_price = $data_source['cost'];
+				$orig_price = $final_price;
+				$price_type =  $data_source['seat_id'];
 				//echo '<h4>$orig_price : ' . $orig_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				//echo '<h4>$final_price : ' . $final_price . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 					
@@ -449,6 +450,9 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 										$x_booking_id = seating_chart::parse_booking_info($att_data_source['x_seat_id'][$k]);
 										if ($x_booking_id > 0) {
 											$seat_check = true;
+											$price_type =  $att_data_source['x_seat_id'][$k];
+											$final_price = seating_chart::get_purchase_price($att_data_source['x_seat_id'][$k]);
+											$orig_price = $final_price;
 										} else {
 											$seat_check = false; //Keeps the system from adding an additional attndee if no seat is selected
 										}
@@ -547,7 +551,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 									if ($question_list->system_name != '') {
 										$ext_att_data_source[$question_list->system_name] = $att_data_source['x_attendee_' . $question_list->system_name][$k];
 									} else {
-										$ext_att_data_source[$question_list->question_type . '_' . $question_list->id] = $att_data_source['x_attendee_' . $question_list->question_type . '_' . $question_list->id][$k];
+										$ext_att_data_source[$question_list->question_type . '_' . $question_list->id] = isset($att_data_source['x_attendee_' . $question_list->question_type . '_' . $question_list->id][$k]) && !empty($att_data_source['x_attendee_' . $question_list->question_type . '_' . $question_list->id][$k]) ? $att_data_source['x_attendee_' . $question_list->question_type . '_' . $question_list->id][$k] : '';
 									}
 								}
 

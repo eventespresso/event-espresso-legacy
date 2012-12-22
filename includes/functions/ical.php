@@ -7,7 +7,7 @@ function espresso_ical() {
 					"VERSION:2.0\n" .
 						"PRODID:-//" . $_REQUEST['organization'] . " - Event Espresso Version ".espresso_version()."//NONSGML v1.0//EN\n" .
 						"METHOD:PUBLISH\n" .
-						"X-WR-CALNAME:" . $_REQUEST['organization'] . "\n" .
+						//"X-WR-CALNAME:" . $_REQUEST['organization'] . "\n" . //Publishes a new calendar in some systems.
 						"X-ORIGINAL-URL:".$_REQUEST['eereg_url']."\n" .
 						"X-WR-CALDESC:" . $_REQUEST['organization'] . "\n" .
 						"X-WR-TIMEZONE:".get_option('timezone_string')."\n" .

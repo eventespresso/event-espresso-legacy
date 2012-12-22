@@ -116,6 +116,7 @@ function espresso_reg_sessionid($registration_id) {
 if (!function_exists('event_espresso_additional_attendees')) {
 
 	function event_espresso_additional_attendees( $event_id = 0, $additional_limit = 2, $available_spaces = 999, $label = '', $show_label = true, $event_meta = '', $qstn_class = '' ) {
+		global $espresso_premium;
 		$event_id = $event_id == 0 ? $_REQUEST['event_id'] : $event_id;
 
 		if ($event_meta == 'admin') {
@@ -132,7 +133,7 @@ if (!function_exists('event_espresso_additional_attendees')) {
 
 
 		$i = 0;
-		if (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) {
+		if ( (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) || $espresso_premium == FALSE ) {
 		
 			$label = $label == '' ? __('Number of Tickets', 'event_espresso') : $label;
 			$html = '<p class="espresso_additional_limit highlight-bg">';
