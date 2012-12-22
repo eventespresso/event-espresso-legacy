@@ -1,6 +1,6 @@
 <?php
 
-class Stripe_Util_Set
+class Espresso_Stripe_Util_Set
 {
   private $_elts;
 

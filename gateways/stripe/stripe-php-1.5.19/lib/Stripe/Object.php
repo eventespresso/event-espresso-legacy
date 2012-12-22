@@ -1,14 +1,14 @@
 <?php
 
-class Stripe_Object implements ArrayAccess
+class Espresso_Stripe_Object implements ArrayAccess
 {
   protected static $_permanentAttributes;
   protected static $_ignoredAttributes;
 
   public static function init()
   {
-    self::$_permanentAttributes = new Stripe_Util_Set(array('_apiKey'));
-    self::$_ignoredAttributes = new Stripe_Util_Set(array('id', '_apiKey', 'object'));
+    self::$_permanentAttributes = new Espresso_Stripe_Util_Set(array('_apiKey'));
+    self::$_ignoredAttributes = new Espresso_Stripe_Util_Set(array('id', '_apiKey', 'object'));
   }
 
   protected $_apiKey;
@@ -20,8 +20,8 @@ class Stripe_Object implements ArrayAccess
   {
     $this->_apiKey = $apiKey;
     $this->_values = array();
-    $this->_unsavedValues = new Stripe_Util_Set();
-    $this->_transientValues = new Stripe_Util_Set();
+    $this->_unsavedValues = new Espresso_Stripe_Util_Set();
+    $this->_transientValues = new Espresso_Stripe_Util_Set();
     if ($id)
       $this->id = $id;
   }
@@ -100,7 +100,7 @@ class Stripe_Object implements ArrayAccess
     // customer, where there is no persistent card parameter.  Mark those values
     // which don't persist as transient
     if ($partial)
-      $removed = new Stripe_Util_Set();
+      $removed = new Espresso_Stripe_Util_Set();
     else
       $removed = array_diff(array_keys($this->_values), array_keys($values));
 
@@ -113,7 +113,7 @@ class Stripe_Object implements ArrayAccess
     foreach ($values as $k => $v) {
       if (self::$_permanentAttributes->includes($k))
         continue;
-      $this->_values[$k] = Stripe_Util::convertToStripeObject($v, $apiKey);
+      $this->_values[$k] = Espresso_Stripe_Util::convertToStripeObject($v, $apiKey);
       $this->_transientValues->discard($k);
       $this->_unsavedValues->discard($k);
     }
@@ -137,13 +137,13 @@ class Stripe_Object implements ArrayAccess
       return "<$class$ident ...>";
 
     $valuesStr = array();
-    $values = Stripe_Util::arrayClone($this->_values);
+    $values = Espresso_Stripe_Util::arrayClone($this->_values);
     ksort($values);
     foreach ($values as $k => $v) {
       if (self::$_ignoredAttributes->includes($k))
 	continue;
       $v = $this->$k;
-      if ($v instanceof Stripe_Object)
+      if ($v instanceof Espresso_Stripe_Object)
 	$v = $v->_stringify(true);
       else if (is_bool($v))
 	$v = $v ? 'true' : 'false';
@@ -175,4 +175,4 @@ class Stripe_Object implements ArrayAccess
 }
 
 
-Stripe_Object::init();
+Espresso_Stripe_Object::init();

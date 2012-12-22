@@ -1,6 +1,6 @@
 <?php
 
-class Stripe_InvalidRequestError extends Stripe_Error
+class Espresso_Stripe_InvalidRequestError extends Espresso_Stripe_Error
 {
   public function __construct($message, $param)
   {

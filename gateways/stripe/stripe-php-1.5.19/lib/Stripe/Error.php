@@ -1,5 +1,5 @@
 <?php
 
-class Stripe_Error extends Exception
+class Espresso_Stripe_Error extends Exception
 {
 }
