@@ -7,7 +7,7 @@
  * @package		Event Espresso WePay Gateway
  * @category	Library
  */
-class Wepay extends Espresso_PaymentGateway {
+class Espresso_Wepay extends Espresso_PaymentGateway {
 
 	/**
 	 * Version number - sent in user agent string
