@@ -8,7 +8,7 @@
  * @category	Library
  */
 
-class Worldpay extends Espresso_PaymentGateway {
+class Espresso_Worldpay extends Espresso_PaymentGateway {
 
 	public $worldpay_gateway_version = '1.0';
 
