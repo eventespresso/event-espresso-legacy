@@ -505,6 +505,11 @@ if (is_admin()) {
 	if ( isset($_REQUEST['page']) && $_REQUEST['page'] == 'support' ) {
 		require_once("includes/admin_support.php");
 	}
+	
+	//System Status
+	if ( isset($_REQUEST['page']) && $_REQUEST['page'] == 'espresso-system-status' ) {
+		require_once("includes/espresso-admin-status.php");
+	}
 
 	//Admin Reporting
 	//require_once("includes/admin-reports/index.php");
@@ -539,6 +544,7 @@ if (is_admin()) {
 				'espresso_permissions',
 				'roles',
 				'event_locales',
+				'espresso-system-status',
 				'event_groups'
 		);
 		if (in_array($_REQUEST['page'], $espresso_pages)) {
