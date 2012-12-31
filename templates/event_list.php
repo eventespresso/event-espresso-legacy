@@ -30,6 +30,9 @@ if (!function_exists('event_espresso_get_event_details')) {
 
 		global $wpdb, $org_options, $events_in_session;
 		
+		$template_name = ( 'event_list_display.php' );
+		$path = locate_template( $template_name );
+		
 		$event_page_id = $org_options['event_page_id'];
 		$currency_symbol = isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : '';
 		$ee_search = isset($_REQUEST['ee_search']) && $_REQUEST['ee_search'] == 'true' && isset($_REQUEST['ee_name']) && !empty($_REQUEST['ee_name']) ? true : false;
@@ -357,7 +360,11 @@ if (!function_exists('event_espresso_get_event_details')) {
 				if ($allow_override == 1) {
 					//Uncomment to show active status array
 					//print_r( event_espresso_get_is_active($event_id));
-					include('event_list_display.php');
+					if ( empty( $path ) ) {
+						include( $template_name );
+					} else {
+						include( $path );
+					}
 				} else {
 					switch (event_espresso_get_status($event_id)) {
 						case 'NOT_ACTIVE':
@@ -373,7 +380,11 @@ if (!function_exists('event_espresso_get_event_details')) {
 								//print_r( event_espresso_get_is_active($event_id));
 
 								echo '<div class="pending_event">';
-								include('event_list_display.php');
+								if ( empty( $path ) ) {
+								  include( $template_name );
+								} else {
+								  include( $path );
+								}
 								echo '</div>';
 							}
 							break;
@@ -382,7 +393,11 @@ if (!function_exists('event_espresso_get_event_details')) {
 
 							//Uncomment to show active status array
 							//print_r( event_espresso_get_is_active($event_id));
-							include('event_list_display.php');
+							if ( empty( $path ) ) {
+								include( $template_name );
+							} else {
+								include( $path );
+							}
 							break;
 					}
 				}
