@@ -2,7 +2,7 @@
 /**
  * Debug/Status page
  *
- * @Credit		WooThemes
+ * @credit		WooThemes
  * @author 		Event Espresso
  * @category 	Admin
  * @package 	Event Espresso/Admin/System Status
@@ -170,26 +170,6 @@ function espresso_system_status() {
 								'option' => $org_options['cancel_return'],
 								'shortcode' => '[ESPRESSO_CANCELLED]'
 							)
-						/*__('Thanks Page', 'event_espresso') => array(
-								'option' => 'woocommerce_thanks_page_id',
-								'shortcode' => '[woocommerce_thankyou]'
-							),
-						__('My Account Page', 'event_espresso') => array(
-								'option' => 'woocommerce_myaccount_page_id',
-								'shortcode' => '[woocommerce_my_account]'
-							),
-						__('Edit Address Page', 'event_espresso') => array(
-								'option' => 'woocommerce_edit_address_page_id',
-								'shortcode' => '[woocommerce_edit_address]'
-							),
-						__('View Order Page', 'event_espresso') => array(
-								'option' => 'woocommerce_view_order_page_id',
-								'shortcode' => '[woocommerce_view_order]'
-							),
-						__('Change Password Page', 'event_espresso') => array(
-								'option' => 'woocommerce_change_password_page_id',
-								'shortcode' => '[woocommerce_change_password]'
-							)*/
 					);
 
 					$alt = 1;
@@ -201,15 +181,7 @@ function espresso_system_status() {
 						echo '<td>' . $page_name . '</td><td>';
 
 						$error = false;
-						
-						/*$reg_page_ids = array(
-							'event_page_id' => $org_options['event_page_id'],
-							'return_url' => $org_options['return_url'],
-							'cancel_return' => $org_options['cancel_return'],
-							'notify_url' => $org_options['notify_url']
-						);*/
-						
-						//$page_id = get_option($values['option']);
+					
 						$page_id = $values['option'];
 
 						// Page ID check
