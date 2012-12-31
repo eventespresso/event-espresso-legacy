@@ -42,7 +42,7 @@ global $wpdb;
 		$sql.= " WHERE e.is_active='Y' ";
 		$sql.= " AND e.event_status != 'D' ";
 
-		if ($single_event_id != NULL) {//Get the ID of a single event
+		if (isset($single_event_id) && $single_event_id != NULL) {//Get the ID of a single event
 			//If a single event needs to be displayed, get its ID
             $sql .= " AND event_identifier = '" . $single_event_id . "' ";
         } else {
