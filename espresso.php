@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.29.2.P
+  Version: 3.1.30.P
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,7 +32,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.29.2.P';
+	return '3.1.30.P';
 }
 
 //This tells the system to check for updates to the paid version
@@ -185,6 +185,10 @@ define("EVENT_ESPRESSO_GATEWAY_DIR", $event_espresso_gateway_dir);
 define("EVENT_ESPRESSO_GATEWAY_URL", $wp_content_url . '/uploads/espresso/gateways/');
 //End - Define dierectory structure for uploads
 
+//Languages folder/path
+define( 'EE_LANGUAGES_SAFE_LOC', '../uploads/espresso/languages/');
+define( 'EE_LANGUAGES_SAFE_DIR', $event_espresso_upload_dir.'languages/');
+
 require_once EVENT_ESPRESSO_PLUGINFULLPATH . 'class/espresso_log.php';
 foreach ($_REQUEST as $key => $value) {
 	if ($key == 'cc' || $key == 'card_num' || $key == 'EPS_CARDNUMBER') {
@@ -224,9 +228,6 @@ define("EVENTS_LOCALE_REL_TABLE", $wpdb->prefix . "events_locale_rel");
 define("EVENTS_PERSONNEL_TABLE", $wpdb->prefix . "events_personnel");
 define("EVENTS_PERSONNEL_REL_TABLE", $wpdb->prefix . "events_personnel_rel");
 
-//Languages folder
-define( 'EE_LANGUAGES_LOC', '../uploads/espresso/languages/');
-
 //Added by Imon
 define("EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE", $wpdb->prefix . "events_multi_event_registration_id_group");
 //define("EVENTS_ATTENDEE_COST_TABLE", $wpdb->prefix . "events_attendee_cost");
@@ -235,10 +236,15 @@ define("EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE", $wpdb->prefix . "events
 //print get_locale();
 //setlocale(LC_ALL, get_locale());
 setlocale(LC_TIME, get_locale());
-
+	
 //Get language files
 function espresso_load_language_files() {
-	load_plugin_textdomain('event_espresso', false, EE_LANGUAGES_LOC);
+	$lang = WPLANG;
+	if ( !empty($lang) && file_exists(EE_LANGUAGES_SAFE_DIR.'event_espresso-'.$lang.'.po') ){
+		load_plugin_textdomain('event_espresso', false, EE_LANGUAGES_SAFE_LOC);
+	}else{
+		load_plugin_textdomain('event_espresso', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+	}
 }
 add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
 
