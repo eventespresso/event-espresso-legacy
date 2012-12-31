@@ -240,13 +240,90 @@ setlocale(LC_TIME, get_locale());
 //Get language files
 function espresso_load_language_files() {
 	$lang = WPLANG;
-	if ( !empty($lang) && file_exists(EE_LANGUAGES_SAFE_DIR.'event_espresso-'.$lang.'.po') ){
+	espresso_sideload_current_lang();
+
+
+	if ( !empty($lang) && file_exists(EE_LANGUAGES_SAFE_DIR.'event_espresso-'.$lang.'.mo') ){
 		load_plugin_textdomain('event_espresso', false, EE_LANGUAGES_SAFE_LOC);
 	}else{
 		load_plugin_textdomain('event_espresso', false, dirname(plugin_basename(__FILE__)) . '/languages/');
 	}
 }
 add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
+
+
+function espresso_sideload_current_lang() {
+	$lang = WPLANG;
+	//first let's see if we've already done an existing file check.
+	if ( $has_check = get_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION) )
+		return;
+
+	//made it here so let's get the file from the github repo
+	$git_path = 'https://github.com/eventespresso/languages/blob/master/event_espresso-' . $lang . '.mo?raw=true';
+
+	//here's the download stuff
+	$temp_dir = get_temp_dir();
+	$tmp_file = basename($git_path);
+	$tmp_file = preg_replace('|\..*$|', '.tmp', $tmp_file);
+	$tmp_file = $temp_dir . wp_unique_filename($temp_dir, $tmp_file);
+	touch($tmp_file);
+	
+	if ( !$tmp_file ) {
+		add_action('admin_notices', 'espresso_lang_sideload_error');
+		update_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION, 1);
+		return;
+	}
+
+	$response = wp_remote_get( $git_path, array( 'timeout' => 300, 'stream' => true, 'filename' => $tmp_file ) );
+
+
+	if ( is_wp_error($response) || 200 != wp_remote_retrieve_response_code( $response ) ) {
+		@unlink($tmp_file);
+		add_action('admin_notices', 'espresso_lang_sideload_error');
+		update_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION, 1);
+		return;
+	}
+
+
+	$file = $tmp_file;
+
+
+
+	//k we have the file now let's get it in the right directory with the right name.
+	$new_name = 'event-espresso-' . $lang . '.mo';
+	$new_path = EVENT_ESPRESSO_PLUGINFULLPATH . '/languages/' . $new_name;
+	var_dump($new_path);
+
+	//move file in
+	if ( false === @ rename( $file, $new_path ) ) {
+		add_action('admin_notices', 'espresso_lang_sideload_error_file_move');
+		update_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION, 1);
+		return;
+	}
+	
+	//set correct permissions
+	$perms = 0644;
+	@ chmod( $new_path, $perms);
+
+	//made it this far all looks good. So let's save option flag
+	update_option('lang_file_check_' . $lang . '_' . EVENTESPRESSO_VERSION, 1);
+	return; 
+}
+
+function espresso_lang_sideload_error() {
+	$content = '<div class="updated">' . "\n\t";
+	$content .= '<p>' . _e('Something went wrong while trying to download the current language file for Event Espresso.  Either github is not available, or we don\'t have a language file for your existing language.', 'event_espresso') . '</p>' . "\n";
+	$content .= '</div>' . "\n";
+	echo $content;
+}
+
+
+function espresso_lang_sideload_error_file_move() {
+	$content = '<div class="updated">' . "\n\t";
+	$content .= '<p>' . _e('Something went wrong while trying to download the current language file for Event Espresso.  It looks like event-espresso was unable to move the file into the correct directory (possible permissions errors)', 'event_espresso') . '</p>' . "\n";
+	$content .= '</div>' . "\n";
+	echo $content;
+}
 
 //Addons
 //Ticketing
