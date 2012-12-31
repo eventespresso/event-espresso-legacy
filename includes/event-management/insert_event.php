@@ -290,6 +290,7 @@ function add_event_to_db($recurrence_arr = array()) {
 		 */
 
         //Add event to a category
+		$string_cat = '';
         if (isset($_REQUEST['event_category']) && $_REQUEST['event_category'] != '') {
             foreach ($_REQUEST['event_category'] as $k => $v) {
                 if ($v != '') {
@@ -298,8 +299,24 @@ function add_event_to_db($recurrence_arr = array()) {
                     if ( !$wpdb->query($wpdb->prepare($sql_cat, NULL)) ) {
                         $error = true;
                     }
+                    //BEGIN CATEGORY MODIFICATION
+                    //We get the category id's of the event and put them in events_detail_table.category_id as a well-formatted string (id,n id)
+                    $string_cat.=$v.",";
                 }
             }
+
+            if($string_cat != "" && $string_cat != ","){
+            $cleaned_string_cat = substr($string_cat, 0, -1);
+            $tmp=explode(",",$cleaned_string_cat);
+            sort($tmp);
+            $cleaned_string_cat=implode(",", $tmp);
+            trim($cleaned_string_cat);
+
+            $sql_insert_event_detail_category_id="UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = '".$cleaned_string_cat."' WHERE id='" . $last_event_id . "'";
+            $wpdb->query($wpdb->prepare($sql_insert_event_detail_category_id, NULL));
+            }
+
+            //END CATEGORY MODIFICATION
         }
 
         if (isset($_REQUEST['event_person']) && !empty($_REQUEST['event_person'])) {
