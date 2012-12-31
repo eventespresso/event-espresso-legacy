@@ -1,6 +1,6 @@
 <?php
 
-class ClsPaytrace
+class Espresso_ClsPaytrace
 {
 	function send_paytrace_api_request($param_list)
 	{

@@ -1,5 +1,5 @@
 <?php
 
-class Stripe_ApiConnectionError extends Stripe_Error
+class Espresso_Stripe_ApiConnectionError extends Espresso_Stripe_Error
 {
 }

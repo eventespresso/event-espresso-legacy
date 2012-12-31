@@ -1,6 +1,6 @@
 <?php
 
-class Stripe_InvoiceItem extends Stripe_ApiResource
+class Espresso_Stripe_InvoiceItem extends Espresso_Stripe_ApiResource
 {
   public static function constructFrom($values, $apiKey=null)
   {

@@ -7,7 +7,7 @@ function espresso_display_worldpay($payment_data) {
 
 	global $wpdb, $org_options;
 
-	$myworldpay = new Worldpay(); // initiate an instance of the class
+	$myworldpay = new Espresso_Worldpay(); // initiate an instance of the class
 	echo '<!-- Event Espresso WorldPay Gateway Version ' . $myworldpay->worldpay_gateway_version . '-->';
 	$worldpay_settings = get_option('event_espresso_worldpay_settings');
 	$use_sandbox = $worldpay_settings['use_sandbox'];

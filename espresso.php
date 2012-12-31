@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.29.2.P
+  Version: 3.1.28.5.P-1663-prefix-authnet-classes
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com

@@ -19,7 +19,7 @@ function espresso_process_paypal_pro($payment_data) {
 	$sandbox = $paypal_pro_settings['paypal_pro_use_sandbox'];
 // Setup PayPal object
 	$PayPalConfig = array('Sandbox' => $sandbox, 'APIUsername' => $paypal_pro_settings['paypal_api_username'], 'APIPassword' => $paypal_pro_settings['paypal_api_password'], 'APISignature' => $paypal_pro_settings['paypal_api_signature']);
-	$PayPal = new PayPal($PayPalConfig);
+	$PayPal = new Espresso_PayPal($PayPalConfig);
 
 // Populate data arrays with order data.
 	$DPFields = array(

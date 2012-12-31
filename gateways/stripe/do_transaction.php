@@ -14,7 +14,7 @@ function espresso_process_stripe($payment_data) {
 	$payment_data['payment_status'] = 'Incomplete';
 	require_once(dirname(__FILE__) . '/stripe.class.php');
 
-	$cls_stripe = new ClsStripe();
+	$cls_stripe = new Espresso_ClsStripe();
 	$stripe_settings = get_option('event_espresso_stripe_settings');
 
 	$cc = $_POST['cc'];

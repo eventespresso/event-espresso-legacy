@@ -6,7 +6,7 @@ function espresso_display_firstdata_connect_2($payment_data) {
 	$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
 	$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
 	require_once('Fdggutil.php');
-	$fdggutil = new Fdggutil($firstdata_connect_2_settings['storename'],
+	$fdggutil = new Espresso_Fdggutil($firstdata_connect_2_settings['storename'],
 									$firstdata_connect_2_settings['sharedSecret']);
 	$fdggutil->set_timezone($firstdata_connect_2_settings['timezone']);
 	$fdggutil->set_chargetotal($payment_data['total_cost']);

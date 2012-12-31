@@ -1,11 +1,11 @@
 <?php
 
-abstract class Stripe_Util
+abstract class Espresso_Stripe_Util
 {
   public static function arrayClone($array)
   {
     if (!is_array($array))
-      throw new Stripe_Error("Trying to clone non-array: $array");
+      throw new Espresso_Stripe_Error("Trying to clone non-array: $array");
     return array_merge($array);
   }
 
@@ -38,7 +38,7 @@ abstract class Stripe_Util
 	$class = $types[$resp['object']];
       else
 	$class = 'Stripe_Object';
-      return Stripe_Object::scopedConstructFrom($class, $resp, $apiKey);
+      return Espresso_Stripe_Object::scopedConstructFrom($class, $resp, $apiKey);
     } else {
       return $resp;
     }

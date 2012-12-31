@@ -7,7 +7,7 @@ $parameter = array(
 "start_date" => "20090326",  // you should change it, this is the start day which you shoul set.
 "end_date" => "20090320",     //you should change it, this is the end day which you shoul set.
 );
-$alipay = new alipay_service($parameter,$security_code,$sign_type);
+$alipay = new Espresso_Alipay_Service($parameter,$security_code,$sign_type);
 print_r($parameter );
 $link=$alipay->create_url();
 print <<<EOT

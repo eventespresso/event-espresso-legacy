@@ -12,7 +12,7 @@ function espresso_process_authnet($payment_data) {
 	include_once ('Authorize.php');
 
 // Create an instance of the authorize.net library
-	$myAuthorize = new EE_Authorize();
+	$myAuthorize = new Espresso_Authorize();
 	echo '<!--Event Espresso Authorize.net SIM Gateway Version ' . $myAuthorize->gateway_version . '-->';
 // Log the IPN results
 	$myAuthorize->ipnLog = TRUE;

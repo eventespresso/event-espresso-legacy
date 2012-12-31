@@ -11,7 +11,7 @@ if (!function_exists('json_decode')) {
 }
 
 
-abstract class Stripe
+abstract class Espresso_Stripe
 {
   public static $apiKey;
   public static $apiBase = 'https://api.stripe.com/v1';

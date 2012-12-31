@@ -5,7 +5,7 @@
  * @package    AuthorizeNet
  * @subpackage AuthorizeNetRequest
  */
-abstract class AuthorizeNetRequest
+abstract class Espresso_AuthorizeNetRequest
 {
 
     protected $_api_login;

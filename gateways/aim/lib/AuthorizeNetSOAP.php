@@ -15,7 +15,7 @@
  * @subpackage AuthorizeNetSoap
  * @todo       Make the doc file a usable class.
  */
-class AuthorizeNetSOAP extends SoapClient
+class Espresso_AuthorizeNetSOAP extends SoapClient
 {
     const WSDL_URL = "https://api.authorize.net/soap/v1/Service.asmx?WSDL";
     const LIVE_URL = "https://api.authorize.net/soap/v1/Service.asmx";

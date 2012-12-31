@@ -6,7 +6,7 @@ function espresso_display_firstdata_e4($payment_data) {
 	include_once ('FirstDataE4.php');
 
 	global $org_options;
-	$myE4 = new E4(); // initiate an instance of the class
+	$myE4 = new Espresso_E4(); // initiate an instance of the class
 	echo '<!--Event Espresso E4.com Gateway Version ' . $myE4->gateway_version . '-->';
 	$firstdata_e4_settings = get_option('event_espresso_firstdata_e4_settings');
 	$firstdata_e4_login_id = empty($firstdata_e4_settings['firstdata_e4_login_id']) ? '' : $firstdata_e4_settings['firstdata_e4_login_id'];
