@@ -254,8 +254,8 @@ add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
 
 function espresso_sideload_current_lang() {
 	$lang = WPLANG;
-	//first let's see if we've already done an existing file check.
-	if ( $has_check = get_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION) )
+	//first let's see if we've already done an existing file check. || if WPLANG is present
+	if ( $has_check = get_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION) || empty($lang) )
 		return;
 
 	//made it here so let's get the file from the github repo
