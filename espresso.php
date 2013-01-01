@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.30.P
+  Version: 3.1.29.2P-beta
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,7 +32,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.30.P';
+	return '3.1.29.P-beta';
 }
 
 //This tells the system to check for updates to the paid version
@@ -254,8 +254,8 @@ add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
 
 function espresso_sideload_current_lang() {
 	$lang = WPLANG;
-	//first let's see if we've already done an existing file check.
-	if ( $has_check = get_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION) )
+	//first let's see if we've already done an existing file check. || if WPLANG is present
+	if ( $has_check = get_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION) || empty($lang) )
 		return;
 
 	//made it here so let's get the file from the github repo
