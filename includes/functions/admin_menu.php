@@ -10,7 +10,7 @@ if (!function_exists('add_event_espresso_menus')) {
 			global $espresso_manager;
 			//echo "<pre>".print_r($espresso_manager,true)."</pre>";
 		} else {
-			$espresso_manager = array('espresso_manager_events' => '', 'espresso_manager_categories' => '', 'espresso_manager_form_groups' => '', 'espresso_manager_form_builder' => '', 'espresso_manager_groupons' => '', 'espresso_manager_discounts' => '', 'espresso_manager_event_emails' => '', 'espresso_manager_personnel_manager' => '', 'espresso_manager_general' => '', 'espresso_manager_calendar' => '', 'espresso_manager_members' => '', 'espresso_manager_payment_gateways' => '', 'espresso_manager_social' => '', 'espresso_manager_addons' => '', 'espresso_manager_support' => '', 'espresso_manager_venue_manager' => '', 'espresso_manager_event_pricing' => '', 'espresso_manager_ticketing' => '', 'espresso_manager_seating' => '');
+			$espresso_manager = array('espresso_manager_events' => '', 'espresso_manager_categories' => '', 'espresso_manager_form_groups' => '', 'espresso_manager_form_builder' => '', 'espresso_manager_groupons' => '', 'espresso_manager_discounts' => '', 'espresso_manager_event_emails' => '', 'espresso_manager_personnel_manager' => '', 'espresso_manager_general' => '', 'espresso_manager_calendar' => '', 'espresso_manager_members' => '', 'espresso_manager_payment_gateways' => '', 'espresso_manager_social' => '', 'espresso_manager_addons' => '', 'espresso_manager_support' => '', 'espresso_manager_venue_manager' => '', 'espresso_manager_event_pricing' => '', 'espresso_manager_ticketing' => '', 'espresso_manager_seating' => '', 'espresso_system_status' => '');
 		}
 
         //Main menu tab
@@ -126,12 +126,15 @@ if (!function_exists('add_event_espresso_menus')) {
 		if ($espresso_premium != true)
 			add_submenu_page('event_espresso', __('Event Espresso - Test Drive Pro', 'event_espresso'), __('Test Drive Pro', 'event_espresso'), 'administrator', 'test_drive', 'event_espresso_test_drive');
 
-        //Help/Support
-        add_submenu_page('event_espresso', __('Event Espresso - Help/Support', 'event_espresso'), __('<span style="color: red;">Help/Support</span>', 'event_espresso'), apply_filters('espresso_management_capability', 'administrator', $espresso_manager['espresso_manager_support']), 'support', 'event_espresso_support');
+		//System Status
+		add_submenu_page('event_espresso', __('Event Espresso - System Status', 'event_espresso'), __('System Status', 'event_espresso'), apply_filters('espresso_management_capability', 'administrator', $espresso_manager['espresso_system_status']), 'espresso-system-status', 'espresso_system_status');
 		
+		//Help/Support
+        add_submenu_page('event_espresso', __('Event Espresso - Help/Support', 'event_espresso'), __('<span style="color: red;">Help/Support</span>', 'event_espresso'), apply_filters('espresso_management_capability', 'administrator', $espresso_manager['espresso_manager_support']), 'support', 'event_espresso_support');
+
+		//Permissions settings
 		add_submenu_page('events', __('Event Espresso - Permissions Settings', 'event_espresso'), '<span class="ee_menu_group"  onclick="return false;">' . __('Permissions', 'event_espresso') . '</span>', 'administrator', 'espresso_permissions', 'espresso_permissions_config_mnu');
 		
-		//Permissions settings
 		if (function_exists('espresso_manager_version') && $espresso_premium == true) {
 			add_submenu_page('event_espresso', __('Event Espresso - Event Manager Permissions', 'event_espresso'), __('User Permissions', 'event_espresso'), 'administrator', 'espresso_permissions', 'espresso_permissions_config_mnu');
 			add_submenu_page('event_espresso', __('Event Espresso - Event Manager Roles', 'event_espresso'), __('User Roles', 'event_espresso'), 'administrator', 'roles', 'espresso_permissions_roles_mnu');

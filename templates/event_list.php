@@ -30,6 +30,9 @@ if (!function_exists('event_espresso_get_event_details')) {
 
 		global $wpdb, $org_options, $events_in_session;
 		
+		$template_name = ( 'event_list_display.php' );
+		$path = locate_template( $template_name );
+		
 		$event_page_id = $org_options['event_page_id'];
 		$currency_symbol = isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : '';
 		$ee_search = isset($_REQUEST['ee_search']) && $_REQUEST['ee_search'] == 'true' && isset($_REQUEST['ee_name']) && !empty($_REQUEST['ee_name']) ? true : false;
@@ -68,7 +71,32 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		// now extract shortcode attributes
 		extract($attributes);
+
+		//BEGIN CATEGORY MODIFICATION : using events_detail_table.category_id instead of events_category_table.category_identifier in order to filter events with one OR MORE categories
+		//Let's check if there's one or more categories specified for the events of the event list (based on the use of "," as a separator) and store them in the $cat array.
 		
+		if(strstr($category_identifier,',')){
+			$array_cat=explode(",",$category_identifier);
+			$cat=array_map('trim', $array_cat);
+		} else {
+   			$cat = array('0' => $category_identifier);
+		}
+		$category_detail_id = '';
+		
+		//For every category specified in the shortcode, let's get the corresponding category_id et create a well-formatted string (id,n id)
+		foreach($cat as $k=>$v){
+
+			$sql_get_category_detail_id="SELECT id FROM ". EVENTS_CATEGORY_TABLE . " WHERE category_identifier = '".$v."'";
+			$category_detail_id .= $wpdb->get_var( $sql_get_category_detail_id ).",";
+		}
+
+		$cleaned_string_cat = substr($category_detail_id, 0, -1);
+		$tmp=explode(",",$cleaned_string_cat);
+		sort($tmp);
+		$cleaned_string_cat=implode(",", $tmp);
+		trim($cleaned_string_cat);
+		$category_id=$cleaned_string_cat;
+
 		//Create the query
 		$DISTINCT = $ee_search == true ? "DISTINCT" : '';
 		$sql = "SELECT $DISTINCT e.*, ese.start_time, ese.end_time, p.event_cost ";
@@ -97,7 +125,12 @@ if (!function_exists('event_espresso_get_event_details')) {
 		$sql .= " WHERE is_active = 'Y' ";
 		
 		//Category sql
-		$sql .= ($category_identifier !== NULL  && !empty($category_identifier))? " AND c.category_identifier = '" . $category_identifier . "' ": '';
+		//$sql .= ($category_identifier !== NULL  && !empty($category_identifier))? " AND c.category_identifier = '" . $category_identifier . "' ": '';
+
+		//We filter the events based on the events_detail_table.category_id instead of the category_identifier
+		$sql .= ($category_id !== NULL  && !empty($category_id))? " AND e.category_id IN (" . $category_id . ") ": '';
+
+		//END CATEGORY MODIFICATION
 		
 		//Staff sql
 		$sql .= ($staff_id !== NULL  && !empty($staff_id))? " AND st.id = '" . $staff_id . "' ": '';
@@ -357,7 +390,11 @@ if (!function_exists('event_espresso_get_event_details')) {
 				if ($allow_override == 1) {
 					//Uncomment to show active status array
 					//print_r( event_espresso_get_is_active($event_id));
-					include('event_list_display.php');
+					if ( empty( $path ) ) {
+						include( $template_name );
+					} else {
+						include( $path );
+					}
 				} else {
 					switch (event_espresso_get_status($event_id)) {
 						case 'NOT_ACTIVE':
@@ -373,7 +410,11 @@ if (!function_exists('event_espresso_get_event_details')) {
 								//print_r( event_espresso_get_is_active($event_id));
 
 								echo '<div class="pending_event">';
-								include('event_list_display.php');
+								if ( empty( $path ) ) {
+								  include( $template_name );
+								} else {
+								  include( $path );
+								}
 								echo '</div>';
 							}
 							break;
@@ -382,7 +423,11 @@ if (!function_exists('event_espresso_get_event_details')) {
 
 							//Uncomment to show active status array
 							//print_r( event_espresso_get_is_active($event_id));
-							include('event_list_display.php');
+							if ( empty( $path ) ) {
+								include( $template_name );
+							} else {
+								include( $path );
+							}
 							break;
 					}
 				}

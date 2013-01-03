@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.30.P
+  Version: 3.1.29.2P-beta
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,7 +32,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.30.P';
+	return '3.1.29.P-beta';
 }
 
 //This tells the system to check for updates to the paid version
@@ -103,6 +103,7 @@ $page_id = isset($_REQUEST['page_id']) ? $_REQUEST['page_id'] : '';
 //Registration page check
 //From Brent C. http://events.codebasehq.com/projects/event-espresso/tickets/99
 $this_is_a_reg_page = FALSE;
+
 $reg_page_ids = array(
 		'event_page_id' => $org_options['event_page_id'],
 		'return_url' => $org_options['return_url'],
@@ -121,14 +122,15 @@ $uri_string = str_replace($find, '', $_SERVER['REQUEST_URI']);
 $uri_string = isset($_SERVER['QUERY_STRING'])?str_replace($_SERVER['QUERY_STRING'], '', $uri_string):$uri_string;
 $uri_string = rtrim($uri_string, '?');
 $uri_string = trim($uri_string, '/');
-$this_page = basename($uri_string);
+//$this_page = basename($uri_string);
 $uri_segments = explode('/', $uri_string);
-
-foreach ($uri_segments as $uri_segment) {
+foreach ( $uri_segments as $uri_segment ) {
 	if ( $uri_segment != '' ) {
-		$seg_page_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment));
+		if ( $page_id == '' ) {
+			$page_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment));
+		}		
 		if ($wpdb->num_rows > 0) {
-			if (in_array($seg_page_id, $reg_page_ids)) {
+			if (in_array($page_id, $reg_page_ids)) {
 				$this_is_a_reg_page = TRUE;
 			}
 		}		
@@ -142,8 +144,10 @@ foreach ($uri_segments as $uri_segment) {
 	}
 
 }
-if (isset($_REQUEST['page_id']) || is_admin())
+
+if ( is_admin() ) {
 	$this_is_a_reg_page = TRUE;
+}
 	
 
 
@@ -254,8 +258,8 @@ add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
 
 function espresso_sideload_current_lang() {
 	$lang = WPLANG;
-	//first let's see if we've already done an existing file check.
-	if ( $has_check = get_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION) )
+	//first let's see if we've already done an existing file check. || if WPLANG is present
+	if ( $has_check = get_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION) || empty($lang) )
 		return;
 
 	//made it here so let's get the file from the github repo
@@ -582,6 +586,11 @@ if (is_admin()) {
 	if ( isset($_REQUEST['page']) && $_REQUEST['page'] == 'support' ) {
 		require_once("includes/admin_support.php");
 	}
+	
+	//System Status
+	if ( isset($_REQUEST['page']) && $_REQUEST['page'] == 'espresso-system-status' ) {
+		require_once("includes/espresso-admin-status.php");
+	}
 
 	//Admin Reporting
 	//require_once("includes/admin-reports/index.php");
@@ -616,6 +625,7 @@ if (is_admin()) {
 				'espresso_permissions',
 				'roles',
 				'event_locales',
+				'espresso-system-status',
 				'event_groups'
 		));
 		if (in_array($_REQUEST['page'], $espresso_pages)) {
@@ -900,9 +910,18 @@ if (!function_exists('event_espresso_run')) {
 
 		$content = ob_get_contents();
 		ob_end_clean();
-		return $content;
+//		return $content;
+		global $espresso_content;
+		$espresso_content = $content;
+		add_shortcode( 'ESPRESSO_EVENTS', 'espresso_filter_the_content' );
+		
 	}
 
+}
+
+function espresso_filter_the_content() {
+	global $espresso_content;
+	return $espresso_content;
 }
 
 function espresso_cancelled() {
@@ -915,9 +934,12 @@ function espresso_cancelled() {
 //New way of doing it with shortcodes
 add_shortcode('ESPRESSO_PAYMENTS', 'event_espresso_pay');
 add_shortcode('ESPRESSO_TXN_PAGE', 'event_espresso_txn');
-add_shortcode('ESPRESSO_EVENTS', 'event_espresso_run');
 add_shortcode('ESPRESSO_CANCELLED', 'espresso_cancelled');
 
+
+if ( $this_is_a_reg_page ) {
+	add_action( 'init', 'event_espresso_run' );
+}
 
 /*
  * These actions need to be loaded a the bottom of this script to prevent errors when post/get requests are received.
