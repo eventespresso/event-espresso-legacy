@@ -18,11 +18,11 @@ function espresso_display_alipay($payment_data) {
 			"total_fee" => '0.01', //number_format( $event_cost, 2 ), //the price of products
 			"currency" => "USD", // change it as the currency which you used on your website
 	);
-	$alipay = new alipay_service($parameter, $security_code, $sign_type);
+	$alipay = new Espresso_Alipay_Service($parameter, $security_code, $sign_type);
 //echo "<pre>", print_r( $parameter ), "</pre>";
 	$link = $alipay->create_url();
 
-	$link_anchor = isset($alipay_settings['button_url']) ? "<img src='" . $alipay_settings['button_url'] . "' alt='" . __('Pay using Alipay', 'event_espresso') . "' />" : __('Pay using Alipay', 'event espresso');
+	$link_anchor = isset($alipay_settings['button_url']) ? "<img src='" . $alipay_settings['button_url'] . "' alt='" . __('Pay using Alipay', 'event espresso') . "' />" : __('Pay using Alipay', 'event espresso');
 
 	$ee_images_url = EVENT_ESPRESSO_PLUGINFULLURL;
 	print <<<EOT

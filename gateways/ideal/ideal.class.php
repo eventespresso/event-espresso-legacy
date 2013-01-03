@@ -10,7 +10,7 @@
   Door               : RDF
 	-----------------------------------------------------------------------*/
 
-class iDEAL_Payment
+class Espresso_iDEAL_Payment
 {
 
 	const     MIN_TRANS_AMOUNT = 118;

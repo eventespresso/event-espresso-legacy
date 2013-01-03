@@ -17,7 +17,7 @@ $txn_type = $_POST['notify_type'];
 $alipay_settings = get_option('event_espresso_alipay_settings');
 require_once("alipay_notify.php");
 require_once("alipay_config.php");
-$alipay = new alipay_notify( $partner, $security_code, $sign_type, $_input_charset, $transport );
+$alipay = new Espresso_Alipay_Notify( $partner, $security_code, $sign_type, $_input_charset, $transport );
 $verify_result = $alipay->notify_verify();
 if ( $verify_result )
 {

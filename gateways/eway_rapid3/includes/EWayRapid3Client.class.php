@@ -14,7 +14,7 @@ if(session_id()=="")
  * 
  * @author mnelson4
  */
-class EWayRapid3Client{
+class Espresso_EWayRapid3Client{
 	private $useSandbox=false;
 	private $apiKey;
 	private $apiPassword;

@@ -13,7 +13,7 @@ function espresso_process_paytrace($payment_data) {
 	$payment_data['txn_type'] = 'PayTrace';
 	$payment_data['payment_status'] = 'Incomplete';
 	require_once(dirname(__FILE__) . '/paytrace.class.php');
-	$cls_paytrace = new ClsPaytrace();
+	$cls_paytrace = new Espresso_ClsPaytrace();
 	$paytrace_settings = get_option('event_espresso_paytrace_settings');
 
 	$primary_registration_id = "";

@@ -1,6 +1,6 @@
 <?php
 
-class Stripe_Customer extends Stripe_ApiResource
+class Espresso_Stripe_Customer extends Espresso_Stripe_ApiResource
 {
   public static function constructFrom($values, $apiKey=null)
   {
@@ -43,7 +43,7 @@ class Stripe_Customer extends Stripe_ApiResource
     if (!$params)
       $params = array();
     $params['customer'] = $this->id;
-    $ii = Stripe_InvoiceItem::create($params, $this->_apiKey);
+    $ii = Espresso_Stripe_InvoiceItem::create($params, $this->_apiKey);
     return $ii;
   }
 
@@ -52,7 +52,7 @@ class Stripe_Customer extends Stripe_ApiResource
     if (!$params)
       $params = array();
     $params['customer'] = $this->id;
-    $invoices = Stripe_Invoice::all($params, $this->_apiKey);
+    $invoices = Espresso_Stripe_Invoice::all($params, $this->_apiKey);
     return $invoices;
   }
 
@@ -61,7 +61,7 @@ class Stripe_Customer extends Stripe_ApiResource
     if (!$params)
       $params = array();
     $params['customer'] = $this->id;
-    $iis = Stripe_InvoiceItem::all($params, $this->_apiKey);
+    $iis = Espresso_Stripe_InvoiceItem::all($params, $this->_apiKey);
     return $iis;
   }
 
@@ -70,13 +70,13 @@ class Stripe_Customer extends Stripe_ApiResource
     if (!$params)
       $params = array();
     $params['customer'] = $this->id;
-    $charges = Stripe_Charge::all($params, $this->_apiKey);
+    $charges = Espresso_Stripe_Charge::all($params, $this->_apiKey);
     return $charges;
   }
 
   public function updateSubscription($params=null)
   {
-    $requestor = new Stripe_ApiRequestor($this->_apiKey);
+    $requestor = new Espresso_Stripe_ApiRequestor($this->_apiKey);
     $url = $this->instanceUrl() . '/subscription';
     list($response, $apiKey) = $requestor->request('post', $url, $params);
     $this->refreshFrom(array('subscription' => $response), $apiKey, true);
@@ -85,7 +85,7 @@ class Stripe_Customer extends Stripe_ApiResource
 
   public function cancelSubscription($params=null)
   {
-    $requestor = new Stripe_ApiRequestor($this->_apiKey);
+    $requestor = new Espresso_Stripe_ApiRequestor($this->_apiKey);
     $url = $this->instanceUrl() . '/subscription';
     list($response, $apiKey) = $requestor->request('delete', $url, $params);
     $this->refreshFrom(array('subscription' => $response), $apiKey, true);

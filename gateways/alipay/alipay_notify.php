@@ -1,6 +1,6 @@
 <?php
 
-class alipay_notify {
+class Espresso_Alipay_Notify {
 	var $gateway;
 	var $security_code;  	//°²È«Ð£ÑéÂë
 	var $partner;
@@ -8,7 +8,7 @@ class alipay_notify {
 	var $mysign;
 	var $_input_charset ;
 	var $transport;
-	function alipay_notify($partner,$security_code,$sign_type = "MD5",$_input_charset = "GBK",$transport= "http") {
+	function Espresso_Alipay_Notify($partner,$security_code,$sign_type = "MD5",$_input_charset = "GBK",$transport= "http") {
 		$this->partner     =   $partner;
 		$this->security_code = $security_code;
 		$this->sign_type = $sign_type;

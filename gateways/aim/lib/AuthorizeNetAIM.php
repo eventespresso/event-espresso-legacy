@@ -39,7 +39,7 @@
  * @package    AuthorizeNet
  * @subpackage AuthorizeNetAIM
  */
-class AuthorizeNetAIM extends AuthorizeNetRequest
+class Espresso_AuthorizeNetAIM extends Espresso_AuthorizeNetRequest
 {
 	public $gateway_version = '1.0';
 	const LIVE_URL = 'https://secure.authorize.net/gateway/transact.dll';//Authnet URL
@@ -307,7 +307,7 @@ class AuthorizeNetAIM extends AuthorizeNetRequest
             if (in_array($name, $this->_all_aim_fields)) {
                 $this->_x_post_fields[$name] = $value;
             } else {
-                throw new AuthorizeNetException("Error: no field $name exists in the AIM API.
+                throw new Espresso_AuthorizeNetException("Error: no field $name exists in the AIM API.
                 To set a custom field use setCustomField('field','value') instead.");
             }
         } else {
@@ -346,7 +346,7 @@ class AuthorizeNetAIM extends AuthorizeNetRequest
      */
     protected function _handleResponse($response)
     {
-        return new AuthorizeNetAIM_Response($response, $this->_x_post_fields['delim_char'], $this->_x_post_fields['encap_char'], $this->_custom_fields);
+        return new Espresso_AuthorizeNetAIM_Response($response, $this->_x_post_fields['delim_char'], $this->_x_post_fields['encap_char'], $this->_custom_fields);
     }
 
     /**
@@ -386,7 +386,7 @@ class AuthorizeNetAIM extends AuthorizeNetRequest
  * @package    AuthorizeNet
  * @subpackage AuthorizeNetAIM
  */
-class AuthorizeNetAIM_Response extends AuthorizeNetResponse
+class Espresso_AuthorizeNetAIM_Response extends Espresso_AuthorizeNetResponse
 {
     private $_response_array = array(); // An array with the split response.
 

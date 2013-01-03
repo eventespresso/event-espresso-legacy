@@ -9,7 +9,7 @@
 	*��Ȩ��֧������˾
 */
 
-class alipay_service {
+class Espresso_Alipay_Service {
 
 	var $gateway = "http://www.alipay.net/cooperate/gateway.do?";         //֧���ӿ�
 	var $parameter;       //ȫ����Ҫ���ݵĲ���
@@ -17,7 +17,7 @@ class alipay_service {
 	var $mysign;          //ǩ��
 
 	//����֧�����ⲿ����ӿڿ���
-	function alipay_service($parameter,$security_code,$sign_type = "MD5",$transport= "https") {
+	function Espresso_Alipay_Service($parameter,$security_code,$sign_type = "MD5",$transport= "https") {
 		$this->parameter      = $this->para_filter($parameter);
 		$this->security_code  = $security_code;
 		$this->sign_type      = $sign_type;

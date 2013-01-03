@@ -17,7 +17,7 @@ function espresso_process_firstdata_connect_2($payment_data) {
 
 		$firstdata_connect_2_settings = get_option('event_espresso_firstdata_connect_2_settings');
 		include("Fdggutil.php");
-		$fdggutil = new Fdggutil($firstdata_connect_2_settings['storename'],
+		$fdggutil = new Espresso_Fdggutil($firstdata_connect_2_settings['storename'],
 										$firstdata_connect_2_settings['sharedSecret']);
 		$hash = $fdggutil->check_return_hash($payment_data['payment_date']);
 	} else {

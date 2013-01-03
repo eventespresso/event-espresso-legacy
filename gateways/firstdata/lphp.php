@@ -14,7 +14,7 @@
 # Use is subject to license terms.
 ### YOU REALLY DO NOT NEED TO EDIT THIS FILE! ###
 
-class lphp {
+class Espresso_Linkpoint {
 
     var $debugging;
 

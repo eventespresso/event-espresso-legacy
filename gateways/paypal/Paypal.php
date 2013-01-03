@@ -7,7 +7,7 @@
  * @package		Event Espresso PayPal Gateway
  * @category	Library
  */
-class EE_Paypal extends PaymentGateway {
+class EE_Paypal extends Espresso_PaymentGateway {
 
 	public $gateway_version = '1.0';
 

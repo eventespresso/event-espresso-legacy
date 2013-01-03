@@ -1,9 +1,9 @@
 <?php
-if(!class_exists("Stripe")) {
+if(!class_exists("Espresso_Stripe")) {
 	require_once (dirname(__FILE__).'/stripe-php-1.5.19/lib/Stripe.php');
 }
 
-class ClsStripe
+class Espresso_ClsStripe
 {	
 	function do_transaction($amount ,$cc, $cvc, $exp_month, $exp_year, $name, $description)
 	{
@@ -15,11 +15,11 @@ class ClsStripe
         $currencySymbol = $stripe_settings['stripe_currency_symbol'];
         //$transactionPrefix = $stripe_settings['stripe_transaction_prefix'];
 		
-		Stripe::setApiKey($secretKey);
+		Espresso_Stripe::setApiKey($secretKey);
 		
 		$charge = "unknown";
 		try {
-			$charge = Stripe_Charge::create(array(
+			$charge = Espresso_Stripe_Charge::create(array(
 					"amount"	=> $amount*100,
 					"currency"	=> $currencySymbol,
 					"card"		=> array(
