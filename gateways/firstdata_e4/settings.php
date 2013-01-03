@@ -128,13 +128,13 @@ function event_espresso_display_firstdata_e4_settings() {
 ?></span> &nbsp;<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=relay_response"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a> </li>
 						<li>
 							<label for="use_sandbox">
-								<?php _e('Account Uses FirstData E4.com\'s Development Server', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=firstdata_e4_sandbox"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+								<?php _e('Account Uses FirstData E4.com\'s Demo Server', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=firstdata_e4_sandbox"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="use_sandbox" type="checkbox" value="1" <?php echo $firstdata_e4_settings['use_sandbox'] ? 'checked="checked"' : '' ?> />
 							</li>
 						<li>
 							<label for="test_transactions">
-								<?php _e('Submit a Test Transaction', 'event_espresso'); ?>
+								<?php _e('Payment Page in Test Mode', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=firstdata_e4_sandbox"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="test_transactions" type="checkbox" value="1" <?php echo $firstdata_e4_settings['test_transactions'] ? 'checked="checked"' : '' ?> /></li>
@@ -183,6 +183,14 @@ function event_espresso_display_firstdata_e4_settings() {
 	</div>
 	<div id="firstdata_e4_sandbox" style="display:none">
 		<h2><?php _e('FirstData E4 Test Mode', 'event_espresso'); ?></h2>
+		<p><?php _e("There are two options for testing in First Data e4:","event_espresso");?></p>
+		<ol>
+			<li><a href='https://firstdata.zendesk.com/entries/21510561-global-gateway-e4sm-demo-accounts' target='_blank'><?php _e("using the Demo site, (option 1)","event_espresso")?></a></li>
+			<li><a href='https://firstdata.zendesk.com/entries/407522#4.2' target='_blank'><?php _e("using the Live site but setting the Payment Page to Test mode, (option 2)","event_espresso")?></a></li>
+		</ol>
+		<p><?php _e("If you login at demo.globalgatewaye4.firstdata.com, then your account is on the Demo site (option 1). If, however, you login at globalgatewaye4.firstdata.com, then your account is on the Live site, and you will want to test with option 2.","event_espresso");?></p>
+		<p><?php _e("If you are using the Demo site (option 1), then check 'Account Uses FirstData E4.com's Demo Server', and leave 'Payment Page in Test Mode' UNchecked.",'event_espresso');?></p>
+		<p><?php _e("If you using the Live site (option 2, most common), then leave 'Account Uses Firstdata E3.com's Demo Server' UNchecked, and check 'Payment Page in Test Mode'.",'event_espresso');?></p>
 		<p><?php _e('Test Mode allows you to submit test transactions to the payment gateway. Transactions that are submitted while Test Mode is ON are NOT actually processed. The result of a transaction depends on the card number submitted, and the invoice amount. If you want a transaction to be approved, use one of the following card numbers.', 'event_espresso'); ?></p><p>370000000000002 (<?php _e('American Express', 'event_espresso'); ?>)<br />6011000000000012 (<?php _e('Discover', 'event_espresso'); ?>)<br />5424000000000015 (<?php _e('Master Card', 'event_espresso'); ?>)<br />4007000000027 (<?php _e('Visa', 'event_espresso'); ?>)</p>
 	</div>
 	<?php
