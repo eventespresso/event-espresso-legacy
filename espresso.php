@@ -89,7 +89,7 @@ function espresso_info_header() {
 add_action('wp_head', 'espresso_info_header');
 
 //Globals
-global $org_options, $wpdb, $this_is_a_reg_page, $run_event_espresso_run;
+global $org_options, $wpdb, $this_is_a_reg_page;
 $org_options = get_option('events_organization_settings');
 	
 if (empty($org_options['event_page_id'])) {
@@ -103,7 +103,6 @@ $page_id = isset($_REQUEST['page_id']) ? $_REQUEST['page_id'] : '';
 //Registration page check
 //From Brent C. http://events.codebasehq.com/projects/event-espresso/tickets/99
 $this_is_a_reg_page = FALSE;
-$run_event_espresso_run = FALSE;
 
 $reg_page_ids = array(
 		'event_page_id' => $org_options['event_page_id'],
@@ -126,14 +125,13 @@ $uri_string = trim($uri_string, '/');
 //$this_page = basename($uri_string);
 $uri_segments = explode('/', $uri_string);
 foreach ( $uri_segments as $uri_segment ) {
-	if ( $uri_segment != '' || $page_id != '' ) {
-		$page_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment));
+	if ( $uri_segment != '' ) {
+		if ( $page_id == '' ) {
+			$page_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment));
+		}		
 		if ($wpdb->num_rows > 0) {
 			if (in_array($page_id, $reg_page_ids)) {
 				$this_is_a_reg_page = TRUE;
-				if ( $page_id == $org_options['event_page_id'] ) {
-					$run_event_espresso_run = TRUE;
-				}
 			}
 		}		
 	} else {
@@ -141,7 +139,6 @@ foreach ( $uri_segments as $uri_segment ) {
 			$frontpage = get_option('page_on_front');
 			if ( in_array( $frontpage, $reg_page_ids )) {
 				$this_is_a_reg_page = TRUE;
-				$run_event_espresso_run = TRUE;
 			}
 		}
 	}
@@ -150,7 +147,6 @@ foreach ( $uri_segments as $uri_segment ) {
 
 if ( is_admin() ) {
 	$this_is_a_reg_page = TRUE;
-	$run_event_espresso_run = TRUE;
 }
 	
 
@@ -941,7 +937,7 @@ add_shortcode('ESPRESSO_TXN_PAGE', 'event_espresso_txn');
 add_shortcode('ESPRESSO_CANCELLED', 'espresso_cancelled');
 
 
-if ( $run_event_espresso_run ) {
+if ( $this_is_a_reg_page ) {
 	add_action( 'init', 'event_espresso_run' );
 }
 
