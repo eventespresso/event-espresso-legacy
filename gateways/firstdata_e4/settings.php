@@ -189,8 +189,8 @@ function event_espresso_display_firstdata_e4_settings() {
 			<li><a href='https://firstdata.zendesk.com/entries/407522#4.2' target='_blank'><?php _e("using the Live site but setting the Payment Page to Test mode, (option 2)","event_espresso")?></a></li>
 		</ol>
 		<p><?php _e("If you login at demo.globalgatewaye4.firstdata.com, then your account is on the Demo site (option 1). If, however, you login at globalgatewaye4.firstdata.com, then your account is on the Live site, and you will want to test with option 2.","event_espresso");?></p>
-		<p><?php _e("If you are using the Demo site (option 1), then check 'Account Uses FirstData E4.com's Demo Server', and leave 'Payment Page in Test Mode' UNchecked.",'event_espresso');?></p>
-		<p><?php _e("If you using the Live site (option 2, most common), then leave 'Account Uses Firstdata E3.com's Demo Server' UNchecked, and check 'Payment Page in Test Mode'.",'event_espresso');?></p>
+		<p><?php _e("If you are using the Demo site (option 1), then check 'Account Uses FirstData E4.com's Demo Server', and leave 'Payment Page in Test Mode' <b>unchecked</b>.",'event_espresso');?></p>
+		<p><?php _e("If you using the Live site (option 2, most common), then leave 'Account Uses Firstdata E3.com's Demo Server' <b>unchecked</b>, and check 'Payment Page in Test Mode'.",'event_espresso');?></p>
 		<p><?php _e('Test Mode allows you to submit test transactions to the payment gateway. Transactions that are submitted while Test Mode is ON are NOT actually processed. The result of a transaction depends on the card number submitted, and the invoice amount. If you want a transaction to be approved, use one of the following card numbers.', 'event_espresso'); ?></p><p>370000000000002 (<?php _e('American Express', 'event_espresso'); ?>)<br />6011000000000012 (<?php _e('Discover', 'event_espresso'); ?>)<br />5424000000000015 (<?php _e('Master Card', 'event_espresso'); ?>)<br />4007000000027 (<?php _e('Visa', 'event_espresso'); ?>)</p>
 	</div>
 	<?php
