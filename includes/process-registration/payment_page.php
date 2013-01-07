@@ -360,6 +360,8 @@ function espresso_confirm_registration() {
 //This is the alternate PayPal button used for the email
 function event_espresso_pay() {
 
+	ob_start();
+	
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 	global $wpdb, $org_options;
 
@@ -432,5 +434,10 @@ function event_espresso_pay() {
 	$_REQUEST['page_id'] = $org_options['return_url'];
 	unset( $_SESSION['espresso_session']['id'] );
 	ee_init_session();
+	
+	$buffer = ob_get_contents();
+	ob_end_clean();
+	return $buffer;
+	
 }
 
