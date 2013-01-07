@@ -116,34 +116,40 @@ if (is_ssl()) {
 } else {
 	$find = str_replace('http://', '', site_url());
 }	 
-	
-$find = str_replace($_SERVER['SERVER_NAME'], '', $find);
-$uri_string = str_replace($find, '', $_SERVER['REQUEST_URI']);
-$uri_string = isset($_SERVER['QUERY_STRING'])?str_replace($_SERVER['QUERY_STRING'], '', $uri_string):$uri_string;
-$uri_string = rtrim($uri_string, '?');
-$uri_string = trim($uri_string, '/');
-//$this_page = basename($uri_string);
-$uri_segments = explode('/', $uri_string);
-foreach ( $uri_segments as $uri_segment ) {
-	if ( $uri_segment != '' ) {
-		if ( $page_id == '' ) {
-			$page_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment));
-		}		
-		if ($wpdb->num_rows > 0) {
-			if (in_array($page_id, $reg_page_ids)) {
-				$this_is_a_reg_page = TRUE;
-			}
-		}		
-	} else {
-		if ( get_option('show_on_front') == 'page' ) {
-			$frontpage = get_option('page_on_front');
-			if ( in_array( $frontpage, $reg_page_ids )) {
-				$this_is_a_reg_page = TRUE;
+
+if ( ! empty( $page_id )) {
+	if ( in_array( $page_id, $reg_page_ids )) {
+		$this_is_a_reg_page = TRUE;
+	}
+} else {
+	// try to find post_name via the url
+	$find = str_replace($_SERVER['SERVER_NAME'], '', $find);
+	$uri_string = str_replace($find, '', $_SERVER['REQUEST_URI']);
+	$uri_string = isset($_SERVER['QUERY_STRING'])?str_replace($_SERVER['QUERY_STRING'], '', $uri_string):$uri_string;
+	$uri_string = rtrim($uri_string, '?');
+	$uri_string = trim($uri_string, '/');
+	$uri_segments = explode('/', $uri_string);
+	// then find the page id via the post_name
+	foreach ( $uri_segments as $uri_segment ) {
+		if ( $uri_segment != '' ) {
+			$page_id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment ));
+			if ( $wpdb->num_rows > 0 ) {
+				if ( in_array($page_id, $reg_page_ids )) {
+					$this_is_a_reg_page = TRUE;
+				}
+			}		
+		} else {
+			if ( get_option('show_on_front') == 'page' ) {
+				$frontpage = get_option('page_on_front');
+				if ( in_array( $frontpage, $reg_page_ids )) {
+					$this_is_a_reg_page = TRUE;
+				}
 			}
 		}
-	}
 
+	}
 }
+
 
 if ( is_admin() ) {
 	$this_is_a_reg_page = TRUE;
