@@ -15,11 +15,11 @@ class Espresso_ClsStripe
         $currencySymbol = $stripe_settings['stripe_currency_symbol'];
         //$transactionPrefix = $stripe_settings['stripe_transaction_prefix'];
 		
-		Espresso_Stripe::setApiKey($secretKey);
+		Stripe::setApiKey($secretKey);
 		
 		$charge = "unknown";
 		try {
-			$charge = Espresso_Stripe_Charge::create(array(
+			$charge = Stripe_Charge::create(array(
 					"amount"	=> $amount*100,
 					"currency"	=> $currencySymbol,
 					"card"		=> array(
