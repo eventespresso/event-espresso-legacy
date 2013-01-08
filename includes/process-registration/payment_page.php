@@ -363,7 +363,7 @@ function event_espresso_pay() {
 	ob_start();
 	
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
-	global $wpdb, $org_options;
+	global $wpdb, $org_options, $espresso_content;
 
 	$payment_data= array( 'attendee_id' => '' );
 
@@ -435,9 +435,10 @@ function event_espresso_pay() {
 	unset( $_SESSION['espresso_session']['id'] );
 	ee_init_session();
 	
-	$buffer = ob_get_contents();
+	$espresso_content = ob_get_contents();
 	ob_end_clean();
-	return $buffer;
+	add_shortcode('ESPRESSO_PAYMENTS', 'espresso_return_espresso_content');
+	return $espresso_content;
 	
 }
 

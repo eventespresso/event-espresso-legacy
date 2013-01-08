@@ -142,7 +142,7 @@ function event_espresso_txn() {
 
 	ob_start();
 
-	global $wpdb, $org_options;
+	global $wpdb, $org_options, $espresso_content;
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	$active_gateways = get_option('event_espresso_active_gateways', array());
 	if (empty($active_gateways)) {
@@ -181,9 +181,10 @@ function event_espresso_txn() {
 	$_REQUEST['page_id'] = $org_options['return_url'];
 	ee_init_session();
 
-	$buffer = ob_get_contents();
+	$espresso_content = ob_get_contents();
 	ob_end_clean();
-	return $buffer;
+	add_shortcode('ESPRESSO_TXN_PAGE', 'espresso_return_espresso_content');	
+	return $espresso_content;
 	
 }
 
