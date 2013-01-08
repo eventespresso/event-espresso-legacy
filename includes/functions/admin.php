@@ -1348,7 +1348,7 @@ function espresso_performance($visible = false) {
 
 add_action('wp_footer', 'espresso_performance', 20);
 
-function espresso_files_in_uploads($visible = false) {
+function espresso_files_in_uploads() {
 	
 	$fileinfo = '';
 	if ( is_dir( EVENT_ESPRESSO_TEMPLATE_DIR )) {
@@ -1358,20 +1358,16 @@ function espresso_files_in_uploads($visible = false) {
 		$files->setMaxDepth(1);
 	    foreach ( $files as $file ) {
 			if ( $file->isDir() ) {
-				$fileinfo .= sprintf( "Dir: &nbsp;&nbsp;%s<br />", $file->getFilename() );
+				$fileinfo .= sprintf( "Dir:  %s\n", $file->getFilename() );
 			} elseif ( $file->isFile() ) {
-				$fileinfo .= sprintf( "File: &nbsp;%s / %s<br />", $files->getSubPath(), $file->getFilename() );
+				$fileinfo .= sprintf( "File: %s/%s\n", $files->getSubPath(), $file->getFilename() );
 			}
 	    }
 	}	
-	
-	if ( $visible ) {
-		echo "<!--<br />Event Espresso Template Files:<br /><br />{$fileinfo}<br />-->";
-	}
+	echo "\r\n\n<!--Event Espresso Template Files:\r\n\n{$fileinfo}\n-->\r\n";
 	
 }
 add_action('wp_footer', 'espresso_files_in_uploads', 20);
-
 
 
 function espresso_admin_performance($show = 0) {
