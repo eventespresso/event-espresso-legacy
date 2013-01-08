@@ -1349,28 +1349,30 @@ function espresso_performance($visible = false) {
 add_action('wp_footer', 'espresso_performance', 20);
 
 function espresso_files_in_uploads($visible = false) {
-	// Create recursive dir iterator which skips dot folders
-	$dir = new RecursiveDirectoryIterator(EVENT_ESPRESSO_TEMPLATE_DIR,FilesystemIterator::SKIP_DOTS);
-
-	// Flatten the recursive iterator, folders come before their files
-	$it  = new RecursiveIteratorIterator($dir,RecursiveIteratorIterator::SELF_FIRST);
-
-	// Maximum depth is 1 level deeper than the base folder
-	$it->setMaxDepth(1);
 	
-	$file = '';
-	// Basic loop displaying different messages based on file or folder
-	foreach ($it as $fileinfo) {
-		if ($fileinfo->isDir()) {
-			$file .= sprintf("Folder - %s\n", $fileinfo->getFilename());
-		} elseif ($fileinfo->isFile()) {
-			$file .= sprintf("File %s - %s\n", $it->getSubPath(), $fileinfo->getFilename());
-		}
+	$fileinfo = '';
+	if ( is_dir( EVENT_ESPRESSO_TEMPLATE_DIR )) {
+	    $dir = new RecursiveDirectoryIterator( EVENT_ESPRESSO_TEMPLATE_DIR );
+	    $files = new RecursiveIteratorIterator( $dir, RecursiveIteratorIterator::SELF_FIRST );
+		// Maximum depth is 1 level deeper than the base folder
+		$files->setMaxDepth(1);
+	    foreach ( $files as $file ) {
+			if ( $file->isDir() ) {
+				$fileinfo .= sprintf( "Dir: &nbsp;&nbsp;%s<br />", $file->getFilename() );
+			} elseif ( $file->isFile() ) {
+				$fileinfo .= sprintf( "File: &nbsp;%s / %s<br />", $files->getSubPath(), $file->getFilename() );
+			}
+	    }
+	}	
+	
+	if ( $visible ) {
+		echo "<!--<br />Event Espresso Template Files:<br /><br />{$fileinfo}<br />-->";
 	}
-	//echo "<!-- {$file} -->";
-	echo $visible ? $stat : "\n<!--\nEvent Espresso Template Files:\r\n{$file}-->\n";
+	
 }
 add_action('wp_footer', 'espresso_files_in_uploads', 20);
+
+
 
 function espresso_admin_performance($show = 0) {
 	if ($show == 0)
