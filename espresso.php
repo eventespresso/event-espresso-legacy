@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.29.2P-beta
+  Version: 3.1.30.2P-beta
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,7 +32,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.29.P-beta';
+	return '3.1.30.2P-beta';
 }
 
 //This tells the system to check for updates to the paid version
@@ -66,10 +66,8 @@ function ee_init_session($admin_override = false) {
 		do_action( 'action_hook_espresso_zero_vlm_dscnt_in_session' ); 
 	}
 }
-
 add_action('init', 'ee_init_session', 1);
 
-add_action('admin_init', 'ee_check_for_export');
 
 function ee_check_for_export() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
@@ -80,16 +78,20 @@ function ee_check_for_export() {
 		}
 	}
 }
+add_action('admin_init', 'ee_check_for_export');
+
 
 function espresso_info_header() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	print( "<meta name='generator' content='Event Espresso Version " . EVENT_ESPRESSO_VERSION . "' />");
 }
-
 add_action('wp_head', 'espresso_info_header');
 
+
 //Globals
-global $org_options, $wpdb, $this_is_a_reg_page;
+global $org_options, $wpdb, $this_is_a_reg_page, $espresso_content;
+$espresso_content = '';
+
 $org_options = get_option('events_organization_settings');
 	
 if (empty($org_options['event_page_id'])) {
@@ -98,52 +100,85 @@ if (empty($org_options['event_page_id'])) {
 	$org_options['cancel_return'] = '';
 	$org_options['notify_url'] = '';
 }
-$page_id = isset($_REQUEST['page_id']) ? $_REQUEST['page_id'] : '';
 
 //Registration page check
 //From Brent C. http://events.codebasehq.com/projects/event-espresso/tickets/99
 $this_is_a_reg_page = FALSE;
+$espresso_events = TRUE;
 
-$reg_page_ids = array(
-		'event_page_id' => $org_options['event_page_id'],
-		'return_url' => $org_options['return_url'],
-		'cancel_return' => $org_options['cancel_return'],
-		'notify_url' => $org_options['notify_url']
-);
+//$reg_page_ids = array(
+//		'event_page_id' => $org_options['event_page_id'],
+//		'return_url' => $org_options['return_url'],
+//		'cancel_return' => $org_options['cancel_return'],
+//		'notify_url' => $org_options['notify_url']
+//);
+
 
 if (is_ssl()) {
 	$find = str_replace('https://', '', site_url());
 } else {
 	$find = str_replace('http://', '', site_url());
-}	 
-	
-$find = str_replace($_SERVER['SERVER_NAME'], '', $find);
-$uri_string = str_replace($find, '', $_SERVER['REQUEST_URI']);
-$uri_string = isset($_SERVER['QUERY_STRING'])?str_replace($_SERVER['QUERY_STRING'], '', $uri_string):$uri_string;
-$uri_string = rtrim($uri_string, '?');
-$uri_string = trim($uri_string, '/');
-//$this_page = basename($uri_string);
-$uri_segments = explode('/', $uri_string);
-foreach ( $uri_segments as $uri_segment ) {
-	if ( $uri_segment != '' ) {
-		if ( $page_id == '' ) {
-			$page_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment));
+}	
+
+
+function espresso_shortcode_pages( $page_id ) {
+
+	global $org_options, $this_is_a_reg_page;
+	$reg_page_ids = array(
+			$org_options['event_page_id'] => 'event_page_id',
+			$org_options['return_url'] => 'return_url',
+			$org_options['cancel_return'] => 'cancel_return',
+			$org_options['notify_url'] => 'notify_url'
+	);
+
+	if ( isset( $reg_page_ids[ $page_id ] )) {
+		switch( $reg_page_ids[ $page_id ] ) {
+			case 'event_page_id' :
+					$this_is_a_reg_page = TRUE;
+					add_action( 'init', 'event_espresso_run', 100 );
+				break;
+			case 'return_url' :
+					$this_is_a_reg_page = TRUE;
+					add_action( 'init', 'event_espresso_pay', 100 );
+				break;
+			case 'notify_url' :
+					$this_is_a_reg_page = TRUE;
+					add_action( 'init', 'event_espresso_txn', 100 );
+				break;
 		}		
-		if ($wpdb->num_rows > 0) {
-			if (in_array($page_id, $reg_page_ids)) {
-				$this_is_a_reg_page = TRUE;
-			}
-		}		
-	} else {
-		if ( get_option('show_on_front') == 'page' ) {
-			$frontpage = get_option('page_on_front');
-			if ( in_array( $frontpage, $reg_page_ids )) {
-				$this_is_a_reg_page = TRUE;
-			}
-		}
 	}
 
 }
+
+$page_id = isset($_REQUEST['page_id']) ? $_REQUEST['page_id'] : '';
+
+if ( ! empty( $page_id )) {
+	espresso_shortcode_pages( $page_id );
+} else {
+	// try to find post_name via the url
+	$find = str_replace($_SERVER['SERVER_NAME'], '', $find);
+	$uri_string = str_replace($find, '', $_SERVER['REQUEST_URI']);
+	$uri_string = isset($_SERVER['QUERY_STRING'])?str_replace($_SERVER['QUERY_STRING'], '', $uri_string):$uri_string;
+	$uri_string = rtrim($uri_string, '?');
+	$uri_string = trim($uri_string, '/');
+	$uri_segments = explode('/', $uri_string);
+	// then find the page id via the post_name
+	foreach ( $uri_segments as $uri_segment ) {
+		if ( $uri_segment != '' ) {
+			$page_id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment ));
+			if ( $wpdb->num_rows > 0 ) {
+				espresso_shortcode_pages( $page_id );
+			}		
+		} else {
+			if ( get_option('show_on_front') == 'page' ) {
+				$frontpage = get_option('page_on_front');
+				espresso_shortcode_pages( $frontpage );
+			}
+		}
+
+	}
+}
+
 
 if ( is_admin() ) {
 	$this_is_a_reg_page = TRUE;
@@ -844,7 +879,7 @@ add_action('admin_menu', 'add_event_espresso_menus');
 if (!function_exists('event_espresso_run')) {
 
 	function event_espresso_run() {
-		global $wpdb, $org_options, $load_espresso_scripts;
+		global $wpdb, $org_options, $load_espresso_scripts, $espresso_content;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$load_espresso_scripts = true; //This tells the plugin to load the required scripts
 		ob_start();
@@ -910,16 +945,14 @@ if (!function_exists('event_espresso_run')) {
 
 		$content = ob_get_contents();
 		ob_end_clean();
-//		return $content;
-		global $espresso_content;
 		$espresso_content = $content;
-		add_shortcode( 'ESPRESSO_EVENTS', 'espresso_filter_the_content' );
+		add_shortcode( 'ESPRESSO_EVENTS', 'espresso_return_espresso_content' );
 		
 	}
 
 }
 
-function espresso_filter_the_content() {
+function espresso_return_espresso_content() {
 	global $espresso_content;
 	return $espresso_content;
 }
@@ -930,16 +963,9 @@ function espresso_cancelled() {
 	$_REQUEST['page_id'] = $org_options['return_url'];
 	ee_init_session();
 }
-
-//New way of doing it with shortcodes
-add_shortcode('ESPRESSO_PAYMENTS', 'event_espresso_pay');
-add_shortcode('ESPRESSO_TXN_PAGE', 'event_espresso_txn');
 add_shortcode('ESPRESSO_CANCELLED', 'espresso_cancelled');
 
 
-if ( $this_is_a_reg_page ) {
-	add_action( 'init', 'event_espresso_run' );
-}
 
 /*
  * These actions need to be loaded a the bottom of this script to prevent errors when post/get requests are received.
