@@ -279,7 +279,7 @@ setlocale(LC_TIME, get_locale());
 //Get language files
 function espresso_load_language_files() {
 	$lang = WPLANG;
-	//espresso_sideload_current_lang();
+	espresso_sideload_current_lang();
 
 
 	if ( !empty($lang) && file_exists(EE_LANGUAGES_SAFE_DIR.'event_espresso-'.$lang.'.mo') ){
