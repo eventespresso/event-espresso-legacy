@@ -1,6 +1,6 @@
 <?php
 
-class Espresso_Stripe_Charge extends Espresso_Stripe_ApiResource
+class Stripe_Charge extends Stripe_ApiResource
 {
   public static function constructFrom($values, $apiKey=null)
   {
@@ -28,7 +28,7 @@ class Espresso_Stripe_Charge extends Espresso_Stripe_ApiResource
 
   public function refund($params=null)
   {
-    $requestor = new Espresso_Stripe_ApiRequestor($this->_apiKey);
+    $requestor = new Stripe_ApiRequestor($this->_apiKey);
     $url = $this->instanceUrl() . '/refund';
     list($response, $apiKey) = $requestor->request('post', $url, $params);
     $this->refreshFrom($response, $apiKey);
@@ -37,7 +37,7 @@ class Espresso_Stripe_Charge extends Espresso_Stripe_ApiResource
 
   public function capture($params=null)
   {
-    $requestor = new Espresso_Stripe_ApiRequestor($this->_apiKey);
+    $requestor = new Stripe_ApiRequestor($this->_apiKey);
     $url = $this->instanceUrl() . '/capture';
     list($response, $apiKey) = $requestor->request('post', $url, $params);
     $this->refreshFrom($response, $apiKey);

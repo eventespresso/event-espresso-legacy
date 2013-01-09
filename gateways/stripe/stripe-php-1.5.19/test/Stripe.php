@@ -4,8 +4,8 @@ function authorizeFromEnv()
 {
   $apiKey = getenv('STRIPE_API_KEY');
   if (!$apiKey)
-    throw new Espresso_Stripe_Error('You need to set STRIPE_API_KEY');
-  Espresso_Stripe::setApiKey($apiKey);
+    throw new Stripe_Error('You need to set STRIPE_API_KEY');
+  Stripe::setApiKey($apiKey);
 }
 
 require_once('simpletest/autorun.php');

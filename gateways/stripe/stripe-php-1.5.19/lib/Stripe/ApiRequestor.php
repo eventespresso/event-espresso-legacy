@@ -1,6 +1,6 @@
 <?php
 
-class Espresso_Stripe_ApiRequestor
+class Stripe_ApiRequestor
 {
   public $apiKey;
 
@@ -11,7 +11,7 @@ class Espresso_Stripe_ApiRequestor
 
   public static function apiUrl($url='')
   {
-    $apiBase = Espresso_Stripe::$apiBase;
+    $apiBase = Stripe::$apiBase;
     return "$apiBase$url";
   }
 
@@ -25,7 +25,7 @@ class Espresso_Stripe_ApiRequestor
 
   private static function _encodeObjects($d)
   {
-    if ($d instanceof Espresso_Stripe_ApiRequestor) {
+    if ($d instanceof Stripe_ApiRequestor) {
       return $d->id;
     } else if ($d === true) {
       return 'true';
@@ -58,21 +58,21 @@ class Espresso_Stripe_ApiRequestor
   public function handleApiError($rbody, $rcode, $resp)
   {
     if (!is_array($resp) || !isset($resp['error']))
-      throw new Espresso_Stripe_ApiError("Invalid response object from API: $rbody (HTTP response code was $rcode)");
+      throw new Stripe_ApiError("Invalid response object from API: $rbody (HTTP response code was $rcode)");
     $error = $resp['error'];
     switch ($rcode) {
     case 400:
     case 404:
-      throw new Espresso_Stripe_InvalidRequestError(isset($error['message']) ? $error['message'] : null,
+      throw new Stripe_InvalidRequestError(isset($error['message']) ? $error['message'] : null,
 					    isset($error['param']) ? $error['param'] : null);
     case 401:
-      throw new Espresso_Stripe_AuthenticationError(isset($error['message']) ? $error['message'] : null);
+      throw new Stripe_AuthenticationError(isset($error['message']) ? $error['message'] : null);
     case 402:
-      throw new Espresso_Stripe_CardError(isset($error['message']) ? $error['message'] : null,
+      throw new Stripe_CardError(isset($error['message']) ? $error['message'] : null,
 				  isset($error['param']) ? $error['param'] : null,
 				  isset($error['code']) ? $error['code'] : null);
     default:
-      throw new Espresso_Stripe_ApiError(isset($error['message']) ? $error['message'] : null);
+      throw new Stripe_ApiError(isset($error['message']) ? $error['message'] : null);
     }
   }
 
@@ -80,22 +80,22 @@ class Espresso_Stripe_ApiRequestor
   {
     $myApiKey = $this->_apiKey;
     if (!$myApiKey)
-      $myApiKey = Espresso_Stripe::$apiKey;
+      $myApiKey = Stripe::$apiKey;
     if (!$myApiKey)
-      throw new Espresso_Stripe_AuthenticationError('No API key provided.  (HINT: set your API key using "Stripe::setApiKey(<API-KEY>)".  You can generate API keys from the Stripe web interface.  See https://stripe.com/api for details, or email support@stripe.com if you have any questions.');
+      throw new Stripe_AuthenticationError('No API key provided.  (HINT: set your API key using "Stripe::setApiKey(<API-KEY>)".  You can generate API keys from the Stripe web interface.  See https://stripe.com/api for details, or email support@stripe.com if you have any questions.');
 
     $absUrl = $this->apiUrl($url);
-    $params = Espresso_Stripe_Util::arrayClone($params);
+    $params = Stripe_Util::arrayClone($params);
     $params = self::_encodeObjects($params);
     $langVersion = phpversion();
     $uname = php_uname();
-    $ua = array('bindings_version' => Espresso_Stripe::VERSION,
+    $ua = array('bindings_version' => Stripe::VERSION,
 		'lang' => 'php',
 		'lang_version' => $langVersion,
 		'publisher' => 'stripe',
 		'uname' => $uname);
     $headers = array('X-Stripe-Client-User-Agent: ' . json_encode($ua),
-		     'User-Agent: Stripe/v1 PhpBindings/' . Espresso_Stripe::VERSION);
+		     'User-Agent: Stripe/v1 PhpBindings/' . Stripe::VERSION);
     list($rbody, $rcode) = $this->_curlRequest($meth, $absUrl, $headers, $params, $myApiKey);
     return array($rbody, $rcode, $myApiKey);
   }
@@ -105,7 +105,7 @@ class Espresso_Stripe_ApiRequestor
     try {
       $resp = json_decode($rbody, true);
     } catch (Exception $e) {
-      throw new Espresso_Stripe_ApiError("Invalid response body from API: $rbody (HTTP response code was $rcode)");
+      throw new Stripe_ApiError("Invalid response body from API: $rbody (HTTP response code was $rcode)");
     }
 
     if ($rcode < 200 || $rcode >= 300) {
@@ -135,7 +135,7 @@ class Espresso_Stripe_ApiRequestor
 	$absUrl = "$absUrl?$encoded";
       }
     } else {
-      throw new Espresso_Stripe_ApiError("Unrecognized method $meth");
+      throw new Stripe_ApiError("Unrecognized method $meth");
     }
 
     $absUrl = self::utf8($absUrl);
@@ -147,7 +147,7 @@ class Espresso_Stripe_ApiRequestor
     $opts[CURLOPT_HTTPHEADER] = $headers;
     $opts[CURLOPT_USERPWD] = $myApiKey . ':';
     $opts[CURLOPT_CAINFO] = dirname(__FILE__) . '/../data/ca-certificates.crt';
-    if (!Espresso_Stripe::$verifySslCerts)
+    if (!Stripe::$verifySslCerts)
       $opts[CURLOPT_SSL_VERIFYPEER] = false;
 
     curl_setopt_array($curl, $opts);
@@ -167,7 +167,7 @@ class Espresso_Stripe_ApiRequestor
 
   public function handleCurlError($errno, $message)
   {
-    $apiBase = Espresso_Stripe::$apiBase;
+    $apiBase = Stripe::$apiBase;
     switch ($errno) {
     case CURLE_COULDNT_CONNECT:
     case CURLE_COULDNT_RESOLVE_HOST:
@@ -183,6 +183,6 @@ class Espresso_Stripe_ApiRequestor
     }
 
     $msg .= "\n\n(Network error: $message)";
-    throw new Espresso_Stripe_ApiConnectionError($msg);
+    throw new Stripe_ApiConnectionError($msg);
   }
 }

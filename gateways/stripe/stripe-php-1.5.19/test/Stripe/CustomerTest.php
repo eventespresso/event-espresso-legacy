@@ -5,7 +5,7 @@ class Stripe_CustomerTest extends UnitTestCase
   public function testDeletion()
   {
     authorizeFromEnv();
-    $c = Espresso_Stripe_Customer::create(array('amount' => 100,
+    $c = Stripe_Customer::create(array('amount' => 100,
 				       'currency' => 'usd',
 				       'card' => array('number' => '4242424242424242',
 						       'exp_month' => 5,
@@ -18,21 +18,21 @@ class Stripe_CustomerTest extends UnitTestCase
   public function testSave()
   {
     authorizeFromEnv();
-    $c = Espresso_Stripe_Customer::create();
+    $c = Stripe_Customer::create();
     $c->email = 'gdb@stripe.com';
     $c->bogus = 'bogus';
     $c->save();
     $this->assertEqual($c->email, 'gdb@stripe.com');
     $this->assertNull($c['bogus']);
 
-    $c2 = Espresso_Stripe_Customer::retrieve($c->id);
+    $c2 = Stripe_Customer::retrieve($c->id);
     $this->assertEqual($c->email, $c2->email);
   }
 
   public function testCancelSubscription()
   {
     authorizeFromEnv();
-    $c = Espresso_Stripe_Customer::create(array('card' => array('number' => '4242424242424242',
+    $c = Stripe_Customer::create(array('card' => array('number' => '4242424242424242',
 						       'exp_month' => 5,
 						       'exp_year' => 2015),
 				       'plan' => 'gold'));

@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.30.2P-beta
+  Version: 3.1.30.5
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,7 +32,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.30.2P-beta';
+	return '3.1.30.5';
 }
 
 //This tells the system to check for updates to the paid version
@@ -313,7 +313,7 @@ function espresso_sideload_current_lang() {
 		return;
 	}
 
-	$response = wp_remote_get( $git_path, array( 'timeout' => 300, 'stream' => true, 'filename' => $tmp_file ) );
+	$response = wp_remote_get( $git_path, array( 'timeout' => 500, 'stream' => true, 'filename' => $tmp_file ) );
 
 
 	if ( is_wp_error($response) || 200 != wp_remote_retrieve_response_code( $response ) ) {
@@ -329,9 +329,8 @@ function espresso_sideload_current_lang() {
 
 
 	//k we have the file now let's get it in the right directory with the right name.
-	$new_name = 'event-espresso-' . $lang . '.mo';
+	$new_name = 'event_espresso-' . $lang . '.mo';
 	$new_path = EVENT_ESPRESSO_PLUGINFULLPATH . '/languages/' . $new_name;
-	var_dump($new_path);
 
 	//move file in
 	if ( false === @ rename( $file, $new_path ) ) {
@@ -345,7 +344,7 @@ function espresso_sideload_current_lang() {
 	@ chmod( $new_path, $perms);
 
 	//made it this far all looks good. So let's save option flag
-	update_option('lang_file_check_' . $lang . '_' . EVENTESPRESSO_VERSION, 1);
+	update_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION, 1);
 	return; 
 }
 
