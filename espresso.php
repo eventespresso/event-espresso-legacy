@@ -345,7 +345,7 @@ function espresso_sideload_current_lang() {
 	@ chmod( $new_path, $perms);
 
 	//made it this far all looks good. So let's save option flag
-	update_option('lang_file_check_' . $lang . '_' . EVENTESPRESSO_VERSION, 1);
+	update_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION, 1);
 	return; 
 }
 
