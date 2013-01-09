@@ -331,7 +331,6 @@ function espresso_sideload_current_lang() {
 	//k we have the file now let's get it in the right directory with the right name.
 	$new_name = 'event_espresso-' . $lang . '.mo';
 	$new_path = EVENT_ESPRESSO_PLUGINFULLPATH . '/languages/' . $new_name;
-	var_dump($new_path);
 
 	//move file in
 	if ( false === @ rename( $file, $new_path ) ) {
