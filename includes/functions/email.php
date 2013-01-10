@@ -49,6 +49,7 @@ function replace_shortcodes($message, $data) {
 			"[attendee_event_list]", //Creates a table of the attendee and event information
 			"[custom_questions]",
 			"[qr_code]",
+			"[seating_tag]",
 			"[edit_attendee_link]",
 			"[add_to_calendar]"
 	);
@@ -100,8 +101,9 @@ function replace_shortcodes($message, $data) {
 			$data->table_open . $data->table_heading . $data->event_table . $data->table_close,
 			$data->email_questions,
 			$data->qr_code,
+			$data->seatingchart_tag,
 			$data->edit_attendee,
-			apply_filters('filter_hook_espresso_display_ical', array(
+			apply_filters('filter_hook_espresso_display_ical', array(//Add to calendar link
 					'event_id' => $data->attendee->event_id,
 					'registration_id' => $data->attendee->registration_id,
 					'event_name' => $data->event->event_name,
