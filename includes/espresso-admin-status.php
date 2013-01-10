@@ -333,7 +333,7 @@ function espresso_system_status() {
             	}
 
             	// WP Remote Post Check
-				$posting['wp_remote_post']['name'] = __('WP Remote Post Check','event_espresso');
+				/*$posting['wp_remote_post']['name'] = __('WP Remote Post Check','event_espresso');
 				$request['cmd'] = '_notify-validate';
 				$params = array(
 					'sslverify' 	=> false,
@@ -352,7 +352,7 @@ function espresso_system_status() {
             	} else {
 	            	$posting['wp_remote_post']['note'] = __('wp_remote_post() failed. PayPal IPN may not work with your server.', 'event_espresso');
             		$posting['wp_remote_post']['success'] = false;
-            	}
+            	}*/
 
             	$posting = apply_filters( 'wc_debug_posting', $posting );
             ?>
