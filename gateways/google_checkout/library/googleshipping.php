@@ -28,7 +28,7 @@
    * {@link http://code.google.com/apis/checkout/developer/index.html#shipping_xsd}
    *  
    */
-  class GoogleFlatRateShipping {
+  class Espresso_GoogleFlatRateShipping {
 
     var $price;
     var $name;
@@ -47,7 +47,7 @@
     /**
      * Adds a restriction to this shipping.
      * 
-     * @param GoogleShippingFilters $restrictions the shipping restrictions
+     * @param Espresso_GoogleShippingFilters $restrictions the shipping restrictions
      */
     function AddShippingRestrictions($restrictions) {
       $this->shipping_restrictions = $restrictions;
@@ -61,7 +61,7 @@
    * {@link http://code.google.com/apis/checkout/developer/index.html#shipping_xsd}
    * {@link http://code.google.com/apis/checkout/developer/index.html#merchant_calculations_specifying}
    */
-  class GoogleMerchantCalculatedShipping {
+  class Espresso_GoogleMerchantCalculatedShipping {
 
     var $price;
     var $name;
@@ -82,7 +82,7 @@
     /**
      * Adds a restriction to this shipping.
      * 
-     * @param GoogleShippingFilters $restrictions the shipping restrictions
+     * @param Espresso_GoogleShippingFilters $restrictions the shipping restrictions
      */
     function AddShippingRestrictions($restrictions) {
       $this->shipping_restrictions = $restrictions;
@@ -91,7 +91,7 @@
     /**
      * Adds an address filter to this shipping.
      * 
-     * @param GoogleShippingFilters $filters the address filters
+     * @param Espresso_GoogleShippingFilters $filters the address filters
      */
     function AddAddressFilters($filters) {
       $this->address_filters = $filters;
@@ -101,7 +101,7 @@
   /**
    * Represents carrier calculated shipping
    */
-  class GoogleCarrierCalculatedShipping {
+  class Espresso_GoogleCarrierCalculatedShipping {
 
     var $name;
     var $type = "carrier-calculated-shipping";
@@ -113,12 +113,12 @@
     /**
      * @param string $name the name of this shipping
      */
-    function GoogleCarrierCalculatedShipping($name) {
+    function Espresso_GoogleCarrierCalculatedShipping($name) {
       $this->name = $name;
     }
 
     /**
-     * @param GoogleCarrierCalculatedShippingOption $option the option to be 
+     * @param Espresso_GoogleCarrierCalculatedShippingOption $option the option to be 
      * added to the carrier calculated shipping
      */
     function addCarrierCalculatedShippingOptions($option){
@@ -126,7 +126,7 @@
     }
 
     /**
-     * @param GoogleShippingPackage $package
+     * @param Espresso_GoogleShippingPackage $package
      */
     function addShippingPackage($package){
 //      $this->ShippingPackages[] = $package; 
@@ -138,7 +138,7 @@
    * Represents a shipping method for which Google Checkout will obtain 
    * shipping costs for the order.
    */
-  class GoogleCarrierCalculatedShippingOption {
+  class Espresso_GoogleCarrierCalculatedShippingOption {
 
     var $price;
     var $shipping_company;
@@ -202,7 +202,7 @@
   /**
    * Represents an individual package that will be shipped to the buyer.
    */
-  class GoogleShippingPackage {
+  class Espresso_GoogleShippingPackage {
 
     var $width;
     var $length;
@@ -212,7 +212,7 @@
     var $delivery_address_category;
 
     /**
-     * @param GoogleShipFrom $ship_from where the package ships from
+     * @param Espresso_GoogleShipFrom $ship_from where the package ships from
      * @param double $width the width of the package
      * @param double $length the length of the package
      * @param double $height the height of the package
@@ -252,7 +252,7 @@
    * Represents the location from where packages will be shipped from.
    * Used with {@link GoogleShippingPackage}.
    */
-  class GoogleShipFrom {
+  class Espresso_GoogleShipFrom {
     var $id;
     var $city;
     var $country_code;
@@ -295,7 +295,7 @@
    * More info:
    * {@link http://code.google.com/apis/checkout/developer/index.html#tag_address-filters}
    */
-  class GoogleShippingFilters {
+  class Espresso_GoogleShippingFilters {
 
     var $allow_us_po_box = true;
 
@@ -514,7 +514,7 @@
    * 
    * GC tag: {@link http://code.google.com/apis/checkout/developer/index.html#tag_pickup} <pickup>
    */
-  class GooglePickUp {
+  class Espresso_GooglePickUp {
 
     var $price;
     var $name;

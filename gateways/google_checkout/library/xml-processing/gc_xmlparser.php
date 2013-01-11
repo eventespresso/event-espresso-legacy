@@ -78,7 +78,7 @@
   * any error during parsing 
   */
   // XML to Array
-  class gc_XmlParser {
+  class Espresso_gc_XmlParser {
 
     var $params = array(); //Stores the object representation of XML data
     var $root = NULL;

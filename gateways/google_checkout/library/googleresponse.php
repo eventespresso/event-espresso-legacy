@@ -27,7 +27,7 @@
   /**
    * Handles the response to notifications sent by the Google Checkout server.
    */
-  class GoogleResponse {
+  class Espresso_GoogleResponse {
     var $merchant_id;
     var $merchant_key;
     var $schema_url;
@@ -42,12 +42,12 @@
      * @param string $id the merchant id
      * @param string $key the merchant key
      */
-    function GoogleResponse($id=null, $key=null) {
+    function Espresso_GoogleResponse($id=null, $key=null) {
       $this->merchant_id = $id;
       $this->merchant_key = $key;
       $this->schema_url = "http://checkout.google.com/schema/2";
       require_once(dirname(__FILE__).'/googlelog.php');
-      $this->log = new GoogleLog('', '', L_OFF);
+      $this->log = new Espresso_GoogleLog('', '', L_OFF);
     }
 
     /**
@@ -60,7 +60,7 @@
     }
 
     function SetLogFiles($errorLogFile, $messageLogFile, $logLevel=L_ERR_RQST) {
-      $this->log = new GoogleLog($errorLogFile, $messageLogFile, $logLevel);
+      $this->log = new Espresso_GoogleLog($errorLogFile, $messageLogFile, $logLevel);
     }
 
     /**
@@ -215,7 +215,7 @@
         $this->response = $request;
         require_once(dirname(__FILE__).'/xml-processing/gc_xmlparser.php');
 
-        $this->xml_parser = new gc_XmlParser($request);
+        $this->xml_parser = new Espresso_gc_XmlParser($request);
         $this->root = $this->xml_parser->GetRoot();
         $this->data = $this->xml_parser->GetData();
       }

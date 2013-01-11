@@ -25,7 +25,7 @@
   /**
    * Generates xml data
    */
-  class gc_XmlBuilder {
+  class Espresso_gc_XmlBuilder {
     var $xml;
     var $indent;
     var $stack = array();

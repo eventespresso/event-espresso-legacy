@@ -26,7 +26,7 @@
   * More info: {@link http://code.google.com/apis/checkout/developer/index.html#understanding_merchant_calculation_results}
   */
   // refer to demo/responsehandler.php for generating these results
-  class GoogleMerchantCalculations {
+  class Espresso_GoogleMerchantCalculations {
      var $results_arr;
      var $currency;
      var $schema_url = "http://checkout.google.com/schema/2";
@@ -37,7 +37,7 @@
      * 
      * @return void
      */
-    function GoogleMerchantCalculations($currency = "USD") {
+    function Espresso_GoogleMerchantCalculations($currency = "USD") {
       $this->results_arr = array();
       $this->currency = $currency;
     }
@@ -45,7 +45,7 @@
     /**
      * Add a result of a merchant calculation to the response to be sent.
      * 
-     * @param GoogleResult $results the result of a particular merchant 
+     * @param Espresso_GoogleResult $results the result of a particular merchant 
      *                              calculation
      * @return void
      */
@@ -62,7 +62,7 @@
     function GetXML() {
       require_once(dirname(__FILE__).'/xml-processing/gc_xmlbuilder.php');
 
-      $xml_data = new gc_XmlBuilder();
+      $xml_data = new Espresso_gc_XmlBuilder();
       $xml_data->Push('merchant-calculation-results', 
           array('xmlns' => $this->schema_url));
       $xml_data->Push('results');

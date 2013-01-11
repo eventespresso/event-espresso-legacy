@@ -24,7 +24,7 @@
   * GC tag: {@link http://code.google.com/apis/checkout/developer/index.html#tag_result <result>}
   */
   // refer to demo/responsehandlerdemo.php for usage of this code
-  class GoogleResult {
+  class Espresso_GoogleResult {
     var $shipping_name;
     var $address_id;
     var $shippable;
@@ -39,7 +39,7 @@
      * @param integer $address_id the id of the anonymous address sent by 
      *                           Google Checkout.
      */
-    function GoogleResult($address_id) {
+    function Espresso_GoogleResult($address_id) {
       $this->address_id = $address_id;
     }
 

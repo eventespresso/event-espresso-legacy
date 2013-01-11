@@ -26,18 +26,18 @@
   * Send functions are provided for most of the commands that are supported
   * by the server for this code
   */
-  define('PHP_SAMPLE_CODE_VERSION', 'v1.3.0');
-  define('ENTER', "\r\n");
-  define('DOUBLE_ENTER', ENTER.ENTER);  
+  define('Espresso_PHP_SAMPLE_CODE_VERSION', 'v1.3.0');
+  define('Espresso_ENTER', "\r\n");
+  define('Espresso_DOUBLE_ENTER', Espresso_ENTER.Espresso_ENTER);  
   // Max size of the Google Messsage string
-  define('GOOGLE_MESSAGE_LENGTH', 254);
-  define('GOOGLE_REASON_LENGTH', 140);
+  define('Espresso_GOOGLE_MESSAGE_LENGTH', 254);
+  define('Espresso_GOOGLE_REASON_LENGTH', 140);
   
   /**
    * Send requests to the Google Checkout server to perform different actions
    */
   // refer demo/responsehandlerdemo.php for different use case scenarios 
-  class GoogleRequest {
+  class Espresso_GoogleRequest {
     var $merchant_id;
     var $merchant_key;
     var $currency;
@@ -65,7 +65,7 @@
      *                         , as of now values can be 'USD' or 'GBP'.
      *                         defaults to 'USD'
      */
-    function GoogleRequest($id, $key, $server_type="sandbox", $currency="USD") {
+    function Espresso_GoogleRequest($id, $key, $server_type="sandbox", $currency="USD") {
       $this->merchant_id = $id;
       $this->merchant_key = $key;
       $this->currency = $currency;
@@ -84,12 +84,12 @@
 
       ini_set('include_path', ini_get('include_path').PATH_SEPARATOR.'.');
       require_once(dirname(__FILE__).'/googlelog.php');
-      $this->log = new GoogleLog('', '', L_OFF);
+      $this->log = new Espresso_GoogleLog('', '', L_OFF);
       
     }
 
     function SetLogFiles($errorLogFile, $messageLogFile, $logLevel=L_ERR_RQST) {
-      $this->log = new GoogleLog($errorLogFile, $messageLogFile, $logLevel);
+      $this->log = new Espresso_GoogleLog($errorLogFile, $messageLogFile, $logLevel);
     }
     /**
      * Submit a SetCertificatePath request.
@@ -126,7 +126,7 @@
       } else {
         require_once(dirname(__FILE__).'/xml-processing/gc_xmlparser.php');
   
-        $xml_parser = new gc_xmlparser($body);
+        $xml_parser = new Espresso_gc_XmlParser($body);
         $root = $xml_parser->GetRoot();
         $data = $xml_parser->GetData();
         
@@ -248,10 +248,10 @@
                   <cancel-order xmlns=\"".$this->schema_url.
                   "\" google-order-number=\"". $google_order. "\">
                   <reason>".
-                    (substr(htmlentities(strip_tags($reason)),0,GOOGLE_REASON_LENGTH)) .
+                    (substr(htmlentities(strip_tags($reason)),0,Espresso_GOOGLE_REASON_LENGTH)) .
                   "</reason>
                   <comment>".
-                    (substr(htmlentities(strip_tags($comment)),0,GOOGLE_REASON_LENGTH)) .                   
+                    (substr(htmlentities(strip_tags($comment)),0,Espresso_GOOGLE_REASON_LENGTH)) .                   
                   "</comment>
                   </cancel-order>";
       return $this->SendReq($this->request_url, 
@@ -355,7 +355,7 @@
                   <send-buyer-message xmlns=\"". $this->schema_url . 
                   "\" google-order-number=\"". $google_order . "\">
                   <message>" . 
-            (substr(htmlentities(strip_tags($message)),0,GOOGLE_MESSAGE_LENGTH)) 
+            (substr(htmlentities(strip_tags($message)),0,Espresso_GOOGLE_MESSAGE_LENGTH)) 
                . "</message>
                   <send-email>" . strtolower($send_mail) . "</send-email>
                   </send-buyer-message>";     
@@ -568,10 +568,10 @@
       $postargs .= "</item-ids>";
       $postargs .= "<send-email>". strtolower($send_mail) . "</send-email>
                   <reason>".
-                    (substr(htmlentities(strip_tags($reason)),0,GOOGLE_REASON_LENGTH)) .
+                    (substr(htmlentities(strip_tags($reason)),0,Espresso_GOOGLE_REASON_LENGTH)) .
                   "</reason>
                   <comment>".
-                    (substr(htmlentities(strip_tags($comment)),0,GOOGLE_REASON_LENGTH)) .                   
+                    (substr(htmlentities(strip_tags($comment)),0,Espresso_GOOGLE_REASON_LENGTH)) .                   
                   "</comment>
                   </cancel-items>";
       return $this->SendReq($this->request_url, 
@@ -656,7 +656,7 @@
           $this->merchant_id.':'.$this->merchant_key);
       $headers[] = "Content-Type: application/xml; charset=UTF-8";
       $headers[] = "Accept: application/xml; charset=UTF-8";
-      $headers[] = "User-Agent: GC-PHP-Sample_code (" . PHP_SAMPLE_CODE_VERSION . "/ropu)";
+      $headers[] = "User-Agent: GC-PHP-Sample_code (" . Espresso_PHP_SAMPLE_CODE_VERSION . "/ropu)";
       return $headers; 
     }
     /**
@@ -755,9 +755,9 @@
      * @access private
      */
     function parse_headers($message) {
-      $head_end = strpos($message, DOUBLE_ENTER);
+      $head_end = strpos($message, Espresso_DOUBLE_ENTER);
       $headers = $this->get_headers_x(substr($message,0,
-                                             $head_end + strlen(DOUBLE_ENTER)));
+                                             $head_end + strlen(Espresso_DOUBLE_ENTER)));
       if(!is_array($headers) || empty($headers)){
         return null;
       }
@@ -767,7 +767,7 @@
       switch( $status_code[1] ) {
         case '200':
           $parsed = $this->parse_headers(substr($message,
-                                             $head_end + strlen(DOUBLE_ENTER)));
+                                             $head_end + strlen(Espresso_DOUBLE_ENTER)));
           return is_null($parsed)?$headers:$parsed;
         break;
         default:
@@ -780,7 +780,7 @@
      * @access private
      */
     function get_headers_x($heads, $format=0) {
-      $fp = explode(ENTER, $heads);
+      $fp = explode(Espresso_ENTER, $heads);
       foreach($fp as $header){
         if($header == "") {
           $eoheader = true;
@@ -808,12 +808,12 @@
      * @access private
      */
     function get_body_x($heads){
-      $fp = explode(DOUBLE_ENTER, $heads, 2);
+      $fp = explode(Espresso_DOUBLE_ENTER, $heads, 2);
       return $fp[1];
     }
   }
   
-class GoogleShipItem {
+class Espresso_GoogleShipItem {
   var $merchant_item_id;
   var $tracking_data_list;
   var $tracking_no;

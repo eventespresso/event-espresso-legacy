@@ -16,27 +16,27 @@
  */
  
   // Log levels
-  define("L_OFF", 0); // No log
-  define("L_ERR", 1); // Log Errors
-  define("L_RQST", 2); // Log Request from GC
-  define("L_RESP", 4); // Log Resoponse To Google
-  define("L_ERR_RQST", L_ERR | L_RQST);
-  define("L_ALL", L_ERR | L_RQST | L_RESP);
+  define("Espresso_L_OFF", 0); // No log
+  define("Espresso_L_ERR", 1); // Log Errors
+  define("Espresso_L_RQST", 2); // Log Request from GC
+  define("Espresso_L_RESP", 4); // Log Resoponse To Google
+  define("Espresso_L_ERR_RQST", Espresso_L_ERR | Espresso_L_RQST);
+  define("Espresso_L_ALL", Espresso_L_ERR | Espresso_L_RQST | Espresso_L_RESP);
  
-class GoogleLog {
+class Espresso_GoogleLog {
     
     var $errorLogFile;
     var $messageLogFile;
  // L_ALL (err+requests+responses), L_ERR, L_RQST, L_RESP, L_OFF    
-    var $logLevel = L_ERR_RQST;
+    var $logLevel = Espresso_L_ERR_RQST;
 
   /**
    * SetLogFiles
    */
-  function GoogleLog($errorLogFile, $messageLogFile, $logLevel=L_ERR_RQST, $die=true){
+  function Espresso_GoogleLog($errorLogFile, $messageLogFile, $logLevel=Espresso_L_ERR_RQST, $die=true){
     $this->logLevel = $logLevel;
-    if($logLevel == L_OFF) {
-      $this->logLevel = L_OFF;
+    if($logLevel == Espresso_L_OFF) {
+      $this->logLevel = Espresso_L_OFF;
     } else {
       if (!$this->errorLogFile = @fopen($errorLogFile, "a")) {
         header('HTTP/1.0 500 Internal Server Error');
@@ -47,7 +47,7 @@ class GoogleLog {
           die($log);
         }else {
           echo $log;
-          $this->logLevel = L_OFF;
+          $this->logLevel = Espresso_L_OFF;
         }
       }
       if (!$this->messageLogFile = @fopen($messageLogFile, "a")) {
@@ -60,7 +60,7 @@ class GoogleLog {
           die($log);
         }else {
           echo $log;
-          $this->logLevel = L_OFF;
+          $this->logLevel = Espresso_L_OFF;
         }
       }
     }
@@ -68,7 +68,7 @@ class GoogleLog {
   }
   
   function LogError($log){
-    if($this->logLevel & L_ERR){
+    if($this->logLevel & Espresso_L_ERR){
       fwrite($this->errorLogFile,
       sprintf("\n%s:- %s\n",date("D M j G:i:s T Y"),$log));
       return true;
@@ -77,7 +77,7 @@ class GoogleLog {
   }
   
   function LogRequest($log){
-    if($this->logLevel & L_RQST){
+    if($this->logLevel & Espresso_L_RQST){
       fwrite($this->messageLogFile,
        sprintf("\n%s:- %s\n",date("D M j G:i:s T Y"),$log));
        return true;
@@ -86,7 +86,7 @@ class GoogleLog {
   }
   
   function LogResponse($log) {
-    if($this->logLevel & L_RESP){
+    if($this->logLevel & Espresso_L_RESP){
       $this->LogRequest($log);
       return true;
     }

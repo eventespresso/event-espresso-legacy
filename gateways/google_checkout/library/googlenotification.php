@@ -2,7 +2,7 @@
  
 require_once('googlelog.php');
 
-class GoogleNotification {
+class Espresso_GoogleNotification {
   var $merchant_id;
   var $merchant_key;
   
@@ -23,7 +23,7 @@ class GoogleNotification {
   
   var $error;
 
-  function GoogleNotification($id, $key, $server_type="sandbox", $proxy=null) {
+  function Espresso_GoogleNotification($id, $key, $server_type="sandbox", $proxy=null) {
     $this->merchant_id = $id;
     $this->merchant_key = $key;
     $this->proxy = $proxy;
@@ -40,11 +40,11 @@ class GoogleNotification {
     $this->reports_url = $this->base_url . "reports/Merchant/" . 
                          $this->merchant_id;
 
-    $this->log = new GoogleLog('', '', L_OFF);
+    $this->log = new Espresso_GoogleLog('', '', L_OFF);
   }
   
   function setLogFiles($errorLogFile, $messageLogFile, $logLevel=L_ERR_RQST) {
-    $this->log = new GoogleLog($errorLogFile, $messageLogFile, $logLevel);
+    $this->log = new Espresso_GoogleLog($errorLogFile, $messageLogFile, $logLevel);
   }
   
   function getNotifications($start_date='', $end_date='', $orders=array(),
@@ -69,7 +69,7 @@ class GoogleNotification {
         return null;
       }
       //echo '<xmp>'; print_r($response); echo '</xmp>';
-      $xml_parser = new gc_XmlParser($response);
+      $xml_parser = new Espresso_gc_XmlParser($response);
       $data = $xml_parser->GetData();
       $root = $xml_parser->GetRoot();
       
@@ -82,7 +82,7 @@ class GoogleNotification {
   }
   
   function _doReportsRequest() {
-    $xml_data = new gc_XmlBuilder();
+    $xml_data = new Espresso_gc_XmlBuilder();
     $xml_data->Push('notification-history-request',
         array('xmlns' => $this->schema_url));
 
@@ -120,7 +120,7 @@ class GoogleNotification {
   
   function getError() {
     if($this->error[0] != 'CURLERR') {
-      $xml_parser = new gc_XmlParser($this->error[1]);
+      $xml_parser = new Espresso_gc_XmlParser($this->error[1]);
       $data = $xml_parser->GetData();
       $error = $data['error']['error-message']['VALUE'];
     } else {

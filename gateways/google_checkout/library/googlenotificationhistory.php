@@ -22,7 +22,7 @@
  *
  * refer to /demo/basicapiresponsehandlerdemo.php for a API V2.5 example.
  */
-  class GoogleNotificationHistoryRequest {
+  class Espresso_GoogleNotificationHistoryRequest {
      var $merchant_id;
      var $merchant_key;
      var $server_type;
@@ -35,7 +35,7 @@
     * @param string $key merchant Key
     * @param string $server_type server environment production or sandbox
     */ 
-    function GoogleNotificationHistoryRequest($id=null, $key=null, $server_type="sandbox"){
+    function Espresso_GoogleNotificationHistoryRequest($id=null, $key=null, $server_type="sandbox"){
      require_once('googlerequest.php');
      $this->merchant_id = $id;
      $this->merchant_key = $key;
@@ -89,7 +89,7 @@
      }
      $postargs .= "</notification-history-request>";
 
-     $Grequest = new GoogleRequest($this->merchant_id, $this->merchant_key, $this->server_type);
+     $Grequest = new Espresso_GoogleRequest($this->merchant_id, $this->merchant_key, $this->server_type);
      $Grequest->SetCertificatePath($cp);
      return $Grequest->SendReq($Grequest->GetReportUrl(), $Grequest->GetAuthenticationHeaders(), $postargs);
     }

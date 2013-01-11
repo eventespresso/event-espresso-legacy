@@ -28,7 +28,7 @@
   * The private-data and tax-selector for each item can be set in the 
   * constructor call or using individual Set functions
   */
-  class GoogleItem {
+  class Espresso_GoogleItem {
      
     var $item_name; 
     var $item_description;
@@ -61,7 +61,7 @@
      * @param double $numeric_weight the weight of the item
      * 
      */
-    function GoogleItem($name, $desc, $qty, $price, $item_weight='', $numeric_weight='') {
+    function Espresso_GoogleItem($name, $desc, $qty, $price, $item_weight='', $numeric_weight='') {
       $this->item_name = $name; 
       $this->item_description= $desc;
       $this->unit_price = $price;
@@ -162,7 +162,7 @@
   /**
     *  Sets the subscription item for the cart
     *
-    *   @param googlesubscription $sub the subscription item 
+    *   @param Espresso_GoogleSubscription $sub the subscription item 
     *   @return void
     */
     
@@ -189,7 +189,7 @@
     function GetXML(){
       require_once('xml-processing/gc_xmlbuilder.php');
       
-      $xml_data = new gc_XmlBuilder();
+      $xml_data = new Espresso_gc_XmlBuilder();
       $xml_data->Push('item');
       $xml_data->Element('item-name', $this->item_name);
       $xml_data->Element('item-description', $this->item_description);

@@ -22,7 +22,7 @@
  * The example for using this class can be found in demos/subscriptiondemo.php and
  * merchantsubscriptionrecurrencedemo.php
  */
- class GoogleSubscription{
+ class Espresso_GoogleSubscription{
  
  var $subscription_type;
  var $subscription_period;
@@ -41,9 +41,9 @@
  *    subscriptions
  *  @param int $times number of times the customer will be charged -- optional
  *  @param double $maximum maximum possible total for subscription period -- required
- *  @param googleitem $item recurrent-item to charge --optional for merchant handled
+ *  @param Espresso_GoogleItem $item recurrent-item to charge --optional for merchant handled
  */
-   function GoogleSubscription($type, $period, $maximum, $times='',  $item='') {
+   function Espresso_GoogleSubscription($type, $period, $maximum, $times='',  $item='') {
      $this->subscription_type = $type;
      $this->subscription_period = $period;
      $this->maximum_charge = $maximum;

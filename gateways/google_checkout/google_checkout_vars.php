@@ -24,15 +24,15 @@ function espresso_display_google_checkout($payment_data) {
 	$google_checkout_id = empty($google_checkout_settings['google_checkout_id']) ? '' : $google_checkout_settings['google_checkout_id'];
 	$google_checkout_key = empty($google_checkout_settings['google_checkout_key']) ? '' : $google_checkout_settings['google_checkout_key'];
 	//$google_checkout_cur = empty($google_checkout_settings['currency_format']) ? '' : $google_checkout_settings['currency_format'];
-	$use_sandbox = $google_checkout_settings['use_sandbox']?'sandbox':'production';
-	$gCart=new GoogleCart($google_checkout_id,$google_checkout_key,$use_sandbox);
+	$serverToUse = $google_checkout_settings['use_sandbox']?'sandbox':'production';
+	$gCart=new Espresso_GoogleCart($google_checkout_id,$google_checkout_key,$serverToUse);
 	$gCart->setMerchantPrivateData("attendee_id={$payment_data['attendee_id']},registration_id={$payment_data['registration_id']}");
 	do_action('action_hook_espresso_use_add_on_functions');
 	$items=espresso_google_checkout_get_items($attendee_id);
 	
 				
 	foreach ( $items as $key => $item ) {	
-		$gItem=new GoogleItem( $item->price_option,//name
+		$gItem=new Espresso_GoogleItem( $item->price_option,//name
 								$item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname,//description
 								$item->quantity,
 								$item->final_price);
@@ -47,13 +47,13 @@ function espresso_display_google_checkout($payment_data) {
 	}
 	$gCart->SetEditCartUrl( $home . '/?page_id=' . $org_options['event_page_id']);
 	$gCart->SetContinueShoppingUrl($home.'?page_id='.$org_options['return_url'].'&r_id=' . $payment_data['registration_id'].'&id='.$payment_data['attendee_id'].'&type=google_checkout');
-	if($payment_data['payment_status']=='Pending'){
+	if(array_key_exists('payment_status',$payment_data) && $payment_data['payment_status']=='Pending'){
 		_e("Your payment with Google Wallet is underway. It should take about 15 minutes for it to be verified and charged.","event_espresso");
 
 	}else{
 		echo $gCart->CheckoutButtonCode("SMALL");
 	}
-	if ($use_sandbox) {
+	if ($google_checkout_settings['use_sandbox']) {
 		echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Google Checkout Debug Mode Is Turned On', 'event_espresso') . '</h3>';
 	}
 }

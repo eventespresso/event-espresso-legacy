@@ -23,12 +23,12 @@
   /**
    * Represents a tax rule
    * 
-   * @see GoogleDefaultTaxRule
-   * @see GoogleAlternateTaxRule
+   * @see Espresso_GoogleDefaultTaxRule
+   * @see Espresso_GoogleAlternateTaxRule
    * 
    * @abstract
    */
-  class GoogleTaxRule {
+  class Espresso_GoogleTaxRule {
 
     var $tax_rate;
 
@@ -84,11 +84,11 @@
    * 
    * GC tag: {@link http://code.google.com/apis/checkout/developer/index.html#tag_default-tax-rule <default-tax-rule>}
    */
-  class GoogleDefaultTaxRule extends GoogleTaxRule {
+  class Espresso_GoogleDefaultTaxRule extends Espresso_GoogleTaxRule {
 
     var $shipping_taxed = false;
 
-    function GoogleDefaultTaxRule($tax_rate, $shipping_taxed = "false") {
+    function Espresso_GoogleDefaultTaxRule($tax_rate, $shipping_taxed = "false") {
       $this->tax_rate = $tax_rate;
       $this->shipping_taxed= $shipping_taxed;
 
@@ -104,9 +104,9 @@
    * 
    * GC tag: {@link http://code.google.com/apis/checkout/developer/index.html#tag_alternate-tax-rule <alternate-tax-rule>}
    */
-  class GoogleAlternateTaxRule extends GoogleTaxRule {
+  class Espresso_GoogleAlternateTaxRule extends Espresso_GoogleTaxRule {
 
-    function GoogleAlternateTaxRule($tax_rate) {
+    function Espresso_GoogleAlternateTaxRule($tax_rate) {
       $this->tax_rate = $tax_rate;
 
       $this->country_codes_arr = array();
@@ -123,13 +123,13 @@
    * 
    * GC tag: {@link http://code.google.com/apis/checkout/developer/index.html#tag_alternate-tax-table <alternate-tax-table>}
    */
-  class GoogleAlternateTaxTable {
+  class Espresso_GoogleAlternateTaxTable {
 
     var $name;
     var $tax_rules_arr;
     var $standalone;
 
-    function GoogleAlternateTaxTable($name = "", $standalone = "false") {
+    function Espresso_GoogleAlternateTaxTable($name = "", $standalone = "false") {
       if($name != "") {
         $this->name = $name;
         $this->tax_rules_arr = array();

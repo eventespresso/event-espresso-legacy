@@ -22,7 +22,7 @@
   /**
    * Polls for notifications
    */
-  class GooglePoll {
+  class Espresso_GooglePoll {
 	
 	var $continue_token;
 	var $get_all_notifications = true;
@@ -47,7 +47,7 @@
 	 * Inputs are: merchant id, merchant key, environment (default 'sandbox')
 	 * and a continue-token (from a ContinueTokenRequest)
 	 */
-	function GooglePoll ($id, $key, $env, $contToken, $cp = null) {
+	function Espresso_GooglePoll ($id, $key, $env, $contToken, $cp = null) {
 		$this->merchant_id = $id;
 		$this->merchant_key = $key;
 		$this->environment = $env;
@@ -86,7 +86,7 @@
 
 		//create GRequest object + post xml (googlecart.php line: 962)
 		require_once('library/googlerequest.php');
-		$GRequest = new GoogleRequest($this->merchant_id, $this->merchant_key);
+		$GRequest = new Espresso_GoogleRequest($this->merchant_id, $this->merchant_key);
 		$GRequest->SetCertificatePath($this->certificate_path);
 
 		while($this->has_more_notifications == "true") {
@@ -120,7 +120,7 @@
 	 */
 	function ExtractNotifications () {
 		require_once('xml-processing/gc_xmlparser.php');
-		$GXmlParser = new gc_XmlParser($this->poll_result[1]);
+		$GXmlParser = new Espresso_gc_XmlParser($this->poll_result[1]);
 			$data = $GXmlParser->GetData();
 			//Get the actual notifications
 			foreach($data['notification-data-response']['notifications'] as $notification) {
@@ -135,7 +135,7 @@
 	 */
 	function GetPollRequestXML() {
 		require_once('xml-processing/gc_xmlbuilder.php');
-		$xml_data = new gc_XmlBuilder();
+		$xml_data = new Espresso_gc_XmlBuilder();
 		
 		$xml_data->Push('notification-data-request',
           		array('xmlns' => $this->schema_url));
@@ -194,7 +194,7 @@
 		
 		//create GRequest object + post xml (googlecart.php line: 962)
 		require_once('library/googlerequest.php');
-		$GRequest = new GoogleRequest($this->merchant_id, $this->merchant_key);
+		$GRequest = new Espresso_GoogleRequest($this->merchant_id, $this->merchant_key);
 		/*---------------------------------------------------------------------------------------------------*/
 		$GRequest->SetCertificatePath($this->certificate_path);
 
@@ -204,7 +204,7 @@
 		//Check response code
 		if($this->token_response_xml[0] == "200") {
 			require_once('xml-processing/gc_xmlparser.php');
-			$GXmlParser = new gc_XmlParser($this->token_response_xml[1]);
+			$GXmlParser = new Espresso_gc_XmlParser($this->token_response_xml[1]);
 			$data = $GXmlParser->GetData();
 
 			$this->continue_token = $data['notification-data-token-response']['continue-token']['VALUE'];
@@ -215,7 +215,7 @@
 	}
 	function GetTokenRequestXML() {
 		require_once('xml-processing/gc_xmlbuilder.php');
-		$xml_data = new gc_XmlBuilder();
+		$xml_data = new Espresso_gc_XmlBuilder();
 		
 		$xml_data->Push('notification-data-token-request',
           		array('xmlns' => $this->schema_url));

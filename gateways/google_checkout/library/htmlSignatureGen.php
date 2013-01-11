@@ -22,7 +22,7 @@
   /**
    * Generates a shopping cart signature for an HTML shopping cart
    */
-  class HtmlSignatureGen {
+  class Espresso_HtmlSignatureGen {
 	var $html_param_names = array();
 	var $html_param_values = array();
 	var $merchant_key;

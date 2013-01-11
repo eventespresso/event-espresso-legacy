@@ -31,7 +31,7 @@ function espresso_google_parse_private_data($privateDataString) {
  */
 function espresso_google_checkout_get_attendee_and_registration_id() {
 	if(isset($_GET['r_id']) && isset($_GET['id'])){
-		return array('attendee_id'=>$GET['id'], 'registration_id'=>$_GET['r_id']);
+		return array('attendee_id'=>$_GET['id'], 'registration_id'=>$_GET['r_id']);
 	}
 	list($root, $data) = espresso_google_checkout_get_response();
 	if (isset($data) && isset($data[$root]) && isset($data[$root]['order-summary']) && 
@@ -81,7 +81,7 @@ function espresso_google_checkout_get_response() {
 	$google_checkout_id = empty($google_checkout_settings['google_checkout_id']) ? '' : $google_checkout_settings['google_checkout_id'];
 	$google_checkout_key = empty($google_checkout_settings['google_checkout_key']) ? '' : $google_checkout_settings['google_checkout_key'];
 	$use_sandbox = $google_checkout_settings['use_sandbox'] ? 'sandbox' : 'production';
-	$gResponse = new GoogleResponse($google_checkout_id, $google_checkout_key);
+	$gResponse = new Espresso_GoogleResponse($google_checkout_id, $google_checkout_key);
 	$gResponse->SetLogFiles('google_checkout_error_logs', 'google_checkout_notice_logs', L_ON);  //Change this to L_ON to log
 	$fakeData=false;
 	if($fakeData){
@@ -186,7 +186,7 @@ HEREDOC;
 			$serial_number = $serial_array["serial-number"];
 			if (isset($serial_number)) {
 				$debugInfoMsg.="\n\nthey sent us a serial code\n\n";
-				$gRequest = new GoogleNotificationHistoryRequest($google_checkout_id, $google_checkout_key, $use_sandbox);
+				$gRequest = new Espresso_GoogleNotificationHistoryRequest($google_checkout_id, $google_checkout_key, $use_sandbox);
 				$sleepTime = 0;
 				do {
 					$raw_xml_array = $gRequest->SendNotificationHistoryRequest($serial_number);
@@ -263,7 +263,7 @@ function espresso_process_google_checkout_ipn($payment_data) {
 
 					$google_order_number = $data[$root]['google-order-number']['VALUE'];
 					//$tracking_data = array("Z12345" => "UPS", "Y12345" => "Fedex");
-					$GChargeRequest = new GoogleRequest($google_checkout_id, $google_checkout_key, $use_sandbox);
+					$GChargeRequest = new Espresso_GoogleRequest($google_checkout_id, $google_checkout_key, $use_sandbox);
 					//$GRequest->SetCertificatePath($certificate_path);
 					//$GChargeRequest->SendChargeAndShipOrder($google_order_number, $tracking_data);
 					list($status, $response) = $GChargeRequest->SendChargeOrder($google_order_number);
@@ -333,7 +333,8 @@ function espresso_process_google_checkout_done_payment($payment_data){
  */
 
 function espresso_google_run_transaction_code_before_shortcode() {
-	if($_REQUEST['type']=='google_checkout' && $_REQUEST['ipn']=='true'){
+	if(array_key_exists('type',$_REQUEST) && array_key_exists('ipn',$_REQUEST) && 
+			$_REQUEST['type']=='google_checkout' && $_REQUEST['ipn']=='true'){
 		event_espresso_require_gateway("process_payments.php");
 	
 		$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');

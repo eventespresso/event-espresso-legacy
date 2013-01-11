@@ -20,14 +20,14 @@
  * @version $Id: googlecart.php 1234 2007-09-25 14:58:57Z ropu $
  */
 
-  define('MAX_DIGITAL_DESC', 1024);
+  define('Espresso_MAX_DIGITAL_DESC', 1024);
   
  /**
   * Creates a Google Checkout shopping cart and posts it 
   * to the google checkout sandbox or production environment
   * Refer demo/cartdemo.php for different use case scenarios for this code
   */
-  class GoogleCart {
+  class Espresso_GoogleCart {
     var $merchant_id;
     var $merchant_key;
     var $variant = false;
@@ -120,7 +120,7 @@
      *                         , as of now values can be 'USD' or 'GBP'.
      *                         defaults to 'USD'
 		 */
-    function GoogleCart($id, $key, $server_type="sandbox", $currency="USD") {
+    function Espresso_GoogleCart($id, $key, $server_type="sandbox", $currency="USD") {
       $this->merchant_id = $id;
       $this->merchant_key = $key;
       $this->currency = $currency;
@@ -166,7 +166,7 @@
      * 
      * GC tag: {@link http://code.google.com/apis/checkout/developer/index.html#tag_merchant-private-data <merchant-private-data>}
      * 
-     * @param MerchantPrivateData $data an object which contains the data to be 
+     * @param Espresso_MerchantPrivateData $data an object which contains the data to be 
      *                                  sent as merchant-private-data
      * 
      * @return void
@@ -244,7 +244,7 @@
      * 
      * GC tag: {@link http://code.google.com/apis/checkout/developer/index.html#tag_item <item>}
      * 
-     * @param GoogleItem $google_item an object that represents an item 
+     * @param Espresso_GoogleItem $google_item an object that represents an item 
      *                                (defined in googleitem.php)
      * 
      * @return void
@@ -272,7 +272,7 @@
      * 
      * GC tag: {@link http://code.google.com/apis/checkout/developer/index.html#tag_default-tax-rule <default-tax-rule>}
      * 
-     * @param GoogleDefaultTaxRule $rules an object that represents a default
+     * @param Espresso_GoogleDefaultTaxRule $rules an object that represents a default
      *                                    tax rule (defined in googletax.php)
      * 
      * @return void
@@ -287,7 +287,7 @@
      * 
      * GC tag: {@link http://code.google.com/apis/checkout/developer/index.html#tag_alternate-tax-table <alternate-tax-table>}
      * 
-     * @param GoogleAlternateTaxTable $tax an object that represents an 
+     * @param Espresso_GoogleAlternateTaxTable $tax an object that represents an 
      *                                     alternate tax table 
      *                                     (defined in googletax.php)
      * 
@@ -399,7 +399,7 @@
     function GetXML() {
       require_once(dirname(__FILE__).'/xml-processing/gc_xmlbuilder.php');
 
-      $xml_data = new gc_XmlBuilder();
+      $xml_data = new Espresso_gc_XmlBuilder();
 
       $xml_data->Push('checkout-shopping-cart',
           array('xmlns' => $this->schema_url));
@@ -447,7 +447,7 @@
           $xml_data->Push('digital-content');
           if(!empty($item->digital_url)) {
             $xml_data->Element('description', substr($item->digital_description,
-                                                          0, MAX_DIGITAL_DESC));
+                                                          0, Espresso_MAX_DIGITAL_DESC));
             $xml_data->Element('url', $item->digital_url);
 //            To avoid NULL key message in GC confirmation Page
             if(!empty($item->digital_key)) {
@@ -455,7 +455,7 @@
             }
           }
           else if(!empty($item->digital_description)) {
-            $xml_data->element('description', substr($item->digital_description, 0,MAX_DIGITAL_DESC));
+            $xml_data->element('description', substr($item->digital_description, 0,Espresso_MAX_DIGITAL_DESC));
           }
           else {
             $xml_data->Element('email-delivery', 
@@ -511,7 +511,7 @@
                 $xml_data->Push('digital-content');
                 if(!empty($recurrent_item->digital_url)) {
                   $xml_data->Element('description', substr($recurrent_item->digital_description,
-                                                                0, MAX_DIGITAL_DESC));
+                                                                0, Espresso_MAX_DIGITAL_DESC));
                   $xml_data->Element('url', $recurrent_item->digital_url);
               //            To avoid NULL key message in GC confirmation Page
                   if(!empty($recurrent_item->digital_key)) {
@@ -519,7 +519,7 @@
                   }
                 }
                 else if(!empty($item->digital_description)) {
-                  $xml_data->element('description', substr($item->digital_description, 0,MAX_DIGITAL_DESC));
+                  $xml_data->element('description', substr($item->digital_description, 0,Espresso_MAX_DIGITAL_DESC));
                 }
                 else {
                   $xml_data->Element('email-delivery', 
@@ -1031,7 +1031,7 @@
      */
     function CheckoutServer2Server($proxy=array(), $certPath='') {
       require_once(dirname(__FILE__).'/googlerequest.php');
-      $GRequest = new GoogleRequest($this->merchant_id, 
+      $GRequest = new Espresso_GoogleRequest($this->merchant_id, 
                       $this->merchant_key, 
                       $this->server_url=="https://checkout.google.com/"?
                                                          "Production":"sandbox",
@@ -1382,7 +1382,7 @@
 
         $request = $this->GetXML();
         require_once(dirname(__FILE__).'/xml-processing/gc_xmlparser.php');
-        $xml_parser = new gc_xmlparser($request);
+        $xml_parser = new Espresso_gc_XmlParser($request);
         $root = $xml_parser->GetRoot();
         $XMLdata = $xml_parser->GetData();
         $this->xml2html($XMLdata[$root], '', $data);
@@ -1594,10 +1594,10 @@
    * 
    * GC tag: {@link http://code.google.com/apis/checkout/developer/index.html#tag_merchant-private-data <merchant-private-data>}
    */
-  class MerchantPrivate {
+  class Espresso_MerchantPrivate {
     var $data;
     var $type = "Abstract";
-    function MerchantPrivate() {
+    function Espresso_MerchantPrivate() {
     }
     
     function AddMerchantPrivateToXML(&$xml_data) {
@@ -1633,7 +1633,7 @@
    * 
    * GC tag: {@link http://code.google.com/apis/checkout/developer/index.html#tag_merchant-private-data <merchant-private-data>}
    */
-  class MerchantPrivateData extends MerchantPrivate {
+  class Espresso_MerchantPrivateData extends Espresso_MerchantPrivate {
     /**
      * @param mixed $data a string with the data that will go in the 
      *                    merchant-private-data tag or an array that will
@@ -1649,7 +1649,7 @@
      *                      </stuff>
      *                    </my-order-id>
      */
-    function MerchantPrivateData($data = array()) {
+    function Espresso_MerchantPrivateData($data = array()) {
       $this->data = $data;
       $this->type = 'merchant-private-data';
     }
@@ -1660,7 +1660,7 @@
    * 
    * GC tag: {@link http://code.google.com/apis/checkout/developer/index.html#tag_merchant-private-item-data <merchant-private-data>}
    */
-  class MerchantPrivateItemData extends MerchantPrivate {
+  class Espresso_MerchantPrivateItemData extends Espresso_MerchantPrivate {
     /**
      * @param mixed $data a string with the data that will go in the 
      *                    merchant-private-item-data tag or an array that will
