@@ -35,7 +35,7 @@ function espresso_display_worldpay($payment_data) {
 			} else {
 				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/worldpay/worldpay-logo.png";
 			}
-		} elseif (file_exists($worldpay_settings['button_url'])) {
+		} elseif (isset($worldpay_settings['button_url'])) {
 			$button_url = $worldpay_settings['button_url'];
 		} else {
 			//If no other buttons exist, then use the default location

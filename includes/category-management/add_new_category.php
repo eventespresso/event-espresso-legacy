@@ -40,7 +40,7 @@ function add_new_event_category() {
 									<?php _e('Use Color Pickers', 'event_espresso'); ?>
 								</label>
 							</th>
-							<td><?php echo select_input('use_pickers', $values, isset($category_meta['use_pickers']) && !empty($category_meta['use_pickers']) ? $category_meta['use_pickers'] : '', 'id="espresso_use_pickers"'); ?></td>
+							<td><?php echo select_input('use_pickers', $values, '', 'id="espresso_use_pickers"'); ?></td>
 						</tr>
 						<tr class="color-picker-selections">
 							<th class="color-picker-style">

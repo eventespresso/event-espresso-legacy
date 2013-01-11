@@ -464,10 +464,15 @@ function update_event($recurrence_arr = array()) {
                     $price_type = $_REQUEST['price_type'][$k] != '' ? $_REQUEST['price_type'][$k] : __('General Admission', 'event_espresso');
                     $member_price_type = !empty($_REQUEST['member_price_type'][$k]) ? $_REQUEST['member_price_type'][$k] : __('Members Admission', 'event_espresso');
                     $member_price = !empty($_REQUEST['member_price'][$k]) ? $_REQUEST['member_price'][$k] : $v;
-                    $sql_prices = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, surcharge_type, price_type, member_price, member_price_type) VALUES ('" . $event_id . "', '" . $v . "', '" . $_REQUEST['surcharge'][$k] . "', '" . $_REQUEST['surcharge_type'][$k] . "', '" . $price_type . "', '" . $member_price . "', '" . $member_price_type . "')";
+                    //$sql_prices = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, surcharge_type, price_type, member_price, member_price_type) VALUES ('" . $event_id . "', '" . $v . "', '" . $_REQUEST['surcharge'][$k] . "', '" . $_REQUEST['surcharge_type'][$k] . "', '" . $price_type . "', '" . $member_price . "', '" . $member_price_type . "')";
                     //echo "$sql_prices <br>";
                     //wpdb->insert($sql_prices);
-					$wpdb->query($wpdb->prepare($sql_prices, array()) );
+					$sql_price = array('event_id' => $event_id, 'event_cost' => $v, 'surcharge' => $_REQUEST['surcharge'][$k], 'surcharge_type' => $_REQUEST['surcharge_type'][$k], 'price_type' => $price_type, 'member_price' => $member_price, 'member_price_type' => $member_price_type );
+					$sql_price_data = array('%d', '%s', '%s', '%s', '%s', '%s', '%s');
+					
+					if ( !$wpdb->insert(EVENTS_PRICES_TABLE, $sql_price, $sql_price_data) ) {
+                        $error = true;
+                    }
                 }
             }
         } else {
