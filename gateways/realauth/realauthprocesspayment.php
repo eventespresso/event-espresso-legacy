@@ -37,5 +37,6 @@ function espresso_process_realauth($payment_data) {
 		var_dump($_REQUEST);
 		//wp_mail($payment_data['contact'], $subject, $body);
 	}
-	return $payment_data;
+	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+    return $payment_data;
 }
