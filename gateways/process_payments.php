@@ -138,6 +138,10 @@ function espresso_prepare_event_link($payment_data) {
 
 add_filter('filter_hook_espresso_prepare_event_link', 'espresso_prepare_event_link');
 
+
+
+
+
 function event_espresso_txn() {
 
 	ob_start();
@@ -187,6 +191,10 @@ function event_espresso_txn() {
 	return $espresso_content;
 	
 }
+
+
+
+
 
 function deal_with_ideal() {
 	if (!empty($_POST['bank_id'])) {
