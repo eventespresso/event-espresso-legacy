@@ -104,14 +104,6 @@ if (empty($org_options['event_page_id'])) {
 //Registration page check
 //From Brent C. http://events.codebasehq.com/projects/event-espresso/tickets/99
 $this_is_a_reg_page = FALSE;
-$espresso_events = TRUE;
-
-//$reg_page_ids = array(
-//		'event_page_id' => $org_options['event_page_id'],
-//		'return_url' => $org_options['return_url'],
-//		'cancel_return' => $org_options['cancel_return'],
-//		'notify_url' => $org_options['notify_url']
-//);
 
 
 if (is_ssl()) {
