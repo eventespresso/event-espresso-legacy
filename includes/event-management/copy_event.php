@@ -26,13 +26,6 @@ function copy_event( $recurrence_array = array() ){
 				'end_date'						=> $event->end_date, 
 				'registration_start'			=> $event->registration_start, 
 				'registration_end'			=> $event->registration_end, 
-//				'start_date'						=> array_key_exists( 'start_date', $recurrence_array ) ? $recurrence_array['start_date'] : $event->start_date, 
-//				'end_date'						=> array_key_exists( 'end_date', $recurrence_array ) ? $recurrence_array['end_date'] : $event->end_date, 
-//				'registration_start'			=> array_key_exists( 'registration_start', $recurrence_array ) ? $recurrence_array['registration_start'] : $event->registration_start, 
-//				'registration_end'			=> array_key_exists( 'registration_end', $recurrence_array ) ? $recurrence_array['registration_end'] : $event->registration_end, 
-				
-//				'registration_startT' 		=> array_key_exists( 'registration_startT', $recurrence_array ) ? $recurrence_array['registration_startT'] : $event->registration_startT, 
-//				'registration_endT' 		=> array_key_exists( 'registration_endT', $recurrence_array ) ? $recurrence_array['registration_endT'] : $event->registration_endT, 
 				'registration_startT' 		=> $event->registration_startT, 
 				'registration_endT' 		=> $event->registration_endT, 
 				'phone'							=> $event->phone, 
@@ -69,7 +62,16 @@ function copy_event( $recurrence_array = array() ){
 				'require_pre_approval' 	=> $event->require_pre_approval, 
 				'timezone_string' 			=> $event->timezone_string, 
 				'submitted' 					=> date('Y-m-d H:i:s', time()), 
-				'ticket_id' 						=> $event->ticket_id
+				'ticket_id' 						=> $event->ticket_id,
+				
+				//Legacy venue information
+				'address' => $event->address, 
+				'address2' => $event->address2, 
+				'city' => $event->city, 
+				'state' => $event->state, 
+				'zip' => $event->zip, 
+				'country' => $event->country, 
+				'phone' => $event->phone
 
 		);
 		
@@ -77,8 +79,10 @@ function copy_event( $recurrence_array = array() ){
 				'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', 
 				'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', 
 				'%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s', 
-				'%s', '%s', '%s', '%s', '%d', '%d', '%d', '%s', '%s', '%d', 
-				'%d', '%s', '%s', '%d'		
+				'%s', '%s', '%s', '%s', '%d', '%d', '%d', 
+				'%s', '%s', '%d',//wp_user
+				'%d', '%s', '%s', '%d',//Ticket id
+				'%s', '%s', '%s', '%s', '%s', '%s', '%s',//Legacy venue
 		);
 		
 	}
@@ -187,25 +191,6 @@ function copy_event( $recurrence_array = array() ){
 		}
 
 
-/*		static $counter = 1;
-        if ( count( $recurrence_array ) > 0 ) {             
-            //$recurrence_dates = array_shift($recurrence_dates); //Remove the first item from the array since it will be added after this recursion
-            foreach ( $recurrence_array as $recurrence ){
-                copy_event(
-                        array(
-                            'event_id'     			=>$event_id,
-                            'recurrence_id'     	=>$event->recurrence_id,
-                            'start_date'        		=>$recurrence['start_date'],
-                            'end_date'        		=>$recurrence['end_date'],
-                            'registration_start'	=>$recurrence['registration_start'],
-                            'registration_end'  	=>$recurrence['registration_end']
-                        ));
-                $counter ++;
-                if ($counter >20) exit();
-            }
-        }*/
-		// End recursion, as part of recurring events.
-			
 	} else {
 		$error[] = __('An error occured. The venue  was not saved.','event_espresso'); 
 	}

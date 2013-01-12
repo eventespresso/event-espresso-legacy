@@ -1,6 +1,6 @@
 <?php
 
-class Espresso_Stripe_Invoice extends Espresso_Stripe_ApiResource
+class Stripe_Invoice extends Stripe_ApiResource
 {
   public static function constructFrom($values, $apiKey=null)
   {
@@ -22,9 +22,9 @@ class Espresso_Stripe_Invoice extends Espresso_Stripe_ApiResource
 
   public static function upcoming($params=null, $apiKey=null)
   {
-    $requestor = new Espresso_Stripe_ApiRequestor($apiKey);
+    $requestor = new Stripe_ApiRequestor($apiKey);
     $url = self::classUrl(get_class()) . '/upcoming';
     list($response, $apiKey) = $requestor->request('get', $url, $params);
-    return Espresso_Stripe_Util::convertToStripeObject($response, $apiKey);
+    return Stripe_Util::convertToStripeObject($response, $apiKey);
   }
 }
