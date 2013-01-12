@@ -12,7 +12,7 @@
  * @package    AuthorizeNet
  * @subpackage AuthorizeNetXML
  */
-class AuthorizeNetXMLResponse
+class Espresso_AuthorizeNetXMLResponse
 {
 
     public $xml; // Holds a SimpleXML Element with response.

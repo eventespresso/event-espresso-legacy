@@ -781,14 +781,14 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 			<div class="mer-event-submit ui-widget-content ui-corner-all">
 				<input type="submit" class="submit btn_event_form_submit ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" name="payment_page" value="<?php _e('Confirm and go to payment page', 'event_espresso'); ?>&nbsp;&raquo;" /><br/>
 				<span style="padding-left:20px"> - <?php _e('or', 'event_espresso'); ?> - </span>
+			</div>
+		</div>
 		<?php } ?> 
 				<!--<p id="event_espresso_edit_cart">-->
 					<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=show_shopping_cart" class="btn_event_form_submit inline-link">
 						<?php _e('Edit Cart', 'event_espresso'); ?>
 					</a> 
 				<!--</p>-->
-			</div>
-		</div>
 		
 	</form>
 </div>
@@ -1173,25 +1173,18 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 							?></td>
 		<td class="selection">
 			<?php		
-				if ($result->allow_multiple == 'Y') {
+				$attendee_limit = 1;
+				$att_qty = empty($_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['attendee_quantity']) ? '' : $_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['attendee_quantity'];
 				
+				if ($result->allow_multiple == 'Y') {			
 					$attendee_limit = $result->additional_limit;
-
 					if ($available_spaces != 'Unlimited') {
 						$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
-					}		
-									
-					$att_qty = empty($_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['attendee_quantity']) ? '' : $_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['attendee_quantity'];
-					
-					event_espresso_multi_qty_dd( $event_id, $result->id,  $attendee_limit, $att_qty );
-				
-				} else {
-
-					$checked = (($wpdb->num_rows == 1) || (array_key_exists($result->id, $_SESSION['espresso_session']['events_in_session'][$event_id]['price_id']) && isset($_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['attendee_quantity']))) ? ' checked="checked"' : '';
-			?>
-			<input type="radio" class="price_id" name="price_id[<?php echo $event_id; ?>]" <?php echo $checked; ?> value="<?php echo $result->id; ?>" />
-			<?php
+					}
 				}
+					
+				event_espresso_multi_qty_dd( $event_id, $result->id,  $attendee_limit, $att_qty );
+				
 			?>
 		</td>
 	</tr>

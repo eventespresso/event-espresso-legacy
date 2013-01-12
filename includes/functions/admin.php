@@ -963,7 +963,7 @@ function event_espresso_custom_email_info() {
 				<p>
 					<?php _e('For customized confirmation emails, the following tags can be placed in the email form and they will pull data from the database to include in the email.', 'event_espresso'); ?>
 				</p>
-				<p>[registration_id], [fname], [lname], [phone], [edit_attendee_link], [event], [event_link], [event_url], [ticket_type], [ticket_link], [qr_code], [description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [invoice_link], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link], [venue_title], [venue_address], [venue_url], [venue_image], [venue_phone], [custom_questions]</p>
+				<p>[registration_id], [fname], [lname], [phone], [edit_attendee_link], [event], [event_link], [event_url], [ticket_type], [ticket_link], [qr_code], [description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [invoice_link], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link], [venue_title], [venue_address], [venue_url], [venue_image], [venue_phone], [custom_questions], [seating_tag]</p>
 			</div>
 		</div>
 	</div>
@@ -1347,6 +1347,30 @@ function espresso_performance($visible = false) {
 }
 
 add_action('wp_footer', 'espresso_performance', 20);
+
+function espresso_files_in_uploads($visible = false) {
+	// Create recursive dir iterator which skips dot folders
+	$dir = new RecursiveDirectoryIterator(EVENT_ESPRESSO_TEMPLATE_DIR,FilesystemIterator::SKIP_DOTS);
+
+	// Flatten the recursive iterator, folders come before their files
+	$it  = new RecursiveIteratorIterator($dir,RecursiveIteratorIterator::SELF_FIRST);
+
+	// Maximum depth is 1 level deeper than the base folder
+	$it->setMaxDepth(1);
+	
+	$file = '';
+	// Basic loop displaying different messages based on file or folder
+	foreach ($it as $fileinfo) {
+		if ($fileinfo->isDir()) {
+			$file .= sprintf("Folder - %s\n", $fileinfo->getFilename());
+		} elseif ($fileinfo->isFile()) {
+			$file .= sprintf("File %s - %s\n", $it->getSubPath(), $fileinfo->getFilename());
+		}
+	}
+	//echo "<!-- {$file} -->";
+	echo $visible ? $stat : "\n<!--\nEvent Espresso Template Files:\r\n{$file}-->\n";
+}
+add_action('wp_footer', 'espresso_files_in_uploads', 20);
 
 function espresso_admin_performance($show = 0) {
 	if ($show == 0)

@@ -381,6 +381,12 @@ div.tablenav {
 	min-height: 30px;
 	height: auto;
 }
+
+div.ee_tablenav .actions select {
+	float:none !important;
+}
+
+
 /*** Add new events / Edit events ***/
 .remove-item {
 	cursor: pointer;

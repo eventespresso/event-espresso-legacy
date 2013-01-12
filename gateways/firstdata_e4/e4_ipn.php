@@ -10,7 +10,7 @@ function espresso_transactions_firstdata_e4_get_attendee_id($attendee_id) {
 function espresso_process_firstdata_e4($payment_data) {
 	include_once ('FirstDataE4.php');
 
-	$myE4 = new E4();
+	$myE4 = new Espresso_E4();
 
 	echo '<!--Event Espresso Exact.com Gateway Version ' . $myE4->gateway_version . '-->';
 // Log the IPN results

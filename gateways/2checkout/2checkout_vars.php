@@ -5,7 +5,7 @@ function espresso_display_2checkout($payment_data) {
 // Setup class
 	include_once ('2checkout.php');
 	echo '<!-- Event Espresso 2Checkout Gateway Version ' . $twocheckout_gateway_version . '-->';
-	$my2checkout = new TwoCo(); // initiate an instance of the class
+	$my2checkout = new Espresso_TwoCo(); // initiate an instance of the class
 	global $org_options, $wpdb;
 //global $attendee_id;
 	$twocheckout_settings = get_option('event_espresso_2checkout_settings');

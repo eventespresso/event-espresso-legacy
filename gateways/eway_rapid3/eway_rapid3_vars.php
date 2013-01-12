@@ -27,7 +27,7 @@ function espresso_display_eway_rapid3($data) {
 		require_once('includes/EWayRapid3Client.class.php');
 		$payment_data=espresso_gateway_get_payment_data($data['registration_id']);
 		//var_dump($payment_data);
-		$rapid3Client=new EWayRapid3Client(
+		$rapid3Client=new Espresso_EWayRapid3Client(
 			array(
 				'apiKey'=>$eway_rapid3_settings['eway_rapid3_api_key'],
 				'apiPassword'=>$eway_rapid3_settings['eway_rapid3_api_password'],

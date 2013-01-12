@@ -9,7 +9,7 @@ function espresso_display_realauth($payment_data) {
 	include("Realauth.php");
 
 	$total_cost = number_format($total_cost, 2, '', '');
-	$realauth = new Realauth($realauth_settings['merchant_id'],
+	$realauth = new Espresso_Realauth($realauth_settings['merchant_id'],
 									$realauth_settings['shared_secret']);
 	$realauth->set_amount($total_cost);
 	$realauth->set_currency($realauth_settings['currency_format']);

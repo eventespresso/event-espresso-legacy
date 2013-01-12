@@ -7,7 +7,7 @@
  * @package		Event Espresso Authorize.net SIM Gateway
  * @category	Library
  */
-class EE_Authorize extends PaymentGateway {
+class Espresso_Authorize extends Espresso_PaymentGateway {
 
 	public $gateway_version = '1.0';
 

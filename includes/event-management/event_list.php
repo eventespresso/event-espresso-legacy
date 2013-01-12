@@ -197,7 +197,7 @@ function event_espresso_edit_list() {
 	$sql .= $category_id !== FALSE ? " AND c.id = '" . $category_id . "' " : '';
 	
 	//Month filter
-	if ($_POST['month_range'] != '') {
+	if (isset($_POST['month_range']) && !empty($_POST['month_range']) ? $_POST['month_range'] : '') {
 		$sql .= " AND e.start_date BETWEEN '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-31')) . "' ";
 	}
 	

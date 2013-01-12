@@ -13,7 +13,7 @@
  * @package AuthorizeNet
  * @subpackage    AuthorizeNetResponse
  */
-class AuthorizeNetResponse
+class Espresso_AuthorizeNetResponse
 {
 
     const APPROVED = 1;

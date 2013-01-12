@@ -15,7 +15,7 @@ function espresso_process_eway_rapid3($payment_data) {
 	//require_once('includes/paypal.nvp.class.php');
 	require_once('includes/EWayRapid3Client.class.php');
 	$eway_rapid3_settings = get_option('event_espresso_eway_rapid3_settings');
-	$rapid3Client=new EWayRapid3Client(
+	$rapid3Client=new Espresso_EWayRapid3Client(
 		array(
 			'apiKey'=>$eway_rapid3_settings['eway_rapid3_api_key'],
 			'apiPassword'=>$eway_rapid3_settings['eway_rapid3_api_password'],

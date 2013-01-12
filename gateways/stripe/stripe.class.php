@@ -1,9 +1,9 @@
 <?php
-if(!class_exists("Stripe")) {
+if(!class_exists("Espresso_Stripe")) {
 	require_once (dirname(__FILE__).'/stripe-php-1.5.19/lib/Stripe.php');
 }
 
-class ClsStripe
+class Espresso_ClsStripe
 {	
 	function do_transaction($amount ,$cc, $cvc, $exp_month, $exp_year, $name, $description)
 	{

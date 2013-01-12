@@ -9,7 +9,7 @@
 
 define('FPDF_VERSION','1.6');
 
-class FPDF
+class Espresso_FPDF
 {
 var $page;               //current page number
 var $n;                  //current object number
@@ -72,7 +72,7 @@ var $PDFVersion;         //PDF version number
 *                               Public methods                                 *
 *                                                                              *
 *******************************************************************************/
-function FPDF($orientation='P', $unit='mm', $format='A4')
+function Espresso_FPDF($orientation='P', $unit='mm', $format='A4')
 {
 	//Some checks
 	$this->_dochecks();

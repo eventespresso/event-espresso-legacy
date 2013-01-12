@@ -362,6 +362,13 @@ function update_event($recurrence_arr = array()) {
         $del_cats = "DELETE FROM " . EVENTS_CATEGORY_REL_TABLE . " WHERE event_id = '" . $event_id . "'";
         $wpdb->query($wpdb->prepare($del_cats, NULL));
 
+        //BEGIN CATEGORY MODIFICATION
+        //We first delete the previous entry then we get the category id's of the event and put them in events_detail_table.category_id as a well-formatted string (id,n id)
+        $update_event_detail_category_id = "UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = NULL WHERE id='" . $event_id . "'";
+        $wpdb->query($wpdb->prepare($update_event_detail_category_id, NULL));
+		
+		$string_cat = '';
+
         if (!empty($_REQUEST['event_category'])) {
             foreach ($_REQUEST['event_category'] as $k => $v) {
                 if ($v != '') {
@@ -369,9 +376,26 @@ function update_event($recurrence_arr = array()) {
                     //echo "$sql_cat <br>";
                     //$wpdb->insert($sql_cat);
 					$wpdb->query($wpdb->prepare($sql_cat, array()) );
+
+                    $string_cat.=$v.",";
+                    
                 }
             }
+            
+            if($string_cat != "" && $string_cat != ","){
+            $cleaned_string_cat = substr($string_cat, 0, -1);
+            $tmp=explode(",",$cleaned_string_cat);
+            sort($tmp);
+            $cleaned_string_cat=implode(",", $tmp);
+            trim($cleaned_string_cat);
+
+            $sql_update_event_detail_category_id="UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = '".$cleaned_string_cat."' WHERE id='" . $event_id . "'";
+            $wpdb->query($wpdb->prepare($sql_update_event_detail_category_id, NULL));
+            }
+
+
         }
+        //END CATEGORY MODIFICATION
 
         $del_ppl = "DELETE FROM " . EVENTS_PERSONNEL_REL_TABLE . " WHERE event_id = '" . $event_id . "'";
         $wpdb->query($wpdb->prepare($del_ppl, NULL));
@@ -440,10 +464,15 @@ function update_event($recurrence_arr = array()) {
                     $price_type = $_REQUEST['price_type'][$k] != '' ? $_REQUEST['price_type'][$k] : __('General Admission', 'event_espresso');
                     $member_price_type = !empty($_REQUEST['member_price_type'][$k]) ? $_REQUEST['member_price_type'][$k] : __('Members Admission', 'event_espresso');
                     $member_price = !empty($_REQUEST['member_price'][$k]) ? $_REQUEST['member_price'][$k] : $v;
-                    $sql_prices = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, surcharge_type, price_type, member_price, member_price_type) VALUES ('" . $event_id . "', '" . $v . "', '" . $_REQUEST['surcharge'][$k] . "', '" . $_REQUEST['surcharge_type'][$k] . "', '" . $price_type . "', '" . $member_price . "', '" . $member_price_type . "')";
+                    //$sql_prices = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, surcharge_type, price_type, member_price, member_price_type) VALUES ('" . $event_id . "', '" . $v . "', '" . $_REQUEST['surcharge'][$k] . "', '" . $_REQUEST['surcharge_type'][$k] . "', '" . $price_type . "', '" . $member_price . "', '" . $member_price_type . "')";
                     //echo "$sql_prices <br>";
                     //wpdb->insert($sql_prices);
-					$wpdb->query($wpdb->prepare($sql_prices, array()) );
+					$sql_price = array('event_id' => $event_id, 'event_cost' => $v, 'surcharge' => $_REQUEST['surcharge'][$k], 'surcharge_type' => $_REQUEST['surcharge_type'][$k], 'price_type' => $price_type, 'member_price' => $member_price, 'member_price_type' => $member_price_type );
+					$sql_price_data = array('%d', '%s', '%s', '%s', '%s', '%s', '%s');
+					
+					if ( !$wpdb->insert(EVENTS_PRICES_TABLE, $sql_price, $sql_price_data) ) {
+                        $error = true;
+                    }
                 }
             }
         } else {

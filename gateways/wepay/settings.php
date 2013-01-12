@@ -24,17 +24,17 @@ function event_espresso_wepay_payment_settings() {
 	}
 	if (isset($_GET['code'])) {
 		if ($wepay_settings['use_sandbox']) {
-			Wepay::useStaging($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
+			Espresso_Wepay::useStaging($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
 		} else {
-			Wepay::useProduction($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
+			Espresso_Wepay::useProduction($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
 		}
-		$info = Wepay::getToken($_GET['code'], $_SESSION['redirect_uri']);
+		$info = Espresso_Wepay::getToken($_GET['code'], $_SESSION['redirect_uri']);
 		if ($info) {
 			// Normally you'd integrate this into your existing auth system
 			$wepay_settings['access_token'] = $info->access_token;
 			$wepay_settings['user_id'] = $info->user_id;
 			try {
-				$wepay = new Wepay($info->access_token);
+				$wepay = new Espresso_Wepay($info->access_token);
 				$accounts = $wepay->request('account/find');
 				foreach ($accounts as $account) {
 					$available_accounts[] = array('id' => $account->account_id, 'text' => $account->name);
@@ -201,14 +201,14 @@ function event_espresso_display_wepay_settings($need_to_reauthorize) {
 	<?php
 	if ($need_to_reauthorize) {
 		if ($wepay_settings['use_sandbox']) {
-			Wepay::useStaging($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
+			Espresso_Wepay::useStaging($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
 		} else {
-			Wepay::useProduction($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
+			Espresso_Wepay::useProduction($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
 		}
-		$scope = Wepay::$all_scopes;
+		$scope = Espresso_Wepay::$all_scopes;
 		$redirect_uri = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 		$_SESSION['redirect_uri'] = $redirect_uri;
-		$uri = Wepay::getAuthorizationUri($scope, $redirect_uri);
+		$uri = Espresso_Wepay::getAuthorizationUri($scope, $redirect_uri);
 		?>
 		<form method="post" action="<?php echo $uri; ?>">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Authorize Application', 'event_espresso') ?>" id="authorize_wepay_application" />
