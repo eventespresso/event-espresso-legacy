@@ -317,6 +317,7 @@ function edit_attendee_record() {
 							} else {
 								$post_val = isset( $_POST[ $question->question_type . '_' . $question->a_id ] ) ? $_POST[ $question->question_type . '_' . $question->a_id ] : '';
 							}
+							$post_val = espresso_parse_admin_question_response_for_price( $post_val, $question->price_mod );
 							$post_val = sanitize_text_field( stripslashes( $post_val ));
 							
 							break;
@@ -324,7 +325,8 @@ function edit_attendee_record() {
 						
 							$post_val = '';
 							for ( $i = 0; $i < count( $_POST[ $question->question_type . '_' . $question->a_id ] ); $i++ ) {
-								$post_val .= trim( $_POST[ $question->question_type . '_' . $question->a_id ][$i] ) . ",";
+								$pval = espresso_parse_admin_question_response_for_price( trim( $_POST[ $question->question_type . '_' . $question->a_id ][$i] ), $question->price_mod );
+								$post_val .= $pval . ",";
 							}
 							$post_val = sanitize_text_field( substr( stripslashes( $post_val ), 0, -1 ));
 							
@@ -753,4 +755,21 @@ function edit_attendee_record() {
 </div>
 <?php
 	}
+}
+
+
+
+
+
+
+function espresso_parse_admin_question_response_for_price( $value = '', $price_mod = 'N' ) {
+	if ( $price_mod == 'Y' ) {
+		global $org_options;
+		$values = explode( '|', $value );
+		$price = number_format( (float)$values[1], 2, '.', ',' );
+		$plus_or_minus = $price > 0 ? '+' : '-';
+		$price_mod = $price > 0 ? $price : $price * (-1);
+		$value = $values[0] . '&nbsp;[' . $plus_or_minus . $org_options['currency_symbol'] . $price_mod . ']';	
+	}
+	return $value;
 }

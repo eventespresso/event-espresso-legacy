@@ -103,7 +103,8 @@ function replace_shortcodes($message, $data) {
 			$data->qr_code,
 			$data->seatingchart_tag,
 			$data->edit_attendee,
-			apply_filters('filter_hook_espresso_display_ical', array(//Add to calendar link
+			//Add to calendar link
+			apply_filters('filter_hook_espresso_display_ical', array(
 					'event_id' => $data->attendee->event_id,
 					'registration_id' => $data->attendee->registration_id,
 					'event_name' => $data->event->event_name,

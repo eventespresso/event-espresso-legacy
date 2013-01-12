@@ -59,9 +59,10 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 						case "TEXTAREA" :
 						case "DROPDOWN" :
 						case "SINGLE" :
-
+							
 							if ($question->admin_only != 'Y') {
-								$post_val = ($question->system_name != '') ? $response_source[$question->system_name] : $question_type;
+								$post_val = ( $question->system_name != '' ) ? $response_source[$question->system_name] : $question_type;
+								$post_val = espresso_parse_question_response_for_price( trim( $post_val ), $question->price_mod, $attendee_id );
 							} else {
 								$post_val = '';
 							}
@@ -70,9 +71,11 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 						case "MULTIPLE" :
 						
 							$post_val = '';
-							if (!empty($response_source[$question->question_type . '_' . $question->qstn_id]) && $question->admin_only != 'Y') {
-								for ($i = 0; $i < count($response_source[$question->question_type . '_' . $question->qstn_id]); $i++) {
-									$post_val .= trim($response_source[$question->question_type . '_' . $question->qstn_id][$i]) . ",";
+							if ( ! empty( $response_source[$question->question_type . '_' . $question->qstn_id] ) && $question->admin_only != 'Y' ) {
+								for ( $i = 0; $i < count( $response_source[$question->question_type . '_' . $question->qstn_id] ); $i++ ) {
+									$val = trim( $response_source[$question->question_type . '_' . $question->qstn_id][$i] );
+									$val = espresso_parse_question_response_for_price( $val, $question->price_mod, $attendee_id );
+									$post_val .= $val . ",";
 								}
 							}
 							
@@ -99,6 +102,33 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 	}
 }
 
+
+
+
+
+
+function espresso_parse_question_response_for_price( $value = '', $price_mod = 'N', $attendee_id = FALSE ) {
+	if ( $price_mod == 'Y' ) {
+		global $org_options;
+		$values = explode( '|', $value );
+		$price = number_format( (float)$values[1], 2, '.', ',' );
+		$plus_or_minus = $price > 0 ? '+' : '-';
+		$price_mod = $price > 0 ? $price : $price * (-1);
+		$value = $values[0] . '&nbsp;[' . $plus_or_minus . $org_options['currency_symbol'] . $price_mod . ']';				
+
+		if ( $price != 0 ) {
+			if ( ! $attendee_id ) {
+				echo __('An error occured. The ticket price could not be modified because an attendee id was not received.', 'event_espresso');
+			}
+			global $wpdb;
+			$SQL = 'UPDATE '. EVENTS_ATTENDEE_TABLE .' SET final_price = final_price ' . $plus_or_minus . ' %f where id = %d';	
+			$wpdb->query( $wpdb->prepare( $SQL, $price, $attendee_id ));
+			//echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+		}
+		
+	}
+	return $value;
+}
 
 
 

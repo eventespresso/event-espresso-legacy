@@ -294,7 +294,7 @@ ul.sexy-contributors li:hover a {
 #post-body p.intro { /* explanatory text for meta boxes */
 	font-size: 14px;
 	font-weight: bold;
-	margin: 10px 0;
+	padding: 10px;
 }
 p.submit-footer {
 	background: #f9f9f9;
@@ -1318,8 +1318,10 @@ textarea {
 	text-align: right; vertical-align:middle;
 }
 .espresso_form input { width:175px; }
-.espresso_form .medium-text { max-width:240px; min-width:200px; }
-.espresso_form input.small-text { max-width:120px; min-width:100px; font-size:1em !important; }
+.espresso_form .wide-text { width:80%; max-width:480px; min-width:200px; }
+.espresso_form .medium-text { width:auto; max-width:240px; min-width:200px; }
+.espresso_form input.small-text { width:auto; max-width:120px; min-width:100px; font-size:1em !important; }
+.espresso_form input.tiny-text { width:auto; max-width:80px; min-width:60px; font-size:1em !important; }
 .espresso_form .quicktags-toolbar input {width: auto;}
 
 .span_event_date_label,
