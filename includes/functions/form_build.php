@@ -1,7 +1,8 @@
 <?php
 if (!function_exists('event_form_build')) {
 
-	function event_form_build($question, $answer = "", $event_id = null, $multi_reg = 0, $extra = array(), $class = 'ee-reg-page-questions', $disabled = '') {
+	function event_form_build( $question, $answer = "", $event_id = null, $multi_reg = 0, $extra = array(), $class = 'ee-reg-page-questions', $disabled = '' ) {
+
 		if ($question->admin_only == 'Y' && empty($extra['admin_only'])) {
 			return;
 		}
@@ -123,8 +124,7 @@ if (!function_exists('event_form_build')) {
 				}
 				
 				$html .= '<div class="event_form_field">' . $label;
-				$html .= '<input type="text" ' . $required_title . ' class="' . $required_class . $class . $text_input_class .'" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' /></div>';
-				
+				$html .= '<input type="text" ' . $required_title . ' class="' . $required_class . $class . $text_input_class .'" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' /></div>';	
 				break;
 				
 			case "TEXTAREA" :
@@ -132,8 +132,7 @@ if (!function_exists('event_form_build')) {
 				if (is_array($answer)) $answer = '';
 				$html .= '<div class="event_form_field event-quest-group-textarea">' . $label;
 				$html .= '<textarea ' . $required_title . ' class="' . $required_class . $class . $text_input_class . '" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" rows="5">' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '</textarea></div>';
-				
-				break;
+			break;
 				
 			case "SINGLE" :
 			
@@ -157,7 +156,7 @@ if (!function_exists('event_form_build')) {
 					<li>
 						<label for="' . $value_id . '" class="' . $class . ' radio-btn-lbl">
 							<input id="' . $value_id . '" ' . $required_title . '" class="' . $required_class . $class . '" name="' . $field_name . $multi_name_adjust . '"  type="radio" value="' . $value . '" ' . $checked . ' /> 
-							<span>' . $value . '</span>
+							<span>' . $formatted . '</span>
 						</label>
 					</li>';
 
@@ -197,7 +196,7 @@ if (!function_exists('event_form_build')) {
 					<li>
 						<label for="' . $value_id . '" class="' . $class . ' checkbox-lbl">
 							<input id="' . $value_id . '" ' . $required_title . ' class="' . $required_class . $class . '" name="' . $field_name . $multi_name_adjust . '[]"  type="checkbox" value="' . $value . '" ' . $checked . '/> 
-							<span>' . $value . '</span>
+							<span>' . $formatted . '</span>
 						</label>
 					</li>';
 					
@@ -237,7 +236,6 @@ if (!function_exists('event_form_build')) {
 				</select>';
 				$html .= '
 				</div>';
-				
 				break;
 				
 			default :
@@ -249,6 +247,48 @@ if (!function_exists('event_form_build')) {
 	}
 
 }
+
+
+
+
+
+function espresso_parse_form_value_for_price( $value = '', $price_mod ) {
+	if ( $price_mod == 'Y' ) {
+		global $org_options;
+		$values = explode( '|', $value );
+		$add_or_sub = $values[1] > 0 ? __('add','event_espresso') : __('subtract','event_espresso');
+		$price_mod = $values[1] > 0 ? $values[1] : $values[1] * (-1);
+		$value = $values[0] . '<span>&nbsp;[' . $add_or_sub . '&nbsp;'  . $org_options['currency_symbol'] . $price_mod . ']</span>';		
+	}
+	return $value;
+}
+
+
+
+
+
+
+function espresso_parse_question_answer_for_price( $value = '', $price_mod = 'N' ) {
+	if ( $price_mod == 'Y' ) {
+		global $org_options;
+		$values = explode( '|', $value );
+		$price = number_format( (float)$values[1], 2, '.', ',' );
+		$plus_or_minus = $price > 0 ? '+' : '-';
+		$price_mod = $price > 0 ? $price : $price * (-1);
+		$find = array( '&#039;', "\xC2\xA0", "\x20", "&#160;", '&nbsp;' );
+		$replace = array( "'", ' ', ' ', ' ', ' '  );
+		$text = trim( stripslashes( str_replace( $find, $replace, $values[0] )));
+		$text = htmlspecialchars( $text, ENT_QUOTES, 'UTF-8' );
+		$value =  $text . ' [' . $plus_or_minus . $org_options['currency_symbol'] . $price_mod . ']';				
+
+	}
+	return $value;
+}
+
+
+
+
+
 
 function event_form_build_edit( $question, $answer, $show_admin_only = false, $class = 'ee-reg-page-questions' ) {
 
@@ -281,11 +321,9 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 	$field_name = ($question->system_name != '') ? $question->system_name : 'TEXT_' . $question->id;
 	$label = '<label for="' . $field_name . '">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '</label>';
 	
-	if ( is_array( $answer )) {
-		array_walk( $answer, 'trim' );
-	} else {
-		$answer = trim( $answer );
-	}	
+	// used to filter answers
+	$find = array( '&#039;', "\xC2\xA0", "\x20", "&#160;", '&nbsp;' );
+	$replace = array( "'", ' ', ' ', ' ', ' '  );
 	
 	switch ($question->question_type) {
 	
@@ -321,7 +359,7 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 		<li>
 			<label class="radio-btn-lbl">
 				<input id="SINGLE_' . $question->id . '_' . $key . '" ' . $required_title . ' class="' . $required_class . $class . '" name="SINGLE_' . $question->id . '"  type="radio" value="' . $value . '" ' . $checked . '/>
-				<span>' . $value . '</span>
+				<span>' . $formatted . '</span>
 			</label>
 		</li>';
 			}
@@ -353,7 +391,7 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 		<li>
 			<label class="checkbox-lbl">
 				<input id="' . $question->id . '_' . trim( stripslashes( $key )) . '" ' . $required_title . ' class="' . $required_class . $class . '" name="MULTIPLE_' . $question->id . '[]"  type="checkbox" value="' . $value . '" ' . $checked . '/>
-				<span>' . $value . '</span>
+				<span>' . $formatted . '</span>
 			</label>
 		</li>';
 			}
