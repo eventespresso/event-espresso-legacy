@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
 
 function event_espresso_moneris_hpp_payment_settings() {
 
@@ -23,15 +23,15 @@ function event_espresso_moneris_hpp_payment_settings() {
 		$moneris_hpp_settings['moneris_hpp_txn_mode'] = isset( $_POST['moneris_hpp_txn_mode'] ) ? sanitize_text_field( $_POST['moneris_hpp_txn_mode'] ) : '';
 		$moneris_hpp_settings['moneris_hpp_txn_notes'] = isset( $_POST['moneris_hpp_txn_notes'] ) ? sanitize_text_field( $_POST['moneris_hpp_txn_notes'] ) : '';
 		// add credit card options
-		$moneris_hpp_settings['moneris_hpp_credit_cards'] = array();
-		$cards = array( 'mstrcrd', 'visa', 'amex', 'discover', 'sears', 'diners' );
-		if ( isset( $_POST['moneris_hpp_credit_cards'] )) {
-			foreach( $_POST['moneris_hpp_credit_cards'] as $cc => $on ) {
-				if ( in_array( $cc, $cards )) {
-					$moneris_hpp_settings['moneris_hpp_credit_cards'][ $cc ] = 1;
-				}
-			}	
-		}
+//		$moneris_hpp_settings['moneris_hpp_credit_cards'] = array();
+//		$cards = array( 'mstrcrd', 'visa', 'amex', 'discover', 'sears', 'diners' );
+//		if ( isset( $_POST['moneris_hpp_credit_cards'] )) {
+//			foreach( $_POST['moneris_hpp_credit_cards'] as $cc => $on ) {
+//				if ( in_array( $cc, $cards )) {
+//					$moneris_hpp_settings['moneris_hpp_credit_cards'][ $cc ] = 1;
+//				}
+//			}	
+//		}
 
 		$moneris_hpp_settings['image_url'] = isset( $_POST['image_url'] ) ? esc_url_raw( $_POST['image_url'] ) : '';
 		$moneris_hpp_settings['button_url'] = isset( $_POST['button_url'] ) ? esc_url_raw( $_POST['button_url'] ) : '';
@@ -97,10 +97,6 @@ add_action('action_hook_espresso_display_gateway_settings','event_espresso_moner
 
 
 function event_espresso_get_moneris_hpp_settings() {
-	
-	$moneris_hpp_dir = dirname( __FILE__ );
-	$moneris_hpp_url = EVENT_ESPRESSO_GATEWAY_URL . '/moneris_hpp/';
-	$cards = array( 'mstrcrd' => 1, 'visa' => 1, 'amex' => 0, 'discover' => 0, 'sears' => 0, 'diners' => 0 );
 
 	$moneris_hpp_settings = get_option('event_espresso_moneris_hpp_settings');
 	if ( empty( $moneris_hpp_settings ) || isset( $_REQUEST['reset-hpp'] )) {	
@@ -110,10 +106,10 @@ function event_espresso_get_moneris_hpp_settings() {
 		$moneris_hpp_settings['moneris_hpp_lang'] = 'en-ca';
 		$moneris_hpp_settings['moneris_hpp_country'] = 'ca';
 		$moneris_hpp_settings['moneris_hpp_txn_mode'] = 'dev';
-		$moneris_hpp_settings['moneris_hpp_credit_cards'] = $cards;
+//		$moneris_hpp_settings['moneris_hpp_credit_cards'] = array( 'mstrcrd' => 1, 'visa' => 1, 'amex' => 0, 'discover' => 0, 'sears' => 0, 'diners' => 0 );
 		$moneris_hpp_settings['moneris_hpp_txn_notes'] = '';
 		$moneris_hpp_settings['image_url'] = '';
-		$button_url = file_exists( $moneris_hpp_dir . 'moneris-logo.png' ) ? $moneris_hpp_url . 'moneris-logo.png' : EVENT_ESPRESSO_PLUGINFULLURL . "gateways/moneris_hpp/moneris-logo.png";
+		$button_url = file_exists( dirname( __FILE__ ) . 'moneris-logo.png' ) ? EVENT_ESPRESSO_GATEWAY_URL . '/moneris_hpp/moneris-logo.png' : EVENT_ESPRESSO_PLUGINFULLURL . "gateways/moneris_hpp/moneris-logo.png";
 		$moneris_hpp_settings['button_url'] = $button_url;
 		
 		if ( add_option( 'event_espresso_moneris_hpp_settings', $moneris_hpp_settings, '', 'no' ) == FALSE ) {
@@ -159,6 +155,30 @@ function event_espresso_display_moneris_hpp_settings() {
 						</li>
 						
 						<li>
+							<label for="moneris_hpp_txn_mode"><?php _e( 'Transaction Mode', 'event_espresso' ); ?></label>
+							<?php 
+								$values = array( 
+									array( 'id' => 'dev', 'text' => __( 'Development', 'event_espresso' )),
+									array( 'id' => 'debug', 'text' => __( 'Dev + Debug', 'event_espresso' )),
+									array( 'id' => 'prod', 'text' => __( 'Production', 'event_espresso' ))									
+								); 
+								echo select_input( 'moneris_hpp_txn_mode', $values, $moneris_hpp_settings['moneris_hpp_txn_mode'] );
+							?>
+							<span class="description">
+								<?php _e('This defines the testing status for the Hosted Paypage.', 'event_espresso'); ?>
+							</span><br/>
+							<span class="description">
+								<?php _e('Set to "Development" to use Moneris\'s test servers and "Production" to process payments on the actual live site. Select "Dev + Debug" to add on-screen reporting while in development mode.', 'event_espresso'); ?>
+							</span>
+						</li>
+
+					</ul>
+				</td>
+				
+				<td valign="top">				
+					<ul class="espresso-payment-gateway-options-ul">					
+
+						<li>
 							<label for="moneris_hpp_country"><?php _e( 'Moneris Canada or USA?', 'event_espresso' ); ?></label>
 							<?php 
 								$values = array( 
@@ -186,30 +206,15 @@ function event_espresso_display_moneris_hpp_settings() {
 							</span>
 						</li>
 						
-					</ul>
-				</td>
-				
-				<td valign="top">				
-					<ul class="espresso-payment-gateway-options-ul">					
-
 						<li>
-							<label for="moneris_hpp_txn_mode"><?php _e( 'Transaction Mode', 'event_espresso' ); ?></label>
-							<?php 
-								$values = array( 
-									array( 'id' => 'dev', 'text' => __( 'Development', 'event_espresso' )),
-									array( 'id' => 'debug', 'text' => __( 'Dev + Debug', 'event_espresso' )),
-									array( 'id' => 'prod', 'text' => __( 'Production', 'event_espresso' ))									
-								); 
-								echo select_input( 'moneris_hpp_txn_mode', $values, $moneris_hpp_settings['moneris_hpp_txn_mode'] );
-							?>
+							<label for="moneris_hpp_txn_notes"><?php _e( 'Invoice Notes', 'event_espresso' ); ?></label>
+							<textarea name="moneris_hpp_txn_notes" cols="50" rows="3" ><?php echo $moneris_hpp_settings['moneris_hpp_txn_notes']; ?></textarea><br/>
 							<span class="description">
-								<?php _e('This defines the testing status for the Hosted Paypage.', 'event_espresso'); ?>
-							</span><br/>
-							<span class="description">
-								<?php _e('Set to "Development" to use Moneris\'s test servers and "Production" to process payments on the actual live site. Select "Dev + Debug" to add on-screen reporting while in development mode.', 'event_espresso'); ?>
+								<?php _e('This is for adding any additional notes or instructions that you wish to appear on the invoice.', 'event_espresso'); ?>
 							</span>
 						</li>
-
+						
+<?php /*
 						<li>
 							<label><?php _e('Credit Cards Accepted', 'event_espresso'); ?></label>
 							<label class="gateway-checkbox-options" style="display:inline-block; min-width:30%; margin:.25em 4% .5em 0; vertical-align: middle;">
@@ -246,7 +251,8 @@ function event_espresso_display_moneris_hpp_settings() {
 								<?php _e('This defines which credit card logos you wish to display on the registration checkout page.', 'event_espresso'); ?>
 							</span>
 						</li>
-						
+*/?>
+					
 						<li>
 							<label for="button_url"><?php _e('Button Image URL', 'event_espresso'); ?></label>
 							<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image">

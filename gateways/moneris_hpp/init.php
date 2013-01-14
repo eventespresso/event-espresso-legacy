@@ -1,13 +1,17 @@
-<?php
+<?php if ( ! defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
+//echo '<h3>'. basename( __FILE__ ) . ' LOADED <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h3>';
+
 // This is for the gateway display
 add_action('action_hook_espresso_display_offsite_payment_header', 'espresso_display_offsite_payment_header');
 add_action('action_hook_espresso_display_offsite_payment_footer', 'espresso_display_offsite_payment_footer');
-event_espresso_require_gateway( 'moneris_hpp/Moneris_HPP.class.php' );
+event_espresso_require_gateway( 'moneris_hpp/moneris_hpp_vars.php' );
 
 
 // This is for the transaction processing
 event_espresso_require_gateway( 'moneris_hpp/moneris_hpp_ipn.php' );
-if (!empty($_REQUEST['type']) && $_REQUEST['type'] == 'moneris_hpp') {
+
+// check for moneris response and that response was posted within the last 15 minutes
+if ( isset( $_POST['rvar_moneris_hpp'] ) && $_POST['rvar_moneris_hpp'] <= time() && $_POST['rvar_moneris_hpp'] >= ( time() - 900 )) {
 	add_filter('filter_hook_espresso_transactions_get_attendee_id', 'espresso_transactions_moneris_hpp_get_attendee_id');
 	add_filter('filter_hook_espresso_transactions_get_payment_data', 'espresso_process_moneris_hpp');
 }
