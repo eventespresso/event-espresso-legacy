@@ -111,21 +111,26 @@ function espresso_parse_question_response_for_price( $value = '', $price_mod = '
 	if ( $price_mod == 'Y' ) {
 		global $org_options;
 		$values = explode( '|', $value );
-		$price = number_format( (float)$values[1], 2, '.', ',' );
-		$plus_or_minus = $price > 0 ? '+' : '-';
-		$price_mod = $price > 0 ? $price : $price * (-1);
-		$value = $values[0] . '&nbsp;[' . $plus_or_minus . $org_options['currency_symbol'] . $price_mod . ']';				
+		if ( isset( $values[1] )) {
+			$price = number_format( (float)$values[1], 2, '.', ',' );
+			$plus_or_minus = $price > 0 ? '+' : '-';
+			$price_mod = $price > 0 ? $price : $price * (-1);
+			$value = $values[0] . '&nbsp;[' . $plus_or_minus . $org_options['currency_symbol'] . $price_mod . ']';				
 
-		if ( $price != 0 ) {
-			if ( ! $attendee_id ) {
-				echo __('An error occured. The ticket price could not be modified because an attendee id was not received.', 'event_espresso');
-			}
-			global $wpdb;
-			$SQL = 'UPDATE '. EVENTS_ATTENDEE_TABLE .' SET final_price = final_price ' . $plus_or_minus . ' %f where id = %d';	
-			$wpdb->query( $wpdb->prepare( $SQL, $price, $attendee_id ));
-			//echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+			if ( $price != 0 ) {
+				if ( ! $attendee_id ) {
+					echo __('An error occured. The ticket price could not be modified because an attendee id was not received.', 'event_espresso');
+				}
+				global $wpdb;
+				$SQL = 'UPDATE '. EVENTS_ATTENDEE_TABLE .' SET final_price = final_price ' . $plus_or_minus . ' %f where id = %d';	
+				$wpdb->query( $wpdb->prepare( $SQL, $price, $attendee_id ));
+				//echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+			} else {
+				$value = '';
+			}		
+		} else {
+			$value = '';
 		}
-		
 	}
 	return $value;
 }
