@@ -21,10 +21,15 @@ if (!function_exists('register_attendees')) {
 		}
         
         global $wpdb, $org_options;
+		
+		$default_event_id = 1;
+		$default_event_id = apply_filters( 'filter_hook_espresso_default_event_id', $default_event_id );
+		
+		$_REQUEST['event_id'] = isset( $_REQUEST['event_id'] ) && ! empty( $_REQUEST['event_id'] ) ? $_REQUEST['event_id'] : $default_event_id;
 
         if (isset($_REQUEST['ee']) && $_REQUEST['ee'] != '') {
             $_REQUEST['event_id'] = $_REQUEST['ee'];
-        }
+        }		
 
         $event_id = $event_id_sc != '0' ? $event_id_sc : $_REQUEST['event_id'];
 
