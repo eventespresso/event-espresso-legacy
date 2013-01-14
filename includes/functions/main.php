@@ -1054,12 +1054,12 @@ if (!function_exists('event_espresso_require_file')) {
 	 * @param mixed $path_first         // First choice for file location.
 	 * @param mixed $path_first         // Fallback location for file.
 	 * @param bool $must_exist          // Error if neither file exist.
-	 * @param bool $as_require_once     // True for require_once(), False for require()
+	 * @param bool $require_once     // TRUE for require_once(), FALSE for require()
 	 * @return void    // No return value. File already included.
 	 *
 	 * Usage: event_espresso_require_file('shopping_cart.php',EVENT_ESPRESSO_TEMPLATE_DIR,EVENT_ESPRESSO_PLUGINFULLPATH.'templates/')
 	 */
-	function event_espresso_require_file($template_file_name, $path_first, $path_else, $must_exist = true, $as_require_once = true) {
+	function event_espresso_require_file($template_file_name, $path_first, $path_else, $must_exist = TRUE, $require_once = TRUE) {
 		if (file_exists($path_first . $template_file_name)) {
 			// Use the template file in the user's upload folder
 			$full_path = $path_first . $template_file_name;
@@ -1067,9 +1067,13 @@ if (!function_exists('event_espresso_require_file')) {
 			// Use the system file path
 			$full_path = $path_else . $template_file_name;
 		}
-		if (file_exists($full_path) || $must_exist) {
-			$path = substr($full_path,0,strrpos($full_path, '/'));
-			($as_require_once == true) ? require_once($full_path) : require($full_path);
+		if ( file_exists( $full_path ) || $must_exist ) {
+			//$path = substr($full_path,0,strrpos($full_path, '/'));
+			if( $require_once ) {
+				require_once( $full_path );
+			} else {
+				require( $full_path );
+			}
 		}
 	}
 
