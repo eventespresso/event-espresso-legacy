@@ -13,7 +13,7 @@ function espresso_process_megasoft($payment_data){
 	if ($use_sandbox) {
 		$url = "https://paytest.megasoft.com.ve:8443/payment/action/procesar-compra";
 	} else {
-		$url = "https://payment.megasoft.com.ve:8443/payment/action/procesar-compra";
+		$url = "https://payment.megasoft.com.ve/payment/action/procesar-compra";
 	}
 	$Request = "?cod_afiliacion=".$megasoft_settings['megasoft_login_id'];
 	$Request .= "&transcode=0141";
@@ -40,6 +40,8 @@ function espresso_process_megasoft($payment_data){
 				$payment_data['txn_id'] = $xml->factura;
 				$payment_data['txn_details'] = $response['body'];
 				$payment_data['payment_status'] = 'Completed';
+			}else{
+				$payment_data['txn_details'] = $response['body'];
 			}
 			
 		}
