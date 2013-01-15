@@ -7,8 +7,6 @@ function espresso_transactions_megasoft_get_attendee_id($attendee_id) {
 	return $attendee_id;
 }
 function espresso_process_megasoft($payment_data){
-	echo "get contents of google:";
-echo "begin process megasoft";
 	global $wpdb, $org_options;
 	$megasoft_settings = get_option('event_espresso_megasoft_settings');
 	$use_sandbox = $megasoft_settings['use_sandbox'];
@@ -28,9 +26,41 @@ echo "begin process megasoft";
 	$Request .= "&factura=".$_POST['invoice_num'];
 	
 	$fullUrl=$url.$Request;
-	echo "request sent to:".$fullUrl;
 	$response=wp_remote_get($fullUrl,array('timeout'=>15,'sslverify'=>false,'user-agent'=>'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.52 Safari/537.17'));
-	var_dump($response);
+	
+	$payment_data['payment_status'] = 'Incomplete';
+	$payment_data['txn_type'] = 'Megasoft';
+	$payment_data['txn_id'] = 0;
+	$payment_data['txn_details'] = serialize($_REQUEST);
+	if(is_array($response) && array_key_exists('body',$response)){
+		$xml=simplexml_load_string($response['body']);
+		if($xml){
+			//it's xml alright. but was it a successful charge, or were there errors?
+			if($xml->codigo=='00'){//success!
+				$payment_data['txn_id'] = $xml->factura;
+				$payment_data['txn_details'] = $response['body'];
+				$payment_data['payment_status'] = 'Completed';
+			}
+			
+		}
+	}
+	if(empty($xml)){
+		?>
+		<p><?php _e('There was no response from MegaSoft', 'event_espresso'); ?>
+		</p>
+		<?php		
+	}elseif(isset($xml) && $xml->codigo!='00'){
+		?>
+		<p><?php _e('There was an error processing your payment:', 'event_espresso'); ?>
+			<?php _e($xml->descripcion)?>
+		</p>
+		<?php
+	}
+	$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
+	$payment_data = apply_filters('filter_hook_espresso_prepare_event_link', $payment_data);
+	
+	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	return $payment_data;
 }
 function espresso_process_megasoft_old($payment_data) {
 echo "begin old process megasoft";
