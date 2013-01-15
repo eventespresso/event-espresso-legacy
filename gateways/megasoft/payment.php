@@ -31,29 +31,29 @@ function espresso_display_megasoft($data) {
 			<div class = "event_espresso_form_wrapper">
 
 				<fieldset id="megasoft-billing-info-dv">
-					<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>
+					<h4 class="section-title"><?php _e('Información de Facturación', 'event_espresso') ?></h4>
 					<p>
-						<label for="first_name"><?php _e('First Name', 'event_espresso'); ?></label>
+						<label for="first_name"><?php _e('Nombre', 'event_espresso'); ?></label>
 						<input name="first_name" type="text" id="megasoft_first_name" value="<?php echo $fname ?>" />
 					</p>
 					<p>
-						<label for="last_name"><?php _e('Last Name', 'event_espresso'); ?></label>
+						<label for="last_name"><?php _e('Apellido', 'event_espresso'); ?></label>
 						<input name="last_name" type="text" id="megasoft_last_name" value="<?php echo $lname ?>" />
 					</p>
 					<p>
-						<label for="email"><?php _e('Email Address', 'event_espresso'); ?></label>
+						<label for="email"><?php _e('Email', 'event_espresso'); ?></label>
 						<input name="email" type="text" id="megasoft_email" value="<?php echo $attendee_email ?>" />
 					</p>
 					<p>
-						<label for="address"><?php _e('Address', 'event_espresso'); ?></label>
+						<label for="address"><?php _e('Dirección', 'event_espresso'); ?></label>
 						<input name="address" type="text" id="megasoft_address" value="<?php echo $address ?>" />
 					</p>
 					<p>
-						<label for="city"><?php _e('City', 'event_espresso'); ?></label>
+						<label for="city"><?php _e('Ciudad', 'event_espresso'); ?></label>
 						<input name="city" type="text" id="megasoft_city" value="<?php echo $city ?>" />
 					</p>
 					<p>
-						<label for="state"><?php _e('State', 'event_espresso'); ?></label>
+						<label for="state"><?php _e('Estado', 'event_espresso'); ?></label>
 						<input name="state" type="text" id="megasoft_state" value="<?php echo $state ?>" />
 					</p>
 					<p>
@@ -63,44 +63,44 @@ function espresso_display_megasoft($data) {
 					<p>
 					  <label for="cid_code"><?php _e('ID code', 'event_espresso'); ?></label>
 					  <select id="cid_code" name ="cid_code" class="required">
-							<option value='V'><?php _e('Venezuelan Citizen','event_espresso'); ?></option>
-							<option value='E'><?php _e('Non-Venezuelan Citizen living in Venezuela','event_espresso'); ?></option>
-							<option value=''><?php _e('Non-Venezuelan Citizen living outside Venezuela','event_espresso'); ?></option>
+							<option value='V'><?php _e('V','event_espresso'); ?></option>
+							<option value='E'><?php _e('E','event_espresso'); ?></option>
+							<option value=''><?php _e('Pasaporte','event_espresso'); ?></option>
 						</select>
 					</p>
 					<p>
-						<label for="cid"><?php _e('ID or passport number', 'event_espresso'); ?></label>
+						<label for="cid"><?php _e('Cédula o Pasaporte', 'event_espresso'); ?></label>
 						<input name="cid" type="text" id="cid" value="" />
 					</p>
 				</fieldset>
 
 				<fieldset id="megasoft-credit-card-info-dv">
-					<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></h4>
+					<h4 class="section-title"><?php _e('Información de la Tarjeta de Crédito', 'event_espresso'); ?></h4>
 					<p>
-						<label for="card_num"><?php _e('Card Number', 'event_espresso'); ?></label>
+						<label for="card_num"><?php _e('Número de la Tarjeta', 'event_espresso'); ?></label>
 						<input type="text" name="card_num" id="megasoft_card_num" />
 					</p>
 					<p>
-						<label for="exp_date"><?php _e('Exp. Date', 'event_espresso'); ?></label>
+						<label for="exp_date"><?php _e('Fecha de Caducidad', 'event_espresso'); ?></label>
 						<input type="text" name="exp_date" id="megasoft_exp_date" />
 					</p>
 					<p>
-						<label for="ccv_code"><?php _e('CCV Code', 'event_espresso'); ?></label>
+						<label for="ccv_code"><?php _e('Código CCV', 'event_espresso'); ?></label>
 						<input type="text" name="ccv_code" id="megasoft_ccv_code" />
 					</p>
 				</fieldset>
-				<input name="invoice_num" type="hidden" value="<?php echo event_espresso_session_id() ?>" />
+				<input name="invoice_num" type="hidden" value="<?php echo $registration_id;//substr(event_espresso_session_id(),0,10); ?>" />
 				<input name="megasoft" type="hidden" value="true" />
 				<input name="cust_id" type="hidden" value="<?php echo $attendee_id ?>" />
 				
 				<p class="event_form_submit">
-					<input name="megasoft_submit" id="megasoft_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+					<input name="megasoft_submit" id="megasoft_submit" class="submit-payment-btn" type="submit" value="<?php _e('Completar Compra', 'event_espresso'); ?>" />
 				</p>
 			</div>
 		</form>
 		<br/>
 		<p class="choose-diff-pay-option-pg">
-			<a class="hide-the-displayed" rel="megasoft-payment-option-form" style="cursor:pointer;"><?php _e('Choose a different payment option', 'event_espresso'); ?></a>
+			<a class="hide-the-displayed" rel="megasoft-payment-option-form" style="cursor:pointer;"><?php _e('Escoja otra opción de pago', 'event_espresso'); ?></a>
 		</p>
 
 	</div>
