@@ -1,5 +1,6 @@
 <?php
 // This is for the gateway display
+wp_register_script( 'megasoft', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/megasoft/megasoft.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
 add_action('action_hook_espresso_display_onsite_payment_header','espresso_display_onsite_payment_header');
 add_action('action_hook_espresso_display_onsite_payment_footer','espresso_display_onsite_payment_footer');
 event_espresso_require_gateway("megasoft/payment.php");

@@ -3,6 +3,7 @@
 function espresso_display_megasoft($data) {
 	extract($data);
 	global $org_options;
+	wp_enqueue_script( 'megasoft' );		
 	?>
 <div id="megasoft-payment-option-dv" class="payment-option-dv">
 
@@ -34,38 +35,39 @@ function espresso_display_megasoft($data) {
 					<h4 class="section-title"><?php _e('Información de Facturación', 'event_espresso') ?></h4>
 					<p>
 						<label for="first_name"><?php _e('Nombre', 'event_espresso'); ?></label>
-						<input name="first_name" type="text" id="megasoft_first_name" value="<?php echo $fname ?>" />
+						<input name="first_name" type="text" id="megasoft_first_name" value="<?php echo $fname ?>" class="required" />
 					</p>
 					<p>
 						<label for="last_name"><?php _e('Apellido', 'event_espresso'); ?></label>
-						<input name="last_name" type="text" id="megasoft_last_name" value="<?php echo $lname ?>" />
+						<input name="last_name" type="text" id="megasoft_last_name" value="<?php echo $lname ?>" class="required" />
 					</p>
 					<p>
 						<label for="email"><?php _e('Email', 'event_espresso'); ?></label>
-						<input name="email" type="text" id="megasoft_email" value="<?php echo $attendee_email ?>" />
+						<input name="email" type="text" id="megasoft_email" value="<?php echo $attendee_email ?>"  class="required" />
 					</p>
 					<p>
 						<label for="address"><?php _e('Dirección', 'event_espresso'); ?></label>
-						<input name="address" type="text" id="megasoft_address" value="<?php echo $address ?>" />
+						<input name="address" type="text" id="megasoft_address" value="<?php echo $address ?>"  class="required" />
 					</p>
 					<p>
 						<label for="city"><?php _e('Ciudad', 'event_espresso'); ?></label>
-						<input name="city" type="text" id="megasoft_city" value="<?php echo $city ?>" />
+						<input name="city" type="text" id="megasoft_city" value="<?php echo $city ?>"  class="required" />
 					</p>
 					<p>
 						<label for="state"><?php _e('Estado', 'event_espresso'); ?></label>
-						<input name="state" type="text" id="megasoft_state" value="<?php echo $state ?>" />
+						<input name="state" type="text" id="megasoft_state" value="<?php echo $state ?>"  class="required" />
 					</p>
 					<p>
 						<label for="zip"><?php _e('Zip', 'event_espresso'); ?></label>
-						<input name="zip" type="text" id="megasoft_zip" value="<?php echo $zip ?>" />
+						<input name="zip" type="text" id="megasoft_zip" value="<?php echo $zip ?>"  class="required" />
 					</p>
 					<p>
 					  <label for="cid_code"><?php _e('ID code', 'event_espresso'); ?></label>
 					  <select id="cid_code" name ="cid_code" class="required">
-							<option value='V'><?php _e('V','event_espresso'); ?></option>
-							<option value='E'><?php _e('E','event_espresso'); ?></option>
-							<option value=''><?php _e('Pasaporte','event_espresso'); ?></option>
+							<option value='V'><?php _e('Venezolano','event_espresso'); ?></option>
+							<option value='J'><?php _e('Juridico','event_espress');?></option>
+							<option value='E'><?php _e('Extranjero','event_espresso'); ?></option>
+							<option value='G'><?php _e("Gubernamental",'event_espresso');?></option>
 						</select>
 					</p>
 					<p>
@@ -78,15 +80,31 @@ function espresso_display_megasoft($data) {
 					<h4 class="section-title"><?php _e('Información de la Tarjeta de Crédito', 'event_espresso'); ?></h4>
 					<p>
 						<label for="card_num"><?php _e('Número de la Tarjeta', 'event_espresso'); ?></label>
-						<input type="text" name="card_num" id="megasoft_card_num" />
+						<input type="text" name="card_num" id="megasoft_card_num"  class="required" />
 					</p>
 					<p>
+						<?php 
+							$currentMonth=date('m');
+							$months=array();
+							for($i=0;$i<12;$i++){
+								$months[$i]['id']=sprintf("%02s",$i+1);
+								$months[$i]['text']=$months[$i]['id'];
+							}
+							$currentYear=intval(date('Y'));
+							$years=array();
+							for($i=0;$i<20;$i++){
+								$years[$i]['id']=substr($currentYear+$i,2);
+								$years[$i]['text']=$currentYear+$i;
+							}
+						
+						?>
 						<label for="exp_date"><?php _e('Fecha de Caducidad', 'event_espresso'); ?></label>
-						<input type="text" name="exp_date" id="megasoft_exp_date" />
+						<?php echo select_input('exp_date_month',$months,$currentMonth);?>/
+						<?php echo select_input('exp_date_year',$years,$currentYear)?>
 					</p>
 					<p>
 						<label for="ccv_code"><?php _e('Código CCV', 'event_espresso'); ?></label>
-						<input type="text" name="ccv_code" id="megasoft_ccv_code" />
+						<input type="text" name="ccv_code" id="megasoft_ccv_code"  class="required" />
 					</p>
 				</fieldset>
 				<input name="invoice_num" type="hidden" value="<?php echo $registration_id;//substr(event_espresso_session_id(),0,10); ?>" />

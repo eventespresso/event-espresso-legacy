@@ -20,7 +20,7 @@ function espresso_process_megasoft($payment_data){
 	$Request .= "&pan=".$_POST['card_num'];
 	$Request .= "&cvv2=".$_POST['ccv_code'];
 	$Request .= "&cid=".$_POST['cid_code'].$_POST['cid'];
-	$Request .= "&expdate=".$_POST['exp_date'];
+	$Request .= "&expdate=".$_POST['exp_date_month'].$_POST['exp_date_year'];
 	$Request .= "&amount=".number_format(100*$payment_data['total_cost'], 0, '', '');
 	$Request .= "&client=".$_POST['first_name']." ".$_POST['last_name'];
 	$Request .= "&factura=".$_POST['invoice_num'];
