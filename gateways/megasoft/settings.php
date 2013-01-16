@@ -8,9 +8,10 @@ function event_espresso_megasoft_payment_settings() {
 		$megasoft_settings['megasoft_login_id'] = $_POST['megasoft_login_id'];
 		$megasoft_settings['header'] = $_POST['header'];
 		$megasoft_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
-		$megasoft_settings['force_ssl_return'] = empty($_POST['force_ssl_return']) ? false : true;
 		$megasoft_settings['display_header'] = empty($_POST['display_header']) ? false : true;
+		$megasoft_settings['button_url'] = $_POST['button_url'];
 		update_option('event_espresso_megasoft_settings', $megasoft_settings);
+		
 		echo '<div id="message" class="updated fade"><p><strong>' . __('Megasoft settings saved.', 'event_espresso') . '</strong></p></div>';
 	}
 	$megasoft_settings = get_option('event_espresso_megasoft_settings');
@@ -18,8 +19,13 @@ function event_espresso_megasoft_payment_settings() {
 		$megasoft_settings['megasoft_login_id'] = '';
 		$megasoft_settings['header'] = 'Payment Transactions by Megasoft';
 		$megasoft_settings['use_sandbox'] = false;
-		$megasoft_settings['force_ssl_return'] = false;
 		$megasoft_settings['display_header'] = false;
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/megasoft/megasoft-logo.gif")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/megasoft/megasoft-logo.gif";
+		} else {
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/megasoft/megasoft-logo.gif";
+		}
+		$megasoft_settings['button_url']=$button_url;
 		if (add_option('event_espresso_megasoft_settings', $megasoft_settings, '', 'no') == false) {
 			update_option('event_espresso_megasoft_settings', $megasoft_settings);
 		}
@@ -81,6 +87,19 @@ function event_espresso_display_megasoft_settings() {
 							</label>
 							<input type="text" name="megasoft_login_id" size="35" value="<?php echo $megasoft_settings['megasoft_login_id']; ?>">
 						</li>
+						<li>
+								<label for="button_url">
+	<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							</label>
+							<?php $buttonUrl=((!array_key_exists('button_url',$megasoft_settings) || empty($megasoft_settings['button_url'])) ? '' : $megasoft_settings['button_url'] );?>
+							<input type="text" name="button_url" id='button_url' size="34" value="<?php echo  $buttonUrl?>" />
+							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a> </li>
+						<?php _e('Current Button Image', 'event_espresso'); ?>
+						<br />
+						<?php// if(!empty($buttonUrl)){?>
+							<img src='<?php echo $buttonUrl?>'/>
+						<?php //}?>
+						</li>
 					</ul></td>
 				<td valign="top">
 					<ul>
@@ -90,12 +109,6 @@ function event_espresso_display_megasoft_settings() {
 							</label>
 							<input id="sandbox_checkbox_aim" name="use_sandbox" type="checkbox" value="1" <?php echo $megasoft_settings['use_sandbox'] ? 'checked="checked"' : '' ?> />
 							 </li>
-							<li>
-							<label for="force_ssl_return">
-								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
-								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-							</label>
-							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $megasoft_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
 							<li>
 							<label for="display_header">
 								<?php _e('Display a Form Header', 'event_espresso'); ?>

@@ -3,26 +3,22 @@
 function espresso_display_megasoft($data) {
 	extract($data);
 	global $org_options;
-	wp_enqueue_script( 'megasoft' );		
+	wp_enqueue_script( 'megasoft' );
+	$megasoft_settings = get_option('event_espresso_megasoft_settings');		
 	?>
 <div id="megasoft-payment-option-dv" class="payment-option-dv">
 
 	<a id="megasoft-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="megasoft-payment-option-form" style="cursor:pointer;">
-		<img alt="Pay using Megasoft" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/megasoft/logo.png">
+		<img alt="Pay using Megasoft" src="<?php echo $megasoft_settings['button_url']?>">
 	</a>	
 
 	<div id="megasoft-payment-option-form-dv" class="hide-if-js">
 		<?php
-		$megasoft_settings = get_option('event_espresso_megasoft_settings');
+		
 		$use_sandbox = $megasoft_settings['use_sandbox'];
 		if ($use_sandbox) {
 			echo '<p>Test credit card # 4007000000027</p>';
 			echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3>';
-		}
-		if ($megasoft_settings['force_ssl_return']) {
-			$home = str_replace('http://', 'https://', home_url());
-		} else {
-			$home = home_url();
 		}
 		if ($megasoft_settings['display_header']) {
 ?>
@@ -59,15 +55,16 @@ function espresso_display_megasoft($data) {
 					</p>
 					<p>
 						<label for="zip"><?php _e('Zip', 'event_espresso'); ?></label>
-						<input name="zip" type="text" id="megasoft_zip" value="<?php echo $zip ?>"  class="required" />
+						<input name="zip" type="text" id="megasoft_zip" value="<?php echo $zip ?>" />
 					</p>
 					<p>
-					  <label for="cid_code"><?php _e('ID code', 'event_espresso'); ?></label>
+					  <label for="cid_code"><?php _e('Número de Identificación', 'event_espresso'); ?></label>
 					  <select id="cid_code" name ="cid_code" class="required">
 							<option value='V'><?php _e('Venezolano','event_espresso'); ?></option>
 							<option value='J'><?php _e('Juridico','event_espress');?></option>
 							<option value='E'><?php _e('Extranjero','event_espresso'); ?></option>
 							<option value='G'><?php _e("Gubernamental",'event_espresso');?></option>
+							<option value='P'><?php _e("Pasaporte",'event_espresso');?></option>
 						</select>
 					</p>
 					<p>
