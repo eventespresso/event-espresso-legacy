@@ -857,6 +857,7 @@ if (!function_exists('espresso_google_map_link')) {
 		$type = isset($type) ? "{$type}" : "";
 		$map_w = isset($map_w) ? "{$map_w}" : 400;
 		$map_h = isset($map_h) ? "{$map_h}" : 400;
+		$map_image_class = isset($map_image_class) ? "{$map_image_class}" : '';
 
 		$gaddress = ($address != '' ? $address : '') . ($city != '' ? ',' . $city : '') . ($state != '' ? ',' . $state : '') . ($zip != '' ? ',' . $zip : '') . ($country != '' ? ',' . $country : '');
 
