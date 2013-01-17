@@ -33,7 +33,7 @@ function event_espresso_wepay_payment_settings() {
 		} else {
 			Espresso_Wepay::useProduction($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
 		}
-		$info = Espresso_Wepay::getToken($_GET['code'], $_SESSION['redirect_uri']);
+		$info = Espresso_Wepay::getToken($_GET['code'], get_transient('espresso_wepay_redirect_uri'));
 		if ($info) {
 			// Normally you'd integrate this into your existing auth system
 			$wepay_settings['access_token'] = $info->access_token;
@@ -212,7 +212,7 @@ function event_espresso_display_wepay_settings($need_to_reauthorize) {
 		}
 		$scope = Espresso_Wepay::$all_scopes;
 		$redirect_uri = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-		$_SESSION['redirect_uri'] = $redirect_uri;
+		set_transient('espresso_wepay_redirect_uri',$redirect_uri,60*60);
 		$uri = Espresso_Wepay::getAuthorizationUri($scope, $redirect_uri);
 		?>
 			<a class="button-primary" href='<?php echo $uri?>'><?php _e('Authorize Application', 'event_espresso') ?></a>
