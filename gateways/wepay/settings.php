@@ -7,12 +7,15 @@ function event_espresso_wepay_payment_settings() {
 	require_once(dirname(__FILE__) . "/Wepay.php");
 	$wepay_settings = get_option('event_espresso_wepay_settings');
 	$need_to_reauthorize = false;
+	if(!array_key_exists('access_token',$wepay_settings) || empty($wepay_settings['access_token'])){
+		$need_to_reauthorize = true;
+	}
 	if (isset($_POST['update_wepay'])) {
 		if ($wepay_settings['wepay_client_id'] != $_POST['wepay_client_id']
 						|| $wepay_settings['wepay_client_secret'] != $_POST['wepay_client_secret']) {
 			$wepay_settings['wepay_client_id'] = $_POST['wepay_client_id'];
 			$wepay_settings['wepay_client_secret'] = $_POST['wepay_client_secret'];
-			$need_to_reauthorize = true;
+			
 		}
 		$wepay_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
 		$wepay_settings['force_ssl_return'] = empty($_POST['force_ssl_return']) ? false : true;
@@ -210,7 +213,7 @@ function event_espresso_display_wepay_settings($need_to_reauthorize) {
 		$_SESSION['redirect_uri'] = $redirect_uri;
 		$uri = Espresso_Wepay::getAuthorizationUri($scope, $redirect_uri);
 		?>
-		<form method="post" action="<?php echo $uri; ?>">
+		<form method="get" action="<?php echo $uri; ?>">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Authorize Application', 'event_espresso') ?>" id="authorize_wepay_application" />
 		</form>
 	<?php } ?>
