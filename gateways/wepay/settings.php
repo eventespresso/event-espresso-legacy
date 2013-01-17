@@ -46,6 +46,7 @@ function event_espresso_wepay_payment_settings() {
 				}
 				$wepay_settings['available_accounts'] = $available_accounts;
 				$wepay_settings['account_id'] = $available_accounts[0]['id'];
+				$need_to_reauthorize=false;
 			} catch (WepayException $e) {
 				// Something went wrong - normally you would log
 				// this and give your user a more informative message
