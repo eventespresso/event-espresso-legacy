@@ -38,26 +38,6 @@ function espresso_display_megasoft($data) {
 						<input name="last_name" type="text" id="megasoft_last_name" value="<?php echo $lname ?>" class="required" />
 					</p>
 					<p>
-						<label for="email"><?php _e('Email', 'event_espresso'); ?></label>
-						<input name="email" type="text" id="megasoft_email" value="<?php echo $attendee_email ?>"  class="required" />
-					</p>
-					<p>
-						<label for="address"><?php _e('Dirección', 'event_espresso'); ?></label>
-						<input name="address" type="text" id="megasoft_address" value="<?php echo $address ?>"  class="required" />
-					</p>
-					<p>
-						<label for="city"><?php _e('Ciudad', 'event_espresso'); ?></label>
-						<input name="city" type="text" id="megasoft_city" value="<?php echo $city ?>"  class="required" />
-					</p>
-					<p>
-						<label for="state"><?php _e('Estado', 'event_espresso'); ?></label>
-						<input name="state" type="text" id="megasoft_state" value="<?php echo $state ?>"  class="required" />
-					</p>
-					<p>
-						<label for="zip"><?php _e('Zip', 'event_espresso'); ?></label>
-						<input name="zip" type="text" id="megasoft_zip" value="<?php echo $zip ?>" />
-					</p>
-					<p>
 					  <label for="cid_code"><?php _e('Número de Identificación', 'event_espresso'); ?></label>
 					  <select id="cid_code" name ="cid_code" class="required">
 							<option value='V'><?php _e('Venezolano','event_espresso'); ?></option>
