@@ -26,7 +26,8 @@ function espresso_process_megasoft($payment_data){
 	$Request .= "&factura=".$_POST['invoice_num'];
 	
 	$fullUrl=$url.$Request;
-	$response=wp_remote_get($fullUrl,array('timeout'=>15,'sslverify'=>false,'user-agent'=>'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.52 Safari/537.17'));
+	echo "full url: $fullUrl";
+	$response=wp_remote_get($fullUrl,array('timeout'=>15,'sslverify'=>false));
 	
 	$payment_data['payment_status'] = 'Incomplete';
 	$payment_data['txn_type'] = 'Megasoft';
