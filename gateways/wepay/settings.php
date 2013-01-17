@@ -15,6 +15,8 @@ function event_espresso_wepay_payment_settings() {
 						|| $wepay_settings['wepay_client_secret'] != $_POST['wepay_client_secret']) {
 			$wepay_settings['wepay_client_id'] = $_POST['wepay_client_id'];
 			$wepay_settings['wepay_client_secret'] = $_POST['wepay_client_secret'];
+			$wepay_settings['access_token']='';
+			$need_to_reauthorize=true;
 			
 		}
 		$wepay_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
@@ -213,9 +215,7 @@ function event_espresso_display_wepay_settings($need_to_reauthorize) {
 		$_SESSION['redirect_uri'] = $redirect_uri;
 		$uri = Espresso_Wepay::getAuthorizationUri($scope, $redirect_uri);
 		?>
-		<form method="get" action="<?php echo $uri; ?>">
-			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Authorize Application', 'event_espresso') ?>" id="authorize_wepay_application" />
-		</form>
+			<a class="button-primary" href='<?php echo $uri?>'><?php _e('Authorize Application', 'event_espresso') ?></a>
 	<?php } ?>
 	<div id="wepay_sandbox_info" style="display:none">
 		<h2><?php _e('WePay Sandbox', 'event_espresso'); ?></h2>
