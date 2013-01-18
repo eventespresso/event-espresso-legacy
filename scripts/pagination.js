@@ -9,7 +9,7 @@ jQuery(document).ready(function($jaer) {
 	//	nav_label_prev : '<',
 	//	nav_label_next : '>'
 	//});
-    $jaer('.event_paginate').live('click',function(event){
+    $jaer('.event_paginate').on('click',function(event){
         event.preventDefault();
         
         //var sql = $jaer('#event_search_code').html(); 
