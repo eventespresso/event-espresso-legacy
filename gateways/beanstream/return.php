@@ -58,7 +58,7 @@ function espresso_process_beanstream($payment_data) {
 			$payment_data['payment_status'] = 'Completed';
 		} else {
 			echo '<p><strong class="credit_card_failure">Attention: Your transaction was declined for the following reason(s):</strong><br />';
-			echo $results['messageText'];
+			echo urldecode($results['messageText']);
 		}
 	}
 	
