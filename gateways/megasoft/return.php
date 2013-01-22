@@ -26,7 +26,7 @@ function espresso_process_megasoft($payment_data){
 	$Request .= "&factura=".$_POST['invoice_num'];
 	
 	$fullUrl=$url.$Request;
-	echo "full url: $fullUrl";
+	//echo "full url: $fullUrl";
 	$response=wp_remote_get($fullUrl,array('timeout'=>15,'sslverify'=>false));
 	
 	$payment_data['payment_status'] = 'Incomplete';
