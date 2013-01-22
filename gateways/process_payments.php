@@ -111,6 +111,9 @@ function espresso_update_attendee_payment_status_in_db($payment_data) {
 			$payment_data['txn_details'],
 			$payment_data['attendee_session']
 	)));
+	
+	do_action('action_hook_espresso_track_successful_sale',$payment_data);
+	
 	return $payment_data;
 }
 add_filter('filter_hook_espresso_update_attendee_payment_data_in_db', 'espresso_update_attendee_payment_status_in_db');
