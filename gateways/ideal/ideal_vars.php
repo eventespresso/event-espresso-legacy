@@ -5,7 +5,7 @@ function espresso_process_ideal($payment_data) {
 	$ideal_mollie_settings = get_option('event_espresso_ideal_mollie_settings');
 	require_once('ideal.class.php');
 	$partner_id = $ideal_mollie_settings['ideal_mollie_partner_id'];
-	$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
+	//$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
 	$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
 //amount needs to be in cents
 	$amount = (int) ($payment_data['total_cost'] * 100);

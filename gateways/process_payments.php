@@ -201,7 +201,7 @@ function deal_with_ideal() {
 	}
 }
 
-add_action('wp_loaded', 'deal_with_ideal');
+/*add_action('wp_loaded', 'deal_with_ideal');
 
 function espresso_email_after_payment($payment_data) {
 	global $org_options;
@@ -211,7 +211,7 @@ function espresso_email_after_payment($payment_data) {
 			event_espresso_email_confirmations(array('session_id' => $payment_data['attendee_session'], 'send_admin_email' => 'true', 'send_attendee_email' => 'true'));
 		}
 	}
-}
+}*/
 // Needed for WorldPay processing
 if ( isset( $_POST[ 'name' ] ) && isset( $_POST[ 'MC_type'] ) && 'worldpay' == $_POST[ 'MC_type' ] ) {
 	$_POST['_name'] = $_POST['name'];
