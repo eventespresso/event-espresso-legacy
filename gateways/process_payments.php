@@ -144,6 +144,7 @@ function event_espresso_txn() {
 
 	global $wpdb, $org_options, $espresso_content;
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+	do_action('action_hook_espresso_transaction');
 	$active_gateways = get_option('event_espresso_active_gateways', array());
 	if (empty($active_gateways)) {
 		$subject = __('Website Payment IPN Not Setup', 'event_espresso');
@@ -188,7 +189,7 @@ function event_espresso_txn() {
 	
 }
 
-/*function deal_with_ideal() {
+function deal_with_ideal() {
 	if (!empty($_POST['bank_id'])) {
 		$active_gateways = get_option('event_espresso_active_gateways', array());
 		if (!empty($active_gateways['ideal'])) {
@@ -201,7 +202,7 @@ function event_espresso_txn() {
 	}
 }
 
-add_action('wp_loaded', 'deal_with_ideal');*/
+add_action('action_hook_espresso_transaction', 'deal_with_ideal',99);//just before espresso_txn
 
 function espresso_email_after_payment($payment_data) {
 	global $org_options;
