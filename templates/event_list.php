@@ -135,6 +135,9 @@ if (!function_exists('event_espresso_get_event_details')) {
 		//Staff sql
 		$sql .= ($staff_id !== NULL  && !empty($staff_id))? " AND st.id = '" . $staff_id . "' ": '';
 		
+		//User sql
+		$sql .= (isset($user_id)  && !empty($user_id))? " AND wp_user = '" . $user_id . "' ": '';
+		
 		$sql .= $show_expired == 'false' ? " AND (e.start_date >= '" . date('Y-m-d') . "' OR e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
 		if  ($show_expired == 'true'){
 			$allow_override = 1;
