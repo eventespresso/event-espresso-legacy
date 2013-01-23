@@ -196,7 +196,7 @@ function event_list_attendees() {
 	
     $attendees = $wpdb->get_results($sql_a);
     $total_attendees = $wpdb->num_rows;
-	
+
 	$quantity =0;
 
 	$att_table_form_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID ), EVT_ADMIN_URL );
@@ -216,7 +216,7 @@ function event_list_attendees() {
 		<input name="start_rec" value="<?php echo $start_rec ?>" class="textfield" type="hidden">
 		<?php
 			if ( $start_rec > 0 && $max_rows < 100000 ) {
-				$prev_rows = $start_rec > $max_rows ? ( $start_rec - $max_rows - 1 ) : 0;
+				$prev_rows = $start_rec > $max_rows ? ( $start_rec - $max_rows ) : 0;
 				$prev_rows_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID, 'max_rows' => $max_rows, 'start_rec' => $prev_rows ), EVT_ADMIN_URL ); 
 		?>
 		<a id="attendee-admin-load-prev-rows-btn" href="<?php echo $prev_rows_url; ?>" title="load prev rows" class="button-secondary">
@@ -225,7 +225,7 @@ function event_list_attendees() {
 		<?php } ?>
 		<?php 			
 			if ( $total_attendees >= $max_rows && $max_rows < 100000 ) {
-				$next_rows = $start_rec + $max_rows + 1;
+				$next_rows = $start_rec + $max_rows;
 				$next_rows_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID, 'max_rows' => $max_rows, 'start_rec' => $next_rows ), EVT_ADMIN_URL ); 
 		?>
 		<a id="attendee-admin-load-next-rows-btn" href="<?php echo $next_rows_url; ?>" title="load next rows" class="button-secondary">

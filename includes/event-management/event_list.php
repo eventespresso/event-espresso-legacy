@@ -238,7 +238,7 @@ function event_espresso_edit_list() {
 			<input name="start_rec" value="<?php echo $start_rec ?>" class="textfield" type="hidden">
 			<?php
 				if ( $start_rec > 0 && $max_rows < 100000 ) {
-					$prev_rows = $start_rec > $max_rows ? ( $start_rec - $max_rows - 1 ) : 0;
+					$prev_rows = $start_rec > $max_rows ? ( $start_rec - $max_rows ) : 0;
 					$prev_rows_url = add_query_arg( array( 'max_rows' => $max_rows, 'start_rec' => $prev_rows ), EVT_ADMIN_URL ); 
 			?>
 			<a id="event-admin-load-prev-rows-btn" href="<?php echo $prev_rows_url; ?>" title="load prev rows" class="button-secondary">
@@ -247,7 +247,7 @@ function event_espresso_edit_list() {
 			<?php } ?>
 			<?php 			
 				if ( $total_events >= $max_rows && $max_rows < 100000 ) {
-					$next_rows = $start_rec + $max_rows + 1;
+					$next_rows = $start_rec + $max_rows;
 					$next_rows_url = add_query_arg( array( 'max_rows' => $max_rows, 'start_rec' => $next_rows ), EVT_ADMIN_URL ); 
 			?>
 			<a id="event-admin-load-next-rows-btn" href="<?php echo $next_rows_url; ?>" title="load next rows" class="button-secondary">
