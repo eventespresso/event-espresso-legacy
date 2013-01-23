@@ -857,6 +857,7 @@ if (!function_exists('espresso_google_map_link')) {
 		$type = isset($type) ? "{$type}" : "";
 		$map_w = isset($map_w) ? "{$map_w}" : 400;
 		$map_h = isset($map_h) ? "{$map_h}" : 400;
+		$map_image_class = isset($map_image_class) ? "{$map_image_class}" : '';
 
 		$gaddress = ($address != '' ? $address : '') . ($city != '' ? ',' . $city : '') . ($state != '' ? ',' . $state : '') . ($zip != '' ? ',' . $zip : '') . ($country != '' ? ',' . $country : '');
 
@@ -1198,7 +1199,7 @@ function espresso_ticket_links($registration_id, $attendee_id) {
 			if (function_exists('espresso_ticket_launch')) {
 				$ticket_url = espresso_ticket_url($attendee->id, $attendee->registration_id);
 			}
-			$ticket_link .= '<a href="' . $ticket_url . '">' . __('Download/Print Ticket') . ' (' . $attendee->fname . ' ' . $attendee->lname . ')' . '</a>' . $break;
+			$ticket_link .= '<a href="' . $ticket_url . '">' . __('Download/Print Ticket', 'event_espresso') . ' (' . $attendee->fname . ' ' . $attendee->lname . ')' . '</a>' . $break;
 		}
 		return '<p>' . $group . $ticket_link . '</p>';
 	}

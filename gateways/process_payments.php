@@ -139,7 +139,10 @@ function espresso_prepare_event_link($payment_data) {
 add_filter('filter_hook_espresso_prepare_event_link', 'espresso_prepare_event_link');
 
 function event_espresso_txn() {
-	global $wpdb, $org_options;
+
+	ob_start();
+
+	global $wpdb, $org_options, $espresso_content;
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	$active_gateways = get_option('event_espresso_active_gateways', array());
 	if (empty($active_gateways)) {
@@ -177,6 +180,12 @@ function event_espresso_txn() {
 	}
 	$_REQUEST['page_id'] = $org_options['return_url'];
 	ee_init_session();
+
+	$espresso_content = ob_get_contents();
+	ob_end_clean();
+	add_shortcode('ESPRESSO_TXN_PAGE', 'espresso_return_espresso_content');	
+	return $espresso_content;
+	
 }
 
 function deal_with_ideal() {

@@ -5,7 +5,7 @@ require_once('includes/paypal.nvp.class.php');
 
 // Setup PayPal object
 $PayPalConfig = array('Sandbox' => $sandbox, 'APIUsername' => $api_username, 'APIPassword' => $api_password, 'APISignature' => $api_signature);
-$PayPal = new PayPal($PayPalConfig);
+$PayPal = new Espresso_PayPal($PayPalConfig);
 
 // Populate data arrays with order data.
 $GBFields = array(

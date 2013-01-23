@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.29.2.P
+  Version: 3.1.30.6P-BETA
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,7 +32,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.29.2.P';
+	return '3.1.30.6P-BETA';
 }
 
 //This tells the system to check for updates to the paid version
@@ -66,10 +66,8 @@ function ee_init_session($admin_override = false) {
 		do_action( 'action_hook_espresso_zero_vlm_dscnt_in_session' ); 
 	}
 }
-
 add_action('init', 'ee_init_session', 1);
 
-add_action('admin_init', 'ee_check_for_export');
 
 function ee_check_for_export() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
@@ -80,16 +78,20 @@ function ee_check_for_export() {
 		}
 	}
 }
+add_action('admin_init', 'ee_check_for_export');
+
 
 function espresso_info_header() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	print( "<meta name='generator' content='Event Espresso Version " . EVENT_ESPRESSO_VERSION . "' />");
 }
-
 add_action('wp_head', 'espresso_info_header');
 
+
 //Globals
-global $org_options, $wpdb, $this_is_a_reg_page;
+global $org_options, $wpdb, $this_is_a_reg_page, $espresso_content;
+$espresso_content = '';
+
 $org_options = get_option('events_organization_settings');
 	
 if (empty($org_options['event_page_id'])) {
@@ -98,52 +100,89 @@ if (empty($org_options['event_page_id'])) {
 	$org_options['cancel_return'] = '';
 	$org_options['notify_url'] = '';
 }
-$page_id = isset($_REQUEST['page_id']) ? $_REQUEST['page_id'] : '';
 
 //Registration page check
 //From Brent C. http://events.codebasehq.com/projects/event-espresso/tickets/99
 $this_is_a_reg_page = FALSE;
-$reg_page_ids = array(
-		'event_page_id' => $org_options['event_page_id'],
-		'return_url' => $org_options['return_url'],
-		'cancel_return' => $org_options['cancel_return'],
-		'notify_url' => $org_options['notify_url']
-);
+$espresso_events = TRUE;
+
+//$reg_page_ids = array(
+//		'event_page_id' => $org_options['event_page_id'],
+//		'return_url' => $org_options['return_url'],
+//		'cancel_return' => $org_options['cancel_return'],
+//		'notify_url' => $org_options['notify_url']
+//);
+
 
 if (is_ssl()) {
 	$find = str_replace('https://', '', site_url());
 } else {
 	$find = str_replace('http://', '', site_url());
-}	 
-	
-$find = str_replace($_SERVER['SERVER_NAME'], '', $find);
-$uri_string = str_replace($find, '', $_SERVER['REQUEST_URI']);
-$uri_string = isset($_SERVER['QUERY_STRING'])?str_replace($_SERVER['QUERY_STRING'], '', $uri_string):$uri_string;
-$uri_string = rtrim($uri_string, '?');
-$uri_string = trim($uri_string, '/');
-$this_page = basename($uri_string);
-$uri_segments = explode('/', $uri_string);
+}	
 
-foreach ($uri_segments as $uri_segment) {
-	if ( $uri_segment != '' ) {
-		$seg_page_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment));
-		if ($wpdb->num_rows > 0) {
-			if (in_array($seg_page_id, $reg_page_ids)) {
-				$this_is_a_reg_page = TRUE;
-			}
+
+function espresso_shortcode_pages( $page_id ) {
+
+	global $org_options, $this_is_a_reg_page;
+	$reg_page_ids = array(
+			$org_options['event_page_id'] => 'event_page_id',
+			$org_options['return_url'] => 'return_url',
+			$org_options['cancel_return'] => 'cancel_return',
+			$org_options['notify_url'] => 'notify_url'
+	);
+
+	if ( isset( $reg_page_ids[ $page_id ] )) {
+		switch( $reg_page_ids[ $page_id ] ) {
+			case 'event_page_id' :
+					$this_is_a_reg_page = TRUE;
+					add_action( 'init', 'event_espresso_run', 100 );
+				break;
+			case 'return_url' :
+					$this_is_a_reg_page = TRUE;
+					add_action( 'init', 'event_espresso_pay', 100 );
+				break;
+			case 'notify_url' :
+					$this_is_a_reg_page = TRUE;
+					add_action( 'init', 'event_espresso_txn', 100 );
+				break;
 		}		
-	} else {
-		if ( get_option('show_on_front') == 'page' ) {
-			$frontpage = get_option('page_on_front');
-			if ( in_array( $frontpage, $reg_page_ids )) {
-				$this_is_a_reg_page = TRUE;
-			}
-		}
 	}
 
 }
-if (isset($_REQUEST['page_id']) || is_admin())
+
+$page_id = isset($_REQUEST['page_id']) ? $_REQUEST['page_id'] : '';
+
+if ( ! empty( $page_id )) {
+	espresso_shortcode_pages( $page_id );
+} else {
+	// try to find post_name via the url
+	$find = str_replace($_SERVER['SERVER_NAME'], '', $find);
+	$uri_string = str_replace($find, '', $_SERVER['REQUEST_URI']);
+	$uri_string = isset($_SERVER['QUERY_STRING'])?str_replace($_SERVER['QUERY_STRING'], '', $uri_string):$uri_string;
+	$uri_string = rtrim($uri_string, '?');
+	$uri_string = trim($uri_string, '/');
+	$uri_segments = explode('/', $uri_string);
+	// then find the page id via the post_name
+	foreach ( $uri_segments as $uri_segment ) {
+		if ( $uri_segment != '' ) {
+			$page_id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment ));
+			if ( $wpdb->num_rows > 0 ) {
+				espresso_shortcode_pages( $page_id );
+			}		
+		} else {
+			if ( get_option('show_on_front') == 'page' ) {
+				$frontpage = get_option('page_on_front');
+				espresso_shortcode_pages( $frontpage );
+			}
+		}
+
+	}
+}
+
+
+if ( is_admin() ) {
 	$this_is_a_reg_page = TRUE;
+}
 	
 
 
@@ -185,6 +224,10 @@ define("EVENT_ESPRESSO_GATEWAY_DIR", $event_espresso_gateway_dir);
 define("EVENT_ESPRESSO_GATEWAY_URL", $wp_content_url . '/uploads/espresso/gateways/');
 //End - Define dierectory structure for uploads
 
+//Languages folder/path
+define( 'EE_LANGUAGES_SAFE_LOC', '../uploads/espresso/languages/');
+define( 'EE_LANGUAGES_SAFE_DIR', $event_espresso_upload_dir.'languages/');
+
 require_once EVENT_ESPRESSO_PLUGINFULLPATH . 'class/espresso_log.php';
 foreach ($_REQUEST as $key => $value) {
 	if ($key == 'cc' || $key == 'card_num' || $key == 'EPS_CARDNUMBER') {
@@ -224,9 +267,6 @@ define("EVENTS_LOCALE_REL_TABLE", $wpdb->prefix . "events_locale_rel");
 define("EVENTS_PERSONNEL_TABLE", $wpdb->prefix . "events_personnel");
 define("EVENTS_PERSONNEL_REL_TABLE", $wpdb->prefix . "events_personnel_rel");
 
-//Languages folder
-define( 'EE_LANGUAGES_LOC', '../uploads/espresso/languages/');
-
 //Added by Imon
 define("EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE", $wpdb->prefix . "events_multi_event_registration_id_group");
 //define("EVENTS_ATTENDEE_COST_TABLE", $wpdb->prefix . "events_attendee_cost");
@@ -235,12 +275,93 @@ define("EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE", $wpdb->prefix . "events
 //print get_locale();
 //setlocale(LC_ALL, get_locale());
 setlocale(LC_TIME, get_locale());
-
+	
 //Get language files
 function espresso_load_language_files() {
-	load_plugin_textdomain('event_espresso', false, EE_LANGUAGES_LOC);
+	$lang = WPLANG;
+	espresso_sideload_current_lang();
+
+
+	if ( !empty($lang) && file_exists(EE_LANGUAGES_SAFE_DIR.'event_espresso-'.$lang.'.mo') ){
+		load_plugin_textdomain('event_espresso', false, EE_LANGUAGES_SAFE_LOC);
+	}else{
+		load_plugin_textdomain('event_espresso', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+	}
 }
 add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
+
+
+function espresso_sideload_current_lang() {
+	$lang = WPLANG;
+	//first let's see if we've already done an existing file check. || if WPLANG is present
+	if ( $has_check = get_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION) || empty($lang) )
+		return;
+
+	//made it here so let's get the file from the github repo
+	$git_path = 'https://github.com/eventespresso/languages/blob/master/event_espresso-' . $lang . '.mo?raw=true';
+
+	//here's the download stuff
+	$temp_dir = get_temp_dir();
+	$tmp_file = basename($git_path);
+	$tmp_file = preg_replace('|\..*$|', '.tmp', $tmp_file);
+	$tmp_file = $temp_dir . wp_unique_filename($temp_dir, $tmp_file);
+	touch($tmp_file);
+	
+	if ( !$tmp_file ) {
+		add_action('admin_notices', 'espresso_lang_sideload_error');
+		update_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION, 1);
+		return;
+	}
+
+	$response = wp_remote_get( $git_path, array( 'timeout' => 500, 'stream' => true, 'filename' => $tmp_file ) );
+
+
+	if ( is_wp_error($response) || 200 != wp_remote_retrieve_response_code( $response ) ) {
+		@unlink($tmp_file);
+		add_action('admin_notices', 'espresso_lang_sideload_error');
+		update_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION, 1);
+		return;
+	}
+
+
+	$file = $tmp_file;
+
+
+
+	//k we have the file now let's get it in the right directory with the right name.
+	$new_name = 'event_espresso-' . $lang . '.mo';
+	$new_path = EVENT_ESPRESSO_PLUGINFULLPATH . '/languages/' . $new_name;
+
+	//move file in
+	if ( false === @ rename( $file, $new_path ) ) {
+		add_action('admin_notices', 'espresso_lang_sideload_error_file_move');
+		update_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION, 1);
+		return;
+	}
+	
+	//set correct permissions
+	$perms = 0644;
+	@ chmod( $new_path, $perms);
+
+	//made it this far all looks good. So let's save option flag
+	update_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION, 1);
+	return; 
+}
+
+function espresso_lang_sideload_error() {
+	$content = '<div class="updated">' . "\n\t";
+	$content .= '<p>' . _e('Something went wrong while trying to download the current language file for Event Espresso.  Either github is not available, or we don\'t have a language file for your existing language.', 'event_espresso') . '</p>' . "\n";
+	$content .= '</div>' . "\n";
+	echo $content;
+}
+
+
+function espresso_lang_sideload_error_file_move() {
+	$content = '<div class="updated">' . "\n\t";
+	$content .= '<p>' . _e('Something went wrong while trying to download the current language file for Event Espresso.  It looks like event-espresso was unable to move the file into the correct directory (possible permissions errors)', 'event_espresso') . '</p>' . "\n";
+	$content .= '</div>' . "\n";
+	echo $content;
+}
 
 //Addons
 //Ticketing
@@ -393,7 +514,7 @@ require_once("includes/functions/admin.php");
 
 //Admin only files
 if (is_admin()) {
-
+	do_action('action_hook_espresso_include_admin_files_start'); 
 	if ($espresso_premium != true)
 		require_once("includes/test_drive_pro.php");
 	
@@ -499,6 +620,11 @@ if (is_admin()) {
 	if ( isset($_REQUEST['page']) && $_REQUEST['page'] == 'support' ) {
 		require_once("includes/admin_support.php");
 	}
+	
+	//System Status
+	if ( isset($_REQUEST['page']) && $_REQUEST['page'] == 'espresso-system-status' ) {
+		require_once("includes/espresso-admin-status.php");
+	}
 
 	//Admin Reporting
 	//require_once("includes/admin-reports/index.php");
@@ -507,7 +633,7 @@ if (is_admin()) {
 
 	//Load scripts and styles for the admin
 	if (isset($_REQUEST['page'])) {
-		$espresso_pages = array(
+		$espresso_pages = apply_filters('filter_hook_espresso_admin_pages_list',array(
 				'event_espresso',
 				'discounts',
 				'groupons',
@@ -533,8 +659,9 @@ if (is_admin()) {
 				'espresso_permissions',
 				'roles',
 				'event_locales',
+				'espresso-system-status',
 				'event_groups'
-		);
+		));
 		if (in_array($_REQUEST['page'], $espresso_pages)) {
 			add_action('admin_print_scripts', 'event_espresso_config_page_scripts');
 			add_action('admin_print_styles', 'event_espresso_config_page_styles');
@@ -751,7 +878,7 @@ add_action('admin_menu', 'add_event_espresso_menus');
 if (!function_exists('event_espresso_run')) {
 
 	function event_espresso_run() {
-		global $wpdb, $org_options, $load_espresso_scripts;
+		global $wpdb, $org_options, $load_espresso_scripts, $espresso_content;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$load_espresso_scripts = true; //This tells the plugin to load the required scripts
 		ob_start();
@@ -817,9 +944,16 @@ if (!function_exists('event_espresso_run')) {
 
 		$content = ob_get_contents();
 		ob_end_clean();
-		return $content;
+		$espresso_content = $content;
+		add_shortcode( 'ESPRESSO_EVENTS', 'espresso_return_espresso_content' );
+		
 	}
 
+}
+
+function espresso_return_espresso_content() {
+	global $espresso_content;
+	return $espresso_content;
 }
 
 function espresso_cancelled() {
@@ -828,12 +962,8 @@ function espresso_cancelled() {
 	$_REQUEST['page_id'] = $org_options['return_url'];
 	ee_init_session();
 }
-
-//New way of doing it with shortcodes
-add_shortcode('ESPRESSO_PAYMENTS', 'event_espresso_pay');
-add_shortcode('ESPRESSO_TXN_PAGE', 'event_espresso_txn');
-add_shortcode('ESPRESSO_EVENTS', 'event_espresso_run');
 add_shortcode('ESPRESSO_CANCELLED', 'espresso_cancelled');
+
 
 
 /*

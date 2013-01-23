@@ -9,6 +9,8 @@ if (!function_exists('register_attendees')) {
     function register_attendees($single_event_id = NULL, $event_id_sc =0, $reg_form_only = false) {
 		//Declare the $data object
 		$data = (object)array( 'event' => NULL );
+		$template_name = ( 'registration_page_display.php' );
+		$path = locate_template( $template_name );
 		
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 		//Run code for the seating chart addon
@@ -284,8 +286,11 @@ if (!function_exists('register_attendees')) {
                         event_espresso_user_login();
                     } else {
                         //Serve up the registration form
-                        //As of version 3.0.17 the registration details have been moved to registration_form.php
-                        require('registration_page_display.php');
+						if ( empty( $path ) ) {
+						  require( $template_name );
+						} else {
+						  require( $path );
+						}
                     }
                 }//End if ($num_attendees >= $reg_limit) (Shows the regsitration form if enough spaces exist)
             } else {//If there are no results from the query, display this message

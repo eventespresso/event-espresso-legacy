@@ -290,6 +290,7 @@ function add_event_to_db($recurrence_arr = array()) {
 		 */
 
         //Add event to a category
+		$string_cat = '';
         if (isset($_REQUEST['event_category']) && $_REQUEST['event_category'] != '') {
             foreach ($_REQUEST['event_category'] as $k => $v) {
                 if ($v != '') {
@@ -298,8 +299,24 @@ function add_event_to_db($recurrence_arr = array()) {
                     if ( !$wpdb->query($wpdb->prepare($sql_cat, NULL)) ) {
                         $error = true;
                     }
+                    //BEGIN CATEGORY MODIFICATION
+                    //We get the category id's of the event and put them in events_detail_table.category_id as a well-formatted string (id,n id)
+                    $string_cat.=$v.",";
                 }
             }
+
+            if($string_cat != "" && $string_cat != ","){
+            $cleaned_string_cat = substr($string_cat, 0, -1);
+            $tmp=explode(",",$cleaned_string_cat);
+            sort($tmp);
+            $cleaned_string_cat=implode(",", $tmp);
+            trim($cleaned_string_cat);
+
+            $sql_insert_event_detail_category_id="UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = '".$cleaned_string_cat."' WHERE id='" . $last_event_id . "'";
+            $wpdb->query($wpdb->prepare($sql_insert_event_detail_category_id, NULL));
+            }
+
+            //END CATEGORY MODIFICATION
         }
 
         if (isset($_REQUEST['event_person']) && !empty($_REQUEST['event_person'])) {
@@ -364,9 +381,13 @@ function add_event_to_db($recurrence_arr = array()) {
                     $price_type = $_REQUEST['price_type'][$k] != '' ? $_REQUEST['price_type'][$k] : __('General Admission', 'event_espresso');
                     $member_price_type = !empty($_REQUEST['member_price_type'][$k]) ? $_REQUEST['member_price_type'][$k] : __('Members Admission', 'event_espresso');
                     $member_price = !empty($_REQUEST['member_price'][$k]) ? $_REQUEST['member_price'][$k] : $v;
-                    $sql_price = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, surcharge_type, price_type, member_price, member_price_type) VALUES ('" . $last_event_id . "', '" . $v . "', '" . $_REQUEST['surcharge'][$k] . "', '" . $_REQUEST['surcharge_type'][$k] . "', '" . $price_type . "', '" . $member_price . "', '" . $member_price_type . "')";
+                    //$sql_price = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, surcharge_type, price_type, member_price, member_price_type) VALUES ('" . $last_event_id . "', '" . $v . "', '" . $_REQUEST['surcharge'][$k] . "', '" . $_REQUEST['surcharge_type'][$k] . "', '" . $price_type . "', '" . $member_price . "', '" . $member_price_type . "')";
                     //echo "$sql3 <br>";
-                    if ( !$wpdb->query( $wpdb->prepare($sql_price, NULL) ) ) {
+                    
+					$sql_price = array('event_id' => $last_event_id, 'event_cost' => $v, 'surcharge' => $_REQUEST['surcharge'][$k], 'surcharge_type' => $_REQUEST['surcharge_type'][$k], 'price_type' => $price_type, 'member_price' => $member_price, 'member_price_type' => $member_price_type );
+					$sql_price_data = array('%d', '%s', '%s', '%s', '%s', '%s', '%s');
+					
+					if ( !$wpdb->insert(EVENTS_PRICES_TABLE, $sql_price, $sql_price_data) ) {
                         $error = true;
                     }
                 }

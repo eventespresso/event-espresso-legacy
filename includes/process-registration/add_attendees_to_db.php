@@ -5,7 +5,8 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 	//This entire function can be overridden using the "Custom Files" addon
 	function event_espresso_add_attendees_to_db( $event_id = NULL, $session_vars = NULL, $skip_check = FALSE ) {
-	
+		
+		//printr( $_SESSION, '$_SESSION  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		//echo '<h3>'. __CLASS__ . '->' . __FUNCTION__ . ' <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h3>';
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 

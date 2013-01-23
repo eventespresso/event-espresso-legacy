@@ -405,16 +405,24 @@ function espresso_display_beanstream($data) {
 							</p>
 			
 			
-							<p>
-								<label for="card-exp"><?php _e('Expiration Month', 'event_espresso'); ?></label>
-								<select id="ppp_card-exp" name ="expmonth" class="required">
-			
-									<?php
-									for ($i = 1; $i < 13; $i++)
-										echo "<option value='$i'>$i</option>";
-									?>
-			
-								</select>
+							<p>				
+									<?php 
+							$currentMonth=date('m');
+							$months=array();
+							for($i=0;$i<12;$i++){
+								$months[$i]['id']=sprintf("%02s",$i+1);
+								$months[$i]['text']=$months[$i]['id'];
+							}
+						
+						?>
+						<label for="exp_date"><?php _e('Expiration Month', 'event_espresso'); ?></label>
+						<?php echo select_input('expmonth',$months,$currentMonth);?>
+								
+								
+								
+								
+								
+								
 			
 							</p>
 			

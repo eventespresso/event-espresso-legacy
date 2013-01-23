@@ -98,7 +98,7 @@ if ($payment_status != 'Completed') {
 
 
 //Instanciation of inherited class
-$pdf = new PDF();
+$pdf = new Espresso_PDF();
 $pdf->AliasNbPages();
 $pdf->SetAuthor(pdftext($org_options['organization']));
 if (isset($invoice_payment_settings['pdf_title'])) {
@@ -160,13 +160,13 @@ foreach ($registration_ids as $reg_id) {
 		$sub_total = $tmp_attendee["final_price"] * $tmp_attendee["quantity"];
 		$orig_total = $tmp_attendee["orig_price"] * $tmp_attendee["quantity"];
 		$attendees[] = $pdf->LoadData(array(
-				pdftext($tmp_attendee["event_name"] . "[" . date('m-d-Y', strtotime($tmp_attendee['start_date'])) . "]") . ' >> '
-				. pdftext(html_entity_decode($tmp_attendee["fname"], ENT_QUOTES, "UTF-8") . " " . html_entity_decode($tmp_attendee["lname"], ENT_QUOTES, "UTF-8")) . ';'
-				. pdftext($tmp_attendee["quantity"]) . ';'
-				. doubleval($tmp_attendee["final_price"]) . ';'
-				. doubleval($sub_total)
-						)
-		);	 
+			pdftext($tmp_attendee["event_name"] . "[" . date('m-d-Y', strtotime($tmp_attendee['start_date'])) . "]") . ' >> '
+			. pdftext(html_entity_decode($tmp_attendee["fname"], ENT_QUOTES, "UTF-8") . " " . html_entity_decode($tmp_attendee["lname"], ENT_QUOTES, "UTF-8")) . ';'
+			. pdftext($tmp_attendee["quantity"]) . ';'
+			. doubleval($tmp_attendee["final_price"]) . ';'
+			. doubleval($sub_total)
+				)
+		);
 		$total_cost += $sub_total;
 		$total_orig_cost += $orig_total;
 		$total_amount_pd += $tmp_attendee["amount_pd"];
@@ -185,7 +185,7 @@ $pdf->Ln();
 //if ( $total_amount_pd != $total_cost ) {
 $pdf->InvoiceTotals(__('Total:', 'event_espresso'), $total_cost, $left, $right);
 $text = __('Amount Paid:', 'event_espresso');
-$pdf->InvoiceTotals($text, $total_amount_pd, $left, $right);	
+$pdf->InvoiceTotals($text, $total_amount_pd, $left, $right);
 //	$discount = $total_orig_cost - $total_cost;
 //	if ($discount > 0) {
 //		$text = __('Discount:', 'event_espresso');
@@ -210,7 +210,7 @@ if (isset($invoice_payment_settings['pdf_instructions'])) {
 $payment_link = home_url() . "/?page_id=" . $org_options['return_url'] . "&r_id=" . $registration_id;
 
 $pdf->SetFont('Arial', 'BU', 20);
-$pdf->Cell(200,20,'Pay Online',0,1,'C',0,$payment_link);//Set payment link
+$pdf->Cell(200, 20, 'Pay Online', 0, 1, 'C', 0, $payment_link); //Set payment link
 
 $pdf->Output('Invoice_' . $attendee_id . '_' . $event_identifier . '.pdf', 'D');
 exit;

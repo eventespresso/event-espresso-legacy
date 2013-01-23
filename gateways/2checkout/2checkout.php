@@ -1,7 +1,7 @@
 <?php
 
 $twocheckout_gateway_version = '1.0';
-class TwoCo extends PaymentGateway
+class Espresso_TwoCo extends Espresso_PaymentGateway
 {
     /**
      * Secret word to be used for IPN verification

@@ -6,9 +6,9 @@
  * This class builds the payment buttons/forms
  *
  * */
-if (!class_exists('PaymentGateway')) {
+if (!class_exists('Espresso_PaymentGateway')) {
 
-    abstract class PaymentGateway {
+    abstract class Espresso_PaymentGateway {
 
         /**
          * Holds the last error encountered

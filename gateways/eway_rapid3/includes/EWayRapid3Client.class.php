@@ -14,7 +14,7 @@ if(session_id()=="")
  * 
  * @author mnelson4
  */
-class EWayRapid3Client{
+class Espresso_EWayRapid3Client{
 	private $useSandbox=false;
 	private $apiKey;
 	private $apiPassword;
@@ -73,7 +73,7 @@ class EWayRapid3Client{
 		$endpoint=$this->getEndpoint('CreateAccessCode');
 		$customerDetailsArray['RedirectUrl']=$redirectUrl;
 		$customerDetailsArray['Method']=$method;
-		$customerDetailsArray['CustomerIP']=$_REQUEST['REMOTE_ADDR'];
+		$customerDetailsArray['CustomerIP']=array_key_exists('REMOTE_ADDR',$_REQUEST)?$_REQUEST['REMOTE_ADDR']:'';
 		$result=$this->curlRequest($endpoint, $customerDetailsArray);
 		//echo "result";
 		//		var_dump($result);

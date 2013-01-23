@@ -9,7 +9,7 @@
  */
 $eway_gateway_version = '1.0';
 
-class eway extends PaymentGateway {
+class Espresso_Eway extends Espresso_PaymentGateway {
 
 	var $eway_settings = NULL;
 

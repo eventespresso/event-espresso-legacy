@@ -5,7 +5,7 @@
 		}else{
 		$currency_sign = html_entity_decode( $org_options[ 'currency_symbol' ], ENT_QUOTES, 'UTF-8' );
 		}
-class PDF extends FPDF{
+class Espresso_PDF extends Espresso_FPDF{
 	//Page header
 	function Header(){
 		global $org_options;
