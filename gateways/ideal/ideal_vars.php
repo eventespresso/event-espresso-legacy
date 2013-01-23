@@ -3,13 +3,13 @@
 function espresso_process_ideal($payment_data) {
 	global $org_options, $wpdb;
 	$ideal_mollie_settings = get_option('event_espresso_ideal_mollie_settings');
-	require_once('ideal.class.php');
+	require_once('ideal2.class.php');
 	$partner_id = $ideal_mollie_settings['ideal_mollie_partner_id'];
 	//$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
 	$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
 //amount needs to be in cents
 	$amount = (int) ($payment_data['total_cost'] * 100);
-	$iDEAL = new Espresso_iDEAL_Payment($partner_id);
+	$iDEAL = new Mollie_iDEAL_Payment($partner_id);
 
 	if ($ideal_mollie_settings['ideal_mollie_use_sandbox'])
 		$iDEAL->setTestMode();
@@ -70,7 +70,7 @@ function espresso_process_ideal($payment_data) {
 				</fieldset>
 				<input name="amount" type="hidden" value="<?php echo $amount; ?>" />
 				<input name="ideal" type="hidden" value="1" />
-				<input name="id" type="hidden" value="<?php echo $payment_data['attendee_id']; ?>" />
+				<input name="id" type="hidden" value="<?php echo $payment_data['attendee_id']; ?>" />				
 				<p class="event_form_submit">
 					<input id="submit_ideal" type="submit" class="submit-payment-btn" name="submit" value="Betaal via iDEAL" />
 				</p>
