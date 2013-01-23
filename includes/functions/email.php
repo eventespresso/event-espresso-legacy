@@ -241,7 +241,7 @@ function espresso_prepare_email_data($attendee_id, $multi_reg, $custom_data='') 
 	//New ticketing system version 2.0
 	if (function_exists('espresso_ticket_launch')) {
 		$data->qr_code = espresso_ticket_qr_code( array('attendee_id' => $data->attendee->id, 'registration_id' => $data->attendee->registration_id, 'event_code' => $data->event->event_code ));
-		$data->ticket_link = espresso_ticket_links($data->attendee->registration_id, $data->attendee->id);
+		$data->ticket_link = espresso_ticket_links($data->attendee->registration_id, $data->attendee->id, TRUE);
 		$data->admin_ticket_link = $data->ticket_link;
 	}
 
