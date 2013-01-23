@@ -1199,7 +1199,7 @@ function espresso_ticket_links($registration_id, $attendee_id) {
 			if (function_exists('espresso_ticket_launch')) {
 				$ticket_url = espresso_ticket_url($attendee->id, $attendee->registration_id);
 			}
-			$ticket_link .= '<a href="' . $ticket_url . '">' . __('Download/Print Ticket', 'event_espresso') . ' (' . $attendee->fname . ' ' . $attendee->lname . ')' . '</a>' . $break;
+			$ticket_link .= '<a href="' . $ticket_url . '" target="_blank">' . $attendee->fname . ' ' . $attendee->lname . '</a>' . $break;
 		}
 		return '<p>' . $group . $ticket_link . '</p>';
 	}
