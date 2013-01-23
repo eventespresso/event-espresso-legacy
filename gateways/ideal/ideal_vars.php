@@ -25,7 +25,7 @@ function espresso_process_ideal($payment_data) {
 //Find the correct amount so that unsavory characters don't change it in the previous form
 
 		$description = stripslashes_deep($payment_data['event_name']);
-		echo sprintf("bank id%s,amoun%s,description%s,returnurl%sreporturl%s",$_POST['bank_id'], $amount, $description, $return_url, $report_url);
+		//echo sprintf("bank id%s,amoun%s,description%s,returnurl%sreporturl%s",$_POST['bank_id'], $amount, $description, $return_url, $report_url);
 		if ($iDEAL->createPayment($_POST['bank_id'], $amount, $description, $return_url, $report_url)) {
 			header("Location: " . $iDEAL->getBankURL());
 			exit;
@@ -59,7 +59,6 @@ function espresso_process_ideal($payment_data) {
 					<h4 class="section-title"><?php _e('Select Bank', 'event_espresso') ?></h4>
 					<p>
 						<select id ="bank_id" name="bank_id" class="required">
-							<option value=''>Kies uw bank</option>
 
 							<?php foreach ($bank_array as $bank_id => $bank_name) { ?>
 								<option value="<?php echo $bank_id ?>"><?php echo $bank_name ?></option>
@@ -71,6 +70,7 @@ function espresso_process_ideal($payment_data) {
 				<input name="amount" type="hidden" value="<?php echo $amount; ?>" />
 				<input name="ideal" type="hidden" value="1" />
 				<input name="id" type="hidden" value="<?php echo $payment_data['attendee_id']; ?>" />				
+				<input name='registration_id' type='hidden' value='<?php echo $payment_data['registration_id']?>'/>
 				<p class="event_form_submit">
 					<input id="submit_ideal" type="submit" class="submit-payment-btn" name="submit" value="Betaal via iDEAL" />
 				</p>
