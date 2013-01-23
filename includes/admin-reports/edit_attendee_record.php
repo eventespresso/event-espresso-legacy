@@ -317,14 +317,18 @@ function edit_attendee_record() {
 							} else {
 								$post_val = isset( $_POST[ $question->question_type . '_' . $question->a_id ] ) ? $_POST[ $question->question_type . '_' . $question->a_id ] : '';
 							}
+							
+							//$post_val = apply_filters('filter_hook_espresso_parse_admin_question_response_for_price',$post_val, $question->price_mod);
 							$post_val = sanitize_text_field( stripslashes( $post_val ));
 							
 							break;
+							
 						case "MULTIPLE" :
 						
 							$post_val = '';
 							for ( $i = 0; $i < count( $_POST[ $question->question_type . '_' . $question->a_id ] ); $i++ ) {
-								$post_val .= trim( $_POST[ $question->question_type . '_' . $question->a_id ][$i] ) . ",";
+								$pval = apply_filters('filter_hook_espresso_parse_admin_question_response_for_price',trim( $_POST[ $question->question_type . '_' . $question->a_id ][$i] ), $question->price_mod);
+								$post_val .= $pval . ",";
 							}
 							$post_val = sanitize_text_field( substr( stripslashes( $post_val ), 0, -1 ));
 							
