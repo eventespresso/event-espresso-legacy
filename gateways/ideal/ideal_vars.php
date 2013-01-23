@@ -25,7 +25,7 @@ function espresso_process_ideal($payment_data) {
 //Find the correct amount so that unsavory characters don't change it in the previous form
 
 		$description = stripslashes_deep($payment_data['event_name']);
-
+		echo sprintf("bank id%s,amoun%s,description%s,returnurl%sreporturl%s",$_POST['bank_id'], $amount, $description, $return_url, $report_url);
 		if ($iDEAL->createPayment($_POST['bank_id'], $amount, $description, $return_url, $report_url)) {
 			header("Location: " . $iDEAL->getBankURL());
 			exit;
