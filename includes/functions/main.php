@@ -1304,3 +1304,65 @@ if (!function_exists('espresso_display_featured_image')) {
 	}
 }
 add_filter('filter_hook_espresso_display_featured_image', 'espresso_display_featured_image',100,5);
+
+
+function espresso_save_attendee_meta($attendee_id, $meta_key, $meta_value){
+	global $wpdb;
+	
+	$notifications['error']	 = array();
+	//$wpdb->show_errors();
+	$set_cols_and_values = array( 
+		'attendee_id'=>$attendee_id, 
+		'meta_key'=>$meta_key, 
+		'meta_value'=>$meta_value 
+	);
+	$set_format = array( '%d', '%s', '%s' );
+	$where_cols_and_values = array( 'attendee_id'=>$attendee_id, 'meta_key'=>$meta_key );
+	$where_format = array( '%d', '%s' );
+	
+	$SQL = "SELECT ameta_id from " . EVENTS_ATTENDEE_META_TABLE . " WHERE attendee_id = '".$attendee_id."' AND meta_key = '".$meta_key."'";
+	$meta = $wpdb->get_results( $SQL );
+	$total_meta = $wpdb->num_rows;
+				
+	if ( $total_meta > 0 ){
+		
+		// run the update
+		$upd_success = $wpdb->update( EVENTS_ATTENDEE_META_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
+		// if there was an actual error
+		if ( $upd_success === FALSE ) {
+			$notifications['error'][] = __('An error occured while attempting to update the attendee meta.', 'event_espresso'); 
+		}
+	}else{
+		// save the new value
+		$save_success = $wpdb->insert( EVENTS_ATTENDEE_META_TABLE, $set_cols_and_values, $set_format );
+		if ( $save_success === FALSE ) {
+			$notifications['error'][] = __('An error occured while attempting to save the attendee meta.', 'event_espresso'); 
+		}
+	}
+	
+	// display error messages
+	if ( ! empty( $notifications['error'] )) {
+		$error_msg = implode( $notifications['error'], '<br />' );
+	?>
+	<div id="message" class="error">
+		<p>
+			<strong><?php echo $error_msg; ?></strong>
+		</p>
+	</div>
+	<?php 
+	//$wpdb->print_error();
+	}
+}
+add_action('action_hook_espresso_save_attendee_meta', 'espresso_save_attendee_meta', 10, 3);
+
+function espresso_get_attendee_meta_value($attendee_id, $meta_key) {
+	global $wpdb;
+	$sql = "SELECT meta_value FROM " . EVENTS_ATTENDEE_META_TABLE;
+	$sql .= " WHERE attendee_id = '" . $attendee_id . "' AND meta_key='".$meta_key."' ";
+	//echo $sql;
+	$wpdb->get_results($sql);
+	if ($wpdb->num_rows > 0) {
+		return $wpdb->last_result[0]->meta_value;
+	}
+}
+add_filter('action_hook_espresso_get_attendee_meta_value', 'espresso_get_attendee_meta_value', 10, 2);

@@ -347,7 +347,9 @@ if (!function_exists('event_espresso_price_dropdown')) {
                 if ($early_price_data = early_discount_amount($event_id, $result->event_cost)) {
                     $result->event_cost = $early_price_data['event_price'];
                     $message = __(' Early Pricing', 'event_espresso');
-                } else $message = '';
+                } else {
+					$message = '';
+				}
 
                 $surcharge = '';
 
@@ -420,28 +422,30 @@ function espresso_attendee_admin_price_dropdown($event_id, $atts) {
 		$html .= '<select name="price_option" id="price_option-' . $event_id . '">';
 
 		 foreach ($results as $result) {
+			 
+			$selected = isset($current_value) && $current_value == $result->price_type ? ' selected="selected" ' : '';
 
-                $selected = isset($current_value) && $current_value == $result->id ? ' selected="selected" ' : '';
+			// Addition for Early Registration discount
+			if ($early_price_data = early_discount_amount($event_id, $result->event_cost)) {
+				$result->event_cost = $early_price_data['event_price'];
+				$message = __(' Early Pricing', 'event_espresso');
+			} else {
+				$message = '';
+			}
 
-                // Addition for Early Registration discount
-                if ($early_price_data = early_discount_amount($event_id, $result->event_cost)) {
-                    $result->event_cost = $early_price_data['event_price'];
-                    $message = __(' Early Pricing', 'event_espresso');
-                } else $message = '';
+			$surcharge = '';
 
-                $surcharge = '';
+			if ($result->surcharge > 0 && $result->event_cost > 0.00) {
+				$surcharge = " + {$org_options['currency_symbol']}{$result->surcharge} " . $surcharge_text;
+				if ($result->surcharge_type == 'pct') {
+					$surcharge = " + {$result->surcharge}% " . $surcharge_text;
+				}
+			}
 
-                if ($result->surcharge > 0 && $result->event_cost > 0.00) {
-                    $surcharge = " + {$org_options['currency_symbol']}{$result->surcharge} " . $surcharge_text;
-                    if ($result->surcharge_type == 'pct') {
-                        $surcharge = " + {$result->surcharge}% " . $surcharge_text;
-                    }
-                }
-
-                //Using price ID
-                $html .= '<option' . $selected . ' value="' . $result->id . '|' . $result->price_type . '">' . $result->price_type . ' (' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . ') ' . $surcharge . ' </option>';
-            }
-            $html .= '</select><input type="hidden" name="price_select" id="price_select-' . $event_id . '" value="true" />';
+			//Using price ID
+			$html .= '<option' . $selected . ' value="' . $result->id . '|' . $result->price_type . '">' . $result->price_type . ' (' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . ') ' . $surcharge . ' </option>';
+		}
+		$html .= '</select><input type="hidden" name="price_select" id="price_select-' . $event_id . '" value="true" />';
 		
 	}
 	//echo 'ts';
