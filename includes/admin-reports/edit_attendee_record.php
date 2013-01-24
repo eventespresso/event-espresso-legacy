@@ -121,7 +121,7 @@ function edit_attendee_record() {
 					$upd_success = $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
 					// if there was an actual error
 					if ( $upd_success === FALSE ) {
-						$notifications['error'][] = __('An error occured while attempting to update the payment status for attendeefrom this registration.', 'event_espresso'); 
+						$notifications['error'][] = __('An error occured while attempting to update the payment status for attendee from this registration.', 'event_espresso'); 
 					}					
 				}
 				
@@ -203,6 +203,9 @@ function edit_attendee_record() {
 			if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'edit_attendee_' . $registration_id . '_update_attendee_nonce' )) {
 				wp_die( $failed_nonce_msg );
 			}
+			
+			do_action('action_hook_espresso_attendee_mover_move');
+			//echo $_POST['event_id'];
 
 			$event_id = isset($_POST['event_id']) ? $_POST['event_id'] : '';
 			$txn_type = isset($_POST['txn_type']) ? $_POST['txn_type'] : '';
@@ -233,7 +236,18 @@ function edit_attendee_record() {
 					array_push( $set_format, '%s', '%s' );
 				}
 			}
-
+			
+			if ( isset( $_POST['price_select'] ) && $_POST['price_select'] == TRUE ) {
+				
+				//Figure out if the person has registered using a price selection
+				$price_options = explode( '|', $_POST['price_option'], 2 );
+				$price_id = $price_options[0];
+				$price_type = $price_options[1];
+				
+				$set_cols_and_values['price_option'] = $price_type;
+				array_push( $set_format, '%s' );
+			}
+			
 			//printr( $_POST, '$_POST  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 			
 			$where_cols_and_values = array( 'id'=> $id );
@@ -429,6 +443,7 @@ function edit_attendee_record() {
 				$total_cost = $attendee->total_cost;
 				$orig_price = $attendee->orig_price;
 				$final_price = $attendee->final_price;
+				$price_option = $attendee->price_option;
 
 				$start_date = $attendee->start_date;
 				$event_time = $attendee->event_time;
@@ -464,11 +479,11 @@ function edit_attendee_record() {
 			$success_msg = implode( $notifications['success'], '<br />' );
 		?>
 				
-<div id="message" class="updated fade">
-	<p>
-		<strong><?php echo $success_msg; ?></strong>
-	</p>
-</div>
+			<div id="message" class="updated fade">
+				<p>
+					<strong><?php echo $success_msg; ?></strong>
+				</p>
+			</div>
 
 		<?php
 		 } 
@@ -477,13 +492,15 @@ function edit_attendee_record() {
 			$error_msg = implode( $notifications['error'], '<br />' );
 		?>
 				
-<div id="message" class="error">
-	<p>
-		<strong><?php echo $error_msg; ?></strong>
-	</p>
-</div>
+			<div id="message" class="error">
+				<p>
+					<strong><?php echo $error_msg; ?></strong>
+				</p>
+			</div>
 
-		<?php } ?>
+		<?php 
+		}
+		?>
 		
 <div>		
 	<p>
@@ -510,6 +527,53 @@ function edit_attendee_record() {
 							</h4>
 							<fieldset>
 								<ul>
+									<li>
+									<?php 
+									$p_values	=	array(
+										array('id'=>'DEFAULT','text'=> __('Default Pricing','event_espresso')),
+										array('id'=>'MEMBER','text'=> __('Member Pricing','event_espresso'))
+									);
+									
+									echo select_input( 'price_option_type', $p_values,  'DEFAULT', 'id="price_option_type"');
+									?>
+									</li>
+									<li id="standard_price_selection">
+										<?php do_action( 'action_hook_espresso_attendee_admin_price_dropdown', $event_id, array('show_label'=>TRUE, 'label'=>'Price Option', 'current_value'=>$price_option) );?> 
+									</li>
+									<li id="members_price_selection">
+										<?php do_action( 'action_hook_espresso_attendee_admin_price_dropdown_member', $event_id, array('show_label'=>TRUE, 'label'=>'Member Price Option', 'current_value'=>$price_option) );?> 
+									</li>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+		// Remove li parent for input 'values' from page if 'text' box or 'textarea' are selected
+		var selectValue = jQuery('select#price_option_type option:selected').val();
+		//alert(selectValue + ' - this is initial value');
+		
+		if(selectValue == 'DEFAULT'){
+			jQuery('#members_price_selection').hide();
+			// we don't want the values field trying to validate if not displayed, remove its name
+			jQuery('#price_select-<?php echo $event_id ?> li input').attr("name","notrequired") 
+		}
+		
+		jQuery('select#price_option_type').bind('change', function() {
+			var selectValue = jQuery('select#price_option_type option:selected').val();
+				  
+			if (selectValue == 'MEMBER') {
+				jQuery('#members_price_selection').fadeIn('slow');
+				jQuery('#standard_price_selection').fadeOut('slow');
+				//alert(selectValue);
+				jQuery('li #standard_price_selection input').attr("name","notrequired");
+				jQuery('li #standard_price_selection select').attr("name","notrequired")  
+			} else {
+				//alert(selectValue);
+				jQuery('#standard_price_selection').fadeIn('slow');
+				jQuery('#members_price_selection').fadeOut('slow');
+				jQuery('#members_price_select-<?php echo $event_id ?> li input').attr("name","notrequired");
+				jQuery('#members_price_option-<?php echo $event_id ?> li select').attr("name","notrequired")
+			}
+		});
+});
+</script>
 									<li>
 										<?php
 										$time_id = 0;
@@ -580,6 +644,9 @@ function edit_attendee_record() {
 												}
 												?>
 									</li>
+									
+									<?php do_action('action_hook_espresso_attendee_mover_events_list', $event_id)?>
+									
 									<input type="hidden" name="id" value="<?php echo $id ?>" />
 									<input type="hidden" name="registration_id" value="<?php echo $registration_id ?>" />
 									<input type="hidden" name="event_id" value="<?php echo $event_id ?>" />
@@ -745,12 +812,14 @@ function edit_attendee_record() {
 							<input type="hidden" name="attendee_payment" value="update_price" />
 							<?php wp_nonce_field( 'edit_attendee_' . $registration_id . '_update_price_nonce' ); ?>
 						</form>
+						
 					</td>
 				</tr>
 			</table>
 		</div>
 	</div>
 </div>
+
 <?php
 	}
 }
