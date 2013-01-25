@@ -239,9 +239,9 @@ function edit_attendee_record() {
 			}
 			
 			if ( isset( $_POST['price_select'] ) && $_POST['price_select'] == TRUE ) {
-				
+				$selected_price_option = isset($_POST['new_price_option']) && !empty($_POST['new_price_option']) ? $_POST['new_price_option'] : $_POST['price_option'] ;
 				//Figure out if the person has registered using a price selection
-				$price_options = explode( '|', $_POST['new_price_option'], 2 );
+				$price_options = explode( '|', $selected_price_option, 2 );
 				$price_id = $price_options[0];
 				$price_type = $price_options[1];
 				
@@ -528,23 +528,24 @@ function edit_attendee_record() {
 							</h4>
 							<fieldset>
 								<ul>
-									<li>
-									<?php 
-									$p_values	=	array(
-										array('id'=>'DEFAULT','text'=> __('Default Pricing','event_espresso')),
-										array('id'=>'MEMBER','text'=> __('Member Pricing','event_espresso'))
-									);
-									echo select_input( 'price_option_type', $p_values, apply_filters('action_hook_espresso_get_attendee_meta_value', $id, 'price_option_type'), 'id="price_option_type"');
-									
-									?>
-									</li>
+								<?php if (function_exists('espresso_members_version')) { ?>
+										<li>
+										<?php 
+										$p_values =	array(
+											array('id'=>'DEFAULT','text'=> __('Default Pricing','event_espresso')),
+											array('id'=>'MEMBER','text'=> __('Member Pricing','event_espresso'))
+										);
+										echo select_input( 'price_option_type', $p_values, apply_filters('action_hook_espresso_get_attendee_meta_value', $id, 'price_option_type'), 'id="price_option_type"');
+										?>
+										<input type="hidden" name="new_price_option" id="new_price_option-<?php echo $event_id ?>" value="<?php echo $price_option ?>" />
+										</li>
+								<?php } ?>
 									<li id="standard_price_selection">
 										<?php do_action( 'action_hook_espresso_attendee_admin_price_dropdown', $event_id, array('show_label'=>TRUE, 'label'=>'Price Option', 'current_value'=>$price_option) );?> 
 									</li>
 									<li id="members_price_selection">
 										<?php do_action( 'action_hook_espresso_attendee_admin_price_dropdown_member', $event_id, array('show_label'=>TRUE, 'label'=>'Member Price Option', 'current_value'=>$price_option) );?> 
 									</li>
-									<input type="hidden" name="new_price_option" id="new_price_option-<?php echo $event_id ?>" value="<?php echo $price_option ?>" />
 									
 									<li>
 										<?php
@@ -791,60 +792,62 @@ function edit_attendee_record() {
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		// Remove li parent for input 'values' from page if 'text' box or 'textarea' are selected
-		var selectValue = jQuery('select#price_option_type option:selected').val();
-		//alert(selectValue + ' - this is initial value');
-		
-		if(selectValue == 'DEFAULT'){
-			jQuery('#members_price_selection').hide();
-			jQuery('select#price_option-<?php echo $event_id ?>').bind('change', function() {
-				var new_standard_SelectValue = jQuery('select#price_option-<?php echo $event_id ?> option:selected').val();
-				jQuery('#new_price_option-<?php echo $event_id ?>').val(new_standard_SelectValue);
-			});	
-		}else{
-			jQuery('#standard_price_selection').hide();
-			jQuery('select#members_price_option-<?php echo $event_id ?>').bind('change', function() {
-			var new_member_SelectValue = jQuery('select#members_price_option-<?php echo $event_id ?> option:selected').val();
-				jQuery('#new_price_option-<?php echo $event_id ?>').val(new_member_SelectValue);
-			});
-		}
-		
-		jQuery('select#price_option_type').bind('change', function() {
-			var selectValue = jQuery('select#price_option_type option:selected').val();
-				  
-			if (selectValue == 'MEMBER') {
-				//alert(selectValue);
-				jQuery('#members_price_selection').fadeIn('fast');
-				jQuery('#standard_price_selection').fadeOut('fast');
-				//move to hidden field
-				var member_SelectValue = jQuery('select#members_price_option-<?php echo $event_id ?> option:selected').val();
-				jQuery('#new_price_option-<?php echo $event_id ?>').val(member_SelectValue);
-				
-				jQuery('select#members_price_option-<?php echo $event_id ?>').bind('change', function() {
-				var new_member_SelectValue = jQuery('select#members_price_option-<?php echo $event_id ?> option:selected').val();
-					jQuery('#new_price_option-<?php echo $event_id ?>').val(new_member_SelectValue);
+		<?php if (function_exists('espresso_members_version')) { ?>
+			<script type="text/javascript">
+				jQuery(document).ready(function($) {
+					// Remove li parent for input 'values' from page if 'text' box or 'textarea' are selected
+					var selectValue = jQuery('select#price_option_type option:selected').val();
+					//alert(selectValue + ' - this is initial value');
+					
+					if(selectValue == 'DEFAULT'){
+						jQuery('#members_price_selection').hide();
+						jQuery('select#price_option-<?php echo $event_id ?>').bind('change', function() {
+							var new_standard_SelectValue = jQuery('select#price_option-<?php echo $event_id ?> option:selected').val();
+							jQuery('#new_price_option-<?php echo $event_id ?>').val(new_standard_SelectValue);
+						});	
+					}else{
+						jQuery('#standard_price_selection').hide();
+						jQuery('select#members_price_option-<?php echo $event_id ?>').bind('change', function() {
+						var new_member_SelectValue = jQuery('select#members_price_option-<?php echo $event_id ?> option:selected').val();
+							jQuery('#new_price_option-<?php echo $event_id ?>').val(new_member_SelectValue);
+						});
+					}
+					
+					jQuery('select#price_option_type').bind('change', function() {
+						var selectValue = jQuery('select#price_option_type option:selected').val();
+							  
+						if (selectValue == 'MEMBER') {
+							//alert(selectValue);
+							jQuery('#members_price_selection').fadeIn('fast');
+							jQuery('#standard_price_selection').fadeOut('fast');
+							//move to hidden field
+							var member_SelectValue = jQuery('select#members_price_option-<?php echo $event_id ?> option:selected').val();
+							jQuery('#new_price_option-<?php echo $event_id ?>').val(member_SelectValue);
+							
+							jQuery('select#members_price_option-<?php echo $event_id ?>').bind('change', function() {
+							var new_member_SelectValue = jQuery('select#members_price_option-<?php echo $event_id ?> option:selected').val();
+								jQuery('#new_price_option-<?php echo $event_id ?>').val(new_member_SelectValue);
+							});
+					
+						} else {
+							//alert(selectValue);
+							jQuery('#standard_price_selection').fadeIn('fast');
+							jQuery('#members_price_selection').fadeOut('fast');
+							//move to hidden field
+							var standard_SelectValue = jQuery('select#price_option-<?php echo $event_id ?> option:selected').val();
+							jQuery('#new_price_option-<?php echo $event_id ?>').val(standard_SelectValue);
+							
+							jQuery('select#price_option-<?php echo $event_id ?>').bind('change', function() {
+								var new_standard_SelectValue = jQuery('select#price_option-<?php echo $event_id ?> option:selected').val();
+								jQuery('#new_price_option-<?php echo $event_id ?>').val(new_standard_SelectValue);
+							});	
+							
+						}
+					});
+					
 				});
-		
-			} else {
-				//alert(selectValue);
-				jQuery('#standard_price_selection').fadeIn('fast');
-				jQuery('#members_price_selection').fadeOut('fast');
-				//move to hidden field
-				var standard_SelectValue = jQuery('select#price_option-<?php echo $event_id ?> option:selected').val();
-				jQuery('#new_price_option-<?php echo $event_id ?>').val(standard_SelectValue);
-				
-				jQuery('select#price_option-<?php echo $event_id ?>').bind('change', function() {
-					var new_standard_SelectValue = jQuery('select#price_option-<?php echo $event_id ?> option:selected').val();
-					jQuery('#new_price_option-<?php echo $event_id ?>').val(new_standard_SelectValue);
-				});	
-				
-			}
-		});
-		
-	});
-</script>
+			</script>
 <?php
+		}
 	}
 }
