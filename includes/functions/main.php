@@ -1309,13 +1309,13 @@ function espresso_save_attendee_meta($attendee_id, $meta_key, $meta_value, $dele
 	
 	$notifications['error']	 = array();
 	
-	$set_cols_and_values = array( 
+	$cols_and_values = array( 
 		'attendee_id'=>$attendee_id, 
 		'meta_key'=>$meta_key, 
-		'meta_value'=>$meta_value 
+		'meta_value'=>$meta_value
 	);
 	
-	$set_format = array( '%d', '%s', '%s' );
+	$cols_and_values_format = array( '%d', '%s', '%s' );
 	$where_cols_and_values = array( 'attendee_id'=>$attendee_id, 'meta_key'=>$meta_key );
 	$where_format = array( '%d', '%s' );
 	
@@ -1333,7 +1333,9 @@ function espresso_save_attendee_meta($attendee_id, $meta_key, $meta_value, $dele
 			}
 		}else{
 			// run the update
-			$upd_success = $wpdb->update( EVENTS_ATTENDEE_META_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
+			$cols_and_values['date_updated'] = date("Y-m-d H:i:s");
+			array_push( $cols_and_values_format, '%s' );
+			$upd_success = $wpdb->update( EVENTS_ATTENDEE_META_TABLE, $cols_and_values, $where_cols_and_values, $cols_and_values_format, $where_format );
 			// if there was an actual error
 			if ( $upd_success === FALSE ) {
 				$notifications['error'][] = __('An error occured while attempting to update the attendee meta.', 'event_espresso'); 
@@ -1341,7 +1343,9 @@ function espresso_save_attendee_meta($attendee_id, $meta_key, $meta_value, $dele
 		}
 	}else{
 		// save the new value
-		$save_success = $wpdb->insert( EVENTS_ATTENDEE_META_TABLE, $set_cols_and_values, $set_format );
+		$cols_and_values['date_added'] = date("Y-m-d H:i:s");
+		array_push( $cols_and_values_format, '%s' );
+		$save_success = $wpdb->insert( EVENTS_ATTENDEE_META_TABLE, $cols_and_values, $cols_and_values_format );
 		if ( $save_success === FALSE ) {
 			$notifications['error'][] = __('An error occured while attempting to save the attendee meta.', 'event_espresso'); 
 		}
