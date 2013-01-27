@@ -411,6 +411,7 @@ function espresso_attendee_admin_price_dropdown($event_id, $atts) {
 	$label = isset($label) && $label != '' ? $label : '<span class="section-title">'.__('Choose an Option: ', 'event_espresso').'</span>';
 	
 	$results = $wpdb->get_results("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' ORDER BY id ASC");
+	//echo "<pre>".print_r($results,true)."</pre>";
 	
 	//If more than one price was added to an event, we need to create a drop down to select the price.
 	if ($wpdb->num_rows > 1) {
@@ -458,7 +459,7 @@ add_action('action_hook_espresso_attendee_admin_price_dropdown', 'espresso_atten
 //This function gets the first price id associated with an event and displays a hidden field.
 function espresso_hidden_price_id($event_id) {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-    global $wpdb, $org_options;
+    global $wpdb;
     $wpdb->get_results("SELECT id FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' LIMIT 0,1 ");
     $num_rows = $wpdb->num_rows;
     if ($num_rows > 0) {

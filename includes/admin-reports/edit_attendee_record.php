@@ -199,30 +199,33 @@ function edit_attendee_record() {
 		// **************************  UPDATE ATTENDEE  **************************
 		// **************************************************************************
 		} else if ( ! empty( $_REQUEST['attendee_action'] ) && $_REQUEST['attendee_action'] == 'update_attendee' ) {
-		
+			//printr( $_POST, '$_POST  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+			
 			if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'edit_attendee_' . $registration_id . '_update_attendee_nonce' )) {
 				wp_die( $failed_nonce_msg );
 			}
 			
-			do_action('action_hook_espresso_attendee_mover_move');
-			
+			//Update the price_option_type
 			do_action('action_hook_espresso_save_attendee_meta', $id, 'price_option_type', sanitize_text_field($_POST['price_option_type']));
+			
+			//Move attendee
+			do_action('action_hook_espresso_attendee_mover_move');
 			
 			$event_id = isset($_POST['event_id']) ? $_POST['event_id'] : '';
 			$txn_type = isset($_POST['txn_type']) ? $_POST['txn_type'] : '';
 
-			$set_cols_and_values = array( 
+			$cols_and_values = array( 
 					'fname'		=> isset($_POST['fname']) ? sanitize_text_field($_POST['fname']) : '', 
 					'lname'		=> isset($_POST['lname']) ? sanitize_text_field($_POST['lname']) : '', 
-					'address'		=> isset($_POST['address']) ? sanitize_text_field($_POST['address']) : '', 
+					'address'	=> isset($_POST['address']) ? sanitize_text_field($_POST['address']) : '', 
 					'address2'	=> isset($_POST['address2']) ? sanitize_text_field($_POST['address2']) : '', 
-					'city'				=> isset($_POST['city']) ? sanitize_text_field($_POST['city']) : '', 
-					'state'			=> isset($_POST['state']) ? sanitize_text_field($_POST['state']) : '', 
-					'zip'				=> isset($_POST['zip']) ? sanitize_text_field($_POST['zip']) : '', 
+					'city'		=> isset($_POST['city']) ? sanitize_text_field($_POST['city']) : '', 
+					'state'		=> isset($_POST['state']) ? sanitize_text_field($_POST['state']) : '', 
+					'zip'		=> isset($_POST['zip']) ? sanitize_text_field($_POST['zip']) : '', 
 					'phone'		=> isset($_POST['phone']) ? sanitize_text_field($_POST['phone']) : '', 
-					'email'			=> isset($_POST['email']) ? sanitize_email($_POST['email']) : '' 
+					'email'		=> isset($_POST['email']) ? sanitize_email($_POST['email']) : '' 
 			);
-			$set_format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' );
+			$cols_and_values_format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' );
 			
 			// Update the time ?
 			if ( isset( $_POST['start_time_id'] )) {
@@ -232,29 +235,41 @@ function edit_attendee_record() {
 						$start_time = $time->start_time;
 						$end_time = $time->end_time;
 					}
-					$set_cols_and_values['event_time'] = $start_time;
-					$set_cols_and_values['end_time'] = $end_time;
-					array_push( $set_format, '%s', '%s' );
+					$cols_and_values['event_time'] = $start_time;
+					$cols_and_values['end_time'] = $end_time;
+					array_push( $cols_and_values_format, '%s', '%s' );
 				}
 			}
 			
+			//Update price option
 			if ( isset( $_POST['price_select'] ) && $_POST['price_select'] == TRUE ) {
-				$selected_price_option = isset($_POST['new_price_option']) && !empty($_POST['new_price_option']) ? $_POST['new_price_option'] : $_POST['price_option'] ;
 				//Figure out if the person has registered using a price selection
+				$selected_price_option = isset($_POST['new_price_option']) && !empty($_POST['new_price_option']) ? $_POST['new_price_option'] : $_POST['price_option'] ;
 				$price_options = explode( '|', $selected_price_option, 2 );
+				//echo "<pre>".print_r($price_options,true)."</pre>";
 				$price_id = $price_options[0];
 				$price_type = $price_options[1];
 				
-				$set_cols_and_values['price_option'] = $price_type;
-				array_push( $set_format, '%s' );
+			}else{
+				//If not using the price selection
+				$wpdb->get_results("SELECT price_type FROM " . EVENTS_PRICES_TABLE . " WHERE id ='" . absint( $_POST['price_id'] ) . "'");
+				$num_rows = $wpdb->num_rows;
+				if ($num_rows > 0) {
+					$price_type = $wpdb->last_result[0]->price_type;
+				}
 			}
-			//echo "<pre>".print_r($price_options,true)."</pre>";
-			//printr( $_POST, '$_POST  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 			
+			if ( !isset($_POST['move_attendee']) ){
+				$cols_and_values['price_option'] = $price_type;
+				array_push( $cols_and_values_format, '%s' );
+			}
+			
+			//echo "<pre>".print_r($cols_and_values,true)."</pre>";
+			
+			//Run the update query
 			$where_cols_and_values = array( 'id'=> $id );
 			$where_format = array( '%d' );
-			// run the update
-			$upd_success = $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
+			$upd_success = $wpdb->update( EVENTS_ATTENDEE_TABLE, $cols_and_values, $where_cols_and_values, $cols_and_values_format, $where_format );
 			// if there was an actual error
 			if ( $upd_success === FALSE ) {
 				$notifications['error'][] = __('An error occured. Attendee details could not be updated.', 'event_espresso'); 
@@ -537,7 +552,6 @@ function edit_attendee_record() {
 										);
 										echo select_input( 'price_option_type', $p_values, apply_filters('action_hook_espresso_get_attendee_meta_value', $id, 'price_option_type'), 'id="price_option_type"');
 										?>
-										<input type="hidden" name="new_price_option" id="new_price_option-<?php echo $event_id ?>" value="<?php echo $price_option ?>" />
 										</li>
 								<?php } ?>
 									<li id="standard_price_selection">
@@ -619,7 +633,8 @@ function edit_attendee_record() {
 									</li>
 									
 									<?php do_action('action_hook_espresso_attendee_mover_events_list', $event_id)?>
-									
+									<?php echo espresso_hidden_price_id($event_id); ?>
+									<input type="hidden" name="new_price_option" id="new_price_option-<?php echo $event_id ?>" value="<?php echo $event_id . '|'.$price_option ?>" />
 									<input type="hidden" name="id" value="<?php echo $id ?>" />
 									<input type="hidden" name="registration_id" value="<?php echo $registration_id ?>" />
 									<input type="hidden" name="event_id" value="<?php echo $event_id ?>" />

@@ -290,6 +290,9 @@ if (!function_exists('event_espresso_get_time')) {
                     case 'end_time' :
                         return event_date_display($time->end_time, get_option('time_format'));
                         break;
+					case 'id' :
+                        return $time->id;
+                        break;
                 }
             }
         }
