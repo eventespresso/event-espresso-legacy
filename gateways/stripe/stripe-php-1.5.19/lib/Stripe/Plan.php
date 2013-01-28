@@ -1,6 +1,6 @@
 <?php
 
-class Espresso_Stripe_Plan extends Espresso_Stripe_ApiResource
+class Stripe_Plan extends Stripe_ApiResource
 {
   public static function constructFrom($values, $apiKey=null)
   {

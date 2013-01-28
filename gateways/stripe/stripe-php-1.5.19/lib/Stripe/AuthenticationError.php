@@ -1,5 +1,5 @@
 <?php
 
-class Espresso_Stripe_AuthenticationError extends Espresso_Stripe_Error
+class Stripe_AuthenticationError extends Stripe_Error
 {
 }

@@ -89,7 +89,7 @@ class Espresso_Wepay extends Espresso_PaymentGateway {
 		if (self::$production === true) {
 			return 'https://wepayapi.com/v2/';
 		} elseif (self::$production === false) {
-			return 'https://stage.wepay.com/v2/';
+			return 'https://stage.wepayapi.com/v2/';
 		} else {
 			throw new RuntimeException('You must initialize the WePay SDK with Wepay::useStaging() or Wepay::useProduction()');
 		}

@@ -445,6 +445,7 @@ function getCountriesArray($lang = "en") {
 	//last code is for political zones, 2 is for european union, 1 for the rest of the world (by the moment)
 	switch ($lang) {
 		default: return array(
+			// updated country list since 3.1.30
 					array(0, __('No country selected', 'event_espresso'), '', '', 0),
 					array(64, 'United States', 'US', 'USA', 1),
 					array(15, 'Australia', 'AU', 'AUS', 1),
@@ -457,7 +458,7 @@ function getCountriesArray($lang = "en") {
 					array(2, 'Albania', 'AL', 'ALB', 1),
 					array(3, 'Germany', 'DE', 'DEU', 2),
 					array(198, 'Switzerland', 'CH', 'CHE', 1),
-					array(87, 'The Netherlands', 'NL', 'NLD', 2),
+					array(87, 'Netherlands', 'NL', 'NLD', 2),
 					array(197, 'Sweden', 'SE', 'SWE', 1),
 					array(230, 'Akrotiri and Dhekelia', 'CY', 'CYP', 2),
 					array(4, 'Andorra', 'AD', 'AND', 2),
@@ -466,14 +467,14 @@ function getCountriesArray($lang = "en") {
 					array(7, 'Antarctica', 'AQ', 'ATA', 1),
 					array(8, 'Antigua and Barbuda', 'AG', 'ATG', 1),
 					array(10, 'Saudi Arabia', 'SA', 'SAU', 1),
-					array(11, 'Argelia', 'DZ', 'DZA', 1),
+					array(11, 'Algeria', 'DZ', 'DZA', 1),
 					array(12, 'Argentina', 'AR', 'ARG', 1),
 					array(13, 'Armenia', 'AM', 'ARM', 1),
 					array(14, 'Aruba', 'AW', 'ABW', 1),
 					array(16, 'Austria', 'AT', 'AUT', 2),
 					array(17, 'Azerbaijan', 'AZ', 'AZE', 1),
 					array(18, 'Bahamas', 'BS', 'BHS', 1),
-					array(19, 'Bahrein', 'BH', 'BHR', 1),
+					array(19, 'Bahrain', 'BH', 'BHR', 1),
 					array(20, 'Bangladesh', 'BD', 'BGD', 1),
 					array(21, 'Barbados', 'BB', 'BRB', 1),
 					array(22, 'Belgium ', 'BE', 'BEL', 2),
@@ -506,12 +507,12 @@ function getCountriesArray($lang = "en") {
 					array(44, 'Colombia', 'CO', 'COL', 1),
 					array(45, 'Comoros', 'KM', 'COM', 1),
 					array(46, 'Congo', 'CG', 'COG', 1),
-					array(47, 'Corea del Norte', 'KP', 'PRK', 1),
+					array(47, 'North Korea', 'KP', 'PRK', 1),
 					array(50, 'Costa Rica', 'CR', 'CRI', 1),
 					array(51, 'Croatia', 'HR', 'HRV', 1),
 					array(52, 'Cuba', 'CU', 'CUB', 1),
 					array(173, 'Czech Republic', 'CZ', 'CZE', 1),
-					array(53, 'Danmark', 'DK', 'DNK', 1),
+					array(53, 'Denmark', 'DK', 'DNK', 1),
 					array(54, 'Djibouti', 'DJ', 'DJI', 1),
 					array(55, 'Dominica', 'DM', 'DMA', 1),
 					array(174, 'Dominican Republic', 'DO', 'DOM', 1),
@@ -519,8 +520,8 @@ function getCountriesArray($lang = "en") {
 					array(57, 'Egypt', 'EG', 'EGY', 1),
 					array(58, 'El Salvador', 'SV', 'SLV', 1),
 					array(60, 'Eritrea', 'ER', 'ERI', 1),
-					array(61, 'Eslovakia', 'SK', 'SVK', 2),
-					array(62, 'Eslovenia', 'SI', 'SVN', 2),
+					array(61, 'Slovakia', 'SK', 'SVK', 2),
+					array(62, 'Slovenia', 'SI', 'SVN', 2),
 					array(65, 'Estonia', 'EE', 'EST', 2),
 					array(66, 'Ethiopia', 'ET', 'ETH', 1),
 					array(102, 'Faroe islands', 'FO', 'FRO', 1),
@@ -560,7 +561,7 @@ function getCountriesArray($lang = "en") {
 					array(114, 'Jordan', 'JO', 'JOR', 1),
 					array(115, 'Kazakhstan', 'KZ', 'KAZ', 1),
 					array(116, 'Kenya', 'KE', 'KEN', 1),
-					array(117, 'Kirguistan', 'KG', 'KGZ', 1),
+					array(117, 'Kyrgyzstan', 'KG', 'KGZ', 1),
 					array(118, 'Kiribati', 'KI', 'KIR', 1),
 					array(48, 'South Korea', 'KR', 'KOR', 1),
 					array(228, 'Kosovo', 'XK', 'XKV', 2), // there is no official ISO code for Kosovo yet (http://geonames.wordpress.com/2010/03/08/xk-country-code-for-kosovo/) so using a temporary country code and a modified 3 character code for ISO code -- this should be updated if/when Kosovo gets its own ISO code
@@ -583,10 +584,10 @@ function getCountriesArray($lang = "en") {
 					array(135, 'Mali', 'ML', 'MLI', 1),
 					array(136, 'Malta', 'MT', 'MLT', 2),
 					array(101, 'Northern Marianas', 'MP', 'MNP', 1),
-					array(137, 'Marruecos', 'MA', 'MAR', 1),
+					array(137, 'Morocco', 'MA', 'MAR', 1),
 					array(104, 'Marshall islands', 'MH', 'MHL', 1),
-					array(138, 'Martinica', 'MQ', 'MTQ', 1),
-					array(139, 'Mauricio', 'MU', 'MUS', 1),
+					array(138, 'Martinique', 'MQ', 'MTQ', 1),
+					array(139, 'Mauritius', 'MU', 'MUS', 1),
 					array(140, 'Mauritania', 'MR', 'MRT', 1),
 					array(141, 'Mayote', 'YT', 'MYT', 2),
 					array(142, 'Mexico', 'MX', 'MEX', 1),
@@ -621,16 +622,16 @@ function getCountriesArray($lang = "en") {
 					array(168, 'Portugal', 'PT', 'PRT', 2),
 					array(169, 'Puerto Rico', 'PR', 'PRI', 1),
 					array(170, 'Qatar', 'QA', 'QAT', 1),
-					array(176, 'Rowanda', 'RW', 'RWA', 1),
+					array(176, 'Rwanda', 'RW', 'RWA', 1),
 					array(177, 'Romania', 'RO', 'ROM', 2),
 					array(178, 'Russia', 'RU', 'RUS', 1),
 					array(229, 'Saint Pierre and Miquelon', 'PM', 'SPM', 2),
 					array(180, 'Samoa', 'WS', 'WSM', 1),
 					array(181, 'American Samoa', 'AS', 'ASM', 1),
 					array(183, 'San Marino', 'SM', 'SMR', 2),
-					array(184, 'San Vincente y las Granadinas', 'VC', 'VCT', 1),
-					array(185, 'Santa Helena', 'SH', 'SHN', 1),
-					array(186, 'Santa Lucia', 'LC', 'LCA', 1),
+					array(184, 'Saint Vincent and the Grenadines', 'VC', 'VCT', 1),
+					array(185, 'Saint Helena', 'SH', 'SHN', 1),
+					array(186, 'Saint Lucia', 'LC', 'LCA', 1),
 					array(188, 'Senegal', 'SN', 'SEN', 1),
 					array(189, 'Seychelles', 'SC', 'SYC', 1),
 					array(190, 'Sierra Leona', 'SL', 'SLE', 1),
@@ -666,7 +667,6 @@ function getCountriesArray($lang = "en") {
 					array(222, 'Vietnam', 'VN', 'VNM', 1),
 					array(108, 'Virgin Islands', 'VI', 'VIR', 1),
 					array(223, 'Yemen', 'YE', 'YEM', 1),
-					array(224, 'Yugoslavia', 'YU', 'YUG', 1),
 					array(225, 'Zambia', 'ZM', 'ZMB', 1),
 					array(226, 'Zimbabwe', 'ZW', 'ZWE', 1));
 	}
@@ -963,7 +963,7 @@ function event_espresso_custom_email_info() {
 				<p>
 					<?php _e('For customized confirmation emails, the following tags can be placed in the email form and they will pull data from the database to include in the email.', 'event_espresso'); ?>
 				</p>
-				<p>[registration_id], [fname], [lname], [phone], [edit_attendee_link], [event], [event_link], [event_url], [ticket_type], [ticket_link], [qr_code], [description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [invoice_link], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link], [venue_title], [venue_address], [venue_url], [venue_image], [venue_phone], [custom_questions]</p>
+				<p>[registration_id], [fname], [lname], [phone], [edit_attendee_link], [event], [event_link], [event_url], [ticket_type], [ticket_link], [qr_code], [description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [invoice_link], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link], [venue_title], [venue_address], [venue_url], [venue_image], [venue_phone], [custom_questions], [seating_tag]</p>
 			</div>
 		</div>
 	</div>
