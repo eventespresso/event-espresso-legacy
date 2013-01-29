@@ -15,13 +15,13 @@ function update_event_venue(){
         }
         
         //print_r($_REQUEST);
-        $venue_meta['contact']      = isset( $_REQUEST['contact'] ) ? $_REQUEST['contact'] : '';
-        $venue_meta['phone']        = isset( $_REQUEST['phone'] ) ? $_REQUEST['phone'] : '';
-        $venue_meta['twitter']      = isset( $_REQUEST['twitter'] ) ? $_REQUEST['twitter'] : '';
-        $venue_meta['image']        = isset( $_REQUEST['image'] ) ? $_REQUEST['image'] : '';
-        $venue_meta['website']      = isset( $_REQUEST['website'] ) ? $_REQUEST['website'] : '';
+        $venue_meta['contact']      = isset( $_REQUEST['contact'] ) ? sanitize_text_field($_REQUEST['contact']) : '';
+        $venue_meta['phone']        = isset( $_REQUEST['phone'] ) ? sanitize_text_field($_REQUEST['phone']) : '';
+        $venue_meta['twitter']      = isset( $_REQUEST['twitter'] ) ? sanitize_text_field($_REQUEST['twitter']) : '';
+        $venue_meta['image']        = isset( $_REQUEST['image'] ) ? sanitize_text_field($_REQUEST['image']) : '';
+        $venue_meta['website']      = isset( $_REQUEST['website'] ) ? sanitize_text_field($_REQUEST['website']) : '';
         $venue_meta['description']  = isset( $_REQUEST['description'] ) ? esc_html( $_REQUEST['description'] ) : '';
-        $locale                     = isset( $_REQUEST['locale'] ) ? $_REQUEST['locale'] : '';
+        $locale                     = isset( $_REQUEST['locale'] ) ? sanitize_text_field($_REQUEST['locale']) : '';
         $meta                       = serialize($venue_meta);
 
 

@@ -311,35 +311,35 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 //echo '<h4>$payment_status : ' . $payment_status . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4><br /><br /><br />';
 
 			$columns_and_values = array(
-					'registration_id' => $registration_id,
-					'is_primary' => $attendee_number == 1 ? TRUE : FALSE,
-					'attendee_session' => $_SESSION['espresso_session']['id'],
-					'lname' => $lname,
-					'fname' => $fname,
-					'address' => $address,
-					'address2' => $address2,
-					'city' => $city,
-					'state' => $state,
-					'zip' => $zip,
-					'email' => $email,
-					'phone' => $phone,
-					'payment' => $payment,
-					'txn_type' => $txn_type,
-					'coupon_code' => $coupon_code,
-					'event_time' => $start_time,
-					'end_time' => $end_time,
-					'start_date' => $start_date,
-					'end_date' => $end_date,
-					'price_option' => $price_type,
-					'organization_name' => $organization_name,
-					'country_id' => $country_id,
-					'payment_status' => $payment_status,
-					'payment_date' => $payment_date,
-					'event_id' => $event_id,
-					'quantity' => (int)$num_people,
-					'amount_pd' => $amount_pd,
-					'orig_price' => $orig_price,
-					'final_price' => $final_price
+					'registration_id'		=> $registration_id,
+					'is_primary'			=> $attendee_number == 1 ? TRUE : FALSE,
+					'attendee_session'		=> $_SESSION['espresso_session']['id'],
+					'lname'					=> $lname,
+					'fname'					=> $fname,
+					'address'				=> $address,
+					'address2'				=> $address2,
+					'city'					=> $city,
+					'state'					=> $state,
+					'zip'					=> $zip,
+					'email'					=> $email,
+					'phone'					=> $phone,
+					'payment'				=> $payment,
+					'txn_type'				=> $txn_type,
+					'coupon_code'			=> $coupon_code,
+					'event_time'			=> $start_time,
+					'end_time'				=> $end_time,
+					'start_date'			=> $start_date,
+					'end_date'				=> $end_date,
+					'price_option'			=> $price_type,
+					'organization_name'		=> $organization_name,
+					'country_id'			=> $country_id,
+					'payment_status'		=> $payment_status,
+					'payment_date'			=> $payment_date,
+					'event_id'				=> $event_id,
+					'quantity'				=> (int)$num_people,
+					'amount_pd'				=> $amount_pd,
+					'orig_price'			=> $orig_price,
+					'final_price'			=> $final_price
 			);
 			
 
@@ -439,15 +439,15 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								$ext_att_data_source = array(
 										'registration_id' => $registration_id,
 										'attendee_session' => $_SESSION['espresso_session']['id'],
-										'lname' => $att_data_source['x_attendee_lname'][$k],
-										'fname' => $v,
-										'email' => $att_data_source['x_attendee_email'][$k],
-										'address' => empty($att_data_source['x_attendee_address'][$k]) ? '' : $att_data_source['x_attendee_address'][$k],
-										'address2' => empty($att_data_source['x_attendee_address2'][$k]) ? '' : $att_data_source['x_attendee_address2'][$k],
-										'city' => empty($att_data_source['x_attendee_city'][$k]) ? '' : $att_data_source['x_attendee_city'][$k],
-										'state' => empty($att_data_source['x_attendee_state'][$k]) ? '' : $att_data_source['x_attendee_state'][$k],
-										'zip' => empty($att_data_source['x_attendee_zip'][$k]) ? '' : $att_data_source['x_attendee_zip'][$k],
-										'phone' => empty($att_data_source['x_attendee_phone'][$k]) ? '' : $att_data_source['x_attendee_phone'][$k],
+										'lname' => sanitize_text_field($att_data_source['x_attendee_lname'][$k]),
+										'fname' => sanitize_text_field($v),
+										'email' => sanitize_text_field($att_data_source['x_attendee_email'][$k]),
+										'address' => empty($att_data_source['x_attendee_address'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_address'][$k]),
+										'address2' => empty($att_data_source['x_attendee_address2'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_address2'][$k]),
+										'city' => empty($att_data_source['x_attendee_city'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_city'][$k]),
+										'state' => empty($att_data_source['x_attendee_state'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_state'][$k]),
+										'zip' => empty($att_data_source['x_attendee_zip'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_zip'][$k]),
+										'phone' => empty($att_data_source['x_attendee_phone'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_phone'][$k]),
 										'payment' => $payment,
 										'event_time' => $start_time,
 										'end_time' => $end_time,
@@ -832,7 +832,7 @@ function espresso_verify_recaptcha( $skip_check = FALSE ) {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 	
 	global $org_options;
-
+	
 //	echo '<h4>use_captcha : ' . $org_options['use_captcha'] . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //	echo '<h4>is_user_logged_in : ' . is_user_logged_in() . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //	echo '<h4>$skip_check : ' . $skip_check . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
