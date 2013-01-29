@@ -604,3 +604,11 @@ function get_reg_total_price($registration_id){
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 }
 
+function espresso_selected_price_option($selected){
+	if (empty($selected)) return false;
+	$price_options = explode( '|', $selected, 2 );
+	$price_id = $price_options[0];
+	$price_type = $price_options[1];
+	
+	return array('price_id' => $price_id, 'price_type' => $price_type);
+}

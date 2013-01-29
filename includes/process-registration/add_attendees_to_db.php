@@ -44,7 +44,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 		//Check to see if the registration id already exists
 		$incomplete_filter = ! $multi_reg ? " AND payment_status ='Incomplete'" : '';
 		$SQL = "SELECT attendee_session, id, registration_id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE attendee_session =%s AND event_id = %d";
-		$SQL .= $incomplete_filter;
+		//$SQL .= $incomplete_filter;
 		$check_sql = $wpdb->get_results($wpdb->prepare( $SQL, $prev_session_id, $event_id ));
 		$nmbr_of_regs = $wpdb->num_rows;
 		static $loop_number = 1;
@@ -55,11 +55,10 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				
 				$SQL = "SELECT id, registration_id FROM " . EVENTS_ATTENDEE_TABLE . ' ';
 				$SQL .= "WHERE attendee_session = %s ";
-				$SQL .= $incomplete_filter;
+				//$SQL .= $incomplete_filter;
 				
-				if ( $rem_attendee_ids = $wpdb->get_results($wpdb->prepare( $SQL, $prev_session_id ))) {
-					//echo '<h4>$rem_attendee_ids : <pre>' . print_r($rem_attendee_ids,true) . '</pre> <span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-					foreach ( $rem_attendee_ids as $v ) {
+				if ( $mer_attendee_ids = $wpdb->get_results($wpdb->prepare( $SQL, $prev_session_id ))) {
+					foreach ( $mer_attendee_ids as $v ) {
 						//Added for seating chart addon
 						if ( defined('ESPRESSO_SEATING_CHART')) {				
 							$SQL = "DELETE FROM " . EVENTS_SEATING_CHART_EVENT_SEAT_TABLE . ' ';
@@ -74,16 +73,16 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$SQL = "DELETE t1, t2 FROM " . EVENTS_ATTENDEE_TABLE . "  t1 ";
 				$SQL .= "JOIN  " . EVENTS_ANSWER_TABLE . " t2 on t1.id = t2.attendee_id ";
 				$SQL .= "WHERE t1.attendee_session = %s ";
-				$SQL .= $incomplete_filter;
+				//$SQL .= $incomplete_filter;
 				$wpdb->query($wpdb->prepare( $SQL, $prev_session_id ));
 				
 			}
 
 			//Added by Imon
-			// First delete attempt might fail if there is no data in answer table. So, second attempt without joining answer table is taken bellow -
+			// First delete attempt might fail if there is no data in answer table. So, second attempt without joining answer table is taken below -
 			$SQL = " DELETE FROM " . EVENTS_ATTENDEE_TABLE . ' ';
 			$SQL .= "WHERE attendee_session = %s ";
-			$SQL .= $incomplete_filter;
+			//$SQL .= $incomplete_filter;
 			$wpdb->query($wpdb->prepare( $SQL, $prev_session_id ));
 
 			// Clean up any attendee information from attendee_cost table where attendee is not available in attendee table
@@ -170,9 +169,10 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			} elseif ( isset( $data_source['price_select'] ) && $data_source['price_select'] == TRUE ) {
 				
 				//Figure out if the person has registered using a price selection
-				$price_options = explode( '|', $data_source['price_option'], 2 );
-				$price_id = $price_options[0];
-				$price_type = $price_options[1];
+				$price_options = espresso_selected_price_option($data_source['price_option']);
+				$price_id = $price_options['price_id'];
+				$price_type = $price_options['price_type'];
+				
 				$orig_price = event_espresso_get_orig_price_and_surcharge( $price_id );
 				$final_price = event_espresso_get_final_price( $price_id, $event_id, $orig_price );
 				$surcharge = event_espresso_calculate_surcharge( $orig_price->event_cost , $orig_price->surcharge, $orig_price->surcharge_type );

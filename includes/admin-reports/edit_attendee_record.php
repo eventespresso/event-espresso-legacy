@@ -104,12 +104,7 @@ function edit_attendee_record() {
 				} elseif ( $upd_total < $amount_pd ) {
 					$upd_payment_status = __('Refund','event_espresso');
 				}
-				
-//				echo '<h4>$amount_pd : ' . $amount_pd . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//				echo '<h4>$payment_status : ' . $payment_status . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//				echo '<h4>$upd_total : ' . $upd_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//				echo '<h4>$upd_payment_status : ' . $upd_payment_status . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-				
+								
 				// compare old payment status with new payment status and update if things have changed
 				if ( $upd_payment_status != $payment_status ) {
 					// update payment status for ALL attendees for the entire registration
@@ -142,9 +137,6 @@ function edit_attendee_record() {
 			
 			}			
 		}
-		
-		
-		
 		
 		
 		// **************************************************************************
@@ -184,9 +176,7 @@ function edit_attendee_record() {
 					if ( $wpdb->query( $wpdb->prepare( $SQL, $registration_id )) === FALSE ) {
 						$notifications['error'][] = __('An error occured while attempting to update additional attendee ticket quantities.', 'event_espresso'); 
 					}
-					
 					event_espresso_cleanup_multi_event_registration_id_group_data();
-
 				}
 
 				// let's base our success on the lack of errors
@@ -245,11 +235,9 @@ function edit_attendee_record() {
 			if ( isset( $_POST['price_select'] ) && $_POST['price_select'] == TRUE ) {
 				//Figure out if the person has registered using a price selection
 				$selected_price_option = isset($_POST['new_price_option']) && !empty($_POST['new_price_option']) ? $_POST['new_price_option'] : $_POST['price_option'] ;
-				$price_options = explode( '|', $selected_price_option, 2 );
-				//echo "<pre>".print_r($price_options,true)."</pre>";
-				$price_id = $price_options[0];
-				$price_type = $price_options[1];
-				
+				$price_options = espresso_selected_price_option($selected_price_option);
+				$price_type = $price_options['price_type'];
+			
 			}else{
 				//If not using the price selection
 				$wpdb->get_results("SELECT price_type FROM " . EVENTS_PRICES_TABLE . " WHERE id ='" . absint( $_POST['price_id'] ) . "'");
