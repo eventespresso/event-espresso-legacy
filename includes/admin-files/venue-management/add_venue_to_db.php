@@ -46,29 +46,29 @@ function add_venue_to_db(){
 		} else {
 
 			$venue_meta = array();
-			$venue_meta['contact'] = isset( $_REQUEST['contact'] ) ? sanitize_text_field( $_REQUEST['contact'] ) : '';
-			$venue_meta['phone'] = isset( $_REQUEST['phone'] ) ? sanitize_text_field( $_REQUEST['phone'] ) : '';
-			$venue_meta['twitter'] = isset( $_REQUEST['twitter'] ) ? sanitize_text_field( $_REQUEST['twitter'] ) : '';
-			$venue_meta['image'] = isset( $_REQUEST['image'] ) ? sanitize_text_field( $_REQUEST['image'] ) : '';
-			$venue_meta['website'] = isset( $_REQUEST['website'] ) ? sanitize_text_field( $_REQUEST['website'] ) : '';
-			$venue_meta['description'] = isset( $_REQUEST['description'] ) ? sanitize_text_field( $_REQUEST['description'] ) : '';
-			$locale = isset( $_REQUEST['locale'] ) ? sanitize_text_field( $_REQUEST['locale'] ) : '';
+			$venue_meta['contact']		= isset( $_REQUEST['contact'] ) ? sanitize_text_field( $_REQUEST['contact'] ) : '';
+			$venue_meta['phone']		= isset( $_REQUEST['phone'] ) ? sanitize_text_field( $_REQUEST['phone'] ) : '';
+			$venue_meta['twitter']		= isset( $_REQUEST['twitter'] ) ? sanitize_text_field( $_REQUEST['twitter'] ) : '';
+			$venue_meta['image']		= isset( $_REQUEST['image'] ) ? sanitize_text_field( $_REQUEST['image'] ) : '';
+			$venue_meta['website']		= isset( $_REQUEST['website'] ) ? sanitize_text_field( $_REQUEST['website'] ) : '';
+			$venue_meta['description']	= isset( $_REQUEST['description'] ) ? esc_html( $_REQUEST['description'] ) : '';
+			$locale						= isset( $_REQUEST['locale'] ) ? sanitize_text_field( sanitize_text_field($_REQUEST['locale']) ) : '';
 			
 			if ( ! function_exists('espresso_member_data')) {
 				$current_user->ID = 1;
 			}			
 		
 			$cols_and_values = array(
-					'identifier' 	=> uniqid($current_user->ID.'-'), 
-					'name'			=> $venue_name,
-					'address'		=> isset( $_REQUEST['venue_address'] ) ? sanitize_text_field( $_REQUEST['venue_address'] ) : '', 
-					'address2'	=> isset( $_REQUEST['venue_address2'] ) ? sanitize_text_field( $_REQUEST['venue_address2'] ) : '', 
-					'city'				=> isset( $_REQUEST['venue_city'] ) ? sanitize_text_field( $_REQUEST['venue_city'] ) : '', 
-					'state'			=> isset( $_REQUEST['venue_state'] ) ? sanitize_text_field( $_REQUEST['venue_state'] ) : '', 
-					'zip'				=> isset( $_REQUEST['venue_zip'] ) ? sanitize_text_field( $_REQUEST['venue_zip'] ) : '', 
-					'country'		=> isset( $_REQUEST['venue_country'] ) ? sanitize_text_field( $_REQUEST['venue_country'] ) : '',
-					'wp_user'		=> $current_user->ID, 
-					'meta'			=> serialize($venue_meta) 
+				'identifier' 	=> uniqid($current_user->ID.'-'), 
+				'name'			=> $venue_name,
+				'address'		=> isset( $_REQUEST['venue_address'] ) ? sanitize_text_field( $_REQUEST['venue_address'] ) : '', 
+				'address2'		=> isset( $_REQUEST['venue_address2'] ) ? sanitize_text_field( $_REQUEST['venue_address2'] ) : '', 
+				'city'			=> isset( $_REQUEST['venue_city'] ) ? sanitize_text_field( $_REQUEST['venue_city'] ) : '', 
+				'state'			=> isset( $_REQUEST['venue_state'] ) ? sanitize_text_field( $_REQUEST['venue_state'] ) : '', 
+				'zip'			=> isset( $_REQUEST['venue_zip'] ) ? sanitize_text_field( $_REQUEST['venue_zip'] ) : '', 
+				'country'		=> isset( $_REQUEST['venue_country'] ) ? sanitize_text_field( $_REQUEST['venue_country'] ) : '',
+				'wp_user'		=> (int)$current_user->ID, 
+				'meta'			=> serialize($venue_meta) 
 			); 
 			
 			$data_format = array('%s','%s','%s','%s','%s','%s','%s','%s','%d','%s');
