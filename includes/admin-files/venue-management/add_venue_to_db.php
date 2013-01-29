@@ -1,4 +1,7 @@
 <?php
+if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	
+
 function add_venue_to_db(){
 	global $wpdb, $current_user;
 	//$wpdb->show_errors();
@@ -12,8 +15,8 @@ function add_venue_to_db(){
 	//If using the Espresso Event Manager
 	if ( isset($_REQUEST['ee_fem_action']) && $_REQUEST['ee_fem_action'] == 'ee_fem_add'){
 		//Security check using nonce
-		if ( empty($_POST['ee_fem_nonce']) || !wp_verify_nonce($_POST['ee_fem_nonce'],'espresso_form_check') ){
-			print '<h3 class="fem_error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
+		if ( empty($_POST['nonce_verify_insert_event']) || !wp_verify_nonce($_POST['nonce_verify_insert_event'],'espresso_verify_insert_event_nonce') ){
+			print '<h3 class="error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
 			return;
 		}
 		$use_fem = TRUE;

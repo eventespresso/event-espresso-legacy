@@ -1,11 +1,14 @@
 <?php 
+if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	
+
 function update_event_venue(){
 	global $wpdb;
 	$wpdb->show_errors();
     $venue_updated = false;
     if ( isset( $_REQUEST[ 'venue_id' ] ) ) {
         
-        $venue_id = $_REQUEST[ 'venue_id' ];
+        $venue_id = (int)$_REQUEST[ 'venue_id' ];
         
         if ( function_exists( 'espresso_user_has_venue_permission' ) ) {
             if ( !espresso_user_has_venue_permission( $venue_id ) ) {
@@ -26,22 +29,17 @@ function update_event_venue(){
 
 
         $sql = array( 
-                'name'      => isset( $_REQUEST[ 'name' ] ) ? $_REQUEST['name'] : '',
-                'address'   => isset( $_REQUEST[ 'address' ] ) ? $_REQUEST['address'] : '',
-                'address2'  => isset( $_REQUEST[ 'address2' ] ) ? $_REQUEST['address2'] : '',
-                'city'      => isset( $_REQUEST[ 'city' ] ) ? $_REQUEST['city'] : '',
-                'state'     => isset( $_REQUEST[ 'state' ] ) ? $_REQUEST['state'] : '',
-                'zip'       => isset( $_REQUEST[ 'zip' ] ) ? $_REQUEST['zip'] : '',
-                'country'   => isset( $_REQUEST[ 'country' ] ) ? $_REQUEST['country'] : '',
+                'name'      => isset( $_REQUEST[ 'name' ] ) ? sanitize_text_field($_REQUEST['name']) : '',
+                'address'   => isset( $_REQUEST[ 'address' ] ) ? sanitize_text_field($_REQUEST['address']) : '',
+                'address2'  => isset( $_REQUEST[ 'address2' ] ) ? sanitize_text_field($_REQUEST['address2']) : '',
+                'city'      => isset( $_REQUEST[ 'city' ] ) ? sanitize_text_field($_REQUEST['city']) : '',
+                'state'     => isset( $_REQUEST[ 'state' ] ) ? sanitize_text_field($_REQUEST['state']) : '',
+                'zip'       => isset( $_REQUEST[ 'zip' ] ) ? sanitize_text_field($_REQUEST['zip']) : '',
+                'country'   => isset( $_REQUEST[ 'country' ] ) ? sanitize_text_field($_REQUEST['country']) : '',
                 'meta'      => $meta
             ); 
 
         $update_id = array( 'id'=> $venue_id );
-        /*echo 'Debug: <br />';
-        print_r($sql);
-        print 'Number of vars: ' . count ($sql);
-        echo '<br />';
-        print 'Number of cols: ' . count($sql_data);*/
 
         $sql_data = array( '%s','%s','%s','%s','%s','%s','%s','%s' );
         $wpdb->update( EVENTS_VENUE_TABLE, $sql, $update_id, $sql_data, array( '%d' ) ); 

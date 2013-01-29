@@ -9,17 +9,18 @@ function add_event_to_db($recurrence_arr = array()) {
 	
 	global $wpdb, $org_options, $current_user, $espresso_premium;
 	
-	//Set front end event manager to false
+	//Security check using nonce
+	if ( empty($_POST['nonce_verify_insert_event']) || !wp_verify_nonce($_POST['nonce_verify_insert_event'],'espresso_verify_insert_event_nonce') ){
+		print '<h3 class="error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
+		return;
+	}
+	
+	//Set FEM to false
 	$use_fem = FALSE;
 	$is_espresso_event_manager = false;
 		
-	//If using the Espresso Event Manager
+	//If using FEM
 	if ( isset($_REQUEST['ee_fem_action']) && $_REQUEST['ee_fem_action'] == 'ee_fem_add'){
-		//Security check using nonce
-		if ( empty($_POST['ee_fem_nonce']) || !wp_verify_nonce($_POST['ee_fem_nonce'],'espresso_form_check') ){
-			print '<h3 class="fem_error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
-			return;
-		}
 		$use_fem = TRUE;
 		if ( function_exists('espresso_member_data') && espresso_member_data('role') == 'espresso_event_manager' ){
 			global $espresso_manager;
@@ -28,8 +29,8 @@ function add_event_to_db($recurrence_arr = array()) {
 		}
 	}
 
-	//Don't show sql errors if using the front-end event manager
-	if ( $use_fem == false )
+	//Don't show sql errors if using the FEM
+	if ( $use_fem === FALSE )
 		$wpdb->show_errors();
 
 	static $recurrence_id = null;
@@ -84,17 +85,9 @@ function add_event_to_db($recurrence_arr = array()) {
 		}else{
 			$event_identifier = sanitize_title_with_dashes($_REQUEST['event_identifier']) . $event_code;
 		}
-		$event_desc			= !empty($_REQUEST['event_desc']) ? sanitize_text_field($_REQUEST['event_desc']) : '';
+		$event_desc			= !empty($_REQUEST['event_desc']) ? esc_html($_REQUEST['event_desc']) : '';
 		$display_desc		= !empty($_REQUEST['display_desc']) ? sanitize_text_field($_REQUEST['display_desc']) : 'Y';
 		$display_reg_form	= !empty($_REQUEST['display_reg_form']) ? sanitize_text_field($_REQUEST['display_reg_form']) : 'Y';
-
-		$address 			= isset($_REQUEST['address']) ? sanitize_text_field($_REQUEST['address']) : '';
-		$address2 			= isset($_REQUEST['address2']) ? sanitize_text_field($_REQUEST['address2']) : '';
-		$city 				= isset($_REQUEST['city']) ? sanitize_text_field($_REQUEST['city']) : '';
-		$state 				= isset($_REQUEST['state']) ? sanitize_text_field($_REQUEST['state']) : '';
-		$zip 				= isset($_REQUEST['zip']) ? sanitize_text_field($_REQUEST['zip']) : '';
-		$country 			= isset($_REQUEST['country']) ? sanitize_text_field($_REQUEST['country']) : '';
-		$phone				= isset($_REQUEST['phone']) ? sanitize_text_field($_REQUEST['phone']) : '';
 		$externalURL		= isset($_REQUEST['externalURL']) ? sanitize_text_field($_REQUEST['externalURL']) : '';
 		$post_type			= !empty($_REQUEST['espresso_post_type']) ? sanitize_text_field($_REQUEST['espresso_post_type']) : '';
 		$reg_limit			= !empty($_REQUEST['reg_limit']) ? sanitize_text_field($_REQUEST['reg_limit']) : '999999';
@@ -125,10 +118,10 @@ function add_event_to_db($recurrence_arr = array()) {
 		$send_mail			= !empty($_REQUEST['send_mail']) ? sanitize_text_field($_REQUEST['send_mail']) : 'N';
 	   	
 		//Custom email content
-		$conf_mail			= !empty($_REQUEST['conf_mail']) ? sanitize_text_field($_REQUEST['conf_mail']) : ''; 
+		$conf_mail			= !empty($_REQUEST['conf_mail']) ? esc_html($_REQUEST['conf_mail']) : ''; 
 		
 		//Use a premade custom email
-		$email_id			= isset($_REQUEST['email_name']) ? sanitize_text_field($_REQUEST['email_name']) : '0';
+		$email_id			= isset($_REQUEST['email_name']) ? (int)$_REQUEST['email_name'] : '0';
 				
 		//Venue Information
 		$venue_title		= isset($_REQUEST['venue_title']) ? sanitize_text_field($_REQUEST['venue_title']) : '';
@@ -141,6 +134,14 @@ function add_event_to_db($recurrence_arr = array()) {
 		$virtual_phone		= !empty($_REQUEST['virtual_phone']) ? sanitize_text_field($_REQUEST['virtual_phone']) : '';
 		
 		//Address/venue information
+		$address 			= isset($_REQUEST['address']) ? sanitize_text_field($_REQUEST['address']) : '';
+		$address2 			= isset($_REQUEST['address2']) ? sanitize_text_field($_REQUEST['address2']) : '';
+		$city 				= isset($_REQUEST['city']) ? sanitize_text_field($_REQUEST['city']) : '';
+		$state 				= isset($_REQUEST['state']) ? sanitize_text_field($_REQUEST['state']) : '';
+		$zip 				= isset($_REQUEST['zip']) ? sanitize_text_field($_REQUEST['zip']) : '';
+		$country 			= isset($_REQUEST['country']) ? sanitize_text_field($_REQUEST['country']) : '';
+		$phone				= isset($_REQUEST['phone']) ? sanitize_text_field($_REQUEST['phone']) : '';
+		
 		$event_location		= '';
 		if ( !empty($address) )
 			$event_location	.= $address . ' ';
@@ -219,8 +220,8 @@ function add_event_to_db($recurrence_arr = array()) {
 		}
 		
 		//Questions/question groups
-		$question_groups = empty($_REQUEST['question_groups']) ? serialize(array(1)) : serialize(sanitize_text_field($_REQUEST['question_groups']));
-		$add_attendee_question_groups = empty($_REQUEST['add_attendee_question_groups']) ? '' : sanitize_text_field($_REQUEST['add_attendee_question_groups']);
+		$question_groups = empty($_REQUEST['question_groups']) ? serialize(array(1)) : serialize($_REQUEST['question_groups']);
+		$add_attendee_question_groups = empty($_REQUEST['add_attendee_question_groups']) ? '' : $_REQUEST['add_attendee_question_groups'];
 		
 		//Process event meta data
 		$event_meta['venue_id'] = isset($_REQUEST['venue_id']) ? $_REQUEST['venue_id'][0] : 0;
