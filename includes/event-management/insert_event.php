@@ -7,18 +7,24 @@ function add_event_to_db($recurrence_arr = array()) {
 	
     global $wpdb, $org_options, $current_user, $espresso_premium;
 	
-	//Set front end event manager to false
-	$use_fem = false;
+
+	//Security check using nonce
+	if ( empty($_POST['nonce_verify_insert_event']) || !wp_verify_nonce($_POST['nonce_verify_insert_event'],'espresso_verify_insert_event_nonce') ){
+		print '<h3 class="error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
+		return;
+	}
+	
+	//Set FEM to false
+	$use_fem = FALSE;
+
 	$is_espresso_event_manager = false;
 		
-	//If using the Espresso Event Manager
+	//If using FEM
 	if ( isset($_REQUEST['ee_fem_action']) && $_REQUEST['ee_fem_action'] == 'ee_fem_add'){
-		//Security check using nonce
-		if ( empty($_POST['ee_fem_nonce']) || !wp_verify_nonce($_POST['ee_fem_nonce'],'espresso_form_check') ){
-			print '<h3 class="fem_error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
-			return;
-		}
-		$use_fem = true;
+
+
+		$use_fem = TRUE;
+
 		if ( function_exists('espresso_member_data') && espresso_member_data('role') == 'espresso_event_manager' ){
 			global $espresso_manager;
 			$event_manager_approval = isset($espresso_manager['event_manager_approval']) && $espresso_manager['event_manager_approval'] == 'Y' ? true : false;
@@ -26,8 +32,10 @@ function add_event_to_db($recurrence_arr = array()) {
 		}
 	}
 
-    //Don't show sql errors if using the front-end event manager
-	if ( $use_fem == false )
+
+	//Don't show sql errors if using the FEM
+	if ( $use_fem === FALSE )
+
 		$wpdb->show_errors();
 
     static $recurrence_id = null;
@@ -106,9 +114,31 @@ function add_event_to_db($recurrence_arr = array()) {
 			$event_status = 'P';
 		}
 
-        //Get the first instance of the start and end times
-        $start_time = !empty($_REQUEST['start_time'][0]) ? $_REQUEST['start_time'][0] : '8:00 AM';
-        $end_time = !empty($_REQUEST['end_time'][0]) ? $_REQUEST['end_time'][0] : '5:00 PM';
+		$event_desc			= !empty($_REQUEST['event_desc']) ? esc_html($_REQUEST['event_desc']) : '';
+		$display_desc		= !empty($_REQUEST['display_desc']) ? sanitize_text_field($_REQUEST['display_desc']) : 'Y';
+		$display_reg_form	= !empty($_REQUEST['display_reg_form']) ? sanitize_text_field($_REQUEST['display_reg_form']) : 'Y';
+		$externalURL		= isset($_REQUEST['externalURL']) ? sanitize_text_field($_REQUEST['externalURL']) : '';
+		$post_type			= !empty($_REQUEST['espresso_post_type']) ? sanitize_text_field($_REQUEST['espresso_post_type']) : '';
+		$reg_limit			= !empty($_REQUEST['reg_limit']) ? sanitize_text_field($_REQUEST['reg_limit']) : '999999';
+		$allow_multiple		= !empty($_REQUEST['allow_multiple']) ? sanitize_text_field($_REQUEST['allow_multiple']) : 'N';
+		$additional_limit	= !empty($_REQUEST['additional_limit']) && $_REQUEST['additional_limit'] > 0 ? sanitize_text_field($_REQUEST['additional_limit']) : '5';
+		$member_only		= !empty($_REQUEST['member_only']) ? sanitize_text_field($_REQUEST['member_only']) : 'N';
+		$is_active			= !empty($_REQUEST['is_active']) ? sanitize_text_field($_REQUEST['is_active']) : 'Y';
+		$event_status		= !empty($_REQUEST['event_status']) ? sanitize_text_field($_REQUEST['event_status']) : 'A';
+		$use_coupon_code	= !empty($_REQUEST['use_coupon_code']) ? sanitize_text_field($_REQUEST['use_coupon_code']) : 'N';
+		$ticket_id			= empty($_REQUEST['ticket_id']) ? 0 : sanitize_text_field($_REQUEST['ticket_id']);
+		
+		//Get the first instance of the start and end times
+		$start_time			= !empty($_REQUEST['start_time'][0]) ? sanitize_text_field($_REQUEST['start_time'][0]) : '8:00 AM';
+		$end_time			= !empty($_REQUEST['end_time'][0]) ? sanitize_text_field($_REQUEST['end_time'][0]) : '5:00 PM';
+		
+		// Add Timezone
+		$timezone_string	= isset($_REQUEST['timezone_string']) ? sanitize_text_field($_REQUEST['timezone_string']) : '';
+		
+		//Early discounts
+		$early_disc			= !empty($_REQUEST['early_disc']) ? sanitize_text_field($_REQUEST['early_disc']) : '';
+		$early_disc_date	= !empty($_REQUEST['early_disc_date']) ? sanitize_text_field($_REQUEST['early_disc_date']) : '';
+		$early_disc_percentage = !empty($_REQUEST['early_disc_percentage']) ? sanitize_text_field($_REQUEST['early_disc_percentage']) : '';
 		
 		//Get the registration start and end times
 		$_REQUEST['registration_startT'] = !empty($_REQUEST['registration_startT']) ? $_REQUEST['registration_startT'] : '12:01 AM';
@@ -135,10 +165,36 @@ function add_event_to_db($recurrence_arr = array()) {
 		$send_mail = !empty($_REQUEST['send_mail']) ? $_REQUEST['send_mail'] : 'N';
        	
 		//Custom email content
-		$conf_mail = !empty($_REQUEST['conf_mail']) ? $_REQUEST['conf_mail'] : ''; 
+		$conf_mail			= !empty($_REQUEST['conf_mail']) ? esc_html($_REQUEST['conf_mail']) : ''; 
 		
 		//Use a premade custom email
-		$email_id = isset($_REQUEST['email_name']) ? $_REQUEST['email_name'] : '0';
+		$email_id			= isset($_REQUEST['email_name']) ? (int)$_REQUEST['email_name'] : '0';
+				
+		//Venue Information
+		$venue_title		= isset($_REQUEST['venue_title']) ? sanitize_text_field($_REQUEST['venue_title']) : '';
+		$venue_url			= isset($_REQUEST['venue_url']) ? sanitize_text_field($_REQUEST['venue_url']) : '';
+		$venue_phone		= isset($_REQUEST['venue_phone']) ? sanitize_text_field($_REQUEST['venue_phone']) : '';
+		$venue_image		= isset($_REQUEST['venue_image']) ? sanitize_text_field($_REQUEST['venue_image']) : '';
+
+		//Virtual location
+		$virtual_url		= !empty($_REQUEST['virtual_url']) ? sanitize_text_field($_REQUEST['virtual_url']) : '';
+		$virtual_phone		= !empty($_REQUEST['virtual_phone']) ? sanitize_text_field($_REQUEST['virtual_phone']) : '';
+		
+		//Address/venue information
+		$address 			= isset($_REQUEST['address']) ? sanitize_text_field($_REQUEST['address']) : '';
+		$address2 			= isset($_REQUEST['address2']) ? sanitize_text_field($_REQUEST['address2']) : '';
+		$city 				= isset($_REQUEST['city']) ? sanitize_text_field($_REQUEST['city']) : '';
+		$state 				= isset($_REQUEST['state']) ? sanitize_text_field($_REQUEST['state']) : '';
+		$zip 				= isset($_REQUEST['zip']) ? sanitize_text_field($_REQUEST['zip']) : '';
+		$country 			= isset($_REQUEST['country']) ? sanitize_text_field($_REQUEST['country']) : '';
+		$phone				= isset($_REQUEST['phone']) ? sanitize_text_field($_REQUEST['phone']) : '';
+		
+		$event_location		= '';
+		if ( !empty($address) )
+			$event_location	.= $address . ' ';
+		
+		if ( !empty($address2) )
+			$event_location .= '<br />' . $address2;
 		
 		$ticket_id = empty($_REQUEST['ticket_id']) ? 0 : $_REQUEST['ticket_id'];
 
@@ -203,7 +259,6 @@ function add_event_to_db($recurrence_arr = array()) {
         $event_meta['date_submitted'] = date("Y-m-d H:i:s");
 
 		$event_meta['default_payment_status'] = !empty($_REQUEST['default_payment_status']) ? $_REQUEST['default_payment_status'] : '';
-
 		
 		if (isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ){
 			$event_meta['event_thumbnail_url'] = $_REQUEST['upload_image'];
