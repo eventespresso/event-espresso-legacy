@@ -613,7 +613,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 								$attendee['price_id'] = $price_id;
 								//this has all the attendee information, name, questions....
 								$session_vars['event_attendees'] = $attendee; 
-								$session_vars['data']['price_type'] = $event['price_id'][$price_id]['price_type'];
+								$session_vars['data']['price_type'] = stripslashes_deep($event['price_id'][$price_id]['price_type']);
 								if ( isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1 ) {
 
 									$num_people = (int)$event['price_id'][$price_id]['attendee_quantity'];

@@ -173,12 +173,12 @@ function copy_event( $recurrence_array = array() ){
 				if ( ! empty( $event_price )) {
 					$columns_and_values = array( 
 							'event_id' => $new_id, 
-							'price_type' => $event_price->price_type, 
+							'price_type' => stripslashes_deep($event_price->price_type), 
 							'event_cost' => $event_price->event_cost, 
 							'surcharge' => $event_price->surcharge, 
 							'surcharge_type' => $event_price->surcharge_type, 
 							'member_price' => $event_price->member_price, 
-							'member_price_type' => $event_price->member_price_type, 
+							'member_price_type' => stripslashes_deep($event_price->member_price_type), 
 							'max_qty' => $event_price->max_qty, 
 							'max_qty_members' => $event_price->max_qty_members 
 					);

@@ -839,7 +839,7 @@ function event_espresso_copy_dd($event_id, $meta) {
 				if ($event_meta['additional_attendee_reg_info'] == 1) {
 					$i = 1;
 					$event_name = strlen($v_event_id['event_name']) > 25 ? substr($v_event_id['event_name'], 0, 15) . '... ' : $v_event_id['event_name']; //if too long to display
-					$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}|$k_event_id|$k_price_id|$i'>" . stripslashes_deep($event_name) . ' - ' . $v_price_id['price_type'] . ' - Attendee ' . $i . "</option>";
+					$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}|$k_event_id|$k_price_id|$i'>" . stripslashes_deep($event_name) . ' - ' . stripslashes_deep($v_price_id['price_type'] ). ' - Attendee ' . $i . "</option>";
 				} else {
 					for ($i = 1; $i <= $v_price_id['attendee_quantity']; $i++) {
 						$event_name = strlen($v_event_id['event_name']) > 25 ? substr($v_event_id['event_name'], 0, 15) . '... ' : $v_event_id['event_name']; //if too long to display
@@ -1145,7 +1145,7 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 			foreach ($results as $result) {
 
 				//Setting this field for use on the registration form
-				$_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['price_type'] = $result->price_type;
+				$_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['price_type'] = stripslashes_deep($result->price_type);
 				// Addition for Early Registration discount
 				if ($early_price_data = early_discount_amount($event_id, $result->event_cost)) {
 					$result->event_cost = $early_price_data['event_price'];
@@ -1162,7 +1162,6 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 					}
 				}
 
-				//echo '<option value="' . number_format($result->event_cost,2) . '|' . $result->price_type . '|' . $result->surcharge . '">' . $result->price_type . ' (' . $org_options['currency_symbol'] .  number_format($result->event_cost,2) . $message  . ') '. $surcharge . ' </option>';
 				?>
 	<tr>
 		<td class="price_type"><?php echo $result->price_type; ?></td>

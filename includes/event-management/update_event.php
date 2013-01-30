@@ -494,9 +494,9 @@ function update_event($recurrence_arr = array()) {
             foreach ($_REQUEST['event_cost'] as $k => $v) {
                 if (!empty($v)) {
 					$v = (float)preg_replace('/[^0-9\.]/ui','',$v);//Removes non-integer characters
-                    $price_type = $_REQUEST['price_type'][$k] != '' ? sanitize_text_field($_REQUEST['price_type'][$k]) : __('General Admission', 'event_espresso');
-                    $member_price_type = !empty($_REQUEST['member_price_type'][$k]) ? sanitize_text_field($_REQUEST['member_price_type'][$k]) : __('Members Admission', 'event_espresso');
-                    $member_price = !empty($_REQUEST['member_price'][$k]) ? $_REQUEST['member_price'][$k] : $v;
+                    $price_type = $_REQUEST['price_type'][$k] != '' ? sanitize_text_field(stripslashes_deep($_REQUEST['price_type'][$k])) : __('General Admission', 'event_espresso');
+                    $member_price_type = !empty($_REQUEST['member_price_type'][$k]) ? sanitize_text_field(stripslashes_deep($_REQUEST['member_price_type'][$k])) : __('Members Admission', 'event_espresso');
+                    $member_price = !empty($_REQUEST['member_price'][$k]) ? (float)$_REQUEST['member_price'][$k] : $v;
 					$sql_price = array(
 						'event_id'			=> $event_id,
 						'event_cost'		=> $v,

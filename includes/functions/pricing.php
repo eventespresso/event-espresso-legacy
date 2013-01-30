@@ -359,7 +359,7 @@ if (!function_exists('event_espresso_price_dropdown')) {
                 }
 
                 //Using price ID
-                $html .= '<option' . $selected . ' value="' . $result->id . '|' . $result->price_type . '">' . $result->price_type . ' (' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . ') ' . $surcharge . ' </option>';
+                $html .= '<option' . $selected . ' value="' . $result->id . '|' . stripslashes_deep($result->price_type) . '">' . stripslashes_deep($result->price_type) . ' (' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . ') ' . $surcharge . ' </option>';
             }
             $html .= '</select><input type="hidden" name="price_select" id="price_select-' . $event_id . '" value="true" />';
         } else if ($wpdb->num_rows == 1) {
