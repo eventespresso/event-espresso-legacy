@@ -668,7 +668,8 @@ function update_event($recurrence_arr = array()) {
             }
         }
         ?>
-        <div id="message" class="updated fade"><p><strong><?php _e('Event details updated for', 'event_espresso'); ?> <a href="<?php echo espresso_reg_url($event_id); ?>" target="_blank"><?php echo stripslashes_deep($_REQUEST['event']) ?> for <?php echo date("m/d/Y", strtotime($start_date)); ?></a>.</strong></p></div>
+        <div id="message" class="updated fade"><p><strong><?php _e('Event details updated for', 'event_espresso'); ?> <a href="<?php echo espresso_reg_url($event_id); ?>" target="_blank">
+		<?php echo htmlentities( stripslashes( sanitize_text_field( $_REQUEST['event'] )), ENT_QUOTES, 'UTF-8' ) ?> for <?php echo date("m/d/Y", strtotime($start_date)); ?></a>.</strong></p></div>
         
         <?php
 			/*
