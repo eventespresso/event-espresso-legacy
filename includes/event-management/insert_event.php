@@ -534,7 +534,9 @@ function add_event_to_db($recurrence_arr = array()) {
 		if (empty($error)) {
 			?>
 			<div id="message" class="updated fade"><p><strong><?php _e('The event', 'event_espresso'); ?>
-			<a href="<?php echo espresso_reg_url($last_event_id); ?>" target="_blank"><?php echo stripslashes_deep($_REQUEST['event']) ?></a>
+			<a href="<?php echo espresso_reg_url($last_event_id); ?>" target="_blank">
+				<?php echo htmlentities( stripslashes( sanitize_text_field( $_REQUEST['event'] )), ENT_QUOTES, 'UTF-8' ); ?>				
+			</a>
 
 			<?php _e('has been added for ', 'event_espresso'); ?><?php echo date("m/d/Y", strtotime($start_date)); ?> <a href="<?php echo admin_url(); ?>admin.php?page=events&action=edit&event_id=<?php echo $last_event_id; ?>"><?php _e('Edit this event?', 'event_espresso'); ?></a></strong></p></div>
 		<?php } else { ?>
