@@ -45,127 +45,166 @@ function espresso_getTinyUrl($url) {
 //Text formatting function.
 //This should fix all of the formatting issues of text output from the database.
 function espresso_format_content($content = '') {
-	$allowed_tags = '
-<!-->
-<a>
-<abbr>
-<acronym>
-<address>
-<applet>
-<area>
-<article>
-<aside>
-<audio>
-<b>
-<base>
-<basefont>
-<bdi>
-<bdo>
-<big>
-<blockquote>
-<body>
-<br>
-<button>
-<canvas>
-<caption>
-<center>
-<cite>
-<code>
-<col>
-<colgroup>
-<command>
-<datalist>
-<dd>
-<del>
-<details>
-<dfn>
-<dir>
-<div>
-<dl>
-<dt>
-<em>
-<embed>
-<fieldset>
-<figcaption>
-<figure>
-<font>
-<footer>
-<form>
-<frame>
-<frameset>
-<head>
-<header>
-<hgroup>
-<h1>
-<h2>
-<h3>
-<h4>
-<h5>
-<h6>
-<hr>
-<html>
-<i>
-<iframe>
-<img>
-<input>
-<ins>
-<kbd>
-<keygen>
-<label>
-<legend>
-<li>
-<link>
-<map>
-<mark>
-<menu>
-<meta>
-<meter>
-<nav>
-<noframes>
-<object>
-<ol>
-<optgroup>
-<option>
-<output>
-<p>
-<param>
-<pre>
-<progress>
-<q>
-<rp>
-<rt>
-<ruby>
-<s>
-<samp>
-<section>
-<select>
-<small>
-<source>
-<span>
-<strike>
-<strong>
-<style>
-<sub>
-<summary>
-<sup>
-<table>
-<tbody>
-<td>
-<textarea>
-<tfoot>
-<th>
-<thead>
-<time>
-<title>
-<tr>
-<track>
-<tt>
-<u>
-<ul>
-<var>
-<video>
-<wbr>';
-	return strip_tags(wpautop(stripslashes_deep(html_entity_decode(do_shortcode($content), ENT_QUOTES, "UTF-8"))),$allowed_tags);
+	
+	$kses_allowed = array(
+		'a' => array(
+			'href' => array(),
+			'title' => array()
+		),
+		'br' => array(),
+		'em' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'blockquote' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'code' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'img' => array(
+			'src' => array(),
+			'class' => array(),
+			'width' => array(),
+			'height' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'strong' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'p' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'div' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'hr' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'ol' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'li' => array(
+			'class' => array(),
+			'id' => array(),
+			'title' => array()
+		),
+		'video' => array(
+			'class' => array(),
+			'id' => array(),
+			'title' => array()
+		),
+		'th' => array(
+			'class' => array(),
+			'id' => array(),
+			'width' => array(),
+			'border' => array(),
+			'cellpadding' => array(),
+			'cellspacing' => array(),
+			'style' => array(),
+			'align' => array(),
+			'cols' => array(),
+			'title' => array()
+		),
+		'thead' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'tfoot' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'tbody' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'table' => array(
+			'class' => array(),
+			'id' => array(),
+			'width' => array(),
+			'border' => array(),
+			'cellpadding' => array(),
+			'cellspacing' => array(),
+			'style' => array(),
+			'align' => array(),
+			'cols' => array(),
+			'bgcolor' => array(),
+			'title' => array()
+		),
+		'tr' => array(
+			'class' => array(),
+			'id' => array(),
+			'width' => array(),
+			'border' => array(),
+			'cellpadding' => array(),
+			'cellspacing' => array(),
+			'style' => array(),
+			'align' => array(),
+			'cols' => array(),
+			'bgcolor' => array(),
+			'title' => array()
+		),
+		'td' => array(
+			'class' => array(),
+			'id' => array(),
+			'width' => array(),
+			'border' => array(),
+			'cellpadding' => array(),
+			'cellspacing' => array(),
+			'style' => array(),
+			'align' => array(),
+			'nowrap' => array(),
+			'height' => array(),
+			'rowspan' => array(),
+			'title' => array()
+		),
+		'ins' => array(
+			'datetime' => array()
+		),
+	);
+	return wp_kses(wpautop(stripslashes_deep(html_entity_decode(do_shortcode($content), ENT_QUOTES, "UTF-8"))), $kses_allowed);
 }
 
 //This function pulls HTML entities back into HTML format first then strips it.
