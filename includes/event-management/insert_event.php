@@ -85,7 +85,7 @@ function add_event_to_db($recurrence_arr = array()) {
 		}else{
 			$event_identifier = sanitize_title_with_dashes($_REQUEST['event_identifier']) . $event_code;
 		}
-		$event_desc			= !empty($_REQUEST['event_desc']) ? esc_html($_REQUEST['event_desc']) : '';
+		$event_desc			= !empty($_REQUEST['event_desc']) ? $_REQUEST['event_desc'] : '';
 		$display_desc		= !empty($_REQUEST['display_desc']) ? sanitize_text_field($_REQUEST['display_desc']) : 'Y';
 		$display_reg_form	= !empty($_REQUEST['display_reg_form']) ? sanitize_text_field($_REQUEST['display_reg_form']) : 'Y';
 		$externalURL		= isset($_REQUEST['externalURL']) ? sanitize_text_field($_REQUEST['externalURL']) : '';
