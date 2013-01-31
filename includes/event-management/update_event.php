@@ -494,9 +494,9 @@ function update_event($recurrence_arr = array()) {
             foreach ($_REQUEST['event_cost'] as $k => $v) {
                 if (!empty($v)) {
 					$v = (float)preg_replace('/[^0-9\.]/ui','',$v);//Removes non-integer characters
-                    $price_type = $_REQUEST['price_type'][$k] != '' ? sanitize_text_field($_REQUEST['price_type'][$k]) : __('General Admission', 'event_espresso');
-                    $member_price_type = !empty($_REQUEST['member_price_type'][$k]) ? sanitize_text_field($_REQUEST['member_price_type'][$k]) : __('Members Admission', 'event_espresso');
-                    $member_price = !empty($_REQUEST['member_price'][$k]) ? $_REQUEST['member_price'][$k] : $v;
+                    $price_type = $_REQUEST['price_type'][$k] != '' ? sanitize_text_field(stripslashes_deep($_REQUEST['price_type'][$k])) : __('General Admission', 'event_espresso');
+                    $member_price_type = !empty($_REQUEST['member_price_type'][$k]) ? sanitize_text_field(stripslashes_deep($_REQUEST['member_price_type'][$k])) : __('Members Admission', 'event_espresso');
+                    $member_price = !empty($_REQUEST['member_price'][$k]) ? (float)$_REQUEST['member_price'][$k] : $v;
 					$sql_price = array(
 						'event_id'			=> $event_id,
 						'event_cost'		=> $v,
@@ -668,7 +668,8 @@ function update_event($recurrence_arr = array()) {
             }
         }
         ?>
-        <div id="message" class="updated fade"><p><strong><?php _e('Event details updated for', 'event_espresso'); ?> <a href="<?php echo espresso_reg_url($event_id); ?>" target="_blank"><?php echo stripslashes_deep($_REQUEST['event']) ?> for <?php echo date("m/d/Y", strtotime($start_date)); ?></a>.</strong></p></div>
+        <div id="message" class="updated fade"><p><strong><?php _e('Event details updated for', 'event_espresso'); ?> <a href="<?php echo espresso_reg_url($event_id); ?>" target="_blank">
+		<?php echo htmlentities( stripslashes( sanitize_text_field( $_REQUEST['event'] )), ENT_QUOTES, 'UTF-8' ) ?> for <?php echo date("m/d/Y", strtotime($start_date)); ?></a>.</strong></p></div>
         
         <?php
 			/*

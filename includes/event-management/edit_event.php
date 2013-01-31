@@ -22,8 +22,8 @@ function edit_event($event_id = 0) {
 	foreach ($events as $event) {
 
 		$event_id				= $event->id;
-		$event_name				= stripslashes_deep($event->event_name);
-		$event_desc				= stripslashes_deep($event->event_desc);
+		$event_name				= htmlentities( stripslashes( $event->event_name ), ENT_QUOTES, 'UTF-8' );
+		$event_desc				= htmlentities( stripslashes( $event->event_desc ), ENT_QUOTES, 'UTF-8' );
 		$display_desc			= $event->display_desc;
 		$display_reg_form		= $event->display_reg_form;
 		$member_only			= $event->member_only;

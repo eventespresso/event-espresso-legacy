@@ -71,7 +71,7 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 				<div class="multi_regis_wrapper_attendee-<?php echo $is_primary; ?>">
 					<div class="event-display-boxes">
 						<?php
-						echo '<h4 class="section-heading"><strong>'.__('Price Type:') . '</strong> ' . $meta['price_type'].$attendee_quantity.'</h4>';
+						echo '<h4 class="section-heading"><strong>'.__('Price Type:') . '</strong> ' . stripslashes_deep($meta['price_type']).$attendee_quantity.'</h4>';
 						echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $attendee_number . '</h3>';
 		
 						//This will be the main attendee

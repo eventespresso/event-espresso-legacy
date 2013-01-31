@@ -61,7 +61,7 @@ function ee_core_load_pue_update() {
 			require(EVENT_ESPRESSO_PLUGINFULLPATH . 'class/pue/pue-client.php' );
 			$api_key = isset($org_options['site_license_key']) ? $org_options['site_license_key'] : '';
 			$host_server_url = 'http://eventespresso.com'; //this needs to be the host server where plugin update engine is installed.
-			$plugin_slug = 'event-espresso-pr'; //this needs to be the slug of the plugin/addon that you want updated (and that pue-client.php is included with).  This slug should match what you've set as the value for plugin-slug when adding the plugin to the plugin list via plugin-update-engine on your server.
+			$plugin_slug = 'event-espresso'; //this needs to be the slug of the plugin/addon that you want updated (and that pue-client.php is included with).  This slug should match what you've set as the value for plugin-slug when adding the plugin to the plugin list via plugin-update-engine on your server.
 			//$options needs to be an array with the included keys as listed.
 			$options = array(
 			//	'optionName' => '', //(optional) - used as the reference for saving update information in the clients options table.  Will be automatically set if left blank.
