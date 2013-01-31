@@ -176,7 +176,7 @@ function update_event($recurrence_arr = array()) {
 
         $event_id						= array_key_exists('event_id', $recurrence_arr) ? $recurrence_arr['event_id'] : (int)$_REQUEST['event_id'];
         $event_name						= sanitize_text_field($_REQUEST['event']);
-        $event_desc						= esc_html($_REQUEST['event_desc']);
+        $event_desc						= $_REQUEST['event_desc'];
         $display_desc					= sanitize_text_field($_REQUEST['display_desc']);
         $display_reg_form				= sanitize_text_field($_REQUEST['display_reg_form']);
 		$externalURL					= !empty($_REQUEST['externalURL']) ? esc_html($_REQUEST['externalURL']):'';
