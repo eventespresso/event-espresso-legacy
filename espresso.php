@@ -89,17 +89,178 @@ add_action('wp_head', 'espresso_info_header');
 
 
 //Globals
-global $org_options, $wpdb, $this_is_a_reg_page, $espresso_content;
+global $org_options, $wpdb, $this_is_a_reg_page, $espresso_content, $ee_kses_allowed;
 $espresso_content = '';
 
 $org_options = get_option('events_organization_settings');
-	
 if (empty($org_options['event_page_id'])) {
 	$org_options['event_page_id'] = '';
 	$org_options['return_url'] = '';
 	$org_options['cancel_return'] = '';
 	$org_options['notify_url'] = '';
 }
+
+$ee_kses_allowed = array(
+		'a' => array(
+			'class' => array(),
+			'id' => array(),
+			'href' => array(),
+			'title' => array()
+		),
+		'br' => array(),
+		'em' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'blockquote' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'code' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'img' => array(
+			'src' => array(),
+			'class' => array(),
+			'width' => array(),
+			'height' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'strong' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'p' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'div' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'hr' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'ol' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'li' => array(
+			'class' => array(),
+			'id' => array(),
+			'title' => array()
+		),
+		'video' => array(
+			'class' => array(),
+			'id' => array(),
+			'title' => array()
+		),
+		'th' => array(
+			'class' => array(),
+			'id' => array(),
+			'width' => array(),
+			'border' => array(),
+			'cellpadding' => array(),
+			'cellspacing' => array(),
+			'style' => array(),
+			'align' => array(),
+			'cols' => array(),
+			'title' => array()
+		),
+		'thead' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'tfoot' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'tbody' => array(
+			'class' => array(),
+			'id' => array(),
+			'style' => array(),
+			'align' => array(),
+			'title' => array()
+		),
+		'table' => array(
+			'class' => array(),
+			'id' => array(),
+			'width' => array(),
+			'border' => array(),
+			'cellpadding' => array(),
+			'cellspacing' => array(),
+			'style' => array(),
+			'align' => array(),
+			'cols' => array(),
+			'bgcolor' => array(),
+			'title' => array()
+		),
+		'tr' => array(
+			'class' => array(),
+			'id' => array(),
+			'width' => array(),
+			'border' => array(),
+			'cellpadding' => array(),
+			'cellspacing' => array(),
+			'style' => array(),
+			'align' => array(),
+			'cols' => array(),
+			'bgcolor' => array(),
+			'title' => array()
+		),
+		'td' => array(
+			'class' => array(),
+			'id' => array(),
+			'width' => array(),
+			'border' => array(),
+			'cellpadding' => array(),
+			'cellspacing' => array(),
+			'style' => array(),
+			'align' => array(),
+			'nowrap' => array(),
+			'height' => array(),
+			'rowspan' => array(),
+			'title' => array()
+		),
+		'ins' => array(
+			'datetime' => array()
+		),
+	);
+
 
 //Registration page check
 //From Brent C. http://events.codebasehq.com/projects/event-espresso/tickets/99

@@ -1,6 +1,6 @@
 <?php
 function add_staff_to_db(){
-	global $wpdb, $current_user;
+	global $wpdb, $current_user, $ee_kses_allowed;
 	$wpdb->show_errors();
 	if ( $_REQUEST['action'] == 'add' ){
 		//print_r($_REQUEST);
@@ -8,7 +8,7 @@ function add_staff_to_db(){
 		$staff_meta['twitter'] = $_REQUEST['twitter'];
 		$staff_meta['image'] = $_REQUEST['image'];
 		$staff_meta['website'] = $_REQUEST['website'];
-		$staff_meta['description'] = esc_html($_REQUEST['description']);
+		$staff_meta['description'] = wp_kses( $_REQUEST['description'], $ee_kses_allowed );
 	
 		$staff_meta['organization'] = esc_html($_REQUEST['organization']);
 		$staff_meta['title'] = esc_html($_REQUEST['title']);

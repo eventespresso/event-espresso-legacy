@@ -3,7 +3,7 @@ if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'
 do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	
 
 function update_event_venue(){
-	global $wpdb;
+	global $wpdb, $ee_kses_allowed;
 	$wpdb->show_errors();
     $venue_updated = false;
     if ( isset( $_REQUEST[ 'venue_id' ] ) ) {
@@ -23,7 +23,7 @@ function update_event_venue(){
         $venue_meta['twitter']      = isset( $_REQUEST['twitter'] ) ? sanitize_text_field($_REQUEST['twitter']) : '';
         $venue_meta['image']        = isset( $_REQUEST['image'] ) ? sanitize_text_field($_REQUEST['image']) : '';
         $venue_meta['website']      = isset( $_REQUEST['website'] ) ? sanitize_text_field($_REQUEST['website']) : '';
-        $venue_meta['description']  = isset( $_REQUEST['description'] ) ? esc_html( $_REQUEST['description'] ) : '';
+        $venue_meta['description']  = isset( $_REQUEST['description'] ) ? wp_kses( $_REQUEST['description'], $ee_kses_allowed ) : '';
         $locale                     = isset( $_REQUEST['locale'] ) ? sanitize_text_field($_REQUEST['locale']) : '';
         $meta                       = serialize($venue_meta);
 

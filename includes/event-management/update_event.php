@@ -6,8 +6,8 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 
 function update_event($recurrence_arr = array()) {
     //print_r($_REQUEST);
-    global $wpdb, $org_options, $current_user, $espresso_premium;
-	
+    global $wpdb, $org_options, $current_user, $espresso_premium, $ee_kses_allowed;
+
 	//Security check using nonce
 	if ( empty($_POST['nonce_verify_update_event']) || !wp_verify_nonce($_POST['nonce_verify_update_event'],'espresso_verify_update_event_nonce') ){
 		print '<h3 class="error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
@@ -176,7 +176,7 @@ function update_event($recurrence_arr = array()) {
 
         $event_id						= array_key_exists('event_id', $recurrence_arr) ? $recurrence_arr['event_id'] : (int)$_REQUEST['event_id'];
         $event_name						= sanitize_text_field($_REQUEST['event']);
-        $event_desc						= $_REQUEST['event_desc'];
+        $event_desc						= !empty($_REQUEST['event_desc']) ? wp_kses($_REQUEST['event_desc'], $ee_kses_allowed) : '';
         $display_desc					= sanitize_text_field($_REQUEST['display_desc']);
         $display_reg_form				= sanitize_text_field($_REQUEST['display_reg_form']);
 		$externalURL					= !empty($_REQUEST['externalURL']) ? esc_html($_REQUEST['externalURL']):'';
