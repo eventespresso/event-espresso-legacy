@@ -40,13 +40,12 @@ function update_event($recurrence_arr = array()) {
                     'frequency'						=> !empty($_POST['recurrence_frequency']) ? sanitize_text_field($_POST['recurrence_frequency']) : '',
                     'interval'						=> !empty($_POST['recurrence_interval']) ? sanitize_text_field($_POST['recurrence_interval']) : '',
                     'recurrence_type'				=> !empty($_POST['recurrence_type']) ? sanitize_text_field($_POST['recurrence_type']) : '',
-                    'weekdays'						=> !empty($_POST['recurrence_weekday']) ? sanitize_text_field($_POST['recurrence_weekday']) : '',
-                    'repeat_by'						=> !empty($_POST['recurrence_repeat_by']) ? sanitize_text_field($_POST['recurrence_repeat_by']) : '',
-                    'recurrence_manual_dates'		=> !empty($_POST['recurrence_manual_dates']) ? sanitize_text_field($_POST['recurrence_manual_dates']) : '',
-                    'recurrence_manual_end_dates'	=> !empty($_POST['recurrence_manual_end_dates']) ? sanitize_text_field($_POST['recurrence_manual_end_dates']) : '',
-                    'recurrence_visibility'			=> ''/*$_POST['recurrence_visibility']*/,
-                    'recurrence_id'					=> !empty($_POST['recurrence_id']) ? sanitize_text_field($_POST['recurrence_id']) : '',
-					'recurrence_regis_date_increment' => !empty($_POST['recurrence_regis_date_increment']) ? sanitize_text_field($_POST['recurrence_regis_date_increment']) : '',
+                    'weekdays'						=> !empty($_POST['recurrence_weekday']) ? $_POST['recurrence_weekday'] : '',
+                    'repeat_by'						=> !empty($_POST['recurrence_repeat_by']) ? $_POST['recurrence_repeat_by'] : '',
+                    'recurrence_manual_dates'		=> !empty($_POST['recurrence_manual_dates']) ? $_POST['recurrence_manual_dates'] : '',
+                    'recurrence_manual_end_dates'	=> !empty($_POST['recurrence_manual_end_dates']) ? $_POST['recurrence_manual_end_dates'] : '',
+                    'recurrence_id'					=> !empty($_POST['recurrence_id']) ? $_POST['recurrence_id'] : '',
+					'recurrence_regis_date_increment' => !empty($_POST['recurrence_regis_date_increment']) ? $_POST['recurrence_regis_date_increment'] : '',
                 );
 
                 //$re_params['adding_to_db'] = 'Y';
