@@ -52,12 +52,11 @@ function add_event_to_db($recurrence_arr = array()) {
 				'frequency'						=> sanitize_text_field($_POST['recurrence_frequency']),
 				'interval'						=> sanitize_text_field($_POST['recurrence_interval']),
 				'type'							=> sanitize_text_field($_POST['recurrence_type']),
-				'weekdays'						=> sanitize_text_field($_POST['recurrence_weekday']),
-				'repeat_by'						=> sanitize_text_field($_POST['recurrence_repeat_by']),
-				'recurrence_regis_date_increment' => sanitize_text_field($_POST['recurrence_regis_date_increment']),
-				'recurrence_manual_dates'		=> sanitize_text_field($_POST['recurrence_manual_dates']),
-				'recurrence_manual_end_dates'	=> sanitize_text_field($_POST['recurrence_manual_end_dates']),
-				'recurrence_visibility'			=> sanitize_text_field($_POST['recurrence_visibility']),
+				'weekdays'						=> $_POST['recurrence_weekday'],
+				'repeat_by'						=> $_POST['recurrence_repeat_by'],
+				'recurrence_regis_date_increment' => $_POST['recurrence_regis_date_increment'],
+				'recurrence_manual_dates'		=> $_POST['recurrence_manual_dates'],
+				'recurrence_manual_end_dates'	=> $_POST['recurrence_manual_end_dates'],
 				'recurrence_id'					=> $recurrence_id,
 				'adding_to_db'					=> 'Y'
 			);
@@ -557,7 +556,6 @@ function add_event_to_db($recurrence_arr = array()) {
 						'recurrence_event_end_date' => $v['event_end_date'],
 						'registration_start' => $v['registration_start'],
 						'registration_end' => $v['registration_end'],
-						'visible_on' => $v['visible_on']
 			));
 		}
 	}
