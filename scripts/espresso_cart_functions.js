@@ -420,26 +420,23 @@ jQuery(document).ready(function() {
     });
 
 
+   //Updated in Event Espresso 3.1.31 to suport Jquery 1.9
+   function event_espresso_do_ajax(data, callback){
+		jQuery.ajax({
+			data: data,
+			dataType: 'json'
+		})
+		.done(function(response, textStatus){
+			process_response(response, callback);
+		})
+		.fail(function(resp) {
+			//alert('Error.');
+		})
+		.complete(function(resp){
+			//alert('Complete.');
+		});
 
-
-
-
-    function event_espresso_do_ajax(data, callback){
-
-        jQuery.ajax({
-            data: data,
-            dataType: "json",
-            success: function(response, textStatus){
-
-                process_response(response, callback);
-
-            },
-            error: function(resp) {
-                //alert("Error.");
-            }
-        });
-
-    }
+   }
 
     function process_response(from_server, callback)
     {
