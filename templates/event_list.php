@@ -81,8 +81,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 
 		//BEGIN CATEGORY MODIFICATION : using events_detail_table.category_id instead of events_category_table.category_identifier in order to filter events with one OR MORE categories
 		//Let's check if there's one or more categories specified for the events of the event list (based on the use of "," as a separator) and store them in the $cat array.
-		$single_cat = FALSE;
-		
+
 		if(strstr($category_identifier,',')){
 			$array_cat=explode(",",$category_identifier);
 			$cat=array_map('trim', $array_cat);
