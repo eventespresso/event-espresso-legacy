@@ -6,7 +6,7 @@ function edit_attendee_record() {
 
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 	global $wpdb, $org_options;
-	
+	$wpdb->show_errors();
 	$notifications['success'] = array(); 
 	$notifications['error']	 = array(); 
 	
@@ -104,12 +104,7 @@ function edit_attendee_record() {
 				} elseif ( $upd_total < $amount_pd ) {
 					$upd_payment_status = __('Refund','event_espresso');
 				}
-				
-//				echo '<h4>$amount_pd : ' . $amount_pd . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//				echo '<h4>$payment_status : ' . $payment_status . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//				echo '<h4>$upd_total : ' . $upd_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//				echo '<h4>$upd_payment_status : ' . $upd_payment_status . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-				
+								
 				// compare old payment status with new payment status and update if things have changed
 				if ( $upd_payment_status != $payment_status ) {
 					// update payment status for ALL attendees for the entire registration
@@ -121,7 +116,7 @@ function edit_attendee_record() {
 					$upd_success = $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
 					// if there was an actual error
 					if ( $upd_success === FALSE ) {
-						$notifications['error'][] = __('An error occured while attempting to update the payment status for attendeefrom this registration.', 'event_espresso'); 
+						$notifications['error'][] = __('An error occured while attempting to update the payment status for attendee from this registration.', 'event_espresso'); 
 					}					
 				}
 				
@@ -142,9 +137,6 @@ function edit_attendee_record() {
 			
 			}			
 		}
-		
-		
-		
 		
 		
 		// **************************************************************************
@@ -184,9 +176,7 @@ function edit_attendee_record() {
 					if ( $wpdb->query( $wpdb->prepare( $SQL, $registration_id )) === FALSE ) {
 						$notifications['error'][] = __('An error occured while attempting to update additional attendee ticket quantities.', 'event_espresso'); 
 					}
-					
 					event_espresso_cleanup_multi_event_registration_id_group_data();
-
 				}
 
 				// let's base our success on the lack of errors
@@ -199,26 +189,33 @@ function edit_attendee_record() {
 		// **************************  UPDATE ATTENDEE  **************************
 		// **************************************************************************
 		} else if ( ! empty( $_REQUEST['attendee_action'] ) && $_REQUEST['attendee_action'] == 'update_attendee' ) {
-		
+			//printr( $_POST, '$_POST  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+			
 			if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'edit_attendee_' . $registration_id . '_update_attendee_nonce' )) {
 				wp_die( $failed_nonce_msg );
 			}
-
+			
+			//Update the price_option_type
+			do_action('action_hook_espresso_save_attendee_meta', $id, 'price_option_type', sanitize_text_field($_POST['price_option_type']));
+			
+			//Move attendee
+			do_action('action_hook_espresso_attendee_mover_move');
+			
 			$event_id = isset($_POST['event_id']) ? $_POST['event_id'] : '';
 			$txn_type = isset($_POST['txn_type']) ? $_POST['txn_type'] : '';
 
-			$set_cols_and_values = array( 
-					'fname'		=> isset($_POST['fname']) ? $_POST['fname'] : '', 
-					'lname'		=> isset($_POST['lname']) ? $_POST['lname'] : '', 
-					'address'		=> isset($_POST['address']) ? $_POST['address'] : '', 
-					'address2'	=> isset($_POST['address2']) ? $_POST['address2'] : '', 
-					'city'				=> isset($_POST['city']) ? $_POST['city'] : '', 
-					'state'			=> isset($_POST['state']) ? $_POST['state'] : '', 
-					'zip'				=> isset($_POST['zip']) ? $_POST['zip'] : '', 
-					'phone'		=> isset($_POST['phone']) ? $_POST['phone'] : '', 
-					'email'			=> isset($_POST['email']) ? $_POST['email'] : '' 
+			$cols_and_values = array( 
+					'fname'		=> isset($_POST['fname']) ? sanitize_text_field($_POST['fname']) : '', 
+					'lname'		=> isset($_POST['lname']) ? sanitize_text_field($_POST['lname']) : '', 
+					'address'	=> isset($_POST['address']) ? sanitize_text_field($_POST['address']) : '', 
+					'address2'	=> isset($_POST['address2']) ? sanitize_text_field($_POST['address2']) : '', 
+					'city'		=> isset($_POST['city']) ? sanitize_text_field($_POST['city']) : '', 
+					'state'		=> isset($_POST['state']) ? sanitize_text_field($_POST['state']) : '', 
+					'zip'		=> isset($_POST['zip']) ? sanitize_text_field($_POST['zip']) : '', 
+					'phone'		=> isset($_POST['phone']) ? sanitize_text_field($_POST['phone']) : '', 
+					'email'		=> isset($_POST['email']) ? sanitize_email($_POST['email']) : '' 
 			);
-			$set_format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' );
+			$cols_and_values_format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' );
 			
 			// Update the time ?
 			if ( isset( $_POST['start_time_id'] )) {
@@ -228,18 +225,39 @@ function edit_attendee_record() {
 						$start_time = $time->start_time;
 						$end_time = $time->end_time;
 					}
-					$set_cols_and_values['event_time'] = $start_time;
-					$set_cols_and_values['end_time'] = $end_time;
-					array_push( $set_format, '%s', '%s' );
+					$cols_and_values['event_time'] = $start_time;
+					$cols_and_values['end_time'] = $end_time;
+					array_push( $cols_and_values_format, '%s', '%s' );
 				}
 			}
-
-			//printr( $_POST, '$_POST  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 			
+			//Update price option
+			if ( isset( $_POST['price_select'] ) && $_POST['price_select'] == TRUE ) {
+				//Figure out if the person has registered using a price selection
+				$selected_price_option = isset($_POST['new_price_option']) && !empty($_POST['new_price_option']) ? $_POST['new_price_option'] : $_POST['price_option'] ;
+				$price_options = espresso_selected_price_option($selected_price_option);
+				$price_type = $price_options['price_type'];
+			
+			}else{
+				//If not using the price selection
+				$wpdb->get_results("SELECT price_type FROM " . EVENTS_PRICES_TABLE . " WHERE id ='" . absint( $_POST['price_id'] ) . "'");
+				$num_rows = $wpdb->num_rows;
+				if ($num_rows > 0) {
+					$price_type = $wpdb->last_result[0]->price_type;
+				}
+			}
+			
+			if ( !isset($_POST['move_attendee']) ){
+				$cols_and_values['price_option'] = $price_type;
+				array_push( $cols_and_values_format, '%s' );
+			}
+			
+			//echo "<pre>".print_r($cols_and_values,true)."</pre>";
+			
+			//Run the update query
 			$where_cols_and_values = array( 'id'=> $id );
 			$where_format = array( '%d' );
-			// run the update
-			$upd_success = $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
+			$upd_success = $wpdb->update( EVENTS_ATTENDEE_TABLE, $cols_and_values, $where_cols_and_values, $cols_and_values_format, $where_format );
 			// if there was an actual error
 			if ( $upd_success === FALSE ) {
 				$notifications['error'][] = __('An error occured. Attendee details could not be updated.', 'event_espresso'); 
@@ -429,6 +447,7 @@ function edit_attendee_record() {
 				$total_cost = $attendee->total_cost;
 				$orig_price = $attendee->orig_price;
 				$final_price = $attendee->final_price;
+				$price_option = $attendee->price_option;
 
 				$start_date = $attendee->start_date;
 				$event_time = $attendee->event_time;
@@ -464,11 +483,11 @@ function edit_attendee_record() {
 			$success_msg = implode( $notifications['success'], '<br />' );
 		?>
 				
-<div id="message" class="updated fade">
-	<p>
-		<strong><?php echo $success_msg; ?></strong>
-	</p>
-</div>
+			<div id="message" class="updated fade">
+				<p>
+					<strong><?php echo $success_msg; ?></strong>
+				</p>
+			</div>
 
 		<?php
 		 } 
@@ -477,13 +496,15 @@ function edit_attendee_record() {
 			$error_msg = implode( $notifications['error'], '<br />' );
 		?>
 				
-<div id="message" class="error">
-	<p>
-		<strong><?php echo $error_msg; ?></strong>
-	</p>
-</div>
+			<div id="message" class="error">
+				<p>
+					<strong><?php echo $error_msg; ?></strong>
+				</p>
+			</div>
 
-		<?php } ?>
+		<?php 
+		}
+		?>
 		
 <div>		
 	<p>
@@ -503,13 +524,31 @@ function edit_attendee_record() {
 			<table width="100%">
 				<tr>
 					<td width="50%" valign="top">
-						<form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>" class="espresso_form">
+						<form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>" class="espresso_form" id="attendee_details">
 							<h4 class="qrtr-margin">
 								<?php _e('Registration Information', 'event_espresso'); ?>
 								<?php echo $is_additional_attendee == false ? '[ <span class="green_text">' . __('Primary Attendee Record', 'event_espresso') . '</span> ]' : '[ <a href="admin.php?page=events&event_admin_reports=edit_attendee_record&event_id=' . $event_id . '&registration_id=' . $registration_id . '&form_action=edit_attendee">View/Edit Primary Attendee</a> ]'; ?>
 							</h4>
 							<fieldset>
 								<ul>
+								<?php if (function_exists('espresso_members_version')) { ?>
+										<li>
+										<?php 
+										$p_values =	array(
+											array('id'=>'DEFAULT','text'=> __('Default Pricing','event_espresso')),
+											array('id'=>'MEMBER','text'=> __('Member Pricing','event_espresso'))
+										);
+										echo select_input( 'price_option_type', $p_values, apply_filters('action_hook_espresso_get_attendee_meta_value', $id, 'price_option_type'), 'id="price_option_type"');
+										?>
+										</li>
+								<?php } ?>
+									<li id="standard_price_selection">
+										<?php do_action( 'action_hook_espresso_attendee_admin_price_dropdown', $event_id, array('show_label'=>TRUE, 'label'=>'Price Option', 'current_value'=>$price_option) );?> 
+									</li>
+									<li id="members_price_selection">
+										<?php do_action( 'action_hook_espresso_attendee_admin_price_dropdown_member', $event_id, array('show_label'=>TRUE, 'label'=>'Member Price Option', 'current_value'=>$price_option) );?> 
+									</li>
+									
 									<li>
 										<?php
 										$time_id = 0;
@@ -580,6 +619,10 @@ function edit_attendee_record() {
 												}
 												?>
 									</li>
+									
+									<?php do_action('action_hook_espresso_attendee_mover_events_list', $event_id)?>
+									<?php echo espresso_hidden_price_id($event_id); ?>
+									<input type="hidden" name="new_price_option" id="new_price_option-<?php echo $event_id ?>" value="<?php echo $event_id . '|'.$price_option ?>" />
 									<input type="hidden" name="id" value="<?php echo $id ?>" />
 									<input type="hidden" name="registration_id" value="<?php echo $registration_id ?>" />
 									<input type="hidden" name="event_id" value="<?php echo $event_id ?>" />
@@ -745,12 +788,69 @@ function edit_attendee_record() {
 							<input type="hidden" name="attendee_payment" value="update_price" />
 							<?php wp_nonce_field( 'edit_attendee_' . $registration_id . '_update_price_nonce' ); ?>
 						</form>
+						
 					</td>
 				</tr>
 			</table>
 		</div>
 	</div>
 </div>
+		<?php if (function_exists('espresso_members_version')) { ?>
+			<script type="text/javascript">
+				jQuery(document).ready(function($) {
+					// Remove li parent for input 'values' from page if 'text' box or 'textarea' are selected
+					var selectValue = jQuery('select#price_option_type option:selected').val();
+					//alert(selectValue + ' - this is initial value');
+					
+					if(selectValue == 'DEFAULT'){
+						jQuery('#members_price_selection').hide();
+						jQuery('select#price_option-<?php echo $event_id ?>').bind('change', function() {
+							var new_standard_SelectValue = jQuery('select#price_option-<?php echo $event_id ?> option:selected').val();
+							jQuery('#new_price_option-<?php echo $event_id ?>').val(new_standard_SelectValue);
+						});	
+					}else{
+						jQuery('#standard_price_selection').hide();
+						jQuery('select#members_price_option-<?php echo $event_id ?>').bind('change', function() {
+						var new_member_SelectValue = jQuery('select#members_price_option-<?php echo $event_id ?> option:selected').val();
+							jQuery('#new_price_option-<?php echo $event_id ?>').val(new_member_SelectValue);
+						});
+					}
+					
+					jQuery('select#price_option_type').bind('change', function() {
+						var selectValue = jQuery('select#price_option_type option:selected').val();
+							  
+						if (selectValue == 'MEMBER') {
+							//alert(selectValue);
+							jQuery('#members_price_selection').fadeIn('fast');
+							jQuery('#standard_price_selection').fadeOut('fast');
+							//move to hidden field
+							var member_SelectValue = jQuery('select#members_price_option-<?php echo $event_id ?> option:selected').val();
+							jQuery('#new_price_option-<?php echo $event_id ?>').val(member_SelectValue);
+							
+							jQuery('select#members_price_option-<?php echo $event_id ?>').bind('change', function() {
+							var new_member_SelectValue = jQuery('select#members_price_option-<?php echo $event_id ?> option:selected').val();
+								jQuery('#new_price_option-<?php echo $event_id ?>').val(new_member_SelectValue);
+							});
+					
+						} else {
+							//alert(selectValue);
+							jQuery('#standard_price_selection').fadeIn('fast');
+							jQuery('#members_price_selection').fadeOut('fast');
+							//move to hidden field
+							var standard_SelectValue = jQuery('select#price_option-<?php echo $event_id ?> option:selected').val();
+							jQuery('#new_price_option-<?php echo $event_id ?>').val(standard_SelectValue);
+							
+							jQuery('select#price_option-<?php echo $event_id ?>').bind('change', function() {
+								var new_standard_SelectValue = jQuery('select#price_option-<?php echo $event_id ?> option:selected').val();
+								jQuery('#new_price_option-<?php echo $event_id ?>').val(new_standard_SelectValue);
+							});	
+							
+						}
+					});
+					
+				});
+			</script>
 <?php
+		}
 	}
 }
