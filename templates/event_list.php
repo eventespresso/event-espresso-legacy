@@ -46,21 +46,24 @@ if (!function_exists('event_espresso_get_event_details')) {
 			$multi_reg = true;
 		}
 		
-		$default_attributes = array('category_identifier' => NULL
-		 							, 'staff_id' => NULL
-									, 'allow_override' => 0
-									, 'show_expired' => 'false'
-									, 'show_secondary' => 'false'
-									, 'show_deleted' => 'false'
-									, 'show_recurrence' => 'true'
-									, 'limit' => '0'
-									, 'order_by' => 'NULL'
-									, 'sort' => 'ASC'
-									, 'css_class' => 'NULL'
-									, 'current_page' => 1
-									, 'events_per_page' => 50
-									, 'num_page_links_to_display'=>10
-									, 'use_wrapper' => true);
+		$default_attributes = array(
+			'category_identifier'		=> NULL,
+			'event_category_id'			=> NULL,
+			'staff_id'					=> NULL,
+			'allow_override'			=> 0,
+			'show_expired'				=> 'false',
+			'show_secondary'			=> 'false',
+			'show_deleted'				=> 'false',
+			'show_recurrence'			=> 'true',
+			'limit'						=> '0',
+			'order_by'					=> 'NULL',
+			'sort'						=> 'ASC',
+			'css_class'					=> 'NULL',
+			'current_page'				=> 1,
+			'events_per_page'			=> 50,
+			'num_page_links_to_display'	=>10,
+			'use_wrapper'				=> true
+		);
 		// loop thru default atts
 		foreach ($default_attributes as $key => $default_attribute) {
 			// check if att exists
@@ -71,13 +74,17 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		// now extract shortcode attributes
 		extract($attributes);
+		
+		if (!empty($event_category_id)){
+			//$category_identifier = $event_category_id;
+		}
 
 		//BEGIN CATEGORY MODIFICATION : using events_detail_table.category_id instead of events_category_table.category_identifier in order to filter events with one OR MORE categories
 		//Let's check if there's one or more categories specified for the events of the event list (based on the use of "," as a separator) and store them in the $cat array.
 		
 		if(strstr($category_identifier,',')){
 			$array_cat=explode(",",$category_identifier);
-			$cat=array_map('trim', $array_cat);
+			$cat = array_map('trim', $array_cat);
 		} else {
    			$cat = array('0' => $category_identifier);
 		}
@@ -85,13 +92,12 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		//For every category specified in the shortcode, let's get the corresponding category_id et create a well-formatted string (id,n id)
 		foreach($cat as $k=>$v){
-
 			$sql_get_category_detail_id="SELECT id FROM ". EVENTS_CATEGORY_TABLE . " WHERE category_identifier = '".$v."'";
 			$category_detail_id .= $wpdb->get_var( $sql_get_category_detail_id ).",";
 		}
 
 		$cleaned_string_cat = substr($category_detail_id, 0, -1);
-		$tmp=explode(",",$cleaned_string_cat);
+		$tmp = explode(",",$cleaned_string_cat);
 		sort($tmp);
 		$cleaned_string_cat=implode(",", $tmp);
 		trim($cleaned_string_cat);
@@ -101,7 +107,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		$DISTINCT = $ee_search == true ? "DISTINCT" : '';
 		$sql = "SELECT $DISTINCT e.*, ese.start_time, ese.end_time, p.event_cost ";
 		
-		//Category sql
+		//Category field names
 		$sql .= ($category_identifier != NULL && !empty($category_identifier))? ", c.category_name, c.category_desc, c.display_desc, c.category_identifier": '';
 		
 		//Venue sql
@@ -110,8 +116,10 @@ if (!function_exists('event_espresso_get_event_details')) {
 		//Staff sql
 		isset($org_options['use_personnel_manager']) && $org_options['use_personnel_manager'] == 'Y' ? $sql .= ", st.name staff_name " : '';
 		
-		
+		//FROM
 		$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
+		
+		//Join Categories
 		$sql .= ($category_identifier != NULL && !empty($category_identifier))? " JOIN " . EVENTS_CATEGORY_REL_TABLE . " r ON r.event_id = e.id  JOIN " . EVENTS_CATEGORY_TABLE . " c ON  c.id = r.cat_id ":'';
 		
 		//Venue sql
