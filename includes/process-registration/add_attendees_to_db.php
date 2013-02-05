@@ -50,10 +50,9 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 		$check_sql = $wpdb->get_results($wpdb->prepare( $SQL, $prev_session_id, $event_id ));
 		$nmbr_of_regs = $wpdb->num_rows;
 		static $loop_number = 1;
-		
 		// delete previous entries from this session in case user is jumping back n forth between pages during the reg process
 		if ( $nmbr_of_regs > 0 && $loop_number == 1 ) {
-			if ( ! isset( $data_source['admin'] )) {
+			if ( !isset( $data_source['admin'] )) {
 				
 				$SQL = "SELECT id, registration_id FROM " . EVENTS_ATTENDEE_TABLE . ' ';
 				$SQL .= "WHERE attendee_session = %s ";
@@ -78,17 +77,17 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				//$SQL .= $incomplete_filter;
 				$wpdb->query($wpdb->prepare( $SQL, $prev_session_id ));
 				
+				//Added by Imon
+				// First delete attempt might fail if there is no data in answer table. So, second attempt without joining answer table is taken bellow -
+				$SQL = " DELETE FROM " . EVENTS_ATTENDEE_TABLE . ' ';
+				$SQL .= "WHERE attendee_session = %s ";
+				//$SQL .= $incomplete_filter;
+				$wpdb->query($wpdb->prepare( $SQL, $prev_session_id ));
+	
+				// Clean up any attendee information from attendee_cost table where attendee is not available in attendee table
+				event_espresso_cleanup_multi_event_registration_id_group_data();		
+				
 			}
-
-			//Added by Imon
-			// First delete attempt might fail if there is no data in answer table. So, second attempt without joining answer table is taken bellow -
-			$SQL = " DELETE FROM " . EVENTS_ATTENDEE_TABLE . ' ';
-			$SQL .= "WHERE attendee_session = %s ";
-			//$SQL .= $incomplete_filter;
-			$wpdb->query($wpdb->prepare( $SQL, $prev_session_id ));
-
-			// Clean up any attendee information from attendee_cost table where attendee is not available in attendee table
-			event_espresso_cleanup_multi_event_registration_id_group_data();			
 		}
 		$loop_number++;
 
