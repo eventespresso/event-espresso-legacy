@@ -196,7 +196,7 @@ function edit_attendee_record() {
 			}
 			
 			//Update the price_option_type
-			do_action('action_hook_espresso_save_attendee_meta', $id, 'price_option_type', sanitize_text_field($_POST['price_option_type']));
+			do_action('action_hook_espresso_save_attendee_meta', $id, 'price_option_type', isset($_POST['price_option_type']) && !empty($_POST['price_option_type']) ? sanitize_text_field($_POST['price_option_type']) : 'DEFAULT');
 			
 			//Move attendee
 			do_action('action_hook_espresso_attendee_mover_move');
@@ -230,26 +230,32 @@ function edit_attendee_record() {
 					array_push( $cols_and_values_format, '%s', '%s' );
 				}
 			}
-			
+		
 			//Update price option
 			if ( isset( $_POST['price_select'] ) && $_POST['price_select'] == TRUE ) {
 				//Figure out if the person has registered using a price selection
 				$selected_price_option = isset($_POST['new_price_option']) && !empty($_POST['new_price_option']) ? $_POST['new_price_option'] : $_POST['price_option'] ;
 				$price_options = espresso_selected_price_option($selected_price_option);
 				$price_type = $price_options['price_type'];
+				$price_id = $price_options['price_id'];
+				$event_cost = number_format(event_espresso_get_orig_price( $price_id ), 2, '.', '' );
 			
 			}else{
 				//If not using the price selection
-				$wpdb->get_results("SELECT price_type FROM " . EVENTS_PRICES_TABLE . " WHERE id ='" . absint( $_POST['price_id'] ) . "'");
+				$wpdb->get_results("SELECT price_type, event_cost FROM " . EVENTS_PRICES_TABLE . " WHERE id ='" . absint( $_POST['price_id'] ) . "'");
 				$num_rows = $wpdb->num_rows;
 				if ($num_rows > 0) {
+					$event_cost = $wpdb->last_result[0]->event_cost;
 					$price_type = $wpdb->last_result[0]->price_type;
 				}
 			}
 			
+			//Don't updat the price if the attendee is moved
 			if ( !isset($_POST['move_attendee']) ){
 				$cols_and_values['price_option'] = $price_type;
-				array_push( $cols_and_values_format, '%s' );
+				$cols_and_values['final_price'] = $event_cost;
+				$cols_and_values['orig_price'] = $event_cost;
+				array_push( $cols_and_values_format, '%s', '%f', '%f' );
 			}
 			
 			//echo "<pre>".print_r($cols_and_values,true)."</pre>";
@@ -452,6 +458,16 @@ function edit_attendee_record() {
 				$start_date = $attendee->start_date;
 				$event_time = $attendee->event_time;
 				
+				//Create an array for the default/member price type
+				$price_type_select = '';
+				if (function_exists('espresso_members_version')) { 
+					$p_values =	array(
+						array('id'=>'DEFAULT','text'=> __('Default Pricing','event_espresso')),
+						array('id'=>'MEMBER','text'=> __('Member Pricing','event_espresso'))
+					);
+					$price_type_select = '<li>'.select_input( 'price_option_type', $p_values, apply_filters('action_hook_espresso_get_attendee_meta_value', $id, 'price_option_type'), 'id="price_option_type"').'</li>';
+				}
+									
 				// Added for seating chart addon
 				$booking_info = "";
 				if ( defined('ESPRESSO_SEATING_CHART') ){
@@ -531,17 +547,9 @@ function edit_attendee_record() {
 							</h4>
 							<fieldset>
 								<ul>
-								<?php if (function_exists('espresso_members_version')) { ?>
-										<li>
-										<?php 
-										$p_values =	array(
-											array('id'=>'DEFAULT','text'=> __('Default Pricing','event_espresso')),
-											array('id'=>'MEMBER','text'=> __('Member Pricing','event_espresso'))
-										);
-										echo select_input( 'price_option_type', $p_values, apply_filters('action_hook_espresso_get_attendee_meta_value', $id, 'price_option_type'), 'id="price_option_type"');
-										?>
-										</li>
-								<?php } ?>
+									
+									<?php echo $price_type_select;?>
+									
 									<li id="standard_price_selection">
 										<?php do_action( 'action_hook_espresso_attendee_admin_price_dropdown', $event_id, array('show_label'=>TRUE, 'label'=>'Price Option', 'current_value'=>$price_option) );?> 
 									</li>
@@ -795,11 +803,14 @@ function edit_attendee_record() {
 		</div>
 	</div>
 </div>
-		<?php if (function_exists('espresso_members_version')) { ?>
 			<script type="text/javascript">
 				jQuery(document).ready(function($) {
 					// Remove li parent for input 'values' from page if 'text' box or 'textarea' are selected
-					var selectValue = jQuery('select#price_option_type option:selected').val();
+					<?php if (function_exists('espresso_members_version')) { ?>
+						var selectValue = jQuery('select#price_option_type option:selected').val();
+					<?php }else{ ?>
+						var selectValue = 'DEFAULT';
+					<?php }?>
 					//alert(selectValue + ' - this is initial value');
 					
 					if(selectValue == 'DEFAULT'){
@@ -844,13 +855,11 @@ function edit_attendee_record() {
 								var new_standard_SelectValue = jQuery('select#price_option-<?php echo $event_id ?> option:selected').val();
 								jQuery('#new_price_option-<?php echo $event_id ?>').val(new_standard_SelectValue);
 							});	
-							
 						}
 					});
 					
 				});
 			</script>
 <?php
-		}
 	}
 }
