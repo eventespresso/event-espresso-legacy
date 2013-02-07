@@ -44,9 +44,9 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 		
 		
 		//Check to see if the registration id already exists
-		//$incomplete_filter = ! $multi_reg ? " AND payment_status ='Incomplete'" : '';
+		$incomplete_filter = ! $multi_reg ? " AND payment_status ='Incomplete'" : '';
 		$SQL = "SELECT attendee_session, id, registration_id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE attendee_session =%s AND event_id = %d";
-		//$SQL .= $incomplete_filter;
+		$SQL .= $incomplete_filter;
 		$check_sql = $wpdb->get_results($wpdb->prepare( $SQL, $prev_session_id, $event_id ));
 		$nmbr_of_regs = $wpdb->num_rows;
 		static $loop_number = 1;
@@ -56,7 +56,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				
 				$SQL = "SELECT id, registration_id FROM " . EVENTS_ATTENDEE_TABLE . ' ';
 				$SQL .= "WHERE attendee_session = %s ";
-				//$SQL .= $incomplete_filter;
+				$SQL .= $incomplete_filter;
 				
 				if ( $mer_attendee_ids = $wpdb->get_results($wpdb->prepare( $SQL, $prev_session_id ))) {
 					foreach ( $mer_attendee_ids as $v ) {
@@ -74,14 +74,14 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$SQL = "DELETE t1, t2 FROM " . EVENTS_ATTENDEE_TABLE . "  t1 ";
 				$SQL .= "JOIN  " . EVENTS_ANSWER_TABLE . " t2 on t1.id = t2.attendee_id ";
 				$SQL .= "WHERE t1.attendee_session = %s ";
-				//$SQL .= $incomplete_filter;
+				$SQL .= $incomplete_filter;
 				$wpdb->query($wpdb->prepare( $SQL, $prev_session_id ));
 				
 				//Added by Imon
 				// First delete attempt might fail if there is no data in answer table. So, second attempt without joining answer table is taken bellow -
 				$SQL = " DELETE FROM " . EVENTS_ATTENDEE_TABLE . ' ';
 				$SQL .= "WHERE attendee_session = %s ";
-				//$SQL .= $incomplete_filter;
+				$SQL .= $incomplete_filter;
 				$wpdb->query($wpdb->prepare( $SQL, $prev_session_id ));
 	
 				// Clean up any attendee information from attendee_cost table where attendee is not available in attendee table
