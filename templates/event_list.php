@@ -57,7 +57,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 			'show_recurrence'			=> 'true',
 			'limit'						=> '0',
 			'order_by'					=> 'NULL',
-			'sort'						=> 'ASC',
+			'sort'						=> '',
 			'css_class'					=> 'NULL',
 			'current_page'				=> 1,
 			'events_per_page'			=> 50,
