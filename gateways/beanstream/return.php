@@ -62,6 +62,6 @@ function espresso_process_beanstream($payment_data) {
 		}
 	}
 	
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
     return $payment_data;
 }

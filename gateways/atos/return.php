@@ -62,7 +62,7 @@ function espresso_process_atos($payment_data) {
 		$payment_data['txn_id'] = $hash['transaction_id'];
 		if (($hash['amount']/100) == $payment_data['total_cost'] && $hash['response_code'] == '00') {
 			$payment_data['payment_status'] = 'Completed';
-			add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+			//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 		}
 	}
 	return $payment_data;

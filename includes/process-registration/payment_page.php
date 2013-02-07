@@ -395,6 +395,7 @@ function event_espresso_pay() {
 			
 		if ($payment_data['payment_status'] != 'Completed') {
 		
+			
 			$payment_data = apply_filters('filter_hook_espresso_thank_you_get_payment_data', $payment_data);
 			
 			$payment_details = array(
@@ -405,6 +406,7 @@ function event_espresso_pay() {
 			espresso_log::singleton()->log( $payment_details );
 			
 			$payment_data = apply_filters('filter_hook_espresso_update_attendee_payment_data_in_db', $payment_data);
+			add_action('action_hook_espresso_email_after_payment','espresso_email_after_payment');
 			do_action('action_hook_espresso_email_after_payment', $payment_data);
 			
 		}

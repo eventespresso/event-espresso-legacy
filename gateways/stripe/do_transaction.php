@@ -48,6 +48,6 @@ function espresso_process_stripe($payment_data) {
 	if ($payment_data['payment_status'] != 'Completed') {
 		echo "<div id='stripe_response' class='stripe_error'>Looks like something went wrong.  Please try again or notify the website administrator.</div>";
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }

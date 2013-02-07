@@ -173,6 +173,8 @@ function event_espresso_txn() {
 		espresso_log::singleton()->log(array('file' => __FILE__, 'function' => __FUNCTION__, 'status' => 'Payment for: '. $payment_data['lname'] . ', ' . $payment_data['fname'] . '|| registration id: ' . $payment_data['registration_id'] . '|| transaction details: ' . $payment_data['txn_details']));
 		
 		$payment_data = apply_filters('filter_hook_espresso_update_attendee_payment_data_in_db', $payment_data);
+		//add and then immediately do action, so developers can modify this behavior on 'after_payment'
+		add_action('action_hook_espresso_email_after_payment','espresso_email_after_payment');
 		do_action('action_hook_espresso_email_after_payment', $payment_data);
 		extract($payment_data);
 

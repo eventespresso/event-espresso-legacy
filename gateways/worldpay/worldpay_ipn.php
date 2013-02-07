@@ -24,6 +24,6 @@ function espresso_process_worldpay($payment_data) {
 		$payment_data['payment_status'] = 'Completed';
 		$payment_data['txn_id'] = $_REQUEST['transId'];
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }
