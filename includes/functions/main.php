@@ -1295,6 +1295,8 @@ if (!function_exists('espresso_display_featured_image')) {
 		if ( !empty($org_options['display_featured_image']) && $org_options['display_featured_image'] == 'N' || !isset($org_options['display_featured_image']) ){
 			return;
 		}
+		if (empty($image_url))
+			return;
 		$class = empty($class) ? 'ee-featured-image' : $class;
 		$title = empty($title) ? __('Featured Image', 'event_espresso') : $title;
 		$align = empty($align) ? 'right' : $align;
