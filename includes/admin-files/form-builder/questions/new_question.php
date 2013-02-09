@@ -72,6 +72,8 @@ function event_espresso_form_builder_new(){
 									<?php _e('Price modifiers will then be added (or subtracted if negative) from the ticket price for that event.', 'event_espresso');?><br />
 									<?php _e('Enter price modifiers with a pipe | ( Shift+\ ) separating prices from the answer options.', 'event_espresso');?><br />
 									<?php _e('Eg. If the question was "Choice of Dinner Entrée", answer options might be: " steak|39.95, chicken|34.95, vegan|29.95 "', 'event_espresso'); ?>
+									<?php _e('If you need to set a limit on how many items are available, then simply add a second pipe followed by the max availalbe number for that item.', 'event_espresso');?><br />
+									<?php _e('Eg. If the question was for choice between two workshops at a conference with limited seating: "Creative Writing|34.95|25, Technical Writing|34.95|35"', 'event_espresso'); ?>
 								</span>
 							</td>
 						</tr>
