@@ -159,9 +159,7 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			
 			$html = '<div id="additional_header" class="event_form_field additional_header espresso_add_subtract_attendees">';
 			// fixed for translation string, previous string untranslatable - http://events.codebasehq.com/projects/event-espresso/tickets/11
-			$html .= '<a id="add-additional-attendee-0" rel="0" class="add-additional-attendee-lnk additional-attendee-lnk">' . __('Add More Attendees? (click to toggle, limit ', 'event_espresso');
-			$html .= $i . ')</a>';
-			$html .= '</div>';
+			$html .= '<a id="add-additional-attendee-0" rel="0" class="add-additional-attendee-lnk additional-attendee-lnk">' . sprintf(__('Add More Attendees? (click to toggle, limit %s)', 'event_espresso'), $i). '</a></div>';
 			
 			
 			//ob_start();
