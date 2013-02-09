@@ -19,6 +19,6 @@ function espresso_process_ideal_report($payment_data) {
 			<h2 style="color:#F00;"><?php _e('There was an error processing your transaction!', 'event_espresso'); ?></h2> <?php
 		}
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }

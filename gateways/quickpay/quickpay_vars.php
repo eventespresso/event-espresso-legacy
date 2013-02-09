@@ -28,6 +28,7 @@ function espresso_display_quickpay($payment_data) {
 			}
 		}
 	}
+	
 
 	if ($attendee_id > 0 && !empty($primary_registration_id) && strlen($primary_registration_id) > 0) {
 		$registration_ids = array();
@@ -39,12 +40,12 @@ function espresso_display_quickpay($payment_data) {
 		} else {
 			$registration_ids[] = $primary_registration_id;
 		}
-		foreach ($registration_ids as $registration_id) {
+		foreach ($registration_ids as $other_attendee_registration_id) {
 			$sql = "select ea.registration_id, ea.id as attendee_id, ea.amount_pd, ed.id as event_id, ";
 			$sql .= " ed.event_name, ed.start_date, ea.fname, ea.lname, ea.quantity, ea.final_price from " . EVENTS_ATTENDEE_TABLE . " ea ";
 			//$sql .= " inner join " . EVENTS_ATTENDEE_COST_TABLE. " eac on ea.id = eac.attendee_id ";
 			$sql .= " inner join " . EVENTS_DETAIL_TABLE. " ed on ea.event_id = ed.id ";
-			$sql .= " where ea.registration_id = '" . $registration_id . "' order by ed.event_name ";
+			$sql .= " where ea.registration_id = '" . $other_attendee_registration_id . "' order by ed.event_name ";
 			$tmp_attendees = $wpdb->get_results($sql, ARRAY_A);
 			foreach ($tmp_attendees as $tmp_attendee) {
 				$amount += $tmp_attendee["final_price"];

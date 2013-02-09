@@ -45,7 +45,7 @@ function espresso_process_eway_rapid3($payment_data) {
 		<p><?php _e('There was no response from Eway Rapid 3.0.', 'event_espresso'); ?></p>
 		<?php
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }
 
