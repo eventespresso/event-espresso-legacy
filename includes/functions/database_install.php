@@ -712,13 +712,13 @@ function events_data_tables_install() {
 			response text NULL,
 			required ENUM( 'Y', 'N' ) NOT NULL DEFAULT 'N',
 			required_text text NULL,
-			price_mod ENUM( 'Y', 'N' ) NOT NULL DEFAULT 'N',
 			admin_only ENUM( 'Y', 'N' ) NOT NULL DEFAULT 'N',
 			wp_user int(22) DEFAULT '1',
 			PRIMARY KEY  (id),
 			KEY wp_user (wp_user),
 			KEY system_name (system_name),
 			KEY admin_only (admin_only)";
+	$sql = apply_filters( 'espresso_filter_hook_events_question_sql', $sql );
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_qst_group";
