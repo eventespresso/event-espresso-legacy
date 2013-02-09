@@ -399,12 +399,12 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				if (empty($questions)) {
 					$questions = $base_questions;
 				}
+echo '<h4>$VARIABLE : <pre>' . print_r($att_data_source['x_seat_id'],true) . '</pre> <span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
-
-				if ( isset( $att_data_source['x_attendee_fname'] )) {
-					foreach ( $att_data_source['x_attendee_fname'] as $k => $v ) {
+				if ( isset( $att_data_source['x_seat_id'] )) {
+					foreach ( $att_data_source['x_seat_id'] as $k => $v ) {
 					
-						if ( trim($v) != '' && trim( $att_data_source['x_attendee_lname'][$k] ) != '' ) {
+						//if ( trim($v) != '' && trim( $att_data_source['x_attendee_lname'][$k] ) != '' ) {
 
 							// Added for seating chart addon
 							$seat_check = true;
@@ -432,15 +432,15 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								$ext_att_data_source = array(
 									'registration_id'	=> $registration_id,
 									'attendee_session'	=> $_SESSION['espresso_session']['id'],
-									'lname'				=> sanitize_text_field($att_data_source['x_attendee_lname'][$k]),
-									'fname'				=> sanitize_text_field($v),
-									'email'				=> sanitize_text_field($att_data_source['x_attendee_email'][$k]),
-									'address'			=> empty($att_data_source['x_attendee_address'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_address'][$k]),
-									'address2'			=> empty($att_data_source['x_attendee_address2'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_address2'][$k]),
-									'city'				=> empty($att_data_source['x_attendee_city'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_city'][$k]),
-									'state'				=> empty($att_data_source['x_attendee_state'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_state'][$k]),
-									'zip'				=> empty($att_data_source['x_attendee_zip'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_zip'][$k]),
-									'phone'				=> empty($att_data_source['x_attendee_phone'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_phone'][$k]),
+									'lname'				=> sanitize_text_field($att_data_source['lname']),
+									'fname'				=> sanitize_text_field($att_data_source['fname']),
+									'email'				=> sanitize_text_field($att_data_source['email']),
+									'address'			=> empty($att_data_source['address']) ? '' : sanitize_text_field($att_data_source['address']),
+									'address2'			=> empty($att_data_source['address2']) ? '' : sanitize_text_field($att_data_source['address2']),
+									'city'				=> empty($att_data_source['city']) ? '' : sanitize_text_field($att_data_source['city']),
+									'state'				=> empty($att_data_source['state']) ? '' : sanitize_text_field($att_data_source['state']),
+									'zip'				=> empty($att_data_source['zip']) ? '' : sanitize_text_field($att_data_source['zip']),
+									'phone'				=> empty($att_data_source['phone']) ? '' : sanitize_text_field($att_data_source['phone']),
 									'payment'			=> $payment,
 									'event_time'		=> $start_time,
 									'end_time'			=> $end_time,
@@ -457,7 +457,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 									'orig_price'		=> $orig_price,
 									'final_price'		=> $final_price										
 								);
-								
+							//	echo '<h4>$ext_att_data_source : <pre>' . print_r($ext_att_data_source,true) . '</pre> <span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 								$format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%f', '%f', '%f' );
 								$wpdb->insert( EVENTS_ATTENDEE_TABLE, $ext_att_data_source, $format );
 								
@@ -492,13 +492,13 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								$questions_list = $wpdb->get_results($wpdb->prepare( $SQL, NULL ));
 								foreach ($questions_list as $question_list) {
 									if ($question_list->system_name != '') {
-										$ext_att_data_source[$question_list->system_name] = $att_data_source['x_attendee_' . $question_list->system_name][$k];
+										$ext_att_data_source[$question_list->system_name] = $att_data_source[$question_list->system_name][$k];
 									} else {
 										$ext_att_data_source[$question_list->question_type . '_' . $question_list->id] = isset($att_data_source['x_attendee_' . $question_list->question_type . '_' . $question_list->id][$k]) && !empty($att_data_source['x_attendee_' . $question_list->question_type . '_' . $question_list->id][$k]) ? $att_data_source['x_attendee_' . $question_list->question_type . '_' . $question_list->id][$k] : '';
 									}
 								}
 
-								echo add_attendee_questions($questions, $registration_id, $ext_attendee_id, array('session_vars' => $ext_att_data_source));
+								add_attendee_questions( $questions, $registration_id, $ext_attendee_id, array( 'session_vars' => $att_data_source ));
 								
 							}
 							
@@ -508,7 +508,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 									seating_chart::confirm_a_seat($x_booking_id, $ext_attendee_id);
 								}
 							}
-						}
+						//}
 					}
 				}
 			}

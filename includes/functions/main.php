@@ -120,18 +120,6 @@ if (!function_exists('event_espresso_additional_attendees')) {
 		global $espresso_premium;
 		$event_id = $event_id == 0 ? $_REQUEST['event_id'] : $event_id;
 
-		if ($event_meta == 'admin') {
-			$admin = true;
-			$event_meta = '';
-		}
-		if ($event_meta == '' && ($event_id != '' || $event_id != 0)) {
-			$event_meta = event_espresso_get_event_meta($event_id);
-		}
-
-		//If the additional attednee questions are empty, then default to the first question group
-		if (empty($event_meta['add_attendee_question_groups']))
-			$event_meta['add_attendee_question_groups'] = array(1 => 1);
-
 
 		$i = 0;
 		if ( (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) || $espresso_premium == FALSE ) {
@@ -151,18 +139,12 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			$buffer = '';
 			
 		} else {
-		
-//			while (($i < $additional_limit) && ($i < $available_spaces)) {
-//				$i++;
-//			}
+
 			$i = min( $additional_limit, $available_spaces ) - 1;
 			
 			$html = '<div id="additional_header" class="event_form_field additional_header espresso_add_subtract_attendees">';
 			// fixed for translation string, previous string untranslatable - http://events.codebasehq.com/projects/event-espresso/tickets/11
-			$html .= '<a id="add-additional-attendee-0" rel="0" class="add-additional-attendee-lnk additional-attendee-lnk">' . __('Add More Attendees? (click to toggle, limit ', 'event_espresso');
-			$html .= $i . ')</a>';
-			$html .= '</div>';
-			
+			$html .= '<a id="add-additional-attendee-0" rel="0" class="add-additional-attendee-lnk additional-attendee-lnk">' . sprintf(__('Add More Attendees? (click to toggle, limit %s)', 'event_espresso'), $i). '</a></div>';
 			
 			//ob_start();
 			$attendee_form = '<div id="additional_attendee_XXXXXX" class="espresso_add_attendee">';
@@ -173,44 +155,25 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			if (defined('ESPRESSO_SEATING_CHART')) {
 				if (seating_chart::check_event_has_seating_chart($_REQUEST['event_id']) !== false) {
 					$attendee_form .= '<p>';
-					$attendee_form .= '<label>' . __('Select a Seat:', 'event_espresso') . '</label>';
+					$attendee_form .= '<label>' . __('Select a Seat', 'event_espresso') . '</label>';
 					$attendee_form .= '<input type="text" name="x_seat_id[XXXXXX]" value="" class="ee_s_select_seat" event_id="' . $_REQUEST['event_id'] . '" readonly="readonly" />';
 					$attendee_form .= '<br/>[' . __('If you do not select a seat this attendee will not be added', 'event_espresso') . ']';
 					$attendee_form .= '</p>';
 				}
 			}
-			if ($event_meta['additional_attendee_reg_info'] == 2) {
-				$attendee_form .= '<p>';
-				$attendee_form .= '<label for="x_attendee_fname">' . __('First Name:', 'event_espresso') . '</label>';
-				$attendee_form .= '<input type="text" name="x_attendee_fname[XXXXXX]" class="input"/>';
-				$attendee_form .= '</p>';
-				$attendee_form .= '<p>';
-				$attendee_form .= '<label for="x_attendee_lname">' . __('Last Name:', 'event_espresso') . '</label>';
-				$attendee_form .= '<input type="text" name="x_attendee_lname[XXXXXX]" class="input"/>';
-				$attendee_form .= '</p>';
-				$attendee_form .= '<p>';
-				$attendee_form .= '<label for="x_attendee_email">' . __('Email:', 'event_espresso') . '</label>';
-				$attendee_form .= '<input type="text" name="x_attendee_email[XXXXXX]" class="input"/>';
-				$attendee_form .= '</p>';
-			} else {
-				$meta = array("x_attendee" => true);
-				if(!empty($admin)) {
-					$meta['admin_only'] = true;
-				}
-				$attendee_form .= event_espresso_add_question_groups( $event_meta['add_attendee_question_groups'], '', null, 0, $meta, $qstn_class );
-			}
+			
 			$attendee_form .= '<div class="espresso_add_subtract_attendees">';
 
 			$attendee_form .= '
 			<a id="remove-additional-attendee-XXXXXX" rel="XXXXXX" class="remove-additional-attendee-lnk additional-attendee-lnk" title="' . __('Remove the above Attendee', 'event_espresso') . '">
 				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Attendee', 'event_espresso') . '" />
-				' . __('Remove the above Attendee:', 'event_espresso') . '
+				' . __('Remove the above Attendee', 'event_espresso') . '
 			</a><br/>';
 			
 			$attendee_form .= '
 			<a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk" title="' . __('Add an Additonal Attendee', 'event_espresso') . '">
 				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add an Additonal Attendee', 'event_espresso') . '" />
-				' . __('Add an Additonal Attendee:', 'event_espresso') . '
+				' . __('Add an Additonal Attendee', 'event_espresso') . '
 			</a>';
 
 
