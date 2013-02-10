@@ -19,7 +19,6 @@ function event_espresso_form_builder_edit(){
 			$required = stripslashes($question->required);
 			$sequence = $question->sequence;
 			$required_text = $question->required_text;
-			$price_mod = $question->price_mod;
 			$admin_only = $question->admin_only;
 			$system_name = $question->system_name;
 			if ($question->system_name !=''){
@@ -109,7 +108,7 @@ function event_espresso_form_builder_edit(){
 							</td>
 						</tr>
 						
-						<?php do_action('action_hook_espresso_new_question_price_mod_tr', $values, $price_mod); ?>
+						<?php do_action('action_hook_espresso_generate_price_mod_form_inputs', $values, $question ); ?>
 						
 						<tr>
 							<th>
