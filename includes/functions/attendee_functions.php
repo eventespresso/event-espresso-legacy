@@ -62,8 +62,7 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 
 							if ($question->admin_only != 'Y') {
 								$post_val = ( $question->system_name != '' ) ? $response_source[$question->system_name] : $question_type;
-								if ( function_exists('espresso_parse_question_response_for_price') )
-									$post_val = espresso_parse_question_response_for_price(trim( $post_val ), $question->price_mod, $attendee_id);
+								$post_val = apply_filters( 'filter_hook_espresso_form_question_response', trim( $post_val ), $question, $attendee_id );
 							} else {
 								$post_val = '';
 							}
@@ -75,8 +74,7 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 							if ( ! empty( $response_source[$question->question_type . '_' . $question->qstn_id] ) && $question->admin_only != 'Y' ) {
 								for ( $i = 0; $i < count( $response_source[$question->question_type . '_' . $question->qstn_id] ); $i++ ) {
 									$val = trim( $response_source[$question->question_type . '_' . $question->qstn_id][$i] );
-									if ( function_exists('espresso_parse_question_response_for_price') )
-										$val = espresso_parse_question_response_for_price($val, $question->price_mod, $attendee_id);
+									$val =  apply_filters( 'filter_hook_espresso_form_question_response', $val, $question, $attendee_id );
 									$post_val .= $val . ",";
 								}
 							}
