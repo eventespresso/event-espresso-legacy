@@ -432,11 +432,6 @@ function update_event($recurrence_arr = array()) {
         //END CATEGORY MODIFICATION
 		
 		//Staff
-		if  ($_POST['event_id'] == $event_id){
-			echo '<h4>$post->recurrence_apply_changes_to : ' . $_POST['recurrence_apply_changes_to'] . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4><br /><br /><br />';
-			echo '<h4>$post->apply_to_all_staff : ' . $_POST['apply_to_all_staff'] . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4><br /><br /><br />';
-		}
-		
 		$update_all_staff = FALSE;
 		if (isset($_POST['rem_apply_to_all_staff']) && $_POST['recurrence_apply_changes_to'] == 2){ 
 			$update_all_staff = TRUE;
