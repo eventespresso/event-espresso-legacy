@@ -59,7 +59,7 @@ function event_espresso_form_builder_new(){
 							</td>
 						</tr>
 						
-						<?php do_action('action_hook_espresso_new_question_price_mod_tr', $values); ?>
+						<?php do_action('action_hook_espresso_generate_price_mod_form_inputs', $values ); ?>
 						
 						<tr>
 							<th>
