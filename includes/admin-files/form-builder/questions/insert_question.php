@@ -30,18 +30,20 @@ function event_espresso_form_builder_insert(){
 		
 		$set_cols_and_values = array( 
 			'sequence'			=> isset( $_POST['sequence'] ) && ! empty( $_POST['sequence'] ) ? absint( $_POST['sequence'] ) : 0,
-			'question_type'		=> isset( $_POST['question_type'] ) && ! empty( $_POST['question_type'] ) ? wp_strip_all_tags( $_POST['question_type'] ) : 'TEXT', 
+			'question_type'	=> isset( $_POST['question_type'] ) && ! empty( $_POST['question_type'] ) ? wp_strip_all_tags( $_POST['question_type'] ) : 'TEXT', 
 			'question'			=> $question, 
 			'response'			=> isset( $_POST['values'] ) && ! empty( $_POST['values'] ) ? wp_kses( $_POST['values'], $allowedtags ) : '', 
 			'required'			=> isset( $_POST['required'] ) && isset( $enum_values[ $_POST['required'] ] ) ?  $enum_values[ $_POST['required'] ]  : 'N',
-			'required_text'		=> isset( $_POST['required_text'] ) && ! empty( $_POST['required_text'] ) ? wp_strip_all_tags( $_POST['required_text'] ) : '',
-			'price_mod'			=> isset( $_POST['price_mod'] ) && isset( $enum_values[ $_POST['price_mod'] ] ) ?  $enum_values[ $_POST['price_mod'] ]  : 'N',
+			'required_text'	=> isset( $_POST['required_text'] ) && ! empty( $_POST['required_text'] ) ? wp_strip_all_tags( $_POST['required_text'] ) : '',
 			'admin_only'		=> isset( $_POST['admin_only'] ) && isset( $enum_values[ $_POST['admin_only'] ] ) ?  $enum_values[ $_POST['admin_only'] ]  : 'N',
-			'wp_user'			=> function_exists( 'espresso_member_data' ) ? $current_user->ID : 1
+			'wp_user'				=> function_exists( 'espresso_member_data' ) ? $current_user->ID : 1
 		);
+		$set_cols_and_values = apply_filters( 'filter_hook_espresso_question_cols_and_values', $set_cols_and_values, $enum_values );
 		
-		$data_format = array( '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d' );
-		$insert_success = $wpdb->insert( EVENTS_QUESTION_TABLE, $set_cols_and_values, $data_format );
+		$data_formats = array( '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%d' );
+		$data_formats = apply_filters( 'filter_hook_espresso_question_data_formats', $data_formats );
+
+		$insert_success = $wpdb->insert( EVENTS_QUESTION_TABLE, $set_cols_and_values, $data_formats );
 		// unless there was an actual error
 		if ( $insert_success !== FALSE ) {
 			$value = htmlspecialchars( trim( stripslashes( $_REQUEST['question'] )), ENT_QUOTES, 'UTF-8' );
