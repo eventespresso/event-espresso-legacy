@@ -251,6 +251,8 @@ function event_espresso_questions_config_mnu() {
 		} else {
 			jQuery('#add-question-values').hide();
 			jQuery('#add-price-modifier').hide();
+			jQuery('#set-price-mod-qty').hide();
+			jQuery('#set-price-mod-available').hide();
 			// we don't want the values field trying to validate if not displayed, remove its name
 			jQuery('#question-values').attr("name","question_values") 
 		}
@@ -261,11 +263,15 @@ function event_espresso_questions_config_mnu() {
 				  
 			if ( selectValue == 'SINGLE' || selectValue == 'DROPDOWN' || selectValue == 'MULTIPLE' ) {
 				jQuery('#add-price-modifier').fadeIn('fast');
+				jQuery('#set-price-mod-qty').fadeIn('fast');
+				jQuery('#set-price-mod-available').fadeIn('fast');
 				jQuery('#add-question-values').fadeIn('fast');
 				jQuery('#question-values').attr("name","values");
 			} else {
 				jQuery('#add-question-values').fadeOut('fast');
 				jQuery('#add-price-modifier').fadeOut('fast');
+				jQuery('#set-price-mod-qty').fadeOut('fast');
+				jQuery('#set-price-mod-available').fadeOut('fast');
 				jQuery('#question-values').attr("name","question_values");
 			}
 		});
