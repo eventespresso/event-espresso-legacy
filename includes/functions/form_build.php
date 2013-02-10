@@ -134,107 +134,128 @@ if (!function_exists('event_form_build')) {
 			break;
 				
 			case "SINGLE" :
-			
-				$html .= '<div class="single-radio">' . $label;
-				$html .= '<ul class="options-list-radio event_form_field">';
-				
-				$values = explode(",", $question->response);
-				$answer = trim( stripslashes( str_replace( '&#039;', "'", $answer )));
-				$answer = htmlspecialchars( $answer, ENT_QUOTES, 'UTF-8' );
-			
-				foreach ($values as $key => $value) {
 
-					$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-					$value = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
-					$checked = ( $value == $answer ) ? ' checked="checked"' : "";
-					$value_id = 'SINGLE_' . $question->id . '_' . $key . '_' . $attendee_number;
+				$question = apply_filters('filter_hook_espresso_form_question', $question );
+				
+				if ( ! empty( $question->response )) {
+
+					$html .= '<div class="single-radio">' . $label;
+					$html .= '<ul class="options-list-radio event_form_field">';
 					
-					$formatted = apply_filters('filter_hook_espresso_parse_form_value_for_price', $value, $question->price_mod);
+					$values = explode(",", $question->response);
+					$answer = trim( stripslashes( str_replace( '&#039;', "'", $answer )));
+					$answer = htmlspecialchars( $answer, ENT_QUOTES, 'UTF-8' );
 					
-					$html .= '
-					<li>
-						<label for="' . $value_id . '" class="' . $class . ' radio-btn-lbl">
-							<input id="' . $value_id . '" ' . $required_title . '" class="' . $required_class . $class . '" name="' . $field_name . $multi_name_adjust . '"  type="radio" value="' . $value . '" ' . $checked . ' /> 
-							<span>' . $formatted . '</span>
-						</label>
-					</li>';
+					foreach ($values as $key => $value) {
+
+						$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
+						$value = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
+						$checked = ( $value == $answer ) ? ' checked="checked"' : "";
+						$value_id = 'SINGLE_' . $question->id . '_' . $key . '_' . $attendee_number;
+						
+						$formatted = apply_filters('filter_hook_espresso_question_formatted_value', $value, $question );
+						
+						$html .= '
+						<li>
+							<label for="' . $value_id . '" class="' . $class . ' radio-btn-lbl">
+								<input id="' . $value_id . '" ' . $required_title . '" class="' . $required_class . $class . '" name="' . $field_name . $multi_name_adjust . '"  type="radio" value="' . $value . '" ' . $checked . ' /> 
+								<span>' . $formatted . '</span>
+							</label>
+						</li>';
+
+					}
+					
+					$html .= '</ul>';
+					$html .= '</div>';	
 
 				}
-				
-				$html .= '</ul>';
-				$html .= '</div>';				
+
 				break;
 				
 			case "MULTIPLE" :
 			
-				$html .= '<div class="multi-checkbox">' . $label;
-				$html .= '<ul class="options-list-check event_form_field">';
+				$question = apply_filters('filter_hook_espresso_form_question', $question );
 
-				if ( is_array( $answer )) {
-					foreach ( $answer as $key => $value ) {
+				if ( ! empty( $question->response )) {
+
+					$html .= '<div class="multi-checkbox">' . $label;
+					$html .= '<ul class="options-list-check event_form_field">';
+
+					if ( is_array( $answer )) {
+						foreach ( $answer as $key => $value ) {
+							$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
+							$answer[$key] = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
+						}					
+					} else {
+						$answer = trim( stripslashes( str_replace( '&#039;', "'", $answer )));
+						$answer = htmlspecialchars( $answer, ENT_QUOTES, 'UTF-8' );
+					}
+
+					
+					$values = explode(",", $question->response);
+					foreach ($values as $key => $value) {
+						
 						$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-						$answer[$key] = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
-					}					
-				} else {
-					$answer = trim( stripslashes( str_replace( '&#039;', "'", $answer )));
-					$answer = htmlspecialchars( $answer, ENT_QUOTES, 'UTF-8' );
-				}
+						$value = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
+						$checked = (is_array($answer) && in_array($value, $answer)) ? ' checked="checked"' : "";
+						$value_id = str_replace(' ', '', $value) . '-' . $event_id . '_' . $attendee_number;
 
-				
-				$values = explode(",", $question->response);
-				foreach ($values as $key => $value) {
+						$formatted = apply_filters('filter_hook_espresso_question_formatted_value', $value, $question );
+
+						$html .= '
+						<li>
+							<label for="' . $value_id . '" class="' . $class . ' checkbox-lbl">
+								<input id="' . $value_id . '" ' . $required_title . ' class="' . $required_class . $class . '" name="' . $field_name . $multi_name_adjust . '[]"  type="checkbox" value="' . $value . '" ' . $checked . '/> 
+								<span>' . $formatted . '</span>
+							</label>
+						</li>';
+						
+					}
 					
-					$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-					$value = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
-					$checked = (is_array($answer) && in_array($value, $answer)) ? ' checked="checked"' : "";
-					$value_id = str_replace(' ', '', $value) . '-' . $event_id . '_' . $attendee_number;
-
-					$formatted = apply_filters('filter_hook_espresso_parse_form_value_for_price', $value, $question->price_mod);
-
-					$html .= '
-					<li>
-						<label for="' . $value_id . '" class="' . $class . ' checkbox-lbl">
-							<input id="' . $value_id . '" ' . $required_title . ' class="' . $required_class . $class . '" name="' . $field_name . $multi_name_adjust . '[]"  type="checkbox" value="' . $value . '" ' . $checked . '/> 
-							<span>' . $formatted . '</span>
-						</label>
-					</li>';
+					$html .= '</ul>';
+					$html .= '</div>';
 					
 				}
-				
-				$html .= '</ul>';
-				$html .= '</div>';				
+					
 				break;
 				
 			case "DROPDOWN" :
 			
-				$dd_type = $question->system_name == 'state' ? 'name="state"' : 'name="' . $field_name . $multi_name_adjust . '"';
-				$html .= '
-				<div class="event_form_field" class="' . $class . '">' . $label;
-				$html .= '
-					<select ' . $dd_type . ' ' . $required_title . ' class="' . $required_class . $class . '" id="DROPDOWN_' . $question->id . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '">';
-				$html .= '
-						<option value="">' . __('Select One', 'event_espresso') . "</option>";
-				
-				$answer = trim( stripslashes( str_replace( '&#039;', "'", $answer )));
-				$answer = htmlspecialchars( $answer, ENT_QUOTES, 'UTF-8' );
+				$question = apply_filters('filter_hook_espresso_form_question', $question );
 
-				$values = explode( ',', $question->response );
-				foreach ( $values as $key => $value ) {
-				
-					$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
-					$value = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
-					$selected = ( $value == $answer ) ? ' selected="selected"' : "";
+				if ( ! empty( $question->response )) {
 
-					$formatted = apply_filters('filter_hook_espresso_parse_form_value_for_price', $value, $question->price_mod);
-
+					$dd_type = $question->system_name == 'state' ? 'name="state"' : 'name="' . $field_name . $multi_name_adjust . '"';
 					$html .= '
-						<option value="' . $value . '"' . $selected . '> ' . $formatted . '</option>';					
+					<div class="event_form_field" class="' . $class . '">' . $label;
+					$html .= '
+						<select ' . $dd_type . ' ' . $required_title . ' class="' . $required_class . $class . '" id="DROPDOWN_' . $question->id . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '">';
+					$html .= '
+							<option value="">' . __('Select One', 'event_espresso') . "</option>";
+					
+					$answer = trim( stripslashes( str_replace( '&#039;', "'", $answer )));
+					$answer = htmlspecialchars( $answer, ENT_QUOTES, 'UTF-8' );
+
+					$values = explode( ',', $question->response );
+					foreach ( $values as $key => $value ) {
+					
+						$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
+						$value = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
+						$selected = ( $value == $answer ) ? ' selected="selected"' : "";
+
+						$formatted = apply_filters('filter_hook_espresso_question_formatted_value', $value, $question );
+
+						$html .= '
+							<option value="' . $value . '"' . $selected . '> ' . $formatted . '</option>';					
+					}
+					
+					$html .= '
+					</select>';
+					$html .= '
+					</div>';
+					
 				}
 				
-				$html .= '
-				</select>';
-				$html .= '
-				</div>';
 				break;
 				
 			default :
