@@ -38,21 +38,26 @@ function event_espresso_form_builder_update(){
 				'response'			=> isset( $_POST['values'] ) && ! empty( $_POST['values'] ) ? wp_kses( $_POST['values'], $allowedtags ) : '',
 				'required'			=> isset( $_POST['required'] ) && isset( $enum_values[ $_POST['required'] ] ) ?  $enum_values[ $_POST['required'] ]  : 'N',
 				'required_text'	=> isset( $_POST['required_text'] ) && ! empty( $_POST['required_text'] ) ? wp_strip_all_tags( $_POST['required_text'] ) : '',
-				'price_mod'		=> isset( $_POST['price_mod'] ) && isset( $enum_values[ $_POST['price_mod'] ] ) ?  $enum_values[ $_POST['price_mod'] ]  : 'N',
 				'admin_only'		=> isset( $_POST['admin_only'] ) && isset( $enum_values[ $_POST['admin_only'] ] ) ?  $enum_values[ $_POST['admin_only'] ]  : 'N'
 		);
-		
-		$set_format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' );
+		$set_cols_and_values = apply_filters( 'filter_hook_espresso_question_cols_and_values', $set_cols_and_values, $enum_values );
+
+		$data_formats = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s' );
+		$data_formats = apply_filters( 'filter_hook_espresso_question_data_formats', $data_formats );
+
 		$where_cols_and_values = array( 'id' => $question_id );
 		$where_format = array( '%d');
+
 		// run the update
-		$upd_success = $wpdb->update( EVENTS_QUESTION_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
+		$upd_success = $wpdb->update( EVENTS_QUESTION_TABLE, $set_cols_and_values, $where_cols_and_values, $data_formats, $where_format );
+
 		// unless there was an actual error
 		if ( $upd_success !== FALSE ) {
 			$value = htmlspecialchars( trim( stripslashes( $_REQUEST['question'] )), ENT_QUOTES, 'UTF-8' );
 			$success = __('The question', 'event_espresso') . ' "' . $value . '" ' . __('has been successfully updated.', 'event_espresso'); 
 		} else {
 			$errors = __('An error occured. The question could not be updated.', 'event_espresso');
+			$errors = WP_DEBUG ? $errors . ' ' . $wpdb->last_error : $errors;
 		}
 		
 	}
