@@ -45,12 +45,17 @@ function event_list_attendees() {
         if ( is_array($_POST['checkbox'])) {
             while (list($att_id, $value) = each($_POST['checkbox'])) {
 				// on / off value for attended status checkbox
-				$checker = $value == "on" && $_POST['attended_customer'] ? 1 : 0;
+				$check_in_or_out = $value == "on" && array_key_exists('attended_customer',$_POST) ? 1 : 0;
 				
-				$SQL = "SELECT checked_in_quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id = %d ";                
-                $ticket_scanned = $wpdb->get_var( $wpdb->prepare( $SQL, $att_id ));
+				$SQL = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id = %d ";                
+                $attendee = $wpdb->get_row( $wpdb->prepare( $SQL, $att_id ));
+				$ticket_quantity_scanned=$attendee->checked_in_quantity;
+				$tickets_for_attendee=$attendee->quantity;
+				$updated_ticket_quantity=$check_in_or_out?$tickets_for_attendee:0;
 				
-                if ( $ticket_scanned >= 1 ) {
+                if ( ($ticket_quantity_scanned >= 1 && true == $check_in_or_out) 
+						|| 
+						($ticket_quantity_scanned<=0 && false == $check_in_or_out)) {
                     ?>
 					<div id="message" class="error fade">
 						<p>
@@ -59,8 +64,7 @@ function event_list_attendees() {
 					</div>
 					<?php
 				} else {
-					
-					if ( $wpdb->update( EVENTS_ATTENDEE_TABLE, array( 'checked_in' => $checker ), array( 'id' => $att_id ), array( '%d' ),  array( '%d' ))) {
+					if ( $wpdb->update( EVENTS_ATTENDEE_TABLE, array( 'checked_in' => $check_in_or_out ,'checked_in_quantity'=>$updated_ticket_quantity), array( 'id' => $att_id ), array( '%d' ,'%d'),  array( '%d' ))) {
 					?>
 					<div id="message" class="updated fade">
 					  <p><strong>
@@ -197,7 +201,7 @@ function event_list_attendees() {
     $attendees = $wpdb->get_results($sql_a);
     $total_attendees = $wpdb->num_rows;
 
-	$quantity =0;
+	$updated_ticket_quantity =0;
 
 	$att_table_form_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID ), EVT_ADMIN_URL );
 ?>
@@ -301,10 +305,10 @@ function event_list_attendees() {
 			$zip = $attendee->zip;
 			$email = '<span style="visibility:hidden">' . $attendee->email . '</span>';
 			$phone = $attendee->phone;
-			$quantity = $attendee->quantity > 1 ? '<br />(' . __('Total Attendees', 'event_espresso') . ': ' . $attendee->quantity . ')' : '';
+			$updated_ticket_quantity = $attendee->quantity > 1 ? '<br />(' . __('Total Attendees', 'event_espresso') . ': ' . $attendee->quantity . ')' : '';
 
 			$attended = $attendee->checked_in;
-			$ticket_scanned = $attendee->checked_in_quantity;
+			$ticket_quantity_scanned = $attendee->checked_in_quantity;
 			$amount_pd = $attendee->amount_pd;
 			$payment_status = $attendee->payment_status;
 			$payment_date = $attendee->payment_date;
@@ -356,7 +360,7 @@ function event_list_attendees() {
 	            <?php if ($ticketing_installed == true) { ?>
 	            <td nowrap="nowrap">
 					<p style="padding-left:15px">
-						<?php echo ($attended == 1 || $ticket_scanned >= 1) ? event_espresso_paid_status_icon('Checkedin') : event_espresso_paid_status_icon('NotCheckedin'); ?>
+						<?php echo ($attended == 1 || $ticket_quantity_scanned >= 1) ? event_espresso_paid_status_icon('Checkedin') : event_espresso_paid_status_icon('NotCheckedin'); ?>
 					</p>
 				</td>
 	            <?php } ?>
