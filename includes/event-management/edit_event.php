@@ -378,18 +378,7 @@ function edit_event($event_id = 0) {
 	<!-- /event-questions -->
 
 	<?php
-	if (function_exists('espresso_personnel_cb') && $org_options['use_personnel_manager'] == 'Y' && $espresso_premium == true) {
-		?>
-		<div id="event-staff" class="postbox">
-			<div class="handlediv" title="Click to toggle"><br>
-			</div>
-			<h3 class="hndle"> <span>
-		<?php _e('Event Staff / Speakers', 'event_espresso'); ?>
-				</span> </h3>
-			<div class="inside"> <?php echo espresso_personnel_cb($event_id); ?> </div>
-		</div>
-		<?php
-	}
+	do_action('action_hook_espresso_staff_cb', $event_id, $recurrence_id);
 
 	if (defined('EVENTS_GROUPON_CODES_TABLE') && $espresso_premium == true) {
 		?>
@@ -542,8 +531,9 @@ function edit_event($event_id = 0) {
 		if (defined('EVENT_ESPRESSO_RECURRENCE_TABLE') && $espresso_premium == true) {
 			require_once(EVENT_ESPRESSO_RECURRENCE_FULL_PATH . "functions/re_view_functions.php");
 			//For now, only the recurring events will show the form
-			if ($recurrence_id > 0)
+			if ($recurrence_id > 0){
 				event_espresso_re_form($recurrence_id);
+			}
 		}
 		?>
 		<div id="event-pricing" class="postbox">
