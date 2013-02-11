@@ -120,7 +120,7 @@ if (!class_exists('Espresso_PaymentGateway')) {
          * @param string value of buttn text
          * @return void
          */
-        public function submitPayment( $fields = FASLE ) {
+        public function submitPayment( $fields = FALSE ) {
             $this->prepareSubmit();
             echo "<html>\n";
             echo "<head><title>Processing Payment...</title></head>\n";
