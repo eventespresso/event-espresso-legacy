@@ -665,7 +665,7 @@ if (!function_exists('event_espresso_add_question_groups')) {
 		$disabled = '';
 		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true ) {
 			$member_options = get_option('events_member_settings');
-			if ( is_user_logged_in() && $member_options['autofilled_editable'] == 'N' )
+			if ( is_user_logged_in() && !empty($member_options['autofilled_editable']) && $member_options['autofilled_editable'] == 'N' )
 			$disabled = 'disabled="disabled"';
 		}
 				
