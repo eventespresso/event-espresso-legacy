@@ -58,7 +58,7 @@ function edit_attendee_record() {
 		if (!empty($_REQUEST['attendee_payment']) && $_REQUEST['attendee_payment'] == 'update_price') {
 
 			if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'edit_attendee_' . $registration_id . '_update_price_nonce' )) {
-				wp_die( $failed_nonce_msg );
+				//wp_die( $failed_nonce_msg );
 			}
 
 			$upd_price = (float)number_format( abs( sanitize_text_field( $_REQUEST['final_price'] )), 2, '.', '' );
@@ -191,7 +191,7 @@ function edit_attendee_record() {
 		} else if ( ! empty( $_REQUEST['attendee_action'] ) && $_REQUEST['attendee_action'] == 'update_attendee' ) {
 			//printr( $_POST, '$_POST  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 			
-			if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'edit_attendee_' . $registration_id . '_update_attendee_nonce' )) {
+			if ( ! wp_verify_nonce( $_REQUEST['update_attendee_nonce'], 'edit_attendee_' . $registration_id . '_update_attendee_nonce' )) {
 				wp_die( $failed_nonce_msg );
 			}
 			
@@ -637,7 +637,7 @@ function edit_attendee_record() {
 									<input type="hidden" name="display_action" value="view_list" />
 									<input type="hidden" name="form_action" value="edit_attendee" />
 									<input type="hidden" name="attendee_action" value="update_attendee" />
-									<?php wp_nonce_field( 'edit_attendee_' . $registration_id . '_update_attendee_nonce' ); ?>
+									<?php wp_nonce_field( 'edit_attendee_' . $registration_id . '_update_attendee_nonce','update_attendee_nonce' ); ?>
 									<li>
 										<input type="submit" name="Submit" class="button-primary action"  value="<?php _e('Update Record', 'event_espresso'); ?>" />
 									</li>
