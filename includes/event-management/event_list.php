@@ -134,7 +134,7 @@ function event_espresso_edit_list() {
 			
 			//Month filter
 			if ( $month_range !== FALSE ) {
-				$sql .= " AND e.start_date BETWEEN '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-31')) . "' ";
+				$sql .= " AND e.start_date BETWEEN '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-' .date('t', strtotime($month_range )))) . "' ";
 			}
 			
 			//Todays events filter
@@ -198,7 +198,7 @@ function event_espresso_edit_list() {
 	
 	//Month filter
 	if (isset($_POST['month_range']) && !empty($_POST['month_range']) ? $_POST['month_range'] : '') {
-		$sql .= " AND e.start_date BETWEEN '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-31')) . "' ";
+		$sql .= " AND e.start_date BETWEEN '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-' .date('t', strtotime($month_range )))) . "' ";
 	}
 	
 	//Todays events filter
@@ -254,6 +254,20 @@ function event_espresso_edit_list() {
 			<?php echo __('Next', 'event_espresso') . ' ' . $max_rows  . ' ' .  __('rows', 'event_espresso'); ?>
 			</a> 
 			<?php } ?>
+			<?php 
+				if (isset($_POST['month_range'])){
+					echo '<input name="month_range" type="hidden" value="'.$_POST['month_range'].'" />';
+				}
+				if (isset($_POST['category_id'])){
+					echo '<input name="category_id" type="hidden" value="'.$_POST['category_id'].'" />';
+				}
+				if (isset($_POST['payment_status'])){
+					echo '<input name="payment_status" type="hidden" value="'.$_POST['payment_status'].'" />';
+				}
+				if (isset($_POST['event_status'])){
+					echo '<input name="event_status" type="hidden" value="'.$_POST['event_status'].'" />';
+				}
+			?>
 		</div>
 	</form>
 
