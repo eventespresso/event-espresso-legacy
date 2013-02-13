@@ -4,15 +4,16 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 
 // Adds an Event or Function to the Event Database
 function add_event_to_db($recurrence_arr = array()) {
-	
-	//echo '<h4>$_POST : <pre>' . print_r($_POST,true) . '</pre> <span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-	
+		
 	global $wpdb, $org_options, $current_user, $espresso_premium, $ee_kses_allowed;
 	
 	//Security check using nonce
 	if ( empty($_POST['nonce_verify_insert_event']) || !wp_verify_nonce($_POST['nonce_verify_insert_event'],'espresso_verify_insert_event_nonce') ){
-		print '<h3 class="error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
-		return;
+		
+		if ($recurrence_arr['bypass_nonce'] == FALSE){
+			print '<h3 class="error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
+			return;
+		}
 	}
 	
 	//Set FEM to false
