@@ -99,6 +99,9 @@ $total_events = espresso_total_events();
 
 						break;
 				}
+				if (isset($_POST['max_rows'])){
+					echo '<input name="max_rows" type="hidden" value="'.$_POST['max_rows'].'" />';
+				}
 				?>
 			</form>
 		</div>
