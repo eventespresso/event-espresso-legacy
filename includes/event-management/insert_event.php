@@ -11,8 +11,11 @@ function add_event_to_db($recurrence_arr = array()) {
 	
 	//Security check using nonce
 	if ( empty($_POST['nonce_verify_insert_event']) || !wp_verify_nonce($_POST['nonce_verify_insert_event'],'espresso_verify_insert_event_nonce') ){
-		print '<h3 class="error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
-		return;
+		
+		if ($recurrence_arr['bypass_nonce'] == FALSE){
+			print '<h3 class="error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
+			return;
+		}
 	}
 	
 	//Set FEM to false
