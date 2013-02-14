@@ -68,7 +68,8 @@ function espresso_display_moneris_hpp( $payment_data ) {
 		// pricen  			Unit Price - (max - "7"."2" digits, i.e. min 0.00 & max 9999999.99)
 		// subtotaln  		Quantity X Price of Product - ( max - "7"."2" digits, i.e. min 0.00 & max 9999999.99)		
 		$EE_Moneris_HPP->addField( 'id' . $item_num, $item->id );
-		$EE_Moneris_HPP->addField( 'description' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname );
+//		$EE_Moneris_HPP->addField( 'description' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname );
+		$EE_Moneris_HPP->addField( 'description' . $item_num, $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname );
 		$EE_Moneris_HPP->addField( 'quantity' . $item_num, absint( $item->quantity ));
 		$EE_Moneris_HPP->addField( 'price' . $item_num, $item->final_price );
 		$EE_Moneris_HPP->addField( 'subtotal' . $item_num, $item->final_price * absint( $item->quantity ));	
