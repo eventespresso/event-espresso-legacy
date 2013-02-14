@@ -24,7 +24,7 @@ function espresso_process_paypal($payment_data) {
 	if ($myPaypal->validateIpn()) {
 		$payment_data['txn_details'] = serialize($myPaypal->ipnData);
 		$payment_data['txn_id'] = $myPaypal->ipnData['txn_id'];
-		if ($myPaypal->ipnData['mc_gross'] == $payment_data['total_cost'] && ($myPaypal->ipnData['payment_status'] == 'Completed' || $myPaypal->ipnData['payment_status'] == 'Pending')) {
+		if ($myPaypal->ipnData['mc_gross'] >= $payment_data['total_cost'] && ($myPaypal->ipnData['payment_status'] == 'Completed' || $myPaypal->ipnData['payment_status'] == 'Pending')) {
 			$payment_data['payment_status'] = 'Completed';
 			if ($paypal_settings['use_sandbox']) {
 				// For this, we'll just email ourselves ALL the data as plain text output.
