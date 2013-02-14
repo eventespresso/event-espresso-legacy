@@ -61,6 +61,7 @@ if (empty($attendee_email)) {
 $data['address'] = isset($address) && !empty($address) ? $address : '';
 $data['city'] = isset($city) && !empty($city) ? $city : '';
 $data['state'] = isset($state) && !empty($state) ? $state : '';
+$data['country'] = isset($country) && !empty($country) ? $country : '';
 $data['zip'] = isset($zip) && !empty($zip) ? $zip : '';
 if (empty($event_cost)) {
 	$data['event_cost'] = $total_cost;

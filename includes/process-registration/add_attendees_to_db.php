@@ -740,6 +740,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 						$address = $attendee->address;
 						$city = $attendee->city;
 						$state = $attendee->state;
+						$country = $attendee->country;
 						$zip = $attendee->zip;
 						$attendee_email = $attendee->email;
 						$registration_id = $attendee->registration_id;
