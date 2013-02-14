@@ -79,18 +79,19 @@ function espresso_display_moneris_hpp( $payment_data ) {
 	// gst   	 				This is where you would include Goods and Services Tax charged,  (min 0.00 & max 9999999.99)
 	// pst   	 				This is where you would include Provincial Sales Tax charged,  (min 0.00 & max 9999999.99)
 	// hst   	 				This is where you would include Harmonized Sales Tax charged,  (min 0.00 & max 9999999.99)
+
+	// charge_total  	Final purchase Amount - no $, must include 2 decimal places
+	$EE_Moneris_HPP->addField( 'charge_total', $total );
 	
 	$country = isset( $country ) ? $country : '';
+//	
+//	if ( $country == 'Canada' ) {
+//		switch( $state ) {
+//			default:
+//			break;
+//		}
+//	}
 	
-	if ( $country == 'Canada' ) {
-		switch( $state ) {
-			default:
-			break;
-		}
-	}
-	
-	// charge_total  	Final purchase Amount - no $, must include 2 decimal places
-	$EE_Moneris_HPP->addField( 'charge_total', number_format( $total, 2, '.', ',' ));
 
 	// bill_first_name text  -  max 30 chars
 	// bill_last_name text  -  max 30 chars
@@ -135,4 +136,4 @@ function espresso_display_moneris_hpp( $payment_data ) {
 	
 }
 
-add_action('action_hook_espresso_display_offsite_payment_gateway', 'espresso_display_moneris_hpp');
+add_action('action_hook_espresso_display_offsite_payment_gateway', 'espresso_display_moneris_hpp', 10, 1 );
