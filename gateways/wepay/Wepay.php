@@ -264,7 +264,7 @@ class Espresso_Wepay extends Espresso_PaymentGateway {
 		echo '</form></div>';
 	}
 
-	public function dump_fields( $fields = FASLE ) {
+	public function dump_fields( $fields = FALSE ) {
 		echo '<table style="background: #000;" width="95%" border="1" cellpadding="2" cellspacing="0">';
 		echo '<caption style="background: #000; color: #fff; font-weight: bold;">WePay debug output</caption>';
 		echo '<thead>';
