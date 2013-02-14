@@ -460,15 +460,12 @@ if ($this_is_a_reg_page == TRUE) {
 	//Process email confirmations
 	require_once("includes/functions/email.php");
 
-	//Various attendee functions
+/*	//Various attendee functions
 	require_once("includes/functions/attendee_functions.php");
-
-
 	//Payment/Registration Processing - Used to display the payment options and the payment link in the email. Used with the [ESPRESSO_PAYMENTS] tag
 	require_once("includes/process-registration/payment_page.php");
-
 	//Add attendees to the database
-	require_once("includes/process-registration/add_attendees_to_db.php");
+	require_once("includes/process-registration/add_attendees_to_db.php");*/
 
 	//Payment processing - Used for onsite payment processing. Used with the [ESPRESSO_TXN_PAGE] shortcode
 	event_espresso_require_gateway('process_payments.php');
@@ -905,6 +902,12 @@ if (!function_exists('event_espresso_run')) {
 				break;
 				
 			case "post_attendee":
+				//Various attendee functions
+				require_once("includes/functions/attendee_functions.php");
+				//Add attendees to the database
+				require_once("includes/process-registration/add_attendees_to_db.php");
+				//Payment/Registration Processing - Used to display the payment options and the payment link in the email. Used with the [ESPRESSO_PAYMENTS] tag
+				require_once("includes/process-registration/payment_page.php");
 				event_espresso_add_attendees_to_db( NULL, NULL, FALSE );
 				break;
 
@@ -924,15 +927,25 @@ if (!function_exists('event_espresso_run')) {
 				
 			case "post_multi_attendee":
 				// MER ONLY
+				//Various attendee functions
+				require_once("includes/functions/attendee_functions.php");
+				//Add attendees to the database
+				require_once("includes/process-registration/add_attendees_to_db.php");
 				event_espresso_update_item_in_session('attendees');
 				event_espresso_add_attendees_to_db_multi();
 				break;
 				
 			case "confirm_registration":
+				//Various attendee functions
+				require_once("includes/functions/attendee_functions.php");
+				//Payment/Registration Processing - Used to display the payment options and the payment link in the email. Used with the [ESPRESSO_PAYMENTS] tag
+				require_once("includes/process-registration/payment_page.php");
 				espresso_confirm_registration();
 				break;
 				
 			case "edit_attendee":
+				//Payment/Registration Processing - Used to display the payment options and the payment link in the email. Used with the [ESPRESSO_PAYMENTS] tag
+				require_once("includes/process-registration/payment_page.php");
 				require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/process-registration/attendee_edit_record.php');
 				attendee_edit_record();
 				break;
