@@ -80,6 +80,8 @@ function espresso_display_moneris_hpp( $payment_data ) {
 	// pst   	 				This is where you would include Provincial Sales Tax charged,  (min 0.00 & max 9999999.99)
 	// hst   	 				This is where you would include Harmonized Sales Tax charged,  (min 0.00 & max 9999999.99)
 	
+	$country = isset( $country ) ? $country : '';
+	
 	if ( $country == 'Canada' ) {
 		switch( $state ) {
 			default:
