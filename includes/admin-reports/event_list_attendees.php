@@ -1,6 +1,6 @@
 <?php
 function event_list_attendees() {
-
+	
     global $wpdb, $org_options, $ticketing_installed, $espresso_premium;
 	
 	define( 'EVT_ADMIN_URL', admin_url( 'admin.php?page=events' ));
@@ -264,11 +264,9 @@ function event_list_attendees() {
 				<th class="manage-column column-title" id="event-time" scope="col" title="Click to Sort" style="width: 8%;"> 
 					<span><?php _e('Event Time', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
 				</th>
-				<?php if ($ticketing_installed == true) { ?>
 				<th class="manage-column column-title" id="attended" scope="col" title="Click to Sort" style="width: 8%;">
-				 	<span><?php _e('Attended', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
+				 	<span><?php echo $ticketing_installed == true ? __('Attended', 'event_espresso') : __('Quantity', 'event_espresso') ?></span> <span class="sorting-indicator"></span> 
 				</th>
-				<?php } ?>
 				<th class="manage-column column-title" id="ticket-option" scope="col" title="Click to Sort" style="width: 13%;">
 				 	<span><?php _e('Option', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
 				</th>
@@ -294,7 +292,6 @@ function event_list_attendees() {
 	
     if ($total_attendees > 0) {
 		foreach ($attendees as $attendee) {
-
 			$id = $attendee->id;
 			$registration_id = $attendee->registration_id;
 			$lname = htmlspecialchars( stripslashes( $attendee->lname ), ENT_QUOTES, 'UTF-8' );
@@ -305,10 +302,14 @@ function event_list_attendees() {
 			$zip = $attendee->zip;
 			$email = '<span style="visibility:hidden">' . $attendee->email . '</span>';
 			$phone = $attendee->phone;
-			$updated_ticket_quantity = $attendee->quantity > 1 ? '<br />(' . __('Total Attendees', 'event_espresso') . ': ' . $attendee->quantity . ')' : '';
-
-			$attended = $attendee->checked_in;
 			$ticket_quantity_scanned = $attendee->checked_in_quantity;
+			//$updated_ticket_quantity = $attendee->quantity > 1 ? '<div class="row-actions">(' . __('Qty', 'event_espresso') . ': ' . $attendee->quantity . ')</div>' : '';
+			if ($ticketing_installed == TRUE){
+				$qty_scanned = $ticket_quantity_scanned.' / '.$attendee->quantity;
+			}else{
+				$qty_scanned = $attendee->quantity;
+			}
+			$attended = $attendee->checked_in;
 			$amount_pd = $attendee->amount_pd;
 			$payment_status = $attendee->payment_status;
 			$payment_date = $attendee->payment_date;
@@ -333,13 +334,13 @@ function event_list_attendees() {
 					<?php echo $attendee->id; ?>
 				</td>
 				
-	            <td class="row-title"  nowrap="nowrap">
-					<a href="admin.php?page=events&amp;event_admin_reports=edit_attendee_record&amp;event_id=<?php echo $event_id; ?>&amp;registration_id=<?php echo $registration_id; ?>&amp;form_action=edit_attendee&amp;id=<?php echo $id ?>" title="<?php echo 'ID#:'.$id.' [ REG#: ' . $registration_id.' ] Email: '.$attendee->email; ?>">
+	            <td class="row-title" nowrap="nowrap" title="<?php echo 'ID#:'.$id.' [ REG#: ' . $registration_id.' ] Email: '.$attendee->email; ?>">
+					<a href="admin.php?page=events&amp;event_admin_reports=edit_attendee_record&amp;event_id=<?php echo $event_id; ?>&amp;registration_id=<?php echo $registration_id; ?>&amp;form_action=edit_attendee&amp;id=<?php echo $id ?>">
 						<?php echo $fname ?> <?php echo $lname ?> <?php echo $email ?>
 	              </a>
 				 </td>
 				
-	            <td nowrap="nowrap">
+	            <td nowrap="nowrap" title="<?php echo $registration_id ?>">
 					<?php echo $registration_id ?>
 				</td>
 				
@@ -357,15 +358,13 @@ function event_list_attendees() {
 					<?php echo event_date_display($event_time, get_option('time_format')) ?>
 				</td>
 				
-	            <?php if ($ticketing_installed == true) { ?>
-	            <td nowrap="nowrap">
+	            <td nowrap="nowrap" title="<?php echo $qty_scanned; ?>">
 					<p style="padding-left:15px">
-						<?php echo ($attended == 1 || $ticket_quantity_scanned >= 1) ? event_espresso_paid_status_icon('Checkedin') : event_espresso_paid_status_icon('NotCheckedin'); ?>
+						<?php echo $qty_scanned; ?>
 					</p>
 				</td>
-	            <?php } ?>
 				
-	            <td nowrap="nowrap">
+	            <td nowrap="nowrap" title="<?php echo $price_option ?>">
 					<?php echo $price_option ?>
 				</td>
 				
@@ -505,7 +504,7 @@ function event_list_attendees() {
 
 
 $hide = $EVT_ID ? '1,5' : '1,3';
-$hide .= $ticketing_installed ? ',11,12' : ',10,11'; 
+$hide .= ',11,12'; 
 
 ?>
 <script>
@@ -521,12 +520,12 @@ $hide .= $ticketing_installed ? ',11,12' : ',10,11';
 			"aoColumns": [
 				{ "bSortable": false },
 				null,
-				<?php echo $ticketing_installed == true ? 'null,' : '' ?>
 				null,
 				null,
 				null,
 				null,
 				null,
+				null,//Qty/Attended
 				null,
 				null,
 				null,
