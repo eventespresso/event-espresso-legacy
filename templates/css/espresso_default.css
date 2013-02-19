@@ -163,6 +163,19 @@
 
 .event_espresso_form_wrapper .coupon_code { margin:2em 0; }
 
+/* Additional Attendees Form */
+.add-additional-attendee-lnk {
+	padding:1em 2em 1.25em; margin: 0 0 1em 0;
+	background-color: #FFC; border: #FC6 1px solid; border-radius:3px;
+	color: #000; text-shadow:1px 1px #fff;
+}
+.remove-additional-attendee-lnk {
+	padding: 1em 2em 1.25em; margin: 0 0 1em 0; 
+	background-color:#FFEEEE; border: #FF0000 1px solid; border-radius:3px;
+	color: #000; text-shadow:1px 1px #fff;
+}
+
+
 /* FEM Styles */
 .ee_fem_form_field label.date_time{
 	width:80px;
