@@ -200,15 +200,15 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			$attendee_form .= '<div class="espresso_add_subtract_attendees">';
 
 			$attendee_form .= '
-			<a id="remove-additional-attendee-XXXXXX" rel="XXXXXX" class="remove-additional-attendee-lnk additional-attendee-lnk" title="' . __('Remove the above Attendee', 'event_espresso') . '">
+			<a id="remove-additional-attendee-XXXXXX" rel="XXXXXX" class="remove-additional-attendee-lnk additional-attendee-lnk" title="' . __('Remove Attendee Above', 'event_espresso') . '">
 				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Attendee', 'event_espresso') . '" />
-				' . __('Remove the above Attendee:', 'event_espresso') . '
+				' . __('Remove Attendee Above', 'event_espresso') . '
 			</a><br/>';
 			
 			$attendee_form .= '
-			<a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk" title="' . __('Add an Additonal Attendee', 'event_espresso') . '">
-				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add an Additonal Attendee', 'event_espresso') . '" />
-				' . __('Add an Additonal Attendee:', 'event_espresso') . '
+			<a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk" title="' . __('Add Additonal Attendee', 'event_espresso') . '">
+				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add Additonal Attendee', 'event_espresso') . '" />
+				' . __('Add Additonal Attendee', 'event_espresso') . '
 			</a>';
 
 
