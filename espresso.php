@@ -975,7 +975,7 @@ function add_espresso_themeroller_stylesheet() {
 
 			//Load the themeroller base style sheet
 			//If the themeroller-base.css is in the uploads folder, then we will use it instead of the one in the core
-			if (file_exists(EVENT_ESPRESSO_UPLOAD_DIR . $themeroller_style_path . 'themeroller-base.css')) {
+			if (file_exists(EVENT_ESPRESSO_UPLOAD_DIR . 'themeroller/themeroller-base.css')) {
 				wp_register_style('espresso_themeroller_base', $themeroller_style_path . 'themeroller-base.css');
 			} else {
 				wp_register_style('espresso_themeroller_base', EVENT_ESPRESSO_PLUGINFULLURL . 'templates/css/themeroller/themeroller-base.css');
