@@ -98,11 +98,11 @@ function edit_attendee_record() {
 				
 				// compare new total_cost with amount_pd
 				if ( $upd_total == $amount_pd ) {
-					$upd_payment_status = __('Completed','event_espresso');
+					$upd_payment_status = 'Completed';//DO NOT TRANSLATE
 				} elseif ( $upd_total > $amount_pd ) {
-					$upd_payment_status = __('Pending','event_espresso');
+					$upd_payment_status = 'Pending';//DO NOT TRANSLATE
 				} elseif ( $upd_total < $amount_pd ) {
-					$upd_payment_status = __('Refund','event_espresso');
+					$upd_payment_status = 'Refund';//DO NOT TRANSLATE
 				}
 								
 				// compare old payment status with new payment status and update if things have changed
