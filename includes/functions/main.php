@@ -181,17 +181,18 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			if ($event_meta['additional_attendee_reg_info'] == 2) {
 				$attendee_form .= '<p>';
 				$attendee_form .= '<label for="x_attendee_fname">' . __('First Name:', 'event_espresso') . '</label>';
-				$attendee_form .= '<input type="text" name="x_attendee_fname[XXXXXX]" class="input"/>';
+				$attendee_form .= '<input type="text" name="x_attendee_fname[XXXXXX]" class="ee-reg-page-text-input fname"/>';
 				$attendee_form .= '</p>';
 				$attendee_form .= '<p>';
 				$attendee_form .= '<label for="x_attendee_lname">' . __('Last Name:', 'event_espresso') . '</label>';
-				$attendee_form .= '<input type="text" name="x_attendee_lname[XXXXXX]" class="input"/>';
+				$attendee_form .= '<input type="text" name="x_attendee_lname[XXXXXX]" class="ee-reg-page-text-input lname"/>';
 				$attendee_form .= '</p>';
 				$attendee_form .= '<p>';
 				$attendee_form .= '<label for="x_attendee_email">' . __('Email:', 'event_espresso') . '</label>';
-				$attendee_form .= '<input type="text" name="x_attendee_email[XXXXXX]" class="input"/>';
+				$attendee_form .= '<input type="text" name="x_attendee_email[XXXXXX]" class="ee-reg-page-text-input email"/>';
 				$attendee_form .= '</p>';
 			} else {
+				$attendee_form .= '<input type="hidden" name="x_attendee_nmbr[XXXXXX]" class="x_attendee_nmbr" value="XXXXXX"/>';
 				$meta = array("x_attendee" => true);
 				if(!empty($admin)) {
 					$meta['admin_only'] = true;

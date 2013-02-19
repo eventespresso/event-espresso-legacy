@@ -35,6 +35,9 @@ function espresso_version() {
 	return '3.1.30.6P-BETA';
 }
 
+define("EVENT_ESPRESSO_VERSION", espresso_version());
+
+
 //This tells the system to check for updates to the paid version
 global $espresso_check_for_updates;
 $espresso_check_for_updates = true;
@@ -139,6 +142,10 @@ function espresso_shortcode_pages( $page_id ) {
 				break;
 			case 'return_url' :
 					$this_is_a_reg_page = TRUE;
+					//Various attendee functions
+					require_once("includes/functions/attendee_functions.php");
+					//Payment/Registration Processing - Used to display the payment options and the payment link in the email. Used with the [ESPRESSO_PAYMENTS] tag
+					require_once("includes/process-registration/payment_page.php");
 					add_action( 'init', 'event_espresso_pay', 100 );
 				break;
 			case 'notify_url' :
@@ -198,7 +205,6 @@ if (is_ssl()) {
 	$wp_content_url = str_replace('http://', 'https://', WP_CONTENT_URL);
 }
 
-define("EVENT_ESPRESSO_VERSION", espresso_version());
 define('EVENT_ESPRESSO_POWERED_BY', 'Event Espresso - ' . EVENT_ESPRESSO_VERSION);
 //Define the plugin directory and path
 define("EVENT_ESPRESSO_PLUGINPATH", "/" . plugin_basename(dirname(__FILE__)) . "/");

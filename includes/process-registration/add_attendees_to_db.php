@@ -82,6 +82,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$address2 = isset($att_data_source['address2']) ? html_entity_decode( trim( $att_data_source['address2'] ), ENT_QUOTES, 'UTF-8' ) : '';
 			$city = isset($att_data_source['city']) ? html_entity_decode( trim( $att_data_source['city'] ), ENT_QUOTES, 'UTF-8' ) : '';
 			$state = isset($att_data_source['state']) ? html_entity_decode( trim( $att_data_source['state'] ), ENT_QUOTES, 'UTF-8' ) : '';
+			$country = isset($att_data_source['country']) ? html_entity_decode( trim( $att_data_source['country'] ), ENT_QUOTES, 'UTF-8' ) : '';
 			$zip = isset($att_data_source['zip']) ? html_entity_decode( trim( $att_data_source['zip'] ), ENT_QUOTES, 'UTF-8' ) : '';
 			$phone = isset($att_data_source['phone']) ? html_entity_decode( trim( $att_data_source['phone'] ), ENT_QUOTES, 'UTF-8' ) : '';
 			$email = isset($att_data_source['email']) ? html_entity_decode( trim( $att_data_source['email'] ), ENT_QUOTES, 'UTF-8' ) : '';
@@ -282,7 +283,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$start_date = empty($start_date) ? '' : $start_date;
 			$end_date = empty($end_date) ? '' : $end_date;
 			$organization_name = empty($organization_name) ? '' : $organization_name;
-			$country_id = empty($country_id) ? '' : $country_id;
+			$country = empty($country) ? '' : $country;
 			$payment_date = empty($payment_date) ? '' : $payment_date;
 			$coupon_code = empty($coupon_code) ? '' : $coupon_code;
 
@@ -319,7 +320,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 					'end_date' => $end_date,
 					'price_option' => $price_type,
 					'organization_name' => $organization_name,
-					'country_id' => $country_id,
+					'country_id' => $country,
 					'payment_status' => $payment_status,
 					'payment_date' => $payment_date,
 					'event_id' => $event_id,
@@ -482,7 +483,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 										'end_date' => $end_date,
 										'price_option' => $price_type,
 										'organization_name' => $organization_name,
-										'country_id' => $country_id,
+										'country_id' => $country,
 										'payment_status' => $payment_status,
 										'payment_date' => $payment_date,
 										'event_id' => $event_id,
@@ -524,7 +525,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 										'end_date' => $end_date,
 										'price_option' => $price_type,
 										'organization_name' => $organization_name,
-										'country_id' => $country_id,
+										'country_id' => $country,
 										'payment_status' => $payment_status,
 										'payment_date' => $payment_date,
 										'event_id' => $event_id,
@@ -741,6 +742,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 						$city = $attendee->city;
 						$state = $attendee->state;
 						$zip = $attendee->zip;
+						$country = $attendee->country_id;
 						$attendee_email = $attendee->email;
 						$registration_id = $attendee->registration_id;
 					}

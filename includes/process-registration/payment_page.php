@@ -295,6 +295,7 @@ function espresso_confirm_registration() {
 	$address2 = htmlspecialchars( stripslashes( $attendee->address2 ), ENT_QUOTES, 'UTF-8' );
 	$city = htmlspecialchars( stripslashes( $attendee->city ), ENT_QUOTES, 'UTF-8' );
 	$state = htmlspecialchars( stripslashes( $attendee->state ), ENT_QUOTES, 'UTF-8' );
+	$country = htmlspecialchars( stripslashes( $attendee->country_id ), ENT_QUOTES, 'UTF-8' );
 	$zip = $attendee->zip;
 	$payment_status = $attendee->payment_status;
 	$txn_type = $attendee->txn_type;

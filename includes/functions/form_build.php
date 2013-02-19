@@ -12,15 +12,12 @@ if (!function_exists('event_form_build')) {
 		$text_input_class = ' ee-reg-page-text-input ';
 		
 		// XXXXXX will get replaced with the attendee number
-		if (!empty($extra["x_attendee"])) {
-			$field_name = ($question->system_name != '') ? "x_attendee_" . $question->system_name . "[XXXXXX]" : "x_attendee_" . $question->question_type . '_' . $question->id . '[XXXXXX]';
-			$email_validate = $question->system_name == 'email' ? 'email' : '';
-			$question->system_name = "x_attendee_" . $question->system_name . "[XXXXXX]";
-			//$question->required = 'N';
-		} else {
-			$field_name = ($question->system_name != '') ? $question->system_name : $question->question_type . '_' . $question->id;
-			$email_validate = $question->system_name == 'email' ? 'email' : '';
-		}
+		$XATT1 = isset( $extra['x_attendee'] ) && $extra['x_attendee'] ? 'x_attendee_' : '';
+		$XATT2 = isset( $extra['x_attendee'] ) && $extra['x_attendee'] ? '[XXXXXX]' : '';
+
+		$field_name = ($question->system_name != '') ? $question->system_name : $question->question_type . '_' . $question->id;
+		$email_validate = $question->system_name == 'email' ? 'email' : '';
+		$question->system_name = ! empty( $extra["x_attendee"] ) ? "x_attendee_" . $question->system_name . "[XXXXXX]" : $question->system_name;
 
 		$question->question = stripslashes( $question->question );
 
@@ -33,10 +30,10 @@ if (!function_exists('event_form_build')) {
 			$required_class = '';
 			$required_label = '';
 		}
-		$label = '<label for="' . $field_name . '" class="' . $class . '">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '</label> ';
+		$label = '<label for="' . $XATT1 . $field_name . $XATT2 . '" class="' . $class . '">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '</label> ';
 		
 		if (is_array($answer) && array_key_exists('event_attendees', $answer) /*&& $attendee_number === 1*/) {
-			$answer = isset($answer['event_attendees'][$price_id][$attendee_number][$field_name]) ? $answer['event_attendees'][$price_id][$attendee_number][$field_name] : '';
+			$answer = isset($answer['event_attendees'][$price_id][$attendee_number][$XATT1 . $field_name . $XATT2]) ? $answer['event_attendees'][$price_id][$attendee_number][$XATT1 . $field_name . $XATT2] : '';
 		}
 
 		//If the members addon is installed, get the users information if available
@@ -123,14 +120,14 @@ if (!function_exists('event_form_build')) {
 				}
 				
 				$html .= '<div class="event_form_field">' . $label;
-				$html .= '<input type="text" ' . $required_title . ' class="' . $required_class . $class . $text_input_class .'" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' /></div>';	
+				$html .= '<input type="text" ' . $required_title . ' class="' . $required_class . $class . $text_input_class .' ' . $field_name . '" id="' . $XATT1 . $field_name . $XATT2 . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $XATT1 . $field_name . $XATT2 . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' /></div>';	
 				break;
 				
 			case "TEXTAREA" :
 			
 				if (is_array($answer)) $answer = '';
 				$html .= '<div class="event_form_field event-quest-group-textarea">' . $label;
-				$html .= '<textarea ' . $required_title . ' class="' . $required_class . $class . $text_input_class . '" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" rows="5">' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '</textarea></div>';
+				$html .= '<textarea ' . $required_title . ' class="' . $required_class . $class . $text_input_class . ' ' . $field_name . '" id="' . $XATT1 . $field_name . $XATT2 . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $XATT1 . $field_name . $XATT2 . $multi_name_adjust . '" rows="5">' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '</textarea></div>';
 			break;
 				
 			case "SINGLE" :
@@ -158,7 +155,7 @@ if (!function_exists('event_form_build')) {
 						$html .= '
 						<li>
 							<label for="' . $value_id . '" class="' . $class . ' radio-btn-lbl">
-								<input id="' . $value_id . '" ' . $required_title . '" class="' . $required_class . $class . '" name="' . $field_name . $multi_name_adjust . '"  type="radio" value="' . $value . '" ' . $checked . ' /> 
+								<input id="' . $value_id . '" ' . $required_title . '" class="' . $required_class . $class . ' ' . $field_name . '" name="' . $XATT1 . $field_name . $XATT2 . $multi_name_adjust . '"  type="radio" value="' . $value . '" ' . $checked . ' /> 
 								<span>' . $formatted . '</span>
 							</label>
 						</li>';
@@ -205,7 +202,7 @@ if (!function_exists('event_form_build')) {
 						$html .= '
 						<li>
 							<label for="' . $value_id . '" class="' . $class . ' checkbox-lbl">
-								<input id="' . $value_id . '" ' . $required_title . ' class="' . $required_class . $class . '" name="' . $field_name . $multi_name_adjust . '[]"  type="checkbox" value="' . $value . '" ' . $checked . '/> 
+								<input id="' . $value_id . '" ' . $required_title . ' class="' . $required_class . $class . ' ' . $field_name . '" name="' . $XATT1 . $field_name . $XATT2 . $multi_name_adjust . '[]"  type="checkbox" value="' . $value . '" ' . $checked . '/> 
 								<span>' . $formatted . '</span>
 							</label>
 						</li>';
@@ -225,11 +222,11 @@ if (!function_exists('event_form_build')) {
 
 				if ( ! empty( $question->response )) {
 
-					$dd_type = $question->system_name == 'state' ? 'name="state"' : 'name="' . $field_name . $multi_name_adjust . '"';
+					$dd_type = $question->system_name == 'state' ? 'name="state"' : 'name="' . $XATT1 . $field_name . $XATT2 . $multi_name_adjust . '"';
 					$html .= '
 					<div class="event_form_field" class="' . $class . '">' . $label;
 					$html .= '
-						<select ' . $dd_type . ' ' . $required_title . ' class="' . $required_class . $class . '" id="DROPDOWN_' . $question->id . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '">';
+						<select ' . $dd_type . ' ' . $required_title . ' class="' . $required_class . $class . ' ' . $field_name . '" id="DROPDOWN_' . $question->id . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '">';
 					$html .= '
 							<option value="">' . __('Select One', 'event_espresso') . "</option>";
 					
@@ -267,6 +264,9 @@ if (!function_exists('event_form_build')) {
 	}
 
 }
+
+
+
 
 
 function event_form_build_edit( $question, $answer, $show_admin_only = false, $class = 'ee-reg-page-questions' ) {
@@ -327,7 +327,8 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 					
 			$form_input .= $label;
 			$form_input .= '
-	<ul class="edit-options-list-radio">';
+			<p class="event_form_field">
+				<ul class="edit-options-list-radio">';
 			foreach ($values as $key => $value) {
 				$value = trim( stripslashes( str_replace( $find, $replace, $value )));
 				$value = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
@@ -335,15 +336,16 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 				$checked = $formatted == $answer ? ' checked="checked"' : '';
 
 				$form_input .= '
-		<li>
-			<label class="radio-btn-lbl">
-				<input id="SINGLE_' . $question->id . '_' . $key . '" ' . $required_title . ' class="' . $required_class . $class . '" name="SINGLE_' . $question->id . '"  type="radio" value="' . $formatted . '" ' . $checked . '/>
-				<span>' . $formatted . '</span>
-			</label>
-		</li>';
+					<li style="min-width:45%;">
+						<label class="radio-btn-lbl">
+							<input id="SINGLE_' . $question->id . '_' . $key . '" ' . $required_title . ' class="' . $required_class . $class . '" name="SINGLE_' . $question->id . '"  type="radio" value="' . $formatted . '" ' . $checked . '/>
+							<span>' . $formatted . '</span>
+						</label>
+					</li>';
 			}
 			$form_input .= '
-	</ul>';
+				</ul>
+			</p>';
 			break;
 			
 		case "MULTIPLE" :
@@ -358,7 +360,8 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 			
 			$form_input .= $label;
 			$form_input .= '
-	<ul class="edit-options-list-check">';
+			<p class="event_form_field">
+				<ul class="edit-options-list-check">';
 			foreach ($values as $key => $value) {
 			
 				$value = trim( stripslashes( str_replace( $find, $replace, $value )));
@@ -367,15 +370,16 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 				$checked = in_array( $formatted, $answers) ? ' checked="checked"' : '';
 
 				$form_input .= '
-		<li>
-			<label class="checkbox-lbl">
-				<input id="' . $question->id . '_' . trim( stripslashes( $key )) . '" ' . $required_title . ' class="' . $required_class . $class . '" name="MULTIPLE_' . $question->id . '[]"  type="checkbox" value="' . $formatted . '" ' . $checked . '/>
-				<span>' . $formatted . '</span>
-			</label>
-		</li>';
+					<li style="min-width:45%;">
+						<label class="checkbox-lbl">
+							<input id="' . $question->id . '_' . trim( stripslashes( $key )) . '" ' . $required_title . ' class="' . $required_class . $class . '" name="MULTIPLE_' . $question->id . '[]"  type="checkbox" value="' . $formatted . '" ' . $checked . '/>
+							<span>' . $formatted . '</span>
+						</label>
+					</li>';
 			}
 			$form_input .= '
-	</ul>';
+				</ul>
+			</p>';
 
 			break;
 			
@@ -388,9 +392,10 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 			$answer = htmlspecialchars( $answer, ENT_QUOTES, 'UTF-8' );
 
 			$form_input .= '
-			<div class="event_form_field">' . $label;
+			<p class="event_form_field">' . $label;
 			$form_input .= '
-				<select ' . $dd_type . ' ' . $required_title . ' class="' . $required_class . $class . '" id="DROPDOWN_' . $question->id . '"  />';
+				<select ' . $dd_type . ' ' . $required_title . ' class="' . $required_class . $class . '" id="DROPDOWN_' . $question->id . '"  />
+					<option value=""></option>';
 			
 			foreach ($values as $key => $value) {
 
@@ -406,7 +411,7 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 			$form_input .= '
 				</select>';
 			$form_input .= '
-			</div>';
+			</p>';
 			break;
 			
 		default :
