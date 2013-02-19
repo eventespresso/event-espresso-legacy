@@ -85,13 +85,11 @@ if (!function_exists('event_espresso_get_event_details')) {
 		if(strstr($category_identifier,',')){
 			$array_cat=explode(",",$category_identifier);
 			$cat=array_map('trim', $array_cat);
-			
 			$category_detail_id = '';
 			
 			//For every category specified in the shortcode, let's get the corresponding category_id et create a well-formatted string (id,n id)
 			foreach($cat as $k=>$v){
-	
-				$sql_get_category_detail_id="SELECT id FROM ". EVENTS_CATEGORY_TABLE . " WHERE category_identifier = '".$v."'";
+				$sql_get_category_detail_id = "SELECT id FROM ". EVENTS_CATEGORY_TABLE . " WHERE category_identifier = '".$v."'";
 				$category_detail_id .= $wpdb->get_var( $sql_get_category_detail_id ).",";
 			}
 	
@@ -183,28 +181,17 @@ if (!function_exists('event_espresso_get_event_details')) {
 		$sql .= " GROUP BY e.id ";
 		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$sort." " : " ORDER BY date(start_date), id ASC ";
 		$sql .= $limit > 0 ? ' LIMIT 0, '.$limit : '';  
-		
-		//echo $sql;
-		//echo 'This page is located in ' . get_option( 'upload_path' );
-		
-		$events = $wpdb->get_results( $sql );
+		$events					= $wpdb->get_results( $wpdb->prepare($sql) );
+		$category_id			= isset($wpdb->last_result[0]->id) ? $wpdb->last_result[0]->id : '';
+		$category_name			= isset($wpdb->last_result[0]->category_name) ? $wpdb->last_result[0]->category_name : '';
+		$category_identifier	= isset($wpdb->last_result[0]->category_identifier) ? $wpdb->last_result[0]->category_identifier : '';
+		$category_desc			= isset($wpdb->last_result[0]->category_desc) ? html_entity_decode(wpautop($wpdb->last_result[0]->category_desc)) : '';
+		$display_desc			= isset($wpdb->last_result[0]->display_desc) ? $wpdb->last_result[0]->display_desc : '';
+		$total_events			= count($events);
+		$total_pages			= ceil($total_events/$events_per_page);
+		$offset					= ($current_page-1)*$events_per_page;
+		$events					= array_slice($events,$offset,$events_per_page);
 
-		$category_id = isset($wpdb->last_result[0]->id) ? $wpdb->last_result[0]->id : '';
-		$category_name = isset($wpdb->last_result[0]->category_name) ? $wpdb->last_result[0]->category_name : '';
-		$category_identifier = isset($wpdb->last_result[0]->category_identifier) ? $wpdb->last_result[0]->category_identifier : '';
-		$category_desc = isset($wpdb->last_result[0]->category_desc) ? html_entity_decode(wpautop($wpdb->last_result[0]->category_desc)) : '';
-		$display_desc = isset($wpdb->last_result[0]->display_desc) ? $wpdb->last_result[0]->display_desc : '';
-        
-		
-		$total_events = count($events);
-		$total_pages = ceil($total_events/$events_per_page);
-		
-		$offset = ($current_page-1)*$events_per_page;
-		$events = array_slice($events,$offset,$events_per_page);
-		
-		//Debug
-		//var_dump($events);
-		
 		if ( $use_wrapper ) {
 			echo "<div id='event_wrapper'>";
 		}
