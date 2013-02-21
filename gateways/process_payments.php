@@ -45,12 +45,20 @@ add_filter('filter_hook_espresso_prepare_payment_data_for_gateways', 'espresso_p
  */
 function espresso_get_total_cost($payment_data) {
 	global $wpdb;
+	//if for some reason attendee_session isn't setin the payment data, set it now
+	if(!array_key_exists('attendee_session',$payment_data) || empty($payment_data['attendee_session'])){
+		$SQL = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id=%d";
+		$session_id = $wpdb->get_var( $wpdb->prepare( $SQL, $payment_data['attendee_id'] ));
+		$payment_data['attendee_session']=$session_id;
+	}
+	//find all the attendee rows
 	$sql = "SELECT a.final_price, a.quantity FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 	$sql .= " WHERE a.attendee_session='" . $payment_data['attendee_session'] . "' ORDER BY a.id ASC";
 	$tickets = $wpdb->get_results($sql, ARRAY_A);
 	$total_cost = 0;
 	$total_quantity = 0;
 	
+	//sum up their final_prices, as this should already take into account discounts
 	foreach ($tickets as $ticket) {
 		$total_cost += $ticket['quantity'] * $ticket['final_price'];
 		$total_quantity += $ticket['quantity'];
@@ -142,7 +150,6 @@ function espresso_prepare_event_link($payment_data) {
 add_filter('filter_hook_espresso_prepare_event_link', 'espresso_prepare_event_link');
 
 function event_espresso_txn() {
-
 	ob_start();
 
 	global $wpdb, $org_options, $espresso_content;
@@ -224,4 +231,25 @@ if ( isset( $_POST[ 'name' ] ) && isset( $_POST[ 'MC_type'] ) && 'worldpay' == $
 	$_REQUEST['_name'] = $_POST['name'];
 	unset($_POST['name']);
 	unset($_REQUEST['name']);
+}
+
+/**
+ * Gets all the events_attendee JOIN events_detail rows on the current attendee's purchase (ie,
+ * who share the attendee_session.)
+ * @param int $attendee_id
+ * @return StdClass[] (events_attendee JOIN events_detail, where each item is in format OBJECT_K)
+ */
+function espresso_get_items_being_purchased($attendee_id){
+	global $wpdb;
+	// get attendee_session
+	$SQL = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id=%d";
+	$session_id = $wpdb->get_var( $wpdb->prepare( $SQL, $attendee_id ));
+	// now get all registrations for that session
+	$SQL = "SELECT a.final_price, a.orig_price, a.quantity, ed.event_name, a.price_option, a.fname, a.lname ";
+	$SQL .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
+	$SQL .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
+	$SQL .= " WHERE attendee_session=%s ORDER BY a.id ASC";
+	
+	$items = $wpdb->get_results( $wpdb->prepare( $SQL, $session_id ));
+	return $items;
 }

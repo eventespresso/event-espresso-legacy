@@ -9,7 +9,8 @@ event_espresso_require_gateway("psigate/psigate_vars.php");
 event_espresso_require_gateway("psigate/psigate_ipn.php");
 if (!empty($_REQUEST['type']) && $_REQUEST['type'] == 'psigate') {
 	add_filter('filter_hook_espresso_transactions_get_attendee_id', 'espresso_transactions_psigate_get_attendee_id');
-	add_filter('filter_hook_espresso_transactions_get_payment_data', 'espresso_process_psigate');
+	//add_filter('filter_hook_espresso_transactions_get_payment_data', 'espresso_process_psigate');
+	add_filter('filter_hook_espresso_thank_you_get_payment_data', 'espresso_process_psigate');
 }
 
 function espresso_psigate_formal_name( $gateway_formal_names ) {

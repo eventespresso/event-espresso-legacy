@@ -8,7 +8,6 @@ function event_espresso_psigate_payment_settings() {
 		$psigate_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
 		$psigate_settings['bypass_payment_page'] = $_POST['bypass_payment_page'];
 		$psigate_settings['force_ssl_return'] = empty($_POST['force_ssl_return']) ? false : true;
-		$psigate_settings['no_shipping'] = $_POST['no_shipping'];
 		$psigate_settings['button_url'] = $_POST['button_url'];
 		update_option('event_espresso_psigate_settings', $psigate_settings);
 		echo '<div id="message" class="updated fade"><p><strong>' . __('PSiGate settings saved.', 'event_espresso') . '</strong></p></div>';
@@ -21,12 +20,10 @@ function event_espresso_psigate_payment_settings() {
 			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/psigate/btn_stdCheckout2.gif";
 		}
 		$psigate_settings['psigate_id'] = '';
-		$psigate_settings['image_url'] = '';
 		$psigate_settings['currency_format'] = 'USD';
 		$psigate_settings['use_sandbox'] = false;
 		$psigate_settings['bypass_payment_page'] = 'N';
 		$psigate_settings['force_ssl_return'] = false;
-		$psigate_settings['no_shipping'] = '0';
 		$psigate_settings['button_url'] = $button_url;
 		if (add_option('event_espresso_psigate_settings', $psigate_settings, '', 'no') == false) {
 			update_option('event_espresso_psigate_settings', $psigate_settings);
@@ -92,6 +89,13 @@ function event_espresso_display_psigate_settings() {
 							<input type="text" name="psigate_id" size="35" value="<?php echo $psigate_settings['psigate_id']; ?>">
 							<br />
 							<?php _e('Eg, NEWSETUPjWbtSQMxaXr400243. NOT the same as your StoreID', 'event_espresso'); ?>
+						</li>
+						<li>
+							<label for="use_sandbox">
+								<?php _e('Use the Development Site', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=paypal_sandbox_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							</label>
+							<input name="use_sandbox" type="checkbox" value="1" <?php echo $psigate_settings['use_sandbox'] ? 'checked="checked"' : '' ?> />
+							<br />
 						</li>
 						<li>
 							<label for="currency_format">
@@ -214,6 +218,10 @@ function event_espresso_display_psigate_settings() {
 					</ul></td>
 			</tr>
 		</table>
+		</p>
+			<input type="hidden" name="update_psigate" value="update_psigate">
+			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update PSiGate Settings', 'event_espresso') ?>" id="save_psigate_settings" />
+		</p>
 	</form>
 	<div id="store_key_id" style="display:none">
 		<h2><?php _e('PSiGate Store Key', 'event_espresso'); ?></h2>
@@ -235,17 +243,6 @@ function event_espresso_display_psigate_settings() {
 				<?php _e("After enabling the HTML Messenger, and saving your settings, copy the Store Key and paste it into your Event Espresso payment settings",'event_espresso');?>
 			</li>
 		</ol>
-	</div>
-	<div id="image_url_info" style="display:none">
-		<h2>
-			<?php _e('PSiGate Image URL (logo for payment page)', 'event_espresso'); ?>
-		</h2>
-		<p>
-			<?php _e('The URL of the 150x50-pixel image displayed as your logo in the upper left corner of the PSiGate checkout pages.', 'event_espresso'); ?>
-		</p>
-		<p>
-			<?php _e('Default - Your business name, if you have a Business account, or your email address, if you have Premier or Personal account.', 'event_espresso'); ?>
-		</p>
 	</div>
 	<div id="currency_info" style="display:none">
 		<h2><?php _e('PSiGate Currency', 'event_espresso'); ?></h2>
