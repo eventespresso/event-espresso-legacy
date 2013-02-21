@@ -222,7 +222,7 @@ function event_espresso_edit_list() {
 		$sql .= " AND e.wp_user = '" . espresso_member_data('id') . "' ";
 	}
 	
-	$sql .= ") ORDER BY start_date = '0000-00-00' DESC, start_date ASC, event_name ASC ";
+	$sql .= ") ORDER BY start_date = '0000-00-00' DESC, start_date DESC, event_name ASC ";
     $sql .= $records_to_show;
 	
 	$events = $wpdb->get_results($sql);
