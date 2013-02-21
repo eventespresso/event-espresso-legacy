@@ -148,11 +148,17 @@ if ( !function_exists( 'espresso_personnel_cb' ) ){
 	function espresso_personnel_cb($event_id = 0, $recurrence_id = 0){
 		global $espresso_premium; if ($espresso_premium != true) return;
 		global $wpdb;
-
-		$where = apply_filters('filter_hook_espresso_personal_cb_where', '', $event_id);
-
-		$sql = "SELECT id, name, role, meta FROM " . EVENTS_PERSONNEL_TABLE . $where;
-
+		$sql = "SELECT id, name, role, meta FROM " . EVENTS_PERSONNEL_TABLE;
+		if (function_exists('espresso_member_data') ) {
+			$wpdb->get_results("SELECT wp_user FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'");
+			$wp_user = $wpdb->last_result[0]->wp_user !='' ? $wpdb->last_result[0]->wp_user:espresso_member_data('id');
+			$sql .= " WHERE ";
+			if ($wp_user == 0 || $wp_user == 1){
+				$sql .= " (wp_user = '0' OR wp_user = '1') ";
+			}else{
+				$sql .= " wp_user = '" . $wp_user ."' ";
+			}
+		}
 		$event_personnel = $wpdb->get_results($sql);
 		$num_rows = $wpdb->num_rows;
 		if ($num_rows > 0){
