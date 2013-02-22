@@ -233,23 +233,3 @@ if ( isset( $_POST[ 'name' ] ) && isset( $_POST[ 'MC_type'] ) && 'worldpay' == $
 	unset($_REQUEST['name']);
 }
 
-/**
- * Gets all the events_attendee JOIN events_detail rows on the current attendee's purchase (ie,
- * who share the attendee_session.)
- * @param int $attendee_id
- * @return StdClass[] (events_attendee JOIN events_detail, where each item is in format OBJECT_K)
- */
-function espresso_get_items_being_purchased($attendee_id){
-	global $wpdb;
-	// get attendee_session
-	$SQL = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id=%d";
-	$session_id = $wpdb->get_var( $wpdb->prepare( $SQL, $attendee_id ));
-	// now get all registrations for that session
-	$SQL = "SELECT a.final_price, a.orig_price, a.quantity, ed.event_name, a.price_option, a.fname, a.lname ";
-	$SQL .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
-	$SQL .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
-	$SQL .= " WHERE attendee_session=%s ORDER BY a.id ASC";
-	
-	$items = $wpdb->get_results( $wpdb->prepare( $SQL, $session_id ));
-	return $items;
-}

@@ -2,7 +2,8 @@
 function event_espresso_psigate_payment_settings() {
 	global $active_gateways;
 	if (isset($_POST['update_psigate'])) {
-		$psigate_settings['psigate_id'] = $_POST['psigate_id'];
+		$psigate_settings['psigate_id_can'] = $_POST['psigate_id_can'];
+		$psigate_settings['psigate_id_us'] = $_POST['psigate_id_us'];
 		$psigate_settings['image_url'] = $_POST['image_url'];
 		$psigate_settings['currency_format'] = $_POST['currency_format'];
 		$psigate_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
@@ -19,7 +20,8 @@ function event_espresso_psigate_payment_settings() {
 		} else {
 			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/psigate/btn_stdCheckout2.gif";
 		}
-		$psigate_settings['psigate_id'] = '';
+		$psigate_settings['psigate_id_can'] = '';
+		$psigate_settings['psigate_id_us'] = '';
 		$psigate_settings['currency_format'] = 'USD';
 		$psigate_settings['use_sandbox'] = false;
 		$psigate_settings['bypass_payment_page'] = 'N';
@@ -82,19 +84,20 @@ function event_espresso_display_psigate_settings() {
 			<tr>
 				<td valign="top"><ul>
 						<li>
-							<label for="psigate_id">
-								<?php _e('PSiGate Store Key (Merchant ID)', 'event_espresso'); ?>
+							<label for="psigate_id_can">
+								<?php _e('Canadian PSiGate Store Key (Merchant ID)', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=store_key_id"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input type="text" name="psigate_id" size="35" value="<?php echo $psigate_settings['psigate_id']; ?>">
+							<input type="text" name="psigate_id_can" size="35" value="<?php echo $psigate_settings['psigate_id_can']; ?>">
 							<br />
 							<?php _e('Eg, NEWSETUPjWbtSQMxaXr400243. NOT the same as your StoreID', 'event_espresso'); ?>
 						</li>
 						<li>
-							<label for="use_sandbox">
-								<?php _e('Use the Development Site', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=paypal_sandbox_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							<label for="psigate_id_us">
+								<?php _e('US PSiGate Store Key (Merchant ID)', 'event_espresso'); ?>
+								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=store_key_id"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input name="use_sandbox" type="checkbox" value="1" <?php echo $psigate_settings['use_sandbox'] ? 'checked="checked"' : '' ?> />
+							<input type="text" name="psigate_id_us" size="35" value="<?php echo $psigate_settings['psigate_id_us']; ?>">
 							<br />
 						</li>
 						<li>
@@ -103,80 +106,22 @@ function event_espresso_display_psigate_settings() {
 							</label>
 							<select name="currency_format">
 								<option value="<?php echo $psigate_settings['currency_format']; ?>"><?php echo $psigate_settings['currency_format']; ?></option>
-								<option value="USD">
+								<option value="USD" >
 									<?php _e('U.S. Dollars ($)', 'event_espresso'); ?>
-								</option>
-								<option value="GBP">
-									<?php _e('Pounds Sterling (&pound;)', 'event_espresso'); ?>
 								</option>
 								<option value="CAD">
 									<?php _e('Canadian Dollars (C $)', 'event_espresso'); ?>
 								</option>
-								<option value="AUD">
-									<?php _e('Australian Dollars (A $)', 'event_espresso'); ?>
-								</option>
-								<option value="BRL">
-									<?php _e('Brazilian Real (only for Brazilian users)', 'event_espresso'); ?>
-								</option>
-								<option value="CHF">
-									<?php _e('Swiss Franc', 'event_espresso'); ?>
-								</option>
-								<option value="CZK">
-									<?php _e('Czech Koruna', 'event_espresso'); ?>
-								</option>
-								<option value="DKK">
-									<?php _e('Danish Krone', 'event_espresso'); ?>
-								</option>
-								<option value="EUR">
-									<?php _e('Euros (&#8364;)', 'event_espresso'); ?>
-								</option>
-								<option value="HKD">
-									<?php _e('Hong Kong Dollar ($)', 'event_espresso'); ?>
-								</option>
-								<option value="HUF">
-									<?php _e('Hungarian Forint', 'event_espresso'); ?>
-								</option>
-								<option value="ILS">
-									<?php _e('Israeli Shekel', 'event_espresso'); ?>
-								</option>
-								<option value="JPY">
-									<?php _e('Yen (&yen;)', 'event_espresso'); ?>
-								</option>
-								<option value="MXN">
-									<?php _e('Mexican Peso', 'event_espresso'); ?>
-								</option>
-								<option value="MYR">
-									<?php _e('Malaysian Ringgits (only for Malaysian users)', 'event_espresso'); ?>
-								</option>
-								<option value="NOK">
-									<?php _e('Norwegian Krone', 'event_espresso'); ?>
-								</option>
-								<option value="NZD">
-									<?php _e('New Zealand Dollar ($)', 'event_espresso'); ?>
-								</option>
-								<option value="PHP">
-									<?php _e('Philippine Pesos', 'event_espresso'); ?>
-								</option>
-								<option value="PLN">
-									<?php _e('Polish Zloty', 'event_espresso'); ?>
-								</option>
-								<option value="SEK">
-									<?php _e('Swedish Krona', 'event_espresso'); ?>
-								</option>
-								<option value="SGD">
-									<?php _e('Singapore Dollar ($)', 'event_espresso'); ?>
-								</option>
-								<option value="THB">
-									<?php _e('Thai Baht', 'event_espresso'); ?>
-								</option>
-								<option value="TRY">
-									<?php _e('Turkish Lira (only for Turkish users)', 'event_espresso'); ?>
-								</option>
-								<option value="TWD">
-									<?php _e('Taiwan New Dollars', 'event_espresso'); ?>
-								</option>
 							</select>
-							 </li>
+						</li>
+						<li>
+							<label for="use_sandbox">
+								<?php _e('Use the Development Site', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=paypal_sandbox_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							</label>
+							<input name="use_sandbox" type="checkbox" value="1" <?php echo $psigate_settings['use_sandbox'] ? 'checked="checked"' : '' ?> />
+							<br />
+						</li>
+						
 						
 						<li>
 							<label for="image_url">
@@ -243,6 +188,14 @@ function event_espresso_display_psigate_settings() {
 				<?php _e("After enabling the HTML Messenger, and saving your settings, copy the Store Key and paste it into your Event Espresso payment settings",'event_espresso');?>
 			</li>
 		</ol>
+		<h2><?php _e("Why is there a Canadian and US PSiGate Store Key?",'event_espresso');?></h2>
+		<p><?php _e('If you will be accepting payments only in USD, you only need to enter a "US PSiGate Store Key". Conversely, 
+			if you are only accepting payments in CAD, you need only enter a "Canadian PsiGate Store Key".','event_espresso');?></p>
+		<p><?php _e('If, however, some events will be accepting US dollars and others will be accepting Canadian dollars, you will need 2
+			PSiGate accounts: one accepting CAD and the other for USD. Enter the store keys for each into Event Espresso in the appropriate fields ("Canadian PSiGate Store Key" and "US PSiGate Store Key").')?></p>
+		<p><?php _e("Then, select a default currency. You may then specify an event as using the other currency by adding an 'Event Meta' called 'event_currency', and give it a value of either 'USD' or 'CAD'.",'event_espresso');?></p>
+		<p><?php _e("When customers go to pay for an event, if the currency is in USD, your US Store Key will be used. If the currency for the event is CAD, the Canadian Store Key will be used.",'event_espresso');?>
+		
 	</div>
 	<div id="currency_info" style="display:none">
 		<h2><?php _e('PSiGate Currency', 'event_espresso'); ?></h2>

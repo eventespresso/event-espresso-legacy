@@ -1,5 +1,6 @@
 <?php
 function espresso_display_psigate($payment_data){
+	global $wpdb;
 	$payment_data['payment_status'] = 'Incomplete';
 	$payment_data['txn_type'] = 'PSiGate';
 	
@@ -8,7 +9,17 @@ function espresso_display_psigate($payment_data){
 	
 	global $wpdb, $org_options;
 	$psigate_settings = get_option('event_espresso_psigate_settings');
-	$storekey = $psigate_settings['psigate_id'];
+	$currency_format=$psigate_settings['currency_format'];
+	$event_meta=$wpdb->get_var($wpdb->prepare("SELECT event_meta from {$wpdb->prefix}events_detail WHERE id=%s",$payment_data['event_id']));
+	$event_meta=maybe_unserialize($event_meta);
+	if(array_key_exists('event_currency',$event_meta)){
+		$currency_format=$event_meta['event_currency'];
+	}
+	if('USD'==$currency_format){
+		$storekey=$psigate_settings['psigate_id_us'];
+	}else{
+		$storekey=$psigate_settings['psigate_id_can'];
+	}
 	$bypass_payment_page = ($psigate_settings['bypass_payment_page'] == 'Y')?true:false;
 	$button_url = $psigate_settings['button_url'];
 	
@@ -144,3 +155,4 @@ HEREDOC;
 }
 
 add_action('action_hook_espresso_display_offsite_payment_gateway', 'espresso_display_psigate');
+
