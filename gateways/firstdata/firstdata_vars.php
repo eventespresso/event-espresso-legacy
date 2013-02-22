@@ -78,7 +78,7 @@ function espresso_display_firstdata($data) {
 						</p>
 						<p>
 							<label for="card_num"><?php _e('Card Number', 'event_espresso'); ?></label>
-							<input type="text" name="card_num" class="required" id="fd_card_num" />
+							<input type="text" name="card_num" class="required" id="fd_card_num" autocomplete="off" />
 						</p>
 
 
@@ -113,7 +113,7 @@ function espresso_display_firstdata($data) {
 
 						<p>
 							<label for="cvv"><?php _e('CVV Code', 'event_espresso'); ?></label>
-							<input type="text" name="cvv" id="fd_cvv" class="required" />
+							<input type="text" name="cvv" id="fd_cvv" class="required" autocomplete="off" />
 						</p>
 					</fieldset>
 					

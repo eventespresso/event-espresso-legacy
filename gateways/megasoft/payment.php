@@ -57,7 +57,7 @@ function espresso_display_megasoft($data) {
 					<h4 class="section-title"><?php _e('Información de la Tarjeta de Crédito', 'event_espresso'); ?></h4>
 					<p>
 						<label for="card_num"><?php _e('Número de la Tarjeta', 'event_espresso'); ?></label>
-						<input type="text" name="card_num" id="megasoft_card_num"  class="required" />
+						<input type="text" name="card_num" id="megasoft_card_num"  class="required" autocomplete="off" />
 					</p>
 					<p>
 						<?php 
@@ -81,7 +81,7 @@ function espresso_display_megasoft($data) {
 					</p>
 					<p>
 						<label for="ccv_code"><?php _e('Código CCV', 'event_espresso'); ?></label>
-						<input type="text" name="ccv_code" id="megasoft_ccv_code"  class="required" />
+						<input type="text" name="ccv_code" id="megasoft_ccv_code"  class="required" autocomplete="off" />
 					</p>
 				</fieldset>
 				<input name="invoice_num" type="hidden" value="<?php echo $registration_id;//substr(event_espresso_session_id(),0,10); ?>" />
