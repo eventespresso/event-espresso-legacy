@@ -5,7 +5,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 // Adds an Event or Function to the Event Database
 function add_event_to_db($recurrence_arr = array()) {
 		
-	global $wpdb, $org_options, $current_user, $espresso_premium, $ee_kses_allowed;
+	global $wpdb, $org_options, $current_user, $espresso_premium;
 	
 	//Security check using nonce
 	if ( empty($_POST['nonce_verify_insert_event']) || !wp_verify_nonce($_POST['nonce_verify_insert_event'],'espresso_verify_insert_event_nonce') ){
@@ -85,7 +85,7 @@ function add_event_to_db($recurrence_arr = array()) {
 		}else{
 			$event_identifier = sanitize_title_with_dashes($_REQUEST['event_identifier']) . $event_code;
 		}
-		$event_desc			= !empty($_REQUEST['event_desc']) ? wp_kses($_REQUEST['event_desc'], $ee_kses_allowed) : '';
+		$event_desc			= !empty($_REQUEST['event_desc']) ? wp_kses_post($_REQUEST['event_desc']) : '';
 		$display_desc		= !empty($_REQUEST['display_desc']) ? sanitize_text_field($_REQUEST['display_desc']) : 'Y';
 		$display_reg_form	= !empty($_REQUEST['display_reg_form']) ? sanitize_text_field($_REQUEST['display_reg_form']) : 'Y';
 		$externalURL		= isset($_REQUEST['externalURL']) ? sanitize_text_field($_REQUEST['externalURL']) : '';

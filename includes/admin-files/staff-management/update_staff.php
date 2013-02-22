@@ -1,13 +1,13 @@
 <?php 
 function update_event_staff(){
-	global $wpdb, $ee_kses_allowed;
+	global $wpdb;
 	$wpdb->show_errors();
 	//print_r($_REQUEST);
 	$staff_meta['phone'] = $_REQUEST['phone'];
 	$staff_meta['twitter'] = $_REQUEST['twitter'];
 	$staff_meta['image'] = $_REQUEST['image'];
 	$staff_meta['website'] = $_REQUEST['website'];
-	$staff_meta['description'] = wp_kses( $_REQUEST['description'], $ee_kses_allowed );
+	$staff_meta['description'] = wp_kses_post( $_REQUEST['description'] );
 	
 	$staff_meta['organization'] = esc_html($_REQUEST['organization']);
 	$staff_meta['title'] = esc_html($_REQUEST['title']);

@@ -45,8 +45,7 @@ function espresso_getTinyUrl($url) {
 //Text formatting function.
 //This should fix all of the formatting issues of text output from the database.
 function espresso_format_content($content = '') {
-	global $ee_kses_allowed;
-	return wp_kses(wpautop(stripslashes_deep(html_entity_decode(do_shortcode($content), ENT_QUOTES, "UTF-8"))), $ee_kses_allowed);
+	return wp_kses_post(wpautop(stripslashes_deep(html_entity_decode(do_shortcode($content), ENT_QUOTES, "UTF-8"))));
 }
 
 //This function pulls HTML entities back into HTML format first then strips it.
