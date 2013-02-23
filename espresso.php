@@ -887,9 +887,20 @@ if (!function_exists('event_espresso_run')) {
 
 		// Get action type
 		$regevent_action = isset($_REQUEST['regevent_action']) ? $_REQUEST['regevent_action'] : '';
-
-		if (isset($_REQUEST['ee'])) {
+		
+		if (isset($_REQUEST['event_id']) && !empty($_REQUEST['event_id'])) {
+			$_REQUEST['event_id'] = wp_strip_all_tags( absint($_REQUEST['event_id']) );
+		}
+		
+		if (isset($_REQUEST['form_action']) && !empty($_REQUEST['form_action'])) {
+			if (isset($_REQUEST['form_action']) && !$_REQUEST['form_action'] == 'edit_attendee' ) {
+				$_REQUEST['primary'] = wp_strip_all_tags( absint($_REQUEST['primary']) );
+			}
+		}
+		
+		if (isset($_REQUEST['ee']) && !empty($_REQUEST['ee'])) {
 			$regevent_action = "register";
+			$_REQUEST['ee'] = wp_strip_all_tags( absint($_REQUEST['ee']) );
 			$_REQUEST['event_id'] = $_REQUEST['ee'];
 		}
 
