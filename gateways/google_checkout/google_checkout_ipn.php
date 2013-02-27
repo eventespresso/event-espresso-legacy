@@ -82,7 +82,7 @@ function espresso_google_checkout_get_response() {
 	$use_sandbox = $google_checkout_settings['use_sandbox'] ? 'sandbox' : 'production';
 	$gResponse = new Espresso_GoogleResponse($google_checkout_id, $google_checkout_key);
 	$gResponse->SetLogFiles('google_checkout_error_logs', 'google_checkout_notice_logs', Espresso_L_ALL);  //Change this to L_ON to log
-	$fakeData=true;
+	$fakeData=false;
 	if($fakeData){
 		$xml_response=<<<HEREDOC
 <?xml version="1.0" encoding="UTF-8"?>
