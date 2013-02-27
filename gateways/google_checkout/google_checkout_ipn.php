@@ -33,11 +33,13 @@ function espresso_google_checkout_get_attendee_and_registration_id() {
 		return array('attendee_id'=>$_GET['id'], 'registration_id'=>$_GET['r_id']);
 	}
 	list($root, $data) = espresso_google_checkout_get_response();
+	
 	if (isset($data) && isset($data[$root]) && isset($data[$root]['order-summary']) && 
 			isset($data[$root]['order-summary']['shopping-cart']) && isset($data[$root]['order-summary']['shopping-cart']['merchant-private-data'])
 			&& isset($data[$root]['order-summary']['shopping-cart']['merchant-private-data']['VALUE'])) {
 		$privateDataString = $data[$root]['order-summary']['shopping-cart']['merchant-private-data']['VALUE'];
 		$privateData = espresso_google_parse_private_data($privateDataString);
+		
 		if (array_key_exists('attendee_id', $privateData) && array_key_exists('registration_id', $privateData))
 			return array('attendee_id' => $privateData['attendee_id'], 'registration_id' => $privateData['registration_id']);
 	}elseif (isset($data) && isset($data[$root]) && isset($data[$root]['google-order-number']) && isset($data[$root]['google-order-number']['VALUE'])) {

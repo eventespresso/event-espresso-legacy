@@ -88,7 +88,7 @@
    /* Constructor for the class
     * Takes in XML data as input( do not include the <xml> tag
     */
-    function gc_XmlParser($input, $xmlParams=array(XML_OPTION_CASE_FOLDING => 0)) {
+    function Espresso_gc_XmlParser($input, $xmlParams=array(XML_OPTION_CASE_FOLDING => 0)) {
       $xmlp = xml_parser_create();
       
       //trim xml definition if it's defined

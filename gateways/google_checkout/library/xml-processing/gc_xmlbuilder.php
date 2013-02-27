@@ -30,7 +30,7 @@
     var $indent;
     var $stack = array();
 
-    function gc_XmlBuilder($indent = '  ') {
+    function Espresso_gc_XmlBuilder($indent = '  ') {
       $this->indent = $indent;
       $this->xml = '<?xml version="1.0" encoding="utf-8"?>'."\n";
     }
