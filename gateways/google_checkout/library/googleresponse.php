@@ -47,7 +47,7 @@
       $this->merchant_key = $key;
       $this->schema_url = "http://checkout.google.com/schema/2";
       require_once(dirname(__FILE__).'/googlelog.php');
-      $this->log = new Espresso_GoogleLog('', '', L_OFF);
+      $this->log = new Espresso_GoogleLog('', '', Espresso_L_OFF);
     }
 
     /**

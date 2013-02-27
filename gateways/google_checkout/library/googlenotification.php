@@ -40,7 +40,7 @@ class Espresso_GoogleNotification {
     $this->reports_url = $this->base_url . "reports/Merchant/" . 
                          $this->merchant_id;
 
-    $this->log = new Espresso_GoogleLog('', '', L_OFF);
+    $this->log = new Espresso_GoogleLog('', '', Espresso_L_OFF);
   }
   
   function setLogFiles($errorLogFile, $messageLogFile, $logLevel=L_ERR_RQST) {

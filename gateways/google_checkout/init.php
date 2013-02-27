@@ -4,7 +4,6 @@ add_action('action_hook_espresso_display_offsite_payment_header', 'espresso_disp
 add_action('action_hook_espresso_display_offsite_payment_footer', 'espresso_display_offsite_payment_footer');
 event_espresso_require_gateway("google_checkout/google_checkout_vars.php");
 
-
 // This is for the transaction processing
 
 if (!empty($_REQUEST['type']) && $_REQUEST['type'] == 'google_checkout') {

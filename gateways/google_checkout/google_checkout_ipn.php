@@ -1,5 +1,4 @@
 <?php
-
 require_once('library/googleresponse.php');
 require_once('library/googlenotificationhistory.php');
 require_once('library/googlerequest.php');
@@ -82,8 +81,8 @@ function espresso_google_checkout_get_response() {
 	$google_checkout_key = empty($google_checkout_settings['google_checkout_key']) ? '' : $google_checkout_settings['google_checkout_key'];
 	$use_sandbox = $google_checkout_settings['use_sandbox'] ? 'sandbox' : 'production';
 	$gResponse = new Espresso_GoogleResponse($google_checkout_id, $google_checkout_key);
-	$gResponse->SetLogFiles('google_checkout_error_logs', 'google_checkout_notice_logs', L_ON);  //Change this to L_ON to log
-	$fakeData=false;
+	$gResponse->SetLogFiles('google_checkout_error_logs', 'google_checkout_notice_logs', Espresso_L_ALL);  //Change this to L_ON to log
+	$fakeData=true;
 	if($fakeData){
 		$xml_response=<<<HEREDOC
 <?xml version="1.0" encoding="UTF-8"?>
@@ -348,6 +347,7 @@ function espresso_google_run_transaction_code_before_shortcode() {
 				return;
 			}
 			$payment_data = espresso_process_google_checkout_ipn($payment_data);
+			$payment_data['txn_details'] = serialize($_REQUEST);
 			espresso_log::singleton()->log(array('file' => __FILE__, 'function' => __FUNCTION__, 'status' => 'Payment for: ' . $payment_data['lname'] . ', ' . $payment_data['fname'] . '|| registration id: ' . $payment_data['registration_id'] . '|| transaction details: ' . $payment_data['txn_details']));
 			
 			

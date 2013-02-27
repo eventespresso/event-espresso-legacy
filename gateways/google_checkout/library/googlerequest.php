@@ -84,7 +84,7 @@
 
       ini_set('include_path', ini_get('include_path').PATH_SEPARATOR.'.');
       require_once(dirname(__FILE__).'/googlelog.php');
-      $this->log = new Espresso_GoogleLog('', '', L_OFF);
+      $this->log = new Espresso_GoogleLog('', '', Espresso_L_OFF);
       
     }
 
