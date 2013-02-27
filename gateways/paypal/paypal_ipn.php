@@ -37,7 +37,7 @@ function espresso_process_paypal($payment_data) {
 				}
 				wp_mail($payment_data['contact'], $subject, $body);
 			}
-		} elseif(in_array($myPaypal->ipnData['payment_status'],array( 'Refunded', 'Reversed')) ){
+		} elseif(in_array($myPaypal->ipnData['payment_status'],array( 'Refunded', 'Reversed','Canceled_Reversal')) ){
 			/*$subject = 'Payment Refund Notice from PayPal';
 			$body = "A payment has been refunded or reversed:\n";
 			$body .= "Payer's Email: " . $myPaypal->ipnData['payer_email'] . " on " . date('m/d/Y');
