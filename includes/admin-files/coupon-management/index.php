@@ -15,6 +15,7 @@ function event_espresso_discount_config_mnu() {
 
 		<?php
 		ob_start();
+		$button_style = 'button-primary';
 		if (isset($_REQUEST['action'])) {
 			switch ($_REQUEST['action']) {
 				case 'add':
@@ -24,10 +25,12 @@ function event_espresso_discount_config_mnu() {
 				case 'new':
 					require_once("new_discount.php");
 					add_new_event_discount(); //Add new discount form
+					$button_style = 'button-secondary';
 					break;
 				case 'edit':
 					require_once("edit_discount.php");
 					edit_event_discount(); //Edit discount form
+					$button_style = 'button-secondary';
 					break;
 				case 'update':
 					require_once("update_discount.php");
@@ -98,7 +101,7 @@ function event_espresso_discount_config_mnu() {
 					</strong>
 					<input name="delete_discount" type="submit" class="button-secondary" id="delete_discount" value="<?php _e('Delete Promotional Code', 'event_espresso'); ?>" style="margin:10 0 0 10px;" onclick="return confirmDelete();">
 
-					<a  style="margin-left:5px"class="button-primary" href="admin.php?page=discounts&amp;action=new"><?php _e('Add New Promotional Code', 'event_espresso'); ?></a></p>
+					<a  style="margin-left:5px"class="<?php echo $button_style; ?>" href="admin.php?page=discounts&amp;action=new"><?php _e('Add New Promotional Code', 'event_espresso'); ?></a></p>
 			</div>
 		</form>
 		<?php

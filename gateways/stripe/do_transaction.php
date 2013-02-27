@@ -14,7 +14,7 @@ function espresso_process_stripe($payment_data) {
 	$payment_data['payment_status'] = 'Incomplete';
 	require_once(dirname(__FILE__) . '/stripe.class.php');
 
-	$cls_stripe = new ClsStripe();
+	$cls_stripe = new Espresso_ClsStripe();
 	$stripe_settings = get_option('event_espresso_stripe_settings');
 
 	$cc = $_POST['cc'];
@@ -48,6 +48,6 @@ function espresso_process_stripe($payment_data) {
 	if ($payment_data['payment_status'] != 'Completed') {
 		echo "<div id='stripe_response' class='stripe_error'>Looks like something went wrong.  Please try again or notify the website administrator.</div>";
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }

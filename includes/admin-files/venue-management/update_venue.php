@@ -1,11 +1,14 @@
 <?php 
+if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	
+
 function update_event_venue(){
-	global $wpdb;
+	global $wpdb, $ee_kses_allowed;
 	$wpdb->show_errors();
     $venue_updated = false;
     if ( isset( $_REQUEST[ 'venue_id' ] ) ) {
         
-        $venue_id = $_REQUEST[ 'venue_id' ];
+        $venue_id = (int)$_REQUEST[ 'venue_id' ];
         
         if ( function_exists( 'espresso_user_has_venue_permission' ) ) {
             if ( !espresso_user_has_venue_permission( $venue_id ) ) {
@@ -15,33 +18,28 @@ function update_event_venue(){
         }
         
         //print_r($_REQUEST);
-        $venue_meta['contact']      = isset( $_REQUEST['contact'] ) ? $_REQUEST['contact'] : '';
-        $venue_meta['phone']        = isset( $_REQUEST['phone'] ) ? $_REQUEST['phone'] : '';
-        $venue_meta['twitter']      = isset( $_REQUEST['twitter'] ) ? $_REQUEST['twitter'] : '';
-        $venue_meta['image']        = isset( $_REQUEST['image'] ) ? $_REQUEST['image'] : '';
-        $venue_meta['website']      = isset( $_REQUEST['website'] ) ? $_REQUEST['website'] : '';
-        $venue_meta['description']  = isset( $_REQUEST['description'] ) ? esc_html( $_REQUEST['description'] ) : '';
-        $locale                     = isset( $_REQUEST['locale'] ) ? $_REQUEST['locale'] : '';
+        $venue_meta['contact']      = isset( $_REQUEST['contact'] ) ? sanitize_text_field($_REQUEST['contact']) : '';
+        $venue_meta['phone']        = isset( $_REQUEST['phone'] ) ? sanitize_text_field($_REQUEST['phone']) : '';
+        $venue_meta['twitter']      = isset( $_REQUEST['twitter'] ) ? sanitize_text_field($_REQUEST['twitter']) : '';
+        $venue_meta['image']        = isset( $_REQUEST['image'] ) ? sanitize_text_field($_REQUEST['image']) : '';
+        $venue_meta['website']      = isset( $_REQUEST['website'] ) ? sanitize_text_field($_REQUEST['website']) : '';
+        $venue_meta['description']  = isset( $_REQUEST['description'] ) ? wp_kses( $_REQUEST['description'], $ee_kses_allowed ) : '';
+        $locale                     = isset( $_REQUEST['locale'] ) ? sanitize_text_field($_REQUEST['locale']) : '';
         $meta                       = serialize($venue_meta);
 
 
         $sql = array( 
-                'name'      => isset( $_REQUEST[ 'name' ] ) ? $_REQUEST['name'] : '',
-                'address'   => isset( $_REQUEST[ 'address' ] ) ? $_REQUEST['address'] : '',
-                'address2'  => isset( $_REQUEST[ 'address2' ] ) ? $_REQUEST['address2'] : '',
-                'city'      => isset( $_REQUEST[ 'city' ] ) ? $_REQUEST['city'] : '',
-                'state'     => isset( $_REQUEST[ 'state' ] ) ? $_REQUEST['state'] : '',
-                'zip'       => isset( $_REQUEST[ 'zip' ] ) ? $_REQUEST['zip'] : '',
-                'country'   => isset( $_REQUEST[ 'country' ] ) ? $_REQUEST['country'] : '',
+                'name'      => isset( $_REQUEST[ 'name' ] ) ? sanitize_text_field($_REQUEST['name']) : '',
+                'address'   => isset( $_REQUEST[ 'address' ] ) ? sanitize_text_field($_REQUEST['address']) : '',
+                'address2'  => isset( $_REQUEST[ 'address2' ] ) ? sanitize_text_field($_REQUEST['address2']) : '',
+                'city'      => isset( $_REQUEST[ 'city' ] ) ? sanitize_text_field($_REQUEST['city']) : '',
+                'state'     => isset( $_REQUEST[ 'state' ] ) ? sanitize_text_field($_REQUEST['state']) : '',
+                'zip'       => isset( $_REQUEST[ 'zip' ] ) ? sanitize_text_field($_REQUEST['zip']) : '',
+                'country'   => isset( $_REQUEST[ 'country' ] ) ? sanitize_text_field($_REQUEST['country']) : '',
                 'meta'      => $meta
             ); 
 
         $update_id = array( 'id'=> $venue_id );
-        /*echo 'Debug: <br />';
-        print_r($sql);
-        print 'Number of vars: ' . count ($sql);
-        echo '<br />';
-        print 'Number of cols: ' . count($sql_data);*/
 
         $sql_data = array( '%s','%s','%s','%s','%s','%s','%s','%s' );
         $wpdb->update( EVENTS_VENUE_TABLE, $sql, $update_id, $sql_data, array( '%d' ) ); 

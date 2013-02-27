@@ -60,7 +60,7 @@ function espresso_process_usaepay_onsite($payment_data) {
 		<p><?php _e('There was no response from USAePay.', 'event_espresso'); ?></p>
 		<?php
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }
 

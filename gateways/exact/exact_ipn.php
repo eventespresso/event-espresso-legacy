@@ -10,7 +10,7 @@ function espresso_transactions_exact_get_attendee_id($attendee_id) {
 function espresso_process_exact($payment_data) {
 	include_once ('Exact.php');
 
-	$myExact = new Exact();
+	$myExact = new Espresso_Exact();
 
 	echo '<!--Event Espresso Exact.com Gateway Version ' . $myExact->gateway_version . '-->';
 // Log the IPN results
@@ -97,6 +97,6 @@ function espresso_process_exact($payment_data) {
 		}
 		wp_mail($payment_data['contact'], $subject, $body);
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }

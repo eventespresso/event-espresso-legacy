@@ -36,7 +36,7 @@ function espresso_process_firstdata($payment_data) {
 
 	if(empty($firstdata_settings['use_verify_peer'])) $firstdata_settings['use_verify_peer'] = false;
 	include"lphp.php";
-	$mylphp = new lphp;
+	$mylphp = new Espresso_Linkpoint;
 	$myorder['verify_peer'] = $firstdata_settings['use_verify_peer'];
 	$myorder["debugging"] = $firstdata_settings['use_sandbox'];
 	$myorder["host"] = $myorder["debugging"] ? "staging.linkpt.net" : "secure.linkpt.net";
@@ -106,6 +106,6 @@ function espresso_process_firstdata($payment_data) {
 			$payment_data['payment_status'] = 'Completed';
 		}
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }

@@ -193,7 +193,7 @@ function load_events_to_db() {
                 $events_sql .= " '$strings[9]','$strings[10]', '" . event_date_display($strings['11'], 'Y-m-d') . "', '" . event_date_display($strings['12'], 'Y-m-d') . "','$strings[15]', ";
                 $events_sql .= " '$strings[17]', '$strings[18]', '$strings[19]', '$strings[20]', '$strings[21]','" . event_date_display($strings['22'], 'Y-m-d') . "', '" . event_date_display($strings['23'], 'Y-m-d') . "','". $question_groups."','". $event_meta."')";
                 // echo $events_sql;
-                if ($wpdb->query($wpdb->prepare($events_sql)) === false) {
+                if ($wpdb->query($wpdb->prepare($events_sql, NULL)) === false) {
                     print $wpdb->print_error();
                 } else {
                     $last_event_id = $wpdb->insert_id;
@@ -205,7 +205,7 @@ function load_events_to_db() {
                 $times_sql = "INSERT INTO " . EVENTS_START_END_TABLE . " (event_id, start_time, end_time) VALUES ('" . $last_event_id . "', '" . date("h:i A", strtotime($strings[13])) . "', '" . date("h:i A", strtotime($strings[14])) . "')";
                 //echo $times_sql;
                 //$wpdb->query ( $wpdb->prepare( $times_sql ) );
-                if ($wpdb->query($wpdb->prepare($times_sql)) === false) {
+                if ($wpdb->query($wpdb->prepare($times_sql, NULL)) === false) {
                     print $wpdb->print_error();
                 }
 
@@ -213,7 +213,7 @@ function load_events_to_db() {
                 $prices_sql = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost) VALUES ('" . $last_event_id . "', '$strings[16]')";
                 //echo $prices_sql;
                 // $wpdb->query ( $wpdb->prepare( $prices_sql ) );
-                if ($wpdb->query($wpdb->prepare($prices_sql)) === false) {
+                if ($wpdb->query($wpdb->prepare($prices_sql, NULL)) === false) {
                     print $wpdb->print_error();
                 }
             }

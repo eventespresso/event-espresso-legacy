@@ -19,10 +19,12 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 		//Show the description ?
 		if ( $display_desc == "Y" && $display_description_on_multi_reg_page != 'N' ) {
 			?>
+			<?php //Featured image
+			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');?>
 			<div class="event_description">
-			<?php 
+			<?php
 				//Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.
-				echo wpautop(do_shortcode($event_desc)); 
+				echo espresso_format_content($event_desc); 
 			?></div>
 			<?php
 		}//End display description
@@ -69,7 +71,7 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 				<div class="multi_regis_wrapper_attendee-<?php echo $is_primary; ?>">
 					<div class="event-display-boxes">
 						<?php
-						echo '<h4 class="section-heading"><strong>'.__('Price Type:') . '</strong> ' . $meta['price_type'].$attendee_quantity.'</h4>';
+						echo '<h4 class="section-heading"><strong>'.__('Price Type:') . '</strong> ' . stripslashes_deep($meta['price_type']).$attendee_quantity.'</h4>';
 						echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $attendee_number . '</h3>';
 		
 						//This will be the main attendee

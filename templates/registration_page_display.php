@@ -19,6 +19,8 @@ if ($reg_form_only == false) {
 }
 ?>
  <div class="event_espresso_form_wrapper event-data-display ui-widget-content <?php echo $ui_corner ?>">
+ 	<?php //Featured image
+		echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');?>
 
 	<?php /* Venue details. Un-comment first and last lines & any venue details you wish to display or use the provided shortcodes. */ ?>
 	<?php // echo '<div id="venue-details-display">'; ?>
@@ -174,24 +176,20 @@ if ($reg_form_only == false) {
 					if ($display_price_dropdown == TRUE) {
 						$price_label = '<span class="section-title">'.__('Choose an Option: ', 'event_espresso').'</span>';
 	?>
-				<p class="event_prices">
-					<?php do_action( 'espresso_price_select', $event_id, array('show_label'=>TRUE, 'label'=>$price_label) );?>
-				</p>
+						<p class="event_prices">
+							<?php do_action( 'espresso_price_select', $event_id, array('show_label'=>TRUE, 'label'=>$price_label) );?>
+						</p>
 	<?php
 					} else {
 	?>
-				<p class="event_prices">
-					<?php do_action( 'espresso_seating_price_select_action', $event_id, array('show_label'=>TRUE, 'label'=>$price_label) );?>
-				</p>
+						<p class="event_prices">
+							<?php do_action( 'espresso_seating_price_select_action', $event_id );?>
+						</p>
 	<?php
-
-					// Seating chart selector
-					do_action('espresso_seating_chart_select', $event_id);
+						// Seating chart selector
+						do_action('espresso_seating_chart_select', $event_id);
 							
 					}						
-					
-							
-
 	?>
 
 				<div id="event-reg-form-groups">

@@ -1,9 +1,4 @@
 <?php
-require_once("add_new_email.php");
-require_once("edit_email.php");
-require_once("update_email.php");
-require_once("add_email_to_db.php");
-
 function event_espresso_email_config_mnu() {
 	global $wpdb, $current_user, $espresso_premium;
 	?>
@@ -37,19 +32,26 @@ function event_espresso_email_config_mnu() {
 			</div>
 		<?php } ?>
 		<?php
+		$button_style = 'button-primary';
 		if (isset($_REQUEST['action'])) {
 			switch ($_REQUEST['action']) {
 				case 'update':
+					require_once("update_email.php");
 					update_event_email();
 					break;
 				case 'add':
+					require_once("add_email_to_db.php");
 					add_email_to_db();
 					break;
 				case 'add_new_email':
+					require_once("add_new_email.php");
 					add_new_event_email();
+					$button_style = 'button-secondary';
 					break;
 				case 'edit':
+					require_once("edit_email.php");
 					edit_event_email();
+					$button_style = 'button-secondary';
 					break;
 			}
 		}
@@ -108,7 +110,7 @@ function event_espresso_email_config_mnu() {
 				<strong>
 	<?php _e('Check All', 'event_espresso'); ?>
 				</strong>
-				<input name="delete_email" type="submit" class="button-secondary" id="delete_email" value="<?php _e('Delete Email', 'event_espresso'); ?>" style="margin-left:100px;" onclick="return confirmDelete();"> <?php echo '<a href="admin.php?page=event_emails&amp;action=add_new_email" style="margin-left:5px"class="button-primary">' . __('Add New Email', 'event_espresso') . '</a>'; ?>
+				<input name="delete_email" type="submit" class="button-secondary" id="delete_email" value="<?php _e('Delete Email', 'event_espresso'); ?>" style="margin-left:100px;" onclick="return confirmDelete();"> <?php echo '<a href="admin.php?page=event_emails&amp;action=add_new_email" style="margin-left:5px"class="'.$button_style.'">' . __('Add New Email', 'event_espresso') . '</a>'; ?>
 			</p>
 		</form>
 		<?php

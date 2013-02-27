@@ -6,7 +6,7 @@ function espresso_display_authnet($payment_data) {
 	include_once ('Authorize.php');
 
 	global $org_options, $wpdb;
-	$myAuthorize = new EE_Authorize(); // initiate an instance of the class
+	$myAuthorize = new Espresso_Authorize(); // initiate an instance of the class
 	echo '<!--Event Espresso Authorize.net Gateway Version ' . $myAuthorize->gateway_version . '-->';
 	$authnet_settings = get_option('event_espresso_authnet_settings');
 	$authnet_login_id = empty($authnet_settings['authnet_login_id']) ? '' : $authnet_settings['authnet_login_id'];
@@ -57,8 +57,8 @@ function espresso_display_authnet($payment_data) {
 		$item_num=$key+1;
 		$myAuthorize->addLineItem(
 				$item_num,
-				substr_replace($item->event_name, '...', 28),
-				substr_replace($item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname, 0, 255),
+				( strlen($item->event_name) > 30 ? substr_replace($item->event_name, '', 30) : $item->event_name ),
+				substr_replace($item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname, '', 255),
 				$item->quantity,
 				$item->final_price,
 				FALSE

@@ -9,7 +9,7 @@
  */
 $eway_gateway_version = '1.0';
 
-class eway extends PaymentGateway {
+class Espresso_Eway extends Espresso_PaymentGateway {
 
 	var $eway_settings = NULL;
 
@@ -86,7 +86,7 @@ class eway extends PaymentGateway {
         }
     }
 
-		public function submitPayment( $fields = FASLE ) {
+		public function submitPayment( $fields = FALSE ) {
             $this->prepareSubmit();
             echo "<html>\n";
             echo "<head><title>Processing Payment...</title></head>\n";

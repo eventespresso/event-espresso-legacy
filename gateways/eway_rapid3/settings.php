@@ -8,7 +8,6 @@ function event_espresso_eway_rapid3_payment_settings() {
 		$eway_rapid3_settings['eway_rapid3_api_key'] = $_POST['eway_rapid3_api_key'];
 		$eway_rapid3_settings['eway_rapid3_api_username'] = $_POST['eway_rapid3_api_username'];
 		$eway_rapid3_settings['eway_rapid3_api_password'] = $_POST['eway_rapid3_api_password'];
-		$eway_rapid3_settings['currency_format'] = $_POST['currency_format'];
 		//$eway_rapid3_settings['eway_rapid3_api_signature'] = $_POST['eway_rapid3_api_signature'];
 		$eway_rapid3_settings['eway_rapid3_api_credit_cards'] = implode(",", empty($_POST['eway_rapid3_api_credit_cards']) ? array() : $_POST['eway_rapid3_api_credit_cards']);
 		$eway_rapid3_settings['eway_rapid3_use_sandbox'] = empty($_POST['eway_rapid3_use_sandbox']) ? false : true;
@@ -35,7 +34,7 @@ function event_espresso_eway_rapid3_payment_settings() {
 		$eway_rapid3_settings['eway_rapid3_api_key'] = '';
 		$eway_rapid3_settings['eway_rapid3_api_username'] = '';
 		$eway_rapid3_settings['eway_rapid3_api_password'] = '';
-		$eway_rapid3_settings['currency_format'] = 'USD';
+		$eway_rapid3_settings['currency_format'] = 'AUD';
 		//$eway_rapid3_settings['eway_rapid3_api_signature'] = '';
 		$eway_rapid3_settings['eway_rapid3_api_credit_cards'] = '';
 		$eway_rapid3_settings['eway_rapid3_use_sandbox'] = false;
@@ -115,7 +114,7 @@ function event_espresso_display_eway_rapid3_settings() {
 							<label for="eway_rapid3_api_password">
 								<?php _e('Eway Rapid 3.0 API Password', 'event_espresso'); ?>
 							</label>
-							<input type="text" name="eway_rapid3_api_password" size="35" value="<?php echo $eway_rapid3_settings['eway_rapid3_api_password']; ?>">
+							<input type="password" name="eway_rapid3_api_password" size="35" value="<?php echo $eway_rapid3_settings['eway_rapid3_api_password']; ?>">
 						</li>
 						<!--<li>
 							<label for="eway_rapid3_api_signature">
@@ -130,9 +129,9 @@ function event_espresso_display_eway_rapid3_settings() {
 								<?php _e('Choose Your Region', 'event_espresso'); ?>
 							</label>
 							<select name="region">
-								<?php $regionOptions=array('UK'=>'United Kingdom','AU'=>'Australia','NZ'=>'New Zealand');
+								<?php $regionOptions=array('AU'=>'Australia','NZ'=>'New Zealand','UK'=>'United Kingdom');
 								foreach($regionOptions as $regionAbbreviation=>$regionName){?>
-								<option value='<?php echo $regionAbbreviation?>' <?php if($regionAbbreviation==$eway_rapid3_settings['region']) echo 'selected'?>>
+								<option value='<?php echo $regionAbbreviation?>' <?php if(array_key_exists('region',$eway_rapid3_settings) && $regionAbbreviation==$eway_rapid3_settings['region']) echo 'selected'?>>
 									<?php _e($regionName,'event_espresso')?>
 								</option>
 								<?php
@@ -157,7 +156,7 @@ function event_espresso_display_eway_rapid3_settings() {
 							</label>
 							<input name="eway_rapid3_use_sandbox" type="checkbox" value="1" <?php echo $eway_rapid3_settings['eway_rapid3_use_sandbox'] ? 'checked="checked"' : '' ?> />
 							<br />
-							<?php _e('(Make sure you enter the sandbox credentials above. Also, sandbox mode only works for AUD, so ensure you have set your region to "Autralia")', 'event_espresso'); ?>
+							<?php _e('Note: Sandbox mode only works for AUD as currency. If you are using Sandbox mode, ensure you are using Sandbox credentials.', 'event_espresso'); ?>
 						</li>
 						<li>
 							<label for="force_ssl_return">
@@ -195,7 +194,7 @@ function event_espresso_display_eway_rapid3_settings() {
 	</div>
 	<div id="currency_info" style="display:none">
 		<h2><?php _e('Eway Rapid 3.0 Currency', 'event_espresso'); ?></h2>
-		<p><?php _e('Eway Rapid 3.0 uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, select the currency you wish to use. The dropdown lists all currencies that Eway Rapid 3.0 (currently) supports.', 'event_espresso'); ?> </p>
+		<p><?php _e('There are currently 3 currencies accepted by Eway Rapid 3.0: GBP (United Kingdom), AUD (Australia), NZD (New Zealand). To change the corrency, change the region in your Eway Rapid 3.0 settings.', 'event_espresso'); ?> </p>
 	</div>
 	<?php
 }

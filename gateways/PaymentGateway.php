@@ -6,9 +6,9 @@
  * This class builds the payment buttons/forms
  *
  * */
-if (!class_exists('PaymentGateway')) {
+if (!class_exists('Espresso_PaymentGateway')) {
 
-    abstract class PaymentGateway {
+    abstract class Espresso_PaymentGateway {
 
         /**
          * Holds the last error encountered
@@ -120,7 +120,7 @@ if (!class_exists('PaymentGateway')) {
          * @param string value of buttn text
          * @return void
          */
-        public function submitPayment( $fields = FASLE ) {
+        public function submitPayment( $fields = FALSE ) {
             $this->prepareSubmit();
             echo "<html>\n";
             echo "<head><title>Processing Payment...</title></head>\n";

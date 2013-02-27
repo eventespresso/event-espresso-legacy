@@ -32,7 +32,7 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 		$SQL .= "	JOIN " . EVENTS_QUESTION_TABLE . " q ON q.id = qgr.question_id ";
 		$SQL .= 'WHERE qg.id IN ('.$questions_in.') ORDER BY qg.id, q.id ASC';
 
-		$questions = $wpdb->get_results( $wpdb->prepare( $SQL ));
+		$questions = $wpdb->get_results( $wpdb->prepare( $SQL, NULL ));
 //		echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //		printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 
@@ -87,7 +87,7 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 					);
 					$data_formats = array( '%s', '%d',  '%d', '%s' );
 				
-					$wpdb->prepare( $wpdb->insert( EVENTS_ANSWER_TABLE, $columns_and_values, $data_formats ));
+					$wpdb->insert( EVENTS_ANSWER_TABLE, $columns_and_values, $data_formats );
 					//echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 					$email_questions .= $question->question . ': ' . $post_val . '<br />';

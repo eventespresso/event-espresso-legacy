@@ -7,7 +7,7 @@ function espresso_ical() {
 					"VERSION:2.0\n" .
 						"PRODID:-//" . $_REQUEST['organization'] . " - Event Espresso Version ".espresso_version()."//NONSGML v1.0//EN\n" .
 						"METHOD:PUBLISH\n" .
-						"X-WR-CALNAME:" . $_REQUEST['organization'] . "\n" .
+						//"X-WR-CALNAME:" . $_REQUEST['organization'] . "\n" . //Publishes a new calendar in some systems.
 						"X-ORIGINAL-URL:".$_REQUEST['eereg_url']."\n" .
 						"X-WR-CALDESC:" . $_REQUEST['organization'] . "\n" .
 						"X-WR-TIMEZONE:".get_option('timezone_string')."\n" .
@@ -20,7 +20,7 @@ function espresso_ical() {
 					"STATUS:CONFIRMED\n" .
 						"URL:" . $_REQUEST['eereg_url'] . "\n" .
 					"SUMMARY:" . $_REQUEST['event_summary'] . "\n" .
-					"DESCRIPTION:" . $_REQUEST['event_description'] . "\n" .
+					//"DESCRIPTION:" . $_REQUEST['event_description'] . "\n" .
 						"LOCATION:" . $_REQUEST['location'] . "\n" .
 					"END:VEVENT\n" .
 					"END:VCALENDAR";
@@ -96,7 +96,7 @@ if (!function_exists('espresso_ical_prepare_by_meta')) {
 			'endday' => date('d', $end_date),
 			'endtime' => date('His', $end_date),
 			'event_summary' => stripslashes($meta['event_name']),
-			'event_description' => espresso_format_content(stripslashes($meta['event_desc'])),
+			//'event_description' => espresso_format_content(stripslashes($meta['event_desc'])),
 			'eereg_url' => espresso_reg_url($meta['event_id']),
 			'site_url' => site_url(),
 			'organization' => $org_options['organization'],

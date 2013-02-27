@@ -45,7 +45,8 @@ function espresso_getTinyUrl($url) {
 //Text formatting function.
 //This should fix all of the formatting issues of text output from the database.
 function espresso_format_content($content = '') {
-	return wpautop(stripslashes_deep(html_entity_decode(do_shortcode($content), ENT_QUOTES, "UTF-8")));
+	global $ee_kses_allowed;
+	return wp_kses(wpautop(stripslashes_deep(html_entity_decode(do_shortcode($content), ENT_QUOTES, "UTF-8"))), $ee_kses_allowed);
 }
 
 //This function pulls HTML entities back into HTML format first then strips it.
@@ -116,6 +117,7 @@ function espresso_reg_sessionid($registration_id) {
 if (!function_exists('event_espresso_additional_attendees')) {
 
 	function event_espresso_additional_attendees( $event_id = 0, $additional_limit = 2, $available_spaces = 999, $label = '', $show_label = true, $event_meta = '', $qstn_class = '' ) {
+		global $espresso_premium;
 		$event_id = $event_id == 0 ? $_REQUEST['event_id'] : $event_id;
 
 		if ($event_meta == 'admin') {
@@ -132,7 +134,7 @@ if (!function_exists('event_espresso_additional_attendees')) {
 
 
 		$i = 0;
-		if (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) {
+		if ( (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) || $espresso_premium == FALSE ) {
 		
 			$label = $label == '' ? __('Number of Tickets', 'event_espresso') : $label;
 			$html = '<p class="espresso_additional_limit highlight-bg">';
@@ -157,9 +159,7 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			
 			$html = '<div id="additional_header" class="event_form_field additional_header espresso_add_subtract_attendees">';
 			// fixed for translation string, previous string untranslatable - http://events.codebasehq.com/projects/event-espresso/tickets/11
-			$html .= '<a id="add-additional-attendee-0" rel="0" class="add-additional-attendee-lnk additional-attendee-lnk">' . __('Add More Attendees? (click to toggle, limit ', 'event_espresso');
-			$html .= $i . ')</a>';
-			$html .= '</div>';
+			$html .= '<a id="add-additional-attendee-0" rel="0" class="add-additional-attendee-lnk additional-attendee-lnk">' . sprintf(__('Add More Attendees? (click to toggle, limit %s)', 'event_espresso'), $i). '</a></div>';
 			
 			
 			//ob_start();
@@ -200,15 +200,15 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			$attendee_form .= '<div class="espresso_add_subtract_attendees">';
 
 			$attendee_form .= '
-			<a id="remove-additional-attendee-XXXXXX" rel="XXXXXX" class="remove-additional-attendee-lnk additional-attendee-lnk" title="' . __('Remove the above Attendee', 'event_espresso') . '">
+			<a id="remove-additional-attendee-XXXXXX" rel="XXXXXX" class="remove-additional-attendee-lnk additional-attendee-lnk" title="' . __('Remove Attendee Above', 'event_espresso') . '">
 				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Attendee', 'event_espresso') . '" />
-				' . __('Remove the above Attendee:', 'event_espresso') . '
+				' . __('Remove Attendee Above', 'event_espresso') . '
 			</a><br/>';
 			
 			$attendee_form .= '
-			<a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk" title="' . __('Add an Additonal Attendee', 'event_espresso') . '">
-				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add an Additonal Attendee', 'event_espresso') . '" />
-				' . __('Add an Additonal Attendee:', 'event_espresso') . '
+			<a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk" title="' . __('Add Additonal Attendee', 'event_espresso') . '">
+				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add Additonal Attendee', 'event_espresso') . '" />
+				' . __('Add Additonal Attendee', 'event_espresso') . '
 			</a>';
 
 
@@ -663,7 +663,7 @@ if (!function_exists('event_espresso_add_question_groups')) {
 		$disabled = '';
 		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true ) {
 			$member_options = get_option('events_member_settings');
-			if ( is_user_logged_in() && $member_options['autofilled_editable'] == 'N' )
+			if ( is_user_logged_in() && !empty($member_options['autofilled_editable']) && $member_options['autofilled_editable'] == 'N' )
 			$disabled = 'disabled="disabled"';
 		}
 				
@@ -822,14 +822,12 @@ if (!function_exists('espresso_ticket_information')) {
 	function espresso_ticket_information($atts) {
 		global $wpdb;
 		extract($atts);
-		if (!empty($registration_id))
-			$registration_id = "{$registration_id}";
 		$price_option = "{$price_option}";
-
 		$type = "{$type}";
 
 		switch ($type) {
 			case 'ticket':
+			default:
 				$sql = $wpdb->get_results("SELECT * FROM " . EVENTS_PRICES_TABLE . " WHERE id ='" . $price_option . "'");
 				$num_rows = $wpdb->num_rows;
 				if ($num_rows > 0) {
@@ -856,6 +854,7 @@ if (!function_exists('espresso_google_map_link')) {
 		$type = isset($type) ? "{$type}" : "";
 		$map_w = isset($map_w) ? "{$map_w}" : 400;
 		$map_h = isset($map_h) ? "{$map_h}" : 400;
+		$map_image_class = isset($map_image_class) ? "{$map_image_class}" : '';
 
 		$gaddress = ($address != '' ? $address : '') . ($city != '' ? ',' . $city : '') . ($state != '' ? ',' . $state : '') . ($zip != '' ? ',' . $zip : '') . ($country != '' ? ',' . $country : '');
 
@@ -1193,7 +1192,7 @@ function espresso_get_primary_attendee_id($registration_id) {
 	}
 }
 
-function espresso_ticket_links($registration_id, $attendee_id) {
+function espresso_ticket_links($registration_id, $attendee_id, $email = FALSE) {
 	global $wpdb;
 	$sql = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE;
 	if (espresso_is_primary_attendee($attendee_id) != true) {
@@ -1205,18 +1204,28 @@ function espresso_ticket_links($registration_id, $attendee_id) {
 	$attendees = $wpdb->get_results($sql);
 	$ticket_link = '';
 	if ($wpdb->num_rows > 0) {
-		$group = $wpdb->num_rows > 1 ? '<strong>' . sprintf(__('Tickets Purchased (%s):', 'event_espresso'), $wpdb->num_rows) . '</strong><br />' : '';
+		
 		$break = '<br />';
+		$group = $wpdb->num_rows > 1 ? sprintf(__('Tickets Purchased (%s):', 'event_espresso'), $wpdb->num_rows).$break : __('Download/Print Ticket:', 'event_espresso').$break;
+		
 		foreach ($attendees as $attendee) {
 			$ticket_url = get_option('siteurl') . "/?download_ticket=true&amp;id=" . $attendee->id . "&amp;r_id=" . $attendee->registration_id;
 			if (function_exists('espresso_ticket_launch')) {
 				$ticket_url = espresso_ticket_url($attendee->id, $attendee->registration_id);
 			}
-			$ticket_link .= '<a href="' . $ticket_url . '">' . __('Download/Print Ticket') . ' (' . $attendee->fname . ' ' . $attendee->lname . ')' . '</a>' . $break;
+			$ticket_link .= '<a href="' . $ticket_url . '" target="_blank">' . $attendee->fname . ' ' . $attendee->lname . '</a>' . $break;
 		}
-		return '<p>' . $group . $ticket_link . '</p>';
+		
+		if ($email == TRUE){
+			$text = '<p>' . $group . $ticket_link .'</p>';
+		}else{
+			$text = $ticket_link;
+		}
+		
+		return $text;
 	}
 }
+
 
 /**
  * Function espresso_get_attendee_coupon_discount
@@ -1276,3 +1285,110 @@ function espresso_build_registration_id($event_id){
 		
 //Registration id filter
 add_filter('filter_hook_espresso_registration_id', 'espresso_build_registration_id', 10, 1);
+
+/*
+  Displays a featured image in the event listings and registration pages.
+
+  Example usage in a template file:
+  echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, $event_meta['event_thumbnail_url']);
+  (Note: the $event_meta variable (array) is populated in the event_list.php and registration_page.php files.)
+  
+  Advanced usage using the class, title and align parameters:
+  echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, $event_meta['event_thumbnail_url'], 'a-custom-class', 'Title of the image');
+
+  Parameters:
+  event_id - used in the id attribute of the image
+  class - a custom css class. //Default: ee-featured-image
+  image_url - the url of the image, most likely the $event_meta['event_thumbnail_url'] variable from the event_list.php and registration_page.php files
+  title - the text to display in the title tag attribute of the image. //Default: Featured Image
+*/
+if (!function_exists('espresso_display_featured_image')) {
+	function espresso_display_featured_image($event_id, $image_url, $class = '', $title = '') {
+		global $org_options;
+		if ( !empty($org_options['display_featured_image']) && $org_options['display_featured_image'] == 'N' || !isset($org_options['display_featured_image']) ){
+			return;
+		}
+		if (empty($image_url))
+			return;
+		$class = empty($class) ? 'ee-featured-image' : $class;
+		$title = empty($title) ? __('Featured Image', 'event_espresso') : $title;
+		$align = empty($align) ? 'right' : $align;
+		$output = '<div class="' . $class . '" id="espresso_featured_image-'.$event_id.'"><img title="' . $title . '" src="'.$image_url.'" /></div>';
+		return $output; 
+	}
+}
+add_filter('filter_hook_espresso_display_featured_image', 'espresso_display_featured_image',100,5);
+
+
+function espresso_save_attendee_meta($attendee_id, $meta_key, $meta_value, $delete = FALSE){
+	global $wpdb;
+	
+	$notifications['error']	 = array();
+	
+	$cols_and_values = array( 
+		'attendee_id'=>$attendee_id, 
+		'meta_key'=>$meta_key, 
+		'meta_value'=>$meta_value
+	);
+	
+	$cols_and_values_format = array( '%d', '%s', '%s' );
+	$where_cols_and_values = array( 'attendee_id'=>$attendee_id, 'meta_key'=>$meta_key );
+	$where_format = array( '%d', '%s' );
+	
+	$SQL = "SELECT ameta_id from " . EVENTS_ATTENDEE_META_TABLE . " WHERE attendee_id = '".$attendee_id."' AND meta_key = '".$meta_key."'";
+	$meta = $wpdb->get_results( $SQL );
+	$total_meta = $wpdb->num_rows;
+
+	if ( $total_meta > 0 ){
+		if ($delete == TRUE){
+			$SQL = "DELETE FROM " . EVENTS_ATTENDEE_META_TABLE . ' ';
+			$SQL .= "WHERE attendee_id = %d";
+			$del_success = $wpdb->query($wpdb->prepare( $SQL, $attendee_id ));
+			if ( $del_success === FALSE ) {
+				$notifications['error'][] = __('An error occured while attempting to delete the attendee meta.', 'event_espresso'); 
+			}
+		}else{
+			// run the update
+			$cols_and_values['date_updated'] = date("Y-m-d H:i:s");
+			array_push( $cols_and_values_format, '%s' );
+			$upd_success = $wpdb->update( EVENTS_ATTENDEE_META_TABLE, $cols_and_values, $where_cols_and_values, $cols_and_values_format, $where_format );
+			// if there was an actual error
+			if ( $upd_success === FALSE ) {
+				$notifications['error'][] = __('An error occured while attempting to update the attendee meta.', 'event_espresso'); 
+			}
+		}
+	}else{
+		// save the new value
+		$cols_and_values['date_added'] = date("Y-m-d H:i:s");
+		array_push( $cols_and_values_format, '%s' );
+		$save_success = $wpdb->insert( EVENTS_ATTENDEE_META_TABLE, $cols_and_values, $cols_and_values_format );
+		if ( $save_success === FALSE ) {
+			$notifications['error'][] = __('An error occured while attempting to save the attendee meta.', 'event_espresso'); 
+		}
+	}
+	
+	// display error messages
+	if ( ! empty( $notifications['error'] )) {
+		$error_msg = implode( $notifications['error'], '<br />' );
+	?>
+	<div id="message" class="error">
+		<p>
+			<strong><?php echo $error_msg; ?></strong>
+		</p>
+	</div>
+	<?php 
+	}
+}
+add_action('action_hook_espresso_save_attendee_meta', 'espresso_save_attendee_meta', 10, 4);
+
+function espresso_get_attendee_meta_value($attendee_id, $meta_key) {
+	global $wpdb;
+	$sql = "SELECT meta_value FROM " . EVENTS_ATTENDEE_META_TABLE;
+	$sql .= " WHERE attendee_id = '" . $attendee_id . "' AND meta_key='".$meta_key."' ";
+	//echo $sql;
+	$wpdb->get_results($sql);
+	if ($wpdb->num_rows > 0) {
+		return $wpdb->last_result[0]->meta_value;
+	}
+}
+add_filter('action_hook_espresso_get_attendee_meta_value', 'espresso_get_attendee_meta_value', 10, 2);

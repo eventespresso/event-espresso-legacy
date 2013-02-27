@@ -12,7 +12,7 @@ function espresso_process_authnet($payment_data) {
 	include_once ('Authorize.php');
 
 // Create an instance of the authorize.net library
-	$myAuthorize = new EE_Authorize();
+	$myAuthorize = new Espresso_Authorize();
 	echo '<!--Event Espresso Authorize.net SIM Gateway Version ' . $myAuthorize->gateway_version . '-->';
 // Log the IPN results
 	$myAuthorize->ipnLog = TRUE;
@@ -106,6 +106,6 @@ function espresso_process_authnet($payment_data) {
 		}
 		wp_mail($payment_data['contact'], $subject, $body);
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }

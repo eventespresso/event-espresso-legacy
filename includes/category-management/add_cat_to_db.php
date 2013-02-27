@@ -1,10 +1,10 @@
 <?php
 function add_cat_to_db(){
-	global $wpdb,$current_user;
+	global $wpdb,$current_user, $ee_kses_allowed;
 	if ( $_REQUEST['action'] == 'add' ){
 		$category_name= esc_html($_REQUEST['category_name']);
 		$category_identifier = ($_REQUEST['category_identifier'] == '') ? $category_identifier = sanitize_title_with_dashes($category_name.'-'.time()) : $category_identifier = sanitize_title_with_dashes($_REQUEST['category_identifier']);
-		$category_desc= esc_html($_REQUEST['category_desc']); 
+		$category_desc= wp_kses( $_REQUEST['category_desc'], $ee_kses_allowed ); 
 		$display_category_desc=$_REQUEST['display_desc'];
 		if (!function_exists('espresso_member_data'))
 			$current_user->ID = 1;

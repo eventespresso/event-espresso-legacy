@@ -9,7 +9,7 @@ Tags: event management, event registration, paypal event registration, paypal ip
 
 Requires at least: 3.3
 
-Tested up to: 3.4.2
+Tested up to: 3.5
 
 == Description ==
 
@@ -25,7 +25,7 @@ I have made several changes to this plugin in the last few months. Quite a bit h
 == Support ==
 Please visit the forums http://eventespresso.com/support/forums/
 
-Current Version: 3.1.28.5
+Current Version: 3.1.30
 
 Author: Seth Shoultes
 Author URI: http://eventespresso.com

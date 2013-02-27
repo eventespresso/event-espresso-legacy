@@ -28,6 +28,9 @@
 
 /* Managed by themeroller */
 /*___ General site wide styles for event-data / espresso_events ___*/
+.ee-featured-image{
+	float: right;
+}
 
 .payment_container, .payment-option-dv { position: relative; margin:0 .25em .25em 0;  }
 .payment-option-closed { display: inline-block; }
@@ -345,9 +348,40 @@ ul#espresso_payment_buttons li form {
 }
 .event_espresso_form_wrapper label,
 .event_espresso_form_wrapper span.label {
-	display: inline-block; width:150px; padding:0 10px 0 0; 
-	text-align: left; font-size:.9em; line-height:1em; vertical-align: top; 
+	display: inline-block; 
+	width:150px; 
+	padding:0 10px 0 0; 
+	text-align: left; 
+	font-size:.9em; 
+	line-height:1em; 
+	vertical-align: top; 
 }
+
+/* FEM Styles*/
+.ee_fem_form_field label.date_time{
+	width:80px;
+}
+
+.ee_fem_form_field label.time{
+	width:50px;
+	margin-left:30px;
+}
+
+input.price-name-input{
+	width:45% !important;
+}
+
+#ee_fem_form div.title {
+	float:left !important;
+	width:40%;
+	clear:none;
+}
+#ee_fem_form div.reg_limit {
+	float:right !important;
+	width:30%;
+	clear:none;
+}
+
 .event_prices label, .event_time label {
 	display: block;
 	float: none;
@@ -640,7 +674,7 @@ p.register-link-footer { clear: left; padding-top: 10px; }
 /* End pagination css */
 
 /* Autocomplete */
-input#ee_autocomplete, input#ee_fes_autocomplete{
+input#ee_autocomplete, input#ee_fem_autocomplete{
 	width:400px;
 }
 input#ee_autocomplete{
@@ -657,19 +691,19 @@ ul.ui-autocomplete li{
 /* Media Queries */
 @media (max-width: 990px) {
 	 .ajx_loading {	 width:300px; height:300px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:300px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:300px; }
 	.ui-autocomplete { width:300px; }
 	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
 }
 @media (max-width: 850px) {
 	 .ajx_loading {	 width:250px; height:250px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:250px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:250px; }
 	.ui-autocomplete { width:250px; }
 	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
 }
 @media (max-width: 800px) {
 	 .ajx_loading {	 width:400px; height:400px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:400px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:400px; }
 	.ui-autocomplete { width:400px; }
 	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
 	.event_form_field input.ee-reg-page-text-input,
@@ -680,7 +714,7 @@ ul.ui-autocomplete li{
 }
 @media (max-width: 700px) {
 	 .ajx_loading {	 width:300px; height:300px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:300px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:300px; }
 	.ui-autocomplete { width:300px; }
 	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
 	.event_form_field input.ee-reg-page-text-input,
@@ -692,7 +726,7 @@ ul.ui-autocomplete li{
 @media (max-width: 600px) {
 	#espresso-search-form-dv { padding:1em; }
 	.ajx_loading {	 width:250px; height:250px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:250px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:250px; }
 	.ui-autocomplete { width:250px; }
 	.event_form_field input.ee-reg-page-text-input,
 	.event_form_field textarea.ee-reg-page-text-input {
@@ -703,7 +737,7 @@ ul.ui-autocomplete li{
 @media (max-width: 505px) {
 	#espresso-search-form-dv { padding:1em; }
 	.ajx_loading {	 width:210px; height:210px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:210px; margin:0 0 .5em; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:210px; margin:0 0 .5em; }
 	.ui-autocomplete { width:210px; }
 	.event_form_field input.ee-reg-page-text-input,
 	.event_form_field textarea.ee-reg-page-text-input {
@@ -714,7 +748,7 @@ ul.ui-autocomplete li{
 @media (max-width: 450px) {
 	#espresso-search-form-dv { padding:1em; }
 	.ajx_loading {	 width:170px; height:170px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:170px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:170px; }
 	.ui-autocomplete { width:170px; }
 	.event_form_field input.ee-reg-page-text-input,
 	.event_form_field textarea.ee-reg-page-text-input {
@@ -725,7 +759,7 @@ ul.ui-autocomplete li{
 @media (max-width: 410px) {
 	#espresso-search-form-dv { padding:1em; }
 	.ajx_loading {	 width:130px; height:130px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:130px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:130px; }
 	.ui-autocomplete { width:130px; }
 	.event_form_field input.ee-reg-page-text-input,
 	.event_form_field textarea.ee-reg-page-text-input {
@@ -736,7 +770,7 @@ ul.ui-autocomplete li{
 @media (max-width: 360px) {
 	#espresso-search-form-dv { padding:1em; text-align: right; }
 	.ajx_loading {	 width:150px; height:150px; }
-	#ee_autocomplete, #ee_fes_autocomplete{ width:150px; margin:0 0 .5em; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:150px; margin:0 0 .5em; }
 	.ui-autocomplete { width:150px; }
 	.event_form_field input.ee-reg-page-text-input,
 	.event_form_field textarea.ee-reg-page-text-input {

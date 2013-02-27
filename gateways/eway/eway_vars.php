@@ -8,7 +8,7 @@ function espresso_display_eway($payment_data) {
 	echo '
  <div id="eway-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
 	<img class="off-site-payment-gateway-img" width="16" height="16" src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png" alt="click to visit this payment gateway">';
-	$myeway = new eway(); // initiate an instance of the class
+	$myeway = new Espresso_Eway(); // initiate an instance of the class
 	global $org_options;
 //global $attendee_id;
 	$eway_settings = get_option('event_espresso_eway_settings');

@@ -55,7 +55,7 @@ function espresso_pending_registration_approval($registration_id) {
 	$SQL .= " LIMIT 0,1 ";//Get the first attendees details
 
 
-	$attendee  = $wpdb->get_row($wpdb->prepare( $SQL ));
+	$attendee  = $wpdb->get_row($wpdb->prepare( $SQL, NULL ));
 	//global $attendee_id;
 	
 	if ( $attendee !== FALSE ) {

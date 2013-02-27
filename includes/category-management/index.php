@@ -1,9 +1,4 @@
 <?php
-require_once("add_new_category.php");
-require_once("edit_event_category.php");
-require_once("update_event_category.php");
-require_once("add_cat_to_db.php");
-
 function event_espresso_categories_config_mnu() {
 	global $wpdb, $current_user;
 	?>
@@ -32,7 +27,7 @@ function event_espresso_categories_config_mnu() {
 					$wpdb->query($sql);
 				endwhile;
 			}
-			if ($_REQUEST['action'] == 'delete_category') {
+			if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'delete_category') {
 				//Delete discount data
 				$sql = "DELETE FROM " . EVENTS_CATEGORY_TABLE . " WHERE id='" . $_REQUEST['id'] . "'";
 				$wpdb->query($sql);
@@ -47,19 +42,26 @@ function event_espresso_categories_config_mnu() {
 			</div>
 			<?php
 		}
+		$button_style = 'button-primary';
 		if (isset($_REQUEST['action'])) {
 			switch ($_REQUEST['action']) {
 				case 'update':
+					require_once("update_event_category.php");
 					update_event_category();
 					break;
 				case 'add':
+					require_once("add_cat_to_db.php");
 					add_cat_to_db();
 					break;
 				case 'add_new_category':
+					require_once("add_new_category.php");
 					add_new_event_category();
+					$button_style = 'button-secondary';
 					break;
 				case 'edit':
+					require_once("edit_event_category.php");
 					edit_event_category();
+					$button_style = 'button-secondary';
 					break;
 			}
 		}
@@ -119,7 +121,7 @@ function event_espresso_categories_config_mnu() {
 	<?php _e('Check All', 'event_espresso'); ?>
 					</strong>
 					<input name="delete_category" type="submit" class="button-secondary" id="delete_category" value="<?php _e('Delete Category', 'event_espresso'); ?>" style="margin-left:10px 0 0 10px;" onclick="return confirmDelete();">
-					<a  style="margin-left:5px"class="button-primary" href="admin.php?page=event_categories&amp;action=add_new_category">
+					<a  style="margin-left:5px"class="<?php echo $button_style; ?>" href="admin.php?page=event_categories&amp;action=add_new_category">
 	<?php _e('Add New Category', 'event_espresso'); ?>
 					</a> </p>
 			</div>
