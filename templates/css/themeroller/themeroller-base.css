@@ -216,6 +216,33 @@ span.google-map-link {
 a.post-edit-link {
 	padding-left: 5px;
 }
+
+/* Additional Attendees Form */
+.additional_header {
+	margin:20px;
+	padding:1em 2em 1.25em; 
+}
+.additional-attendee-div{
+	margin:40px !important;
+	
+}
+.add-additional-attendee-lnk {
+	padding:1em 2em 1.25em; 
+	margin: 0 0 1em 0;
+	background-color: #FFC; 
+	border: #FC6 1px solid; 
+	border-radius:3px;
+	color: #000; text-shadow:1px 1px #fff;
+}
+.remove-additional-attendee-lnk {
+	padding: 1em 2em 1.25em; 
+	margin: 0 0 1em 0; 
+	background-color:#FFEEEE; 
+	border: #FF0000 1px solid; 
+	border-radius:3px;
+	color: #000; text-shadow:1px 1px #fff;
+}
+
 /*___ Attendee list ___*/
 
 ol.attendee_list {

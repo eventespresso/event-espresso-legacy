@@ -45,8 +45,7 @@ function espresso_getTinyUrl($url) {
 //Text formatting function.
 //This should fix all of the formatting issues of text output from the database.
 function espresso_format_content($content = '') {
-	global $ee_kses_allowed;
-	return wp_kses(wpautop(stripslashes_deep(html_entity_decode(do_shortcode($content), ENT_QUOTES, "UTF-8"))), $ee_kses_allowed);
+	return wp_kses_post(wpautop(stripslashes_deep(html_entity_decode(do_shortcode($content), ENT_QUOTES, "UTF-8"))));
 }
 
 //This function pulls HTML entities back into HTML format first then strips it.
@@ -159,7 +158,7 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			
 			$html = '<div id="additional_header" class="event_form_field additional_header espresso_add_subtract_attendees">';
 			// fixed for translation string, previous string untranslatable - http://events.codebasehq.com/projects/event-espresso/tickets/11
-			$html .= '<a id="add-additional-attendee-0" rel="0" class="add-additional-attendee-lnk additional-attendee-lnk">' . sprintf(__('Add More Attendees? (click to toggle, limit %s)', 'event_espresso'), $i). '</a></div>';
+			$html .= '<a id="add-additional-attendee-0" rel="0" class="add-additional-attendee-lnk additional-attendee-lnk ui-state-highlight">' . sprintf(__('Add More Attendees? (click to toggle, limit %s)', 'event_espresso'), $i). '</a></div>';
 			
 			
 			//ob_start();
@@ -200,16 +199,16 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			$attendee_form .= '<div class="espresso_add_subtract_attendees">';
 
 			$attendee_form .= '
-			<a id="remove-additional-attendee-XXXXXX" rel="XXXXXX" class="remove-additional-attendee-lnk additional-attendee-lnk" title="' . __('Remove Attendee Above', 'event_espresso') . '">
+			<div class="additional-attendee-div"><a id="remove-additional-attendee-XXXXXX" rel="XXXXXX" class="remove-additional-attendee-lnk additional-attendee-lnk ui-priority-primary " title="' . __('Remove Attendee Above', 'event_espresso') . '">
 				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Attendee', 'event_espresso') . '" />
 				' . __('Remove Attendee Above', 'event_espresso') . '
-			</a><br/>';
+			</a></div>';
 			
 			$attendee_form .= '
-			<a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk" title="' . __('Add Additonal Attendee', 'event_espresso') . '">
+			<div class="additional-attendee-div"><a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk ui-priority-primary " title="' . __('Add Additonal Attendee', 'event_espresso') . '">
 				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add Additonal Attendee', 'event_espresso') . '" />
 				' . __('Add Additonal Attendee', 'event_espresso') . '
-			</a>';
+			</a></div>';
 
 
 			$attendee_form .= '</div></div>';

@@ -9,8 +9,8 @@ function attendee_edit_record() {
 	
 	$id = isset( $_REQUEST['id'] ) ? absint( $_REQUEST['id'] ) : FALSE;
 	$registration_id = isset( $_REQUEST['registration_id'] ) ? wp_strip_all_tags( $_REQUEST['registration_id'] ) : FALSE;
-	$req_primary = isset( $_REQUEST['primary'] ) ? wp_strip_all_tags( $_REQUEST['primary'] ) : $id;
-	$req_p_id = isset( $_REQUEST['p_id'] ) ? wp_strip_all_tags( $_REQUEST['p_id'] ) : FALSE;
+	$req_primary = isset( $_REQUEST['primary'] ) ? wp_strip_all_tags( absint($_REQUEST['primary']) ) : $id;
+	$req_p_id = isset( $_REQUEST['p_id'] ) ? wp_strip_all_tags( absint($_REQUEST['p_id']) ) : FALSE;
 	
 	if ( isset( $_REQUEST['r_id'] ) && ! empty( $_REQUEST['r_id'] )) {
 		$registration_id = wp_strip_all_tags( $_REQUEST['r_id'] );
