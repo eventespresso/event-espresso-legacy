@@ -1,6 +1,6 @@
 <?php
 
-class Realauth {
+class Espresso_Realauth {
 
 	private $merchant_id;
 	private $order_id;
@@ -14,7 +14,7 @@ class Realauth {
 	private $shared_secret;
 	private $reg_id;
 
-	public function Realauth($merchant_id, $shared_secret) {
+	public function Espresso_Realauth($merchant_id, $shared_secret) {
 		$this->merchant_id = $merchant_id;
 		$this->shared_secret = $shared_secret;
 		$this->gateway_Url = "https://epage.payandshop.com/epage.cgi";
@@ -90,27 +90,30 @@ class Realauth {
 	}
 
 	public function submitButton($button_url) {
-		$out = '<li><form  method="post" name="payment_form" action="' . $this->gateway_Url . '">';
+		$out = '
+<div id="realauth-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+	<img class="off-site-payment-gateway-img" width="16" height="16" src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png" alt="click to visit this payment gateway">';
+		$out .= '<form  method="post" name="payment_form" action="' . $this->gateway_Url . '">';
 		$out .= $this->submitForm();
-		$out .= '<input class="espresso_payment_button_realauth" type="image" ';
+		$out .= '<input id="realauth-payment-option-lnk" class="payment-option-lnk" type="image" ';
 		$out .= 'alt="Pay using RealAuth" src="' . $button_url . '" />';
-    $out .= '</form></li>';
+    	$out .= '</form></div>';
 		return $out;
 	}
 
 	public function submitPayment() {
 		$out = "<html>\n";
-    $out .= "<head><title>Processing Payment...</title></head>\n";
-    $out .= "<body onLoad=\"document.forms['gateway_form'].submit();\">\n";
-    $out .= "<p style=\"text-align:center;\"><h2>Please wait, your order is being processed and you";
-    $out .= " will be redirected to the payment website.</h2></p>\n";
-    $out .= '<form method="post" name="gateway_form" action="' . $this->gateway_Url . '">\n';
-    $out .= $this->submitForm();
+	    $out .= "<head><title>Processing Payment...</title></head>\n";
+	    $out .= "<body onLoad=\"document.forms['gateway_form'].submit();\">\n";
+	    $out .= "<p style=\"text-align:center;\"><h2>Please wait, your order is being processed and you";
+	    $out .= " will be redirected to the payment website.</h2></p>\n";
+	    $out .= '<form method="post" name="gateway_form" action="' . $this->gateway_Url . '">\n';
+	    $out .= $this->submitForm();
 		$out .= "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to ";
-    $out .= "the payment website within 5 seconds...<br/><br/>\n";
-    $out .= "<input type=\"submit\" value=\"Click Here\"></p>\n";
-    $out .= "</form>\n";
-    $out .= "</body></html>\n";
+	    $out .= "the payment website within 5 seconds...<br/><br/>\n";
+	    $out .= "<input type=\"submit\" value=\"Click Here\"></p>\n";
+	    $out .= "</form>\n";
+	    $out .= "</body></html>\n";
 		return $out;
 	}
 }

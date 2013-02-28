@@ -14,11 +14,11 @@ function espresso_process_wepay($payment_data) {
 	$wepay_settings = get_option('event_espresso_wepay_settings');
 	include_once ('Wepay.php');
 	if ($wepay_settings['use_sandbox']) {
-		Wepay::useStaging($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
+		Espresso_Wepay::useStaging($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
 	} else {
-		Wepay::useProduction($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
+		Espresso_Wepay::useProduction($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
 	}
-	$wepay = new Wepay($wepay_settings['access_token']);
+	$wepay = new Espresso_Wepay($wepay_settings['access_token']);
 	$raw = $wepay->request('checkout', array('checkout_id' => $_REQUEST['checkout_id']));
 	if (!empty($raw)) {
 		$payment_data['txn_details'] = serialize(get_object_vars($raw));
@@ -74,11 +74,11 @@ function espresso_process_wepay_callback($payment_data) {
 	$wepay_settings = get_option('event_espresso_wepay_settings');
 	include_once ('Wepay.php');
 	if ($wepay_settings['use_sandbox']) {
-		Wepay::useStaging($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
+		Espresso_Wepay::useStaging($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
 	} else {
-		Wepay::useProduction($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
+		Espresso_Wepay::useProduction($wepay_settings['wepay_client_id'], $wepay_settings['wepay_client_secret']);
 	}
-	$wepay = new Wepay($wepay_settings['access_token']);
+	$wepay = new Espresso_Wepay($wepay_settings['access_token']);
 	$raw = $wepay->request('checkout', array('checkout_id' => $_REQUEST['checkout_id']));
 	if (!empty($raw)) {
 		$payment_data['txn_details'] = serialize(get_object_vars($raw));

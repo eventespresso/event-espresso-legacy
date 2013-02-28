@@ -49,6 +49,7 @@ function replace_shortcodes($message, $data) {
 			"[attendee_event_list]", //Creates a table of the attendee and event information
 			"[custom_questions]",
 			"[qr_code]",
+			"[seating_tag]",
 			"[edit_attendee_link]",
 			"[add_to_calendar]"
 	);
@@ -80,7 +81,7 @@ function replace_shortcodes($message, $data) {
 			$data->attendee->price_option,
 			$data->ticket_link,
 			empty($data->certificate_link) ? '' : $data->certificate_link,
-			$data->event->alt_email == '' ? $org_options['contact_email'] : $data->event->alt_email,
+			empty($data->event->alt_email) ? $org_options['contact_email'] : $data->event->alt_email,
 			//Organization details
 			$org_options['organization'],
 			$org_options['organization_street1'],
@@ -100,8 +101,22 @@ function replace_shortcodes($message, $data) {
 			$data->table_open . $data->table_heading . $data->event_table . $data->table_close,
 			$data->email_questions,
 			$data->qr_code,
+			$data->seatingchart_tag,
 			$data->edit_attendee,
-			apply_filters('filter_hook_espresso_display_add_to_calendar_by_attendee_id', $data->attendee->id)
+			apply_filters('filter_hook_espresso_display_ical', array(//Add to calendar link
+					'event_id' => $data->attendee->event_id,
+					'registration_id' => $data->attendee->registration_id,
+					'event_name' => $data->event->event_name,
+					'event_desc' => wp_kses($data->event->event_desc, ''),
+					'contact_email' => empty($data->event->alt_email) ? $org_options['contact_email'] : $data->event->alt_email,
+					'start_time' => empty($event->start_time) ? '' : $event->start_time,
+					'start_date' => event_date_display($data->attendee->start_date, get_option('date_format')),
+					'end_date' => event_date_display($data->attendee->end_date, get_option('date_format')),
+					'start_time' => empty($data->attendee->event_time) ? '' : $data->attendee->event_time,
+					'end_time' => empty($data->attendee->end_time) ? '' : $data->attendee->end_time,
+					'location' => $data->location,
+				), '', '', TRUE
+			)
 	);
 
 	//Get the questions and answers
@@ -109,8 +124,8 @@ function replace_shortcodes($message, $data) {
 	//echo '<p>'.print_r($questions).'</p>';
 	if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->question != NULL) {
 		foreach ($questions as $q) {
-			$k = $q['question'];
-			$v = $q['answer'];
+			$k = stripslashes( $q['question'] );
+			$v = stripslashes( $q['answer'] );
 
 			//Output the question
 			array_push($SearchValues, "[" . 'question_' . $k . "]");
@@ -118,7 +133,7 @@ function replace_shortcodes($message, $data) {
 
 			//Output the answer
 			array_push($SearchValues, "[" . 'answer_' . $k . "]");
-			array_push($ReplaceValues, stripslashes_deep(rtrim($v, ",")) );
+			array_push($ReplaceValues, rtrim($v, ",") );
 		}
 	}
 	//Get the event meta
@@ -226,7 +241,7 @@ function espresso_prepare_email_data($attendee_id, $multi_reg, $custom_data='') 
 	//New ticketing system version 2.0
 	if (function_exists('espresso_ticket_launch')) {
 		$data->qr_code = espresso_ticket_qr_code( array('attendee_id' => $data->attendee->id, 'registration_id' => $data->attendee->registration_id, 'event_code' => $data->event->event_code ));
-		$data->ticket_link = espresso_ticket_links($data->attendee->registration_id, $data->attendee->id);
+		$data->ticket_link = espresso_ticket_links($data->attendee->registration_id, $data->attendee->id, TRUE);
 		$data->admin_ticket_link = $data->ticket_link;
 	}
 
@@ -402,8 +417,7 @@ function espresso_prepare_admin_email($data) {
 	$admin_attendee_link = espresso_edit_attendee($data->attendee->registration_id, $data->attendee->id, $data->attendee->event_id, 'admin', $data->attendee->fname . ' ' . $data->attendee->lname);
 
 	//Group registration check
-	if ($data->attendee->quantity > 0 && !$data->multi_reg)
-		$primary_attendee = $data->primary_attendee == true ? "<p><strong>" . __('Primary Attendee', 'event_espresso') . "</strong></p>" : '';
+	$primary_attendee = $data->attendee->quantity > 0 && !$data->multi_reg && $data->primary_attendee == true ? "<p><strong>" . __('Primary Attendee', 'event_espresso') . "</strong></p>" : '';
 
 	//Build the email title
 	$admin_message = "<h3>" . __('Registration Summary:', 'event_espresso') . "</h3>";
@@ -594,29 +608,31 @@ if (!function_exists('event_espresso_send_invoice')) {
 if (!function_exists('event_espresso_send_payment_notification')) {
 
 	function event_espresso_send_payment_notification($atts) {
-		global $wpdb, $org_options;
+
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+
+		global $wpdb, $org_options;
 		//Extract the attendee_id and registration_id
 		extract($atts);
 		
 		$registration_id = is_array( $registration_id ) ? $registration_id[0] : $registration_id;
 		
-		if (empty($registration_id))
+		if ( empty( $registration_id ) && isset( $attendee_id )) {
 			$registration_id = espresso_registration_id($attendee_id);
-		if (empty($registration_id))
-			return __('No ID Supplied', 'event_espresso');
+		}
+			
+		if ( empty( $registration_id )) {
+			return __('No Registration ID was supplied', 'event_espresso');
+		}			
 
 		//Get the attendee  id or registration_id and create the sql statement
-		$sql = "SELECT a.* FROM " . EVENTS_ATTENDEE_TABLE . " a ";
-		$sql .= " WHERE a.registration_id = '" . $registration_id . "' ";
-		//$sql .= "  ORDER BY id LIMIT 1 ";
-
-		$attendees = $wpdb->get_results($sql);
+		$SQL = "SELECT a.* FROM " . EVENTS_ATTENDEE_TABLE . " a ";
+		$SQL .= " WHERE a.registration_id = %s ";
+		$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ));
 
 		if ($org_options['default_mail'] == 'Y') { 
 			foreach ($attendees as $attendee) {
-				$attendee_id = $attendee->id;
-				event_espresso_email_confirmations(array('attendee_id' => $attendee_id, 'send_admin_email' => 'false', 'send_attendee_email' => 'true', 'custom_data' => array('email_type' => 'payment', 'payment_subject' => $org_options['payment_subject'], 'payment_message' => $org_options['payment_message'])));
+				event_espresso_email_confirmations(array('attendee_id' => $attendee->id, 'send_admin_email' => 'false', 'send_attendee_email' => 'true', 'custom_data' => array('email_type' => 'payment', 'payment_subject' => $org_options['payment_subject'], 'payment_message' => $org_options['payment_message'])));
 			}
 		}
 

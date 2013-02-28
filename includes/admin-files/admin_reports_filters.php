@@ -1,7 +1,9 @@
 <?php
 global $espresso_premium;
-if ($espresso_premium != true)
+if ($espresso_premium != true) {
 	return;
+}
+$total_events = espresso_total_events();
 ?>
 <ul class="subsubsub">
 	<li><h3><?php echo __('Filters', 'event_espresso'); ?></h3></li>
@@ -41,9 +43,9 @@ if ($espresso_premium != true)
 <div style="clear:both"></div>
 
 <?php if ($_REQUEST['page'] == 'events') { ?>
-	<div class="tablenav">
+	<div class="ee_tablenav tablenav">
 		<div class="actions">
-			<form id="form2" name="form2" method="post" action="<?php echo $_SERVER["REQUEST_URI"] ?>">
+			<form id="ee_tablenav" name="ee_tablenav" method="post" action="<?php echo $_SERVER["REQUEST_URI"] ?>">
 			<?php
 				$_REQUEST['event_admin_reports'] = isset($_REQUEST['event_admin_reports']) ? $_REQUEST['event_admin_reports'] : '';
 				switch ($_REQUEST['event_admin_reports']) {

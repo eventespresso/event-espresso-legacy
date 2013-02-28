@@ -123,7 +123,9 @@ class PluginUpdateEngineChecker {
 		//the following is for install key inclusion (will apply later with PUE addons.)
 		$this->install_key_arr = get_option($this->pue_install_key);
 		if ( isset($this->install_key_arr['key'] ) ) {
-			$this->install_key = hash_hmac('md5', $this->install_key_arr['key'], $this->install_key_arr['hashkey']);
+			
+			$this->install_key = $this->install_key_arr['key'];
+
 			$this->download_query['pue_install_key'] = $this->install_key;
 		} else {
 			$this->download_query['pue_install_key'] = '';
@@ -254,6 +256,9 @@ class PluginUpdateEngineChecker {
 			
 		if ( !empty($this->install_key) )
 			$queryArgs['pue_install_key'] = $this->install_key;
+
+		//todo: this can be removed in a later version of PUE when majority of EE users are using more recent versions.
+		$queryArgs['new_pue_chk'] = 1;
         
 		//include version info
 			$queryArgs['pue_active_version'] = $this->getInstalledVersion();
@@ -319,24 +324,19 @@ class PluginUpdateEngineChecker {
 
 		
 		if ( isset($pluginInfo->new_install_key) ) {
-			$this->install_key = $pluginInfo->new_install_key;
-			$this->install_key_arr['key'] = $this->install_key;
+			$this->install_key_arr['key'] = $pluginInfo->new_install_key; 
+			update_option($this->pue_install_key, $this->install_key_arr);
 		}
-
-		if ( isset($pluginInfo->render_pass) ) {
-			$render_pass = $pluginInfo->render_pass;
-		}
-
-		$this->install_key_arr['hashkey'] = ( isset($render_pass) ) ? $render_pass : null;
-		update_option($this->pue_install_key, $this->install_key_arr);
 		
 		//need to correct the download url so it contains the custom user data (i.e. api and any other paramaters)
 		//oh let's generate the download_url otherwise it will be old news...
 				
-		if ( !empty($this->download_query) ) 
-			$d_install_key = hash_hmac('md5', $this->install_key_arr['key'], $this->install_key_arr['hashkey']);
+		if ( !empty($this->download_query) )  {
+			$d_install_key = $this->install_key_arr['key'];
 			$this->download_query['pue_install_key'] = $d_install_key;
+			$this->download_query['new_pue_check'] = 1;
 			$pluginInfo->download_url = add_query_arg($this->download_query, $pluginInfo->download_url);
+		}
 		
 		return PluginUpdateUtility::fromPluginInfo($pluginInfo);
 	}
@@ -416,7 +416,7 @@ class PluginUpdateEngineChecker {
 			foreach ( $allPlugins as $loc => $details ) {
 					//prepare string for match.
 					$slug_match = str_replace('-','\-',$this->slug);
-					if ( !empty($slug_match) && preg_match('/(^'.$slug_match.')(?=\/)/', $loc) ) {
+					if ( !empty($slug_match) && preg_match('/(?<=)(^'.$slug_match.')((?=\/)|(?=\.))/', $loc) ) {
 						update_option('pue_file_loc_'.$this->slug, $loc);
 						return $allPlugins[$loc]['Version'];
 					}

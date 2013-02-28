@@ -52,9 +52,7 @@ $this_event_id = $event_id;
 		<?php //echo $status_display_custom_closed; //Turn this on to display the closed message. ?>
 	</h3>
 <div class="event-data-display ui-widget-content ui-corner-bottom">
-	<?php
-		echo apply_filters('filter_hook_espresso_display_add_to_calendar_by_event_id', $event_id);
-		/* Venue details. Un-comment to display. */ ?>
+	<?php /* Venue details. Un-comment to display. */ ?>
 	<?php //echo $venue_title != ''?'<p id="event_venue_name-'.$event_id.'" class="event_venue_name">'.stripslashes_deep($venue_title).'</p>':'' ?>
 	<?php //echo $venue_address != ''?'<p id="event_venue_address-'.$event_id.'" class="event_venue_address">'.stripslashes_deep($venue_address).'</p>':''?>
 	<?php //echo $venue_address2 != ''?'<p id="event_venue_address2-'.$event_id.'" class="event_venue_address2">'.stripslashes_deep($venue_address2).'</p>':''?>
@@ -66,20 +64,25 @@ $this_event_id = $event_id;
 	?>
 
 	<div class="event-meta">
+			<?php //Featured image
+			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');?>
 			<?php if ( $event->event_cost != '0.00' ) { ?>
 				 <p id="p_event_price-<?php echo $event_id ?>" class="event_price"><span class="section-title"><?php  echo __('Price: ', 'event_espresso'); ?></span> <?php echo  $org_options['currency_symbol'].$event->event_cost; ?></p>
 			<?php } else { ?>
 				<p id="p_event_price-<?php echo $event_id ?>" class="event_price"><?php echo __('Free Event', 'event_espresso'); ?></p>
 			<?php } ?>
 
-		<p id="event_date-<?php echo $event_id ?>"><span class="section-title"><?php _e('Date:', 'event_espresso'); ?></span>  <?php echo event_date_display($start_date, get_option('date_format')) ?></p>
+		<p id="event_date-<?php echo $event_id ?>"><span class="section-title"><?php _e('Date:', 'event_espresso'); ?></span>  <?php echo event_date_display($start_date, get_option('date_format')) ?> 
+			<?php //Add to calendar button
+			echo apply_filters('filter_hook_espresso_display_ical', $all_meta);?>
+		</p>
 	</div>
 	<?php
 //Show short descriptions
 	if (!empty($event_desc) && isset($org_options['display_short_description_in_event_list']) && $org_options['display_short_description_in_event_list'] == 'Y') {
 		?>
 		<div class="event-desc">
-			<p><?php echo espresso_format_content($event_desc); ?></p>
+			<?php echo espresso_format_content($event_desc); ?>
 		</div>
 		<?php
 	}
@@ -87,7 +90,10 @@ $this_event_id = $event_id;
 
 	<?php if ( (isset($location) && $location != '' ) && (isset($org_options['display_address_in_event_list']) && $org_options['display_address_in_event_list'] == 'Y') ) { ?>
 		<p class="event_address" id="event_address-<?php echo $event_id ?>"><span class="section-title"><?php echo __('Address:', 'event_espresso'); ?></span> <br />
-			<span class="address-block"><?php echo stripslashes_deep($location); ?>
+			
+			<span class="address-block">
+			<?php echo $venue_title; ?><br />
+			<?php echo stripslashes_deep($location); ?>
 				<span class="google-map-link"><?php echo $google_map_link; ?></span></span>
 		</p>
 		<?php
@@ -101,7 +107,7 @@ $this_event_id = $event_id;
 		?>
 		<p id="available_spaces-<?php echo $event_id ?>"><span class="section-title"><?php _e('Available Spaces:', 'event_espresso') ?> </span><?php echo get_number_of_attendees_reg_limit($event_id, 'available_spaces', 'All Seats Reserved') ?></p>
 		<?php if ($overflow_event_id != '0' && $allow_overflow == 'Y') { ?>
-			<p id="register_link-<?php echo $overflow_event_id ?>" class="register-link-footer"><a class="a_register_link" id="a_register_link-<?php echo $overflow_event_id ?>" href="<?php echo espresso_reg_url($overflow_event_id); ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Join Waiting List', 'event_espresso'); ?></a></p>
+			<p id="register_link-<?php echo $overflow_event_id ?>" class="register-link-footer"><a class="a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="a_register_link-<?php echo $overflow_event_id ?>" href="<?php echo espresso_reg_url($overflow_event_id); ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Join Waiting List', 'event_espresso'); ?></a></p>
 			<?php
 		}
 	} else {
@@ -117,7 +123,8 @@ $this_event_id = $event_id;
 		//echo event_espresso_get_status($event_id);
 		//print_r( event_espresso_get_is_active($event_id));
 
-		if ($multi_reg && event_espresso_get_status($event_id) == 'ACTIVE') {
+		if ($multi_reg && event_espresso_get_status($event_id) == 'ACTIVE'/* && $display_reg_form == 'Y'*/) { 
+		// Uncomment && $display_reg_form == 'Y' in the line above to hide the add to cart link/button form the event list when the registration form is turned off.
 
 			$params = array(
 				//REQUIRED, the id of the event that needs to be added to the cart
@@ -136,19 +143,28 @@ $this_event_id = $event_id;
 			$cart_link = false;
 		}
 		if ($display_reg_form == 'Y') {
+			//Check to see if the Members plugin is installed.
+			$member_options = get_option('events_member_settings');
+			if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && !is_user_logged_in() && ($member_only == 'Y' || $member_options['member_only_all'] == 'Y') ) {
+				echo '<p class="ee_member_only">'.__('Member Only Event', 'event_espresso').'</p>';
+			}else{
 			?>
-
-			<p id="register_link-<?php echo $event_id ?>" class="register-link-footer">
-				<a class="a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Register', 'event_espresso'); ?></a>
-				<?php echo isset($cart_link) && $externalURL == '' ? $cart_link : ''; ?>
-			</p>
-		<?php } else { ?>
+				<p id="register_link-<?php echo $event_id ?>" class="register-link-footer">
+					<a class="a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Register', 'event_espresso'); ?></a>
+					<?php echo isset($cart_link) && $externalURL == '' ? $cart_link : ''; ?>
+				</p>
+	<?php 
+			}
+		} else { 
+	?>
 			<p id="register_link-<?php echo $event_id ?>" class="register-link-footer">
 				<a class="a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('View Details', 'event_espresso'); ?></a> <?php echo isset($cart_link) && $externalURL == '' ? $cart_link : ''; ?>
 			</p>
+			
 		<?php
 		}
 	}
 	?>
+	
 </div><!-- / .event-data-display -->
 </div><!-- / .event-display-boxes -->

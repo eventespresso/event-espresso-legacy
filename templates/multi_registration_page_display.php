@@ -5,6 +5,8 @@
 global $this_event_id;
 $this_event_id = $event_id;
 $num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$event_id]['attendee_quantitiy'] . __(' attendees', 'event_espresso');
+$attendee_quantity = ' x '.sprintf(_n('%d attendee', '%d attendees', $meta['attendee_quantity'], 'event_espresso'), $meta['attendee_quantity']);
+$display_description_on_multi_reg_page = isset( $org_options['display_description_on_multi_reg_page'] ) ? $org_options['display_description_on_multi_reg_page'] : 'N';
 ?>
 <div id="event_espresso_registration_form" class="event-display-boxes multi-reg-page ui-widget">
 
@@ -14,9 +16,16 @@ $num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$eve
 	<div class="multi_regis_form_fields event-data-display ui-widget-content ui-corner-bottom" id="multi_regis_form_fields-<?php echo $event_id . '-' . $meta['price_id']; ?>">
 
 		<?php
-		if ($display_desc == "Y" && $org_options['display_description_on_multi_reg_page'] != 'N') {//Show the description or not
+		//Show the description ?
+		if ( $display_desc == "Y" && $display_description_on_multi_reg_page != 'N' ) {
 			?>
-			<div class="event_description"><?php echo wpautop(do_shortcode($event_desc)); //Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.     ?></div>
+			<?php //Featured image
+			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');?>
+			<div class="event_description">
+			<?php
+				//Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.
+				echo espresso_format_content($event_desc); 
+			?></div>
 			<?php
 		}//End display description
 		//print_r( event_espresso_get_is_active($event_id));
@@ -56,19 +65,17 @@ $num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$eve
 				$is_primary = $event_counter == 1 ? 'primary' : 'additional';
 
 				$price_group_att_counter = 1; //this will keep track of the attendee number inside each event inside each price type
-				
+				wp_nonce_field('reg_nonce', 'reg_form_nonce');
 				//Outputs registration forms
 				?>
 				<div class="multi_regis_wrapper_attendee-<?php echo $is_primary; ?>">
 					<div class="event-display-boxes">
 						<?php
-						
+						echo '<h4 class="section-heading"><strong>'.__('Price Type:') . '</strong> ' . $meta['price_type'].$attendee_quantity.'</h4>';
 						echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $attendee_number . '</h3>';
-						echo '<p>'.__('Price Type:') . ' ' . $meta['price_type'].'</p>';
-						
+		
 						//This will be the main attendee
 						//$meta['attendee_number'] = 1;
-						
 						$meta['attendee_number'] = $price_group_att_counter;
 						//echo "Attendee # ".$attendee_number;
 						
@@ -78,13 +85,18 @@ $num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$eve
 						}
 						
 						//Outputs the form questions.
-						echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
+						echo event_espresso_add_question_groups($question_groups, $events_in_session[$event_id], $event_id, 1, $meta);
 						
 						//Displays the copy to all button
-						if ($event_counter == 1) {
+						if ( $event_counter == 1 && $event_count > 1 || ($meta['attendee_quantity'] > 1 && $event_meta['additional_attendee_reg_info'] > 1) ) {
 							?>
 							<div class="event-messages ui-state-highlight">
-								<p class="instruct"><?php _e('Copy above information to all forms?', 'event_espresso'); ?> <button type="button" id="copy_to_all_button" value="<?php echo $event_id . '|' . $meta['price_id']; ?>"><?php _e('Yes', 'event_espresso'); ?></button></p>
+								<p class="instruct" style="position:relative;padding:1em;">
+									<span class="copy-all-button-wrapper" style="position:relative;z-index:10;">									
+										<?php _e('Copy above information to all forms?', 'event_espresso'); ?> <button type="button" class="copy-all-button" value="<?php echo $event_id . '|' . $meta['price_id']; ?>"><?php _e('Yes', 'event_espresso'); ?></button>										
+									</span>
+									<span class="copy-all-button-success" style="display:none;position:absolute; top:.2em; left:0;padding:1em; border-radius:3px;z-index:1;background:#DCF3D9;"></span>
+								</p>
 							</div>
 							<?php
 						}
@@ -103,14 +115,6 @@ $num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$eve
 					echo event_espresso_add_cart_item_groups($item_groups);
 				}
 
-				//Coupons
-				if (function_exists('event_espresso_coupon_registration_page')) {
-					// echo event_espresso_coupon_registration_page( $use_coupon_code, $event_id );
-				}//End coupons display
-				//Groupons
-				if (function_exists('event_espresso_groupon_registration_page')) {
-					//echo event_espresso_groupon_registration_page( $use_groupon_code, $event_id );
-				}//End groupons display
 				//Multiple Attendees
 				if ($allow_multiple == "Y") {
 
@@ -144,7 +148,7 @@ $num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$eve
 										<?php
 										echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $i . '</h3>';
 										echo event_espresso_copy_dd($event_id, $meta);
-										echo event_espresso_add_question_groups($question_groups, $events_in_session, $event_id, 1, $meta);
+										echo event_espresso_add_question_groups($question_groups, $events_in_session[$event_id], $event_id, 1, $meta);
 										?>
 									</div>
 								</div>

@@ -19,6 +19,6 @@ if (class_exists("SoapClient")) {
  *
  * @package AuthorizeNet
  */
-class AuthorizeNetException extends Exception
+class Espresso_AuthorizeNetException extends Exception
 {
 }

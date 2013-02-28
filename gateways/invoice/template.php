@@ -64,7 +64,7 @@ foreach ($attendees as $attendee) {
 if ($payment_status != 'Completed') {
 	$payment_status = 'Pending';
 	$txn_type = 'INV';
-	$payment_date = date("d-m-Y");
+	$payment_date = date('Y-m-d-H:i:s');
 
 //Added by Imon
 	if (count($registration_ids) > 0 && $admin == false) {
@@ -97,11 +97,8 @@ if ($payment_status != 'Completed') {
   $organization_name = $wpdb->last_result[0]->answer;//question_id = '9' */
 
 
-//Create a payment link
-$payment_link = home_url() . "/?page_id=" . $org_options['return_url'] . "&id=" . $attendee_id;
-
 //Instanciation of inherited class
-$pdf = new PDF();
+$pdf = new Espresso_PDF();
 $pdf->AliasNbPages();
 $pdf->SetAuthor(pdftext($org_options['organization']));
 if (isset($invoice_payment_settings['pdf_title'])) {
@@ -114,7 +111,7 @@ if (isset($invoice_payment_settings['pdf_title'])) {
 $pdf->AddPage();
 //Create the top right of invoice below header
 $pdf->SetFont('Times', '', 12);
-$pdf->Cell(180, 0, __('Date: ', 'event_espresso') . date('m-d-Y'), 0, 1, 'R'); //Set invoice date
+$pdf->Cell(180, 0, __('Date: ', 'event_espresso') . date(get_option('date_format')), 0, 1, 'R'); //Set invoice date
 $pdf->Cell(180, 10, __('Primary Attendee ID: ', 'event_espresso') . $attendee_id, 0, 0, 'R'); //Set Invoice number
 $pdf->Ln(0);
 
@@ -149,25 +146,30 @@ $pdf->Ln(10);
 //Added by Imon
 $attendees = array();
 $total_cost = 0.00;
+$total_orig_cost = 0.00;
+$total_amount_pd = 0.00;
 foreach ($registration_ids as $reg_id) {
-	$sql = "select ea.registration_id, ed.event_name, ed.start_date, ed.event_identifier, ea.fname, ea.lname, eac.quantity, eac.cost from " . EVENTS_ATTENDEE_TABLE . " ea
-				inner join " . EVENTS_ATTENDEE_COST_TABLE . " eac on ea.id = eac.attendee_id
-				inner join " . EVENTS_DETAIL_TABLE . " ed on ea.event_id = ed.id
-				where ea.registration_id = '" . $reg_id['registration_id'] . "' order by ed.event_name ";
+	$sql = "select ea.registration_id, ed.event_name, ed.start_date, ed.event_identifier, ea.fname, ea.lname, ea.quantity, ea.orig_price, ea.final_price, ea.amount_pd from " . EVENTS_ATTENDEE_TABLE . " ea ";
+	//$sql .= " inner join " . EVENTS_ATTENDEE_COST_TABLE . " eac on ea.id = eac.attendee_id ";
+	$sql .= " inner join " . EVENTS_DETAIL_TABLE . " ed on ea.event_id = ed.id ";
+	$sql .= " where ea.registration_id = '" . $reg_id['registration_id'] . "' order by ed.event_name ";
 
 	$tmp_attendees = $wpdb->get_results($sql, ARRAY_A);
 
 	foreach ($tmp_attendees as $tmp_attendee) {
-		$sub_total = $tmp_attendee["cost"] * $tmp_attendee["quantity"];
+		$sub_total = $tmp_attendee["final_price"] * $tmp_attendee["quantity"];
+		$orig_total = $tmp_attendee["orig_price"] * $tmp_attendee["quantity"];
 		$attendees[] = $pdf->LoadData(array(
-				pdftext($tmp_attendee["event_name"] . "[" . date('m-d-Y', strtotime($tmp_attendee['start_date'])) . "]") . ' >> '
-				. pdftext(html_entity_decode($tmp_attendee["fname"], ENT_QUOTES, "UTF-8") . " " . html_entity_decode($tmp_attendee["lname"], ENT_QUOTES, "UTF-8")) . ';'
-				. pdftext($tmp_attendee["quantity"]) . ';'
-				. doubleval($tmp_attendee["cost"]) . ';'
-				. doubleval($sub_total)
-						)
+			pdftext($tmp_attendee["event_name"] . "[" . date('m-d-Y', strtotime($tmp_attendee['start_date'])) . "]") . ' >> '
+			. pdftext(html_entity_decode($tmp_attendee["fname"], ENT_QUOTES, "UTF-8") . " " . html_entity_decode($tmp_attendee["lname"], ENT_QUOTES, "UTF-8")) . ';'
+			. pdftext($tmp_attendee["quantity"]) . ';'
+			. doubleval($tmp_attendee["final_price"]) . ';'
+			. doubleval($sub_total)
+				)
 		);
 		$total_cost += $sub_total;
+		$total_orig_cost += $orig_total;
+		$total_amount_pd += $tmp_attendee["amount_pd"];
 		$event_identifier = $tmp_attendee["event_identifier"];
 	}
 }
@@ -180,18 +182,21 @@ $right = 30;
 $pdf->ImprovedTable($header, $attendees, $w, $alling);
 
 $pdf->Ln();
-if ($amount_pd != $total_cost) {
-	$pdf->InvoiceTotals(__('Total:', 'event_espresso'), $total_cost, $left, $right);
-	$discount = $amount_pd - $total_cost;
-	if ($discount < 0) {
-		$text = __('Discount:', 'event_espresso');
-	} else {
-		$text = __('Extra:', 'event_espresso');
-	}
-	$pdf->InvoiceTotals($text, $discount, $left, $right);
-}
+//if ( $total_amount_pd != $total_cost ) {
+$pdf->InvoiceTotals(__('Total:', 'event_espresso'), $total_cost, $left, $right);
+$text = __('Amount Paid:', 'event_espresso');
+$pdf->InvoiceTotals($text, $total_amount_pd, $left, $right);
+//	$discount = $total_orig_cost - $total_cost;
+//	if ($discount > 0) {
+//		$text = __('Discount:', 'event_espresso');
+//	} else {
+//		$text = __('Discount:', 'event_espresso');
+//		$pdf->InvoiceTotals($text, $discount, $left, $right);
+//	}
+//}
+$total_owing = $total_cost - $total_amount_pd;
 $text = __("Total due:", 'event_espresso');
-$pdf->InvoiceTotals($text, $amount_pd, $left, $right);
+$pdf->InvoiceTotals($text, $total_owing, $left, $right);
 $pdf->Ln(10);
 
 //Build the payment link and instructions
@@ -200,8 +205,12 @@ if (isset($invoice_payment_settings['pdf_instructions'])) {
 } else {
 	$pdf->MultiCell(100, 5, pdftext(''), 0, 'L'); //Set instructions
 }
+
+//Create a payment link
+$payment_link = home_url() . "/?page_id=" . $org_options['return_url'] . "&r_id=" . $registration_id;
+
 $pdf->SetFont('Arial', 'BU', 20);
-//$pdf->Cell(200,20,'Pay Online',0,1,'C',0,$payment_link);//Set payment link
+$pdf->Cell(200, 20, 'Pay Online', 0, 1, 'C', 0, $payment_link); //Set payment link
 
 $pdf->Output('Invoice_' . $attendee_id . '_' . $event_identifier . '.pdf', 'D');
 exit;

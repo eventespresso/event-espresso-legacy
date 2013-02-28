@@ -19,22 +19,7 @@ function espresso_process_paypal_pro($payment_data) {
 	$sandbox = $paypal_pro_settings['paypal_pro_use_sandbox'];
 // Setup PayPal object
 	$PayPalConfig = array('Sandbox' => $sandbox, 'APIUsername' => $paypal_pro_settings['paypal_api_username'], 'APIPassword' => $paypal_pro_settings['paypal_api_password'], 'APISignature' => $paypal_pro_settings['paypal_api_signature']);
-	$PayPal = new PayPal($PayPalConfig);
-
-
-//Find the correct amount so that unsavory characters don't change it in the previous form
-	$sql = "SELECT ea.amount_pd, ed.event_name FROM " . EVENTS_ATTENDEE_TABLE . " ea ";
-	$sql .= "JOIN " . EVENTS_DETAIL_TABLE . " ed ";
-	$sql .= "ON ed.id = ea.event_id ";
-	$sql .= " WHERE registration_id = '" . espresso_registration_id($_POST['id']) . "' ";
-	$sql .= " ORDER BY ea.id ASC LIMIT 1";
-
-	$r = $wpdb->get_row($sql);
-
-	if (!$r || $wpdb->num_rows == 0) {
-
-		exit("Looks like something went wrong.  Please try again or notify the website administrator.");
-	}
+	$PayPal = new Espresso_PayPal($PayPalConfig);
 
 // Populate data arrays with order data.
 	$DPFields = array(
@@ -89,13 +74,13 @@ function espresso_process_paypal_pro($payment_data) {
 	);
 
 	$PaymentDetails = array(
-			'amt' => $r->amount_pd, // Required.  Total amount of order, including shipping, handling, and tax.
+			'amt' => $payment_data['total_cost'], // Required.  Total amount of order, including shipping, handling, and tax.
 			'currencycode' => $paypal_pro_settings['currency_format'], // Required.  Three-letter currency code.  Default is USD.
 			'itemamt' => '', // Required if you include itemized cart details. (L_AMTn, etc.)  Subtotal of items not including S&H, or tax.
 			'shippingamt' => '', // Total shipping costs for the order.  If you specify shippingamt, you must also specify itemamt.
 			'handlingamt' => '', // Total handling costs for the order.  If you specify handlingamt, you must also specify itemamt.
 			'taxamt' => '', // Required if you specify itemized cart tax details. Sum of tax for all items on the order.  Total sales tax.
-			'desc' => stripslashes_deep($r->event_name), // Description of the order the customer is purchasing.  127 char max.
+			'desc' => stripslashes_deep($event_name), // Description of the order the customer is purchasing.  127 char max.
 			'custom' => '', // Free-form field for your own use.  256 char max.
 			'invnum' => '', // Your own invoice or tracking number
 			'notifyurl' => '' // URL for receiving Instant Payment Notifications.  This overrides what your profile is set to use.
@@ -103,8 +88,8 @@ function espresso_process_paypal_pro($payment_data) {
 
 	$OrderItems = array();
 	$Item = array(
-			'l_name' => stripslashes_deep($r->event_name), // Item Name.  127 char max.
-			'l_desc' => stripslashes_deep($r->event_name), // Item description.  127 char max.
+			'l_name' => stripslashes_deep($event_name), // Item Name.  127 char max.
+			'l_desc' => stripslashes_deep($event_name), // Item description.  127 char max.
 			'l_amt' => $_POST['amount'], // Cost of individual item.
 			'l_number' => '', // Item Number.  127 char max.
 			'l_qty' => '1', // Item quantity.  Must be any positive integer.

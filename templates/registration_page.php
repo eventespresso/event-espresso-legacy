@@ -1,4 +1,5 @@
-<?php
+<?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');		
 //As of version 3.0.17
 //This is a logic file for displaying a registration form for an event on a page. This file will do all of the backend data retrieval functions.
 //There should be a copy of this file in your wp-content/uploads/espresso/ folder.
@@ -7,8 +8,11 @@ if (!function_exists('register_attendees')) {
 
     function register_attendees($single_event_id = NULL, $event_id_sc =0, $reg_form_only = false) {
 		//Declare the $data object
-		$data = new stdClass;
+		$data = (object)array( 'event' => NULL );
+		$template_name = ( 'registration_page_display.php' );
+		$path = locate_template( $template_name );
 		
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 		//Run code for the seating chart addon
 		if ( function_exists('espresso_seating_version') ){
 			do_action('ee_seating_chart_css');
@@ -16,11 +20,6 @@ if (!function_exists('register_attendees')) {
 			do_action('ee_seating_chart_flush_expired_seats');
 		}
         
-		if ((isset($_REQUEST['form_action']) && $_REQUEST['form_action'] == 'edit_attendee') || (isset($_REQUEST['edit_attendee']) && $_REQUEST['edit_attendee'] == 'true')) {
-            require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/process-registration/attendee_edit_record.php');
-            attendee_edit_record();
-            return;
-        }
         global $wpdb, $org_options;
 
         if (isset($_REQUEST['ee']) && $_REQUEST['ee'] != '') {
@@ -53,15 +52,20 @@ if (!function_exists('register_attendees')) {
 
         //Build event queries
         $sql = "SELECT e.*, ese.start_time, ese.end_time ";
-        isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= ", v.name venue_name, v.address venue_address, v.address2 venue_address2, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta " : '';
+		if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
+	 		$sql .= ", v.name venue_name, v.address venue_address, v.address2 venue_address2, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta ";
+		}
         $sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
 		$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id = e.id ";
 
-        isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id " : '';
+		if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
+			$sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id ";
+		}
 		$sql.= " WHERE e.is_active='Y' ";
 		$sql.= " AND e.event_status != 'D' ";
 
-		if ($single_event_id != NULL) {//Get the ID of a single event
+		//Get the ID of a single event
+		if ($single_event_id != NULL) {
 			//If a single event needs to be displayed, get its ID
             $sql .= " AND event_identifier = '" . $single_event_id . "' ";
         } else {
@@ -76,14 +80,12 @@ if (!function_exists('register_attendees')) {
             $sql .= " LIMIT 0,1";
         }
 		
-        $data->event = $wpdb->get_row($sql, OBJECT);
-        //print_r($data->event);
-
+        $data->event = $wpdb->get_row( $wpdb->prepare( $sql, NULL ), OBJECT);
         $num_rows = $wpdb->num_rows;
 
         //Build the registration page
         if ($num_rows > 0) {
-            do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+
             //These are the variables that can be used throughout the registration page
             //foreach ($events as $event) {
             global $this_event_id;
@@ -103,8 +105,6 @@ if (!function_exists('register_attendees')) {
             $event_state = $data->event->state;
             $event_zip = $data->event->zip;
             $event_country = $data->event->country;
-
-
             $event_description = stripslashes_deep($data->event->event_desc);
             $event_identifier = $data->event->event_identifier;
             $event_cost = isset($data->event->event_cost) ? $data->event->event_cost : "0.00";
@@ -165,7 +165,7 @@ if (!function_exists('register_attendees')) {
             $virtual_phone = stripslashes_deep($data->event->virtual_phone);
 
             //Address formatting
-            $location = ($event_address != '' ? $event_address : '') . ($event_address2 != '' ? '<br />' . $event_address2 : '') . ($event_city != '' ? '<br />' . $event_city : '') . ($event_state != '' ? ', ' . $event_state : '') . ($event_zip != '' ? '<br />' . $event_zip : '') . ($event_country != '' ? '<br />' . $event_country : '');
+           $location = (!empty($event_address) ? $event_address : '') . (!empty($event_address2) ? '<br />' . $event_address2 : '') . (!empty($event_city) ? '<br />' . $event_city : '') . (!empty($event_state)  ? ', ' . $event_state : '') . (!empty($event_zip) ? '<br />' . $event_zip : '') . (!empty($event_country) ? '<br />' . $event_country : '');
 
             //Google map link creation
             $google_map_link = espresso_google_map_link(array('address' => $event_address, 'city' => $event_city, 'state' => $event_state, 'zip' => $event_zip, 'country' => $event_country, 'text' => 'Map and Directions', 'type' => 'text'));
@@ -193,14 +193,10 @@ if (!function_exists('register_attendees')) {
 
 
             //If the coupon code system is intalled then use it
-            if (function_exists('event_espresso_coupon_registration_page')) {
-                $use_coupon_code = $data->event->use_coupon_code;
-            }
+            $use_coupon_code = $data->event->use_coupon_code;
 
             //If the groupon code addon is installed, then use it
-            if (function_exists('event_espresso_groupon_payment_page')) {
-                $use_groupon_code = $data->event->use_groupon_code;
-            }
+            $use_groupon_code = $data->event->use_groupon_code;
 
             //Set a default value for additional limit
             if ($additional_limit == '') {
@@ -215,7 +211,8 @@ if (!function_exists('register_attendees')) {
 
             global $all_meta;
             $all_meta = array(
-                'event_name' => '<p class="section-title">' . stripslashes_deep($event_name) . '</span>',
+                'event_id' => $event_id,
+				'event_name' => stripslashes_deep($event_name),
                 'event_desc' => stripslashes_deep($event_desc),
                 'event_address' => $event_address,
                 'event_address2' => $event_address2,
@@ -223,32 +220,25 @@ if (!function_exists('register_attendees')) {
                 'event_state' => $event_state,
                 'event_zip' => $event_zip,
                 'event_country' => $event_country,
-                'venue_title' => '<span class="section-title">' . $venue_title . '</span>',
+                'venue_title' => $venue_title,
                 'venue_address' => $venue_address,
                 'venue_address2' => $venue_address2,
                 'venue_city' => $venue_city,
                 'venue_state' => $venue_state,
                 'venue_country' => $venue_country,
-
+				'location' => $location,
 				'is_active' => $data->event->is_active,
 				'event_status' => $data->event->event_status,
-				'start_time' => $data->event->start_time,
+				'contact_email' => empty($data->event->alt_email) ? $org_options['contact_email'] : $data->event->alt_email,
 				'start_time' => empty($data->event->start_time) ? '' : $data->event->start_time,
-
+				'end_time' => empty($data->event->end_time) ? '' : $data->event->end_time,
 				'registration_startT' => $data->event->registration_startT,
 				'registration_start' => $data->event->registration_start,
-
 				'registration_endT' => $data->event->registration_endT,
 				'registration_end' => $data->event->registration_end,
-'event_address' => empty($data->event->event_address) ? '' : $data->event->event_address,
-
-				'start_date' => '<span class="section-title">' . event_espresso_no_format_date($start_date, get_option('date_format')) . '</span>',
-                'end_date' => '<span class="section-title">' . event_date_display($end_date, get_option('date_format')) . '</span>',
-                //'time' => event_espresso_time_dropdown($event_id, 0),
+				'start_date' => event_espresso_no_format_date($start_date, get_option('date_format')),
+                'end_date' => event_date_display($end_date, get_option('date_format')),
                 'google_map_link' => $google_map_link,
-                //'price' => event_espresso_price_dropdown($event_id, 0),
-                //'registration' => event_espresso_add_question_groups($question_groups),
-                //'additional_attendees' => $allow_multiple == "Y" && $number_available_spaces > 1 ? event_espresso_additional_attendees($event_id, $additional_limit, $number_available_spaces, '', false, $event_meta) : '<input type="hidden" name="num_people" id="num_people-' . $event_id . '" value="1">',
             );
 			
 			//print_r($all_meta);
@@ -282,13 +272,13 @@ if (!function_exists('register_attendees')) {
                 $num_attendees = get_number_of_attendees_reg_limit($event_id, 'num_attendees'); //Get the number of attendees. Please visit http://eventespresso.com/forums/?p=247 for available parameters for the get_number_of_attendees_reg_limit() function.
                 if (($num_attendees >= $reg_limit) && ($allow_overflow == 'Y' && $overflow_event_id != 0)) {
                     ?>
-                        <p id="register_link-<?php echo $overflow_event_id ?>" class="register-link-footer"><a class="a_register_link" id="a_register_link-<?php echo $overflow_event_id ?>" href="<?php echo espresso_reg_url($overflow_event_id); ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Join Waiting List', 'event_espresso'); ?></a></p>
+                        <p id="register_link-<?php echo $overflow_event_id ?>" class="register-link-footer"><a class="a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="a_register_link-<?php echo $overflow_event_id ?>" href="<?php echo espresso_reg_url($overflow_event_id); ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Join Waiting List', 'event_espresso'); ?></a></p>
                     <?php } ?>
                 </div>
 
                     <?php
                 } else {
-					global $member_options;
+					$member_options = get_option('events_member_settings');
 					//echo "<pre>".print_r($member_options,true)."</pre>";
                     //If enough spaces exist then show the form
                     //Check to see if the Members plugin is installed.
@@ -296,8 +286,11 @@ if (!function_exists('register_attendees')) {
                         event_espresso_user_login();
                     } else {
                         //Serve up the registration form
-                        //As of version 3.0.17 the registration details have been moved to registration_form.php
-                        require('registration_page_display.php');
+						if ( empty( $path ) ) {
+						  require( $template_name );
+						} else {
+						  require( $path );
+						}
                     }
                 }//End if ($num_attendees >= $reg_limit) (Shows the regsitration form if enough spaces exist)
             } else {//If there are no results from the query, display this message

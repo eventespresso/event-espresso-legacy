@@ -12,7 +12,7 @@ function event_espresso_config_page_styles() {
 		switch ($_REQUEST['page']) {
 			case ( 'events' ):
 			case ( 'espresso_reports' ):
-				wp_enqueue_style('jquery-ui-style', EVENT_ESPRESSO_PLUGINFULLURL . 'css/ui-lightness/jquery-ui-1.7.3.custom.css');
+				wp_enqueue_style('jquery-ui-style', EVENT_ESPRESSO_PLUGINFULLURL . 'css/jquery-ui-1.9.2.custom.min.css');
 				break;
 		}
 		if (isset($_REQUEST['event_admin_reports'])) {
@@ -50,7 +50,7 @@ function event_espresso_config_page_scripts() {
 		wp_enqueue_script('jquery-ui-tabs');
 
 		//Load datepicker script
-		wp_enqueue_script('jquery-ui-datepicker', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/ui.datepicker.min.js', array('jquery', 'jquery-ui-core'));
+		wp_enqueue_script('jquery-ui-datepicker');
 	}
 
 	if (isset($_REQUEST['event_admin_reports']) && $_REQUEST['event_admin_reports'] == 'add_new_attendee' || $_REQUEST['page'] == 'form_groups' || $_REQUEST['page'] == 'form_builder' || $_REQUEST['page'] == 'event_staff' || $_REQUEST['page'] == 'event_categories' || $_REQUEST['page'] == 'event_venues' || $_REQUEST['page'] == 'discounts' || $_REQUEST['page'] == 'groupons') {
@@ -147,53 +147,6 @@ if (!function_exists('event_espresso_delete_event')) {
 		}
 	}
 
-}
-
-//This function installs the tables
-function event_espresso_run_install($table_name, $table_version, $sql) {
-
-	global $wpdb;
-
-	$wp_table_name = $wpdb->prefix . $table_name;
-
-	if ($wpdb->get_var("SHOW TABLES LIKE '" . $wp_table_name . "'") != $wp_table_name) {
-
-		$sql_create_table = "CREATE TABLE " . $wp_table_name . " ( " . $sql . " ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;";
-
-		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-		dbDelta($sql_create_table);
-
-		//create option for table version
-		$option_name = $table_name . '_tbl_version';
-		$newvalue = $table_version;
-		if (get_option($option_name)) {
-			update_option($option_name, $newvalue);
-		} else {
-			$deprecated = '';
-			$autoload = 'no';
-			add_option($option_name, $newvalue, $deprecated, $autoload);
-		}
-		//create option for table name
-		$option_name = $table_name . '_tbl';
-		$newvalue = $wp_table_name;
-		if (get_option($option_name)) {
-			update_option($option_name, $newvalue);
-		} else {
-			$deprecated = '';
-			$autoload = 'no';
-			add_option($option_name, $newvalue, $deprecated, $autoload);
-		}
-	}
-
-	// Code here with new database upgrade info/table Must change version number to work.
-
-	$installed_ver = get_option($table_name . '_tbl_version');
-	if ($installed_ver != $table_version) {
-		$sql_create_table = "CREATE TABLE " . $wp_table_name . " ( " . $sql . " ) ;";
-		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-		dbDelta($sql_create_table);
-		update_option($table_name . '_tbl_version', $table_version);
-	}
 }
 
 //function to empty trash
@@ -333,10 +286,23 @@ function event_espresso_create_upload_directories() {
 			EVENT_ESPRESSO_TEMPLATE_DIR,
 			EVENT_ESPRESSO_GATEWAY_DIR,
 			EVENT_ESPRESSO_UPLOAD_DIR . '/logs/',
+			EVENT_ESPRESSO_UPLOAD_DIR . '/languages/',
 	);
 	foreach ($folders as $folder) {
 		wp_mkdir_p($folder);
 		@ chmod($folder, 0755);
+	}
+	
+	if (!file_exists(EVENT_ESPRESSO_UPLOAD_DIR . 'logs/.htaccess')) {
+		if (file_put_contents(EVENT_ESPRESSO_UPLOAD_DIR . 'logs/.htaccess', 'deny from all')){
+			do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'created .htaccess file that blocks direct access to logs folder');
+		}
+	}
+	
+	if (!file_exists(EVENT_ESPRESSO_UPLOAD_DIR . 'languages/index.php')) {
+		if (file_put_contents(EVENT_ESPRESSO_UPLOAD_DIR . 'languages/index.php', '')){
+			do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'created uploads/languages/index.php');
+		}
 	}
 }
 
@@ -479,6 +445,7 @@ function getCountriesArray($lang = "en") {
 	//last code is for political zones, 2 is for european union, 1 for the rest of the world (by the moment)
 	switch ($lang) {
 		default: return array(
+			// updated country list since 3.1.30
 					array(0, __('No country selected', 'event_espresso'), '', '', 0),
 					array(64, 'United States', 'US', 'USA', 1),
 					array(15, 'Australia', 'AU', 'AUS', 1),
@@ -491,7 +458,7 @@ function getCountriesArray($lang = "en") {
 					array(2, 'Albania', 'AL', 'ALB', 1),
 					array(3, 'Germany', 'DE', 'DEU', 2),
 					array(198, 'Switzerland', 'CH', 'CHE', 1),
-					array(87, 'The Netherlands', 'NL', 'NLD', 2),
+					array(87, 'Netherlands', 'NL', 'NLD', 2),
 					array(197, 'Sweden', 'SE', 'SWE', 1),
 					array(230, 'Akrotiri and Dhekelia', 'CY', 'CYP', 2),
 					array(4, 'Andorra', 'AD', 'AND', 2),
@@ -500,14 +467,14 @@ function getCountriesArray($lang = "en") {
 					array(7, 'Antarctica', 'AQ', 'ATA', 1),
 					array(8, 'Antigua and Barbuda', 'AG', 'ATG', 1),
 					array(10, 'Saudi Arabia', 'SA', 'SAU', 1),
-					array(11, 'Argelia', 'DZ', 'DZA', 1),
+					array(11, 'Algeria', 'DZ', 'DZA', 1),
 					array(12, 'Argentina', 'AR', 'ARG', 1),
 					array(13, 'Armenia', 'AM', 'ARM', 1),
 					array(14, 'Aruba', 'AW', 'ABW', 1),
 					array(16, 'Austria', 'AT', 'AUT', 2),
 					array(17, 'Azerbaijan', 'AZ', 'AZE', 1),
 					array(18, 'Bahamas', 'BS', 'BHS', 1),
-					array(19, 'Bahrein', 'BH', 'BHR', 1),
+					array(19, 'Bahrain', 'BH', 'BHR', 1),
 					array(20, 'Bangladesh', 'BD', 'BGD', 1),
 					array(21, 'Barbados', 'BB', 'BRB', 1),
 					array(22, 'Belgium ', 'BE', 'BEL', 2),
@@ -540,12 +507,12 @@ function getCountriesArray($lang = "en") {
 					array(44, 'Colombia', 'CO', 'COL', 1),
 					array(45, 'Comoros', 'KM', 'COM', 1),
 					array(46, 'Congo', 'CG', 'COG', 1),
-					array(47, 'Corea del Norte', 'KP', 'PRK', 1),
+					array(47, 'North Korea', 'KP', 'PRK', 1),
 					array(50, 'Costa Rica', 'CR', 'CRI', 1),
 					array(51, 'Croatia', 'HR', 'HRV', 1),
 					array(52, 'Cuba', 'CU', 'CUB', 1),
 					array(173, 'Czech Republic', 'CZ', 'CZE', 1),
-					array(53, 'Danmark', 'DK', 'DNK', 1),
+					array(53, 'Denmark', 'DK', 'DNK', 1),
 					array(54, 'Djibouti', 'DJ', 'DJI', 1),
 					array(55, 'Dominica', 'DM', 'DMA', 1),
 					array(174, 'Dominican Republic', 'DO', 'DOM', 1),
@@ -553,8 +520,8 @@ function getCountriesArray($lang = "en") {
 					array(57, 'Egypt', 'EG', 'EGY', 1),
 					array(58, 'El Salvador', 'SV', 'SLV', 1),
 					array(60, 'Eritrea', 'ER', 'ERI', 1),
-					array(61, 'Eslovakia', 'SK', 'SVK', 2),
-					array(62, 'Eslovenia', 'SI', 'SVN', 2),
+					array(61, 'Slovakia', 'SK', 'SVK', 2),
+					array(62, 'Slovenia', 'SI', 'SVN', 2),
 					array(65, 'Estonia', 'EE', 'EST', 2),
 					array(66, 'Ethiopia', 'ET', 'ETH', 1),
 					array(102, 'Faroe islands', 'FO', 'FRO', 1),
@@ -594,7 +561,7 @@ function getCountriesArray($lang = "en") {
 					array(114, 'Jordan', 'JO', 'JOR', 1),
 					array(115, 'Kazakhstan', 'KZ', 'KAZ', 1),
 					array(116, 'Kenya', 'KE', 'KEN', 1),
-					array(117, 'Kirguistan', 'KG', 'KGZ', 1),
+					array(117, 'Kyrgyzstan', 'KG', 'KGZ', 1),
 					array(118, 'Kiribati', 'KI', 'KIR', 1),
 					array(48, 'South Korea', 'KR', 'KOR', 1),
 					array(228, 'Kosovo', 'XK', 'XKV', 2), // there is no official ISO code for Kosovo yet (http://geonames.wordpress.com/2010/03/08/xk-country-code-for-kosovo/) so using a temporary country code and a modified 3 character code for ISO code -- this should be updated if/when Kosovo gets its own ISO code
@@ -617,10 +584,10 @@ function getCountriesArray($lang = "en") {
 					array(135, 'Mali', 'ML', 'MLI', 1),
 					array(136, 'Malta', 'MT', 'MLT', 2),
 					array(101, 'Northern Marianas', 'MP', 'MNP', 1),
-					array(137, 'Marruecos', 'MA', 'MAR', 1),
+					array(137, 'Morocco', 'MA', 'MAR', 1),
 					array(104, 'Marshall islands', 'MH', 'MHL', 1),
-					array(138, 'Martinica', 'MQ', 'MTQ', 1),
-					array(139, 'Mauricio', 'MU', 'MUS', 1),
+					array(138, 'Martinique', 'MQ', 'MTQ', 1),
+					array(139, 'Mauritius', 'MU', 'MUS', 1),
 					array(140, 'Mauritania', 'MR', 'MRT', 1),
 					array(141, 'Mayote', 'YT', 'MYT', 2),
 					array(142, 'Mexico', 'MX', 'MEX', 1),
@@ -655,16 +622,16 @@ function getCountriesArray($lang = "en") {
 					array(168, 'Portugal', 'PT', 'PRT', 2),
 					array(169, 'Puerto Rico', 'PR', 'PRI', 1),
 					array(170, 'Qatar', 'QA', 'QAT', 1),
-					array(176, 'Rowanda', 'RW', 'RWA', 1),
+					array(176, 'Rwanda', 'RW', 'RWA', 1),
 					array(177, 'Romania', 'RO', 'ROM', 2),
 					array(178, 'Russia', 'RU', 'RUS', 1),
 					array(229, 'Saint Pierre and Miquelon', 'PM', 'SPM', 2),
 					array(180, 'Samoa', 'WS', 'WSM', 1),
 					array(181, 'American Samoa', 'AS', 'ASM', 1),
 					array(183, 'San Marino', 'SM', 'SMR', 2),
-					array(184, 'San Vincente y las Granadinas', 'VC', 'VCT', 1),
-					array(185, 'Santa Helena', 'SH', 'SHN', 1),
-					array(186, 'Santa Lucia', 'LC', 'LCA', 1),
+					array(184, 'Saint Vincent and the Grenadines', 'VC', 'VCT', 1),
+					array(185, 'Saint Helena', 'SH', 'SHN', 1),
+					array(186, 'Saint Lucia', 'LC', 'LCA', 1),
 					array(188, 'Senegal', 'SN', 'SEN', 1),
 					array(189, 'Seychelles', 'SC', 'SYC', 1),
 					array(190, 'Sierra Leona', 'SL', 'SLE', 1),
@@ -700,7 +667,6 @@ function getCountriesArray($lang = "en") {
 					array(222, 'Vietnam', 'VN', 'VNM', 1),
 					array(108, 'Virgin Islands', 'VI', 'VIR', 1),
 					array(223, 'Yemen', 'YE', 'YEM', 1),
-					array(224, 'Yugoslavia', 'YU', 'YUG', 1),
 					array(225, 'Zambia', 'ZM', 'ZMB', 1),
 					array(226, 'Zimbabwe', 'ZW', 'ZWE', 1));
 	}
@@ -774,46 +740,6 @@ function printCountriesSelector($name, $selected) {
  */
 function event_espresso_is_url($url) {
 	return preg_match('~^https?://~', $url);
-}
-
-/**
- * Show plugin changes
- */
-function event_espresso_plugin_update_message($url) {
-	$data = event_espresso_url_get($url);
-
-	if ($data) {
-		$matches = null;
-		if (preg_match('~==\s*Changelog\s*==\s*=\s*[0-9.]+\s*=(.*)(=\s*[0-9.]+\s*=|$)~Uis', $data, $matches)) {
-			$changelog = (array) preg_split('~[\r\n]+~', trim($matches[1]));
-
-			echo '<div style="color: #f00;">Take a minute to update, here\'s why:</div><div style="font-weight: normal;">';
-			$ul = false;
-
-			foreach ($changelog as $index => $line) {
-				if (preg_match('~^\s*\*\s*~', $line)) {
-					if (!$ul) {
-						echo '<ul style="list-style: disc; margin-left: 20px;">';
-						$ul = true;
-					}
-					$line = preg_replace('~^\s*\*\s*~', '', htmlspecialchars($line));
-					echo '<li style="width: 50%; margin: 0; float: left; ' . ($index % 2 == 0 ? 'clear: left;' : '') . '">' . $line . '</li>';
-				} else {
-					if ($ul) {
-						echo '</ul><div style="clear: left;"></div>';
-						$ul = false;
-					}
-					echo '<p style="margin: 5px 0;">' . htmlspecialchars($line) . '</p>';
-				}
-			}
-
-			if ($ul) {
-				echo '</ul><div style="clear: left;"></div>';
-			}
-
-			echo '</div>';
-		}
-	}
 }
 
 function event_espresso_admin_news($url) {
@@ -1037,7 +963,7 @@ function event_espresso_custom_email_info() {
 				<p>
 					<?php _e('For customized confirmation emails, the following tags can be placed in the email form and they will pull data from the database to include in the email.', 'event_espresso'); ?>
 				</p>
-				<p>[registration_id], [fname], [lname], [phone], [event], [event_link], [event_url], [ticket_type], [ticket_link], [qr_code], [description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [invoice_link], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link], [venue_title], [venue_address], [venue_url], [venue_image], [venue_phone], [custom_questions]</p>
+				<p>[registration_id], [fname], [lname], [phone], [edit_attendee_link], [event], [event_link], [event_url], [ticket_type], [ticket_link], [qr_code], [description], [cost], [company], [co_add1], [co_add2], [co_city],[co_state], [co_zip],[contact], [payment_url], [invoice_link], [start_date], [start_time], [end_date], [end_time], [location], [location_phone], [google_map_link], [venue_title], [venue_address], [venue_url], [venue_image], [venue_phone], [custom_questions], [seating_tag]</p>
 			</div>
 		</div>
 	</div>
@@ -1054,6 +980,7 @@ function event_espresso_custom_email_info() {
 				<p style="font-size:10px;">[qr_code] (generated by the QR Code addon, if installed)</p>
 				<p style="font-size:10px;">If you have not done so already, please submit your payment in the amount of [cost].</p>
 				<p style="font-size:10px;">Click here to review your payment information [payment_url].</p>
+				<p style="font-size:10px;">[edit_attendee_link].</p>
 				<p style="font-size:10px;">Your questions: [custom_questions].</p>
 			</div>
 		</div>
@@ -1421,6 +1348,28 @@ function espresso_performance($visible = false) {
 
 add_action('wp_footer', 'espresso_performance', 20);
 
+function espresso_files_in_uploads() {
+	
+	$fileinfo = '';
+	if ( is_dir( EVENT_ESPRESSO_TEMPLATE_DIR )) {
+	    $dir = new RecursiveDirectoryIterator( EVENT_ESPRESSO_TEMPLATE_DIR );
+	    $files = new RecursiveIteratorIterator( $dir, RecursiveIteratorIterator::SELF_FIRST );
+		// Maximum depth is 1 level deeper than the base folder
+		$files->setMaxDepth(1);
+	    foreach ( $files as $file ) {
+			if ( $file->isDir() ) {
+				$fileinfo .= sprintf( "Dir:  %s\n", $file->getFilename() );
+			} elseif ( $file->isFile() ) {
+				$fileinfo .= sprintf( "File: %s/%s\n", $files->getSubPath(), $file->getFilename() );
+			}
+	    }
+	}	
+	echo "\r\n\n<!--Event Espresso Template Files:\r\n\n{$fileinfo}\n-->\r\n";
+	
+}
+add_action('wp_footer', 'espresso_files_in_uploads', 20);
+
+
 function espresso_admin_performance($show = 0) {
 	if ($show == 0)
 		return;
@@ -1568,7 +1517,7 @@ function espresso_get_user_questions($user_id = null, $question_id = null, $use_
 
 	$sql .= " ORDER BY sequence, id ASC ";
 
-	$questions = $wpdb->get_results( $wpdb->prepare($sql) );
+	$questions = $wpdb->get_results( $wpdb->prepare($sql, NULL) );
 
 	return ( $use_filters) ? apply_filters('espresso_get_user_questions_questions', $questions, $user_id, $num) : $questions;
 }
@@ -1587,7 +1536,7 @@ function espresso_get_user_questions_for_group( $group_id, $user_id = null, $use
     $sql .= " WHERE qgr.group_id = " . $group_id;
     $sql .= " ORDER BY q.sequence, q.id ASC ";
 
-    $questions = $wpdb->get_results($wpdb->prepare($sql) );
+    $questions = $wpdb->get_results($wpdb->prepare($sql, NULL) );
 
     foreach ( $questions as $question ) {
   		$q_attached[] = $question->id;
@@ -1646,7 +1595,7 @@ function espresso_get_user_question_groups($user_id = null, $use_filters = true,
 
 	$sql .= ( empty($group_id) ) ? " ORDER BY id ASC " : " ORDER BY group_order ";
 
-	$groups = $wpdb->get_results( $wpdb->prepare($sql) );
+	$groups = $wpdb->get_results( $wpdb->prepare($sql, NULL) );
 
 	return $use_filters ? apply_filters('espresso_get_user_groups_groups', $groups, $user_id, $num) : $groups;		
 }
@@ -1659,7 +1608,7 @@ function espresso_get_question_groups_for_event( $existing_question_groups = arr
 	$sql .= $use_filters ? apply_filters('espresso_get_question_groups_for_event_where', " WHERE (qg.wp_user = '0' OR qg.wp_user = '1' ) ", $existing_question_groups, $event ) : " WHERE (qg.wp_user = '0' OR qg.wp_user = '1' ) ";
 	$sql .= " GROUP BY qg.id ORDER BY qg.system_group, qg.group_order "; 
 
-	$question_groups = $wpdb->get_results( $wpdb->prepare($sql) );
+	$question_groups = $wpdb->get_results( $sql );
 
 	//let's setup data.
 	$count_row = 0;  

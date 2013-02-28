@@ -7,7 +7,7 @@
  * @package		Event Espresso WePay Gateway
  * @category	Library
  */
-class Wepay extends PaymentGateway {
+class Espresso_Wepay extends Espresso_PaymentGateway {
 
 	/**
 	 * Version number - sent in user agent string
@@ -89,7 +89,7 @@ class Wepay extends PaymentGateway {
 		if (self::$production === true) {
 			return 'https://wepayapi.com/v2/';
 		} elseif (self::$production === false) {
-			return 'https://stage.wepay.com/v2/';
+			return 'https://stage.wepayapi.com/v2/';
 		} else {
 			throw new RuntimeException('You must initialize the WePay SDK with Wepay::useStaging() or Wepay::useProduction()');
 		}
@@ -242,7 +242,7 @@ class Wepay extends PaymentGateway {
 		return $result;
 	}
 
-	public function submitPayment($uri) {
+	public function submitPayment( $uri = FALSE ) {
 		echo "<html>\n";
 		echo "<head><title>Processing Payment...</title></head>\n";
 		echo "<body onLoad=\"document.forms['payment_form'].submit();\">\n";
@@ -256,13 +256,15 @@ class Wepay extends PaymentGateway {
 		echo "</body></html>\n";
 	}
 
-	public function submitButton($uri, $button_url, $gateway) {
-		echo '<li><form method="get" name="payment_form" action="' . $uri . '">';
-		echo '<td><input class="espresso_payment_button" id="wepay_submit" type="image" alt="Pay using WePay" src="' . $button_url . '" /></td>';
-		echo '</form></li>';
+	public function submitButton($uri, $button_url) {
+		echo '<div id="wepay-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+	<img class="off-site-payment-gateway-img" width="16" height="16" src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png" alt="click to visit this payment gateway">';
+		echo '<form method="get" name="payment_form" action="' . $uri . '">';
+		echo '<input class="payment-option-lnk" id="wepay_submit" type="image" alt="Pay using WePay" src="' . $button_url . '" />';
+		echo '</form></div>';
 	}
 
-	public function dump_fields($fields) {
+	public function dump_fields( $fields = FASLE ) {
 		echo '<table style="background: #000;" width="95%" border="1" cellpadding="2" cellspacing="0">';
 		echo '<caption style="background: #000; color: #fff; font-weight: bold;">WePay debug output</caption>';
 		echo '<thead>';

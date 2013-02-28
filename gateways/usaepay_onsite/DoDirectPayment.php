@@ -68,7 +68,10 @@ function espresso_itemize_items($ePay, $attendee_id) {
 	global $wpdb;
 	$sql = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id='" . $attendee_id . "'";
 	$session_id = $wpdb->get_var($sql);
-	$sql = "SELECT ac.cost, ac.quantity, ed.event_name, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage FROM " . EVENTS_ATTENDEE_COST_TABLE . " ac JOIN " . EVENTS_ATTENDEE_TABLE . " a ON ac.attendee_id=a.id JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
+	$sql = "SELECT a.final_price, a.quantity, ed.event_name, a.price_option, a.fname, a.lname, dc.coupon_code_price, dc.use_percentage ";
+	//$sql .= " FROM " . EVENTS_ATTENDEE_COST_TABLE . " ac ";
+	$sql .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
+	$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
 	$sql .= " LEFT JOIN " . EVENTS_DISCOUNT_CODES_TABLE . " dc ON a.coupon_code=dc.coupon_code ";
 	$sql .= " WHERE attendee_session='" . $session_id . "' ORDER BY a.id ASC";
 	$items = $wpdb->get_results($sql);
@@ -77,8 +80,8 @@ function espresso_itemize_items($ePay, $attendee_id) {
 	$total_cost = 0;
 	foreach ($items as $key=>$item) {
 		$item_num=$key+1;
-		$total_cost += $item->quantity * $item->cost;
-		$ePay->addLine($item_num, 'Attendee: '. $item->fname . ' ' . $item->lname, $item->price_option . ' for ' . $item->event_name, $item->cost, $item->quantity, FALSE);
+		$total_cost += $item->quantity * $item->final_price;
+		$ePay->addLine($item_num, 'Attendee: '. $item->fname . ' ' . $item->lname, $item->price_option . ' for ' . $item->event_name, $item->final_price, $item->quantity, FALSE);
 	}
 	if (!empty($coupon_amount)) {
 		if ($is_coupon_pct) {

@@ -1,6 +1,15 @@
 <?php
 function add_new_event_venue(){
 	global $wpdb,$current_user;
+	
+		if ( isset( $_REQUEST['form_error'] )) : 
+?>
+		<div id="message" class="error">
+			<p><strong><?php echo sanitize_text_field( urldecode( $_REQUEST['form_error'] ));?></strong></p>
+		</div>
+		
+<?php	
+		endif;	
 ?>
 <div id="add-edit-venue" class="metabox-holder">
   <div class="postbox">
@@ -140,7 +149,7 @@ function add_new_event_venue(){
   					<?php 
 					if (function_exists('wp_editor')){
 						$args = array("textarea_rows" => 5, "textarea_name" => "description", "editor_class" => "my_editor_custom");
-						wp_editor("My venue content", "description", $args);
+						wp_editor("", "description", $args);
 					}else{
 						the_editor('', $id = 'event_desc', $prev_id = 'title', $media_buttons = true, $tab_index = 3);
 					}

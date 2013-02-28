@@ -47,7 +47,7 @@ function event_espresso_form_builder_edit(){
 			<p class="intro"> <?php _e('Edit the question using the form below.  By default all participants will be asked for their first name, last name, and email address.','event_espresso'); ?></p>
 					<?php
 					if ($system_question == true){
-						echo '<p class="inform">'.__('Attention: This is a "System Question", some settings may be disabled.','event_espresso').'</p>';
+						echo '<p class="yellow_inform">'.__('Attention: This is a "System Question", some settings may be disabled.','event_espresso').'</p>';
 					}
 					?>
 
@@ -58,7 +58,7 @@ function event_espresso_form_builder_edit(){
 		  				<label for="question"><?php _e('Question','event_espresso'); ?></label>
 						</th>
 						<td>
-		  				<input name="question" id="question" size="50" value="<?php echo $question_name; ?>" type="text">
+		  				<input name="question" id="question" size="50" value="<?php echo htmlspecialchars( $question_name, ENT_QUOTES, 'UTF-8' ); ?>" type="text">
 						</td>
 					</tr>
 					<tr>
@@ -88,7 +88,7 @@ function event_espresso_form_builder_edit(){
 		  			<label for="values"><?php _e('Values','event_espresso'); ?></label>
 					</th>
 					<td>
-		  			<input name="values" id="values" size="50" value="<?php echo $question_values; ?>" type="text" />
+		  			<input name="values" id="values" size="50" value="<?php echo htmlspecialchars( $question_values, ENT_QUOTES, 'UTF-8' ); ?>" type="text" />
 					<br />
 						<span class="description"><?php _e('A comma seperated list of values. Eg. black, blue, red', 'event_espresso'); ?></span>
 					</td>
@@ -138,7 +138,7 @@ function event_espresso_form_builder_edit(){
 						</label>
 					</th>
 					<td>
-						<input name="required_text" id="required_text" size="50" value="<?php echo $required_text; ?>" type="text" /><br />
+						<input name="required_text" id="required_text" size="50" value="<?php echo htmlspecialchars( $required_text, ENT_QUOTES, 'UTF-8' ); ?>" type="text" /><br />
 						<span class="description"><?php _e('Text displayed if not completed.', 'event_espresso'); ?></span>
 					</td>
 				</tr>
@@ -154,7 +154,7 @@ function event_espresso_form_builder_edit(){
 				</tr>
 			</tbody>
 		</table>
-		<p class="submit-footer">
+		<p>
 			<input name="edit_action" value="update" type="hidden">
 			<input type="hidden" name="action" value="edit_question">
 			<input name="question_id" value="<?php echo $question_id; ?>" type="hidden">

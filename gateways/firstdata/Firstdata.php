@@ -36,7 +36,7 @@ function espresso_process_firstdata($payment_data) {
 
 	if(empty($firstdata_settings['use_verify_peer'])) $firstdata_settings['use_verify_peer'] = false;
 	include"lphp.php";
-	$mylphp = new lphp;
+	$mylphp = new Espresso_Linkpoint;
 	$myorder['verify_peer'] = $firstdata_settings['use_verify_peer'];
 	$myorder["debugging"] = $firstdata_settings['use_sandbox'];
 	$myorder["host"] = $myorder["debugging"] ? "staging.linkpt.net" : "secure.linkpt.net";
@@ -49,7 +49,7 @@ function espresso_process_firstdata($payment_data) {
 	$myorder["cardnumber"] = $_POST['card_num'];
 	$myorder["cardexpmonth"] = $_POST['expmonth'];
 	$myorder["cardexpyear"] = $_POST['expyear'];
-	$myorder["chargetotal"] = $r->amount_pd;
+	$myorder["chargetotal"] = $payment_data['total_cost'];
 
 	$myorder["name"] = $_POST['first_name'] . ' ' . $_POST['last_name'];
 	$myorder["address1"] = $_POST['address'];

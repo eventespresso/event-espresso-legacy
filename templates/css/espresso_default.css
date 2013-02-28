@@ -1,0 +1,504 @@
+/********************************************/
+/****			-==ATTENTION==-			****/
+/**** 	MOVE THIS FILE BEFORE EDITING 	***/
+
+/*** Please move this file to: 'wp-content/uploads/espresso/templates/css/espresso_default.css directory before editing ****/
+
+/* General Style */
+.edit-link-footer {
+	text-align: right; font-size:.9em;
+}
+.ee-featured-image{
+	float: right;
+}
+
+/* Payment Page Styles */
+.payment_container, .payment-option-dv { position: relative; margin:0 .25em .25em 0;  }
+.payment-option-closed { display: inline-block !important; }
+
+.payment-option-dv .payment-option-lnk {
+	display: inline-block; position: relative; max-width:140px; padding:20px; margin:0 0 1em; 
+	border:1px solid #ddd; border-radius:3px;
+	text-align: center; line-height:1em; vertical-align: middle; cursor:pointer;
+
+}
+.payment-option-dv .payment-option-lnk:hover {
+	top:-1px; border-color:#d5d5d5; text-decoration:none;
+	-webkit-box-shadow: 4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025); 
+	-moz-box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025); 
+	box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025);	
+}
+.payment-option-dv .payment-option-lnk img { max-width:140px !important; padding:0; margin:0; border:none; box-shadow: none; }
+.payment-option-dv .payment-option-lnk.algn-vrt { display: table !important; height:30px; }
+.payment-option-dv .payment-option-lnk.algn-vrt .vrt-cell { display: table-cell !important; vertical-align: middle; }
+
+#event_espresso_checkout_form { margin: 5px 0; padding: 5px; }
+
+.choose-diff-pay-option-pg { margin:0 0 6em; font-size:.8em; }
+
+.payment-option-dv .off-site-payment-gateway-img { 
+	position: absolute; top:-4px; right:-5px;
+	border:none; box-shadow: none;
+}
+#external-link-msg-pg { margin:0 0 4em; color:#ccc; font-size:.8em; text-align: center;; }
+#external-link-msg-pg img { position: relative; top:2px; border:none; box-shadow: none; }
+
+/* Multi registration form style */
+.event_total_price{
+	font-size: 25px;
+	float: right;
+	text-align: right;
+	padding:5px;
+}
+
+.multi_reg_cart_block{
+	padding:5px; margin:5px; 
+}
+
+#event_espresso_notifications {
+    display: block; margin: 2em 10px; padding: 1em;
+	border: 2px solid #EEEEEE; border-radius: 3px 3px 3px 3px;
+}
+
+#event_espresso_coupon_wrapper {
+	padding:5px; margin:5px 10px 5px 5px; text-align: right;;
+}
+#event_espresso_total_wrapper {
+	padding:5px; margin:5px; 
+}
+#event_espresso_edit_cart {
+	clear:both; padding:5px; margin:5px 5px 1em 5px; font-size:.9em;
+}
+#event_espresso_edit_cart_or_reg {
+	clear:both; padding:5px; margin:5px 5px 1em 5px; text-align:right;font-size:.9em;
+}
+#event_espresso_refresh_total {
+	clear:both; padding:5px; margin:5px 4px 1em 5px; text-align:right;font-size:.9em;
+}
+#event_espresso_submit_cart {
+	clear:both; padding:5px; margin:5px; text-align:right;
+}
+
+#event_espresso_shopping_cart table{
+	text-align: left;
+}
+
+#event_espresso_registration_form {
+	margin: 10px 3px;
+}
+
+
+/* Errors and notices */
+.event_espresso_error {
+	padding: 1em 2em 1.25em; margin: 0 0 1em 0; 
+	background-color:#FFEEEE; border: #FF0000 1px solid; border-radius:3px;
+	color: #000; text-shadow:1px 1px #fff;
+}
+
+.event_espresso_error p { margin: 0; color: #333; text-shadow:1px 1px #fff; }
+.event_espresso_error p em { color: #cc0000; font-style: normal; font-weight: bold; display: block;}
+
+.event_espresso_attention {
+	padding:1em 2em 1.25em; margin: 0 0 1em 0;
+	background-color: #FFC; border: #FC6 1px solid; border-radius:3px;
+	color: #000; text-shadow:1px 1px #fff;
+}
+.event_espresso_attention p { margin: 0; text-shadow:1px 1px #fff; }
+.event_espresso_attention p em { color: #C00; font-style: normal; font-weight: bold;display: block; }
+
+.event_espresso_form_wrapper label.error,
+.event_espresso_form_wrapper span.error { color: #C00; width: auto;}
+.event_espresso_form_wrapper label em,
+.event_espresso_form_wrapper span.label em,
+.event_espresso_form_wrapper legend em { font-style: normal; color: #C00; padding-left: 3px;}
+.event_espresso_form_wrapper input.error { border-color: #C00; background-color: #FEF; }
+
+/* Form styles */
+.event_form_field input.ee-reg-page-text-input,
+.event_form_field textarea.ee-reg-page-text-input {
+    width:50%;
+}
+
+.event_espresso_form_wrapper {
+	font-size:1em;
+}
+
+#edit-attendee-record-dv,
+#event-reg-form-groups { margin: 2em 0 0;  }
+
+.event_espresso_form_wrapper h3,
+.event_espresso_form_wrapper h4,
+.event_espresso_form_wrapper h5,
+.event_espresso_form_wrapper h6 { margin: 1em 0 .25em; font-weight: bold; }
+.event_espresso_form_wrapper p { margin:.5em 0 1.5em; }
+.event_espresso_form_wrapper fieldset { margin: 1em 0; }
+.event_espresso_form_wrapper fieldset  legend.event_form_field { 
+	float: left; width:150px; padding:.5em 10px 1em 0; border:none;
+	font-size:12px; text-align: right; line-height:1.25em; 
+}
+.event_espresso_form_wrapper fieldset div { margin:1em 0 2em; clear: both;  }
+
+.span_event_date_label,
+.span_event_time_label,
+.event_price_label{
+	display: inline-block; width:150px; padding:0 10px 0 0; 
+	text-align: left; font-size:.9em; line-height:1em; vertical-align: middle;
+}
+
+.event_espresso_form_wrapper label,
+.event_espresso_form_wrapper span.label {
+	display: inline-block; float: left; width:150px; padding:.5em 10px 1em 0;
+	text-align: right; font-size:12px; line-height:1em; vertical-align: middle; 
+}
+.event_form_field .event-quest-group-textarea label.ee-reg-page-questions{
+	vertical-align: top; 
+}
+.span_event_date_value,
+.span_event_time_value { display: inline-block; padding:0; margin:0; text-align: left; }
+
+.event_espresso_form_wrapper input[type=text], 
+.event_espresso_form_wrapper select {
+	width:65%; padding: 3px; margin:0 0 1.25em; vertical-align: middle; 
+}
+
+.event_espresso_form_wrapper .coupon_code { margin:2em 0; }
+
+/* FEM Styles */
+.ee_fem_form_field label.date_time{
+	width:80px;
+	float:none;
+}
+
+.ee_fem_form_field label.time{
+	width:50px;
+	margin-left:30px;
+}
+.ee_fem_form_field input.ee_fem_time_value, .ee_fem_form_field input.ee_fem_date_value {
+	width: 80px;
+}
+
+input.price-name-input{
+	width:45% !important;
+}
+
+ul.dynamic-price-input-form {
+	list-style:none !important;
+}
+ul.dynamic-price-input-form, ul.dynamic-price-input-form li {
+	margin:0 !important;	
+}
+#event_title_field {
+	width:100%;
+}
+label.dynamic-price-input-label {
+	width:100px;
+}
+.ee_fem_form_field input.price-input {
+	width: 80px;
+	float:none;
+}
+.event_espresso_form_wrapper select.surcharge_type {
+	width:25%; 
+}
+#ee_fem_form div.title {
+	float:left !important;
+	width:40%;
+	clear:none;
+}
+#ee_fem_form div.reg_limit {
+	float:right !important;
+	width:30%;
+	text-align:left !important;
+	clear:none;
+}
+#ee_fem_form div.reg_limit label, #ee_fem_form div.title label, #ee_fem_form p.title label{
+	text-align:left !important;
+}
+
+select.small { width:25px; }
+select.med { width: 100px; }
+select.wide { width: 175px; }
+
+.event_espresso_form_wrapper ul.event_form_field { display: inline-block; width:65%; list-style: none; padding:0; margin:.25em 0 0; }   /*160px*/
+.event_espresso_form_wrapper ul.event_form_field li,
+.event_espresso_form_wrapper .checkbox-lbl,
+.event_espresso_form_wrapper .radio-btn-lbl {
+ 	display: inline-block; margin:0 2em 0 0; padding:0;
+	text-align: left; vertical-align: middle; cursor: pointer;
+}
+/*.event_espresso_form_wrapper li label { width:auto; }*/
+.event_espresso_form_wrapper .checkbox-lbl span,
+.event_espresso_form_wrapper .radio-btn-lbl span {
+	position: relative; top:0px; margin:0;  vertical-align: middle;
+	font-size:1em; line-height:1em; text-align: left;
+}
+.event_espresso_form_wrapper .checkbox-lbl input,
+.event_espresso_form_wrapper .radio-btn-lbl input { float: left; position: relative; top:0px; vertical-align: middle; margin:0 .5em 1em .25em; }
+.event_espresso_form_wrapper .checkbox-lbl + .checkbox-lbl,
+.event_espresso_form_wrapper .radio-btn-lbl + .radio-btn-lbl { margin-left:1em; }
+
+#additional_header { margin:2em 0 1em; }
+.event_espresso_form_wrapper .additional-attendee-nmbr-h4 { margin:3em 0 -1em; }
+
+.espresso_add_subtract_attendees { padding:0 0 0 160px; }
+.espresso_confirm_registration { padding:0 0 1em 160px; }
+.event_form_submit { padding:1em 0 2em 160px; }
+
+.additional-attendee-lnk { display: inline-block; margin:0 0 .5em; cursor: pointer; }
+.additional-attendee-lnk img { margin:1px .5em -2px 0; }
+
+.smaller-text { font-size:.7em; }
+.small-text { font-size:.85em; }
+.big-text { font-size:1.2em; }
+.bigger-text { font-size:1.5em; }
+.highlight-bg { padding:1em 20px; background:#ffffdd; border-radius:3px; }
+.highlight-bg label { width:130px;  }
+
+.long-label { position: relative; top:-2px; }
+
+.laquo { line-height:.9em; vertical-align: top; }
+
+
+
+.recaptchatable #recaptcha_response_field {left:0 !important;}
+
+/* Confirmation page display */
+table#event_espresso_attendee_verify th,
+table#event_espresso_attendee_verify_questions th { padding: .75em; text-align: right; width:160px; line-height:1.25em; vertical-align: middle; }
+table#event_espresso_attendee_verify td,
+table#event_espresso_attendee_verify_questions td { padding: .75em; text-align: left; line-height:1.25em; vertical-align: top; }
+table#event_espresso_attendee_verify tr,
+table#event_espresso_attendee_verify_questions tr { text-align: left; line-height:1.25em; vertical-align: middle; }
+
+
+table.price_list{ margin: 10px auto; border: 1px; }
+
+table.price_list td{
+	padding: 5px;
+}
+
+.event_espresso_value { }
+
+/* Event List Pagination */
+.page_navigation .no_more{
+	background-color: white;
+	color: gray;
+	cursor: default;
+}
+
+.ellipse{
+	float: left;
+}
+.page_navigation , .alt_page_navigation{
+	padding-bottom: 10px;
+}
+
+.page_navigation a, .alt_page_navigation a{
+	padding:3px 5px;
+	margin:2px;
+	text-decoration:none;
+	float: left;
+	font-family: Tahoma;
+	font-size: 12px;
+}
+.active_page{
+	color:black !important;
+ }
+ 
+ .ajx_loading {	
+	width:400px;
+	height:400px;
+	background:url('../images/ajax-loader-large.gif') center no-repeat;
+ }
+
+/* Search Form  */
+#espresso-search-form-dv { 
+	padding:1em 1.5em; margin:0em 0 3em; background:#f8f8f8; 
+	border:1px solid #f0f0f0; border-top:1px solid #f4f4f4; border-bottom:1px solid #e8e8e8; border-radius:3px; 
+	text-align: center; 
+}
+
+/* Autocomplete */
+#ee_autocomplete, #ee_fem_autocomplete{ width:400px; }
+#ee_autocomplete{ }
+.ui-autocomplete {
+	list-style:none; width:400px; background:#fff; 
+	border:1px solid #ccc; border-radius:3px;
+	-webkit-box-shadow: 4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025); 
+	-moz-box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025); 
+	box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025);	
+}
+.ui-autocomplete li { }
+.ui-autocomplete li a { display: block; padding: .5em 1em; border-radius:3px; cursor: pointer; text-decoration: none; line-height:1em; }
+.ui-autocomplete li a:hover { background:#f8f8f8; text-decoration: none; }
+
+/* Media Queries */
+@media (max-width: 990px) {
+	 .ajx_loading {	 width:300px; height:300px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:300px; }
+	.ui-autocomplete { width:300px; }
+	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
+}
+/*@media (max-width: 880px) {
+	.event_espresso_form_wrapper legend,
+	.event_espresso_form_wrapper label,
+	.event_espresso_form_wrapper span.label { display: block; width:auto; padding:0; text-align: left; }
+	.event_espresso_form_wrapper ul { margin:0 0 0 1em; }
+}*/
+@media (max-width: 850px) {
+	 .ajx_loading {	 width:250px; height:250px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:250px; }
+	.ui-autocomplete { width:250px; }
+	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
+}
+@media (max-width: 800px) {
+	 .ajx_loading {	 width:400px; height:400px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:400px; }
+	.ui-autocomplete { width:400px; }
+	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
+	.event_form_field input.ee-reg-page-text-input,
+	.event_form_field textarea.ee-reg-page-text-input {
+		width:60%;
+		margin-top:5px;
+	}
+}
+@media (max-width: 700px) {
+	 .ajx_loading {	 width:300px; height:300px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:300px; }
+	.ui-autocomplete { width:300px; }
+	.event_espresso_form_wrapper p { margin: 20px 0 1em; }
+	.event_form_field input.ee-reg-page-text-input,
+	.event_form_field textarea.ee-reg-page-text-input {
+		width:60%;
+		margin-top:5px;
+	}
+	.ee_fem_form_field label.time{
+		width:50px;
+		margin:0;
+	}
+}
+@media (max-width: 600px) {
+	.event_espresso_form_wrapper ul.event_form_field li,
+	.event_espresso_form_wrapper .checkbox-lbl,
+	.event_espresso_form_wrapper .radio-btn-lbl { display: block; clear: both; width:100%; margin:0; }
+	.event_espresso_form_wrapper label, 
+	.event_espresso_form_wrapper span.label { 
+		display: block; float: none; padding:.5em 0 0; text-align: left;
+	}
+	.event_form_submit,
+	.espresso_add_subtract_attendees { padding-left:0; }
+	.ajx_loading {	 width:250px; height:250px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:250px; }
+	.ui-autocomplete { width:250px; }
+	.event_form_field input.ee-reg-page-text-input,
+	.event_form_field textarea.ee-reg-page-text-input {
+		width:80%;
+		margin-top:5px;
+	}
+	.ee_fem_form_field label.time{
+		width:50px;
+		margin:0;
+	}
+}
+@media (max-width: 505px) {
+	.event_espresso_form_wrapper ul.event_form_field li,
+	.event_espresso_form_wrapper .checkbox-lbl,
+	.event_espresso_form_wrapper .radio-btn-lbl { display: block; clear: both; width:100%; margin:0; }
+	.event_espresso_form_wrapper label, 
+	.event_espresso_form_wrapper span.label { 
+		display: block; float: none; width:90%; padding:.5em 0 0; text-align: left;
+	}
+	.event_form_submit,
+	.espresso_add_subtract_attendees { padding-left:0; }
+	.ajx_loading {	 width:210px; height:210px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:210px; margin:0 0 .5em; }
+	.ui-autocomplete { width:210px; }
+	.event_form_field input.ee-reg-page-text-input,
+	.event_form_field textarea.ee-reg-page-text-input {
+		width:90%;
+		margin-top:5px;
+	}
+	.ee_fem_form_field label.time{
+		width:50px;
+		margin:0;
+	}
+}
+@media (max-width: 450px) {
+	.event_espresso_form_wrapper ul.event_form_field li,
+	.event_espresso_form_wrapper .checkbox-lbl,
+	.event_espresso_form_wrapper .radio-btn-lbl { display: block; clear: both; width:100%; margin:0; }
+	.event_espresso_form_wrapper label, 
+	.event_espresso_form_wrapper span.label { 
+		display: block; float: none; width:90%; padding:.5em 0 0; text-align: left;
+	}
+	.event_form_submit,
+	.espresso_add_subtract_attendees { padding-left:0; }
+	#espresso-search-form-dv { padding:1em; }
+	.ajx_loading {	 width:170px; height:170px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:170px; }
+	.ui-autocomplete { width:170px; }
+	.event_form_field input.ee-reg-page-text-input,
+	.event_form_field textarea.ee-reg-page-text-input {
+		width:90%;
+		margin-top:5px;
+	}
+	.ee_fem_form_field label.time{
+		width:50px;
+		margin:0;
+	}
+}
+@media (max-width: 410px) {
+	.event_espresso_form_wrapper ul.event_form_field li,
+	.event_espresso_form_wrapper .checkbox-lbl,
+	.event_espresso_form_wrapper .radio-btn-lbl { display: block; clear: both; width:100%; margin:0; }
+	.event_espresso_form_wrapper label, 
+	.event_espresso_form_wrapper span.label { 
+		display: block; float: none; width:90%; padding:.5em 0 0; text-align: left;
+	}
+	.event_form_submit,
+	.espresso_add_subtract_attendees { padding-left:0; }
+	#espresso-search-form-dv { padding:1em; }
+	.ajx_loading {	 width:130px; height:130px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:130px; }
+	.ui-autocomplete { width:130px; }
+	.event_form_field input.ee-reg-page-text-input,
+	.event_form_field textarea.ee-reg-page-text-input {
+		width:90%;
+		margin-top:5px;
+	}
+	.ee_fem_form_field label.time{
+		width:50px;
+		margin:0;
+	}
+}
+@media (max-width: 360px) {
+	.event_espresso_form_wrapper ul.event_form_field li,
+	.event_espresso_form_wrapper .checkbox-lbl,
+	.event_espresso_form_wrapper .radio-btn-lbl { display: block; clear: both; width:100%; margin:0; }
+	.event_espresso_form_wrapper label, 
+	.event_espresso_form_wrapper span.label { 
+		display: block; float: none; width:90%; padding:.5em 0 0; text-align: left;
+	}
+	.event_form_submit,
+	.espresso_add_subtract_attendees { padding-left:0; }
+	#espresso-search-form-dv { padding:1em; text-align: right; }
+	 .ajx_loading {	 width:150px; height:150px; }
+	#ee_autocomplete, #ee_fem_autocomplete{ width:150px; margin:0 0 .5em; }
+	.ui-autocomplete { width:150px; }
+	.event_form_field input.ee-reg-page-text-input,
+	.event_form_field textarea.ee-reg-page-text-input {
+		width:90%;
+		margin-top:5px;
+	}
+	.ee_fem_form_field label.time{
+		width:50px;
+		margin:0;
+	}
+}
+
+
+/********************************************/
+/****			-==ATTENTION==-			****/
+/**** 	MOVE THIS FILE BEFORE EDITING 	***/
+
+/*** Please move this file to: 'wp-content/uploads/espresso/templates/css/espresso_default.css directory before editing ****/

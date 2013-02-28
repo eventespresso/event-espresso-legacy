@@ -6,7 +6,7 @@ function espresso_display_exact($payment_data) {
 	include_once ('Exact.php');
 
 	global $org_options;
-	$myExact = new Exact(); // initiate an instance of the class
+	$myExact = new Espresso_Exact(); // initiate an instance of the class
 	echo '<!--Event Espresso Exact.com Gateway Version ' . $myExact->gateway_version . '-->';
 	$exact_settings = get_option('event_espresso_exact_settings');
 	$exact_login_id = empty($exact_settings['exact_login_id']) ? '' : $exact_settings['exact_login_id'];
@@ -63,17 +63,17 @@ function espresso_display_exact($payment_data) {
 		$myExact->submitPayment(); //Enable auto redirect to payment site
 	} else {
 		if (empty($exact_settings['button_url'])) {
-			//$button_url = EVENT_ESPRESSO_GATEWAY_URL . "exact/btn_cc_vmad.gif";
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/exact/btn_cc_vmad.gif")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/exact/btn_cc_vmad.gif";
+			//$button_url = EVENT_ESPRESSO_GATEWAY_URL . "exact/exact-logo.png";
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/exact/exact-logo.png")) {
+				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/exact/exact-logo.png";
 			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/btn_cc_vmad.gif";
+				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/exact-logo.png";
 			}
 		} elseif (file_exists($exact_settings['button_url'])) {
 			$button_url = $exact_settings['button_url'];
 		} else {
 			//If no other buttons exist, then use the default location
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/btn_cc_vmad.gif";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/exact-logo.png";
 		}
 		$myExact->submitButton($button_url, 'exact'); //Display payment button
 	}

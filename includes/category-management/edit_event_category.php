@@ -106,7 +106,7 @@ function edit_event_category(){
 					</div>
 					<!-- /.postbox -->
 					<p>
-						<input class="button-secondary" type="submit" name="Submit" value="<?php _e('Update'); ?>" id="update_category" />
+						<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update'); ?>" id="update_category" />
 					</p>
 				</div>
 				<!-- /.postarea -->

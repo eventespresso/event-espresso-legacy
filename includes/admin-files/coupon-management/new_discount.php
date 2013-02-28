@@ -24,9 +24,9 @@ function add_new_event_discount(){
         </li>
         <li>
           <?php _e('Is this a percentage discount?','event_espresso'); ?>
-          <input type="radio" name="use_percentage" <?php echo ($use_percentage=='Y')? 'checked' : '' ?> value="Y">
+          <input type="radio" name="use_percentage" value="Y">
           <?php _e('Yes','event_espresso'); ?>
-          <input type="radio" name="use_percentage" <?php echo ($use_percentage=='N')? 'checked' : '' ?> checked="checked" value="N">
+          <input type="radio" name="use_percentage" checked="checked" value="N">
           <?php _e('No','event_espresso'); ?>
         </li>
         <li>
@@ -36,7 +36,7 @@ function add_new_event_discount(){
         </li>
         <li>
           <p>
-            <input class="button-secondary" type="submit" name="add_new_discount" value="<?php _e('Submit','event_espresso'); ?>" id="add_new_discount" />
+            <input class="button-primary" type="submit" name="add_new_discount" value="<?php _e('Submit','event_espresso'); ?>" id="add_new_discount" />
           </p>
         </li>
       </ul>

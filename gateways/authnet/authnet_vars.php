@@ -5,8 +5,8 @@ function espresso_display_authnet($payment_data) {
 // Setup class
 	include_once ('Authorize.php');
 
-	global $org_options;
-	$myAuthorize = new EE_Authorize(); // initiate an instance of the class
+	global $org_options, $wpdb;
+	$myAuthorize = new Espresso_Authorize(); // initiate an instance of the class
 	echo '<!--Event Espresso Authorize.net Gateway Version ' . $myAuthorize->gateway_version . '-->';
 	$authnet_settings = get_option('event_espresso_authnet_settings');
 	$authnet_login_id = empty($authnet_settings['authnet_login_id']) ? '' : $authnet_settings['authnet_login_id'];
@@ -47,6 +47,24 @@ function espresso_display_authnet($payment_data) {
 	$myAuthorize->addField('x_City', $city);
 	$myAuthorize->addField('x_State', $state);
 	$myAuthorize->addField('x_Zip', $zip);
+	
+	$sql = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id='" . $attendee_id . "'";
+	$session_id = $wpdb->get_var($sql);
+	$sql = "SELECT a.final_price, a.quantity, ed.event_name, a.price_option, a.fname, a.lname FROM " . EVENTS_ATTENDEE_TABLE . " a JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
+	$sql .= " WHERE attendee_session='" . $session_id . "' ORDER BY a.id ASC";
+	$items = $wpdb->get_results($sql);
+	foreach ($items as $key=>$item) {
+		$item_num=$key+1;
+		$myAuthorize->addLineItem(
+				$item_num,
+				substr_replace($item->event_name, '...', 28),
+				substr_replace($item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname, 0, 255),
+				$item->quantity,
+				$item->final_price,
+				FALSE
+		);
+	}
+	
 
 
 //Enable this function if you want to send payment notification before the person has paid.
@@ -57,17 +75,17 @@ function espresso_display_authnet($payment_data) {
 		$myAuthorize->submitPayment(); //Enable auto redirect to payment site
 	} else {
 		if (empty($authnet_settings['button_url'])) {
-			//$button_url = EVENT_ESPRESSO_GATEWAY_URL . "authnet/btn_cc_vmad.gif";
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/btn_cc_vmad.gif")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/btn_cc_vmad.gif";
+			//$button_url = EVENT_ESPRESSO_GATEWAY_URL . "authnet/authnet-logo.png";
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/pay-by-credit-card.png")) {
+				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/pay-by-credit-card.png";
 			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/btn_cc_vmad.gif";
+				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 			}
 		} elseif (file_exists($authnet_settings['button_url'])) {
 			$button_url = $authnet_settings['button_url'];
 		} else {
 			//If no other buttons exist, then use the default location
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/btn_cc_vmad.gif";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 		}
 		$myAuthorize->submitButton($button_url, 'authnet'); //Display payment button
 	}

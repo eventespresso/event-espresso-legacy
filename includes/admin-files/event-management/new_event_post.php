@@ -33,6 +33,7 @@
 
         $custom_post_array = array(array('id' => 'espresso_event', 'text' => __('Espresso Event', 'event_espresso')));
         $post_page_array = array(array('id' => 'post', 'text' => __('Post', 'event_espresso')));
+		$org_options['use_custom_post_types'] = isset( $org_options['use_custom_post_types'] ) ? $org_options['use_custom_post_types'] : 'N'; 
         $post_page_array = $org_options['use_custom_post_types'] == 'Y' ? array_merge($custom_post_array, $post_page_array) : $post_page_array;
 
         $post_types = $post_page_array;

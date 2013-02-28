@@ -64,7 +64,7 @@ function event_espresso_gateways_options() {
 		<h2><?php _e('Bypassing the Confirmation Page', 'event_espresso'); ?></h2>
 		<p><?php _e('This will allow you to send your customers directly to the payment gateway of your choice.', 'event_espresso'); ?></p>
 	</div>
-	'<div id="force_ssl_return" style="display:none">';
+	<div id="force_ssl_return" style="display:none">
 		<h2><?php _e('Force HTTPS on Return URL', 'event_espresso'); ?></h2>
 		<p><?php _e('Forces the gateway provider to send the customer back to the return page -- or pull the return page from the site -- using HTTPS.  This is required in some instances to prevent a warning that the page the user is going to is not secure.', 'event_espresso'); ?></p>
 	</div>
@@ -89,105 +89,105 @@ function espresso_update_active_gateways() {
 	global $espresso_premium;
 
 	$paypal_settings = get_option('event_espresso_paypal_settings');
-	if (!empty($paypal_settings) && strpos($paypal_settings['button_url'], "/paypal/btn_stdCheckout2.gif")) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/paypal/btn_stdCheckout2.gif")) {
-			$paypal_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/paypal/btn_stdCheckout2.gif";
+	if (!empty($paypal_settings) && strpos($paypal_settings['button_url'], "/paypal/paypal-logo.png")) {
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/paypal/paypal-logo.png")) {
+			$paypal_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/paypal/paypal-logo.png";
 		} else {
-			$paypal_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/paypal/btn_stdCheckout2.gif";
+			$paypal_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/paypal/paypal-logo.png";
 		}
 		update_option('event_espresso_paypal_settings', $paypal_settings);
 	}
 
 	if ($espresso_premium == true) {
 		$twocheckout_settings = get_option('event_espresso_2checkout_settings');
-		if (!empty($twocheckout_settings) && strpos($twocheckout_settings['button_url'], "/2checkout/logo.png")) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/2checkout/logo.png")) {
-				$twocheckout_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/2checkout/logo.png";
+		if (!empty($twocheckout_settings) && strpos($twocheckout_settings['button_url'], "/2checkout/2checkout-logo.png")) {
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/2checkout/2checkout-logo.png")) {
+				$twocheckout_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/2checkout/2checkout-logo.png";
 			} else {
-				$twocheckout_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/2checkout/logo.png";
+				$twocheckout_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/2checkout/2checkout-logo.png";
 			}
 			update_option('event_espresso_2checkout_settings', $twocheckout_settings);
 		}
 		$alipay_settings = get_option('event_espresso_alipay_settings');
-		if (!empty($alipay_settings) && strpos($alipay_settings['button_url'], "/alipay/new_logo.jpg")) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/alipay/new_logo.jpg")) {
-				$alipay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/alipay/new_logo.jpg";
+		if (!empty($alipay_settings) && strpos($alipay_settings['button_url'], "/alipay/alipay-logo.png")) {
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/alipay/alipay-logo.png")) {
+				$alipay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/alipay/alipay-logo.png";
 			} else {
-				$alipay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/alipay/new_logo.jpg";
+				$alipay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/alipay/alipay-logo.png";
 			}
 			update_option('event_espresso_alipay_settings', $alipay_settings);
 		}
 		$authnet_settings = get_option('event_espresso_authnet_settings');
-		if (!empty($authnet_settings) && strpos($authnet_settings['button_url'], "/authnet/btn_cc_vmad.gif")) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/btn_cc_vmad.gif")) {
-				$authnet_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/authnet/btn_cc_vmad.gif";
+		if (!empty($authnet_settings) && strpos($authnet_settings['button_url'], "/authnet/authnet-logo.png")) {
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/authnet-logo.png")) {
+				$authnet_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/authnet/authnet-logo.png";
 			} else {
-				$authnet_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/btn_cc_vmad.gif";
+				$authnet_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/authnet-logo.png";
 			}
 			update_option('event_espresso_authnet_settings', $authnet_settings);
 		}
 		$eway_settings = get_option('event_espresso_eway_settings');
-		if (!empty($eway_settings) && strpos($eway_settings['button_url'], "/eway/eway_logo.png")) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/eway/eway_logo.png")) {
-				$eway_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/eway/eway_logo.png";
+		if (!empty($eway_settings) && strpos($eway_settings['button_url'], "/eway/eway-logo.png")) {
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/eway/eway-logo.png")) {
+				$eway_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/eway/eway-logo.png";
 			} else {
-				$eway_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/eway/eway_logo.png";
+				$eway_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/eway/eway-logo.png";
 			}
 			update_option('event_espresso_eway_settings', $eway_settings);
 		}
 
 		$exact_settings = get_option('event_espresso_exact_settings');
-		if (!empty($exact_settings) && strpos($exact_settings['button_url'], "/exact/btn_cc_vmad.gif")) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/exact/btn_cc_vmad.gif")) {
-				$exact_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/exact/btn_cc_vmad.gif";
+		if (!empty($exact_settings) && strpos($exact_settings['button_url'], "/exact/exact-logo.png")) {
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/exact/exact-logo.png")) {
+				$exact_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/exact/exact-logo.png";
 			} else {
-				$exact_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/btn_cc_vmad.gif";
+				$exact_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/exact-logo.png";
 			}
 			update_option('event_espresso_exact_settings', $exact_settings);
 		}
 
 		$firstdata_connect_2_settings = get_option('event_espresso_firstdata_connect_2_settings');
-		if (!empty($firstdata_connect_2_settings) && strpos($firstdata_connect_2_settings['button_url'], "/firstdata_connect_2/standard_button.gif")) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_connect_2/standard_button.gif")) {
-				$firstdata_connect_2_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/firstdata_connect_2/standard_button.gif";
+		if (!empty($firstdata_connect_2_settings) && strpos($firstdata_connect_2_settings['button_url'], "/firstdata_connect_2/firstdata-logo.png")) {
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_connect_2/firstdata-logo.png")) {
+				$firstdata_connect_2_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/firstdata_connect_2/firstdata-logo.png";
 			} else {
-				$firstdata_connect_2_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/firstdata_connect_2/standard_button.gif";
+				$firstdata_connect_2_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/firstdata_connect_2/firstdata-logo.png";
 			}
 			update_option('event_espresso_firstdata_connect_2_settings', $firstdata_connect_2_settings);
 		}
 		$mwarrior_settings = get_option('event_espresso_mwarrior_settings');
-		if (!empty($mwarrior_settings) && strpos($mwarrior_settings['button_url'], "/mwarrior/btn_checkout.png")) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/mwarrior/btn_checkout.png")) {
-				$mwarrior_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/mwarrior/btn_checkout.png";
+		if (!empty($mwarrior_settings) && strpos($mwarrior_settings['button_url'], "/mwarrior/mwarrior-logo.png")) {
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/mwarrior/mwarrior-logo.png")) {
+				$mwarrior_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/mwarrior/mwarrior-logo.png";
 			} else {
-				$mwarrior_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/mwarrior/btn_checkout.png";
+				$mwarrior_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/mwarrior/mwarrior-logo.png";
 			}
 			update_option('event_espresso_mwarrior_settings', $mwarrior_settings);
 		}
 		$realauth_settings = get_option('event_espresso_realauth_settings');
-		if (!empty($realauth_settings) && !empty($realauth_settings['button_url']) && strpos($realauth_settings['button_url'], "/realauth/logo.gif")) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/realauth/logo.gif")) {
-				$realauth_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/realauth/logo.gif";
+		if (!empty($realauth_settings) && !empty($realauth_settings['button_url']) && strpos($realauth_settings['button_url'], "/realauth/realauth-logo.png")) {
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/realauth/realauth-logo.png")) {
+				$realauth_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/realauth/realauth-logo.png";
 			} else {
-				$realauth_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/realauth/logo.gif";
+				$realauth_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/realauth/realauth-logo.png";
 			}
 			update_option('event_espresso_realauth_settings', $realauth_settings);
 		}
 		$wepay_settings = get_option('event_espresso_wepay_settings');
-		if (!empty($wepay_settings) && strpos($wepay_settings['button_url'], "/wepay/logo.png")) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/wepay/logo.png")) {
-				$wepay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/wepay/logo.png";
+		if (!empty($wepay_settings) && strpos($wepay_settings['button_url'], "/wepay/wepay-logo.png")) {
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/wepay/wepay-logo.png")) {
+				$wepay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/wepay/wepay-logo.png";
 			} else {
-				$wepay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/wepay/logo.png";
+				$wepay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/wepay/wepay-logo.png";
 			}
 			update_option('event_espresso_wepay_settings', $wepay_settings);
 		}
 		$worldpay_settings = get_option('event_espresso_worldpay_settings');
-		if (!empty($worldpay_settings) && strpos($worldpay_settings['button_url'], "/worldpay/WorldPaylogoBluetrans.png")) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/worldpay/WorldPaylogoBluetrans.png")) {
-				$worldpay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/worldpay/WorldPaylogoBluetrans.png";
+		if (!empty($worldpay_settings) && strpos($worldpay_settings['button_url'], "/worldpay/worldpay-logo.png")) {
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/worldpay/worldpay-logo.png")) {
+				$worldpay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/worldpay/worldpay-logo.png";
 			} else {
-				$worldpay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/worldpay/WorldPaylogoBluetrans.png";
+				$worldpay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/worldpay/worldpay-logo.png";
 			}
 			update_option('event_espresso_worldpay_settings', $worldpay_settings);
 		}

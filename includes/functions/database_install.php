@@ -1,4 +1,47 @@
-<?php
+<?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	
+
+
+//This function installs the tables
+function event_espresso_run_install($table_name, $table_version, $sql) {
+
+	global $wpdb;
+	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+	$wp_table_name = $wpdb->prefix . $table_name;
+
+	if ($wpdb->get_var("SHOW TABLES LIKE '" . $wp_table_name . "'") != $wp_table_name) {
+
+		$sql_create_table = "CREATE TABLE " . $wp_table_name . " ( " . $sql . " ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;";
+
+		dbDelta($sql_create_table);
+
+		//create option for table version
+		$option_name = $table_name . '_tbl_version';
+		// update_option creates new option if no existing
+		update_option( $option_name, $table_version, '', 'no' );
+
+		//create option for table name
+		$option_name = $table_name . '_tbl';
+		update_option($option_name, $wp_table_name, '', 'no' );
+
+	}
+
+	// Code here with new database upgrade info/table Must change version number to work.
+
+	$installed_ver = get_option($table_name . '_tbl_version');
+	if ($installed_ver != $table_version) {
+		$sql_create_table = "CREATE TABLE " . $wp_table_name . " ( " . $sql . " ) ;";
+		dbDelta($sql_create_table);
+		update_option($table_name . '_tbl_version', $table_version, '', 'no' );
+		//create option for table name
+		$option_name = $table_name . '_tbl';
+		update_option($option_name, $wp_table_name, '', 'no' );
+	}
+}
+
+
+
 
 //Install/update data tables in the Wordpress database
 //This fixes some tables that may have been named wrong in an earlier version of the plugin
@@ -13,7 +56,11 @@ function event_espresso_rename_tables($old_table_name, $new_table_name) {
 	}
 }
 
+
+
+
 function events_data_tables_install() {
+
 	$table_version = EVENT_ESPRESSO_VERSION;
 
 	function event_espresso_install_system_names() {
@@ -139,7 +186,7 @@ function events_data_tables_install() {
 
 	function event_espresso_update_shortcodes() {
 		global $wpdb;
-		$wpdb->query("SELECT id FROM " . $wpdb->prefix . "posts " . " WHERE (post_content LIKE '%{ESPRESSO_EVENTS}%' AND `post_type` = 'page') OR (post_content LIKE '%{ESPRESSO_PAYMENTS}%'  AND `post_type` = 'page') OR (post_content LIKE '%{ESPRESSO_TXN_PAGE}%'  AND `post_type` = 'page') ");
+		$wpdb->query("SELECT id FROM " . $wpdb->prefix . "posts " . " WHERE (post_content LIKE '%{ESPRESSO_EVENTS}%' AND post_type = 'page') OR (post_content LIKE '%{ESPRESSO_PAYMENTS}%'  AND post_type = 'page') OR (post_content LIKE '%{ESPRESSO_TXN_PAGE}%'  AND post_type = 'page') ");
 
 		if ($wpdb->num_rows > 0) {
 			$wpdb->query("UPDATE " . $wpdb->prefix . "posts SET post_content = REPLACE(post_content,'{ESPRESSO_EVENTS}','[ESPRESSO_EVENTS]')");
@@ -147,7 +194,7 @@ function events_data_tables_install() {
 			$wpdb->query("UPDATE " . $wpdb->prefix . "posts SET post_content = REPLACE(post_content,'{ESPRESSO_TXN_PAGE}','[ESPRESSO_TXN_PAGE]')");
 		}
 
-		$wpdb->query("SELECT id FROM " . $wpdb->prefix . "posts " . " WHERE (post_content LIKE '%{EVENTREGIS}%' AND `post_type` = 'page') OR (post_content LIKE '%{EVENTREGPAY}%' AND `post_type` = 'page') OR (post_content LIKE '%{EVENTPAYPALTXN}%' AND `post_type` = 'page') ");
+		$wpdb->query("SELECT id FROM " . $wpdb->prefix . "posts " . " WHERE (post_content LIKE '%{EVENTREGIS}%' AND post_type = 'page') OR (post_content LIKE '%{EVENTREGPAY}%' AND post_type = 'page') OR (post_content LIKE '%{EVENTPAYPALTXN}%' AND post_type = 'page') ");
 
 		if ($wpdb->num_rows > 0) {
 			$wpdb->query("UPDATE " . $wpdb->prefix . "posts SET post_content = REPLACE(post_content,'{EVENTREGIS}','[ESPRESSO_EVENTS]')");
@@ -168,12 +215,12 @@ function events_data_tables_install() {
 
 	function espresso_answer_fix() {
 		global $wpdb;
-		$sql = "SHOW COLUMNS FROM `" . EVENTS_ANSWER_TABLE . "` LIKE 'id';";
+		$sql = "SHOW COLUMNS FROM " . EVENTS_ANSWER_TABLE . " LIKE 'id';";
 		$test = $wpdb->query($sql);
 		if (empty($test)) {
 			$sql = "ALTER TABLE " . EVENTS_ANSWER_TABLE . " DROP PRIMARY KEY";
 			$wpdb->query($sql);
-			$sql = "ALTER TABLE  `" . EVENTS_ANSWER_TABLE . "` ADD  `id` INT( 11 ) unsigned NOT NULL AUTO_INCREMENT FIRST , ADD PRIMARY KEY (  `id` )";
+			$sql = "ALTER TABLE  " . EVENTS_ANSWER_TABLE . " ADD  id INT( 11 ) unsigned NOT NULL AUTO_INCREMENT FIRST , ADD PRIMARY KEY (  id )";
 			$wpdb->query($sql);
 		}
 	}
@@ -211,7 +258,7 @@ function events_data_tables_install() {
 			$payment_subject = (__('Payment Received for [event_name]', 'event_espresso'));
 			$payment_message = (__('<p>***This Is An Automated Response*** </p><p>Thank You [fname] [lname]</p>  <p>We have just  received a payment in the amount of [event_price] for your registration to [event_name].</p> <p>Transaction ID: [txn_id]</p>', 'event_espresso'));
 
-			$message = ( __('<p>***This is an automated response - Do Not Reply***</p> <p>Thank you [fname] [lname] for registering for [event].</p><p>This event starts at [start_time] on [start_date] and runs until [end_time] on [end_date].</p><p>Location:<br>[location]</p><p>Phone: [location_phone]</p><p>Google Map: [google_map_link]</p><p> We hope that you will find this event both informative and enjoyable. Should you have any questions, please contact [contact].</p><p>If you have not done so already, please submit your payment in the amount of [cost].</p><p>Click here to review your payment information [payment_url].</p><p>Thank You.</p>', 'event_espresso'));
+			$message = ( __('<p>***This is an automated response - Do Not Reply***</p> <p>Thank you [fname] [lname] for registering for [event].</p><p>This event starts at [start_time] on [start_date] and runs until [end_time] on [end_date].</p><p>Location:<br>[location]</p><p>Phone: [location_phone]</p><p>Google Map: [google_map_link]</p><p> We hope that you will find this event both informative and enjoyable. Should you have any questions, please contact [contact].</p><p>If you have not done so already, please submit your payment in the amount of [cost].</p><p>Click here to review your payment information [payment_url].</p><p>[edit_attendee_link]</p><p>Thank You.</p>', 'event_espresso'));
 
 			$new_org_options = array(
 					'organization' => get_bloginfo('name'),
@@ -234,15 +281,38 @@ function events_data_tables_install() {
 					'expire_on_registration_end' => 'Y',
 					'email_before_payment' => 'N',
 					'email_fancy_headers' => 'N',
-					'enable_default_style' => 'Y',
+					'enable_default_style' => 'N',
 					'event_ssl_active' => 'N',
 					'use_venue_manager' => 'Y',
+					'enable_default_style' => 'N',
+					'selected_style' => 'event_espresso_style.css',
+					'show_pending_payment_options' => 'Y',
+					'show_reg_footer' => 'Y',
+					'skip_confirmation_page' => 'N',
+					'allow_mer_discounts' => 'N',
+					'allow_mer_vouchers' => 'N',
+					'display_short_description_in_event_list' => 'N',
+					'display_description_on_multi_reg_page' => 'N',
+					'display_address_in_event_list' => 'N',
+					'display_address_in_regform' => 'Y',
+					'use_custom_post_types' => 'N',
+					'display_ical_download' => 'Y',
+'display_featured_image' => 'N',
+					'themeroller' => array(
+						'themeroller_style' => 'smoothness',
+					),
+					'style_settings' => array(
+						'disable_legacy_styles' => 'Y',
+						'enable_default_style' => 'Y',
+						'css_name' => '',
+					),
 			);
 
 			add_option('events_organization_settings', $new_org_options);
+			
 		} else if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name) {
 			//If an earlier version is found
-			$results = $wpdb->get_results("SELECT * FROM " . EVENTS_ORGANIZATION_TABLE . " WHERE id='1'");
+			$results = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "events_organization" . " WHERE id='1'");
 			foreach ($results as $result) {
 				$org_id = $result->id;
 				$Organization = $result->organization;
@@ -322,14 +392,16 @@ function events_data_tables_install() {
 					'payment_message' => $payment_message,
 					'message' => $message,
 					'country_id' => $country_id,
-					'expire_on_registration_end' => 'Y',
 					'email_before_payment' => 'N',
 					'use_personnel_manager' => 'Y',
 					'use_venue_manager' => 'Y',
-					'enable_default_style' => 'Y',
+					'enable_default_style' => 'N',
 					'selected_style' => 'event_espresso_style.css',
 					'show_pending_payment_options' => 'Y',
-					'show_reg_footer' => 'Y'
+					'show_reg_footer' => 'Y',
+					'skip_confirmation_page' => 'N',
+					'allow_mer_discounts' => 'N',
+					'allow_mer_vouchers' => 'N'
 			);
 
 			add_option('events_organization_settings', $org_options);
@@ -337,8 +409,9 @@ function events_data_tables_install() {
 	}
 
 	$table_name = "events_attendee";
-	$sql = " id int(11) unsigned NOT NULL AUTO_INCREMENT,
+	$sql = "id int(11) unsigned NOT NULL AUTO_INCREMENT,
 					  registration_id VARCHAR(23) DEFAULT '0',
+					  is_primary tinyint(1) DEFAULT '0',
 					  lname VARCHAR(45) DEFAULT NULL,
 					  fname VARCHAR(45) DEFAULT NULL,
 					  address VARCHAR(45) DEFAULT NULL,
@@ -352,15 +425,17 @@ function events_data_tables_install() {
 					  email VARCHAR(45) DEFAULT NULL,
 					  phone VARCHAR(45) DEFAULT NULL,
 					  date timestamp NOT NULL default CURRENT_TIMESTAMP,
+					  price_option VARCHAR(100) DEFAULT NULL,
+					  orig_price decimal(20,2) DEFAULT '0.00',
+					  final_price decimal(20,2) DEFAULT '0.00',
+					  quantity tinyint(1) DEFAULT '0',
+					  total_cost decimal(20,2) DEFAULT '0.00',
+					  amount_pd decimal(20,2) DEFAULT '0.00',
+					  coupon_code VARCHAR(45) DEFAULT NULL,
 					  payment VARCHAR(45) DEFAULT NULL,
 					  payment_status VARCHAR(45) DEFAULT 'Incomplete',
 					  txn_type VARCHAR(45) DEFAULT NULL,
 					  txn_id VARCHAR(45) DEFAULT NULL,
-					  amount_pd decimal(20,2) DEFAULT '0.00',
-					  total_cost decimal(20,2) DEFAULT '0.00',
-					  price_option VARCHAR(100) DEFAULT NULL,
-					  coupon_code VARCHAR(45) DEFAULT NULL,
-					  quantity VARCHAR(5) DEFAULT '0',
 					  payment_date VARCHAR(45) DEFAULT NULL,
 					  event_id VARCHAR(45) DEFAULT NULL,
 					  event_time VARCHAR(15) DEFAULT NULL,
@@ -374,8 +449,8 @@ function events_data_tables_install() {
 					  checked_in_quantity INT(11) DEFAULT '0',
 					  hashSalt VARCHAR(250) DEFAULT NULL,
 					PRIMARY KEY  (id),
-					KEY `registration_id` (`registration_id`),
-					KEY `event_id` (`event_id`)";
+					KEY registration_id (registration_id),
+					KEY event_id (event_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_attendee_meta";
@@ -385,7 +460,7 @@ function events_data_tables_install() {
 			  meta_value longtext,
 			  date_added datetime DEFAULT NULL,
   			  PRIMARY KEY  (ameta_id),
-			  KEY `attendee_id` (`attendee_id`)";
+			  KEY attendee_id (attendee_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_detail";
@@ -451,21 +526,21 @@ function events_data_tables_install() {
 					likes int(22) DEFAULT NULL,
 					ticket_id int(22) DEFAULT '0',
 					submitted datetime NOT NULL,
-				 PRIMARY KEY  (`id`),
-				 KEY `event_code` (`event_code`),
-				 KEY `wp_user` (`wp_user`),
-				 KEY `event_name` (`event_name`),
-				 KEY `city` (`city`),
-				 KEY `state` (`state`),
-				 KEY `start_date` (`start_date`),
-				 KEY `end_date` (`end_date`),
-				 KEY `registration_start` (`registration_start`),
-				 KEY `registration_end` (`registration_end`),
-				 KEY `reg_limit` (`reg_limit`),
-				 KEY `event_status` (`event_status`),
-				 KEY `recurrence_id` (`recurrence_id`),
-				 KEY `submitted` (`submitted`),
-  				 KEY `likes` (`likes`)";
+				 PRIMARY KEY  (id),
+				 KEY event_code (event_code),
+				 KEY wp_user (wp_user),
+				 KEY event_name (event_name),
+				 KEY city (city),
+				 KEY state (state),
+				 KEY start_date (start_date),
+				 KEY end_date (end_date),
+				 KEY registration_start (registration_start),
+				 KEY registration_end (registration_end),
+				 KEY reg_limit (reg_limit),
+				 KEY event_status (event_status),
+				 KEY recurrence_id (recurrence_id),
+				 KEY submitted (submitted),
+  				 KEY likes (likes)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_meta";
@@ -475,8 +550,8 @@ function events_data_tables_install() {
 			  meta_value longtext,
 			  date_added datetime DEFAULT NULL,
   			  PRIMARY KEY  (emeta_id),
-			  KEY `event_id` (`event_id`),
-			  KEY `meta_key` (`meta_key`)";
+			  KEY event_id (event_id),
+			  KEY meta_key (meta_key)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_email";
@@ -485,8 +560,8 @@ function events_data_tables_install() {
 				email_subject VARCHAR(250) DEFAULT NULL,
 				email_text TEXT,
 				wp_user int(22) DEFAULT '1',
-				UNIQUE KEY id (id),
-				KEY `wp_user` (`wp_user`)";
+				PRIMARY KEY  (id),
+				KEY wp_user (wp_user)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_category_detail";
@@ -497,9 +572,9 @@ function events_data_tables_install() {
 				category_meta TEXT,
 				display_desc VARCHAR (4) DEFAULT NULL,
 				wp_user int(22) DEFAULT '1',
-				UNIQUE KEY id (id),
-				KEY `category_identifier` (`category_identifier`),
-				KEY `wp_user` (`wp_user`)";
+				PRIMARY KEY  (id),
+				KEY category_identifier (category_identifier),
+				KEY wp_user (wp_user)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_category_rel";
@@ -507,7 +582,7 @@ function events_data_tables_install() {
 				event_id int(11) DEFAULT NULL,
 				cat_id int(11) DEFAULT NULL,
 				PRIMARY KEY  (id),
-			  	KEY `event_id` (`event_id`)";
+			  	KEY event_id (event_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_venue";
@@ -522,9 +597,9 @@ function events_data_tables_install() {
 				country VARCHAR(250) DEFAULT NULL,
 				meta TEXT,
 				wp_user int(22) DEFAULT '1',
-				UNIQUE KEY id (id),
-			  	KEY `identifier` (`identifier`),
-				KEY `wp_user` (`wp_user`)";
+				PRIMARY KEY  (id),
+			  	KEY identifier (identifier),
+				KEY wp_user (wp_user)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_venue_rel";
@@ -532,25 +607,25 @@ function events_data_tables_install() {
 				event_id int(11) DEFAULT NULL,
 				venue_id int(11) DEFAULT NULL,
 				PRIMARY KEY  (id),
-			  	KEY `event_id` (`event_id`)";
+			  	KEY event_id (event_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_locale";
-	$sql = "`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-			  `name` varchar(250) DEFAULT NULL,
-			  `identifier` varchar(26) DEFAULT '0',
-			  `wp_user` int(22) DEFAULT '1',
-			  UNIQUE KEY `id` (`id`),
-			  KEY `identifier` (`identifier`),
-			  KEY `wp_user` (`wp_user`)";
+	$sql = "id int(11) unsigned NOT NULL AUTO_INCREMENT,
+			  name varchar(250) DEFAULT NULL,
+			  identifier varchar(26) DEFAULT '0',
+			  wp_user int(22) DEFAULT '1',
+			  PRIMARY KEY  (id),
+			  KEY identifier (identifier),
+			  KEY wp_user (wp_user)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_locale_rel";
-	$sql = "`id` int(11) NOT NULL AUTO_INCREMENT,
-				`venue_id` int(11) DEFAULT NULL,
-				`locale_id` int(11) DEFAULT NULL,
-				PRIMARY KEY  (`id`),
-			  	KEY `venue_id` (`venue_id`)";
+	$sql = "id int(11) NOT NULL AUTO_INCREMENT,
+				venue_id int(11) DEFAULT NULL,
+				locale_id int(11) DEFAULT NULL,
+				PRIMARY KEY  (id),
+			  	KEY venue_id (venue_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_personnel";
@@ -561,9 +636,9 @@ function events_data_tables_install() {
 				email TEXT,
 				meta TEXT,
 				wp_user int(22) DEFAULT '1',
-				UNIQUE KEY id (id),
-			  	KEY `identifier` (`identifier`),
-			  	KEY `wp_user` (`wp_user`)";
+				PRIMARY KEY  (id),
+			  	KEY identifier (identifier),
+			  	KEY wp_user (wp_user)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_personnel_rel";
@@ -571,8 +646,8 @@ function events_data_tables_install() {
 				event_id int(11) DEFAULT NULL,
 				person_id int(11) DEFAULT NULL,
 				PRIMARY KEY  (id),
-			  	KEY `event_id` (`event_id`),
-			  	KEY `person_id` (`person_id`)";
+			  	KEY event_id (event_id),
+			  	KEY person_id (person_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_discount_rel";
@@ -580,7 +655,7 @@ function events_data_tables_install() {
 				event_id int(11) DEFAULT NULL,
 				discount_id int(11) DEFAULT NULL,
 				PRIMARY KEY  (id),
-			  	KEY `event_id` (`event_id`)";
+			  	KEY event_id (event_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_start_end";
@@ -590,7 +665,7 @@ function events_data_tables_install() {
 				end_time varchar(10) DEFAULT NULL,
 				reg_limit int (15) DEFAULT '0',
 				PRIMARY KEY  (id),
-			  	KEY `event_id` (`event_id`)";
+			  	KEY event_id (event_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_prices";
@@ -605,7 +680,7 @@ function events_data_tables_install() {
 				max_qty int(7) DEFAULT '0',
 				max_qty_members int(7) DEFAULT '0',
 				PRIMARY KEY  (id),
-			  	KEY `event_id` (`event_id`)";
+			  	KEY event_id (event_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_discount_codes";
@@ -617,20 +692,15 @@ function events_data_tables_install() {
 				each_attendee VARCHAR(1) DEFAULT NULL,
 				wp_user int(22) DEFAULT '1',
 				PRIMARY KEY  (id),
-			  	KEY `coupon_code` (`coupon_code`),
-			  	KEY `wp_user` (`wp_user`)";
+			  	KEY coupon_code (coupon_code),
+			  	KEY wp_user (wp_user)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_multi_event_registration_id_group";
 	$sql = "primary_registration_id varchar(255) DEFAULT NULL,
-			registration_id varchar(255) DEFAULT NULL  ";
-	event_espresso_run_install($table_name, $table_version, $sql);
-
-	$table_name = "events_attendee_cost";
-	$sql = "attendee_id int(11) DEFAULT NULL,
-			cost decimal(20,2) DEFAULT '0.00',
-			quantity int(11) DEFAULT NULL,
-			KEY `attendee_id` (`attendee_id`)";
+			registration_id varchar(255) DEFAULT NULL,
+			KEY primary_registration_id (primary_registration_id),
+			KEY registration_id (registration_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_question";
@@ -645,9 +715,9 @@ function events_data_tables_install() {
 			admin_only ENUM( 'Y', 'N' ) NOT NULL DEFAULT 'N',
 			wp_user int(22) DEFAULT '1',
 			PRIMARY KEY  (id),
-			KEY `wp_user` (`wp_user`),
-			KEY `system_name` (`system_name`),
-			KEY `admin_only` (`admin_only`)";
+			KEY wp_user (wp_user),
+			KEY system_name (system_name),
+			KEY admin_only (admin_only)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_qst_group";
@@ -661,8 +731,8 @@ function events_data_tables_install() {
 				system_group TINYINT( 1 ) NOT NULL DEFAULT '0',
 				wp_user int(22) DEFAULT '1',
 				PRIMARY KEY  (id),
-			  	KEY `system_group` (`system_group`),
-			  	KEY `wp_user` (`wp_user`)";
+			  	KEY system_group (system_group),
+			  	KEY wp_user (wp_user)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_qst_group_rel";
@@ -670,8 +740,8 @@ function events_data_tables_install() {
 				group_id int(11)  NOT NULL,
 				question_id int(11) NOT NULL,
 				PRIMARY KEY  (id),
-			  	KEY `group_id` (`group_id`),
-			  	KEY `question_id` (`question_id`)";
+			  	KEY group_id (group_id),
+			  	KEY question_id (question_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
 
 	$table_name = "events_answer";
@@ -681,9 +751,11 @@ function events_data_tables_install() {
 			question_id int(11) NOT NULL default '0',
 			answer text NOT NULL,
 			PRIMARY KEY  (id),
-			KEY `registration_id` (`registration_id`),
-			KEY `attendee_id` (`attendee_id`)";
+			KEY registration_id (registration_id),
+			KEY attendee_id (attendee_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
+
+
 
 	events_organization_tbl_install();
 	event_espresso_install_system_names();
@@ -694,4 +766,7 @@ function events_data_tables_install() {
 	espresso_answer_fix();
 	espresso_added_by_admin_session_id_fix();
 	espresso_add_cancel_shortcode();
+	
+	add_option( 'espresso_db_update', EVENT_ESPRESSO_VERSION, '', 'no' );
+
 }

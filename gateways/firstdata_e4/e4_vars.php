@@ -6,7 +6,7 @@ function espresso_display_firstdata_e4($payment_data) {
 	include_once ('FirstDataE4.php');
 
 	global $org_options;
-	$myE4 = new E4(); // initiate an instance of the class
+	$myE4 = new Espresso_E4(); // initiate an instance of the class
 	echo '<!--Event Espresso E4.com Gateway Version ' . $myE4->gateway_version . '-->';
 	$firstdata_e4_settings = get_option('event_espresso_firstdata_e4_settings');
 	$firstdata_e4_login_id = empty($firstdata_e4_settings['firstdata_e4_login_id']) ? '' : $firstdata_e4_settings['firstdata_e4_login_id'];
@@ -63,20 +63,21 @@ function espresso_display_firstdata_e4($payment_data) {
 		$myE4->submitPayment(); //Enable auto redirect to payment site
 	} else {
 		if (empty($firstdata_e4_settings['button_url'])) {
-			//$button_url = EVENT_ESPRESSO_GATEWAY_URL . "firstdata_e4/standard_button.gif";
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_e4/standard_button.gif")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_e4/standard_button.gif";
+			//$button_url = EVENT_ESPRESSO_GATEWAY_URL . "firstdata_e4/firstdata-logo.png";
+			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_e4/firstdata-logo.png")) {
+				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_e4/firstdata-logo.png";
 			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/firstdata_e4/standard_button.gif";
+				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/firstdata_e4/firstdata-logo.png";
 			}
 		} elseif (file_exists($firstdata_e4_settings['button_url'])) {
 			$button_url = $firstdata_e4_settings['button_url'];
 		} else {
 			//If no other buttons exist, then use the default location
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/firstdata_e4/standard_button.gif";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/firstdata_e4/firstdata-logo.png";
 		}
 		$myE4->submitButton($button_url, 'firstdata_e4'); //Display payment button
 	}
+
 
 	if ($use_sandbox) {
 		echo '<p>Test credit card # 4007000000027</p>';

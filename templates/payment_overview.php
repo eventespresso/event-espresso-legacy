@@ -1,3 +1,5 @@
+<?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	?>
 <div class="espresso_payment_overview event-display-boxes ui-widget" >
   <h3 class="section-heading ui-widget-header ui-corner-top">
 		<?php _e('Payment Overview', 'event_espresso'); ?>
@@ -36,7 +38,6 @@
 		<tr>
 			<?php
 			echo $txn_id == '' ? '' : '<td>' . __('Transaction ID:', 'event_espresso') . '</td> <td>' . $txn_id . '</td>';
-			echo apply_filters('filter_hook_espresso_display_add_to_calendar_by_attendee_id', $attendee_id);
 			?>
 		</tr>
 	</table>

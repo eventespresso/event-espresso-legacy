@@ -21,6 +21,7 @@ $values=array(
               <?php _e(' Default Surcharge (this value will be automatically filled in for each price type when creating an event): ','event_espresso'); ?>
             </label>
             <input type="text" name="surcharge" size="2" value="<?php echo (!is_numeric($org_options['surcharge']))?'0.00':$org_options['surcharge'];?>" />
+			<?php $org_options['surcharge_type'] = isset( $org_options['surcharge_type'] ) ? $org_options['surcharge_type'] : 'flat_rate'; ?>
             <select name="surcharge_type">
               <option value = "flat_rate" <?php selected($org_options['surcharge_type'], 'flat_rate') ?>>
               <?php _e('Flat Rate', 'event_espresso'); ?>
@@ -30,7 +31,7 @@ $values=array(
               </option>
             </select>
             <label for="surcharge_text">
-              <?php _e('Display text (eg. Surcharge or Service Fee:','event_espresso'); ?>
+              <?php _e('Display text (eg. Surcharge or Service Fee):','event_espresso'); ?>
             </label>
             <input type="text" name="surcharge_text" value="<?php echo isset($org_options['surcharge_text'])? $org_options['surcharge_text']:__('Surcharge', 'event_espresso');?>" />
           </li>
@@ -68,16 +69,39 @@ $values=array(
             <?php echo select_input('use_event_timezones', $values, isset($org_options['use_event_timezones']) ? $org_options['use_event_timezones'] : ''); ?> <br />
           </li>
           <li>
+            <label for="skip_confirmation_page">
+              <?php _e('Skip Confirmation Page during Registration Process?','event_espresso'); ?>
+            </label>
+            <?php echo select_input('skip_confirmation_page', $values, isset($org_options['skip_confirmation_page']) ? $org_options['skip_confirmation_page'] : ''); ?> 
+		 </li>
+         <li>
             <label for="use_attendee_pre_approval">
               <?php _e('Enable attendee pre-approval feature?','event_espresso'); ?>
             </label>
-            <?php echo select_input('use_attendee_pre_approval', $values, isset($org_options['use_attendee_pre_approval']) ? $org_options['use_attendee_pre_approval'] : ''); ?> </li>
+            <?php echo select_input('use_attendee_pre_approval', $values, isset($org_options['use_attendee_pre_approval']) ? $org_options['use_attendee_pre_approval'] : ''); ?> 
+		 </li>
           <li>
             <label>
               <?php _e('Show payment options for "Pending Payments" on the Payment Overview page?','event_espresso'); ?>
             </label>
             <?php echo select_input('show_pending_payment_options', $values, isset($org_options['show_pending_payment_options']) ? $org_options['show_pending_payment_options'] : ''); ?> <br />
           </li>
+		  <?php if ( function_exists( 'event_espresso_coupon_payment_page' ) ) : ?>
+		  <li>
+            <label>
+              <?php _e('Allow discounts in the shopping cart?','event_espresso'); ?>
+            </label>
+            <?php echo select_input('allow_mer_discounts', $values, isset($org_options['allow_mer_discounts']) ? $org_options['allow_mer_discounts'] : ''); ?> <br />
+          </li>
+		  <?php endif; ?>
+		  <?php if ( function_exists( 'event_espresso_groupon_payment_page' ) ) : ?>
+		   <li>
+            <label>
+              <?php _e('Allow voucher codes in the shopping cart?','event_espresso'); ?>
+            </label>
+            <?php echo select_input('allow_mer_vouchers', $values, isset($org_options['allow_mer_vouchers']) ? $org_options['allow_mer_vouchers'] : ''); ?> <br />
+          </li>
+		  <?php endif; ?>
           <li>
             <label>
               <?php _e('Use the Venue Manager?','event_espresso'); ?>
@@ -111,7 +135,7 @@ $values=array(
                           <p>
                             <?php _e('Promote Event Espresso and earn cash!', 'event_espresso'); ?>
                           </p>
-                          <p>Get paid by helping other event mangers understand the power of Event Espresso by becoming an affiliate.</p><ol><li>Go to the <a href="https://www.e-junkie.com/affiliates/?cl=113214&amp;ev=5649f286f0" target="_blank">e-junkie site</a> to get your affiliate link</li><li>All affiliates get 20% from each sale</li><li>Payments are made only through paypal</li><li>Payments are sent at the beginning of each month for the sales of  the previous month</li><li>Payments will be made regardless of the sales volume. There is no  minimum limit</li><li>You can create your own banner or use the ones below</li></ol>
+                          <p>Get paid by helping other event mangers understand the power of Event Espresso by becoming an affiliate.</p><ol><li>Go to the <a href="http://eventespresso.com/wp-content/plugins/wp-affiliate-platform/affiliates/register.php" target="_blank">affiliate sign up page</a> to get your affiliate link</li><li>All affiliates get 20% from each sale</li><li>Payments are made only through paypal</li><li>Payments are sent at the beginning of each month for the sales of  the previous month</li><li>Payments will be made regardless of the sales volume. There is no  minimum limit</li><li>You can create your own banner or use the ones below</li></ol>
                         <p>
                             <a href="http://eventespresso.com/affiliates/" target="_blank"><?php _e('Banners and More Info >>', 'event_espresso'); ?></a>
                           </p>

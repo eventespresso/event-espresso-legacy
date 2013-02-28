@@ -30,7 +30,7 @@ function espresso_process_aim($payment_data) {
 	}
 
 //start transaction
-	$transaction = new AuthorizeNetAIM($authnet_aim_login_id, $authnet_aim_transaction_key);
+	$transaction = new Espresso_AuthorizeNetAIM($authnet_aim_login_id, $authnet_aim_transaction_key);
 	echo '<!--Event Espresso Authorize.net AIM Gateway Version ' . $transaction->gateway_version . '-->';
 	$transaction->amount = $_POST['amount'];
 	$transaction->card_num = $_POST['card_num'];
@@ -49,6 +49,23 @@ function espresso_process_aim($payment_data) {
 		$transaction->test_request = "true";
 	}
 
+	$sql = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id='" . $attendee_id . "'";
+	$session_id = $wpdb->get_var($sql);
+	$sql = "SELECT a.final_price, a.quantity, ed.event_name, a.price_option, a.fname, a.lname FROM " . EVENTS_ATTENDEE_TABLE . " a JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
+	$sql .= " WHERE attendee_session='" . $session_id . "' ORDER BY a.id ASC";
+	$items = $wpdb->get_results($sql);
+	foreach ($items as $key=>$item) {
+		$item_num=$key+1;
+		$transaction->addLineItem(
+				$item_num,
+				substr_replace($item->event_name, '...', 28),
+				substr($item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname, 0, 255),
+				$item->quantity,
+				$item->final_price,
+				FALSE
+		);
+	}
+	
 	$payment_data['txn_type'] = 'authorize.net AIM';
 	$payment_data['payment_status'] = 'Incomplete';
 	$payment_data['txn_id'] = 0;

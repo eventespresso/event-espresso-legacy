@@ -27,8 +27,19 @@ if (!function_exists('event_espresso_get_event_details_ajx')) {
 if (!function_exists('event_espresso_get_event_details')) {
 
 	function event_espresso_get_event_details( $attributes ) {
-		//echo $sql; 
+
 		global $wpdb, $org_options, $events_in_session;
+		
+		$template_name = ( 'event_list_display.php' );
+		$path = locate_template( $template_name );
+		
+		$event_page_id = $org_options['event_page_id'];
+		$currency_symbol = isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : '';
+		$ee_search = isset($_REQUEST['ee_search']) && $_REQUEST['ee_search'] == 'true' && isset($_REQUEST['ee_name']) && !empty($_REQUEST['ee_name']) ? true : false;
+		$ee_search_string = isset($_REQUEST['ee_name']) && !empty($_REQUEST['ee_name']) ? sanitize_text_field( $_REQUEST['ee_name'] ) : '';
+		
+		
+		//Check for Multi Event Registration
 		$multi_reg = false;
 			$category_name = '';
 		if (function_exists('event_espresso_multi_reg_init')) {
@@ -60,7 +71,35 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		// now extract shortcode attributes
 		extract($attributes);
-		$sql = "SELECT e.*, ese.start_time, ese.end_time, p.event_cost ";
+
+		//BEGIN CATEGORY MODIFICATION : using events_detail_table.category_id instead of events_category_table.category_identifier in order to filter events with one OR MORE categories
+		//Let's check if there's one or more categories specified for the events of the event list (based on the use of "," as a separator) and store them in the $cat array.
+		
+		if(strstr($category_identifier,',')){
+			$array_cat=explode(",",$category_identifier);
+			$cat=array_map('trim', $array_cat);
+		} else {
+   			$cat = array('0' => $category_identifier);
+		}
+		$category_detail_id = '';
+		
+		//For every category specified in the shortcode, let's get the corresponding category_id et create a well-formatted string (id,n id)
+		foreach($cat as $k=>$v){
+
+			$sql_get_category_detail_id="SELECT id FROM ". EVENTS_CATEGORY_TABLE . " WHERE category_identifier = '".$v."'";
+			$category_detail_id .= $wpdb->get_var( $sql_get_category_detail_id ).",";
+		}
+
+		$cleaned_string_cat = substr($category_detail_id, 0, -1);
+		$tmp=explode(",",$cleaned_string_cat);
+		sort($tmp);
+		$cleaned_string_cat=implode(",", $tmp);
+		trim($cleaned_string_cat);
+		$category_id=$cleaned_string_cat;
+
+		//Create the query
+		$DISTINCT = $ee_search == true ? "DISTINCT" : '';
+		$sql = "SELECT $DISTINCT e.*, ese.start_time, ese.end_time, p.event_cost ";
 		
 		//Category sql
 		$sql .= ($category_identifier != NULL && !empty($category_identifier))? ", c.category_name, c.category_desc, c.display_desc, c.category_identifier": '';
@@ -86,7 +125,12 @@ if (!function_exists('event_espresso_get_event_details')) {
 		$sql .= " WHERE is_active = 'Y' ";
 		
 		//Category sql
-		$sql .= ($category_identifier !== NULL  && !empty($category_identifier))? " AND c.category_identifier = '" . $category_identifier . "' ": '';
+		//$sql .= ($category_identifier !== NULL  && !empty($category_identifier))? " AND c.category_identifier = '" . $category_identifier . "' ": '';
+
+		//We filter the events based on the events_detail_table.category_id instead of the category_identifier
+		$sql .= ($category_id !== NULL  && !empty($category_id))? " AND e.category_id IN (" . $category_id . ") ": '';
+
+		//END CATEGORY MODIFICATION
 		
 		//Staff sql
 		$sql .= ($staff_id !== NULL  && !empty($staff_id))? " AND st.id = '" . $staff_id . "' ": '';
@@ -106,15 +150,33 @@ if (!function_exists('event_espresso_get_event_details')) {
 		}
 		//echo '<p>'.$order_by.'</p>';
 		$sql .= $show_recurrence == 'false' ? " AND e.recurrence_id = '0' " : '';
+		
+		//Search query
+		if ( $ee_search ){
+			// search for full original string within bracketed search options
+			$sql .= " AND ( e.event_name LIKE '%$ee_search_string%' ";
+			// array of common words that we don't want to waste time looking for
+			$words_to_strip = array( ' the ', ' a ', ' or ', ' and ' );
+			$words = str_replace( $words_to_strip, ' ', $ee_search_string );
+			// break words array into individual strings
+			$words = explode( ' ', $words );
+			// search for each word  as an OR statement
+			foreach ( $words as $word ) {
+				$sql .= " OR e.event_name LIKE '%$word%' ";			
+			}
+			// close the search options
+			$sql .= " ) ";
+		}
+		
 		$sql .= " GROUP BY e.id ";
 		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$sort." " : " ORDER BY date(start_date), id ASC ";
 		$sql .= $limit > 0 ? ' LIMIT 0, '.$limit : '';  
 		
 		//echo $sql;
 		//echo 'This page is located in ' . get_option( 'upload_path' );
-		$event_page_id = $org_options['event_page_id'];
-		$currency_symbol = isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : '';
-		$events = $wpdb->get_results($sql);
+		
+		$events = $wpdb->get_results( $sql );
+
 		$category_id = isset($wpdb->last_result[0]->id) ? $wpdb->last_result[0]->id : '';
 		$category_name = isset($wpdb->last_result[0]->category_name) ? $wpdb->last_result[0]->category_name : '';
 		$category_identifier = isset($wpdb->last_result[0]->category_identifier) ? $wpdb->last_result[0]->category_identifier : '';
@@ -130,6 +192,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		//Debug
 		//var_dump($events);
+		
 		if ( $use_wrapper ) {
 			echo "<div id='event_wrapper'>";
 		}
@@ -271,12 +334,13 @@ if (!function_exists('event_espresso_get_event_details')) {
 			}
 
 			//Address formatting
-			$location = ($event_address != '' ? $event_address : '') . ($event_address2 != '' ? '<br />' . $event_address2 : '') . ($event_city != '' ? '<br />' . $event_city : '') . ($event_state != '' ? ', ' . $event_state : '') . ($event_zip != '' ? '<br />' . $event_zip : '') . ($event_country != '' ? '<br />' . $event_country : '');
+			$location = (!empty($event_address) ? $event_address : '') . (!empty($event_address2) ? '<br />' . $event_address2 : '') . (!empty($event_city) ? '<br />' . $event_city : '') . (!empty($event_state)  ? ', ' . $event_state : '') . (!empty($event_zip) ? '<br />' . $event_zip : '') . (!empty($event_country) ? '<br />' . $event_country : '');
 
 			//Google map link creation
 			$google_map_link = espresso_google_map_link(array('address' => $event_address, 'city' => $event_city, 'state' => $event_state, 'zip' => $event_zip, 'country' => $event_country, 'text' => 'Map and Directions', 'type' => 'text'));
 			global $all_meta;
 			$all_meta = array(
+				'event_id' => $event_id,
 				'event_name' => stripslashes_deep($event_name),
 				'event_desc' => stripslashes_deep($event_desc),
 				'event_address' => $event_address,
@@ -284,8 +348,17 @@ if (!function_exists('event_espresso_get_event_details')) {
 				'event_city' => $event_city,
 				'event_state' => $event_state,
 				'event_zip' => $event_zip,
+				'event_country' => $venue_country,
+				'venue_title' => $venue_title,
+                'venue_address' => $venue_address,
+                'venue_address2' => $venue_address2,
+                'venue_city' => $venue_city,
+                'venue_state' => $venue_state,
+                'venue_country' => $venue_country,
+				'location' => $location,
 				'is_active' => $event->is_active,
 				'event_status' => $event->event_status,
+				'contact_email' => empty($event->alt_email) ? $org_options['contact_email'] : $event->alt_email,
 				'start_time' => empty($event->start_time) ? '' : $event->start_time,
 				'registration_startT' => $event->registration_startT,
 				'registration_start' => $registration_start,
@@ -296,6 +369,8 @@ if (!function_exists('event_espresso_get_event_details')) {
 				'start_date' => event_date_display($start_date, get_option('date_format')),
 				'end_date' => event_date_display($end_date, get_option('date_format')),
 				'time' => empty($event->start_time) ? '' : $event->start_time,
+				'start_time' => empty($event->start_time) ? '' : $event->start_time,
+				'end_time' => empty($event->end_time) ? '' : $event->end_time,
 				'google_map_link' => $google_map_link,
 				'price' => empty($event->event_cost) ? '' : $event->event_cost,
 				'event_cost' => empty($event->event_cost) ? '' : $event->event_cost,
@@ -309,17 +384,17 @@ if (!function_exists('event_espresso_get_event_details')) {
 
 			//This can be used in place of the registration link if you are usign the external URL feature
 			$registration_url = $externalURL != '' ? $externalURL : espresso_reg_url($event_id);
-			if (!is_user_logged_in() && defined('EVENTS_MEMBER_REL_TABLE') && $member_only == 'Y') {
-				//Display a message if the user is not logged in.
-				//_e('Member Only Event. Please ','event_espresso') . event_espresso_user_login_link() . '.';
-			} else {
 				//Serve up the event list
 				//As of version 3.0.17 the event list details have been moved to event_list_display.php
 
 				if ($allow_override == 1) {
 					//Uncomment to show active status array
 					//print_r( event_espresso_get_is_active($event_id));
-					include('event_list_display.php');
+					if ( empty( $path ) ) {
+						include( $template_name );
+					} else {
+						include( $path );
+					}
 				} else {
 					switch (event_espresso_get_status($event_id)) {
 						case 'NOT_ACTIVE':
@@ -335,7 +410,11 @@ if (!function_exists('event_espresso_get_event_details')) {
 								//print_r( event_espresso_get_is_active($event_id));
 
 								echo '<div class="pending_event">';
-								include('event_list_display.php');
+								if ( empty( $path ) ) {
+								  include( $template_name );
+								} else {
+								  include( $path );
+								}
 								echo '</div>';
 							}
 							break;
@@ -344,11 +423,15 @@ if (!function_exists('event_espresso_get_event_details')) {
 
 							//Uncomment to show active status array
 							//print_r( event_espresso_get_is_active($event_id));
-							include('event_list_display.php');
+							if ( empty( $path ) ) {
+								include( $template_name );
+							} else {
+								include( $path );
+							}
 							break;
 					}
 				}
-			}
+			
 		}
 		echo "</div>";
 		echo "</div>";

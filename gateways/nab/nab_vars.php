@@ -2,7 +2,7 @@
 
 function espresso_display_nab($payment_data) {
 	include_once ('Nab.php');
-	$mynab = new nab(); // initiate an instance of the class
+	$mynab = new Espresso_nab(); // initiate an instance of the class
 	global $org_options;
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	$nab_result_url = home_url() . '/?page_id=' . $org_options['return_url'] . '&id=' . $payment_data['attendee_id'] . '&r_id=' . $payment_data['registration_id'] . '&event_id=' . $payment_data['event_id'] . '&attendee_action=post_payment&form_action=payment&type=nab';
@@ -27,44 +27,50 @@ function espresso_display_nab($payment_data) {
 	$mynab->addField('EPS_TIMESTAMP', $timestamp);
 
 	?>
-	<form method="post" action="<?php echo $nab_post_url; ?>">
-		<input type="hidden" name="EPS_MERCHANT" value="<?php echo $nab_id; ?>">
-		<input type="hidden" name="EPS_PASSWORD" value="<?php echo $nab_pass; ?>">
-		<input type="hidden" name="EPS_REFERENCEID" value="<?php echo $payment_data['registration_id']; ?>">
-		<input type="hidden" name="EPS_AMOUNT" value="<?php echo number_format($payment_data['event_cost'], 2, '.', ''); ?>">
-		<input type="hidden" name="EPS_TIMESTAMP" value="<?php echo $timestamp; ?>">
-		<input type="hidden" name="EPS_FINGERPRINT" value="<?php echo $mynab->prepareSubmit(); ?>">
-		<input type="hidden" name="EPS_RESULTURL" value="<?php echo $nab_result_url; ?>">
-		<input type="hidden" name="EPS_FIRSTNAME" value="<?php echo $payment_data['fname']; ?>">
-		<input type="hidden" name="EPS_LASTNAME" value="<?php echo $payment_data['lname']; ?>">
-		<input type="hidden" name="EPS_ZIPCODE" value="<?php echo $payment_data['zip']; ?>">
-		<input type="hidden" name="EPS_TOWN" value="<?php echo $payment_data['city']; ?>">
-		<input type="hidden" name="EPS_EMAILADDRESS" value="<?php echo $payment_data['attendee_email']; ?>">
-		<table>
-			<tbody>
-				<tr>
-					<td colspan="2"><b>Enter Account Details</b></td>
-				</tr>
-				<tr>
-					<td>Card Type :</td>
-					<td><select name="EPS_CARDTYPE" class="inputbox" style="width:167px">
-							<option value="visa">Visa</option>
-							<option value="mastercard">MasterCard</option>
-							<option value="amex">Amex</option>
-						</select></td>
-				</tr>
-				<tr>
-					<td>Card Number :</td>
-					<td><input type="text" class="inputbox" name="EPS_CARDNUMBER" size="27"/></td>
-				</tr>
-				<tr>
-					<td> Card CCV :</td>
-					<td><input type="text"   class="inputbox" name="EPS_CCV" size="27" /></td>
-				</tr>
-				<tr>
-					<td>Card Expires :</td>
-					<td><select name="EPS_EXPIRYMONTH" class="inputbox">
-							<option value="">- Month -</option>
+<div id="nab-payment-option-dv" class="payment-option-dv">
+
+	<a id="nab-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="nab-payment-option-form" style="cursor:pointer;">
+		<img alt="Pay using a Credit Card" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/pay-by-credit-card.png">
+	</a>	
+
+	<div id="nab-payment-option-form-dv" class="hide-if-js">	
+	<div class = "event_espresso_form_wrapper">
+		<form method="post" action="<?php echo $nab_post_url; ?>">
+			<input type="hidden" name="EPS_MERCHANT" value="<?php echo $nab_id; ?>">
+			<input type="hidden" name="EPS_PASSWORD" value="<?php echo $nab_pass; ?>">
+			<input type="hidden" name="EPS_REFERENCEID" value="<?php echo $payment_data['registration_id']; ?>">
+			<input type="hidden" name="EPS_AMOUNT" value="<?php echo number_format($payment_data['event_cost'], 2, '.', ''); ?>">
+			<input type="hidden" name="EPS_TIMESTAMP" value="<?php echo $timestamp; ?>">
+			<input type="hidden" name="EPS_FINGERPRINT" value="<?php echo $mynab->prepareSubmit(); ?>">
+			<input type="hidden" name="EPS_RESULTURL" value="<?php echo $nab_result_url; ?>">
+			<input type="hidden" name="EPS_FIRSTNAME" value="<?php echo $payment_data['fname']; ?>">
+			<input type="hidden" name="EPS_LASTNAME" value="<?php echo $payment_data['lname']; ?>">
+			<input type="hidden" name="EPS_ZIPCODE" value="<?php echo $payment_data['zip']; ?>">
+			<input type="hidden" name="EPS_TOWN" value="<?php echo $payment_data['city']; ?>">
+			<input type="hidden" name="EPS_EMAILADDRESS" value="<?php echo $payment_data['attendee_email']; ?>">
+
+			<fieldset id="nab-billing-info-dv">
+				<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso') ?></h4>
+				<p>
+					<label for="EPS_CARDTYPE"><?php _e('Card Type:', 'event_espresso');?></label>
+					<select name="EPS_CARDTYPE" class="inputbox" style="width:167px">
+						<option value="visa"><?php _e('Visa', 'event_espresso');?></option>
+						<option value="mastercard"><?php _e('MasterCard', 'event_espresso');?></option>
+						<option value="amex"><?php _e('Amex', 'event_espresso');?></option>
+					</select>
+				</p>
+				<p>
+					<label for="EPS_CARDNUMBER"><?php _e('Card Number:', 'event_espresso');?></label>
+						<input type="text" class="inputbox" name="EPS_CARDNUMBER" size="27"/>
+				</p>
+				<p>
+					<label for="EPS_CCV"><?php _e('Card CCV:', 'event_espresso');?></label>
+					<input type="text"   class="inputbox" name="EPS_CCV" size="27" />
+				</p>
+				<p>
+					<label for="EPS_EXPIRYMONTH"><?php _e('Card Expires:', 'event_espresso');?></label>
+					<select name="EPS_EXPIRYMONTH" class="inputbox">
+							<option value="">- <?php _e('Month', 'event_espresso');?> -</option>
 							<option value="1">01</option>
 							<option value="2">02</option>
 							<option value="3">03</option>
@@ -80,7 +86,7 @@ function espresso_display_nab($payment_data) {
 						</select>
 						&nbsp;
 						<select name="EPS_EXPIRYYEAR" class="inputbox">
-							<option value="">- Year -</option>
+							<option value="">- <?php _e('Year', 'event_espresso');?> -</option>
 							<option value="2009">2009</option>
 							<option value="2010">2010</option>
 							<option value="2011">2011</option>
@@ -98,14 +104,13 @@ function espresso_display_nab($payment_data) {
 							<option value="2023">2023</option>
 							<option value="2024">2024</option>
 							<option value="2025">2025</option>
-						</select></td>
-				</tr>
-				<tr height=''50px''>
-						<td align="left" colspan="2"><input type="submit" value="Post Payment" class="submit_button"/></td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
+						</select>
+				</p>
+				<p class="event_form_submit">
+					<input type="submit" value="<?php _e('Complete Purchase', 'event_espresso');?>" class="submit-payment-btn"/>
+				</p>
+			</fieldset>
+		</form>
 	<?php
 	wp_deregister_script('jquery.validate.pack');
 
@@ -114,6 +119,17 @@ function espresso_display_nab($payment_data) {
 		echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3>';
 		$mynab->dump_fields();
 	}
+?>	
+
+		<br/>
+		<p class="choose-diff-pay-option-pg">
+			<a class="hide-the-displayed" rel="nab-payment-option-form" style="cursor:pointer;"><?php _e('Choose a different payment option', 'event_espresso'); ?></a>
+		</p>
+
+	</div>
+	</div>
+</div>
+<?php
 }
 
 add_action('action_hook_espresso_display_onsite_payment_gateway', 'espresso_display_nab');
