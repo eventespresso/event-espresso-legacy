@@ -46,7 +46,7 @@ function event_espresso_psigate_payment_settings() {
 		<div class="postbox <?php echo $postbox_style; ?>">
 			<div title="Click to toggle" class="handlediv"><br /></div>
 			<h3 class="hndle">
-				<?php _e('PSiGate Settings', 'event_espresso'); ?>
+				<?php _e('PSiGate / Merchant Account Settings', 'event_espresso'); ?>
 			</h3>
 			<div class="inside">
 				<div class="padding">
@@ -154,7 +154,7 @@ function event_espresso_display_psigate_settings() {
 						
 						<li>
 							<label for="button_url">
-								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=psigate_button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input type="text" name="button_url" size="34" value="<?php echo $psigate_settings['button_url']; ?>" />
 							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>  </li><li>
@@ -204,6 +204,11 @@ function event_espresso_display_psigate_settings() {
 	<div id="no_shipping" style="display:none">
 		<h2><?php _e('Shipping Address', 'event_espresso'); ?></h2>
 		<p><?php _e('By default, PSiGate will display shipping address information on the PSiGate payment screen. If you plan on shipping items to a registrant (shirts, invoices, etc) then use this option. Otherwise it should not be used, as it will require a shipping address when someone registers for an event.', 'event_espresso'); ?></p>
+	</div>
+	<div id="psigate_button_image" style="display:none">
+		<h2><?php _e('Button Image URL', 'event_espresso'); ?></h2>
+		<p><?php echo sprintf(__('You may specify the URL of any image you want to be displayed to users when selecting their payment gateway.
+			By default, the PSiGate icon is selected. We also have a merchant accounts image available at %s', 'event_espresso'), EVENT_ESPRESSO_GATEWAY_URL . "/psigate/merchant-accounts-logo.gif"); ?></p>
 	</div>
 	<?php
 }
