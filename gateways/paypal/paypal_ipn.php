@@ -37,7 +37,20 @@ function espresso_process_paypal($payment_data) {
 				}
 				wp_mail($payment_data['contact'], $subject, $body);
 			}
-		} else {
+		} elseif(in_array($myPaypal->ipnData['payment_status'],array( 'Refunded', 'Reversed','Canceled_Reversal')) ){
+			/*$subject = 'Payment Refund Notice from PayPal';
+			$body = "A payment has been refunded or reversed:\n";
+			$body .= "Payer's Email: " . $myPaypal->ipnData['payer_email'] . " on " . date('m/d/Y');
+			$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+			foreach ($myPaypal->ipnData as $key => $value) {
+				$body .= "\n$key: $value\n";
+			}
+			$body .= "Event Espresso does not handle payment refunds automatically. You will want to verify that the registration for this
+				user has been cancelled here ".site_url()."/wp-admin/";
+			wp_mail($payment_data['contact'], $subject, $body);*/
+			die;
+		}else {
+			
 			$subject = 'Instant Payment Notification - Gateway Variable Dump';
 			$body = "An instant payment notification failed\n";
 			$body .= "from " . $myPaypal->ipnData['payer_email'] . " on " . date('m/d/Y');

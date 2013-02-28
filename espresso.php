@@ -2,7 +2,7 @@
 /*
   Plugin Name: Event Espresso
   Plugin URI: http://eventespresso.com/
-  Description: Out-of-the-box Events Registration integrated with PayPal IPN for your WordPress blog/website. <a href="admin.php?page=support" >Support</a>
+  Description: Out-of-the-box Events Registration integrated with PayPal IPN for your WordPress blog/website <a href="admin.php?page=support" >Support</a>
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
@@ -1123,6 +1123,15 @@ function espresso_cancelled() {
 	$_REQUEST['page_id'] = $org_options['return_url'];
 	ee_init_session();
 }
+
+//load active gateways, in case they want to hook into anything (used to only 
+//load on certain shortcode executions, but that sometimes didn't work, as
+//in the case of the google checkout gateway
+add_action('plugins_loaded','event_espresso_init_active_gateways');
+//New way of doing it with shortcodes
+add_shortcode('ESPRESSO_PAYMENTS', 'event_espresso_pay');
+add_shortcode('ESPRESSO_TXN_PAGE', 'event_espresso_txn');
+add_shortcode('ESPRESSO_EVENTS', 'event_espresso_run');
 add_shortcode('ESPRESSO_CANCELLED', 'espresso_cancelled');
 
 

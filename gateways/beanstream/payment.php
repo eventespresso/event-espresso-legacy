@@ -401,7 +401,7 @@ function espresso_display_beanstream($data) {
 							<p class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></p>
 							<p>
 								<label for="card_num"><?php _e('Card Number', 'event_espresso'); ?></label>
-								<input type="text" name="card_num" class="required" id="ppp_card_num" />
+								<input type="text" name="card_num" class="required" id="ppp_card_num" autocomplete="off" />
 							</p>
 			
 			
@@ -444,7 +444,7 @@ function espresso_display_beanstream($data) {
 			
 							<p>
 								<label for="cvv"><?php _e('CVV Code', 'event_espresso'); ?></label>
-								<input type="text" name="cvv" id="ppp_exp_date" />
+								<input type="text" name="cvv" id="ppp_exp_date" autocomplete="off" />
 							</p>
 						</fieldset>
 						<input name="amount" type="hidden" value="<?php echo number_format($event_cost, 2) ?>" />
