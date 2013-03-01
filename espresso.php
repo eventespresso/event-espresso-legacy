@@ -89,7 +89,7 @@ add_action('wp_head', 'espresso_info_header');
 
 
 //Globals
-global $org_options, $wpdb, $this_is_a_reg_page, $espresso_content, $ee_kses_allowed;
+global $org_options, $wpdb, $this_is_a_reg_page, $espresso_content;
 $espresso_content = '';
 
 $org_options = get_option('events_organization_settings');
@@ -99,168 +99,6 @@ if (empty($org_options['event_page_id'])) {
 	$org_options['cancel_return'] = '';
 	$org_options['notify_url'] = '';
 }
-
-$ee_kses_allowed = array(
-		'a' => array(
-			'class' => array(),
-			'id' => array(),
-			'href' => array(),
-			'title' => array()
-		),
-		'br' => array(),
-		'em' => array(
-			'class' => array(),
-			'id' => array(),
-			'style' => array(),
-			'align' => array(),
-			'title' => array()
-		),
-		'blockquote' => array(
-			'class' => array(),
-			'id' => array(),
-			'style' => array(),
-			'align' => array(),
-			'title' => array()
-		),
-		'code' => array(
-			'class' => array(),
-			'id' => array(),
-			'style' => array(),
-			'align' => array(),
-			'title' => array()
-		),
-		'img' => array(
-			'src' => array(),
-			'class' => array(),
-			'width' => array(),
-			'height' => array(),
-			'style' => array(),
-			'align' => array(),
-			'title' => array()
-		),
-		'strong' => array(
-			'class' => array(),
-			'id' => array(),
-			'style' => array(),
-			'align' => array(),
-			'title' => array()
-		),
-		'p' => array(
-			'class' => array(),
-			'id' => array(),
-			'style' => array(),
-			'align' => array(),
-			'title' => array()
-		),
-		'div' => array(
-			'class' => array(),
-			'id' => array(),
-			'style' => array(),
-			'align' => array(),
-			'title' => array()
-		),
-		'hr' => array(
-			'class' => array(),
-			'id' => array(),
-			'style' => array(),
-			'align' => array(),
-			'title' => array()
-		),
-		'ol' => array(
-			'class' => array(),
-			'id' => array(),
-			'style' => array(),
-			'align' => array(),
-			'title' => array()
-		),
-		'li' => array(
-			'class' => array(),
-			'id' => array(),
-			'title' => array()
-		),
-		'video' => array(
-			'class' => array(),
-			'id' => array(),
-			'title' => array()
-		),
-		'th' => array(
-			'class' => array(),
-			'id' => array(),
-			'width' => array(),
-			'border' => array(),
-			'cellpadding' => array(),
-			'cellspacing' => array(),
-			'style' => array(),
-			'align' => array(),
-			'cols' => array(),
-			'title' => array()
-		),
-		'thead' => array(
-			'class' => array(),
-			'id' => array(),
-			'style' => array(),
-			'align' => array(),
-			'title' => array()
-		),
-		'tfoot' => array(
-			'class' => array(),
-			'id' => array(),
-			'style' => array(),
-			'align' => array(),
-			'title' => array()
-		),
-		'tbody' => array(
-			'class' => array(),
-			'id' => array(),
-			'style' => array(),
-			'align' => array(),
-			'title' => array()
-		),
-		'table' => array(
-			'class' => array(),
-			'id' => array(),
-			'width' => array(),
-			'border' => array(),
-			'cellpadding' => array(),
-			'cellspacing' => array(),
-			'style' => array(),
-			'align' => array(),
-			'cols' => array(),
-			'bgcolor' => array(),
-			'title' => array()
-		),
-		'tr' => array(
-			'class' => array(),
-			'id' => array(),
-			'width' => array(),
-			'border' => array(),
-			'cellpadding' => array(),
-			'cellspacing' => array(),
-			'style' => array(),
-			'align' => array(),
-			'cols' => array(),
-			'bgcolor' => array(),
-			'title' => array()
-		),
-		'td' => array(
-			'class' => array(),
-			'id' => array(),
-			'width' => array(),
-			'border' => array(),
-			'cellpadding' => array(),
-			'cellspacing' => array(),
-			'style' => array(),
-			'align' => array(),
-			'nowrap' => array(),
-			'height' => array(),
-			'rowspan' => array(),
-			'title' => array()
-		),
-		'ins' => array(
-			'datetime' => array()
-		),
-	);
-
 
 //Registration page check
 //From Brent C. http://events.codebasehq.com/projects/event-espresso/tickets/99
@@ -897,6 +735,7 @@ if (!function_exists('espresso_load_jquery')) {
 				wp_enqueue_script('ee_ajax_request', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_cart_functions.js', array('jquery'));
 				$EEGlobals = array('ajaxurl' => admin_url('admin-ajax.php'), 'plugin_url' => EVENT_ESPRESSO_PLUGINFULLURL, 'event_page_id' => $org_options['event_page_id']);
 				wp_localize_script('ee_ajax_request', 'EEGlobals',$EEGlobals );
+				wp_enqueue_script('jquery-migrate', 'http://code.jquery.com/jquery-migrate-1.1.1.min.js', array('jquery'));
 			}
 		}
 		
@@ -1049,9 +888,20 @@ if (!function_exists('event_espresso_run')) {
 
 		// Get action type
 		$regevent_action = isset($_REQUEST['regevent_action']) ? $_REQUEST['regevent_action'] : '';
-
-		if (isset($_REQUEST['ee'])) {
+		
+		if (isset($_REQUEST['event_id']) && !empty($_REQUEST['event_id'])) {
+			$_REQUEST['event_id'] = wp_strip_all_tags( absint($_REQUEST['event_id']) );
+		}
+		
+		if (isset($_REQUEST['form_action']) && !empty($_REQUEST['form_action'])) {
+			if (isset($_REQUEST['form_action']) && !$_REQUEST['form_action'] == 'edit_attendee' ) {
+				$_REQUEST['primary'] = wp_strip_all_tags( absint($_REQUEST['primary']) );
+			}
+		}
+		
+		if (isset($_REQUEST['ee']) && !empty($_REQUEST['ee'])) {
 			$regevent_action = "register";
+			$_REQUEST['ee'] = wp_strip_all_tags( absint($_REQUEST['ee']) );
 			$_REQUEST['event_id'] = $_REQUEST['ee'];
 		}
 
@@ -1123,15 +973,6 @@ function espresso_cancelled() {
 	$_REQUEST['page_id'] = $org_options['return_url'];
 	ee_init_session();
 }
-
-//load active gateways, in case they want to hook into anything (used to only 
-//load on certain shortcode executions, but that sometimes didn't work, as
-//in the case of the google checkout gateway
-add_action('plugins_loaded','event_espresso_init_active_gateways');
-//New way of doing it with shortcodes
-add_shortcode('ESPRESSO_PAYMENTS', 'event_espresso_pay');
-add_shortcode('ESPRESSO_TXN_PAGE', 'event_espresso_txn');
-add_shortcode('ESPRESSO_EVENTS', 'event_espresso_run');
 add_shortcode('ESPRESSO_CANCELLED', 'espresso_cancelled');
 
 
