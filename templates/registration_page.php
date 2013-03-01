@@ -139,13 +139,13 @@ if (!function_exists('register_attendees')) {
                 $event_country		= $data->event->venue_country;
 
                 //Leaving these variables intact, just in case people wnat to use them
-                $venue_title		= $data->event->venue_name;
-                $venue_address		= $data->event->venue_address;
-                $venue_address2		= $data->event->venue_address2;
-                $venue_city			= $data->event->venue_city;
-                $venue_state		= $data->event->venue_state;
-                $venue_zip			= $data->event->venue_zip;
-                $venue_country		= $data->event->venue_country;
+                $venue_title		= !empty($data->event->venue_name) ? $data->event->venue_name : '';
+                $venue_address		= !empty($data->event->venue_address) ? $data->event->venue_address : '';
+                $venue_address2		= !empty($data->event->venue_address2) ? $data->event->venue_address2 : '';
+                $venue_city			= !empty($data->event->venue_city) ? $data->event->venue_city : '';
+                $venue_state		= !empty($data->event->venue_state) ? $data->event->venue_state : '';
+                $venue_zip			= !empty($data->event->venue_zip) ? $data->event->venue_zip : '';
+                $venue_country		= !empty($data->event->venue_country) ? $data->event->venue_country : '';
                 global $venue_meta;
                 $add_venue_meta = array(
                     'venue_title'		=> $data->event->venue_name,
