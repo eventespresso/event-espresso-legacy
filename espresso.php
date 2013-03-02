@@ -976,6 +976,12 @@ function espresso_cancelled() {
 add_shortcode('ESPRESSO_CANCELLED', 'espresso_cancelled');
 
 
+//load active gateways (on all page loads), in case they want to hook into anything (used to only 
+//load on certain shortcode executions, but that sometimes didn't work, as
+//in the case of the google checkout gateway
+//this COULD be done only on the ee critical pages (events, transactions, thank you)
+add_action('plugins_loaded','event_espresso_init_active_gateways');
+
 
 /*
  * These actions need to be loaded a the bottom of this script to prevent errors when post/get requests are received.
