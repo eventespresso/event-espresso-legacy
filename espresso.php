@@ -980,6 +980,7 @@ add_shortcode('ESPRESSO_CANCELLED', 'espresso_cancelled');
 //load on certain shortcode executions, but that sometimes didn't work, as
 //in the case of the google checkout gateway
 //this COULD be done only on the ee critical pages (events, transactions, thank you)
+//unimportant change, just checking to see if this produces the line endings problem or not...
 add_action('plugins_loaded','event_espresso_init_active_gateways');
 
 
