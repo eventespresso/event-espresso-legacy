@@ -23,12 +23,19 @@ function event_list_attendees() {
     if ( isset( $_POST['delete_customer'] ) && ! empty( $_POST['delete_customer'] )) {
         if ( is_array( $_POST['checkbox'] )) {
             while ( list( $att_id, $value ) = each( $_POST['checkbox'] )) {
+
+            	//hook for before delete
+            	do_action( 'action_hook_espresso_before_delete_attendee_event_list', $att_id, $EVT_ID );
+
                 $SQL = "DELETE FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id = '%d'";
                 $wpdb->query( $wpdb->prepare( $SQL, $att_id ));
 				$SQL = "DELETE FROM " . EVENTS_ATTENDEE_META_TABLE . " WHERE attendee_id = '%d'";
 				$wpdb->query( $wpdb->prepare( $SQL, $att_id ));
 				$SQL = "DELETE FROM " . EVENTS_ANSWER_TABLE . " WHERE attendee_id = '%d'";
-				$wpdb->query( $wpdb->prepare( $SQL, $att_id ));				
+				$wpdb->query( $wpdb->prepare( $SQL, $att_id ));	
+
+				//hook for after delete
+				do_action('action_hook_espresso_after_delete_attendee_event_list', $att_id, $EVT_ID);			
 			}
         }
 		?>
