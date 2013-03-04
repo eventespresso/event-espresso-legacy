@@ -4,8 +4,8 @@ function event_espresso_luottokunta_payment_settings() {
 	if (isset($_POST['update_luottokunta'])) {
 		$luottokunta_settings['luottokunta_id'] = $_POST['luottokunta_id'];
 		$luottokunta_settings['luottokunta_mac_key'] = $_POST['luottokunta_mac_key'];
-		
-		$luottokunta_settings['payment_page_language'] = $_POST['payment_page_language'];
+		$luottokunta_settings['luottokunta_uses_mac_key'] = $_POST['luottokunta_uses_mac_key'];
+		$luottokunta_settings['luottokunta_payment_page_language'] = $_POST['luottokunta_payment_page_language'];
 		//$luottokunta_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
 		$luottokunta_settings['bypass_payment_page'] = $_POST['bypass_payment_page'];
 		$luottokunta_settings['force_ssl_return'] = empty($_POST['force_ssl_return']) ? false : true;
@@ -21,8 +21,9 @@ function event_espresso_luottokunta_payment_settings() {
 			$button_url = EVENT_ESPRESSO_PLUGINFULLURL;
 		}
 		$luottokunta_settings['luottokunta_id'] = '';
+		$luottokunta_uses_mac_key = 'N';
 		$luottokunta_settings['luottokunta_mac_key']='';
-		$luottokunta_settings['payment_page_language'] = '978';
+		$luottokunta_settings['luottokunta_payment_page_language'] = '978';
 		//$luottokunta_settings['use_sandbox'] = false;
 		$luottokunta_settings['bypass_payment_page'] = 'N';
 		$luottokunta_settings['force_ssl_return'] = false;
@@ -85,34 +86,42 @@ function event_espresso_display_luottokunta_settings() {
 				<td valign="top"><ul>
 						<li>
 							<label for="luottokunta_id">
-								<?php _e('Luottokunta ID', 'event_espresso'); ?>
-								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=store_key_id"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+								<?php _e('Luottokunta ID / Merchant Number', 'event_espresso'); ?>
 							</label>
 							<input type="text" name="luottokunta_id" size="35" value="<?php echo $luottokunta_settings['luottokunta_id']; ?>">
 							<br />
-							<?php _e('Eg, NEWSETUPjWbtSQMxaXr400243. NOT the same as your StoreID', 'event_espresso'); ?>
+						</li>
+						<li>
+							<label for='luottokunta_uses_mac_key'>
+								<?php _e("Perform MAC security Check",'event_espresso')?>
+								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=mac_security_check"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							</label>
+							<?php $use_mac_options = array(
+								array('id'=>'Y','text'=>__('Yes','event_espresso')),
+								array('id'=>'N','text'=>__('No','event_espresso')));
+							
+								echo select_input('luottokunta_uses_mac_key', $use_mac_options, $luottokunta_settings['luottokunta_uses_mac_key']);?>
 						</li>
 						<li>
 							<label for="luottokunta_mac_key">
 								<?php _e('Secret MAC key', 'event_espresso'); ?>
-								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=store_key_id"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=mac_security_check"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input type="text" name="luottokunta_mac_key" size="35" value="<?php echo $luottokunta_settings['luottokunta_mac_key']; ?>">
 							<br />
 							<?php _e('A secret key used to identify your client', 'event_espresso'); ?>
 						</li>
 						<li>
-							<label for="payment_page_language">
-								<?php _e('Luottokunta Payment Page Language', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=currency_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							<label for="luottokunta_payment_page_language">
+								<?php _e('Luottokunta Payment Page Language', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=payment_page_language_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 								<?php $languages = array(
 									array('id'=>'EN','text'=>__('English','event_espresso')),
 									array('id'=>'FI','text'=>__('Finnish','event_espresso')),
 									array('id'=>'SE','text'=>__('Swedish','event_espresso'))
 								);
-								echo select_input('payment_page_language', $languages, $luottokunta_settings['payment_page_language']);
+								echo select_input('luottokunta_payment_page_language', $languages, $luottokunta_settings['luottokunta_payment_page_language']);
 								?>
-								
 						</li>
 						<!--<li>
 							<label for="use_sandbox">
@@ -132,6 +141,7 @@ function event_espresso_display_luottokunta_settings() {
 								array('id' => 'Y', 'text' => __('Yes', 'event_espresso')));
 						echo select_input('bypass_payment_page', $values, $luottokunta_settings['bypass_payment_page']);
 						?>
+							
 						</li>
 						
 						
@@ -158,38 +168,33 @@ function event_espresso_display_luottokunta_settings() {
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update Luottokunta Settings', 'event_espresso') ?>" id="save_luottokunta_settings" />
 		</p>
 	</form>
-	<div id="store_key_id" style="display:none">
-		<h2><?php _e('Luottokunta Store Key', 'event_espresso'); ?></h2>
-		<p><?php _e("To find and setup your Luottokunta Store Key,",'event_espresso'); ?></p>
+	<div id="mac_security_check" style="display:none">
+		<h2><?php _e('Luottokunta MAC Security Check', 'event_espresso'); ?></h2>
+		<p><?php _e("Using MAC calculation (MAC = Message Authentication Code) improves the security of the card payments in online store. Use of the MAC calculation is mandatory and the merchant must implement the MAC calculation in two phases in the HTML form interface. If the merchant does not use MAC calculation, the merchant will be responsible for any security risks and damages experienced by Luottokunta.",'event_espresso'); ?></p>
+		<p> <?php _e('Luottokunta sends the merchant one secret key for the MAC calculation, enclosed in the service ID codes letter for Luottokunta ePayment Service, and this key is used for actual MAC calculation.','event_espresso')?></p>
+		<p> <?php _e("To Activate the Mac Security Check:",'event_espresso');?></p>
 		<ol>
 			<li>
-				<?php echo sprintf(__("login to %s luottokunta.com %s", 'event_espresso'),"<a href='https://secure.luottokunta.com/'>","</a>"); ?>
+				<?php _e("Log in to Transaction management section of the web interface of Luottokunta ePayment Service, using a merchant admin user or admin user ID.",'event_espresso')?>
 			</li>
 			<li>
-				<?php _e("Click on 'View Reports' for your Store",'event_espresso');?>
+				<?php _e('Go to the page "Merchant settings".','event_espresso');?>
 			</li>
 			<li>
-				<?php _e("Click 'HTML Capture Settings'","event_espresso");?>
+				<?php _e('Select the options "Add MAC check to HTML form" and "Add MAC check to Success_Url".','event_espresso');?>
 			</li>
 			<li>
-				<?php _e("Set 'Enable HTML Messenger' to 'Yes' and click 'Save'",'event_espresso');?>
+				<?php _e('Save your changes by clicking the button "Update"','event_espresso');?>
 			</li>
 			<li>
-				<?php _e("After enabling the HTML Messenger, and saving your settings, copy the Store Key and paste it into your Event Espresso payment settings",'event_espresso');?>
+				<?php _e('Lastly, from within Event Espresso\'s payments page, set "Perform MAC security Check" to "Yes" and click "Update Luottokunta Settings"','event_espresso')?>
 			</li>
-		</ol>
-		<h2><?php _e("Why is there a Canadian and US Luottokunta Store Key?",'event_espresso');?></h2>
-		<p><?php _e('If you will be accepting payments only in USD, you only need to enter a "US Luottokunta Store Key". Conversely, 
-			if you are only accepting payments in CAD, you need only enter a "Canadian Luottokunta Store Key".','event_espresso');?></p>
-		<p><?php _e('If, however, some events will be accepting US dollars and others will be accepting Canadian dollars, you will need 2
-			Luottokunta accounts: one accepting CAD and the other for USD. Enter the store keys for each into Event Espresso in the appropriate fields ("Canadian Luottokunta Store Key" and "US Luottokunta Store Key").')?></p>
-		<p><?php _e("Then, select a default currency. You may then specify an event as using the other currency by adding an 'Event Meta' called 'event_currency', and give it a value of either 'USD' or 'CAD'.",'event_espresso');?></p>
-		<p><?php _e("When customers go to pay for an event, if the currency is in USD, your US Store Key will be used. If the currency for the event is CAD, the Canadian Store Key will be used.",'event_espresso');?>
-		
+		</ol> 
+		</p>
 	</div>
-	<div id="currency_info" style="display:none">
-		<h2><?php _e('Luottokunta Currency', 'event_espresso'); ?></h2>
-		<p><?php _e('Luottokunta uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, select the currency you wish to use. The dropdown lists all currencies that Luottokunta (currently) supports.', 'event_espresso'); ?> </p>
+	<div id="payment_page_language_info" style="display:none">
+		<h2><?php _e('Luottokunta Payment Page Language', 'event_espresso'); ?></h2>
+		<p><?php _e('During the payment process with Luottokunta, your website clients will be taken to Luottokunta\'s secure payment page. This setting selects the language this page will be in.', 'event_espresso'); ?> </p>
 	</div>
 	<div id="no_shipping" style="display:none">
 		<h2><?php _e('Shipping Address', 'event_espresso'); ?></h2>

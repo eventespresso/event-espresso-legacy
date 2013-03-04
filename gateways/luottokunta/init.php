@@ -4,7 +4,6 @@ add_action('action_hook_espresso_display_offsite_payment_header', 'espresso_disp
 add_action('action_hook_espresso_display_offsite_payment_footer', 'espresso_display_offsite_payment_footer');
 event_espresso_require_gateway("luottokunta/luottokunta_vars.php");
 
-
 // This is for the transaction processing
 event_espresso_require_gateway("luottokunta/luottokunta_ipn.php");
 if (!empty($_REQUEST['type']) && $_REQUEST['type'] == 'luottokunta') {

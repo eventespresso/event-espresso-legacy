@@ -32,12 +32,6 @@ function espresso_display_luottokunta($payment_data){
 		$cancel_url = str_replace("http://", "https://", $cancel_url);
 	}
 	$server_url="https://dmp2.luottokunta.fi/dmp/html_payments";
-	/* @var $items StdClass[] array of attendees inner join with event on teh current purhcase*/
-	//$items=espresso_get_items_being_purchased($payment_data['attendee_id']);
-	//get payment's details
-	//get country of user. default to Canada, as this gateway is canadian
-	$country=array_key_exists('country',$payment_data)?$payment_data['country']:'Canada';
-	$address2=array_key_exists('address2',$payment_data)?$payment_data['address2']:'';
 	$user_ip = $_SERVER["REMOTE_ADDR"]!='::1'?$_SERVER['REMOTE_ADDR']:'127.0.0.1';
 	
 	if (empty($luottokunta_settings['button_url'])) {
@@ -62,11 +56,11 @@ function espresso_display_luottokunta($payment_data){
 	
 	
 	$formhtml=<<<HEREDOC
-<form action="{$server_url}" method="post"> 
+<form action="{$server_url}" method="post" id='luottokunta_form'> 
 	<input type="text" name="Merchant_Number" value="{$merchant_number}"> 
 	
 	<input type="text" name="Card_Details_Transmit" value="0">
-	<input type="text" name="Language" value="{$luottokunta_settings['payment_page_language']}"> 
+	<input type="text" name="Language" value="{$luottokunta_settings['luottokunta_payment_page_language']}"> 
 	<input type="text" name="Device_Category" value="1"> 
 	<input type="text" name="Order_ID" value="{$order_id}"> 
 	<input type="text" name="Customer_ID" value="{$payment_data['attendee_id']}"> 
