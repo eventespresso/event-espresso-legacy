@@ -24,12 +24,13 @@ function event_espresso_google_checkout_payment_settings() {
 			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/google_checkout/btn_stdCheckout2.gif";
 		}
 		$google_checkout_settings['google_checkout_id'] = '';
+		$google_checkout_settings['google_checkout_key'] = '';
 		$google_checkout_settings['image_url'] = '';
 		$google_checkout_settings['currency_format'] = 'USD';
 		$google_checkout_settings['use_sandbox'] = false;
-		//$google_checkout_settings['bypass_payment_page'] = 'N';
+		//note: how this is displayed will be internationalized, but this value is used internally
+		$google_checkout_settings['default_payment_status'] = 'Pending';
 		$google_checkout_settings['force_ssl_return'] = false;
-		$google_checkout_settings['no_shipping'] = '0';
 		$google_checkout_settings['button_url'] = $button_url;
 		if (add_option('event_espresso_google_checkout_settings', $google_checkout_settings, '', 'no') == false) {
 			update_option('event_espresso_google_checkout_settings', $google_checkout_settings);
@@ -205,14 +206,11 @@ function event_espresso_display_google_checkout_settings() {
 							<label for="default_payment_status">
 								<?php _e("Default Payment Status on Receipt of 'New Order Notification'", 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=default_payment_status"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a><br/>
-								<?php $defaultPaymentStatuses=array('Pending'=>__("Pending","event_espresso"),'Complete'=>__("Complete","event_espresso"));?>
-								<select name="default_payment_status">
-									<?php foreach($defaultPaymentStatuses as $status=>$displayStatus){?>
-									<option value="<?php echo $status?>" <?php echo ($status==$google_checkout_settings['default_payment_status'])?"selected='selected'":''?>>
-										<?php echo $displayStatus //already translated?>
-									</option>
-									<?php }?>
-								</select>   
+								<?php $defaultPaymentStatuses=array(
+									array('id'=>'Pending','text'=>__("Pending","event_espresso")),
+									array('id'=>'Complete','text'=>__("Complete","event_espresso")));?>
+								
+								<?php echo select_input('default_payment_status', $defaultPaymentStatuses, $google_checkout_settings['default_payment_status']);?>
 							</label>
 						<li>
 						</li>
