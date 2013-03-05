@@ -50,7 +50,7 @@ function espresso_process_luottokunta($payment_data) {
 	//if the request says it was successful, check the mac calculations (if teh settings indicate we should)
 	}elseif($success && 'Y' == $luottokunta_settings['luottokunta_uses_mac_key']){
 		$locally_calculated_mac_string = generate_mac_string($payment_data);
-		if( $locally_calculated_mac_string == $_GET['LKMAC'] ){
+		if( array_key_exists('LKMAC',$_GET) && $locally_calculated_mac_string == $_GET['LKMAC'] ){
 			$payment_data['txn_id']=$order_id;
 			$payment_data['payment_status']='Completed';
 		}else{
