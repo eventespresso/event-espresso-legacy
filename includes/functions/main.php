@@ -1051,7 +1051,7 @@ if(!function_exists('event_espresso_init_active_gateways')){
 	function event_espresso_init_active_gateways(){
 		$active_gateways = apply_filters('action_filter_espresso_active_gateways', get_option('event_espresso_active_gateways', array()));
 		foreach ($active_gateways as $gateway => $path) {
-			event_espresso_require_gateway($gateway . "/init.php");
+			event_espresso_require_gateway($gateway . "/init.php",false);
 		}
 	}
 }
