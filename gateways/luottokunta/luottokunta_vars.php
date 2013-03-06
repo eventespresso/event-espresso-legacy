@@ -57,22 +57,22 @@ function espresso_display_luottokunta($payment_data){
 	
 	$formhtml=<<<HEREDOC
 <form action="{$server_url}" method="post" id='luottokunta_form'> 
-	<input type="text" name="Merchant_Number" value="{$merchant_number}"> 
+	<input type="hidden" name="Merchant_Number" value="{$merchant_number}"> 
 	
-	<input type="text" name="Card_Details_Transmit" value="0">
-	<input type="text" name="Language" value="{$luottokunta_settings['luottokunta_payment_page_language']}"> 
-	<input type="text" name="Device_Category" value="1"> 
-	<input type="text" name="Order_ID" value="{$order_id}"> 
-	<input type="text" name="Customer_ID" value="{$payment_data['attendee_id']}"> 
-	<input type="text" name="Amount" value="{$total_cost_in_cents}"> 
-	<input type="text" name="Currency_Code" value="{$currency_code}"> 
-	<input type="text" name="Order_Description" value="{$description}"> 
-	<input type="text" name="Success_Url" value="{$success_url}"> 
-	<input type="text" name="Failure_Url" value="{$failure_url}"> 
-	<input type="text" name="Cancel_Url" value="{$cancel_url}"> 
-	<input type="text" name="Transaction_Type" value="0"> 
+	<input type="hidden" name="Card_Details_Transmit" value="0">
+	<input type="hidden" name="Language" value="{$luottokunta_settings['luottokunta_payment_page_language']}"> 
+	<input type="hidden" name="Device_Category" value="1"> 
+	<input type="hidden" name="Order_ID" value="{$order_id}"> 
+	<input type="hidden" name="Customer_ID" value="{$payment_data['attendee_id']}"> 
+	<input type="hidden" name="Amount" value="{$total_cost_in_cents}"> 
+	<input type="hidden" name="Currency_Code" value="{$currency_code}"> 
+	<input type="hidden" name="Order_Description" value="{$description}"> 
+	<input type="hidden" name="Success_Url" value="{$success_url}"> 
+	<input type="hidden" name="Failure_Url" value="{$failure_url}"> 
+	<input type="hidden" name="Cancel_Url" value="{$cancel_url}"> 
+	<input type="hidden" name="Transaction_Type" value="0"> 
 	 
-	<input type="text" name="Customer_IP_Address" value="{$user_ip}"> 
+	<input type="hidden" name="Customer_IP_Address" value="{$user_ip}"> 
 	{$submit_html}
 	</form>
 $bypass_payment_page_js
