@@ -389,7 +389,7 @@ function event_espresso_pay() {
 			wp_die(__('There was a problem finding your Registration ID', 'event_espresso'));
 		}
 			
-		if ($payment_data['payment_status'] != 'Completed') {
+		if ( $payment_data['payment_status'] != 'Completed' || $payment_data['payment_status'] != 'Refund' ) {
 		
 			
 			$payment_data = apply_filters('filter_hook_espresso_thank_you_get_payment_data', $payment_data);

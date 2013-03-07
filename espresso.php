@@ -2,11 +2,11 @@
 /*
   Plugin Name: Event Espresso
   Plugin URI: http://eventespresso.com/
-  Description: Out-of-the-box Events Registration integrated with PayPal IPN for your WordPress blog/website <a href="admin.php?page=support" >Support</a>
+  Description: Out-of-the-box Events Registration integrated with PayPal IPN for your WordPress blog/website. <a href="admin.php?page=support" >Support</a>
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.30.7P
+  Version: 3.1.31.B
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,7 +32,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.30.7P';
+	return '3.1.31.B';
 }
 
 //This tells the system to check for updates to the paid version
@@ -976,12 +976,12 @@ function espresso_cancelled() {
 add_shortcode('ESPRESSO_CANCELLED', 'espresso_cancelled');
 
 
+
 //load active gateways (on all page loads), in case they want to hook into anything (used to only 
 //load on certain shortcode executions, but that sometimes didn't work, as
 //in the case of the google checkout gateway
 //this COULD be done only on the ee critical pages (events, transactions, thank you)
 add_action('plugins_loaded','event_espresso_init_active_gateways');
-
 
 /*
  * These actions need to be loaded a the bottom of this script to prevent errors when post/get requests are received.
@@ -1006,7 +1006,7 @@ if (is_admin()) {
 	add_action('admin_init', 'espresso_check_data_tables' );
 	
 	//Check to make sure there are no empty registration id fields in the database.
-	if (event_espresso_verify_attendee_data() == true && $_POST['action'] != 'event_espresso_update_attendee_data') {
+	if (event_espresso_verify_attendee_data() == true && isset($_POST['action']) && $_POST['action'] != 'event_espresso_update_attendee_data') {
 		add_action('admin_notices', 'event_espresso_registration_id_notice');
 	}
 

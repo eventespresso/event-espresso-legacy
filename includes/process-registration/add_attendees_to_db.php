@@ -120,19 +120,20 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$event_cost = isset($data_source['cost']) && $data_source['cost'] != '' ? $data_source['cost'] : 0.00;
 			$final_price = $event_cost;
 
-			$fname		= isset($att_data_source['fname']) ? html_entity_decode( trim( sanitize_text_field($att_data_source['fname']) ), ENT_QUOTES, 'UTF-8' ) : '';
-			$lname		= isset($att_data_source['lname']) ? html_entity_decode( trim( sanitize_text_field($att_data_source['lname']) ), ENT_QUOTES, 'UTF-8' ) : '';
-			$address	= isset($att_data_source['address']) ? html_entity_decode( trim( sanitize_text_field($att_data_source['address']) ), ENT_QUOTES, 'UTF-8' ) : '';
-			$address2	= isset($att_data_source['address2']) ? html_entity_decode( trim( sanitize_text_field($att_data_source['address2']) ), ENT_QUOTES, 'UTF-8' ) : '';
-			$city		= isset($att_data_source['city']) ? html_entity_decode( trim( sanitize_text_field($att_data_source['city']) ), ENT_QUOTES, 'UTF-8' ) : '';
-			$state		= isset($att_data_source['state']) ? html_entity_decode( trim( sanitize_text_field($att_data_source['state']) ), ENT_QUOTES, 'UTF-8' ) : '';
-			$zip		= isset($att_data_source['zip']) ? html_entity_decode( trim( sanitize_text_field($att_data_source['zip']) ), ENT_QUOTES, 'UTF-8' ) : '';
-			$phone		= isset($att_data_source['phone']) ? html_entity_decode( trim( sanitize_text_field($att_data_source['phone']) ), ENT_QUOTES, 'UTF-8' ) : '';
-			$email		= isset($att_data_source['email']) ? html_entity_decode( trim( sanitize_text_field($att_data_source['email']) ), ENT_QUOTES, 'UTF-8' ) : '';
+			$fname		= isset($att_data_source['fname']) ? ee_sanitize_value($att_data_source['fname']): '';
+			$lname		= isset($att_data_source['lname']) ? ee_sanitize_value($att_data_source['lname']) : '';
+			$address	= isset($att_data_source['address']) ? ee_sanitize_value($att_data_source['address']) : '';
+			$address2	= isset($att_data_source['address2']) ? ee_sanitize_value($att_data_source['address2']) : '';
+			$city		= isset($att_data_source['city']) ? ee_sanitize_value($att_data_source['city']) : '';
+			$state		= isset($att_data_source['state']) ? ee_sanitize_value($att_data_source['state']) : '';
+			$zip		= isset($att_data_source['zip']) ? ee_sanitize_value($att_data_source['zip']) : '';
+			$phone		= isset($att_data_source['phone']) ? ee_sanitize_value($att_data_source['phone']) : '';
+			$email		= isset($att_data_source['email']) ? ee_sanitize_value($att_data_source['email']) : '';
 
 
 			$SQL = "SELECT question_groups, event_meta FROM " . EVENTS_DETAIL_TABLE . " WHERE id = %d";
 			$questions = $wpdb->get_row( $wpdb->prepare( $SQL, $event_id ));
+			//echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 			$event_meta = maybe_unserialize( $questions->event_meta );
 			$questions = maybe_unserialize( $questions->question_groups );
 
@@ -166,7 +167,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			} elseif ( isset( $data_source['price_select'] ) && $data_source['price_select'] == TRUE ) {
 				
 				//Figure out if the person has registered using a price selection
-				$price_options	= explode( '|', sanitize_text_field($data_source['price_option']), 2 );
+				$price_options	= explode( '|', ee_sanitize_value($data_source['price_option']), 2 );
 				$price_id		= absint($price_options[0]);
 				$price_type		= $price_options[1];
 				$orig_price		= event_espresso_get_orig_price_and_surcharge( $price_id );
@@ -176,16 +177,16 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				
 			} else {
 			
-				if ( $data_source['price_id'] == 'free' ) {
+				if ( isset($data_source['price_id']) && $data_source['price_id'] == 'free' ) {
 					$orig_price		= 0.00;
 					$final_price	= 0.00;
 					$price_type		=  __('Free Event', 'event_espresso');		
 				} else {
-					$orig_price		= event_espresso_get_orig_price_and_surcharge( absint($data_source['price_id']) );
+					$orig_price		= isset( $data_source['price_id'] ) ? event_espresso_get_orig_price_and_surcharge( absint($data_source['price_id']) ) : 0.00;
 					$final_price	= isset( $data_source['price_id'] ) ? event_espresso_get_final_price( absint($data_source['price_id']), $event_id, $orig_price ) : 0.00;
 					$price_type		= isset($data_source['price_id']) ? espresso_ticket_information(array('type' => 'ticket', 'price_option' => absint($data_source['price_id']))) : '';
-					$surcharge		= event_espresso_calculate_surcharge( $orig_price->event_cost , $orig_price->surcharge, $orig_price->surcharge_type );
-					$orig_price		= (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' ); 
+					$surcharge		= isset($orig_price->surcharge) && isset($orig_price->event_cost) ? event_espresso_calculate_surcharge( $orig_price->event_cost , $orig_price->surcharge, $orig_price->surcharge_type ) : 0.00;
+					$orig_price		= isset($orig_price->event_cost) ? (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' ) :  0.00; 
 				}
 			
 			}
@@ -338,6 +339,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			if ( ! $wpdb->insert( EVENTS_ATTENDEE_TABLE, $columns_and_values, $data_formats )) {
 				$error = true;
 			}
+			//echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 			$attendee_id = $wpdb->insert_id;
 			
@@ -353,7 +355,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			if (defined('ESPRESSO_SEATING_CHART')) {
 				if (seating_chart::check_event_has_seating_chart($event_id) !== false) {
 					if (isset($_POST['seat_id'])) {
-						$booking_id = seating_chart::parse_booking_info(sanitize_text_field($_POST['seat_id']));
+						$booking_id = seating_chart::parse_booking_info(ee_sanitize_value($_POST['seat_id']));
 						if ($booking_id > 0) {
 							seating_chart::confirm_a_seat($booking_id, $attendee_id);
 						}
@@ -432,15 +434,15 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								$ext_att_data_source = array(
 									'registration_id'	=> $registration_id,
 									'attendee_session'	=> $_SESSION['espresso_session']['id'],
-									'lname'				=> sanitize_text_field($att_data_source['x_attendee_lname'][$k]),
-									'fname'				=> sanitize_text_field($v),
-									'email'				=> sanitize_text_field($att_data_source['x_attendee_email'][$k]),
-									'address'			=> empty($att_data_source['x_attendee_address'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_address'][$k]),
-									'address2'			=> empty($att_data_source['x_attendee_address2'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_address2'][$k]),
-									'city'				=> empty($att_data_source['x_attendee_city'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_city'][$k]),
-									'state'				=> empty($att_data_source['x_attendee_state'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_state'][$k]),
-									'zip'				=> empty($att_data_source['x_attendee_zip'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_zip'][$k]),
-									'phone'				=> empty($att_data_source['x_attendee_phone'][$k]) ? '' : sanitize_text_field($att_data_source['x_attendee_phone'][$k]),
+									'lname'				=> ee_sanitize_value($att_data_source['x_attendee_lname'][$k]),
+									'fname'				=> ee_sanitize_value($v),
+									'email'				=> ee_sanitize_value($att_data_source['x_attendee_email'][$k]),
+									'address'			=> empty($att_data_source['x_attendee_address'][$k]) ? '' : ee_sanitize_value($att_data_source['x_attendee_address'][$k]),
+									'address2'			=> empty($att_data_source['x_attendee_address2'][$k]) ? '' : ee_sanitize_value($att_data_source['x_attendee_address2'][$k]),
+									'city'				=> empty($att_data_source['x_attendee_city'][$k]) ? '' : ee_sanitize_value($att_data_source['x_attendee_city'][$k]),
+									'state'				=> empty($att_data_source['x_attendee_state'][$k]) ? '' : ee_sanitize_value($att_data_source['x_attendee_state'][$k]),
+									'zip'				=> empty($att_data_source['x_attendee_zip'][$k]) ? '' : ee_sanitize_value($att_data_source['x_attendee_zip'][$k]),
+									'phone'				=> empty($att_data_source['x_attendee_phone'][$k]) ? '' : ee_sanitize_value($att_data_source['x_attendee_phone'][$k]),
 									'payment'			=> $payment,
 									'event_time'		=> $start_time,
 									'end_time'			=> $end_time,
