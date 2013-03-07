@@ -1376,3 +1376,8 @@ function espresso_get_attendee_meta_value($attendee_id, $meta_key) {
 	}
 }
 add_filter('action_hook_espresso_get_attendee_meta_value', 'espresso_get_attendee_meta_value', 10, 2);
+
+//Sanitizes values
+function ee_sanitize_value($value) {
+	return wp_strip_all_tags( html_entity_decode( trim( sanitize_text_field(wp_strip_all_tags($value)) ), ENT_QUOTES, 'UTF-8' ) );
+}

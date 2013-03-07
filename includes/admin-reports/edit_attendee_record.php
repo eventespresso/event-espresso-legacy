@@ -27,7 +27,7 @@ function edit_attendee_record() {
 	if ($_REQUEST['form_action'] == 'edit_attendee') {
 
 		$id = isset($_REQUEST['id']) ? absint( $_REQUEST['id'] ) : '';
-		$registration_id = isset($_REQUEST['registration_id']) ? sanitize_text_field( $_REQUEST['registration_id'] ) : '';
+		$registration_id = isset($_REQUEST['registration_id']) ? ee_sanitize_value( $_REQUEST['registration_id'] ) : '';
 		$multi_reg = FALSE;
 		
 		// check for multi reg, additional attendees, and verify reg id for primary attendee
@@ -61,7 +61,7 @@ function edit_attendee_record() {
 				//wp_die( $failed_nonce_msg );
 			}
 
-			$upd_price = (float)number_format( abs( sanitize_text_field( $_REQUEST['final_price'] )), 2, '.', '' );
+			$upd_price = (float)number_format( abs( ee_sanitize_value( $_REQUEST['final_price'] )), 2, '.', '' );
 			$upd_qty = absint( $_REQUEST['quantity'] );			
 			
 			$set_cols_and_values = array( 
@@ -196,7 +196,7 @@ function edit_attendee_record() {
 			}
 			
 			//Update the price_option_type
-			do_action('action_hook_espresso_save_attendee_meta', $id, 'price_option_type', isset($_POST['price_option_type']) && !empty($_POST['price_option_type']) ? sanitize_text_field($_POST['price_option_type']) : 'DEFAULT');
+			do_action('action_hook_espresso_save_attendee_meta', $id, 'price_option_type', isset($_POST['price_option_type']) && !empty($_POST['price_option_type']) ? ee_sanitize_value($_POST['price_option_type']) : 'DEFAULT');
 			
 			//Move attendee
 			do_action('action_hook_espresso_attendee_mover_move');
@@ -205,14 +205,14 @@ function edit_attendee_record() {
 			$txn_type = isset($_POST['txn_type']) ? $_POST['txn_type'] : '';
 
 			$cols_and_values = array( 
-					'fname'		=> isset($_POST['fname']) ? sanitize_text_field($_POST['fname']) : '', 
-					'lname'		=> isset($_POST['lname']) ? sanitize_text_field($_POST['lname']) : '', 
-					'address'	=> isset($_POST['address']) ? sanitize_text_field($_POST['address']) : '', 
-					'address2'	=> isset($_POST['address2']) ? sanitize_text_field($_POST['address2']) : '', 
-					'city'		=> isset($_POST['city']) ? sanitize_text_field($_POST['city']) : '', 
-					'state'		=> isset($_POST['state']) ? sanitize_text_field($_POST['state']) : '', 
-					'zip'		=> isset($_POST['zip']) ? sanitize_text_field($_POST['zip']) : '', 
-					'phone'		=> isset($_POST['phone']) ? sanitize_text_field($_POST['phone']) : '', 
+					'fname'		=> isset($_POST['fname']) ? ee_sanitize_value($_POST['fname']) : '', 
+					'lname'		=> isset($_POST['lname']) ? ee_sanitize_value($_POST['lname']) : '', 
+					'address'	=> isset($_POST['address']) ? ee_sanitize_value($_POST['address']) : '', 
+					'address2'	=> isset($_POST['address2']) ? ee_sanitize_value($_POST['address2']) : '', 
+					'city'		=> isset($_POST['city']) ? ee_sanitize_value($_POST['city']) : '', 
+					'state'		=> isset($_POST['state']) ? ee_sanitize_value($_POST['state']) : '', 
+					'zip'		=> isset($_POST['zip']) ? ee_sanitize_value($_POST['zip']) : '', 
+					'phone'		=> isset($_POST['phone']) ? ee_sanitize_value($_POST['phone']) : '', 
 					'email'		=> isset($_POST['email']) ? sanitize_email($_POST['email']) : '' 
 			);
 			$cols_and_values_format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' );
@@ -341,7 +341,7 @@ function edit_attendee_record() {
 							} else {
 								$post_val = isset( $_POST[ $question->question_type . '_' . $question->a_id ] ) ? $_POST[ $question->question_type . '_' . $question->a_id ] : '';
 							}
-							$post_val = sanitize_text_field( stripslashes( $post_val ));
+							$post_val = ee_sanitize_value( stripslashes( $post_val ));
 							
 							break;
 						case "MULTIPLE" :
@@ -350,7 +350,7 @@ function edit_attendee_record() {
 							for ( $i = 0; $i < count( $_POST[ $question->question_type . '_' . $question->a_id ] ); $i++ ) {
 								$post_val .= trim( $_POST[ $question->question_type . '_' . $question->a_id ][$i] ) . ",";
 							}
-							$post_val = sanitize_text_field( substr( stripslashes( $post_val ), 0, -1 ));
+							$post_val = ee_sanitize_value( substr( stripslashes( $post_val ), 0, -1 ));
 							
 							break;
 					}
@@ -406,17 +406,17 @@ function edit_attendee_record() {
 		$SQL .= "JOIN " . EVENTS_DETAIL_TABLE . " evt ON att.event_id = evt.id ";
 		// are we looking for an additional attendee ?
 		if ( isset( $_REQUEST['attendee_num'] ) && $_REQUEST['attendee_num'] > 1 && isset( $_REQUEST['id'] )) {
-			$SQL .= "WHERE  att.id = " . sanitize_text_field( $_REQUEST['id'] );
+			$SQL .= "WHERE  att.id = " . ee_sanitize_value( $_REQUEST['id'] );
 		} else {
 			// check for multi reg & additional attendees by first finding primary attendee
 			$SQL2 = "SELECT primary_registration_id FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE registration_id = %s";
-			if ( $primary_registration_id = $wpdb->get_var( $wpdb->prepare( $SQL2, sanitize_text_field( $_REQUEST['registration_id'] )))) {
+			if ( $primary_registration_id = $wpdb->get_var( $wpdb->prepare( $SQL2, ee_sanitize_value( $_REQUEST['registration_id'] )))) {
 				// now find all registrations
 				$SQL3 = "SELECT registration_id FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE primary_registration_id = %s";
 				$reg_ids = $wpdb->get_col( $wpdb->prepare( $SQL3, $primary_registration_id ));
 				$reg_ids = "'" . implode("','", $reg_ids) . "'";
 			} else {
-				$reg_ids = "'" . sanitize_text_field( $_REQUEST['registration_id'] ) . "'";
+				$reg_ids = "'" . ee_sanitize_value( $_REQUEST['registration_id'] ) . "'";
 			}		
 			$SQL .= " WHERE registration_id IN ( $reg_ids ) ORDER BY att.id";
 		}

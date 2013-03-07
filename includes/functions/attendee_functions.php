@@ -83,7 +83,7 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 						'registration_id' => $registration_id, 
 						'attendee_id' => $attendee_id, 
 						'question_id' => $question->qstn_id,
-						'answer' => html_entity_decode( trim( $post_val ), ENT_QUOTES, 'UTF-8' )
+						'answer' => ee_sanitize_value($post_val)
 					);
 					$data_formats = array( '%s', '%d',  '%d', '%s' );
 				
