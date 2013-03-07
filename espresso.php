@@ -533,6 +533,7 @@ if (is_admin()) {
 	do_action('action_hook_espresso_recurring_update_api');
 	do_action('action_hook_espresso_ticketing_update_api');
 	do_action('action_hook_espresso_mailchimp_update_api');
+	do_action('action_hook_espresso_json_update_api');
 	
 	//New form builder
 	require_once("includes/form-builder/index.php");
