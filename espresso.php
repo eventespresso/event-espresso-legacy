@@ -35,7 +35,7 @@ function espresso_version() {
 	return '3.1.30.7P';
 }
 
-//This tells the system to check for updates to the paid version
+//This tells the system to check for updates to the paid version 
 global $espresso_check_for_updates;
 $espresso_check_for_updates = true;
 
