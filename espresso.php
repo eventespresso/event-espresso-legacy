@@ -29,7 +29,7 @@
  */
 
 
-//Define the version of the Plugin
+//Define the version of the Plugin 
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	return '3.1.30.7P';
