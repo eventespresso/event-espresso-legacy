@@ -2,7 +2,7 @@
 * text=auto
 
 # Explicitly declare text files we want to always be normalized and converted 
-# to native line endings on checkout.
+# to native line endings on checkout. But on commit, they should be given unix-style line endings (LFs)
 *.c text
 *.h text
 *.php text
@@ -14,6 +14,8 @@
 *.csv text
 *.po text
 *.pot text
+*.afm text
+*.LGPL text
 
 
 # Declare files that will always have CRLF line endings on checkout.
