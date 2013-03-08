@@ -1,6 +1,6 @@
 <?php
 //general gateway stuff
-load_plugin_textdomain( 'espresso_g_luottokunta', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' ); 
+//load_plugin_textdomain( 'espresso_g_luottokunta', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' ); mike has a branch which uses this
 
 // This is for the gateway display
 add_action('action_hook_espresso_display_offsite_payment_header', 'espresso_display_offsite_payment_header');
