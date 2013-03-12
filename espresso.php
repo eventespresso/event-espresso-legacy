@@ -1130,12 +1130,11 @@ function espresso_check_data_tables() {
 	// if we don't need them, don't load them
 	$load_data_migration_scripts = FALSE;
 	
-	if ( ! empty( $existing_data_migrations )) {
-	
+	if ( ! empty( $existing_data_migrations )) {	
 		// loop through all previous migrations
 		foreach ( $existing_data_migrations as $ver => $migrations ) {
 			$migrations = is_array( $migrations ) ? $migrations : array( $migrations );
-			foreach ( $migrations as $migration_func ) {
+			foreach ( $migrations as $migration_func => $update_errors ) {
 				// make sure they have been executed
 				if ( ! in_array( $migration_func, $espresso_data_migrations )) {		
 					// ok NOW load the scripts
