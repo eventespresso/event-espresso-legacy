@@ -1097,6 +1097,7 @@ function espresso_check_data_tables() {
 	
 	// if current EE version is NOT in list of db updates, then update the db
 	if ( ! in_array( EVENT_ESPRESSO_VERSION, $espresso_db_update )) {
+		delete_option( 'espresso_db_update' );
 		events_data_tables_install();
 	}	
 	
