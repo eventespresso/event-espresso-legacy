@@ -25,14 +25,15 @@ function espresso_update_data_migrations_option( $func, $errors = array() ) {
 			//this is a value from the first time we tracked data migrations
 			// so we'll convert it to the new format where $value was the EE version, 
 			// and array() means no errors (cuz we were not tracking them)
-			$existing_data_migrations[ $value ]['attendee_cost_table_fix_3_1_28'] = array();	
+			$existing_data_migrations[ $ver ]['attendee_cost_table_fix_3_1_28'] = array();	
 		}
 		
 	}
 	$existing_data_migrations[ EVENT_ESPRESSO_VERSION ][ $func ] = $errors;	
-//	update_option( 'espresso_data_migrations', $existing_data_migrations );	
+	update_option( 'espresso_data_migrations', $existing_data_migrations );	
 //	$existing_data_migrations = get_option( 'espresso_data_migrations' );
-	printr( $existing_data_migrations, '$existing_data_migrations  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+//	printr( $existing_data_migrations, '$existing_data_migrations  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+//	wp_die();
 }
 
 
@@ -63,21 +64,21 @@ function espresso_copy_data_from_attendee_cost_table() {
 			$SQL = "SELECT * FROM " . $wpdb->prefix . "events_attendee_cost";			
 			if ( $results = $wpdb->get_results($SQL)) {
 				foreach ( $results as $result ) {
-					if ( ! $wpdb->update( 
+					if ( $wpdb->update( 
 							$wpdb->prefix . "events_attendee", 
 							array( 'orig_price' => $result->cost,  'final_price' => $result->cost ), 
 							array( 'id' => $result->attendee_id ),
 							array( '%f', '%f' ),
 							array( '%d' )
-					)) {
-						$errors[] = __FUNCTION__ . ' : line #' . __LINE__;
-					}
+					) === FALSE ) {
+						$errors[] = __FUNCTION__ . ' : line #' . __LINE__ . ' : ' . $wpdb->last_error;
+					} 
 				}						
 			} else {
-			$errors[] = __FUNCTION__ . ' : line #' . __LINE__;
+				$errors[] = __FUNCTION__ . ' : line #' . __LINE__ . ' : ' . $wpdb->last_error;
 			}
 		} else {
-			$errors[] = __FUNCTION__ . ' : line #' . __LINE__;
+			$errors[] = __FUNCTION__ . ' : line #' . __LINE__ . ' : ' . $wpdb->last_error;
 		}
 
 		// get  reg IDs for all multi registration attendees that are NOT the primary attendee
@@ -95,14 +96,14 @@ function espresso_copy_data_from_attendee_cost_table() {
 				// check for non-primary attendees
 				if ( in_array( $attendee->registration_id, $non_primary_registrants )) {
 					// set "is_primary" to false
-					if ( ! $wpdb->update(
+					if ( $wpdb->update(
 							$wpdb->prefix . "events_attendee",
 							array( 'is_primary' => 0,  'amount_pd' => 0.00 ),
 							array( 'registration_id' => $attendee->registration_id ),
 							array( '%d', '%f' ),
 							array( '%s' )
-					)) {
-						$errors[] = __FUNCTION__ . ' : line #' . __LINE__;
+					) === FALSE ) {
+						$errors[] = __FUNCTION__ . ' : line #' . __LINE__ . ' : ' . $wpdb->last_error;
 					}
 				} else {
 
@@ -115,19 +116,19 @@ function espresso_copy_data_from_attendee_cost_table() {
 					// but keep the old one if it exists
 					$amount_pd = $attendee->amount_pd != '0.00' ? $attendee->amount_pd : $amount_pd;
 					// update
-					if ( ! $wpdb->update(
+					if ( $wpdb->update(
 							$wpdb->prefix . "events_attendee",
 							array( 'is_primary' => 1,  'total_cost' => $total_cost,  'amount_pd' => $amount_pd ),
 							array( 'registration_id' => $attendee->registration_id ),
 							array( '%d', '%f', '%f' ),
 							array( '%s' )
-					)) {
-						$errors[] = __FUNCTION__ . ' : line #' . __LINE__;
+					) === FALSE ) {
+						$errors[] = __FUNCTION__ . ' : line #' . __LINE__ . ' : ' . $wpdb->last_error;
 					}
 				}
 			}
 		} else {
-			$errors[] = __FUNCTION__ . ' : line #' . __LINE__;
+			$errors[] = __FUNCTION__ . ' : line #' . __LINE__ . ' : ' . $wpdb->last_error;
 		}
 
 
@@ -162,14 +163,14 @@ function espresso_copy_data_from_attendee_cost_table() {
 								
 								// while we are here, update total cost and zero out amount paid for non-primary attendees
 								if ( $primary_registrant->primary_registration_id != $attendee->registration_id || ! $attendee->is_primary ) {
-									if ( ! $wpdb->update( 
+									if ( $wpdb->update( 
 											$wpdb->prefix . "events_attendee", 
 											array( 'total_cost' => $att_total,  'amount_pd' => 0.00 ), 
 											array( 'registration_id' => $attendee->registration_id ),
 											array( '%f', '%f' ),
 											array( '%s' )
-									)) {
-										$errors[] = __FUNCTION__ . ' : line #' . __LINE__;
+									) === FALSE ) {
+										$errors[] = __FUNCTION__ . ' : line #' . __LINE__ . ' : ' . $wpdb->last_error;
 									}
 													
 								} else {
@@ -177,23 +178,26 @@ function espresso_copy_data_from_attendee_cost_table() {
 								}				
 							}	
 						} else {
-							$errors[] = __FUNCTION__ . ' : line #' . __LINE__;
+							// was it an actual error ?
+							if ( $attendees === FALSE ) {
+								$errors[] = __FUNCTION__ . ' : line #' . __LINE__ . ' : ' . $wpdb->last_error;
+							}							
 						}						
 					}
 				} else {
-					$errors[] = __FUNCTION__ . ' : line #' . __LINE__;
+					$errors[] = __FUNCTION__ . ' : line #' . __LINE__ . ' : ' . $wpdb->last_error;
 				}
 				
 				$amount_pd = $txn_complete ? $reg_total : 0.00;
 				//echo '<h4>txn completed</h4>';	
-				if ( ! $wpdb->update( 
+				if ( $wpdb->update( 
 						$wpdb->prefix . "events_attendee", 
 						array( 'total_cost' => $reg_total, 'amount_pd' => $amount_pd ), 
 						array( 'registration_id' => $primary_registrant->primary_registration_id ),
 						array( '%f', '%f' ),
 						array( '%s' )
-				)) {
-					$errors[] = __FUNCTION__ . ' : line #' . __LINE__;
+				) === FALSE ) {
+					$errors[] = __FUNCTION__ . ' : line #' . __LINE__ . ' : ' . $wpdb->last_error;
 				}
 										
 			}	// end foreach ( $primary_registrants as $primary_registrant )
@@ -220,6 +224,7 @@ function espresso_copy_data_from_attendee_cost_table() {
 function espresso_ensure_is_primary_is_set() {
 
 	global $wpdb;
+	$errors = array();
 	
 	$prev_session = FALSE;
 	$SQL = "SELECT id, payment_status, attendee_session FROM " . $wpdb->prefix . "events_attendee ORDER BY id";
@@ -228,33 +233,33 @@ function espresso_ensure_is_primary_is_set() {
 			// compare attendee sessions and payment status	
 			if ( $attendee->attendee_session != $prev_session || $attendee->payment_status == 'Incomplete' ) {
 				// IS the primary attendent
-				if ( ! $wpdb->update( 
+				if ( $wpdb->update( 
 						$wpdb->prefix . "events_attendee", 
 						array( 'is_primary' => 1 ), 
 						array( 'id' => $attendee->id ),
 						array( '%d' ),
 						array( '%d' )
-				)) {
-					$errors[] = __FUNCTION__ . ' : line #' . __LINE__;
+				) === FALSE ) {
+					$errors[] = __FUNCTION__ . ' : line #' . __LINE__ . ' : ' . $wpdb->last_error;
 				}
 							
 			} else {
 				// NOT the primary
-				if ( ! $wpdb->update( 
+				if ( $wpdb->update( 
 						$wpdb->prefix . "events_attendee", 
 						array( 'is_primary' => 0 ), 
 						array( 'id' => $attendee->id ),
 						array( '%d' ),
 						array( '%d' )
-				)) {
-					$errors[] = __FUNCTION__ . ' : line #' . __LINE__;
+				) === FALSE ) {
+					$errors[] = __FUNCTION__ . ' : line #' . __LINE__ . ' : ' . $wpdb->last_error;
 				}				
 			}
 			// set prev_session to current
 			$prev_session = $attendee->attendee_session;
 		}
 	} else {
-		$errors[] = __FUNCTION__ . ' : line #' . __LINE__;
+		$errors[] = __FUNCTION__ . ' : line #' . __LINE__ . ' : ' . $wpdb->last_error;
 	}
 	
 	espresso_update_data_migrations_option( __FUNCTION__, $errors );
