@@ -30,10 +30,37 @@ function espresso_update_data_migrations_option( $func, $errors = array() ) {
 		
 	}
 	$existing_data_migrations[ EVENT_ESPRESSO_VERSION ][ $func ] = $errors;	
-	update_option( 'espresso_data_migrations', $existing_data_migrations );	
+	update_option( 'espresso_data_migrations', $existing_data_migrations );
+	if ( ! empty( $errors )) {
+		add_action( 'admin_notices', 'espresso_data_migration_update_error_notification' );
+	}
+	
 //	$existing_data_migrations = get_option( 'espresso_data_migrations' );
 //	printr( $existing_data_migrations, '$existing_data_migrations  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 //	wp_die();
+}
+
+
+
+
+
+/**
+* espresso_data_migration_update_error_notification
+* 
+* displays admin notice if errors occur during data migration
+* 
+* @since 3.1.28
+* @return void
+*/
+function espresso_data_migration_update_error_notification() {
+	$content = '
+	<div class="updated">
+		<p>
+			' . __('An error has potentially occured while attempting to update some of the information in your database. Please contact Event Espresso Customer Service so that they may look further into this matter and ensure that all data is correct', 'event_espresso') . '
+		</p>
+	</div>
+';
+	echo $content;
 }
 
 
