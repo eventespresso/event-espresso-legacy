@@ -145,20 +145,11 @@ if ( !function_exists( 'espresso_venue_dd' ) ){
 }
 
 if ( !function_exists( 'espresso_personnel_cb' ) ){
-	function espresso_personnel_cb($event_id = 0){
+	function espresso_personnel_cb($event_id = 0, $recurrence_id = 0){
 		global $espresso_premium; if ($espresso_premium != true) return;
 		global $wpdb;
-		$sql = "SELECT id, name, role, meta FROM " . EVENTS_PERSONNEL_TABLE;
-		if (function_exists('espresso_member_data') ) {
-			$wpdb->get_results("SELECT wp_user FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'");
-			$wp_user = $wpdb->last_result[0]->wp_user !='' ? $wpdb->last_result[0]->wp_user:espresso_member_data('id');
-			$sql .= " WHERE ";
-			if ($wp_user == 0 || $wp_user == 1){
-				$sql .= " (wp_user = '0' OR wp_user = '1') ";
-			}else{
-				$sql .= " wp_user = '" . $wp_user ."' ";
-			}
-		}
+		$where = apply_filters('filter_hook_espresso_personal_cb_where', '', $event_id);
+		$sql = "SELECT id, name, role, meta FROM " . EVENTS_PERSONNEL_TABLE . $where;
 		$event_personnel = $wpdb->get_results($sql);
 		$num_rows = $wpdb->num_rows;
 		if ($num_rows > 0){
@@ -182,7 +173,7 @@ if ( !function_exists( 'espresso_personnel_cb' ) ){
 				$html .= '<p id="event-person-' . $person_id . '" class="event-staff-list"><label for="in-event-person-' . $person_id . '" class="selectit"><input value="' . $person_id . '" type="checkbox" name="event_person[]" id="in-event-person-' . $person_id . '"' . ($in_event_person == $person_id ? ' checked="checked"' : "" ) . '/> <a href="admin.php?page=event_staff&amp;action=edit&amp;id='.$person_id.'"  target="_blank" title="'.$person_organization.'">' . $person_name .'</a> '. $person_info.'</label></p>';
 
 			}
-
+			
 			$top_div ='';
 			$bottom_div ='';
 
@@ -190,27 +181,36 @@ if ( !function_exists( 'espresso_personnel_cb' ) ){
 				$top_div = '<div style="height:250px;overflow:auto;">';
 				$bottom_div = '</div>';
 			}
-
-			$manage = '<p><a href="admin.php?page=event_staff" target="_blank">'.__('Manage Staff Members', 'event_espresso').'</a> | <a class="thickbox link" href="#TB_inline?height=300&width=400&inlineId=staff_info">Shortcode</a> </p>';
-
-			echo '<div id="staff_info" style="display:none">';
-			echo '<h2>'.__('Staff Shortcode', 'event_espresso').'</h2>';
-			echo '<p>'.__('Add the following shortcode into the description to show the staff for this event.', 'event_espresso').'</p>';
-			echo '<p>[ESPRESSO_STAFF]</p>';
-			echo '<p>Example with Optional Parameters:<br />
-			[ESPRESSO_STAFF outside_wrapper="div" outside_wrapper_class="event_staff" inside_wrapper="p" inside_wrapper_class="event_person"]</p>';
-
-			echo '<p><strong><a href="http://eventespresso.com/forums/2010/10/post-type-variables-and-shortcodes/#staff_shortcode" target="_blank">More Examples</a></strong></p>';
-			echo '</div>';
-
-			$html = $top_div.$html.$bottom_div.$manage;
-			return $html;
-
+			
+			?>
+			<div id="event-staff" class="postbox">
+			<div class="handlediv" title="Click to toggle"><br></div>
+			<h3 class="hndle"> <span><?php _e('Event Staff / Speakers', 'event_espresso'); ?></span> </h3>
+				<div class="inside">  
+				<?php 
+				echo $top_div.$html.$bottom_div; 
+				if (defined('EVENT_ESPRESSO_RECURRENCE_TABLE') && $recurrence_id > 0) {
+					echo '<hr /><input name="rem_apply_to_all_staff" type="checkbox" value="1" /> '.__('Apply to all events in this series', 'event_espresso');
+				}
+				?>
+			<p><a href="admin.php?page=event_staff" target="_blank"><?php _e('Manage Staff Members', 'event_espresso')?></a> | <a class="thickbox link" href="#TB_inline?height=300&width=400&inlineId=staff_info">Shortcode</a> </p>
+			<div id="staff_info" style="display:none">
+				<h2><?php _e('Staff Shortcode', 'event_espresso');?></h2>
+				<p><?php _e('Add the following shortcode into the description to show the staff for this event.', 'event_espresso')?></p>
+				<p>[ESPRESSO_STAFF]</p>
+				<p><?php _e('Example with Optional Parameters:', 'event_espresso'); ?><br />
+					[ESPRESSO_STAFF outside_wrapper="div" outside_wrapper_class="event_staff" inside_wrapper="p" inside_wrapper_class="event_person"]</p>
+				<p><strong><a href="http://eventespresso.com/wiki/shortcodes-template-variables/#staff_shortcode" target="_blank"><?php _e('More Examples', 'event_espresso'); ?></a></strong></p>
+			</div>
+		</div>
+	</div>
+<?php
 		}else{
 			return '<a href="admin.php?page=event_staff&amp;action=add_new_person">'.__('Please add at least one person.', 'event_espresso').'</a>';
 		}
 	}
 }
+add_action('action_hook_espresso_staff_cb', 'espresso_personnel_cb', 10, 2);
 
 if ( !function_exists( 'espresso_personnel_dd' ) ){
 	function espresso_personnel_dd(){
@@ -252,7 +252,7 @@ if (!function_exists('espresso_chart_display')){
 			case 'total_completed':
 				//Completed Registrations/Transactions
 				$title = __('Completed Registrations/Transactions', 'event_espresso');
-				$sql = "SELECT SUM(a.amount_pd) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." AND payment_status='Completed' GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
+				$sql = "SELECT SUM(a.amount_pd) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." AND (payment_status='Completed' OR payment_status='Refund') GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
 			break;
 
 			case 'total_pending':

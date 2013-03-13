@@ -63,7 +63,7 @@ $total_events = espresso_total_events();
 						<input type="submit" class="button-secondary" value="Filter Category" id="post-query-category">
 						<?php
 						//Payment status drop down
-						$status = array(array('id' => '', 'text' => __('Show All Completed/Incomplete', 'event_espresso')), array('id' => 'Completed', 'text' => __('Completed', 'event_espresso')), array('id' => 'Pending', 'text' => __('Pending', 'event_espresso')), array('id' => 'Incomplete', 'text' => __('Incomplete', 'event_espresso')), array('id' => 'Payment Declined', 'text' => __('Payment Declined', 'event_espresso')));
+						$status = array(array('id' => '', 'text' => __('Show All Completed/Incomplete', 'event_espresso')), array('id' => 'Completed', 'text' => __('Completed', 'event_espresso')), array('id' => 'Pending', 'text' => __('Pending', 'event_espresso')), array('id' => 'Incomplete', 'text' => __('Incomplete', 'event_espresso')), array('id' => 'Payment Declined', 'text' => __('Payment Declined', 'event_espresso')), array('id' => 'Refund', 'text' => __('Refund', 'event_espresso')));
 
 						echo select_input('payment_status', $status, isset($_REQUEST['payment_status']) ? $_REQUEST['payment_status'] : '');
 						?>
@@ -98,6 +98,9 @@ $total_events = espresso_total_events();
 						<?php
 
 						break;
+				}
+				if (isset($_POST['max_rows'])){
+					echo '<input name="max_rows" type="hidden" value="'.$_POST['max_rows'].'" />';
 				}
 				?>
 			</form>

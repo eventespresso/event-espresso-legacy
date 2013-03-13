@@ -77,13 +77,16 @@ function event_espresso_edit_list() {
 		$month_r = $pieces[1];
 	}
 	
+	//Defaults
 	$group = '';
 	$sql = '';
+	$is_regional_manager = FALSE;
 	
 	//Check if the venue manager is turned on
 	$use_venue_manager = isset( $org_options['use_venue_manager'] ) && $org_options['use_venue_manager'] == 'Y' ? TRUE : FALSE;
-	$is_regional_manager = FALSE;
 	
+	
+	//Roles & Permissions
 	//This checks to see if the user is a regional manager and creates a union to join the events that are in the users region based on the venue/locale combination
 	if (function_exists('espresso_member_data') && espresso_member_data('role') == 'espresso_group_admin') {
 	
@@ -134,7 +137,7 @@ function event_espresso_edit_list() {
 			
 			//Month filter
 			if ( $month_range !== FALSE ) {
-				$sql .= " AND e.start_date BETWEEN '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-31')) . "' ";
+				$sql .= " AND e.start_date BETWEEN '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-' .date('t', strtotime($month_range )))) . "' ";
 			}
 			
 			//Todays events filter
@@ -165,6 +168,7 @@ function event_espresso_edit_list() {
 		$sql .= ", e.venue_title, e.phone, e.address, e.address2, e.city, e.state, e.zip, e.country ";
 	}
 	
+	//Roles & Permissions
 	//get the locale fields
 	if ( $is_regional_manager && $use_venue_manager ) {
 		$sql .= ", lc.name AS locale_name, e.wp_user ";
@@ -184,6 +188,7 @@ function event_espresso_edit_list() {
 		$sql .= " LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = vr.venue_id ";
 	}
 	
+	//Roles & Permissions
 	//Join the locales
 	if (isset($is_regional_manager) && $is_regional_manager == true && $use_venue_manager == true) {
 		$sql .= " LEFT JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = vr.venue_id ";
@@ -198,7 +203,7 @@ function event_espresso_edit_list() {
 	
 	//Month filter
 	if (isset($_POST['month_range']) && !empty($_POST['month_range']) ? $_POST['month_range'] : '') {
-		$sql .= " AND e.start_date BETWEEN '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-31')) . "' ";
+		$sql .= " AND e.start_date BETWEEN '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-' .date('t', strtotime($month_range )))) . "' ";
 	}
 	
 	//Todays events filter
@@ -211,12 +216,13 @@ function event_espresso_edit_list() {
 		$sql .= " AND e.start_date BETWEEN '" . date('Y-m-d', strtotime($this_year_r . '-' . $this_month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($this_year_r . '-' . $this_month_r . '-' . $days_this_month)) . "' ";
 	}
 	
+	//Roles & Permissions
 	//If user is an event manager, then show only their events
 	if (function_exists('espresso_member_data') && ( espresso_member_data('role') == 'espresso_event_manager' || espresso_member_data('role') == 'espresso_group_admin')) {
 		$sql .= " AND e.wp_user = '" . espresso_member_data('id') . "' ";
 	}
 	
-	$sql .= ") ORDER BY start_date DESC ";
+	$sql .= ") ORDER BY start_date = '0000-00-00' DESC, start_date ASC, event_name ASC ";
     $sql .= $records_to_show;
 	
 	$events = $wpdb->get_results($sql);
@@ -238,7 +244,7 @@ function event_espresso_edit_list() {
 			<input name="start_rec" value="<?php echo $start_rec ?>" class="textfield" type="hidden">
 			<?php
 				if ( $start_rec > 0 && $max_rows < 100000 ) {
-					$prev_rows = $start_rec > $max_rows ? ( $start_rec - $max_rows - 1 ) : 0;
+					$prev_rows = $start_rec > $max_rows ? ( $start_rec - $max_rows ) : 0;
 					$prev_rows_url = add_query_arg( array( 'max_rows' => $max_rows, 'start_rec' => $prev_rows ), EVT_ADMIN_URL ); 
 			?>
 			<a id="event-admin-load-prev-rows-btn" href="<?php echo $prev_rows_url; ?>" title="load prev rows" class="button-secondary">
@@ -247,13 +253,27 @@ function event_espresso_edit_list() {
 			<?php } ?>
 			<?php 			
 				if ( $total_events >= $max_rows && $max_rows < 100000 ) {
-					$next_rows = $start_rec + $max_rows + 1;
+					$next_rows = $start_rec + $max_rows;
 					$next_rows_url = add_query_arg( array( 'max_rows' => $max_rows, 'start_rec' => $next_rows ), EVT_ADMIN_URL ); 
 			?>
 			<a id="event-admin-load-next-rows-btn" href="<?php echo $next_rows_url; ?>" title="load next rows" class="button-secondary">
 			<?php echo __('Next', 'event_espresso') . ' ' . $max_rows  . ' ' .  __('rows', 'event_espresso'); ?>
 			</a> 
 			<?php } ?>
+			<?php 
+				if (isset($_POST['month_range'])){
+					echo '<input name="month_range" type="hidden" value="'.$_POST['month_range'].'" />';
+				}
+				if (isset($_POST['category_id'])){
+					echo '<input name="category_id" type="hidden" value="'.$_POST['category_id'].'" />';
+				}
+				if (isset($_POST['payment_status'])){
+					echo '<input name="payment_status" type="hidden" value="'.$_POST['payment_status'].'" />';
+				}
+				if (isset($_POST['event_status'])){
+					echo '<input name="event_status" type="hidden" value="'.$_POST['event_status'].'" />';
+				}
+			?>
 		</div>
 	</form>
 

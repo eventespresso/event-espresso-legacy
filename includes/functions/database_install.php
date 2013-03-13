@@ -459,6 +459,7 @@ function events_data_tables_install() {
 			  meta_key varchar(255) DEFAULT NULL,
 			  meta_value longtext,
 			  date_added datetime DEFAULT NULL,
+			  date_updated datetime DEFAULT NULL,
   			  PRIMARY KEY  (ameta_id),
 			  KEY attendee_id (attendee_id)";
 	event_espresso_run_install($table_name, $table_version, $sql);
@@ -495,7 +496,7 @@ function events_data_tables_install() {
 				  additional_limit INT(10) DEFAULT '5',
 				  send_mail VARCHAR(2) DEFAULT 'Y',
 				  is_active VARCHAR(1) DEFAULT 'Y',
-				  event_status VARCHAR(1) DEFAULT 'A',
+				  event_status VARCHAR(2) DEFAULT 'A',
 				  conf_mail TEXT,
 				  use_coupon_code VARCHAR(1) DEFAULT 'N',
 				  use_groupon_code VARCHAR(1) DEFAULT 'N',

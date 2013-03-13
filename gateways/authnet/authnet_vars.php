@@ -57,8 +57,8 @@ function espresso_display_authnet($payment_data) {
 		$item_num=$key+1;
 		$myAuthorize->addLineItem(
 				$item_num,
-				substr_replace($item->event_name, '...', 28),
-				substr_replace($item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname, 0, 255),
+				( strlen($item->event_name) > 30 ? substr_replace($item->event_name, '', 30) : $item->event_name ),
+				substr_replace($item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname, '', 255),
 				$item->quantity,
 				$item->final_price,
 				FALSE

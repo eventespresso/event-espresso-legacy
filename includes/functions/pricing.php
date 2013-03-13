@@ -11,6 +11,7 @@ function event_espresso_paid_status_icon($payment_status ='') {
         case 'NotCheckedin':
             echo '<img align="absmiddle" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/exclamation.png" width="16" height="16" alt="' . __('Not Checked-in', 'event_espresso') . '" title="' . __('Not Checked-in', 'event_espresso') . '" />';
             break;
+        case 'Refund':
         case 'Completed':
             echo '<img align="absmiddle" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/accept.png" width="16" height="16" alt="' . __('Completed', 'event_espresso') . '" title="' . __('Completed', 'event_espresso') . '" />';
             break;
@@ -330,7 +331,7 @@ if (!function_exists('event_espresso_price_dropdown')) {
        
 	    $surcharge_text = isset($org_options['surcharge_text']) ? $org_options['surcharge_text'] : __('Surcharge', 'event_espresso');
 
-        $results = $wpdb->get_results("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' ORDER BY id ASC");
+        $results = $wpdb->get_results( $wpdb->prepare("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' ORDER BY id ASC", '') );
 
         if ($wpdb->num_rows > 1) {
            //Create the label for the drop down
@@ -347,7 +348,9 @@ if (!function_exists('event_espresso_price_dropdown')) {
                 if ($early_price_data = early_discount_amount($event_id, $result->event_cost)) {
                     $result->event_cost = $early_price_data['event_price'];
                     $message = __(' Early Pricing', 'event_espresso');
-                } else $message = '';
+                } else {
+					$message = '';
+				}
 
                 $surcharge = '';
 
@@ -359,7 +362,7 @@ if (!function_exists('event_espresso_price_dropdown')) {
                 }
 
                 //Using price ID
-                $html .= '<option' . $selected . ' value="' . $result->id . '|' . $result->price_type . '">' . $result->price_type . ' (' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . ') ' . $surcharge . ' </option>';
+                $html .= '<option' . $selected . ' value="' . $result->id . '|' . stripslashes_deep($result->price_type) . '">' . stripslashes_deep($result->price_type) . ' (' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . ') ' . $surcharge . ' </option>';
             }
             $html .= '</select><input type="hidden" name="price_select" id="price_select-' . $event_id . '" value="true" />';
         } else if ($wpdb->num_rows == 1) {
@@ -399,11 +402,66 @@ if (!function_exists('event_espresso_price_dropdown')) {
 }
 
 
+function espresso_attendee_admin_price_dropdown($event_id, $atts) {
+	extract($atts);
+	global $wpdb, $org_options, $espresso_premium;
+
+	if ($espresso_premium != true)
+		return;
+		
+	$html = '';
+	$label = isset($label) && $label != '' ? $label : '<span class="section-title">'.__('Choose an Option: ', 'event_espresso').'</span>';
+	
+	$results = $wpdb->get_results("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' ORDER BY id ASC");
+	//echo "<pre>".print_r($results,true)."</pre>";
+	
+	//If more than one price was added to an event, we need to create a drop down to select the price.
+	if ($wpdb->num_rows > 1) {
+		
+		//Create the label for the drop down
+		$html .= $show_label == 1 ? '<label for="event_cost">' . $label . '</label>' : '';
+
+		//Create a dropdown of prices
+		$html .= '<select name="price_option" id="price_option-' . $event_id . '">';
+
+		 foreach ($results as $result) {
+			 
+			$selected = isset($current_value) && $current_value == $result->price_type ? ' selected="selected" ' : '';
+
+			// Addition for Early Registration discount
+			if ($early_price_data = early_discount_amount($event_id, $result->event_cost)) {
+				$result->event_cost = $early_price_data['event_price'];
+				$message = __(' Early Pricing', 'event_espresso');
+			} else {
+				$message = '';
+			}
+
+			$surcharge = '';
+
+			if ($result->surcharge > 0 && $result->event_cost > 0.00) {
+				$surcharge = " + {$org_options['currency_symbol']}{$result->surcharge} " . $surcharge_text;
+				if ($result->surcharge_type == 'pct') {
+					$surcharge = " + {$result->surcharge}% " . $surcharge_text;
+				}
+			}
+
+			//Using price ID
+			$html .= '<option' . $selected . ' value="' . $result->id . '|' . $result->price_type . '">' . $result->price_type . ' (' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . ') ' . $surcharge . ' </option>';
+		}
+		$html .= '</select><input type="hidden" name="price_select" id="price_select-' . $event_id . '" value="true" />';
+		
+	}
+	//echo 'ts';
+	echo $html;
+}
+add_action('action_hook_espresso_attendee_admin_price_dropdown', 'espresso_attendee_admin_price_dropdown', 10, 2);
+
+
 
 //This function gets the first price id associated with an event and displays a hidden field.
 function espresso_hidden_price_id($event_id) {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-    global $wpdb, $org_options;
+    global $wpdb;
     $wpdb->get_results("SELECT id FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' LIMIT 0,1 ");
     $num_rows = $wpdb->num_rows;
     if ($num_rows > 0) {
@@ -548,3 +606,11 @@ function get_reg_total_price($registration_id){
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 }
 
+function espresso_selected_price_option($selected){
+	if (empty($selected)) return false;
+	$price_options = explode( '|', $selected, 2 );
+	$price_id = $price_options[0];
+	$price_type = $price_options[1];
+	
+	return array('price_id' => $price_id, 'price_type' => $price_type);
+}

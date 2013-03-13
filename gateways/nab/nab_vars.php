@@ -61,11 +61,11 @@ function espresso_display_nab($payment_data) {
 				</p>
 				<p>
 					<label for="EPS_CARDNUMBER"><?php _e('Card Number:', 'event_espresso');?></label>
-						<input type="text" class="inputbox" name="EPS_CARDNUMBER" size="27"/>
+						<input type="text" class="inputbox" name="EPS_CARDNUMBER" size="27" autocomplete="off"/>
 				</p>
 				<p>
 					<label for="EPS_CCV"><?php _e('Card CCV:', 'event_espresso');?></label>
-					<input type="text"   class="inputbox" name="EPS_CCV" size="27" />
+					<input type="text"   class="inputbox" name="EPS_CCV" size="27" autocomplete="off" />
 				</p>
 				<p>
 					<label for="EPS_EXPIRYMONTH"><?php _e('Card Expires:', 'event_espresso');?></label>

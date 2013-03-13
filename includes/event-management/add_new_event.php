@@ -1,5 +1,7 @@
 <?php
-if ( ! defined('EVENT_ESPRESSO_VERSION')) exit('No direct script access allowed');
+if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	
+
 function add_new_event() {
 	global $wpdb, $org_options, $espresso_premium;
 	ob_start();
@@ -627,6 +629,7 @@ function add_new_event() {
 	espresso_choose_layout($main_post_content, $sidebar_content, $center_metabox_content);
 	include_once('create_events_help.php'); ?>
 <input type="hidden" name="action" value="add" />
+<?php wp_nonce_field('espresso_verify_insert_event_nonce', 'nonce_verify_insert_event'); //Security check using nonce ?>
 <?php //wp_nonce_field('closedpostboxes', 'closedpostboxesnonce', false ); ?>
 <?php //wp_nonce_field('meta-box-order', 'meta-box-order-nonce', false ); ?>
 <script type="text/javascript" charset="utf-8">

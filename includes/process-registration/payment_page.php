@@ -125,7 +125,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	} 
 
 	if ( $total_cost == 0 ) {
-		$payment_status = __('Completed', 'event_espresso');
+		$payment_status = 'Completed';//DO NOT TRANSLATE
 		$today = date(get_option('date_format'));
 		$data = array('amount_pd' => 0.00, 'payment_status' => $payment_status, 'payment_date' => $today);
 		$format = array('%f', '%s', '%s');
@@ -368,10 +368,6 @@ function event_espresso_pay() {
 
 	$payment_data= array( 'attendee_id' => '' );
 
-	$active_gateways = get_option('event_espresso_active_gateways', array());
-	foreach ($active_gateways as $gateway => $path) {
-		event_espresso_require_gateway($gateway . "/init.php");
-	}
 	$payment_data['attendee_id'] = apply_filters( 'filter_hook_espresso_transactions_get_attendee_id', $payment_data['attendee_id'] );
 	$REG_ID = espresso_return_reg_id();
 	
@@ -394,8 +390,9 @@ function event_espresso_pay() {
 			wp_die(__('There was a problem finding your Registration ID', 'event_espresso'));
 		}
 			
-		if ($payment_data['payment_status'] != 'Completed') {
+		if ( $payment_data['payment_status'] != 'Completed' || $payment_data['payment_status'] != 'Refund' ) {
 		
+			
 			$payment_data = apply_filters('filter_hook_espresso_thank_you_get_payment_data', $payment_data);
 			
 			$payment_details = array(
@@ -406,6 +403,7 @@ function event_espresso_pay() {
 			espresso_log::singleton()->log( $payment_details );
 			
 			$payment_data = apply_filters('filter_hook_espresso_update_attendee_payment_data_in_db', $payment_data);
+			add_action('action_hook_espresso_email_after_payment','espresso_email_after_payment');
 			do_action('action_hook_espresso_email_after_payment', $payment_data);
 			
 		}

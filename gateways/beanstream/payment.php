@@ -401,20 +401,28 @@ function espresso_display_beanstream($data) {
 							<p class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></p>
 							<p>
 								<label for="card_num"><?php _e('Card Number', 'event_espresso'); ?></label>
-								<input type="text" name="card_num" class="required" id="ppp_card_num" />
+								<input type="text" name="card_num" class="required" id="ppp_card_num" autocomplete="off" />
 							</p>
 			
 			
-							<p>
-								<label for="card-exp"><?php _e('Expiration Month', 'event_espresso'); ?></label>
-								<select id="ppp_card-exp" name ="expmonth" class="required">
-			
-									<?php
-									for ($i = 1; $i < 13; $i++)
-										echo "<option value='$i'>$i</option>";
-									?>
-			
-								</select>
+							<p>				
+									<?php 
+							$currentMonth=date('m');
+							$months=array();
+							for($i=0;$i<12;$i++){
+								$months[$i]['id']=sprintf("%02s",$i+1);
+								$months[$i]['text']=$months[$i]['id'];
+							}
+						
+						?>
+						<label for="exp_date"><?php _e('Expiration Month', 'event_espresso'); ?></label>
+						<?php echo select_input('expmonth',$months,$currentMonth);?>
+								
+								
+								
+								
+								
+								
 			
 							</p>
 			
@@ -436,7 +444,7 @@ function espresso_display_beanstream($data) {
 			
 							<p>
 								<label for="cvv"><?php _e('CVV Code', 'event_espresso'); ?></label>
-								<input type="text" name="cvv" id="ppp_exp_date" />
+								<input type="text" name="cvv" id="ppp_exp_date" autocomplete="off" />
 							</p>
 						</fieldset>
 						<input name="amount" type="hidden" value="<?php echo number_format($event_cost, 2) ?>" />

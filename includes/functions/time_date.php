@@ -183,7 +183,6 @@ if (!function_exists('event_espresso_time_dropdown')) {
 			$SQL .= "( SELECT count(id) FROM " . EVENTS_ATTENDEE_TABLE . " ATT ";
 			$SQL .= "WHERE ATT.event_id= %d ";
 			$SQL .= "AND ATT.payment_status != 'Incomplete' ";
-			$SQL .= "AND ATT.payment_status != 'Refund' ";
 			$SQL .= "AND ATT.event_time = ESE.start_time ";
 			$SQL .= "AND ATT.end_time = ESE.end_time ) ";
 			$SQL .= ") AS available_spaces ";
@@ -289,6 +288,9 @@ if (!function_exists('event_espresso_get_time')) {
                         break;
                     case 'end_time' :
                         return event_date_display($time->end_time, get_option('time_format'));
+                        break;
+					case 'id' :
+                        return $time->id;
                         break;
                 }
             }

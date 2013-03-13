@@ -109,7 +109,7 @@ jQuery(document).ready(function() {
 
     };
 
-    jQuery('.ee_add_item_to_cart').live('click',function(){
+    jQuery('.ee_add_item_to_cart').on('click',function(){
 
         var data = {
             item_type: 'event',
@@ -130,7 +130,7 @@ jQuery(document).ready(function() {
 
 
 
-    jQuery('.ee_delete_item_from_cart').live('click',function(){
+    jQuery('.ee_delete_item_from_cart').on('click',function(){
  
        var data = {
             item_type: 'event',
@@ -287,7 +287,7 @@ jQuery(document).ready(function() {
 
 
 
-    jQuery('.event_espresso_copy_info').live('change', function(){
+    jQuery('.event_espresso_copy_info').on('change', function(){
         /*
          * Copies info from one section of the form to another.  Will help the user so
          * they don't have to enter info again.
@@ -420,26 +420,23 @@ jQuery(document).ready(function() {
     });
 
 
+   //Updated in Event Espresso 3.1.31 to suport Jquery 1.9
+   function event_espresso_do_ajax(data, callback){
+		jQuery.ajax({
+			data: data,
+			dataType: 'json'
+		})
+		.done(function(response, textStatus){
+			process_response(response, callback);
+		})
+		.fail(function(resp) {
+			//alert('Error.');
+		})
+		.complete(function(resp){
+			//alert('Complete.');
+		});
 
-
-
-
-    function event_espresso_do_ajax(data, callback){
-
-        jQuery.ajax({
-            data: data,
-            dataType: "json",
-            success: function(response, textStatus){
-
-                process_response(response, callback);
-
-            },
-            error: function(resp) {
-                //alert("Error.");
-            }
-        });
-
-    }
+   }
 
     function process_response(from_server, callback)
     {

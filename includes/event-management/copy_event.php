@@ -71,7 +71,12 @@ function copy_event( $recurrence_array = array() ){
 				'state' => $event->state, 
 				'zip' => $event->zip, 
 				'country' => $event->country, 
-				'phone' => $event->phone
+				'phone' => $event->phone,
+				
+				'venue_phone'=> $event->venue_phone,
+				'venue_title' => $event->venue_title,
+				'venue_url' => $event->venue_url,
+				'venue_image' => $event->venue_image,
 
 		);
 		
@@ -82,7 +87,7 @@ function copy_event( $recurrence_array = array() ){
 				'%s', '%s', '%s', '%s', '%d', '%d', '%d', 
 				'%s', '%s', '%d',//wp_user
 				'%d', '%s', '%s', '%d',//Ticket id
-				'%s', '%s', '%s', '%s', '%s', '%s', '%s',//Legacy venue
+				'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',//Legacy venue
 		);
 		
 	}
@@ -173,12 +178,12 @@ function copy_event( $recurrence_array = array() ){
 				if ( ! empty( $event_price )) {
 					$columns_and_values = array( 
 							'event_id' => $new_id, 
-							'price_type' => $event_price->price_type, 
+							'price_type' => stripslashes_deep($event_price->price_type), 
 							'event_cost' => $event_price->event_cost, 
 							'surcharge' => $event_price->surcharge, 
 							'surcharge_type' => $event_price->surcharge_type, 
 							'member_price' => $event_price->member_price, 
-							'member_price_type' => $event_price->member_price_type, 
+							'member_price_type' => stripslashes_deep($event_price->member_price_type), 
 							'max_qty' => $event_price->max_qty, 
 							'max_qty_members' => $event_price->max_qty_members 
 					);

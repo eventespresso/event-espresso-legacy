@@ -68,7 +68,7 @@ if (!function_exists('event_espresso_show_attendess')) {
 			<ol class="attendee_list">
 				<?php
 					$a_sql = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id='" . $event_id . "'";
-					$a_sql .= $paid_only == 'true'? " AND (payment_status='Completed' OR payment_status='Pending') ":'';
+					$a_sql .= $paid_only == 'true'? " AND (payment_status='Completed' OR payment_status='Pending' OR payment_status='Refund') ":'';
 					$a_sql .= $sort;
 					//echo $a_sql;
 					$attendees = $wpdb->get_results($a_sql);

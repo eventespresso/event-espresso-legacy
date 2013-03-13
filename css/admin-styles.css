@@ -64,6 +64,19 @@ dt {font-weight: bold; margin: 15px 0 10px ;}
 .algn-left { text-align:right !important; }
 .algn-cntr { text-align:right !important; }
 .algn-rght { text-align:right !important; }
+
+#attendee_move_new_event_select {
+	height: 100%;
+	padding: 5px;
+	width:80%;
+}
+
+label.espresso select {
+	font-weight:normal;
+}
+#attendee_details textarea{
+	width:80%;
+}
 /*___ Structure ___*/
 
 /*** 2 columns event admin area ***/

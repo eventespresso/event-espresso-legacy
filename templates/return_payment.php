@@ -9,7 +9,7 @@ if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . "payment_overview.php")) {
 	require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "templates/payment_overview.php");
 }
 	
-if ($payment_status == "Completed") {
+if ($payment_status == "Completed" || $payment_status == "Refund") {
 	//echo '<p class="payment_details payment_paid">'.__('Our records indicate you have paid','event_espresso')." ".$org_options['currency_symbol'].$event_cost."</p>";
 }
 
