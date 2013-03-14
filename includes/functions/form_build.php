@@ -248,48 +248,6 @@ if (!function_exists('event_form_build')) {
 
 }
 
-
-
-
-
-function espresso_parse_form_value_for_price( $value = '', $price_mod ) {
-	if ( $price_mod == 'Y' ) {
-		global $org_options;
-		$values = explode( '|', $value );
-		$add_or_sub = $values[1] > 0 ? __('add','event_espresso') : __('subtract','event_espresso');
-		$price_mod = $values[1] > 0 ? $values[1] : $values[1] * (-1);
-		$value = $values[0] . '<span>&nbsp;[' . $add_or_sub . '&nbsp;'  . $org_options['currency_symbol'] . $price_mod . ']</span>';		
-	}
-	return $value;
-}
-
-
-
-
-
-
-function espresso_parse_question_answer_for_price( $value = '', $price_mod = 'N' ) {
-	if ( $price_mod == 'Y' ) {
-		global $org_options;
-		$values = explode( '|', $value );
-		$price = number_format( (float)$values[1], 2, '.', ',' );
-		$plus_or_minus = $price > 0 ? '+' : '-';
-		$price_mod = $price > 0 ? $price : $price * (-1);
-		$find = array( '&#039;', "\xC2\xA0", "\x20", "&#160;", '&nbsp;' );
-		$replace = array( "'", ' ', ' ', ' ', ' '  );
-		$text = trim( stripslashes( str_replace( $find, $replace, $values[0] )));
-		$text = htmlspecialchars( $text, ENT_QUOTES, 'UTF-8' );
-		$value =  $text . ' [' . $plus_or_minus . $org_options['currency_symbol'] . $price_mod . ']';				
-
-	}
-	return $value;
-}
-
-
-
-
-
-
 function event_form_build_edit( $question, $answer, $show_admin_only = false, $class = 'ee-reg-page-questions' ) {
 
 	$form_input = '';
