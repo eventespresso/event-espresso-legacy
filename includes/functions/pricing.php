@@ -54,7 +54,6 @@ if (!function_exists('espresso_return_price')) {
 						$event_cost = $result->event_cost;
 					}
                     $event_cost = number_format( $event_cost, 2, '.', '');
-                    #$event_cost = $result->surcharge > 0.00 && $result->event_cost > 0.00 ? $result->event_cost + number_format($result->event_cost * $result->surcharge / 100, 2, '.', '') : $result->event_cost;
 
                     // Addition for Early Registration discount
                     if ($early_price_data = early_discount_amount($event_id, $event_cost)) {
