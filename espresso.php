@@ -1146,7 +1146,9 @@ function espresso_check_data_tables() {
 		require_once( 'includes/functions/data_migration_scripts.php' );	
 		// run the appropriate migration script
 		foreach( $scripts_to_run as $migration_func ) {
-			call_user_func( $migration_func );		
+			if ( function_exists( $migration_func )) {
+				call_user_func( $migration_func );
+			}
 		}
 	}
 
