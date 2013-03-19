@@ -15,13 +15,13 @@ function event_espresso_luottokunta_payment_settings() {
 	}
 	$luottokunta_settings = get_option('event_espresso_luottokunta_settings');
 	if (empty($luottokunta_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/luottokunta/luottokunta.jpg")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/luottokunta/luottokunta.jpg";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "luottokunta/luottokunta.jpg")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "luottokunta/luottokunta.jpg";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL;
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/luottokunta/luottokunta.jpg";
 		}
 		$luottokunta_settings['luottokunta_id'] = '';
-		$luottokunta_uses_mac_key = 'N';
+		$luottokunta_settings['luottokunta_uses_mac_key'] = 'N';
 		$luottokunta_settings['luottokunta_mac_key']='';
 		$luottokunta_settings['luottokunta_payment_page_language'] = '978';
 		//$luottokunta_settings['use_sandbox'] = false;
