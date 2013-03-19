@@ -150,13 +150,11 @@ if (!function_exists('event_form_build')) {
 					$checked = ( $value == $answer ) ? ' checked="checked"' : "";
 					$value_id = 'SINGLE_' . $question->id . '_' . $key . '_' . $attendee_number;
 					
-					$formatted = espresso_parse_form_value_for_price( $value, $question->price_mod );
-					
 					$html .= '
 					<li>
 						<label for="' . $value_id . '" class="' . $class . ' radio-btn-lbl">
 							<input id="' . $value_id . '" ' . $required_title . '" class="' . $required_class . $class . '" name="' . $field_name . $multi_name_adjust . '"  type="radio" value="' . $value . '" ' . $checked . ' /> 
-							<span>' . $formatted . '</span>
+							<span>' . $value . '</span>
 						</label>
 					</li>';
 
@@ -190,13 +188,11 @@ if (!function_exists('event_form_build')) {
 					$checked = (is_array($answer) && in_array($value, $answer)) ? ' checked="checked"' : "";
 					$value_id = str_replace(' ', '', $value) . '-' . $event_id . '_' . $attendee_number;
 
-					$formatted = espresso_parse_form_value_for_price( $value, $question->price_mod );
-
 					$html .= '
 					<li>
 						<label for="' . $value_id . '" class="' . $class . ' checkbox-lbl">
 							<input id="' . $value_id . '" ' . $required_title . ' class="' . $required_class . $class . '" name="' . $field_name . $multi_name_adjust . '[]"  type="checkbox" value="' . $value . '" ' . $checked . '/> 
-							<span>' . $formatted . '</span>
+							<span>' . $value . '</span>
 						</label>
 					</li>';
 					
@@ -226,10 +222,8 @@ if (!function_exists('event_form_build')) {
 					$value = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
 					$selected = ( $value == $answer ) ? ' selected="selected"' : "";
 
-					$formatted = espresso_parse_form_value_for_price( $value, $question->price_mod );
-
 					$html .= '
-						<option value="' . $value . '"' . $selected . '> ' . $formatted . '</option>';					
+						<option value="' . $value . '"' . $selected . '> ' . $value . '</option>';					
 				}
 				
 				$html .= '
@@ -310,14 +304,13 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 			foreach ($values as $key => $value) {
 				$value = trim( stripslashes( str_replace( $find, $replace, $value )));
 				$value = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
-				$formatted = espresso_parse_question_answer_for_price( $value, $question->price_mod );
-				$checked = $formatted == $answer ? ' checked="checked"' : '';
+				$checked = $value == $answer ? ' checked="checked"' : '';
 
 				$form_input .= '
 		<li>
 			<label class="radio-btn-lbl">
 				<input id="SINGLE_' . $question->id . '_' . $key . '" ' . $required_title . ' class="' . $required_class . $class . '" name="SINGLE_' . $question->id . '"  type="radio" value="' . $value . '" ' . $checked . '/>
-				<span>' . $formatted . '</span>
+				<span>' . $value . '</span>
 			</label>
 		</li>';
 			}
@@ -342,14 +335,13 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 			
 				$value = trim( stripslashes( str_replace( $find, $replace, $value )));
 				$value = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
-				$formatted = espresso_parse_question_answer_for_price( $value, $question->price_mod );
-				$checked = in_array( $formatted, $answers) ? ' checked="checked"' : '';
+				$checked = in_array( $value, $answers) ? ' checked="checked"' : '';
 
 				$form_input .= '
 		<li>
 			<label class="checkbox-lbl">
 				<input id="' . $question->id . '_' . trim( stripslashes( $key )) . '" ' . $required_title . ' class="' . $required_class . $class . '" name="MULTIPLE_' . $question->id . '[]"  type="checkbox" value="' . $value . '" ' . $checked . '/>
-				<span>' . $formatted . '</span>
+				<span>' . $value . '</span>
 			</label>
 		</li>';
 			}
@@ -375,11 +367,10 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 
 				$value = trim( stripslashes( str_replace( $find, $replace, $value )));
 				$value = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
-				$formatted = espresso_parse_question_answer_for_price( $value, $question->price_mod );
-				$selected = ( $formatted == $answer ) ? ' selected="selected"' : "";
+				$selected = ( $value == $answer ) ? ' selected="selected"' : "";
 
 				$form_input .= '
-					<option value="' . $value . '"' . $selected . '/> ' . $formatted . '</option>';
+					<option value="' . $value . '"' . $selected . '/> ' . $value . '</option>';
 			}
 			$form_input .= '
 				</select>';
