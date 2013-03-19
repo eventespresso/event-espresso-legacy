@@ -181,7 +181,7 @@ function event_espresso_display_luottokunta_settings() {
 				<?php _e('Go to the page "Merchant settings".','event_espresso');?>
 			</li>
 			<li>
-				<?php _e('Select the options "Add MAC check to HTML form" and "Add MAC check to Success_Url".','event_espresso');?>
+				<?php _e('Enable the options "Add MAC check to HTML form" and "Add MAC check to Success_Url" (by marking them as checked).','event_espresso');?>
 			</li>
 			<li>
 				<?php _e('Save your changes by clicking the button "Update"','event_espresso');?>
