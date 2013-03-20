@@ -53,7 +53,11 @@ function espresso_display_luottokunta($payment_data){
 	}else{
 		$bypass_payment_page_js="";
 	}
+	$transaction_type="0";
 	
+	$authentication_mac_unhashed = $mac_check_in_form=implode("&",array($merchant_number,$order_id,$total_cost_in_cents,$currency_code,$transaction_type,$mac_key));
+	//echo "authentication mac unhasehd:".$authentication_mac_unhashed; //note: order is essential. see luottokunta's "html form interface v1.3 section 4.2.1
+	$authentication_mac = hash('sha256',$authentication_mac_unhashed);
 	
 	$formhtml=<<<HEREDOC
 <form action="{$server_url}" method="post" id='luottokunta_form'> 
@@ -70,8 +74,9 @@ function espresso_display_luottokunta($payment_data){
 	<input type="hidden" name="Success_Url" value="{$success_url}"> 
 	<input type="hidden" name="Failure_Url" value="{$failure_url}"> 
 	<input type="hidden" name="Cancel_Url" value="{$cancel_url}"> 
-	<input type="hidden" name="Transaction_Type" value="0"> 
-	 
+	<input type="hidden" name="Transaction_Type" value="{$transaction_type}"> 
+	<input type='hidden' name='Authentication_Mac' value='{$authentication_mac}'>
+
 	<input type="hidden" name="Customer_IP_Address" value="{$user_ip}"> 
 	{$submit_html}
 	</form>

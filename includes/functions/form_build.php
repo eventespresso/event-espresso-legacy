@@ -7,7 +7,7 @@ if (!function_exists('event_form_build')) {
 			return;
 		}
 		
-		$attendee_number = isset($extra['attendee_number']) ? $extra['attendee_number'] : 3;
+		$attendee_number = isset($extra['attendee_number']) ? $extra['attendee_number'] : 'XXXXXX';
 		$price_id = isset($extra['price_id']) ? $extra['price_id'] : 0;
 		$multi_name_adjust = $multi_reg == 1 ? "[$event_id][$price_id][$attendee_number]" : '';
 		$text_input_class = ' ee-reg-page-text-input ';
@@ -186,7 +186,7 @@ if (!function_exists('event_form_build')) {
 					$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
 					$value = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
 					$checked = (is_array($answer) && in_array($value, $answer)) ? ' checked="checked"' : "";
-					$value_id = str_replace(' ', '', $value) . '-' . $event_id . '_' . $attendee_number;
+					$value_id = 'MULTIPLE_' . $question->id . '_' . $key . '_' . $attendee_number;
 
 					$html .= '
 					<li>
@@ -208,7 +208,7 @@ if (!function_exists('event_form_build')) {
 				$html .= '
 				<div class="event_form_field" class="' . $class . '">' . $label;
 				$html .= '
-					<select ' . $dd_type . ' ' . $required_title . ' class="' . $required_class . $class . '" id="DROPDOWN_' . $question->id . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '">';
+					<select ' . $dd_type . ' ' . $required_title . ' class="' . $required_class . $class . '" id="DROPDOWN_' . $question->id . '_' . $event_id . '_' . $price_id . '_' . $attendee_number . '">';
 				$html .= '
 						<option value="">' . __('Select One', 'event_espresso') . "</option>";
 				

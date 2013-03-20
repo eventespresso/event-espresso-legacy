@@ -760,7 +760,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 			</a>
 			<?php _e(' or ', 'event_espresso'); ?>
 			<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=load_checkout_page">
-			<?php _e('Edit Registrant Information', 'event_espresso'); ?>
+				<?php _e('Edit Registrant Information', 'event_espresso'); ?>
 			</a> 
 		</p>
 	</div>

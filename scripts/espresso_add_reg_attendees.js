@@ -14,13 +14,13 @@ jQuery(document).ready(function($) {
 		var next_att = parseInt( att_nmbr ) + 1;
 		var prev_att = parseInt( att_nmbr ) - 1;
 		// don't process beyond additional_limit'
-		if ( next_att < additional_limit ) {
+		if ( next_att <= additional_limit ) {
 			// add form for next attendee
 			$('.event_form_submit').before( markup( next_att ));
 			// hide add/remove buttons for this attendee
 			$( '#add-additional-attendee-' + att_nmbr ).hide();
 			$( '#remove-additional-attendee-' + att_nmbr ).hide();
-			if ( next_att == ( additional_limit - 1 )) {
+			if ( next_att == ( additional_limit )) {
 				$('#add-additional-attendee-' + next_att ).remove();
 			}			
 		}
