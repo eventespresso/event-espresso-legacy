@@ -84,23 +84,14 @@ function enter_attendee_payments() {
 					} else {
 						$upd_total = $amount_pd;
 					}
-					
-//					echo '<h4>$upd_total : ' . $upd_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//					echo '<h4>$new_payment : ' . $new_payment . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//					echo '<h4>$total_owing : ' . $total_owing . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//					echo '<h4>$upd_payment_status : ' . $upd_payment_status . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-					
-//					if( $upd_payment_status != 'Payment Declined' && $upd_payment_status != 'Incomplete' ) {
-						// compare new total_cost with amount_pd
-						if ( $new_payment == $total_owing ) {
-							$upd_payment_status = __('Completed','event_espresso');
-						} elseif ( $new_payment < $total_owing ) {
-							$upd_payment_status = __('Pending','event_espresso');
-						} elseif ( $new_payment > $total_owing ) {
-							$upd_payment_status = __('Refund','event_espresso');
-						} 						
-//					}						
 
+					if ( $new_payment == $total_owing ) {
+						$upd_payment_status = __('Completed','event_espresso');
+					} elseif ( $new_payment < $total_owing ) {
+						$upd_payment_status = __('Pending','event_espresso');
+					} elseif ( $new_payment > $total_owing ) {
+						$upd_payment_status = __('Refund','event_espresso');
+					} 						
 					
 					//Update payment status information for primary attendee
 					$set_cols_and_values = array( 
