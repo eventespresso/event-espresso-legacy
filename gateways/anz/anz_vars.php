@@ -33,28 +33,44 @@ function espresso_display_anz($payment_data){
 		$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/anz/anz.gif";
 	}
 	if(!empty($button_url)){
-		$submit_html="<input type='image' src='$button_url'/>";
+		$submit_html="<img src='$button_url'/>";
 	}else{
-		$submit_html="<button>Submit Purchase</button>";
+		$submit_html="Purchase with ANZ";
 	}
 	if($bypass_payment_page){
 		$bypass_payment_page_js="<script>document.getElementById('anz_form').submit();</script>";
 	}else{
 		$bypass_payment_page_js="";
 	}
-	?>
-<form action="<?php echo $server_url?>" method="get">
-	<input type="text" name="vpc_Version" value="1" size="20" maxlength="8">
-	<input type="text" name="vpc_Command" value="pay" size="20" maxlength="16">
-	<input type="text" name="vpc_AccessCode" value="<?php echo $access_code?>" size="20" maxlength="8">
-	<input type="text" name="vpc_MerchTxnRef" value="" size="20" maxlength="40">
-	<input type="text" name="vpc_Merchant" value="<?php echo $merchant_id?>" size="20" maxlength="16">
-	<input type="text" name="vpc_OrderInfo" value="VPC Example" size="20" maxlength="34">
-	<input type="text" name="vpc_Amount" value="100" size="<?php echo $payment_data['total_cost']?>" maxlength="10">
-	<input type="text" name="vpc_Locale" value="en" size="20" maxlength="5">
-	<input type="text" name="vpc_ReturnURL" size="63" value="<?php echo $return_url?>" maxlength="250">
-	<?php echo $submit_html?>
-</form>
+	$txn_id = $payment_data['registration_id'];
+	$amount_in_cents=$payment_data['total_cost']*100;
+	//as per eGate Virtual Payment Clietn Guide Rev 1.2.0, all inputs must be hashed, in ascending alphabetical order
+	$hash_data = array(
+		'01_secret_must_come_first'=>$secure_secret,
+		'vpc_AccessCode'=>$access_code,
+		'vpc_Amount'=>$amount_in_cents,
+		'vpc_Command'=>'pay',
+		'vpc_Locale'=>'en',
+		'vpc_Merchant'=>$merchant_id,
+		'vpc_MerchTxnRef'=>$txn_id,
+		'vpc_OrderInfo'=>'VPC Example',
+		'vpc_ReturnURL'=>$return_url,
+		'Title'=>'PHP VPC 3-Party',
+		'vpc_Version'=>1);
+	$success = ksort($hash_data);
+	$url_encoded_hash_values=array();
+	foreach($hash_data as $field_name => $field_value){
+		$url_encoded_hash_values[ urlencode( $field_name ) ] = urlencode( $field_value );
+	}
+	$md5_data = implode( "", $hash_data );
+	$hash_string = strtoupper( md5( $md5_data ));
+//	echo "fields used in hash:".implode( "", $hash_fields );
+	//remove our super-secret thing from the list, because we're about to 
+	//send each of them as a GET parameter to ANZ
+	unset($url_encoded_hash_values['01_secret_must_come_first']);
+	unset($hash_data['01_secret_must_come_first']);
+	$full_url = add_query_arg(array('vpc_SecureHash'=>$hash_string), add_query_arg($url_encoded_hash_values,$server_url));
+	?><a href='<?php echo $full_url?>'><?php echo $submit_html?></a>
 	<?php echo $bypass_payment_page_js;?>
 <?php
 

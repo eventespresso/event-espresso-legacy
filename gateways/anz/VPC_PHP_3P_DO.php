@@ -102,7 +102,7 @@ NOTE:
 // This secret will vary from merchant to merchant
 // To not create a secure hash, let SECURE_SECRET be an empty string - ""
 // $SECURE_SECRET = "secure-hash-secret";
-$SECURE_SECRET = "B4264D743B97609FD46E3FA264FBF16F";
+$SECURE_SECRET = "076779668878633DBCA97589902309AB";
 
 // add the start of the vpcURL querystring parameters
 $vpcURL = $_POST["virtualPaymentClientURL"] . "?";
@@ -129,7 +129,6 @@ ksort ($_POST);
 
 // set a parameter to show the first pair in the URL
 $appendAmp = 0;
-
 foreach($_POST as $key => $value) {
 
     // create the md5 input and URL leaving out any fields that have no value
@@ -145,13 +144,15 @@ foreach($_POST as $key => $value) {
         $md5HashData .= $value;
     }
 }
+echo "md5hashdata:$md5HashData<br>";
 
 // Create the secure hash and append it to the Virtual Payment Client Data if
 // the merchant secret has been provided.
 if (strlen($SECURE_SECRET) > 0) {
     $vpcURL .= "&vpc_SecureHash=" . strtoupper(md5($md5HashData));
 }
-
+echo "final url: $vpcURL";
+die;
 // FINISH TRANSACTION - Redirect the customers using the Digital Order
 // ===================================================================
 header("Location: ".$vpcURL);
