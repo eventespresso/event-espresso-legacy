@@ -158,12 +158,12 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			
 			$html = '<div id="additional_header" class="event_form_field additional_header espresso_add_subtract_attendees">';
 			// fixed for translation string, previous string untranslatable - http://events.codebasehq.com/projects/event-espresso/tickets/11
-			$html .= '<a id="add-additional-attendee-0" rel="0" class="add-additional-attendee-lnk additional-attendee-lnk ui-state-highlight">' . sprintf(__('Add More Attendees? (click to toggle, limit %s)', 'event_espresso'), $i). '</a></div>';
+			$html .= '<a id="add-additional-attendee-1" rel="1" class="add-additional-attendee-lnk additional-attendee-lnk ui-state-highlight">' . sprintf(__('Add More Attendees? (click to toggle, limit %s)', 'event_espresso'), $i). '</a></div>';
 			
 			
 			//ob_start();
 			$attendee_form = '<div id="additional_attendee_XXXXXX" class="espresso_add_attendee">';
-			$attendee_form .= '<h4 class="additional-attendee-nmbr-h4">' . __('Additional Attendee #', 'event_espresso') . 'XXXXXX</h4>';
+			$attendee_form .= '<h4 class="additional-attendee-nmbr-h4">' . __('Attendee #', 'event_espresso') . 'XXXXXX</h4>';
 			/*
 			 * Added for seating chart addon
 			 */

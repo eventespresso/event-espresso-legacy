@@ -126,6 +126,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$address2	= isset($att_data_source['address2']) ? ee_sanitize_value($att_data_source['address2']) : '';
 			$city		= isset($att_data_source['city']) ? ee_sanitize_value($att_data_source['city']) : '';
 			$state		= isset($att_data_source['state']) ? ee_sanitize_value($att_data_source['state']) : '';
+			$country_id		= isset($att_data_source['country']) ? ee_sanitize_value($att_data_source['country']) : '';
 			$zip		= isset($att_data_source['zip']) ? ee_sanitize_value($att_data_source['zip']) : '';
 			$phone		= isset($att_data_source['phone']) ? ee_sanitize_value($att_data_source['phone']) : '';
 			$email		= isset($att_data_source['email']) ? ee_sanitize_value($att_data_source['email']) : '';
@@ -310,6 +311,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				'address2'				=> $address2,
 				'city'					=> $city,
 				'state'					=> $state,
+				'country_id'			=> $country_id,
 				'zip'					=> $zip,
 				'email'					=> $email,
 				'phone'					=> $phone,
@@ -322,7 +324,6 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				'end_date'				=> $end_date,
 				'price_option'			=> $price_type,
 				'organization_name'		=> $organization_name,
-				'country_id'			=> $country_id,
 				'payment_status'		=> $payment_status,
 				'payment_date'			=> $payment_date,
 				'event_id'				=> $event_id,
@@ -673,7 +674,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 						$address				= $attendee->address;
 						$city					= $attendee->city;
 						$state					= $attendee->state;
-						$country 				= $attendee->country;
+						$country 			= $attendee->country_id;
 						$zip					= $attendee->zip;
 						$attendee_email			= $attendee->email;
 						$registration_id		= $attendee->registration_id;
@@ -758,8 +759,8 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 			<?php _e('Edit Cart', 'event_espresso'); ?>
 			</a>
 			<?php _e(' or ', 'event_espresso'); ?>
-			<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&registration_id=<?php echo $registration_id; ?>&id=<?php echo $attendee_id; ?>&regevent_action=edit_attendee&primary=<?php echo $primary_attendee_id; ?>&event_id=<?php echo $event_id; ?>&attendee_num=1">
-			<?php _e('Edit Registrant Information', 'event_espresso'); ?>
+			<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=load_checkout_page">
+				<?php _e('Edit Registrant Information', 'event_espresso'); ?>
 			</a> 
 		</p>
 	</div>
