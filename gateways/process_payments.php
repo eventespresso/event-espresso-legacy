@@ -18,16 +18,16 @@
  * payment_status
  * payment_date
  */
-function espresso_prepare_payment_data_for_gateways($payment_data) {
+function espresso_prepare_payment_data_for_gateways( $payment_data ) {
 	global $wpdb, $org_options;
-	$sql = "SELECT ea.email, ea.event_id, ea.registration_id, ea.txn_type, ed.start_date,";
-	$sql .= " ea.attendee_session, ed.event_name, ea.lname, ea.fname, ea.total_cost,";
-	$sql .= " ea.payment_status, ea.payment_date, ea.address, ea.city, ea.txn_id,";
-	$sql .= " ea.zip, ea.state, ea.phone FROM " . EVENTS_ATTENDEE_TABLE . " ea";
-	$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=ea.event_id";
-	$sql .= " WHERE ea.id='" . $payment_data['attendee_id'] . "'";
-	$temp_data = $wpdb->get_row($sql, ARRAY_A);
-	$payment_data = array_merge($payment_data, $temp_data);
+	$SQL = "SELECT ea.email, ea.event_id, ea.registration_id, ea.txn_type, ed.start_date,";
+	$SQL .= " ea.attendee_session, ed.event_name, ea.lname, ea.fname, ea.total_cost,";
+	$SQL .= " ea.payment_status, ea.payment_date, ea.address, ea.city, ea.txn_id,";
+	$SQL .= " ea.zip, ea.state, ea.phone FROM " . EVENTS_ATTENDEE_TABLE . " ea";
+	$SQL .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=ea.event_id";
+	$SQL .= " WHERE ea.id = %d";
+	$temp_data = $wpdb->get_row( $wpdb->prepare( $SQL, $payment_data['attendee_id'] ), ARRAY_A );
+	$payment_data = array_merge( $payment_data, $temp_data );
 	$payment_data['contact'] = $org_options['contact_email'];
 	return $payment_data;
 }
@@ -170,6 +170,7 @@ function event_espresso_txn() {
 	/*foreach ($active_gateways as $gateway => $path) {
 		event_espresso_require_gateway($gateway . "/init.php");
 	}*/
+	$payment_data = array( 'attendee_id' => NULL );
 	$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
 	if ( empty( $payment_data['attendee_id'] )) {
 		echo "An error occurred. No ID or an invalid ID was supplied.";
