@@ -59,9 +59,9 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 						case "TEXTAREA" :
 						case "DROPDOWN" :
 						case "SINGLE" :
-
+							
 							if ($question->admin_only != 'Y') {
-								$post_val = ($question->system_name != '') ? $response_source[$question->system_name] : $question_type;
+								$post_val = ( $question->system_name != '' ) ? $response_source[$question->system_name] : $question_type;
 							} else {
 								$post_val = '';
 							}
@@ -70,9 +70,10 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 						case "MULTIPLE" :
 						
 							$post_val = '';
-							if (!empty($response_source[$question->question_type . '_' . $question->qstn_id]) && $question->admin_only != 'Y') {
-								for ($i = 0; $i < count($response_source[$question->question_type . '_' . $question->qstn_id]); $i++) {
-									$post_val .= trim($response_source[$question->question_type . '_' . $question->qstn_id][$i]) . ",";
+							if ( ! empty( $response_source[$question->question_type . '_' . $question->qstn_id] ) && $question->admin_only != 'Y' ) {
+								for ( $i = 0; $i < count( $response_source[$question->question_type . '_' . $question->qstn_id] ); $i++ ) {
+									$val = trim( $response_source[$question->question_type . '_' . $question->qstn_id][$i] );
+									$post_val .= $val . ",";
 								}
 							}
 							
@@ -98,11 +99,6 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 		}
 	}
 }
-
-
-
-
-
 
 function is_attendee_approved($event_id, $attendee_id) {
 	global $wpdb, $org_options;

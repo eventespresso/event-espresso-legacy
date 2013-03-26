@@ -17,7 +17,6 @@ function espresso_process_moneris_hpp( $payment_data ) {
 	
 	$EE_Moneris_HPP = new EE_Moneris_HPP();
 	$EE_Moneris_HPP->ipnLog = TRUE;
-	$EE_Moneris_HPP->ipnLog = FALSE;
 	
 	// if TXN mode = Development, Debug or anything other than Production
 	if ( $EE_Moneris_HPP->settings['moneris_hpp_txn_mode'] != 'prod' ) {
@@ -42,12 +41,13 @@ function espresso_process_moneris_hpp( $payment_data ) {
 		$payment_data['txn_details'] = serialize( $EE_Moneris_HPP->ipnData );
 		$payment_data['txn_id'] = $EE_Moneris_HPP->ipnData['bank_transaction_id'];
 		
-		$totals_match = $EE_Moneris_HPP->ipnData['charge_total'] == $payment_data['total_cost'] ? TRUE : FALSE;
-		$txn_approved = $EE_Moneris_HPP->ipnData['response_code'] <= 50 ? TRUE : FALSE;
+		$totals_match = (float)$EE_Moneris_HPP->ipnData['charge_total'] == (float)$payment_data['total_cost'] ? TRUE : FALSE;
+		$txn_approved = (int)$EE_Moneris_HPP->ipnData['response_code'] <= 50 ? TRUE : FALSE;
 		
 		if ( $totals_match && $txn_approved ) {
 		
 			$payment_data['payment_status'] = 'Completed';
+			$payment_data['txn_id'] = $EE_Moneris_HPP->ipnData['bank_transaction_id'];
 			
 			if ( $EE_Moneris_HPP->testMode ) {
 				// For this, we'll just email ourselves ALL the data as plain text output.
@@ -73,7 +73,7 @@ function espresso_process_moneris_hpp( $payment_data ) {
 		}
 		
 	}
-	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }
 

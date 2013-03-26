@@ -149,6 +149,10 @@ function espresso_prepare_event_link($payment_data) {
 
 add_filter('filter_hook_espresso_prepare_event_link', 'espresso_prepare_event_link');
 
+
+
+
+
 function event_espresso_txn() {
 	ob_start();
 
@@ -167,8 +171,8 @@ function event_espresso_txn() {
 		event_espresso_require_gateway($gateway . "/init.php");
 	}*/
 	$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
-	if ($payment_data['attendee_id'] == "") {
-		echo "ID not supplied.";
+	if ( empty( $payment_data['attendee_id'] )) {
+		echo "An error occurred. No ID or an invalid ID was supplied.";
 	} else {
 		$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
@@ -200,6 +204,10 @@ function event_espresso_txn() {
 	return $espresso_content;
 	
 }
+
+
+
+
 
 function deal_with_ideal() {
 	if (!empty($_POST['bank_id'])) {

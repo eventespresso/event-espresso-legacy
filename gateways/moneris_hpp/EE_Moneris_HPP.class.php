@@ -11,6 +11,7 @@ class EE_Moneris_HPP extends Espresso_PaymentGateway {
 
 	public $gateway_version = '0.1';
 	public $settings;
+	public $logIpn;
 	
 	private $_verification_url = '';
 

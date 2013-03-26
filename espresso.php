@@ -103,14 +103,6 @@ if (empty($org_options['event_page_id'])) {
 //Registration page check
 //From Brent C. http://events.codebasehq.com/projects/event-espresso/tickets/99
 $this_is_a_reg_page = FALSE;
-$espresso_events = TRUE;
-
-//$reg_page_ids = array(
-//		'event_page_id' => $org_options['event_page_id'],
-//		'return_url' => $org_options['return_url'],
-//		'cancel_return' => $org_options['cancel_return'],
-//		'notify_url' => $org_options['notify_url']
-//);
 
 
 if (is_ssl()) {
@@ -1097,6 +1089,7 @@ function espresso_check_data_tables() {
 	
 	// if current EE version is NOT in list of db updates, then update the db
 	if ( ! in_array( EVENT_ESPRESSO_VERSION, $espresso_db_update )) {
+		delete_option( 'espresso_db_update' );
 		events_data_tables_install();
 	}	
 	
@@ -1129,12 +1122,11 @@ function espresso_check_data_tables() {
 	// if we don't need them, don't load them
 	$load_data_migration_scripts = FALSE;
 	
-	if ( ! empty( $existing_data_migrations )) {
-	
+	if ( ! empty( $existing_data_migrations )) {	
 		// loop through all previous migrations
 		foreach ( $existing_data_migrations as $ver => $migrations ) {
 			$migrations = is_array( $migrations ) ? $migrations : array( $migrations );
-			foreach ( $migrations as $migration_func ) {
+			foreach ( $migrations as $migration_func => $update_errors ) {
 				// make sure they have been executed
 				if ( ! in_array( $migration_func, $espresso_data_migrations )) {		
 					// ok NOW load the scripts
@@ -1150,11 +1142,13 @@ function espresso_check_data_tables() {
 	}
 	
 
-	if ( $load_data_migration_scripts ) {
-		require_once( 'includes/functions/data_migration_scripts.php' );		
+	if ( $load_data_migration_scripts && ! empty( $scripts_to_run )) {
+		require_once( 'includes/functions/data_migration_scripts.php' );	
 		// run the appropriate migration script
 		foreach( $scripts_to_run as $migration_func ) {
-			call_user_func( $migration_func );		
+			if ( function_exists( $migration_func )) {
+				call_user_func( $migration_func );
+			}
 		}
 	}
 
