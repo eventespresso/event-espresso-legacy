@@ -34,7 +34,7 @@ function espresso_display_psigate($payment_data){
 	//$items=espresso_get_items_being_purchased($payment_data['attendee_id']);
 	//get payment's details
 	//get country of user. default to Canada, as this gateway is canadian
-	$country=array_key_exists('country',$payment_data)?$payment_data['country']:'Canada';
+	$country=array_key_exists('country',$payment_data)?$payment_data['country']:'';
 	$address2=array_key_exists('address2',$payment_data)?$payment_data['address2']:'';
 	$user_ip = $_SERVER["REMOTE_ADDR"];
 	

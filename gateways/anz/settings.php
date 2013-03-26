@@ -13,10 +13,10 @@ function event_espresso_anz_payment_settings() {
 	}
 	$anz_settings = get_option('event_espresso_anz_settings');
 	if (empty($anz_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/anz/btn_stdCheckout2.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/anz/btn_stdCheckout2.gif";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/anz/ANZLogo_eGate.gif")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/anz/ANZLogo_eGate.gif";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/anz/btn_stdCheckout2.gif";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/anz/ANZLogo_eGate.gif";
 		}
 		$anz_settings['anz_id'] = '';
 		$anz_settings['anz_access_code'] ='';
@@ -83,7 +83,7 @@ function event_espresso_display_anz_settings() {
 						<li>
 							<label for="anz_id">
 								<?php _e('Merchant ID', 'event_espresso'); ?>
-								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=store_key_id"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=anz_creds"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input type="text" name="anz_id" size="35" value="<?php echo $anz_settings['anz_id']; ?>">
 							<br />
@@ -92,7 +92,7 @@ function event_espresso_display_anz_settings() {
 						<li>
 							<label for="anz_access_code">
 								<?php _e('Access Code', 'event_espresso'); ?>
-								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=store_key_id"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=anz_creds"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input type="text" name="anz_access_code" size="35" value="<?php echo $anz_settings['anz_access_code']; ?>">
 							<br />
@@ -101,7 +101,7 @@ function event_espresso_display_anz_settings() {
 						<li>
 							<label for="anz_secure_secret">
 								<?php _e('Secure Secret', 'event_espresso'); ?>
-								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=store_key_id"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=anz_creds"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input type="text" name="anz_secure_secret" size="35" value="<?php echo $anz_settings['anz_secure_secret']; ?>">
 							<br />
@@ -144,10 +144,16 @@ function event_espresso_display_anz_settings() {
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update ANZ Settings', 'event_espresso') ?>" id="save_anz_settings" />
 		</p>
 	</form>
+<div id='anz_creds' style='display:none'>
+	<h2><?php _e("ANZ eGate Credentials",'event_espresso')?></h2>
+	<p><?php _e("The Merchant ID, Access Code, and Secure Secrets are provided from ANZ upon registration with them. Note: if you want to test your account, use the test credentials (the test Merchant ID always starts with the characters 'TEST'. e.g., if your normal account has a Merchant ID of 'ANZKANGAROO', your test merchant ID should be 'TESTANZKANGAROO'.)",'event_espresso')?></p>
+	<p><?php _e("Note, ANZ will provide you wish two Secure Secrets. You may use either one.",'event_espresso');?></p>
+		
+</div>
 	<div id="anz_button_image" style="display:none">
 		<h2><?php _e('Button Image URL', 'event_espresso'); ?></h2>
 		<p><?php echo sprintf(__('You may specify the URL of any image you want to be displayed to users when selecting their payment gateway.
-			By default, the ANZ icon is selected. We also have a merchant accounts image available at %s', 'event_espresso'), EVENT_ESPRESSO_GATEWAY_URL . "/anz/merchant-accounts-logo.gif"); ?></p>
+			By default, the ANZ icon is selected. We also have a merchant accounts image available at %s', 'event_espresso'), EVENT_ESPRESSO_GATEWAY_URL . "anz/ANZLogo_eGate.gif"); ?></p>
 	</div>
 	<?php
 }
