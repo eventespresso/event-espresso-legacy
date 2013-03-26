@@ -42,7 +42,8 @@ function espresso_display_anz($payment_data){
 	}else{
 		$bypass_payment_page_js="";
 	}
-	$txn_id = $payment_data['registration_id'];
+	//http://localhost/eetrunk31/?page_id=5&r_id=42-5150cf9c1f748&type=anz&Title=PHP+VPC+3-Party&vpc_3DSECI=01&vpc_3DSXID=7S%2BXbvLUbBrsxTkYaXJMxjx0yhM%3D&vpc_3DSenrolled=Y&vpc_3DSstatus=A&vpc_AVSResultCode=Unsupported&vpc_AcqAVSRespCode=Unsupported&vpc_AcqCSCRespCode=N&vpc_AcqResponseCode=04&vpc_Amount=1000&vpc_BatchNo=20130326&vpc_CSCResultCode=N&vpc_Card=MC&vpc_Command=pay&vpc_Locale=en&vpc_MerchTxnRef=425150cf9c1f748&vpc_Merchant=ANZCAZALYS&vpc_Message=Expired+Card&vpc_OrderInfo=VPC+Example2&vpc_ReceiptNo=130326378001&vpc_SecureHash=329FC69DA1F03B3F7B896C97BF488E45&vpc_TransactionNo=2000000187&vpc_TxnResponseCode=4&vpc_VerSecurityLevel=06&vpc_VerStatus=M&vpc_VerToken=how5CsZD%2BBZwCAEAAAJ1AhUAAAA%3D&vpc_VerType=3DS&vpc_Version=1
+	$txn_id = str_replace("-","",$payment_data['registration_id']);
 	$amount_in_cents=$payment_data['total_cost']*100;
 	//as per eGate Virtual Payment Clietn Guide Rev 1.2.0, all inputs must be hashed, in ascending alphabetical order
 	$hash_data = array(
@@ -53,7 +54,7 @@ function espresso_display_anz($payment_data){
 		'vpc_Locale'=>'en',
 		'vpc_Merchant'=>$merchant_id,
 		'vpc_MerchTxnRef'=>$txn_id,
-		'vpc_OrderInfo'=>'VPC Example',
+		'vpc_OrderInfo'=>'VPC Example2',
 		'vpc_ReturnURL'=>$return_url,
 		'Title'=>'PHP VPC 3-Party',
 		'vpc_Version'=>1);

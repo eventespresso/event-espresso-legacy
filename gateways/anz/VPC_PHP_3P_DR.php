@@ -215,7 +215,7 @@ $title = $_GET["Title"];
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
     <head>
-        <title><?=$title?> - <?=$errorTxt?>Response Page</title>
+        <title><?php echo $title?> - <?php echo $errorTxt?>Response Page</title>
         <meta http-equiv="Content-Type" content="text/html, charset=iso-8859-1">
         <style type="text/css">
             <!--
@@ -251,34 +251,34 @@ $title = $_GET["Title"];
 		</table>
 		<!-- end branding table -->
         <!-- End Branding Table -->
-        <center><h1><?=$title?> - <?=$errorTxt?>Response Page</h1></center>
+        <center><h1><?php echo $title?> - <?php echo $errorTxt?>Response Page</h1></center>
         <table width="85%" align="center" cellpadding="5" border="0">
             <tr class="title">
                 <td colspan="2" height="25"><P><strong>&nbsp;Basic Transaction Fields</strong></P></td>
             </tr>
             <tr>
                 <td align="right" width="55%"><strong><i>VPC API Version: </i></strong></td>
-                <td width="45%"><?=$version?></td>
+                <td width="45%"><?php echo $version?></td>
             </tr>
             <tr class="shade">
                 <td align="right"><strong><i>Command: </i></strong></td>
-                <td><?=$command?></td>
+                <td><?php echo $command?></td>
             </tr>
             <tr>
                 <td align="right"><strong><i>Merchant Transaction Reference: </i></strong></td>
-                <td><?=$merchTxnRef?></td>
+                <td><?php echo $merchTxnRef?></td>
             </tr>
             <tr class="shade">
                 <td align="right"><strong><i>Merchant ID: </i></strong></td>
-                <td><?=$merchantID?></td>
+                <td><?php echo $merchantID?></td>
             </tr>
             <tr>
                 <td align="right"><strong><i>Order Information: </i></strong></td>
-                <td><?=$orderInfo?></td>
+                <td><?php echo $orderInfo?></td>
             </tr>
             <tr class="shade">
                 <td align="right"><strong><i>Purchase Amount: </i></strong></td>
-                <td><?=$amount?></td>
+                <td><?php echo $amount?></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
@@ -289,43 +289,43 @@ $title = $_GET["Title"];
             </tr>
             <tr class="shade">
                 <td align="right"><strong><i>VPC Transaction Response Code: </i></strong></td>
-                <td><?=$txnResponseCode?></td>
+                <td><?php echo $txnResponseCode?></td>
             </tr>
             <tr>
                 <td align="right"><strong><i>Transaction Response Code Description: </i></strong></td>
-                <td><?=getResponseDescription($txnResponseCode)?></td>
+                <td><?php echo getResponseDescription($txnResponseCode)?></td>
             </tr>
             <tr class="shade">
                 <td align="right"><strong><i>Message: </i></strong></td>
-                <td><?=$message?></td>
+                <td><?php echo $message?></td>
             </tr>
-<? 
+<?php 
     // only display the following fields if not an error condition
     if ($txnResponseCode != "7" && $txnResponseCode != "No Value Returned") { 
 ?>
             <tr>
                 <td align="right"><strong><i>Receipt Number: </i></strong></td>
-                <td><?=$receiptNo?></td>
+                <td><?php echo $receiptNo?></td>
             </tr>
             <tr class="shade">
                 <td align="right"><strong><i>Transaction Number: </i></strong></td>
-                <td><?=$transactionNo?></td>
+                <td><?php echo $transactionNo?></td>
             </tr>
             <tr>
                 <td align="right"><strong><i>Acquirer Response Code: </i></strong></td>
-                <td><?=$acqResponseCode?></td>
+                <td><?php echo $acqResponseCode?></td>
             </tr>
             <tr class="shade">
                 <td align="right"><strong><i>Bank Authorization ID: </i></strong></td>
-                <td><?=$authorizeID?></td>
+                <td><?php echo $authorizeID?></td>
             </tr>
             <tr>
                 <td align="right"><strong><i>Batch Number: </i></strong></td>
-                <td><?=$batchNo?></td>
+                <td><?php echo $batchNo?></td>
             </tr>
             <tr class="shade">
                 <td align="right"><strong><i>Card Type: </i></strong></td>
-                <td><?=$cardType?></td>
+                <td><?php echo $cardType?></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
@@ -342,23 +342,23 @@ $title = $_GET["Title"];
             </tr>
             <tr>
                 <td align="right"><strong><i>Unique 3DS transaction identifier: </i></strong></td>
-                <td class="red"><?=$xid?></td>
+                <td class="red"><?php echo $xid?></td>
             </tr>
             <tr class="shade">
                 <td align="right"><strong><i>3DS Authentication Verification Value: </i></strong></td>
-                <td class="red"><?=$token?></td>
+                <td class="red"><?php echo $token?></td>
             </tr>
             <tr>
                 <td align="right"><strong><i>3DS Electronic Commerce Indicator: </i></strong></td>
-                <td class="red"><?=$acqECI?></td>
+                <td class="red"><?php echo $acqECI?></td>
             </tr>
             <tr class="shade">
                 <td align="right"><strong><i>3DS Authentication Scheme: </i></strong></td>
-                <td class="red"><?=$verType?></td>
+                <td class="red"><?php echo $verType?></td>
             </tr>
             <tr>
                 <td align="right"><strong><i>3DS Security level used in the AUTH message: </i></strong></td>
-                <td class="red"><?=$verSecurLevel?></td>
+                <td class="red"><?php echo $verSecurLevel?></td>
             </tr>
             <tr class="shade">
                 <td align="right">
@@ -366,7 +366,7 @@ $title = $_GET["Title"];
                     <br />
                     <font size="1">Takes values: <strong>Y</strong> - Yes <strong>N</strong> - No</i></font>
                 </td>
-                <td class="red"><?=$enrolled?></td>
+                <td class="red"><?php echo $enrolled?></td>
             </tr>
             <tr>
                 <td align="right">
@@ -374,15 +374,15 @@ $title = $_GET["Title"];
                     <font size="1">Only returned if CardHolder Enrolled = <strong>Y</strong>. Takes values:<br />
                     <strong>Y</strong> - Yes <strong>N</strong> - No <strong>A</strong> - Attempted to Check <strong>U</strong> - Unavailable for Checking</font></i>
                 </td>
-                <td class="red"><?=$authStatus?></td>
+                <td class="red"><?php echo $authStatus?></td>
             </tr>
             <tr class="shade">
                 <td align="right"><strong><i>Payment Server 3DS Authentication Status Code: </i></strong></td>
-                <td class="green"><?=$verStatus?></td>
+                <td class="green"><?php echo $verStatus?></td>
             </tr>
             <tr>
                 <td align="right"><i><strong>3DS Authentication Status Code Description: </strong></i></td>
-                <td class="green"><?=getStatusDescription($verStatus)?></td>
+                <td class="green"><?php echo getStatusDescription($verStatus)?></td>
             </tr>
             <tr>
                 <td colspan="2" class="red" align="center">
@@ -402,15 +402,15 @@ $title = $_GET["Title"];
             </tr>
             <tr>
                 <td align="right"><strong><i>Hash Validated Correctly: </i></strong></td>
-                <td><?=$hashValidated?></td>
+                <td><?php echo $hashValidated?></td>
             </tr>
-<? 
+<?php 
 } ?>    </table>
-        <!-- TK <center><P><a href='<?=$againLink?>'>New Transaction</a></P></center> -->
+        <!-- TK <center><P><a href='<?php echo $againLink?>'>New Transaction</a></P></center> -->
     </body>
 </html>
 
-<?    
+<?php   
 // End Processing
 
 // This method uses the QSI Response code retrieved from the Digital
