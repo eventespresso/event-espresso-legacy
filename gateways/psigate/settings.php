@@ -4,7 +4,6 @@ function event_espresso_psigate_payment_settings() {
 	if (isset($_POST['update_psigate'])) {
 		$psigate_settings['psigate_id_can'] = $_POST['psigate_id_can'];
 		$psigate_settings['psigate_id_us'] = $_POST['psigate_id_us'];
-		$psigate_settings['image_url'] = $_POST['image_url'];
 		$psigate_settings['currency_format'] = $_POST['currency_format'];
 		$psigate_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
 		$psigate_settings['bypass_payment_page'] = $_POST['bypass_payment_page'];
@@ -15,10 +14,10 @@ function event_espresso_psigate_payment_settings() {
 	}
 	$psigate_settings = get_option('event_espresso_psigate_settings');
 	if (empty($psigate_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/psigate/btn_stdCheckout2.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/psigate/btn_stdCheckout2.gif";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/psigate/psigate.gif")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/psigate/psigate.gif";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/psigate/btn_stdCheckout2.gif";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/psigate/psigate.gif";
 		}
 		$psigate_settings['psigate_id_can'] = '';
 		$psigate_settings['psigate_id_us'] = '';
@@ -121,16 +120,6 @@ function event_espresso_display_psigate_settings() {
 							<input name="use_sandbox" type="checkbox" value="1" <?php echo $psigate_settings['use_sandbox'] ? 'checked="checked"' : '' ?> />
 							<br />
 						</li>
-						
-						
-						<li>
-							<label for="image_url">
-								<?php _e('Image URL (logo for payment page)', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=image_url_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-							</label>
-							<input type="text" name="image_url" size="35" value="<?php echo $psigate_settings['image_url']; ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=image_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a><br />
-							<?php _e('(used for your business/personal logo on the PSiGate page)', 'event_espresso'); ?>
-						</li>
 					</ul></td>
 				<td valign="top"><ul><li>
 						<label for="bypass_payment_page">
@@ -208,7 +197,7 @@ function event_espresso_display_psigate_settings() {
 	<div id="psigate_button_image" style="display:none">
 		<h2><?php _e('Button Image URL', 'event_espresso'); ?></h2>
 		<p><?php echo sprintf(__('You may specify the URL of any image you want to be displayed to users when selecting their payment gateway.
-			By default, the PSiGate icon is selected. We also have a merchant accounts image available at %s', 'event_espresso'), EVENT_ESPRESSO_GATEWAY_URL . "/psigate/merchant-accounts-logo.gif"); ?></p>
+			By default, the PSiGate icon is selected. We also have a merchant accounts image available at %s', 'event_espresso'), EVENT_ESPRESSO_PLUGINFULLURL . "gateways/psigate/merchant-accounts-logo.gif"); ?></p>
 	</div>
 	<?php
 }
