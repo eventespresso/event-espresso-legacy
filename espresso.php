@@ -1128,12 +1128,18 @@ function espresso_check_data_tables() {
 		// loop through all previous migrations
 		foreach ( $existing_data_migrations as $ver => $migrations ) {
 			$migrations = is_array( $migrations ) ? $migrations : array( $migrations );
-			foreach ( $migrations as $migration_func ) {
+			foreach ( $migrations as $migration_func => $errors_array ) {
 				// make sure they have been executed
 				if ( ! in_array( $migration_func, $espresso_data_migrations )) {		
 					// ok NOW load the scripts
 					$load_data_migration_scripts = TRUE;
-					$scripts_to_run[ $migration_func ] = $migration_func;
+					if ( is_array( $errors_array )) {
+						$scripts_to_run[ $migration_func ] = $migration_func;
+					} else {
+						// older format, so $errors_array is actually the callback function
+						$scripts_to_run[ $errors_array ] = $errors_array;
+					}
+					
 				} 
 			}
 		}		
