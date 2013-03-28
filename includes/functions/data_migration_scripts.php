@@ -32,8 +32,8 @@ function espresso_copy_data_from_attendee_cost_table() {
 	if ( ! $data_migrated_version ) {
 
 		// check for events_attendee_cost table
-		$SQL = "SELECT *  FROM information_schema.tables WHERE table_name = '" . $wpdb->prefix . "events_attendee_cost' LIMIT 1";
-		if ( $wpdb->get_row($SQL)) {
+		$SQL = 'SHOW TABLES LIKE %s';
+		if ( $wpdb->get_var( $wpdb->prepare( $SQL, $wpdb->prefix . 'events_attendee_cost' )) == $wpdb->prefix . 'events_attendee_cost' ) {
 			// copy attendee costs to orig_price
 			$SQL = "SELECT * FROM " . $wpdb->prefix . "events_attendee_cost";			
 			if ( $results = $wpdb->get_results($SQL)) {
