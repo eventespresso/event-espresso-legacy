@@ -761,7 +761,7 @@ function event_espresso_support() {
 												<a href="http://eventespresso.com/forums/?submit.x=0&submit.y=0&s=ipn" target="_blank"> http://eventespresso.com/forums/?submit.x=0&amp;submit.y=0&amp;s=ipn</a></p>
 										</dd>
 										<dt>
-											<?php _e('Why are mails are not being sent when somone registers?', 'event_espresso'); ?>
+											<?php _e('Why are mails are not being sent when someone registers?', 'event_espresso'); ?>
 										</dt>
 										<dd>
 	<?php _e('Check your email settings on the', 'event_espresso'); ?>

@@ -675,7 +675,7 @@ if (!function_exists('event_espresso_add_question_groups')) {
 				$FILTER = " AND q.admin_only != 'Y' ";
 
 			//echo 'additional_attendee_reg_info = '.$meta['additional_attendee_reg_info'].'<br />';
-			//Only personal inforamation for the additional attendees in each group
+			//Only personal information for the additional attendees in each group
 			if (isset($meta['additional_attendee_reg_info']) && $meta['additional_attendee_reg_info'] == '2' && isset($meta['attendee_number']) && $meta['attendee_number'] > 1)
 				$FILTER .= " AND qg.system_group = 1 ";
             
