@@ -218,12 +218,14 @@ function event_espresso_display_paypal_pro_settings() {
 							<br />
 							<?php _e('(Make sure you enter the sandbox credentials above.)', 'event_espresso'); ?>
 						</li>
+						<?php if (espresso_check_ssl() == TRUE || ( isset($paypal_pro_settings['force_ssl_return']) && $paypal_pro_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $paypal_pro_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<?php }?>
 						<li>
 							<label for="display_header">
 								<?php _e('Display a Form Header', 'event_espresso'); ?>
@@ -240,6 +242,11 @@ function event_espresso_display_paypal_pro_settings() {
 				</td>
 			</tr>
 		</table>
+		<?php 
+		if (espresso_check_ssl() == FALSE){
+			espresso_ssl_required_gateway_message();
+		}
+		?>
 		<p>
 			<input type="hidden" name="update_paypal_pro" value="update_paypal_pro">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update PayPal Payments Pro Settings', 'event_espresso') ?>" id="save_paypal_settings" />

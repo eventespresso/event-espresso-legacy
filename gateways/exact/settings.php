@@ -149,12 +149,14 @@ function event_espresso_display_exact_settings() {
 							echo select_input('bypass_payment_page', $values, $exact_settings['bypass_payment_page']);
 							?>
 							 </li>
+						<?php if (espresso_check_ssl() == TRUE || ( isset($exact_settings['force_ssl_return']) && $exact_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $exact_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<?php }?>
 						<li>
 							<label><?php _e('Current Button Image', 'event_espresso'); ?></label>
 							<?php echo '<img src="' . $exact_settings['button_url'] . '" />'; ?></li>

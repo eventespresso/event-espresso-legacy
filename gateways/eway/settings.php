@@ -160,12 +160,14 @@ function event_espresso_display_eway_settings() {
 							echo select_input('bypass_payment_page', $values, $eway_settings['bypass_payment_page']);
 							?>
 						</li>
+						<?php if (espresso_check_ssl() == TRUE || ( isset($eway_settings['force_ssl_return']) && $eway_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $eway_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<?php }?>
 						<li>
 							<label for="use_sandbox">
 								<?php _e('Turn on Debugging Using the', 'event_espresso'); ?> <a href="http://www.eway.com.au/Developer/Testing/" title="eWay Sandbox Login" target="_blank"><?php _e('eWay Sandbox', 'event_espresso'); ?></a> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=eway_sandbox_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>

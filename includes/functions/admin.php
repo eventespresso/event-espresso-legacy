@@ -1627,3 +1627,12 @@ function espresso_get_question_groups_for_event( $existing_question_groups = arr
 	return ($use_filters) ? apply_filters('espresso_get_question_groups_for_event_groups', $event_groups, $existing_question_groups, $event) : $event_groups;
 
 }
+
+function espresso_check_ssl() {
+	$home = str_replace("http://", "https://", home_url());
+	@$handle = fopen($home, "r");
+	if(empty($handle)){ 
+		return FALSE;
+	}
+	return TRUE;
+}

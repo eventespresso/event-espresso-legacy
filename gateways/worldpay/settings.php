@@ -208,12 +208,14 @@ function event_espresso_display_worldpay_settings() {
 							<input name="use_sandbox" type="checkbox" value="1" <?php echo $worldpay_settings['use_sandbox'] ? 'checked="checked"' : '' ?> />
 
 						</li>
+						<?php if (espresso_check_ssl() == TRUE || ( isset($worldpay_settings['force_ssl_return']) && $worldpay_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $worldpay_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<?php }?>
 						<li>
 							<label><?php _e('Current Button Image', 'event_espresso'); ?></label>
 	<?php echo (($worldpay_settings['button_url'] == '') ? '<img src="' . $button_url . '" />' : '<img src="' . $worldpay_settings['button_url'] . '" />'); ?></li>

@@ -92,7 +92,7 @@ function enter_attendee_payments() {
 						$upd_payment_status = __('Pending','event_espresso');
 					} elseif ( $new_payment > $total_owing ) {
 						$upd_payment_status = __('Refund','event_espresso');
-					} 			
+					} 						
 					
 					//Update payment status information for primary attendee
 					$set_cols_and_values = array( 

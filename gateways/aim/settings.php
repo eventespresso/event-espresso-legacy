@@ -74,6 +74,7 @@ function event_espresso_aim_payment_settings() {
 //Authorize.net Settings Form
 function event_espresso_display_authnet_aim_settings() {
 	$authnet_aim_settings = get_option('event_espresso_authnet_aim_settings');
+	
 	?>
 	<form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
 		<table width="99%" border="0" cellspacing="5" cellpadding="5">
@@ -107,12 +108,15 @@ function event_espresso_display_authnet_aim_settings() {
 							</label>
 							<input name="test_transactions" type="checkbox" value="1" <?php echo $authnet_aim_settings['test_transactions'] ? 'checked="checked"' : '' ?> />
 						</li>
+						
+						<?php if (espresso_check_ssl() == TRUE || ( isset($authnet_aim_settings['force_ssl_return']) && $authnet_aim_settings['force_ssl_return'] == 1 )) {?>
 							<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $authnet_aim_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<?php }?>
 							<li>
 							<label for="display_header">
 								<?php _e('Display a Form Header', 'event_espresso'); ?>
@@ -129,6 +133,11 @@ function event_espresso_display_authnet_aim_settings() {
 					</ul></td>
 			</tr>
 		</table>
+		<?php 
+		if (espresso_check_ssl() == FALSE){
+			espresso_ssl_required_gateway_message();
+		}
+		?>
 		<p>
 			<input type="hidden" name="update_authnet_aim" value="update_authnet_aim">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update Authorize.net AIM Settings', 'event_espresso') ?>" id="save_authnet_aim_settings" />
