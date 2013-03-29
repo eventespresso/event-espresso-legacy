@@ -91,12 +91,14 @@ function event_espresso_display_beanstream_settings() {
 							<br />
 							<?php _e('(Make sure you enter the sandbox credentials above.)', 'event_espresso'); ?>
 						</li>
+						<?php if (espresso_check_ssl() == TRUE || ( isset($beanstream_settings['force_ssl_return']) && $beanstream_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $beanstream_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<?php }?>
 						<li>
 							<label for="display_header">
 								<?php _e('Display a Form Header', 'event_espresso'); ?>

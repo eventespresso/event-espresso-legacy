@@ -144,13 +144,14 @@ function event_espresso_display_luottokunta_settings() {
 							
 						</li>
 						
-						
+						<?php if (espresso_check_ssl() == TRUE || ( isset($luottokunta_settings['force_ssl_return']) && $luottokunta_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $luottokunta_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<?php }?>
 						
 						<li>
 							<label for="button_url">
@@ -163,7 +164,7 @@ function event_espresso_display_luottokunta_settings() {
 					</ul></td>
 			</tr>
 		</table>
-		</p>
+		<p>
 			<input type="hidden" name="update_luottokunta" value="update_luottokunta">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update Luottokunta Settings', 'event_espresso') ?>" id="save_luottokunta_settings" />
 		</p>

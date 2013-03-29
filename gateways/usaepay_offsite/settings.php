@@ -95,6 +95,11 @@ function espresso_display_usaepay_offsite_settings() {
 				</td>
 			</tr>
 		</table>
+		<?php 
+		if (espresso_check_ssl() == FALSE){
+			espresso_ssl_required_gateway_message();
+		}
+		?>
 		<p>
 			<input type="hidden" name="update_usaepay_offsite" value="update_usaepay_offsite">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update USAePay Offsite Settings', 'event_espresso') ?>" id="save_usaepay_offsite_settings" />

@@ -195,12 +195,14 @@ function event_espresso_display_google_checkout_settings() {
 							<input name="use_sandbox" type="checkbox" value="1" <?php echo $google_checkout_settings['use_sandbox'] ? 'checked="checked"' : '' ?> />
 							<br />
 						</li>
+						<?php if (espresso_check_ssl() == TRUE || ( isset($google_checkout_settings['force_ssl_return']) && $google_checkout_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $google_checkout_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<?php }?>
 						
 						<li>
 							<label for="default_payment_status">
@@ -218,6 +220,8 @@ function event_espresso_display_google_checkout_settings() {
 					</ul></td>
 			</tr>
 		</table>
+		
+		<p>
 			<input type="hidden" name="update_google_checkout" value="update_google_checkout">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update Google Checkout Settings', 'event_espresso') ?>" id="save_google_checkout_settings" />
 		</p>

@@ -6,6 +6,10 @@ function espresso_help_popup($name) {
 
 add_filter('espresso_help', 'espresso_help_popup');
 
+function espresso_ssl_required_gateway_message() {
+	echo '<p class="red_alert"><strong>'. __('Attention: A valid SSL Certificate is required on your website in order to process payments using this gateway!', 'event_espresso').'</strong></p>';
+}
+
 //This is the payment gateway settings page.
 function event_espresso_gateways_options() {
 	global $active_gateways;
