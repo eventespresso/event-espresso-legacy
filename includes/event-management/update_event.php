@@ -305,6 +305,7 @@ function update_event($recurrence_arr = array()) {
 		}
 
 		//Process thumbnail image
+		$event_thumbnail_url = '';
 		if (isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ){
 			 $event_meta['event_thumbnail_url'] = sanitize_text_field($_REQUEST['upload_image']);
 			 $event_thumbnail_url = sanitize_text_field($event_meta['event_thumbnail_url']);
@@ -591,12 +592,12 @@ function update_event($recurrence_arr = array()) {
                     if ($post_id > 0)
                         $my_post['ID'] = $post_id;
 
-                    $my_post['post_title']		= esc_html($_REQUEST['event']);
+                    $my_post['post_title']		= sanitize_text_field($_REQUEST['event']);
                     $my_post['post_content']	= $post_content;
                     $my_post['post_status']		= 'publish';
 					$my_post['post_author']		= !empty($_REQUEST['user']) ? (int)$_REQUEST['user'] : '';
-          			$my_post['post_category']	= !empty($_REQUEST['post_category']) ? sanitize_text_field($_REQUEST['post_category']) : '';
-            		$my_post['tags_input']		= !empty($_REQUEST['post_tags']) ? sanitize_text_field($_REQUEST['post_tags']) : '';
+          			$my_post['post_category']	= !empty($_REQUEST['post_category']) ? $_REQUEST['post_category'] : '';
+            		$my_post['tags_input']		= !empty($_REQUEST['post_tags']) ? $_REQUEST['post_tags'] : '';
            			$my_post['post_type']		= !empty($post_type) ? $post_type : 'post';
 					
 					
