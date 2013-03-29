@@ -3340,7 +3340,7 @@ EOT;
 		  break;
 
 		case  'c':
-		  // this this might be a callback function
+		  // this might be a callback function
 		  $j++;
 		  $k =  mb_strpos($text, '>', $j);
 
@@ -3411,7 +3411,7 @@ EOT;
 	  case  'C':
 		$noClose =  1;
 	  case  'c':
-		// this this might be a callback function
+		// this might be a callback function
 		$j++;
 		$k =  mb_strpos($text, '>', $j);
 
