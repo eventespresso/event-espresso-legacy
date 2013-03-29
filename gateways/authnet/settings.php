@@ -161,6 +161,7 @@ function event_espresso_display_authnet_settings() {
 							<br />
 							<input type="text" name="authnet_md5_value" size="35" value="<?php echo $authnet_settings['authnet_md5_value']; ?>">
 						</li>
+						<?php if (espresso_check_ssl() == TRUE || ( isset($authnet_settings['force_ssl_return']) && $authnet_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
@@ -168,6 +169,7 @@ function event_espresso_display_authnet_settings() {
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $authnet_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
 						</li>
+						<?php }?>
 						<li>
 							<label for="bypass_payment_page">
 								<?php _e('Bypass Payment Overview Page', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=bypass_confirmation"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
