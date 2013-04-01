@@ -91,7 +91,7 @@ function event_espresso_display_paypal_settings() {
 							</label>
 							<input type="text" name="paypal_id" size="35" value="<?php echo $paypal_settings['paypal_id']; ?>">
 							<br />
-							<?php _e('(Typically payment@yourdomain.com)', 'event_espresso'); ?>
+							<?php _e('(The email address you use when you log in to your account at PayPal.com)', 'event_espresso'); ?>
 						</li>
 						<li>
 							<label for="currency_format">

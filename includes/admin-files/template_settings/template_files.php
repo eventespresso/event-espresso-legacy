@@ -106,7 +106,7 @@
 	} else if (!is_writable(EVENT_ESPRESSO_TEMPLATE_DIR)) {
 	    ?>
 	    <p>
-    <?php _e('In order to use this this feature, you will need to move the files located in the', 'event_espresso'); ?> <span class="display-path"><strong><?php echo EVENT_ESPRESSO_PLUGINFULLPATH ?>templates/</strong></span> <?php _e('directory into the', 'event_espresso'); ?> <span class="display-path"><strong><?php echo EVENT_ESPRESSO_TEMPLATE_DIR ?></strong></span> <?php _e('directory', 'event_espresso'); ?>.
+    <?php _e('In order to use this feature, you will need to move the files located in the', 'event_espresso'); ?> <span class="display-path"><strong><?php echo EVENT_ESPRESSO_PLUGINFULLPATH ?>templates/</strong></span> <?php _e('directory into the', 'event_espresso'); ?> <span class="display-path"><strong><?php echo EVENT_ESPRESSO_TEMPLATE_DIR ?></strong></span> <?php _e('directory', 'event_espresso'); ?>.
 	    </p>
 	    <p class="fugue f-error">
     <?php _e("The permissions on your templates directory are incorrect.", 'event_espresso'); ?>

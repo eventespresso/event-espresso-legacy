@@ -246,25 +246,25 @@ if (!function_exists('espresso_chart_display')){
 			case 'total_reg':
 				//Total Registrations/Transactions
 				$title = __('Total Registrations/Transactions', 'event_espresso');
-				$sql = "SELECT SUM(a.amount_pd) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
+				$sql = "SELECT SUM(a.total_cost) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
 			break;
 
 			case 'total_completed':
 				//Completed Registrations/Transactions
 				$title = __('Completed Registrations/Transactions', 'event_espresso');
-				$sql = "SELECT SUM(a.amount_pd) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." AND (payment_status='Completed' OR payment_status='Refund') GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
+				$sql = "SELECT SUM(a.total_cost) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." AND (payment_status='Completed' OR payment_status='Refund') GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
 			break;
 
 			case 'total_pending':
 				//Pending Registrations/Transactions
 				$title = __('Pending Registrations/Transactions', 'event_espresso');
-				$sql = "SELECT SUM(a.amount_pd) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." AND payment_status='Pending' GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
+				$sql = "SELECT SUM(a.total_cost) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." AND payment_status='Pending' GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
 			break;
 
 			case 'total_incomplete':
 				//Incomplete Registrations/Transactions
 				$title = __('Incomplete Registrations/Transactions', 'event_espresso');
-				$sql = "SELECT SUM(a.amount_pd) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." AND (payment_status='Incomplete' OR payment_status='Payment Declined') GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
+				$sql = "SELECT SUM(a.total_cost) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." AND (payment_status='Incomplete' OR payment_status='Payment Declined') GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
 			break;
 		}
 
