@@ -136,6 +136,9 @@ function event_espresso_display_qbms_settings() {
 				</td>
 			</tr>
 		</table>
+		<?php if (espresso_check_ssl() == FALSE){
+			espresso_ssl_required_gateway_message();
+		}?>
 		<p>
 			<input type="hidden" name="update_qbms" value="update_qbms">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update QBMS Settings', 'event_espresso') ?>" id="save_qbms_settings" />
