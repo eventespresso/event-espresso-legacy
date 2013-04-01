@@ -66,7 +66,7 @@ function espresso_process_qbms($payment_data) {
 			$app_login = ESPRESSO_QBMS_DEV_APP_LOGIN;
 		} else {
 			$qbmsurl = 'https://webmerchantaccount.quickbooks.com/j/AppGateway';//$qbms_settings['qbms_testurl'];
-			throw new Exception(__("No Merchant ID or APP IDconfigured for LIVE payments yet! Still in development.",'event_espresso'));
+			//throw new Exception(__("No Merchant ID or APP IDconfigured for LIVE payments yet! Still in development.",'event_espresso'));
 			$app_id = ESPRESSO_QBMS_LIVE_APP_ID;
 			$app_login = ESPRESSO_QBMS_LIVE_APP_LOGIN;
 		}

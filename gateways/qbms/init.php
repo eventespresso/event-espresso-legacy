@@ -2,8 +2,8 @@
 //a few globals
 define('ESPRESSO_QBSM_DEV_APP_ID','245799785');
 define('ESPRESSO_QBMS_DEV_APP_LOGIN','eventespresso.com2.eventespresso.com');
-define('ESPRESSO_QBMS_LIVE_APP_ID','');
-define('ESPRESSO_QBMS_LIVE_APP_LOGIN','');
+define('ESPRESSO_QBMS_LIVE_APP_ID','679873720');
+define('ESPRESSO_QBMS_LIVE_APP_LOGIN','eventespresso.eventespresso.com');
 
 //Display Gateway
 add_action('action_hook_espresso_display_onsite_payment_header', 'espresso_display_onsite_payment_header');
