@@ -712,6 +712,7 @@ function events_data_tables_install() {
 			system_name varchar(15) DEFAULT NULL,
 			response text NULL,
 			required ENUM( 'Y', 'N' ) NOT NULL DEFAULT 'N',
+			price_mod ENUM( 'Y', 'N' ) NOT NULL DEFAULT 'N',
 			required_text text NULL,
 			admin_only ENUM( 'Y', 'N' ) NOT NULL DEFAULT 'N',
 			wp_user int(22) DEFAULT '1',

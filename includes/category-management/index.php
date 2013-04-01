@@ -136,7 +136,7 @@ function event_espresso_categories_config_mnu() {
 			<?php _e('Unique Category Identifier', 'event_espresso'); ?>
 		</h2>
 		<p>
-			<?php _e('This should be a unique identifier for the category. Example: "category1" (without qoutes.)', 'event_espresso'); ?>
+			<?php _e('This should be a unique identifier for the category. Example: "category1" (without quotes.)', 'event_espresso'); ?>
 		</p>
 		<p>The
 			<?php _e(' unique ID can also be used in individual pages using the', 'event_espresso'); ?>

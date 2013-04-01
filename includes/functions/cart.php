@@ -722,7 +722,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 								}
 	
 								//If they have selected more than allowed max group registration
-								//Dispaly an error instead of the continue button
+								//display an error instead of the continue button
 								if ($total_attendees_per_event > $attendee_limit || $total_attendees_per_event == 0) {
 									$attendee_overflow = true;
 									$show_checkout_button = false;

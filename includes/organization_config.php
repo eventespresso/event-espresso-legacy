@@ -331,7 +331,7 @@ function organization_config_mnu() {
 											<p><em class="important"><b>
 														<?php _e('ATTENTION:', 'event_espresso'); ?>
 													</b><br />
-													<?php _e('This page should be hidden from from your navigation menu. Exclude pages by using the "Exclude Pages" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the "exclude" parameter in your "wp_list_pages" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.', 'event_espresso'); ?>
+													<?php _e('This page should be hidden from from your navigation menu. Exclude pages by using the "Exclude Pages" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the "exclude" parameter in your "wp_list_pages" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more information about excluding pages.', 'event_espresso'); ?>
 												</em> </p>
 										</div>
 										<?php ##### close popup help #####    ?>
@@ -363,7 +363,7 @@ function organization_config_mnu() {
 											<p><em class="important"><b>
 														<?php _e('ATTENTION:', 'event_espresso'); ?>
 													</b><br />
-													<?php _e('This page should be hidden from from your navigation menu. Exclude pages by using the "Exclude Pages" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the "exclude" parameter in your "wp_list_pages" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.', 'event_espresso'); ?>
+													<?php _e('This page should be hidden from from your navigation menu. Exclude pages by using the "Exclude Pages" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the "exclude" parameter in your "wp_list_pages" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more information about excluding pages.', 'event_espresso'); ?>
 												</em></p>
 										</div>
 										<?php ##### close popup help box #####    ?>
@@ -391,7 +391,7 @@ function organization_config_mnu() {
 											<p><em class="important"><b>
 														<?php _e('ATTENTION:', 'event_espresso'); ?>
 													</b><br />
-													<?php _e('This page should be hidden from from your navigation menu. Exclude pages by using the "Exclude Pages" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the "exclude" parameter in your "wp_list_pages" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.', 'event_espresso'); ?>
+													<?php _e('This page should be hidden from from your navigation menu. Exclude pages by using the "Exclude Pages" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the "exclude" parameter in your "wp_list_pages" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more information about excluding pages.', 'event_espresso'); ?>
 												</em> </p>
 										</div>
 										<p>
