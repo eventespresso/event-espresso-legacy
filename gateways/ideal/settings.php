@@ -99,11 +99,6 @@ function event_espresso_display_ideal_settings() {
 					</ul></td>
 			</tr>
 		</table>
-		<?php 
-		if (espresso_check_ssl() == FALSE){
-			espresso_ssl_required_gateway_message();
-		}
-		?>
 		<p>
 			<input type="hidden" name="update_ideal" value="update_ideal">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update iDEAL Settings', 'event_espresso') ?>" id="save_ideal_settings" />
