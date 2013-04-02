@@ -127,6 +127,11 @@ function espresso_display_usaepay_onsite_settings() {
 				</td>
 			</tr>
 		</table>
+		<?php 
+		if (espresso_check_ssl() == FALSE){
+			espresso_ssl_required_gateway_message();
+		}
+		?>
 		<p>
 			<input type="hidden" name="update_usaepay_onsite" value="update_usaepay_onsite">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update USAePay Onsite Settings', 'event_espresso') ?>" id="save_usaepay_onsite_settings" />
