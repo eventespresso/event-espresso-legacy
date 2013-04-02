@@ -116,6 +116,11 @@ function event_espresso_display_beanstream_settings() {
 				</td>
 			</tr>
 		</table>
+		<?php 
+		if (espresso_check_ssl() == FALSE){
+			espresso_ssl_required_gateway_message();
+		}
+		?>
 		<p>
 			<input type="hidden" name="update_beanstream" value="update_beanstream">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update Beanstream Settings', 'event_espresso') ?>" id="save_paypal_settings" />
