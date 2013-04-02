@@ -85,10 +85,42 @@ function event_espresso_support() {
 							</h3>
 							<div class="inside">
 								<div class="padding">
-									<p>Download the <a href="http://eventespresso.com/wp-content/plugins/download-monitor/download.php?id=2">Installation Guide</a> as a PDF</p>
 									<p>
 	<?php _e('For the latest installation instructions please visit:', 'event_espresso'); ?>
-										<a href="http://eventespresso.com/support/installation/" target="_blank">http://eventespresso.com/support/installation/</a></p>
+										<a href="http://eventespresso.com/wiki/installing-event-espresso/" target="_blank">http://eventespresso.com/wiki/installing-event-espresso/</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="metabox-holder">
+						<div class="postbox">
+							<div title="Click to toggle" class="handlediv"><br />
+							</div>
+							<h3 class="hndle">
+	<?php _e('Event Marketing Resources', 'event_espresso'); ?>
+								<a name="hire_promo" id="hire_promo"></a></h3>
+							<div class="inside">
+								<div class="padding">
+						
+									<dl id="hire_promo">
+									
+									<?php /*?><dt> <a href="http://theadventgroup.net/?referral=eventespresso.com" target="_blank">
+	<?php _e('The Advent Group', 'event_espresso'); ?>
+										</a> </dt>
+										<dd><a href="http://theadventgroup.net/?referral=eventespresso.com" target="_blank"><img src="http://eventespresso.com/wp-content/uploads/2013/03/theadventgroup-logo-300x99.jpg" class="alignright" width="300" height="99" border="0"></a>StickerGiant is two businesses in one. We are a printing company that prints stickers and labels for thousands of customers all over the United States and Canada. We also have a fun online sticker store that has over 26,000 designs from bands to sports and everything in between. Our selection of Embroidered Patches is vast. </dd><?php */?>
+										
+										
+										<dt> <a href="http://www.stickergiant.com/?referral=eventespresso.com" target="_blank">
+	<?php _e('StickerGiant.com', 'event_espresso'); ?>
+										</a> </dt>
+										<dd><a href="http://www.stickergiant.com/?referral=eventespresso.com" target="_blank"><img src="http://www.stickergiant.com/banners/120x60.gif" class="alignright" width="120" height="60" border="0"></a>StickerGiant is two businesses in one. We are a printing company that prints stickers and labels for thousands of customers all over the United States and Canada. We also have a fun online sticker store that has over 26,000 designs from bands to sports and everything in between. Our selection of Embroidered Patches is vast. </dd>
+										<dt> <a href="http://eventespresso.com/contact/?referral=eventespresso_plugin" target="_blank">
+	<?php _e('Add a Merketing Resource', 'event_espresso'); ?>
+										</a> </dt>
+										<dd>Have a marketing resource you would like to see listed here? Please let us know!</dd>
+									</dl>
 								</div>
 							</div>
 						</div>
@@ -104,11 +136,23 @@ function event_espresso_support() {
 								<a name="partners" id="partners"></a></h3>
 							<div class="inside">
 								<div class="padding">
-
+								<p>The following developers have experience with Event Espresso for their clients and have requested to be listed in this directory. Event Espresso does not make any guarantees about their services. This directory is offered as a community benefit to Event Espresso users. We offer our recommendations on <a href="/support/how-to-select-a-developer/">how to select a developer</a>.</p>
 									<dl id="partners">
+									
+									<dt><a href="http://www.ivycat.com/?referral=eventespresso.com" target="_blank">Ivy Cat</a></dt>
+<dd><a href="http://www.ivycat.com/?referral=eventespresso.com"><img src="http://eventespresso.com/wp-content/uploads/2013/01/IvyCat_Logo.png" alt="" title="IvyCat_Logo" class="alignright size-thumbnail wp-image-36065" width="150"></a>We're a small, agile team of web designers, developers, and server geeks that love to help businesses strategize, create, market, and maintain strong, effective and profitable websites and web applications.</dd>
+<dd>Our staff has well over a decade of experience engineering successful websites in many industries. </dd>
+<dd>Check our <a href="http://www.ivycat.com/web-design/portfolio/?referral=eventespresso.com" target="_blank">web design portfolio</a> for examples of our work. </dd>
+										
+										<dt> <a href="http://pixeljar.net/?referral=eventespresso.com" target="_blank">Pixel Jar</a></dt>
+										<dd><a href="http://pixeljar.net/?referral=eventespresso.com" target="_blank"><img src="http://eventespresso.com/wp-content/uploads/2013/01/pixel-jar-logo-150x150.png" alt="" title="pixel-jar-logo" class="alignright size-thumbnail wp-image-36059" height="150" width="150"></a>Pixel Jar creates custom themes, plugins and sites as well as provides custom coding and modifications for existing projects. The co-creators of Pixel Jar, Brandon and Jeff, met working at another web development firm in 2001. Pixel Jar started in 2004 with the goal to provide solid web solutions for small to medium businesses. In 2007 we worked on our first WordPress project and loved it so much that by 2009, our business model was solely WordPress projects. We are very active in the WordPress community, regularly attending and presenting at our local WordPress Meetup, attending regional WordCamps and hosting the annual WordCamp Orange County.</dd>
+										
+										
 										<dt> <a href="http://bigimprint.com/espresso/" target="_blank">Big Imprint Design</a></dt>
 										<dd>We create affordable websites for small businesses and non-profits.</dd>
-										<dt> <a href="http://eventespresso.com/contact/" target="_blank">
+										
+										
+										<dt> <a href="http://eventespresso.com/contact/?referral=eventespresso_plugin" target="_blank">
 	<?php _e('Become a Partner', 'event_espresso'); ?>
 										</a> </dt>
 										<dd>Have experience developing websites around Event Espresso? Become a partner!</dd>
@@ -130,11 +174,11 @@ function event_espresso_support() {
 								<div class="padding">
 
 									<dl id="hire_devs">
-										<dt> <a href="http://jobs.eventespresso.com/" target="_blank">
+										<dt> <a href="http://jobs.eventespresso.com/?referral=eventespresso.com" target="_blank">
 	<?php _e('Event Espresso Job Board', 'event_espresso'); ?>
 										</a> </dt>
 										<dd>A dedicated job board that lists the opportunities to work with Event Espresso or our clients.</dd>
-										<dt> <a href="http://wpcandy.com/pros" target="_blank">
+										<dt> <a href="http://wpcandy.com/pros/?referral=eventespresso.com" target="_blank">
 	<?php _e('WP Candy Pros', 'event_espresso'); ?>
 										</a> </dt>
 										<dd>WordPress Professionals and theme developers.</dd>
@@ -155,7 +199,7 @@ function event_espresso_support() {
 							<div class="inside">
 								<div class="padding">
 									<dl id="developers">
-										<dt><a href="http://www.mojo-themes.com/" target="_blank">MOJO Themes</a></dt>
+										<dt><a href="http://www.mojo-themes.com/?referral=eventespresso.com" target="_blank">MOJO Themes</a></dt>
 										<dd>It's simple really – MOJO themes is a marketplace for everyone to <strong><em>buy</em></strong> or <strong><em>sell</em></strong> themes and templates.</dd>
 										<dt><a href="http://www.appthemes.com/cp/go.php?r=12413&i=l0" target="_blank">AppThemes</a></dt>
 										<dd>AppThemes are built for businesses of all sizes and run on WordPress so  you don't have to worry about the headache of setting up a complex  server environment.</dd>
@@ -165,11 +209,11 @@ function event_espresso_support() {
 										<dd>Build websites faster and better using drag and drop, layout, typography, design-control and more... </dd>
 										<dt><a href="http://www.studiopress.com/" target="_blank">StudioPress</a></dt>
 										<dd>When you buy a StudioPress theme, you are getting state of the art code,  smart design architecture as well as an array of beautiful frames for  your content.</dd>
-										<dt><a href="http://www.elegantthemes.com/" target="_blank">ElegantThemes</a></dt>
+										<dt><a href="http://www.elegantthemes.com/?referral=eventespresso.com" target="_blank">ElegantThemes</a></dt>
 										<dd>Each premium WordPress theme comes expertly coded in valid XHTML and  CSS, and all are made compatible with the latest version of WordPress.</dd>
-										<dt><a href="http://allurethemes.com" target="_blank">AllureThemes</a></dt>
+										<dt><a href="http://allurethemes.com/?referral=eventespresso.com" target="_blank">AllureThemes</a></dt>
 										<dd>We create beautiful, top quality WordPress themes for you at amazing prices with exceptional support.</dd>
-										<dt><a href="http://museumthemes.com" target="_blank">Museum Themes</a></dt>
+										<dt><a href="http://museumthemes.com/?referral=eventespresso.com" target="_blank">Museum Themes</a></dt>
 										<dd>Fine art WordPress themes.</dd>
 									</dl>
 								</div>
@@ -218,8 +262,8 @@ function event_espresso_support() {
 							<div class="inside">
 								<div class="padding">
 									<dl id="themes">
-										<dt><a href="http://www.pagelines.com/" target="_blank">PageLines Framework</a> by Pagelines</dt>
-										<dt><a href="http://www.woothemes.com/" target="_blank">Diarise</a> by WooThemes</dt>
+										<dt><a href="http://www.pagelines.com/?referral=eventespresso.com" target="_blank">PageLines Framework</a> by Pagelines</dt>
+										<dt><a href="http://www.woothemes.com/?referral=eventespresso.com" target="_blank">Diarise</a> by WooThemes</dt>
 									</dl>
 								</div>
 							</div>
@@ -610,7 +654,7 @@ function event_espresso_support() {
 								<div class="padding">
 									<h4>Before Contacting Support</h4>
 									<p>Please understand that our primary goal is to offer Event Espresso as a very low cost solution compared to building your own system or using a 3rd party service to handle your registrations.</p><p> As with most open source programs (and closed licensed programs), chances are you will find the occasional bug, glitch, white screen of death, and/or general failure. Please don't panic!</p>
-									<p>If your problems are not urgent, please post in our <a href="http://eventespresso.com/forums/" target="_blank">support forums</a>. If you need immediate help. Please purchase a support token below, at which time you can schedule time with a dedicated support tech or core developer.</p>
+									<p>If your problems are not urgent, please post in our <a href="http://eventespresso.com/support/forums/" target="_blank">support forums</a>. If you need immediate help. Please purchase a support token below, at which time you can schedule time with a dedicated support tech or core developer.</p>
 									<p class="attention-block"><strong class="red_text">
 										<?php _e('Attention:', 'event_espresso'); ?>
 										</strong><br />
@@ -630,16 +674,16 @@ function event_espresso_support() {
 										<?php _e('A support token can be used to get priority support for a single  incident. It can be used to schedule support via phone or IM for a  single incident (up to 30 minutes), or to receive priority e-mail  support. A support token can be used for &ldquo;how to&rdquo; questions, technical  issues, &ldquo;best practice&rdquo; questions or for custom development consulting. A  support token consists of the PayPal Transaction ID you received from  PayPal at the time of your purchase.', 'event_espresso'); ?>
 									</p>
 									<p>
-	<?php _e('<strong>You can purchase support tokens</strong> on the <a href="http://eventespresso.com/support/premium-support-options/">Premium Support page</a>. Tokens can be purchased one at a time, or in blocks of three at a discount.', 'event_espresso'); ?>
+	<?php _e('<strong>You can purchase support tokens</strong> on the <a href="http://eventespresso.com/product/priority-support-tokens/">Premium Support page</a>. Tokens can be purchased one at a time, or in blocks of three at a discount.', 'event_espresso'); ?>
 									</p>
 									<p>Support tokens can be used to schedule live support (phone or IM) or for priority e-mail support. See <a href="http://eventespresso.com/support/">details on premium support</a>.</p>
 									<div class="support-tokens">
-										<h6>1 Premium Support Token</h6>
+										<h6><a href="http://eventespresso.com/product/priority-support-tokens/" target="_blank">1 Premium Support Token</a></h6>
 										<p>Single incident, up to 30 minutes of live support or priority e-mail support.</p>
 										<p class="support-prices"><span class="price">Price: $65.00 </span></p>
 									</div>
 									<div class="support-tokens">
-										<h6>3 Premium Support Tokens</h6>
+										<h6><a href="http://eventespresso.com/product/3-premium-support-tokens/" target="_blank">3 Premium Support Tokens</a></h6>
 										<p>Up to 90 minutes of live support or priority e-mail support.</p>
 										<p class="support-prices"><span class="price">Price: $150.00 </span></p>
 									</div>
@@ -647,17 +691,17 @@ function event_espresso_support() {
 	<?php _e('Installation &amp; Consulting', 'event_espreso'); ?>
 									</h5>
 									<div class="install-options">
-										<h6>Basic Install</h6>
+										<h6><a href="http://eventespresso.com/product/basic-install/" target="_blank">Basic Install</a></h6>
 										<p>Includes plugin installation and setting up basic pages for the plugin.</p>
 										<p class="support-prices"><span class="price">Price: $35.00 </span></p>
 									</div>
 									<div class="install-options">
-										<h6>Basic Install with Configuration</h6>
+										<h6><a href="http://eventespresso.com/product/basic-install-with-configuration/" target="_blank">Basic Install with Configuration</a></h6>
 										<p>Includes configuration and testing Payment Gateway's .</p>
 										<p class="support-prices"><span class="price">Price: $65.00 </span></p>
 									</div>
 									<div class="install-options">
-										<h6>Consulting (1 hour)</h6>
+										<h6><a href="http://eventespresso.com/product/consultation/" target="_blank">Consulting (1 hour)</a></h6>
 										<p>Developer support and implementation consulting for the Advanced Events Registration plugin for WordPress.</p>
 										<p class="support-prices"><span class="price">Price: $135.00 </span></p>
 									</div>
@@ -742,7 +786,7 @@ function event_espresso_support() {
 						</div>
 					</div>
 				</li>
-				<li>
+				<?php /*?><li>
 					<div class="metabox-holder">
 						<div class="postbox">
 	            <div title="Click to toggle" class="handlediv"><br />
@@ -753,7 +797,7 @@ function event_espresso_support() {
 	            <div class="inside">
 								<div class="padding">
 									<dl id="additonal">
-										<dt><a href="http://eventespresso.com/forums/category/premium-plugin-support/community-user-guide-premium-plugin-support/">User Guide Forum</a>
+										<dt><a href="http://eventespresso.com/support/documentation/">User Guide Forum</a>
 										</dt>
 										<dt><a href="http://eventespresso.com/forums/category/premium-plugin-support/tutorials/template-customization/">Tutorials</a> </dt><dd>(calendar, css override, payment gateway system, etc.)</dd>
 										<dt><a href="http://eventespresso.com/forums/premium-plugin-support/tutorials/template-customization/">Template Customization</a></dt>
@@ -772,7 +816,7 @@ function event_espresso_support() {
 							</div>
 						</div>
 					</div>
-				</li>
+				</li><?php */?>
 
 
 				<?php /* ?>
