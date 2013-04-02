@@ -120,7 +120,7 @@ if (!function_exists('espresso_event_export')){
 			$sql .= " AND wp_user = '" . espresso_member_data('id') ."' ";
 		}
 		
-		$sql .= ") ORDER BY start_date ASC";
+		$sql .= ") ORDER BY start_date = '0000-00-00' ASC, start_date ASC, event_name ASC";
 		
 		ob_start();
 		

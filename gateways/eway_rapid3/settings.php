@@ -158,6 +158,7 @@ function event_espresso_display_eway_rapid3_settings() {
 							<br />
 							<?php _e('Note: Sandbox mode only works for AUD as currency. If you are using Sandbox mode, ensure you are using Sandbox credentials.', 'event_espresso'); ?>
 						</li>
+						<?php if (espresso_check_ssl() == TRUE || ( isset($eway_rapid3_settings['force_ssl_return']) && $eway_rapid3_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
@@ -165,6 +166,7 @@ function event_espresso_display_eway_rapid3_settings() {
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $eway_rapid3_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> />
 						</li>
+						<?php }?>
 						<li>
 							<label for="display_header">
 								<?php _e('Display a Form Header', 'event_espresso'); ?>
@@ -181,6 +183,11 @@ function event_espresso_display_eway_rapid3_settings() {
 				</td>
 			</tr>
 		</table>
+		<?php 
+		if (espresso_check_ssl() == FALSE){
+			espresso_ssl_required_gateway_message();
+		}
+		?>
 		<p>
 			<input type="hidden" name="update_eway_rapid3" value="update_eway_rapid3">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update Eway Rapid 3.0 Settings', 'event_espresso') ?>" id="save_eway_rapid3_settings" />

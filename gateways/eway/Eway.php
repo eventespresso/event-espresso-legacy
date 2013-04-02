@@ -86,7 +86,7 @@ class Espresso_Eway extends Espresso_PaymentGateway {
         }
     }
 
-		public function submitPayment( $fields = FASLE ) {
+		public function submitPayment( $fields = FALSE ) {
             $this->prepareSubmit();
             echo "<html>\n";
             echo "<head><title>Processing Payment...</title></head>\n";

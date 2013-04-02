@@ -66,15 +66,15 @@ function espresso_display_aim($data) {
 					<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></h4>
 					<p>
 						<label for="card_num"><?php _e('Card Number', 'event_espresso'); ?></label>
-						<input type="text" name="card_num" id="aim_card_num" />
+						<input type="text" name="card_num" id="aim_card_num" autocomplete="off" />
 					</p>
 					<p>
 						<label for="exp_date"><?php _e('Exp. Date', 'event_espresso'); ?></label>
-						<input type="text" name="exp_date" id="aim_exp_date" />
+						<input type="text" name="exp_date" id="aim_exp_date" autocomplete="off" />
 					</p>
 					<p>
 						<label for="ccv_code"><?php _e('CCV Code', 'event_espresso'); ?></label>
-						<input type="text" name="ccv_code" id="aim_ccv_code" />
+						<input type="text" name="ccv_code" id="aim_ccv_code" autocomplete="off" />
 					</p>
 				</fieldset>
 					

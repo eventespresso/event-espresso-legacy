@@ -2,7 +2,7 @@
 //Function to update questions in the database
 function event_espresso_form_builder_update(){
 
-	global $wpdb, $current_user, $allowedtags;
+	global $wpdb, $current_user;
 
 	$success = FALSE;
 	$errors = FALSE;
@@ -20,8 +20,8 @@ function event_espresso_form_builder_update(){
 		'height' 	=> array(),
 		'title' 		=> array()
 	);
-
-	$question= isset( $_POST['question'] ) && ! empty( $_POST['question'] ) ? wp_kses( $_POST['question'], $allowedtags ) : FALSE;
+	
+	$question= isset( $_POST['question'] ) && ! empty( $_POST['question'] ) ? wp_kses_post( $_POST['question'] ) : FALSE;
 	$question_id= isset( $_POST['question_id'] ) && ! empty( $_POST['question_id'] ) ? absint( $_POST['question_id'] ) : FALSE;
 	
 	
@@ -32,14 +32,15 @@ function event_espresso_form_builder_update(){
 	} else {
 		
 		$set_cols_and_values = array( 
-				'sequence' 			=> isset( $_POST['sequence'] ) && ! empty( $_POST['sequence'] ) ? absint( $_POST['sequence'] ) : 0,
-				'question_type' 	=> isset( $_POST['question_type'] ) && ! empty( $_POST['question_type'] ) ? wp_strip_all_tags( $_POST['question_type'] ) : 'TEXT', 
-				'question'			=> $question,
-				'response'			=> isset( $_POST['values'] ) && ! empty( $_POST['values'] ) ? wp_kses( $_POST['values'], $allowedtags ) : '',
-				'required'			=> isset( $_POST['required'] ) && isset( $enum_values[ $_POST['required'] ] ) ?  $enum_values[ $_POST['required'] ]  : 'N',
+				'sequence' 		=> isset( $_POST['sequence'] ) && ! empty( $_POST['sequence'] ) ? absint( $_POST['sequence'] ) : 0,
+				'question_type' => isset( $_POST['question_type'] ) && ! empty( $_POST['question_type'] ) ? wp_strip_all_tags( $_POST['question_type'] ) : 'TEXT', 
+				'question'		=> $question,
+				'response'		=> isset( $_POST['values'] ) && ! empty( $_POST['values'] ) ? wp_kses_post( $_POST['values'] ) : '',
+				'required'		=> isset( $_POST['required'] ) && isset( $enum_values[ $_POST['required'] ] ) ?  $enum_values[ $_POST['required'] ]  : 'N',
 				'required_text'	=> isset( $_POST['required_text'] ) && ! empty( $_POST['required_text'] ) ? wp_strip_all_tags( $_POST['required_text'] ) : '',
 				'admin_only'		=> isset( $_POST['admin_only'] ) && isset( $enum_values[ $_POST['admin_only'] ] ) ?  $enum_values[ $_POST['admin_only'] ]  : 'N'
 		);
+		
 		$set_cols_and_values = apply_filters( 'filter_hook_espresso_question_cols_and_values', $set_cols_and_values, $enum_values );
 
 		$data_formats = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s' );

@@ -19,6 +19,7 @@ function event_espresso_form_builder_edit(){
 			$required = stripslashes($question->required);
 			$sequence = $question->sequence;
 			$required_text = $question->required_text;
+			$price_mod = $question->price_mod;
 			$admin_only = $question->admin_only;
 			$system_name = $question->system_name;
 			if ($question->system_name !=''){
@@ -53,7 +54,7 @@ function event_espresso_form_builder_edit(){
 			<form id="edit-new-question-form" class="espresso_form" name="newquestion" method="post" action="<?php echo $_SERVER["REQUEST_URI"]?>">
 			
 				<p class="intro">
-					<?php _e('By default all registrants will be asked for their first name, last name, and email address.','event_espresso'); ?>
+					<?php _e('By default all event registrants will be asked for their first name, last name, and email address.','event_espresso'); ?>
 				</p>
 				
 				<?php
@@ -120,7 +121,7 @@ function event_espresso_form_builder_edit(){
 											$values=array(array('id'=>'Y','text'=> __('Yes','event_espresso')));
 									}
 									echo select_input('required', $values, $required); 
-								?>
+								?>&nbsp;&nbsp; 
 								<span class="description"><?php _e('Mark this question as required.', 'event_espresso'); ?></span>
 							</td>
 						</tr>
@@ -149,7 +150,7 @@ function event_espresso_form_builder_edit(){
 									$values=array(array('id'=>'N','text'=> __('No','event_espresso')));
 								}
 								echo select_input('admin_only', $values, $admin_only);
-								?>
+								?>&nbsp;&nbsp; 
 								<span class="description"><?php _e('Only the administrator can see this field.', 'event_espresso'); ?></span>
 							</td>
 						</tr>

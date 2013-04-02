@@ -1,12 +1,13 @@
 <?php
 if (!function_exists('event_form_build')) {
 
-	function event_form_build($question, $answer = "", $event_id = null, $multi_reg = 0, $extra = array(), $class = 'ee-reg-page-questions', $disabled = '') {
+	function event_form_build( $question, $answer = "", $event_id = null, $multi_reg = 0, $extra = array(), $class = 'ee-reg-page-questions', $disabled = '' ) {
+
 		if ($question->admin_only == 'Y' && empty($extra['admin_only'])) {
 			return;
 		}
 		
-		$attendee_number = isset($extra['attendee_number']) ? $extra['attendee_number'] : 3;
+		$attendee_number = isset($extra['attendee_number']) ? $extra['attendee_number'] : 'XXXXXX';
 		$price_id = isset($extra['price_id']) ? $extra['price_id'] : 0;
 		$multi_name_adjust = $multi_reg == 1 ? "[$event_id][$price_id][$attendee_number]" : '';
 		$text_input_class = ' ee-reg-page-text-input ';

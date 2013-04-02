@@ -45,7 +45,7 @@ function espresso_getTinyUrl($url) {
 //Text formatting function.
 //This should fix all of the formatting issues of text output from the database.
 function espresso_format_content($content = '') {
-	return wpautop(stripslashes_deep(html_entity_decode(do_shortcode($content), ENT_QUOTES, "UTF-8")));
+	return wp_kses_post(wpautop(stripslashes_deep(html_entity_decode(do_shortcode($content), ENT_QUOTES, "UTF-8"))));
 }
 
 //This function pulls HTML entities back into HTML format first then strips it.
@@ -158,14 +158,12 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			
 			$html = '<div id="additional_header" class="event_form_field additional_header espresso_add_subtract_attendees">';
 			// fixed for translation string, previous string untranslatable - http://events.codebasehq.com/projects/event-espresso/tickets/11
-			$html .= '<a id="add-additional-attendee-0" rel="0" class="add-additional-attendee-lnk additional-attendee-lnk">' . __('Add More Attendees? (click to toggle, limit ', 'event_espresso');
-			$html .= $i . ')</a>';
-			$html .= '</div>';
+			$html .= '<a id="add-additional-attendee-1" rel="1" class="add-additional-attendee-lnk additional-attendee-lnk ui-state-highlight">' . sprintf(__('Add More Attendees? (click to toggle, limit %s)', 'event_espresso'), $i). '</a></div>';
 			
 			
 			//ob_start();
 			$attendee_form = '<div id="additional_attendee_XXXXXX" class="espresso_add_attendee">';
-			$attendee_form .= '<h4 class="additional-attendee-nmbr-h4">' . __('Additional Attendee #', 'event_espresso') . 'XXXXXX</h4>';
+			$attendee_form .= '<h4 class="additional-attendee-nmbr-h4">' . __('Attendee #', 'event_espresso') . 'XXXXXX</h4>';
 			/*
 			 * Added for seating chart addon
 			 */
@@ -202,16 +200,16 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			$attendee_form .= '<div class="espresso_add_subtract_attendees">';
 
 			$attendee_form .= '
-			<a id="remove-additional-attendee-XXXXXX" rel="XXXXXX" class="remove-additional-attendee-lnk additional-attendee-lnk" title="' . __('Remove the above Attendee', 'event_espresso') . '">
+			<div class="additional-attendee-div"><a id="remove-additional-attendee-XXXXXX" rel="XXXXXX" class="remove-additional-attendee-lnk additional-attendee-lnk ui-priority-primary " title="' . __('Remove Attendee Above', 'event_espresso') . '">
 				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Attendee', 'event_espresso') . '" />
-				' . __('Remove the above Attendee:', 'event_espresso') . '
-			</a><br/>';
+				' . __('Remove Attendee Above', 'event_espresso') . '
+			</a></div>';
 			
 			$attendee_form .= '
-			<a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk" title="' . __('Add an Additonal Attendee', 'event_espresso') . '">
-				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add an Additonal Attendee', 'event_espresso') . '" />
-				' . __('Add an Additonal Attendee:', 'event_espresso') . '
-			</a>';
+			<div class="additional-attendee-div"><a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk ui-priority-primary " title="' . __('Add Additonal Attendee', 'event_espresso') . '">
+				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add Additonal Attendee', 'event_espresso') . '" />
+				' . __('Add Additonal Attendee', 'event_espresso') . '
+			</a></div>';
 
 
 			$attendee_form .= '</div></div>';
@@ -515,7 +513,7 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 			case 'num_attendees_slash_reg_limit' :
 			case 'avail_spaces_slash_reg_limit' :
 				$num_attendees = 0;
-				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id='" . $event_id . "' AND (payment_status='Completed' OR payment_status='Pending') ";
+				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id='" . $event_id . "' AND (payment_status='Completed' OR payment_status='Pending' OR payment_status='Refund') ";
 				$wpdb->get_results($a_sql, ARRAY_A);
 				if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
 					$num_attendees = $wpdb->last_result[0]->quantity;
@@ -577,7 +575,7 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 				break;
 			case 'num_completed' :
 				$num_completed = 0;
-				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id='" . $event_id . "' AND (payment_status='Completed' OR payment_status='Pending')  ";
+				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id='" . $event_id . "' AND (payment_status='Completed' OR payment_status='Pending'' OR payment_status='Refund')  ";
 				$wpdb->get_results($a_sql);
 				if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
 					$num_completed = $wpdb->last_result[0]->quantity;
@@ -665,7 +663,7 @@ if (!function_exists('event_espresso_add_question_groups')) {
 		$disabled = '';
 		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true ) {
 			$member_options = get_option('events_member_settings');
-			if ( is_user_logged_in() && $member_options['autofilled_editable'] == 'N' )
+			if ( is_user_logged_in() && !empty($member_options['autofilled_editable']) && $member_options['autofilled_editable'] == 'N' )
 			$disabled = 'disabled="disabled"';
 		}
 				
@@ -678,7 +676,7 @@ if (!function_exists('event_espresso_add_question_groups')) {
 				$FILTER = " AND q.admin_only != 'Y' ";
 
 			//echo 'additional_attendee_reg_info = '.$meta['additional_attendee_reg_info'].'<br />';
-			//Only personal inforamation for the additional attendees in each group
+			//Only personal information for the additional attendees in each group
 			if (isset($meta['additional_attendee_reg_info']) && $meta['additional_attendee_reg_info'] == '2' && isset($meta['attendee_number']) && $meta['attendee_number'] > 1)
 				$FILTER .= " AND qg.system_group = 1 ";
             
@@ -824,14 +822,12 @@ if (!function_exists('espresso_ticket_information')) {
 	function espresso_ticket_information($atts) {
 		global $wpdb;
 		extract($atts);
-		if (!empty($registration_id))
-			$registration_id = "{$registration_id}";
 		$price_option = "{$price_option}";
-
 		$type = "{$type}";
 
 		switch ($type) {
 			case 'ticket':
+			default:
 				$sql = $wpdb->get_results("SELECT * FROM " . EVENTS_PRICES_TABLE . " WHERE id ='" . $price_option . "'");
 				$num_rows = $wpdb->num_rows;
 				if ($num_rows > 0) {
@@ -1046,6 +1042,21 @@ if (!function_exists('event_espresso_require_gateway')) {
 
 }
 
+//function to include all active gateways' code
+if(!function_exists('event_espresso_init_active_gateways')){
+	/**
+	 *  initialized each active gateway. this is added onto the 'plugins_loaded' hook so taht each active gateway will be called.
+	 * before each gateway was included only on pages with important shortcodes (like transaction, or payment) but that wasn't enough power
+	 * for some gateways (eg: the google checkout gateway needed to be able to add a hook on init for all page loads, which it coudln't do before)
+	 */
+	function event_espresso_init_active_gateways(){
+		$active_gateways = apply_filters('action_filter_espresso_active_gateways', get_option('event_espresso_active_gateways', array()));
+		foreach ($active_gateways as $gateway => $path) {
+			event_espresso_require_gateway($gateway . "/init.php",false);
+		}
+	}
+}
+
 //Function to include a template file. Checks user templates folder first, then default template.
 if (!function_exists('event_espresso_require_file')) {
 
@@ -1056,12 +1067,12 @@ if (!function_exists('event_espresso_require_file')) {
 	 * @param mixed $path_first         // First choice for file location.
 	 * @param mixed $path_first         // Fallback location for file.
 	 * @param bool $must_exist          // Error if neither file exist.
-	 * @param bool $as_require_once     // True for require_once(), False for require()
+	 * @param bool $require_once     // TRUE for require_once(), FALSE for require()
 	 * @return void    // No return value. File already included.
 	 *
 	 * Usage: event_espresso_require_file('shopping_cart.php',EVENT_ESPRESSO_TEMPLATE_DIR,EVENT_ESPRESSO_PLUGINFULLPATH.'templates/')
 	 */
-	function event_espresso_require_file($template_file_name, $path_first, $path_else, $must_exist = true, $as_require_once = true) {
+	function event_espresso_require_file($template_file_name, $path_first, $path_else, $must_exist = TRUE, $require_once = TRUE) {
 		if (file_exists($path_first . $template_file_name)) {
 			// Use the template file in the user's upload folder
 			$full_path = $path_first . $template_file_name;
@@ -1069,9 +1080,13 @@ if (!function_exists('event_espresso_require_file')) {
 			// Use the system file path
 			$full_path = $path_else . $template_file_name;
 		}
-		if (file_exists($full_path) || $must_exist) {
-			$path = substr($full_path,0,strrpos($full_path, '/'));
-			($as_require_once == true) ? require_once($full_path) : require($full_path);
+		if ( file_exists( $full_path ) || $must_exist ) {
+			//$path = substr($full_path,0,strrpos($full_path, '/'));
+			if( $require_once ) {
+				require_once( $full_path );
+			} else {
+				require( $full_path );
+			}
 		}
 	}
 
@@ -1181,7 +1196,7 @@ function espresso_get_primary_attendee_id($registration_id) {
 	}
 }
 
-function espresso_ticket_links($registration_id, $attendee_id) {
+function espresso_ticket_links($registration_id, $attendee_id, $email = FALSE) {
 	global $wpdb;
 	$sql = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE;
 	if (espresso_is_primary_attendee($attendee_id) != true) {
@@ -1193,8 +1208,10 @@ function espresso_ticket_links($registration_id, $attendee_id) {
 	$attendees = $wpdb->get_results($sql);
 	$ticket_link = '';
 	if ($wpdb->num_rows > 0) {
-		$group = $wpdb->num_rows > 1 ? '<strong>' . sprintf(__('Tickets Purchased (%s):', 'event_espresso'), $wpdb->num_rows) . '</strong><br />' : '';
+		
 		$break = '<br />';
+		$group = $wpdb->num_rows > 1 ? sprintf(__('Tickets Purchased (%s):', 'event_espresso'), $wpdb->num_rows).$break : __('Download/Print Ticket:', 'event_espresso').$break;
+		
 		foreach ($attendees as $attendee) {
 			$ticket_url = get_option('siteurl') . "/?download_ticket=true&amp;id=" . $attendee->id . "&amp;r_id=" . $attendee->registration_id;
 			if (function_exists('espresso_ticket_launch')) {
@@ -1202,9 +1219,17 @@ function espresso_ticket_links($registration_id, $attendee_id) {
 			}
 			$ticket_link .= '<a href="' . $ticket_url . '" target="_blank">' . $attendee->fname . ' ' . $attendee->lname . '</a>' . $break;
 		}
-		return '<p>' . $group . $ticket_link . '</p>';
+		
+		if ($email == TRUE){
+			$text = '<p>' . $group . $ticket_link .'</p>';
+		}else{
+			$text = $ticket_link;
+		}
+		
+		return $text;
 	}
 }
+
 
 /**
  * Function espresso_get_attendee_coupon_discount
@@ -1287,6 +1312,8 @@ if (!function_exists('espresso_display_featured_image')) {
 		if ( !empty($org_options['display_featured_image']) && $org_options['display_featured_image'] == 'N' || !isset($org_options['display_featured_image']) ){
 			return;
 		}
+		if (empty($image_url))
+			return;
 		$class = empty($class) ? 'ee-featured-image' : $class;
 		$title = empty($title) ? __('Featured Image', 'event_espresso') : $title;
 		$align = empty($align) ? 'right' : $align;
@@ -1295,3 +1322,82 @@ if (!function_exists('espresso_display_featured_image')) {
 	}
 }
 add_filter('filter_hook_espresso_display_featured_image', 'espresso_display_featured_image',100,5);
+
+
+function espresso_save_attendee_meta($attendee_id, $meta_key, $meta_value, $delete = FALSE){
+	global $wpdb;
+	
+	$notifications['error']	 = array();
+	
+	$cols_and_values = array( 
+		'attendee_id'=>$attendee_id, 
+		'meta_key'=>$meta_key, 
+		'meta_value'=>$meta_value
+	);
+	
+	$cols_and_values_format = array( '%d', '%s', '%s' );
+	$where_cols_and_values = array( 'attendee_id'=>$attendee_id, 'meta_key'=>$meta_key );
+	$where_format = array( '%d', '%s' );
+	
+	$SQL = "SELECT ameta_id from " . EVENTS_ATTENDEE_META_TABLE . " WHERE attendee_id = '".$attendee_id."' AND meta_key = '".$meta_key."'";
+	$meta = $wpdb->get_results( $SQL );
+	$total_meta = $wpdb->num_rows;
+
+	if ( $total_meta > 0 ){
+		if ($delete == TRUE){
+			$SQL = "DELETE FROM " . EVENTS_ATTENDEE_META_TABLE . ' ';
+			$SQL .= "WHERE attendee_id = %d";
+			$del_success = $wpdb->query($wpdb->prepare( $SQL, $attendee_id ));
+			if ( $del_success === FALSE ) {
+				$notifications['error'][] = __('An error occured while attempting to delete the attendee meta.', 'event_espresso'); 
+			}
+		}else{
+			// run the update
+			$cols_and_values['date_updated'] = date("Y-m-d H:i:s");
+			array_push( $cols_and_values_format, '%s' );
+			$upd_success = $wpdb->update( EVENTS_ATTENDEE_META_TABLE, $cols_and_values, $where_cols_and_values, $cols_and_values_format, $where_format );
+			// if there was an actual error
+			if ( $upd_success === FALSE ) {
+				$notifications['error'][] = __('An error occured while attempting to update the attendee meta.', 'event_espresso'); 
+			}
+		}
+	}else{
+		// save the new value
+		$cols_and_values['date_added'] = date("Y-m-d H:i:s");
+		array_push( $cols_and_values_format, '%s' );
+		$save_success = $wpdb->insert( EVENTS_ATTENDEE_META_TABLE, $cols_and_values, $cols_and_values_format );
+		if ( $save_success === FALSE ) {
+			$notifications['error'][] = __('An error occured while attempting to save the attendee meta.', 'event_espresso'); 
+		}
+	}
+	
+	// display error messages
+	if ( ! empty( $notifications['error'] )) {
+		$error_msg = implode( $notifications['error'], '<br />' );
+	?>
+	<div id="message" class="error">
+		<p>
+			<strong><?php echo $error_msg; ?></strong>
+		</p>
+	</div>
+	<?php 
+	}
+}
+add_action('action_hook_espresso_save_attendee_meta', 'espresso_save_attendee_meta', 10, 4);
+
+function espresso_get_attendee_meta_value($attendee_id, $meta_key) {
+	global $wpdb;
+	$sql = "SELECT meta_value FROM " . EVENTS_ATTENDEE_META_TABLE;
+	$sql .= " WHERE attendee_id = '" . $attendee_id . "' AND meta_key='".$meta_key."' ";
+	//echo $sql;
+	$wpdb->get_results($sql);
+	if ($wpdb->num_rows > 0) {
+		return $wpdb->last_result[0]->meta_value;
+	}
+}
+add_filter('action_hook_espresso_get_attendee_meta_value', 'espresso_get_attendee_meta_value', 10, 2);
+
+//Sanitizes values
+function ee_sanitize_value($value) {
+	return wp_strip_all_tags( html_entity_decode( trim( sanitize_text_field(wp_strip_all_tags($value)) ), ENT_QUOTES, 'UTF-8' ) );
+}

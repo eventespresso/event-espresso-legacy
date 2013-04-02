@@ -74,7 +74,7 @@ function espresso_display_usaepay_onsite($data) {
 					<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></h4>
 					<p>
 				        <label for="card_num"><?php _e('Card Number', 'event_espresso'); ?></label>
-				        <input type="text" name="card_num" class="required" id="ppp_card_num" />
+				        <input type="text" name="card_num" class="required" id="ppp_card_num" autocomplete="off" />
 					</p>
 					<p>
 				        <label for="card-exp"><?php _e('Expiration Month', 'event_espresso'); ?></label>
@@ -105,7 +105,7 @@ function espresso_display_usaepay_onsite($data) {
 					</p>
 					<p>
 				        <label for="cvv"><?php _e('CVV Code', 'event_espresso'); ?></label>
-				        <input type="text" name="cvv" id="ppp_exp_date" />
+				        <input type="text" name="cvv" id="ppp_exp_date" autocomplete="off" />
 					</p>
 				</fieldset>
 				<input name="amount" type="hidden" value="<?php echo number_format($event_cost, 2) ?>" />

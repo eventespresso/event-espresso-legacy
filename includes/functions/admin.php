@@ -1324,7 +1324,7 @@ if (!function_exists('espresso_event_list_attendee_title')) {
 function espresso_payment_reports($atts) {
 	global $wpdb;
 	extract($atts);
-	$sql = "SELECT SUM(a.amount_pd) quantity FROM " . EVENTS_ATTENDEE_TABLE . " a WHERE a.quantity >= 1 AND a.payment_status='Completed' AND a.event_id = '" . $event_id . "' ";
+	$sql = "SELECT SUM(a.amount_pd) quantity FROM " . EVENTS_ATTENDEE_TABLE . " a WHERE a.quantity >= 1 AND (a.payment_status='Completed' OR a.payment_status='Refund') AND a.event_id = '" . $event_id . "' ";
 	$payments = $wpdb->get_results($sql, ARRAY_A);
 	$total = 0;
 	if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
@@ -1348,29 +1348,27 @@ function espresso_performance($visible = false) {
 
 add_action('wp_footer', 'espresso_performance', 20);
 
-function espresso_files_in_uploads($visible = false) {
-	// Create recursive dir iterator which skips dot folders
-	$dir = new RecursiveDirectoryIterator(EVENT_ESPRESSO_TEMPLATE_DIR,FilesystemIterator::SKIP_DOTS);
-
-	// Flatten the recursive iterator, folders come before their files
-	$it  = new RecursiveIteratorIterator($dir,RecursiveIteratorIterator::SELF_FIRST);
-
-	// Maximum depth is 1 level deeper than the base folder
-	$it->setMaxDepth(1);
+function espresso_files_in_uploads() {
 	
-	$file = '';
-	// Basic loop displaying different messages based on file or folder
-	foreach ($it as $fileinfo) {
-		if ($fileinfo->isDir()) {
-			$file .= sprintf("Folder - %s\n", $fileinfo->getFilename());
-		} elseif ($fileinfo->isFile()) {
-			$file .= sprintf("File %s - %s\n", $it->getSubPath(), $fileinfo->getFilename());
-		}
-	}
-	//echo "<!-- {$file} -->";
-	echo $visible ? $stat : "\n<!--\nEvent Espresso Template Files:\r\n{$file}-->\n";
+	$fileinfo = '';
+	if ( is_dir( EVENT_ESPRESSO_TEMPLATE_DIR )) {
+	    $dir = new RecursiveDirectoryIterator( EVENT_ESPRESSO_TEMPLATE_DIR );
+	    $files = new RecursiveIteratorIterator( $dir, RecursiveIteratorIterator::SELF_FIRST );
+		// Maximum depth is 1 level deeper than the base folder
+		$files->setMaxDepth(1);
+	    foreach ( $files as $file ) {
+			if ( $file->isDir() ) {
+				$fileinfo .= sprintf( "Dir:  %s\n", $file->getFilename() );
+			} elseif ( $file->isFile() ) {
+				$fileinfo .= sprintf( "File: %s/%s\n", $files->getSubPath(), $file->getFilename() );
+			}
+	    }
+	}	
+	echo "\r\n\n<!--Event Espresso Template Files:\r\n\n{$fileinfo}\n-->\r\n";
+	
 }
 add_action('wp_footer', 'espresso_files_in_uploads', 20);
+
 
 function espresso_admin_performance($show = 0) {
 	if ($show == 0)
@@ -1628,4 +1626,13 @@ function espresso_get_question_groups_for_event( $existing_question_groups = arr
 
 	return ($use_filters) ? apply_filters('espresso_get_question_groups_for_event_groups', $event_groups, $existing_question_groups, $event) : $event_groups;
 
+}
+
+function espresso_check_ssl() {
+	$home = str_replace("http://", "https://", home_url());
+	@$handle = fopen($home, "r");
+	if(empty($handle)){ 
+		return FALSE;
+	}
+	return TRUE;
 }

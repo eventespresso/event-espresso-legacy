@@ -13,7 +13,7 @@ function event_espresso_form_builder_new(){
    		<div class="inside">
 		
 			<p class="intro">
-				<?php _e('By default, all registrants will be asked for their first name, last name, and email address.','event_espresso'); ?>
+				<?php _e('By default, all event registrants will be asked for their first name, last name, and email address.','event_espresso'); ?>
 			</p>
 			
 			<form name="newquestion" method="post" action="" id="new-question-form">
@@ -66,7 +66,7 @@ function event_espresso_form_builder_new(){
 								<label class="inline" for="required"><?php _e('Required:','event_espresso'); ?></label>
 							</th>
 							<td>
-								<?php echo select_input('required', $values, 'N'); ?>
+								<?php echo select_input('required', $values, 'N'); ?>&nbsp;&nbsp; 
 								<span class="description"><?php _e('Mark this question as required.', 'event_espresso'); ?></span>
 							</td>
 						</tr>

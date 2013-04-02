@@ -80,9 +80,11 @@ function espresso_process_paytrace($payment_data) {
 			}
 		}
 		$discount = 0;
-		if ($amount_pd < $total_cost) {
+		$amount_pd=$total_cost;
+		/*if ($amount_pd < $total_cost) {
 			$discount = $total_cost - $amount_pd;
-		}
+		}*/
+		//echo "do_transaction: amount:$amount_pd, total cost: $total_cost, discount:$discount";
 		$cc = $_POST['cc'];
 		$exp_month = $_POST['exp_month'];
 		$exp_year = $_POST['exp_year'];
@@ -117,6 +119,6 @@ function espresso_process_paytrace($payment_data) {
 	if ($payment_data['payment_status'] != 'Completed') {
 		echo "<div id='paytrace_response' class='paytrace_error'>Looks like something went wrong.  Please try again or notify the website administrator.</div>";
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }

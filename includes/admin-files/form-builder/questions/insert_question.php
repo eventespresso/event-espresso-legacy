@@ -3,10 +3,14 @@
 //Function to add a question to the database
 function event_espresso_form_builder_insert(){
 
-	global $wpdb, $current_user, $allowedtags;
+	global $wpdb, $current_user;
 
 	$success = FALSE;
 	$errors = FALSE;
+
+	$enum_values=array( 'Y' => 'Y', 'N' => 'N' );
+//	$event_id = empty($_REQUEST['event_id']) ? 0 : $_REQUEST['event_id'];
+//	$event_name = empty($_REQUEST['event_name']) ? '' : $_REQUEST['event_name'];
 	
 	$enum_values=array( 'Y' => 'Y', 'N' => 'N' );
 	
@@ -22,7 +26,7 @@ function event_espresso_form_builder_insert(){
 		'title' 		=> array()
 	);
 	
-	$question= isset( $_POST['question'] ) && ! empty( $_POST['question'] ) ? wp_kses( $_POST['question'], $allowedtags ) : FALSE;
+	$question= isset( $_POST['question'] ) && ! empty( $_POST['question'] ) ? wp_kses_post( $_POST['question'] ) : FALSE;
 	
 	if ( ! $question ) {
 		$errors = __('Question is a required field. You need to enter a value for it in order to proceed.', 'event_espresso');

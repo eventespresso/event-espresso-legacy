@@ -6,6 +6,10 @@ function espresso_help_popup($name) {
 
 add_filter('espresso_help', 'espresso_help_popup');
 
+function espresso_ssl_required_gateway_message() {
+	echo '<p class="red_alert"><strong>'. __('Attention: A valid SSL Certificate is required on your website in order to process payments using this gateway!', 'event_espresso').'</strong></p>';
+}
+
 //This is the payment gateway settings page.
 function event_espresso_gateways_options() {
 	global $active_gateways;
@@ -214,6 +218,9 @@ function espresso_update_active_gateways() {
 		if (array_key_exists('check', $active_gateways)) {
 			$active_gateways['check'] = "/gateways/check";
 		}
+		if (array_key_exists('purchase_order', $active_gateways)) {
+			$active_gateways['purchase_order'] = "/gateways/purchase_order";
+		}
 		if (array_key_exists('eway', $active_gateways)) {
 			$active_gateways['eway'] = "/gateways/eway";
 		}
@@ -281,6 +288,9 @@ function espresso_update_active_gateways() {
 		if (get_option('events_check_payment_active') == true) {
 			$active_gateways['check'] = "/gateways/check";
 		}
+		if (get_option('events_purchase_order_payment_active') == true) {
+			$active_gateways['purchase_order'] = "/gateways/purchase_order";
+		}
 		if (get_option('events_eway_active') == true) {
 			$active_gateways['eway'] = "/gateways/eway";
 		}
@@ -338,6 +348,7 @@ function espresso_update_active_gateways() {
 	delete_option('events_authnet_active');
 	delete_option('events_bank_payment_active');
 	delete_option('events_check_payment_active');
+	delete_option('events_purchase_order_payment_active');
 	delete_option('events_eway_active');
 	delete_option('events_exact_active');
 	delete_option('events_firstdata_active');

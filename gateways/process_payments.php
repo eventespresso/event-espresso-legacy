@@ -18,16 +18,16 @@
  * payment_status
  * payment_date
  */
-function espresso_prepare_payment_data_for_gateways($payment_data) {
+function espresso_prepare_payment_data_for_gateways( $payment_data ) {
 	global $wpdb, $org_options;
-	$sql = "SELECT ea.email, ea.event_id, ea.registration_id, ea.txn_type, ed.start_date,";
-	$sql .= " ea.attendee_session, ed.event_name, ea.lname, ea.fname, ea.total_cost,";
-	$sql .= " ea.payment_status, ea.payment_date, ea.address, ea.city, ea.txn_id,";
-	$sql .= " ea.zip, ea.state, ea.phone FROM " . EVENTS_ATTENDEE_TABLE . " ea";
-	$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=ea.event_id";
-	$sql .= " WHERE ea.id='" . $payment_data['attendee_id'] . "'";
-	$temp_data = $wpdb->get_row($sql, ARRAY_A);
-	$payment_data = array_merge($payment_data, $temp_data);
+	$SQL = "SELECT ea.email, ea.event_id, ea.registration_id, ea.txn_type, ed.start_date,";
+	$SQL .= " ea.attendee_session, ed.event_name, ea.lname, ea.fname, ea.total_cost,";
+	$SQL .= " ea.payment_status, ea.payment_date, ea.address, ea.city, ea.txn_id,";
+	$SQL .= " ea.zip, ea.state, ea.phone FROM " . EVENTS_ATTENDEE_TABLE . " ea";
+	$SQL .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=ea.event_id";
+	$SQL .= " WHERE ea.id = %d";
+	$temp_data = $wpdb->get_row( $wpdb->prepare( $SQL, $payment_data['attendee_id'] ), ARRAY_A );
+	$payment_data = array_merge( $payment_data, $temp_data );
 	$payment_data['contact'] = $org_options['contact_email'];
 	return $payment_data;
 }
@@ -45,12 +45,20 @@ add_filter('filter_hook_espresso_prepare_payment_data_for_gateways', 'espresso_p
  */
 function espresso_get_total_cost($payment_data) {
 	global $wpdb;
+	//if for some reason attendee_session isn't setin the payment data, set it now
+	if(!array_key_exists('attendee_session',$payment_data) || empty($payment_data['attendee_session'])){
+		$SQL = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id=%d";
+		$session_id = $wpdb->get_var( $wpdb->prepare( $SQL, $payment_data['attendee_id'] ));
+		$payment_data['attendee_session']=$session_id;
+	}
+	//find all the attendee rows
 	$sql = "SELECT a.final_price, a.quantity FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 	$sql .= " WHERE a.attendee_session='" . $payment_data['attendee_session'] . "' ORDER BY a.id ASC";
 	$tickets = $wpdb->get_results($sql, ARRAY_A);
 	$total_cost = 0;
 	$total_quantity = 0;
 	
+	//sum up their final_prices, as this should already take into account discounts
 	foreach ($tickets as $ticket) {
 		$total_cost += $ticket['quantity'] * $ticket['final_price'];
 		$total_quantity += $ticket['quantity'];
@@ -141,12 +149,16 @@ function espresso_prepare_event_link($payment_data) {
 
 add_filter('filter_hook_espresso_prepare_event_link', 'espresso_prepare_event_link');
 
-function event_espresso_txn() {
 
+
+
+
+function event_espresso_txn() {
 	ob_start();
 
 	global $wpdb, $org_options, $espresso_content;
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+	do_action('action_hook_espresso_transaction');
 	$active_gateways = get_option('event_espresso_active_gateways', array());
 	if (empty($active_gateways)) {
 		$subject = __('Website Payment IPN Not Setup', 'event_espresso');
@@ -155,12 +167,13 @@ function event_espresso_txn() {
 		return;
 	}
 	
-	foreach ($active_gateways as $gateway => $path) {
+	/*foreach ($active_gateways as $gateway => $path) {
 		event_espresso_require_gateway($gateway . "/init.php");
-	}
+	}*/
+	$payment_data = array( 'attendee_id' => NULL );
 	$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
-	if ($payment_data['attendee_id'] == "") {
-		echo "ID not supplied.";
+	if ( empty( $payment_data['attendee_id'] )) {
+		echo "An error occurred. No ID or an invalid ID was supplied.";
 	} else {
 		$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
@@ -172,6 +185,8 @@ function event_espresso_txn() {
 		espresso_log::singleton()->log(array('file' => __FILE__, 'function' => __FUNCTION__, 'status' => 'Payment for: '. $payment_data['lname'] . ', ' . $payment_data['fname'] . '|| registration id: ' . $payment_data['registration_id'] . '|| transaction details: ' . $payment_data['txn_details']));
 		
 		$payment_data = apply_filters('filter_hook_espresso_update_attendee_payment_data_in_db', $payment_data);
+		//add and then immediately do action, so developers can modify this behavior on 'after_payment'
+		add_action('action_hook_espresso_email_after_payment','espresso_email_after_payment');
 		do_action('action_hook_espresso_email_after_payment', $payment_data);
 		extract($payment_data);
 
@@ -191,20 +206,21 @@ function event_espresso_txn() {
 	
 }
 
+
+
+
+
 function deal_with_ideal() {
 	if (!empty($_POST['bank_id'])) {
 		$active_gateways = get_option('event_espresso_active_gateways', array());
 		if (!empty($active_gateways['ideal'])) {
-			foreach ($active_gateways as $gateway => $path) {
-				event_espresso_require_gateway($gateway . "/init.php");
-			}
 			$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
 			espresso_process_ideal($payment_data);
 		}
 	}
 }
 
-add_action('wp_loaded', 'deal_with_ideal');
+add_action('action_hook_espresso_transaction', 'deal_with_ideal',99);//just before espresso_txn
 
 function espresso_email_after_payment($payment_data) {
 	global $org_options;
@@ -222,3 +238,4 @@ if ( isset( $_POST[ 'name' ] ) && isset( $_POST[ 'MC_type'] ) && 'worldpay' == $
 	unset($_POST['name']);
 	unset($_REQUEST['name']);
 }
+

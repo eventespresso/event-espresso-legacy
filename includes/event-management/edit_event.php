@@ -5,6 +5,7 @@ if (!defined('EVENT_ESPRESSO_VERSION'))
 function edit_event($event_id = 0) {
 	global $wpdb, $org_options, $espresso_premium;
 	ob_start();
+	
 	$SQL = "SELECT e.*, ev.id as venue_id
 	    FROM " . EVENTS_DETAIL_TABLE . " e
 	    LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " vr ON e.id = vr.event_id
@@ -20,96 +21,99 @@ function edit_event($event_id = 0) {
 	}
 	foreach ($events as $event) {
 
-		$event_id = $event->id;
-		$event_name = stripslashes_deep($event->event_name);
-		$event_desc = stripslashes_deep($event->event_desc);
-		$display_desc = $event->display_desc;
-		$display_reg_form = $event->display_reg_form;
-		$member_only = $event->member_only;
+		$event_id				= $event->id;
+		$event_name				= htmlentities( stripslashes( $event->event_name ), ENT_QUOTES, 'UTF-8' );
+		$event_desc				= htmlentities( stripslashes( $event->event_desc ), ENT_QUOTES, 'UTF-8' );
+		$display_desc			= $event->display_desc;
+		$display_reg_form		= $event->display_reg_form;
+		$member_only			= $event->member_only;
 
-		$phone = stripslashes_deep($event->phone);
-		$externalURL = stripslashes_deep($event->externalURL);
+		$phone					= stripslashes_deep($event->phone);
+		$externalURL			= stripslashes_deep($event->externalURL);
 
 		//Early discounts
-		$early_disc = stripslashes_deep($event->early_disc);
-		$early_disc_date = stripslashes_deep($event->early_disc_date);
-		$early_disc_percentage = stripslashes_deep($event->early_disc_percentage);
+		$early_disc				= stripslashes_deep($event->early_disc);
+		$early_disc_date		= stripslashes_deep($event->early_disc_date);
+		$early_disc_percentage	= stripslashes_deep($event->early_disc_percentage);
 
-		$post_id = $event->post_id;
-		$post_type = $event->post_type;
+		$post_id				= $event->post_id;
+		$post_type				= $event->post_type;
 
-		$event_identifier = stripslashes_deep($event->event_identifier);
+		$event_identifier		= stripslashes_deep($event->event_identifier);
 
-		$registration_start = $event->registration_start;
-		$registration_end = $event->registration_end;
-		$registration_startT = $event->registration_startT;
-		$resitration_endT = $event->registration_endT;
-		$timezone_string = $event->timezone_string;
+		$registration_start		= $event->registration_start;
+		$registration_end		= $event->registration_end;
+		$registration_startT	= $event->registration_startT;
+		$resitration_endT		= $event->registration_endT;
+		$timezone_string		= $event->timezone_string;
 
-		$start_date = $event->start_date;
-		$end_date = $event->end_date;
+		$start_date				= $event->start_date;
+		$end_date				= $event->end_date;
 
-		$tax_percentage = $event->tax_percentage;
-		$tax_mode = $event->tax_mode;
+		$tax_percentage			= $event->tax_percentage;
+		$tax_mode				= $event->tax_mode;
 
-		$start_time = isset($event->start_time) ? $event->start_time : '';
-		$end_time = isset($event->end_time) ? $event->end_time : '';
-		$reg_limit = $event->reg_limit;
-		$additional_limit = $event->additional_limit;
-		$allow_overflow = $event->allow_overflow;
-		$overflow_event_id = $event->overflow_event_id;
-		$allow_multiple = $event->allow_multiple;
-		$event_cost = unserialize(isset($event->event_cost) ? $event->event_cost : '');
-		$is_active = $event->is_active;
-		$status = array();
-		$status = event_espresso_get_is_active($event_id);
-		$event_status = $event->event_status;
-		$conf_mail = stripslashes_deep($event->conf_mail);
-		$send_mail = stripslashes_deep($event->send_mail);
-		$use_coupon_code = $event->use_coupon_code;
-		if (function_exists('event_espresso_edit_event_groupon')) {
-			$use_groupon_code = $event->use_groupon_code;
-		}
-		$alt_email = $event->alt_email;
+		$start_time				= isset($event->start_time) ? $event->start_time : '';
+		$end_time				= isset($event->end_time) ? $event->end_time : '';
+		$reg_limit				= $event->reg_limit;
+		$additional_limit		= $event->additional_limit;
+		$allow_overflow			= $event->allow_overflow;
+		$overflow_event_id		= $event->overflow_event_id;
+		$allow_multiple			= $event->allow_multiple;
+		$event_cost				= unserialize(isset($event->event_cost) ? $event->event_cost : '');
+		$is_active				= $event->is_active;
+		$status					= array();
+		$status					= event_espresso_get_is_active($event_id);
+		$event_status			= $event->event_status;
+		$conf_mail				= stripslashes_deep($event->conf_mail);
+		$send_mail				= stripslashes_deep($event->send_mail);
+		$use_coupon_code		= $event->use_coupon_code;
+		
+		$alt_email				= $event->alt_email;
 
-		$address = stripslashes_deep($event->address);
-		$address2 = stripslashes_deep($event->address2);
-		$city = stripslashes_deep($event->city);
-		$state = stripslashes_deep($event->state);
-		$zip = stripslashes_deep($event->zip);
-		$country = stripslashes_deep($event->country);
+		$address				= stripslashes_deep($event->address);
+		$address2				= stripslashes_deep($event->address2);
+		$city					= stripslashes_deep($event->city);
+		$state					= stripslashes_deep($event->state);
+		$zip					= stripslashes_deep($event->zip);
+		$country				= stripslashes_deep($event->country);
 
-		$venue_id = stripslashes_deep($event->venue_id);
-		$venue_title = stripslashes_deep($event->venue_title);
-		$venue_url = stripslashes_deep($event->venue_url);
-		$venue_phone = stripslashes_deep($event->venue_phone);
-		$venue_image = stripslashes_deep($event->venue_image);
+		$venue_id				= stripslashes_deep($event->venue_id);
+		$venue_title			= stripslashes_deep($event->venue_title);
+		$venue_url				= stripslashes_deep($event->venue_url);
+		$venue_phone			= stripslashes_deep($event->venue_phone);
+		$venue_image			= stripslashes_deep($event->venue_image);
 
-		$email_id = $event->email_id;
-		$ticket_id = $event->ticket_id;
-		$wp_user = $event->wp_user;
-		//echo 'date_submitted = '.$event->submitted;
-		$date_submitted = $event->submitted != '0000-00-00 00:00:00' ? (empty($event->submitted) ? '' : event_date_display($event->submitted, get_option('date_format')) ) : 'N/A';
+		$email_id				= $event->email_id;
+		$ticket_id				= $event->ticket_id;
+		$wp_user				= $event->wp_user;
 
-		$google_map_link = espresso_google_map_link(array('address' => $address, 'city' => $city, 'state' => $state, 'zip' => $zip, 'country' => $country));
+		$date_submitted			= $event->submitted != '0000-00-00 00:00:00' ? (empty($event->submitted) ? '' : event_date_display($event->submitted, get_option('date_format')) ) : 'N/A';
+
+		$google_map_link		= espresso_google_map_link(array('address' => $address, 'city' => $city, 'state' => $state, 'zip' => $zip, 'country' => $country));
 
 
 		//Virtual location
-		$virtual_url = stripslashes_deep($event->virtual_url);
-		$virtual_phone = stripslashes_deep($event->virtual_phone);
+		$virtual_url			= stripslashes_deep($event->virtual_url);
+		$virtual_phone			= stripslashes_deep($event->virtual_phone);
 
-		$question_groups = unserialize($event->question_groups);
+		$question_groups		= unserialize($event->question_groups);
 
-		$event_meta = unserialize($event->event_meta);
+		$event_meta				= unserialize($event->event_meta);
 
-		$recurrence_id = $event->recurrence_id;
-		$visible_on = $event->visible_on;
-		$require_pre_approval = $event->require_pre_approval;
+		$recurrence_id			= $event->recurrence_id;
+		$visible_on				= $event->visible_on;
+		$require_pre_approval	= $event->require_pre_approval;
+		
+		if (function_exists('event_espresso_edit_event_groupon')) {
+			$use_groupon_code	= $event->use_groupon_code;
+		}
 	}
 
 	$values = array(
-			array('id' => 'Y', 'text' => __('Yes', 'event_espresso')),
-			array('id' => 'N', 'text' => __('No', 'event_espresso')));
+		array('id' => 'Y', 'text' => __('Yes', 'event_espresso')),
+		array('id' => 'N', 'text' => __('No', 'event_espresso'))
+	);
 
 	//If user is an event manager, then show only their events
 	if (function_exists('espresso_is_my_event') && espresso_is_my_event($event_id) != true) {
@@ -374,18 +378,7 @@ function edit_event($event_id = 0) {
 	<!-- /event-questions -->
 
 	<?php
-	if (function_exists('espresso_personnel_cb') && $org_options['use_personnel_manager'] == 'Y' && $espresso_premium == true) {
-		?>
-		<div id="event-staff" class="postbox">
-			<div class="handlediv" title="Click to toggle"><br>
-			</div>
-			<h3 class="hndle"> <span>
-		<?php _e('Event Staff / Speakers', 'event_espresso'); ?>
-				</span> </h3>
-			<div class="inside"> <?php echo espresso_personnel_cb($event_id); ?> </div>
-		</div>
-		<?php
-	}
+	do_action('action_hook_espresso_staff_cb', $event_id, $recurrence_id);
 
 	if (defined('EVENTS_GROUPON_CODES_TABLE') && $espresso_premium == true) {
 		?>
@@ -538,8 +531,9 @@ function edit_event($event_id = 0) {
 		if (defined('EVENT_ESPRESSO_RECURRENCE_TABLE') && $espresso_premium == true) {
 			require_once(EVENT_ESPRESSO_RECURRENCE_FULL_PATH . "functions/re_view_functions.php");
 			//For now, only the recurring events will show the form
-			if ($recurrence_id > 0)
+			if ($recurrence_id > 0){
 				event_espresso_re_form($recurrence_id);
+			}
 		}
 		?>
 		<div id="event-pricing" class="postbox">
@@ -779,7 +773,7 @@ function edit_event($event_id = 0) {
 	espresso_choose_layout($main_post_content, $sidebar_content, $center_metabox_content);
 	include_once('create_events_help.php');
 	?>
-
+	<?php wp_nonce_field('espresso_verify_update_event_nonce', 'nonce_verify_update_event'); //Security check using nonce ?>
 	<input type="hidden" name="edit_action" value="update">
 	<input type="hidden" name="date_submitted" value="<?php echo $date_submitted; ?>">
 	<input type="hidden" name="recurrence_id" value="<?php echo $recurrence_id; ?>">
@@ -838,9 +832,6 @@ function edit_event($event_id = 0) {
 	
 	
 		});
-		
-		
-
 		//]]>
 	</script>
 	<?php

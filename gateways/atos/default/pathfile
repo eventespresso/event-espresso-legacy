@@ -11,7 +11,7 @@
 # Activation (YES) / D�sactivation (NO) du mode DEBUG
 #-------------------------------------------------------------------------
 #
-DEBUG!YES!
+DEBUG!NO!
 #
 # ------------------------------------------------------------------------
 # Chemin vers le r�pertoire des logos depuis le web alias  
@@ -19,7 +19,7 @@ DEBUG!YES!
 # indiquer:
 # ------------------------------------------------------------------------
 #
-D_LOGO!../logos/!
+D_LOGO!https://localhost/eetrunk31/wp-content/plugins/event-espresso-31/gateways/atos/logos/!
 #
 # --------------------------------------------------------------------------
 #  Fichiers param�tres li�s a l'api sips paiement	
@@ -27,19 +27,18 @@ D_LOGO!../logos/!
 #
 # fichier des  param�tres sips
 #
-F_DEFAULT!parmcom.defaut!
+F_DEFAULT!C:\xampp\htdocs\eetrunk31\wp-content\plugins\event-espresso-31\gateways\atos/default/parmcom.default!
 #
 # fichier param�tre commercant
 #
-F_PARAM!parmcom!
+F_PARAM!C:\xampp\htdocs\eetrunk31\wp-content\plugins\event-espresso-31\gateways\atos/default/parmcom!
 #
 # certificat du commercant
 #
-F_CERTIFICATE!certif!
+F_CERTIFICATE!C:\xampp\htdocs\eetrunk31\wp-content\plugins\event-espresso-31\gateways\atos/default/certif!
 #
 # type du certificat
 #
-F_CTYPE!php!
 #
 # --------------------------------------------------------------------------
 # 	end of file

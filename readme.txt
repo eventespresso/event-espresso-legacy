@@ -64,7 +64,7 @@ To display list of attendees of an active event use [LISTATTENDEES] on a page or
 
 *For PayPal to notify about payment confirmation use  [ESPRESSO_TXN_PAGE] on a new page.
 
-*This page should be hidden from from your navigation menu. Exclude pages by using the 'Exclude Pages' plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the 'exclude' parameter in your 'wp_list_pages' template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.
+*This page should be hidden from from your navigation menu. Exclude pages by using the 'Exclude Pages' plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the 'exclude' parameter in your 'wp_list_pages' template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more information about excluding pages.
 
 = Email Confirmations =
 For customized confirmation emails, the following tags can be placed in the email form and they will pull data from the database to include in the email.
