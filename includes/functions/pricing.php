@@ -271,7 +271,7 @@ if (!function_exists('event_espresso_get_final_price')) {
 			$orig_price = espresso_return_single_price($event_id);
 		}
 			
-		$result = $orig_price !== FALSE ? $orig_price : event_espresso_get_orig_price_and_surcharge( $price_id );
+		$result = $orig_price !== FALSE ? $orig_price : event_espresso_get_orig_price_and_surcharge( $price_id , $event_id );
 		
 		if ( isset( $result->event_cost )) {
 			$result->event_cost = (float)$result->event_cost;
