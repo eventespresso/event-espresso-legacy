@@ -364,7 +364,7 @@ function event_espresso_edit_list() {
 						$event_zip = isset($event->zip) ? $event->zip : '';
 						$event_country = isset($event->country) ? $event->country : '';
 						//added new
-						$venue_title = isset($event->venue_title) ? $event->venue_title : '';
+						$venue_title = isset($event->venue_title) ? stripslashes_deep($event->venue_title) : '';
 						$venue_locale = isset($event->locale_name) ? $event->locale_name : '';
 						$wp_user = isset($event->wp_user) ? $event->wp_user : '';
 
