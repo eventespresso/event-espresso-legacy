@@ -92,7 +92,7 @@ $this_event_id = $event_id;
 		<p class="event_address" id="event_address-<?php echo $event_id ?>"><span class="section-title"><?php echo __('Address:', 'event_espresso'); ?></span> <br />
 			
 			<span class="address-block">
-			<?php echo $venue_title; ?><br />
+			<?php echo stripslashes_deep($venue_title); ?><br />
 			<?php echo stripslashes_deep($location); ?>
 				<span class="google-map-link"><?php echo $google_map_link; ?></span></span>
 		</p>
