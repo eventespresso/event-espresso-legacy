@@ -3,8 +3,8 @@
 //This is a template file for displaying a registration form for an event on a page.
 //There should be a copy of this file in your wp-content/uploads/espresso/ folder.
 ?>
+<div id="espresso-event-id-<?php echo $event_id; ?>">
 <div id="event_espresso_registration_form" class="event-display-boxes ui-widget">
-	
 <?php
 $ui_corner = 'ui-corner-all'; 
 //This tells the system to hide the event title if we only need to display the registration form.
@@ -110,7 +110,7 @@ if ($reg_form_only == false) {
 	?>
 				<p class="event_address" id="event_address-<?php echo $event_id ?>"><span class="section-title"><?php echo __('Address:', 'event_espresso'); ?></span> <br />
 					<span class="address-block">
-						<?php echo $venue_title; ?><br />
+						<?php echo stripslashes_deep($venue_title); ?><br />
 						<?php echo stripslashes_deep($location); ?><br />
 						<span class="google-map-link"><?php echo $google_map_link; ?></span>
 					</span>
@@ -278,5 +278,6 @@ if ($reg_form_only == false) {
 		}			
 ?>
 <p class="edit-link-footer"><?php echo espresso_edit_this($event_id) ?></p>
+</div>
 </div>
 </div>

@@ -81,7 +81,7 @@ function espresso_display_eway_rapid3($data) {
 							</p>
 							<p>
 								<label for="card_num"><?php _e('Card Number', 'event_espresso'); ?></label>
-								<input type="text" name="EWAY_CARDNUMBER" class="required" id="ppp_card_num" />
+								<input type="text" name="EWAY_CARDNUMBER" class="required" id="ppp_card_num" autocomplete="off" />
 							</p>
 							<p>
 								<label for="card-exp"><?php _e('Expiration Month', 'event_espresso'); ?></label>
@@ -108,7 +108,7 @@ function espresso_display_eway_rapid3($data) {
 							</p>
 							<p>
 								<label for="cvv"><?php _e('CVN Code', 'event_espresso'); ?></label>
-								<input type="text" name="EWAY_CARDCVN" id="ppp_exp_date" />
+								<input type="text" name="EWAY_CARDCVN" id="ppp_exp_date" autocomplete="off" />
 							</p>
 						</fieldset>
 

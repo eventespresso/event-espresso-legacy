@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.30.7P
+  Version: 3.1.31.B
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,7 +32,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.30.7P';
+	return '3.1.31.B';
 }
 
 //This tells the system to check for updates to the paid version
@@ -93,7 +93,6 @@ global $org_options, $wpdb, $this_is_a_reg_page, $espresso_content;
 $espresso_content = '';
 
 $org_options = get_option('events_organization_settings');
-	
 if (empty($org_options['event_page_id'])) {
 	$org_options['event_page_id'] = '';
 	$org_options['return_url'] = '';
@@ -534,6 +533,7 @@ if (is_admin()) {
 	do_action('action_hook_espresso_recurring_update_api');
 	do_action('action_hook_espresso_ticketing_update_api');
 	do_action('action_hook_espresso_mailchimp_update_api');
+	do_action('action_hook_espresso_json_update_api');
 	
 	//New form builder
 	require_once("includes/form-builder/index.php");
@@ -736,6 +736,7 @@ if (!function_exists('espresso_load_jquery')) {
 				wp_enqueue_script('ee_ajax_request', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_cart_functions.js', array('jquery'));
 				$EEGlobals = array('ajaxurl' => admin_url('admin-ajax.php'), 'plugin_url' => EVENT_ESPRESSO_PLUGINFULLURL, 'event_page_id' => $org_options['event_page_id']);
 				wp_localize_script('ee_ajax_request', 'EEGlobals',$EEGlobals );
+				wp_enqueue_script('jquery-migrate', 'http://code.jquery.com/jquery-migrate-1.1.1.min.js', array('jquery'));
 			}
 		}
 		
@@ -814,7 +815,7 @@ function add_espresso_themeroller_stylesheet() {
 
 			//Load the themeroller base style sheet
 			//If the themeroller-base.css is in the uploads folder, then we will use it instead of the one in the core
-			if (file_exists(EVENT_ESPRESSO_UPLOAD_DIR . $themeroller_style_path . 'themeroller-base.css')) {
+			if (file_exists(EVENT_ESPRESSO_UPLOAD_DIR . 'themeroller/themeroller-base.css')) {
 				wp_register_style('espresso_themeroller_base', $themeroller_style_path . 'themeroller-base.css');
 			} else {
 				wp_register_style('espresso_themeroller_base', EVENT_ESPRESSO_PLUGINFULLURL . 'templates/css/themeroller/themeroller-base.css');
@@ -888,9 +889,20 @@ if (!function_exists('event_espresso_run')) {
 
 		// Get action type
 		$regevent_action = isset($_REQUEST['regevent_action']) ? $_REQUEST['regevent_action'] : '';
-
-		if (isset($_REQUEST['ee'])) {
+		
+		if (isset($_REQUEST['event_id']) && !empty($_REQUEST['event_id'])) {
+			$_REQUEST['event_id'] = wp_strip_all_tags( absint($_REQUEST['event_id']) );
+		}
+		
+		if (isset($_REQUEST['form_action']) && !empty($_REQUEST['form_action'])) {
+			if (isset($_REQUEST['form_action']) && !$_REQUEST['form_action'] == 'edit_attendee' ) {
+				$_REQUEST['primary'] = wp_strip_all_tags( absint($_REQUEST['primary']) );
+			}
+		}
+		
+		if (isset($_REQUEST['ee']) && !empty($_REQUEST['ee'])) {
 			$regevent_action = "register";
+			$_REQUEST['ee'] = wp_strip_all_tags( absint($_REQUEST['ee']) );
 			$_REQUEST['event_id'] = $_REQUEST['ee'];
 		}
 
@@ -989,7 +1001,7 @@ if (is_admin()) {
 	add_action('admin_init', 'espresso_check_data_tables' );
 	
 	//Check to make sure there are no empty registration id fields in the database.
-	if (event_espresso_verify_attendee_data() == true && $_POST['action'] != 'event_espresso_update_attendee_data') {
+	if (event_espresso_verify_attendee_data() == true && isset($_POST['action']) && $_POST['action'] != 'event_espresso_update_attendee_data') {
 		add_action('admin_notices', 'event_espresso_registration_id_notice');
 	}
 
@@ -1116,12 +1128,18 @@ function espresso_check_data_tables() {
 		// loop through all previous migrations
 		foreach ( $existing_data_migrations as $ver => $migrations ) {
 			$migrations = is_array( $migrations ) ? $migrations : array( $migrations );
-			foreach ( $migrations as $migration_func ) {
+			foreach ( $migrations as $migration_func => $errors_array ) {
 				// make sure they have been executed
 				if ( ! in_array( $migration_func, $espresso_data_migrations )) {		
 					// ok NOW load the scripts
 					$load_data_migration_scripts = TRUE;
-					$scripts_to_run[ $migration_func ] = $migration_func;
+					if ( is_array( $errors_array )) {
+						$scripts_to_run[ $migration_func ] = $migration_func;
+					} else {
+						// older format, so $errors_array is actually the callback function
+						$scripts_to_run[ $errors_array ] = $errors_array;
+					}
+					
 				} 
 			}
 		}		

@@ -51,7 +51,7 @@ function add_venue_to_db(){
 			$venue_meta['twitter']		= isset( $_REQUEST['twitter'] ) ? sanitize_text_field( $_REQUEST['twitter'] ) : '';
 			$venue_meta['image']		= isset( $_REQUEST['image'] ) ? sanitize_text_field( $_REQUEST['image'] ) : '';
 			$venue_meta['website']		= isset( $_REQUEST['website'] ) ? sanitize_text_field( $_REQUEST['website'] ) : '';
-			$venue_meta['description']	= isset( $_REQUEST['description'] ) ? esc_html( $_REQUEST['description'] ) : '';
+			$venue_meta['description']	= isset( $_REQUEST['description'] ) ? wp_kses_post( $_REQUEST['description'] ) : '';
 			$locale						= isset( $_REQUEST['locale'] ) ? sanitize_text_field( sanitize_text_field($_REQUEST['locale']) ) : '';
 			
 			if ( ! function_exists('espresso_member_data')) {

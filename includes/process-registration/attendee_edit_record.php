@@ -9,8 +9,8 @@ function attendee_edit_record() {
 	
 	$id = isset( $_REQUEST['id'] ) ? absint( $_REQUEST['id'] ) : FALSE;
 	$registration_id = isset( $_REQUEST['registration_id'] ) ? wp_strip_all_tags( $_REQUEST['registration_id'] ) : FALSE;
-	$req_primary = isset( $_REQUEST['primary'] ) ? wp_strip_all_tags( $_REQUEST['primary'] ) : $id;
-	$req_p_id = isset( $_REQUEST['p_id'] ) ? wp_strip_all_tags( $_REQUEST['p_id'] ) : FALSE;
+	$req_primary = isset( $_REQUEST['primary'] ) ? wp_strip_all_tags( absint($_REQUEST['primary']) ) : $id;
+	$req_p_id = isset( $_REQUEST['p_id'] ) ? wp_strip_all_tags( absint($_REQUEST['p_id']) ) : FALSE;
 	
 	if ( isset( $_REQUEST['r_id'] ) && ! empty( $_REQUEST['r_id'] )) {
 		$registration_id = wp_strip_all_tags( $_REQUEST['r_id'] );
@@ -121,14 +121,14 @@ function attendee_edit_record() {
 			// Update the attendee information
 			if ( isset( $_REQUEST['attendee_action'] ) && $_REQUEST['attendee_action'] == 'update_attendee' ) {
 
-				$fname = ! empty($_POST['fname']) ? $_POST['fname'] : '';
-				$lname = ! empty($_POST['lname']) ? $_POST['lname'] : '';
-				$address = ! empty($_POST['address']) ? $_POST['address'] : '';
-				$city = ! empty($_POST['city']) ? $_POST['city'] : '';
-				$state = ! empty($_POST['state']) ? $_POST['state'] : '';
-				$zip = ! empty($_POST['zip']) ? $_POST['zip'] : '';
-				$phone = ! empty($_POST['phone']) ? $_POST['phone'] : '';
-				$email = ! empty($_POST['email']) ? $_POST['email'] : '';
+				$fname = ! empty($_POST['fname']) ? ee_sanitize_value($_POST['fname'] ): '';
+				$lname = ! empty($_POST['lname']) ? ee_sanitize_value($_POST['lname']) : '';
+				$address = ! empty($_POST['address']) ? ee_sanitize_value($_POST['address']) : '';
+				$city = ! empty($_POST['city']) ? ee_sanitize_value($_POST['city']) : '';
+				$state = ! empty($_POST['state']) ? ee_sanitize_value($_POST['state']) : '';
+				$zip = ! empty($_POST['zip']) ? ee_sanitize_value($_POST['zip']) : '';
+				$phone = ! empty($_POST['phone']) ? ee_sanitize_value($_POST['phone']) : '';
+				$email = ! empty($_POST['email']) ? ee_sanitize_value($_POST['email']) : '';
 					
 				$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET fname=%s, lname=%s, address=%s, city=%s, state=%s, zip=%s, phone=%s, email=%s WHERE id =%d";
 				$wpdb->query( $wpdb->prepare( $SQL, $fname, $lname, $address, $city, $state, $zip, $phone, $email, $id ));
@@ -141,14 +141,14 @@ function attendee_edit_record() {
 							case "TEXTAREA" :
 							case "DROPDOWN" :
 							case "SINGLE" :					
-								$post_val = ($question->system_name != '') ? $_POST[$question->system_name] : $_POST[$question->question_type . '_' . $question->q_id];
+								$post_val = ($question->system_name != '') ? ee_sanitize_value($_POST[$question->system_name]) : ee_sanitize_value($_POST[$question->question_type . '_' . $question->q_id]);
 								break;
 								
 							case "MULTIPLE" :					
 								$post_val = '';
 								if (!empty($_POST[$question->question_type . '_' . $question->id])) {
 									for ( $i = 0; $i < count( $_POST[$question->question_type . '_' . $question->id] ); $i++ ) {
-										$post_val .= trim( $_POST[$question->question_type . '_' . $question->id][$i] ) . ',';
+										$post_val .= trim( ee_sanitize_value($_POST[$question->question_type . '_' . $question->id][$i]) ) . ',';
 									}
 								}
 								$post_val = substr( $post_val, 0, -1 );

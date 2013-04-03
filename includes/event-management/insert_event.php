@@ -4,9 +4,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 
 // Adds an Event or Function to the Event Database
 function add_event_to_db($recurrence_arr = array()) {
-	
-	//echo '<h4>$_POST : <pre>' . print_r($_POST,true) . '</pre> <span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-	
+		
 	global $wpdb, $org_options, $current_user, $espresso_premium;
 	
 	//Security check using nonce
@@ -55,7 +53,7 @@ function add_event_to_db($recurrence_arr = array()) {
 				'frequency'						=> sanitize_text_field($_POST['recurrence_frequency']),
 				'interval'						=> sanitize_text_field($_POST['recurrence_interval']),
 				'type'							=> sanitize_text_field($_POST['recurrence_type']),
-				'weekdays'						=> $_POST['recurrence_weekday'],
+				'weekdays'						=> isset($_POST['recurrence_weekday']) ? $_POST['recurrence_weekday'] : '',
 				'repeat_by'						=> $_POST['recurrence_repeat_by'],
 				'recurrence_regis_date_increment' => $_POST['recurrence_regis_date_increment'],
 				'recurrence_manual_dates'		=> $_POST['recurrence_manual_dates'],
@@ -87,7 +85,7 @@ function add_event_to_db($recurrence_arr = array()) {
 		}else{
 			$event_identifier = sanitize_title_with_dashes($_REQUEST['event_identifier']) . $event_code;
 		}
-		$event_desc			= !empty($_REQUEST['event_desc']) ? $_REQUEST['event_desc'] : '';
+		$event_desc			= !empty($_REQUEST['event_desc']) ? wp_kses_post($_REQUEST['event_desc']) : '';
 		$display_desc		= !empty($_REQUEST['display_desc']) ? sanitize_text_field($_REQUEST['display_desc']) : 'Y';
 		$display_reg_form	= !empty($_REQUEST['display_reg_form']) ? sanitize_text_field($_REQUEST['display_reg_form']) : 'Y';
 		$externalURL		= isset($_REQUEST['externalURL']) ? sanitize_text_field($_REQUEST['externalURL']) : '';
@@ -233,6 +231,7 @@ function add_event_to_db($recurrence_arr = array()) {
 		$event_meta['default_payment_status'] = !empty($_REQUEST['default_payment_status']) ? sanitize_text_field($_REQUEST['default_payment_status']) : '';
 
 		//Process thumbnail uploads
+		$event_thumbnail_url = '';
 		if (isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ){
 			$event_meta['event_thumbnail_url'] = sanitize_text_field($_REQUEST['upload_image']);
 			$event_thumbnail_url = sanitize_text_field($event_meta['event_thumbnail_url']);
@@ -442,6 +441,8 @@ function add_event_to_db($recurrence_arr = array()) {
 					$price_type = !empty($_REQUEST['price_type'][$k]) ? sanitize_text_field(stripslashes_deep($_REQUEST['price_type'][$k])) : __('General Admission', 'event_espresso');
 					$member_price_type = !empty($_REQUEST['member_price_type'][$k]) ? sanitize_text_field(stripslashes_deep($_REQUEST['member_price_type'][$k])) : __('Members Admission', 'event_espresso');
 					$member_price = !empty($_REQUEST['member_price'][$k]) ? $_REQUEST['member_price'][$k] : $v;
+					//$sql_price = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, surcharge_type, price_type, member_price, member_price_type) VALUES ('" . $last_event_id . "', '" . $v . "', '" . $_REQUEST['surcharge'][$k] . "', '" . $_REQUEST['surcharge_type'][$k] . "', '" . $price_type . "', '" . $member_price . "', '" . $member_price_type . "')";
+					//echo "$sql3 <br>";
 					
 					$sql_price = array('event_id' => $last_event_id, 'event_cost' => $v, 'surcharge' => $_REQUEST['surcharge'][$k], 'surcharge_type' => $_REQUEST['surcharge_type'][$k], 'price_type' => $price_type, 'member_price' => $member_price, 'member_price_type' => $member_price_type );
 					$sql_price_data = array('%d', '%s', '%s', '%s', '%s', '%s', '%s');
@@ -489,9 +490,9 @@ function add_event_to_db($recurrence_arr = array()) {
 			$my_post['post_title'] = sanitize_text_field($_REQUEST['event']);
 			$my_post['post_content'] = $post_content;
 			$my_post['post_status'] = 'publish';
-			$my_post['post_author'] = !empty($_REQUEST['user']) ? sanitize_text_field($_REQUEST['user']) : '';
-			$my_post['post_category'] = !empty($_REQUEST['post_category']) ? sanitize_text_field($_REQUEST['post_category']) : '';
-			$my_post['tags_input'] = !empty($_REQUEST['post_tags']) ? sanitize_text_field($_REQUEST['post_tags']) : '';
+			$my_post['post_author'] = !empty($_REQUEST['user']) ? $_REQUEST['user'] : '';
+			$my_post['post_category'] = !empty($_REQUEST['post_category']) ? $_REQUEST['post_category'] : '';
+			$my_post['tags_input'] = !empty($_REQUEST['post_tags']) ? $_REQUEST['post_tags'] : '';
 			$my_post['post_type'] = !empty($post_type) ? $post_type : 'post';
 			//print_r($my_post);
 			// Insert the post into the database
@@ -563,6 +564,6 @@ function add_event_to_db($recurrence_arr = array()) {
 	
 	//If not using the FEM addon, then we return the event id
 	if ( !$use_fem === TRUE )
-		return $last_event_id;
+		return @$last_event_id;
 
 }//End add_event_funct_to_db()

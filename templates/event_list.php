@@ -57,7 +57,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 			'show_recurrence'			=> 'true',
 			'limit'						=> '0',
 			'order_by'					=> 'NULL',
-			'sort'						=> 'ASC',
+			'sort'						=> '',
 			'css_class'					=> 'NULL',
 			'current_page'				=> 1,
 			'events_per_page'			=> 50,
@@ -85,13 +85,11 @@ if (!function_exists('event_espresso_get_event_details')) {
 		if(strstr($category_identifier,',')){
 			$array_cat=explode(",",$category_identifier);
 			$cat=array_map('trim', $array_cat);
-			
 			$category_detail_id = '';
 			
 			//For every category specified in the shortcode, let's get the corresponding category_id et create a well-formatted string (id,n id)
 			foreach($cat as $k=>$v){
-	
-				$sql_get_category_detail_id="SELECT id FROM ". EVENTS_CATEGORY_TABLE . " WHERE category_identifier = '".$v."'";
+				$sql_get_category_detail_id = "SELECT id FROM ". EVENTS_CATEGORY_TABLE . " WHERE category_identifier = '".$v."'";
 				$category_detail_id .= $wpdb->get_var( $sql_get_category_detail_id ).",";
 			}
 	
@@ -183,28 +181,17 @@ if (!function_exists('event_espresso_get_event_details')) {
 		$sql .= " GROUP BY e.id ";
 		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$sort." " : " ORDER BY date(start_date), id ASC ";
 		$sql .= $limit > 0 ? ' LIMIT 0, '.$limit : '';  
-		
-		//echo $sql;
-		//echo 'This page is located in ' . get_option( 'upload_path' );
-		
-		$events = $wpdb->get_results( $sql );
+		$events					= $wpdb->get_results( $wpdb->prepare($sql, '') );
+		$category_id			= isset($wpdb->last_result[0]->id) ? $wpdb->last_result[0]->id : '';
+		$category_name			= isset($wpdb->last_result[0]->category_name) ? $wpdb->last_result[0]->category_name : '';
+		$category_identifier	= isset($wpdb->last_result[0]->category_identifier) ? $wpdb->last_result[0]->category_identifier : '';
+		$category_desc			= isset($wpdb->last_result[0]->category_desc) ? html_entity_decode(wpautop($wpdb->last_result[0]->category_desc)) : '';
+		$display_desc			= isset($wpdb->last_result[0]->display_desc) ? $wpdb->last_result[0]->display_desc : '';
+		$total_events			= count($events);
+		$total_pages			= ceil($total_events/$events_per_page);
+		$offset					= ($current_page-1)*$events_per_page;
+		$events					= array_slice($events,$offset,$events_per_page);
 
-		$category_id = isset($wpdb->last_result[0]->id) ? $wpdb->last_result[0]->id : '';
-		$category_name = isset($wpdb->last_result[0]->category_name) ? $wpdb->last_result[0]->category_name : '';
-		$category_identifier = isset($wpdb->last_result[0]->category_identifier) ? $wpdb->last_result[0]->category_identifier : '';
-		$category_desc = isset($wpdb->last_result[0]->category_desc) ? html_entity_decode(wpautop($wpdb->last_result[0]->category_desc)) : '';
-		$display_desc = isset($wpdb->last_result[0]->display_desc) ? $wpdb->last_result[0]->display_desc : '';
-        
-		
-		$total_events = count($events);
-		$total_pages = ceil($total_events/$events_per_page);
-		
-		$offset = ($current_page-1)*$events_per_page;
-		$events = array_slice($events,$offset,$events_per_page);
-		
-		//Debug
-		//var_dump($events);
-		
 		if ( $use_wrapper ) {
 			echo "<div id='event_wrapper'>";
 		}
@@ -291,6 +278,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 			$start_date = $event->start_date;
 			$end_date = $event->end_date;
 			$reg_limit = $event->reg_limit;
+			$venue_title = $event->venue_title;
 			$event_address = $event->address;
 			$event_address2 = $event->address2;
 			$event_city = $event->city;
@@ -360,13 +348,13 @@ if (!function_exists('event_espresso_get_event_details')) {
 				'event_city' => $event_city,
 				'event_state' => $event_state,
 				'event_zip' => $event_zip,
-				'event_country' => $venue_country,
-				'venue_title' => $venue_title,
-                'venue_address' => $venue_address,
-                'venue_address2' => $venue_address2,
-                'venue_city' => $venue_city,
-                'venue_state' => $venue_state,
-                'venue_country' => $venue_country,
+				'event_country' => !empty($venue_country) ? $venue_country : '',
+				'venue_title' => !empty($venue_title) ? $venue_title : '',
+                'venue_address' => !empty($venue_address) ? $venue_address : '',
+                'venue_address2' => !empty($venue_address2) ? $venue_address2 : '',
+                'venue_city' => !empty($venue_city) ? $venue_city : '',
+                'venue_state' => !empty($venue_state) ? $venue_state : '',
+                'venue_country' => !empty($venue_country) ? $venue_country : '',
 				'location' => $location,
 				'is_active' => $event->is_active,
 				'event_status' => $event->event_status,

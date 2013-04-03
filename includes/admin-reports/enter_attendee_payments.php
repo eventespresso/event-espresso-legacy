@@ -59,9 +59,10 @@ function enter_attendee_payments() {
 					$txn_id = isset($_POST[ 'txn_id' ]) ? $_POST[ 'txn_id' ] : FALSE;
 					$payment_date = isset($_POST[ 'payment_date' ]) ? date_i18n( get_option('date_format'), strtotime( $_POST[ 'payment_date' ] )) : FALSE;
 					$coupon_code = isset($_POST[ 'coupon_code' ]) ? $_POST[ 'coupon_code' ] : '';
-					$total_owing = isset($_POST[ 'total_owing' ]) ? (float)number_format( (float)abs( (float)sanitize_text_field( $_POST[ 'total_owing' ] )), 2, '.', '' ) : 0.00;
-					$amount_pd = isset($_POST[ 'amount_pd' ]) ? (float)number_format( (float)abs( (float)sanitize_text_field( $_POST[ 'amount_pd' ] )), 2, '.', '' ) : 0.00;
-					$new_payment = isset($_POST[ 'new_payment' ]) && $_POST[ 'new_payment' ] != '' ? (float)number_format( (float)sanitize_text_field( $_POST[ 'new_payment' ] ), 2, '.', '' ) : 0.00;
+					$total_owing = isset($_POST[ 'total_owing' ]) ? (float)number_format( sanitize_text_field( $_POST[ 'total_owing' ] ), 2, '.', '' ) : 0.00;
+					$amount_pd = isset($_POST[ 'amount_pd' ]) ? (float)number_format( sanitize_text_field( $_POST[ 'amount_pd' ] ), 2, '.', '' ) : 0.00;
+					$new_payment = isset($_POST[ 'new_payment' ]) && $_POST[ 'new_payment' ] != '' ? (float)number_format( sanitize_text_field( $_POST[ 'new_payment' ] ), 2, '.', '' ) : 0.00;
+					$upd_payment_status = isset($_POST[ 'payment_status' ]) ? $_POST[ 'payment_status' ] : __('Pending','event_espresso');
 					
 					// if making a payment, we are going to require the txn type and txn id
 					if ( $new_payment != 0.00  ) {						
@@ -80,19 +81,18 @@ function enter_attendee_payments() {
 					
 						$upd_total = $amount_pd + $new_payment;  
 
-						// compare new total_cost with amount_pd
-						if ( $upd_total == $total_owing ) {
-							$upd_payment_status = __('Completed','event_espresso');
-						} elseif ( $upd_total < $total_owing ) {
-							$upd_payment_status = __('Pending','event_espresso');
-						} elseif ( $upd_total > $total_owing ) {
-							$upd_payment_status = __('Refund','event_espresso');
-						}					
-
 					} else {
-						$upd_payment_status = isset($_POST[ 'payment_status' ]) ? $_POST[ 'payment_status' ] : __('Pending','event_espresso');
 						$upd_total = $amount_pd;
 					}
+
+					// compare new total_cost with amount_pd
+					if ( $new_payment == $total_owing ) {
+						$upd_payment_status = __('Completed','event_espresso');
+					} elseif ( $new_payment < $total_owing ) {
+						$upd_payment_status = __('Pending','event_espresso');
+					} elseif ( $new_payment > $total_owing ) {
+						$upd_payment_status = __('Refund','event_espresso');
+					} 						
 					
 					//Update payment status information for primary attendee
 					$set_cols_and_values = array( 

@@ -71,7 +71,12 @@ function copy_event( $recurrence_array = array() ){
 				'state' => $event->state, 
 				'zip' => $event->zip, 
 				'country' => $event->country, 
-				'phone' => $event->phone
+				'phone' => $event->phone,
+				
+				'venue_phone'=> $event->venue_phone,
+				'venue_title' => $event->venue_title,
+				'venue_url' => $event->venue_url,
+				'venue_image' => $event->venue_image,
 
 		);
 		
@@ -82,7 +87,7 @@ function copy_event( $recurrence_array = array() ){
 				'%s', '%s', '%s', '%s', '%d', '%d', '%d', 
 				'%s', '%s', '%d',//wp_user
 				'%d', '%s', '%s', '%d',//Ticket id
-				'%s', '%s', '%s', '%s', '%s', '%s', '%s',//Legacy venue
+				'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',//Legacy venue
 		);
 		
 	}

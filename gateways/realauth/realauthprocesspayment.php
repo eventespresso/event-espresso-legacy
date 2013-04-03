@@ -33,10 +33,10 @@ function espresso_process_realauth($payment_data) {
 		$body = "An instant payment notification failed\n";
 		$body .= "from " . " on " . date('m/d/Y');
 		$body .= " at " . date('g:i A') . "\n\nDetails:\n";
-		var_dump($body);
-		var_dump($_REQUEST);
+		//var_dump($body);
+		//var_dump($_REQUEST);
 		//wp_mail($payment_data['contact'], $subject, $body);
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
     return $payment_data;
 }
