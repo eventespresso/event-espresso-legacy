@@ -11,7 +11,7 @@ function update_event($recurrence_arr = array()) {
 	//Security check using nonce
 	if ( empty($_POST['nonce_verify_update_event']) || !wp_verify_nonce($_POST['nonce_verify_update_event'],'espresso_verify_update_event_nonce') ){
 		if ($recurrence_arr['bypass_nonce'] == FALSE){
-			print '<h3 class="error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
+			print '<h3 class="error">'.__('Sorry, there was a security error and your event was not updated.', 'event_espresso').'</h3>';
 			return;
 		}
 	}
@@ -706,6 +706,7 @@ function update_event($recurrence_arr = array()) {
 						'recurrence_event_end_date' => $r_d['event_end_date'],
 						'registration_start'		=> $r_d['registration_start'],
 						'registration_end'			=> $r_d['registration_end'],
+						'visible_on'				=> $r_d['visible_on'],
 						'bypass_nonce'				=> TRUE,
                 ));
             }

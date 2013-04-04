@@ -195,7 +195,6 @@ if (!function_exists('event_espresso_verify_price_id')) {
  */
 if (!function_exists('event_espresso_get_orig_price_and_surcharge')) {
 	function event_espresso_get_orig_price_and_surcharge( $price_id = FALSE, $event_id = FALSE ) {
-		
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 
 		if ( ! $price_id || ! $event_id ) {
@@ -222,7 +221,8 @@ if (!function_exists('event_espresso_get_orig_price_and_surcharge')) {
 		}
 		
 		if ( event_espresso_verify_price_id( $price_id, $event_id ) == FALSE ){
-			$result = espresso_return_single_price($event_id);
+			$result = event_espresso_get_first_price($price_id);
+			//$result = espresso_return_single_price($event_id);
 		}
 		
 		//printr( $result, '$result  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
@@ -230,6 +230,19 @@ if (!function_exists('event_espresso_get_orig_price_and_surcharge')) {
 		
 	}
 
+}
+
+/**
+ * Gets teh price result for this event. Used when we just want one of them.
+ * @global type $wpdb
+ * @param type $event_id
+ * @return type
+ */
+function event_espresso_get_first_price($event_id){
+	global $wpdb;
+	$SQL = "SELECT id, event_cost, surcharge, surcharge_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id=%d ORDER BY id ASC LIMIT 1";
+	$result = $wpdb->get_row( $wpdb->prepare( $SQL, absint( $event_id )));
+	return $result;
 }
 
 
@@ -262,7 +275,6 @@ if (!function_exists('event_espresso_get_final_price')) {
 	function event_espresso_get_final_price( $price_id = FALSE, $event_id = FALSE, $orig_price = FALSE ) {
 	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-
 		if ( ! $price_id || ! $event_id ) {
 			return 1000000;
 		}
@@ -271,7 +283,7 @@ if (!function_exists('event_espresso_get_final_price')) {
 			$orig_price = espresso_return_single_price($event_id);
 		}
 			
-		$result = $orig_price !== FALSE ? $orig_price : event_espresso_get_orig_price_and_surcharge( $price_id , $event_id );
+		$result = $orig_price !== FALSE ? $orig_price : event_espresso_get_orig_price_and_surcharge( $price_id, $event_id );
 		
 		if ( isset( $result->event_cost )) {
 			$result->event_cost = (float)$result->event_cost;
