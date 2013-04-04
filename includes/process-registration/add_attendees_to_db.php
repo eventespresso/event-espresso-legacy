@@ -136,7 +136,6 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			//echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 			$event_meta = maybe_unserialize( $questions->event_meta );
 			$questions = maybe_unserialize( $questions->question_groups );
-
 			// Adding attenddee specific cost to events_attendee table
 			if (isset($data_source['admin'])) {
 				
@@ -154,8 +153,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$price_type		= $data_source['seat_id'];
 					
 			} elseif ( isset( $att_data_source['price_id'] ) && ! empty( $att_data_source['price_id'] ) ) {
-
-				$orig_price		= event_espresso_get_orig_price_and_surcharge( (int)$att_data_source['price_id'], $event_id );
+				$orig_price		= event_espresso_get_orig_price_and_surcharge( $att_data_source['price_id'], $event_id );
 				$final_price	= isset( $att_data_source['price_id'] ) && !empty( $data_source['price_id'] ) ? event_espresso_get_final_price( absint($att_data_source['price_id']), $event_id, $orig_price ) : espresso_return_single_price($event_id);
 				$price_type		= isset( $att_data_source['price_id'] ) && !empty( $data_source['price_id'] ) ? espresso_ticket_information( array( 'type' => 'ticket', 'price_option' => absint($att_data_source['price_id']) )) : '';
 				$surcharge		= event_espresso_calculate_surcharge( (float)$orig_price->event_cost , (float)$orig_price->surcharge, $orig_price->surcharge_type );
