@@ -320,7 +320,7 @@ class PluginUpdateEngineChecker {
 			'pue_stats_request' => 1,
 			'domain' => $this->current_domain,
 			'pue_plugin_slug' => $this->slug,
-			'pue_plugin_version' => $this->download_query['pue_active_version']
+			'pue_plugin_version' => $this->getInstalledVersion()
 			);
 
 		//setup up post args
