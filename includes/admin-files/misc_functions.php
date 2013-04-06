@@ -57,6 +57,16 @@ function ee_core_load_pue_update() {
 	if ( $espresso_check_for_updates == false )
 		return;
 
+	//let's prepare extra stats
+	$extra_stats = array();
+	//active gateways
+	$active_gateways = get_option('event_espresso_active_gateways');
+	if ( !empty($active_gateways ) ) {
+		foreach ( (array) $active_gateways as $gateway => $ignore ) {
+			$extra_stats[$gateway . '_active'] = 1;
+		}
+	}
+
 	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'class/pue/pue-client.php')) { //include the file 
 			require(EVENT_ESPRESSO_PLUGINFULLPATH . 'class/pue/pue-client.php' );
 			$api_key = isset($org_options['site_license_key']) ? $org_options['site_license_key'] : '';
@@ -69,7 +79,8 @@ function ee_core_load_pue_update() {
 				'lang_domain' => 'event_espresso', //(optional) - put here whatever reference you are using for the localization of your plugin (if it's localized).  That way strings in this file will be included in the translation for your plugin.
 				'checkPeriod' => '12', //(optional) - use this parameter to indicate how often you want the client's install to ping your server for update checks.  The integer indicates hours.  If you don't include this parameter it will default to 12 hours.
 				'option_key' => 'site_license_key', //this is what is used to reference the api_key in your plugin options.  PUE uses this to trigger updating your information message whenever this option_key is modified.
-				'options_page_slug' => 'event_espresso'
+				'options_page_slug' => 'event_espresso',
+				'extra_stats' => $extra_stats
 			);
 			$check_for_updates = new PluginUpdateEngineChecker($host_server_url, $plugin_slug, $options); //initiate the class and start the plugin update engine!
 		}
