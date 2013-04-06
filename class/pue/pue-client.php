@@ -318,7 +318,9 @@ class PluginUpdateEngineChecker {
 			'extra_stats' => $this->extra_stats,
 			'user_api_key' => $this->api_secret_key,
 			'pue_stats_request' => 1,
-			'domain' => $this->current_domain
+			'domain' => $this->current_domain,
+			'pue_plugin_slug' => $this->slug,
+			'pue_plugin_version' => $this->download_query['pue_active_version']
 			);
 
 		//setup up post args
@@ -327,7 +329,7 @@ class PluginUpdateEngineChecker {
 			'blocking' => TRUE,
 			'user-agent' => 'PUE-stats-carrier',
 			'body' => $body,
-			'blocking' => FALSE,
+			'blocking' => TRUE,
 			'sslverify' => FALSE
 			);
 
