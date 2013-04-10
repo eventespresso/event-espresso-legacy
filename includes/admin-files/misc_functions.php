@@ -77,7 +77,7 @@ function ee_core_load_pue_update() {
 	//only collect extra stats if the plugin user has opted in.
 	if ( !empty($espresso_data_optin) && $espresso_data_optin == 'yes' ) {
 		//let's only setup extra data if transient has expired
-		if ( is_admin() && false === ( $transient = get_transient('ee_extra_data') ) ) {
+		if ( false === ( $transient = get_transient('ee_extra_data') ) ) {
 			//active gateways
 			$active_gateways = get_option('event_espresso_active_gateways');
 			if ( !empty($active_gateways ) ) {
