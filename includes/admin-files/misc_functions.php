@@ -115,12 +115,24 @@ function ee_core_load_pue_update() {
  * The purpose of this function is to display information about Event Espresso data collection and a optin selection for extra data collecting by users.
  * @return string html.
  */
+ function espresso_data_collection_optin_text() {
+	 $ueip_has_notified = get_option('ee_ueip_has_notified');
+	 
+	 echo '<h4>'.__('User Experience Improvement Program (UEIP)', 'event_espresso').'</h4>';
+	 echo sprintf( __('%sPlease help us make Event Espresso better!%s With this version of Event Espresso a feature, called the %sUser Experience Improvement Program (UEIP)%s, has been implemented to automatically send information to us about how you use our products and services, and support related data. We use this information to improve our products and features, that you use most often, and to help track problems. Participation in the program is enabled by default, and the end results are software improvements to better meet the needs of our customers. The data we collect will never be sold, traded, or misused in any way. %sPlease see our %sPrivacy Policy%s for more information. You can opt out of this program by changing the %sEvent Espresso > GeneralSettings > UEIP Settings%s within your WordPress Admin.', 'event_espresso'), '<em>', '</em><br />','<a href="http://eventespresso.com/user-experience-improvement-program-ueip/" target="_blank">','</a>','<br><br>','<a href="http://eventespresso.com/about/privacy-policy/" target="_blank">','</a>','<a href="admin.php?page=event_espresso#ueip_optin">','</a>' );
+}
+
 function espresso_data_collection_optin_notice() {
 	?>
 	<div class="updated data-collect-optin" id="espresso-data-collect-optin-container">
-		<p><?php _e('<strong>Please help us make Event Espresso better</strong>! With this version of Event Espresso, a feature called User Experience Improvement Program (UEIP) has been implemented to automatically send information to us about how you use our products and about some of the problems you encounter. We use this information to improve our products and features that you use most often and to help solve problems. Participation in the program is enabled by default, and the end results are software improvements to better meet the needs of our customers. Your data will never be sold, traded or misused. Please see our privacy policy for more information. You can opt out of this program by changing the setting on the Event Espresso general options page.', 'event_espresso'); ?></p>
+		<p><?php echo espresso_data_collection_optin_text(); ?></p>
 		<div id="data-collect-optin-options-container">
 			<span style="display: none" id="data-optin-nonce"><?php echo wp_create_nonce('ee-data-optin'); ?></span>
+			<?php
+			if ( empty($ueip_has_notified) ) {
+				echo '<a href="admin.php?page=event_espresso#ueip_optin">'.__('Opt-out now?', 'event_espresso').'</a>';
+			}
+			?>
 			<button class="button-secondary data-optin-button" value="no"><?php _e('Dismiss', 'event_espresso'); ?></button>
 			<!--<button class="button-primary data-optin-button" value="yes"><?php _e('Yes! I\'m In', 'event_espresso'); ?></button>-->
 			<div style="clear:both"></div>

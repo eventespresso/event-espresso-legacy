@@ -630,12 +630,12 @@ function organization_config_mnu() {
 									<div title="Click to toggle" class="handlediv"><br />
 									</div>
 									<h3 class="hndle">
-		<?php _e('Support License', 'event_espresso'); ?>
+		<?php _e('UEIP Settings', 'event_espresso'); ?>
 									</h3>
 									<div class="inside">
 										<div class="padding">
 											<p>
-												<?php _e('<strong>Please help us make Event Espresso better</strong>! The User Experience Improvement Program (UEIP) automatically sends information to us about how you use our products and about some of the problems you encounter. We use this information to improve our products and features that you use most often and to help solve problems. Participation in the program is voluntary, and the end results are software improvements to better meet the needs of our customers. Your data will never be sold, traded or misused. Please see our privacy policy for more information. Thank you for participating.', 'event_espresso'); ?>	
+												<?php echo espresso_data_collection_optin_text(); ?>	
 											</p>
 											<ul>
 												<li>
