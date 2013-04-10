@@ -76,13 +76,18 @@ function ee_core_load_pue_update() {
 
 	//only collect extra stats if the plugin user has opted in.
 	if ( !empty($espresso_data_optin) && $espresso_data_optin == 'yes' ) {
-	
-		//active gateways
-		$active_gateways = get_option('event_espresso_active_gateways');
-		if ( !empty($active_gateways ) ) {
-			foreach ( (array) $active_gateways as $gateway => $ignore ) {
-				$extra_stats[$gateway . '_gateway_active'] = 1;
+		//let's only setup extra data if transient has expired
+		if ( false === ( $transient = get_transient('ee_extra_data') ) ) {
+			//active gateways
+			$active_gateways = get_option('event_espresso_active_gateways');
+			if ( !empty($active_gateways ) ) {
+				foreach ( (array) $active_gateways as $gateway => $ignore ) {
+					$extra_stats[$gateway . '_gateway_active'] = 1;
+				}
 			}
+
+			//set transient
+			set_transient( 'ee_extra_data', $extra_stats, WEEK_IN_SECONDS );
 		}
 	}
 
