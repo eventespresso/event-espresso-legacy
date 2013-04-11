@@ -630,7 +630,7 @@ function organization_config_mnu() {
 									<div title="Click to toggle" class="handlediv"><br />
 									</div>
 									<h3 class="hndle">
-		<?php _e('UEIP Settings', 'event_espresso'); ?>
+		<?php _e('UXIP Settings', 'event_espresso'); ?>
 									</h3>
 									<div class="inside">
 										<div class="padding">
