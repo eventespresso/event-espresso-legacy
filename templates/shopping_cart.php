@@ -128,11 +128,10 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			
              <div id="event_espresso_notifications" class="clearfix event-data-display" style=""></div> 			
 
-			<div id="event_espresso_total_wrapper" class="clearfix event-data-display">	
-					
+			<div id="event_espresso_total_wrapper" class="clearfix event-data-display">					
 				<?php do_action( 'action_hook_espresso_shopping_cart_before_total' ); ?>				
 				<span class="event_total_price">
-					<?php _e( 'Total ', 'event_espresso' ) . $org_options['currency_symbol'];?> <span id="event_total_price"><?php echo $_SESSION['espresso_session']['grand_total'];?></span>
+					<?php echo __( 'Total ', 'event_espresso' ) . $org_options['currency_symbol'];?> <span id="event_total_price"><?php echo $_SESSION['espresso_session']['grand_total'];?></span>
 				</span>
 				<?php do_action( 'action_hook_espresso_shopping_cart_after_total' ); ?>
 				<p id="event_espresso_refresh_total">
