@@ -12,7 +12,7 @@ function event_list_attendees() {
 
 	$max_rows = isset( $_REQUEST['max_rows'] ) & ! empty( $_REQUEST['max_rows'] ) ? absint( $_REQUEST['max_rows'] ) : 50;
 	$start_rec = isset( $_REQUEST['start_rec'] ) && ! empty($_REQUEST['start_rec']) ? absint( $_REQUEST['start_rec'] ) : 0;
-	$records_to_show = " LIMIT $max_rows OFFSET $start_rec ";
+	$records_to_show = " LIMIT $start_rec,$max_rows  ";
 	
 	//Dates
 	$curdate = date('Y-m-d');
@@ -211,40 +211,20 @@ function event_list_attendees() {
 	$updated_ticket_quantity =0;
 
 	$att_table_form_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID ), EVT_ADMIN_URL );
-?>
-<form id="attendee-admin-list-page-select-frm" name="attendee_admin_list_page_select_frm" method="post" action="<?php echo $att_table_form_url; ?>">
-	<div id="attendee-admin-list-page-select-dv" class="admin-list-page-select-dv">
-		<input name="navig" value="<?php _e('Retrieve', 'event_espresso'); ?>" type="submit" class="button-secondary">
-		<?php //_e('a max total of', 'event_espresso'); ?>
-		<?php $rows = array( 50 => 50, 100 => 100, 250 => 250, 500 => 500, 100000 => 'all' ); ?>
-		<select name="max_rows" size="1">
-			<?php foreach ( $rows as $key => $value ) { ?>
-			<?php $selected = $key == $max_rows ? ' selected="selected"' : ''; ?>
-			<option value="<?php echo $key ?>"<?php echo $selected ?>><?php echo $value ?>&nbsp;&nbsp;</option>
-			<?php } ?>
-		</select>		
-		<?php _e('rows from the db at a time', 'event_espresso'); ?>
-		<input name="start_rec" value="<?php echo $start_rec ?>" class="textfield" type="hidden">
-		<?php
-			if ( $start_rec > 0 && $max_rows < 100000 ) {
-				$prev_rows = $start_rec > $max_rows ? ( $start_rec - $max_rows ) : 0;
-				$prev_rows_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID, 'max_rows' => $max_rows, 'start_rec' => $prev_rows ), EVT_ADMIN_URL ); 
+	
+	//show db-leve pagination buttons
+	$prev_start_rec = $start_rec - $max_rows;
+	if ($prev_start_rec >= 0) {
 		?>
-		<a id="attendee-admin-load-prev-rows-btn" href="<?php echo $prev_rows_url; ?>" title="load prev rows" class="button-secondary">
-			<?php echo __('Previous', 'event_espresso') . ' ' . $max_rows  . ' ' .  __('rows', 'event_espresso'); ?>
-		</a>
-		<?php } ?>
-		<?php 			
-			if ( $total_attendees >= $max_rows && $max_rows < 100000 ) {
-				$next_rows = $start_rec + $max_rows;
-				$next_rows_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID, 'max_rows' => $max_rows, 'start_rec' => $next_rows ), EVT_ADMIN_URL ); 
-		?>
-		<a id="attendee-admin-load-next-rows-btn" href="<?php echo $next_rows_url; ?>" title="load next rows" class="button-secondary">
-		<?php echo __('Next', 'event_espresso') . ' ' . $max_rows  . ' ' .  __('rows', 'event_espresso'); ?>
-		</a> 
-		<?php } ?>
-	</div>
-</form>
+		<a href='javascript: return false;' id="event-admin-load-prev-rows-btn" title="load prev rows" class="event-pagination-button button-secondary"><?php echo __('Previous', 'event_espresso') . ' ' . $max_rows . ' ' . __('rows', 'event_espresso'); ?></a>
+	<?php
+	}
+	//we make a lazy assumption here: if we have a limit of 50 rows, and the last query got 50, then we probably have more to sho won the next page
+	//this is always right except when there were exactly only 50 rows remainign to fetch.
+	//oh well
+	if ($max_rows == $total_attendees) {?>	
+		<a href='javascript: return false;' id="event-admin-load-next-rows-btn"  title="load next rows" class="event-pagination-button button-secondary"><?php echo __('Next', 'event_espresso') . ' ' . $max_rows . ' ' . __('rows', 'event_espresso'); ?></a> 
+	<?php } ?>
 	
 <form id="form1" name="form1" method="post" action="<?php echo $att_table_form_url; ?>">
 	<table id="table" class="widefat fixed" width="100%">
