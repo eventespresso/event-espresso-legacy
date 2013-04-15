@@ -89,7 +89,11 @@ function event_list_attendees() {
 
 	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php')) {
         require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php');
-    } else {
+		espresso_display_month_category_status_filters();
+		espresso_ee_tablenav_form_open();
+		$show_filters = TRUE;
+	} else {
+		$show_filters = FALSE;
 		?>
 		<p>
 			<strong><?php _e('Advanced filters are available in the premium versions.', 'event_espresso');?></strong> 
@@ -212,19 +216,13 @@ function event_list_attendees() {
 
 	$att_table_form_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID ), EVT_ADMIN_URL );
 	
-	//show db-leve pagination buttons
-	$prev_start_rec = $start_rec - $max_rows;
-	if ($prev_start_rec >= 0) {
-		?>
-		<a href='javascript: return false;' id="event-admin-load-prev-rows-btn" title="load prev rows" class="event-pagination-button button-secondary"><?php echo __('Previous', 'event_espresso') . ' ' . $max_rows . ' ' . __('rows', 'event_espresso'); ?></a>
-	<?php
+	if ( $show_filters ) {
+		espresso_display_ee_tablenav();
+		espresso_display_ee_pagination( $total_attendees );
+		espresso_ee_tablenav_form_close ();
 	}
-	//we make a lazy assumption here: if we have a limit of 50 rows, and the last query got 50, then we probably have more to sho won the next page
-	//this is always right except when there were exactly only 50 rows remainign to fetch.
-	//oh well
-	if ($max_rows == $total_attendees) {?>	
-		<a href='javascript: return false;' id="event-admin-load-next-rows-btn"  title="load next rows" class="event-pagination-button button-secondary"><?php echo __('Next', 'event_espresso') . ' ' . $max_rows . ' ' . __('rows', 'event_espresso'); ?></a> 
-	<?php } ?>
+	
+?>
 	
 <form id="form1" name="form1" method="post" action="<?php echo $att_table_form_url; ?>">
 	<table id="table" class="widefat fixed" width="100%">
