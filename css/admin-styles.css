@@ -381,7 +381,7 @@ li.time-date .run-in {
 /*___ Overview screen ___*/
 
 ul.subsubsub { clear:both; }
-ul.subsubsub + ul.subsubsub { margin:0  20px; }
+ul.subsubsub + ul.subsubsub { margin-top:-8px; /*margin:0  20px;*/ }
 
 .subsubsub + .tablenav {
 	margin-bottom: 20px;
@@ -395,9 +395,13 @@ div.tablenav {
 	height: auto;
 }
 
-div.ee_tablenav .actions select {
-	float:none !important;
-}
+div.ee_tablenav .actions select { float:none !important; }
+
+
+#ee_table_pagination  { margin:1em 0; }
+#ee_tablenav a.button-secondary,
+#event-admin-load-prev-rows-btn,
+#event-admin-load-next-rows-btn { display: inline-block; }
 
 
 /*** Add new events / Edit events ***/
