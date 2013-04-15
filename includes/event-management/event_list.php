@@ -90,83 +90,114 @@ function event_espresso_edit_list() {
 	$group = '';
 	$sql = '';
 	$is_regional_manager = FALSE;
+	
+	$use_group_union = FALSE;
 
 	//Check if the venue manager is turned on
 	$use_venue_manager = isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? TRUE : FALSE;
-
 
 	//Roles & Permissions
 	//This checks to see if the user is a regional manager and creates a union to join the events that are in the users region based on the venue/locale combination
 	if (function_exists('espresso_member_data') && espresso_member_data('role') == 'espresso_group_admin') {
 
 		$is_regional_manager = TRUE;
-
 		$group = get_user_meta(espresso_member_data('id'), "espresso_group", TRUE);
 		if ($group != '0' && !empty($group)) {
-
-			$sql = "(SELECT e.id event_id, e.event_name, e.event_identifier, e.reg_limit, e.registration_start, ";
-			$sql .= " e.start_date, e.is_active, e.recurrence_id, e.registration_startT, e.wp_user ";
-
-			//Get the venue information
-			if ($use_venue_manager) {
-				$sql .= ", v.name AS venue_title, v.address AS venue_address, v.address2 AS venue_address2, v.city AS venue_city, v.state AS venue_state, v.zip AS venue_zip, v.country AS venue_country ";
-			} else {
-				$sql .= ", e.venue_title, e.phone, e.address, e.address2, e.city, e.state, e.zip, e.country ";
-			}
-
-			//Get the locale fields
-			if ($use_venue_manager) {
-				$sql .= ", lc.name AS locale_name, e.wp_user ";
-			}
-
-			$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
-
-			//Join the categories
-			if ($today_filter) {
-				$sql .= " JOIN " . EVENTS_CATEGORY_REL_TABLE . " cr ON cr.event_id = e.id ";
-				$sql .= " JOIN " . EVENTS_CATEGORY_TABLE . " c ON  c.id = cr.cat_id ";
-			}
-
-			//Join the venues and locales
-			if (!empty($group) && $use_venue_manager) {
-				$sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " vr ON vr.event_id = e.id ";
-				$sql .= " LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = vr.venue_id ";
-				$sql .= " LEFT JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = vr.venue_id ";
-				$sql .= " LEFT JOIN " . EVENTS_LOCALE_TABLE . " lc ON lc.id = l.locale_id ";
-			}
-
-			//Event status filter
-			$sql .= $event_status !== FALSE && $event_status != 'IA' ? " WHERE e.event_status = '" . $event_status . "' " : " WHERE e.event_status != 'D' ";
-
-			//Category filter
-			$sql .= $category_id !== FALSE ? " AND c.id = '" . $category_id . "' " : '';
-
-			//Find events in the locale
-			$sql .=!empty($group) && $use_venue_manager == true ? " AND l.locale_id IN (" . implode(",", $group) . ") " : '';
-
-			//Month filter
-			if ($month_range !== FALSE) {
-				$sql .= " AND e.start_date BETWEEN '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-' . date('t', strtotime($month_range)))) . "' ";
-			}
-
-			//Todays events filter
-			if ($today_filter) {
-				$sql .= " AND e.start_date = '" . $curdate . "' ";
-			}
-
-			//This months events filter
-			if ($this_month_filter) {
-				$sql .= " AND e.start_date BETWEEN '" . date('Y-m-d', strtotime($this_year_r . '-' . $this_month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($this_year_r . '-' . $this_month_r . '-' . $days_this_month)) . "' ";
-			}
-			$sql .= ") UNION ";
+			$use_group_union = TRUE;
 		}
+	}
+		
+	if ( $use_group_union ) {
+		$sql .= "(SELECT e.id event_id, e.event_name, e.event_identifier, e.registration_start, e.registration_startT, e.registration_end, e.registration_endT, ";
+		$sql .= " e.start_date, e.end_date, e.is_active, e.recurrence_id, e.wp_user, e.event_status, e.reg_limit ";
+
+		//Get the venue information
+		if ($use_venue_manager) {
+			$sql .= ", v.name AS venue_title, v.address AS venue_address, v.address2 AS venue_address2, v.city AS venue_city, v.state AS venue_state, v.zip AS venue_zip, v.country AS venue_country ";
+		} else {
+			$sql .= ", e.venue_title, e.phone, e.address, e.address2, e.city, e.state, e.zip, e.country ";
+		}
+
+		//Get the locale fields
+		if ($use_venue_manager) {
+			$sql .= ", lc.name AS locale_name, e.wp_user ";
+		}
+
+		$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
+
+		//Join the categories
+		if ($today_filter) {
+			$sql .= " JOIN " . EVENTS_CATEGORY_REL_TABLE . " cr ON cr.event_id = e.id ";
+			$sql .= " JOIN " . EVENTS_CATEGORY_TABLE . " c ON  c.id = cr.cat_id ";
+		}
+
+		//Join the venues and locales
+		if (!empty($group) && $use_venue_manager) {
+			$sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " vr ON vr.event_id = e.id ";
+			$sql .= " LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = vr.venue_id ";
+			$sql .= " LEFT JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = vr.venue_id ";
+			$sql .= " LEFT JOIN " . EVENTS_LOCALE_TABLE . " lc ON lc.id = l.locale_id ";
+		}
+		
+		//Event status filter
+		if ( $event_status ) {
+			switch ( $event_status ) {
+				
+				case 'A' : // Active
+				case 'P' : // Pending
+				case 'R' : // Draft
+				case 'S' : // Waitlist
+				case 'O' : // Ongoing
+						$sql .= " WHERE e.is_active = 'Y' AND e.event_status = '" . $event_status . "' ";
+						// and if we are NOT filtering the date in any other way, then only retreive currently running events
+						$sql .=  ! $month_range && ! $today_filter && ! $this_month_filter ? " AND e.end_date >= '" . $curdate . "' " : '';
+					break;
+				
+				case 'IA' : // Inactive
+						$sql .= " WHERE ( e.event_status = '" . $event_status . "' ";
+						// and if we are NOT filtering the date in any other way, then only retreive currently running events
+						$sql .=  ! $month_range && ! $today_filter && ! $this_month_filter ? " OR e.end_date < '" . $curdate . "' ) " : '';
+					break;
+
+				case 'X' : // Denied
+				case 'D' : // Deleted
+						$sql .= " WHERE e.event_status = '" . $event_status . "' ";
+					break;
+
+			}
+		} else {
+			$sql .= " WHERE e.is_active = 'Y' AND e.event_status != 'D' ";
+		}
+
+		//Category filter
+		$sql .= $category_id !== FALSE ? " AND c.id = '" . $category_id . "' " : '';
+
+		//Find events in the locale
+		$sql .=!empty($group) && $use_venue_manager == true ? " AND l.locale_id IN (" . implode(",", $group) . ") " : '';
+
+		//Month filter
+		if ( $month_range ) {
+			$sql .= " AND e.start_date BETWEEN '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-' . date('t', strtotime($month_range)))) . "' ";
+		}
+
+		//Todays events filter
+		if ( $today_filter ) {
+			$sql .= " AND e.start_date = '" . $curdate . "' ";
+		}
+
+		//This months events filter
+		if ( $this_month_filter ) {
+			$sql .= " AND e.start_date BETWEEN '" . date('Y-m-d', strtotime($this_year_r . '-' . $this_month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($this_year_r . '-' . $this_month_r . '-' . $days_this_month)) . "' ";
+		}
+		
+		$sql .= ") UNION (";
 	}
 
 
 
 	//This is the standard query to retrieve the events
-	$sql .= "(SELECT e.id event_id, e.event_name, e.event_identifier, e.reg_limit, e.registration_start, ";
-	$sql .= " e.start_date, e.is_active, e.recurrence_id, e.registration_startT, e.wp_user ";
+	$sql .= "SELECT e.id event_id, e.event_name, e.event_identifier, e.registration_start, e.registration_startT, e.registration_end, e.registration_endT, ";
+	$sql .= " e.start_date, e.end_date, e.is_active, e.recurrence_id, e.wp_user, e.event_status, e.reg_limit ";
 
 	//Get the venue information
 	if ($use_venue_manager) {
@@ -205,7 +236,44 @@ function event_espresso_edit_list() {
 	}
 
 	//Event status filter  // removed: "" && $_REQUEST['event_status'] != 'IA' " since "IA" is one of the possible values for $_REQUEST['event_status'] that we might be filtering for
-	$sql .= ( isset($_REQUEST['event_status']) && ($_REQUEST['event_status'] != '' )) ? " WHERE e.event_status = '" . $_REQUEST['event_status'] . "' " : " WHERE e.event_status != 'D' ";
+//	$sql .= ( isset($_REQUEST['event_status']) && ($_REQUEST['event_status'] != '' )) ? " WHERE e.event_status = '" . $_REQUEST['event_status'] . "' " : " WHERE e.event_status != 'D' ";
+		//Event status filter
+		if ( $event_status ) {
+			switch ( $event_status ) {
+				
+				case 'X' : // Denied
+				case 'D' : // Deleted
+						$sql .= " WHERE e.event_status = '" . $event_status . "' ";
+					break;
+
+				case 'IA' : // Inactive
+						$sql .= " WHERE ( e.event_status = '" . $event_status . "' ";
+						// and if we are NOT filtering the date in any other way, then only retreive currently running events
+						$sql .=  ! $month_range && ! $today_filter && ! $this_month_filter ? " OR e.end_date < '" . $curdate . "' ) " : '';
+					break;
+
+				case 'P' : // Pending
+				case 'R' : // Draft
+				case 'S' : // Waitlist
+				case 'O' : // Ongoing
+				default :
+						$sql .= " WHERE e.is_active = 'Y' AND e.event_status = '" . $event_status . "' ";
+						// and if we are NOT filtering the date in any other way, then only retreive currently running events
+						$sql .=  ! $month_range && ! $today_filter && ! $this_month_filter ? " AND e.end_date >= '" . $curdate . "' " : '';
+					break;
+								
+				case 'L' : // ALL
+						$sql .= " WHERE e.is_active = 'Y' AND e.event_status != 'D' ";
+					break;
+								
+			}
+		} else {
+			// show ACTIVE events
+			$sql .= " WHERE e.is_active = 'Y' AND e.event_status = 'A' ";
+			// and if we are NOT filtering the date in any other way, then only retreive currently running events
+			$sql .=  ! $month_range && ! $today_filter && ! $this_month_filter ? " AND e.end_date >= '" . $curdate . "' " : '';
+		}
+
 
 	//Category filter
 	$sql .= $category_id !== FALSE ? " AND c.id = '" . $category_id . "' " : '';
@@ -231,10 +299,16 @@ function event_espresso_edit_list() {
 		$sql .= " AND e.wp_user = '" . espresso_member_data('id') . "' ";
 	}
 
-	$sql .= ") ORDER BY start_date ASC, event_name ASC ";
+	$sql .= $use_group_union ? ")" : '';
+	
+	$sql .= " ORDER BY start_date ASC, event_name ASC ";
 	$sql .= $records_to_show;
 
-	$events = $wpdb->get_results($sql);
+
+	$events = $wpdb->get_results( $sql, OBJECT_K );
+//	echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+	//printr( $events, '$events  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+	
 	$total_events = $wpdb->num_rows;
 
 	if ( $show_filters ) {
@@ -309,8 +383,16 @@ function event_espresso_edit_list() {
 			<tbody>
 				<?php
 				if ($total_events > 0) {
+					
+					$event_ids = implode( ',', array_keys( $events ));
+					// we're gonna need start times ::  k this is kinda clever
+					// by ordering the list by start time and using OBJECT_K as the return format we automagically only get the start times
+					$sql = 'SELECT event_id, start_time FROM ' . EVENTS_START_END_TABLE . ' WHERE event_id IN ('. $event_ids .') ORDER BY start_time ASC';
+					$start_times = $wpdb->get_results( $sql, OBJECT_K );					
+//					printr( $start_times, '$start_times  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+					
 					foreach ($events as $event) {
-						//print_r ($event);
+						//printr( $event, '$event  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 						$event_id = $event->event_id;
 						$event_name = stripslashes_deep($event->event_name);
 						$event_identifier = stripslashes_deep($event->event_identifier);
@@ -320,7 +402,6 @@ function event_espresso_edit_list() {
 						$end_date = isset($event->end_date) ? $event->end_date : '';
 						$is_active = isset($event->is_active) ? $event->is_active : '';
 						$status = array();
-						$status = event_espresso_get_is_active($event_id);
 						$recurrence_id = isset($event->recurrence_id) ? $event->recurrence_id : '';
 						$registration_startT = isset($event->registration_startT) ? $event->registration_startT : '';
 
@@ -334,6 +415,22 @@ function event_espresso_edit_list() {
 						$venue_title = isset($event->venue_title) ? stripslashes_deep($event->venue_title) : '';
 						$venue_locale = isset($event->locale_name) ? $event->locale_name : '';
 						$wp_user = isset($event->wp_user) ? $event->wp_user : '';
+						
+						$event_meta = array();
+						$event_meta['is_active'] = $is_active;
+						$event_meta['event_status'] = $event->event_status;
+
+						$start_time = $event_meta['start_time'] = isset( $start_times[ $event_id ] ) ? $start_times[ $event_id ]->start_time : '00:00';
+						$event_meta['start_date'] = $start_date;
+
+						$event_meta['registration_start'] = $registration_start;
+						$event_meta['registration_startT'] = $registration_startT;
+
+						$registration_end = $event_meta['registration_end'] = $event->registration_end;
+						$registration_endT = $event_meta['registration_endT'] = $event->registration_endT;
+									
+						$status = event_espresso_get_is_active( $event_id, $event_meta );
+						
 
 
 						$location = (!empty($event_address) ? $event_address : '') . (!empty($event_address2) ? '<br />' . $event_address2 : '') . (!empty($event_city) ? '<br />' . $event_city : '') . (!empty($event_state) ? ', ' . $event_state : '') . (!empty($event_zip) ? '<br />' . $event_zip : '') . (!empty($event_country) ? '<br />' . $event_country : '');
@@ -397,42 +494,14 @@ function event_espresso_edit_list() {
 								</div></td>
 						</tr>
 						<?php
-						//echo $_REQUEST['event_status'];
-						if (!empty($_REQUEST['event_status'])) {
+
 							$content = ob_get_contents();
 							ob_end_clean();
-							switch ($_REQUEST['event_status']) {
-								case 'A':
-									switch (event_espresso_get_status($event_id, empty($event_meta) ? '' : $event_meta)) {
-										case 'NOT_ACTIVE':
-											//Don't show the event if any of the above are true
-											break;
-
-										default:
-											echo $content;
-											break;
-									}
-									break;
-								case 'IA':
-									switch (event_espresso_get_status($event_id)) {
-										case 'NOT_ACTIVE':
-											echo $content;
-											break;
-
-										default:
-											//Don't show the event if any of the above are true
-											break;
-									}
-									break;
-								default:
-									echo $content;
-									break;
-							}
-						}
-					}//End foreach ($events as $event){
-				} else {
-					
-				}
+							echo $content;
+							
+					}
+					//End foreach ($events as $event){						
+				} 
 				?>
 
 			</tbody>
@@ -481,7 +550,7 @@ function event_espresso_edit_list() {
 
 	<script>
 		jQuery(document).ready(function($) {
-			/* show the table data */
+			// show the table data 
 			var mytable = $('#table').dataTable( {
 				"sDom": 'Clfrtip',
 				"aoColumns": [
