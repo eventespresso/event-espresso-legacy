@@ -57,13 +57,18 @@ function ee_core_load_pue_update() {
 	if ( $espresso_check_for_updates == false )
 		return;
 
-	//has optin been selected for datacollection?
-	$espresso_data_optin = get_option('espresso_data_optin');
+	$ueip_optin = get_option('ee_ueip_optin');
+	$ueip_has_notified = get_option('ee_ueip_has_notified');
 
-	if ( empty($espresso_data_optin ) && $espresso_data_optin !== 'no' ) {
+	//has optin been selected for datacollection?
+	$espresso_data_optin = !empty($ueip_optin) ? $ueip_optin : NULL;
+
+	if ( empty($ueip_has_notified) ) {
 		add_action('admin_notices', 'espresso_data_collection_optin_notice');
 		add_action('admin_enqueue_scripts', 'espresso_data_collection_enqueue_scripts' );
 		add_action('wp_ajax_espresso_data_optin', 'espresso_data_optin_ajax_handler');
+		update_option('ee_ueip_optin', 'yes');
+		$espresso_data_optin = 'yes';
 	}
 
 	//let's prepare extra stats
@@ -71,13 +76,18 @@ function ee_core_load_pue_update() {
 
 	//only collect extra stats if the plugin user has opted in.
 	if ( !empty($espresso_data_optin) && $espresso_data_optin == 'yes' ) {
-	
-		//active gateways
-		$active_gateways = get_option('event_espresso_active_gateways');
-		if ( !empty($active_gateways ) ) {
-			foreach ( (array) $active_gateways as $gateway => $ignore ) {
-				$extra_stats[$gateway . '_gateway_active'] = 1;
+		//let's only setup extra data if transient has expired
+		if ( false === ( $transient = get_transient('ee_extra_data') ) ) {
+			//active gateways
+			$active_gateways = get_option('event_espresso_active_gateways');
+			if ( !empty($active_gateways ) ) {
+				foreach ( (array) $active_gateways as $gateway => $ignore ) {
+					$extra_stats[$gateway . '_gateway_active'] = 1;
+				}
 			}
+
+			//set transient
+			set_transient( 'ee_extra_data', $extra_stats, WEEK_IN_SECONDS );
 		}
 	}
 
@@ -105,21 +115,26 @@ function ee_core_load_pue_update() {
  * The purpose of this function is to display information about Event Espresso data collection and a optin selection for extra data collecting by users.
  * @return string html.
  */
+ function espresso_data_collection_optin_text() {
+	 $ueip_has_notified = get_option('ee_ueip_has_notified');
+	 
+	 echo '<h4>'.__('User eXperience Improvement Program (UXIP)', 'event_espresso').'</h4>';
+	 echo sprintf( __('%sPlease help us make Event Espresso better and vote for your favorite features.%s With this version of Event Espresso a feature, called the %sUser eXperience Improvement Program (UXIP)%s, has been implemented to automatically send information to us about how you use our products and services, and support-related data. We use this information to improve our products and features, that you use most often, and to help track problems. Participation in the program is enabled by default, and the end results are software improvements to better meet the needs of our customers. The data we collect will never be sold, traded, or misused in any way. %sPlease see our %sPrivacy Policy%s for more information. You can opt out of this program by changing the %sEvent Espresso > General Settings > UXIP Settings%s within your WordPress General Settings.', 'event_espresso'), '<em>', '</em><br />','<a href="http://eventespresso.com/about/user-experience-improvement-program-uxip/" target="_blank">','</a>','<br><br>','<a href="http://eventespresso.com/about/privacy-policy/" target="_blank">','</a>','<a href="admin.php?page=event_espresso#ueip_optin">','</a>' );
+}
+
 function espresso_data_collection_optin_notice() {
 	?>
 	<div class="updated data-collect-optin" id="espresso-data-collect-optin-container">
-		<p><?php _e('Thank you for using Event Espresso.  The Event Espresso plugin collects data from every installation to verify authorized usage and to enable automatic updates. At the minimum our servers receive from this installation:', 'event_espresso'); ?>
-			<ul>
-				<li><?php _e('Your site-license-key (to verify authorized use for updates)', 'event_espresso'); ?></li>
-				<li><?php _e('The domain of this installation', 'event_espresso'); ?></li>
-				<li><?php _e('The Event Espresso plugins/addons and their version numbers', 'event_espresso', 'event_espresso'); ?></li>
-			</ul>
-		</p>
-		<p><?php _e('Recently, we implemented some code that enables us to collect data that will help us learn how the product is being used and make better decisions on what we need to focus our development time on making better.  However, we this is not enabled by default.  It would help us out tremendously if you will agree to this feature so your Event Espresso install can contribute info that will help us make a better product:', 'event_espresso'); ?></p>
+		<p><?php echo espresso_data_collection_optin_text(); ?></p>
 		<div id="data-collect-optin-options-container">
 			<span style="display: none" id="data-optin-nonce"><?php echo wp_create_nonce('ee-data-optin'); ?></span>
-			<button class="button-primary data-optin-button" value="yes"><?php _e('Yes! I\'m In', 'event_espresso'); ?></button>
-			<button class="button-secondary data-optin-button" value="no"><?php _e('No', 'event_espresso'); ?></button>
+			<?php
+			if ( empty($ueip_has_notified) ) {
+				echo '<a href="admin.php?page=event_espresso#ueip_optin">'.__('Opt-out now?', 'event_espresso').'</a>';
+			}
+			?>
+			<button class="button-secondary data-optin-button" value="no"><?php _e('Dismiss', 'event_espresso'); ?></button>
+			<!--<button class="button-primary data-optin-button" value="yes"><?php _e('Yes! I\'m In', 'event_espresso'); ?></button>-->
 			<div style="clear:both"></div>
 		</div>
 	</div>
@@ -146,13 +161,15 @@ function espresso_data_collection_enqueue_scripts() {
  * @return void
  */
 function espresso_data_optin_ajax_handler() {
+
 	//verify nonce
 	if ( isset($_POST['nonce']) && !wp_verify_nonce($_POST['nonce'], 'ee-data-optin') ) exit();
 
 	//made it here so let's save the selection
-	$selection = isset( $_POST['selection'] ) ? $_POST['selection'] : 'no';
+	$ueip_optin = isset( $_POST['selection'] ) ? $_POST['selection'] : 'no';
 
-	update_option('espresso_data_optin', $selection);
+	//update_option('ee_ueip_optin', $ueip_optin);
+	update_option('ee_ueip_has_notified', 1);
 	exit();
 }
 

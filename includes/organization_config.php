@@ -50,6 +50,7 @@ function organization_config_mnu() {
 		$org_options['affiliate_id'] = isset($_POST['affiliate_id']) && !empty($_POST['affiliate_id']) ? $_POST['affiliate_id'] : '';
 		$org_options['site_license_key'] = isset($_POST['site_license_key']) && !empty($_POST['site_license_key']) ? $_POST['site_license_key'] : '';
 		$org_options['default_payment_status'] = isset($_POST['default_payment_status']) && !empty($_POST['default_payment_status']) ? $_POST['default_payment_status'] : '';
+		$ueip_optin = isset($_POST['ueip_optin']) && !empty($_POST['ueip_optin']) ? $_POST['ueip_optin'] : 'yes';
 		
 		$org_options['default_logo_url'] = isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ? $_REQUEST['upload_image'] : '';
 			 
@@ -116,10 +117,12 @@ function organization_config_mnu() {
 		  $org_options['currency_symbol'] = 'Euro: '; //Creates the symbol for the Euro
 		  } */
 		update_option('events_organization_settings', $org_options);
+		update_option('ee_ueip_optin', $ueip_optin);
 		echo '<div id="message" class="updated fade"><p><strong>' . __('Organization details saved.', 'event_espresso') . '</strong></p></div>';
 	}
 
 	$org_options = get_option('events_organization_settings');
+	$ueip_optin = get_option('ee_ueip_optin');
 	$values = array(
 			array('id' => 'Y', 'text' => __('Yes', 'event_espresso')),
 			array('id' => 'N', 'text' => __('No', 'event_espresso')));
@@ -615,6 +618,42 @@ function organization_config_mnu() {
 											</ul>
 											<p>
 												<input class="button-primary" type="submit" name="Submit" value="<?php _e('Save Options', 'event_espresso'); ?>" id="save_organization_saetting_5" />
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li><a name="ueip_optin" id="ueip_optin"></a>
+							<div class="metabox-holder">
+								<div class="postbox">
+									<div title="Click to toggle" class="handlediv"><br />
+									</div>
+									<h3 class="hndle">
+		<?php _e('UXIP Settings', 'event_espresso'); ?>
+									</h3>
+									<div class="inside">
+										<div class="padding">
+											<p>
+												<?php echo espresso_data_collection_optin_text(); ?>	
+											</p>
+											<ul>
+												<li>
+													<label for="ueip_optin">
+		<?php _e('Yes! I\'m In:', 'event_espresso'); ?>
+													</label>
+													<?php 
+													$values=array(					
+													array('id'=>'yes','text'=> __('Yes','event_espresso')),
+													array('id'=>'no','text'=> __('No','event_espresso'))
+												);
+													echo select_input('ueip_optin', $values, !empty($ueip_optin) ? $ueip_optin : 'yes');
+													?>
+												</li>
+
+											</ul>
+											<p>
+												<input class="button-primary" type="submit" name="Submit" value="<?php _e('Save Options', 'event_espresso'); ?>" id="save_organization_saetting_6" />
 											</p>
 										</div>
 									</div>
