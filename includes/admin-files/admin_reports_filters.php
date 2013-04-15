@@ -40,7 +40,6 @@ function espresso_display_month_category_status_filters() {
 					<?php _e('View Report', 'event_espresso'); ?>
 				</a></li>
 		<?php } ?>
-		<?php /* ?><li> | <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=attendee_filter_info" title="<?php _e('Numbers not matching up?', 'event_espresso'); ?>"><?php echo '<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/question-frame.png" width="16" height="16" />'; ?></a></li><?php */ ?>
 	</ul>
 	<div style="clear:both"></div>
 	<?php
@@ -104,7 +103,14 @@ function espresso_display_ee_tablenav () {
 				<input type="submit" class="button-secondary" value="Filter Category" id="post-query-category">
 			<?php }
 			//Payment status drop down
-			$status = array(array('id' => '', 'text' => __('Show All Completed/Incomplete', 'event_espresso')), array('id' => 'Completed', 'text' => __('Completed', 'event_espresso')), array('id' => 'Pending', 'text' => __('Pending', 'event_espresso')), array('id' => 'Incomplete', 'text' => __('Incomplete', 'event_espresso')), array('id' => 'Payment Declined', 'text' => __('Payment Declined', 'event_espresso')), array('id' => 'Refund', 'text' => __('Refund', 'event_espresso')));
+			$status = array(
+				array('id' => '', 'text' => __('Show All Completed/Incomplete', 'event_espresso')), 
+				array('id' => 'Completed', 'text' => __('Completed', 'event_espresso')), 
+				array('id' => 'Pending', 'text' => __('Pending', 'event_espresso')), 
+				array('id' => 'Incomplete', 'text' => __('Incomplete', 'event_espresso')), 
+				array('id' => 'Payment Declined', 'text' => __('Payment Declined', 'event_espresso')), 
+				array('id' => 'Refund', 'text' => __('Refund', 'event_espresso'))
+			);
 
 			echo select_input('payment_status', $status, isset($_REQUEST['payment_status']) ? $_REQUEST['payment_status'] : '');
 			?>
@@ -129,7 +135,17 @@ function espresso_display_ee_tablenav () {
 				<input type="submit" class="button-secondary" value="Filter Category" id="post-query-submit">
 			<?php }?>
 			<?php
-			$status = array(array('id' => '', 'text' => __('Show Active/Inactive', 'event_espresso')), array('id' => 'A', 'text' => __('Active', 'event_espresso')), array('id' => 'IA', 'text' => __('Inactive', 'event_espresso')), array('id' => 'P', 'text' => __('Pending', 'event_espresso')), array('id' => 'R', 'text' => __('Draft', 'event_espresso')), array('id' => 'S', 'text' => __('Waitlist', 'event_espresso')), array('id' => 'O', 'text' => __('Ongoing', 'event_espresso')), array('id' => 'X', 'text' => __('Denied', 'event_espresso')), array('id' => 'D', 'text' => __('Deleted', 'event_espresso')));
+			$status = array(
+				array('id' => 'A', 'text' 	=> __('Active', 'event_espresso')), 
+				array('id' => 'L', 'text'		=> __('Show Active/Inactive', 'event_espresso')), 
+				array('id' => 'IA', 'text' 	=> __('Inactive', 'event_espresso')), 
+				array('id' => 'P', 'text' 	=> __('Pending', 'event_espresso')), 
+				array('id' => 'R', 'text' 	=> __('Draft', 'event_espresso')), 
+				array('id' => 'S', 'text' 	=> __('Waitlist', 'event_espresso')), 
+				array('id' => 'O', 'text' 	=> __('Ongoing', 'event_espresso')), 
+				array('id' => 'X', 'text' 	=> __('Denied', 'event_espresso')), 
+				array('id' => 'D', 'text' 	=> __('Deleted', 'event_espresso'))
+			);
 
 			if (empty($_REQUEST['event_status'])) {
 				$_REQUEST['event_status'] = '';
@@ -173,25 +189,27 @@ function espresso_display_ee_pagination ( $total = 0 ) {
 		$prev_start_rec = $start_rec - $max_rows;
 		$next_start_rec = $start_rec + $max_rows;
 		
-		//show db-leve pagination buttons
-		if ($prev_start_rec >= 0) {
+		//show db-level pagination buttons
+		if ( $prev_start_rec >= 0 ) {
 			?>
 			<a id="event-admin-load-prev-rows-btn" title="load prev rows" class="event-pagination-button button-secondary">
 				<?php echo __('Previous', 'event_espresso') . ' ' . $max_rows . ' ' . __('rows', 'event_espresso'); ?>
 			</a>
 		<?php
-		}
-		//we make a lazy assumption here: if we have a limit of 50 rows, and the last query got 50, then we probably have more to sho won the next page
-		//this is always right except when there were exactly only 50 rows remainign to fetch.
-		//oh well
-		if ($max_rows == $total) { ?>	
+		} 
+
+		if ( $total >= $max_rows) {
+		?>	
 			<a  id="event-admin-load-next-rows-btn"  title="load next rows" class="event-pagination-button button-secondary">
 				<?php echo __('Next', 'event_espresso') . ' ' . $max_rows . ' ' . __('rows', 'event_espresso'); ?>				
 			</a> 
 		<?php } ?>
 		
 	</div>
+	
 	<?php
+//	echo '<h4>$max_rows : ' . $max_rows . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//	echo '<h4>$total : ' . $total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 	//setup jquery for previous and next buttons, 
 	//but don't output them here.
 	//we actually don't know if we want them both yet anyways
@@ -199,8 +217,8 @@ function espresso_display_ee_pagination ( $total = 0 ) {
 	//the query hasn't been run yet. (Hence why its nice to setup all your variables FIRST and then start outputting
 	//although sometimes it requires some work and discipline
 	//anyways, to output the previous/next buttons, just have some HTML like
-	//<a href='javascript: return false;' id='event-admin-load-prev-rows-btn'>Previous</a>
-	//<a href='javascript: return false;' id='event-admin-load-next-rows-btn'>Previous</a>
+	//<a id='event-admin-load-prev-rows-btn'>Previous</a>
+	//<a id='event-admin-load-next-rows-btn'>Previous</a>
 	//and it can be placed anywher ein the page
 	?>
 	<script>
@@ -214,6 +232,9 @@ function espresso_display_ee_pagination ( $total = 0 ) {
 				event_set_start_rec_and_send_form(<?php echo $next_start_rec ?>);
 			});
 			jQuery('#ee_tablenav input').click(function(){
+				event_reset_start_rec();
+			});			
+			jQuery('#ee_table_pagination button').click(function(){
 				event_reset_start_rec();
 			});
 			
