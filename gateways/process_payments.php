@@ -91,6 +91,7 @@ add_filter('filter_hook_espresso_get_total_cost', 'espresso_get_total_cost');
  * payment_date
  */
 function espresso_update_attendee_payment_status_in_db($payment_data) {
+//	echo '<h3>'. __CLASS__ . '->' . __FUNCTION__ . ' <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h3>';
 	global $wpdb;
 	
 	$payment_data['payment_date'] = date(get_option('date_format'));
@@ -111,6 +112,13 @@ function espresso_update_attendee_payment_status_in_db($payment_data) {
 			$payment_data['txn_details'],
 			$payment_data['attendee_session']
 	)));
+//	echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//	$wpdb->insert( 
+//		EVENTS_ATTENDEE_TABLE, 
+//		array(  'registration_id' => __LINE__,  'lname' =>basename( __FILE__ ),  'fname' => __FUNCTION__ ), 
+//		array(  '%s',  '%s',  '%s'  ) 
+//	);	
+//	echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 	
 	do_action('action_hook_espresso_track_successful_sale',$payment_data);
 	
@@ -138,8 +146,12 @@ function espresso_prepare_event_link($payment_data) {
 	}
 	return $payment_data;
 }
-
 add_filter('filter_hook_espresso_prepare_event_link', 'espresso_prepare_event_link');
+
+
+
+
+
 
 function event_espresso_txn() {
 
@@ -194,6 +206,10 @@ function event_espresso_txn() {
 	
 }
 
+
+
+
+
 function deal_with_ideal() {
 	if (!empty($_POST['bank_id'])) {
 		$active_gateways = get_option('event_espresso_active_gateways', array());
@@ -206,8 +222,11 @@ function deal_with_ideal() {
 		}
 	}
 }
-
 add_action('action_hook_espresso_transaction', 'deal_with_ideal',99);//just before espresso_txn
+
+
+
+
 
 function espresso_email_after_payment($payment_data) {
 	global $org_options;
@@ -218,6 +237,11 @@ function espresso_email_after_payment($payment_data) {
 		}
 	}
 }
+
+
+
+
+
 // Needed for WorldPay processing
 if ( isset( $_POST[ 'name' ] ) && isset( $_POST[ 'MC_type'] ) && 'worldpay' == $_POST[ 'MC_type' ] ) {
 	$_POST['_name'] = $_POST['name'];
