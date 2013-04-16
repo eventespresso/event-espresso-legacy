@@ -1,12 +1,16 @@
 <?php
 
 function espresso_display_quickpay($payment_data) {
+	//echo '<h3>'. __CLASS__ . '->' . __FUNCTION__ . ' <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h3>';
 	extract($payment_data);
 	global $wpdb, $org_options;
 	$quickpay_settings = get_option('event_espresso_quickpay_settings');
 	$sessionid = $_SESSION['espresso_session']['id'];
 	$ordernumber = $registration_id;
-	$transaction_id = uniqid(md5(rand(1, 666)), true); // Set the transaction id to a unique value for reference in the system.
+	// Set the transaction id to a unique value for reference in the system.
+	$transaction_id = uniqid(md5(rand(1, 666)), true); 
+	// truncate to 45 chars to fit db field
+	$transaction_id = substr( $transaction_id, 0, 45 );
 	$button_url = $quickpay_settings['button_url'];
 	$md5secret = $quickpay_settings['quickpay_md5secret'];
 	$payurl = "https://secure.quickpay.dk/form/";
@@ -52,10 +56,29 @@ function espresso_display_quickpay($payment_data) {
 			}
 		}
 	}
-	$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET
-				txn_id = '" . md5($transaction_id . $md5secret) . "'
-				WHERE id='" . $attendee_id . "' ";
-	$wpdb->query($sql);
+	
+//	echo '<h4>$transaction_id : ' . $transaction_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//	echo '<h4>$md5secret : ' . $md5secret . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//	echo '<h4>md5 B4 save 2DB : ' . md5( $transaction_id . $md5secret ) . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+
+
+	$wpdb->update( 
+		EVENTS_ATTENDEE_TABLE, 
+		array( 'txn_id' => $transaction_id ), 
+		array( 'id' => $attendee_id ), 
+		array( '%s' ),
+		array( '%d' ) 
+	);
+//	echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//	
+//	$wpdb->insert( 
+//		EVENTS_ATTENDEE_TABLE, 
+//		array(  'registration_id' => __LINE__,  'lname' =>basename( __FILE__ ),  'fname' => __FUNCTION__ ), 
+//		array(  '%s',  '%s',  '%s'  ) 
+//	);	
+//	echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+	
+	
 	$amount = number_format($amount, 2, '', '');
 	$currency = $quickpay_settings['quickpay_currency'];
 
