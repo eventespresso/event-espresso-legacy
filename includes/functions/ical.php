@@ -23,7 +23,7 @@ function espresso_ical() {
 					//"DESCRIPTION:" . $_REQUEST['event_description'] . "\n" .
 						"LOCATION:" . $_REQUEST['location'] . "\n" .
 					"END:VEVENT\n" .
-					"END:VCALENDAR";
+					"END:VCALENDAR\n";
 		if (ob_get_length()){
 		echo('Some data has already been output, can\'t send iCal file');
 		}
@@ -32,12 +32,12 @@ function espresso_ical() {
 		echo('Some data has already been output, can\'t send iCal file');
 		}
 	header('Content-Length: ' . strlen($output));
-	header('Content-Disposition: inline; filename="' . $name . '"');
-	header('Cache-Control: private, max-age=0, must-revalidate');
-	header('Pragma: public');
-	header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
-	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
-	ini_set('zlib.output_compression', '0');
+	header('Content-Disposition: inline; filename="' .$name . '"');
+	//header('Cache-Control: private, max-age=0, must-revalidate');
+	//header('Pragma: public');
+	//header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+	//header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+	//ini_set('zlib.output_compression', '0');
 	echo $output;
 	die();
 }
@@ -99,7 +99,7 @@ if (!function_exists('espresso_ical_prepare_by_meta')) {
 			'location' => str_replace(array('<br>','<br />'), ' ', $meta['location']),
 		);
 		$url = add_query_arg( $array, site_url() );
-		$html = '<a  href="' . wp_kses($url, '') . '" target="_blank" id="espresso_ical_' . $meta['event_id'] . '" class="espresso_ical_link" title="' . $title . '">' . $image . '</a>';
+		$html = '<a  href="' . wp_kses($url, '') . '" id="espresso_ical_' . $meta['event_id'] . '" class="espresso_ical_link" title="' . $title . '">' . $image . '</a>';
 		return $html;
 	}
 }
