@@ -616,6 +616,12 @@ function organization_config_mnu() {
 												</li>
 
 											</ul>
+											<p class="description">
+												<?php _e('Adding a valid Support License Key will enable automatic update notifications and backend updates for Event Espresso Core and any installed addons.'); ?>
+											</p>
+											<p>
+												<?php _e('If this is a development or test site, please <strong>DO NOT</strong> enter your Support License Key. Save it for the live production site, otherwise you will unnecessarily run into issues with needing to have your Key reset.', 'event_espresso'); ?>
+											</p>
 											<p>
 												<input class="button-primary" type="submit" name="Submit" value="<?php _e('Save Options', 'event_espresso'); ?>" id="save_organization_saetting_5" />
 											</p>
