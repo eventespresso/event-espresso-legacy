@@ -1122,24 +1122,29 @@ function espresso_check_data_tables() {
 	$scripts_to_run = array();
 	// if we don't need them, don't load them
 	$load_data_migration_scripts = FALSE;
-	
-	if ( ! empty( $existing_data_migrations )) {
-	
+	// have we already performed some data migrations ?
+	if ( ! empty( $existing_data_migrations )) {	
 		// loop through all previous migrations
 		foreach ( $existing_data_migrations as $ver => $migrations ) {
+			// ensure that migrations is an array, then loop thru it
 			$migrations = is_array( $migrations ) ? $migrations : array( $migrations );
-			foreach ( $migrations as $migration_func => $errors_array ) {
+			foreach ( $migrations as $key => $value ) {
+				// check format of $key
+				if ( is_numeric( $key )) {
+					// numeric key means that it is NOT the callback function
+					// therefore the callback function is the value
+					$migration_func = $value;
+					$errors_array = array();
+				} else {
+					// callback function is the key
+					$migration_func = $key;
+					$errors_array = $value;
+				}
 				// make sure they have been executed
 				if ( ! in_array( $migration_func, $espresso_data_migrations )) {		
 					// ok NOW load the scripts
 					$load_data_migration_scripts = TRUE;
-					if ( is_array( $errors_array )) {
-						$scripts_to_run[ $migration_func ] = $migration_func;
-					} else {
-						// older format, so $errors_array is actually the callback function
-						$scripts_to_run[ $errors_array ] = $errors_array;
-					}
-					
+					$scripts_to_run[ $migration_func ] = $migration_func;
 				} 
 			}
 		}		
@@ -1150,11 +1155,13 @@ function espresso_check_data_tables() {
 	}
 	
 
-	if ( $load_data_migration_scripts ) {
+	if ( $load_data_migration_scripts && ! empty( $scripts_to_run )) {
 		require_once( 'includes/functions/data_migration_scripts.php' );		
 		// run the appropriate migration script
 		foreach( $scripts_to_run as $migration_func ) {
-			call_user_func( $migration_func );		
+			if ( function_exists( $migration_func )) {
+				call_user_func( $migration_func );
+			}		
 		}
 	}
 
