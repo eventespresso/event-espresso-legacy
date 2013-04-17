@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.32.B.2
+  Version: 3.1.32.B.3
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,7 +32,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.32.B.2';
+	return '3.1.32.B.3';
 }
 
 //This tells the system to check for updates to the paid version
@@ -1034,7 +1034,7 @@ function espresso_export_ticket() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	//Version 2.0
 	if (isset($_REQUEST['ticket_launch']) && $_REQUEST['ticket_launch'] == 'true') {
-		echo espresso_ticket_launch($_REQUEST['id'], $_REQUEST['r_id']);
+		echo espresso_ticket_launch( ee_sanitize_value( absint($_REQUEST['id'])), ee_sanitize_value($_REQUEST['r_id']) );
 	}
 	//End Version 2.0
 	
