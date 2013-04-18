@@ -7,34 +7,86 @@ function espresso_transactions_quickpay_get_attendee_id($attendee_id) {
 }
 
 function espresso_process_quickpay($payment_data) {
-//	echo '<h3>'. __CLASS__ . '->' . __FUNCTION__ . ' <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h3>';
-//	printr( $_REQUEST, '$_REQUEST  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-	global $wpdb;
-	$payment_data['txn_details'] = serialize($_REQUEST);
-	$payment_data['txn_id'] = trim(stripslashes($_GET['transaction_id']));
-	$payment_data['txn_type'] = 'QuickPay';
-	$payment_data['payment_status'] = 'Incomplete';
+	
 	$quickpay_settings = get_option('event_espresso_quickpay_settings');
-	$sql = "SELECT txn_id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id=%d";
-	$txn_id = $wpdb->get_var( $wpdb->prepare( $sql, $payment_data['attendee_id'] ));
-//	echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//	$wpdb->insert( 
-//		EVENTS_ATTENDEE_TABLE, 
-//		array(  'registration_id' => __LINE__,  'lname' =>basename( __FILE__ ),  'fname' => __FUNCTION__ ), 
-//		array(  '%s',  '%s',  '%s'  ) 
-//	);	
-//	echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
-	if ($_GET['chronopay_callback'] == 'true') {
-		$sessionid = trim(stripslashes($_GET['sessionid']));
-//		echo '<h4>txn_id from QP: ' . $payment_data['txn_id'] . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//		echo '<h4>md5secret from QP: ' . $quickpay_settings['quickpay_md5secret'] . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//		echo '<h4>md5 from QP: ' . md5($payment_data['txn_id'] . $quickpay_settings['quickpay_md5secret']). '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//		echo '<h4>txn_id from DB : ' . $txn_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-		if ( md5( $payment_data['txn_id'] . $quickpay_settings['quickpay_md5secret'] ) ==  md5( $txn_id . $quickpay_settings['quickpay_md5secret'] )) {
-			$payment_data['payment_status'] = 'Completed';
-		}
+	$msgtype		= isset( $_POST['msgtype'] ) ? sanitize_text_field( $_POST['msgtype'] ) : '';
+	$ordernumber	= isset( $_POST['ordernumber'] ) ? sanitize_text_field( $_POST['ordernumber'] ) : '';
+	$amount 		= isset( $_POST['amount'] ) ? sanitize_text_field( $_POST['amount'] ) : '';
+	$currency 		= isset( $_POST['currency'] ) ? sanitize_text_field( $_POST['currency'] ) : '';
+	$time	 		= isset( $_POST['time'] ) ? sanitize_text_field( $_POST['time'] ) : '';
+	$state			= isset( $_POST['state'] ) ? sanitize_text_field( $_POST['state'] ) : '';
+	$qpstat			= isset( $_POST['qpstat'] ) ? sanitize_text_field( $_POST['qpstat'] ) : '';
+	$qpstatmsg		= isset( $_POST['qpstatmsg'] ) ? sanitize_text_field( $_POST['qpstatmsg'] ) : '';
+	$chstat 		= isset( $_POST['chstat'] ) ? sanitize_text_field( $_POST['chstat'] ) : '';
+	$chstatmsg		= isset( $_POST['chstatmsg'] ) ? sanitize_text_field( $_POST['chstatmsg'] ) : '';
+	$merchant		= isset( $_POST['merchant'] ) ? sanitize_text_field( $_POST['merchant'] ) : '';
+	$merchantemail	= isset( $_POST['merchantemail'] ) ? sanitize_text_field( $_POST['merchantemail'] ) : '';
+	$transaction	= isset( $_POST['transaction'] ) ? sanitize_text_field( $_POST['transaction'] ) : '';
+	$cardtype		= isset( $_POST['cardtype'] ) ? sanitize_text_field( $_POST['cardtype'] ) : '';
+	$cardnumber		= isset( $_POST['cardnumber'] ) ? sanitize_text_field( $_POST['cardnumber'] ) : '';
+	
+	// concatenate above values,  add our SECRET QUIICKPAY SALT value, then  md5 the whole thing
+	$response_md5_check = md5( $msgtype . $ordernumber . $amount . $currency . $time . $state . $qpstat . $qpstatmsg . $chstat . $chstatmsg . $merchant . $merchantemail . $transaction . $cardtype . $cardnumber . $quickpay_settings['quickpay_md5secret'] );
+	
+	// if our md5 check value matches QuickPay's md5 check value, then nobody haxor'd  the data
+	// oh... and the TXN also has to have been approved
+	if ( $_POST['md5check'] == $response_md5_check && $qpstat == '000' ) {
+		$payment_data['amount_pd'] 			= number_format( (float)$amount/100, 2 );
+		$payment_data['payment_status'] 	= 'Completed';
+	} else {
+		$payment_data['amount_pd'] 			= 0.00;
 	}
-	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	
+	$payment_data['txn_type'] 	= $cardtype;
+	$payment_data['txn_id'] 	= $transaction;
+	$payment_data['txn_details'] = serialize( $_POST );
+
 	return $payment_data;
+
 }
+
+
+function espresso_verify_quickpay_status_code( $code = FALSE ) {
+	// can't verify something if you don't send it to us!!
+	if ( ! $code ) {
+		return FALSE;
+	}
+	
+	$quickpay_status_codes = array(
+		'000' => 'Approved.',
+		'001' => "Rejected by acquirer. See field 'chstat' and 'chstatmsg' for further explanation.",
+		'002' => 'Communication error.',
+		'003' => 'Card expired.',
+		'004' => 'Transition is not allowed for transaction current state.',
+		'005' => 'Authorization is expired.',
+		'006' => 'Error reported by acquirer.',
+		'007' => 'Error reported by QuickPay.',
+		'008' => 'Error in request data.',
+		'009' => 'Payment aborted by shopper'
+	);	
+	$is_quickpay_status_code = array_key_exists( $code, $quickpay_status_codes );
+	return $is_quickpay_status_code;	 
+}
+
+// EXAMPLE OF POST DATA RETURNED FROM QUICKPAY
+/*
+a:16:{
+	s:7:"msgtype";s:7:"capture";
+	s:11:"ordernumber";s:15:"2-516ef44e2067f";
+	s:6:"amount";s:4:"9995";
+	s:8:"currency";s:3:"USD";
+	s:4:"time";s:12:"130417211330";
+	s:5:"state";s:1:"3";
+	s:6:"qpstat";s:3:"000";
+	s:9:"qpstatmsg";s:2:"OK";
+	s:6:"chstat";s:3:"000";
+	s:9:"chstatmsg";s:2:"OK";
+	s:8:"merchant";s:19:"Quickpay Test konto";
+	s:13:"merchantemail";s:17:"demo@quickpay.net";
+	s:11:"transaction";s:8:"58226954";
+	s:8:"cardtype";s:13:"mastercard-dk";
+	s:10:"cardnumber";s:16:"XXXXXXXXXXXX0005";
+	s:8:"md5check";s:32:"2d3216fc431ec95737b78a87ad3d8e3b";
+} 
+*/

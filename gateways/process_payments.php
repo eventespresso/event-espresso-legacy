@@ -98,27 +98,29 @@ function espresso_update_attendee_payment_status_in_db($payment_data) {
 
 	$payment = $payment_data['payment_status'] == "Completed" ? $payment_data['total_cost'] : 0.00;
 
-	$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET amount_pd = '%f' WHERE id ='%d' ";
-	$wpdb->query( $wpdb->prepare( $SQL, $payment, $payment_data['attendee_id'] ));
+	$wpdb->update( 
+		EVENTS_ATTENDEE_TABLE, 
+		array( 'amount_pd' => $payment ), 
+		array( 'id' => $payment_data['attendee_id'] ), 
+		array( '%f' ),
+		array( '%d' ) 
+	);
 	
-	$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . " ";
-	$SQL .= "SET payment_status = '%s', txn_type = '%s', txn_id = '%s', payment_date ='%s', transaction_details = '%s' ";
-	$SQL .= "WHERE attendee_session ='%s' ";
-	$wpdb->query($wpdb->prepare( $SQL, array(	
-			$payment_data['payment_status'],
-			$payment_data['txn_type'],
-			$payment_data['txn_id'],
-			$payment_data['payment_date'],
-			$payment_data['txn_details'],
-			$payment_data['attendee_session']
-	)));
-//	echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//	$wpdb->insert( 
-//		EVENTS_ATTENDEE_TABLE, 
-//		array(  'registration_id' => __LINE__,  'lname' =>basename( __FILE__ ),  'fname' => __FUNCTION__ ), 
-//		array(  '%s',  '%s',  '%s'  ) 
-//	);	
-//	echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+	$payment_data['txn_details'] = empty( $payment_data['txn_details'] ) ? serialize( $_REQUEST ) : $payment_data['txn_details']; 
+	
+	$wpdb->update( 
+		EVENTS_ATTENDEE_TABLE, 
+		array( 
+			'payment_status' 		=> $payment_data['payment_status'],
+			'txn_type' 					=> $payment_data['txn_type'],
+			'txn_id' 						=> $payment_data['txn_id'],
+			'payment_date' 		=> $payment_data['payment_date'],
+			'transaction_details' 	=> $payment_data['txn_details']
+		), 
+		array( 'attendee_session' => $payment_data['attendee_session'] ), 
+		array( '%s', '%s', '%s', '%s', '%s' ),
+		array( '%s' ) 
+	);	
 	
 	do_action('action_hook_espresso_track_successful_sale',$payment_data);
 	
@@ -172,6 +174,7 @@ function event_espresso_txn() {
 		event_espresso_require_gateway($gateway . "/init.php");
 	}
 	$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
+	
 	if ($payment_data['attendee_id'] == "") {
 		echo "ID not supplied.";
 	} else {
