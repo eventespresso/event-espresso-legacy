@@ -109,7 +109,7 @@ function event_espresso_edit_list() {
 		
 	if ( $use_group_union ) {
 		$sql .= "(SELECT e.id event_id, e.event_name, e.event_identifier, e.registration_start, e.registration_startT, e.registration_end, e.registration_endT, ";
-		$sql .= " e.start_date, e.end_date, e.is_active, e.recurrence_id, e.wp_user, e.event_status, e.reg_limit ";
+		$sql .= " e.start_date, e.end_date, e.is_active, e.recurrence_id, e.wp_user, e.event_status, e.reg_limit, t.start_time ";
 
 		//Get the venue information
 		if ($use_venue_manager) {
@@ -124,9 +124,11 @@ function event_espresso_edit_list() {
 		}
 
 		$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
+		
+		$sql .= " JOIN " . EVENTS_START_END_TABLE . " t ON t.event_id = e.id ";
 
 		//Join the categories
-		if ($today_filter) {
+		if ($category_id != FALSE) {
 			$sql .= " JOIN " . EVENTS_CATEGORY_REL_TABLE . " cr ON cr.event_id = e.id ";
 			$sql .= " JOIN " . EVENTS_CATEGORY_TABLE . " c ON  c.id = cr.cat_id ";
 		}
@@ -197,7 +199,7 @@ function event_espresso_edit_list() {
 
 	//This is the standard query to retrieve the events
 	$sql .= "SELECT e.id event_id, e.event_name, e.event_identifier, e.registration_start, e.registration_startT, e.registration_end, e.registration_endT, ";
-	$sql .= " e.start_date, e.end_date, e.is_active, e.recurrence_id, e.wp_user, e.event_status, e.reg_limit ";
+	$sql .= " e.start_date, e.end_date, e.is_active, e.recurrence_id, e.wp_user, e.event_status, e.reg_limit, t.start_time ";
 
 	//Get the venue information
 	if ($use_venue_manager) {
@@ -215,6 +217,8 @@ function event_espresso_edit_list() {
 	}
 
 	$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
+	
+	$sql .= " JOIN " . EVENTS_START_END_TABLE . " t ON t.event_id = e.id ";
 
 	//Join the categories
 	if ( $category_id != FALSE ) {
@@ -399,6 +403,7 @@ function event_espresso_edit_list() {
 						$reg_limit = isset($event->reg_limit) ? $event->reg_limit : '';
 						$registration_start = isset($event->registration_start) ? $event->registration_start : '';
 						$start_date = isset($event->start_date) ? $event->start_date : '';
+						$start_time = isset($event->start_time) ? $event->start_time : '';
 						$end_date = isset($event->end_date) ? $event->end_date : '';
 						$is_active = isset($event->is_active) ? $event->is_active : '';
 						$status = array();
@@ -431,6 +436,13 @@ function event_espresso_edit_list() {
 									
 						$status = event_espresso_get_is_active( $event_id, $event_meta );
 						
+						//Get number of attendees
+						$num_attendees = 0;
+						$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id=%d AND (payment_status='Completed' OR payment_status='Pending' OR payment_status='Refund') ";
+						$wpdb->get_results( $wpdb->prepare( $a_sql, $event_id ), ARRAY_A);
+						if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
+							$num_attendees = $wpdb->last_result[0]->quantity;
+						}
 
 
 						$location = (!empty($event_address) ? $event_address : '') . (!empty($event_address2) ? '<br />' . $event_address2 : '') . (!empty($event_city) ? '<br />' . $event_city : '') . (!empty($event_state) ? ', ' . $event_state : '') . (!empty($event_zip) ? '<br />' . $event_zip : '') . (!empty($event_country) ? '<br />' . $event_country : '');
@@ -452,7 +464,7 @@ function event_espresso_edit_list() {
 
 							<td class="author"><?php echo event_date_display($start_date, get_option('date_format')) ?></td>
 
-							<td class="author"><?php echo event_espresso_get_time($event_id, 'start_time') ?></td>
+							<td class="author"><?php echo $start_time ?></td>
 
 							<td class="date"><?php echo $dow ?></td>
 
@@ -472,7 +484,7 @@ function event_espresso_edit_list() {
 								</td>
 			<?php } ?>
 
-							<td class="author"><a href="admin.php?page=events&amp;event_admin_reports=list_attendee_payments&amp;event_id=<?php echo $event_id ?>"><?php echo get_number_of_attendees_reg_limit($event_id, 'num_attendees_slash_reg_limit'); ?></a></td>
+							<td class="author"><a href="admin.php?page=events&amp;event_admin_reports=list_attendee_payments&amp;event_id=<?php echo $event_id ?>"><?php echo $num_attendees . '/' . $reg_limit; ?></a></td>
 							<td class="date"><div style="width:180px;"><a href="<?php echo espresso_reg_url($event_id); ?>" title="<?php _e('View Event', 'event_espresso'); ?>" target="_blank"><div class="view_btn"></div></a>
 
 									<a href="admin.php?page=events&amp;action=edit&amp;event_id=<?php echo $event_id ?>" title="<?php _e('Edit Event', 'event_espresso'); ?>"><div class="edit_btn"></div></a>
