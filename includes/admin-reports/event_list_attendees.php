@@ -10,6 +10,7 @@ function event_list_attendees() {
 		echo '<h1>'.espresso_event_list_attendee_title( $EVT_ID ).'</h1>'; 
 	}	
 
+	$event_status = isset( $_REQUEST['event_status'] ) & ! empty( $_REQUEST['event_status'] ) ? sanitize_text_field( $_REQUEST['event_status'] ) : FALSE;
 	$max_rows = isset( $_REQUEST['max_rows'] ) & ! empty( $_REQUEST['max_rows'] ) ? absint( $_REQUEST['max_rows'] ) : 50;
 	$start_rec = isset( $_REQUEST['start_rec'] ) && ! empty($_REQUEST['start_rec']) ? absint( $_REQUEST['start_rec'] ) : 0;
 	$records_to_show = " LIMIT $start_rec,$max_rows  ";
@@ -156,7 +157,7 @@ function event_list_attendees() {
             $sql_clause = " AND ";
         }
         $sql_a .= $group != '' ? $sql_clause . "  l.locale_id IN (" . $group . ") " : '';
-		$sql_a .= " AND e.event_status != 'D' ";
+		$sql_a .= $event_status ? " AND e.event_status = '" . $event_status . "' " : " AND e.event_status != 'D' ";
         $sql_a .= ") UNION (";
 		
     }
@@ -205,11 +206,12 @@ function event_list_attendees() {
     if (function_exists('espresso_member_data') && ( espresso_member_data('role') == 'espresso_event_manager' || espresso_member_data('role') == 'espresso_group_admin')) {
         $sql_a .= $sql_clause . " e.wp_user = '" . espresso_member_data('id') . "' ";
     }
-	$sql_a .= " $sql_clause e.event_status != 'D' ";
+	$sql_a .= $event_status ? " AND e.event_status = '" . $event_status . "' " : " AND e.event_status != 'D' ";
     $sql_a .= ") ORDER BY date DESC, id ASC ";
     $sql_a .= $records_to_show;
 	
     $attendees = $wpdb->get_results($sql_a);
+	//echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
     $total_attendees = $wpdb->num_rows;
 
 	$updated_ticket_quantity =0;
