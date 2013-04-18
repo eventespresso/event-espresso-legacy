@@ -98,9 +98,9 @@ function espresso_display_ee_tablenav () {
 		case'charts':
 		
 			 espresso_attendees_by_month_dropdown(isset($_REQUEST['month_range']) ? $_REQUEST['month_range'] : ''); //echo $_POST[ 'month_range' ];  ?>
-			<input type="submit" class="button-secondary" value="Filter Month" id="post-query-month">
+			<input type="submit" class="button-secondary" value="Filter Month" id="post-query-month"/>
 			<?php if( espresso_category_dropdown(isset($_REQUEST['category_id']) ? $_REQUEST['category_id'] : '')){ ?>
-				<input type="submit" class="button-secondary" value="Filter Category" id="post-query-category">
+				<input type="submit" class="button-secondary" value="Filter Category" id="post-query-category"/>
 			<?php }
 			//Payment status drop down
 			$status = array(
@@ -114,7 +114,7 @@ function espresso_display_ee_tablenav () {
 
 			echo select_input('payment_status', $status, isset($_REQUEST['payment_status']) ? $_REQUEST['payment_status'] : '');
 			?>
-			<input type="submit" class="button-secondary" value="Filter Status" id="post-query-payment">
+			<input type="submit" class="button-secondary" value="Filter Status" id="post-query-payment"/>
 			<a class="button-secondary" href="admin.php?page=events&event_admin_reports=event_list_attendees" style=" width:40px; display:inline">
 				<?php _e('Reset Filters', 'event_espresso'); ?>
 			</a>
@@ -127,17 +127,17 @@ function espresso_display_ee_tablenav () {
 			$_REQUEST['month_range'] = isset($_REQUEST['month_range']) ? $_REQUEST['month_range'] : '';
 			espresso_event_months_dropdown($_REQUEST['month_range']); //echo $_POST[ 'month_range' ];  
 			?>
-			<input type="submit" class="button-secondary" value="Filter Month" id="post-query-submit">
+			<input type="submit" class="button-secondary" value="Filter Month" id="post-query-submit"/>
 			<?php
 			$_REQUEST['category_id'] = isset($_REQUEST['category_id']) ? $_REQUEST['category_id'] : '';
 			if ( espresso_category_dropdown($_REQUEST['category_id'])){
 			?>
-				<input type="submit" class="button-secondary" value="Filter Category" id="post-query-submit">
+				<input type="submit" class="button-secondary" value="Filter Category" id="post-query-submit"/>
 			<?php }?>
 			<?php
 			$status = array(
 				array('id' => 'A', 'text' 	=> __('Active', 'event_espresso')), 
-				array('id' => 'L', 'text'		=> __('Show Active/Inactive', 'event_espresso')), 
+				array('id' => 'L', 'text'	=> __('Show Active/Inactive', 'event_espresso')), 
 				array('id' => 'IA', 'text' 	=> __('Inactive', 'event_espresso')), 
 				array('id' => 'P', 'text' 	=> __('Pending', 'event_espresso')), 
 				array('id' => 'R', 'text' 	=> __('Draft', 'event_espresso')), 
@@ -153,7 +153,7 @@ function espresso_display_ee_tablenav () {
 
 			echo select_input('event_status', $status, $_REQUEST['event_status']);
 			?>
-			<input type="submit" class="button-secondary" value="Filter Status" id="post-query-submit">
+			<input type="submit" class="button-secondary" value="Filter Status" id="post-query-submit"/>
 			<a class="button-secondary" href="admin.php?page=events" style=" width:40px; display:inline">
 			<?php _e('Reset Filters', 'event_espresso'); ?>
 			</a>
