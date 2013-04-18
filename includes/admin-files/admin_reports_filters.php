@@ -12,13 +12,13 @@ function espresso_display_month_category_status_filters() {
 		<li><strong>
 				<?php _e('Events', 'event_espresso'); ?>
 				: </strong> </li>
-		<li><a <?php echo (isset($_REQUEST['all']) && $_REQUEST['all'] == 'true') ? ' class="current" ' : '' ?> href="admin.php?page=events&all=true">
+		<li><a <?php echo (isset($_REQUEST['all']) && $_REQUEST['all'] == 'true') ? ' class="current" ' : '' ?> href="admin.php?page=events&all=true&max_rows=100000">
 				<?php _e('All Events', 'event_espresso'); ?>
 				<span class="count">(<?php echo $total_events; ?>)</span></a> |</li>
-		<li><a <?php echo (isset($_REQUEST['today']) && $_REQUEST['today'] == 'true') ? ' class="current" ' : '' ?> href="admin.php?page=events&today=true">
+		<li><a <?php echo (isset($_REQUEST['today']) && $_REQUEST['today'] == 'true') ? ' class="current" ' : '' ?> href="admin.php?page=events&today=true&max_rows=100000">
 				<?php _e('Today', 'event_espresso'); ?>
 				<span class="count">(<?php echo espresso_total_events_today(); ?>)</span></a> |</li>
-		<li><a <?php echo (isset($_REQUEST['this_month']) && $_REQUEST['this_month'] == 'true') ? ' class="current" ' : '' ?>  href="admin.php?page=events&this_month=true">
+		<li><a <?php echo (isset($_REQUEST['this_month']) && $_REQUEST['this_month'] == 'true') ? ' class="current" ' : '' ?>  href="admin.php?page=events&this_month=true&max_rows=100000">
 				<?php _e('This Month', 'event_espresso'); ?>
 				<span class="count">(<?php echo espresso_total_events_this_month(); ?>)</span></a></li>
 	</ul>
