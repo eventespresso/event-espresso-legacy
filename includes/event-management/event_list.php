@@ -8,6 +8,7 @@ function event_espresso_edit_list() {
 	define('EVT_ADMIN_URL', admin_url('admin.php?page=events'));
 
 	$max_rows = isset($_REQUEST['max_rows']) & !empty($_REQUEST['max_rows']) ? absint($_REQUEST['max_rows']) : 50;
+	$max_rows = min( $max_rows, 100000 );
 	$start_rec = isset($_REQUEST['start_rec']) && !empty($_REQUEST['start_rec']) ? absint($_REQUEST['start_rec']) : 0;
 	$records_to_show = " LIMIT $max_rows OFFSET $start_rec ";
 
@@ -156,9 +157,9 @@ function event_espresso_edit_list() {
 					break;
 				
 				case 'IA' : // Inactive
-						$sql .= " WHERE ( e.event_status = '" . $event_status . "' ";
+						$sql .= " WHERE ( e.event_status = '" . $event_status . "'";
 						// and if we are NOT filtering the date in any other way, then only retreive currently running events
-						$sql .=  ! $month_range && ! $today_filter && ! $this_month_filter ? " OR e.end_date < '" . $curdate . "' ) " : '';
+						$sql .=  ! $month_range && ! $today_filter && ! $this_month_filter ? " OR e.end_date < '" . $curdate . "' ) " : ' ) ';
 					break;
 
 				case 'X' : // Denied
@@ -251,9 +252,9 @@ function event_espresso_edit_list() {
 					break;
 
 				case 'IA' : // Inactive
-						$sql .= " WHERE ( e.event_status = '" . $event_status . "' ";
+						$sql .= " WHERE ( e.event_status = '" . $event_status . "'";
 						// and if we are NOT filtering the date in any other way, then only retreive currently running events
-						$sql .=  ! $month_range && ! $today_filter && ! $this_month_filter ? " OR e.end_date < '" . $curdate . "' ) " : '';
+						$sql .=  ! $month_range && ! $today_filter && ! $this_month_filter ? " OR e.end_date < '" . $curdate . "' ) " : ' ) ';
 					break;
 
 				case 'P' : // Pending

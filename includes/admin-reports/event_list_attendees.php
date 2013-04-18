@@ -12,6 +12,7 @@ function event_list_attendees() {
 
 	$event_status = isset( $_REQUEST['event_status'] ) & ! empty( $_REQUEST['event_status'] ) ? sanitize_text_field( $_REQUEST['event_status'] ) : FALSE;
 	$max_rows = isset( $_REQUEST['max_rows'] ) & ! empty( $_REQUEST['max_rows'] ) ? absint( $_REQUEST['max_rows'] ) : 50;
+	$max_rows = min( $max_rows, 100000 );
 	$start_rec = isset( $_REQUEST['start_rec'] ) && ! empty($_REQUEST['start_rec']) ? absint( $_REQUEST['start_rec'] ) : 0;
 	$records_to_show = " LIMIT $start_rec,$max_rows  ";
 	
