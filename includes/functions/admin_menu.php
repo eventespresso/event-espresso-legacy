@@ -89,6 +89,11 @@ if (!function_exists('add_event_espresso_menus')) {
             add_submenu_page('event_espresso', __('Event Espresso - MailChimp Integration', 'event_espresso'), __('MailChimp Integration', 'event_espresso'), $default_role, 'espresso-mailchimp', 'event_espresso_mailchimp_settings');
         }
 		
+		//Infusionsoft Integration Settings
+        if (function_exists('event_espresso_infusionsoft_settings') && $espresso_premium == true) {
+            add_submenu_page('event_espresso', __('Event Espresso - Infusionsoft Settings', 'event_espresso'), __('Infusionsoft Settings', 'event_espresso'), $default_role, 'espresso-infusionsoft', 'event_espresso_infusionsoft_settings');
+        }
+		
 		//Ticketing Settings
         if (function_exists('espresso_ticket_config_mnu') && $espresso_premium == true) {
             add_submenu_page('event_espresso', __('Event Espresso - Ticket Customization', 'event_espresso'), __('Ticket Templates', 'event_espresso'), apply_filters('espresso_management_capability', $default_role, isset($espresso_manager['espresso_manager_ticketing']) && !empty($espresso_manager['espresso_manager_ticketing']) ? $espresso_manager['espresso_manager_ticketing'] : $default_role), 'event_tickets', 'espresso_ticket_config_mnu');
