@@ -333,8 +333,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 
 			$attendee_id = $wpdb->insert_id;
 			
-			//Infusionsoft
-			do_action('action_hook_espresso_save_infusionsoft_attendee', $attendee_id, $columns_and_values);
+			//Save attednee hook
+			do_action('action_hook_espresso_save_attendee_data', $attendee_id, $columns_and_values);
 			
 			//Save the attendee data as a meta value
 			do_action('action_hook_espresso_save_attendee_meta', $attendee_id, 'original_attendee_details', serialize($columns_and_values));
@@ -459,8 +459,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								//Added by Imon
 								$ext_attendee_id = $wpdb->insert_id;
 								
-								//Infusionsoft
-								do_action('action_hook_espresso_save_infusionsoft_attendee', $ext_attendee_id, $ext_att_data_source);
+								//Save attednee hook
+								do_action('action_hook_espresso_save_attendee_data', $ext_attendee_id, $ext_att_data_source);
 			
 								//Save the attendee data as a meta value
 								do_action('action_hook_espresso_save_attendee_meta', $ext_attendee_id, 'original_attendee_details', serialize($ext_att_data_source));
