@@ -8,7 +8,15 @@ function espresso_display_paypal($payment_data) {
 	echo '<!-- Event Espresso PayPal Gateway Version ' . $myPaypal->gateway_version . '-->';
 	global $org_options;
 	$paypal_settings = get_option('event_espresso_paypal_settings');
-	$paypal_id = empty($paypal_settings['paypal_id']) ? '' : $paypal_settings['paypal_id'];
+	
+	//Check for an alternate PayPal email address
+	if (isset($payment_data['event_meta']['paypal_email']) && !empty($payment_data['event_meta']['paypal_email']) && filter_var($payment_data['event_meta']['paypal_email'], FILTER_VALIDATE_EMAIL) != FALSE) {
+		//Alternate PayPal email - using the paypal meta key field.
+		$paypal_id = $payment_data['event_meta']['paypal_email'];
+	} else {
+		$paypal_id = empty($paypal_settings['paypal_id']) ? '' : $paypal_settings['paypal_id'];
+	}
+	
 	$paypal_cur = empty($paypal_settings['currency_format']) ? '' : $paypal_settings['currency_format'];
 	$no_shipping = isset($paypal_settings['no_shipping']) ? $paypal_settings['no_shipping'] : '0';
 	$use_sandbox = $paypal_settings['use_sandbox'];
