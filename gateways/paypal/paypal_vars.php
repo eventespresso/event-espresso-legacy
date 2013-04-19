@@ -10,9 +10,9 @@ function espresso_display_paypal($payment_data) {
 	$paypal_settings = get_option('event_espresso_paypal_settings');
 	
 	//Check for an alternate PayPal email address
-	if (isset($payment_data['event_meta']['paypal_email']) && !empty($payment_data['event_meta']['paypal_email']) && filter_var($payment_data['event_meta']['paypal_email'], FILTER_VALIDATE_EMAIL) != FALSE) {
+	if (isset($event_meta['paypal_email']) && !empty($event_meta['paypal_email']) && filter_var($event_meta['paypal_email'], FILTER_VALIDATE_EMAIL) != FALSE) {
 		//Alternate PayPal email - using the paypal meta key field.
-		$paypal_id = $payment_data['event_meta']['paypal_email'];
+		$paypal_id = $event_meta['paypal_email'];
 	} else {
 		$paypal_id = empty($paypal_settings['paypal_id']) ? '' : $paypal_settings['paypal_id'];
 	}
