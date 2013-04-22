@@ -175,12 +175,15 @@ function update_event($recurrence_arr = array()) {
         count($recurrence_arr) == 0 && $_POST['recurrence_apply_changes_to'] > 1) {
 //skip the first update
     } else {
-
+		
+		//Filters the event description based on user level
+		$user_access = apply_filters( 'filter_hook_espresso_event_unfiltered_description', current_user_can('administrator') );
+		$_REQUEST['event_desc'] = is_admin() || $user_access ? $_REQUEST['event_desc'] : apply_filters( 'filter_hook_espresso_event_wp_kses_post_description', wp_kses_post( $_REQUEST['event_desc'] ) );
+		
         $event_meta = array(); //will be used to hold event meta data
-
         $event_id						= array_key_exists('event_id', $recurrence_arr) ? $recurrence_arr['event_id'] : (int)$_REQUEST['event_id'];
         $event_name						= sanitize_text_field($_REQUEST['event']);
-        $event_desc						= !empty($_REQUEST['event_desc']) ? wp_kses_post($_REQUEST['event_desc']) : '';
+        $event_desc						= !empty($_REQUEST['event_desc']) ? $_REQUEST['event_desc'] : '';
         $display_desc					= sanitize_text_field($_REQUEST['display_desc']);
         $display_reg_form				= sanitize_text_field($_REQUEST['display_reg_form']);
 		$externalURL					= !empty($_REQUEST['externalURL']) ? esc_html($_REQUEST['externalURL']):'';
