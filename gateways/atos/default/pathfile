@@ -19,7 +19,7 @@ DEBUG!NO!
 # indiquer:
 # ------------------------------------------------------------------------
 #
-D_LOGO!https://localhost/eetrunk31/wp-content/plugins/event-espresso-31/gateways/atos/logos/!
+D_LOGO!http://wp-3-5.dev/wp-content/plugins/event-espresso/gateways/atos/logos/!
 #
 # --------------------------------------------------------------------------
 #  Fichiers param�tres li�s a l'api sips paiement	
@@ -27,15 +27,15 @@ D_LOGO!https://localhost/eetrunk31/wp-content/plugins/event-espresso-31/gateways
 #
 # fichier des  param�tres sips
 #
-F_DEFAULT!C:\xampp\htdocs\eetrunk31\wp-content\plugins\event-espresso-31\gateways\atos/default/parmcom.default!
+F_DEFAULT!/Users/sethshoultes/Documents/Websites/wp-3-5.dev/wp-content/plugins/event-espresso/gateways/atos/default/parmcom.default!
 #
 # fichier param�tre commercant
 #
-F_PARAM!C:\xampp\htdocs\eetrunk31\wp-content\plugins\event-espresso-31\gateways\atos/default/parmcom!
+F_PARAM!/Users/sethshoultes/Documents/Websites/wp-3-5.dev/wp-content/plugins/event-espresso/gateways/atos/default/parmcom!
 #
 # certificat du commercant
 #
-F_CERTIFICATE!C:\xampp\htdocs\eetrunk31\wp-content\plugins\event-espresso-31\gateways\atos/default/certif!
+F_CERTIFICATE!/Users/sethshoultes/Documents/Websites/wp-3-5.dev/wp-content/plugins/event-espresso/gateways/atos/default/certif!
 #
 # type du certificat
 #
