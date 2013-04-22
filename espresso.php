@@ -1130,7 +1130,7 @@ function espresso_check_data_tables() {
 	
 	// temp array to track scripts we need to run 
 	$scripts_to_run = array();
-	// for tracking script erros
+	// for tracking script errors
 	$previous_script = '';
 	// if we don't need them, don't load them
 	$load_data_migration_scripts = FALSE;
@@ -1143,6 +1143,10 @@ function espresso_check_data_tables() {
 			foreach ( $migrations as $key => $value ) {
 				// check format of $key
 				if ( is_numeric( $key )) {
+					// $existing_migrations array might be corrupted
+					$existing_migrations_error = TRUE;
+					unset( $existing_data_migrations[ $ver ][ $key ] );
+					$existing_data_migrations[ $ver ][ $value ] = array();
 					// track script
 					if ( $value != $previous_script ) {
 						$previous_script = $value;
@@ -1150,11 +1154,8 @@ function espresso_check_data_tables() {
 						// therefore the callback function is the value
 						$migration_func = $value;
 						$errors_array = array();
-					} else {
-						// it also means that the $existing_migrations array might be corrupted
-						$existing_migrations_error = TRUE;
-						unset( $existing_data_migrations[ $ver ][ $key ] );
-					}
+					} 
+
 				} else {
 					// callback function is the key
 					$migration_func = $key;
