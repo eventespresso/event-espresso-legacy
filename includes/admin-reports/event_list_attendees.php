@@ -1,26 +1,26 @@
-<?php
+<?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }	
+
 function event_list_attendees() {
 	
-    global $wpdb, $org_options, $ticketing_installed, $espresso_premium;
-	
-	define( 'EVT_ADMIN_URL', admin_url( 'admin.php?page=events' ));
+   global $wpdb, $org_options, $ticketing_installed, $espresso_premium;
+    require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/event-management/queries.php');
+	if ( ! defined( 'EVT_ADMIN_URL' )) {
+		define( 'EVT_ADMIN_URL', admin_url( 'admin.php?page=events' ));		
+	}
+ 
 	$EVT_ID = isset( $_REQUEST['event_id'] ) && $_REQUEST['event_id'] != '' ? absint( $_REQUEST['event_id'] ) : FALSE;
 
 	if ( $EVT_ID ){
 		echo '<h1>'.espresso_event_list_attendee_title( $EVT_ID ).'</h1>'; 
 	}	
 
-	$event_status = isset( $_REQUEST['event_status'] ) & ! empty( $_REQUEST['event_status'] ) ? sanitize_text_field( $_REQUEST['event_status'] ) : FALSE;
-	$max_rows = isset( $_REQUEST['max_rows'] ) & ! empty( $_REQUEST['max_rows'] ) ? absint( $_REQUEST['max_rows'] ) : 50;
-	$max_rows = min( $max_rows, 100000 );
-	$start_rec = isset( $_REQUEST['start_rec'] ) && ! empty($_REQUEST['start_rec']) ? absint( $_REQUEST['start_rec'] ) : 0;
-	$records_to_show = " LIMIT $start_rec,$max_rows  ";
+	// get SQL for query
+	$SQL = espresso_generate_events_page_list_table_sql( FALSE, TRUE );
+	$attendees = $wpdb->get_results( $SQL, OBJECT_K );
+	$total_attendees = $wpdb->num_rows;
+//	echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//	printr( $attendees, '$attendees  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 	
-	//Dates
-	$curdate = date('Y-m-d');
-	$this_year_r = date('Y');
-	$this_month_r = date('m');
-	$days_this_month = date( 't', time() );
 
     if ( isset( $_POST['delete_customer'] ) && ! empty( $_POST['delete_customer'] )) {
         if ( is_array( $_POST['checkbox'] )) {
@@ -87,15 +87,10 @@ function event_list_attendees() {
         }
     }
 	
-    require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/event-management/queries.php');
-
 	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php')) {
         require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php');
-		espresso_display_month_category_status_filters();
-		espresso_ee_tablenav_form_open();
-		$show_filters = TRUE;
+	 	espresso_display_admin_reports_filters( $total_events );
 	} else {
-		$show_filters = FALSE;
 		?>
 		<p>
 			<strong><?php _e('Advanced filters are available in the premium versions.', 'event_espresso');?></strong> 
@@ -108,10 +103,10 @@ function event_list_attendees() {
 
 	
 	
-	$sql_clause = " WHERE ";
-    $sql_a = "(";
+//	$sql_clause = " WHERE ";
+//    $sql_a = "(";
 	
-    if (function_exists('espresso_member_data') && espresso_member_data('role') == 'espresso_group_admin') {
+/*    if (function_exists('espresso_member_data') && espresso_member_data('role') == 'espresso_group_admin') {
 	
         $group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
         $group = implode(",", $group);
@@ -213,17 +208,11 @@ function event_list_attendees() {
 	
     $attendees = $wpdb->get_results($sql_a);
 	//echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-    $total_attendees = $wpdb->num_rows;
+    $total_attendees = $wpdb->num_rows;*/
 
 	$updated_ticket_quantity =0;
-
 	$att_table_form_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID ), EVT_ADMIN_URL );
-	
-	if ( $show_filters ) {
-		espresso_display_ee_tablenav();
-		espresso_display_ee_pagination( $total_attendees );
-		espresso_ee_tablenav_form_close ();
-	}
+
 	
 ?>
 	
