@@ -2,6 +2,8 @@
 if ( ! defined('EVENT_ESPRESSO_VERSION')) exit('No direct script access allowed');
 function add_new_attendee($event_id){
 	if (isset($_REQUEST['regevent_action_admin']) && $_REQUEST['regevent_action_admin']== 'post_attendee'){
+		require_once(EVENT_ESPRESSO_PLUGINFULLPATH."includes/functions/attendee_functions.php");
+		require_once(EVENT_ESPRESSO_PLUGINFULLPATH."includes/process-registration/add_attendees_to_db.php");
 		$attendee_id = event_espresso_add_attendees_to_db();
 		// SEND CONFIRMATION EMAIL MESSAGES
 		event_espresso_email_confirmations(array('attendee_id' => $attendee_id, 'send_admin_email' => 'true', 'send_attendee_email' => 'true'));
