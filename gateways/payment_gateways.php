@@ -309,9 +309,6 @@ function espresso_update_active_gateways() {
 		if (get_option('events_ideal_active') == true) {
 			$active_gateways['ideal'] = "/gateways/ideal";
 		}
-		if (get_option('events_infusionsoft_active') == true) {
-			$active_gateways['infusionsoft_payment'] = "/gateways/infusionsoft";
-		}
 		if (get_option('events_invoice_payment_active') == true) {
 			$active_gateways['invoice'] = "/gateways/invoice";
 		}
@@ -360,7 +357,6 @@ function espresso_update_active_gateways() {
 	delete_option('events_firstdata_active');
 	delete_option('events_firstdata_connect_2_active');
 	delete_option('events_ideal_active');
-	delete_option('events_infusionsoft_active');
 	delete_option('events_invoice_payment_active');
 	delete_option('events_mwarrior_active');
 	delete_option('events_nab_active');
