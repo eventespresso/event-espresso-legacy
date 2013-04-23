@@ -10,6 +10,7 @@
  * @return string
  */
 function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendees= FALSE, $filters = '', $group_admin = FALSE ) {
+	global $org_options;
 	
 	if ( ! $group_admin ) {
 		$SQL = '';
