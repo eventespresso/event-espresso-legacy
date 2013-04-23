@@ -16,7 +16,7 @@ function espresso_process_moneris_hpp( $payment_data ) {
 	}
 	
 	$EE_Moneris_HPP = new EE_Moneris_HPP();
-	$EE_Moneris_HPP->ipnLog = TRUE;
+	$EE_Moneris_HPP->ipnLog = FALSE;		//		TRUE		FALSE
 	
 	// if TXN mode = Development, Debug or anything other than Production
 	if ( $EE_Moneris_HPP->settings['moneris_hpp_txn_mode'] != 'prod' ) {
