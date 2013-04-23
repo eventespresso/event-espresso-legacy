@@ -13,7 +13,6 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	global $org_options;
 	
 	if ( ! $group_admin ) {
-		$SQL = '';
 		$member_id = FALSE;
 	}
 
@@ -72,6 +71,8 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 
 	//Check if the venue manager is turned on
 	$use_venue_manager = isset( $org_options['use_venue_manager'] ) && $org_options['use_venue_manager'] == 'Y' ? TRUE : FALSE;
+
+	$SQL = '';
 	
 	//Roles & Permissions
 	//This checks to see if the user is a regional manager and creates a union to join the events that are in the users region based on the venue/locale combination
