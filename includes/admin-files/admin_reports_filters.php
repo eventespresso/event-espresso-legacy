@@ -243,6 +243,11 @@ function espresso_display_admin_reports_filters( $total = 0 ) {
 
 	}
 
+	// query params we need to remove now
+	$remove = array( 'month_range', 'category_id', 'event_status' );
+	// then remove the current view from the query args so that the view can be changed
+	$query_args = espresso_remove_filter_from_query_args( $remove );
+
 	// add view  back into query args
 	if ( ! empty( $view )) {
 		$query_args[ $view ] = 'true';
