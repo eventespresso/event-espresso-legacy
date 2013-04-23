@@ -73,10 +73,10 @@ function add_event_to_db($recurrence_arr = array()) {
 //skip the first insert because we do not have the start dates
 	} else {
 		$event_meta = array(); //will be used to hold event meta data
-		//If the Espresso Facebook Events is installed, add the event to Facebook
-		//$fb = new FacebookEvents();
-		//echo $fb->espresso_createevent();
-		//echo $_POST['event'];
+		
+		//Filters the event description based on user level
+		$user_access = apply_filters( 'filter_hook_espresso_event_unfiltered_description', current_user_can('administrator') );
+		$_REQUEST['event_desc'] = is_admin() || $user_access ? $_REQUEST['event_desc'] : apply_filters( 'filter_hook_espresso_event_wp_kses_post_description', wp_kses_post( $_REQUEST['event_desc'] ) );
 		
 		$event_code			= uniqid($current_user->ID . '-');
 		$event_name			= !empty($_REQUEST['event']) ? sanitize_text_field($_REQUEST['event']) : $event_code;
@@ -85,7 +85,7 @@ function add_event_to_db($recurrence_arr = array()) {
 		}else{
 			$event_identifier = sanitize_title_with_dashes($_REQUEST['event_identifier']) . $event_code;
 		}
-		$event_desc			= !empty($_REQUEST['event_desc']) ? wp_kses_post($_REQUEST['event_desc']) : '';
+		$event_desc			= !empty($_REQUEST['event_desc']) ? $_REQUEST['event_desc'] : '';
 		$display_desc		= !empty($_REQUEST['display_desc']) ? sanitize_text_field($_REQUEST['display_desc']) : 'Y';
 		$display_reg_form	= !empty($_REQUEST['display_reg_form']) ? sanitize_text_field($_REQUEST['display_reg_form']) : 'Y';
 		$externalURL		= isset($_REQUEST['externalURL']) ? sanitize_text_field($_REQUEST['externalURL']) : '';
