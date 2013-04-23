@@ -59,6 +59,7 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 			break;
 	}
 
+	$event_id = isset( $_REQUEST['event_id'] ) && $_REQUEST['event_id'] != '' ? absint( $_REQUEST['event_id'] ) : FALSE;
 	$category_id = isset($_REQUEST['category_id']) && !empty($_REQUEST['category_id']) ? absint($_REQUEST['category_id']) : FALSE;
 	$event_status = isset($_REQUEST['event_status']) && !empty($_REQUEST['event_status']) ? sanitize_text_field($_REQUEST['event_status']) : FALSE;
 	$payment_status = isset($_REQUEST['payment_status']) ? wp_strip_all_tags( $_REQUEST['payment_status'] ) : FALSE;
@@ -87,6 +88,8 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	
 	//If this is an event manager	
 	$event_manager = function_exists('espresso_member_data') && ( current_user_can('espresso_event_manager') && !current_user_can('administrator') ) ? true : false;
+	$event_admin = function_exists('espresso_member_data') && ( current_user_can('espresso_event_admin') ) ? true : false;
+	
 	
 	$SQL .= 'SELECT ';
 	
@@ -138,9 +141,9 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 					$SQL .= 'WHERE e.event_status = "' . $event_status . '"';
 				break;
 			case 'IA' : // Inactive
-					$SQL .= 'WHERE ( e.event_status = "' . $event_status . '"';
+					$SQL .= 'WHERE ( e.is_active = "N" AND e.event_status != "D" )';
 					// and if we are NOT filtering the date in any other way, then only retreive currently running events
-					$SQL .=  ! $month_range && ! $today_filter ? ' OR e.end_date < "' . $curdate . '" )' : ' )';
+					//$SQL .=  ! $month_range && ! $today_filter ? ' OR e.end_date < "' . $curdate . '" )' : ' )';
 				break;
 			case 'A' : // Active
 			case 'P' : // Pending
@@ -153,7 +156,7 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 				break;							
 			case 'L' : // ALL
 			default :
-					$SQL .= 'WHERE e.is_active = "Y" AND e.event_status != "D"';
+					$SQL .= 'WHERE e.event_status != "D"';
 				break;							
 		}		
 	} else {
@@ -163,7 +166,7 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 		$SQL .=  ! $month_range && ! $today_filter ? ' AND e.end_date >= "' . $curdate . '"' : '';
 	}
 	// specific event?
-	$SQL .= $EVT_ID ? 'AND a.event_id = ' . $EVT_ID : '';
+	$SQL .= !$count && $event_id ? 'AND e.id = ' . $event_id : '';
 	//Category filter
 	$SQL .= $category_id ? ' AND c.id = "' . $category_id . '" ' : '';
 	// for R&P : Find events in the locale
@@ -171,7 +174,8 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	// Attendee Payment Status
 	$SQL .= ! $count && $attendees && $payment_status ? ' AND a.payment_status = "' . $payment_status . '"' : '';
 	//Month filter
-	$SQL .= $month_range ? ' AND e.start_date BETWEEN "' . $year_r . '-' . $month_r . '-01" AND "' . $year_r . '-' . $month_r . '-' . $days_this_month . '"' : '';
+	$SQL .= $month_range && $attendees ? ' AND a.date BETWEEN "' . $year_r . '-' . $month_r . '-01" AND "' . $year_r . '-' . $month_r . '-' . $days_this_month . '"' : '';
+	$SQL .= $month_range && ! $attendees ? ' AND e.start_date BETWEEN "' . $year_r . '-' . $month_r . '-01" AND "' . $year_r . '-' . $month_r . '-' . $days_this_month . '"' : '';
 	// Today events filter 
 	$SQL .= $today_filter && $attendees ? " AND date BETWEEN '". $curdate . " 00:00:00' AND '". $curdate." 23:59:59' " : '';
 	$SQL .= $today_filter && ! $attendees ? ' AND e.start_date = "' . $curdate . '"' : '';
@@ -179,8 +183,8 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	$SQL .= $this_month_filter && $attendees ? " AND date BETWEEN '" . $this_year_r . "-" . $this_month_r . "-01' AND '" . $this_year_r . "-" . $this_month_r . "-" . $days_this_month . "' " : '';
 	$SQL .= $this_month_filter && ! $attendees ? ' AND e.start_date BETWEEN "' . $this_year_r . '-' . $this_month_r . '-01" AND "' . $this_year_r . '-' . $this_month_r . '-' . $days_this_month . '"' : '';
 	// for R&P : If user is an event manager, then show only their events
-	$SQL .= $member_id && !$event_manager ? ' AND e.wp_user = "' . $member_id . '"' : '';
-	$SQL .= $event_manager && !$member_id ? " AND e.wp_user = '" . espresso_member_data('id') ."'" : '';
+	$SQL .= $member_id && !$event_manager && !$event_admin ? ' AND e.wp_user = "' . $member_id . '"' : '';
+	$SQL .= $event_manager && !$member_id && !$event_admin ? " AND e.wp_user = '" . espresso_member_data('id') ."'" : '';
 	// group data queries by event
 	$SQL .= ! $count && ! $attendees ? ' GROUP BY e.id' : '';		
 	// for R&P : close the UNION

@@ -117,10 +117,10 @@ function espresso_display_admin_reports_filters( $total = 0 ) {
 	  			<?php _e('This Month', 'event_espresso'); ?> <span class="count">(<?php echo espresso_total_events_this_month(); ?>)</span>
 	  		</a>
 	  	</li>
-	  	<li>
+	  	<li>| 
 		  	<a <?php echo $view == 'today' ? ' class="current" ' : '' ?> href="<?php echo add_query_arg( array_merge( array( 'today' => 'true' ), $query_args ), EVT_ADMIN_URL ); ?>">
 	  			<?php _e('Today', 'event_espresso'); ?> <span class="count">(<?php echo espresso_total_events_today(); ?>)</span>
-	  		</a> |
+	  		</a>
 	  	</li>
 	  </ul>
 	 
