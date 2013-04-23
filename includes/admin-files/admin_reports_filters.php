@@ -108,7 +108,7 @@ function espresso_display_admin_reports_filters( $total = 0 ) {
 	  		</strong>
 	  	</li>
 	  	<li>	  		
-		  	<a <?php echo $view == 'all' ? ' class="current" ' : '' ?> href="<?php echo add_query_arg( array_merge( array( 'all' => 'true' ), $query_args ), EVT_ADMIN_URL ); ?>">
+		  	<a <?php echo $view == 'all' ? ' class="current" ' : '' ?> href="<?php echo add_query_arg( array_merge( array( 'all' => 'true', 'max_rows' => 100000 ), $query_args ), EVT_ADMIN_URL ); ?>">
 	  			<?php _e('All Events', 'event_espresso'); ?> <span class="count">(<?php echo espresso_total_events(); ?>)</span>
 	  		</a> |
 	  	</li>
@@ -131,7 +131,7 @@ function espresso_display_admin_reports_filters( $total = 0 ) {
 	  		</strong>
 	  	</li>
 	  	<li>
-		  	<a <?php echo $view == 'all_a' ? ' class="current" ' : '' ?> href="<?php echo add_query_arg( array_merge( array( 'event_admin_reports' => 'event_list_attendees', 'all_a' => 'true' ), $query_args ), EVT_ADMIN_URL ); ?>">
+		  	<a <?php echo $view == 'all_a' ? ' class="current" ' : '' ?> href="<?php echo add_query_arg( array_merge( array( 'event_admin_reports' => 'event_list_attendees', 'all_a' => 'true', 'max_rows' => 100000 ), $query_args ), EVT_ADMIN_URL ); ?>">
 	  			<?php _e('All Attendees', 'event_espresso'); ?>
 	  			<span class="count">
 		  			(<?php echo espresso_total_all_attendees(); ?>)
