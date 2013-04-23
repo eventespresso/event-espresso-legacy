@@ -19,9 +19,10 @@ function espresso_display_moneris_hpp( $payment_data ) {
 	do_action('action_hook_espresso_use_add_on_functions');
 
 	// ps_store_id  	Identifies the configuration for the Hosted Paypage.
-	// hpp_key  		This is a security key that corresponds to the ps_store_id.
 	$EE_Moneris_HPP->addField( 'ps_store_id', $EE_Moneris_HPP->settings['moneris_hpp_ps_store_id'] );
+	// hpp_key  		This is a security key that corresponds to the ps_store_id.
 	$EE_Moneris_HPP->addField( 'hpp_key', $EE_Moneris_HPP->settings['moneris_hpp_key'] );
+	// the time the transaction was initiated
 	$EE_Moneris_HPP->addField( 'rvar_moneris_hpp', time() );
 
 	// lang   	 				en-ca = English  fr-ca = French
@@ -56,41 +57,38 @@ function espresso_display_moneris_hpp( $payment_data ) {
 		// if this the primary attendee
 		if ( $item_num == 1 ) {
 			// cust_id   		This is an ID field that can be used to identify the client  MAX 50 chars.
-			// order_id  	MUST be unique per transaction MAX 50 chars.
-			// email  			Customer email address. MAX 50 chars. 
 			$EE_Moneris_HPP->addField( 'cust_id', $registration_id );
+			// order_id  	MUST be unique per transaction MAX 50 chars.
 			$EE_Moneris_HPP->addField( 'order_id', $registration_id );
+			// email  			Customer email address. MAX 50 chars. 
 			$EE_Moneris_HPP->addField( 'email', $attendee_email );		
 		}
 		// idn  					Product Code - SKU (max 10 chars)
-		// descriptionn  	Product Description - (max 15 chars)
-		// quantityn  		Quantity of Goods Purchased - (max - 4 digits)
-		// pricen  			Unit Price - (max - "7"."2" digits, i.e. min 0.00 & max 9999999.99)
-		// subtotaln  		Quantity X Price of Product - ( max - "7"."2" digits, i.e. min 0.00 & max 9999999.99)		
 		$EE_Moneris_HPP->addField( 'id' . $item_num, $item->id );
-//		$EE_Moneris_HPP->addField( 'description' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname );
+		// descriptionn  	Product Description - (max 15 chars)
 		$EE_Moneris_HPP->addField( 'description' . $item_num, $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname );
+		// quantityn  		Quantity of Goods Purchased - (max - 4 digits)
 		$EE_Moneris_HPP->addField( 'quantity' . $item_num, absint( $item->quantity ));
+		// pricen  			Unit Price - (max - "7"."2" digits, i.e. min 0.00 & max 9999999.99)
 		$EE_Moneris_HPP->addField( 'price' . $item_num, $item->final_price );
+		// subtotaln  		Quantity X Price of Product - ( max - "7"."2" digits, i.e. min 0.00 & max 9999999.99)		
 		$EE_Moneris_HPP->addField( 'subtotal' . $item_num, $item->final_price * absint( $item->quantity ));	
-		$total = number_format( $item->final_price * absint( $item->quantity ), 2, '.', ',' );
+		$total += $item->final_price * absint( $item->quantity );
 	}
 
 	// gst   	 				This is where you would include Goods and Services Tax charged,  (min 0.00 & max 9999999.99)
 	// pst   	 				This is where you would include Provincial Sales Tax charged,  (min 0.00 & max 9999999.99)
 	// hst   	 				This is where you would include Harmonized Sales Tax charged,  (min 0.00 & max 9999999.99)
 
+	$total = number_format( $total, 2, '.', ',' );
+	
+	if ( WP_DEBUG && current_user_can( 'update_core' )) {
+//		$total = 0.01;
+	}
 	// charge_total  	Final purchase Amount - no $, must include 2 decimal places
 	$EE_Moneris_HPP->addField( 'charge_total', $total );
 	
 	$country = isset( $country ) ? $country : '';
-//	
-//	if ( $country == 'Canada' ) {
-//		switch( $state ) {
-//			default:
-//			break;
-//		}
-//	}
 	
 
 	// bill_first_name text  -  max 30 chars
