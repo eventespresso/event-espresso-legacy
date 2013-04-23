@@ -74,7 +74,7 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	
 	//Roles & Permissions
 	//This checks to see if the user is a regional manager and creates a union to join the events that are in the users region based on the venue/locale combination
-	if ( ! $group_admin && function_exists('espresso_member_data') && current_user_can('espresso_group_admin') ) {
+	if ( ! $group_admin && function_exists('espresso_member_data') && current_user_can('espresso_group_admin') && !current_user_can('administrator') ) {
 		$member_id = espresso_member_data('id');
 		$group_admin = get_user_meta( $member_id, 'espresso_group', TRUE );
 		$group_admin = is_array( $group_admin ) ? implode( ',', $group_admin ) : FALSE;
@@ -84,6 +84,9 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 			$SQL .= ' ) UNION ( ';
 		}
 	}
+	
+	//If this is an event manager	
+	$event_manager = function_exists('espresso_member_data') && ( current_user_can('espresso_event_manager') && !current_user_can('administrator') ) ? true : false;
 	
 	$SQL .= 'SELECT ';
 	
@@ -176,7 +179,8 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	$SQL .= $this_month_filter && $attendees ? " AND date BETWEEN '" . $this_year_r . "-" . $this_month_r . "-01' AND '" . $this_year_r . "-" . $this_month_r . "-" . $days_this_month . "' " : '';
 	$SQL .= $this_month_filter && ! $attendees ? ' AND e.start_date BETWEEN "' . $this_year_r . '-' . $this_month_r . '-01" AND "' . $this_year_r . '-' . $this_month_r . '-' . $days_this_month . '"' : '';
 	// for R&P : If user is an event manager, then show only their events
-	$SQL .= $member_id ? ' AND e.wp_user = "' . $member_id . '"' : '';
+	$SQL .= $member_id && !$event_manager ? ' AND e.wp_user = "' . $member_id . '"' : '';
+	$SQL .= $event_manager && !$member_id ? " AND e.wp_user = '" . espresso_member_data('id') ."'" : '';
 	// group data queries by event
 	$SQL .= ! $count && ! $attendees ? ' GROUP BY e.id' : '';		
 	// for R&P : close the UNION
