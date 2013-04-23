@@ -30,6 +30,8 @@
 /*___ General site wide styles for event-data / espresso_events ___*/
 .ee-featured-image{
 	float: right;
+	margin:5px;
+	padding:10px;
 }
 
 .payment_container, .payment-option-dv { position: relative; margin:0 .25em .25em 0;  }
