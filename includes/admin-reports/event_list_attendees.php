@@ -14,14 +14,7 @@ function event_list_attendees() {
 		echo '<h1>'.espresso_event_list_attendee_title( $EVT_ID ).'</h1>'; 
 	}	
 
-	// get SQL for query
-	$SQL = espresso_generate_events_page_list_table_sql( FALSE, TRUE );
-	$attendees = $wpdb->get_results( $SQL, OBJECT_K );
-	$total_attendees = $wpdb->num_rows;
-//	echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-//	printr( $attendees, '$attendees  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-	
-
+	//Delete the attendee(s)
     if ( isset( $_POST['delete_customer'] ) && ! empty( $_POST['delete_customer'] )) {
         if ( is_array( $_POST['checkbox'] )) {
             while ( list( $att_id, $value ) = each( $_POST['checkbox'] )) {
@@ -87,6 +80,14 @@ function event_list_attendees() {
         }
     }
 	
+	// get SQL for query
+	$SQL = espresso_generate_events_page_list_table_sql( FALSE, TRUE );
+	$attendees = $wpdb->get_results( $SQL, OBJECT_K );
+	$total_attendees = $wpdb->num_rows;
+//	echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//	printr( $attendees, '$attendees  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+
+
 	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php')) {
         require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php');
 	 	espresso_display_admin_reports_filters( $total_events );
