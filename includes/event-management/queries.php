@@ -1,242 +1,291 @@
 <?php
-function espresso_total_events(){
-	//Get number of total events
-	global $wpdb;
+/**
+ * 	espresso_get_events_page_list_table_results
+ *
+ * @access public
+ * @param boolean $count whether this query will return field data or COUNT events or SUM attendee quantity
+ * @param boolean $attendees whether this query will return data from the events table or the attendee table
+ * @param string $filters whether a particular filter is active or not; mostly used in conjunction with the $count parameter ie: COUNT events this_month
+ * @param mixed boolean | array $group_admin_locales array og R&P member group IDs or FALSE if not used
+ * @return string
+ */
+function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendees= FALSE, $filters = '', $group_admin_locales = FALSE ) {
+	global $org_options;
 	
+	if ( ! $group_admin_locales ) {
+		$member_id = FALSE;
+	}
+
+	$max_rows = isset($_REQUEST['max_rows']) & !empty($_REQUEST['max_rows']) ? absint($_REQUEST['max_rows']) : 50;
+	$max_rows = min( $max_rows, 100000 );
+	$start_rec = isset($_REQUEST['start_rec']) && !empty($_REQUEST['start_rec']) ? absint($_REQUEST['start_rec']) : 0;
+	$records_to_show = ' LIMIT ' . $max_rows .' OFFSET ' . $start_rec;
+
 	//Dates
-	$curdate = date("Y-m-d");
-	$pieces = explode('-',$curdate, 3);
-	$this_year_r = $pieces[0];
-	$this_month_r = $pieces[1];
+	$curdate = date('Y-m-d');
+	$this_year_r = date('Y');
+	$this_month_r = date('m');
 	$days_this_month = date('t', strtotime($curdate));
 	
-	$group = '0';
-	if ( function_exists('espresso_member_data') && current_user_can('espresso_group_admin') ) {
-		$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-		if ($group > 0){
-			$group = implode(",",$group);
+	// event date filters
+	$month_range = isset($_REQUEST['month_range']) && !empty($_REQUEST['month_range']) ? sanitize_text_field($_REQUEST['month_range']) : FALSE;
+	$this_month_filter = isset($_REQUEST['this_month']) && $_REQUEST['this_month'] == 'true' ? TRUE : FALSE;
+	$today_filter = isset($_REQUEST['today']) && $_REQUEST['today'] == 'true' ? TRUE : FALSE;
+	// attendee date filters
+	$this_month_filter = isset($_REQUEST['this_month_a']) && $_REQUEST['this_month_a'] == 'true' ? TRUE : $this_month_filter;
+	$today_filter = isset($_REQUEST['today_a']) && $_REQUEST['today_a'] == 'true' ? TRUE : $today_filter;
+	
+	// toggle filters based on value passed from "count functions" (date filters)
+	switch ( $filters ) {
+		case 'this_month' :
+				$month_range = FALSE;
+				$this_month_filter = TRUE;
+				$today_filter = FALSE;
+			break;
+		case 'today' :
+				$month_range = FALSE;
+				$this_month_filter = FALSE;
+				$today_filter = TRUE;
+			break;
+		case 'none' :
+				$month_range = FALSE;
+				$this_month_filter = FALSE;
+				$today_filter = FALSE;
+			break;
+	}
+
+	$event_id = isset( $_REQUEST['event_id'] ) && $_REQUEST['event_id'] != '' ? absint( $_REQUEST['event_id'] ) : FALSE;
+	$category_id = isset($_REQUEST['category_id']) && !empty($_REQUEST['category_id']) ? absint($_REQUEST['category_id']) : FALSE;
+	$event_status = isset($_REQUEST['event_status']) && !empty($_REQUEST['event_status']) ? sanitize_text_field($_REQUEST['event_status']) : FALSE;
+	$payment_status = isset($_REQUEST['payment_status']) ? wp_strip_all_tags( $_REQUEST['payment_status'] ) : FALSE;
+
+	if ( $month_range ) {
+		$pieces = explode('-', $month_range, 3);
+		$year_r = $pieces[0];
+		$month_r = $pieces[1];
+	}
+
+	//Check if the venue manager is turned on
+	$use_venue_manager = isset( $org_options['use_venue_manager'] ) && $org_options['use_venue_manager'] == 'Y' ? TRUE : FALSE;
+
+	$SQL = '';
+	$close_union = FALSE;
+	
+	//Roles & Permissions
+	//This checks to see if the user is a regional manager and creates a union to join the events that are in the users region based on the venue/locale combination
+	if ( ! $group_admin_locales && function_exists('espresso_member_data') && current_user_can('espresso_group_admin') && !current_user_can('administrator') ) {
+		$member_id = espresso_member_data('id');
+		$group_admin_locales = get_user_meta( $member_id, 'espresso_group', TRUE );
+		$group_admin_locales = is_array( $group_admin_locales ) ? implode( ',', $group_admin_locales ) : FALSE;
+		if ( $group_admin_locales ) {
+			$SQL .= '( ';
+			$SQL .= espresso_generate_events_page_list_table_sql( $count, $attendees, $filters, $group_admin_locales );
+			$SQL .= ' ) UNION ( ';
+			$close_union = TRUE;
 		}
 	}
 	
-	$sql1 = "(";
-	if ( $group > 0 ){
-		$sql1 .= "SELECT e.id FROM ". EVENTS_DETAIL_TABLE." e ";
-		$sql1 .= " JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id ";
-		$sql1 .= " JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = r.venue_id ";
-		$sql1 .= " WHERE event_status != 'D'";
-		$sql1 .= $group > 0 ? " AND l.locale_id IN (" . $group . ") " : '';
-		$sql1 .= ") UNION (";
-	}
-	$sql1 .= "SELECT e.id FROM ". EVENTS_DETAIL_TABLE." e ";
-	$sql1 .= " WHERE event_status != 'D'";
-	if(  function_exists('espresso_member_data') && ( espresso_member_data('role')=='espresso_event_manager' || espresso_member_data('role')=='espresso_group_admin') ){
-		$sql1 .= " AND wp_user = '" . espresso_member_data('id') ."' ";
-	}
-	$sql1 .= ")";
-	$total_events = 0;
-	if( $wpdb->query($sql1) ){
-		$total_events =	$wpdb->num_rows;
-	}
-	return $total_events;
-}
+	//If this is an event manager	
+	$event_manager = function_exists('espresso_member_data') && ( current_user_can('espresso_event_manager') && !current_user_can('administrator') ) ? true : false;
+	$event_admin = function_exists('espresso_member_data') && ( current_user_can('espresso_event_admin') ) ? true : false;	
 	
-function espresso_total_events_today(){
-	//Get total events today
-	global $wpdb;
+	$SQL .= 'SELECT ';
 	
-	//Dates
-	$curdate = date("Y-m-d");
-	$pieces = explode('-',$curdate, 3);
-	$this_year_r = $pieces[0];
-	$this_month_r = $pieces[1];
-	$days_this_month = date('t', strtotime($curdate));	
-	
-	$sql2 = "(";
-	if ( !empty($group)){
-		$sql2 .= "SELECT e.id FROM ". EVENTS_DETAIL_TABLE." e ";
-		$sql2 .= " JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id ";
-		$sql2 .= " JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = r.venue_id ";
-		$sql2 .= " WHERE e.event_status != 'D' AND e.start_date = '" . $curdate . "' ";
-		$sql2 .= !empty($group) ? " AND l.locale_id IN (" . $group . ") " : '';
-		$sql2 .= ") UNION (";
+	if ( $count && $attendees ) {
+		// count attendees
+		$SQL .= 'SUM(a.quantity) quantity';
+	} else if ( ! $count && $attendees ) {
+		// get attendees
+		$SQL .= 'a.*, e.id event_id, e.event_name, checked_in';
+	} else if ( $count && ! $attendees ) {
+		// count events
+		$SQL .= 'COUNT(e.id) events'; //, t.start_time
+	} else if ( ! $count && ! $attendees ) {
+		// get events
+		$SQL .= 'e.id event_id, e.event_name, e.event_identifier, e.registration_start, e.registration_startT, e.registration_end, e.registration_endT, e.start_date, e.end_date, e.is_active, e.recurrence_id, e.wp_user, e.event_status, e.reg_limit'; //, t.start_time
+	} 	
+	//get the venue 
+	if ( ! $count && ! $attendees && $use_venue_manager ) {
+		$SQL .= ', v.name AS venue_title, v.address AS venue_address, v.address2 AS venue_address2, v.city AS venue_city, v.state AS venue_state, v.zip AS venue_zip, v.country AS venue_country';
+	} else if ( ! $count && ! $attendees ) {
+		$SQL .= ', e.venue_title, e.phone, e.address, e.address2, e.city, e.state, e.zip, e.country';
 	}
-	$sql2 .= "SELECT e.id FROM ". EVENTS_DETAIL_TABLE." e ";
-	$sql2 .= " WHERE e.event_status != 'D' AND e.start_date = '" . $curdate . "' ";
-	if(  function_exists('espresso_member_data') && ( espresso_member_data('role')=='espresso_event_manager' || espresso_member_data('role')=='espresso_group_admin') ){
-		$sql2 .= " AND e.wp_user = '" . espresso_member_data('id') ."' ";
+	// get the locale for R&P
+	$SQL .= ! $count && ! $attendees && $group_admin_locales && $use_venue_manager ? ', lc.name AS locale_name' : '';
+	// this might be needed
+	$SQL .= $attendees ? ' FROM '. EVENTS_ATTENDEE_TABLE . ' a ' : ' FROM '. EVENTS_DETAIL_TABLE . ' e ';	
+	// join event table for attendee queries
+	$SQL .= $attendees ? 'JOIN '. EVENTS_DETAIL_TABLE . ' e ON e.id=a.event_id ' : '';
+	// join  categories
+	if ( $category_id ) {
+		$SQL .= 'JOIN ' . EVENTS_CATEGORY_REL_TABLE . ' cr ON cr.event_id = e.id ';
+		$SQL .= 'JOIN ' . EVENTS_CATEGORY_TABLE . ' c ON  c.id = cr.cat_id ';
 	}
-	$sql2 .= ")";
-	$total_events_today = 0;
-	if( $wpdb->query($sql2) ){
-		$total_events_today =	$wpdb->num_rows;
+	// join venues
+	if (  ! $count && ! $attendees && $use_venue_manager ) {
+		$SQL .= 'LEFT JOIN ' . EVENTS_VENUE_REL_TABLE . ' vr ON vr.event_id = e.id ';
+		$SQL .= 'LEFT JOIN ' . EVENTS_VENUE_TABLE . ' v ON v.id = vr.venue_id ';
 	}
-	return $total_events_today;
+	// join locales for R&P
+	if (   ! $count && ! $attendees && $use_venue_manager && $group_admin_locales  ) {
+		$SQL .= 'JOIN ' . EVENTS_LOCALE_REL_TABLE . ' l ON  l.venue_id = vr.venue_id ';
+		$SQL .= 'JOIN ' . EVENTS_LOCALE_TABLE . ' lc ON lc.id = l.locale_id ';
+	}
+	//Event status filter
+	if ( $event_status ) {
+		switch ( $event_status ) {			
+			case 'X' : // Denied
+			case 'D' : // Deleted
+					$SQL .= 'WHERE e.event_status = "' . $event_status . '"';
+				break;
+			case 'IA' : // Inactive
+					$SQL .= 'WHERE ( e.is_active = "N" AND e.event_status != "D" )';
+					// and if we are NOT filtering the date in any other way, then only retreive currently running events
+					//$SQL .=  ! $month_range && ! $today_filter ? ' OR e.end_date < "' . $curdate . '" )' : ' )';
+				break;
+			case 'A' : // Active
+			case 'P' : // Pending
+			case 'R' : // Draft
+			case 'S' : // Waitlist
+			case 'O' : // Ongoing
+					$SQL .= 'WHERE e.is_active = "Y" AND e.event_status = "' . $event_status . '"';
+					// and if we are NOT filtering the date in any other way, then only retreive currently running events
+					$SQL .=  ! $month_range && ! $today_filter ? ' AND e.end_date >= "' . $curdate . '"' : '';
+				break;							
+			case 'L' : // ALL
+			default :
+					$SQL .= 'WHERE e.event_status != "D"';
+				break;							
+		}		
+	} else {
+		// show ACTIVE events
+		$SQL .= 'WHERE e.is_active = "Y" AND e.event_status = "A"';
+		// and if we are NOT filtering the date in any other way, then only retreive currently running events
+		$SQL .=  ! $month_range && ! $today_filter ? ' AND e.end_date >= "' . $curdate . '"' : '';
+	}
+	// specific event?
+	$SQL .= !$count && $event_id ? 'AND e.id = ' . $event_id : '';
+	//Category filter
+	$SQL .= $category_id ? ' AND c.id = "' . $category_id . '" ' : '';
+	// for R&P : Find events in the locale
+	$SQL .=! $count && ! $attendees && $use_venue_manager && $group_admin_locales ? ' AND l.locale_id IN (' . $group_admin_locales . ') ' : '';
+	// Attendee Payment Status
+	$SQL .= ! $count && $attendees && $payment_status ? ' AND a.payment_status = "' . $payment_status . '"' : '';
+	//Month filter
+	$SQL .= $month_range && $attendees ? ' AND a.date BETWEEN "' . $year_r . '-' . $month_r . '-01" AND "' . $year_r . '-' . $month_r . '-' . $days_this_month . '"' : '';
+	$SQL .= $month_range && ! $attendees ? ' AND e.start_date BETWEEN "' . $year_r . '-' . $month_r . '-01" AND "' . $year_r . '-' . $month_r . '-' . $days_this_month . '"' : '';
+	// Today events filter 
+	$SQL .= $today_filter && $attendees ? " AND date BETWEEN '". $curdate . " 00:00:00' AND '". $curdate." 23:59:59' " : '';
+	$SQL .= $today_filter && ! $attendees ? ' AND e.start_date = "' . $curdate . '"' : '';
+	//This months events filter
+	$SQL .= $this_month_filter && $attendees ? " AND date BETWEEN '" . $this_year_r . "-" . $this_month_r . "-01' AND '" . $this_year_r . "-" . $this_month_r . "-" . $days_this_month . "' " : '';
+	$SQL .= $this_month_filter && ! $attendees ? ' AND e.start_date BETWEEN "' . $this_year_r . '-' . $this_month_r . '-01" AND "' . $this_year_r . '-' . $this_month_r . '-' . $days_this_month . '"' : '';
+	// for R&P : If user is an event manager, then show only their events
+	$SQL .= $member_id && !$event_manager && !$event_admin ? ' AND e.wp_user = "' . $member_id . '"' : '';
+	$SQL .= $event_manager && !$member_id && !$event_admin ? " AND e.wp_user = '" . espresso_member_data('id') ."'" : '';
+	// group data queries by event
+	$SQL .= ! $count && ! $attendees ? ' GROUP BY e.id' : '';		
+	// for R&P : close the UNION
+	$SQL .= $close_union ? ' )' : '';
+	// order by
+	$SQL .= ! $count && $attendees && ! $group_admin_locales ? ' ORDER BY date DESC, id ASC' : '';
+	$SQL .= ! $count && ! $attendees && ! $group_admin_locales ? ' ORDER BY e.start_date ASC, e.event_name ASC' : '';
+	// limit and offset
+	$SQL .= ! $count && ! $group_admin_locales ? $records_to_show : '';
+	// send 'er back
+	return $SQL;
+
 }
 
-function espresso_total_events_this_month(){	
-	//Get total events this month
+
+
+/**
+ * 	Get total number of events
+ *
+ * @access public
+ * @return int
+ */
+function espresso_total_events(){
 	global $wpdb;
-	
-	//Dates
-	$curdate = date("Y-m-d");
-	$pieces = explode('-',$curdate, 3);
-	$this_year_r = $pieces[0];
-	$this_month_r = $pieces[1];
-	$days_this_month = date('t', strtotime($curdate));
-	
-	$sql3 = "(";
-	if (!empty($group)){
-		$sql3 .= "SELECT e.id FROM ". EVENTS_DETAIL_TABLE." e ";
-		$sql3 .= " JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id ";
-		$sql3 .= " JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = r.venue_id ";
-		$sql3 .= " WHERE event_status != 'D' AND start_date BETWEEN '".date('Y-m-d', strtotime($this_year_r. '-' .$this_month_r . '-01'))."' AND '".date('Y-m-d', strtotime($this_year_r . '-' .$this_month_r. '-' . $days_this_month))."' ";
-		$sql3 .= !empty($group) ? " AND l.locale_id IN (" . $group . ") " : '';
-		$sql3 .= ") UNION (";
-	}
-	$sql3 .= "SELECT e.id FROM ". EVENTS_DETAIL_TABLE." e ";
-	$sql3 .= " WHERE event_status != 'D' AND start_date BETWEEN '".date('Y-m-d', strtotime($this_year_r. '-' .$this_month_r . '-01'))."' AND '".date('Y-m-d', strtotime($this_year_r . '-' .$this_month_r. '-' . $days_this_month))."' ";
-	if(  function_exists('espresso_member_data') && ( espresso_member_data('role')=='espresso_event_manager' || espresso_member_data('role')=='espresso_group_admin') ){
-		$sql3 .= " AND wp_user = '" . espresso_member_data('id') ."' ";
-	}
-	$sql3 .= ")";
-	//echo $sql3;
-	$wpdb->query($sql3);
-	$total_events_this_month = 0;
-	if( $wpdb->query($sql3) ){
-		$total_events_this_month =	$wpdb->num_rows;
-	}
-	return $total_events_this_month;
+	$SQL = espresso_generate_events_page_list_table_sql( TRUE, FALSE, 'none' );
+	$results = $wpdb->get_var( $SQL );
+	return $results;
 }
-	
-	/* Attendees */
-	
-	function espresso_total_all_attendees(){
+
+
+
+/**
+ * 	Get total number of events this month
+ *
+ * @access public
+ * @return int
+ */
+
+function espresso_total_events_this_month(){	
+	global $wpdb;
+	$SQL = espresso_generate_events_page_list_table_sql( TRUE, FALSE, 'this_month' );
+	$results = $wpdb->get_var( $SQL );
+	return $results;
+}
+
+
+
+/**
+ * 	Get total number of events for today
+ *
+ * @access public
+ * @return int
+ */
+function espresso_total_events_today(){
+	global $wpdb;
+	$SQL = espresso_generate_events_page_list_table_sql( TRUE, FALSE, 'today' );
+	$results = $wpdb->get_var( $SQL );
+	return $results;
+}
+
+
+
+/**
+ * 	Get total number of attendees for all events
+ *
+ * @access public
+ * @return int
+ */
+function espresso_total_all_attendees(){
 		//Get number of total attendees
-		global $wpdb;
-		$WHERE = " WHERE ";
-		$asql1 = "(";
-		if (function_exists('espresso_member_data')&&espresso_member_data('role')=='espresso_group_admin'){
-			$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-			$asql1 .= "SELECT SUM(a.quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE. " a ";
-			$asql1 .= " JOIN ". EVENTS_DETAIL_TABLE ." e ON e.id=a.event_id ";
-			if (!empty($group)){
-				$asql1 .= " JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id ";
-				$asql1 .= " JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = r.venue_id ";
-				$asql1 .= " $WHERE l.locale_id IN (" . implode(",",$group) . ") " ;
-				$WHERE = " AND ";
-			}
-			//$asql1 .= !empty($group) ? " WHERE l.locale_id IN (" . implode(",",$group) . ") " : '';
-			//$asql1 .= " AND quantity >= 1 ";
-			// AND (payment_status='Completed' OR payment_status='Pending') ";
-			$asql1 .= " $WHERE event_status != 'D' ";
-			$asql1 .= ") UNION (";
-		}
-		$WHERE_2 = " WHERE ";
-		$asql1 .= "SELECT SUM(a.quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE. " a ";
-		$asql1 .= " JOIN ". EVENTS_DETAIL_TABLE ." e ON e.id=a.event_id ";
-		if(  function_exists('espresso_member_data') && ( espresso_member_data('role')=='espresso_event_manager' || espresso_member_data('role')=='espresso_group_admin') ){
-			$asql1 .= " $WHERE_2 wp_user = '" . espresso_member_data('id') ."'";
-			$WHERE_2 = " AND ";
-		}
-		//$asql1 .= " $WHERE a.quantity >= 1 ";
-		//AND (a.payment_status='Completed' OR a.payment_status='Pending') ";
-		$asql1 .= " $WHERE_2 e.event_status != 'D' ";
-		$asql1 .= ")";
-		if(  function_exists('espresso_member_data') && ( espresso_member_data('role')=='espresso_event_manager' || espresso_member_data('role')=='espresso_group_admin') ){
-		}
-		$wpdb->query($asql1);
-		//echo $asql1;
-		//echo '<p>$asql1 '.$asql1.'</p>';
-		$total_a = 0;
-		if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity!=NULL) {
-			$total_a =  $wpdb->last_result[0]->quantity + (isset($wpdb->last_result[1]->quantity) ? $wpdb->last_result[1]->quantity:0);
-		}
-		return $total_a;
-	}
-	
-	function espresso_total_attendees_today(){
-		//Get total attendees today
-		global $wpdb;
-		$curdate = date("Y-m-d");
-		$asql2 = "(";
-		if (function_exists('espresso_member_data')&&espresso_member_data('role')=='espresso_group_admin'){
-			$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-			$asql2 .= "SELECT SUM(a.quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE. " a ";
-			$asql2 .= " LEFT JOIN ". EVENTS_DETAIL_TABLE ." e ON e.id=a.event_id ";
-			if (!empty($group)){
-				$asql2 .= " JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id ";
-				$asql2 .= " JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = r.venue_id ";
-			}
-			$asql2 .= " WHERE date BETWEEN '". $curdate.' 00:00:00'."' AND '". $curdate.' 23:59:59' ."' ";
-			$asql2 .= !empty($group) ? " AND l.locale_id IN (" . implode(",",$group) . ") " : '';
-			$asql2 .= " AND quantity >= 1";
-			// AND (payment_status='Completed' OR payment_status='Pending') ";
-			$asql2 .= " AND event_status != 'D' ";
-			$asql2 .= ") UNION (";
-		}
-		$asql2 .= "SELECT SUM(a.quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE. " a ";
-		$asql2 .= " LEFT JOIN ". EVENTS_DETAIL_TABLE ." e ON e.id=a.event_id ";
-		$asql2 .= " WHERE date BETWEEN '". $curdate.' 00:00:00'."' AND '". $curdate.' 23:59:59' ."' ";
-		if(  function_exists('espresso_member_data') && ( espresso_member_data('role')=='espresso_event_manager' || espresso_member_data('role')=='espresso_group_admin') ){
-			$asql2 .= " AND e.wp_user = '" . espresso_member_data('id') ."' ";
-		}
-		$asql2 .= " AND a.quantity >= 1 ";
-		//AND (a.payment_status='Completed' OR a.payment_status='Pending') ";
-		$asql2 .= " AND e.event_status != 'D' ";
-		$asql2 .= ")";
-		//echo $asql2;
-		$total_a_today = 0;
-		$wpdb->query($asql2);
-		if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity!=NULL) {
-			$total_a_today =  $wpdb->last_result[0]->quantity + (isset($wpdb->last_result[1]->quantity) ? $wpdb->last_result[1]->quantity:0);
-		}
-		return $total_a_today;
-	}
-	//echo total_attendees_today();
-	
-	function espresso_total_attendees_this_month(){
-		//Get total attendees this month
-		global $wpdb;
+	global $wpdb;
+	$SQL = espresso_generate_events_page_list_table_sql( TRUE, TRUE, 'none' );
+	$results = $wpdb->get_var( $SQL );
+	return $results;
+}
+
+
+
+/**
+ * 	Get total number of attendees for this month
+ *
+ * @access public
+ * @return int
+ */
+function espresso_total_attendees_this_month(){
 		
-		//Dates
-		$curdate = date("Y-m-d");
-		$pieces = explode('-',$curdate, 3);
-		$this_year_r = $pieces[0];
-		$this_month_r = $pieces[1];
-		$days_this_month = date('t', strtotime($curdate));
-		
-		$asql3 = "(";
-		if (function_exists('espresso_member_data')&&espresso_member_data('role')=='espresso_group_admin'){
-			$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-			$asql3 .= "SELECT SUM(a.quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE. " a ";
-			$asql3 .= " LEFT JOIN ". EVENTS_DETAIL_TABLE ." e ON e.id=a.event_id ";
-			if (!empty($group)){
-				$asql3 .= " JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id ";
-				$asql3 .= " JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = r.venue_id ";
-			}
-			$asql3 .= " WHERE date BETWEEN '".event_espresso_no_format_date($this_year_r. '-' .$this_month_r . '-01',$format = 'Y-m-d')."' AND '".event_espresso_no_format_date($this_year_r . '-' .$this_month_r. '-' . $days_this_month,$format = 'Y-m-d')."' ";
-			$asql3 .= !empty($group) ? " AND l.locale_id IN (" . implode(",",$group) . ") " : '';
-			$asql3 .= " AND a.quantity >= 1 ";
-			//AND (a.payment_status='Completed' OR a.payment_status='Pending') ";
-			$asql3 .= " AND e.event_status != 'D' ";
-			$asql3 .= ") UNION (";
-		}
-		$asql3 .= "SELECT SUM(a.quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE. " a ";
-		$asql3 .= " LEFT JOIN ". EVENTS_DETAIL_TABLE ." e ON e.id=a.event_id ";
-		$asql3 .= " WHERE a.date BETWEEN '".event_espresso_no_format_date($this_year_r. '-' .$this_month_r . '-01',$format = 'Y-m-d')."' AND '".event_espresso_no_format_date($this_year_r . '-' .$this_month_r. '-' . $days_this_month,$format = 'Y-m-d')."' ";
-		if(  function_exists('espresso_member_data') && ( espresso_member_data('role')=='espresso_event_manager' || espresso_member_data('role')=='espresso_group_admin') ){
-			$asql3 .= " AND e.wp_user = '" . espresso_member_data('id') ."' ";
-		}
-		$asql3 .= " AND a.quantity >= 1 ";
-		//AND (a.payment_status='Completed' OR a.payment_status='Pending') ";
-		$asql3 .= " AND e.event_status != 'D' ";
-		$asql3 .= ")";
-		//echo $asql3;
-		$total_a_this_month = 0;
-		$wpdb->query($asql3);
-		if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity!=NULL) {
-			$total_a_this_month =  $wpdb->last_result[0]->quantity + (isset($wpdb->last_result[1]->quantity) ? $wpdb->last_result[1]->quantity:0);
-		}
-		return $total_a_this_month;
-	}
-	//echo total_attendees_this_month();
+	global $wpdb;
+	$SQL = espresso_generate_events_page_list_table_sql( TRUE, TRUE, 'this_month' );
+	$results = $wpdb->get_var( $SQL );
+	return $results;
+}
+
+
+
+/**
+ * 	Get total number of attendees for today
+ *
+ * @access public
+ * @return int
+ */
+function espresso_total_attendees_today(){
+	global $wpdb;
+	$SQL = espresso_generate_events_page_list_table_sql( TRUE, TRUE, 'today' );
+	$results = $wpdb->get_var( $SQL );
+	return $results;
+}
