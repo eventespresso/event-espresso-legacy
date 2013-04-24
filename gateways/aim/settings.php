@@ -1,7 +1,7 @@
 <?php
 
 function event_espresso_aim_payment_settings() {
-	global $espresso_premium, $active_gateways;;
+	global $espresso_premium, $active_gateways;
 	if (!$espresso_premium)
 		return;
 	if (isset($_POST['update_authnet_aim'])) {

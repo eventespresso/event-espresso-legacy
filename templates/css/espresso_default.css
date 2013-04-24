@@ -9,7 +9,9 @@
 	text-align: right; font-size:.9em;
 }
 .ee-featured-image{
-	float: right;
+	float: left;
+	margin:5px;
+	padding:10px;
 }
 
 /* Payment Page Styles */
