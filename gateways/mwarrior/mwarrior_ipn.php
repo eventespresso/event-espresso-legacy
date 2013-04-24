@@ -30,7 +30,7 @@ function espresso_process_mwarrior($payment_data) {
 		$payment_data['txn_id'] = $mwarrior->response['responseData']['transactionID'];
 		if ($mwarrior->response['status'] == 'approved') {
 			?>
-			<h2><?php _e('Thank You!', 'event_espresso'); ?></h2>
+			
 			<p><?php _e('Your transaction has been processed.', 'event_espresso'); ?></p>
 			<?php
 			$payment_data['payment_status'] = 'Completed';
