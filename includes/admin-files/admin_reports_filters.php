@@ -146,7 +146,7 @@ function espresso_display_admin_reports_filters( $total = 0 ) {
 	  			</span>
 	  		</a>
 	  	</li>
-	  	<li>
+	  	<li> | 
 		  	<a <?php echo $view == 'today_a' ? ' class="current" ' : '' ?> href="<?php echo add_query_arg( array_merge( array( 'event_admin_reports' => 'event_list_attendees', 'today_a' => 'true' ), $query_args ), EVT_ADMIN_URL ); ?>">
 	  			<?php _e('Today', 'event_espresso'); ?>
 	  			<span class="count">
