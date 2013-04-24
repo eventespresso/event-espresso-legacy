@@ -6,13 +6,13 @@
  * @param boolean $count whether this query will return field data or COUNT events or SUM attendee quantity
  * @param boolean $attendees whether this query will return data from the events table or the attendee table
  * @param string $filters whether a particular filter is active or not; mostly used in conjunction with the $count parameter ie: COUNT events this_month
- * @param mixed boolean | array $group_admin array og R&P member group IDs or FALSE if not used
+ * @param mixed boolean | array $group_admin_locales array og R&P member group IDs or FALSE if not used
  * @return string
  */
-function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendees= FALSE, $filters = '', $group_admin = FALSE ) {
+function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendees= FALSE, $filters = '', $group_admin_locales = FALSE ) {
 	global $org_options;
 	
-	if ( ! $group_admin ) {
+	if ( ! $group_admin_locales ) {
 		$member_id = FALSE;
 	}
 
@@ -73,24 +73,25 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	$use_venue_manager = isset( $org_options['use_venue_manager'] ) && $org_options['use_venue_manager'] == 'Y' ? TRUE : FALSE;
 
 	$SQL = '';
+	$close_union = FALSE;
 	
 	//Roles & Permissions
 	//This checks to see if the user is a regional manager and creates a union to join the events that are in the users region based on the venue/locale combination
-	if ( ! $group_admin && function_exists('espresso_member_data') && current_user_can('espresso_group_admin') && !current_user_can('administrator') ) {
+	if ( ! $group_admin_locales && function_exists('espresso_member_data') && current_user_can('espresso_group_admin') && !current_user_can('administrator') ) {
 		$member_id = espresso_member_data('id');
-		$group_admin = get_user_meta( $member_id, 'espresso_group', TRUE );
-		$group_admin = is_array( $group_admin ) ? implode( ',', $group_admin ) : FALSE;
-		if ( $group_admin ) {
+		$group_admin_locales = get_user_meta( $member_id, 'espresso_group', TRUE );
+		$group_admin_locales = is_array( $group_admin_locales ) ? implode( ',', $group_admin_locales ) : FALSE;
+		if ( $group_admin_locales ) {
 			$SQL .= '( ';
-			$SQL .= espresso_generate_events_page_list_table_sql( $count, $attendees, $filters, $group_admin );
+			$SQL .= espresso_generate_events_page_list_table_sql( $count, $attendees, $filters, $group_admin_locales );
 			$SQL .= ' ) UNION ( ';
+			$close_union = TRUE;
 		}
 	}
 	
 	//If this is an event manager	
 	$event_manager = function_exists('espresso_member_data') && ( current_user_can('espresso_event_manager') && !current_user_can('administrator') ) ? true : false;
-	$event_admin = function_exists('espresso_member_data') && ( current_user_can('espresso_event_admin') ) ? true : false;
-	
+	$event_admin = function_exists('espresso_member_data') && ( current_user_can('espresso_event_admin') ) ? true : false;	
 	
 	$SQL .= 'SELECT ';
 	
@@ -114,7 +115,7 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 		$SQL .= ', e.venue_title, e.phone, e.address, e.address2, e.city, e.state, e.zip, e.country';
 	}
 	// get the locale for R&P
-	$SQL .= ! $count && ! $attendees && $group_admin && $use_venue_manager ? ', lc.name AS locale_name' : '';
+	$SQL .= ! $count && ! $attendees && $group_admin_locales && $use_venue_manager ? ', lc.name AS locale_name' : '';
 	// this might be needed
 	$SQL .= $attendees ? ' FROM '. EVENTS_ATTENDEE_TABLE . ' a ' : ' FROM '. EVENTS_DETAIL_TABLE . ' e ';	
 	// join event table for attendee queries
@@ -130,9 +131,9 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 		$SQL .= 'LEFT JOIN ' . EVENTS_VENUE_TABLE . ' v ON v.id = vr.venue_id ';
 	}
 	// join locales for R&P
-	if (   ! $count && ! $attendees && $group_admin && $use_venue_manager  ) {
-		$SQL .= 'LEFT JOIN ' . EVENTS_LOCALE_REL_TABLE . ' l ON  l.venue_id = vr.venue_id ';
-		$SQL .= 'LEFT JOIN ' . EVENTS_LOCALE_TABLE . ' lc ON lc.id = l.locale_id ';
+	if (   ! $count && ! $attendees && $use_venue_manager && $group_admin_locales  ) {
+		$SQL .= 'JOIN ' . EVENTS_LOCALE_REL_TABLE . ' l ON  l.venue_id = vr.venue_id ';
+		$SQL .= 'JOIN ' . EVENTS_LOCALE_TABLE . ' lc ON lc.id = l.locale_id ';
 	}
 	//Event status filter
 	if ( $event_status ) {
@@ -171,7 +172,7 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	//Category filter
 	$SQL .= $category_id ? ' AND c.id = "' . $category_id . '" ' : '';
 	// for R&P : Find events in the locale
-	$SQL .=$group_admin && $use_venue_manager ? ' AND l.locale_id IN (' . implode( ',', $group_admin ) . ') ' : '';
+	$SQL .=! $count && ! $attendees && $use_venue_manager && $group_admin_locales ? ' AND l.locale_id IN (' . $group_admin_locales . ') ' : '';
 	// Attendee Payment Status
 	$SQL .= ! $count && $attendees && $payment_status ? ' AND a.payment_status = "' . $payment_status . '"' : '';
 	//Month filter
@@ -189,12 +190,12 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	// group data queries by event
 	$SQL .= ! $count && ! $attendees ? ' GROUP BY e.id' : '';		
 	// for R&P : close the UNION
-	$SQL .= $group_admin ? ' )' : '';
+	$SQL .= $close_union ? ' )' : '';
 	// order by
-	$SQL .= ! $count && $attendees ? ' ORDER BY date DESC, id ASC' : '';
-	$SQL .= ! $count && ! $attendees ? ' ORDER BY e.start_date ASC, e.event_name ASC' : '';
+	$SQL .= ! $count && $attendees && ! $group_admin_locales ? ' ORDER BY date DESC, id ASC' : '';
+	$SQL .= ! $count && ! $attendees && ! $group_admin_locales ? ' ORDER BY e.start_date ASC, e.event_name ASC' : '';
 	// limit and offset
-	$SQL .= ! $count ? $records_to_show : '';
+	$SQL .= ! $count && ! $group_admin_locales ? $records_to_show : '';
 	// send 'er back
 	//echo '<h4>$SQL : ' . $SQL . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 	return $SQL;
