@@ -1,14 +1,12 @@
 <?php
 
 function espresso_display_quickpay($payment_data) {
-	//echo '<h3>'. __CLASS__ . '->' . __FUNCTION__ . ' <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h3>';
 	extract($payment_data);
 	global $wpdb, $org_options;
 	$quickpay_settings = get_option('event_espresso_quickpay_settings');
 	$sessionid = $_SESSION['espresso_session']['id'];
 	$ordernumber = $registration_id;
-	// Set the transaction id to a unique value for reference in the system.
-	$transaction_id = uniqid(md5(rand(1, 666)), true); 
+	$transaction_id = uniqid(md5(rand(1, 666)), true); // Set the transaction id to a unique value for reference in the system.
 	$button_url = $quickpay_settings['button_url'];
 	$md5secret = $quickpay_settings['quickpay_md5secret'];
 	$payurl = "https://secure.quickpay.dk/form/";
@@ -54,7 +52,10 @@ function espresso_display_quickpay($payment_data) {
 			}
 		}
 	}
-	
+	$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET
+				txn_id = '" . md5($transaction_id . $md5secret) . "'
+				WHERE id='" . $attendee_id . "' ";
+	$wpdb->query($sql);
 	$amount = number_format($amount, 2, '', '');
 	$currency = $quickpay_settings['quickpay_currency'];
 
