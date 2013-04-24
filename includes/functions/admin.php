@@ -1172,6 +1172,13 @@ function espresso_email_message($id) {
 	return $email_data;
 }
 
+/**
+ * Echoes out the HTML for the even category dropdown. 
+ * Returns true if its outputted, false if we decdied not to output it.
+ * @global type $wpdb
+ * @param type $current_value
+ * @return boolean
+ */
 function espresso_category_dropdown($current_value = '') {
 	global $wpdb;
 
@@ -1193,8 +1200,9 @@ function espresso_category_dropdown($current_value = '') {
 			echo '>' . stripslashes_deep($row["category_name"]) . '</option>' . "\n";
 		}
 		echo "</select>";
+		return true;
 	} else {
-		return;
+		return false;
 	}
 }
 

@@ -236,6 +236,9 @@ function espresso_update_active_gateways() {
 		if (array_key_exists('ideal', $active_gateways)) {
 			$active_gateways['ideal'] = "/gateways/ideal";
 		}
+		if (array_key_exists('infusionsoft_payment', $active_gateways)) {
+			$active_gateways['infusionsoft_payment'] = "/gateways/infusionsoft";
+		}
 		if (array_key_exists('invoice', $active_gateways)) {
 			$active_gateways['invoice'] = "/gateways/invoice";
 		}

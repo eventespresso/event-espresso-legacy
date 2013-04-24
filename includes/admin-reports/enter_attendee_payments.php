@@ -112,7 +112,11 @@ function enter_attendee_payments() {
 					if ( $upd_success === FALSE ) {
 						$notifications['error'][] = __('An error occured. The attendee payment details could not be updated.', 'event_espresso'); 
 					} else {
-
+						
+						$attendee_data = array('attendee_id'=> $primary_att->id, 'payment_status'=>$upd_payment_status, 'registration_id'=> $registration_id, 'total_cost'=>$upd_total, 'txn_type'=>__('Manual Website Payment', 'event_espresso'), 'txn_id'=>$txn_id);
+				
+						do_action('action_hook_espresso_update_attendee_payment_status', $attendee_data);
+				
 						if ( count($registration_ids) > 0 ) {
 						
 							foreach($registration_ids as $reg_id) {

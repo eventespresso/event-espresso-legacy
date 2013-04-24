@@ -9,7 +9,9 @@
 	text-align: right; font-size:.9em;
 }
 .ee-featured-image{
-	float: right;
+	float: left;
+	margin:5px;
+	padding:10px;
 }
 
 /* Payment Page Styles */
@@ -236,7 +238,7 @@ select.wide { width: 175px; }
 .event_espresso_form_wrapper ul.event_form_field li,
 .event_espresso_form_wrapper .checkbox-lbl,
 .event_espresso_form_wrapper .radio-btn-lbl {
- 	display: inline-block; margin:0 2em 0 0; padding:0;
+ 	display: inline-block; width:98%; margin:0 2em 0 0; padding:0;
 	text-align: left; vertical-align: middle; cursor: pointer;
 }
 /*.event_espresso_form_wrapper li label { width:auto; }*/
