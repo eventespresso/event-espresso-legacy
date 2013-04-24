@@ -1,25 +1,20 @@
-<?php
+<?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }	
+
 function event_list_attendees() {
 	
-    global $wpdb, $org_options, $ticketing_installed, $espresso_premium;
-	
-	define( 'EVT_ADMIN_URL', admin_url( 'admin.php?page=events' ));
+   global $wpdb, $org_options, $ticketing_installed, $espresso_premium;
+    require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/event-management/queries.php');
+	if ( ! defined( 'EVT_ADMIN_URL' )) {
+		define( 'EVT_ADMIN_URL', admin_url( 'admin.php?page=events' ));		
+	}
+ 
 	$EVT_ID = isset( $_REQUEST['event_id'] ) && $_REQUEST['event_id'] != '' ? absint( $_REQUEST['event_id'] ) : FALSE;
 
 	if ( $EVT_ID ){
 		echo '<h1>'.espresso_event_list_attendee_title( $EVT_ID ).'</h1>'; 
 	}	
 
-	$max_rows = isset( $_REQUEST['max_rows'] ) & ! empty( $_REQUEST['max_rows'] ) ? absint( $_REQUEST['max_rows'] ) : 50;
-	$start_rec = isset( $_REQUEST['start_rec'] ) && ! empty($_REQUEST['start_rec']) ? absint( $_REQUEST['start_rec'] ) : 0;
-	$records_to_show = " LIMIT $max_rows OFFSET $start_rec ";
-	
-	//Dates
-	$curdate = date('Y-m-d');
-	$this_year_r = date('Y');
-	$this_month_r = date('m');
-	$days_this_month = date( 't', time() );
-
+	//Delete the attendee(s)
     if ( isset( $_POST['delete_customer'] ) && ! empty( $_POST['delete_customer'] )) {
         if ( is_array( $_POST['checkbox'] )) {
             while ( list( $att_id, $value ) = each( $_POST['checkbox'] )) {
@@ -85,11 +80,18 @@ function event_list_attendees() {
         }
     }
 	
-    require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/event-management/queries.php');
+	// get SQL for query
+	$SQL = espresso_generate_events_page_list_table_sql( FALSE, TRUE );
+	$attendees = $wpdb->get_results( $SQL, OBJECT_K );
+	$total_attendees = $wpdb->num_rows;
+//	echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//	printr( $attendees, '$attendees  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+
 
 	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php')) {
         require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php');
-    } else {
+	 	espresso_display_admin_reports_filters( $total_events );
+	} else {
 		?>
 		<p>
 			<strong><?php _e('Advanced filters are available in the premium versions.', 'event_espresso');?></strong> 
@@ -102,10 +104,10 @@ function event_list_attendees() {
 
 	
 	
-	$sql_clause = " WHERE ";
-    $sql_a = "(";
+//	$sql_clause = " WHERE ";
+//    $sql_a = "(";
 	
-    if (function_exists('espresso_member_data') && espresso_member_data('role') == 'espresso_group_admin') {
+/*    if (function_exists('espresso_member_data') && espresso_member_data('role') == 'espresso_group_admin') {
 	
         $group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
         $group = implode(",", $group);
@@ -152,7 +154,7 @@ function event_list_attendees() {
             $sql_clause = " AND ";
         }
         $sql_a .= $group != '' ? $sql_clause . "  l.locale_id IN (" . $group . ") " : '';
-		$sql_a .= " AND e.event_status != 'D' ";
+		$sql_a .= $event_status ? " AND e.event_status = '" . $event_status . "' " : " AND e.event_status != 'D' ";
         $sql_a .= ") UNION (";
 		
     }
@@ -201,50 +203,19 @@ function event_list_attendees() {
     if (function_exists('espresso_member_data') && ( espresso_member_data('role') == 'espresso_event_manager' || espresso_member_data('role') == 'espresso_group_admin')) {
         $sql_a .= $sql_clause . " e.wp_user = '" . espresso_member_data('id') . "' ";
     }
-	$sql_a .= " $sql_clause e.event_status != 'D' ";
+	$sql_a .= $event_status ? " AND e.event_status = '" . $event_status . "' " : " AND e.event_status != 'D' ";
     $sql_a .= ") ORDER BY date DESC, id ASC ";
     $sql_a .= $records_to_show;
 	
     $attendees = $wpdb->get_results($sql_a);
-    $total_attendees = $wpdb->num_rows;
+	//echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+    $total_attendees = $wpdb->num_rows;*/
 
 	$updated_ticket_quantity =0;
-
 	$att_table_form_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID ), EVT_ADMIN_URL );
+
+	
 ?>
-<form id="attendee-admin-list-page-select-frm" name="attendee_admin_list_page_select_frm" method="post" action="<?php echo $att_table_form_url; ?>">
-	<div id="attendee-admin-list-page-select-dv" class="admin-list-page-select-dv">
-		<input name="navig" value="<?php _e('Retrieve', 'event_espresso'); ?>" type="submit" class="button-secondary">
-		<?php //_e('a max total of', 'event_espresso'); ?>
-		<?php $rows = array( 50 => 50, 100 => 100, 250 => 250, 500 => 500, 100000 => 'all' ); ?>
-		<select name="max_rows" size="1">
-			<?php foreach ( $rows as $key => $value ) { ?>
-			<?php $selected = $key == $max_rows ? ' selected="selected"' : ''; ?>
-			<option value="<?php echo $key ?>"<?php echo $selected ?>><?php echo $value ?>&nbsp;&nbsp;</option>
-			<?php } ?>
-		</select>		
-		<?php _e('rows from the db at a time', 'event_espresso'); ?>
-		<input name="start_rec" value="<?php echo $start_rec ?>" class="textfield" type="hidden">
-		<?php
-			if ( $start_rec > 0 && $max_rows < 100000 ) {
-				$prev_rows = $start_rec > $max_rows ? ( $start_rec - $max_rows ) : 0;
-				$prev_rows_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID, 'max_rows' => $max_rows, 'start_rec' => $prev_rows ), EVT_ADMIN_URL ); 
-		?>
-		<a id="attendee-admin-load-prev-rows-btn" href="<?php echo $prev_rows_url; ?>" title="load prev rows" class="button-secondary">
-			<?php echo __('Previous', 'event_espresso') . ' ' . $max_rows  . ' ' .  __('rows', 'event_espresso'); ?>
-		</a>
-		<?php } ?>
-		<?php 			
-			if ( $total_attendees >= $max_rows && $max_rows < 100000 ) {
-				$next_rows = $start_rec + $max_rows;
-				$next_rows_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID, 'max_rows' => $max_rows, 'start_rec' => $next_rows ), EVT_ADMIN_URL ); 
-		?>
-		<a id="attendee-admin-load-next-rows-btn" href="<?php echo $next_rows_url; ?>" title="load next rows" class="button-secondary">
-		<?php echo __('Next', 'event_espresso') . ' ' . $max_rows  . ' ' .  __('rows', 'event_espresso'); ?>
-		</a> 
-		<?php } ?>
-	</div>
-</form>
 	
 <form id="form1" name="form1" method="post" action="<?php echo $att_table_form_url; ?>">
 	<table id="table" class="widefat fixed" width="100%">

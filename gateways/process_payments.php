@@ -99,26 +99,36 @@ add_filter('filter_hook_espresso_get_total_cost', 'espresso_get_total_cost');
  * payment_date
  */
 function espresso_update_attendee_payment_status_in_db($payment_data) {
+//	echo '<h3>'. __CLASS__ . '->' . __FUNCTION__ . ' <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h3>';
 	global $wpdb;
 	
 	$payment_data['payment_date'] = date(get_option('date_format'));
 
 	$payment = $payment_data['payment_status'] == "Completed" ? $payment_data['total_cost'] : 0.00;
 
-	$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET amount_pd = '%f' WHERE id ='%d' ";
-	$wpdb->query( $wpdb->prepare( $SQL, $payment, $payment_data['attendee_id'] ));
+	$wpdb->update( 
+		EVENTS_ATTENDEE_TABLE, 
+		array( 'amount_pd' => $payment ), 
+		array( 'id' => $payment_data['attendee_id'] ), 
+		array( '%f' ),
+		array( '%d' ) 
+	);
 	
-	$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . " ";
-	$SQL .= "SET payment_status = '%s', txn_type = '%s', txn_id = '%s', payment_date ='%s', transaction_details = '%s' ";
-	$SQL .= "WHERE attendee_session ='%s' ";
-	$wpdb->query($wpdb->prepare( $SQL, array(	
-			$payment_data['payment_status'],
-			$payment_data['txn_type'],
-			$payment_data['txn_id'],
-			$payment_data['payment_date'],
-			$payment_data['txn_details'],
-			$payment_data['attendee_session']
-	)));
+	$payment_data['txn_details'] = empty( $payment_data['txn_details'] ) ? serialize( $_REQUEST ) : $payment_data['txn_details']; 
+	
+	$wpdb->update( 
+		EVENTS_ATTENDEE_TABLE, 
+		array( 
+			'payment_status' 		=> $payment_data['payment_status'],
+			'txn_type' 					=> $payment_data['txn_type'],
+			'txn_id' 						=> $payment_data['txn_id'],
+			'payment_date' 		=> $payment_data['payment_date'],
+			'transaction_details' 	=> $payment_data['txn_details']
+		), 
+		array( 'attendee_session' => $payment_data['attendee_session'] ), 
+		array( '%s', '%s', '%s', '%s', '%s' ),
+		array( '%s' ) 
+	);	
 	
 	do_action('action_hook_espresso_track_successful_sale',$payment_data);
 	
@@ -146,7 +156,6 @@ function espresso_prepare_event_link($payment_data) {
 	}
 	return $payment_data;
 }
-
 add_filter('filter_hook_espresso_prepare_event_link', 'espresso_prepare_event_link');
 
 
@@ -219,8 +228,11 @@ function deal_with_ideal() {
 		}
 	}
 }
-
 add_action('action_hook_espresso_transaction', 'deal_with_ideal',99);//just before espresso_txn
+
+
+
+
 
 function espresso_email_after_payment($payment_data) {
 	global $org_options;
@@ -231,6 +243,11 @@ function espresso_email_after_payment($payment_data) {
 		}
 	}
 }
+
+
+
+
+
 // Needed for WorldPay processing
 if ( isset( $_POST[ 'name' ] ) && isset( $_POST[ 'MC_type'] ) && 'worldpay' == $_POST[ 'MC_type' ] ) {
 	$_POST['_name'] = $_POST['name'];

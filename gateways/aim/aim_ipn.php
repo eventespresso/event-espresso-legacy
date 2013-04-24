@@ -86,7 +86,6 @@ function espresso_process_aim($payment_data) {
 		if ($response->approved) {
 			$payment_data['payment_status'] = 'Completed';
 			?>
-			<h2><?php _e('Thank You!', 'event_espresso'); ?></h2>
 			<p><?php _e('Your transaction has been processed.', 'event_espresso'); ?></p>
 			<p><?php __('Transaction ID:', 'event_espresso') . $response->transaction_id; ?></p>
 			<?php
