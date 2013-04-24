@@ -56,7 +56,7 @@ function espresso_process_firstdata_e4($payment_data) {
 //store the results in reusable variables
 		if ($myE4->ipnData['x_response_code'] == 1) {
 			?>
-			
+			<h2><?php _e('Thank You!', 'event_espresso'); ?></h2>
 			<p><?php _e('Your transaction has been processed.', 'event_espresso'); ?></p>
 			<?php
 			$payment_data['payment_status'] = 'Completed';
