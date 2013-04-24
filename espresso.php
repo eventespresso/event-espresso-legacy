@@ -11,7 +11,7 @@
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
 
-  Copyright (c) 2008-2012 Event Espresso  All Rights Reserved.
+  Copyright (c) 2008-2013 Event Espresso  All Rights Reserved.
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
