@@ -37,10 +37,6 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	
 	// toggle filters based on value passed from "count functions" (date filters)
 	switch ( $filters ) {
-//		case 'month_range' :
-//				$this_month_filter = FALSE;
-//				$today_filter = FALSE;
-//			break;
 		case 'this_month' :
 				$month_range = FALSE;
 				$this_month_filter = TRUE;
@@ -197,7 +193,6 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	// limit and offset
 	$SQL .= ! $count && ! $group_admin_locales ? $records_to_show : '';
 	// send 'er back
-	//echo '<h4>$SQL : ' . $SQL . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 	return $SQL;
 
 }
