@@ -8,14 +8,6 @@ function event_espresso_edit_list() {
 		define( 'EVT_ADMIN_URL', admin_url( 'admin.php?page=events' ));		
 	}
 
-	// get SQL for query
-	$SQL = espresso_generate_events_page_list_table_sql();
-	$events = $wpdb->get_results( $SQL, OBJECT_K );
-	$total_events = $wpdb->num_rows;
-//	echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-	//printr( $events, '$events  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-
-
 	 // DELETE EVENT
 	if (isset($_POST['delete_event'])) {
 		if (is_array($_POST['checkbox'])) {
@@ -54,6 +46,14 @@ function event_espresso_edit_list() {
 	if (defined('EVENT_ESPRESSO_RECURRENCE_MODULE_ACTIVE')) {
 		$recurrence_icon = '<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/arrow_rotate_clockwise.png" alt="Recurring Event" title="Recurring Event" class="re_fr" />';
 	}
+
+	// get SQL for query
+	$SQL = espresso_generate_events_page_list_table_sql();
+	$events = $wpdb->get_results( $SQL, OBJECT_K );
+	$total_events = $wpdb->num_rows;
+	//echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+	//printr( $events, '$events  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+
 
 	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php')) {
 		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php');
