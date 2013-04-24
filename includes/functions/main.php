@@ -446,6 +446,39 @@ if (!function_exists('event_espresso_get_status')) {
 
 }
 
+
+
+/*
+'NOT_ACTIVE';
+$is_active == "Y" && date($timestamp) <= date(time()) && $event_status != "D";
+$is_active == "N" && $event_status != "D";
+$event_status == "D";
+$is_active == "Y" && date($registration_end_timestamp) <= date(time()) && $event_status != "D";
+$is_active == "Y" && $event_status == "X";
+
+
+'PENDING';
+$is_active == "Y" && $event_status == "P";
+$is_active == "Y" && $event_status == "R";
+
+
+'ACTIVE';
+$is_active == "Y" && date($timestamp) >= date(time()) && $event_status != "D";
+$is_active == "Y" && $event_status == "O";
+$is_active == "Y" && $event_status == "S";
+$is_active == "Y" && date($registration_start_timestamp) <= date(time()) && $event_status != "D";
+
+
+'REGISTRATION_NOT_OPEN'
+$is_active == "Y" && date($registration_start_timestamp) >= date(time()) && $event_status != "D"
+*/
+
+
+
+
+
+
+
 if (!function_exists('espresso_status_detail')) {
 
 	function espresso_status_detail($event_id) {
@@ -512,8 +545,8 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 			case 'num_attendees_slash_reg_limit' :
 			case 'avail_spaces_slash_reg_limit' :
 				$num_attendees = 0;
-				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id='" . $event_id . "' AND (payment_status='Completed' OR payment_status='Pending' OR payment_status='Refund') ";
-				$wpdb->get_results($a_sql, ARRAY_A);
+				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id=%d AND (payment_status='Completed' OR payment_status='Pending' OR payment_status='Refund') ";
+				$wpdb->get_results( $wpdb->prepare( $a_sql, $event_id ), ARRAY_A);
 				if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
 					$num_attendees = $wpdb->last_result[0]->quantity;
 				}
@@ -525,8 +558,8 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 			case 'avail_spaces_slash_reg_limit' :
 			case 'num_attendees_slash_reg_limit' :
 				$number_available_spaces = 0;
-				$sql_reg_limit = "SELECT reg_limit FROM " . EVENTS_DETAIL_TABLE . " WHERE id='" . $event_id . "'";
-				$reg_limit = $wpdb->get_var($sql_reg_limit);
+				$sql_reg_limit = "SELECT reg_limit FROM " . EVENTS_DETAIL_TABLE . " WHERE id=%d";
+				$reg_limit = $wpdb->get_var( $wpdb->prepare( $sql_reg_limit, $event_id ));
 				if (empty($num_attendees))
 					$num_attendees = 0;
 				if ($reg_limit > $num_attendees) {
@@ -537,8 +570,8 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 			case 'num_incomplete' :
 			case 'num_completed_slash_incomplete' :
 				$num_incomplete = 0;
-				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id='" . $event_id . "' AND payment_status='Incomplete'";
-				$wpdb->get_results($a_sql);
+				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id=%d AND payment_status='Incomplete'";
+				$wpdb->get_results( $wpdb->prepare( $a_sql, $event_id ));
 				if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
 					$num_incomplete = $wpdb->last_result[0]->quantity;
 				}
@@ -574,8 +607,8 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 				break;
 			case 'num_completed' :
 				$num_completed = 0;
-				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id='" . $event_id . "' AND (payment_status='Completed' OR payment_status='Pending'' OR payment_status='Refund')  ";
-				$wpdb->get_results($a_sql);
+				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id=%d AND (payment_status='Completed' OR payment_status='Pending' OR payment_status='Refund')  ";
+				$wpdb->get_results( $wpdb->prepare( $a_sql, $event_id ));
 				if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
 					$num_completed = $wpdb->last_result[0]->quantity;
 				}
@@ -583,8 +616,8 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 				break;
 			case 'num_pending' :
 				$num_pending = 0;
-				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id='" . $event_id . "' AND  payment_status='Pending'";
-				$wpdb->get_results($a_sql);
+				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id=%d AND  payment_status='Pending'";
+				$wpdb->get_results( $wpdb->prepare( $a_sql, $event_id ));
 				if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
 					$num_pending = $wpdb->last_result[0]->quantity;
 				}
@@ -592,8 +625,8 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 				break;
 			case 'num_declined' :
 				$num_declined = 0;
-				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id='" . $event_id . "' AND  payment_status='Payment Declined'";
-				$wpdb->get_results($a_sql);
+				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id=%d AND  payment_status='Payment Declined'";
+				$wpdb->get_results( $wpdb->prepare( $a_sql, $event_id ));
 				if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
 					$num_declined = $wpdb->last_result[0]->quantity;
 				}
@@ -758,9 +791,9 @@ if (!function_exists('espresso_event_category_data')) {
 		$sql = "SELECT c.category_identifier, c.category_name, c.category_desc, c.display_desc, c.category_meta FROM " . EVENTS_DETAIL_TABLE . " e ";
 		$sql .= " JOIN " . EVENTS_CATEGORY_REL_TABLE . " r ON r.event_id = e.id ";
 		$sql .= " JOIN " . EVENTS_CATEGORY_TABLE . " c ON  c.id = r.cat_id ";
-		$sql .= " WHERE e.id = '" . $event_id . "' ";
+		$sql .= " WHERE e.id =%d ";
 
-		$wpdb->get_results($sql);
+		$wpdb->get_results( $wpdb->prepare( $sql, $event_id ));
 		$num_rows = $wpdb->num_rows;
 
 		if ($num_rows > 0 && $all_cats = FALSE) {
@@ -1171,9 +1204,9 @@ function espresso_quantity_for_registration($attendee_id) {
 function espresso_is_primary_attendee($attendee_id) {
 	global $wpdb;
 	$sql = "SELECT am.meta_value FROM " . EVENTS_ATTENDEE_META_TABLE . " am ";
-	$sql .= " WHERE am.attendee_id = '" . $attendee_id . "' AND am.meta_key='primary_attendee' AND am.meta_value='1' ";
+	$sql .= " WHERE am.attendee_id = %d AND am.meta_key='primary_attendee' AND am.meta_value='1' ";
 	//echo $sql;
-	$wpdb->get_results($sql);
+	$wpdb->get_results( $wpdb->prepare( $sql, $attendee_id ));
 	if ($wpdb->num_rows > 0) {
 		return true;
 	}
@@ -1183,9 +1216,9 @@ function espresso_get_primary_attendee_id($registration_id) {
 	global $wpdb;
 	$sql = "SELECT am.attendee_id FROM " . EVENTS_ATTENDEE_META_TABLE . " am ";
 	$sql .= " JOIN " . EVENTS_ATTENDEE_TABLE . " ea ON ea.id = am.attendee_id ";
-	$sql .= " WHERE ea.registration_id = '" . $registration_id . "' AND am.meta_key='primary_attendee' AND am.meta_value='1' ";
+	$sql .= " WHERE ea.registration_id = %s AND am.meta_key='primary_attendee' AND am.meta_value='1' ";
 	//echo $sql;
-	$wpdb->get_results($sql);
+	$wpdb->get_results( $wpdb->prepare( $sql, $registration_id ));
 	if ($wpdb->num_rows > 0) {
 		return $wpdb->last_result[0]->attendee_id;
 	}
