@@ -9,7 +9,7 @@
 */
 class EE_Moneris_HPP extends Espresso_PaymentGateway {
 
-	public $gateway_version = '0.1';
+	public $gateway_version = '0.3';
 	public $settings;
 	public $logIpn;
 	
@@ -89,7 +89,7 @@ class EE_Moneris_HPP extends Espresso_PaymentGateway {
 	
 		global $org_options;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-		// make sure the WP_Http clkass is loaded
+		// make sure the WP_Http class is loaded
 	    if( ! class_exists( 'WP_Http' )) {
 			include_once( ABSPATH . WPINC. '/class-http.php' );
 		}
@@ -125,17 +125,17 @@ class EE_Moneris_HPP extends Espresso_PaymentGateway {
 		    } 
 			$verification = simplexml_load_string( $response['body'] );
 
-			if ( current_user_can( 'update_core' )) {
+			if ( $this->testMode && WP_DEBUG && current_user_can( 'update_core' )) {
 				// super user can see debug info 
-//				printr( $this->ipnData, '$this->ipnData  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-//				printr( $verification, '$verification  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+				printr( $this->ipnData, '$this->ipnData  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+				printr( $verification, '$verification  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 			}
 
 			if ( absint( $verification->response_code ) <= 50 && (float)$verification->amount == (float)$this->ipnData['charge_total'] && $verification->status == 'Valid-Approved' ) {
 				return TRUE;
-			} elseif ( $this->testMode ) {
+			} /*elseif ( $this->testMode ) {
 				return TRUE;
-			} else {
+			}*/ else {
 				$log_entry = 'Transaction failed verification, & ';
 				$log_entry .= 'order_id = ' . $verification->order_id . ', & ';
 				$log_entry .= 'response_code = ' . $verification->response_code . ', & ';

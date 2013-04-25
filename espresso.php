@@ -1045,7 +1045,7 @@ function espresso_export_ticket() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	//Version 2.0
 	if (isset($_REQUEST['ticket_launch']) && $_REQUEST['ticket_launch'] == 'true') {
-		echo espresso_ticket_launch($_REQUEST['id'], $_REQUEST['r_id']);
+		echo espresso_ticket_launch( ee_sanitize_value( absint($_REQUEST['id'])), ee_sanitize_value($_REQUEST['r_id']) );
 	}
 	//End Version 2.0
 	

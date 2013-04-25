@@ -82,20 +82,13 @@ function espresso_display_moneris_hpp( $payment_data ) {
 
 	$total = number_format( $total, 2, '.', ',' );
 	
-	if ( current_user_can( 'update_core' )) {
+	if ( WP_DEBUG && current_user_can( 'update_core' )) {
 //		$total = 0.01;
 	}
 	// charge_total  	Final purchase Amount - no $, must include 2 decimal places
 	$EE_Moneris_HPP->addField( 'charge_total', $total );
 	
 	$country = isset( $country ) ? $country : '';
-//	
-//	if ( $country == 'Canada' ) {
-//		switch( $state ) {
-//			default:
-//			break;
-//		}
-//	}
 	
 
 	// bill_first_name text  -  max 30 chars
