@@ -490,8 +490,7 @@ if (!function_exists('espresso_export_stuff')){
 								. $s . escape_csv_val($participant->email)
 								;
 	
-//Debug
-echo '<h4>$VARIABLE : <pre>' . print_r($question_filter,true) . '</pre> <span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+
 								$SQL = "SELECT question_id, answer FROM " . EVENTS_ANSWER_TABLE . " ";
 								$SQL .= "WHERE question_id IN ($question_filter) AND attendee_id = %d";
 
