@@ -58,15 +58,15 @@ function ee_core_load_pue_update() {
 		return;
 
 	$ueip_optin = get_option('ee_ueip_optin');
-	$ueip_has_notified = get_option('ee_ueip_has_notified');
+	$ueip_has_notified = isset($_POST['ueip_optin']) ? TRUE : get_option('ee_ueip_has_notified');
 
 	//has optin been selected for datacollection?
 	$espresso_data_optin = !empty($ueip_optin) ? $ueip_optin : NULL;
 
 	if ( empty($ueip_has_notified) ) {
-		add_action('admin_notices', 'espresso_data_collection_optin_notice');
-		add_action('admin_enqueue_scripts', 'espresso_data_collection_enqueue_scripts' );
-		add_action('wp_ajax_espresso_data_optin', 'espresso_data_optin_ajax_handler');
+		add_action('admin_notices', 'espresso_data_collection_optin_notice', 10 );
+		add_action('admin_enqueue_scripts', 'espresso_data_collection_enqueue_scripts', 10 );
+		add_action('wp_ajax_espresso_data_optin', 'espresso_data_optin_ajax_handler', 10 );
 		update_option('ee_ueip_optin', 'yes');
 		$espresso_data_optin = 'yes';
 	}
@@ -116,13 +116,12 @@ function ee_core_load_pue_update() {
  * @return string html.
  */
  function espresso_data_collection_optin_text() {
-	 $ueip_has_notified = get_option('ee_ueip_has_notified');
-	 
 	 echo '<h4>'.__('User eXperience Improvement Program (UXIP)', 'event_espresso').'</h4>';
 	 echo sprintf( __('%sPlease help us make Event Espresso better and vote for your favorite features.%s With this version of Event Espresso a feature, called the %sUser eXperience Improvement Program (UXIP)%s, has been implemented to automatically send information to us about how you use our products and services, and support-related data. We use this information to improve our products and features, that you use most often, and to help track problems. Participation in the program is enabled by default, and the end results are software improvements to better meet the needs of our customers. The data we collect will never be sold, traded, or misused in any way. %sPlease see our %sPrivacy Policy%s for more information. You can choose to not be part of the solution and opt-out of this program by changing the %sEvent Espresso > General Settings > UXIP Settings%s within your WordPress General Settings.', 'event_espresso'), '<em>', '</em><br />','<a href="http://eventespresso.com/about/user-experience-improvement-program-uxip/" target="_blank">','</a>','<br><br>','<a href="http://eventespresso.com/about/privacy-policy/" target="_blank">','</a>','<a href="admin.php?page=event_espresso#ueip_optin">','</a>' );
 }
 
 function espresso_data_collection_optin_notice() {
+	$ueip_has_notified = get_option('ee_ueip_has_notified');
 	?>
 	<div class="updated data-collect-optin" id="espresso-data-collect-optin-container">
 		<p><?php echo espresso_data_collection_optin_text(); ?></p>

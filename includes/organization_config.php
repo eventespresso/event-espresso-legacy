@@ -118,6 +118,8 @@ function organization_config_mnu() {
 		  } */
 		update_option('events_organization_settings', $org_options);
 		update_option('ee_ueip_optin', $ueip_optin);
+		update_option( 'ee_ueip_has_notified', TRUE );
+		remove_action( 'admin_notices', 'espresso_data_collection_optin_notice', 10 );
 		echo '<div id="message" class="updated fade"><p><strong>' . __('Organization details saved.', 'event_espresso') . '</strong></p></div>';
 	}
 
