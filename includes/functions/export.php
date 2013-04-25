@@ -327,7 +327,7 @@ if (!function_exists('espresso_export_stuff')){
 							$quest_sql .= " JOIN " .  EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 							$quest_sql .= " JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
 							$quest_sql .= " WHERE qgr.group_id in ( $questions_in ) ";
-							if(  function_exists('espresso_member_data') && ( espresso_member_data('role')=='espresso_event_manager' || espresso_member_data('role')=='espresso_group_admin' )){
+							if(  function_exists('espresso_member_data') && ( espresso_member_data('role')=='espresso_event_manager') ){
 								$quest_sql .= " AND qg.wp_user = '" . espresso_member_data('id') ."' ";
 							}		
 							//Fix from Jesse in the forums (http://eventespresso.com/forums/2010/10/form-questions-appearing-in-wrong-columns-in-excel-export/)
@@ -345,7 +345,8 @@ if (!function_exists('espresso_export_stuff')){
 										$question_list[$question->id] = $question->question;
 										$question_filter[$question->id] = $question->id;
 										array_push( $basic_header, escape_csv_val( stripslashes( $question->question )));
-										//array_push($question_sequence, $question->sequence);									
+										//array_push($question_sequence, $question->sequence);		
+																	
 									}
 								}
 							}
@@ -367,7 +368,7 @@ if (!function_exists('espresso_export_stuff')){
 							$group = implode(",",$group);
 							$sql .= "(SELECT ed.event_name, ed.start_date, a.id AS att_id, a.registration_id, a.payment, a.date, a.payment_status, a.txn_type, a.txn_id";
 							$sql .= ", a.amount_pd, a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity";
-							$sql .= ", a.payment_date, a.event_time, a.price_option, a.final_price a_final_price, a.amount_pd, a.quantity a_quantity, a.fname, a.lname, a.email";
+							$sql .= ", a.payment_date, a.event_time, a.price_option, a.final_price a_final_price, a.quantity a_quantity, a.fname, a.lname, a.email";
 							$sql .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 							$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=a.event_id ";
 							if ($group !=''){
@@ -391,7 +392,7 @@ if (!function_exists('espresso_export_stuff')){
 							$sql .= " AND ed.wp_user = '" . espresso_member_data('id') ."' ";
 						}
 						
-						$sql .= $espresso_member ?  ") ORDER BY a.id " : " ORDER BY a.id ";
+						$sql .= $espresso_member ?  ") ORDER BY att_id " : " ORDER BY a.id ";
 		
 						$participants = $wpdb->get_results($sql);
 

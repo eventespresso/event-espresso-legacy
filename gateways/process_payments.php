@@ -113,9 +113,9 @@ function espresso_update_attendee_payment_status_in_db($payment_data) {
 		array( '%f' ),
 		array( '%d' ) 
 	);
-	
+
 	$payment_data['txn_details'] = empty( $payment_data['txn_details'] ) ? serialize( $_REQUEST ) : $payment_data['txn_details']; 
-	
+
 	$wpdb->update( 
 		EVENTS_ATTENDEE_TABLE, 
 		array( 
