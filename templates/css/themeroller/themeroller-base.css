@@ -287,11 +287,11 @@ span.remove-cart-item {
 }
 /*___ Confirmation page ___*/
 
-input[name="confirm"],
-input[name="confirm2"]{
+.entry-content input[name="confirm"],
+.entry-content input[name="confirm2"] {
 margin: .75em .75em 0;
 }
-.additional-conf-info{
+.additional-conf-info {
 margin-top: .75em;
 }
 /*___ Payment options page ___*/
