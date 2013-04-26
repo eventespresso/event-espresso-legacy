@@ -1025,7 +1025,7 @@ if (is_admin()) {
 	}
 	//Check to make sure all of the main pages are setup properly, if not show an admin message.
 	if (((!isset($_REQUEST['event_page_id']) || $_REQUEST['event_page_id'] == NULL) && ($org_options['event_page_id'] == ('0' || ''))) || $org_options['return_url'] == ('0' || '') || $org_options['notify_url'] == ('0' || '')) {
-		add_action('admin_notices', 'event_espresso_activation_notice');
+		add_action('admin_notices', 'event_espresso_activation_notice', 5);
 	}
 }
 
