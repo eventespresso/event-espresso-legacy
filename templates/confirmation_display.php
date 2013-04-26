@@ -115,18 +115,16 @@ $attendee_num = 1;
 					</td>
 				</tr>
 			</table>
-			
+			<p class="espresso_confirm_registration">
+			<input class="btn_event_form_submit ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" type="submit" name="confirm" id="confirm" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
+		    </p>
 		</div>
-		
-		<p class="espresso_confirm_registration">
-			<input class="btn_event_form_submit ui-priority-primary ui-widget-content ui-corner-all" type="submit" name="confirm" id="confirm" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
-		</p>
 		
 		<?php if ($display_questions != '') { ?>
 		
-		<div id="additional-conf-info" class="event-display-boxes">
+		<div class="additional-conf-info event-display-boxes">
 				<h3 class="event_title ui-widget-header ui-corner-top"><?php echo stripslashes_deep($attendee_name)?></h3>
-				<div id="additional-conf-info" class="event-data-display ui-widget-content ui-corner-bottom">
+				<div class="additional-conf-info-inner event-data-display ui-widget-content ui-corner-bottom">
 					<table id="event_espresso_attendee_verify_questions" class="event-display-tables grid">
 					<?php foreach ($questions as $question) { ?>
 						<tr>
@@ -138,15 +136,14 @@ $attendee_num = 1;
 							</td>
 						</tr>
 					<?php } ?>
-					</table>              
+					</table>
+					<p class="espresso_confirm_registration">
+						<input class="btn_event_form_submit ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" type="submit" name="confirm2" id="confirm2" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
+					</p>             
 				</div>
 				<!-- / .event-data-display -->   
 			</div>
 			<!-- / .event-display-boxes -->   
-			
-			<p class="espresso_confirm_registration">
-				<input class="btn_event_form_submit ui-priority-primary ui-widget-content ui-corner-all" type="submit" name="confirm2" id="confirm2" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
-			</p>
 			
 		<?php	} ?>
 								
