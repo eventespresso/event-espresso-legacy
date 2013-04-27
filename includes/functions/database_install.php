@@ -3,7 +3,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 
 
 //This function installs the tables
-function event_espresso_run_install( $table_name, $sql ) {
+function event_espresso_run_install( $table_name, $table_version = '', $sql ) {
 
 	global $wpdb;
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
