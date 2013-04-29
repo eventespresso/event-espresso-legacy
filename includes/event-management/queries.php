@@ -10,7 +10,7 @@
  * @return string
  */
 function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendees= FALSE, $filters = '', $group_admin_locales = FALSE ) {
-	global $org_options, $espresso_premium;
+	global $org_options;
 	
 	if ( ! $group_admin_locales ) {
 		$member_id = FALSE;
@@ -161,9 +161,7 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 		// show ACTIVE events
 		$SQL .= 'WHERE e.is_active = "Y" AND e.event_status = "A"';
 		// and if we are NOT filtering the date in any other way, then only retreive currently running events
-		if ( $espresso_premium == TRUE ){
-			$SQL .=  ! $month_range && ! $today_filter ? ' AND e.end_date >= "' . $curdate . '"' : '';
-		}
+		$SQL .=  ! $month_range && ! $today_filter ? ' AND e.end_date >= "' . $curdate . '"' : '';
 	}
 	// specific event?
 	$SQL .= !$count && $event_id ? 'AND e.id = ' . $event_id : '';
