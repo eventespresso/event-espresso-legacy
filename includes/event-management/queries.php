@@ -150,7 +150,9 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 			case 'O' : // Ongoing
 					$SQL .= 'WHERE e.is_active = "Y" AND e.event_status = "' . $event_status . '"';
 					// and if we are NOT filtering the date in any other way, then only retreive currently running events
-					$SQL .=  ! $month_range && ! $today_filter ? ' AND e.end_date >= "' . $curdate . '"' : '';
+					if ( $attendees == FALSE ){
+						$SQL .=  ! $month_range && ! $today_filter ? ' AND e.end_date >= "' . $curdate . '"' : '';
+					}
 				break;							
 			case 'L' : // ALL
 			default :
