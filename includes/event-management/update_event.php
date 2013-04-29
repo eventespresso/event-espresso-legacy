@@ -193,8 +193,8 @@ function update_event($recurrence_arr = array()) {
         $allow_overflow					= empty($_REQUEST['allow_overflow']) ? 'N' : sanitize_text_field($_REQUEST['allow_overflow']);
         $additional_limit				= !empty($_REQUEST['additional_limit']) && $_REQUEST['additional_limit'] > 0 ? (int)$_REQUEST['additional_limit'] : '5';
         $member_only					= empty($_REQUEST['member_only']) ? 'N' : sanitize_text_field($_REQUEST['member_only']);
-        $is_active						= sanitize_text_field($_REQUEST['is_active']);
-        $event_status					= sanitize_text_field($_REQUEST['event_status']);
+        $is_active						= !empty($_REQUEST['is_active']) ? sanitize_text_field($_REQUEST['is_active']) : 'Y';
+        $event_status					= !empty($_REQUEST['event_status']) ? sanitize_text_field($_REQUEST['event_status']) : 'A';
 
         //Get the first instance of the start and end times
         $start_time						= sanitize_text_field($_REQUEST['start_time'][0]);
