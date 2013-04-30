@@ -247,6 +247,36 @@ function events_data_tables_install() {
 			}
 		}
 	}
+	
+	/**
+	* espresso_ensure_event_status_is_not_blank
+	* 
+	* ensure that for each event has an event status
+	* if the event status is missing, give it a default value of  'A'
+	* 
+	* @since 3.1.32
+	* @return void
+	*/
+	function espresso_ensure_event_status_is_not_blank() {
+	
+		global $wpdb;
+		
+		$SQL = "SELECT id FROM " . $wpdb->prefix . "events_detail WHERE event_status = '' ORDER BY id";
+		if ( $events = $wpdb->get_results( $SQL )) {
+			foreach ( $events as $event ) {		
+					$wpdb->update( 
+							$wpdb->prefix . "events_detail", 
+							array( 'event_status' => 'A' ), 
+							array( 'id' => $event->id ),
+							array( '%s' ),
+							array( '%d' )
+					);	
+								
+			}
+		}
+			
+	}
+
 
 	function events_organization_tbl_install() {
 		global $wpdb;
@@ -767,6 +797,7 @@ function events_data_tables_install() {
 	espresso_answer_fix();
 	espresso_added_by_admin_session_id_fix();
 	espresso_add_cancel_shortcode();
+	espresso_ensure_event_status_is_not_blank();
 	
 	// grab espresso_db_update option
 	$espresso_db_update = get_option( 'espresso_db_update', array() );
