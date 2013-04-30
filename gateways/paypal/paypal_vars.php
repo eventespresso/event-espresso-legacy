@@ -60,7 +60,10 @@ function espresso_display_paypal($payment_data) {
 		
 		if (isset($paypal_settings['tax_override']) && $paypal_settings['tax_override'] == true) {
 			$myPaypal->addField('tax_'.$item_num, '0.00');
-		}	
+		}
+		if (isset($paypal_settings['shipping_override']) && $paypal_settings['shipping_override'] == true) {
+			$myPaypal->addField('shipping_'.$item_num, '0.00');
+		}
 	
 	}
 	//printr( $myPaypal, '$myPaypal  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );

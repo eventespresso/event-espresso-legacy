@@ -5,6 +5,7 @@ function event_espresso_paypal_payment_settings() {
 	if (isset($_POST['update_paypal'])) {
 		$paypal_settings['paypal_id'] = $_POST['paypal_id'];
 		$paypal_settings['tax_override'] = empty($_POST['tax_override']) ? false : true;
+		$paypal_settings['shipping_override'] = empty($_POST['shipping_override']) ? false : true;
 		$paypal_settings['image_url'] = $_POST['image_url'];
 		$paypal_settings['currency_format'] = $_POST['currency_format'];
 		$paypal_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
@@ -24,6 +25,7 @@ function event_espresso_paypal_payment_settings() {
 		}
 		$paypal_settings['paypal_id'] = '';
 		$paypal_settings['tax_override'] = false;
+		$paypal_settings['shipping_override'] = false;
 		$paypal_settings['image_url'] = '';
 		$paypal_settings['currency_format'] = 'USD';
 		$paypal_settings['use_sandbox'] = false;
@@ -98,6 +100,12 @@ function event_espresso_display_paypal_settings() {
 						<li>
 							<label for="tax_override">
 								<?php _e('Override Profile-Based Tax', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=tax_override_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a> <input name="tax_override" type="checkbox" value="1" <?php echo $paypal_settings['tax_override'] ? 'checked="checked"' : '' ?> />
+							</label>
+							
+						</li>
+						<li>
+							<label for="shipping_override">
+								<?php _e('Override Profile-Based Shipping', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=shipping_override_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a> <input name="shipping_override" type="checkbox" value="1" <?php echo $paypal_settings['shipping_override'] ? 'checked="checked"' : '' ?> />
 							</label>
 							
 						</li>
@@ -277,7 +285,12 @@ function event_espresso_display_paypal_settings() {
 		<p><?php _e('Overrides any sales taxes that may be applied to all of your PayPal.com payments. These settings can be managed in your PayPal.com Profile > Sales Tax (<a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=_profile-sales-tax" target="_blank">https://www.paypal.com/us/cgi-bin/webscr?cmd=_profile-sales-tax</a>).', 'event_espresso'); ?></p>
 		<p><?php _e('Even if you are using your Profile-based tax settings, you may want to set a special tax rate for some of your items (e.g. if it is a event/product that does not require tax).', 'event_espresso'); ?></p>
 	</div>
+	<div id="tax_override_info" style="display:none">
+		<h2><?php _e('Override Profile-Based Shipping', 'event_espresso'); ?></h2>
+		<p><?php _e('Overrides any shipping charges that may be applied to all of your PayPal.com payments. These settings can be managed in your PayPal.com Profile > Shipping Calculations  (<a href="https://www.paypal.com/cgi-bin/customerprofileweb?cmd=_profile-shipping" target="_blank">https://www.paypal.com/cgi-bin/customerprofileweb?cmd=_profile-shipping</a>).', 'event_espresso'); ?></p>
+	</div>
 	<?php
+	
 }
 
 add_action('action_hook_espresso_display_gateway_settings','event_espresso_paypal_payment_settings');
