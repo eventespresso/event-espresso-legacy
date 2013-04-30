@@ -267,6 +267,37 @@ function event_espresso_get_event_meta($event_id) {
 	return $event_meta;
 }
 
+/**
+ * espresso get event
+ * @since 3.1.33-alpha
+ * @author Chris Reynolds
+ * @param $event_id // the ID of the event
+ * returns an array of information for the event by the event id
+ */
+if ( !function_exists('espresso_get_event') ) {
+	function espresso_get_event($event_id) {
+		global $wpdb, $org_options;
+		$data = (object)array();
+
+		//Build event queries
+		$sql = "SELECT e.*, ese.start_time, ese.end_time ";
+		if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
+		 	$sql .= ", v.name venue_name, v.address venue_address, v.address2 venue_address2, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta ";
+		}
+		$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
+		$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id = e.id ";
+		if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
+			$sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id ";
+		}
+		$sql.= " WHERE e.is_active='Y' ";
+		$sql.= " AND e.event_status != 'D' ";
+		$sql.= " AND e.id = '" . $event_id . "' LIMIT 0,1";
+
+		$data = $wpdb->get_row( $wpdb->prepare( $sql, NULL ), OBJECT );
+		return $data;
+	}
+}
+
 //This function returns the condition of an event
 if (!function_exists('event_espresso_get_is_active')) {
 

@@ -535,8 +535,7 @@ if (is_admin()) {
 	require_once("includes/form-builder/groups/index.php");
 
 	//Install/Update Tables when plugin is activated
-	require_once("includes/functions/database_install.php");
-	register_activation_hook(__FILE__, 'events_data_tables_install');
+	register_activation_hook(__FILE__, 'espresso_check_data_tables');
 	register_activation_hook(__FILE__, 'espresso_update_active_gateways');
 
 	
@@ -1105,8 +1104,9 @@ function espresso_check_data_tables() {
 	if( ! is_array( $espresso_db_update )) {
 		// if option is FALSE, then it never existed
 		if ( $espresso_db_update === FALSE ) {
-			// create coption with autoload OFF
-			add_option( 'espresso_db_update', array(), '', 'no' );
+			// make $espresso_db_update an array and save option with autoload OFF
+			$espresso_db_update =  array();
+			add_option( 'espresso_db_update', $espresso_db_update, '', 'no' );
 		} else {
 			// option is NOT FALSE but also is NOT an array, so make it an array and save it
 			$espresso_db_update =  array( $espresso_db_update );
@@ -1116,7 +1116,7 @@ function espresso_check_data_tables() {
 	
 	// if current EE version is NOT in list of db updates, then update the db
 	if ( ! in_array( EVENT_ESPRESSO_VERSION, $espresso_db_update )) {
-		delete_option( 'espresso_db_update' );
+		require_once("includes/functions/database_install.php");
 		events_data_tables_install();
 	}	
 	
@@ -1211,3 +1211,21 @@ function espresso_check_data_tables() {
 
 
 }
+
+
+
+
+
+
+/**
+ * 		captures plugin activation errors for debugging
+ *
+ * 		@access public
+ * 		@return void
+ */
+function espresso_plugin_activation_errors() {
+	if ( WP_DEBUG === TRUE ) {
+		file_put_contents( EVENT_ESPRESSO_UPLOAD_DIR. 'logs/espresso_plugin_activation_errors.html', ob_get_contents() );
+	}	
+}
+add_action('activated_plugin', 'espresso_plugin_activation_errors');
