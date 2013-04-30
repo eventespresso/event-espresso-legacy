@@ -285,7 +285,7 @@ function event_espresso_display_paypal_settings() {
 		<p><?php _e('Overrides any sales taxes that may be applied to all of your PayPal.com payments. These settings can be managed in your PayPal.com Profile > Sales Tax (<a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=_profile-sales-tax" target="_blank">https://www.paypal.com/us/cgi-bin/webscr?cmd=_profile-sales-tax</a>).', 'event_espresso'); ?></p>
 		<p><?php _e('Even if you are using your Profile-based tax settings, you may want to set a special tax rate for some of your items (e.g. if it is a event/product that does not require tax).', 'event_espresso'); ?></p>
 	</div>
-	<div id="tax_override_info" style="display:none">
+	<div id="shipping_override_info" style="display:none">
 		<h2><?php _e('Override Profile-Based Shipping', 'event_espresso'); ?></h2>
 		<p><?php _e('Overrides any shipping charges that may be applied to all of your PayPal.com payments. These settings can be managed in your PayPal.com Profile > Shipping Calculations  (<a href="https://www.paypal.com/cgi-bin/customerprofileweb?cmd=_profile-shipping" target="_blank">https://www.paypal.com/cgi-bin/customerprofileweb?cmd=_profile-shipping</a>).', 'event_espresso'); ?></p>
 	</div>
