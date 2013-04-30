@@ -85,6 +85,9 @@ function espresso_display_paypal($payment_data) {
 	$myPaypal->addField('city', $city);
 	$myPaypal->addField('state', $state);
 	$myPaypal->addField('zip', $zip);
+	if (isset($paypal_settings['tax_override']) && $paypal_settings['tax_override'] == true) {
+		$myPaypal->addField('tax', '0.00');
+	}
 	
 	if (!empty($paypal_settings['bypass_payment_page']) && $paypal_settings['bypass_payment_page'] == 'Y') {
 		$myPaypal->submitPayment();
