@@ -56,7 +56,11 @@ function espresso_display_paypal($payment_data) {
 		} else {
 
 			$myPaypal->addField('amount_' . $item_num, $item->final_price);
-		}		
+		}
+		
+		if (isset($paypal_settings['tax_override']) && $paypal_settings['tax_override'] == true) {
+			$myPaypal->addField('tax_'.$item_num, '0.00');
+		}	
 	
 	}
 	//printr( $myPaypal, '$myPaypal  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
@@ -85,10 +89,7 @@ function espresso_display_paypal($payment_data) {
 	$myPaypal->addField('city', $city);
 	$myPaypal->addField('state', $state);
 	$myPaypal->addField('zip', $zip);
-	if (isset($paypal_settings['tax_override']) && $paypal_settings['tax_override'] == true) {
-		$myPaypal->addField('tax', '0.00');
-	}
-	
+		
 	if (!empty($paypal_settings['bypass_payment_page']) && $paypal_settings['bypass_payment_page'] == 'Y') {
 		$myPaypal->submitPayment();
 	} else {
