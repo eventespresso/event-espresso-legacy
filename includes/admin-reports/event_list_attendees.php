@@ -90,7 +90,7 @@ function event_list_attendees() {
 
 	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php')) {
         require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php');
-	 	espresso_display_admin_reports_filters( $total_events );
+	 	espresso_display_admin_reports_filters( $total_attendees );
 	} else {
 		?>
 		<p>
@@ -102,8 +102,6 @@ function event_list_attendees() {
 		<?php
     }
 
-	
-	
 	$updated_ticket_quantity =0;
 	$att_table_form_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID ), EVT_ADMIN_URL );
 
