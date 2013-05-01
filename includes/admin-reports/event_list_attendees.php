@@ -90,7 +90,7 @@ function event_list_attendees() {
 
 	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php')) {
         require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php');
-	 	espresso_display_admin_reports_filters( $total_events );
+	 	espresso_display_admin_reports_filters( $total_attendees );
 	} else {
 		?>
 		<p>
