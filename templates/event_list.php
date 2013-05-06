@@ -164,7 +164,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		//Search query
 		if ( $ee_search ){
 			// search for full original string within bracketed search options
-			$sql .= " AND ( e.event_name LIKE '%$ee_search_string%' ";
+			$sql .= " AND ( e.event_name LIKE '%%$ee_search_string%%' ";
 			// array of common words that we don't want to waste time looking for
 			$words_to_strip = array( ' the ', ' a ', ' or ', ' and ' );
 			$words = str_replace( $words_to_strip, ' ', $ee_search_string );
@@ -172,7 +172,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 			$words = explode( ' ', $words );
 			// search for each word  as an OR statement
 			foreach ( $words as $word ) {
-				$sql .= " OR e.event_name LIKE '%$word%' ";			
+				$sql .= " OR e.event_name LIKE '%%$word%%' ";			
 			}
 			// close the search options
 			$sql .= " ) ";
@@ -191,7 +191,6 @@ if (!function_exists('event_espresso_get_event_details')) {
 		$total_pages			= ceil($total_events/$events_per_page);
 		$offset					= ($current_page-1)*$events_per_page;
 		$events					= array_slice($events,$offset,$events_per_page);
-
 		if ( $use_wrapper ) {
 			echo "<div id='event_wrapper'>";
 		}
