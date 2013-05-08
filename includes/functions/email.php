@@ -566,7 +566,7 @@ if (!function_exists('event_espresso_send_email')) {
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		extract($params);
 		//Define email headers
-		$headers = "MIME-Version: 1.0\r\n";
+		$headers = "";
 		if ($org_options['email_fancy_headers']=='Y') {
 			$headers .= "From: " . $org_options['organization'] . " <" . $org_options['contact_email'] . ">\r\n";
 			$headers .= "Reply-To: " . $org_options['organization'] . "  <" . $org_options['contact_email'] . ">\r\n";
@@ -689,7 +689,7 @@ if (!function_exists('event_espresso_send_cancellation_notice')) {
 		global $wpdb, $org_options;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		//Define email headers
-		$headers = "MIME-Version: 1.0\r\n";
+		$headers = "";
 		if ($org_options['email_fancy_headers']=='Y') {
 			$headers .= "From: " . $org_options['organization'] . " <" . $org_options['contact_email'] . ">\r\n";
 			$headers .= "Reply-To: " . $org_options['organization'] . "  <" . $org_options['contact_email'] . ">\r\n";
