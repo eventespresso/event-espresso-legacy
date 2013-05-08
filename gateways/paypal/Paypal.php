@@ -111,7 +111,7 @@ class EE_Paypal extends Espresso_PaymentGateway {
 			$errors .= "Errors resulting from the execution of curl transfer: " . $error["result"];
 			$this->logErrors($errors);
 
-			if (strcmp($result, "VERIFIED") == 0) { // It may seem strange but this function returns 0 if the result matches the string So you MUST check it is 0 and not just do strcmp ($result, "VERIFIED") (the if will fail as it will equate the result as false)
+			if (strcmp(trim($result), "VERIFIED") == 0) { // It may seem strange but this function returns 0 if the result matches the string So you MUST check it is 0 and not just do strcmp ($result, "VERIFIED") (the if will fail as it will equate the result as false)
 				// Do some checks to ensure that the payment has been sent to the correct person
 				// Check and ensure currency and amount are correct
 				// Check that the transaction has not been processed before
