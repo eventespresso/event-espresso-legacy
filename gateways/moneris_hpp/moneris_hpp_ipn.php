@@ -2,9 +2,9 @@
 //echo '<h3>'. basename( __FILE__ ) . ' LOADED <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h3>';
 
 function espresso_transactions_moneris_hpp_get_attendee_id( $attendee_id ) {
-	$attendee_id = isset( $_POST['id1'] ) && ! empty( $_POST['id1'] ) ? absint( $_POST['id1'] ) : '';
+	$_REQUEST['attendee_id'] = isset( $_POST['id1'] ) && ! empty( $_POST['id1'] ) ? absint( $_POST['id1'] ) : '';
 	$_REQUEST['registration_id'] = isset( $_POST['cust_id'] ) && ! empty( $_POST['cust_id'] ) ? sanitize_key( $_POST['cust_id'] ) : FALSE;
-	return $attendee_id;
+	return $_REQUEST['attendee_id'];
 }
 
 function espresso_process_moneris_hpp( $payment_data ) {

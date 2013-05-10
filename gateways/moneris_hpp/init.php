@@ -13,7 +13,8 @@ event_espresso_require_gateway( 'moneris_hpp/moneris_hpp_ipn.php' );
 // check for moneris response and that response was posted within the last 15 minutes
 if ( isset( $_POST['rvar_moneris_hpp'] ) && $_POST['rvar_moneris_hpp'] <= time() && $_POST['rvar_moneris_hpp'] >= ( time() - 900 )) {
 	add_filter('filter_hook_espresso_transactions_get_attendee_id', 'espresso_transactions_moneris_hpp_get_attendee_id');
-	add_filter('filter_hook_espresso_transactions_get_payment_data', 'espresso_process_moneris_hpp');
+//	add_filter('filter_hook_espresso_transactions_get_payment_data', 'espresso_process_moneris_hpp');
+	add_filter('filter_hook_espresso_thank_you_get_payment_data', 'espresso_process_moneris_hpp');
 }
 
 function espresso_moneris_hpp_formal_name( $gateway_formal_names ) {

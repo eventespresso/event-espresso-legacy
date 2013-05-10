@@ -180,16 +180,19 @@ function espresso_display_admin_reports_filters( $total = 0 ) {
 		
 		// add event_admin_reports back into query args
 		$query_args['event_admin_reports'] = $event_admin_reports;
-			
+		
 		// Filter Month
 		espresso_attendees_by_month_dropdown( $month_range ); ?>
 		<input type="submit" class="button-secondary" value="Filter Month" id="post-query-month"/> &nbsp; &nbsp; 
 		
 		<?php 
 		// Filter Category
-		if( espresso_category_dropdown( $category_id ) ){ ?>
-		<input type="submit" class="button-secondary" value="Filter Category" id="post-query-category"/> &nbsp; &nbsp; 			
-		<?php }
+		// when viewing the attendee list for a specific event we no longer need or would want the category filter	
+		if ( ! $event_id ) {
+			if( espresso_category_dropdown( $category_id ) ){ ?>
+			<input type="submit" class="button-secondary" value="Filter Category" id="post-query-category"/> &nbsp; &nbsp; 			
+			<?php }
+		}
 		
 		// Filter Payment Status
 		$status = array(
@@ -244,7 +247,7 @@ function espresso_display_admin_reports_filters( $total = 0 ) {
 	}
 
 	// query params we need to remove now
-	$remove = array( 'month_range', 'category_id', 'event_status' );
+	$remove = array( 'month_range', 'category_id', 'event_status', 'payment_status' );
 	// then remove the current view from the query args so that the view can be changed
 	$query_args = espresso_remove_filter_from_query_args( $remove );
 
