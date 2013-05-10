@@ -140,7 +140,7 @@ function event_list_attendees() {
 				 	<span><?php _e('Option', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
 				</th>
 				<th align="center" class="manage-column column-date" id="amount" style="width: 5%;" title="Click to Sort" scope="col">
-				 	<span><?php _e('Payment', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
+				 	<span><?php _e('Status', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
 				</th>
 				<th class="manage-column column-date" id="payment_type" scope="col" title="Click to Sort" style="width: 8%;">
 				 	<span><?php _e('Type', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
