@@ -1202,24 +1202,3 @@ function espresso_check_data_tables() {
 
 
 }
-<<<<<<< HEAD
-
-
-
-
-
-
-/**
- * 		captures plugin activation errors for debugging
- *
- * 		@access public
- * 		@return void
- */
-function espresso_plugin_activation_errors() {
-	if ( WP_DEBUG === TRUE ) {
-		file_put_contents( EVENT_ESPRESSO_UPLOAD_DIR. 'logs/espresso_plugin_activation_errors.html', ob_get_contents() );
-	}	
-}
-add_action('activated_plugin', 'espresso_plugin_activation_errors');
-=======
->>>>>>> refs/heads/3.1.33-BETA
