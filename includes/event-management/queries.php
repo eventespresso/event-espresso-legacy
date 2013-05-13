@@ -201,8 +201,6 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	// limit and offset
 	$SQL .= ! $count && ! $group_admin_locales ? $records_to_show : '';
 	// send 'er back
-	//Debug
-echo '<h4>$VARIABLE : ' . $SQL . '  <br />' . __FILE__ . '<br />line no: ' . __LINE__ . '</h4><br /><br /><br />';
 	return $SQL;
 
 }
