@@ -103,7 +103,7 @@ function espresso_update_attendee_payment_status_in_db($payment_data) {
 //	echo '<h3>'. __CLASS__ . '->' . __FUNCTION__ . ' <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h3>';
 	global $wpdb;
 	
-	$payment_data['payment_date'] = date(get_option('date_format'));
+	$payment_data['payment_date'] = date_i18n(get_option('date_format'));
 
 	$payment = $payment_data['payment_status'] == "Completed" ? $payment_data['total_cost'] : 0.00;
 
@@ -172,7 +172,7 @@ function event_espresso_txn() {
 	$active_gateways = get_option('event_espresso_active_gateways', array());
 	if (empty($active_gateways)) {
 		$subject = __('Website Payment IPN Not Setup', 'event_espresso');
-		$body = sprintf(__('The IPN for %s at %s has not been properly setup and is not working. Date/time %s', 'event_espresso'), $org_options['organization'], home_url(), date('g:i A'));
+		$body = sprintf(__('The IPN for %s at %s has not been properly setup and is not working. Date/time %s', 'event_espresso'), $org_options['organization'], home_url(), date_i18n('g:i A'));
 		wp_mail($org_options['contact_email'], $subject, $body);
 		return;
 	}

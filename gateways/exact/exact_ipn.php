@@ -75,7 +75,7 @@ function espresso_process_exact($payment_data) {
 			$subject = 'Exact.com Notification - Gateway Variable Dump';
 			$body = "An authorize.net payment notification was successfully recieved\n";
 			$body .= "from " . $myExact->ipnData['x_email'] . " on " . date('m/d/Y');
-			$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+			$body .= " at " . date_i18n('g:i A') . "\n\nDetails:\n";
 			foreach ($myExact->ipnData as $key => $value) {
 				$body .= "\n$key: $value\n";
 			}
@@ -90,7 +90,7 @@ function espresso_process_exact($payment_data) {
 		$subject = 'Instant Payment Notification - Gateway Variable Dump';
 		$body = "An instant payment notification failed\n";
 		$body .= "from " . $myExact->ipnData['x_email'] . " on " . date('m/d/Y');
-		$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+		$body .= " at " . date_i18n('g:i A') . "\n\nDetails:\n";
 		foreach ($myExact->ipnData as $key => $value) {
 			$body .= "\n$key: $value\n";
 		}

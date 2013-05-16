@@ -70,7 +70,7 @@ class Espresso_GoogleLog {
   function LogError($log){
     if($this->logLevel & Espresso_L_ERR){
       fwrite($this->errorLogFile,
-      sprintf("\n%s:- %s\n",date("D M j G:i:s T Y"),$log));
+      sprintf("\n%s:- %s\n",date_i18n("D M j G:i:s T Y"),$log));
       return true;
     }
     return false;
@@ -79,7 +79,7 @@ class Espresso_GoogleLog {
   function LogRequest($log){
     if($this->logLevel & Espresso_L_RQST){
       fwrite($this->messageLogFile,
-       sprintf("\n%s:- %s\n",date("D M j G:i:s T Y"),$log));
+       sprintf("\n%s:- %s\n",date_i18n("D M j G:i:s T Y"),$log));
        return true;
     }
     return false;

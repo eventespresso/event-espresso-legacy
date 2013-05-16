@@ -111,7 +111,7 @@ if (isset($invoice_payment_settings['pdf_title'])) {
 $pdf->AddPage();
 //Create the top right of invoice below header
 $pdf->SetFont('Times', '', 12);
-$pdf->Cell(180, 0, __('Date: ', 'event_espresso') . date(get_option('date_format')), 0, 1, 'R'); //Set invoice date
+$pdf->Cell(180, 0, __('Date: ', 'event_espresso') . date_i18n(get_option('date_format')), 0, 1, 'R'); //Set invoice date
 $pdf->Cell(180, 10, __('Primary Attendee ID: ', 'event_espresso') . $attendee_id, 0, 0, 'R'); //Set Invoice number
 $pdf->Ln(0);
 

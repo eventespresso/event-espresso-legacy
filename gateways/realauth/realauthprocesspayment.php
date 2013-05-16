@@ -25,14 +25,14 @@ function espresso_process_realauth($payment_data) {
 			$subject = 'Instant Payment Notification - Gateway Variable Dump';
 			$body = "An instant payment notification was successfully recieved\n";
 			$body .= "from " . " on " . date('m/d/Y');
-			$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+			$body .= " at " . date_i18n('g:i A') . "\n\nDetails:\n";
 			wp_mail($payment_data['contact'], $subject, $body);
 		}
 	} else {
 		$subject = 'Instant Payment Notification - Gateway Variable Dump';
 		$body = "An instant payment notification failed\n";
 		$body .= "from " . " on " . date('m/d/Y');
-		$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+		$body .= " at " . date_i18n('g:i A') . "\n\nDetails:\n";
 		//var_dump($body);
 		//var_dump($_REQUEST);
 		//wp_mail($payment_data['contact'], $subject, $body);

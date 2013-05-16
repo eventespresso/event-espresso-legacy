@@ -94,7 +94,7 @@ function load_events_to_db() {
     global $wpdb, $current_user;
     $events_detail_tbl = get_option('events_detail_tbl');
     $curdate = date("Y-m-j");
-    $month = date('M');
+    $month = date_i18n('M');
     $day = date('j');
     $year = date('Y');
 

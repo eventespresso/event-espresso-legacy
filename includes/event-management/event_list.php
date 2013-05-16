@@ -200,7 +200,7 @@ function event_espresso_edit_list() {
 						$num_attendees = isset( $attendees[ $event_id ]) ? $attendees[ $event_id ]->quantity : 0;
 
 						$location = (!empty($event_address) ? $event_address : '') . (!empty($event_address2) ? '<br />' . $event_address2 : '') . (!empty($event_city) ? '<br />' . $event_city : '') . (!empty($event_state) ? ', ' . $event_state : '') . (!empty($event_zip) ? '<br />' . $event_zip : '') . (!empty($event_country) ? '<br />' . $event_country : '');
-						$dow = date("D", strtotime($start_date));
+						$dow = date_i18n("D", strtotime($start_date));
 						ob_start();
 						?>
 						<tr>
@@ -225,9 +225,9 @@ function event_espresso_edit_list() {
 
 							<td class="author"><?php echo event_date_display( $start_date, get_option('date_format')) ?></td>
 
-							<td class="author"><?php echo date( get_option('time_format'), strtotime( $start_time )); ?></td>
+							<td class="author"><?php echo date_i18n( get_option('time_format'), strtotime( $start_time )); ?></td>
 
-							<td class="date"><?php echo event_date_display( $registration_start, get_option('date_format')); ?> @ <?php echo date( get_option('time_format'), strtotime( $registration_startT )); ?></td>
+							<td class="date"><?php echo event_date_display( $registration_start, get_option('date_format')); ?> @ <?php echo date_i18n( get_option('time_format'), strtotime( $registration_startT )); ?></td>
 
 							<td class="date"><?php echo $status['display'] ?></td>
 

@@ -198,7 +198,7 @@ if (!function_exists('espresso_event_export')){
 
 			$wp_user = $event->wp_user;
 			//$location = ($event_address != '' ? $event_address :'') . ($event_address2 != '' ? '<br />' . $event_address2 :'') . ($event_city != '' ? '<br />' . $event_city :'') . ($event_state != '' ? ', ' . $event_state :'') . ($event_zip != '' ? '<br />' . $event_zip :'') . ($event_country != '' ? '<br />' . $event_country :'');
-			$dow = date("D",strtotime($start_date));
+			$dow = date_i18n("D",strtotime($start_date));
 			echo $event_id 
 					. $s . $event_name
 					. $s . $venue_title

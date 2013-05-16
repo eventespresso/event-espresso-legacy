@@ -699,7 +699,7 @@ function date_at_timezone($format, $locale, $timestamp=null) {
 if (!function_exists('time_to_12hr')) {
 
     function time_to_12hr($time) {
-        return date("g:i A", strtotime($time)); // 5:02
+        return date_i18n("g:i A", strtotime($time)); // 5:02
     }
 
 }

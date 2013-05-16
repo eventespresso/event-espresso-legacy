@@ -53,7 +53,7 @@ function espresso_process_mwarrior($payment_data) {
 			$subject = 'Instant Payment Notification - Gateway Variable Dump';
 			$body = "An instant payment notification was successfully recieved\n";
 			$body .= "from " . $payment_data['email'] . " on " . date('m/d/Y');
-			$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+			$body .= " at " . date_i18n('g:i A') . "\n\nDetails:\n";
 			foreach ($mwarrior->response as $key => $value) {
 				if (is_array($value)) {
 					foreach ($value as $k => $v) {
@@ -74,7 +74,7 @@ function espresso_process_mwarrior($payment_data) {
 		$subject = 'Instant Payment Notification - Gateway Variable Dump';
 		$body = "An instant payment notification failed\n";
 		$body .= "from " . $payment_data['email'] . " on " . date('m/d/Y');
-		$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+		$body .= " at " . date_i18n('g:i A') . "\n\nDetails:\n";
 		foreach ($mwarrior->response as $key => $value) {
 			$body .= "\n$key: $value\n";
 		}
