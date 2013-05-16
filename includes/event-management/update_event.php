@@ -718,4 +718,6 @@ function update_event($recurrence_arr = array()) {
     /*
      * End recursion, as part of recurring events.
      */
+	 
+	do_action('action_hook_espresso_update_event',$_REQUEST);
 }
