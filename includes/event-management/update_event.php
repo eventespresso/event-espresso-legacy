@@ -277,8 +277,6 @@ function update_event($recurrence_arr = array()) {
             $reg_limit = 999999;
         }
 
-        
-
         $event_meta['default_payment_status'] = sanitize_text_field($_REQUEST['default_payment_status']);
         $event_meta['venue_id'] = empty($_REQUEST['venue_id']) ? '' : (int)$_REQUEST['venue_id'][0];
         $event_meta['additional_attendee_reg_info'] = sanitize_text_field($_REQUEST['additional_attendee_reg_info']);
@@ -318,7 +316,10 @@ function update_event($recurrence_arr = array()) {
             foreach ($_REQUEST['emeta'] as $k => $v) {
                 $event_meta[$v] = sanitize_text_field($_REQUEST['emetad'][$k]);
             }
-        }
+        }		
+		
+		//Filter to update the event meta as needed
+		$event_meta = apply_filters('filter_hook_espresso_update_event_update_meta', $event_meta, $event_id);
 		
 		//print_r($_REQUEST['emeta'] );
         $event_meta = serialize($event_meta);
@@ -719,5 +720,5 @@ function update_event($recurrence_arr = array()) {
      * End recursion, as part of recurring events.
      */
 	 
-	do_action('action_hook_espresso_update_event',$_REQUEST);
+	do_action('action_hook_espresso_update_event_success',$_REQUEST);
 }

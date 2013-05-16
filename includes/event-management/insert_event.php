@@ -570,7 +570,7 @@ function add_event_to_db($recurrence_arr = array()) {
 	}
 	
 	$_REQUEST['event_id'] = $last_event_id;
-	do_action('action_hook_espresso_insert_event',$_REQUEST);
+	do_action('action_hook_espresso_insert_event_success',$_REQUEST);
 	
 	//If not using the FEM addon, then we return the event id
 	if ( !$use_fem === TRUE )
