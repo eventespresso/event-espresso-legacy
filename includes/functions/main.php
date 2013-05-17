@@ -1477,3 +1477,31 @@ add_filter('action_hook_espresso_get_attendee_meta_value', 'espresso_get_attende
 function ee_sanitize_value($value) {
 	return wp_strip_all_tags( html_entity_decode( trim( sanitize_text_field(wp_strip_all_tags($value)) ), ENT_QUOTES, 'UTF-8' ) );
 }
+
+function espresso_update_event_meta($event_id, $new_meta){
+	global $wpdb;
+	$data = (object)array();
+	
+	//Get the event meta
+	$sql = "SELECT e.event_meta";
+	$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
+	$sql.= " WHERE e.id = '" . $event_id . "' LIMIT 0,1";
+	$data = $wpdb->get_row( $wpdb->prepare( $sql, NULL ) );
+	
+	//Unserilaize the old meta
+	$data->event_meta = unserialize( $data->event_meta );
+		
+	//Merge the new meta into the old meta
+	$data->event_meta = array_replace_recursive( $data->event_meta, $new_meta );
+				
+	//Update the event meta
+	$sql = array( 'event_meta' => serialize( $data->event_meta ) );
+	$event_id = array('id' => $event_id);
+	$sql_data = array('%s');
+	
+	//Run the update query
+	if ($wpdb->update(EVENTS_DETAIL_TABLE, $sql, $event_id, $sql_data, array('%d'))) {
+		return true;
+	}
+}
+add_action('action_hook_espresso_update_event_meta', 'espresso_update_event_meta', 10, 2);
