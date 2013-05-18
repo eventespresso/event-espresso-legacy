@@ -54,7 +54,7 @@ $allow_overflow = isset($allow_overflow) ? $allow_overflow : 'N';
 $externalURL = isset($externalURL) ? $externalURL : '';
 $alt_email = isset($alt_email) ? $alt_email : '';
 $advanced_options .= '<p><label>' . __('Display  description? ', 'event_espresso') . '</label>' . select_input('display_desc', $values, $display_desc) . '</p>';
-$advanced_options .= '<p><label>' . __('Display  registration form? ', 'event_espresso') . '</label>' . select_input('display_reg_form', $values, $display_reg_form) . '</p>';
+$advanced_options .= '<p id="p_display_reg_form"><label>' . __('Display  registration form? ', 'event_espresso') . '</label>' . select_input('display_reg_form', $values, $display_reg_form, 'id="display_reg_form"') . '</p>';
 $advanced_options .= '<p class="inputunder"><label>' . __('Default Payment Status for Event: ', 'event_espresso') . '</label>' . select_input('default_payment_status', $default_payment_status, isset($event_meta['default_payment_status']) ? $event_meta['default_payment_status']: '') . '</p>';
 $advanced_options .= $event_status != 'S' ? espresso_secondary_events_dd($overflow_event_id, $allow_overflow) : '';
 $advanced_options .= '<p class="inputunder"><label>' . __('Alternate Registration Page (optional)', 'event_espresso') . '</label>

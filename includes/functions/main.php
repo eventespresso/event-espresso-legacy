@@ -1492,7 +1492,11 @@ function espresso_update_event_meta($event_id, $new_meta){
 	$data->event_meta = unserialize( $data->event_meta );
 		
 	//Merge the new meta into the old meta
-	$data->event_meta = array_replace_recursive( $data->event_meta, $new_meta );
+	if (!empty($new_meta) && is_array($new_meta)){
+		$data->event_meta = array_replace_recursive( $data->event_meta, $new_meta );
+	}else{
+		return;
+	}
 				
 	//Update the event meta
 	$sql = array( 'event_meta' => serialize( $data->event_meta ) );

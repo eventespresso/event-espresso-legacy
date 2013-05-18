@@ -88,7 +88,7 @@ function event_espresso_manage_events() {
 			//If we need to add or edit a new event then we show the add or edit forms
 			if (isset($_REQUEST['action']) && ($_REQUEST['action'] == 'add_new_event' || $_REQUEST['action'] == 'edit')) {
 				?>
-				<form name="form" method="post" action="<?php echo $_SERVER["REQUEST_URI"] ?>">
+				<form id="espresso_event_editor" name="form" method="post" action="<?php echo $_SERVER["REQUEST_URI"] ?>">
 					<?php
 					if ($_REQUEST['action'] == 'edit') {//show the edit form
 						require_once("edit_event.php");

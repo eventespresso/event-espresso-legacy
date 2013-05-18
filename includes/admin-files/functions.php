@@ -342,7 +342,10 @@ if (!function_exists('event_espresso_meta_edit')){
 		if ($espresso_premium != true)
 			return;
 		$good_meta = array();
-		$hiddenmeta = array("", "venue_id", "additional_attendee_reg_info", "add_attendee_question_groups", "date_submitted", "event_host_terms", "default_payment_status","event_thumbnail_url", "eb_ticket_ids");
+		$hiddenmeta = array("", "venue_id", "additional_attendee_reg_info", "add_attendee_question_groups", "date_submitted", "event_host_terms", "default_payment_status","event_thumbnail_url");
+		
+		$hiddenmeta = apply_filters('filter_hook_espresso_hidden_meta',$hiddenmeta);
+		
 		$meta_counter = 1;
 
 		$default_meta = $event_meta==''?ee_default_event_meta():array();
