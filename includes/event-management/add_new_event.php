@@ -37,6 +37,7 @@ function add_new_event() {
 		
 		<?php
             $values = array(array('id' => 'Y', 'text' => __('Yes', 'event_espresso')), array('id' => 'N', 'text' => __('No', 'event_espresso')));
+			$event_meta = isset($event_meta) ? $event_meta : array();
 
             $advanced_options = '';
             if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/event-management/advanced_settings.php')) {
@@ -50,7 +51,7 @@ function add_new_event() {
                         . '<p>' . __('Display  registration form? ', 'event_espresso') . select_input('display_reg_form', $values, $display_reg_form) . '</p>';
             }//Display Lite version options - End
             $reg_limit = isset($reg_limit) ? $reg_limit : '';
-            //$event_meta = isset($event_meta) ? $event_meta : array();
+ 
             $additional_limit = isset($additional_limit) ? $additional_limit : '';
             postbox('event-status', 'Event Options', '<p>' . __('Attendee Limit', 'event_espresso') . ': <input name="reg_limit" size="10" type="text" value="' . $reg_limit . '"><br />' .
                     '(' . __('leave blank for unlimited', 'event_espresso') . ')</p>' .
