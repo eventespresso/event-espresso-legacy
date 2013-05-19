@@ -1478,34 +1478,36 @@ function ee_sanitize_value($value) {
 	return wp_strip_all_tags( html_entity_decode( trim( sanitize_text_field(wp_strip_all_tags($value)) ), ENT_QUOTES, 'UTF-8' ) );
 }
 
-function espresso_update_event_meta($event_id, $new_meta){
+function espresso_update_event_meta( $event_id, $new_meta ){
 	global $wpdb;
-	$data = (object)array();
-	
 	//Get the event meta
 	$sql = "SELECT e.event_meta";
 	$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
-	$sql.= " WHERE e.id = '" . $event_id . "' LIMIT 0,1";
-	$data = $wpdb->get_row( $wpdb->prepare( $sql, NULL ) );
-	
+	$sql.= " WHERE e.id = %d";
+	$event_meta = $wpdb->get_var( $wpdb->prepare( $sql, $event_id ));
+	// fail?
+	if ( $event_meta === FALSE ) {
+		return FALSE;
+	}	
 	//Unserilaize the old meta
-	$data->event_meta = unserialize( $data->event_meta );
-		
+	$event_meta = unserialize( $event_meta );			
 	//Merge the new meta into the old meta
-	if (!empty($new_meta) && is_array($new_meta)){
-		$data->event_meta = array_replace_recursive( $data->event_meta, $new_meta );
-	}else{
-		return;
-	}
-				
+	if ( ! empty( $new_meta ) && is_array( $new_meta )) {
+		$event_meta = array_replace_recursive( $event_meta, $new_meta );
+	} else {
+		return FALSE;
+	}					
+
 	//Update the event meta
-	$sql = array( 'event_meta' => serialize( $data->event_meta ) );
-	$event_id = array('id' => $event_id);
-	$sql_data = array('%s');
+	$results = $wpdb->update( 
+		EVENTS_DETAIL_TABLE, 
+		array( 'event_meta' => serialize( $event_meta )), 
+		array( 'id' => $event_id ), 
+		array('%s'), 
+		array('%d')
+	);
 	
-	//Run the update query
-	if ($wpdb->update(EVENTS_DETAIL_TABLE, $sql, $event_id, $sql_data, array('%d'))) {
-		return true;
-	}
+	return $results !== FALSE ? TRUE : FALSE;
+
 }
 add_action('action_hook_espresso_update_event_meta', 'espresso_update_event_meta', 10, 2);
