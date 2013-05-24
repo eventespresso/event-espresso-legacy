@@ -23,8 +23,8 @@ function espresso_process_paypal_pro($payment_data) {
 	
 	$sql = "SELECT ea.transaction_details FROM " . EVENTS_ATTENDEE_TABLE . " ea";
 	$sql .= " WHERE ea.id='" . $attendee_id . "'";
-	$transaction_details = unserialize($wpdb->get_var($sql));
-	$payment_data['txn_details'] = serialize($transaction_details);
+	$payment_data['txn_details'] = $wpdb->get_var($sql);
+	$transaction_details = unserialize($payment_data['txn_details']);
 	if(empty($transaction_details['TRANSACTIONID'])) {
 		// Populate data arrays with order data.
 		$DPFields = array(
