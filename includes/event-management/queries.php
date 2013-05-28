@@ -140,18 +140,24 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 						$SQL .= 'WHERE e.event_status = "' . $event_status . '"';
 					break;
 				case 'IA' : // Inactive
-						$SQL .= 'WHERE ( e.is_active = "N" AND e.event_status != "D" ) OR  e.end_date < "' . $curdate . '"';
+						$SQL .= 'WHERE ( e.is_active = "N" AND e.event_status != "D" ) OR ( e.end_date < "' . $curdate . '" AND e.event_status != "O" )';
 						// and if we are NOT filtering the date in any other way, then only retreive currently running events
 						//$SQL .=  ! $month_range && ! $today_filter ? ' OR e.end_date < "' . $curdate . '" )' : ' )';
 					break;
 				case 'A' : // Active
+						$SQL .= 'WHERE e.is_active = "Y" AND  ( e.event_status = "' . $event_status . '" OR e.event_status = "O" )';
+						// and if we are NOT filtering the date in any other way, then only retreive currently running events
+						$SQL .=  ! $month_range && ! $today_filter ? ' AND ( e.end_date >= "' . $curdate . '" OR e.event_status = "O" )' : '';
+					break;							
 				case 'P' : // Pending
 				case 'R' : // Draft
 				case 'S' : // Waitlist
-				case 'O' : // Ongoing
-						$SQL .= 'WHERE e.is_active = "Y" AND e.event_status = "' . $event_status . '"';
+						$SQL .= 'WHERE e.is_active = "Y" AND  e.event_status = "' . $event_status . '"';
 						// and if we are NOT filtering the date in any other way, then only retreive currently running events
-						$SQL .=  ! $month_range && ! $today_filter ? ' AND e.end_date >= "' . $curdate . '"' : '';
+						$SQL .=  ! $month_range && ! $today_filter ? ' AND ( e.end_date >= "' . $curdate . '" OR e.event_status = "O" )' : '';
+					break;							
+				case 'O' : // Ongoing
+						$SQL .= 'WHERE e.is_active = "Y" AND  e.event_status = "' . $event_status . '"';
 					break;							
 				case 'L' : // ALL
 				default :
@@ -160,10 +166,10 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 			}		
 		} else {
 			// show ACTIVE events
-			$SQL .= 'WHERE e.is_active = "Y" AND e.event_status = "A"';
+			$SQL .= 'WHERE e.is_active = "Y" AND ( e.event_status = "A" OR e.event_status = "O" )';
 			// and if we are NOT filtering the date in any other way, then only retreive currently running events
 			if ( $espresso_premium == TRUE ){
-				$SQL .=  ! $month_range && ! $today_filter ? ' AND e.end_date >= "' . $curdate . '"' : '';
+				$SQL .=  ! $month_range && ! $today_filter ? ' AND ( e.end_date >= "' . $curdate . '" OR e.event_status = "O" )' : '';
 			}
 		}
 		// specific event?
