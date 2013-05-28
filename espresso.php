@@ -731,7 +731,6 @@ if (!function_exists('espresso_load_EEGlobals_jquery')) {
 if (!function_exists('espresso_load_jquery')) {
 	function espresso_load_jquery() {
 		global $wp_version;
-		echo plugins_url();
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if (!is_admin() ) {
 			global $org_options;
