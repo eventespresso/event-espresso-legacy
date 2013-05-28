@@ -315,7 +315,7 @@ function edit_event($event_id = 0) {
 
 
 	###### Modification by wp-developers to introduce attendee pre-approval requirement ##########
-	if ($org_options['use_attendee_pre_approval'] == 'Y' && $espresso_premium == true) {
+	if (isset($org_options['use_attendee_pre_approval']) && $org_options['use_attendee_pre_approval'] == 'Y' && $espresso_premium == true) {
 		?>
 		<div id="attendee-pre-approval-options" class="postbox">
 			<div class="handlediv" title="Click to toggle"><br />
