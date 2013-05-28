@@ -163,7 +163,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 
 	
 	
-	if ( $org_options['skip_confirmation_page'] == 'Y' ) {	
+	if ( isset($org_options['skip_confirmation_page']) && $org_options['skip_confirmation_page'] == 'Y' ) {	
 
 		$redirect_url = home_url().'/?page_id='.$org_options['event_page_id'] . '&regevent_action=confirm_registration';				
 		$_POST['regevent_action'] = 'confirm_registration';
