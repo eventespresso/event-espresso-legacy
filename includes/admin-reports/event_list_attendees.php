@@ -154,9 +154,9 @@ function event_list_attendees() {
 				</th>
 				<?php 
 				if ($ticketing_installed == true) { ?>
-				<th class="manage-column column-title" id="date_attended" scope="col" title="Click to Sort" style="width: 8%;">
-				 	<span><?php _e('<-Date', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
-				</th>
+					<th class="manage-column column-title" id="date_attended" scope="col" title="Click to Sort" style="width: 8%;">
+						<span><?php _e('<-Date', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
+					</th>
 				<?php
 				}
 				?>
