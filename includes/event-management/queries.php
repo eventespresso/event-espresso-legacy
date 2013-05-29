@@ -10,7 +10,7 @@
  * @return string
  */
 function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendees= FALSE, $filters = '', $group_admin_locales = FALSE ) {
-	global $org_options, $espresso_premium;
+	global $org_options, $espresso_premium, $ticketing_installed, $wpdb;
 	
 	if ( ! $group_admin_locales ) {
 		$member_id = FALSE;
@@ -96,7 +96,8 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 		$SQL .= 'SUM(a.quantity) quantity';
 	} else if ( ! $count && $attendees ) {
 		// get attendees
-		$SQL .= 'a.*, e.id event_id, e.event_name, checked_in';
+		$SQL .= 'a.*, e.id event_id, e.event_name, a.checked_in';
+		$SQL .= $ticketing_installed ? ', ac.date_scanned, ac.checked_in ac_checked_in' : '';
 	} else if ( $count && ! $attendees ) {
 		// count events
 		$SQL .= 'COUNT(e.id) events'; //, t.start_time
@@ -116,6 +117,7 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	$SQL .= $attendees ? ' FROM '. EVENTS_ATTENDEE_TABLE . ' a ' : ' FROM '. EVENTS_DETAIL_TABLE . ' e ';	
 	// join event table for attendee queries
 	$SQL .= $attendees ? 'JOIN '. EVENTS_DETAIL_TABLE . ' e ON e.id=a.event_id ' : '';
+	$SQL .= $attendees && $ticketing_installed ? 'LEFT JOIN ' . $wpdb->prefix . "events_attendee_checkin" . ' ac ON ac.attendee_id = a.id ' : '';
 	// join  categories
 	if ( $category_id ) {
 		$SQL .= 'JOIN ' . EVENTS_CATEGORY_REL_TABLE . ' cr ON cr.event_id = e.id ';
