@@ -200,17 +200,7 @@ function add_new_event() {
 		<!-- /event-questions -->
 		
 		<?php
-         if (function_exists('espresso_personnel_cb') && isset($org_options['use_personnel_manager']) && $org_options['use_personnel_manager'] == 'Y' && $espresso_premium == true) {
-				?>
-		<div id="event-category" class="postbox">
-			<div class="handlediv" title="Click to toggle"><br>
-			</div>
-			<h3 class="hndle"> <span>
-				<?php _e('Event Staff / Speakers', 'event_espresso'); ?>
-				</span> </h3>
-			<div class="inside"> <?php echo espresso_personnel_cb(); ?> </div>
-		</div>
-		<?php	}
+        do_action('action_hook_espresso_staff_cb');
 
 			if (defined('EVENTS_GROUPON_CODES_TABLE') && $espresso_premium == true) { ?>
 		<div id="groupon-options" class="postbox">
