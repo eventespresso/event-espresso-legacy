@@ -36,7 +36,7 @@ function add_new_event() {
 		<!-- /submitdiv -->
 		
 <?php
-	do_action('action_hook_espresso_new_event_left_column_top');
+	if ( $espresso_premium == true ){do_action('action_hook_espresso_new_event_left_column_top');}
 	$values = array(array('id' => 'Y', 'text' => __('Yes', 'event_espresso')), array('id' => 'N', 'text' => __('No', 'event_espresso')));
 	$event_meta = isset($event_meta) ? $event_meta : array();
 
@@ -219,8 +219,7 @@ function add_new_event() {
 		<!-- /groupon-options -->
 	<?php
 	}
-	
-	do_action('action_hook_espresso_new_event_left_column_bottom');
+	if ( $espresso_premium == true ){do_action('action_hook_espresso_new_event_left_column_bottom');}
 	$sidebar_content = ob_get_clean();
 	ob_start();
 	?>
@@ -407,7 +406,7 @@ function add_new_event() {
 			<h2>
 				<?php _e('Advanced Options', 'event_espresso'); ?>
 			</h2>
-			<?php do_action('action_hook_espresso_new_event_left_column_advanced_options_top');?>
+			<?php if ( $espresso_premium == true ){do_action('action_hook_espresso_new_event_left_column_advanced_options_top');}?>
 			<div id="event-location" class="postbox">
 				<div class="handlediv" title="Click to toggle"><br />
 				</div>
