@@ -109,7 +109,7 @@ jQuery(document).ready(function() {
 
     };
 
-    jQuery('.ee_add_item_to_cart').on('click',function(){
+    jQuery('body').on('click', '.ee_add_item_to_cart',function(){
 
         var data = {
             item_type: 'event',

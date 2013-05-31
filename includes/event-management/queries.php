@@ -10,7 +10,7 @@
  * @return string
  */
 function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendees= FALSE, $filters = '', $group_admin_locales = FALSE ) {
-	global $org_options;
+	global $org_options, $espresso_premium;
 	
 	if ( ! $group_admin_locales ) {
 		$member_id = FALSE;
@@ -132,39 +132,53 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 		$SQL .= 'JOIN ' . EVENTS_LOCALE_TABLE . ' lc ON lc.id = l.locale_id ';
 	}
 	//Event status filter
-	if ( $event_status ) {
-		switch ( $event_status ) {			
-			case 'X' : // Denied
-			case 'D' : // Deleted
-					$SQL .= 'WHERE e.event_status = "' . $event_status . '"';
-				break;
-			case 'IA' : // Inactive
-					$SQL .= 'WHERE ( e.is_active = "N" AND e.event_status != "D" )';
-					// and if we are NOT filtering the date in any other way, then only retreive currently running events
-					//$SQL .=  ! $month_range && ! $today_filter ? ' OR e.end_date < "' . $curdate . '" )' : ' )';
-				break;
-			case 'A' : // Active
-			case 'P' : // Pending
-			case 'R' : // Draft
-			case 'S' : // Waitlist
-			case 'O' : // Ongoing
-					$SQL .= 'WHERE e.is_active = "Y" AND e.event_status = "' . $event_status . '"';
-					// and if we are NOT filtering the date in any other way, then only retreive currently running events
-					$SQL .=  ! $month_range && ! $today_filter ? ' AND e.end_date >= "' . $curdate . '"' : '';
-				break;							
-			case 'L' : // ALL
-			default :
-					$SQL .= 'WHERE e.event_status != "D"';
-				break;							
-		}		
+	if (  ! $event_id  ) {
+		if ( $event_status ) {
+			switch ( $event_status ) {			
+				case 'X' : // Denied
+				case 'D' : // Deleted
+						$SQL .= 'WHERE e.event_status = "' . $event_status . '"';
+					break;
+				case 'IA' : // Inactive
+						$SQL .= 'WHERE ( e.is_active = "N" AND e.event_status != "D" ) OR ( e.end_date < "' . $curdate . '" AND e.event_status != "O" )';
+						// and if we are NOT filtering the date in any other way, then only retreive currently running events
+						//$SQL .=  ! $month_range && ! $today_filter ? ' OR e.end_date < "' . $curdate . '" )' : ' )';
+					break;
+				case 'A' : // Active
+						$SQL .= 'WHERE e.is_active = "Y" AND  ( e.event_status = "' . $event_status . '" OR e.event_status = "O" )';
+						// and if we are NOT filtering the date in any other way, then only retreive currently running events
+						$SQL .=  ! $month_range && ! $today_filter ? ' AND ( e.end_date >= "' . $curdate . '" OR e.event_status = "O" )' : '';
+					break;							
+				case 'P' : // Pending
+				case 'R' : // Draft
+				case 'S' : // Waitlist
+						$SQL .= 'WHERE e.is_active = "Y" AND  e.event_status = "' . $event_status . '"';
+						// and if we are NOT filtering the date in any other way, then only retreive currently running events
+						$SQL .=  ! $month_range && ! $today_filter ? ' AND ( e.end_date >= "' . $curdate . '" OR e.event_status = "O" )' : '';
+					break;							
+				case 'O' : // Ongoing
+						$SQL .= 'WHERE e.is_active = "Y" AND  e.event_status = "' . $event_status . '"';
+					break;							
+				case 'L' : // ALL
+				default :
+						$SQL .= 'WHERE e.event_status != "D"';
+					break;							
+			}		
+		} else {
+			// show ACTIVE events
+			$SQL .= 'WHERE e.is_active = "Y" AND ( e.event_status = "A" OR e.event_status = "O" )';
+			// and if we are NOT filtering the date in any other way, then only retreive currently running events
+			if ( $espresso_premium == TRUE ){
+				$SQL .=  ! $month_range && ! $today_filter ? ' AND ( e.end_date >= "' . $curdate . '" OR e.event_status = "O" )' : '';
+			}
+		}
+		// specific event?
+		$SQL .= ! $count && $event_id ? ' AND e.id = ' . $event_id : '';
+		
 	} else {
-		// show ACTIVE events
-		$SQL .= 'WHERE e.is_active = "Y" AND e.event_status = "A"';
-		// and if we are NOT filtering the date in any other way, then only retreive currently running events
-		$SQL .=  ! $month_range && ! $today_filter ? ' AND e.end_date >= "' . $curdate . '"' : '';
+		// we want a specific event and don't care about status filters
+		$SQL .= 'WHERE e.id = ' . $event_id;
 	}
-	// specific event?
-	$SQL .= !$count && $event_id ? 'AND e.id = ' . $event_id : '';
 	//Category filter
 	$SQL .= $category_id ? ' AND c.id = "' . $category_id . '" ' : '';
 	// for R&P : Find events in the locale
@@ -172,17 +186,17 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	// Attendee Payment Status
 	$SQL .= ! $count && $attendees && $payment_status ? ' AND a.payment_status = "' . $payment_status . '"' : '';
 	//Month filter
-	$SQL .= $month_range && $attendees ? ' AND a.date BETWEEN "' . $year_r . '-' . $month_r . '-01" AND "' . $year_r . '-' . $month_r . '-' . $days_this_month . '"' : '';
-	$SQL .= $month_range && ! $attendees ? ' AND e.start_date BETWEEN "' . $year_r . '-' . $month_r . '-01" AND "' . $year_r . '-' . $month_r . '-' . $days_this_month . '"' : '';
+	$SQL .= $month_range && $attendees && ! $event_id ? ' AND a.date BETWEEN "' . $year_r . '-' . $month_r . '-01" AND "' . $year_r . '-' . $month_r . '-' . $days_this_month . '"' : '';
+	$SQL .= $month_range && ! $attendees && ! $event_id ? ' AND e.start_date BETWEEN "' . $year_r . '-' . $month_r . '-01" AND "' . $year_r . '-' . $month_r . '-' . $days_this_month . '"' : '';
 	// Today events filter 
-	$SQL .= $today_filter && $attendees ? " AND date BETWEEN '". $curdate . " 00:00:00' AND '". $curdate." 23:59:59' " : '';
-	$SQL .= $today_filter && ! $attendees ? ' AND e.start_date = "' . $curdate . '"' : '';
+	$SQL .= $today_filter && $attendees && ! $event_id ? " AND date BETWEEN '". $curdate . " 00:00:00' AND '". $curdate." 23:59:59' " : '';
+	$SQL .= $today_filter && ! $attendees && ! $event_id ? ' AND e.start_date = "' . $curdate . '"' : '';
 	//This months events filter
-	$SQL .= $this_month_filter && $attendees ? " AND date BETWEEN '" . $this_year_r . "-" . $this_month_r . "-01' AND '" . $this_year_r . "-" . $this_month_r . "-" . $days_this_month . "' " : '';
-	$SQL .= $this_month_filter && ! $attendees ? ' AND e.start_date BETWEEN "' . $this_year_r . '-' . $this_month_r . '-01" AND "' . $this_year_r . '-' . $this_month_r . '-' . $days_this_month . '"' : '';
+	$SQL .= $this_month_filter && $attendees && ! $event_id ? " AND date BETWEEN '" . $this_year_r . "-" . $this_month_r . "-01' AND '" . $this_year_r . "-" . $this_month_r . "-" . $days_this_month . "' " : '';
+	$SQL .= $this_month_filter && ! $attendees && ! $event_id ? ' AND e.start_date BETWEEN "' . $this_year_r . '-' . $this_month_r . '-01" AND "' . $this_year_r . '-' . $this_month_r . '-' . $days_this_month . '"' : '';
 	// for R&P : If user is an event manager, then show only their events
-	$SQL .= $member_id && !$event_manager && !$event_admin ? ' AND e.wp_user = "' . $member_id . '"' : '';
-	$SQL .= $event_manager && !$member_id && !$event_admin ? " AND e.wp_user = '" . espresso_member_data('id') ."'" : '';
+	$SQL .= $member_id && ! $event_manager && ! $event_admin ? ' AND e.wp_user = "' . $member_id . '"' : '';
+	$SQL .= $event_manager && ! $member_id && ! $event_admin ? " AND e.wp_user = '" . espresso_member_data('id') ."'" : '';
 	// group data queries by event
 	$SQL .= ! $count && ! $attendees ? ' GROUP BY e.id' : '';		
 	// for R&P : close the UNION

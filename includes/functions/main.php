@@ -275,7 +275,7 @@ function event_espresso_get_event_meta($event_id) {
  * returns an array of information for the event by the event id
  */
 if ( !function_exists('espresso_get_event') ) {
-	function espresso_get_event($event_id) {
+	function espresso_get_event($event_id, $single_event_id = null) {
 		global $wpdb, $org_options;
 		$data = (object)array();
 
@@ -291,7 +291,19 @@ if ( !function_exists('espresso_get_event') ) {
 		}
 		$sql.= " WHERE e.is_active='Y' ";
 		$sql.= " AND e.event_status != 'D' ";
-		$sql.= " AND e.id = '" . $event_id . "' LIMIT 0,1";
+		if ($single_event_id != NULL) {
+			//If a single event needs to be displayed, get its ID
+            $sql .= " AND event_identifier = '" . $single_event_id . "' ";
+        } else {
+			$sql.= " AND e.id = '" . $event_id . "' LIMIT 0,1";
+        }
+        //Support for diarise
+        if (!empty($_REQUEST['post_event_id'])) {
+            $sql = "SELECT e.* FROM " . EVENTS_DETAIL_TABLE . ' e';
+            $sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id = e.id ";
+            $sql .= " WHERE post_id = '" . $_REQUEST['post_event_id'] . "' ";
+            $sql .= " LIMIT 0,1";
+        }
 
 		$data = $wpdb->get_row( $wpdb->prepare( $sql, NULL ), OBJECT );
 		return $data;
