@@ -30,20 +30,20 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	?>
 			<?php // localize all the things!
 				switch( $payment_status ) {
 					case 'Pending':
-						$payment_status = __( 'Pending', 'event_espresso' );
+						$payment_status_translated = __( 'Pending', 'event_espresso' );
 						break;
 					case 'Incomplete':
-						$payment_status = __( 'Incomplete', 'event_espresso' );
+						$payment_status_translated = __( 'Incomplete', 'event_espresso' );
 						break;
 					case 'Completed':
-						$payment_status = __( 'Completed', 'event_espresso' );
+						$payment_status_translated = __( 'Completed', 'event_espresso' );
 						break;
 					case 'Payment Declined':
-						$payment_status = __( 'Payment Declined', 'event_espresso' );
+						$payment_status_translated = __( 'Payment Declined', 'event_espresso' );
 						break;
 				}
 			?>
-			<td><?php echo $payment_status; ?></td>
+			<td><?php echo $payment_status_translated; ?></td>
     </tr>
 		<tr>
 			<td>
