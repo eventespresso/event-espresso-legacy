@@ -19,7 +19,7 @@ function event_espresso_form_group_edit() {
             $show_group_description = $group->show_group_description;
             $wp_user = $group->wp_user;
 			
-			if ($group->system_group !=''){
+			if ($group->system_group > 0){
 				$system_group = true;
 			} else {
 				$system_group = false;
