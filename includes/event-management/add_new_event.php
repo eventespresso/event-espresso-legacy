@@ -36,7 +36,7 @@ function add_new_event() {
 		<!-- /submitdiv -->
 		
 <?php
-	if ( $espresso_premium == true ){do_action('action_hook_espresso_new_event_left_column_top');}
+	if ( $espresso_premium == true ){do_action('action_hook_espresso_new_event_right_column_top');}
 	$values = array(array('id' => 'Y', 'text' => __('Yes', 'event_espresso')), array('id' => 'N', 'text' => __('No', 'event_espresso')));
 	$event_meta = isset($event_meta) ? $event_meta : array();
 
@@ -219,7 +219,7 @@ function add_new_event() {
 		<!-- /groupon-options -->
 	<?php
 	}
-	if ( $espresso_premium == true ){do_action('action_hook_espresso_new_event_left_column_bottom');}
+	if ( $espresso_premium == true ){do_action('action_hook_espresso_new_event_right_column_bottom');}
 	$sidebar_content = ob_get_clean();
 	ob_start();
 	?>
