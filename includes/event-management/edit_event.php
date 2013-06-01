@@ -99,6 +99,7 @@ function edit_event($event_id = 0) {
 
 		$question_groups		= unserialize($event->question_groups);
 
+		global $event_meta;
 		$event_meta				= unserialize($event->event_meta);
 
 		$recurrence_id			= $event->recurrence_id;

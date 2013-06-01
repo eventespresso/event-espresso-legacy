@@ -62,4 +62,4 @@ $advanced_options .= '<p class="inputunder"><label>' . __('Alternate Registratio
 $advanced_options .= '<p class="inputunder"><label>' . __('Alternate Email Address (optional)', 'event_espresso') . '</label>
 				<input name="alt_email" size="20" type="text" value="' . $alt_email . '"> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=alt_email_info"><img src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/question-frame.png" width="16" height="16" /></a></p>';
 				
-$advanced_options .= apply_filters('filter_hook_espresso_event_editor_advanced_options', $event_meta);
+$advanced_options .= apply_filters('filter_hook_espresso_event_editor_advanced_options');
