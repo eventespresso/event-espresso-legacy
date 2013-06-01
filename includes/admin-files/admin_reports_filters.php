@@ -225,8 +225,8 @@ function espresso_display_admin_reports_filters( $total = 0 ) {
 		<?php }?>
 		<?php
 		$status = array(
-			array('id' => 'A', 'text' 	=> __('Active', 'event_espresso')), 
-			array('id' => 'L', 'text'	=> __('Show Active/Inactive', 'event_espresso')), 
+			array('id' => 'A', 'text' 	=> __('Active / Ongoing', 'event_espresso')), 
+			array('id' => 'L', 'text'	=> __('ALL ( Active / Inactive )', 'event_espresso')), 
 			array('id' => 'IA', 'text' 	=> __('Inactive', 'event_espresso')), 
 			array('id' => 'P', 'text' 	=> __('Pending', 'event_espresso')), 
 			array('id' => 'R', 'text' 	=> __('Draft', 'event_espresso')), 
