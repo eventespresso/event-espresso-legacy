@@ -1189,7 +1189,7 @@ if (!function_exists('event_espresso_cleanup_multi_event_registration_id_group_d
 function espresso_check_scripts() {
 	if (function_exists('wp_script_is')) {
 		if (!wp_script_is('jquery')) {
-			echo '<div class="event_espresso_error"><p><em>' . __('Jquery is not loaded!', 'event_espresso') . '</em><br />' . __('Event Espresso is unable to load Jquery do to a conflict with your theme or another plugin.', 'event_espresso') . '</p></div>';
+			//echo '<div class="event_espresso_error"><p><em>' . __('Jquery is not loaded!', 'event_espresso') . '</em><br />' . __('Event Espresso is unable to load Jquery do to a conflict with your theme or another plugin.', 'event_espresso') . '</p></div>';
 		}
 	}
 	if (!function_exists('wp_head')) {

@@ -676,10 +676,10 @@ if (is_admin()) {
 }
 
 //Load the required Javascripts
-add_action('wp_footer', 'espresso_load_javascript_files');
-add_action('init', 'espresso_load_jquery', 10);
-add_action('init', 'espresso_load_EEGlobals_jquery', 10);
-
+add_action('wp_enqueue_scripts', 'espresso_load_javascript_files');
+add_action('wp_enqueue_scripts', 'espresso_load_jquery', 10);
+add_action('admin_enqueue_scripts', 'espresso_load_EEGlobals_jquery', 10);
+add_action('wp_enqueue_scripts', 'espresso_load_pagination_scripts');
 
 if (!function_exists('espresso_load_javascript_files')) {
 	function espresso_load_javascript_files() {
@@ -689,36 +689,40 @@ if (!function_exists('espresso_load_javascript_files')) {
 		
 		if (!$load_espresso_scripts)
 			return;
-		wp_register_script('reCopy', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/reCopy.js"), false, '1.1.0');
-		wp_print_scripts('reCopy');
+		wp_register_script('reCopy', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/reCopy.js"), array('jquery'), '1.1.0', TRUE);
+		wp_enqueue_script('reCopy');
 
-		wp_register_script('jquery.validate.js', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/jquery.validate.min.js"), false, '1.8.1');
-		wp_print_scripts('jquery.validate.js');
+		wp_register_script('jquery.validate.js', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/jquery.validate.min.js"), array('jquery'), '1.8.1', TRUE);
+		wp_enqueue_script('jquery.validate.js');
 
-		wp_register_script('validation', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/validation.js"), false, EVENT_ESPRESSO_VERSION);
-		wp_print_scripts('validation');
-        
-        wp_register_script('ee_pagination_plugin', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/jquery.pajinate.min.js"), false, EVENT_ESPRESSO_VERSION);
-		wp_print_scripts('ee_pagination_plugin');
-        
-        wp_register_script('ee_pagination', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/pagination.js"), false, EVENT_ESPRESSO_VERSION);
-        $data = array( 'ajaxurl' => admin_url( 'admin-ajax.php'  ));
-        wp_localize_script( 'ee_pagination', 'ee_pagination', $data );
-		wp_print_scripts('ee_pagination');
-        
+		wp_register_script('validation', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/validation.js"), array('jquery'), EVENT_ESPRESSO_VERSION, TRUE);
+		wp_enqueue_script('validation');
+                
 	}
 }
 
+if (!function_exists('espresso_load_pagination_scripts')) {
+	function espresso_load_pagination_scripts() {
+		wp_register_script('ee_pagination_plugin', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/jquery.pajinate.min.js"), array('jquery'), EVENT_ESPRESSO_VERSION, TRUE);
+		wp_enqueue_script('ee_pagination_plugin');
+        
+		wp_register_script('ee_pagination', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/pagination.js"), array('jquery'), EVENT_ESPRESSO_VERSION, TRUE);
+		wp_enqueue_script('ee_pagination');
+		$data = array( 'ajaxurl' => admin_url( 'admin-ajax.php'  ));
+		wp_localize_script( 'ee_pagination', 'ee_pagination', $data );
+		
 
+	}
+}
 
-//Used for the drap and drop questions
+//Used for the drag and drop questions
 if (!function_exists('espresso_load_EEGlobals_jquery')) {	
 	function espresso_load_EEGlobals_jquery(){
 	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if ( isset($_REQUEST['page']) && ( $_REQUEST['page'] == 'form_builder' || $_REQUEST['page'] == 'form_groups') ){
-			wp_enqueue_script( 'jquery' );
-			wp_enqueue_script('ee_ajax_request', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_EEGlobals_functions.js', array('jquery'));
+			//wp_enqueue_script( 'jquery' );
+			wp_enqueue_script('ee_ajax_request', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_EEGlobals_functions.js', array('jquery'), EVENT_ESPRESSO_VERSION, TRUE);
 			wp_localize_script( 'ee_ajax_request', 'EEGlobals', array('ajaxurl' => admin_url('admin-ajax.php'), 'plugin_url' => EVENT_ESPRESSO_PLUGINFULLURL) );
 		}
 		
@@ -734,7 +738,7 @@ if (!function_exists('espresso_load_jquery')) {
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if (!is_admin() ) {
 			global $org_options;
-			wp_enqueue_script('jquery');
+			//wp_enqueue_script('jquery');
 			if ( function_exists('event_espresso_multi_reg_init') ) {
 				wp_enqueue_script('ee_ajax_request', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_cart_functions.js', array('jquery'));
 				$EEGlobals = array('ajaxurl' => admin_url('admin-ajax.php'), 'plugin_url' => EVENT_ESPRESSO_PLUGINFULLURL, 'event_page_id' => $org_options['event_page_id']);
@@ -756,7 +760,7 @@ if (!function_exists('espresso_load_jquery')) {
 //Load the style sheets for the reegistration pages
 
 //This is the old style settings. Will be deprecated/removed soon.
-add_action('wp_print_styles', 'add_event_espresso_stylesheet');
+add_action('wp_enqueue_scripts', 'add_event_espresso_stylesheet');
 if (!function_exists('add_event_espresso_stylesheet')) {
 
 	function add_event_espresso_stylesheet() {
@@ -796,7 +800,7 @@ if (!function_exists('add_event_espresso_stylesheet')) {
 }
 
 //Themeroller stuff
-add_action('wp_print_styles', 'add_espresso_themeroller_stylesheet');
+add_action('wp_enqueue_scripts', 'add_espresso_themeroller_stylesheet');
 function add_espresso_themeroller_stylesheet() {
 
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
