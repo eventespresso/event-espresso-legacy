@@ -432,7 +432,7 @@ if (!function_exists('event_espresso_calculate_total')) {
 
 			$_SESSION['espresso_session']['pre_discount_total'] = $grand_total;
 			$_SESSION['espresso_session']['grand_total'] = $grand_total;
-			event_espresso_update_item_in_session( $update_section );
+			event_espresso_update_item_in_session( 'details' );
 			
 		}
 			
