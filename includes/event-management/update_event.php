@@ -208,12 +208,12 @@ function update_event($recurrence_arr = array()) {
         $timezone_string				= empty($_REQUEST['timezone_string']) ? '' : sanitize_text_field($_REQUEST['timezone_string']);
 
         //Early discounts
-        $early_disc						= sanitize_text_field($_REQUEST['early_disc']);
-        $early_disc_date				= sanitize_text_field($_REQUEST['early_disc_date']);
-        $early_disc_percentage			= sanitize_text_field($_REQUEST['early_disc_percentage']);
+        $early_disc						= !empty($_REQUEST['early_disc']) ? sanitize_text_field($_REQUEST['early_disc']) : '';
+        $early_disc_date				= !empty($_REQUEST['early_disc_date']) ? sanitize_text_field($_REQUEST['early_disc_date']) : '';
+        $early_disc_percentage			= !empty($_REQUEST['early_disc_percentage']) ? sanitize_text_field($_REQUEST['early_disc_percentage']) : '';
 
         $conf_mail						= esc_html($_REQUEST['conf_mail']);
-        $use_coupon_code				= sanitize_text_field($_REQUEST['use_coupon_code']);
+        $use_coupon_code				= !empty($_REQUEST['use_coupon_code']) ? sanitize_text_field($_REQUEST['use_coupon_code']) : '';
         $alt_email						= isset($_REQUEST['alt_email']) && !empty($_REQUEST['alt_email']) ? sanitize_text_field($_REQUEST['alt_email']) : '';
 
         $send_mail						= sanitize_text_field($_REQUEST['send_mail']);
@@ -277,9 +277,11 @@ function update_event($recurrence_arr = array()) {
             $reg_limit = 999999;
         }
 
-        $event_meta['default_payment_status'] = sanitize_text_field($_REQUEST['default_payment_status']);
+        
+
+        $event_meta['default_payment_status'] = !empty($_REQUEST['default_payment_status']) ? sanitize_text_field($_REQUEST['default_payment_status']) : '';
         $event_meta['venue_id'] = empty($_REQUEST['venue_id']) ? '' : (int)$_REQUEST['venue_id'][0];
-        $event_meta['additional_attendee_reg_info'] = sanitize_text_field($_REQUEST['additional_attendee_reg_info']);
+        $event_meta['additional_attendee_reg_info'] = !empty($_REQUEST['additional_attendee_reg_info']) ? sanitize_text_field($_REQUEST['additional_attendee_reg_info']) : '';
         $event_meta['add_attendee_question_groups'] = $add_attendee_question_groups;
         $event_meta['date_submitted'] = sanitize_text_field($_REQUEST['date_submitted']);
 		
@@ -312,11 +314,11 @@ function update_event($recurrence_arr = array()) {
 			 $event_thumbnail_url = sanitize_text_field($event_meta['event_thumbnail_url']);
 		}
 			
-        if ($_REQUEST['emeta'] != '') {
+        if (!empty($_REQUEST['emeta'])) {
             foreach ($_REQUEST['emeta'] as $k => $v) {
                 $event_meta[$v] = sanitize_text_field($_REQUEST['emetad'][$k]);
             }
-        }		
+        }
 		
 		//Filter to update the event meta as needed
 		$event_meta = apply_filters('filter_hook_espresso_update_event_update_meta', $event_meta, $event_id);

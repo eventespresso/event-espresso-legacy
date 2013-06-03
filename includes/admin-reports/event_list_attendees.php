@@ -54,7 +54,8 @@ function event_list_attendees() {
 				$ticket_quantity_scanned=$attendee->checked_in_quantity;
 				$tickets_for_attendee=$attendee->quantity;
 				$updated_ticket_quantity=$check_in_or_out?$tickets_for_attendee:0;
-				
+				$type = $check_in_or_out == true ? 'checkin':'checkout';
+				//$type
                 if ( ($ticket_quantity_scanned >= 1 && true == $check_in_or_out) 
 						|| 
 						($ticket_quantity_scanned<=0 && false == $check_in_or_out)) {
@@ -73,7 +74,22 @@ function event_list_attendees() {
 						<?php _e('Customer(s) attendance data successfully updated for this event.', 'event_espresso'); ?>
 						</strong></p>
 					</div>
-					<?php
+						<?php
+						//Add the date checked-out into the events_attendee_checkin table
+						$columns_and_values = array(
+							'attendee_id'			=> $att_id,
+							'registration_id'		=> $attendee->registration_id,
+							'event_id'				=> $attendee->event_id,
+							'checked_in'			=> $updated_ticket_quantity,//Checked-out
+							'date_scanned'			=> date('Y-m-d H:i:s'),
+							'method'				=> 'website',
+							'type'					=> $type,
+						);
+						$data_formats = array( '%d', '%s', '%d', '%d', '%s', '%s', '%s', );
+						$scan_date = $wpdb->insert( $wpdb->prefix."events_attendee_checkin", $columns_and_values, $data_formats );
+						if(!$scan_date){
+							//throw new EspressoAPI_OperationFailed(__("Updating of date checked in failed:","event_espresso").$scan_date);
+						}
 					}
                 }
             }
@@ -136,11 +152,19 @@ function event_list_attendees() {
 				<th class="manage-column column-title" id="attended" scope="col" title="Click to Sort" style="width: 8%;">
 				 	<span><?php echo $ticketing_installed == true ? __('Attended', 'event_espresso') : __('Quantity', 'event_espresso') ?></span> <span class="sorting-indicator"></span> 
 				</th>
+				<?php 
+				if ($ticketing_installed == true) { ?>
+					<th class="manage-column column-title" id="date_attended" scope="col" title="Click to Sort" style="width: 8%;">
+						<span><?php _e('<-Date', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
+					</th>
+				<?php
+				}
+				?>
 				<th class="manage-column column-title" id="ticket-option" scope="col" title="Click to Sort" style="width: 13%;">
 				 	<span><?php _e('Option', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
 				</th>
 				<th align="center" class="manage-column column-date" id="amount" style="width: 5%;" title="Click to Sort" scope="col">
-				 	<span><?php _e('Payment', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
+				 	<span><?php _e('Status', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
 				</th>
 				<th class="manage-column column-date" id="payment_type" scope="col" title="Click to Sort" style="width: 8%;">
 				 	<span><?php _e('Type', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
@@ -190,8 +214,10 @@ function event_list_attendees() {
 			$price_option = $attendee->price_option;
 			$event_time = $attendee->event_time;
 			$event_name = $attendee->event_name;
-			$event_date = $attendee->start_date;				
-				
+			$event_date = $attendee->start_date;
+			
+			$date_scanned = $ticketing_installed == true && !empty($attendee->date_scanned) ? $attendee->date_scanned : '';
+			
 ?>
 			<tr>
 			
@@ -232,6 +258,11 @@ function event_list_attendees() {
 						<?php echo $qty_scanned; ?>
 					</p>
 				</td>
+				<?php if ($ticketing_installed == true) { ?>
+				<td class="date column-date">
+					<?php echo event_date_display($date_scanned, get_option('date_format') . ' g:i a') ?>
+				</td>
+				<?php }?>
 				
 	            <td nowrap="nowrap" title="<?php echo $price_option ?>">
 					<?php echo $price_option ?>
@@ -373,7 +404,7 @@ function event_list_attendees() {
 
 
 $hide = $EVT_ID ? '1,5' : '1,3';
-$hide .= ',11,12'; 
+$hide .= ',8,12,13'; 
 
 ?>
 <script>
@@ -395,6 +426,7 @@ $hide .= ',11,12';
 				null,
 				null,
 				null,//Qty/Attended
+				null,//Date Attended
 				null,
 				null,
 				null,

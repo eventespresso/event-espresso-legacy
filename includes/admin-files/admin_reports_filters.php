@@ -201,6 +201,7 @@ function espresso_display_admin_reports_filters( $total = 0 ) {
 			array('id' => 'Pending', 'text' => __('Pending', 'event_espresso')), 
 			array('id' => 'Incomplete', 'text' => __('Incomplete', 'event_espresso')), 
 			array('id' => 'Payment Declined', 'text' => __('Payment Declined', 'event_espresso')), 
+			array('id' => 'Cancelled','text' => __('Cancelled','event_espresso')),
 			array('id' => 'Refund', 'text' => __('Refund', 'event_espresso'))
 		);
 		echo select_input( 'payment_status', $status, $payment_status );
@@ -224,8 +225,8 @@ function espresso_display_admin_reports_filters( $total = 0 ) {
 		<?php }?>
 		<?php
 		$status = array(
-			array('id' => 'A', 'text' 	=> __('Active', 'event_espresso')), 
-			array('id' => 'L', 'text'	=> __('Show Active/Inactive', 'event_espresso')), 
+			array('id' => 'A', 'text' 	=> __('Active / Ongoing', 'event_espresso')), 
+			array('id' => 'L', 'text'	=> __('ALL ( Active / Inactive )', 'event_espresso')), 
 			array('id' => 'IA', 'text' 	=> __('Inactive', 'event_espresso')), 
 			array('id' => 'P', 'text' 	=> __('Pending', 'event_espresso')), 
 			array('id' => 'R', 'text' 	=> __('Draft', 'event_espresso')), 

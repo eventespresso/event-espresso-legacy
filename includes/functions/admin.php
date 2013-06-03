@@ -1634,7 +1634,7 @@ function espresso_get_user_question_groups($user_id = null, $use_filters = true,
   		$sql .= " WHERE qg.id = '" . $group_id . "' ";
   	} 
 
-	$sql .= ( empty($group_id) ) ? " ORDER BY id ASC " : " ORDER BY group_order ";
+	$sql .= ( empty($group_id) ) ? " ORDER BY group_order " : " ORDER BY id ASC ";
 
 	$groups = $wpdb->get_results( $wpdb->prepare($sql, NULL) );
 

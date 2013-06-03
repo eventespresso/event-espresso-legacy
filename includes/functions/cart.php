@@ -1155,9 +1155,9 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 				$surcharge = '';
 
 				if ($result->surcharge > 0 && $result->event_cost > 0.00) {
-					$surcharge = " + {$org_options['currency_symbol']}{$result->surcharge} " . __('Surcharge', 'event_espresso');
+					$surcharge = " + {$org_options['currency_symbol']}{$result->surcharge} " . $org_options['surcharge_text'];
 					if ($result->surcharge_type == 'pct') {
-						$surcharge = " + {$result->surcharge}% " . __('Surcharge', 'event_espresso');
+						$surcharge = " + {$result->surcharge}% " . $org_options['surcharge_text'];
 					}
 				}
 
