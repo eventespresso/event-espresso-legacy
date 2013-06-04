@@ -404,7 +404,7 @@ function event_list_attendees() {
 
 
 $hide = $EVT_ID ? '1,5' : '1,3';
-$hide .= ',8,12,13'; 
+$hide .= $ticketing_installed ? ',8,12,13': ',11,12'; 
 
 ?>
 <script>
@@ -426,8 +426,7 @@ $hide .= ',8,12,13';
 				null,
 				null,
 				null,//Qty/Attended
-				null,//Date Attended
-				null,
+	<?php echo $ticketing_installed ? 'null,//Date Attended' : ''; ?>				null,
 				null,
 				null,
 				null,
