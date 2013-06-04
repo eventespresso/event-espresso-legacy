@@ -426,7 +426,7 @@ $hide .= $ticketing_installed ? ',8,12,13': ',11,12';
 				null,
 				null,
 				null,//Qty/Attended
-	      <?php echo $ticketing_installed ? "null,//Date Attended\n" : ''; ?>
+				<?php echo $ticketing_installed ? "null," : ''; ?>//Date Attended
 				null,
 				null,
 				null,
