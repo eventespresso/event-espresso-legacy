@@ -70,8 +70,6 @@ $data['event_id'] = $event_id;
 $data['event_name'] = isset($event_name) && !empty($event_name) ? $event_name : '';
 $data['registration_id'] = $registration_id;
 $data['phone'] = isset($phone) && !empty($phone) ? $phone : '';
-$data['event_meta'] = event_espresso_get_event_meta($event_id);
-
 //This file builds the gateways that are available
 echo '<div id="payment-options-dv" class="event-display-boxes ui-widget">';
 echo '<h2 class="section-heading ui-widget-header ui-corner-top">' . __('Please choose a payment option', 'event_espresso') . '</h2>';

@@ -796,52 +796,14 @@ function espresso_news_dashboard_widget_function() {
 function espresso_news_dashboard_widgets() {
 	wp_add_dashboard_widget('espresso_news_dashboard_widget', 'Event Espresso News', 'espresso_news_dashboard_widget_function');
 }
+
 add_action('wp_dashboard_setup', 'espresso_news_dashboard_widgets');
-
-
-add_action( 'wp_ajax_espresso-ajax-content', 'event_espresso_ajax_metabox_content', 10 );
-
-
-function event_espresso_ajax_metabox_content() {
-	$contentid = isset( $_GET['contentid'] ) ? $_GET['contentid'] : '';
-	$url = isset( $_GET['contenturl'] ) ? $_GET['contenturl'] : '';
-	
-	event_espresso_cached_rss_display( $contentid, $url );
-	wp_die();
-}
-
-
-
-function event_espresso_cached_rss_display( $rss_id, $url ) {
-	$loading = '<p class="widget-loading hide-if-no-js">' . __( 'Loading&#8230;' ) . '</p><p class="hide-if-js">' . __( 'This widget requires JavaScript.' ) . '</p>';
-	$doing_ajax = ( defined( 'DOING_AJAX' ) && DOING_AJAX );
-	$pre = '<div class="espresso-rss-display">' . "\n\t";
-	$pre .= '<span id="' . $rss_id . '_url" class="hidden">' . $url . '</span>';
-	$post = '</div>' . "\n";
-
-	$cache_key = 'esp_rss_' . md5( $rss_id );
-	if ( FALSE != ( $output = get_transient( $cache_key ) ) ) {
-		echo $pre . $output . $post;
-		return TRUE;
-	}
-
-	if ( ! $doing_ajax ) {
-		echo $pre . $loading . $post;
-		return FALSE;
-	}
-
-	ob_start();
-	wp_widget_rss_output($url, array('show_date' => 0, 'items' => 5) );
-	set_transient( $cache_key, ob_get_flush(), 12 * HOUR_IN_SECONDS );
-	return TRUE;
-
-}
 
 function event_espresso_display_right_column() {
 	global $espresso_premium;
 	ob_start();
 	?>
-			<div id="espresso_news_box_blog" class="postbox">
+			<div id="submitdiv" class="postbox">
 				<div title="Click to toggle" class="handlediv"><br />
 				</div>
 				<h3 class="hndle">
@@ -853,8 +815,16 @@ function event_espresso_display_right_column() {
 							<?php
 							echo '<h4 style="margin:0">' . __('From the Blog', 'event_espresso') . '</h4>';
 
-							$url = urlencode('http://eventespresso.com/feed/');
-							event_espresso_cached_rss_display( 'espresso_news_box_blog', $url );
+							// Get RSS Feed(s)
+							@wp_widget_rss_output('http://eventespresso.com/feed/', array('show_date' => 0, 'items' => 5));
+
+							/*echo '<h4 style="margin:0">' . __('From the Forums', 'event_espresso') . '</h4>';
+
+							if ($espresso_premium == true){
+								@wp_widget_rss_output('http://eventespresso.com/forum/event-espresso-support/feed', array('show_date' => 0, 'items' => 4));
+							}else{
+								@wp_widget_rss_output('http://eventespresso.com/forum/event-espresso-public/feed', array('show_date' => 0, 'items' => 4));
+							}*/
 							?>
 						</div>
 					</div>
