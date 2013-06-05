@@ -69,7 +69,7 @@ if ($payment_status != 'Completed') {
 //Added by Imon
 	if (count($registration_ids) > 0 && $admin == false) {
 		foreach ($registration_ids as $reg_id) {
-			$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET payment_status = '" . $payment_status . "', txn_type = '" . $txn_type . "', payment_date ='" . $payment_date . "'  WHERE registration_id ='" . $reg_id['registration_id'] . "'";
+			$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET payment_status = '" . $payment_status . "', txn_type = '" . $txn_type . "', payment_date ='" . $payment_date . "'  WHERE registration_id ='" . $reg_id['registration_id'] . "' AND txn_type ='' ";
 			$wpdb->query($sql);
 		}
 	}
