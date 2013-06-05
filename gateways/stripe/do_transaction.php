@@ -29,7 +29,7 @@ function espresso_process_stripe($payment_data) {
 	$line_item = "LINEITEM~PRODUCTID=" . $payment_data['attendee_id'] . "+DESCRIPTION=" . $payment_data["event_name"] . "[" . date('m-d-Y', strtotime($payment_data['start_date'])) . "]" . " >> " . $payment_data["fname"] . " " . $payment_data["lname"] . "
 							QUANTITY=1 UNITCOST=" . $payment_data['total_cost'];
 
-	$response = $cls_stripe->do_transaction($payment_data['total_cost'], $cc, $csc, $exp_month, $exp_year, $bname, $line_item);
+	$response = $cls_stripe->do_transaction($payment_data['total_cost'], $cc, $csc, $exp_month, $exp_year, $bname, $line_item, $payment_data);
 	if (!empty($response)) {
 		$payment_data['txn_details'] = serialize($response);
 		if (isset($response['status'])) {

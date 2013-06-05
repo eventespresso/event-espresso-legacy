@@ -4,6 +4,8 @@ function event_espresso_paypal_payment_settings() {
 	global $active_gateways;
 	if (isset($_POST['update_paypal'])) {
 		$paypal_settings['paypal_id'] = $_POST['paypal_id'];
+		$paypal_settings['tax_override'] = empty($_POST['tax_override']) ? false : true;
+		$paypal_settings['shipping_override'] = empty($_POST['shipping_override']) ? false : true;
 		$paypal_settings['image_url'] = $_POST['image_url'];
 		$paypal_settings['currency_format'] = $_POST['currency_format'];
 		$paypal_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
@@ -22,6 +24,8 @@ function event_espresso_paypal_payment_settings() {
 			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/paypal/btn_stdCheckout2.gif";
 		}
 		$paypal_settings['paypal_id'] = '';
+		$paypal_settings['tax_override'] = false;
+		$paypal_settings['shipping_override'] = false;
 		$paypal_settings['image_url'] = '';
 		$paypal_settings['currency_format'] = 'USD';
 		$paypal_settings['use_sandbox'] = false;
@@ -92,6 +96,18 @@ function event_espresso_display_paypal_settings() {
 							<input type="text" name="paypal_id" size="35" value="<?php echo $paypal_settings['paypal_id']; ?>">
 							<br />
 							<?php _e('(The email address you use when you log in to your account at PayPal.com)', 'event_espresso'); ?>
+						</li>
+						<li>
+							<label for="tax_override">
+								<?php _e('Override Profile-Based Tax', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=tax_override_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a> <input name="tax_override" type="checkbox" value="1" <?php echo $paypal_settings['tax_override'] ? 'checked="checked"' : '' ?> />
+							</label>
+							
+						</li>
+						<li>
+							<label for="shipping_override">
+								<?php _e('Override Profile-Based Shipping', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=shipping_override_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a> <input name="shipping_override" type="checkbox" value="1" <?php echo $paypal_settings['shipping_override'] ? 'checked="checked"' : '' ?> />
+							</label>
+							
 						</li>
 						<li>
 							<label for="currency_format">
@@ -182,6 +198,8 @@ function event_espresso_display_paypal_settings() {
 							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=image_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a><br />
 							<?php _e('(used for your business/personal logo on the PayPal page)', 'event_espresso'); ?>
 						</li>
+						
+						
 					</ul></td>
 				<td valign="top"><ul><li>
 						<label for="bypass_payment_page">
@@ -206,13 +224,7 @@ function event_espresso_display_paypal_settings() {
 							echo select_input('no_shipping', $values, $paypal_settings['no_shipping']);
 							?>
 							</li>
-						<li>
-							<label for="use_sandbox">
-								<?php _e('Use the Debugging Feature and the', 'event_espresso'); ?> <a href="https://developer.paypal.com/devscr?cmd=_home||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox_get_started" title="PayPal Sandbox Login||Sandbox Tutorial||Getting Started with PayPal Sandbox" target="_blank"><?php _e('PayPal Sandbox', 'event_espresso'); ?></a><a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=paypal_sandbox_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-							</label>
-							<input name="use_sandbox" type="checkbox" value="1" <?php echo $paypal_settings['use_sandbox'] ? 'checked="checked"' : '' ?> />
-							<br />
-						</li>
+						
 						<?php if (espresso_check_ssl() == TRUE || ( isset($paypal_settings['force_ssl_return']) && $paypal_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
@@ -238,6 +250,10 @@ function event_espresso_display_paypal_settings() {
 			<input type="hidden" name="update_paypal" value="update_paypal">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update PayPal Settings', 'event_espresso') ?>" id="save_paypal_settings" />
 		</p>
+		<p><label for="use_sandbox">
+								<?php _e('Use the Debugging Feature and the', 'event_espresso'); ?> <a href="https://developer.paypal.com/devscr?cmd=_home||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox_get_started" title="PayPal Sandbox Login||Sandbox Tutorial||Getting Started with PayPal Sandbox" target="_blank"><?php _e('PayPal Sandbox', 'event_espresso'); ?></a><a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=paypal_sandbox_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							</label>
+							<input name="use_sandbox" type="checkbox" value="1" <?php echo $paypal_settings['use_sandbox'] ? 'checked="checked"' : '' ?> /></p>
 	</form>
 	<div id="paypal_sandbox_info" style="display:none">
 		<h2><?php _e('PayPal Sandbox', 'event_espresso'); ?></h2>
@@ -264,7 +280,17 @@ function event_espresso_display_paypal_settings() {
 		<h2><?php _e('Shipping Address', 'event_espresso'); ?></h2>
 		<p><?php _e('By default, PayPal will display shipping address information on the PayPal payment screen. If you plan on shipping items to a registrant (shirts, invoices, etc) then use this option. Otherwise it should not be used, as it will require a shipping address when someone registers for an event.', 'event_espresso'); ?></p>
 	</div>
+	<div id="tax_override_info" style="display:none">
+		<h2><?php _e('Override Profile-Based Tax', 'event_espresso'); ?></h2>
+		<p><?php _e('Overrides any sales taxes that may be applied to all of your PayPal.com payments. These settings can be managed in your PayPal.com Profile > Sales Tax (<a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=_profile-sales-tax" target="_blank">https://www.paypal.com/us/cgi-bin/webscr?cmd=_profile-sales-tax</a>).', 'event_espresso'); ?></p>
+		<p><?php _e('Even if you are using your Profile-based tax settings, you may want to set a special tax rate for some of your items (e.g. if it is a event/product that does not require tax).', 'event_espresso'); ?></p>
+	</div>
+	<div id="shipping_override_info" style="display:none">
+		<h2><?php _e('Override Profile-Based Shipping', 'event_espresso'); ?></h2>
+		<p><?php _e('Overrides any shipping charges that may be applied to all of your PayPal.com payments. These settings can be managed in your PayPal.com Profile > Shipping Calculations  (<a href="https://www.paypal.com/cgi-bin/customerprofileweb?cmd=_profile-shipping" target="_blank">https://www.paypal.com/cgi-bin/customerprofileweb?cmd=_profile-shipping</a>).', 'event_espresso'); ?></p>
+	</div>
 	<?php
+	
 }
 
 add_action('action_hook_espresso_display_gateway_settings','event_espresso_paypal_payment_settings');

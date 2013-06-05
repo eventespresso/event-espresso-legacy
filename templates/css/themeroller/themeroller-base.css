@@ -289,6 +289,15 @@ span.remove-cart-item {
 #event_espresso_refresh_total {
 	line-height: 2.2;
 }
+/*___ Confirmation page ___*/
+
+.entry-content input[name="confirm"],
+.entry-content input[name="confirm2"] {
+margin: .75em .75em 0;
+}
+.additional-conf-info {
+margin-top: .75em;
+}
 /*___ Payment options page ___*/
 
 #sandbox-panel {
