@@ -100,5 +100,38 @@ jQuery(document).ready(function($jaer) {
 
 });
 
+jQuery(document).ready( function($) {
+	//these may have ajaxContent
+	var espressoAjaxContent = [
+		'espresso_news_box_blog'
+	];
+
+	espressoAjaxPopulate = function(el) {
+		function show(i, id) {
+			var p, e = $('#' + id + ' div.inside:visible').find('.widget-loading');
+			if ( e.length ) {
+				p = e.parent();
+				var u = $('#' + id + '_url').text();
+				setTimeout( function(){
+					p.load( ajaxurl + '?action=espresso-ajax-content&contentid=' + id + '&contenturl=' + u, '', function() {
+						p.hide().slideDown('normal', function(){
+							$(this).css('display', '');
+						});
+					});
+				}, i * 500 );
+			}
+		}
+
+		if ( el ) {
+			el = el.toString();
+			if ( $.inArray(el, espressoAjaxContent) != -1 )
+				show(0, el);
+		} else {
+			$.each( espressoAjaxContent, show );
+		}
+	};
+	espressoAjaxPopulate();
+});
+
 				
 				

@@ -8,7 +8,15 @@ function espresso_display_paypal($payment_data) {
 	echo '<!-- Event Espresso PayPal Gateway Version ' . $myPaypal->gateway_version . '-->';
 	global $org_options;
 	$paypal_settings = get_option('event_espresso_paypal_settings');
-	$paypal_id = empty($paypal_settings['paypal_id']) ? '' : $paypal_settings['paypal_id'];
+	
+	//Check for an alternate PayPal email address
+	if (isset($event_meta['paypal_email']) && !empty($event_meta['paypal_email']) && filter_var($event_meta['paypal_email'], FILTER_VALIDATE_EMAIL) != FALSE) {
+		//Alternate PayPal email - using the paypal meta key field.
+		$paypal_id = $event_meta['paypal_email'];
+	} else {
+		$paypal_id = empty($paypal_settings['paypal_id']) ? '' : $paypal_settings['paypal_id'];
+	}
+	
 	$paypal_cur = empty($paypal_settings['currency_format']) ? '' : $paypal_settings['currency_format'];
 	$no_shipping = isset($paypal_settings['no_shipping']) ? $paypal_settings['no_shipping'] : '0';
 	$use_sandbox = $paypal_settings['use_sandbox'];
@@ -48,7 +56,14 @@ function espresso_display_paypal($payment_data) {
 		} else {
 
 			$myPaypal->addField('amount_' . $item_num, $item->final_price);
-		}		
+		}
+		
+		if (isset($paypal_settings['tax_override']) && $paypal_settings['tax_override'] == true) {
+			$myPaypal->addField('tax_'.$item_num, '0.00');
+		}
+		if (isset($paypal_settings['shipping_override']) && $paypal_settings['shipping_override'] == true) {
+			$myPaypal->addField('shipping_'.$item_num, '0.00');
+		}
 	
 	}
 	//printr( $myPaypal, '$myPaypal  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
@@ -77,7 +92,7 @@ function espresso_display_paypal($payment_data) {
 	$myPaypal->addField('city', $city);
 	$myPaypal->addField('state', $state);
 	$myPaypal->addField('zip', $zip);
-	
+		
 	if (!empty($paypal_settings['bypass_payment_page']) && $paypal_settings['bypass_payment_page'] == 'Y') {
 		$myPaypal->submitPayment();
 	} else {
