@@ -48,7 +48,7 @@ function organization_config_mnu() {
 		$org_options['surcharge_text'] = isset($_POST['surcharge_text']) && !empty($_POST['surcharge_text']) ? $_POST['surcharge_text'] : '';
 		$org_options['show_reg_footer'] = isset($_POST['show_reg_footer']) && !empty($_POST['show_reg_footer']) ? $_POST['show_reg_footer'] : '';
 		$org_options['affiliate_id'] = isset($_POST['affiliate_id']) && !empty($_POST['affiliate_id']) ? $_POST['affiliate_id'] : '';
-		$org_options['site_license_key'] = isset($_POST['site_license_key']) && !empty($_POST['site_license_key']) ? $_POST['site_license_key'] : '';
+		$org_options['site_license_key'] = isset($_POST['site_license_key']) && !empty($_POST['site_license_key']) ? trim($_POST['site_license_key']) : '';
 		$org_options['default_payment_status'] = isset($_POST['default_payment_status']) && !empty($_POST['default_payment_status']) ? $_POST['default_payment_status'] : '';
 		$ueip_optin = isset($_POST['ueip_optin']) && !empty($_POST['ueip_optin']) ? $_POST['ueip_optin'] : 'yes';
 		

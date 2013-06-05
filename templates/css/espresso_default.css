@@ -170,11 +170,13 @@
 	padding:1em 2em 1.25em; margin: 0 0 1em 0;
 	background-color: #FFC; border: #FC6 1px solid; border-radius:3px;
 	color: #000; text-shadow:1px 1px #fff;
+	cursor: pointer;
 }
 .remove-additional-attendee-lnk {
 	padding: 1em 2em 1.25em; margin: 0 0 1em 0; 
 	background-color:#FFEEEE; border: #FF0000 1px solid; border-radius:3px;
 	color: #000; text-shadow:1px 1px #fff;
+	cursor: pointer;
 }
 
 
@@ -252,7 +254,7 @@ select.wide { width: 175px; }
 .event_espresso_form_wrapper .checkbox-lbl + .checkbox-lbl,
 .event_espresso_form_wrapper .radio-btn-lbl + .radio-btn-lbl { margin-left:1em; }
 
-#additional_header { margin:2em 0 1em; }
+#additional_header { margin:2em 0 1em; cursor:pointer; }
 .event_espresso_form_wrapper .additional-attendee-nmbr-h4 { margin:3em 0 -1em; }
 
 .espresso_add_subtract_attendees { padding:0 0 0 160px; }

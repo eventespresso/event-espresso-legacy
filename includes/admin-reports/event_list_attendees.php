@@ -90,7 +90,7 @@ function event_list_attendees() {
 
 	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php')) {
         require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/admin_reports_filters.php');
-	 	espresso_display_admin_reports_filters( $total_events );
+	 	espresso_display_admin_reports_filters( $total_attendees );
 	} else {
 		?>
 		<p>
@@ -101,115 +101,6 @@ function event_list_attendees() {
 		</p>
 		<?php
     }
-
-	
-	
-//	$sql_clause = " WHERE ";
-//    $sql_a = "(";
-	
-/*    if (function_exists('espresso_member_data') && espresso_member_data('role') == 'espresso_group_admin') {
-	
-        $group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-        $group = implode(",", $group);
-        $sql_a .= "SELECT a.*, e.id event_id, e.event_name, checked_in FROM " . EVENTS_ATTENDEE_TABLE . " a ";
-        $sql_a .= " LEFT JOIN " . EVENTS_DETAIL_TABLE . " e ON e.id=a.event_id ";
-
-        if ($_REQUEST['category_id'] != '') {
-            $sql_a .= " JOIN " . EVENTS_CATEGORY_REL_TABLE . " r ON r.event_id = e.id ";
-            $sql_a .= " JOIN " . EVENTS_CATEGORY_TABLE . " c ON  c.id = r.cat_id ";
-        }
-        if ($group != '') {
-            $sql_a .= " JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id ";
-            $sql_a .= " JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = r.venue_id ";
-        }
-        $sql_a .= $_REQUEST['category_id'] != '' ? " AND c.id = '" . $_REQUEST['category_id'] . "' " : '';
-
-        $sql_clause = " WHERE ";
-
-        if ($_REQUEST['payment_status'] != '') {
-            $sql_a .= " $sql_clause a.payment_status = '" . $_REQUEST['payment_status'] . "' ";
-            $sql_clause = " AND ";
-        }
-        if ($_POST['month_range'] != '') {
-            $pieces = explode('-', $_REQUEST['month_range'], 3);
-            $year_r = $pieces[0];
-            $month_r = $pieces[1];
-            $sql_a .= " $sql_clause a.date BETWEEN '" . event_espresso_no_format_date($year_r . '-' . $month_r . '-01', $format = 'Y-m-d') . "' AND '" . event_espresso_no_format_date($year_r . '-' . $month_r . '-31', $format = 'Y-m-d') . "' ";
-            $sql_clause = " AND ";
-        }
-
-        if ( $EVT_ID ) {
-            $sql_a .= " $sql_clause a.event_id = '" . $EVT_ID . "' ";
-            $sql_clause = " AND ";
-        }
-
-        if ($_REQUEST['today_a'] == 'true') {
-            //$sql_a .= " $sql_clause a.date = '" . event_espresso_no_format_date($curdate,$format = 'Y-m-d') ."' ";
-            $sql_a .= " $sql_clause a.date BETWEEN '" . $curdate . ' 00:00:00' . "' AND '" . $curdate . ' 23:59:59' . "' ";
-            $sql_clause = " AND ";
-        }
-
-        if ($_REQUEST['this_month_a'] == 'true') {
-            $sql_a .= " $sql_clause a.date BETWEEN '" . event_espresso_no_format_date($this_year_r . '-' . $this_month_r . '-01', $format = 'Y-m-d') . "' AND '" . event_espresso_no_format_date($this_year_r . '-' . $this_month_r . '-' . $days_this_month, $format = 'Y-m-d') . "' ";
-            $sql_clause = " AND ";
-        }
-        $sql_a .= $group != '' ? $sql_clause . "  l.locale_id IN (" . $group . ") " : '';
-		$sql_a .= $event_status ? " AND e.event_status = '" . $event_status . "' " : " AND e.event_status != 'D' ";
-        $sql_a .= ") UNION (";
-		
-    }
-	
-    $sql_a .= "SELECT a.*, e.id event_id, e.event_name, checked_in FROM " . EVENTS_ATTENDEE_TABLE . " a ";
-    $sql_a .= " LEFT JOIN " . EVENTS_DETAIL_TABLE . " e ON e.id=a.event_id ";
-	
-    if (!empty($_REQUEST['category_id'])) {
-        $sql_a .= " JOIN " . EVENTS_CATEGORY_REL_TABLE . " r ON r.event_id = e.id ";
-        $sql_a .= " JOIN " . EVENTS_CATEGORY_TABLE . " c ON  c.id = r.cat_id ";
-    }
-
-    $sql_a .= !empty($_REQUEST['category_id']) ? " AND c.id = '" . $_REQUEST['category_id'] . "' " : '';
-
-    $sql_clause = " WHERE ";
-
-    if (!empty($_REQUEST['payment_status'])) {
-        $sql_a .= " $sql_clause a.payment_status = '" . $_REQUEST['payment_status'] . "' ";
-        $sql_clause = " AND ";
-    }
-
-    if (!empty($_POST['month_range'])) {
-        $pieces = explode('-', $_REQUEST['month_range'], 3);
-        $year_r = $pieces[0];
-        $month_r = $pieces[1];
-        $sql_a .= " $sql_clause a.date BETWEEN '" . event_espresso_no_format_date($year_r . '-' . $month_r . '-01', $format = 'Y-m-d') . "' AND '" . event_espresso_no_format_date($year_r . '-' . $month_r . '-31', $format = 'Y-m-d') . "' ";
-        $sql_clause = " AND ";
-    }
-
-    if ( $EVT_ID ) {
-        $sql_a .= " $sql_clause a.event_id = '" . $EVT_ID . "' ";
-        $sql_clause = " AND ";
-    }
-	
-    if (!empty($_REQUEST['today_a'])) {
-        //$sql_a .= " $sql_clause a.date = '" . event_espresso_no_format_date($curdate,$format = 'Y-m-d') ."' ";
-        $sql_a .= " $sql_clause a.date BETWEEN '" . $curdate . ' 00:00:00' . "' AND '" . $curdate . ' 23:59:59' . "' ";
-        $sql_clause = " AND ";
-    }
-	
-    if (!empty($_REQUEST['this_month_a'])) {
-        $sql_a .= " $sql_clause a.date BETWEEN '" . event_espresso_no_format_date($this_year_r . '-' . $this_month_r . '-01', $format = 'Y-m-d') . "' AND '" . event_espresso_no_format_date($this_year_r . '-' . $this_month_r . '-' . $days_this_month, $format = 'Y-m-d') . "' ";
-        $sql_clause = " AND ";
-    }
-	
-    if (function_exists('espresso_member_data') && ( espresso_member_data('role') == 'espresso_event_manager' || espresso_member_data('role') == 'espresso_group_admin')) {
-        $sql_a .= $sql_clause . " e.wp_user = '" . espresso_member_data('id') . "' ";
-    }
-	$sql_a .= $event_status ? " AND e.event_status = '" . $event_status . "' " : " AND e.event_status != 'D' ";
-    $sql_a .= ") ORDER BY date DESC, id ASC ";
-    $sql_a .= $records_to_show;
-	
-    $attendees = $wpdb->get_results($sql_a);
-	//echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-    $total_attendees = $wpdb->num_rows;*/
 
 	$updated_ticket_quantity =0;
 	$att_table_form_url = add_query_arg( array( 'event_admin_reports' => 'list_attendee_payments', 'event_id' => $EVT_ID ), EVT_ADMIN_URL );

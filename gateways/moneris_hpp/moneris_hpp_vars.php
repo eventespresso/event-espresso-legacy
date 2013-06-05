@@ -80,7 +80,7 @@ function espresso_display_moneris_hpp( $payment_data ) {
 	// pst   	 				This is where you would include Provincial Sales Tax charged,  (min 0.00 & max 9999999.99)
 	// hst   	 				This is where you would include Harmonized Sales Tax charged,  (min 0.00 & max 9999999.99)
 
-	$total = number_format( $total, 2, '.', ',' );
+	$total = number_format( $total, 2, '.', '' );
 	
 	if ( WP_DEBUG && current_user_can( 'update_core' )) {
 //		$total = 0.01;
