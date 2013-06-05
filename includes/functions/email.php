@@ -101,11 +101,12 @@ function replace_shortcodes($message, $data) {
 			$data->event->venue_phone,
 			$data->google_map_link,
 			$data->table_open . $data->table_heading . $data->event_table . $data->table_close,
-			$data->email_questions,
+			isset($data->email_questions) && !empty($data->email_questions) ? $data->email_questions : '',
 			$data->qr_code,
 			$data->seatingchart_tag,
 			$data->edit_attendee,
-			apply_filters('filter_hook_espresso_display_ical', array(//Add to calendar link
+			//Add to calendar link
+			apply_filters('filter_hook_espresso_display_ical', array(
 					'event_id' => $data->attendee->event_id,
 					'registration_id' => $data->attendee->registration_id,
 					'event_name' => $data->event->event_name,

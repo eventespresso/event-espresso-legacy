@@ -10,6 +10,8 @@
 }
 .ee-featured-image{
 	float: right;
+	margin:5px;
+	padding:10px;
 }
 
 /* Payment Page Styles */
@@ -168,11 +170,13 @@
 	padding:1em 2em 1.25em; margin: 0 0 1em 0;
 	background-color: #FFC; border: #FC6 1px solid; border-radius:3px;
 	color: #000; text-shadow:1px 1px #fff;
+	cursor: pointer;
 }
 .remove-additional-attendee-lnk {
 	padding: 1em 2em 1.25em; margin: 0 0 1em 0; 
 	background-color:#FFEEEE; border: #FF0000 1px solid; border-radius:3px;
 	color: #000; text-shadow:1px 1px #fff;
+	cursor: pointer;
 }
 
 
@@ -236,7 +240,7 @@ select.wide { width: 175px; }
 .event_espresso_form_wrapper ul.event_form_field li,
 .event_espresso_form_wrapper .checkbox-lbl,
 .event_espresso_form_wrapper .radio-btn-lbl {
- 	display: inline-block; margin:0 2em 0 0; padding:0;
+ 	display: inline-block; width:98%; margin:0 2em 0 0; padding:0;
 	text-align: left; vertical-align: middle; cursor: pointer;
 }
 /*.event_espresso_form_wrapper li label { width:auto; }*/
@@ -250,7 +254,7 @@ select.wide { width: 175px; }
 .event_espresso_form_wrapper .checkbox-lbl + .checkbox-lbl,
 .event_espresso_form_wrapper .radio-btn-lbl + .radio-btn-lbl { margin-left:1em; }
 
-#additional_header { margin:2em 0 1em; }
+#additional_header { margin:2em 0 1em; cursor:pointer; }
 .event_espresso_form_wrapper .additional-attendee-nmbr-h4 { margin:3em 0 -1em; }
 
 .espresso_add_subtract_attendees { padding:0 0 0 160px; }

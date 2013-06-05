@@ -179,17 +179,18 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			if ($event_meta['additional_attendee_reg_info'] == 2) {
 				$attendee_form .= '<p>';
 				$attendee_form .= '<label for="x_attendee_fname">' . __('First Name:', 'event_espresso') . '</label>';
-				$attendee_form .= '<input type="text" name="x_attendee_fname[XXXXXX]" class="input"/>';
+				$attendee_form .= '<input type="text" name="x_attendee_fname[XXXXXX]" class="ee-reg-page-text-input fname"/>';
 				$attendee_form .= '</p>';
 				$attendee_form .= '<p>';
 				$attendee_form .= '<label for="x_attendee_lname">' . __('Last Name:', 'event_espresso') . '</label>';
-				$attendee_form .= '<input type="text" name="x_attendee_lname[XXXXXX]" class="input"/>';
+				$attendee_form .= '<input type="text" name="x_attendee_lname[XXXXXX]" class="ee-reg-page-text-input lname"/>';
 				$attendee_form .= '</p>';
 				$attendee_form .= '<p>';
 				$attendee_form .= '<label for="x_attendee_email">' . __('Email:', 'event_espresso') . '</label>';
-				$attendee_form .= '<input type="text" name="x_attendee_email[XXXXXX]" class="input"/>';
+				$attendee_form .= '<input type="text" name="x_attendee_email[XXXXXX]" class="ee-reg-page-text-input email"/>';
 				$attendee_form .= '</p>';
 			} else {
+				$attendee_form .= '<input type="hidden" name="x_attendee_nmbr[XXXXXX]" class="x_attendee_nmbr" value="XXXXXX"/>';
 				$meta = array("x_attendee" => true);
 				if(!empty($admin)) {
 					$meta['admin_only'] = true;
@@ -264,6 +265,49 @@ function event_espresso_get_event_meta($event_id) {
 		}
 	}
 	return $event_meta;
+}
+
+/**
+ * espresso get event
+ * @since 3.1.33-alpha
+ * @author Chris Reynolds
+ * @param $event_id // the ID of the event
+ * returns an array of information for the event by the event id
+ */
+if ( !function_exists('espresso_get_event') ) {
+	function espresso_get_event($event_id, $single_event_id = null) {
+		global $wpdb, $org_options;
+		$data = (object)array();
+
+		//Build event queries
+		$sql = "SELECT e.*, ese.start_time, ese.end_time ";
+		if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
+		 	$sql .= ", v.name venue_name, v.address venue_address, v.address2 venue_address2, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta ";
+		}
+		$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
+		$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id = e.id ";
+		if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
+			$sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id ";
+		}
+		$sql.= " WHERE e.is_active='Y' ";
+		$sql.= " AND e.event_status != 'D' ";
+		if ($single_event_id != NULL) {
+			//If a single event needs to be displayed, get its ID
+            $sql .= " AND event_identifier = '" . $single_event_id . "' ";
+        } else {
+			$sql.= " AND e.id = '" . $event_id . "' LIMIT 0,1";
+        }
+        //Support for diarise
+        if (!empty($_REQUEST['post_event_id'])) {
+            $sql = "SELECT e.* FROM " . EVENTS_DETAIL_TABLE . ' e';
+            $sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id = e.id ";
+            $sql .= " WHERE post_id = '" . $_REQUEST['post_event_id'] . "' ";
+            $sql .= " LIMIT 0,1";
+        }
+
+		$data = $wpdb->get_row( $wpdb->prepare( $sql, NULL ), OBJECT );
+		return $data;
+	}
 }
 
 //This function returns the condition of an event
@@ -1099,12 +1143,12 @@ if (!function_exists('event_espresso_require_file')) {
 	 * @param mixed $path_first         // First choice for file location.
 	 * @param mixed $path_first         // Fallback location for file.
 	 * @param bool $must_exist          // Error if neither file exist.
-	 * @param bool $as_require_once     // True for require_once(), False for require()
+	 * @param bool $require_once     // TRUE for require_once(), FALSE for require()
 	 * @return void    // No return value. File already included.
 	 *
 	 * Usage: event_espresso_require_file('shopping_cart.php',EVENT_ESPRESSO_TEMPLATE_DIR,EVENT_ESPRESSO_PLUGINFULLPATH.'templates/')
 	 */
-	function event_espresso_require_file($template_file_name, $path_first, $path_else, $must_exist = true, $as_require_once = true) {
+	function event_espresso_require_file($template_file_name, $path_first, $path_else, $must_exist = TRUE, $require_once = TRUE) {
 		if (file_exists($path_first . $template_file_name)) {
 			// Use the template file in the user's upload folder
 			$full_path = $path_first . $template_file_name;
@@ -1112,9 +1156,13 @@ if (!function_exists('event_espresso_require_file')) {
 			// Use the system file path
 			$full_path = $path_else . $template_file_name;
 		}
-		if (file_exists($full_path) || $must_exist) {
-			$path = substr($full_path,0,strrpos($full_path, '/'));
-			($as_require_once == true) ? require_once($full_path) : require($full_path);
+		if ( file_exists( $full_path ) || $must_exist ) {
+			//$path = substr($full_path,0,strrpos($full_path, '/'));
+			if( $require_once ) {
+				require_once( $full_path );
+			} else {
+				require( $full_path );
+			}
 		}
 	}
 

@@ -191,7 +191,7 @@ function event_espresso_questions_config_mnu() {
 	<div id="question_info" class="pop-help" style="display:none">
 		<div class="TB-ee-frame">
 			<h2><?php _e('Manage Questions Overview', 'event_espresso'); ?></h2>
-			<p><?php _e('The <code>Questions</code> page shows your list of available questions to add to your registration forms for events', 'event_espresso'); ?>
+			<p><?php _e('The <code>Questions</code> page shows your list of available questions to add to your registration forms for events', 'event_espresso'); ?></p>
 			<p><?php _e('Use the add new question button at the top of the page to create a new question to add to the list ', 'event_espresso'); ?><a href="admin.php?page=form_builder&amp;action=new_question"><?php _e('Add New Question', 'event_espresso'); ?></a></p>
 			<p><?php _e('Once you have a built a list of questions you may further organize your questions into <code>Groups.</code> These', 'event_espresso') ?> <a href="admin.php?page=form_groups"><?php _e('Question Groups ', 'event_espresso'); ?></a><?php _e('allow you to easily and conveniently add a group to a registration that will have a pre populated set of questions, this is especially handy when creating many registration forms, saving time, by being able to re-use specific groups of questions repetedly.', 'event_espresso') ?></p>
 		</div>
@@ -243,30 +243,36 @@ function event_espresso_questions_config_mnu() {
 		} );
 						
 		// Remove li parent for input 'values' from page if 'text' box or 'textarea' are selected
-		var selectValue = jQuery('select#question_type option:selected').val();
+		var selectValue = jQuery('#question_type option:selected').val();
 		//alert(selectValue + ' - this is initial value');
 		// hide values field on initial page view
-		if(selectValue == 'TEXT' || selectValue == 'TEXTAREA' || selectValue == 'DATE'){
+		if( selectValue == 'SINGLE' || selectValue == 'DROPDOWN' || selectValue == 'MULTIPLE' ) {
+			jQuery('#question-values').attr("name","values") 
+		} else {
 			jQuery('#add-question-values').hide();
+			jQuery('#add-price-modifier').hide();
+			jQuery('#set-price-mod-qty').hide();
+			jQuery('#set-price-mod-available').hide();
 			// we don't want the values field trying to validate if not displayed, remove its name
-			jQuery('#add-question-values td input').attr("name","notrequired") 
+			jQuery('#question-values').attr("name","question_values") 
 		}
+			
 					
-					
-		jQuery('select#question_type').bind('change', function() {
-			var selectValue = jQuery('select#question_type option:selected').val();
+		jQuery('#question_type').on('change', function() {
+			var selectValue = jQuery('#question_type option:selected').val();
 				  
-			if (selectValue == 'TEXT' || selectValue == 'TEXTAREA' || selectValue == 'DATE') {
-				jQuery('#add-question-values').fadeOut('slow');
-				// we don't want the values field trying to validate if not displayed, remove its name
-				jQuery('#add-question-values td input').attr("name","notrequired") 
-				//alert(selectValue);
-			} else{
-				//alert(selectValue);
-				jQuery('#add-question-values').fadeIn('slow');
-				// add the correct name value back in so we can run validation check.
-				jQuery('#add-question-values td input').attr("name","values");
-							
+			if ( selectValue == 'SINGLE' || selectValue == 'DROPDOWN' || selectValue == 'MULTIPLE' ) {
+				jQuery('#add-price-modifier').fadeIn('fast');
+				jQuery('#set-price-mod-qty').fadeIn('fast');
+				jQuery('#set-price-mod-available').fadeIn('fast');
+				jQuery('#add-question-values').fadeIn('fast');
+				jQuery('#question-values').attr("name","values");
+			} else {
+				jQuery('#add-question-values').fadeOut('fast');
+				jQuery('#add-price-modifier').fadeOut('fast');
+				jQuery('#set-price-mod-qty').fadeOut('fast');
+				jQuery('#set-price-mod-available').fadeOut('fast');
+				jQuery('#question-values').attr("name","question_values");
 			}
 		});
 
@@ -280,7 +286,7 @@ function event_espresso_questions_config_mnu() {
 				},
 				messages: {
 					question: "Please add a title for your question",
-					values: "Please add a list of values for your question"
+					values: "Please add a list of answer options for your question"
 				}
 			});
 						

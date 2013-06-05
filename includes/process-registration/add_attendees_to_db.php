@@ -126,6 +126,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$address2	= isset($att_data_source['address2']) ? ee_sanitize_value($att_data_source['address2']) : '';
 			$city		= isset($att_data_source['city']) ? ee_sanitize_value($att_data_source['city']) : '';
 			$state		= isset($att_data_source['state']) ? ee_sanitize_value($att_data_source['state']) : '';
+			$country_id		= isset($att_data_source['country']) ? ee_sanitize_value($att_data_source['country']) : '';
 			$zip		= isset($att_data_source['zip']) ? ee_sanitize_value($att_data_source['zip']) : '';
 			$phone		= isset($att_data_source['phone']) ? ee_sanitize_value($att_data_source['phone']) : '';
 			$email		= isset($att_data_source['email']) ? ee_sanitize_value($att_data_source['email']) : '';
@@ -299,6 +300,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				'address2'				=> $address2,
 				'city'					=> $city,
 				'state'					=> $state,
+				'country_id'			=> $country_id,
 				'zip'					=> $zip,
 				'email'					=> $email,
 				'phone'					=> $phone,
@@ -311,7 +313,6 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				'end_date'				=> $end_date,
 				'price_option'			=> $price_type,
 				'organization_name'		=> $organization_name,
-				'country_id'			=> $country_id,
 				'payment_status'		=> $payment_status,
 				'payment_date'			=> $payment_date,
 				'event_id'				=> $event_id,
@@ -332,11 +333,15 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 
 			$attendee_id = $wpdb->insert_id;
 			
+			$attendee_data = $columns_and_values;
+			$attendee_data['attendee_id'] = $attendee_id;
+			$attendee_data['event_meta'] = $event_meta;
+			
 			//Save attendee hook
-			do_action('action_hook_espresso_save_attendee_data', $attendee_id, $columns_and_values);
+			do_action('action_hook_espresso_save_attendee_data', $attendee_data);
 			
 			//Save the attendee data as a meta value
-			do_action('action_hook_espresso_save_attendee_meta', $attendee_id, 'original_attendee_details', serialize($columns_and_values));
+			do_action('action_hook_espresso_save_attendee_meta', $attendee_id, 'original_attendee_details', serialize($attendee_data));
 			
 			// save attendee id for the primary attendee
 			$primary_att_id = $attendee_number == 1 ? $attendee_id : FALSE;
@@ -458,9 +463,13 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								//Added by Imon
 								$ext_attendee_id = $wpdb->insert_id;
 								
+								$ext_att_data_source['attendee_id'] = $attendee_id;
+								$ext_att_data_source['event_meta'] = $event_meta;
+			
+			
 								//Save attendee hook
-								do_action('action_hook_espresso_save_attendee_data', $ext_attendee_id, $ext_att_data_source);
-								
+								do_action('action_hook_espresso_save_attendee_data', $ext_att_data_source);
+			
 								//Save the attendee data as a meta value
 								do_action('action_hook_espresso_save_attendee_meta', $ext_attendee_id, 'original_attendee_details', serialize($ext_att_data_source));
 			
@@ -668,6 +677,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 						$address				= $attendee->address;
 						$city					= $attendee->city;
 						$state					= $attendee->state;
+						$country 			= $attendee->country_id;
 						$zip					= $attendee->zip;
 						$attendee_email			= $attendee->email;
 						$registration_id		= $attendee->registration_id;
@@ -701,7 +711,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				}						
 				
 				//Post the gateway page with the payment options
-				if ( $total_cost > 0 ) {
+				if ( $final_total > 0 ) {
 ?>
 
 <div class="espresso_payment_overview event-display-boxes ui-widget" >
@@ -745,7 +755,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				<td colspan="3"><strong class="event_espresso_name">
 					<?php _e('Total Amount due: ', 'event_espresso'); ?>
 					</strong></td>
-				<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] ?><?php echo number_format($total_cost,2); ?></td>
+				<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] ?><?php echo number_format($final_total,2); ?></td>
 			</tr>
 		</table>
 		<p class="event_espresso_refresh_total">
@@ -772,7 +782,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 						event_espresso_email_confirmations(array('session_id' => $_SESSION['espresso_session']['id'], 'send_admin_email' => 'true', 'send_attendee_email' => 'true', 'multi_reg' => true));
 					}
 					
-				} elseif ( $total_cost == 0.00 ) {
+				} elseif ( $final_total == 0.00 ) {
 					?>
 <p>
 	<?php _e('Thank you! Your registration is confirmed for', 'event_espresso'); ?>

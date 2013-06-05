@@ -8,7 +8,7 @@ if ( !function_exists( 'event_espresso_custom_questions_output' ) ){
     global $wpdb;
 
      extract( $atts );
-//Get the questions for the attendee
+	//Get the questions for the attendee
 
 		$sql = "SELECT ea.answer, eq.question FROM " . EVENTS_ANSWER_TABLE . " ea ";
 		$sql .= " LEFT JOIN " . EVENTS_QUESTION_TABLE . " eq ON eq.id = ea.question_id ";

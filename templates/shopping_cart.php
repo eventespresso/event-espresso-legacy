@@ -13,7 +13,7 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 
 			if ( count( $events_in_session ) > 0 ){
 				foreach ( $events_in_session as $event ) {
-					// echo $event['id'];
+					//echo '<h4>$event[id] : ' . $event['id'] . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 					if ( is_numeric( $event['id'] ) )
 						$events_IN[] = $event['id'];
 				}
@@ -25,9 +25,9 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			$sql .= " WHERE e.id in ($events_IN) ";
 			$sql .= " AND e.event_status != 'D' ";
 			$sql .= " ORDER BY e.start_date ";
-//echo '<h4>$sql : ' . $sql . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 			$result = $wpdb->get_results( $sql );
+
 ?>
 
 <form action='?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=load_checkout_page' method='post' id="event_espresso_shopping_cart">
@@ -35,6 +35,8 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 <?php
 		$counter = 1; //Counter that will keep track of the first events
 		foreach ( $result as $r ){
+			
+			$r = apply_filters( 'filter_hook_espresso_shopping_cart_event', $r );
 			
 			//Check to see if the Members plugin is installed.
 			if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && !is_user_logged_in() ) {
@@ -126,11 +128,10 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			
              <div id="event_espresso_notifications" class="clearfix event-data-display" style=""></div> 			
 
-			<div id="event_espresso_total_wrapper" class="clearfix event-data-display">	
-					
+			<div id="event_espresso_total_wrapper" class="clearfix event-data-display">					
 				<?php do_action( 'action_hook_espresso_shopping_cart_before_total' ); ?>				
 				<span class="event_total_price">
-					<?php _e( 'Total ', 'event_espresso' ) . $org_options['currency_symbol'];?> <span id="event_total_price"><?php echo $_SESSION['espresso_session']['grand_total'];?></span>
+					<?php echo __( 'Total ', 'event_espresso' ) . $org_options['currency_symbol'];?> <span id="event_total_price"><?php echo $_SESSION['espresso_session']['grand_total'];?></span>
 				</span>
 				<?php do_action( 'action_hook_espresso_shopping_cart_after_total' ); ?>
 				<p id="event_espresso_refresh_total">

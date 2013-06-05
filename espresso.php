@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.32.2.P
+  Version: 3.1.33
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -32,7 +32,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.32.2.P';
+	return '3.1.33';
 }
 
 //This tells the system to check for updates to the paid version
@@ -730,7 +730,7 @@ if (!function_exists('espresso_load_EEGlobals_jquery')) {
 //Used for the event cart
 if (!function_exists('espresso_load_jquery')) {
 	function espresso_load_jquery() {
-	
+		global $wp_version;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if (!is_admin() ) {
 			global $org_options;
@@ -739,7 +739,12 @@ if (!function_exists('espresso_load_jquery')) {
 				wp_enqueue_script('ee_ajax_request', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_cart_functions.js', array('jquery'));
 				$EEGlobals = array('ajaxurl' => admin_url('admin-ajax.php'), 'plugin_url' => EVENT_ESPRESSO_PLUGINFULLURL, 'event_page_id' => $org_options['event_page_id']);
 				wp_localize_script('ee_ajax_request', 'EEGlobals',$EEGlobals );
-				wp_enqueue_script('jquery-migrate', 'http://code.jquery.com/jquery-migrate-1.1.1.min.js', array('jquery'));
+				
+				//Load the jQuery migrate scripts if WP is older than 3.6
+				if ( !version_compare($wp_version, '3.6', '>=' ) ) {
+					wp_register_script('jquery-migrate', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/jquery-migrate-1.1.1.min.js', array('jquery'));
+				}
+				wp_enqueue_script('jquery-migrate');
 			}
 		}
 		

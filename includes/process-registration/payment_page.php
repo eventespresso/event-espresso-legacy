@@ -163,7 +163,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 
 	
 	
-	if ( $org_options['skip_confirmation_page'] == 'Y' ) {	
+	if ( isset($org_options['skip_confirmation_page']) && $org_options['skip_confirmation_page'] == 'Y' ) {	
 
 		$redirect_url = home_url().'/?page_id='.$org_options['event_page_id'] . '&regevent_action=confirm_registration';				
 		$_POST['regevent_action'] = 'confirm_registration';
@@ -295,6 +295,7 @@ function espresso_confirm_registration() {
 	$address2 = htmlspecialchars( stripslashes( $attendee->address2 ), ENT_QUOTES, 'UTF-8' );
 	$city = htmlspecialchars( stripslashes( $attendee->city ), ENT_QUOTES, 'UTF-8' );
 	$state = htmlspecialchars( stripslashes( $attendee->state ), ENT_QUOTES, 'UTF-8' );
+	$country = htmlspecialchars( stripslashes( $attendee->country ), ENT_QUOTES, 'UTF-8' );
 	$zip = $attendee->zip;
 	$payment_status = $attendee->payment_status;
 	$txn_type = $attendee->txn_type;
@@ -311,9 +312,9 @@ function espresso_confirm_registration() {
 		$event_cost = $total_cost;
 	}
 
-	$pre_approval_check = is_attendee_approved($event_id, $attendee_id);
+	$attendee_pre_approved = is_attendee_approved($event_id, $attendee_id);
 
-	if ($pre_approval_check) {
+	if ( $attendee_pre_approved ) {
 
 		//Pull in the "Thank You" page template
 		if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . "payment_page.php")) {
@@ -374,7 +375,7 @@ function event_espresso_pay() {
 	
 		$SQL = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id='" . $REG_ID . "' ORDER BY id LIMIT 1";
 		$payment_data['attendee_id'] = $wpdb->get_var( $wpdb->prepare( $SQL, NULL ));
-		
+				
 		$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_prepare_event_link', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
