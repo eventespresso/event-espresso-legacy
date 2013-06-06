@@ -323,7 +323,7 @@ function event_list_attendees() {
 		
 		<a class="button-secondary" style="margin-left:5px" href="#" onclick="window.location='<?php echo get_bloginfo('wpurl') . "/wp-admin/admin.php?event_espresso&amp;export=report&action=payment&amp;type=excel&amp;"; echo $EVT_ID  ? "event_id=" . $EVT_ID : "all_events=true"; ?>'" title="<?php _e('Export to Excel', 'event_espresso'); ?>">
 	    	<?php _e('Export to Excel', 'event_espresso'); ?>
-	    </a> 
+	    </a>
 		
 		<?php if( $EVT_ID ) { ?>
 		<a style="margin-left:5px"  class="button-secondary"  href="admin.php?page=events&amp;event_admin_reports=add_new_attendee&amp;event_id=<?php echo $EVT_ID;?>">
@@ -336,6 +336,8 @@ function event_list_attendees() {
 			<?php _e('Edit Event', 'event_espresso')?>
 		</a>
 		<?php } ?> 
+		
+		<?php do_action('action_hook_espresso_attendee_list_admin_buttons', $EVT_ID);?>
 		
 	</div>
 	
