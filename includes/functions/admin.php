@@ -14,6 +14,9 @@ function event_espresso_config_page_styles() {
 			case ( 'espresso_reports' ):
 				wp_enqueue_style('jquery-ui-style', EVENT_ESPRESSO_PLUGINFULLURL . 'css/jquery-ui-1.9.2.custom.min.css');
 				break;
+			case ( 'payment_gateways'):
+				wp_enqueue_media();
+				break;
 		}
 		if (isset($_REQUEST['event_admin_reports'])) {
 			switch ($_REQUEST['event_admin_reports']) {

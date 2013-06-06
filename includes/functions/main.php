@@ -1478,6 +1478,22 @@ function ee_sanitize_value($value) {
 	return wp_strip_all_tags( html_entity_decode( trim( sanitize_text_field(wp_strip_all_tags($value)) ), ENT_QUOTES, 'UTF-8' ) );
 }
 
+function espresso_select_button_for_display($settings_location, $default_location) {
+	if (empty($settings_location)) {
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . $default_location)) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . $default_location;
+		} else {
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/" . $default_location;
+		}
+	} elseif (@fopen($settings_location,"r")==true) {
+		$button_url = $settings_location;
+	} else {
+		//If no other buttons exist, then use the default location
+		$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/" . $default_location;
+	}
+	return $button_url;
+}
+
 function espresso_update_event_meta( $event_id, $new_meta ){
 	global $wpdb;
 	//Get the event meta

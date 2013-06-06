@@ -224,8 +224,8 @@ function event_espresso_display_2checkout_settings() {
 	<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							
-							<input type="text" name="button_url" size="34" value="<?php echo $twocheckout_settings['button_url']; ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>  </li>
+							<input class="upload_url_input" type="text" name="button_url" size="34" value="<?php echo $twocheckout_settings['button_url']; ?>" />
+							<a  class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>  </li>
 						<li>
 							<label><?php _e('Current Button Image', 'event_espresso'); ?></label>
 							
@@ -248,6 +248,8 @@ function event_espresso_display_2checkout_settings() {
 		<h2><?php _e('2Checkout Currency', 'event_espresso'); ?></h2>
 		<p><?php _e('2Checkout uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, select the currency you wish to use. The dropdown lists all currencies that 2Checkout (currently) supports.', 'event_espresso'); ?> </p>
 	</div>
+
+	
 	<?php
 }
 
