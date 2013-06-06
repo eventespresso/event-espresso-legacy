@@ -83,7 +83,10 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	}
 	
 	// get # of attendees
-	$SQL = "SELECT COUNT(quantity) FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id =%s";
+	$SQL = "SELECT COUNT(quantity) FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id =%s ";
+	
+	$SQL .= apply_filters('filter_hook_espresso_payment_page_count_attendees_sql_where', '');
+	
 	$num_people = $wpdb->get_var( $wpdb->prepare( $SQL, $registration_id ));
 
 	//If we are using the number of attendees dropdown
@@ -206,7 +209,8 @@ function espresso_confirm_registration() {
 	} else {
 		wp_die(__('An error has occured. The registration ID could not be found.', 'event_espresso'));
 	}
-
+	
+	do_action('action_hook_espresso_confirmation_page_before',$registration_id);
 
 	//Get the questions for the attendee
 	$SQL = "SELECT ea.answer, eq.question FROM " . EVENTS_ANSWER_TABLE . " ea ";
