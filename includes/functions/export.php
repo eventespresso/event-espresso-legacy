@@ -387,11 +387,13 @@ if (!function_exists('espresso_export_stuff')){
 						$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=a.event_id ";
 						//$sql .= " JOIN " . EVENTS_ATTENDEE_COST_TABLE . " ac ON a.id=ac.attendee_id ";
 						$sql .= $event_id ? " WHERE ed.id = '" . $event_id . "' " : '';
-
+						
+						$sql .= apply_filters('filter_hook_espresso_export_payments_query_where', '');
+						
 						if(  function_exists('espresso_member_data') && ( espresso_member_data('role')=='espresso_event_manager' || espresso_member_data('role')=='espresso_group_admin') ){
 							$sql .= " AND ed.wp_user = '" . espresso_member_data('id') ."' ";
 						}
-						
+												
 						$sql .= $espresso_member ?  ") ORDER BY att_id " : " ORDER BY a.id ";
 		
 						$participants = $wpdb->get_results($sql);
