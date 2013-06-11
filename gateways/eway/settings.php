@@ -141,9 +141,10 @@ function event_espresso_display_eway_settings() {
 						<li>
 							<label for="image_url">
 								<?php _e('Image URL (logo for payment page)', 'event_espresso'); ?>
+								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=image_url_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input type="text" name="image_url" size="35" value="<?php echo $eway_settings['image_url']; ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=image_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=image_url_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a><br />
+							<input class="upload_url_input" type="text" name="image_url" size="35" value="<?php echo $eway_settings['image_url']; ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a><br />
 							<?php _e('(used for your business/personal logo on the eWay page)', 'event_espresso'); ?>
 						</li>
 					</ul></td>
@@ -178,8 +179,8 @@ function event_espresso_display_eway_settings() {
 							<label for="button_url">
 								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input type="text" name="button_url" size="34" value="<?php echo (($eway_settings['button_url'] == '') ? '' : $eway_settings['button_url'] ); ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>  </li>
+							<input class="upload_url_input" type="text" name="button_url" size="34" value="<?php echo (($eway_settings['button_url'] == '') ? '' : $eway_settings['button_url'] ); ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>  </li>
 						<li>
 							<label><?php _e('Current Button Image', 'event_espresso'); ?></label>
 							<?php echo (($eway_settings['button_url'] == '') ? '<img src="' . $button_url . '" />' : '<img src="' . $eway_settings['button_url'] . '" />'); ?></li>

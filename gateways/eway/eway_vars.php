@@ -65,15 +65,7 @@ function espresso_display_eway($payment_data) {
 	if ($eway_settings['bypass_payment_page'] == 'Y') {
 		$myeway->submitPayment(); //Enable auto redirect to payment site
 	} else {
-		if (empty($eway_settings['button_url'])) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "eway/eway-logo.png")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_URL . "eway/eway-logo.png";
-			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/eway/eway-logo.png";
-			}
-		} else {
-			$button_url = $eway_settings['button_url'];
-		}
+		$button_url = espresso_select_button_for_display($eway_settings['button_url'], "eway/eway-logo.png");
 		$myeway->submitButton($button_url, 'eway'); //Display payment button
 		wp_deregister_script('jquery.validate.pack');
 	}
