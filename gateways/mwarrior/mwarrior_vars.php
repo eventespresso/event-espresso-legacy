@@ -60,18 +60,7 @@ function espresso_display_mwarrior($payment_data) {
 	if (!empty($mwarrior_settings['bypass_payment_page']) && $mwarrior_settings['bypass_payment_page'] == 'Y') {
 		$mwarrior->submitPayment(); //Enable auto redirect to payment site
 	} else {
-		if (empty($mwarrior_settings['button_url'])) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/mwarrior/mwarrior-logo.png")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/mwarrior/mwarrior-logo.png";
-			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/mwarrior/mwarrior-logo.png";
-			}
-		} elseif (file_exists($mwarrior_settings['button_url'])) {
-			$button_url = $mwarrior_settings['button_url'];
-		} else {
-			//If no other buttons exist, then use the default location
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/mwarrior/mwarrior-logo.png";
-		}
+		$button_url = espresso_select_button_for_display($mwarrior_settings['button_url'], "mwarrior/mwarrior-logo.png");
 		$mwarrior->submitButton($button_url, 'mwarrior'); //Display payment button
 	}
 
