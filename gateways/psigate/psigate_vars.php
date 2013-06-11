@@ -38,20 +38,9 @@ function espresso_display_psigate($payment_data){
 	$address2=array_key_exists('address2',$payment_data)?$payment_data['address2']:'';
 	$user_ip = $_SERVER["REMOTE_ADDR"];
 	
-	if (empty($psigate_settings['button_url'])) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/psigate/psigate.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/psigate/psigate.gif";
-		}
-	} elseif (isset($psigate_settings['button_url'])) {
-		$button_url = $psigate_settings['button_url'];
-	} else {
-		$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/psigate/psigate.gif";
-	}
-	if(!empty($button_url)){
-		$submit_html="<input type='image' src='$button_url'/>";
-	}else{
-		$submit_html="<button>Submit Purchase</button>";
-	}
+	$button_url = espresso_select_button_for_display($psigate_settings['button_url'], "psigate/psigate.gif");
+	$submit_html="<input type='image' src='$button_url'/>";
+
 	if($bypass_payment_page){
 		$bypass_payment_page_js="<script>document.getElementById('psigate_form').submit();</script>";
 	}else{
