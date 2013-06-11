@@ -62,19 +62,7 @@ function espresso_display_firstdata_e4($payment_data) {
 	if (!empty($firstdata_e4_settings['bypass_payment_page']) && $firstdata_e4_settings['bypass_payment_page'] == 'Y') {
 		$myE4->submitPayment(); //Enable auto redirect to payment site
 	} else {
-		if (empty($firstdata_e4_settings['button_url'])) {
-			//$button_url = EVENT_ESPRESSO_GATEWAY_URL . "firstdata_e4/firstdata-logo.png";
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_e4/firstdata-logo.png")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_e4/firstdata-logo.png";
-			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/firstdata_e4/firstdata-logo.png";
-			}
-		} elseif (isset($firstdata_e4_settings['button_url'])) {
-			$button_url = $firstdata_e4_settings['button_url'];
-		} else {
-			//If no other buttons exist, then use the default location
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/firstdata_e4/firstdata-logo.png";
-		}
+		$button_url = espresso_select_button_for_display($firstdata_e4_settings['button_url'], "firstdata_e4/firstdata-logo.png");
 		$myE4->submitButton($button_url, 'firstdata_e4'); //Display payment button
 	}
 
