@@ -7,6 +7,7 @@ function espresso_transactions_purchase_order_get_attendee_id($attendee_id) {
 }
 
 function espresso_process_purchase_order($payment_data) {
+	if (empty($_POST['po_number'])) return;
 	$payment_data['payment_status'] = 'Pending';
 	$payment_data['txn_type'] = 'P.O. - '.$_POST['po_number'];
 	$payment_data['txn_id'] = $payment_data['attendee_session'];
