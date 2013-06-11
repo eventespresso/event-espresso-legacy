@@ -154,8 +154,8 @@ function event_espresso_display_wepay_settings($need_to_reauthorize) {
 							<label for="button_url">
 	<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input type="text" name="button_url" size="34" value="<?php echo (($wepay_settings['button_url'] == '') ? '' : $wepay_settings['button_url'] ); ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a> </li>
+							<input class="upload_url_input" type="text" name="button_url" size="34" value="<?php echo (($wepay_settings['button_url'] == '') ? '' : $wepay_settings['button_url'] ); ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a> </li>
 						<li>
 							<label for="account_id">
 							<?php _e('Select the Account to Use', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=select_account"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
