@@ -34,20 +34,9 @@ function espresso_display_luottokunta($payment_data){
 	$server_url="https://dmp2.luottokunta.fi/dmp/html_payments";
 	$user_ip = $_SERVER["REMOTE_ADDR"]!='::1'?$_SERVER['REMOTE_ADDR']:'127.0.0.1';
 	
-	if (empty($luottokunta_settings['button_url'])) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/luottokunta/luottokunta.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/luottokunta/luottokunta.gif";
-		}
-	} elseif (isset($luottokunta_settings['button_url'])) {
-		$button_url = $luottokunta_settings['button_url'];
-	} else {
-		$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/luottokunta/luottokunta.gif";
-	}
-	if(!empty($button_url)){
-		$submit_html="<input type='image' src='$button_url'/>";
-	}else{
-		$submit_html="<button>Submit Purchase</button>";
-	}
+	$button_url = espresso_select_button_for_display($luottokunta_settings['button_url'], "luottokunta/luottokunta.gif");
+	$submit_html="<input type='image' src='$button_url'/>";
+
 	if($bypass_payment_page){
 		$bypass_payment_page_js="<script>document.getElementById('luottokunta_form').submit();</script>";
 	}else{
