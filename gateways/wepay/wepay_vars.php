@@ -3,6 +3,7 @@
 function espresso_display_wepay($payment_data) {
 	extract($payment_data);
 // Setup class
+	if (empty($event_name)) $event_name = "Event number #" . $event_id;
 	include_once ('Wepay.php');
 	echo '<!-- Event Espresso WePay Gateway Version ' . Espresso_Wepay::$version . '-->';
 	$wepay_settings = get_option('event_espresso_wepay_settings');

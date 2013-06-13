@@ -5,7 +5,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 /* Payments template page. Currently this just shows the registration data block.*/
 //This page gets all of the varaibles from includes/process-registration/payment_page.php
 //Payment confirmation block
-$attendee_num = 1;
+$attendee_num = apply_filters('action_hook_espresso_confirmation_page_primary_attendee_count',1);
 ?>
 	<form id="form1" name="form1" method="post" action="<?php echo get_permalink($org_options['event_page_id']);?>">
 		<div class="event-conf-block event-display-boxes ui-widget" >
