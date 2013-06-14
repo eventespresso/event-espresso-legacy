@@ -69,8 +69,33 @@ function espresso_display_aim($data) {
 						<input type="text" name="card_num" id="aim_card_num" autocomplete="off" />
 					</p>
 					<p>
-						<label for="exp_date"><?php _e('Exp. Date', 'event_espresso'); ?></label>
-						<input type="text" name="exp_date" id="aim_exp_date" autocomplete="off" />
+						<label for="card-exp"><?php _e('Expiration Month', 'event_espresso'); ?></label>
+						<select id="aim_card-exp" name ="exp_month" class="required">
+							<?php
+							$curr_month = date("m");
+							for ($i = 1; $i < 13; $i++) {
+								$val = $i;
+								if ($i < 10) {
+									$val = '0' . $i;
+								}
+								$selected = ($i == $curr_month) ? " selected" : "";
+								echo "<option value='$val'$selected>$val</option>";
+							}
+							?>
+						</select>
+					</p>
+					<p>
+						<label for="exp-year"><?php _e('Expiration Year', 'event_espresso'); ?></label>
+						<select id="aim_exp_year" name ="exp_year" class="required">
+							<?php
+							$curr_year = date("Y");
+							for ($i = 0; $i < 10; $i++) {
+								$disp_year = $curr_year + $i;
+								$selected = ($i == 0) ? " selected" : "";
+								echo "<option value='$disp_year'$selected>$disp_year</option>";
+							}
+							?>
+						</select>
 					</p>
 					<p>
 						<label for="ccv_code"><?php _e('CCV Code', 'event_espresso'); ?></label>

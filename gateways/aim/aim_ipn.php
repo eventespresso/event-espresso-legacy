@@ -34,7 +34,7 @@ function espresso_process_aim($payment_data) {
 	echo '<!--Event Espresso Authorize.net AIM Gateway Version ' . $transaction->gateway_version . '-->';
 	$transaction->amount = $_POST['amount'];
 	$transaction->card_num = $_POST['card_num'];
-	$transaction->exp_date = $_POST['exp_date'];
+	$transaction->exp_date = $_POST['exp_month'].$_POST['exp_year'];
 	$transaction->card_code = $_POST['ccv_code'];
 	$transaction->first_name = $_POST['first_name'];
 	$transaction->last_name = $_POST['last_name'];
