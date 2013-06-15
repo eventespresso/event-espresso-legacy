@@ -4,6 +4,8 @@ function event_list_attendees() {
 	
    global $wpdb, $org_options, $ticketing_installed, $espresso_premium;
     require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/event-management/queries.php');
+	require_once(EVENT_ESPRESSO_PLUGINFULLPATH."includes/functions/attendee_functions.php");
+
 	if ( ! defined( 'EVT_ADMIN_URL' )) {
 		define( 'EVT_ADMIN_URL', admin_url( 'admin.php?page=events' ));		
 	}
