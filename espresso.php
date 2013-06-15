@@ -35,6 +35,9 @@ function espresso_version() {
 	return '3.1.35-ALPHA';
 }
 
+define("EVENT_ESPRESSO_VERSION", espresso_version());
+define('EVENT_ESPRESSO_POWERED_BY', 'Event Espresso - ' . EVENT_ESPRESSO_VERSION);
+
 //This tells the system to check for updates to the paid version
 global $espresso_check_for_updates;
 $espresso_check_for_updates = true;
@@ -191,8 +194,6 @@ if (is_ssl()) {
 	$wp_content_url = str_replace('http://', 'https://', WP_CONTENT_URL);
 }
 
-define("EVENT_ESPRESSO_VERSION", espresso_version());
-define('EVENT_ESPRESSO_POWERED_BY', 'Event Espresso - ' . EVENT_ESPRESSO_VERSION);
 //Define the plugin directory and path
 define("EVENT_ESPRESSO_PLUGINPATH", "/" . plugin_basename(dirname(__FILE__)) . "/");
 define("EVENT_ESPRESSO_PLUGINFULLPATH", WP_PLUGIN_DIR . EVENT_ESPRESSO_PLUGINPATH);
