@@ -108,17 +108,10 @@ function event_espresso_display_wepay_settings($need_to_reauthorize) {
 							</label>
 							<input type="text" name="wepay_client_secret" size="35" value="<?php echo $wepay_settings['wepay_client_secret']; ?>" />
 						</li>
-						<li>
-							<label for="button_url">
-								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-							</label>
-							<input type="text" name="button_url" size="34" value="<?php echo (($wepay_settings['button_url'] == '') ? '' : $wepay_settings['button_url'] ); ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a> </li>
-						<li>
-							<label for="account_id">
-								<?php _e('Input the account id', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=account_id"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-							</label>
-							<input type="text" name="account_id" size="34" value="<?php echo (($wepay_settings['account_id'] == '') ? '' : $wepay_settings['account_id'] ); ?>" />
+						<label for="account_id">
+							<?php _e('Input the account id', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=account_id"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+						</label><br>
+						<input type="text" name="account_id" size="34" value="<?php echo (($wepay_settings['account_id'] == '') ? '' : $wepay_settings['account_id'] ); ?>" />
 						</li>
 						<li>
 							<label for="access_token">
@@ -155,6 +148,13 @@ function event_espresso_display_wepay_settings($need_to_reauthorize) {
 								</label>
 								<input name="force_ssl_return" type="checkbox" value="1" <?php echo $wepay_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
 						<?php } ?>
+						<li>
+							<label for="button_url">
+								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							</label>
+							<input type="text" name="button_url" size="34" value="<?php echo (($wepay_settings['button_url'] == '') ? '' : $wepay_settings['button_url'] ); ?>" />
+							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
+						</li>
 						<li>
 							<?php _e('Current Button Image', 'event_espresso'); ?>
 							<br />
