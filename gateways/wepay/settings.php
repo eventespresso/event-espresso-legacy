@@ -66,7 +66,7 @@ function event_espresso_wepay_payment_settings() {
 					echo '<ul>';
 					if (array_key_exists('wepay', $active_gateways)) {
 						echo '<li id="deactivate_wepay" style="width:30%;" onclick="location.href=\'' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=payment_gateways&deactivate_wepay=true\';" class="red_alert pointer"><strong>' . __('Deactivate WePay IPN?', 'event_espresso') . '</strong></li>';
-						event_espresso_display_wepay_settings($need_to_reauthorize);
+						event_espresso_display_wepay_settings();
 					} else {
 						echo '<li id="activate_wepay" style="width:30%;" onclick="location.href=\'' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=payment_gateways&activate_wepay=true#wepay\';" class="green_alert pointer"><strong>' . __('Activate WePay IPN?', 'event_espresso') . '</strong></li>';
 					}
@@ -80,7 +80,7 @@ function event_espresso_wepay_payment_settings() {
 }
 
 //wepay Settings Form
-function event_espresso_display_wepay_settings($need_to_reauthorize) {
+function event_espresso_display_wepay_settings() {
 	$wepay_settings = get_option('event_espresso_wepay_settings');
 	$uri = $_SERVER['REQUEST_URI'];
 	$pos = strpos($uri, '&activate_wepay=true');
@@ -109,13 +109,13 @@ function event_espresso_display_wepay_settings($need_to_reauthorize) {
 							<input type="text" name="wepay_client_secret" size="35" value="<?php echo $wepay_settings['wepay_client_secret']; ?>" />
 						</li>
 						<label for="account_id">
-							<?php _e('Input the account id', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=account_id"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							<?php _e('Account ID', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=account_id"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 						</label><br>
 						<input type="text" name="account_id" size="34" value="<?php echo (($wepay_settings['account_id'] == '') ? '' : $wepay_settings['account_id'] ); ?>" />
 						</li>
 						<li>
 							<label for="access_token">
-								<?php _e('Input the access token', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=access_token"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+								<?php _e('Access Token', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=access_token"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input type="text" name="access_token" size="100" value="<?php echo (($wepay_settings['access_token'] == '') ? '' : $wepay_settings['access_token'] ); ?>" />
 						</li>
@@ -179,25 +179,23 @@ function event_espresso_display_wepay_settings($need_to_reauthorize) {
 		<?php _e('To use WePay, follow these steps:'); ?>
 		<ol>
 			<li>
-				<?php _e('At WePay.com (or stage.wepay.com for sandbox) sign up as a user and add an account to your user.'); ?>
+				<?php _e('At WePay.com (or stage.wepay.com for sandbox) sign up as a user.'); ?>
 			</li>
 			<li>
-				<?php _e('Register your instance of Event Espresso as an application in your WePay user profile.'); ?>
+				<?php _e('Add Event Espresso as an API application in your account.'); ?>
 			</li>
 			<li>
-				<?php _e('Copy your client id and client secret from your application profile and paste them here.'); ?>
-			</li>
-			<li>
-				<?php _e('Anytime you change your id and secret on this page and update your WePay settings, you will see a button to authorize your application.'); ?>
-			</li>
-			<li>
-				<?php _e('Once your application is authorized, you will be able to select from your available accounts, and update your WePay settings.'); ?>
+				<?php _e('Copy your client id, client secret, account id, and access token from yourAPI application\'s API Keys page and paste them here.'); ?>
 			</li>
 		</ol>
 	</div>
-	<div id="select_account" style="display: none">
+	<div id="account_id" style="display: none">
 		<h2><?php _e('WePay Account', 'event_espresso'); ?></h2>
-		<p><?php _e('The name of the account you want to use with Event Espresso.', 'event_espresso'); ?></p>
+		<p><?php _e('The id of the account you want to use with Event Espresso. Found on the Application API page in your WePay account.', 'event_espresso'); ?></p>
+	</div>
+	<div id="access_token" style="display: none">
+		<h2><?php _e('WePay Access Token', 'event_espresso'); ?></h2>
+		<p><?php _e('The API access token from the account you want to use with Event Espresso. Found on the Application API page in your WePay account.', 'event_espresso'); ?></p>
 	</div>
 	<?php
 }
