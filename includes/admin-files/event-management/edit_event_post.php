@@ -21,6 +21,7 @@ if (function_exists('espresso_member_data')) {
         } else {
             $create_post = 'N'; //If a post was NOT created previously, default to no so we do not create a post on accident.
         }
+				$create_post = apply_filters('filter_hook_espresso_defalt_update_post_option', $create_post);
         global $current_user;
         get_currentuserinfo();
         ?>
