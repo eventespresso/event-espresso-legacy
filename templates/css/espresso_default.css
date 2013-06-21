@@ -514,6 +514,15 @@ table.price_list td{
 }
 
 
+.finalize_button,
+#finalize_purchase_order .finalize_button {
+	display: block; float: right; padding: 1em 2em; margin: .5em 0;
+	background: #fff; border-radius: 3px;
+	border: 1px solid #ccc; border-top-color: #ddd; border-bottom-color: #bbb; 
+	font-weight: bold; font-size:14px; color:#666; text-decoration: none;
+}
+
+
 /********************************************/
 /****			-==ATTENTION==-			****/
 /**** 	MOVE THIS FILE BEFORE EDITING 	***/
