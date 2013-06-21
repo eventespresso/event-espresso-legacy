@@ -42,7 +42,7 @@
 			</a>
 		</p>
 		<?php
-		$sql = "SELECT id, coupon_code FROM " . EVENTS_DISCOUNT_CODES_TABLE;
+		$sql = "SELECT id, coupon_code FROM " . EVENTS_DISCOUNT_CODES_TABLE . " WHERE apply_to_all=0";
 		if (function_exists('espresso_member_data') && !empty($event_id)) {
 			$wpdb->get_results("SELECT wp_user FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'");
 			$wp_user = $wpdb->last_result[0]->wp_user != '' ? $wpdb->last_result[0]->wp_user : espresso_member_data('id');
@@ -54,6 +54,9 @@
 			}
 		}
 		$event_discounts = $wpdb->get_results($sql);
+		?>
+		<strong><?php _e("Allow Optional Promo Codes:", "event_espresso");?></strong>
+		<?php
 		foreach ($event_discounts as $event_discount) {
 			if (!empty($event_id)) {
 				$in_event_discounts = $wpdb->get_col("SELECT discount_id FROM " . EVENTS_DISCOUNT_REL_TABLE . " WHERE event_id='" . $event_id . "' AND discount_id='" . $event_discount->id . "'");
@@ -62,10 +65,10 @@
 
 			$checked = in_array($event_discount->id, $in_event_discounts) ? ' checked="checked"' : '';
 			echo '<p class="event-disc-code" id="event-discount-' . $event_discount->id . '"><label for="in-event-discount-' . $event_discount->id . '" class="selectit"><input value="' . $event_discount->id . '" type="checkbox" name="event_discount[]" id="in-event-discount-' . $event_discount->id . '"' . $checked . '/> ' . $event_discount->coupon_code . "</label></p>";
-		}
-
-		echo '<p><a href="admin.php?page=discounts" target="_blank">' . __('Manage Promotional Codes ', 'event_espresso') . '</a></p>';
-				?>
+		}?>
+		
+		<p><a href="admin.php?page=discounts" target="_blank"><?php _e('Manage Promotional Codes ', 'event_espresso') ?></a></p>
+				
 	</div>
 </div>
 <!-- /event-discounts -->

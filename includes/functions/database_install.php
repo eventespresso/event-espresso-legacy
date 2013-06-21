@@ -656,7 +656,7 @@ function events_data_tables_install() {
 			  	KEY event_id (event_id),
 			  	KEY person_id (person_id)";
 	event_espresso_run_install($table_name, '', $sql);
-
+	
 	$table_name = "events_discount_rel";
 	$sql = "id int(11) NOT NULL AUTO_INCREMENT,
 				event_id int(11) DEFAULT NULL,
@@ -698,6 +698,7 @@ function events_data_tables_install() {
 				coupon_code_description TEXT,
 				each_attendee VARCHAR(1) DEFAULT NULL,
 				wp_user int(22) DEFAULT '1',
+				apply_to_all TINYINT(1) NOT NULL DEFAULT '0',
 				PRIMARY KEY  (id),
 			  	KEY coupon_code (coupon_code),
 			  	KEY wp_user (wp_user)";

@@ -1324,6 +1324,11 @@ function espresso_get_attendee_coupon_discount($attendee_id, $cost) {
 		$coupon_code = $row['coupon_code'];
 		$event_id = $row['event_id'];
 		//$results = $wpdb->get_results("SELECT * FROM ". EVENTS_DISCOUNT_CODES_TABLE ." WHERE coupon_code = '".$_REQUEST['coupon_code']."'");
+		/**
+		 * mike discount code tweak needed
+		 * also get all global discoutn codes 
+		 */
+		echo "ESPRESSO_GET_ATTENDEE_CUOPON_DISCOUTN CALLED!!";throw new Expception();die;
 		$discounts = $wpdb->get_results("SELECT d.* FROM " . EVENTS_DISCOUNT_CODES_TABLE . " d JOIN " . EVENTS_DISCOUNT_REL_TABLE . " r ON r.discount_id  = d.id WHERE d.coupon_code = '" . $coupon_code . "'  AND r.event_id = '" . $event_id . "' ");
 		if ($wpdb->num_rows > 0) {
 			$valid_discount = true;
