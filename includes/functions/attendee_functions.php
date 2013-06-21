@@ -126,3 +126,23 @@ function is_attendee_approved($event_id, $attendee_id) {
 	}
 	return $result;
 }
+
+
+
+
+
+function espresso_update_primary_attendee_total_cost( $attendee_id, $total_cost, $source ) {
+	
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, array( '$total_cost' => $total_cost ));		
+	global $wpdb;
+	
+	$set_cols_and_values = array( 'total_cost'=>number_format( (float)$total_cost, 2, '.', '' ));
+	$set_format = array( '%f' );
+	$where_cols_and_values = array( 'id'=> $attendee_id );
+	$where_format = array( '%d' );		
+	
+	if ( $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format  ) === FALSE ) {
+		wp_die( __('An error occured. The primary attende\'s data could not be updated.' . "\n( " . basename( $source ) . ' )', 'event_espresso'));
+	}				
+				
+}
