@@ -77,10 +77,6 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 					}
 					
 				} else {
-				/**
-				 * mike discount code tweak needed
-				 * tweak query or add another to find global queries
-				 */
 					$SQL = "SELECT d.* FROM " . EVENTS_DISCOUNT_CODES_TABLE . " d ";
 					$SQL .= " LEFT JOIN " . EVENTS_DISCOUNT_REL_TABLE . " r ON r.discount_id  = d.id ";
 					$SQL .= "WHERE d.coupon_code = %s AND ";
@@ -88,7 +84,6 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 					$SQL .= " d.apply_to_all = 1";
 					$SQL .= $event_id ? " ) ": '';
 					$prepared_SQL = $wpdb->prepare( $SQL, $coupon_code );
-					echo "ran query: $prepared_SQL";
 					if ( $coupon = $wpdb->get_row( $prepared_SQL )) {	
 					
 						$valid = TRUE;
