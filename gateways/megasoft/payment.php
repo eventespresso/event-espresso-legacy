@@ -90,6 +90,7 @@ function espresso_display_megasoft($data) {
 				
 				<p class="event_form_submit">
 					<input name="megasoft_submit" id="megasoft_submit" class="submit-payment-btn" type="submit" value="<?php _e('Completar Compra', 'event_espresso'); ?>" />
+					<div class="clear"></div>
 				</p>
 			</div>
 		</form>

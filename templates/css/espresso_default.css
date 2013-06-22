@@ -19,7 +19,7 @@
 .payment-option-closed { display: inline-block !important; }
 
 .payment-option-dv .payment-option-lnk {
-	display: inline-block; position: relative; max-width:140px; padding:20px; margin:0 0 1em; 
+	display: inline-block; position: relative; max-width:140px; min-height:53px; padding:20px; margin:0 0 1em; 
 	border:1px solid #ddd; border-radius:3px;
 	text-align: center; line-height:1em; vertical-align: middle; cursor:pointer;
 
@@ -32,7 +32,8 @@
 }
 .payment-option-dv .payment-option-lnk img { max-width:140px !important; padding:0; margin:0; border:none; box-shadow: none; }
 .payment-option-dv .payment-option-lnk.algn-vrt { display: table !important; height:30px; }
-.payment-option-dv .payment-option-lnk.algn-vrt .vrt-cell { display: table-cell !important; vertical-align: middle; }
+.payment-option-dv .payment-option-lnk.algn-vrt .vrt-cell { display: table-cell !important; vertical-align: middle; width:140px; }
+.payment-option-dv .payment-option-lnk.algn-vrt .vrt-cell div { word-wrap: normal; }
 
 #event_espresso_checkout_form { margin: 5px 0; padding: 5px; }
 
@@ -511,6 +512,16 @@ table.price_list td{
 		width:50px;
 		margin:0;
 	}
+}
+
+
+#payment-options-dv .finalize_button,
+#finalize_purchase_order .finalize_button,
+#payment-options-dv .submit-payment-btn {
+	display: block; float: right; padding: 1em 2em; margin: 1em;
+	background: #7DBD29; border-radius: 3px;
+	border: 1px solid #6CBA00; border-top-color: #96E430; border-bottom-color: #5A861C; 
+	font-weight: bold; font-size:16px; color:#fff; text-shadow:1px 1px 0px rgba(0,0,0,.75); text-decoration: none;
 }
 
 

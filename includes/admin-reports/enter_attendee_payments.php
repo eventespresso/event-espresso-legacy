@@ -2,6 +2,8 @@
 function enter_attendee_payments() {
 
 	global $wpdb, $org_options;
+	require_once(EVENT_ESPRESSO_PLUGINFULLPATH."includes/functions/attendee_functions.php");
+
  
 	$notifications['success'] = array(); 
 	$notifications['error']	 = array(); 
