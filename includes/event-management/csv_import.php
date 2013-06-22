@@ -58,10 +58,10 @@ function uploader($num_of_uploads = 1, $file_types_array = array("csv"), $max_fi
 			if ($_FILES["file"]["name"][$key] != "") {
 				if ($value == UPLOAD_ERR_OK) {
 					$origfilename = $_FILES["file"]["name"][$key];
-					$filename = explode(".", $_FILES["file"]["name"][$key]);
-					$filenameext = $filename[count($filename) - 1];
-					unset($filename[count($filename) - 1]);
-					$filename = implode(".", $filename);
+					$filename_array = explode(".", $_FILES["file"]["name"][$key]);
+					$filenameext = $filename_array[count($filename_array) - 1];
+					unset($filename_array[count($filename_array) - 1]);
+					$filename = implode(".", $filename_array);
 					$filename = substr($filename, 0, 15) . "." . $filenameext;
 					$file_ext_allow = FALSE;
 					for ($x = 0; $x < count($file_types_array); $x++) {
@@ -92,90 +92,46 @@ function uploader($num_of_uploads = 1, $file_types_array = array("csv"), $max_fi
 
 function load_events_to_db() {
 	global $wpdb, $current_user;
-	$events_detail_tbl = get_option('events_detail_tbl');
-	$curdate = date("Y-m-j");
-	$month = date('M');
-	$day = date('j');
-	$year = date('Y');
 
-	$fieldseparator = ",";
-	$lineseparator = "\n";
 	$csvfile = "../wp-content/uploads/events.csv";
 
 	if (!function_exists('espresso_member_data')) {
 		$current_user->ID = 1;
 	}
 
-	function getCSVValues($string, $separator = ",") {
-		global $wpdb;
-		//$wpdb->show_errors();
-		$elements = explode($separator, $string);
-		for ($i = 0; $i < count($elements); $i++) {
-			$nquotes = substr_count($elements[$i], '"');
-
-			if ($nquotes % 2 == 1) {
-				for ($j = $i + 1; $j < count($elements); $j++) {
-					if (substr_count($elements[$j], '"') > 0) {
-						// Put the quoted string's pieces back together again
-						array_splice($elements, $i, $j - $i + 1, implode($separator, array_slice($elements, $i, $j - $i + 1)));
-						break;
-					}
-				}
-			}
-
-			if ($nquotes > 0) {
-				// Remove first and last quotes, then merge pairs of quotes
-				$qstr = & $elements[$i];
-				$qstr = substr_replace($qstr, '', strpos($qstr, '"'), 1);
-				$qstr = substr_replace($qstr, '', strrpos($qstr, '"'), 1);
-				$qstr = str_replace('""', '"', $qstr);
-			}
-		}
-
-		return $elements;
-	}
 
 	if (!file_exists($csvfile)) {
 		echo "File not found. Make sure you specified the correct path.\n";
 		exit;
 	}
 
-	$file = fopen($csvfile, "r");
+	$file_handle = fopen($csvfile, "r");
 
-	if (!$file) {
+	if (!$file_handle) {
 		echo "Error opening data file.\n";
 		exit;
 	}
 
-	$size = filesize($csvfile);
-
-	if (!$size) {
+	$file_size = filesize($csvfile);
+	if (empty($file_size)) {
 		echo "File is empty.\n";
 		exit;
 	}
 
-	$file = file_get_contents($csvfile);
-	$dataStrings = explode("\r", $file);
-
-	$i = 0;
-	$question_groups_rs = $wpdb->get_results("select * from " . EVENTS_QST_GROUP_TABLE . " where wp_user = " . $current_user->ID . " and system_group = 1");
-	$question_groups_ar = array();
-	foreach ($question_groups_rs as $question_group) {
-		$question_groups_ar[] = $question_group->id;
-	}
-	$question_groups = serialize($question_groups_ar);
-	foreach ($dataStrings as $data) {
-		++$i;
-
-		for ($j = 0; $j < $i; ++$j) {
-			$strings = getCSVValues($dataStrings[$j]);
+	$num_of_imported_events = 0;
+	while ($strings = fgetcsv($file_handle)) {
+		++$num_of_imported_events;
+		$question_groups_rs = $wpdb->get_results("select * from " . EVENTS_QST_GROUP_TABLE . " where wp_user = " . $current_user->ID . " and system_group = 1");
+		$question_groups_ar = array();
+		foreach ($question_groups_rs as $question_group) {
+			$question_groups_ar[] = $question_group->id;
 		}
+		$question_groups = serialize($question_groups_ar);
 
 		//echo "valid is :'".$valid."'";
 		if (array_key_exists('2', $strings)) {
 			//echo "The  element is in the array";
 			$skip = $strings[0];
-var_dump($strings);
 			if ($skip >= "1") {
 				// Event meta info -
 				$event_meta = array();
@@ -222,13 +178,15 @@ var_dump($strings);
 				foreach ($category_names as $category_name) {
 					$category_name = trim($category_name);
 					$category_sql = "SELECT cd.id FROM " . EVENTS_CATEGORY_TABLE . " cd WHERE category_name='%s'";
-					$cat_id = $wpdb->query($wpdb->prepare($category_sql, $category_name));
+					$cat_id = $wpdb->get_var($wpdb->prepare($category_sql, $category_name));
 					if ($cat_id == false) {
+						$_REQUEST['action'] = 'add';
 						$_REQUEST['category_name'] = $category_name;
-						require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/categoty-management/add_cat_to_db.php');
+						require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/category-management/add_cat_to_db.php');
 						add_cat_to_db();
+						$cat_id = $wpdb->get_var($wpdb->prepare($category_sql, $category_name));
 					}
-					$cat_sql_2 = "INSERT INTO " . EVENTS_CATEGORY_REL_TABLE . " (event_id, cat_id) VALUES ('%d, %d')";
+					$cat_sql_2 = "INSERT INTO " . EVENTS_CATEGORY_REL_TABLE . " (event_id, cat_id) VALUES (%d, %d)";
 					if ($wpdb->query($wpdb->prepare($cat_sql_2, $last_event_id, $cat_id)) === false) {
 						print $wpdb->print_error();
 					}
@@ -243,6 +201,7 @@ var_dump($strings);
 		echo "<br>
 Upload file has been deleted.<br>";
 	}
-	$tot_records = $i - "2";
-	echo "Added a total of $tot_records events to the database.<br>";
+	echo "Added a total of $num_of_imported_events events to the database.<br>";
+	
+	remove_query_arg("action");
 }
