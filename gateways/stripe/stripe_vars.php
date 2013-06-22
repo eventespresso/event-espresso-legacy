@@ -104,6 +104,7 @@ function espresso_display_stripe($payment_data) {
 				<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
 				<p class="event_form_submit">
 					<input name="stripe_submit" id="stripe_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+					<div class="clear"></div>
 				</p>
 			</form>
 		</div>

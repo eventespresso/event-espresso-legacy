@@ -292,15 +292,15 @@ function espresso_confirm_registration() {
 	}
 
 	$attendee_id = $attendee->id;
-	$attendee_email = $attendee->email;
-	$lname = htmlspecialchars( stripslashes( $attendee->lname ), ENT_QUOTES, 'UTF-8' );
-	$fname = htmlspecialchars( stripslashes( $attendee->fname ), ENT_QUOTES, 'UTF-8' );
-	$address = htmlspecialchars( stripslashes( $attendee->address ), ENT_QUOTES, 'UTF-8' );
-	$address2 = htmlspecialchars( stripslashes( $attendee->address2 ), ENT_QUOTES, 'UTF-8' );
-	$city = htmlspecialchars( stripslashes( $attendee->city ), ENT_QUOTES, 'UTF-8' );
-	$state = htmlspecialchars( stripslashes( $attendee->state ), ENT_QUOTES, 'UTF-8' );
-	$country = htmlspecialchars( stripslashes( $attendee->country ), ENT_QUOTES, 'UTF-8' );
-	$zip = $attendee->zip;
+	$attendee_email = isset( $attendee->email ) ? $attendee->email : '';
+	$lname = isset( $attendee->lname ) ? htmlspecialchars( stripslashes( $attendee->lname ), ENT_QUOTES, 'UTF-8' ) : '';
+	$fname = isset( $attendee->fname ) ? htmlspecialchars( stripslashes( $attendee->fname ), ENT_QUOTES, 'UTF-8' ) : '';
+	$address = isset( $attendee->address ) ? htmlspecialchars( stripslashes( $attendee->address ), ENT_QUOTES, 'UTF-8' ) : '';
+	$address2 = isset( $attendee->address2 ) ? htmlspecialchars( stripslashes( $attendee->address2 ), ENT_QUOTES, 'UTF-8' ) : '';
+	$city = isset( $attendee->city ) ? htmlspecialchars( stripslashes( $attendee->city ), ENT_QUOTES, 'UTF-8' ) : '';
+	$state = isset( $attendee->state ) ? htmlspecialchars( stripslashes( $attendee->state ), ENT_QUOTES, 'UTF-8' ) : '';
+	$country = isset( $attendee->country ) ? htmlspecialchars( stripslashes( $attendee->country ), ENT_QUOTES, 'UTF-8' ) : '';
+	$zip =  isset( $attendee->zip ) ? $attendee->zip : '';
 	$payment_status = $attendee->payment_status;
 	$txn_type = $attendee->txn_type;
 	$amount_pd = (float)$attendee->amount_pd;
