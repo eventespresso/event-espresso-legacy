@@ -453,25 +453,11 @@ if ($this_is_a_reg_page == TRUE) {
 	
 	//Process email confirmations
 	require_once("includes/functions/email.php");
-
-/*
-	//Various attendee functions
-	require_once("includes/functions/attendee_functions.php");
-	//Payment/Registration Processing - Used to display the payment options and the payment link in the email. Used with the [ESPRESSO_PAYMENTS] tag
-	require_once("includes/process-registration/payment_page.php");
-	//Add attendees to the database
-	require_once("includes/process-registration/add_attendees_to_db.php");
-*/
-
 	//Payment processing - Used for onsite payment processing. Used with the [ESPRESSO_TXN_PAGE] shortcode
 	event_espresso_require_gateway('process_payments.php');
 	event_espresso_require_gateway('PaymentGateway.php');
 
-
-	/*
-	 * AJAX functions
-	 */
-
+	// AJAX functions
 	add_action('wp_ajax_event_espresso_add_item', 'event_espresso_add_item_to_session');
 	add_action('wp_ajax_nopriv_event_espresso_add_item', 'event_espresso_add_item_to_session');
 
@@ -964,6 +950,8 @@ if (!function_exists('event_espresso_run')) {
 				break;
 				
 			case "edit_attendee":
+				//Various attendee functions
+				require_once("includes/functions/attendee_functions.php");
 				//Payment/Registration Processing - Used to display the payment options and the payment link in the email. Used with the [ESPRESSO_PAYMENTS] tag
 				require_once("includes/process-registration/payment_page.php");
 				require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/process-registration/attendee_edit_record.php');

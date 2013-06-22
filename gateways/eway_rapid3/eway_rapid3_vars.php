@@ -115,6 +115,7 @@ function espresso_display_eway_rapid3($data) {
 						<input name="EWAY_ACCESSCODE" type='hidden' value='<?php echo $ewayRapid3AccessCode?>'/>
 						<p class="event_form_submit">
 							<input name="eway_rapid3_submit" id="eway_rapid3_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+							<div class="clear"></div>
 						</p>
 						<span id="processing"></span>
 					</form>

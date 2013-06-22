@@ -123,6 +123,7 @@ function espresso_display_firstdata($data) {
 
 					<p class="event_form_submit">
 						<input name="firstdata_submit" id="firstdata_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+						<div class="clear"></div>
 					</p>
 					<span id="processing"></span>
 				</form><!-- / close firstdata form -->

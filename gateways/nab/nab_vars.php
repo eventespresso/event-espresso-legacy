@@ -108,6 +108,7 @@ function espresso_display_nab($payment_data) {
 				</p>
 				<p class="event_form_submit">
 					<input type="submit" value="<?php _e('Complete Purchase', 'event_espresso');?>" class="submit-payment-btn"/>
+					<div class="clear"></div>
 				</p>
 			</fieldset>
 		</form>
