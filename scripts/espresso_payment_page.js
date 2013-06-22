@@ -3,7 +3,10 @@ jQuery(document).ready(function($) {
 	$('.hide-if-js').hide();
 	$('.payment_container').toggleClass('payment-option-closed'); 
 	$('.payment-option-dv').toggleClass('payment-option-closed'); 
-
+	
+	window.onbeforeunload = function() {
+	    return 'Warning!!! Using the back button will overwrite your existing registration.';
+	}
 	
 	// generic click event for displaying and giving focus to an element and hiding control 
 	$('.display-the-hidden').click(function() {
