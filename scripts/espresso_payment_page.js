@@ -25,11 +25,16 @@ jQuery(document).ready(function($) {
 		$('#'+item_to_hide+'-dv').slideToggle( 500, function() {
 			$(this).parent().toggleClass('payment-option-closed'); 
 		}); 
+		preventLeavePage = true;
 		return false;
 	});	
 
 
-	$('.payment-option-lnk').on( 'click', function() {
+	$('input.payment-option-lnk').on( 'click', function() {
+		preventLeavePage = false;
+	});
+	
+	$('.submit-payment-btn').on( 'click', function() {
 		preventLeavePage = false;
 	});
 	
