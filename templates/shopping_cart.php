@@ -8,8 +8,11 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			//echo "<pre>", print_r( $_SESSION ), "</pre>";
 			$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
 			
-			if ( event_espresso_invoke_cart_error( $events_in_session ) )
+			if ( event_espresso_invoke_cart_error( $events_in_session )) {
 				return false;
+			}
+				
+			$events_IN = array();
 
 			if ( count( $events_in_session ) > 0 ){
 				foreach ( $events_in_session as $event ) {
@@ -19,6 +22,10 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 				}
 
 			$events_IN = implode( ',', $events_IN );
+			
+			if ( empty( $events_IN )) {
+				return FALSE;
+			}
 
 			$sql = "SELECT e.* FROM " . EVENTS_DETAIL_TABLE . " e ";
 			$sql = apply_filters( 'filter_hook_espresso_shopping_cart_SQL_select', $sql );
