@@ -277,7 +277,7 @@ if (!function_exists('espresso_export_stuff')) {
 						}
 					}
 
-					$basic_header = array(__('Group', 'event_espresso'), __('ID', 'event_espresso'), __('Reg ID', 'event_espresso'), __('Payment Method', 'event_espresso'), __('Reg Date', 'event_espresso'), __('Pay Status', 'event_espresso'), __('Type of Payment', 'event_espresso'), __('Transaction ID', 'event_espresso'), __('Price', 'event_espresso'), __('Coupon Code', 'event_espresso'), __('# Attendees', 'event_espresso'), __('Amount Paid', 'event_espresso'), __('Date Paid', 'event_espresso'), __('Event Name', 'event_espresso'), __('Price Option', 'event_espresso'), __('Event Date', 'event_espresso'), __('Event Time', 'event_espresso'), __('Website Check-in', 'event_espresso'), __('Tickets Scanned', 'event_espresso'), __('Seat Tag', 'event_espresso'), __('First Name', 'event_espresso'), __('Last Name', 'event_espresso'), __('Email', 'event_espresso'));
+					$basic_header = array(__('Group', 'event_espresso'), __('ID', 'event_espresso'), __('Reg ID', 'event_espresso'), __('Payment Method', 'event_espresso'), __('Reg Date', 'event_espresso'), __('Pay Status', 'event_espresso'), __('Type of Payment', 'event_espresso'), __('Transaction ID', 'event_espresso'), __('Price', 'event_espresso'), __('Coupon Code', 'event_espresso'), __('# Attendees', 'event_espresso'), __('Amount Paid', 'event_espresso'), __('Date Paid', 'event_espresso'), __('Event Name', 'event_espresso'), __('Price Option', 'event_espresso'), __('Event Date', 'event_espresso'), __('Event Time', 'event_espresso'), __('Website Check-in', 'event_espresso'), __('Tickets Scanned', 'event_espresso'), __('Check-in Date', 'event_espresso'),__('Seat Tag', 'event_espresso'), __('First Name', 'event_espresso'), __('Last Name', 'event_espresso'), __('Email', 'event_espresso'));
 
 					$question_groups = maybe_unserialize($question_groups);
 					$event_meta = maybe_unserialize($event_meta);
@@ -362,10 +362,11 @@ if (!function_exists('espresso_export_stuff')) {
 								$group = maybe_unserialize($group);
 								$group = implode(",", $group);
 								$sql .= "(SELECT ed.event_name, ed.start_date, a.id AS att_id, a.registration_id, a.payment, a.date, a.payment_status, a.txn_type, a.txn_id";
-								$sql .= ", a.amount_pd, a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity";
+								$sql .= ", a.amount_pd, a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity, ac.date_scanned";
 								$sql .= ", a.payment_date, a.event_time, a.price_option, a.final_price a_final_price, a.quantity a_quantity, a.fname, a.lname, a.email";
 								$sql .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 								$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=a.event_id ";
+								$sql .= " LEFT JOIN " . $wpdb->prefix . "events_attendee_checkin ac ON ed.id=a.event_id ";
 								if ($group != '') {
 									$sql .= " JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = ed.id ";
 									$sql .= " JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = r.venue_id ";
@@ -375,11 +376,12 @@ if (!function_exists('espresso_export_stuff')) {
 								$sql .= ") UNION (";
 							}
 							$sql .= "SELECT ed.event_name, ed.start_date, a.id AS att_id, a.registration_id, a.payment, a.date, a.payment_status, a.txn_type, a.txn_id";
-							$sql .= ", a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity, a.final_price a_final_price, a.amount_pd, a.quantity a_quantity";
+							$sql .= ", a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity, ac.date_scanned, a.final_price a_final_price, a.amount_pd, a.quantity a_quantity";
 
 							$sql .= ", a.payment_date, a.event_time, a.price_option, a.fname, a.lname, a.email";
 							$sql .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 							$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=a.event_id ";
+							$sql .= " LEFT JOIN " . $wpdb->prefix . "events_attendee_checkin ac ON ed.id=a.event_id ";
 							//$sql .= " JOIN " . EVENTS_ATTENDEE_COST_TABLE . " ac ON a.id=ac.attendee_id ";
 							$sql .= $event_id ? " WHERE ed.id = '" . $event_id . "' " : '';
 
@@ -461,6 +463,7 @@ if (!function_exists('espresso_export_stuff')) {
 									} else {
 										$participant->seatingchart_tag = '';
 									}
+									$scanned_date = DateTime::createFromFormat('Y-m-d H:i:s', $participant->date_scanned);
 
 									echo $attendees_group
 									. $s . escape_csv_val($participant->att_id)
@@ -481,6 +484,7 @@ if (!function_exists('espresso_export_stuff')) {
 									. $s . escape_csv_val(event_date_display($participant->event_time, get_option('time_format')))
 									. $s . escape_csv_val($participant->checked_in)
 									. $s . escape_csv_val($participant->checked_in_quantity)
+									. $s . escape_csv_val($scanned_date->format(get_option('date_format') . ' ' . get_option('time_format')))
 									. $s . escape_csv_val($participant->seatingchart_tag)
 									. $s . escape_csv_val($participant->fname)
 									. $s . escape_csv_val($participant->lname)
