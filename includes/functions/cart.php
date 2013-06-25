@@ -194,7 +194,12 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 				 * - from a radio >> price_id[event_id] with a value of price_id
 				 */
 				$attendee_quantity = 1;
-				$price_id = $_POST['price_id'][$event_id];
+				
+				if ( isset( $_POST['price_id'][$event_id] )) {
+					$price_id = $_POST['price_id'][$event_id];
+				} else {
+					return FALSE;
+				}
 
 				if (is_array($price_id)) {
 					foreach ($price_id as $_price_id => $val) {
@@ -204,7 +209,7 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 
 						$attendee_quantity++;
 					}
-				} else {
+				} else if ( $price_id !== FALSE ) {
 					if (isset($price_id)) {
 						$updated_events_in_session[$event_id]['price_id'][$price_id]['attendee_quantity'] = 1;
 						$updated_events_in_session[$event_id]['price_id'][$price_id]['price_type'] = $events_in_session[$event_id]['price_id'][$price_id]['price_type'];
@@ -298,6 +303,8 @@ if (!function_exists('event_espresso_calculate_total')) {
 		$groupon_events = array();
 		$groupon_notifications = '';
 		$groupon_errors = '';
+		
+		$notifications = '';
 				
 		if (is_array($events_in_session)) {
 
@@ -305,126 +312,136 @@ if (!function_exists('event_espresso_calculate_total')) {
 
 			foreach ( $events_in_session as $event_id => $event ) {
 			
-				$event_id = absint( $event_id );
-				$event_cost = 0;
-				$event_individual_cost[$event_id] = 0;
-				$attendee_quantity = 0;
-				$coupon_results = array(
-					'event_cost' => 0,
-					'valid' => FALSE,
-					'error' => '',
-					'msg' => ''
-				);
-				
-				$groupon_results = array(
-					'event_cost' => 0,
-					'valid' => FALSE,
-					'error' => '',
-					'msg' => ''
-				);
-				
-				$use_coupon_code = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';
-				if ( $use_coupon_code == 'Y' ) {
-					add_filter( 'filter_hook_espresso_coupon_results', 'espresso_filter_coupon_results', 10, 3 );
-				}
-
-				$use_groupon_code = isset( $_POST['use_groupon'][$event_id] ) ? $_POST['use_groupon'][$event_id] : 'N';
-				if ( $use_groupon_code == 'Y' ) {
-					add_filter( 'filter_hook_espresso_groupon_results', 'espresso_filter_groupon_results', 10, 3 );
-				}
-
-
-				$start_time_id = '';
-				if (array_key_exists('start_time_id', $_POST) && array_key_exists($event_id, $_POST['start_time_id'])) {
-					$start_time_id = $_POST['start_time_id'][$event_id];
-				}
-
-				/*
-				 * two ways the price id comes this way
-				 * - from a dropdown >> price_id[event_id][price_id]
-				 * - from a radio >> price_id[event_id] with a value of price_id
-				 */
-				$event_price = $_POST['price_id'][$event_id];
-				//echo '<h4>event_cost : ' . $event_individual_cost[$event_id] . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-
-				if ( is_array( $event_price )) {
-				
-					foreach ( $event_price as $_price_id => $qty ) {					
-						$attendee_quantity = absint( $qty );
-						if ( $attendee_quantity > 0 ) {
-						
-							// Process coupons
-							$coupon_results['event_cost'] = event_espresso_get_final_price( $_price_id, $event_id );
-							$coupon_results = apply_filters( 'filter_hook_espresso_coupon_results', $coupon_results, $event_id, $mer );
-							$coupon_notifications = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $coupon_notifications, $coupon_results['msg'] );
-							$coupon_errors = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $coupon_errors, $coupon_results['error'] );
-							if ( $coupon_results['valid'] ) {
-								$coupon_events = apply_filters( 'filter_hook_espresso_cart_coupon_events_array', $coupon_events, $event['event_name'] );
-							}
-							$event_cost = $coupon_results['event_cost'];
-							
-							if (function_exists('event_espresso_groupon_payment_page') && isset($_POST['event_espresso_groupon_code'])) {	
-
-								// Process Groupons
-								$groupon_results['event_cost'] = $event_cost;
-								$groupon_results = apply_filters( 'filter_hook_espresso_groupon_results', $groupon_results, $event_id, $mer );
-								$groupon_notifications = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $groupon_notifications, $groupon_results['msg'] );
-								$groupon_errors = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $groupon_errors, $groupon_results['error'] );
-								if ( $groupon_results['valid'] ) {
-									$groupon_events = apply_filters( 'filter_hook_espresso_cart_groupon_events_array', $groupon_events, $event['event_name'] );
-								}
-								//printr( $groupon_results, '$groupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-								$event_cost = $groupon_results['event_cost'];
-							
-							} 
-							
-							// now sum up costs so far
-							$event_individual_cost[$event_id] += number_format( $event_cost * $attendee_quantity, 2, '.', '' );
-							do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line '. __LINE__ .': event_cost='.$event_cost );
-							
-						}
+				$event_id = absint( $event_id );				
+				if ( $event_id ) {
+					
+					$event_cost = 0;
+					$event_individual_cost[$event_id] = 0;
+					$attendee_quantity = 0;
+					$coupon_results = array(
+						'event_cost' => 0,
+						'valid' => FALSE,
+						'error' => '',
+						'msg' => ''
+					);
+					
+					$groupon_results = array(
+						'event_cost' => 0,
+						'valid' => FALSE,
+						'error' => '',
+						'msg' => ''
+					);
+					
+					$use_coupon_code = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';
+					if ( $use_coupon_code == 'Y' ) {
+						add_filter( 'filter_hook_espresso_coupon_results', 'espresso_filter_coupon_results', 10, 3 );
 					}
-					 
-				} else {
-				
-					// Process coupons
-					$coupon_results['event_cost'] = event_espresso_get_final_price( $event_price, $event_id );
-					$coupon_results = apply_filters( 'filter_hook_espresso_coupon_results', $coupon_results, $event_id, $mer );
-					$coupon_notifications = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $coupon_notifications, $coupon_results['msg'] );
-					$coupon_errors = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $coupon_errors, $coupon_results['error'] );
-					if ( $coupon_results['valid'] ) {
-						$coupon_events = apply_filters( 'filter_hook_espresso_cart_coupon_events_array', $coupon_events, $event['event_name'] );
+
+					$use_groupon_code = isset( $_POST['use_groupon'][$event_id] ) ? $_POST['use_groupon'][$event_id] : 'N';
+					if ( $use_groupon_code == 'Y' ) {
+						add_filter( 'filter_hook_espresso_groupon_results', 'espresso_filter_groupon_results', 10, 3 );
 					}
-					$event_cost = $coupon_results['event_cost'];
 
 
-					if (function_exists('event_espresso_groupon_payment_page') && isset($_POST['event_espresso_groupon_code'])) {	
+					$start_time_id = '';
+					if (array_key_exists('start_time_id', $_POST) && array_key_exists($event_id, $_POST['start_time_id'])) {
+						$start_time_id = $_POST['start_time_id'][$event_id];
+					}
 
-						// Process groupons
-						$groupon_results['event_cost'] = $event_cost;
-						$groupon_results = apply_filters( 'filter_hook_espresso_groupon_results', $groupon_results, $event_id, $mer );
-						$groupon_notifications = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $groupon_notifications, $groupon_results['msg'] );
-						$groupon_errors = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $groupon_errors, $groupon_results['error'] );
-						if ( $groupon_results['valid'] ) {
-							$groupon_events = apply_filters( 'filter_hook_espresso_cart_groupon_events_array', $groupon_events, $event['event_name'] );
-						}
-						//printr( $groupon_results, '$groupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-						$event_cost = $groupon_results['event_cost'];
-						
+					/*
+					 * two ways the price id comes this way
+					 * - from a dropdown >> price_id[event_id][price_id]
+					 * - from a radio >> price_id[event_id] with a value of price_id
+					 */
+					
+					if ( isset( $_POST['price_id'][$event_id] )) {
+						$event_price = $_POST['price_id'][$event_id];
+					} else {
+						$event_price = FALSE;
+						$notifications = __('An error occured, a valid price is required.', 'event_espresso');
 					}
 					
-					// now sum up costs so far
-					$event_individual_cost[$event_id] += number_format( $event_cost, 2, '.', '' );
 					//echo '<h4>event_cost : ' . $event_individual_cost[$event_id] . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-					do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line '. __LINE__ .': event_cost='.$event_cost );
+
+					if ( is_array( $event_price )) {
 					
+						foreach ( $event_price as $_price_id => $qty ) {					
+							$attendee_quantity = absint( $qty );
+							if ( $attendee_quantity > 0 ) {
+							
+								// Process coupons
+								$coupon_results['event_cost'] = event_espresso_get_final_price( $_price_id, $event_id );
+								$coupon_results = apply_filters( 'filter_hook_espresso_coupon_results', $coupon_results, $event_id, $mer );
+								$coupon_notifications = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $coupon_notifications, $coupon_results['msg'] );
+								$coupon_errors = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $coupon_errors, $coupon_results['error'] );
+								if ( $coupon_results['valid'] ) {
+									$coupon_events = apply_filters( 'filter_hook_espresso_cart_coupon_events_array', $coupon_events, $event['event_name'] );
+								}
+								$event_cost = $coupon_results['event_cost'];
+								
+								if (function_exists('event_espresso_groupon_payment_page') && isset($_POST['event_espresso_groupon_code'])) {	
+
+									// Process Groupons
+									$groupon_results['event_cost'] = $event_cost;
+									$groupon_results = apply_filters( 'filter_hook_espresso_groupon_results', $groupon_results, $event_id, $mer );
+									$groupon_notifications = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $groupon_notifications, $groupon_results['msg'] );
+									$groupon_errors = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $groupon_errors, $groupon_results['error'] );
+									if ( $groupon_results['valid'] ) {
+										$groupon_events = apply_filters( 'filter_hook_espresso_cart_groupon_events_array', $groupon_events, $event['event_name'] );
+									}
+									//printr( $groupon_results, '$groupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+									$event_cost = $groupon_results['event_cost'];
+								
+								} 
+								
+								// now sum up costs so far
+								$event_individual_cost[$event_id] += number_format( $event_cost * $attendee_quantity, 2, '.', '' );
+								do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line '. __LINE__ .': event_cost='.$event_cost );
+								
+							}
+						}
+						 
+					} else if ( $event_price !== FALSE ) {
+					
+						// Process coupons
+						$coupon_results['event_cost'] = event_espresso_get_final_price( $event_price, $event_id );
+						$coupon_results = apply_filters( 'filter_hook_espresso_coupon_results', $coupon_results, $event_id, $mer );
+						$coupon_notifications = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $coupon_notifications, $coupon_results['msg'] );
+						$coupon_errors = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $coupon_errors, $coupon_results['error'] );
+						if ( $coupon_results['valid'] ) {
+							$coupon_events = apply_filters( 'filter_hook_espresso_cart_coupon_events_array', $coupon_events, $event['event_name'] );
+						}
+						$event_cost = $coupon_results['event_cost'];
+
+
+						if (function_exists('event_espresso_groupon_payment_page') && isset($_POST['event_espresso_groupon_code'])) {	
+
+							// Process groupons
+							$groupon_results['event_cost'] = $event_cost;
+							$groupon_results = apply_filters( 'filter_hook_espresso_groupon_results', $groupon_results, $event_id, $mer );
+							$groupon_notifications = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $groupon_notifications, $groupon_results['msg'] );
+							$groupon_errors = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $groupon_errors, $groupon_results['error'] );
+							if ( $groupon_results['valid'] ) {
+								$groupon_events = apply_filters( 'filter_hook_espresso_cart_groupon_events_array', $groupon_events, $event['event_name'] );
+							}
+							//printr( $groupon_results, '$groupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+							$event_cost = $groupon_results['event_cost'];
+							
+						}
+						
+						// now sum up costs so far
+						$event_individual_cost[$event_id] += number_format( $event_cost, 2, '.', '' );
+						//echo '<h4>event_cost : ' . $event_individual_cost[$event_id] . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+						do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'line '. __LINE__ .': event_cost='.$event_cost );
+						
+					}
+
+
+					$_SESSION['espresso_session']['events_in_session'][$event_id]['cost'] = $event_individual_cost[$event_id];
+					//echo '<h4>event_cost : ' . $event_individual_cost[$event_id] . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+					$event_total_cost += $event_individual_cost[$event_id];
+
 				}
-
-
-				$_SESSION['espresso_session']['events_in_session'][$event_id]['cost'] = $event_individual_cost[$event_id];
-				//echo '<h4>event_cost : ' . $event_individual_cost[$event_id] . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-				$event_total_cost += $event_individual_cost[$event_id];
-
 			}
 			
 			$grand_total = number_format($event_total_cost, 2, '.', '');
@@ -469,7 +486,7 @@ if (!function_exists('event_espresso_calculate_total')) {
 		// add space between $groupon_notifications and  $groupon_errors ( if any $groupon_errors exist )
 		$groupon_notifications = $groupon_count && $groupon_errors ? $groupon_notifications . '<br/>' : $groupon_notifications;
 		// ALL together now!!!
-		$notifications = $coupon_notifications . $groupon_notifications . $groupon_errors;
+		$notifications .= $coupon_notifications . $groupon_notifications . $groupon_errors;
 		
 		if ( ! $update_section ) {
 			echo event_espresso_json_response(array('grand_total' => number_format( $grand_total, 2, '.', '' ), 'msg' => $notifications ));
@@ -1036,6 +1053,14 @@ if (!function_exists('event_espresso_cart_link')) {
 				$atts
 			)
 		);
+		
+		if ( empty( $event_id )) {
+			$error = "<div class='event_espresso_error'><p><em>Attention</em>";
+			$error .= __('An error occured, a valid event id is required for this shortcode to function properlly.', 'event_espresso');
+			$error .= "</p></div>";
+			return $error;
+		}
+		
 
 		$registration_cart_class = '';
 		ob_start();
@@ -1074,11 +1099,10 @@ add_shortcode('ESPRESSO_CART_LINK', 'event_espresso_cart_link');
 
 
 if (!function_exists('event_espresso_invoke_cart_error')) {
-	function event_espresso_invoke_cart_error($events_in_session) {
+	function event_espresso_invoke_cart_error( $events_in_session ) {
 	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if (!is_array($events_in_session)) {
-
 			echo __('It looks like you are attempting to refresh a page after completing your registration or your cart is empty.  Please go to the events page and try again.', 'event_espresso') . "<br />";
 			return true;
 		}
