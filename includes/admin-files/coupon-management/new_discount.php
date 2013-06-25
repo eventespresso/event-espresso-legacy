@@ -30,7 +30,7 @@ function add_new_event_discount(){
           <?php _e('No','event_espresso'); ?>
         </li> 
 		<li>
-          <?php _e('Apply to all events by default?','event_espresso'); ?>
+          <?php _e('Global ? (Apply to all events by default)','event_espresso'); ?>
           <input type="radio" name="apply_to_all" value=1>
           <?php _e('Yes','event_espresso'); ?>
           <input type="radio" name="apply_to_all" checked="checked" value=0>

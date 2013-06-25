@@ -324,7 +324,7 @@ if (!function_exists('event_espresso_calculate_total')) {
 				);
 				
 				$use_coupon_code = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';
-				if ( $use_coupon_code == 'Y' ) {
+				if ( in_array( $use_coupon_code,array('Y',"G","A")) ) {
 					add_filter( 'filter_hook_espresso_coupon_results', 'espresso_filter_coupon_results', 10, 3 );
 				}
 

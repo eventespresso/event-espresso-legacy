@@ -409,7 +409,9 @@ function add_event_to_db($recurrence_arr = array()) {
 		}
 		
 		//Process the discounts
-		if (isset($_REQUEST['event_discount']) && !empty($_REQUEST['event_discount'])) {
+		if (isset($_REQUEST['event_discount']) && !empty($_REQUEST['event_discount']) && $_REQUEST['use_coupon_code']=='Y') {
+			//if they have specified to use specific coupon codes, THEN we add entries ot teh discount rel table
+			//otherwise we shouldn't
 			foreach ($_REQUEST['event_discount'] as $k => $v) {
 				if ($v != '') {
 					$sql_cat = "INSERT INTO " . EVENTS_DISCOUNT_REL_TABLE . " (event_id, discount_id) VALUES ('" . $last_event_id . "', '" . $v . "')";

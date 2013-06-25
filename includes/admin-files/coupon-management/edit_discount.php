@@ -51,7 +51,7 @@ function edit_event_discount(){
       				echo select_input('use_percentage', $values, $use_percentage); ?>
 					</li>
 					<li>
-						<?php _e('Apply to All Events by Default?','event_espresso'); ?>
+						<?php _e('Global? (Apply to All Events by Default)','event_espresso'); ?>
 						<?php $values=array(					
 
               array('id'=>0,'text'=> __('No','event_espresso')),

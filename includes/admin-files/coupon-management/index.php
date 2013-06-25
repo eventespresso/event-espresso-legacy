@@ -60,6 +60,7 @@ function event_espresso_discount_config_mnu() {
 	<?php } ?>
 						<th class="manage-column column-author" id="start" scope="col" title="Click to Sort" style="width:20%;"><?php _e('Amount', 'event_espresso'); ?></th>
 						<th class="manage-column column-date" id="begins" scope="col" title="Click to Sort" style="width:20%;"><?php _e('Percentage', 'event_espresso'); ?></th>
+						<th class="manage-column column-date" id="begins" scope="col" title="Click to Sort" style="width:20%;"><?php _e('Global', 'event_espresso'); ?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -77,6 +78,7 @@ function event_espresso_discount_config_mnu() {
 							$coupon_code_description = $event_discount->coupon_code_description;
 							$use_percentage = $event_discount->use_percentage;
 							$wp_user = $event_discount->wp_user;
+							$apply_to_all = $event_discount->apply_to_all;
 							?>
 							<tr>
 								<td class="check-column" style="padding:7px 0 22px 5px; vertical-align:top;"><input name="checkbox[<?php echo $discount_id ?>]" type="checkbox"  title="Delete <?php echo $coupon_code ?>"></td>
@@ -88,6 +90,7 @@ function event_espresso_discount_config_mnu() {
 			<?php } ?>
 								<td class="author column-author"><?php echo $coupon_code_price ?></td>
 								<td class="author column-author"><?php echo $use_percentage ?></td>
+								<td class="author column-author"><?php echo ($apply_to_all)?'Y':'N' ?></td>
 							</tr>
 						<?php }
 					}
@@ -122,6 +125,7 @@ function event_espresso_discount_config_mnu() {
 					"sZeroRecords": "<?php _e('No Records Found!', 'event_espresso'); ?>" },
 				"aoColumns": [
 					{ "bSortable": false },
+					null,
 					null,
 					null,
 					null,

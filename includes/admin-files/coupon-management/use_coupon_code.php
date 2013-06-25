@@ -49,7 +49,7 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 		}
 //		echo '<h4>$use_coupon_code : ' . $use_coupon_code . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		
-		if ( $use_coupon_code == 'Y' && $event_cost > 0 ) {
+		if ( in_array($use_coupon_code, array('Y',"G","A")) && $event_cost > 0 ) {
 			if ( $coupon_code ){
 
 				global $wpdb;
@@ -77,12 +77,16 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 					}
 					
 				} else {
+					
 					$SQL = "SELECT d.* FROM " . EVENTS_DISCOUNT_CODES_TABLE . " d ";
 					$SQL .= " LEFT JOIN " . EVENTS_DISCOUNT_REL_TABLE . " r ON r.discount_id  = d.id ";
-					$SQL .= "WHERE d.coupon_code = %s AND ";
-				    $SQL .= $event_id ? " (r.event_id = '" . $event_id . "' OR " : '';
-					$SQL .= " d.apply_to_all = 1";
-					$SQL .= $event_id ? " ) ": '';
+					$SQL .= "WHERE d.coupon_code = %s ";
+					if($use_coupon_code != 'A'){//if $use_coupon_code is 'A', then we use ALL coupon codes, regardless of whether htey 'apply_to_all', or have a relation to this event
+						$SQL .= " AND ";
+						$SQL .= $event_id ? " (r.event_id = '" . $event_id . "' OR " : '';
+						$SQL .= " d.apply_to_all = 1";
+						$SQL .= $event_id ? " ) ": '';
+					}
 					$prepared_SQL = $wpdb->prepare( $SQL, $coupon_code );
 					if ( $coupon = $wpdb->get_row( $prepared_SQL )) {	
 					
@@ -219,7 +223,7 @@ if (!function_exists('event_espresso_coupon_registration_page')) {
 			return;
 		}
             
-        if ( $use_coupon_code == "Y" ) {
+        if ( in_array($use_coupon_code,array("Y", "G", "A")) ) {
 
             $multi_reg_adjust = $multi_reg ? "[$event_id]" : '';	 
 

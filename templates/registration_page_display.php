@@ -207,7 +207,7 @@ if ($reg_form_only == false) {
 	?>
 				<input type="hidden" name="use_coupon[<?php echo $event_id; ?>]" value="<?php echo $use_coupon_code; ?>" />
 	<?php
-					if ( $use_coupon_code == 'Y' && function_exists( 'event_espresso_coupon_registration_page' )) {
+					if ( in_array( $use_coupon_code, array('Y','G','A')) && function_exists( 'event_espresso_coupon_registration_page' )) {
 						echo event_espresso_coupon_registration_page($use_coupon_code, $event_id);
 					}
 					//End coupons display
