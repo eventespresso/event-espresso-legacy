@@ -154,31 +154,47 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$price_type		= $data_source['seat_id'];
 					
 			} elseif ( isset( $att_data_source['price_id'] ) && ! empty( $att_data_source['price_id'] ) ) {
-				$orig_price		= event_espresso_get_orig_price_and_surcharge( $att_data_source['price_id'], $event_id );
-				$final_price	= isset( $att_data_source['price_id'] ) && !empty( $data_source['price_id'] ) ? event_espresso_get_final_price( absint($att_data_source['price_id']), $event_id, $orig_price ) : espresso_return_single_price($event_id);
-				$price_type		= isset( $att_data_source['price_id'] ) && !empty( $data_source['price_id'] ) ? espresso_ticket_information( array( 'type' => 'ticket', 'price_option' => absint($att_data_source['price_id']) )) : '';
-				$surcharge		= event_espresso_calculate_surcharge( (float)$orig_price->event_cost , (float)$orig_price->surcharge, $orig_price->surcharge_type );
-				$orig_price		= (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' ); 			
+				
+				$orig_price = event_espresso_get_orig_price_and_surcharge( $att_data_source['price_id'], $event_id );
+				if ( $orig_price !== FALSE ) {
+					
+					$final_price	= ! empty( $data_source['price_id'] ) ? event_espresso_get_final_price( absint($att_data_source['price_id']), $event_id, $orig_price ) : espresso_return_single_price($event_id);
+					$price_type = ! empty( $data_source['price_id'] ) ? espresso_ticket_information( array( 'type' => 'ticket', 'price_option' => absint($att_data_source['price_id']) )) : '';
+					$surcharge = event_espresso_calculate_surcharge( (float)$orig_price->event_cost , (float)$orig_price->surcharge, $orig_price->surcharge_type );
+					$orig_price = (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' ); 			
+					
+				} 
 				
 			} elseif ( isset( $data_source['price_select'] ) && $data_source['price_select'] == TRUE ) {
 
 				//Figure out if the person has registered using a price selection
-				$price_options	= explode( '|', ee_sanitize_value($data_source['price_option']), 2 );
-				$price_id		= absint($price_options[0]);
-				$price_type		= $price_options[1];
-				$orig_price		= event_espresso_get_orig_price_and_surcharge( $price_id, $event_id );
-				$final_price	= event_espresso_get_final_price( $price_id, $event_id, $orig_price );
-				$surcharge		= event_espresso_calculate_surcharge( $orig_price->event_cost , $orig_price->surcharge, $orig_price->surcharge_type );
-				$orig_price		= (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' ); 
+				$data_source['price_option'] = isset($data_source['price_option']) ? ee_sanitize_value($data_source['price_option']) : '';
+				$price_options = explode( '|', $data_source['price_option'], 2 );
+				$price_id = absint($price_options[0]);
+				$price_type = $price_options[1];
+				$orig_price = event_espresso_get_orig_price_and_surcharge( $price_id, $event_id );
+				if ( $orig_price !== FALSE ) {
+					$final_price	= event_espresso_get_final_price( $price_id, $event_id, $orig_price );
+					$surcharge = event_espresso_calculate_surcharge( $orig_price->event_cost , $orig_price->surcharge, $orig_price->surcharge_type );
+					$orig_price = (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' ); 
+				} 
 				
 			} else {
-				
-				$orig_price		= isset( $data_source['price_id'] ) && !empty( $data_source['price_id'] ) ? event_espresso_get_orig_price_and_surcharge( absint($data_source['price_id']), $event_id ) : espresso_return_single_price($event_id);
-				$final_price	= isset( $data_source['price_id'] ) && !empty( $data_source['price_id'] ) ? event_espresso_get_final_price( absint($data_source['price_id']), $event_id, $orig_price ) : espresso_return_single_price($event_id);
-				$price_type		= isset($data_source['price_id']) && !empty( $data_source['price_id'] ) ? espresso_ticket_information(array('type' => 'ticket', 'price_option' => absint($data_source['price_id']))) : '';
-				$surcharge		= isset($orig_price->surcharge) && isset($orig_price->event_cost) ? event_espresso_calculate_surcharge( $orig_price->event_cost , $orig_price->surcharge, $orig_price->surcharge_type ) : 0.00;
-				$orig_price		= isset($orig_price->event_cost) ? (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' ) :  espresso_return_single_price($event_id); 
+				$have_price_id = isset( $data_source['price_id'] ) && !empty( $data_source['price_id'] ) ? TRUE : FALSE;
+				$orig_price = $have_price_id ? event_espresso_get_orig_price_and_surcharge( absint($data_source['price_id']), $event_id ) : espresso_return_single_price($event_id);
+				if ( $orig_price !== FALSE ) {
+					$final_price	= $have_price_id ? event_espresso_get_final_price( absint($data_source['price_id']), $event_id, $orig_price ) : espresso_return_single_price($event_id);
+					$price_type = $have_price_id ? espresso_ticket_information(array('type' => 'ticket', 'price_option' => absint($data_source['price_id']))) : '';
+					$surcharge = isset($orig_price->surcharge) && isset($orig_price->event_cost) ? event_espresso_calculate_surcharge( $orig_price->event_cost , $orig_price->surcharge, $orig_price->surcharge_type ) : 0.00;
+					$orig_price = isset($orig_price->event_cost) ? (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' ) :  espresso_return_single_price($event_id); 
+				}
 			
+			}
+
+			// throw error if price could not be determined
+			if ( $orig_price === FALSE ) {
+				print '<h3 class="error">'.__('An error occured, a valid price was not submitted.', 'event_espresso').'</h3>';
+				return;
 			}
 			
 			$final_price		= apply_filters( 'filter_hook_espresso_attendee_cost', $final_price );
