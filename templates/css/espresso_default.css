@@ -525,6 +525,16 @@ table.price_list td{
 }
 
 
+.ee-ajax-loader-img,
+.espresso_ical_link img,
+.register-link-footer img,
+.remove-cart-item .ee_delete_item_from_cart  {
+	border:none !important; box-shadow: none !important;
+}
+
+
+
+
 /********************************************/
 /****			-==ATTENTION==-			****/
 /**** 	MOVE THIS FILE BEFORE EDITING 	***/
