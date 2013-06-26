@@ -469,6 +469,14 @@ function event_espresso_discount_code_pagination(){
 add_action('wp_ajax_event_espresso_get_discount_codes', 'event_espresso_discount_code_pagination');
 	//add_action('wp_ajax_nopriv_event_espresso_add_item', 'event_espresso_add_item_to_session');
 
+function event_espresso_get_discount_codes_for_jquery_datatables(){
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+    require(EVENT_ESPRESSO_PLUGINFULLPATH.'/includes/admin-files/coupon-management/search.php');
+	espresso_promocodes_datatables_search();
+    die();
+}
+
+add_action('wp_ajax_event_espresso_get_discount_codes_for_jquery_datatables', 'event_espresso_get_discount_codes_for_jquery_datatables');
 
 //Load these files if we are in an actuial registration page
 if ($this_is_a_reg_page == TRUE) {
