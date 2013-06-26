@@ -107,7 +107,7 @@ function espresso_promocodes_count_total(){
 }
 
 /**
- * Formats results from query to the EVENTS_DISCOUNT_CODES_TABLE for use in a jquery data table
+ * Formats wpdb results from query to the EVENTS_DISCOUNT_CODES_TABLE for use in a jquery data table
  * @param array $wpdb_result_objects results from $wpdb->get_results($query);
  * @return array formatted for jquery datatables row entries
  */
