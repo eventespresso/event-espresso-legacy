@@ -1,6 +1,8 @@
 <?php
 /*
- * gets a list of promotions and outputs them
+ * gets a list of promotions and outputs them.
+ * Should be included in AJAX requests from includes/admin-files/event-management/promotions_box.php
+ * where the ajax has the action parameter 'event_espresso_get_discount_codes'
  */
 global $wpdb;
 $start = isset($_REQUEST['start']) ? sanitize_text_field($_REQUEST['start']) : 1;

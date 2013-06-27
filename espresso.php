@@ -462,7 +462,7 @@ function event_espresso_pagination() {
  */
 function event_espresso_discount_code_pagination(){
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-    require(EVENT_ESPRESSO_PLUGINFULLPATH.'/includes/event-management/promotions_page_for_box.php');
+    require(EVENT_ESPRESSO_PLUGINFULLPATH.'/includes/admin-files/event-management/promotions_page_for_box.php');
     die();
 }
 

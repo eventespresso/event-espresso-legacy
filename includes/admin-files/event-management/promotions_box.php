@@ -77,7 +77,7 @@
 				<?php
 				if($promocodes_in_use){
 					foreach ($promocodes_in_use as $promocode) {
-						echo '<p class="event-disc-code" id="event-discount-' . $promocode->id . '"><label for="in-event-discount-' . $promocode->id . '" class="selectit already-added-disc-code"><input value="' . $promocode->id . '" type="checkbox" name="event_discount[]" id="in-event-discount-' . $promocode->id . '" checked/> ' . $promocode->coupon_code . "</label></p>";
+						echo '<p class="event-disc-code" id="event-discount-' . $promocode->id . '"><label for="in-event-discount-' . $promocode->id . '" class="selectit already-added-disc-code"><input value="' . $promocode->id . '" type="checkbox" name="event_discount[]" id="in-event-discount-' . $promocode->id . '" checked="checked" /> ' . $promocode->coupon_code . "</label></p>";
 					}
 				}else{
 					echo "<p id='no-promocodes-in-use'>None</p>";
