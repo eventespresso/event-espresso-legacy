@@ -57,22 +57,27 @@
 			<div class='promocodes-in-use'>
 				<?php
 				global $wpdb;
-				$sql = "SELECT d.id, d.coupon_code FROM " . EVENTS_DISCOUNT_CODES_TABLE . " AS d 
-					INNER JOIN " . EVENTS_DISCOUNT_REL_TABLE . " AS r ON d.id=r.discount_id WHERE apply_to_all=0 ";
 				if (!empty($event_id)) {
-					$sql.= $wpdb->prepare(" AND event_id=%d ", $event_id);
-				}
-				if (function_exists('espresso_member_data') && !empty($event_id)) {
-					$wpdb->get_results("SELECT wp_user FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'");
-					$wp_user = $wpdb->last_result[0]->wp_user != '' ? $wpdb->last_result[0]->wp_user : espresso_member_data('id');
-					$sql .= " AND ";
-					if ($wp_user == 0 || $wp_user == 1) {
-						$sql .= " (wp_user = '0' OR wp_user = '1') ";
-					} else {
-						$sql .= " wp_user = '" . $wp_user . "' ";
+					$sql = $wpdb->prepare("SELECT d.id, d.coupon_code FROM " . EVENTS_DISCOUNT_CODES_TABLE . " AS d 
+						INNER JOIN " . EVENTS_DISCOUNT_REL_TABLE . " AS r ON d.id=r.discount_id WHERE apply_to_all=0 AND event_id=%d ",$event_id);
+
+
+
+					if (function_exists('espresso_member_data') && !empty($event_id)) {
+						$wpdb->get_results("SELECT wp_user FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'");
+						$wp_user = $wpdb->last_result[0]->wp_user != '' ? $wpdb->last_result[0]->wp_user : espresso_member_data('id');
+						$sql .= " AND ";
+						if ($wp_user == 0 || $wp_user == 1) {
+							$sql .= " (wp_user = '0' OR wp_user = '1') ";
+						} else {
+							$sql .= " wp_user = '" . $wp_user . "' ";
+						}
 					}
+					$promocodes_in_use = $wpdb->get_results($sql);
+				}else{
+					$promocodes_in_use = array();
 				}
-				$promocodes_in_use = $wpdb->get_results($sql);
+				
 				?>
 				<?php
 				if($promocodes_in_use){
@@ -136,7 +141,7 @@
 					}
 					var data = {
 						action: 'event_espresso_get_discount_codes',
-						event_id: <?php echo $event_id ?>,
+						event_id: <?php echo $event_id ?  $event_id : 0 ?>,
 						start:start,
 						count:count,
 						excludes:excludes
