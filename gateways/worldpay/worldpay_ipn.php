@@ -19,9 +19,10 @@ function espresso_process_worldpay($payment_data) {
 	$payment_data['payment_status'] = "Incomplete";
 	$payment_data['txn_id'] = 0;
 	$payment_data['txn_details'] = serialize($_REQUEST);
-	session_id($_REQUEST['MC_session_id']);
-	session_start();
-	session_destroy();
+	//removed sidney's fix, as hopefully we'll have a more general fix taht will work for all gateayss
+//	session_id($_REQUEST['MC_session_id']);
+//	session_start();
+//	session_destroy();
 	if ($_REQUEST['transStatus'] == 'Y') {
 		$attendee_id = $payment_data['attendee_id'];
 		$payment_data['payment_status'] = 'Completed';
