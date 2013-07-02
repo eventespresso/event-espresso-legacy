@@ -150,25 +150,27 @@
 					// since 2.8 ajaxurl is always defined in the admin header and points to wp's admin-ajax.php
 					jQuery.post(ajaxurl, data, function(response) {
 						jQuery('.promocode-ajax-list').html(response);
-						jQuery('.add-this-disc-code').click(function(){
-							jQuery('.promocodes-in-use').append(jQuery(this).parent());
-							//this is a tricky gotcha: windows (no, not a specific browser... windows itself)
-							//checks the box FIRST, and then first the action
-							//whereas MAC seems to fire the action first, and then check the box
-							//so, we need to be flexible. Point is: we want it to be checked now
-							if(jQuery('input',this).attr('checked') != 'checked'){
-								jQuery('input',this).attr('checked','checked');
-							}
-							jQuery(this).removeClass('add-this-disc-code');
-							jQuery(this).addClass('already-added-disc-code');
-							jQuery(this).unbind();
-							jQuery(this).click(function(){
-								jQuery(this).remove();
-								espresso_disc_codes_paginate();
-								return false;
+						jQuery('.add-this-disc-code input').click(function(){
+							
+							parent_label = jQuery(this).closest('label');
+							//do an 'animate' so that we can seperate the click event
+							//from when we add a different listener on the click event
+							jQuery(this).animate({
+								display:'none'
+							},1, 'swing', function(){
+								jQuery('.promocodes-in-use').append(jQuery(parent_label).parent());
+								jQuery(parent_label).removeClass('add-this-disc-code');
+								jQuery(parent_label).addClass('already-added-disc-code');
+								jQuery(this).click(function(){
+									jQuery(parent_label).remove();
+									espresso_disc_codes_paginate();
+								});
+								espresso_disc_codes_paginate(Math.max(0,start-1),count);
 							});
-							espresso_disc_codes_paginate(Math.max(0,start-1),count);
-							return false;
+							
+							//jQuery(this).unbind();
+							
+							//return false;
 						});
 				
 					});
