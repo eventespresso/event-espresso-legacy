@@ -1323,8 +1323,18 @@ function espresso_get_attendee_coupon_discount($attendee_id, $cost) {
 	if (!is_null($row['coupon_code']) && !empty($row['coupon_code'])) {
 		$coupon_code = $row['coupon_code'];
 		$event_id = $row['event_id'];
+		$use_coupon_code_for_event = $wpdb->get_var("SELECT use_coupon_code FROM ".EVENTS_DETAIL_TABLE." WHERE id=%d",$event_id);
+		if($use_coupon_code_for_event == 'A'){
+			//if we're using ALL coupons codes (even non-global ones), we don't care about the rel table
+			$discounts = $wpdb->get_results("SELECT * FROM ".EVENTS_DISCOUNT_CODES_TABLE." WHERE coupon_code=%d",$coupon_code);
+		}else{
+			$discounts = $wpdb->get_results("SELECT d.* FROM " 
+				. EVENTS_DISCOUNT_CODES_TABLE . " d JOIN " 
+				. EVENTS_DISCOUNT_REL_TABLE . " r ON r.discount_id  = d.id WHERE d.coupon_code = '" . $coupon_code . "'  AND r.event_id = '" . $event_id . "' ");
+		
+		}
 		//$results = $wpdb->get_results("SELECT * FROM ". EVENTS_DISCOUNT_CODES_TABLE ." WHERE coupon_code = '".$_REQUEST['coupon_code']."'");
-		$discounts = $wpdb->get_results("SELECT d.* FROM " . EVENTS_DISCOUNT_CODES_TABLE . " d JOIN " . EVENTS_DISCOUNT_REL_TABLE . " r ON r.discount_id  = d.id WHERE d.coupon_code = '" . $coupon_code . "'  AND r.event_id = '" . $event_id . "' ");
+		
 		if ($wpdb->num_rows > 0) {
 			$valid_discount = true;
 			foreach ($discounts as $discount) {

@@ -2,6 +2,7 @@
 
 function event_espresso_discount_config_mnu() {
 	global $wpdb;
+	require_once("search.php");
 	?>
 	<div class="wrap">
 		<div id="icon-options-event" class="icon32"> </div>
@@ -60,39 +61,26 @@ function event_espresso_discount_config_mnu() {
 	<?php } ?>
 						<th class="manage-column column-author" id="start" scope="col" title="Click to Sort" style="width:20%;"><?php _e('Amount', 'event_espresso'); ?></th>
 						<th class="manage-column column-date" id="begins" scope="col" title="Click to Sort" style="width:20%;"><?php _e('Percentage', 'event_espresso'); ?></th>
+						<th class="manage-column column-date" id="begins" scope="col" title="Click to Sort" style="width:20%;"><?php _e('Global', 'event_espresso'); ?></th>
 					</tr>
 				</thead>
 				<tbody>
-					<?php
-					$sql = "SELECT * FROM " . EVENTS_DISCOUNT_CODES_TABLE;
-					if (function_exists('espresso_member_data') && ( espresso_member_data('role') == 'espresso_event_manager' || espresso_member_data('role') == 'espresso_group_admin')) {
-						$sql .= " WHERE wp_user = '" . espresso_member_data('id') . "' ";
-					}
-					$event_discounts = $wpdb->get_results($sql);
-					if ($wpdb->num_rows > 0) {
-						foreach ($event_discounts as $event_discount) {
-							$discount_id = $event_discount->id;
-							$coupon_code = $event_discount->coupon_code;
-							$coupon_code_price = $event_discount->coupon_code_price;
-							$coupon_code_description = $event_discount->coupon_code_description;
-							$use_percentage = $event_discount->use_percentage;
-							$wp_user = $event_discount->wp_user;
-							?>
-							<tr>
-								<td class="check-column" style="padding:7px 0 22px 5px; vertical-align:top;"><input name="checkbox[<?php echo $discount_id ?>]" type="checkbox"  title="Delete <?php echo $coupon_code ?>"></td>
-								<td class="column-comments" style="padding-top:3px;"><?php echo $discount_id ?></td>
-								<td class="post-title page-title column-title"><strong><a href="admin.php?page=discounts&amp;action=edit&amp;discount_id=<?php echo $discount_id ?>"><?php echo $coupon_code ?></a></strong>
-									<div class="row-actions"><span class="edit"><a href="admin.php?page=discounts&action=edit&discount_id=<?php echo $discount_id ?>"><?php _e('Edit', 'event_espresso'); ?></a> | </span><span class="delete"><a onclick="return confirmDelete();" class="delete submitdelete" href="admin.php?page=discounts&action=delete_discount&discount_id=<?php echo $discount_id ?>"><?php _e('Delete', 'event_espresso'); ?></a></span></div></td>
-								<?php if (function_exists('espresso_is_admin') && espresso_is_admin() == true) { ?>
-									<td><?php echo espresso_user_meta($wp_user, 'user_firstname') != '' ? espresso_user_meta($wp_user, 'user_firstname') . ' ' . espresso_user_meta($wp_user, 'user_lastname') : espresso_user_meta($wp_user, 'display_name'); ?></td>
-			<?php } ?>
-								<td class="author column-author"><?php echo $coupon_code_price ?></td>
-								<td class="author column-author"><?php echo $use_percentage ?></td>
-							</tr>
-						<?php }
-					}
-					?>
+					<tr>
+						<td colspan=6 class='dataTables_empty' style='text-align:center'>
+							 <?php	_e("Loading...", "event_espresso")?>
+						</td>
+					</tr>
+					
+				<!--	<?php /*foreach(espresso_promocodes_initial_jquery_datatables_data() as $row){?>
+					<tr>
+						<?php foreach($row as $column){ ?>
+						<td><?php echo $column?></td>
+						<?php } ?>
+					</tr>
+					<?php }  */ ?> -->
 				</tbody>
+				</thead>
+				
 			</table>
 			<div style="clear:both">
 				<p><input type="checkbox" name="sAll" onclick="selectAll(this)" />
@@ -115,20 +103,31 @@ function event_espresso_discount_config_mnu() {
 
 			/* show the table data */
 			var mytable = $('#table').dataTable( {
-				"bStateSave": true,
-				"sPaginationType": "full_numbers",
-
-				"oLanguage": {	"sSearch": "<strong><?php _e('Live Search Filter', 'event_espresso'); ?>:</strong>",
-					"sZeroRecords": "<?php _e('No Records Found!', 'event_espresso'); ?>" },
+					
+				
 				"aoColumns": [
 					{ "bSortable": false },
+					null,
 					null,
 					null,
 					null,
 	<?php echo function_exists('espresso_is_admin') && espresso_is_admin() == true ? 'null,' : ''; ?>
 							null
 
-						]
+						],
+				'bProcessing': true, 
+				'bServerSide': true, 
+//				"bDeferRender": true,
+				'sAjaxSource': ajaxurl+'?action=event_espresso_get_discount_codes_for_jquery_datatables',// - See more at: http://www.koolkatwebdesigns.com/using-jquery-datatables-with-wordpress-and-ajax/#sthash.H0zsZy6z.dpuf
+				"iDeferLoading": <?php echo espresso_promocodes_count_total() ?>,
+				"bStateSave": true,
+				"sPaginationType": "full_numbers",
+
+				"oLanguage": {	
+					"sSearch": "<strong><?php _e('Live Search Filter', 'event_espresso'); ?>:</strong>",
+					"sZeroRecords": "<?php _e('No Records Found!', 'event_espresso'); ?>",
+					"sProcessing": "<img src='<?php echo EVENT_ESPRESSO_PLUGINFULLURL . "images/ajax-loader.gif" ?>'>"}
+				
 
 					} );
 

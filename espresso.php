@@ -261,6 +261,12 @@ define("EVENTS_LOCALE_REL_TABLE", $wpdb->prefix . "events_locale_rel");
 define("EVENTS_PERSONNEL_TABLE", $wpdb->prefix . "events_personnel");
 define("EVENTS_PERSONNEL_REL_TABLE", $wpdb->prefix . "events_personnel_rel");
 
+//$ten_thousand = 3000;
+//$count = 2;
+//global $wpdb;
+//while($count++<$ten_thousand){
+//	$wpdb->insert(EVENTS_DISCOUNT_CODES_TABLE,array('coupon_code'=>"code$count",'use_percentage'=>'Y','coupon_code_price'=>$count),array('%s','%s','%s'));
+//}
 //Added by Imon
 define("EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE", $wpdb->prefix . "events_multi_event_registration_id_group");
 //define("EVENTS_ATTENDEE_COST_TABLE", $wpdb->prefix . "events_attendee_cost");
@@ -447,6 +453,30 @@ function event_espresso_pagination() {
     event_espresso_get_event_details($_REQUEST); 
     die();
 }
+
+/**
+ * displays HTML for the discoutn code page within the widget
+ * onthe event details page. Assumed to be used for JSON, so we 
+ * DIE at the end of the function
+ * @return void
+ */
+function event_espresso_discount_code_pagination(){
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+    require(EVENT_ESPRESSO_PLUGINFULLPATH.'/includes/admin-files/event-management/promotions_page_for_box.php');
+    die();
+}
+
+add_action('wp_ajax_event_espresso_get_discount_codes', 'event_espresso_discount_code_pagination');
+	//add_action('wp_ajax_nopriv_event_espresso_add_item', 'event_espresso_add_item_to_session');
+
+function event_espresso_get_discount_codes_for_jquery_datatables(){
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+    require(EVENT_ESPRESSO_PLUGINFULLPATH.'/includes/admin-files/coupon-management/search.php');
+	espresso_promocodes_datatables_search();
+    die();
+}
+
+add_action('wp_ajax_event_espresso_get_discount_codes_for_jquery_datatables', 'event_espresso_get_discount_codes_for_jquery_datatables');
 
 //Load these files if we are in an actuial registration page
 if ($this_is_a_reg_page == TRUE) {
