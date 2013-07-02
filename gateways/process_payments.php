@@ -207,6 +207,9 @@ function event_espresso_txn() {
 		}
 	}
 	$_REQUEST['page_id'] = $org_options['return_url'];
+	//include payment_page as it contains the next function we're going to call
+	require_once("includes/process-registration/payment_page.php"); 
+	event_espresso_clear_session_of_attendee($payment_data['attendee_session']);
 	ee_init_session();
 
 	$espresso_content = ob_get_contents();
