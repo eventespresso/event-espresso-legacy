@@ -152,7 +152,13 @@
 						jQuery('.promocode-ajax-list').html(response);
 						jQuery('.add-this-disc-code').click(function(){
 							jQuery('.promocodes-in-use').append(jQuery(this).parent());
-							jQuery('input',this).attr('checked','checked');
+							//this is a tricky gotcha: windows (no, not a specific browser... windows itself)
+							//checks the box FIRST, and then first the action
+							//whereas MAC seems to fire the action first, and then check the box
+							//so, we need to be flexible. Point is: we want it to be checked now
+							if(jQuery('input',this).attr('checked') != 'checked'){
+								jQuery('input',this).attr('checked','checked');
+							}
 							jQuery(this).removeClass('add-this-disc-code');
 							jQuery(this).addClass('already-added-disc-code');
 							jQuery(this).unbind();
