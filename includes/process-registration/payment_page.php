@@ -210,6 +210,8 @@ function espresso_confirm_registration() {
 		wp_die(__('An error has occured. The registration ID could not be found.', 'event_espresso'));
 	}
 	
+	echo '<div id="espresso-payment_page-dv" >';
+	
 	do_action('action_hook_espresso_confirmation_page_before',$registration_id);
 
 	//Get the questions for the attendee
@@ -320,7 +322,7 @@ function espresso_confirm_registration() {
 
 	if ( $attendee_pre_approved ) {
 
-		//Pull in the "Thank You" page template
+		//Pull in the "Payment Overview" page template
 		if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . "payment_page.php")) {
 			require_once(EVENT_ESPRESSO_TEMPLATE_DIR . "payment_page.php"); //This is the path to the template file if available
 		} else {
@@ -335,7 +337,7 @@ function espresso_confirm_registration() {
 			} else {
 				require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "gateways/gateway_display.php");
 			}
-			
+
 			//Check to see if the site owner wants to send an confirmation eamil before payment is recieved.
 			if ($org_options['email_before_payment'] == 'Y') {
 				event_espresso_email_confirmations(array('session_id' => $session_id, 'send_admin_email' => 'true', 'send_attendee_email' => 'true'));
@@ -354,6 +356,8 @@ function espresso_confirm_registration() {
 		}
 		
 	}
+
+	echo '</div>';
 	
 }
 
