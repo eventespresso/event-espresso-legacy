@@ -275,7 +275,7 @@ function event_list_attendees() {
 							</td>
 
 							<td class="">
-			<?php echo espresso_payment_type($txn_type); ?>
+			<?php echo stripslashes_deep(espresso_payment_type($txn_type)); ?>
 							</td>
 
 							<td class="">

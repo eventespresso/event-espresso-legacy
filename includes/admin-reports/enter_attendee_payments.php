@@ -494,7 +494,7 @@ function enter_attendee_payments() {
 //												);
 //												echo select_input('txn_type', $txn_values, $txn_type);
 										?>
-											<input type="text" class="medium-text" name="txn_type" size="45" value ="<?php echo $txn_type; ?>" />
+											<input type="text" class="medium-text" name="txn_type" size="45" value ="<?php echo stripslashes_deep(htmlentities($txn_type)); ?>" />
 										</li>
 									<li>
 										<label>
