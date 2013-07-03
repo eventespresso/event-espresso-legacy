@@ -26,7 +26,7 @@ function espresso_display_invoice($payment_data) {
 ?>
 <div id="invoice-payment-option-dv" class="payment-option-dv">
 
-	<a id="invoice-payment-option-lnk" class="payment-option-lnk algn-vrt display-the-hidden" rel="invoice-payment-option-form" style="display: table-cell">
+	<a id="invoice-payment-option-lnk" class="payment-option-lnk algn-vrt display-the-hidden" rel="invoice-payment-option-form" style="display: table">
 		<div class="vrt-cell">
 			<div>
 				<?php

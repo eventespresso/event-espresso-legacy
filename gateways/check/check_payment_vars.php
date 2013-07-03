@@ -22,7 +22,7 @@ function espresso_display_check($payment_data) {
 ?>
 <div id="check-payment-option-dv" class="payment-option-dv">
 
-	<a id="check-payment-option-lnk" class="payment-option-lnk algn-vrt display-the-hidden" rel="check-payment-option-form" style="display: table-cell">
+	<a id="check-payment-option-lnk" class="payment-option-lnk algn-vrt display-the-hidden" rel="check-payment-option-form" style="display: table">
 		<div class="vrt-cell">
 			<div>
 				<?php echo stripslashes( $check_payment_settings['check_title'] ) ?>
