@@ -39,9 +39,9 @@ $values=array(
             <label for="default_payment_status">
               <?php
 					  $default_payment_status = array(
-							array('id'=>'Incomplete','text'=> 'Incomplete'),
+							array('id'=>'Incomplete','text'=> 'Incomplete (default)'),
 							array('id' => 'Pending', 'text' => 'Pending'),
-							array('id' => 'Completed', 'text' => 'Completed')
+							//array('id' => 'Completed', 'text' => 'Completed')
 						);
  _e(' Default Payment Status (this value will be automatically filled in for each person\'s payment status, until payment is made, for each event): ','event_espresso'); ?>
             </label>
