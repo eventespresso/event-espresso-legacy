@@ -4,6 +4,11 @@ function espresso_transactions_exact_get_attendee_id($attendee_id) {
 	if (!empty($_REQUEST['x_cust_id'])) {
 		$attendee_id = $_REQUEST['x_cust_id'];
 	}
+	if (!empty($_REQUEST['x_reference_3'])) {
+		$temp_array = explode('|', $_REQUEST['x_reference_3']);
+		$_REQUEST['registration_id'] = $temp_array[0];
+		$_REQUEST['type'] = $temp_array[1];
+	}
 	return $attendee_id;
 }
 

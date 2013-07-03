@@ -19,7 +19,7 @@ function espresso_display_purchase_order($payment_data) {
 ?>
 <div id="po-payment-option-dv" class="payment-option-dv">
 
-	<a id="po-payment-option-lnk" class="payment-option-lnk algn-vrt display-the-hidden" rel="po-payment-option-form" style="display: table-cell">
+	<a id="po-payment-option-lnk" class="payment-option-lnk algn-vrt display-the-hidden" rel="po-payment-option-form" style="display: table">
 		<div class="vrt-cell">
 			<div>
 				<?php echo stripslashes( $po_payment_settings['purchase_order_title'] ) ?>
