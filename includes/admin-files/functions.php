@@ -375,7 +375,7 @@ if (!function_exists('event_espresso_meta_edit')){
 									<option value="<?php echo $k2; ?>" <?php echo ($k2 == $k ? "SELECTED" : null); ?>><?php echo $k2; ?></option>
 								<?php } ?>
 							</select>
-							<label for="meta-value"><?php _e('Value: ', 'event_espresso'); ?></label> <input  size="20" type="text" value="<?php echo $v; ?>" name="emetad[]" id="emetad[]" />
+							<label for="meta-value"><?php _e('Value: ', 'event_espresso'); ?></label> <input  size="20" type="text" value="<?php echo stripslashes_deep(htmlentities($v)); ?>" name="emetad[]" id="emetad[]" />
 						<?php
 						echo '<img class="remove-item" title="' . __('Remove this meta box', 'event_espresso') . '" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Meta', 'event_espresso') . '" />';
 						?>
