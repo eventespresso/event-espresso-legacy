@@ -1,5 +1,7 @@
 jQuery(document).ready(function($) {
 
+	var bypass_payment_page = $('#bypass_payment_page').val();
+
 	$('.hide-if-js').hide();
 	$('.payment_container').toggleClass('payment-option-closed'); 
 	$('.payment-option-dv').toggleClass('payment-option-closed'); 
@@ -43,7 +45,7 @@ jQuery(document).ready(function($) {
 	});
 	
 	window.onbeforeunload = function() {
-		if ( preventLeavePage ) {
+		if ( preventLeavePage && bypass_payment_page != 'true' ) {
 	  	  return 'Warning!!! Using the back button will overwrite your existing registration.';
 		}
 	}	
