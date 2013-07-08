@@ -488,7 +488,7 @@ if (!function_exists('espresso_export_stuff')) {
 									. $s . escape_csv_val($participant->price_option)
 									. $s . escape_csv_val(event_date_display($participant->start_date, get_option('date_format')))
 									. $s . escape_csv_val(event_date_display($participant->event_time, get_option('time_format')))
-									. $s . escape_csv_val($participant->checked_in)
+									. $s . escape_csv_val($participant->checked_in ? "Yes" : "No")
 									. $s . escape_csv_val($participant->checked_in_quantity)
 									. $s . escape_csv_val($scanned_date)
 									. $s . escape_csv_val($participant->seatingchart_tag)
