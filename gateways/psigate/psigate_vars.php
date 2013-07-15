@@ -48,9 +48,9 @@ function espresso_display_psigate($payment_data){
 		$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/psigate/psigate.gif";
 	}
 	if(!empty($button_url)){
-		$submit_html="<input type='image' src='$button_url'/>";
+		$submit_html="<input class=\"payment-option-lnk\" type='image' src='$button_url'/>";
 	}else{
-		$submit_html="<button>Submit Purchase</button>";
+		$submit_html="<button class=\"payment-option-lnk\">Submit Purchase</button>";
 	}
 	if($bypass_payment_page){
 		$bypass_payment_page_js="<script>document.getElementById('psigate_form').submit();</script>";
@@ -58,29 +58,34 @@ function espresso_display_psigate($payment_data){
 		$bypass_payment_page_js="";
 	}
 	
+	$external_link_img = EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png';
 		
 	$formhtml=<<<HEREDOC
-<form action="{$server_url}" id='psigate_form' method="post">
-<input type="HIDDEN" name="MerchantID" value="{$storekey}">
-<input type='HIDDEN' name='ThanksURL' value='{$return_url}'>
-<input type='HIDDEN' name='NoThanksURL' value='{$return_url}'>
-<input type="HIDDEN" name="PaymentType" value="CC">
-<input type="HIDDEN" name="Bname" value="{$payment_data['fname']} {$payment_data['lname']}">
-<input type="HIDDEN" name="Baddress1" value="{$payment_data['address']}">
-<input type="HIDDEN" name="Baddress2" value="{$address2}">
-<input type="HIDDEN" name="Bcity" value="{$payment_data['city']}">
-<input type="HIDDEN" name="Bprovince" value="{$payment_data['state']}">
-<input type="HIDDEN" name="Bpostalcode" value="{$payment_data['zip']}">
-<input type="HIDDEN" name="Bcountry" value="{$country}">
+		 <div id="luottokunta-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+			<img class="off-site-payment-gateway-img" width="16" height="16" src="{$external_link_img}" alt="click to visit this payment gateway">
+	
+			<form action="{$server_url}" id='psigate_form' method="post">
+			<input type="HIDDEN" name="MerchantID" value="{$storekey}">
+			<input type='HIDDEN' name='ThanksURL' value='{$return_url}'>
+			<input type='HIDDEN' name='NoThanksURL' value='{$return_url}'>
+			<input type="HIDDEN" name="PaymentType" value="CC">
+			<input type="HIDDEN" name="Bname" value="{$payment_data['fname']} {$payment_data['lname']}">
+			<input type="HIDDEN" name="Baddress1" value="{$payment_data['address']}">
+			<input type="HIDDEN" name="Baddress2" value="{$address2}">
+			<input type="HIDDEN" name="Bcity" value="{$payment_data['city']}">
+			<input type="HIDDEN" name="Bprovince" value="{$payment_data['state']}">
+			<input type="HIDDEN" name="Bpostalcode" value="{$payment_data['zip']}">
+			<input type="HIDDEN" name="Bcountry" value="{$country}">
 
-<input type="HIDDEN" name="Phone" value="{$payment_data['phone']}">
-<input type="HIDDEN" name="Email" value="{$payment_data['attendee_email']}">
+			<input type="HIDDEN" name="Phone" value="{$payment_data['phone']}">
+			<input type="HIDDEN" name="Email" value="{$payment_data['attendee_email']}">
 
-<input type="HIDDEN" name="SubTotal" value="{$payment_data['total_cost']}">
-<input type="HIDDEN" name="CardAction" value="0">
-<input type="HIDDEN" name="CustomerIP" value="{$user_ip}">
-$submit_html
-</form>
+			<input type="HIDDEN" name="SubTotal" value="{$payment_data['total_cost']}">
+			<input type="HIDDEN" name="CardAction" value="0">
+			<input type="HIDDEN" name="CustomerIP" value="{$user_ip}">
+			$submit_html
+			</form>
+			</div>
 $bypass_payment_page_js
 HEREDOC;
 

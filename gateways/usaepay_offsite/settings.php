@@ -14,16 +14,24 @@ function espresso_usaepay_offsite_payment_settings() {
 	$settings = get_option('espresso_usaepay_offsite_settings');
 	if (empty($settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_offsite/usaepay-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_offsite/usaepay-logo.png";
+			$settings['button_url'] = EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_offsite/usaepay-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/usaepay_offsite/usaepay-logo.png";
+			$settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/usaepay_offsite/usaepay-logo.png";
 		}
 		$settings['key'] = '';
-		$settings['button_url'] = $button_url;
+
 		if (add_option('espresso_usaepay_offsite_settings', $settings, '', 'no') == false) {
 			update_option('espresso_usaepay_offsite_settings', $settings);
 		}
 	}
+	
+	if ( ! isset( $settings['button_url'] ) || ! file_exists( $settings['button_url'] )) {
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_offsite/usaepay-logo.png")) {
+			$settings['button_url'] = EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_offsite/usaepay-logo.png";
+		} else {
+			$settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/usaepay_offsite/usaepay-logo.png";
+		}	
+	}	
 
 	if (empty($_REQUEST['deactivate_usaepay_offsite'])
 					&& (!empty($_REQUEST['activate_usaepay_offsite'])

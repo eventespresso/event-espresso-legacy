@@ -20,21 +20,27 @@ function event_espresso_wepay_payment_settings() {
 	}
 	if (empty($wepay_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/wepay/wepay-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/wepay/wepay-logo.png";
+			$wepay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/wepay/wepay-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/wepay/wepay-logo.png";
+			$wepay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/wepay/wepay-logo.png";
 		}
 		$wepay_settings['wepay_client_id'] = '';
 		$wepay_settings['wepay_client_secret'] = '';
 		$wepay_settings['use_sandbox'] = false;
 		$wepay_settings['bypass_payment_page'] = 'N';
-		$wepay_settings['button_url'] = $button_url;
 		$wepay_settings['account_id'] = '';
 		$wepay_settings['force_ssl_return'] = false;
 		if (add_option('event_espresso_wepay_settings', $wepay_settings, '', 'no') == false) {
 			update_option('event_espresso_wepay_settings', $wepay_settings);
 		}
 	}
+	if ( ! isset( $wepay_settings['button_url'] ) || ! file_exists( $wepay_settings['button_url'] )) {
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/wepay/wepay-logo.png")) {
+			$wepay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/wepay/wepay-logo.png";
+		} else {
+			$wepay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/wepay/wepay-logo.png";
+		}	
+	}	
 
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_wepay'])
@@ -108,10 +114,11 @@ function event_espresso_display_wepay_settings() {
 							</label>
 							<input type="text" name="wepay_client_secret" size="35" value="<?php echo $wepay_settings['wepay_client_secret']; ?>" />
 						</li>
-						<label for="account_id">
-							<?php _e('Account ID', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=account_id"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-						</label><br>
-						<input type="text" name="account_id" size="34" value="<?php echo (($wepay_settings['account_id'] == '') ? '' : $wepay_settings['account_id'] ); ?>" />
+						<li>
+							<label for="account_id">
+								<?php _e('Account ID', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=account_id"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							</label><br>
+							<input type="text" name="account_id" size="34" value="<?php echo (($wepay_settings['account_id'] == '') ? '' : $wepay_settings['account_id'] ); ?>" />
 						</li>
 						<li>
 							<label for="access_token">
@@ -158,7 +165,7 @@ function event_espresso_display_wepay_settings() {
 						<li>
 							<?php _e('Current Button Image', 'event_espresso'); ?>
 							<br />
-							<?php echo (($wepay_settings['button_url'] == '') ? '<img src="' . $button_url . '" />' : '<img src="' . $wepay_settings['button_url'] . '" />'); ?></li>
+							<?php echo (($wepay_settings['button_url'] == '') ? '' : '<img src="' . $wepay_settings['button_url'] . '" />'); ?></li>
 					</ul>
 				</td>
 			</tr>
