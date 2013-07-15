@@ -33,9 +33,9 @@ function espresso_display_atos($payment_data) {
 	$parm = escapeshellcmd($parm);
 	$result = exec("$path_bin $parm");
 	$tableau = explode ("!", "$result");
-	$code = $tableau[1];
-	$error = $tableau[2];
-	$message = $tableau[3];
+	$code = isset($tableau[1]) ? $tableau[1] : '';
+	$error = isset($tableau[2]) ? $tableau[2] : '';
+	$message = isset($tableau[3]) ? $tableau[3] : '';
 	if (($code == "") && ($error == "")) {
 		echo "executable request non trouve $path_bin";
 	} elseif ($code != 0) {
