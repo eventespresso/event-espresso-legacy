@@ -29,7 +29,7 @@ function espresso_display_worldpay($payment_data) {
 	if (!empty($worldpay_settings['bypass_payment_page'])) {
 		$myworldpay->submitPayment(); //Enable auto redirect to payment site
 	} else {
-		if (empty($worldpay_settings['button_url'])) {
+		if (empty($worldpay_settings['button_url']) || ! file_exists($worldpay_settings['button_url'])) {
 			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/worldpay/worldpay-logo.png")) {
 				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/worldpay/worldpay-logo.png";
 			} else {
