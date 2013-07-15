@@ -30,7 +30,7 @@ function espresso_display_exact($payment_data) {
 	$myExact->setUserInfo($exact_login_id, $exact_transaction_key);
 	$myExact->addField('x_amount', number_format($event_cost, 2));
 	$myExact->addField('x_show_form', 'PAYMENT_FORM');
-	$myExact->addField('x_reference_3', $registration_id . '|exact');
+	$myExact->addField('registration_id', $registration_id );
 	$myExact->addField('x_relay_response', 'TRUE');
 	if ($exact_settings['force_ssl_return']) {
 		$home = str_replace("http://", "https://", home_url());
