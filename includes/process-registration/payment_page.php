@@ -461,6 +461,10 @@ function event_espresso_pay() {
  * @return void 
  */
 function event_espresso_clear_session_of_attendee($attendee_session){
+	//first, check that the $attendee_session isn't blank
+	if( ! $attendee_session ){
+		return;
+	}
 	//extract the PHP session portion of attendee_session, the part before the "-"
 	$pos_of_dash = strpos($attendee_session, "-");
 	$php_session_id = substr($attendee_session, 0, $pos_of_dash);
