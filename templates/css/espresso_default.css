@@ -19,7 +19,7 @@
 .payment-option-closed { display: inline-block !important; }
 
 .payment-option-dv .payment-option-lnk {
-	display: inline-block; position: relative; max-width:140px; min-height:53px; padding:20px; margin:0 0 1em; 
+	display: inline-block; position: relative; max-width:140px; min-height:53px; height: auto; padding:20px; margin:0 0 1em; 
 	border:1px solid #ddd; border-radius:3px;
 	text-align: center; line-height:1em; vertical-align: middle; cursor:pointer;
 
