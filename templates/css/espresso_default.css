@@ -233,9 +233,13 @@ label.dynamic-price-input-label {
 	text-align:left !important;
 }
 
-select.small { width:25px; }
-select.med { width: 100px; }
-select.wide { width: 175px; }
+.event_espresso_form_wrapper  input.small { width:50px; }
+.event_espresso_form_wrapper  input.med { width: 100px; }
+.event_espresso_form_wrapper  input.wide { width: 200px; }
+
+.event_espresso_form_wrapper  select.small { width:50px; }
+.event_espresso_form_wrapper  select.med { width: 100px; }
+.event_espresso_form_wrapper  select.wide { width: 200px; }
 
 .event_espresso_form_wrapper ul.event_form_field { display: inline-block; width:65%; list-style: none; padding:0; margin:.25em 0 0; }   /*160px*/
 .event_espresso_form_wrapper ul.event_form_field li,
