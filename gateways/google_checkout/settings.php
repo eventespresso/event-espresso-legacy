@@ -5,33 +5,23 @@ function event_espresso_google_checkout_payment_settings() {
 	if (isset($_POST['update_google_checkout'])) {
 		$google_checkout_settings['google_checkout_id'] = $_POST['google_checkout_id'];
 		$google_checkout_settings['google_checkout_key'] = $_POST['google_checkout_key'];
-		$google_checkout_settings['image_url'] = $_POST['image_url'];
 		$google_checkout_settings['currency_format'] = $_POST['currency_format'];
 		$google_checkout_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
 		//$google_checkout_settings['bypass_payment_page'] = $_POST['bypass_payment_page'];
 		$google_checkout_settings['force_ssl_return'] = empty($_POST['force_ssl_return']) ? false : true;
-		$google_checkout_settings['no_shipping'] = $_POST['no_shipping'];
-		$google_checkout_settings['button_url'] = $_POST['button_url'];
 		$google_checkout_settings['default_payment_status']=$_POST['default_payment_status'];
 		update_option('event_espresso_google_checkout_settings', $google_checkout_settings);
 		echo '<div id="message" class="updated fade"><p><strong>' . __('Google Checkout settings saved.', 'event_espresso') . '</strong></p></div>';
 	}
 	$google_checkout_settings = get_option('event_espresso_google_checkout_settings');
 	if (empty($google_checkout_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/google_checkout/btn_stdCheckout2.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/google_checkout/btn_stdCheckout2.gif";
-		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/google_checkout/btn_stdCheckout2.gif";
-		}
 		$google_checkout_settings['google_checkout_id'] = '';
 		$google_checkout_settings['google_checkout_key'] = '';
-		$google_checkout_settings['image_url'] = '';
 		$google_checkout_settings['currency_format'] = 'USD';
 		$google_checkout_settings['use_sandbox'] = false;
 		//note: how this is displayed will be internationalized, but this value is used internally
 		$google_checkout_settings['default_payment_status'] = 'Pending';
 		$google_checkout_settings['force_ssl_return'] = false;
-		$google_checkout_settings['button_url'] = $button_url;
 		if (add_option('event_espresso_google_checkout_settings', $google_checkout_settings, '', 'no') == false) {
 			update_option('event_espresso_google_checkout_settings', $google_checkout_settings);
 		}
