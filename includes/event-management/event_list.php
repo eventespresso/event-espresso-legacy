@@ -308,7 +308,7 @@ function event_espresso_edit_list() {
 			<input type="checkbox" name="sAll" onclick="selectAll(this)" />
 			<strong>
 	<?php _e('Check All', 'event_espresso'); ?>
-			</strong><?php if (isset($_POST['event_status']) && $_POST['event_status'] == 'D') { ?>
+			</strong><?php if (isset($_REQUEST['event_status']) && $_REQUEST['event_status'] == 'D') { ?>
 				<input name="perm_delete_event" type="submit" class="button-secondary" id="perm_delete_event" value="<?php _e('Permanently Delete Events(s)', 'event_espresso'); ?>" style="margin:10px 0 0 10px;" onclick="return confirmDelete();" />
 			<?php } else { ?>
 				<input name="delete_event" type="submit" class="button-secondary" id="delete_event" value="<?php _e('Delete Events(s)', 'event_espresso'); ?>" style="margin:10px 0 0 10px;" onclick="return confirmDelete();" />

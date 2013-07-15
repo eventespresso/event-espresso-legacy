@@ -22,16 +22,16 @@ if (function_exists('espresso_member_data') && espresso_member_data('role') == '
 }
 
 $additional_attendee_reg_info = array(
-    array('id' => '1','text'=> __('No info required','event_espresso')),
-    array('id' => '2', 'text' => __('Personal Information only', 'event_espresso')),
-    array('id' => '3', 'text' => __('Full registration information', 'event_espresso'))
+	array('id' => '1','text'=> __('No info required','event_espresso')),
+	array('id' => '2', 'text' => __('Personal Information only', 'event_espresso')),
+	array('id' => '3', 'text' => __('Full registration information', 'event_espresso'))
 );
 
 $default_payment_status = array(
-    array('id' => "", 'text' => 'No Change'),
-    array('id' => 'Incomplete', 'text' => 'Incomplete'),
-    array('id' => 'Pending', 'text' => 'Pending'),
-    array('id' => 'Completed', 'text' => 'Completed')
+	array('id' => "", 'text' => 'No Change'),
+	array('id' => 'Incomplete', 'text' => 'Incomplete'),
+	array('id' => 'Pending', 'text' => 'Pending'),
+	//array('id' => 'Completed', 'text' => 'Completed')
 );
 
 $advanced_options = '';

@@ -106,7 +106,8 @@ class Espresso_Eway extends Espresso_PaymentGateway {
         $this->prepareSubmit();
         echo '<form method="get" name="payment_form" action="' . $this->gatewayUrl[0] . '">';
         echo '<input type="hidden" value="' . $this->gatewayUrl[1] . '" name="value">';
-        echo '<input id="eway-payment-option-lnk" class="payment-option-lnk" type="image" alt="Pay using eWay" src="' . $button_url . '" />';
+ 	 echo "<input type=\"hidden\" id=\"bypass_payment_page\" name=\"bypass_payment_page\" value=\"true\"/>\n";
+       echo '<input id="eway-payment-option-lnk" class="payment-option-lnk" type="image" alt="Pay using eWay" src="' . $button_url . '" />';
         echo '</form>';
     }
 

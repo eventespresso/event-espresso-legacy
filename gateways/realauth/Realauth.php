@@ -109,6 +109,7 @@ class Espresso_Realauth {
 	    $out .= " will be redirected to the payment website.</h2></p>\n";
 	    $out .= '<form method="post" name="gateway_form" action="' . $this->gateway_Url . '">\n';
 	    $out .= $this->submitForm();
+		$out .= "<input type=\"hidden\" id=\"bypass_payment_page\" name=\"bypass_payment_page\" value=\"true\"/>\n";
 		$out .= "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to ";
 	    $out .= "the payment website within 5 seconds...<br/><br/>\n";
 	    $out .= "<input type=\"submit\" value=\"Click Here\"></p>\n";

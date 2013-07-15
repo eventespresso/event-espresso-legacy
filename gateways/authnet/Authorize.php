@@ -176,6 +176,7 @@ class Espresso_Authorize extends Espresso_PaymentGateway {
 		foreach ($this->_additional_line_items as $value) {
 			echo "<input type=\"hidden\" name=\"x_line_item\" value=\"$value\"/>\n";
 		}
+           echo "<input type=\"hidden\" id=\"bypass_payment_page\" name=\"bypass_payment_page\" value=\"true\"/>\n";
 		echo "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to ";
 		echo "the payment website within 5 seconds...<br/><br/>\n";
 		echo "<input type=\"submit\" value=\"Click Here\"></p>\n";
