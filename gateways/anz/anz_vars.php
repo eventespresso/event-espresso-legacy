@@ -63,6 +63,10 @@ function espresso_display_anz($payment_data){
 	//otherwise, we want them to see the error message
 	if($bypass_payment_page && !array_key_exists('vpc_Message',$_GET)){
 		
+		 echo "<form>\n";
+		 echo "<input type=\"hidden\" id=\"bypass_payment_page\" name=\"bypass_payment_page\" value=\"true\"/>\n";
+		 echo "</form>\n";
+			
 		echo "<script>window.location = '$full_url';</script>";
 	}
 
