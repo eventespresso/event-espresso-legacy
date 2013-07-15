@@ -195,7 +195,7 @@ if (is_ssl()) {
 
 	//force admin-ajax.php to use https:// ssl
 	if ( !is_admin() )
-		add_filter('set_url_scheme', 'ee_force_admin_ajax_ssl', 200, 3);
+		add_filter('admin_url', 'ee_force_admin_ajax_ssl', 200, 2);
 }
 
 //Define the plugin directory and path
@@ -290,7 +290,7 @@ add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
 
 
 
-function ee_force_admin_ajax_ssl( $url, $scheme, $orig_scheme ) {
+function ee_force_admin_ajax_ssl( $url, $scheme ) {
 	if ( preg_match('/admin-ajax.php/', $url ) ) {
 		$url = preg_replace( '#^.+://#', 'https' . '://', $url );
 	}
