@@ -192,6 +192,10 @@ if (is_ssl()) {
 
 	$wp_plugin_url = str_replace('http://', 'https://', WP_PLUGIN_URL);
 	$wp_content_url = str_replace('http://', 'https://', WP_CONTENT_URL);
+
+	//force admin-ajax.php to use https:// ssl
+	if ( !is_admin() )
+		add_filter('set_url_scheme', 'ee_force_admin_ajax_ssl', 200, 3);
 }
 
 //Define the plugin directory and path
@@ -283,6 +287,15 @@ function espresso_load_language_files() {
 	}
 }
 add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
+
+
+
+function ee_force_admin_ajax_ssl( $url, $scheme, $orig_scheme ) {
+	if ( preg_match('/admin-ajax.php/', $url ) ) {
+		$url = preg_replace( '#^.+://#', 'https' . '://', $url );
+	}
+	return $url;
+}
 
 
 function espresso_sideload_current_lang() {
