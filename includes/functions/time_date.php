@@ -188,13 +188,15 @@ if (!function_exists('event_espresso_time_dropdown')) {
 			$SQL .= ") AS available_spaces ";
 			$SQL .= "FROM " . EVENTS_START_END_TABLE . " ESE ";
 			$SQL .= "WHERE ESE.event_id= %d ";
-			$SQL .= "GROUP BY ESE.id";
+			$SQL .= "GROUP BY ESE.id ";
+            $SQL .= "ORDER BY ESE.start_time";
    			$event_times = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id, $event_id ));
 
         } else {
 			$SQL = "SELECT ESE.* FROM " . EVENTS_START_END_TABLE . " ESE ";
 			$SQL .= "WHERE ESE.event_id= %d ";
-			$SQL .= "GROUP BY ESE.id";	 	
+			$SQL .= "GROUP BY ESE.id ";
+            $SQL .= "ORDER BY ESE.start_time";	
   			$event_times = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ));
 	 }
 	 
