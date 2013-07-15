@@ -142,34 +142,94 @@ function load_events_to_db() {
 				$event_meta['date_submitted'] = date("Y-m-d H:i:s");
 				$event_meta = serialize($event_meta);
 
-				//Add event data 
-				$events_sql = "INSERT INTO " . EVENTS_DETAIL_TABLE . " (event_name, event_desc, address, address2, city, state, country, zip, phone, display_desc, event_identifier, ";
-				$events_sql .= " start_date, end_date, reg_limit, allow_multiple, additional_limit, send_mail, is_active, conf_mail, registration_start, registration_end, question_groups,event_meta)";
-				$events_sql .= " VALUES ('$strings[1]', '$strings[2]', '$strings[3]', '$strings[4]', '$strings[5]', '$strings[6]', '$strings[7]', '$strings[8]', '$strings[9]', ";
-				$events_sql .= " '$strings[10]','$strings[11]', '" . event_date_display($strings['12'], 'Y-m-d') . "', '" . event_date_display($strings['13'], 'Y-m-d') . "','$strings[16]', ";
-				$events_sql .= " '$strings[18]', '$strings[19]', '$strings[20]', '$strings[21]', '$strings[22]','" . event_date_display($strings['23'], 'Y-m-d') . "', '" . event_date_display($strings['24'], 'Y-m-d') . "','" . $question_groups . "','" . $event_meta . "')";
-				// echo $events_sql;
-				if ($wpdb->query($wpdb->prepare($events_sql, NULL)) === false) {
+				$strings_sql_array = array(
+					'event_name' => sanitize_text_field($strings[1]), //event_name
+					'event_desc' => $strings[2],
+					'address' => sanitize_text_field($strings[3]),
+					'address2' => sanitize_text_field($strings[4]),
+					'city' => sanitize_text_field($strings[5]),
+					'state' => sanitize_text_field($strings[6]),
+					'country' => sanitize_text_field($strings[7]),
+					'zip' => sanitize_text_field($strings[8]),
+					'phone' => sanitize_text_field($strings[9]),
+					'display_desc' => sanitize_text_field($strings[10]),
+					'event_identifier' => sanitize_title_with_dashes($strings[11]),
+					'start_date' => date('Y-m-d',strtotime($strings[12])),
+					'end_date' => date('Y-m-d', strtotime($strings[13])),
+					'reg_limit' => sanitize_text_field($strings[16]),
+					'allow_multiple' => sanitize_text_field($strings[18]),
+					'additional_limit' => (int) $strings[19],
+					'send_mail' => sanitize_text_field($strings[20]),
+					'is_active' => sanitize_text_field($strings[21]),
+					'conf_mail' => $strings[22],
+					'registration_start' => date('Y-m-d', strtotime($strings[23])),
+					'registration_end' => date('Y-m-d', strtotime($strings[24])),
+					'question_groups' => $question_groups,
+					'event_meta' => $event_meta
+					);
+
+				$sql_format = array(
+					'%s', //event_name
+					'%s', //event_desc
+					'%s', //address
+					'%s', //address2
+					'%s', //city
+					'%s', //state
+					'%s', //country
+					'%s', //zip
+					'%s', //phone
+					'%s', //display_desc
+					'%s', //event_identifier
+					'%s', //start_date
+					'%s', //end_date
+					'%s', //reg_limit
+					'%s', //allow_multiple
+					'%d', //additional_limit
+					'%s', //send_mail
+					'%s', //is_active
+					'%s', //conf_mail
+					'%s', //registration_start
+					'%s', //registration_end
+					'%s', //question_groups
+					'%s', //event_meta
+					);
+
+				if ( $wpdb->insert(EVENTS_DETAIL_TABLE, $strings_sql_array, $sql_format ) === FALSE ) {
 					print $wpdb->print_error();
 				} else {
 					$last_event_id = $wpdb->insert_id;
 				}
 
 
-
 				//Add times data
-				$times_sql = "INSERT INTO " . EVENTS_START_END_TABLE . " (event_id, start_time, end_time) VALUES ('" . $last_event_id . "', '" . date("h:i A", strtotime($strings[14])) . "', '" . date("h:i A", strtotime($strings[15])) . "')";
+				$times_sql = array(
+					'event_id' => $last_event_id,
+					'start_time' => date("h:i A", strtotime($strings[14])),
+					'end_time' => date("h:i A", strtotime($strings[15]))
+					);
+
+				$times_sql_format = array(
+					'%d',
+					'%s',
+					'%s'
+					);
+				
 				//echo $times_sql;
 				//$wpdb->query ( $wpdb->prepare( $times_sql ) );
-				if ($wpdb->query($wpdb->prepare($times_sql, NULL)) === false) {
+				if ($wpdb->insert(EVENTS_START_END_TABLE, $times_sql, $times_sql_format ) === false) {
 					print $wpdb->print_error();
 				}
 
 				//Add price data
-				$prices_sql = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost) VALUES ('" . $last_event_id . "', '$strings[17]')";
+				$prices_sql = array(
+					'event_id' => $last_event_id,
+					'event_cost' => (float) $strings[17]
+					);
+				$prices_sql_format = array( '%d', '%f' );
+				
 				//echo $prices_sql;
 				// $wpdb->query ( $wpdb->prepare( $prices_sql ) );
-				if ($wpdb->query($wpdb->prepare($prices_sql, NULL)) === false) {
+				if ($wpdb->insert(EVENTS_PRICES_TABLE, $prices_sql, $prices_sql_format ) === false) {
 					print $wpdb->print_error();
 				}
 
