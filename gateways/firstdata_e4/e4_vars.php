@@ -62,7 +62,7 @@ function espresso_display_firstdata_e4($payment_data) {
 	if (!empty($firstdata_e4_settings['bypass_payment_page']) && $firstdata_e4_settings['bypass_payment_page'] == 'Y') {
 		$myE4->submitPayment(); //Enable auto redirect to payment site
 	} else {
-		if (empty($firstdata_e4_settings['button_url'])) {
+		if (empty($firstdata_e4_settings['button_url']) || ! file_exists( $firstdata_e4_settings['button_url'] )) {
 			//$button_url = EVENT_ESPRESSO_GATEWAY_URL . "firstdata_e4/firstdata-logo.png";
 			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_e4/firstdata-logo.png")) {
 				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_e4/firstdata-logo.png";
