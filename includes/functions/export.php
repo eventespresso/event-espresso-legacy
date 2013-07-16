@@ -362,11 +362,15 @@ if (!function_exists('espresso_export_stuff')) {
 								$group = maybe_unserialize($group);
 								$group = implode(",", $group);
 								$sql .= "(SELECT ed.event_name, ed.start_date, a.id AS att_id, a.registration_id, a.payment, a.date, a.payment_status, a.txn_type, a.txn_id";
-								$sql .= ", a.amount_pd, a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity, ac.date_scanned";
+								$sql .= ", a.amount_pd, a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity";
+								if ( function_exists('espresso_ticketing_install') )
+									$sql.=", ac.date_scanned";
 								$sql .= ", a.payment_date, a.event_time, a.price_option, a.final_price a_final_price, a.quantity a_quantity, a.fname, a.lname, a.email";
 								$sql .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 								$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=a.event_id ";
-								$sql .= " LEFT JOIN " . $wpdb->prefix . "events_attendee_checkin ac ON a.id=ac.attendee_id ";
+
+								if ( function_exists('espresso_ticketing_install') )
+									$sql .= " LEFT JOIN " . $wpdb->prefix . "events_attendee_checkin ac ON a.id=ac.attendee_id ";
 								if ($group != '') {
 									$sql .= " JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = ed.id ";
 									$sql .= " JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = r.venue_id ";
@@ -376,12 +380,16 @@ if (!function_exists('espresso_export_stuff')) {
 								$sql .= ") UNION (";
 							}
 							$sql .= "SELECT ed.event_name, ed.start_date, a.id AS att_id, a.registration_id, a.payment, a.date, a.payment_status, a.txn_type, a.txn_id";
-							$sql .= ", a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity, ac.date_scanned, a.final_price a_final_price, a.amount_pd, a.quantity a_quantity";
+							$sql .= ", a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity, a.final_price a_final_price, a.amount_pd, a.quantity a_quantity";
+
+							if ( function_exists('espresso_ticketing_install') )
+									$sql.=", ac.date_scanned";
 
 							$sql .= ", a.payment_date, a.event_time, a.price_option, a.fname, a.lname, a.email";
 							$sql .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 							$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=a.event_id ";
-							$sql .= " LEFT JOIN " . $wpdb->prefix . "events_attendee_checkin ac ON a.id=ac.attendee_id ";
+							if ( function_exists('espresso_ticketing_install') )
+								$sql .= " LEFT JOIN " . $wpdb->prefix . "events_attendee_checkin ac ON a.id=ac.attendee_id ";
 							//$sql .= " JOIN " . EVENTS_ATTENDEE_COST_TABLE . " ac ON a.id=ac.attendee_id ";
 							$sql .= $event_id ? " WHERE ed.id = '" . $event_id . "' " : '';
 
