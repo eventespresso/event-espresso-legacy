@@ -26,21 +26,25 @@ function espresso_process_paychoice($payment_data) {
 	$csc = $_POST['csc'];
 	$invoiceNumber = $_GET['r_id'];	
 	$amount = $payment_data['total_cost'] / 100;
-	
-	$response = $paychoice->charge($invoiceNumber, $cc_name, $cc_type, $cc, $csc, $exp_month, $exp_year, $amount, $paychoice_settings['paychoice_currency_symbol']);
-	if (!empty($response)) {
-		$payment_data['txn_details'] = serialize($response);
-		echo "<div id='paychoice_response'>";
-		if ($response->approved == true) {
-			echo "<div class='paychoice_status'>" . $response->status . " (" . $response->errorCode . " " . $response->errorDescription . ")</div>";
-			$payment_data['payment_status'] = 'Completed';
-			$payment_data['txn_id'] = $response->transactionGuid;
+	echo "<div id='paychoice_response'>";
+	try{
+		$response = $paychoice->charge($invoiceNumber, $cc_name, $cc_type, $cc, $csc, $exp_month, $exp_year, $amount, $paychoice_settings['paychoice_currency_symbol']);
+		if (!empty($response)) {
+			$payment_data['txn_details'] = serialize($response);	
+			if ($response->approved == true) {
+				echo "<div class='paychoice_status'>" . $response->status . " (" . $response->errorCode . " " . $response->errorDescription . ")</div>";
+				$payment_data['payment_status'] = 'Completed';
+				$payment_data['txn_id'] = $response->transactionGuid;
+			}
+			else {
+				echo "<div class='paychoice_error'>ERROR: " . $response->errorCode . " " . $response->errorDescription . "  </div>";
+			}
+			
 		}
-		else {
-			echo "<div class='paychoice_error'>ERROR: " . $response->errorCode . " " . $response->errorDescription . "  </div>";
-		}
-		echo "</div>";		
+	}catch(PayChoiceException $e){
+		echo "<div class='paychoice_error'>ERROR: " . $e->getMessage(). "  </div>";
 	}
+	echo "</div>";		
 	if ($payment_data['payment_status'] != 'Completed') {
 		echo "<div id='paychoice_response' class='paychoice_error'>Looks like something went wrong.  Please try again or notify the website administrator.</div>";
 	}
