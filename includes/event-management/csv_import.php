@@ -14,7 +14,7 @@ function csv_import() { ?>
 			<p>One final note, you will see that the header row, fist column has a 0 while other rows have a 1.  This tells the upload to ignore rows that have the 0 identifier and only use rows with the 1.</p>
 			<p>This is the first pass at the uploader, but for those of you who have alot of events, particularly events that are similar in setup, this will be a time saver.</p>
 			<?php
-			uploader();
+			espresso_uploader();
 			load_events_to_db();
 			?>
 		</li>
@@ -23,7 +23,7 @@ function csv_import() { ?>
 }
 
 /*
-  uploader([int num_uploads [, arr file_types [, int file_size [, str upload_dir ]]]]);
+  espresso_uploader([int num_uploads [, arr file_types [, int file_size [, str upload_dir ]]]]);
 
   num_uploads = Number of uploads to handle at once.
 
@@ -34,7 +34,7 @@ function csv_import() { ?>
   upload_dir = The directory to upload to, make sure this ends with a /
  */
 
-function uploader($num_of_uploads = 1, $file_types_array = array("csv"), $max_file_size = 1048576, $upload_dir = "../wp-content/uploads/") {
+function espresso_uploader($num_of_uploads = 1, $file_types_array = array("csv"), $max_file_size = 1048576, $upload_dir = "../wp-content/uploads/") {
 	if (!is_numeric($max_file_size)) {
 		$max_file_size = 1048576;
 	}
