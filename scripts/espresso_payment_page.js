@@ -1,12 +1,12 @@
 jQuery(document).ready(function($) {
 
 	var bypass_payment_page = $('#bypass_payment_page').val();
+	var preventLeavePage = true;
 
 	$('.hide-if-js').hide();
 	$('.payment_container').toggleClass('payment-option-closed'); 
 	$('.payment-option-dv').toggleClass('payment-option-closed'); 
 	
-	var preventLeavePage = true;
 	
 	// generic click event for displaying and giving focus to an element and hiding control 
 	$('.display-the-hidden').on( 'click', function() {
@@ -32,7 +32,7 @@ jQuery(document).ready(function($) {
 	});	
 
 
-	$('input.payment-option-lnk').on( 'click', function() {
+	$('.payment-option-lnk').on( 'click', function() {
 		preventLeavePage = false;
 	});
 	
@@ -48,5 +48,6 @@ jQuery(document).ready(function($) {
 		if ( preventLeavePage && bypass_payment_page != 'true' ) {
 	  	  return 'Warning!!! Using the back button will overwrite your existing registration.';
 		}
-	}	
+	}
+
 });	
