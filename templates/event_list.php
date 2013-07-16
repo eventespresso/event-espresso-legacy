@@ -179,7 +179,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		}
 		
 		$sql .= " GROUP BY e.id ";
-		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$sort." " : " ORDER BY date(start_date) + start_time DESC, id DESC ";
+		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$sort." " : " ORDER BY date(start_date) + start_time ASC, id ASC ";
 		$sql .= $limit > 0 ? ' LIMIT 0, '.$limit : '';  
 		$events					= $wpdb->get_results( $wpdb->prepare($sql, '') );
 		$category_id			= isset($wpdb->last_result[0]->id) ? $wpdb->last_result[0]->id : '';

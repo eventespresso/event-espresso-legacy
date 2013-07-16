@@ -13,12 +13,15 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 		}
 
 		global $wpdb, $org_options, $espresso_premium;
+
+
 		
 		//Defaults
 		$data_source = $_POST;
 		$att_data_source = $_POST;
 		$multi_reg = FALSE;
 		$notifications = array( 'coupons' => '', 'groupons' => '' );
+		$notifications['error'] = array();
 		
 		if ( ! is_null($event_id) && ! is_null($session_vars)) {
 			//event details, ie qty, price, start..
@@ -130,6 +133,27 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$zip		= isset($att_data_source['zip']) ? ee_sanitize_value($att_data_source['zip']) : '';
 			$phone		= isset($att_data_source['phone']) ? ee_sanitize_value($att_data_source['phone']) : '';
 			$email		= isset($att_data_source['email']) ? ee_sanitize_value($att_data_source['email']) : '';
+
+
+			//initial verification of required fields for now I'm just making this an admin side verification cause there hasn't been complaints about frontend?  I'm assuming frontend has its own js verification?
+			if ( is_admin() ) {
+				global $notifications;
+				if ( empty($fname) ) {
+					$notifications['error'][] = __('You must enter the first name for the attendee', 'event_espresso');
+				}
+
+				if ( empty($lname) ) {
+					$notifications['error'][] = __('You must enter the last name for the attendee', 'event_espresso');
+				}
+
+				if ( empty($email) ) {
+					$notifications['error'][] = __('You must add an email address for the attendee', 'event_espresso');
+				}
+
+				if ( !empty( $notifications['error'] ) ) {
+					return FALSE;
+				}
+			}
 
 
 			$SQL = "SELECT question_groups, event_meta FROM " . EVENTS_DETAIL_TABLE . " WHERE id = %d";
