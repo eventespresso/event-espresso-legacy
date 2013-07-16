@@ -13,10 +13,10 @@ function event_espresso_anz_payment_settings() {
 	}
 	$anz_settings = get_option('event_espresso_anz_settings');
 	if (empty($anz_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/anz/ANZLogo_eGate.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/anz/ANZLogo_eGate.gif";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/anz/anz_egate-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/anz/anz_egate-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/anz/ANZLogo_eGate.gif";
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/anz/anz_egate-logo.png";
 		}
 		$anz_settings['anz_id'] = '';
 		$anz_settings['anz_access_code'] ='';
@@ -27,6 +27,10 @@ function event_espresso_anz_payment_settings() {
 		if (add_option('event_espresso_anz_settings', $anz_settings, '', 'no') == false) {
 			update_option('event_espresso_anz_settings', $anz_settings);
 		}
+	}
+
+	if ( basename( $anz_settings['button_url'] ) == 'ANZLogo_eGate.gif' ) {
+		$anz_settings['button_url'] = $button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/anz/anz_egate-logo.png";
 	}
 
 	//Open or close the postbox div

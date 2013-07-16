@@ -23,17 +23,17 @@ function espresso_display_anz($payment_data){
 	$return_url= $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $payment_data['registration_id']. '&type=anz';
 	$server_url="https://migs.mastercard.com.au/vpcpay";
 	
-	if (empty($anz_settings['button_url'])) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/anz/anz.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/anz/anz.gif";
+	if ( empty( $anz_settings['button_url'] ) || ! file_exists( $anz_settings['button_url'] )) {
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/anz/anz_egate-logo.png")) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/anz/anz_egate-logo.png";
 		}
 	} elseif (isset($anz_settings['button_url'])) {
 		$button_url = $anz_settings['button_url'];
 	} else {
-		$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/anz/anz.gif";
+		$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/anz/anz_egate-logo.png";
 	}
 	if(!empty($button_url)){
-		$submit_html="<img class='payment-option-lnk' src='$button_url'/>";
+		$submit_html="<img src='$button_url'/>";
 	}else{
 		$submit_html=__("Purchase with ANZ",'event_espresso');
 	}
@@ -67,7 +67,14 @@ function espresso_display_anz($payment_data){
 	unset($url_encoded_hash_values['01_secret_must_come_first']);
 	unset($hash_data['01_secret_must_come_first']);
 	$full_url = add_query_arg(array('vpc_SecureHash'=>$hash_string), add_query_arg($url_encoded_hash_values,$server_url));
-	?><a href='<?php echo $full_url?>'><?php echo $submit_html?></a>
+	?>
+
+		 <div id="anz-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+			<img class="off-site-payment-gateway-img" width="16" height="16" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL;?>/images/icons/external-link.png" alt="click to visit this payment gateway">
+			<a href="<?php echo $full_url?>" class='payment-option-lnk'><?php echo $submit_html?></a>
+		</div>
+
+	
 	<?php
 	//only redirect immediately if they didnt jsut return from ANZ
 	//otherwise, we want them to see the error message

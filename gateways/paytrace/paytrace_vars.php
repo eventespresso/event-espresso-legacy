@@ -4,13 +4,8 @@ function espresso_display_paytrace($payment_data) {
 	extract($payment_data);
 	global $org_options;
 	$paytrace_settings = get_option('event_espresso_paytrace_settings');
-
-	if ($paytrace_settings['force_ssl_return']) {
-		$home = str_replace('http://', 'https://', home_url());
-	} else {
-		$home = home_url();
-	}
-	if ($paytrace_settings['display_header']) {
+	$home = $paytrace_settings['force_ssl_return'] ? str_replace('http://', 'https://', home_url()) : home_url();
+	
 		?>
 <div id="paytrace-payment-option-dv" class="payment-option-dv">
 
@@ -19,7 +14,8 @@ function espresso_display_paytrace($payment_data) {
 	</a>	
 
 	<div id="paytrace-payment-option-form-dv" class="hide-if-js">
-		<h3 class="payment_header"><?php echo $paytrace_settings['header']; ?></h3><?php } ?>
+	
+		<?php if ($paytrace_settings['display_header']) { ?><h3 class="payment_header"><?php echo $paytrace_settings['header']; ?></h3><?php } ?>
 
 		<div class = "event_espresso_form_wrapper">
 			<form id="paytrace_payment_form" name="paytrace_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">

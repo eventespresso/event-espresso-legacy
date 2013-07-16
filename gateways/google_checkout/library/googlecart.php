@@ -1096,9 +1096,16 @@
               break;
         }
       }
-      $data = "<div style=\"width: ".$width."px\">";
+	
+	
+	$data = '
+	<div id="google_checkout-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+			<img class="off-site-payment-gateway-img" width="16" height="16" src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png" alt="click to visit this payment gateway">';
+	
+	
+     // $data = "<div style=\"width: ".$width."px\">";
       if ($this->variant == "text") {
-        $data .= "<div align=\"center\"><form method=\"post\" action=\"".
+        $data .= "<form method=\"post\" action=\"".
                 $url . "\"" . ($this->googleAnalytics_id?
                 " onsubmit=\"setUrchinInputCode();\"":"") . ">
                 <input type=\"image\" name=\"Checkout\" alt=\"Checkout\" 
@@ -1110,7 +1117,7 @@
         if($this->googleAnalytics_id) {
           $data .= "<input type=\"hidden\" name=\"analyticsdata\" value=\"\" />";
         }                
-        $data .= "</form></div>";
+        $data .= "</form>";
         if($this->googleAnalytics_id) {                
             $data .= "<!-- Start Google analytics -->
             <script src=\"https://ssl.google-analytics.com/urchin.js\" type=\"".
@@ -1123,12 +1130,13 @@
             <script src=\"https://checkout.google.com/files/digital/urchin_po" .
                 "st.js\" type=\"text/javascript\"></script>  
             <!-- End Google analytics -->";
-        }      } else {
-        $data .= "<div><img alt=\"Checkout\" src=\"" .
+        }      
+	 } else {
+        $data .= "<img class=\"payment-option-lnk\" alt=\"Checkout\" src=\"" .
                 "". $this->server_url."buttons/checkout.gif?merchant_id=" .
                 "".$this->merchant_id."&amp;w=".$width. "&amp;h=".$height."&amp;style=".$style.
                 "&amp;variant=".$this->variant."&amp;loc=".$loc."\" height=\"".$height."\"".
-                " width=\"".$width. "\" /></div>";
+                " width=\"".$width. "\" />";
         
       }
       $data .= "</div>";
@@ -1188,25 +1196,29 @@
       }
 
       
-      $data = "<div style=\"width: ".$width."px\">";
+      //$data = "<div style=\"width: ".$width."px\">";
+	$data = '
+	<div id="google_checkout-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+			<img class="off-site-payment-gateway-img" width="16" height="16" src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png" alt="click to visit this payment gateway">';
+	
       if ($this->variant == "text") {
-        $data .= "<div align=\"center\"><form method=\"post\" action=\"".
+        $data .= "<form method=\"post\" action=\"".
                 $this->checkout_url . "\"" . ($this->googleAnalytics_id?
                 " onsubmit=\"setUrchinInputCode();\"":"") . ">
                 <input type=\"hidden\" name=\"cart\" value=\"". 
                 base64_encode($this->GetXML()) ."\">
                 <input type=\"hidden\" name=\"signature\" value=\"". 
                 base64_encode($this->CalcHmacSha1($this->GetXML())). "\"> 
-                <input type=\"image\" name=\"Checkout\" alt=\"Checkout\" 
+                <input class=\"payment-option-lnk\" type=\"image\" name=\"Checkout\" alt=\"Checkout\" 
                 src=\"". $this->server_url."buttons/checkout.gif?merchant_id=" .
                 $this->merchant_id."&amp;w=".$width. "&amp;h=".$height."&amp;style=".
                 $style."&amp;variant=".$this->variant."&amp;loc=".$loc."\" 
-                style=\"height:".$height."px;width:".$width. "px\" />";
+                />";
                 
         if($this->googleAnalytics_id) {
           $data .= "<input type=\"hidden\" name=\"analyticsdata\" value=\"\" />";
         }                
-        $data .= "</form></div>";
+        $data .= "</form>";
         if($this->googleAnalytics_id) {                
             $data .= "<!-- Start Google analytics -->
             <script src=\"https://ssl.google-analytics.com/urchin.js\" type=\"".
@@ -1221,11 +1233,10 @@
             <!-- End Google analytics -->";
         }
       } else {
-        $data .= "<div><img alt=\"Checkout\" src=\"" .
+        $data .= "<img class=\"payment-option-lnk\" alt=\"Checkout\" src=\"" .
             "". $this->server_url."buttons/checkout.gif?merchant_id=" .
             "".$this->merchant_id."&amp;w=".$width. "&amp;h=".$height."&amp;style=".$style.
-            "&amp;variant=".$this->variant."&amp;loc=".$loc."\" height=\"".$height."\"".
-            " width=\"".$width. "\" /></div>";
+            "&amp;variant=".$this->variant."&amp;loc=".$loc."\" />";
       }
       if($showtext) {
         $data .="<div align=\"center\"><a href=\"javascript:void(window.ope".
