@@ -111,6 +111,7 @@ function espresso_display_paypal_pro($data) {
 					<input name="amount" type="hidden" value="<?php echo number_format($event_cost, 2) ?>" />
 					<input name="paypal_pro" type="hidden" value="true" />
 					<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
+					<input name='invoice' type='hidden' value='<?php echo md5(uniqid(rand(), true)) ?>'/>
 					<p class="event_form_submit">
 						<input name="paypal_pro_submit" id="paypal_pro_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />						
 						<div class="clear"></div>
