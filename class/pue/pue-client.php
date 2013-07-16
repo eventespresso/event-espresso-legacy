@@ -74,6 +74,10 @@ class PluginUpdateEngineChecker {
 	 */
 	function __construct( $metadataUrl, $slug = '', $options = array() ){
 		$this->metadataUrl = $metadataUrl;
+		if ( is_array($slug ) ) {
+			$premium = array_values($slug['premium']);
+			$slug = $premium[0];
+		}
 		$this->slug = $slug;
 		$tr_slug = str_replace('-','_',$this->slug);
 		$this->pluginFile = get_option('pue_file_loc_'.$this->slug);
