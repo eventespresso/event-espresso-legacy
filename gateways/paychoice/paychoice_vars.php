@@ -47,7 +47,7 @@ function espresso_display_paychoice($payment_data) {
 				</p>
 				<p>
 					<label for="exp_month"><?php _e('Expiration Date', 'event_espresso'); ?> <em>*</em></label>
-					<select id="paychoice_card-exp" name="exp_month" class="small required">
+					<select id="paychoice_card-exp" name="exp_month" class="med required">
 						<?php
 						$curr_month = date("m");
 						for ($i = 1; $i < 13; $i++) {
@@ -61,7 +61,7 @@ function espresso_display_paychoice($payment_data) {
 						?>
 					</select>
 					&nbsp;/&nbsp;
-					<select id="paychoice_exp_year" name="exp_year" class="small required">
+					<select id="paychoice_exp_year" name="exp_year" class="med required">
 						<?php
 						$curr_year = date("Y");
 						for ($i = 0; $i < 10; $i++) {
@@ -78,7 +78,8 @@ function espresso_display_paychoice($payment_data) {
 				</p>
 				<input name="paychoice" type="hidden" value="true" />
 				<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
-				<input name="paychoice_submit" id="paychoice_submit" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+				<input name="paychoice_submit" id="paychoice_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+				<div class="clear"></div><br/>
 			</form>
 		</div>
 	</div>

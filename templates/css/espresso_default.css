@@ -92,6 +92,9 @@
 
 
 /* Errors and notices */
+p.error,
+.stripe_error,
+.paytrace_error,
 .event_espresso_error {
 	padding: 1em 2em 1.25em; margin: 0 0 1em 0; 
 	background-color:#FFEEEE; border: #FF0000 1px solid; border-radius:3px;
@@ -110,7 +113,10 @@
 .event_espresso_attention p em { color: #C00; font-style: normal; font-weight: bold;display: block; }
 
 .event_espresso_form_wrapper label.error,
-.event_espresso_form_wrapper span.error { color: #C00; width: auto;}
+.event_espresso_form_wrapper span.error {
+		display: inline-block; width: 90%; padding-left:150px; margin:-1em 0 1em 1em; 
+		color: #C00; text-align: left;
+}
 .event_espresso_form_wrapper label em,
 .event_espresso_form_wrapper span.label em,
 .event_espresso_form_wrapper legend em { font-style: normal; color: #C00; padding-left: 3px;}

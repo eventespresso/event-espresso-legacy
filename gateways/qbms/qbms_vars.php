@@ -62,15 +62,13 @@ function espresso_display_qbms($payment_data) {
 
 					<fieldset id="qbms-credit-card-info-dv">
 						<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></h4>
-						<p class="form-row" style="width:200px;">
+						<p>
 							<label>Card Number <span class="required">*</span></label>
-
-							<input class="input-text" style="width:180px;" type="text" size="16" maxlength="16" name="qbms_creditcard" />
+							<input class="input-text" type="text" size="16" maxlength="16" name="qbms_creditcard" />
 						</p>
-						<div class="clear"></div>
-						<p class="form-row form-row-first" style="width:150px;">
+						<p>
 							<label>Expiration Month <span class="required">*</span></label>
-							<select name="qbms_expdatemonth">
+							<select name="qbms_expdatemonth" class="med required">
 								<option value=01> 1 - January</option>
 								<option value=02> 2 - February</option>
 								<option value=03> 3 - March</option>
@@ -85,9 +83,9 @@ function espresso_display_qbms($payment_data) {
 								<option value=12>12 - December</option>
 							</select>
 						</p>
-						<p class="form-row form-row-second" style="width:150px;">
+						<p>
 							<label>Expiration Year  <span class="required">*</span></label>
-							<select name="qbms_expdateyear">
+							<select name="qbms_expdateyear" class="med required">
 								<?php
 								$today = (int)date('y', time());
 								$today1 = (int)date('Y', time());
@@ -102,10 +100,9 @@ function espresso_display_qbms($payment_data) {
 								?>
 							</select>
 						</p>
-						<p class="form-row" style="width:200px;">
+						<p>
 							<label>Card CVV <span class="required">*</span></label>
-
-							<input class="input-text" style="width:100px;" type="text" size="5" maxlength="5" name="qbms_cvv" />
+							<input class="small required" type="text" size="5" maxlength="5" name="qbms_cvv" />
 						</p>
 						<div class="clear"></div>
 					</fieldset>

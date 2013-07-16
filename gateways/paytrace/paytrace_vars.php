@@ -60,7 +60,7 @@ function espresso_display_paytrace($payment_data) {
 					</p>
 					<p>
 						<label for="card-exp"><?php _e('Expiration Month', 'event_espresso'); ?></label>
-						<select id="pt_card-exp" name ="exp_month" class="required">
+						<select id="pt_card-exp" name ="exp_month" class="med required">
 							<?php
 							for ($i = 1; $i < 13; $i++)
 								echo "<option value='$i'>$i</option>";
@@ -69,7 +69,7 @@ function espresso_display_paytrace($payment_data) {
 					</p>
 					<p>
 						<label for="exp-year"><?php _e('Expiration Year', 'event_espresso'); ?></label>
-						<select id="pt_exp_year" name ="exp_year" class="required">
+						<select id="pt_exp_year" name ="exp_year" class="med required">
 							<?php
 							$curr_year = date("y");
 							for ($i = 0; $i < 10; $i++) {
@@ -81,7 +81,7 @@ function espresso_display_paytrace($payment_data) {
 					</p>
 					<p>
 						<label for="cvv"><?php _e('CVV Code', 'event_espresso'); ?></label>
-						<input id="pt_cvv" type="text" name="csc" autocomplete="off" />
+						<input id="pt_cvv" type="text" name="csc" autocomplete="off"  class="small required"/>
 					</p>
 				</fieldset>
 				<input name="amount" type="hidden" value="<?php echo number_format($event_cost, 2) ?>" />

@@ -38,7 +38,7 @@ function espresso_display_usaepay_onsite($data) {
 		<div class = "event_espresso_form_wrapper">
 			<form id="usaepay_onsite_payment_form" name="usaepay_onsite_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
 
-				<fieldset id="stripe-billing-info-dv">
+				<fieldset id="usaepay_onsite-billing-info-dv">
 					<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>
 					<p>
 				        <label for="first_name"><?php _e('First Name', 'event_espresso'); ?></label>
@@ -70,7 +70,7 @@ function espresso_display_usaepay_onsite($data) {
 					</p>
 				</fieldset>
 
-				<fieldset id="stripe-credit-card-info-dv">
+				<fieldset id="usaepay_onsite-credit-card-info-dv">
 					<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></h4>
 					<p>
 				        <label for="card_num"><?php _e('Card Number', 'event_espresso'); ?></label>
@@ -78,7 +78,7 @@ function espresso_display_usaepay_onsite($data) {
 					</p>
 					<p>
 				        <label for="card-exp"><?php _e('Expiration Month', 'event_espresso'); ?></label>
-				        <select id="ppp_card-exp" name ="expmonth" class="required">
+				        <select id="usaepay_onsite_card-exp" name ="expmonth" class="med required">
 
 									<?php
 									for ($i = 1; $i < 10; $i++)
@@ -91,7 +91,7 @@ function espresso_display_usaepay_onsite($data) {
 					</p>
 					<p>
 				        <label for="exp-year"><?php _e('Expiration Year', 'event_espresso'); ?></label>
-				        <select id="ppp_exp-year" name ="expyear" class="required">
+				        <select id="usaepay_onsite_exp-year" name ="expyear" class="med required">
 
 									<?php
 									$curr_year = date("y");
@@ -105,7 +105,7 @@ function espresso_display_usaepay_onsite($data) {
 					</p>
 					<p>
 				        <label for="cvv"><?php _e('CVV Code', 'event_espresso'); ?></label>
-				        <input type="text" name="cvv" id="ppp_exp_date" autocomplete="off" />
+				        <input type="text" name="cvv" id="usaepay_onsite_exp_date" autocomplete="off" class="small required"/>
 					</p>
 				</fieldset>
 				<input name="amount" type="hidden" value="<?php echo number_format($event_cost, 2) ?>" />

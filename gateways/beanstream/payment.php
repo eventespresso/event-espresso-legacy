@@ -416,7 +416,7 @@ function espresso_display_beanstream($data) {
 						
 						?>
 						<label for="exp_date"><?php _e('Expiration Month', 'event_espresso'); ?></label>
-						<?php echo select_input('expmonth',$months,$currentMonth);?>
+						<?php echo select_input('expmonth',$months,$currentMonth, 'class="med"' );?>
 								
 								
 								
@@ -428,7 +428,7 @@ function espresso_display_beanstream($data) {
 			
 							<p>
 								<label for="exp-year"><?php _e('Expiration Year', 'event_espresso'); ?></label>
-								<select id="ppp_exp-year" name ="expyear" class="required">
+								<select id="ppp_exp-year" name ="expyear" class="med required">
 			
 									<?php
 									$curr_year = date("y");
@@ -444,14 +444,14 @@ function espresso_display_beanstream($data) {
 			
 							<p>
 								<label for="cvv"><?php _e('CVV Code', 'event_espresso'); ?></label>
-								<input type="text" name="cvv" id="ppp_exp_date" autocomplete="off" />
+								<input type="text" name="cvv" id="ppp_exp_date" autocomplete="off" class="small" />
 							</p>
 						</fieldset>
 						<input name="amount" type="hidden" value="<?php echo number_format($event_cost, 2) ?>" />
 						<input name="beanstream" type="hidden" value="true" />
 						<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
 		
-						<input name="beanstream_submit" id="beanstream_submit" class="btn_event_form_submit payment-submit" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+						<input name="beanstream_submit" id="beanstream_submit" class="submit-payment-btn btn_event_form_submit payment-submit" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
 						<span id="processing"></span>
 					</form>
 				</div><!-- / .event_espresso_or_wrapper -->

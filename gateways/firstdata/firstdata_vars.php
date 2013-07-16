@@ -65,40 +65,33 @@ function espresso_display_firstdata($data) {
 					<fieldset id="firstdata-credit-card-info-dv">
 						<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></h4>
 						<p>
+							<label for="card_num"><?php _e('Card Number', 'event_espresso'); ?></label>
+							<input type="text" name="card_num" class="required" id="fd_card_num" autocomplete="off" />
+						</p>
+						
+						<p>
 							<label for="card_num"><?php _e('Card Card Type', 'event_espresso'); ?></label>
-							<select name ="creditcardtype" class="required">
-
+							<select name ="creditcardtype" class="wide required">
 								<?php
 								foreach (explode(",", $firstdata_settings['firstdata_credit_cards']) as $k => $v)
 									echo "<option value='$v'>$v</option>";
 								?>
-
 							</select>
-
 						</p>
-						<p>
-							<label for="card_num"><?php _e('Card Number', 'event_espresso'); ?></label>
-							<input type="text" name="card_num" class="required" id="fd_card_num" autocomplete="off" />
-						</p>
-
-
+						
 						<p>
 							<label for="card_num"><?php _e('Expiration Month', 'event_espresso'); ?></label>
-							<select name ="expmonth" id="fd_expmonth" class="required">
-
+							<select name ="expmonth" id="fd_expmonth" class="med required">
 								<?php
 								for ($i = 1; $i < 13; $i++)
 									echo "<option value='$i'>$i</option>";
 								?>
-
 							</select>
-
 						</p>
 
 						<p>
 							<label for=""><?php _e('Expiration Year', 'event_espresso'); ?></label>
-							<select name ="expyear" id="fd_expyear" class="required">
-
+							<select name ="expyear" id="fd_expyear" class="med required">
 								<?php
 								$curr_year = date("Y");
 								for ($i = 0; $i < 10; $i++) {
@@ -106,14 +99,12 @@ function espresso_display_firstdata($data) {
 									echo "<option value='" . substr($disp_year, 2, 2) . "'>$disp_year</option>";
 								}
 								?>
-
 							</select>
-
 						</p>
 
 						<p>
 							<label for="cvv"><?php _e('CVV Code', 'event_espresso'); ?></label>
-							<input type="text" name="cvv" id="fd_cvv" class="required" autocomplete="off" />
+							<input type="text" name="cvv" id="fd_cvv" class="small required" autocomplete="off" />
 						</p>
 					</fieldset>
 					

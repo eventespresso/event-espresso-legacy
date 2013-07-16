@@ -76,12 +76,12 @@ function espresso_display_megasoft($data) {
 						
 						?>
 						<label for="exp_date"><?php _e('Fecha de Caducidad', 'event_espresso'); ?></label>
-						<?php echo select_input('exp_date_month',$months,$currentMonth);?>/
-						<?php echo select_input('exp_date_year',$years,$currentYear)?>
+						<?php echo select_input('exp_date_month',$months,$currentMonth, 'class="med"' );?>/
+						<?php echo select_input('exp_date_year',$years,$currentYear, 'class="med"')?>
 					</p>
 					<p>
 						<label for="ccv_code"><?php _e('Código CCV', 'event_espresso'); ?></label>
-						<input type="text" name="ccv_code" id="megasoft_ccv_code"  class="required" autocomplete="off" />
+						<input type="text" name="ccv_code" id="megasoft_ccv_code"  class="small required" autocomplete="off" />
 					</p>
 				</fieldset>
 				<input name="invoice_num" type="hidden" value="<?php echo $registration_id;//substr(event_espresso_session_id(),0,10); ?>" />

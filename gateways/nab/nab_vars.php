@@ -53,7 +53,7 @@ function espresso_display_nab($payment_data) {
 				<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso') ?></h4>
 				<p>
 					<label for="EPS_CARDTYPE"><?php _e('Card Type:', 'event_espresso');?></label>
-					<select name="EPS_CARDTYPE" class="inputbox" style="width:167px">
+					<select name="EPS_CARDTYPE" class="wide inputbox">
 						<option value="visa"><?php _e('Visa', 'event_espresso');?></option>
 						<option value="mastercard"><?php _e('MasterCard', 'event_espresso');?></option>
 						<option value="amex"><?php _e('Amex', 'event_espresso');?></option>
@@ -65,11 +65,11 @@ function espresso_display_nab($payment_data) {
 				</p>
 				<p>
 					<label for="EPS_CCV"><?php _e('Card CCV:', 'event_espresso');?></label>
-					<input type="text"   class="inputbox" name="EPS_CCV" size="27" autocomplete="off" />
+					<input type="text"   class="small inputbox" name="EPS_CCV" size="27" autocomplete="off" />
 				</p>
 				<p>
 					<label for="EPS_EXPIRYMONTH"><?php _e('Card Expires:', 'event_espresso');?></label>
-					<select name="EPS_EXPIRYMONTH" class="inputbox">
+					<select name="EPS_EXPIRYMONTH" class="med inputbox">
 							<option value="">- <?php _e('Month', 'event_espresso');?> -</option>
 							<option value="1">01</option>
 							<option value="2">02</option>
@@ -85,7 +85,7 @@ function espresso_display_nab($payment_data) {
 							<option value="12">12</option>
 						</select>
 						&nbsp;
-						<select name="EPS_EXPIRYYEAR" class="inputbox">
+						<select name="EPS_EXPIRYYEAR" class="med inputbox">
 							<option value="">- <?php _e('Year', 'event_espresso');?> -</option>
 							<option value="2009">2009</option>
 							<option value="2010">2010</option>
