@@ -320,7 +320,7 @@ function espresso_display_beanstream($data) {
 		$home = home_url();
 	}
 
-	wp_register_script( 'beanstream', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/beanstream/beanstream.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
+	wp_register_script( 'beanstream', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/beanstream/beanstream.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'beanstream' );	
 	
 	?>

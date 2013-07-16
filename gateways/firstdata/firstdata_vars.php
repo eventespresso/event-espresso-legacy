@@ -13,7 +13,7 @@ function espresso_display_firstdata($data) {
 	} else {
 		$home = home_url();
 	}
-	wp_register_script( 'firstdata', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/firstdata/firstdata.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
+	wp_register_script( 'firstdata', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/firstdata/firstdata.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'firstdata' );	
 	
 	?>

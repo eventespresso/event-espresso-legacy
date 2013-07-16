@@ -52,7 +52,7 @@ function espresso_display_eway_rapid3($data) {
 		$ewayRapid3AccessCode=$_GET['AccessCode'];
 	}*/
 	
-	wp_register_script( 'eway_rapid3', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/eway_rapid3/eway_rapid3.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
+	wp_register_script( 'eway_rapid3', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/eway_rapid3/eway_rapid3.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'eway_rapid3' );		
 	?>
 <div id="eway_rapid3-payment-option-dv" class="payment-option-dv">
