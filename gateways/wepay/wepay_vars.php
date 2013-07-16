@@ -29,8 +29,13 @@ function espresso_display_wepay($payment_data) {
 	$fields['callback_uri'] = $home . '/?page_id=' . $org_options['notify_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=wepay';
 
 	if (empty($wepay_settings['access_token'])) return;
+	try{
 	$wepay = new Espresso_Wepay($wepay_settings['access_token']);
 	$raw = $wepay->request('checkout/create', $fields);
+	}catch(Exception $e){
+		printf(__("WePay seems to be misconfigured. Error: %s", "event_espresso"),$e->getMessage());
+		return;
+	}
 	if (empty($raw->checkout_uri)) return;
 	$uri = $raw->checkout_uri;
 	if ($wepay_settings['bypass_payment_page'] == 'Y') {
