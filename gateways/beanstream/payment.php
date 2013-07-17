@@ -451,7 +451,7 @@ function espresso_display_beanstream($data) {
 						<input name="beanstream" type="hidden" value="true" />
 						<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
 		
-						<input name="beanstream_submit" id="beanstream_submit" class="submit-payment-btn btn_event_form_submit payment-submit" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+						<input name="beanstream_submit" id="beanstream_submit" class="submit-payment-btn allow-leave-page btn_event_form_submit payment-submit" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
 						<span id="processing"></span>
 					</form>
 				</div><!-- / .event_espresso_or_wrapper -->

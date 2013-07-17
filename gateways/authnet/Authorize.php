@@ -144,7 +144,7 @@ class Espresso_Authorize extends Espresso_PaymentGateway {
 		foreach ($this->_additional_line_items as $value) {
 			echo "<input type=\"hidden\" name=\"x_line_item\" value=\"$value\"/>\n";
 		}
-		echo '<input id="' . $gateway . '-payment-option-lnk" class="payment-option-lnk" type="image" alt="Pay using ' . $gateway_name . '" src="' . $button_url . '" />';
+		echo '<input id="' . $gateway . '-payment-option-lnk" class="payment-option-lnk allow-leave-page" type="image" alt="Pay using ' . $gateway_name . '" src="' . $button_url . '" />';
             echo '
 		 	</form>
 		</div>';

@@ -97,7 +97,7 @@ function espresso_display_quickpay($payment_data) {
 		<input type="hidden" name="cardtypelock" value="<?php echo $cardtypelock; ?>" />
 		<?php if ($quickpay_settings['use_sandbox']) { ?><input type="hidden" name="testmode" value="1" /><?php } ?>
 		<input type="hidden" name="md5check" value="<?php echo $md5check; ?>" />
-		<input id="quickpay-payment-option-lnk" class="payment-option-lnk" value="Payvalue" type="image" alt="Pay using QuickPay" src="<?php echo $button_url; ?>" />
+		<input id="quickpay-payment-option-lnk" class="payment-option-lnk allow-leave-page" value="Payvalue" type="image" alt="Pay using QuickPay" src="<?php echo $button_url; ?>" />
 	</form>
 </div>
 	<?php

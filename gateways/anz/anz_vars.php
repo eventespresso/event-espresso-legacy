@@ -71,7 +71,7 @@ function espresso_display_anz($payment_data){
 
 		 <div id="anz-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
 			<img class="off-site-payment-gateway-img" width="16" height="16" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL;?>/images/icons/external-link.png" alt="click to visit this payment gateway">
-			<a href="<?php echo $full_url?>" class='payment-option-lnk'><?php echo $submit_html?></a>
+			<a href="<?php echo $full_url?>" class="payment-option-lnk allow-leave-page"><?php echo $submit_html?></a>
 		</div>
 
 	

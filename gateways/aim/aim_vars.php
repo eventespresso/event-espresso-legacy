@@ -49,19 +49,19 @@ function espresso_display_aim($data) {
 					</p>
 					<p>
 						<label for="address"><?php _e('Address', 'event_espresso'); ?></label>
-						<input name="address" type="text" id="aim_address" value="<?php echo $address ?>" />
+						<input name="address" type="text" id="aim_address" value="<?php echo $address ?>"  class="required" />
 					</p>
 					<p>
 						<label for="city"><?php _e('City', 'event_espresso'); ?></label>
-						<input name="city" type="text" id="aim_city" value="<?php echo $city ?>" />
+						<input name="city" type="text" id="aim_city" value="<?php echo $city ?>"  class="required" />
 					</p>
 					<p>
 						<label for="state"><?php _e('State', 'event_espresso'); ?></label>
-						<input name="state" type="text" id="aim_state" value="<?php echo $state ?>" />
+						<input name="state" type="text" id="aim_state" value="<?php echo $state ?>"  class="required" />
 					</p>
 					<p>
 						<label for="zip"><?php _e('Zip', 'event_espresso'); ?></label>
-						<input name="zip" type="text" id="aim_zip" value="<?php echo $zip ?>" />
+						<input name="zip" type="text" id="aim_zip" value="<?php echo $zip ?>"  class="required" />
 					</p>
 				</fieldset>
 
@@ -111,7 +111,7 @@ function espresso_display_aim($data) {
 				<input name="authnet_aim" type="hidden" value="true" />
 				<input name="x_cust_id" type="hidden" value="<?php echo $attendee_id ?>" />
 
-				<input name="aim_submit" id="aim_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+				<input name="aim_submit" id="aim_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
 				<div class="clear"></div>
 
 			</div>

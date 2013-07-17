@@ -1132,7 +1132,7 @@
             <!-- End Google analytics -->";
         }      
 	 } else {
-        $data .= "<img class=\"payment-option-lnk\" alt=\"Checkout\" src=\"" .
+        $data .= "<img class=\"payment-option-lnk allow-leave-page\" alt=\"Checkout\" src=\"" .
                 "". $this->server_url."buttons/checkout.gif?merchant_id=" .
                 "".$this->merchant_id."&amp;w=".$width. "&amp;h=".$height."&amp;style=".$style.
                 "&amp;variant=".$this->variant."&amp;loc=".$loc."\" height=\"".$height."\"".
@@ -1209,7 +1209,7 @@
                 base64_encode($this->GetXML()) ."\">
                 <input type=\"hidden\" name=\"signature\" value=\"". 
                 base64_encode($this->CalcHmacSha1($this->GetXML())). "\"> 
-                <input class=\"payment-option-lnk\" type=\"image\" name=\"Checkout\" alt=\"Checkout\" 
+                <input class=\"payment-option-lnk allow-leave-page\" type=\"image\" name=\"Checkout\" alt=\"Checkout\" 
                 src=\"". $this->server_url."buttons/checkout.gif?merchant_id=" .
                 $this->merchant_id."&amp;w=".$width. "&amp;h=".$height."&amp;style=".
                 $style."&amp;variant=".$this->variant."&amp;loc=".$loc."\" 
@@ -1233,7 +1233,7 @@
             <!-- End Google analytics -->";
         }
       } else {
-        $data .= "<img class=\"payment-option-lnk\" alt=\"Checkout\" src=\"" .
+        $data .= "<img class=\"payment-option-lnk allow-leave-page\" alt=\"Checkout\" src=\"" .
             "". $this->server_url."buttons/checkout.gif?merchant_id=" .
             "".$this->merchant_id."&amp;w=".$width. "&amp;h=".$height."&amp;style=".$style.
             "&amp;variant=".$this->variant."&amp;loc=".$loc."\" />";

@@ -56,7 +56,7 @@ function espresso_display_purchase_order($payment_data) {
 				<strong><?php _e('Attention!', 'event_espresso'); ?></strong><br />
 				<?php _e('If you wish to pay by check or money order, then please make note of the information above, and<br />enter Purchase Order or Money Order Number :', 'event_espresso'); ?> 
 				<input type="text" name="po_number" id="po_number" /><br/>
-				<input class="finalize_button inline-link" name="submit_purcahse_order" value="<?php _e('Complete your Registration', 'event_espresso'); ?>" type="submit" />
+				<input class="finalize_button allow-leave-page inline-link" name="submit_purcahse_order" value="<?php _e('Complete your Registration', 'event_espresso'); ?>" type="submit" />
 				<div class="clear"></div>
 			</p>			
 		</form>

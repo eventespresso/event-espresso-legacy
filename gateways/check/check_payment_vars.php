@@ -58,7 +58,7 @@ function espresso_display_check($payment_data) {
 			<p>
 				<strong><?php _e('Attention!', 'event_espresso'); ?></strong><br />
 				<?php _e('If you wish to pay by check or money order, then please make note of the information above, and click to ', 'event_espresso'); ?>
-				<a id="finalize_check" class="finalize_button inline-link" href="<?php echo $finalize_link; ?>" title="<?php _e('Complete your Registration', 'event_espresso'); ?>">
+				<a id="finalize_check" class="finalize_button allow-leave-page inline-link" href="<?php echo $finalize_link; ?>" title="<?php _e('Complete your Registration', 'event_espresso'); ?>">
 					<?php _e('Complete your Registration', 'event_espresso'); ?>
 				</a>
 				<div class="clear"></div>

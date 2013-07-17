@@ -89,7 +89,7 @@ function espresso_display_megasoft($data) {
 				<input name="cust_id" type="hidden" value="<?php echo $attendee_id ?>" />
 				
 				<p class="event_form_submit">
-					<input name="megasoft_submit" id="megasoft_submit" class="submit-payment-btn" type="submit" value="<?php _e('Completar Compra', 'event_espresso'); ?>" />
+					<input name="megasoft_submit" id="megasoft_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Completar Compra', 'event_espresso'); ?>" />
 					<div class="clear"></div>
 				</p>
 			</div>
