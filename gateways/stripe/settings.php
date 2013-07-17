@@ -27,6 +27,10 @@ function event_espresso_stripe_payment_settings() {
 		}
 	}
 
+	if ( ! isset( $stripe_settings['button_url'] ) || ! file_exists( $stripe_settings['button_url'] )) {
+		$stripe_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+	
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_stripe'])
 					&& (!empty($_REQUEST['activate_stripe'])

@@ -34,7 +34,8 @@ function espresso_process_megasoft($payment_data){
 	$payment_data['txn_id'] = 0;
 	$payment_data['txn_details'] = serialize($_REQUEST);
 	if(is_array($response) && array_key_exists('body',$response)){
-		$xml=simplexml_load_string($response['body']);
+		//ignore xml parsing errors. If Megasoft doesn't properly escape their XML, we'll just try our best to use it
+		$xml= @simplexml_load_string($response['body']);
 		if($xml){
 			//it's xml alright. but was it a successful charge, or were there errors?
 			if($xml->codigo=='00'){//success!

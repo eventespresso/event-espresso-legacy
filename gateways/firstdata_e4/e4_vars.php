@@ -12,7 +12,6 @@ function espresso_display_firstdata_e4($payment_data) {
 	$firstdata_e4_login_id = empty($firstdata_e4_settings['firstdata_e4_login_id']) ? '' : $firstdata_e4_settings['firstdata_e4_login_id'];
 	$firstdata_e4_transaction_key = empty($firstdata_e4_settings['firstdata_e4_transaction_key']) ? '' : $firstdata_e4_settings['firstdata_e4_transaction_key'];
 	$button_type = empty($firstdata_e4_settings['button_type']) ? '' : $firstdata_e4_settings['button_type'];
-//$button_url = $firstdata_e4_settings['button_url'];
 	$image_url = empty($firstdata_e4_settings['image_url']) ? '' : $firstdata_e4_settings['image_url'];
 	$use_sandbox = $firstdata_e4_settings['use_sandbox'];
 	$use_testmode = $firstdata_e4_settings['test_transactions'];
@@ -62,8 +61,8 @@ function espresso_display_firstdata_e4($payment_data) {
 	if (!empty($firstdata_e4_settings['bypass_payment_page']) && $firstdata_e4_settings['bypass_payment_page'] == 'Y') {
 		$myE4->submitPayment(); //Enable auto redirect to payment site
 	} else {
-		$button_url = espresso_select_button_for_display($firstdata_e4_settings['button_url'], "firstdata_e4/firstdata-logo.png");
-		$myE4->submitButton($button_url, 'firstdata_e4'); //Display payment button
+		$firstdata_e4_settings['button_url'] = espresso_select_button_for_display($firstdata_e4_settings['button_url'], "firstdata_e4/firstdata-logo.png");
+		$myE4->submitButton($firstdata_e4_settings['button_url'], 'firstdata_e4'); //Display payment button
 	}
 
 

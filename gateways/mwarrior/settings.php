@@ -20,9 +20,9 @@ function event_espresso_mwarrior_payment_settings() {
 	$mwarrior_settings = get_option('event_espresso_mwarrior_settings');
 	if (empty($mwarrior_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/mwarrior/mwarrior-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/mwarrior/mwarrior-logo.png";
+			$mwarrior_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/mwarrior/mwarrior-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/mwarrior/mwarrior-logo.png";
+			$mwarrior_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/mwarrior/mwarrior-logo.png";
 		}
 		$mwarrior_settings['mwarrior_id'] = '';
 		$mwarrior_settings['mwarrior_apikey'] = '';
@@ -32,10 +32,13 @@ function event_espresso_mwarrior_payment_settings() {
 		$mwarrior_settings['use_sandbox'] = false;
 		$mwarrior_settings['force_ssl_return'] = false;
 		$mwarrior_settings['bypass_payment_page'] = '';
-		$mwarrior_settings['button_url'] = $button_url;
 		if (add_option('event_espresso_mwarrior_settings', $mwarrior_settings, '', 'no') == false) {
 			update_option('event_espresso_mwarrior_settings', $mwarrior_settings);
 		}
+	}
+
+	if ( ! isset( $mwarrior_settings['button_url'] ) || ! file_exists( $mwarrior_settings['button_url'] )) {
+		$mwarrior_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div
@@ -178,7 +181,7 @@ function event_espresso_display_mwarrior_settings() {
 							<label for="button_url">
 								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input class="upload_url_input" type="text" name="button_url" size="34" value="<?php echo (($mwarrior_settings['button_url'] == '') ? $button_url : $mwarrior_settings['button_url'] ); ?>" />
+							<input class="upload_url_input" type="text" name="button_url" size="34" value="<?php echo (isset($mwarrior_settings['button_url']) ? $mwarrior_settings['button_url'] : '' ); ?>" />
 							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>  </li>
 						<li>
 							<label><?php _e('Current Button Image', 'event_espresso'); ?></label>

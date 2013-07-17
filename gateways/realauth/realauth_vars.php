@@ -18,11 +18,19 @@ function espresso_display_realauth($payment_data) {
 	$realauth->set_registration_id($registration_id);
 	$realauth->set_timestamp();
 	$realauth->set_auto_settle_flag($realauth_settings['auto_settle']);
-	$button_url = $realauth_settings['button_url'];
+	
+	if ( empty( $realauth_settings['button_url']) || ! file_exists( $realauth_settings['button_url'] )) {
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/realauth/realauth-logo.png")) {
+			$realauth_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/realauth/realauth-logo.png";
+		} else {
+			$realauth_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/realauth/realauth-logo.png";
+		}
+	} 
+			
 	if (!empty($realauth_settings['bypass_payment_page']) && $realauth_settings['bypass_payment_page'] == 'Y') {
 		echo $realauth->submitPayment();
 	} else {
-		echo $realauth->submitButton($button_url);
+		echo $realauth->submitButton( $realauth_settings['button_url'] );
 	}
 }
 

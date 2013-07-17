@@ -19,20 +19,23 @@ function event_espresso_realauth_payment_settings() {
 	$realauth_settings = get_option('event_espresso_realauth_settings');
 	if (empty($realauth_settings['button_url'])) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/realauth/realauth-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/realauth/realauth-logo.png";
+			$realauth_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/realauth/realauth-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/realauth/realauth-logo.png";
+			$realauth_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/realauth/realauth-logo.png";
 		}
 		$realauth_settings['merchant_id'] = '';
 		$realauth_settings['shared_secret'] = '';
 		$realauth_settings['currency_format'] = 'USD';
 		$realauth_settings['auto_settle'] = 'Y';
-		$realauth_settings['button_url'] = $button_url;
 		$realauth_settings['use_sandbox'] = false;
 		$realauth_settings['bypass_payment_page'] = 'N';
 		if (add_option('event_espresso_realauth_settings', $realauth_settings, '', 'no') == false) {
 			update_option('event_espresso_realauth_settings', $realauth_settings);
 		}
+	}
+
+	if ( ! isset( $realauth_settings['button_url'] ) || ! file_exists( $realauth_settings['button_url'] )) {
+		$realauth_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div

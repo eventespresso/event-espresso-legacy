@@ -18,9 +18,9 @@ function event_espresso_qbms_payment_settings() {
 	$qbms_settings = get_option('event_espresso_qbms_settings');
 	if (empty($qbms_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/qbms/qbms-logo.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/qbms/qbms-logo.gif";
+			$qbms_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/qbms/qbms-logo.gif";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/qbms/qbms-logo.gif";
+			$qbms_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/qbms/qbms-logo.gif";
 		}
 		$qbms_settings['qbms_conn_ticket'] = '';
 		$qbms_settings['qbms_sandbox'] = false;
@@ -32,6 +32,10 @@ function event_espresso_qbms_payment_settings() {
 		if (add_option('event_espresso_qbms_settings', $qbms_settings, '', 'no') == false) {
 			update_option('event_espresso_qbms_settings', $qbms_settings);
 		}
+	}
+
+	if ( ! isset( $qbms_settings['button_url'] ) || ! file_exists( $qbms_settings['button_url'] )) {
+		$qbms_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div

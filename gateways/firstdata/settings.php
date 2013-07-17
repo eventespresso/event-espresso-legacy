@@ -29,6 +29,10 @@ function event_espresso_firstdata_payment_settings() {
 		}
 	}
 
+	if ( ! isset( $firstdata_settings['button_url'] ) || ! file_exists( $firstdata_settings['button_url'] )) {
+		$firstdata_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_firstdata'])
 					&& (!empty($_REQUEST['activate_firstdata'])

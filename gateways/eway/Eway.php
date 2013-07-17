@@ -95,9 +95,10 @@ class Espresso_Eway extends Espresso_PaymentGateway {
             echo " will be redirected to the payment website.</h2></p>\n";
             echo '<form method="get" name="payment_form" action="' . $this->gatewayUrl[0] . '">';
 						echo '<input type="hidden" value="' . $this->gatewayUrl[1] . '" name="value">';
-            echo "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to ";
+             echo "<input type=\"hidden\" id=\"bypass_payment_page\" name=\"bypass_payment_page\" value=\"true\"/>\n";
+           echo "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to ";
             echo "the payment website within 5 seconds...<br/><br/>\n";
-            echo "<input type=\"submit\" value=\"Click Here\"></p>\n";
+            echo "<input class=\"allow-leave-page\" type=\"submit\" value=\"Click Here\"></p>\n";
             echo "</form>\n";
             echo "</body></html>\n";
         }
@@ -106,8 +107,7 @@ class Espresso_Eway extends Espresso_PaymentGateway {
         $this->prepareSubmit();
         echo '<form method="get" name="payment_form" action="' . $this->gatewayUrl[0] . '">';
         echo '<input type="hidden" value="' . $this->gatewayUrl[1] . '" name="value">';
- 	 echo "<input type=\"hidden\" id=\"bypass_payment_page\" name=\"bypass_payment_page\" value=\"true\"/>\n";
-       echo '<input id="eway-payment-option-lnk" class="payment-option-lnk" type="image" alt="Pay using eWay" src="' . $button_url . '" />';
+       echo '<input id="eway-payment-option-lnk" class="payment-option-lnk allow-leave-page" type="image" alt="Pay using eWay" src="' . $button_url . '" />';
         echo '</form>';
     }
 

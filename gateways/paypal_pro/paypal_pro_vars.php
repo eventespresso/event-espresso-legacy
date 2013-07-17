@@ -70,7 +70,7 @@ function espresso_display_paypal_pro($data) {
 						<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></h4>
 						<p>
 					        <label for="card-type"><?php _e('Card Card Type', 'event_espresso'); ?></label>
-					        <select id="ppp_card-type" name ="creditcardtype" class="required">
+					        <select id="ppp_card-type" name ="creditcardtype" class="wide required">
 										<?php
 										foreach (explode(",", $paypal_pro_settings['paypal_api_credit_cards']) as $k => $v)
 											echo "<option value='$v'>$v</option>";
@@ -83,7 +83,7 @@ function espresso_display_paypal_pro($data) {
 						</p>
 						<p>
 					        <label for="card-exp"><?php _e('Expiration Month', 'event_espresso'); ?></label>
-					        <select id="ppp_card-exp" name ="expmonth" class="required">
+					        <select id="ppp_card-exp" name ="expmonth" class="med required">
 										<?php
 										for ($i = 1; $i < 13; $i++)
 											echo "<option value='$i'>$i</option>";
@@ -92,7 +92,7 @@ function espresso_display_paypal_pro($data) {
 						</p>
 						<p>
 					        <label for="exp-year"><?php _e('Expiration Year', 'event_espresso'); ?></label>
-					        <select id="ppp_exp-year" name ="expyear" class="required">
+					        <select id="ppp_exp-year" name ="expyear" class="med required">
 										<?php
 										$curr_year = date("Y");
 										for ($i = 0; $i < 10; $i++) {
@@ -104,7 +104,7 @@ function espresso_display_paypal_pro($data) {
 						</p>
 						<p>
 					        <label for="cvv"><?php _e('CVV Code', 'event_espresso'); ?></label>
-					        <input type="text" name="cvv" id="ppp_exp_date" autocomplete="off" />
+					        <input type="text" name="cvv" id="ppp_exp_date" autocomplete="off"  class="small required"/>
 						</p>
 					</fieldset>
 					
@@ -112,7 +112,7 @@ function espresso_display_paypal_pro($data) {
 					<input name="paypal_pro" type="hidden" value="true" />
 					<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
 					<p class="event_form_submit">
-						<input name="paypal_pro_submit" id="paypal_pro_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />						
+						<input name="paypal_pro_submit" id="paypal_pro_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />						
 						<div class="clear"></div>
 					</p>
 					<span id="processing"></span>

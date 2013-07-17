@@ -30,9 +30,9 @@ function event_espresso_eway_payment_settings() {
 	$eway_settings = get_option('event_espresso_eway_settings');
 	if (empty($eway_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/eway/eway-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/eway/eway-logo.png";
+			$eway_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/eway/eway-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/eway/eway-logo.png";
+			$eway_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/eway/eway-logo.png";
 		}
 		$eway_settings['eway_id'] = '';
 		$eway_settings['eway_username'] = '';
@@ -41,11 +41,14 @@ function event_espresso_eway_payment_settings() {
 		$eway_settings['use_sandbox'] = false;
 		$eway_settings['bypass_payment_page'] = 'N';
 		$eway_settings['force_ssl_return'] = false;
-		$eway_settings['button_url'] = $button_url;
 		$eway_settings['region'] = 'UK';
 		if (add_option('event_espresso_eway_settings', $eway_settings, '', 'no') == false) {
 			update_option('event_espresso_eway_settings', $eway_settings);
 		}
+	}
+
+	if ( ! isset( $eway_settings['button_url'] ) || ! file_exists( $eway_settings['button_url'] )) {
+		$eway_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div
@@ -183,7 +186,7 @@ function event_espresso_display_eway_settings() {
 							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>  </li>
 						<li>
 							<label><?php _e('Current Button Image', 'event_espresso'); ?></label>
-							<?php echo (($eway_settings['button_url'] == '') ? '<img src="' . $button_url . '" />' : '<img src="' . $eway_settings['button_url'] . '" />'); ?></li>
+							<?php echo (($eway_settings['button_url'] == '') ? '' : '<img src="' . $eway_settings['button_url'] . '" />'); ?></li>
 					</ul>
 				</td>
 			</tr>

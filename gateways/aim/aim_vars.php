@@ -3,6 +3,9 @@
 function espresso_display_aim($data) {
 	extract($data);
 	global $org_options;
+	wp_register_script( 'aim', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/aim/aim.js', array( 'jquery.validate.js' ), '1.0', TRUE );
+	wp_enqueue_script( 'aim' );	
+	
 	?>
 <div id="aim-payment-option-dv" class="payment-option-dv">
 
@@ -34,31 +37,31 @@ function espresso_display_aim($data) {
 					<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>
 					<p>
 						<label for="first_name"><?php _e('First Name', 'event_espresso'); ?></label>
-						<input name="first_name" type="text" id="aim_first_name" value="<?php echo $fname ?>" />
+						<input name="first_name" type="text" id="aim_first_name" value="<?php echo $fname ?>"  class="required"/>
 					</p>
 					<p>
 						<label for="last_name"><?php _e('Last Name', 'event_espresso'); ?></label>
-						<input name="last_name" type="text" id="aim_last_name" value="<?php echo $lname ?>" />
+						<input name="last_name" type="text" id="aim_last_name" value="<?php echo $lname ?>"  class="required"/>
 					</p>
 					<p>
 						<label for="email"><?php _e('Email Address', 'event_espresso'); ?></label>
-						<input name="email" type="text" id="aim_email" value="<?php echo $attendee_email ?>" />
+						<input name="email" type="text" id="aim_email" value="<?php echo $attendee_email ?>"  class="required"/>
 					</p>
 					<p>
 						<label for="address"><?php _e('Address', 'event_espresso'); ?></label>
-						<input name="address" type="text" id="aim_address" value="<?php echo $address ?>" />
+						<input name="address" type="text" id="aim_address" value="<?php echo $address ?>"  class="required" />
 					</p>
 					<p>
 						<label for="city"><?php _e('City', 'event_espresso'); ?></label>
-						<input name="city" type="text" id="aim_city" value="<?php echo $city ?>" />
+						<input name="city" type="text" id="aim_city" value="<?php echo $city ?>"  class="required" />
 					</p>
 					<p>
 						<label for="state"><?php _e('State', 'event_espresso'); ?></label>
-						<input name="state" type="text" id="aim_state" value="<?php echo $state ?>" />
+						<input name="state" type="text" id="aim_state" value="<?php echo $state ?>"  class="required" />
 					</p>
 					<p>
 						<label for="zip"><?php _e('Zip', 'event_espresso'); ?></label>
-						<input name="zip" type="text" id="aim_zip" value="<?php echo $zip ?>" />
+						<input name="zip" type="text" id="aim_zip" value="<?php echo $zip ?>"  class="required" />
 					</p>
 				</fieldset>
 
@@ -66,11 +69,11 @@ function espresso_display_aim($data) {
 					<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></h4>
 					<p>
 						<label for="card_num"><?php _e('Card Number', 'event_espresso'); ?></label>
-						<input type="text" name="card_num" id="aim_card_num" autocomplete="off" />
+						<input type="text" name="card_num" id="aim_card_num" autocomplete="off" class="required" />
 					</p>
 					<p>
 						<label for="card-exp"><?php _e('Expiration Month', 'event_espresso'); ?></label>
-						<select id="aim_card-exp" name ="exp_month" class="required">
+						<select id="aim_card-exp" name ="exp_month" class="med required">
 							<?php
 							$curr_month = date("m");
 							for ($i = 1; $i < 13; $i++) {
@@ -86,7 +89,7 @@ function espresso_display_aim($data) {
 					</p>
 					<p>
 						<label for="exp-year"><?php _e('Expiration Year', 'event_espresso'); ?></label>
-						<select id="aim_exp_year" name ="exp_year" class="required">
+						<select id="aim_exp_year" name ="exp_year" class="med required">
 							<?php
 							$curr_year = date("Y");
 							for ($i = 0; $i < 10; $i++) {
@@ -99,7 +102,7 @@ function espresso_display_aim($data) {
 					</p>
 					<p>
 						<label for="ccv_code"><?php _e('CCV Code', 'event_espresso'); ?></label>
-						<input type="text" name="ccv_code" id="aim_ccv_code" autocomplete="off" />
+						<input type="text" name="ccv_code" id="aim_ccv_code" autocomplete="off"  class="small required"/>
 					</p>
 				</fieldset>
 					
@@ -107,11 +110,10 @@ function espresso_display_aim($data) {
 				<input name="invoice_num" type="hidden" value="<?php echo 'au-' . event_espresso_session_id() ?>" />
 				<input name="authnet_aim" type="hidden" value="true" />
 				<input name="x_cust_id" type="hidden" value="<?php echo $attendee_id ?>" />
-				
-				<p class="event_form_submit">
-					<input name="aim_submit" id="aim_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
-					<div class="clear"></div>
-				</p>
+
+				<input name="aim_submit" id="aim_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+				<div class="clear"></div>
+
 			</div>
 		</form>
 		<br/>

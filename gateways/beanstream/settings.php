@@ -25,6 +25,10 @@ function event_espresso_beanstream_payment_settings() {
 		}
 	}
 
+	if ( ! isset( $beanstream_settings['button_url'] ) || ! file_exists( $beanstream_settings['button_url'] )) {
+		$beanstream_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_beanstream'])
 					&& (!empty($_REQUEST['activate_beanstream'])

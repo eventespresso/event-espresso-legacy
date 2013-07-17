@@ -21,9 +21,9 @@ function event_espresso_authnet_payment_settings() {
 	$authnet_settings = get_option('event_espresso_authnet_settings');
 	if (empty($authnet_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/authnet/authnet-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/authnet/authnet-logo.png";
+			$authnet_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/authnet/authnet-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/authnet-logo.png";
+			$authnet_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/authnet/authnet-logo.png";
 		}
 		$authnet_settings['active'] = false;
 		$authnet_settings['authnet_login_id'] = '';
@@ -35,7 +35,6 @@ function event_espresso_authnet_payment_settings() {
 		$authnet_settings['test_transactions'] = false;
 		$authnet_settings['force_ssl_return'] = false;
 		$authnet_settings['bypass_payment_page'] = 'N';
-		$authnet_settings['button_url'] = $button_url;
 		if (add_option('event_espresso_authnet_settings', $authnet_settings, '', 'no') == false) {
 			update_option('event_espresso_authnet_settings', $authnet_settings);
 		}
@@ -45,6 +44,11 @@ function event_espresso_authnet_payment_settings() {
 		$authnet_settings['authnet_md5_value'] = $authnet_settings['authnet_transaction_key'];
 		update_option('event_espresso_authnet_settings', $authnet_settings);
 	}
+
+	if ( ! isset( $authnet_settings['button_url'] ) || ! file_exists( $authnet_settings['button_url'] )) {
+		$authnet_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_authnet'])
 					&& (!empty($_REQUEST['activate_authnet'])
@@ -139,7 +143,7 @@ function event_espresso_display_authnet_settings() {
 								<?php _e('Submit a Test Transaction', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=authnet_sandbox"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input name="test_transactions" type="checkbox" value="1" <?php echo $authnet_settings['test_transactions'] ? 'checked="checked"' : '' ?> /></li>
+							<input name="test_transactions" type="checkbox" value="1" <?php echo $authnet_settings['test_transactions'] ? 'checked="checked"' : '' ?> />
 						</li>
 						<li>
 							<label for="use_md5">
@@ -160,7 +164,7 @@ function event_espresso_display_authnet_settings() {
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $authnet_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $authnet_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> />
 						</li>
 						<?php }?>
 						<li>
@@ -183,7 +187,7 @@ function event_espresso_display_authnet_settings() {
 						</li>
 						<li>
 							<label><?php _e('Current Button Image', 'event_espresso'); ?></label>
-							<?php echo (($authnet_settings['button_url'] == '') ? '<img src="' . $button_url . '" />' : '<img src="' . $authnet_settings['button_url'] . '" />'); ?>
+							<?php echo (($authnet_settings['button_url'] == '') ? '' : '<img src="' . $authnet_settings['button_url'] . '" />'); ?>
 						</li>
 					</ul>
 				</td>
@@ -225,6 +229,8 @@ function event_espresso_display_authnet_settings() {
 			<li><?php _e('Enter any random value to use for your MD5 Hash Value. Enter the value again to confirm', 'event_espresso'); ?></li>
 			<li><?php _e('Click Submit', 'event_espresso'); ?></li>
 		</ol>
+		</p>
+		
 		<p><strong><?php _e('Warning:', 'event_espresso'); ?></strong><br />
 <strong><?php _e('MAY CAUSE LEGITAMATE PAYMENTS TO BE MARKED "INCOMPLETE"', 'event_espresso'); ?></strong><br />
 			<?php _e('This may be a problem, such as a mismatch, between the authorize.net and Event Espresso MD5 Hash value settings.', 'event_espresso'); ?></p>

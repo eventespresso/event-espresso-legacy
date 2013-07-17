@@ -47,28 +47,33 @@ function espresso_display_luottokunta($payment_data){
 	$authentication_mac_unhashed = $mac_check_in_form=implode("&",array($merchant_number,$order_id,$total_cost_in_cents,$currency_code,$transaction_type,$mac_key));
 	//echo "authentication mac unhasehd:".$authentication_mac_unhashed; //note: order is essential. see luottokunta's "html form interface v1.3 section 4.2.1
 	$authentication_mac = hash('sha256',$authentication_mac_unhashed);
+	$external_link_img = EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png';
 	
 	$formhtml=<<<HEREDOC
-<form action="{$server_url}" method="post" id='luottokunta_form'> 
-	<input type="hidden" name="Merchant_Number" value="{$merchant_number}"> 
+		 <div id="luottokunta-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+			<img class="off-site-payment-gateway-img" width="16" height="16" src="{$external_link_img}" alt="click to visit this payment gateway">
 	
-	<input type="hidden" name="Card_Details_Transmit" value="0">
-	<input type="hidden" name="Language" value="{$luottokunta_settings['luottokunta_payment_page_language']}"> 
-	<input type="hidden" name="Device_Category" value="1"> 
-	<input type="hidden" name="Order_ID" value="{$order_id}"> 
-	<input type="hidden" name="Customer_ID" value="{$payment_data['attendee_id']}"> 
-	<input type="hidden" name="Amount" value="{$total_cost_in_cents}"> 
-	<input type="hidden" name="Currency_Code" value="{$currency_code}"> 
-	<input type="hidden" name="Order_Description" value="{$description}"> 
-	<input type="hidden" name="Success_Url" value="{$success_url}"> 
-	<input type="hidden" name="Failure_Url" value="{$failure_url}"> 
-	<input type="hidden" name="Cancel_Url" value="{$cancel_url}"> 
-	<input type="hidden" name="Transaction_Type" value="{$transaction_type}"> 
-	<input type='hidden' name='Authentication_Mac' value='{$authentication_mac}'>
+			<form action="{$server_url}" method="post" id='luottokunta_form'> 
+				<input type="hidden" name="Merchant_Number" value="{$merchant_number}"> 
+				
+				<input type="hidden" name="Card_Details_Transmit" value="0">
+				<input type="hidden" name="Language" value="{$luottokunta_settings['luottokunta_payment_page_language']}"> 
+				<input type="hidden" name="Device_Category" value="1"> 
+				<input type="hidden" name="Order_ID" value="{$order_id}"> 
+				<input type="hidden" name="Customer_ID" value="{$payment_data['attendee_id']}"> 
+				<input type="hidden" name="Amount" value="{$total_cost_in_cents}"> 
+				<input type="hidden" name="Currency_Code" value="{$currency_code}"> 
+				<input type="hidden" name="Order_Description" value="{$description}"> 
+				<input type="hidden" name="Success_Url" value="{$success_url}"> 
+				<input type="hidden" name="Failure_Url" value="{$failure_url}"> 
+				<input type="hidden" name="Cancel_Url" value="{$cancel_url}"> 
+				<input type="hidden" name="Transaction_Type" value="{$transaction_type}"> 
+				<input type='hidden' name='Authentication_Mac' value='{$authentication_mac}'>
 
-	<input type="hidden" name="Customer_IP_Address" value="{$user_ip}"> 
-	{$submit_html}
-	</form>
+				<input type="hidden" name="Customer_IP_Address" value="{$user_ip}"> 
+				{$submit_html}
+				</form>
+			</div>
 $bypass_payment_page_js
 HEREDOC;
 

@@ -515,6 +515,7 @@ function event_espresso_display_atos_settings() {
 		_e("In order for the Atos gateway to work properly, you will need to upload the files given to you by your provider to the folder matching your selected provider above. Eg, gateways/atos/mercanet/. The file called pathfile will need to be writable by your web server and the two files in gateways/atos/bin/ will need to be executable by your web server. The current implementation uses the Atos provided Linux executables. Please contact support if you are using a Windows server, and would like to sponsor development of a version that will run on your server. ", "event_espresso");
 		_e("For more information on setting file permissions, see: ", "event_espresso"); ?>
 		<a href="http://codex.wordpress.org/Changing_File_Permissions" target="blank">http://codex.wordpress.org/Changing_File_Permissions</a>
+	</p>
 		<?php
 }
 

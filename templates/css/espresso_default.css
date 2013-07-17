@@ -19,7 +19,7 @@
 .payment-option-closed { display: inline-block !important; }
 
 .payment-option-dv .payment-option-lnk {
-	display: inline-block; position: relative; max-width:140px; min-height:53px; padding:20px; margin:0 0 1em; 
+	display: inline-block; position: relative; max-width:140px; min-height:53px; height: auto; padding:20px; margin:0 0 1em; 
 	border:1px solid #ddd; border-radius:3px;
 	text-align: center; line-height:1em; vertical-align: middle; cursor:pointer;
 
@@ -92,6 +92,9 @@
 
 
 /* Errors and notices */
+p.error,
+.stripe_error,
+.paytrace_error,
 .event_espresso_error {
 	padding: 1em 2em 1.25em; margin: 0 0 1em 0; 
 	background-color:#FFEEEE; border: #FF0000 1px solid; border-radius:3px;
@@ -110,7 +113,10 @@
 .event_espresso_attention p em { color: #C00; font-style: normal; font-weight: bold;display: block; }
 
 .event_espresso_form_wrapper label.error,
-.event_espresso_form_wrapper span.error { color: #C00; width: auto;}
+.event_espresso_form_wrapper span.error {
+		display: inline-block; width: 90%; padding-left:150px; margin:-1em 0 1em 1em; 
+		color: #C00; text-align: left;
+}
 .event_espresso_form_wrapper label em,
 .event_espresso_form_wrapper span.label em,
 .event_espresso_form_wrapper legend em { font-style: normal; color: #C00; padding-left: 3px;}
@@ -233,9 +239,13 @@ label.dynamic-price-input-label {
 	text-align:left !important;
 }
 
-select.small { width:25px; }
-select.med { width: 100px; }
-select.wide { width: 175px; }
+.event_espresso_form_wrapper  input.small { width:50px; }
+.event_espresso_form_wrapper  input.med { width: 100px; }
+.event_espresso_form_wrapper  input.wide { width: 200px; }
+
+.event_espresso_form_wrapper  select.small { width:50px; }
+.event_espresso_form_wrapper  select.med { width: 100px; }
+.event_espresso_form_wrapper  select.wide { width: 200px; }
 
 .event_espresso_form_wrapper ul.event_form_field { display: inline-block; width:65%; list-style: none; padding:0; margin:.25em 0 0; }   /*160px*/
 .event_espresso_form_wrapper ul.event_form_field li,
