@@ -44,9 +44,9 @@ function espresso_display_luottokunta($payment_data){
 		$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/luottokunta/luottokunta.gif";
 	}
 	if(!empty($button_url)){
-		$submit_html="<input class=\"payment-option-lnk\" type='image' src='$button_url'/>";
+		$submit_html="<input class=\"payment-option-lnk allow-leave-page\" type='image' src='$button_url'/>";
 	}else{
-		$submit_html="<button class=\"payment-option-lnk\">Submit Purchase</button>";
+		$submit_html="<button class=\"payment-option-lnk allow-leave-page\">Submit Purchase</button>";
 	}
 	if($bypass_payment_page){
 		$bypass_payment_page_js="<script>document.getElementById('luottokunta_form').submit();</script>";

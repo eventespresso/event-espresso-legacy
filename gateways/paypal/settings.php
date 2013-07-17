@@ -19,9 +19,9 @@ function event_espresso_paypal_payment_settings() {
 	$paypal_settings = get_option('event_espresso_paypal_settings');
 	if (empty($paypal_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/paypal/btn_stdCheckout2.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/paypal/btn_stdCheckout2.gif";
+			$paypal_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/paypal/btn_stdCheckout2.gif";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/paypal/btn_stdCheckout2.gif";
+			$paypal_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/paypal/btn_stdCheckout2.gif";
 		}
 		$paypal_settings['paypal_id'] = '';
 		$paypal_settings['tax_override'] = false;
@@ -32,10 +32,13 @@ function event_espresso_paypal_payment_settings() {
 		$paypal_settings['bypass_payment_page'] = 'N';
 		$paypal_settings['force_ssl_return'] = false;
 		$paypal_settings['no_shipping'] = '0';
-		$paypal_settings['button_url'] = $button_url;
 		if (add_option('event_espresso_paypal_settings', $paypal_settings, '', 'no') == false) {
 			update_option('event_espresso_paypal_settings', $paypal_settings);
 		}
+	}
+
+	if ( ! isset( $paypal_settings['button_url'] ) || ! file_exists( $paypal_settings['button_url'] )) {
+		$paypal_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div

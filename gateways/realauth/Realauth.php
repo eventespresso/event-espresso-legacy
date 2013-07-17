@@ -95,7 +95,7 @@ class Espresso_Realauth {
 	<img class="off-site-payment-gateway-img" width="16" height="16" src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png" alt="click to visit this payment gateway">';
 		$out .= '<form  method="post" name="payment_form" action="' . $this->gateway_Url . '">';
 		$out .= $this->submitForm();
-		$out .= '<input id="realauth-payment-option-lnk" class="payment-option-lnk" type="image" ';
+		$out .= '<input id="realauth-payment-option-lnk" class="payment-option-lnk allow-leave-page" type="image" ';
 		$out .= 'alt="Pay using RealAuth" src="' . $button_url . '" />';
     	$out .= '</form></div>';
 		return $out;

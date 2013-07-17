@@ -35,12 +35,9 @@ function event_espresso_wepay_payment_settings() {
 			update_option('event_espresso_wepay_settings', $wepay_settings);
 		}
 	}
+	
 	if ( ! isset( $wepay_settings['button_url'] ) || ! file_exists( $wepay_settings['button_url'] )) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/wepay/wepay-logo.png")) {
-			$wepay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/wepay/wepay-logo.png";
-		} else {
-			$wepay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/wepay/wepay-logo.png";
-		}	
+		$wepay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}	
 
 	//Open or close the postbox div

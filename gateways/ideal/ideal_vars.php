@@ -72,7 +72,7 @@ function espresso_process_ideal($payment_data) {
 				<input name="id" type="hidden" value="<?php echo $payment_data['attendee_id']; ?>" />				
 				<input name='registration_id' type='hidden' value='<?php echo $payment_data['registration_id']?>'/>
 				<p class="event_form_submit">
-					<input id="submit_ideal" type="submit" class="submit-payment-btn" name="submit" value="Betaal via iDEAL" />
+					<input id="submit_ideal" type="submit" class="submit-payment-btn allow-leave-page" name="submit" value="Betaal via iDEAL" />
 					<div class="clear"></div>
 				</p>
 			</form>

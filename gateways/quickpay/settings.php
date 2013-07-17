@@ -19,11 +19,10 @@ function event_espresso_quickpay_payment_settings() {
 	$quickpay_settings = get_option('event_espresso_quickpay_settings');
 	if (empty($quickpay_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/quickpay/quickpay-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/quickpay/quickpay-logo.png";
+			$quickpay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/quickpay/quickpay-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/quickpay/quickpay-logo.png";
+			$quickpay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/quickpay/quickpay-logo.png";
 		}
-		$quickpay_settings['button_url'] = $button_url;
 		$quickpay_settings['quickpay_merchantid'] = '';
 		$quickpay_settings['quickpay_md5secret'] = '';
 		$quickpay_settings['quickpay_language'] = 'en';
@@ -34,6 +33,10 @@ function event_espresso_quickpay_payment_settings() {
 		if (add_option('event_espresso_quickpay_settings', $quickpay_settings, '', 'no') == false) {
 			update_option('event_espresso_quickpay_settings', $quickpay_settings);
 		}
+	}
+
+	if ( ! isset( $quickpay_settings['button_url'] ) || ! file_exists( $quickpay_settings['button_url'] )) {
+		$quickpay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div

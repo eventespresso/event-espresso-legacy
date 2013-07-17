@@ -21,14 +21,17 @@ function event_espresso_megasoft_payment_settings() {
 		$megasoft_settings['use_sandbox'] = false;
 		$megasoft_settings['display_header'] = false;
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/megasoft/megasoft-logo.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/megasoft/megasoft-logo.gif";
+			$megasoft_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/megasoft/megasoft-logo.gif";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/megasoft/megasoft-logo.gif";
+			$megasoft_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/megasoft/megasoft-logo.gif";
 		}
-		$megasoft_settings['button_url']=$button_url;
 		if (add_option('event_espresso_megasoft_settings', $megasoft_settings, '', 'no') == false) {
 			update_option('event_espresso_megasoft_settings', $megasoft_settings);
 		}
+	}
+
+	if ( ! isset( $megasoft_settings['button_url'] ) || ! file_exists( $megasoft_settings['button_url'] )) {
+		$megasoft_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div

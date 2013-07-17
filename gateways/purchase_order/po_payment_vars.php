@@ -59,7 +59,7 @@ function espresso_display_purchase_order($payment_data) {
 				<?php foreach($args as $key=>$value){
 					echo "<input type='hidden' name='$key' value='$value'>";
 				}?>
-				<input class="finalize_button inline-link" name="submit_purcahse_order" value="<?php _e('Complete your Registration', 'event_espresso'); ?>" type="submit" />
+				<input class="finalize_button allow-leave-page inline-link" name="submit_purcahse_order" value="<?php _e('Complete your Registration', 'event_espresso'); ?>" type="submit" />
 				<div class="clear"></div>
 			</p>			
 		</form>

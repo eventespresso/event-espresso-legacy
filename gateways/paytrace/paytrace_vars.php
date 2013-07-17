@@ -6,7 +6,9 @@ function espresso_display_paytrace($payment_data) {
 	$paytrace_settings = get_option('event_espresso_paytrace_settings');
 	$home = $paytrace_settings['force_ssl_return'] ? str_replace('http://', 'https://', home_url()) : home_url();
 	
-		?>
+	wp_register_script( 'paytrace', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/paytrace/paytrace.js', array( 'jquery.validate.js' ), '1.0', TRUE );
+	wp_enqueue_script( 'paytrace' );
+?>
 <div id="paytrace-payment-option-dv" class="payment-option-dv">
 
 	<a id="paytrace-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="paytrace-payment-option-form" style="cursor:pointer;">
@@ -60,7 +62,7 @@ function espresso_display_paytrace($payment_data) {
 					</p>
 					<p>
 						<label for="card-exp"><?php _e('Expiration Month', 'event_espresso'); ?></label>
-						<select id="pt_card-exp" name ="exp_month" class="required">
+						<select id="pt_card-exp" name ="exp_month" class="med required">
 							<?php
 							for ($i = 1; $i < 13; $i++)
 								echo "<option value='$i'>$i</option>";
@@ -69,7 +71,7 @@ function espresso_display_paytrace($payment_data) {
 					</p>
 					<p>
 						<label for="exp-year"><?php _e('Expiration Year', 'event_espresso'); ?></label>
-						<select id="pt_exp_year" name ="exp_year" class="required">
+						<select id="pt_exp_year" name ="exp_year" class="med required">
 							<?php
 							$curr_year = date("y");
 							for ($i = 0; $i < 10; $i++) {
@@ -81,14 +83,14 @@ function espresso_display_paytrace($payment_data) {
 					</p>
 					<p>
 						<label for="cvv"><?php _e('CVV Code', 'event_espresso'); ?></label>
-						<input id="pt_cvv" type="text" name="csc" autocomplete="off" />
+						<input id="pt_cvv" type="text" name="csc" autocomplete="off"  class="small required"/>
 					</p>
 				</fieldset>
 				<input name="amount" type="hidden" value="<?php echo number_format($event_cost, 2) ?>" />
 				<input name="paytrace" type="hidden" value="true" />
 				<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
 				<p class="event_form_submit">
-					<input name="paytrace_submit" id="paytrace_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+					<input name="paytrace_submit" id="paytrace_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
 					<div class="clear"></div>
 				</p>
 			</form>

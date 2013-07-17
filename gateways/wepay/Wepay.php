@@ -249,6 +249,7 @@ class Espresso_Wepay extends Espresso_PaymentGateway {
 		echo "<p style=\"text-align:center;\"><h2>Please wait, your order is being processed and you";
 		echo " will be redirected to the payment website.</h2></p>\n";
 		echo '<form method="get" name="payment_form" action="' . $uri . '">';
+		echo "<input type=\"hidden\" id=\"bypass_payment_page\" name=\"bypass_payment_page\" value=\"true\"/>\n";
 		echo "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to ";
 		echo "the payment website within 5 seconds...<br/><br/>\n";
 		echo "<input type=\"submit\" value=\"Click Here\"></p>\n";
@@ -260,7 +261,7 @@ class Espresso_Wepay extends Espresso_PaymentGateway {
 		echo '<div id="wepay-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
 	<img class="off-site-payment-gateway-img" width="16" height="16" src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png" alt="click to visit this payment gateway">';
 		echo '<form method="get" name="payment_form" action="' . $uri . '">';
-		echo '<input class="payment-option-lnk" id="wepay_submit" type="image" alt="Pay using WePay" src="' . $button_url . '" />';
+		echo '<input class="payment-option-lnk allow-leave-page" id="wepay_submit" type="image" alt="Pay using WePay" src="' . $button_url . '" />';
 		echo '</form></div>';
 	}
 
