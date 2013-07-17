@@ -34,11 +34,7 @@ function event_espresso_worldpay_payment_settings() {
 	}
 
 	if ( ! isset( $worldpay_settings['button_url'] ) || ! file_exists( $worldpay_settings['button_url'] )) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/worldpay/worldpay-logo.png")) {
-			$worldpay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/worldpay/worldpay-logo.png";
-		} else {
-			$worldpay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/worldpay/worldpay-logo.png";
-		}
+		$worldpay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}	
 
 	//Open or close the postbox div

@@ -18,12 +18,11 @@ function espresso_usaepay_onsite_payment_settings() {
 	$settings = get_option('espresso_usaepay_onsite_settings');
 	if (empty($settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_onsite/usaepay-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/usaepay_onsite/usaepay-logo.png";
+			$settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/usaepay_onsite/usaepay-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/usaepay_onsite/usaepay-logo.png";
+			$settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/usaepay_onsite/usaepay-logo.png";
 		}
 		$settings['key'] = '';
-		$settings['button_url'] = $button_url;
 		$settings['use_sandbox'] = false;
 		$settings['testmode'] = false;
 		$settings['header'] = 'Payment Transactions by USAePay';
@@ -34,9 +33,11 @@ function espresso_usaepay_onsite_payment_settings() {
 		}
 	}
 
-	if (empty($_REQUEST['deactivate_usaepay_onsite'])
-					&& (!empty($_REQUEST['activate_usaepay_onsite'])
-					|| array_key_exists('usaepay_onsite', $active_gateways))) {
+	if ( ! isset( $settings['button_url'] ) || ! file_exists( $settings['button_url'] )) {
+		$settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+
+	if ( empty( $_REQUEST['deactivate_usaepay_onsite'] ) && ( ! empty( $_REQUEST['activate_usaepay_onsite'] ) || array_key_exists( 'usaepay_onsite', $active_gateways ))) {
 		$postbox_style = '';
 	} else {
 		$postbox_style = 'closed';

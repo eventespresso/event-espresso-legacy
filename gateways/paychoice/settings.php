@@ -29,6 +29,10 @@ function event_espresso_paychoice_payment_settings() {
 		}
 	}
 
+	if ( ! isset( $paychoice_settings['button_url'] ) || ! file_exists( $paychoice_settings['button_url'] )) {
+		$paychoice_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_paychoice'])
 					&& (!empty($_REQUEST['activate_paychoice'])

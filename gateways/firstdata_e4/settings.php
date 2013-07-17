@@ -19,9 +19,9 @@ function event_espresso_firstdata_e4_payment_settings() {
 	$firstdata_e4_settings = get_option('event_espresso_firstdata_e4_settings');
 	if (empty($firstdata_e4_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/firstdata_e4/firstdata-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/firstdata_e4/firstdata-logo.png";
+			$firstdata_e4_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/firstdata_e4/firstdata-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/firstdata_e4/firstdata-logo.png";
+			$firstdata_e4_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/firstdata_e4/firstdata-logo.png";
 		}
 		$firstdata_e4_settings['firstdata_e4_login_id'] = '';
 		$firstdata_e4_settings['firstdata_e4_transaction_key'] = '';
@@ -30,10 +30,13 @@ function event_espresso_firstdata_e4_payment_settings() {
 		$firstdata_e4_settings['test_transactions'] = false;
 		$firstdata_e4_settings['bypass_payment_page'] = 'N';
 		$firstdata_e4_settings['force_ssl_return'] = false;
-		$firstdata_e4_settings['button_url'] = $button_url;
 		if (add_option('event_espresso_firstdata_e4_settings', $firstdata_e4_settings, '', 'no') == false) {
 			update_option('event_espresso_firstdata_e4_settings', $firstdata_e4_settings);
 		}
+	}
+
+	if ( ! isset( $firstdata_e4_settings['button_url'] ) || ! file_exists( $firstdata_e4_settings['button_url'] )) {
+		$firstdata_e4_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div
@@ -103,7 +106,7 @@ function event_espresso_display_firstdata_e4_settings() {
 							<label for="button_url">
 								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input type="text" name="button_url" size="35" value="<?php echo (($firstdata_e4_settings['button_url'] == '') ? $button_url : $firstdata_e4_settings['button_url'] ); ?>" />
+							<input type="text" name="button_url" size="35" value="<?php echo (($firstdata_e4_settings['button_url'] == '') ? '' : $firstdata_e4_settings['button_url'] ); ?>" />
 							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
 							</li>
 						<li>

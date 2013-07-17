@@ -16,9 +16,9 @@ function event_espresso_luottokunta_payment_settings() {
 	$luottokunta_settings = get_option('event_espresso_luottokunta_settings');
 	if (empty($luottokunta_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "luottokunta/luottokunta.jpg")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "luottokunta/luottokunta.jpg";
+			$luottokunta_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "luottokunta/luottokunta.jpg";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/luottokunta/luottokunta.jpg";
+			$luottokunta_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/luottokunta/luottokunta.jpg";
 		}
 		$luottokunta_settings['luottokunta_id'] = '';
 		$luottokunta_settings['luottokunta_uses_mac_key'] = 'N';
@@ -27,10 +27,13 @@ function event_espresso_luottokunta_payment_settings() {
 		//$luottokunta_settings['use_sandbox'] = false;
 		$luottokunta_settings['bypass_payment_page'] = 'N';
 		$luottokunta_settings['force_ssl_return'] = false;
-		$luottokunta_settings['button_url'] = $button_url;
 		if (add_option('event_espresso_luottokunta_settings', $luottokunta_settings, '', 'no') == false) {
 			update_option('event_espresso_luottokunta_settings', $luottokunta_settings);
 		}
+	}
+
+	if ( ! isset( $luottokunta_settings['button_url'] ) || ! file_exists( $luottokunta_settings['button_url'] )) {
+		$luottokunta_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div

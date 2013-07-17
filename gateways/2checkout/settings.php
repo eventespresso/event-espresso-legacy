@@ -19,9 +19,9 @@ function event_espresso_2checkout_payment_settings() {
 	$twocheckout_settings = get_option('event_espresso_2checkout_settings');
 	if (empty($twocheckout_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/2checkout/logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/2checkout/logo.png";
+			$twocheckout_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/2checkout/logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/2checkout/logo.png";
+			$twocheckout_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/2checkout/logo.png";
 		}
 		$twocheckout_settings['2checkout_id'] = '';
 		$twocheckout_settings['2checkout_username'] = '';
@@ -29,12 +29,16 @@ function event_espresso_2checkout_payment_settings() {
 		$twocheckout_settings['use_sandbox'] = 'N';
 		$twocheckout_settings['bypass_payment_page'] = 'N';
 		$twocheckout_settings['force_ssl_return'] = false;
-		$twocheckout_settings['button_url'] = $button_url;
+		$twocheckout_settings['button_url'] = $twocheckout_settings['button_url'];
 		if (add_option('event_espresso_2checkout_settings', $twocheckout_settings, '', 'no') == false) {
 			update_option('event_espresso_2checkout_settings', $twocheckout_settings);
 		}
 	}
 
+	if ( ! isset( $twocheckout_settings['button_url'] ) || ! file_exists( $twocheckout_settings['button_url'] )) {
+		$twocheckout_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/2checkout/logo.png";
+	}
+	
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_2checkout'])
 					&& (!empty($_REQUEST['activate_2checkout'])

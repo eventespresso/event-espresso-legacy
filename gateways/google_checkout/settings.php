@@ -191,10 +191,11 @@ function event_espresso_display_google_checkout_settings() {
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $google_checkout_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $google_checkout_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> />
+							</li>
 							<?php }?>
 						
-						<li>
+						<li>						
 							<label for="default_payment_status">
 								<?php _e("Default Payment Status on Receipt of 'New Order Notification'", 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=default_payment_status"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a><br/>
@@ -204,10 +205,10 @@ function event_espresso_display_google_checkout_settings() {
 								
 								<?php echo select_input('default_payment_status', $defaultPaymentStatuses, $google_checkout_settings['default_payment_status']);?>
 							</label>
-						<li>
 						</li>
 						
-					</ul></td>
+					</ul>
+				</td>
 			</tr>
 		</table>
 		
