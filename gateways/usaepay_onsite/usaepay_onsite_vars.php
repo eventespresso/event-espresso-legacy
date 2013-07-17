@@ -18,7 +18,7 @@ function espresso_display_usaepay_onsite($data) {
 			$home = home_url();
 		}
 
-	wp_register_script( 'usaepay_onsite', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/usaepay_onsite/usaepay_onsite.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
+	wp_register_script( 'usaepay_onsite', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/usaepay_onsite/usaepay_onsite.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'usaepay_onsite' );	
 
 ?>
@@ -38,7 +38,7 @@ function espresso_display_usaepay_onsite($data) {
 		<div class = "event_espresso_form_wrapper">
 			<form id="usaepay_onsite_payment_form" name="usaepay_onsite_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
 
-				<fieldset id="stripe-billing-info-dv">
+				<fieldset id="usaepay_onsite-billing-info-dv">
 					<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>
 					<p>
 				        <label for="first_name"><?php _e('First Name', 'event_espresso'); ?></label>
@@ -70,7 +70,7 @@ function espresso_display_usaepay_onsite($data) {
 					</p>
 				</fieldset>
 
-				<fieldset id="stripe-credit-card-info-dv">
+				<fieldset id="usaepay_onsite-credit-card-info-dv">
 					<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></h4>
 					<p>
 				        <label for="card_num"><?php _e('Card Number', 'event_espresso'); ?></label>
@@ -78,7 +78,7 @@ function espresso_display_usaepay_onsite($data) {
 					</p>
 					<p>
 				        <label for="card-exp"><?php _e('Expiration Month', 'event_espresso'); ?></label>
-				        <select id="ppp_card-exp" name ="expmonth" class="required">
+				        <select id="usaepay_onsite_card-exp" name ="expmonth" class="med required">
 
 									<?php
 									for ($i = 1; $i < 10; $i++)
@@ -91,7 +91,7 @@ function espresso_display_usaepay_onsite($data) {
 					</p>
 					<p>
 				        <label for="exp-year"><?php _e('Expiration Year', 'event_espresso'); ?></label>
-				        <select id="ppp_exp-year" name ="expyear" class="required">
+				        <select id="usaepay_onsite_exp-year" name ="expyear" class="med required">
 
 									<?php
 									$curr_year = date("y");
@@ -105,14 +105,14 @@ function espresso_display_usaepay_onsite($data) {
 					</p>
 					<p>
 				        <label for="cvv"><?php _e('CVV Code', 'event_espresso'); ?></label>
-				        <input type="text" name="cvv" id="ppp_exp_date" autocomplete="off" />
+				        <input type="text" name="cvv" id="usaepay_onsite_exp_date" autocomplete="off" class="small required"/>
 					</p>
 				</fieldset>
 				<input name="amount" type="hidden" value="<?php echo number_format($event_cost, 2) ?>" />
 				<input name="usaepay_onsite" type="hidden" value="true" />
 				<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
 				<p class="event_form_submit">
-					<input name="usaepay_onsite_submit" id="usaepay_onsite_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+					<input name="usaepay_onsite_submit" id="usaepay_onsite_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
 					<div class="clear"></div>
 				</p>
 				<span id="processing"></span>

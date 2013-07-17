@@ -18,9 +18,9 @@ function event_espresso_worldpay_payment_settings() {
 	$worldpay_settings = get_option('event_espresso_worldpay_settings');
 	if (empty($worldpay_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/worldpay/worldpay-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/worldpay/worldpay-logo.png";
+			$worldpay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/worldpay/worldpay-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/worldpay/worldpay-logo.png";
+			$worldpay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/worldpay/worldpay-logo.png";
 		}
 		$worldpay_settings['worldpay_id'] = '';
 		$worldpay_settings['image_url'] = '';
@@ -28,11 +28,14 @@ function event_espresso_worldpay_payment_settings() {
 		$worldpay_settings['use_sandbox'] = FALSE;
 		$worldpay_settings['force_ssl_return'] = FALSE;
 		$worldpay_settings['bypass_payment_page'] = FALSE;
-		$worldpay_settings['button_url'] = $button_url;
 		if (add_option('event_espresso_worldpay_settings', $worldpay_settings, '', 'no') == false) {
 			update_option('event_espresso_worldpay_settings', $worldpay_settings);
 		}
 	}
+
+	if ( ! isset( $worldpay_settings['button_url'] ) || ! file_exists( $worldpay_settings['button_url'] )) {
+		$worldpay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}	
 
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_worldpay'])
@@ -218,7 +221,7 @@ function event_espresso_display_worldpay_settings() {
 							<?php }?>
 						<li>
 							<label><?php _e('Current Button Image', 'event_espresso'); ?></label>
-	<?php echo (($worldpay_settings['button_url'] == '') ? '<img src="' . $button_url . '" />' : '<img src="' . $worldpay_settings['button_url'] . '" />'); ?></li>
+	<?php echo (($worldpay_settings['button_url'] == '') ? '' : '<img src="' . $worldpay_settings['button_url'] . '" />'); ?></li>
 					</ul>
 				</td>
 			</tr>

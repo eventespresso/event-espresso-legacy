@@ -10,6 +10,9 @@ function espresso_display_qbms($payment_data) {
 	} else {
 		$home = home_url();
 	}
+	
+	wp_register_script( 'qbms', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/qbms/qbms.js', array( 'jquery.validate.js' ), '1.0', TRUE );
+	wp_enqueue_script( 'qbms' );	
 	?>
 
 	<div id="qbms-payment-option-dv" class="payment-option-dv">
@@ -62,15 +65,13 @@ function espresso_display_qbms($payment_data) {
 
 					<fieldset id="qbms-credit-card-info-dv">
 						<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></h4>
-						<p class="form-row" style="width:200px;">
+						<p>
 							<label>Card Number <span class="required">*</span></label>
-
-							<input class="input-text" style="width:180px;" type="text" size="16" maxlength="16" name="qbms_creditcard" />
+							<input class="required input-text" type="text" size="16" maxlength="16" name="qbms_creditcard" />
 						</p>
-						<div class="clear"></div>
-						<p class="form-row form-row-first" style="width:150px;">
+						<p>
 							<label>Expiration Month <span class="required">*</span></label>
-							<select name="qbms_expdatemonth">
+							<select name="qbms_expdatemonth" class="med required">
 								<option value=01> 1 - January</option>
 								<option value=02> 2 - February</option>
 								<option value=03> 3 - March</option>
@@ -85,9 +86,9 @@ function espresso_display_qbms($payment_data) {
 								<option value=12>12 - December</option>
 							</select>
 						</p>
-						<p class="form-row form-row-second" style="width:150px;">
+						<p>
 							<label>Expiration Year  <span class="required">*</span></label>
-							<select name="qbms_expdateyear">
+							<select name="qbms_expdateyear" class="med required">
 								<?php
 								$today = (int)date('y', time());
 								$today1 = (int)date('Y', time());
@@ -102,10 +103,9 @@ function espresso_display_qbms($payment_data) {
 								?>
 							</select>
 						</p>
-						<p class="form-row" style="width:200px;">
+						<p>
 							<label>Card CVV <span class="required">*</span></label>
-
-							<input class="input-text" style="width:100px;" type="text" size="5" maxlength="5" name="qbms_cvv" />
+							<input class="small required" type="text" size="5" maxlength="5" name="qbms_cvv" />
 						</p>
 						<div class="clear"></div>
 					</fieldset>
@@ -113,7 +113,7 @@ function espresso_display_qbms($payment_data) {
 					<input name="qbms" type="hidden" value="true" />
 					<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
 					<p class="event_form_submit">
-						<input name="qbms_submit" id="qbms_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />						
+						<input name="qbms_submit" id="qbms_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />						
 						<div class="clear"></div>
 					</p>
 				</form>

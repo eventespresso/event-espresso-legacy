@@ -19,9 +19,9 @@ function event_espresso_exact_payment_settings() {
 	$exact_settings = get_option('event_espresso_exact_settings');
 	if (empty($exact_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/exact/exact-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/exact/exact-logo.png";
+			$exact_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/exact/exact-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/exact-logo.png";
+			$exact_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/exact-logo.png";
 		}
 		$exact_settings['exact_login_id'] = '';
 		$exact_settings['exact_transaction_key'] = '';
@@ -30,10 +30,13 @@ function event_espresso_exact_payment_settings() {
 		$exact_settings['test_transactions'] = false;
 		$exact_settings['bypass_payment_page'] = 'N';
 		$exact_settings['force_ssl_return'] = false;
-		$exact_settings['button_url'] = $button_url;
 		if (add_option('event_espresso_exact_settings', $exact_settings, '', 'no') == false) {
 			update_option('event_espresso_exact_settings', $exact_settings);
 		}
+	}
+
+	if ( ! isset( $exact_settings['button_url'] ) || ! file_exists( $exact_settings['button_url'] )) {
+		$exact_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div
@@ -103,7 +106,7 @@ function event_espresso_display_exact_settings() {
 							<label for="button_url">
 								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input class="upload_url_input" type="text" name="button_url" size="35" value="<?php echo (($exact_settings['button_url'] == '') ? $button_url : $exact_settings['button_url'] ); ?>" />
+							<input class="upload_url_input" type="text" name="button_url" size="35" value="<?php echo (isset($exact_settings['button_url']) ? $exact_settings['button_url'] : ''  ); ?>" />
 							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
 							</li>
 						<li>

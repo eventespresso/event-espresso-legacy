@@ -31,6 +31,7 @@ function event_espresso_purchase_order_payment_settings() {
 		}
 	}
 
+
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_purchase_order_payment'])
 					&& (!empty($_REQUEST['activate_purchase_order_payment'])

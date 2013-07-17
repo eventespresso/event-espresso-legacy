@@ -192,7 +192,7 @@ function event_espresso_txn() {
 			wp_die(__('There was a problem finding your Registration ID', 'event_espresso'));
 		}
 		$payment_data = apply_filters('filter_hook_espresso_transactions_get_payment_data', $payment_data);
-		espresso_log::singleton()->log(array('file' => __FILE__, 'function' => __FUNCTION__, 'status' => 'Payment for: '. $payment_data['lname'] . ', ' . $payment_data['fname'] . '|| registration id: ' . $payment_data['registration_id'] . '|| transaction details: ' . $payment_data['txn_details']));
+		espresso_log::singleton()->log(array('file' => __FILE__, 'function' => __FUNCTION__, 'status' => 'Payment for: '. $payment_data['lname'] . ', ' . $payment_data['fname'] . '|| registration id: ' . $payment_data['registration_id'] . '|| transaction details: ' . (isset($payment_data['txn_details']) ? $payment_data['txn_details'] : '')));
 		
 		$payment_data = apply_filters('filter_hook_espresso_update_attendee_payment_data_in_db', $payment_data);
 		//add and then immediately do action, so developers can modify this behavior on 'after_payment'

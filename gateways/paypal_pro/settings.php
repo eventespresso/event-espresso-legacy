@@ -35,6 +35,10 @@ function event_espresso_paypal_pro_payment_settings() {
 		}
 	}
 
+	if ( ! isset( $paypal_pro_settings['button_url'] ) || ! file_exists( $paypal_pro_settings['button_url'] )) {
+		$paypal_pro_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_paypal_pro'])
 					&& (!empty($_REQUEST['activate_paypal_pro'])

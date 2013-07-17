@@ -21,6 +21,10 @@ function event_espresso_nab_settings() {
 		}
 	}
 
+	if ( ! isset( $nab_settings['button_url'] ) || ! file_exists( $nab_settings['button_url'] )) {
+		$nab_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_nab'])
 					&& (!empty($_REQUEST['activate_nab'])

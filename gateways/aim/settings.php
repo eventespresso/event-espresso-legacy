@@ -29,6 +29,10 @@ function event_espresso_aim_payment_settings() {
 		}
 	}
 
+	if ( ! isset( $authnet_aim_settings['button_url'] ) || ! file_exists( $authnet_aim_settings['button_url'] )) {
+		$authnet_aim_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/aim/aim-logo.png";
+	}
+	
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_authnet_aim'])
 					&& (!empty($_REQUEST['activate_authnet_aim'])

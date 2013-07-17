@@ -15,9 +15,9 @@ function event_espresso_psigate_payment_settings() {
 	$psigate_settings = get_option('event_espresso_psigate_settings');
 	if (empty($psigate_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/psigate/psigate.gif")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/psigate/psigate.gif";
+			$psigate_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/psigate/psigate.gif";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/psigate/psigate.gif";
+			$psigate_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/psigate/psigate.gif";
 		}
 		$psigate_settings['psigate_id_can'] = '';
 		$psigate_settings['psigate_id_us'] = '';
@@ -25,10 +25,13 @@ function event_espresso_psigate_payment_settings() {
 		$psigate_settings['use_sandbox'] = false;
 		$psigate_settings['bypass_payment_page'] = 'N';
 		$psigate_settings['force_ssl_return'] = false;
-		$psigate_settings['button_url'] = $button_url;
 		if (add_option('event_espresso_psigate_settings', $psigate_settings, '', 'no') == false) {
 			update_option('event_espresso_psigate_settings', $psigate_settings);
 		}
+	}
+
+	if ( ! isset( $psigate_settings['button_url'] ) || ! file_exists( $psigate_settings['button_url'] )) {
+		$psigate_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div
@@ -153,7 +156,7 @@ function event_espresso_display_psigate_settings() {
 					</ul></td>
 			</tr>
 		</table>
-		</p>
+		<p>
 			<input type="hidden" name="update_psigate" value="update_psigate">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update PSiGate Settings', 'event_espresso') ?>" id="save_psigate_settings" />
 		</p>

@@ -192,6 +192,10 @@ if (is_ssl()) {
 
 	$wp_plugin_url = str_replace('http://', 'https://', WP_PLUGIN_URL);
 	$wp_content_url = str_replace('http://', 'https://', WP_CONTENT_URL);
+
+	//force admin-ajax.php to use https:// ssl
+	if ( !is_admin() )
+		add_filter('admin_url', 'ee_force_admin_ajax_ssl', 200, 2);
 }
 
 //Define the plugin directory and path
@@ -289,6 +293,15 @@ function espresso_load_language_files() {
 	}
 }
 add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
+
+
+
+function ee_force_admin_ajax_ssl( $url, $scheme ) {
+	if ( preg_match('/admin-ajax.php/', $url ) ) {
+		$url = preg_replace( '#^.+://#', 'https' . '://', $url );
+	}
+	return $url;
+}
 
 
 function espresso_sideload_current_lang() {
@@ -704,7 +717,7 @@ if (!function_exists('espresso_load_javascript_files')) {
 		wp_register_script('jquery.validate.js', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/jquery.validate.min.js"), array('jquery'), '1.8.1', TRUE);
 		wp_enqueue_script('jquery.validate.js');
 
-		wp_register_script('validation', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/validation.js"), array('jquery'), EVENT_ESPRESSO_VERSION, TRUE);
+		wp_register_script('validation', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/validation.js"), array('jquery.validate.js'), EVENT_ESPRESSO_VERSION, TRUE);
 		wp_enqueue_script('validation');
                 
 	}
@@ -715,7 +728,7 @@ if (!function_exists('espresso_load_pagination_scripts')) {
 		wp_register_script('ee_pagination_plugin', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/jquery.pajinate.min.js"), array('jquery'), EVENT_ESPRESSO_VERSION, TRUE);
 		wp_enqueue_script('ee_pagination_plugin');
         
-		wp_register_script('ee_pagination', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/pagination.js"), array('jquery'), EVENT_ESPRESSO_VERSION, TRUE);
+		wp_register_script('ee_pagination', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/pagination.js"), array('ee_pagination_plugin'), EVENT_ESPRESSO_VERSION, TRUE);
 		wp_enqueue_script('ee_pagination');
 		$data = array( 'ajaxurl' => admin_url( 'admin-ajax.php'  ));
 		wp_localize_script( 'ee_pagination', 'ee_pagination', $data );
@@ -749,13 +762,13 @@ if (!function_exists('espresso_load_jquery')) {
 			global $org_options;
 			//wp_enqueue_script('jquery');
 			if ( function_exists('event_espresso_multi_reg_init') ) {
-				wp_enqueue_script('ee_ajax_request', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_cart_functions.js', array('jquery'));
+				wp_enqueue_script('ee_ajax_request', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_cart_functions.js', array('jquery'), EVENT_ESPRESSO_VERSION);
 				$EEGlobals = array('ajaxurl' => admin_url('admin-ajax.php'), 'plugin_url' => EVENT_ESPRESSO_PLUGINFULLURL, 'event_page_id' => $org_options['event_page_id']);
 				wp_localize_script('ee_ajax_request', 'EEGlobals',$EEGlobals );
 				
 				//Load the jQuery migrate scripts if WP is older than 3.6
 				if ( !version_compare($wp_version, '3.6', '>=' ) ) {
-					wp_register_script('jquery-migrate', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/jquery-migrate-1.1.1.min.js', array('jquery'));
+					wp_register_script('jquery-migrate', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/jquery-migrate-1.1.1.min.js', array('jquery'), EVENT_ESPRESSO_VERSION);
 				}
 				wp_enqueue_script('jquery-migrate');
 			}
@@ -795,13 +808,13 @@ if (!function_exists('add_event_espresso_stylesheet')) {
 			$event_espresso_style_sheet = EVENT_ESPRESSO_UPLOAD_URL . 'templates/event_espresso_style.css';
 		}
 
-		wp_register_style('event_espresso_style_sheets', $event_espresso_style_sheet);
+		wp_register_style('event_espresso_style_sheets', $event_espresso_style_sheet, array(), EVENT_ESPRESSO_VERSION );
 		wp_enqueue_style('event_espresso_style_sheets');
 
 		if (!file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "templates/event_espresso_style.css") && !empty($org_options['style_color'])) {
 			$event_espresso_style_color = EVENT_ESPRESSO_PLUGINFULLURL . 'templates/css/colors/' . $org_options['style_color'];
 
-			wp_register_style('event_espresso_style_color', $event_espresso_style_color);
+			wp_register_style('event_espresso_style_color', $event_espresso_style_color, array(), EVENT_ESPRESSO_VERSION);
 			wp_enqueue_style('event_espresso_style_color');
 		}
 	}
@@ -827,7 +840,7 @@ function add_espresso_themeroller_stylesheet() {
 
 		//Load custom style sheet if available
 		if (!empty($org_options['style_settings']['css_name'])) {
-			wp_register_style('espresso_custom_css', EVENT_ESPRESSO_UPLOAD_URL . 'css/' . $org_options['style_settings']['css_name']);
+			wp_register_style('espresso_custom_css', EVENT_ESPRESSO_UPLOAD_URL . 'css/' . $org_options['style_settings']['css_name'], array(), EVENT_ESPRESSO_VERSION);
 			wp_enqueue_style('espresso_custom_css');
 		}
 
@@ -839,7 +852,7 @@ function add_espresso_themeroller_stylesheet() {
 			if (file_exists(EVENT_ESPRESSO_UPLOAD_DIR . 'themeroller/themeroller-base.css')) {
 				wp_register_style('espresso_themeroller_base', $themeroller_style_path . 'themeroller-base.css');
 			} else {
-				wp_register_style('espresso_themeroller_base', EVENT_ESPRESSO_PLUGINFULLURL . 'templates/css/themeroller/themeroller-base.css');
+				wp_register_style('espresso_themeroller_base', EVENT_ESPRESSO_PLUGINFULLURL . 'templates/css/themeroller/themeroller-base.css', array(), EVENT_ESPRESSO_VERSION);
 			}
 			wp_enqueue_style('espresso_themeroller_base');
 
@@ -849,7 +862,7 @@ function add_espresso_themeroller_stylesheet() {
 			}
 
 			//Load the selected themeroller style
-			wp_register_style('espresso_themeroller', $themeroller_style_path . $org_options['themeroller']['themeroller_style'] . '/style.css');
+			wp_register_style('espresso_themeroller', $themeroller_style_path . $org_options['themeroller']['themeroller_style'] . '/style.css', array(), EVENT_ESPRESSO_VERSION);
 			wp_enqueue_style('espresso_themeroller');
 		}
 		
@@ -865,7 +878,7 @@ function add_espresso_themeroller_stylesheet() {
 			$event_espresso_style_sheet = EVENT_ESPRESSO_UPLOAD_URL . 'templates/css/espresso_default.css';
 		}
 
-		wp_register_style('event_espresso_style_sheets', $event_espresso_style_sheet);
+		wp_register_style('event_espresso_style_sheets', $event_espresso_style_sheet, array(), EVENT_ESPRESSO_VERSION);
 		wp_enqueue_style('event_espresso_style_sheets');
 	}
 }

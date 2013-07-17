@@ -41,6 +41,10 @@ function event_espresso_moneris_hpp_payment_settings() {
 		}
 	}
 
+	if ( ! isset( $moneris_hpp_settings['button_url'] ) || ! file_exists( $moneris_hpp_settings['button_url'] )) {
+		$moneris_hpp_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+
 	//Open or close the postbox div
 	$postbox_style = empty( $_REQUEST['deactivate_moneris_hpp'] ) && ( ! empty( $_REQUEST['activate_moneris_hpp'] ) || array_key_exists( 'moneris_hpp', $active_gateways )) ? '' : 'closed';
 
