@@ -51,11 +51,14 @@ function espresso_display_purchase_order($payment_data) {
 		</div>
 		<br/>
 		<div class="event_espresso_attention event-messages ui-state-highlight">
-		<form id="finalize_purchase_order" name="finalize_purchase_order" method="post" action="<?php echo $finalize_link;?>">
+		<form id="finalize_purchase_order" name="finalize_purchase_order" method="GET" action="<?php echo home_url();//echo $finalize_link;?>">
 			<p>
 				<strong><?php _e('Attention!', 'event_espresso'); ?></strong><br />
 				<?php _e('If you wish to pay by check or money order, then please make note of the information above, and<br />enter Purchase Order or Money Order Number :', 'event_espresso'); ?> 
 				<input type="text" name="po_number" id="po_number" /><br/>
+				<?php foreach($args as $key=>$value){
+					echo "<input type='hidden' name='$key' value='$value'>";
+				}?>
 				<input class="finalize_button allow-leave-page inline-link" name="submit_purcahse_order" value="<?php _e('Complete your Registration', 'event_espresso'); ?>" type="submit" />
 				<div class="clear"></div>
 			</p>			

@@ -31,8 +31,8 @@ function espresso_process_ideal($payment_data) {
 			exit;
 		} else {
 			echo '<p>De betaling kon niet aangemaakt worden.</p>';
-
 			echo '<p><strong>Foutmelding:</strong> ', $iDEAL->getErrorMessage(), '</p>';
+			$payment_data['txn_details'] = '';
 		}
 	} elseif (isset($_POST['bank_id']) && $_POST['bank_id'] == '') {
 		echo "<p>" . __("Please use your browser's back button and select a bank.", 'event_espresso');

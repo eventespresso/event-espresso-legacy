@@ -26,6 +26,7 @@ function event_espresso_wepay_payment_settings() {
 		}
 		$wepay_settings['wepay_client_id'] = '';
 		$wepay_settings['wepay_client_secret'] = '';
+		$wepay_settings['access_token'] = '';
 		$wepay_settings['use_sandbox'] = false;
 		$wepay_settings['bypass_payment_page'] = 'N';
 		$wepay_settings['account_id'] = '';

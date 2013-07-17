@@ -124,7 +124,8 @@ function espresso_process_paypal_pro($payment_data) {
 		unset($PayPalResult['REQUESTDATA']['EXPDATE']);
 		unset($PayPalResult['REQUESTDATA']['CVV2']);
 		unset($PayPalResult['RAWREQUEST']);
-		$payment_data['txn_id'] = $PayPalResult['TRANSACTIONID'];
+		
+		$payment_data['txn_id'] = isset( $PayPalResult['TRANSACTIONID'] ) ? $PayPalResult['TRANSACTIONID'] : '';
 		$payment_data['txn_details'] = serialize($PayPalResult);
 		if (!APICallSuccessful($PayPalResult['ACK'])) {
 			DisplayErrors($Errors);
