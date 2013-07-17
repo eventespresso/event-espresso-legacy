@@ -257,10 +257,10 @@ function edit_event($event_id = 0) {
 					<?php _e('Add Featured Image', 'event_espresso'); ?>
 				</label>
 				<input id="upload_image" type="hidden" size="36" name="upload_image" value="<?php echo $event_thumb ?>" />
-				<input id="upload_image_button" type="button" value="Upload Image" />
+				<input id="upload_image_button" type="button" value="<?php _e('Upload Image', 'event_espresso'); ?>" />
 				<?php if ($event_thumb) { ?>
-					<p class="event-featured-thumb"><img  src="<?php echo $event_thumb ?>" alt="" /></p>
-					<a id='remove-image' href='#' title='Remove this image' onclick='return false;'><?php _e('Remove Image', 'event_espresso'); ?></a>
+					<p class="event-featured-thumb"><img style="width: 100%;"  src="<?php echo $event_thumb ?>" alt="" /></p>
+					<a id='remove-image' href='#' title='<?php _e('Remove Image', 'event_espresso'); ?>' onclick='return false;'><?php _e('Remove Image', 'event_espresso'); ?></a>
 				<?php } ?>
 			</div>
 			
@@ -823,7 +823,7 @@ function edit_event($event_id = 0) {
 		
 			// process the remove link in the metabox
 			jQuery('#remove-image').click(function(){
-				var answer = confirm('<?php _e('Do you really want to delete this image? Please remember to update your event to complete the removal.', 'event_espresso'); ?>');
+				var answer = confirm("<?php _e("Do you really want to delete this image? Please remember to update your event to complete the removal.", 'event_espresso'); ?>");
 				if (answer){
 					jQuery("#upload_image").val('');
 					jQuery("p.event-featured-thumb").remove();

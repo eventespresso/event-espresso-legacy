@@ -87,7 +87,9 @@ function espresso_process_paypal_pro($payment_data) {
 				'taxamt' => '', // Required if you specify itemized cart tax details. Sum of tax for all items on the order.  Total sales tax.
 				'desc' => stripslashes_deep($event_name), // Description of the order the customer is purchasing.  127 char max.
 				'custom' => '', // Free-form field for your own use.  256 char max.
-				'invnum' => '', // Your own invoice or tracking number
+				'invnum' => $_POST['invoice'], // The invoice number in the form. Each time th page is refreshed teh invoice number changes
+							//but if the user submits the same form repeatedly, each submission will have teh same invnum
+							//allowing Paypal to identify repayments
 				'notifyurl' => '' // URL for receiving Instant Payment Notifications.  This overrides what your profile is set to use.
 		);
 

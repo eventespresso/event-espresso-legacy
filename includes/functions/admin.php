@@ -294,9 +294,12 @@ function event_espresso_create_upload_directories() {
 			EVENT_ESPRESSO_UPLOAD_DIR . '/logs/',
 			EVENT_ESPRESSO_UPLOAD_DIR . '/languages/',
 	);
+
+	$folder_permissions = apply_filters( 'espresso_folder_permissions', 0755 );
+
 	foreach ($folders as $folder) {
 		wp_mkdir_p($folder);
-		@ chmod($folder, 0755);
+		@ chmod($folder, $folder_permissions);
 	}
 	
 	if (!file_exists(EVENT_ESPRESSO_UPLOAD_DIR . 'logs/.htaccess')) {
@@ -363,12 +366,14 @@ function event_espresso_trigger_copy_gateways() {
 }
 
 //Functions for copying and moving files and themes
-function event_espresso_smartCopy($source, $dest, $folderPermission = 0755, $filePermission = 0644) {
+function event_espresso_smartCopy($source, $dest, $folder_permissions = 0755, $file_permissions = 0644) {
 # source=file & dest=dir => copy file from source-dir to dest-dir
 # source=file & dest=file / not there yet => copy file from source-dir to dest and overwrite a file there, if present
 # source=dir & dest=dir => copy all content from source to dir
 # source=dir & dest not there yet => copy all content from source to a, yet to be created, dest-dir
 	$result = false;
+	$folder_permissions = apply_filters( 'espresso_folder_permissions', $folder_permissions );
+	$file_permissions = apply_filters( 'espresso_file_permissions', $file_permissions );
 
 	if (is_file($source)) { # $source is file
 		if (is_dir($dest)) { # $dest is folder
@@ -380,11 +385,11 @@ function event_espresso_smartCopy($source, $dest, $folderPermission = 0755, $fil
 			$__dest = $dest;
 		}
 		$result = copy($source, $__dest);
-		chmod($__dest, $filePermission);
+		chmod($__dest, $file_permissions);
 	} elseif (is_dir($source)) { # $source is dir
 		if (!is_dir($dest)) { # dest-dir not there yet, create it
-			@mkdir($dest, $folderPermission);
-			chmod($dest, $folderPermission);
+			@mkdir($dest, $folder_permissions);
+			chmod($dest, $folder_permissions);
 		}
 		if ($source[strlen($source) - 1] != '/') # add '/' if necessary
 			$source = $source . "/";
@@ -397,7 +402,7 @@ function event_espresso_smartCopy($source, $dest, $folderPermission = 0755, $fil
 		while ($file = readdir($dirHandle)) { # note that $file can also be a folder
 			if ($file != "." && $file != "..") { # filter starting elements and pass the rest to this function again
 #                echo "$source$file ||| $dest$file<br />\n";
-				$result = event_espresso_smartCopy($source . $file, $dest . $file, $folderPermission, $filePermission);
+				$result = event_espresso_smartCopy($source . $file, $dest . $file, $folder_permissions, $file_permissions);
 			}
 		}
 		closedir($dirHandle);
