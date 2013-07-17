@@ -200,6 +200,7 @@ if (is_ssl()) {
 
 //Define the plugin directory and path
 define("EVENT_ESPRESSO_PLUGINPATH", "/" . plugin_basename(dirname(__FILE__)) . "/");
+define('EVENT_ESPRESSO_WPPLUGINPATH', plugin_basename(__FILE__) );
 define("EVENT_ESPRESSO_PLUGINFULLPATH", WP_PLUGIN_DIR . EVENT_ESPRESSO_PLUGINPATH);
 define("EVENT_ESPRESSO_PLUGINFULLURL", $wp_plugin_url . EVENT_ESPRESSO_PLUGINPATH);
 //End - Define the plugin directory and path
@@ -353,8 +354,8 @@ function espresso_sideload_current_lang() {
 	}
 	
 	//set correct permissions
-	$perms = 0644;
-	@ chmod( $new_path, $perms);
+	$file_permissions = apply_filters( 'espresso_file_permissions', 0644 );
+	@ chmod( $new_path, $file_permissions);
 
 	//made it this far all looks good. So let's save option flag
 	update_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION, 1);
