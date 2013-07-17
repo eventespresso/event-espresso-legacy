@@ -107,7 +107,7 @@ function ee_core_load_pue_update() {
 				'checkPeriod' => '12', //(optional) - use this parameter to indicate how often you want the client's install to ping your server for update checks.  The integer indicates hours.  If you don't include this parameter it will default to 12 hours.
 				'option_key' => 'site_license_key', //this is what is used to reference the api_key in your plugin options.  PUE uses this to trigger updating your information message whenever this option_key is modified.
 				'options_page_slug' => 'event_espresso',
-				'plugin_basename' => plugin_basename(EVENT_ESPRESSO_PLUGINPATH),
+				'plugin_basename' => EVENT_ESPRESSO_WPPLUGINPATH,
 				'use_wp_update' => TRUE, //if TRUE then you want FREE versions of the plugin to be updated from WP
 				'extra_stats' => $extra_stats
 			);
