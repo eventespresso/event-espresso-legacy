@@ -57,13 +57,12 @@
 
 .choose-diff-pay-option-pg { margin:0 0 6em; font-size:.8em; }
 
-.off-site-payment-gateway-img { position: absolute; top:-4px; right:-5px; 
-	-webkit-box-shadow: none !important;
-	-moz-box-shadow:none !important; 
-	box-shadow:none !important;	
-}
+.off-site-payment-gateway-img { position: absolute; top:-4px; right:-5px; }
 #external-link-msg-pg { margin:0 0 4em; color:#ccc; font-size:.8em; text-align: center;; }
 #external-link-msg-pg img { position: relative; top:2px; }
+
+
+
 
 /* Add some shadow where ui has no hooks */
 
@@ -826,4 +825,17 @@ ul.ui-autocomplete li{
 	#event-reg-form-groups .event_questions {
 		padding: 0;
 	}
+}
+
+
+.espresso_ical_link img,
+
+.remove-cart-item img,
+.register-link-footer img,
+.payment-option-lnk img,
+#external-link-msg-pg img,
+.off-site-payment-gateway-img,
+.espresso_payment_overview img,
+#event_espresso_total_wrapper img {
+	-webkit-box-shadow: none !important; -moz-box-shadow: none !important; box-shadow: none !important;
 }
