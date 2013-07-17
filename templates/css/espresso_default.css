@@ -535,6 +535,10 @@ table.price_list td{
 }
 
 
+.remove-cart-item img {
+	box-shadow: none !important;
+}
+
 /********************************************/
 /****			-==ATTENTION==-			****/
 /**** 	MOVE THIS FILE BEFORE EDITING 	***/
