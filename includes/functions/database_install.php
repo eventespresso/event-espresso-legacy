@@ -38,6 +38,19 @@ function event_espresso_rename_tables($old_table_name, $new_table_name) {
 
 
 function events_data_tables_install() {
+	
+		$prev_versions = get_option( 'espresso_db_update' );
+		$prev_versions = is_array( $prev_versions ) ? $prev_versions : array( $prev_versions );
+		foreach ( $prev_versions as $prev_version ) {
+			if ( $prev_version && version_compare( $prev_version, '3.2', '>' )) {
+				wp_die( '
+			<h2 style="color:red; font-size:2em; text-align:center;">' . __( 'Warning!', 'event_espresso' ) . '</h2>
+			<p style="font-size:1.4em; text-align:center;">
+				' . __( 'THE DATABASE SCHEMA FOR NEWER VERSIONS OF EVENT ESPRESSO IS INCOMPATIBLE WITH OLDER VERSIONS.<br/><br/>If you wish to re-activate an older version Event Espresso, please backup your existing data and remove the tables from the database first, or utilize a fresh install of WordPress.<br/><br/><span style="font-size:.7em;">Please press the back button on your browser to return to the plugins page.</span>', 'event_espresso' ) . '
+			</p>');				
+			}
+		}
+	
 
 	function event_espresso_install_system_names() {
 		global $wpdb;
