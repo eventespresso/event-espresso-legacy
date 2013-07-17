@@ -59,3 +59,6 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	?>
 	</table>
 	</div>
 </div><!-- / .event-display-boxes -->
+<form>
+	<input  type="hidden" name="allow_leave_page" id="allow_leave_page" value="true"/>
+</form>
