@@ -9,6 +9,10 @@ function espresso_display_stripe($payment_data) {
 		} else {
 			$home = home_url();
 		}
+
+	wp_register_script( 'stripe', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/stripe/stripe.js', array( 'jquery.validate.js' ), '1.0', TRUE );
+	wp_enqueue_script( 'stripe' );	
+
 ?>
 
 <div id="stripe-payment-option-dv" class="payment-option-dv">
@@ -103,7 +107,7 @@ function espresso_display_stripe($payment_data) {
 				<input name="stripe" type="hidden" value="true" />
 				<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
 				<p class="event_form_submit">
-					<input name="stripe_submit" id="stripe_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+					<input name="stripe_submit" id="stripe_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
 					<div class="clear"></div>
 				</p>
 			</form>

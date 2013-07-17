@@ -10,6 +10,9 @@ function espresso_display_qbms($payment_data) {
 	} else {
 		$home = home_url();
 	}
+	
+	wp_register_script( 'qbms', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/qbms/qbms.js', array( 'jquery.validate.js' ), '1.0', TRUE );
+	wp_enqueue_script( 'qbms' );	
 	?>
 
 	<div id="qbms-payment-option-dv" class="payment-option-dv">
@@ -64,7 +67,7 @@ function espresso_display_qbms($payment_data) {
 						<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></h4>
 						<p>
 							<label>Card Number <span class="required">*</span></label>
-							<input class="input-text" type="text" size="16" maxlength="16" name="qbms_creditcard" />
+							<input class="required input-text" type="text" size="16" maxlength="16" name="qbms_creditcard" />
 						</p>
 						<p>
 							<label>Expiration Month <span class="required">*</span></label>
@@ -110,7 +113,7 @@ function espresso_display_qbms($payment_data) {
 					<input name="qbms" type="hidden" value="true" />
 					<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
 					<p class="event_form_submit">
-						<input name="qbms_submit" id="qbms_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />						
+						<input name="qbms_submit" id="qbms_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />						
 						<div class="clear"></div>
 					</p>
 				</form>

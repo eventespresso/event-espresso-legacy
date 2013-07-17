@@ -25,7 +25,8 @@ function espresso_display_nab($payment_data) {
 	$mynab->addField('EPS_REFERENCEID', $payment_data['registration_id']);
 	$mynab->addField('EPS_AMOUNT', number_format($payment_data['event_cost'], 2, '.', ''));
 	$mynab->addField('EPS_TIMESTAMP', $timestamp);
-
+	wp_register_script( 'nab', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/nab/nab.js', array( 'jquery.validate.js' ), '1.0', TRUE );
+	wp_enqueue_script( 'nab' );		
 	?>
 <div id="nab-payment-option-dv" class="payment-option-dv">
 
@@ -35,7 +36,7 @@ function espresso_display_nab($payment_data) {
 
 	<div id="nab-payment-option-form-dv" class="hide-if-js">	
 	<div class = "event_espresso_form_wrapper">
-		<form method="post" action="<?php echo $nab_post_url; ?>">
+		<form id="nab_payment_form" method="post" action="<?php echo $nab_post_url; ?>">
 			<input type="hidden" name="EPS_MERCHANT" value="<?php echo $nab_id; ?>">
 			<input type="hidden" name="EPS_PASSWORD" value="<?php echo $nab_pass; ?>">
 			<input type="hidden" name="EPS_REFERENCEID" value="<?php echo $payment_data['registration_id']; ?>">
@@ -53,7 +54,7 @@ function espresso_display_nab($payment_data) {
 				<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso') ?></h4>
 				<p>
 					<label for="EPS_CARDTYPE"><?php _e('Card Type:', 'event_espresso');?></label>
-					<select name="EPS_CARDTYPE" class="wide inputbox">
+					<select name="EPS_CARDTYPE" class="wide required inputbox">
 						<option value="visa"><?php _e('Visa', 'event_espresso');?></option>
 						<option value="mastercard"><?php _e('MasterCard', 'event_espresso');?></option>
 						<option value="amex"><?php _e('Amex', 'event_espresso');?></option>
@@ -61,15 +62,15 @@ function espresso_display_nab($payment_data) {
 				</p>
 				<p>
 					<label for="EPS_CARDNUMBER"><?php _e('Card Number:', 'event_espresso');?></label>
-						<input type="text" class="inputbox" name="EPS_CARDNUMBER" size="27" autocomplete="off"/>
+						<input type="text" class="required inputbox" name="EPS_CARDNUMBER" size="27" autocomplete="off"/>
 				</p>
 				<p>
 					<label for="EPS_CCV"><?php _e('Card CCV:', 'event_espresso');?></label>
-					<input type="text"   class="small inputbox" name="EPS_CCV" size="27" autocomplete="off" />
+					<input type="text"   class="small required inputbox" name="EPS_CCV" size="27" autocomplete="off" />
 				</p>
 				<p>
 					<label for="EPS_EXPIRYMONTH"><?php _e('Card Expires:', 'event_espresso');?></label>
-					<select name="EPS_EXPIRYMONTH" class="med inputbox">
+					<select name="EPS_EXPIRYMONTH" class="med required inputbox">
 							<option value="">- <?php _e('Month', 'event_espresso');?> -</option>
 							<option value="1">01</option>
 							<option value="2">02</option>
@@ -85,7 +86,7 @@ function espresso_display_nab($payment_data) {
 							<option value="12">12</option>
 						</select>
 						&nbsp;
-						<select name="EPS_EXPIRYYEAR" class="med inputbox">
+						<select name="EPS_EXPIRYYEAR" class="med required inputbox">
 							<option value="">- <?php _e('Year', 'event_espresso');?> -</option>
 							<option value="2009">2009</option>
 							<option value="2010">2010</option>
@@ -107,7 +108,7 @@ function espresso_display_nab($payment_data) {
 						</select>
 				</p>
 				<p class="event_form_submit">
-					<input type="submit" value="<?php _e('Complete Purchase', 'event_espresso');?>" class="submit-payment-btn"/>
+					<input type="submit" value="<?php _e('Complete Purchase', 'event_espresso');?>" class="submit-payment-btn allow-leave-page"/>
 					<div class="clear"></div>
 				</p>
 			</fieldset>

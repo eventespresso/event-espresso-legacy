@@ -14,6 +14,8 @@ function espresso_display_paychoice($payment_data) {
 	
 	$paychoice_settings['header'] = $paychoice_settings['display_header'] ? '<h3 class="payment_header">' . $paychoice_settings['header'] . '</h3>' : '';
 
+	wp_register_script( 'paychoice', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/paychoice/paychoice.js', array( 'jquery.validate.js' ), '1.0', TRUE );
+	wp_enqueue_script( 'paychoice' );		
 ?>
 
 <div id="paychoice-payment-option-dv" class="payment-option-dv">
@@ -74,11 +76,11 @@ function espresso_display_paychoice($payment_data) {
 				</p>
 				<p>
 					<label for="csc"><?php _e('CVC Code', 'event_espresso'); ?> <em>*</em></label>
-					<input type="text" name="csc" id="paychoice_csc" class="small"/>
+					<input type="text" name="csc" id="paychoice_csc" class="small required"/>
 				</p>
 				<input name="paychoice" type="hidden" value="true" />
 				<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
-				<input name="paychoice_submit" id="paychoice_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+				<input name="paychoice_submit" id="paychoice_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
 				<div class="clear"></div><br/>
 			</form>
 		</div>

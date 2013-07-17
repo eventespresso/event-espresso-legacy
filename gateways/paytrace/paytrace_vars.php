@@ -6,7 +6,9 @@ function espresso_display_paytrace($payment_data) {
 	$paytrace_settings = get_option('event_espresso_paytrace_settings');
 	$home = $paytrace_settings['force_ssl_return'] ? str_replace('http://', 'https://', home_url()) : home_url();
 	
-		?>
+	wp_register_script( 'paytrace', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/paytrace/paytrace.js', array( 'jquery.validate.js' ), '1.0', TRUE );
+	wp_enqueue_script( 'paytrace' );
+?>
 <div id="paytrace-payment-option-dv" class="payment-option-dv">
 
 	<a id="paytrace-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="paytrace-payment-option-form" style="cursor:pointer;">
@@ -88,7 +90,7 @@ function espresso_display_paytrace($payment_data) {
 				<input name="paytrace" type="hidden" value="true" />
 				<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
 				<p class="event_form_submit">
-					<input name="paytrace_submit" id="paytrace_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+					<input name="paytrace_submit" id="paytrace_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
 					<div class="clear"></div>
 				</p>
 			</form>
