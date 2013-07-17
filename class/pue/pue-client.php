@@ -92,7 +92,6 @@ class PluginUpdateEngineChecker {
 	 */
 	function __construct( $metadataUrl = NULL, $slug = NULL, $options = array() ){
 		$this->metadataUrl = $metadataUrl;
-<<<<<<< HEAD
 		$this->_incoming_slug = $slug;
 
 		$options_verified = $this->_verify_options( $options );
@@ -105,18 +104,6 @@ class PluginUpdateEngineChecker {
 		if ( !$verify_slug ) 
 			return; //get out because the slug isn't valid.  An admin notice should show.
 
-=======
-		if ( is_array($slug ) ) {
-			$premium = array_values($slug['premium']);
-			$slug = $premium[0];
-		}
-		$this->slug = $slug;
-		$tr_slug = str_replace('-','_',$this->slug);
-		$this->pluginFile = get_option('pue_file_loc_'.$this->slug);
-		$this->dismiss_upgrade = 'pu_dismissed_upgrade_'.$tr_slug;
-		$this->pluginName = ucwords(str_replace('-', ' ', $this->slug));
-		$this->pue_install_key = 'pue_install_key_'.$tr_slug;
->>>>>>> 3.1.35-ALPHA
 		$this->current_domain = str_replace('http://','',site_url());
 		$this->current_domain = urlencode(str_replace('https://','',$this->current_domain));
 		$this->optionName = 'external_updates-' . $this->slug;
