@@ -105,7 +105,7 @@ if (!class_exists('Espresso_PaymentGateway')) {
             foreach ($this->fields as $name => $value) {
                 echo "<input type=\"hidden\" name=\"$name\" value=\"$value\"/>\n";
             }
-            echo '<input id="' . $gateway . '-payment-option-lnk" class="payment-option-lnk" type="image" alt="Pay using ' . $gateway_name . '" src="' . $button_url . '" />';
+            echo '<input id="' . $gateway . '-payment-option-lnk" class="payment-option-lnk allow-leave-page" type="image" alt="Pay using ' . $gateway_name . '" src="' . $button_url . '" />';
             echo '
 		 	</form>
 		</div>';
