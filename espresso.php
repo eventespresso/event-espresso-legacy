@@ -340,8 +340,8 @@ function espresso_sideload_current_lang() {
 	}
 	
 	//set correct permissions
-	$perms = 0644;
-	@ chmod( $new_path, $perms);
+	$file_permissions = apply_filters( 'espresso_file_permissions', 0644 );
+	@ chmod( $new_path, $file_permissions);
 
 	//made it this far all looks good. So let's save option flag
 	update_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION, 1);
