@@ -35,7 +35,7 @@ function espresso_display_luottokunta($payment_data){
 	$user_ip = $_SERVER["REMOTE_ADDR"]!='::1'?$_SERVER['REMOTE_ADDR']:'127.0.0.1';
 	
 	$button_url = espresso_select_button_for_display($luottokunta_settings['button_url'], "luottokunta/luottokunta.gif");
-	$submit_html="<input type='image' src='$button_url'/>";
+	$submit_html="<input type='image' class='payment-option-lnk allow-leave-page' src='$button_url'/>";
 
 	if($bypass_payment_page){
 		$bypass_payment_page_js="<script>document.getElementById('luottokunta_form').submit();</script>";
