@@ -192,7 +192,7 @@ function event_espresso_empty_event_trash($event_id) {
 /**
  * Create a postbox widget
  */
-function postbox($id, $title, $content) {
+function espresso_postbox($id, $title, $content) {
 	?>
 
 	<div id="<?php echo $id; ?>" class="postbox">
