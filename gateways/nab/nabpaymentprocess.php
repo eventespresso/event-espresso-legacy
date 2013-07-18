@@ -35,7 +35,7 @@ function espresso_process_nab ($payment_data) {
 		$body .= " at " . date('g:i A') . "\n\nDetails:\n";
 		$body .= $payment_data['txn_details'];
 		wp_mail($payment_data['contact'], $subject, $body);
-		event_espresso_pay();
+		//event_espresso_pay(); can anybody say infinite loop?!
 	}
 	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
