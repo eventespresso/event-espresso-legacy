@@ -437,7 +437,9 @@ function event_espresso_pay() {
 			}
 		}
 	}
-	event_espresso_clear_session_of_attendee($payment_data['attendee_session']);
+	if (isset($payment_data['attendee_session'])){
+		event_espresso_clear_session_of_attendee($payment_data['attendee_session']);
+	}
 	$_REQUEST['page_id'] = $org_options['return_url'];
 	
 	$espresso_content = ob_get_contents();
@@ -467,10 +469,15 @@ function event_espresso_clear_session_of_attendee($attendee_session){
 	//extract the PHP session portion of attendee_session, the part before the "-"
 	$pos_of_dash = strpos($attendee_session, "-");
 	$php_session_id = substr($attendee_session, 0, $pos_of_dash);
-	//load that session instead of teh current requestor's session
+	//if the current session doesn't have id == $php_session_id, (probably
+	//because its the gateway who's sent the request to the current page, not the user themselves)
+	//effectively this overwrites the session (which has id == $php_session_id) to be identical
+	//to teh current session. That means if the user's session had events queued in it, they're gone.
 	session_id($php_session_id);
-	session_start();
-	unset( $_SESSION['espresso_session']['id'] );
+	
+	//in case the current session's id == $php_session_id (ie, the current request IS NOT a
+	//gateway sending a request to thank you page, but IT IS the actual user themselves sending the request)
+	//then we need to reset their ee session using the following
 	ee_init_session();
 }
 
