@@ -40,12 +40,12 @@ function espresso_process_firstdata_e4($payment_data) {
 	} else {
 		$payment_data['txn_id'] = 0;
 	}
-	$payment_data['txn_details'] = serialize($_REQUEST);
-	$curl_session_id = uniqid('', true);
-	global $wpdb;
-	$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET attendee_session = '" . $curl_session_id . "' WHERE attendee_session ='" . $payment_data['attendee_session'] . "' ";
-	$wpdb->query($sql);
-	$payment_data['attendee_session'] = $curl_session_id;
+//	$payment_data['txn_details'] = serialize($_REQUEST);
+//	$curl_session_id = uniqid('', true);
+//	global $wpdb;
+//	$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET attendee_session = '" . $curl_session_id . "' WHERE attendee_session ='" . $payment_data['attendee_session'] . "' ";
+//	$wpdb->query($sql);
+//	$payment_data['attendee_session'] = $curl_session_id;
 
 // Specify your authorize login and secret
 	$myE4->setUserInfo($firstdata_e4_login_id, $firstdata_e4_transaction_key);
