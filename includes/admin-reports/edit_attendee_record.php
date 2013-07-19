@@ -598,17 +598,30 @@ function edit_attendee_record() {
 													}
 
 													//pull the list of questions that are relevant to this event
-													$SQL = "SELECT q.*, at.*, qg.group_name, qg.show_group_description, qg.show_group_name ";
+													$SQL = "SELECT q.*,  qg.group_name, qg.show_group_description, qg.show_group_name ";
 													$SQL .= "FROM " . EVENTS_QUESTION_TABLE . " q ";
-													$SQL .= "LEFT JOIN " . EVENTS_ANSWER_TABLE . " at on q.id = at.question_id ";
+													//$SQL .= "LEFT JOIN " . EVENTS_ANSWER_TABLE . " at on q.id = at.question_id ";
 													$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 													$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
 													$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
-													$SQL .= "AND ( at.attendee_id IS NULL OR at.attendee_id = %d ) ";
+													//$SQL .= "AND ( at.attendee_id IS NULL OR at.attendee_id = %d ) ";
 													$SQL .= $FILTER . " ";
 													$SQL .= "ORDER BY qg.id, q.id ASC";
-
-													$questions = $wpdb->get_results( $wpdb->prepare( $SQL, $id ));
+													//echo "sql:".$wpdb->prepare( $SQL, $id );
+													$questions = $wpdb->get_results( $SQL);
+													
+													$question_ids = array();
+													foreach($questions as $question){
+														$question_ids[]=$question->id;
+													}
+													$answer_objs_to_those_questions = $wpdb->get_results($wpdb->prepare("
+														SELECT question_id,answer FROM ".EVENTS_ANSWER_TABLE." WHERE
+															question_id IN (".implode(",",$question_ids).") AND attendee_id = %d",$id));
+													$answers_to_question_ids = array();
+													foreach($answer_objs_to_those_questions as $answer){
+														$answers_to_question_ids[$answer->question_id] = $answer->answer;
+													}
+													
 													$num_rows = $wpdb->num_rows;
 
 													if ($num_rows > 0) {
@@ -616,11 +629,12 @@ function edit_attendee_record() {
 													//Output the questions
 														$question_displayed = array();
 														foreach ($questions as $question) {
+															
 															$counter++;
 															if (!in_array($question->id, $question_displayed)) {
 																$question_displayed[] = $question->id;
 																//echo '<p>';
-																echo event_form_build_edit($question, $question->answer, $show_admin_only = true);
+																echo event_form_build_edit($question, isset($answers_to_question_ids[$question->id])?$answers_to_question_ids[$question->id]:null, $show_admin_only = true);
 																//echo "</p>";
 
 
