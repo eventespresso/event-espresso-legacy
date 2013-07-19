@@ -20,14 +20,16 @@ function espresso_display_wepay($payment_data) {
 	$fields['type'] = 'SERVICE';
 	$fields['reference_id'] = $attendee_id;
 	$fields['amount'] = number_format($event_cost, 2, '.', '');
-	if ($wepay_settings['force_ssl_return']) {
-		$home = str_replace("http://", "https://", home_url());
-	} else {
-		$home = home_url();
-	}
-	$fields['redirect_uri'] = $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=wepay';
-	$fields['callback_uri'] = $home . '/?page_id=' . $org_options['notify_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=wepay';
+	
+	$fields['redirect_uri'] = add_query_arg(array('id'=>$attendee_id,'r_id'=>$registration_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'wepay'),  get_permalink($org_options['return_url']));
+	$fields['callback_uri'] = add_query_arg(array('id'=>$attendee_id,'r_id'=>$registration_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'wepay'),  get_permalink($org_options['notify_url']));
+//	$fields['redirect_uri'] = $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=wepay';
+//	$fields['callback_uri'] = $home . '/?page_id=' . $org_options['notify_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=wepay';
 
+	if ($wepay_settings['force_ssl_return']) {
+		$fields['redirect_uri'] = str_replace("http://", "https://", $fields['redirect_uri']);
+		$fields['callback_uri'] = str_replace("http://", "https://", $fields['callback_uri']);
+	}
 	if (empty($wepay_settings['access_token'])) return;
 	try{
 	$wepay = new Espresso_Wepay($wepay_settings['access_token']);

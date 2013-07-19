@@ -41,14 +41,18 @@ function espresso_display_mwarrior($payment_data) {
 	$mwarrior->addField('transactionCurrency', $mwarrior_cur);
 
 	$mwarrior->addField('logoURL', $logo_url);
+	$returnURL = add_query_arg(array('id'=>$attendee_id,'r_id'=>$registration_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'mwarrior'),  get_permalink($org_options['return_url']));
+	//notify is the thank yuo page... is that right? mike july 19 2013, editing code...
+	$notifyURL = add_query_arg(array('id'=>$attendee_id,'r_id'=>$registration_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'mwarrior'),  get_permalink($org_options['return_url']));
 	if ($mwarrior_settings['force_ssl_return']) {
-		$home = str_replace("http://", "https://", home_url());
-	} else {
-		$home = home_url();
+		$returnURL = str_replace("http://", "https://", $returnURL);
+		$notifyURL = str_replace("http://", "https://", $notifyURL);
 	}
-	$mwarrior->addField('returnURL', $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=mwarrior');
+	$mwarrior->addField('returnURL',$returnURL);
+	$mwarrior->addField('notifyURL',$notifyURL);
+//	$mwarrior->addField('returnURL', $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=mwarrior');
 //$mwarrior->addField('cancel_return', $home.'/?page_id='.$org_options['cancel_return']);
-	$mwarrior->addField('notifyURL', $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=mwarrior');
+//	$mwarrior->addField('notifyURL', $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=mwarrior');
 	$mwarrior->addField('urlHash', $mwarrior->_calculateHash($mwarrior->fields, "url"));
 	$mwarrior->addField('hash', $mwarrior->_calculateHash($mwarrior->fields, "transaction"));
 	$mwarrior->addField('hashSalt', $salt);
