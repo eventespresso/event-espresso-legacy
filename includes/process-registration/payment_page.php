@@ -376,7 +376,8 @@ function event_espresso_pay() {
 	$REG_ID = espresso_return_reg_id();
 	
 	if ( $REG_ID != false && empty($payment_data['attendee_id'] )) {
-	
+		//we're assuming there is NO payment data in this request, so we'll just 
+		//prepare the $payment_data for display only. No processing of payment etc.
 		$SQL = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id='" . $REG_ID . "' ORDER BY id LIMIT 1";
 		$payment_data['attendee_id'] = $wpdb->get_var( $wpdb->prepare( $SQL, NULL ));
 				
