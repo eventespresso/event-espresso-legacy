@@ -99,9 +99,6 @@ $this_event_id = $event_id;
 		<?php
 	}
 
-	//Social media buttons
-	do_action('action_hook_espresso_social_display_buttons', $event_id);
-
 	$num_attendees = get_number_of_attendees_reg_limit($event_id, 'num_attendees'); //Get the number of attendees. Please visit http://eventespresso.com/forums/?p=247 for available parameters for the get_number_of_attendees_reg_limit() function.
 	if ($num_attendees >= $reg_limit) {
 		?>
