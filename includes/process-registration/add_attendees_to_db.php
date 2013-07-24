@@ -1,6 +1,6 @@
 <?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
 do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	
-if ( ! function_exists('espresso_verify_event_has_x_tickets_remaining' )){
+if ( ! function_exists('espresso_verify_sufficient_remaining_tickets' )){
 	/**
 	 * Checks if the specified event still has $tickets_requested available, and returns true or false.
 	 * Takes into account INCOMPLETE registrations for a few minutes (specified by admin by the "Ticket Reservation Time".
@@ -8,15 +8,41 @@ if ( ! function_exists('espresso_verify_event_has_x_tickets_remaining' )){
 	 * @param type $tickets_requested
 	 * @return boolean
 	 */
-	function espresso_verify_event_has_x_tickets_remaining($event_id, $tickets_requested = 1){
-		$available_spaces = get_number_of_attendees_reg_limit($event_id,'number_available_spaces');
-		if( $available_spaces >= $tickets_requested){
+	function espresso_verify_sufficient_remaining_tickets($event_id){
+		//query for availables spaces, counting INCOMPLETE tickets being purchased by OTHERS within the last X
+		//minutes as being 'reserved'
+		
+		$available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');
+		
+		if( $available_spaces >= espresso_count_tickets_requested()){
 			return true;
 		}else{
 			echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, but all the tickets for this event have been sold, or are being purchased. You may want to try registering later, in case someone doesn\'t finish registering or cancels', 'event_espresso') . '</strong></p></div>';
 		}
 	}
 }	
+
+if ( ! function_exists('espresso_count_tickets_requested') ){
+	/**
+	 * Checks the POST data to determine how many tickets have been requested in the
+	 * request. This takes into account the two formats: providing additional attendee
+	 * info or not.
+	 * @return int
+	 */
+	function espresso_count_tickets_requested(){
+		$data_source = $_POST;
+		//If we are using the number of attendees dropdown, find out how many tickets they want.
+		//echo $data_source['espresso_addtl_limit_dd'];
+		if (isset($data_source['num_people'])) {
+			$num_people = absint($data_source ['num_people']);
+		} else {
+			//we asked for additional info about the other attendees, so count the other attemdee infos
+			$additional_attendees = isset($data_source['x_attendee_fname']) ? count($data_source['x_attendee_fname']) : 0;
+			$num_people = 1 + $additional_attendees;
+		}
+		return $num_people;
+	}
+}
 
 if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 	//This entire function can be overridden using the "Custom Files" addon
@@ -114,18 +140,10 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 		//Check if added admin
 		$skip_check = $skip_check || isset( $data_source['admin'] ) ? TRUE : FALSE;
 		
-		//If we are using the number of attendees dropdown, find out how many tickets they want.
-		//echo $data_source['espresso_addtl_limit_dd'];
-		if (isset($data_source['espresso_addtl_limit_dd'])) {
-			$num_people = absint($data_source ['num_people']);
-		} elseif (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) {
-			$num_people = absint($data_source ['num_people']);
-		} else {
-			$num_people = 1;
-		}
+		
 		
 		//If added by admin, skip the recaptcha check
-		if ( espresso_verify_recaptcha( $skip_check ) && espresso_verify_event_has_x_tickets_remaining($event_id,$num_people)) {
+		if ( espresso_verify_recaptcha( $skip_check ) && espresso_verify_sufficient_remaining_tickets($event_id)) {
 
 			array_walk_recursive($data_source, 'wp_strip_all_tags');
 			array_walk_recursive($att_data_source, 'wp_strip_all_tags');
@@ -248,6 +266,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				return;
 			}
 			
+			
+			
 			$final_price		= apply_filters( 'filter_hook_espresso_attendee_cost', $final_price );
 			$attendee_quantity	= isset( $data_source['num_people'] ) ? $data_source['num_people'] : 1;
 			$coupon_code		= '';
@@ -348,6 +368,16 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$orig_price			= number_format( (float)$orig_price, 2, '.', '' );
 			$final_price		= number_format( (float)$final_price, 2, '.', '' );
 			$total_cost			= $total_cost + $final_price;
+			
+			//If we are using the number of attendees dropdown, find out how many tickets they want.
+			//echo $data_source['espresso_addtl_limit_dd'];
+			if (isset($data_source['espresso_addtl_limit_dd'])) {
+				$num_people = absint($data_source ['num_people']);
+			} elseif (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) {
+				$num_people = absint($data_source ['num_people']);
+			} else {
+				$num_people = 1;
+			}
 
 			$columns_and_values = array(
 				'registration_id'		=> $registration_id,
@@ -613,7 +643,6 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 	//This function is called from the shopping cart
 	function event_espresso_add_attendees_to_db_multi() {
-	
 		//echo '<h3>'. __CLASS__ . '->' . __FUNCTION__ . ' <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h3>';
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 		
