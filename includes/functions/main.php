@@ -589,8 +589,22 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 			case 'num_attendees_slash_reg_limit' :
 			case 'avail_spaces_slash_reg_limit' :
 				$num_attendees = 0;
-				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id=%d AND (payment_status='Completed' OR payment_status='Pending' OR payment_status='Refund') ";
-				$wpdb->get_results( $wpdb->prepare( $a_sql, $event_id ), ARRAY_A);
+				global $org_options;
+				$seconds_in_past = $org_options['ticket_reservation_time'] * 60;
+				//NOTE: we count incomplete and declined payments temporarily
+				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " 
+						WHERE 
+							event_id=%d AND 
+							(	payment_status='Completed' OR 
+								payment_status='Pending' OR
+								payment_status='Refund' OR
+								(
+									payment_status IN ('Payment Declined','Incomplete') AND 
+									date> NOW() - %d
+								)
+							)";
+				 //echo "query".$wpdb->prepare( $a_sql, $event_id, $seconds_in_past) ;
+				$wpdb->get_results( $wpdb->prepare( $a_sql, $event_id, $seconds_in_past ), ARRAY_A);
 				if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
 					$num_attendees = $wpdb->last_result[0]->quantity;
 				}
