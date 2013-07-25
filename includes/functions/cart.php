@@ -78,7 +78,7 @@ if (!function_exists('event_espresso_add_event_process')) {
 		$_SESSION['espresso_session']['events_in_session'][$event_id] = array(
 				'id' => $event_id,
 				'event_name' => stripslashes_deep($event_name),
-				'attendee_quantitiy' => 1,
+				'attendee_quantity' => 1,
 				'start_time_id' => '',
 				'price_id' => array(),
 				'cost' => 0.00,
@@ -216,7 +216,7 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 					}
 				}
 
-				$updated_events_in_session[$event_id]['attendee_quantitiy'] = $attendee_quantity;
+				$updated_events_in_session[$event_id]['attendee_quantity'] = $attendee_quantity;
 
 				//Get Cost of each event
 				//$updated_events_in_session[$event_id]['cost'] = $event_individual_cost[$event_id];

@@ -4,20 +4,30 @@ if ( ! function_exists('espresso_verify_sufficient_remaining_tickets' )){
 	/**
 	 * Checks if the specified event still has $tickets_requested available, and returns true or false.
 	 * Takes into account INCOMPLETE registrations for a few minutes (specified by admin by the "Ticket Reservation Time".
-	 * @param type $event_id
-	 * @param type $tickets_requested
+	 * @param int $event_id
+	 * @param array $data_source like $_POST
 	 * @return boolean
 	 */
-	function espresso_verify_sufficient_remaining_tickets($event_id){
+	function espresso_verify_sufficient_remaining_tickets($event_id,$data_source){
 		//query for availables spaces, counting INCOMPLETE tickets being purchased by OTHERS within the last X
 		//minutes as being 'reserved'
 		
 		$available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');
-		
-		if( $available_spaces >= espresso_count_tickets_requested()){
+		$tickets_requested = espresso_count_tickets_requested($data_source);
+		if( $available_spaces >= $tickets_requested){
 			return true;
 		}else{
-			echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, but all the tickets for this event have been sold, or are being purchased. You may want to try registering later, in case someone doesn\'t finish registering or cancels', 'event_espresso') . '</strong></p></div>';
+			//the global $only_show_event_full_message_once_for is ONLY used here.
+			//it is used to make sure that for MER, we only show this message once per event
+			//because code will pass through this function once for EACH attendee
+			global $wpdb,$only_show_event_full_message_once_for;
+			$event_name = $wpdb->get_var($wpdb->prepare("SELECT event_name FROM ".EVENTS_DETAIL_TABLE." WHERE id=%d",$event_id));
+			if($only_show_event_full_message_once_for[$event_id]){
+				echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . sprintf(__('Sorry, you have requested %1$d ticket(s) for \'%2$s\', but only %3$d remains(s). ', 'event_espresso'),$tickets_requested,$event_name,$available_spaces) .
+				__("All other tickets for this event have been sold, or are being purchased. You may want to try registering later, in case someone doesn't finish registering or cancels", "event_espresso").'</strong></p></div>';
+			}
+			$only_show_event_full_message_once_for[$event_id] = true;
+			return false;
 		}
 	}
 }	
@@ -27,15 +37,20 @@ if ( ! function_exists('espresso_count_tickets_requested') ){
 	 * Checks the POST data to determine how many tickets have been requested in the
 	 * request. This takes into account the two formats: providing additional attendee
 	 * info or not.
+	 * @param $data_source ARRAY like $_POST, containing 
 	 * @return int
 	 */
-	function espresso_count_tickets_requested(){
-		$data_source = $_POST;
+	function espresso_count_tickets_requested($data_source){
 		//If we are using the number of attendees dropdown, find out how many tickets they want.
 		//echo $data_source['espresso_addtl_limit_dd'];
 		if (isset($data_source['num_people'])) {
 			$num_people = absint($data_source ['num_people']);
-		} else {
+		//if $data_source is from MER, and we are requriing additional attendee info,
+		//foreach attendee, the 'attendee_quantity' should be set.
+		//and yes, it has a typo.
+		} elseif(isset($data_source['attendee_quantity'])){
+			$num_people = absint($data_source['attendee_quantity']);
+		}else {
 			//we asked for additional info about the other attendees, so count the other attemdee infos
 			$additional_attendees = isset($data_source['x_attendee_fname']) ? count($data_source['x_attendee_fname']) : 0;
 			$num_people = 1 + $additional_attendees;
@@ -143,7 +158,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 		
 		
 		//If added by admin, skip the recaptcha check
-		if ( espresso_verify_recaptcha( $skip_check ) && espresso_verify_sufficient_remaining_tickets($event_id)) {
+		if ( espresso_verify_recaptcha( $skip_check ) && espresso_verify_sufficient_remaining_tickets($event_id,$data_source)) {
 
 			array_walk_recursive($data_source, 'wp_strip_all_tags');
 			array_walk_recursive($att_data_source, 'wp_strip_all_tags');
@@ -666,11 +681,6 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 
 			// If there are events in the session, add them one by one to the attendee table
 			if ($count_of_events > 0) {
-			
-				//first event key will be used to find the first attendee
-				$first_event_id = key($events_in_session);
-
-				reset($events_in_session);
 				foreach ($events_in_session as $event_id => $event) {
 
 					$event_meta = event_espresso_get_event_meta($event_id);
