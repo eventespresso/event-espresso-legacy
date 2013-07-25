@@ -408,6 +408,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				'zip'					=> $zip,
 				'email'					=> $email,
 				'phone'					=> $phone,
+				'date'					=> current_time('mysql'),
 				'payment'				=> $payment,
 				'txn_type'				=> $txn_type,
 				'coupon_code'			=> $coupon_code,
@@ -427,7 +428,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			);
 			
 
-			$data_formats = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%f', '%f', '%f' );
+			$data_formats = array( '%s', '%s', '%s','%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%f', '%f', '%f' );
 
 			// save the attendee details - FINALLY !!!
 			if ( ! $wpdb->insert( EVENTS_ATTENDEE_TABLE, $columns_and_values, $data_formats )) {
@@ -544,6 +545,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 									'state'				=> empty($att_data_source['x_attendee_state'][$k]) ? '' : ee_sanitize_value($att_data_source['x_attendee_state'][$k]),
 									'zip'				=> empty($att_data_source['x_attendee_zip'][$k]) ? '' : ee_sanitize_value($att_data_source['x_attendee_zip'][$k]),
 									'phone'				=> empty($att_data_source['x_attendee_phone'][$k]) ? '' : ee_sanitize_value($att_data_source['x_attendee_phone'][$k]),
+									'date'				=> current_time('mysql'),
 									'payment'			=> $payment,
 									'event_time'		=> $start_time,
 									'end_time'			=> $end_time,
@@ -561,7 +563,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 									'final_price'		=> $final_price										
 								);
 								
-								$format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%f', '%f', '%f' );
+								$format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%f', '%f', '%f' );
 								$wpdb->insert( EVENTS_ATTENDEE_TABLE, $ext_att_data_source, $format );
 								
 								//Added by Imon

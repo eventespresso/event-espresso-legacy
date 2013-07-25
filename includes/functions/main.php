@@ -590,11 +590,13 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 			case 'avail_spaces_slash_reg_limit' :
 				$num_attendees = 0;
 				global $org_options;
-				$seconds_in_past = $org_options['ticket_reservation_time'] * 60;
+				$minutes_in_past = $org_options['ticket_reservation_time'];
 				$current_users_session =  isset($_SESSION['espresso_session']['id']) && !empty($_SESSION['espresso_session']['id']) ? $_SESSION['espresso_session']['id'] : '';
 				//NOTE: we count incomplete and declined payments temporarily if they were initiated by someone else.
 				//if they're yours, then pretend they dont exist.
-				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " 
+				//$x_minutes_ago_timestmap = strtotime("- ".$minutes_in_past." minute",);
+				$x_minutes_ago = date("Y-m-d H:i:s",strtotime(current_time('mysql'))-($minutes_in_past*60));
+					$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " 
 						WHERE 
 							event_id=%d AND 
 							(	payment_status='Completed' OR 
@@ -602,11 +604,11 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 								payment_status='Refund' OR
 								(
 									payment_status IN ('Payment Declined','Incomplete') AND 
-									date> NOW() - %d AND
+									date > %s AND
 									attendee_session != %s
 								)
 							)";
-				$query = $wpdb->prepare( $a_sql, $event_id, $seconds_in_past, $current_users_session );
+				$query = $wpdb->prepare( $a_sql, $event_id, $x_minutes_ago, $current_users_session );
 				//echo "query:$query";
 				$wpdb->get_results( $query , ARRAY_A);
 				if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
