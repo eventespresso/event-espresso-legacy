@@ -124,10 +124,11 @@ function espresso_update_attendee_payment_status_in_db($payment_data) {
 			'txn_type' 					=> $payment_data['txn_type'],
 			'txn_id' 						=> $payment_data['txn_id'],
 			'payment_date' 		=> $payment_data['payment_date'],
-			'transaction_details' 	=> $payment_data['txn_details']
+			'transaction_details' 	=> $payment_data['txn_details'],
+			'date'=>current_time('mysql')
 		), 
 		array( 'attendee_session' => $payment_data['attendee_session'] ), 
-		array( '%s', '%s', '%s', '%s', '%s' ),
+		array( '%s', '%s', '%s', '%s', '%s','%s' ),
 		array( '%s' ) 
 	);	
 	
