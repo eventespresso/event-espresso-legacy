@@ -598,7 +598,7 @@ function edit_attendee_record() {
 													}
 
 													//pull the list of questions that are relevant to this event
-													$SQL = "SELECT at.*, q.*, qg.group_name, qg.show_group_description, qg.show_group_name ";
+													$SQL = "SELECT q.*, at.*, qg.group_name, qg.show_group_description, qg.show_group_name ";
 													$SQL .= "FROM " . EVENTS_QUESTION_TABLE . " q ";
 													$SQL .= "LEFT JOIN " . EVENTS_ANSWER_TABLE . " at on q.id = at.question_id ";
 													$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
