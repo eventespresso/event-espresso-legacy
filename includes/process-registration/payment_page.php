@@ -376,7 +376,8 @@ function event_espresso_pay() {
 	$REG_ID = espresso_return_reg_id();
 	
 	if ( $REG_ID != false && empty($payment_data['attendee_id'] )) {
-	
+		//we're assuming there is NO payment data in this request, so we'll just 
+		//prepare the $payment_data for display only. No processing of payment etc.
 		$SQL = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id='" . $REG_ID . "' ORDER BY id LIMIT 1";
 		$payment_data['attendee_id'] = $wpdb->get_var( $wpdb->prepare( $SQL, NULL ));
 				
@@ -394,7 +395,7 @@ function event_espresso_pay() {
 			wp_die(__('There was a problem finding your Registration ID', 'event_espresso'));
 		}
 			
-		if ( $payment_data['payment_status'] != 'Completed' || $payment_data['payment_status'] != 'Refund' ) {
+		if ( $payment_data['payment_status'] != 'Completed' && $payment_data['payment_status'] != 'Refund' ) {
 		
 			
 			$payment_data = apply_filters('filter_hook_espresso_thank_you_get_payment_data', $payment_data);
