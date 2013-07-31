@@ -750,7 +750,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				
 				//printr( $attendees, '$attendees  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 				foreach ($attendees as $attendee) {
-				
+					
 					if ( $attendee->is_primary ) {
 						$primary_attendee_id	= $attendee_id = $attendee->id;
 						$coupon_code			= $attendee->coupon_code;
@@ -765,14 +765,17 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 						$attendee_email			= $attendee->email;
 						$registration_id		= $attendee->registration_id;
 					}
+					$attendee->final_price = apply_filters( 'filter_hook_espresso__add_attendees_to_db_multi__final_price', $attendee->final_price, $attendee->orig_price );
 					$final_total		+= $attendee->final_price;
 					$sub_total			+= (int)$attendee->quantity * $attendee->orig_price;
 					$discounted_total	+= (int)$attendee->quantity * $attendee->final_price;
 					$quantity			+= (int)$attendee->quantity;
 				}
-				$discount_amount	= $sub_total - $discounted_total;
-				$total_cost			= $discounted_total;		
-				$total_cost			= $total_cost < 0 ? 0.00 : (float)$total_cost;
+				$discount_amount	 = $sub_total - $discounted_total;
+				$total_cost = $discounted_total < 0 ? 0.00 : (float)$discounted_total;
+
+				$discount_amount = apply_filters( 'filter_hook_espresso__add_attendees_to_db_multi__discount_amount', $discount_amount );
+				$total_cost = apply_filters( 'filter_hook_espresso__add_attendees_to_db_multi__total_cost', $total_cost );
 				
 				if ( function_exists( 'espresso_update_attendee_coupon_info' ) && $primary_attendee_id && ! empty( $attendee->coupon_code )) {
 					espresso_update_attendee_coupon_info( $primary_attendee_id, $attendee->coupon_code  );
@@ -794,7 +797,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				}						
 				
 				//Post the gateway page with the payment options
-				if ( $final_total > 0 ) {
+				if ( $total_cost > 0 ) {
 ?>
 
 <div class="espresso_payment_overview event-display-boxes ui-widget" >
@@ -838,7 +841,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				<td colspan="3"><strong class="event_espresso_name">
 					<?php _e('Total Amount due: ', 'event_espresso'); ?>
 					</strong></td>
-				<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] ?><?php echo number_format($final_total,2); ?></td>
+				<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] ?><?php echo number_format($total_cost,2); ?></td>
 			</tr>
 		</table>
 		<p class="event_espresso_refresh_total">

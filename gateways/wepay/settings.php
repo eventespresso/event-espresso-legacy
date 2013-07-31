@@ -184,13 +184,13 @@ function event_espresso_display_wepay_settings() {
 		<?php _e('To use WePay, follow these steps:'); ?>
 		<ol>
 			<li>
-				<?php _e('At WePay.com (or stage.wepay.com for sandbox) sign up as a user.'); ?>
+				<?php _e('At WePay.com (or stage.wepay.com for sandbox) sign up as a user.','event_espresso'); ?>
 			</li>
 			<li>
-				<?php _e('Add Event Espresso as an API application in your account.'); ?>
+				<?php _e('Add Event Espresso as an API application in your account. (If you are using a LIVE account, WePay may need to approve your application before using it.)','event_espresso'); ?>
 			</li>
 			<li>
-				<?php _e('Copy your client id, client secret, account id, and access token from yourAPI application\'s API Keys page and paste them here.'); ?>
+				<?php _e('Copy your client id, client secret, account id, and access token from yourAPI application\'s API Keys page and paste them here.','event_espresso'); ?>
 			</li>
 		</ol>
 	</div>
