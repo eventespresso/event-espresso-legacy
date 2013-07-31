@@ -590,7 +590,7 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 			case 'avail_spaces_slash_reg_limit' :
 				$num_attendees = 0;
 				global $org_options;
-				$minutes_in_past = isset($org_options['ticket_reservation_time']) ? $org_options['ticket_reservation_time']: 30;
+				$minutes_in_past = $org_options['ticket_reservation_time'];
 				$current_users_session =  isset($_SESSION['espresso_session']['id']) && !empty($_SESSION['espresso_session']['id']) ? $_SESSION['espresso_session']['id'] : '';
 				//NOTE: we count incomplete and declined payments temporarily if they were initiated by someone else.
 				//if they're yours, then pretend they dont exist.
