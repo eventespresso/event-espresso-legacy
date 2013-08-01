@@ -49,7 +49,6 @@ if ( ! function_exists('espresso_count_tickets_requested') ){
 			$num_people = absint($data_source ['num_people']);
 		//if $data_source is from MER, and we are requriing additional attendee info,
 		//foreach attendee, the 'attendee_quantity' should be set.
-		//and yes, it has a typo.
 		} elseif(isset($data_source['attendee_quantity'])){
 			$num_people = absint($data_source['attendee_quantity']);
 		}else {
@@ -694,6 +693,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 					
 						$counter = 1;
 						//foreach price type in event attendees
+						
 						foreach ( $event['event_attendees'] as $price_id => $event_attendees ) { 
 						
 							$session_vars['data'] = $event;
@@ -713,7 +713,11 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 
 								// ADD ATTENDEE TO DB
 								$return_data = event_espresso_add_attendees_to_db( $event_id, $session_vars, TRUE );
-								
+								if ( ! $return_data){
+									//something went wrong when adding them to the DB, 
+									//like the event sold out
+									return;
+								}
 								$tmp_registration_id = $return_data['registration_id'];
 								$notifications = $return_data['notifications'];
 
