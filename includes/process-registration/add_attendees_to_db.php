@@ -11,7 +11,7 @@ if ( ! function_exists('espresso_verify_sufficient_remaining_tickets' )){
 	function espresso_verify_sufficient_remaining_tickets($event_id,$data_source){
 		//query for availables spaces, counting INCOMPLETE tickets being purchased by OTHERS within the last X
 		//minutes as being 'reserved'
-		
+		echo "verifying sufficient tickets remain!";
 		$available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');
 		$tickets_requested = espresso_count_tickets_requested($data_source);
 		if( $available_spaces >= $tickets_requested){
@@ -21,8 +21,11 @@ if ( ! function_exists('espresso_verify_sufficient_remaining_tickets' )){
 			//it is used to make sure that for MER, we only show this message once per event
 			//because code will pass through this function once for EACH attendee
 			global $wpdb,$only_show_event_full_message_once_for;
+			if(is_array($only_show_event_full_message_once_for)){
+				$only_show_event_full_message_once_for = array();
+			}
 			$event_name = $wpdb->get_var($wpdb->prepare("SELECT event_name FROM ".EVENTS_DETAIL_TABLE." WHERE id=%d",$event_id));
-			if($only_show_event_full_message_once_for[$event_id]){
+			if( ! $only_show_event_full_message_once_for[$event_id]){
 				echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . sprintf(__('Sorry, you have requested %1$d ticket(s) for \'%2$s\', but only %3$d remains(s). ', 'event_espresso'),$tickets_requested,$event_name,$available_spaces) .
 				__("All other tickets for this event have been sold, or are being purchased. You may want to try registering later, in case someone doesn't finish registering or cancels", "event_espresso").'</strong></p></div>';
 			}
