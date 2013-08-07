@@ -1,19 +1,19 @@
 <?php
-function espresso_display_securepay($data) {
+function espresso_display_securepay_aus($data) {
 	extract($data);
 	global $org_options;
-	$securepay_settings = get_option('event_espresso_securepay_settings');
-	$use_sandbox = $securepay_settings['securepay_use_sandbox'];
-//	wp_register_script( 'securepay', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/securepay/securepay.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
-//	wp_enqueue_script( 'securepay' );		
+	$securepay_aus_settings = get_option('event_espresso_securepay_aus_settings');
+	$use_sandbox = $securepay_aus_settings['securepay_aus_use_sandbox'];
+//	wp_register_script( 'securepay_aus', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/securepay_aus/securepay_aus.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
+//	wp_enqueue_script( 'securepay_aus' );		
 	?>
-<div id="securepay-payment-option-dv" class="payment-option-dv">
+<div id="securepay_aus-payment-option-dv" class="payment-option-dv">
 
-	<a id="securepay-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="securepay-payment-option-form" style="cursor:pointer;">
+	<a id="securepay_aus-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="securepay_aus-payment-option-form" style="cursor:pointer;">
 		<img alt="Pay using Credit Card" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/pay-by-credit-card.png">
 	</a>	
 
-	<div id="securepay-payment-option-form-dv" class="hide-if-js">	
+	<div id="securepay_aus-payment-option-form-dv" class="hide-if-js">	
 		<div class="event-display-boxes">
 			<?php
 			if ($use_sandbox) {
@@ -22,19 +22,19 @@ function espresso_display_securepay($data) {
 				echo '<p>CVV2: 123 </p>';
 				echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3></div>';
 			}
-			if ($securepay_settings['force_ssl_return']) {
+			if ($securepay_aus_settings['force_ssl_return']) {
 				$home = str_replace('http://', 'https://', home_url());
 			} else {
 				$home = home_url();
 			}
-			if ($securepay_settings['display_header']) {
+			if ($securepay_aus_settings['display_header']) {
 ?>
-			<h3 class="payment_header"><?php echo $securepay_settings['header']; ?></h3><?php } ?>
+			<h3 class="payment_header"><?php echo $securepay_aus_settings['header']; ?></h3><?php } ?>
 
 			<div class = "event_espresso_form_wrapper">
-				<form id="securepay_payment_form" name="securepay_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
+				<form id="securepay_aus_payment_form" name="securepay_aus_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
 					
-					<fieldset id="securepay-billing-info-dv">
+					<fieldset id="securepay_aus-billing-info-dv">
 						<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>
 						<p>
 							<label for="first_name"><?php _e('First Name', 'event_espresso'); ?></label>
@@ -66,7 +66,7 @@ function espresso_display_securepay($data) {
 						</p>
 					</fieldset>
 
-					<fieldset id="securepay-credit-card-info-dv">
+					<fieldset id="securepay_aus-credit-card-info-dv">
 						<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></h4>
 						<p>
 					        <label for="card-type"><?php _e('Card Card Type', 'event_espresso'); ?></label>
@@ -113,10 +113,10 @@ function espresso_display_securepay($data) {
 					        <input type="text" name="cvv" id="ppp_exp_date" autocomplete="off"  class="small required"/>
 						</p>
 					</fieldset>
-					<input name="securepay" type="hidden" value="true" />
+					<input name="securepay_aus" type="hidden" value="true" />
 					<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
 					<p class="event_form_submit">
-						<input name="securepay_submit" id="securepay_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />						
+						<input name="securepay_aus_submit" id="securepay_aus_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />						
 						<div class="clear"></div>
 					</p>
 					<span id="processing"></span>
@@ -126,7 +126,7 @@ function espresso_display_securepay($data) {
 		</div>
 		<br/>
 		<p class="choose-diff-pay-option-pg">
-			<a class="hide-the-displayed" rel="securepay-payment-option-form" style="cursor:pointer;"><?php _e('Choose a different payment option', 'event_espresso'); ?></a>
+			<a class="hide-the-displayed" rel="securepay_aus-payment-option-form" style="cursor:pointer;"><?php _e('Choose a different payment option', 'event_espresso'); ?></a>
 		</p>
 
 	</div>
@@ -134,4 +134,4 @@ function espresso_display_securepay($data) {
 	<?php
 }
 
-add_action('action_hook_espresso_display_onsite_payment_gateway','espresso_display_securepay');
+add_action('action_hook_espresso_display_onsite_payment_gateway','espresso_display_securepay_aus');

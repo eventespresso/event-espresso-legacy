@@ -1,33 +1,33 @@
 <?php
 
-function espresso_transactions_securepay_get_attendee_id($attendee_id) {
+function espresso_transactions_securepay_aus_get_attendee_id($attendee_id) {
 	if (!empty($_REQUEST['id'])) {
 		$attendee_id = $_REQUEST['id'];
 	}
 	return $attendee_id;
 }
 
-function espresso_process_securepay($payment_data) {
+function espresso_process_securepay_aus($payment_data) {
 	extract($payment_data);
 
-	$securepay_settings = get_option('event_espresso_securepay_settings');
+	$securepay_aus_settings = get_option('event_espresso_securepay_aus_settings');
 
-	$sandbox = $securepay_settings['securepay_use_sandbox'];
+	$sandbox = $securepay_aus_settings['securepay_aus_use_sandbox'];
 	if($sandbox){
-		$payment_url = 'https://test.securepay.com.au/xmlapi/payment';
+		$payment_url = 'https://test.securepay_aus.com.au/xmlapi/payment';
 	}else{
-		$payment_url = 'https://api.securepay.com.au/xmlapi/payment';
+		$payment_url = 'https://api.securepay_aus.com.au/xmlapi/payment';
 	}
 		
 	echo 'echodump of $payment_data';
 	var_dump($payment_data);
 $messageId= wp_generate_password(15,false);
 //$messageTimeStamp = date("YdmHs").substrmicrotime(false)
-$merchantID = $securepay_settings['merchant_id'];
-$merchant_password = $securepay_settings['mechant_password'];
+$merchantID = $securepay_aus_settings['merchant_id'];
+$merchant_password = $securepay_aus_settings['mechant_password'];
 $orderRef = "TestSoapOrder";
 $amount = '1000000';
-$currency = $securepay_settings['currency_format'];
+$currency = $securepay_aus_settings['currency_format'];
 $cardType = $_POST['creditcardtype'];   //Visa
 $cardNumber = $_POST['card_num'];
 $cardExpiry = $_POST['expmonth'].'/'.$_POST['expyear'];
@@ -84,7 +84,7 @@ echo "failReason: " . $result->failReason . "<br />";
 echo "<br />";
 	
 //// Setup SecurePay object
-//	$SecurePayConfig = array('Sandbox' => $sandbox, 'APIUsername' => $securepay_settings['securepay_api_username'], 'APIPassword' => $securepay_settings['securepay_api_password'], 'APISignature' => $securepay_settings['securepay_api_signature']);
+//	$SecurePayConfig = array('Sandbox' => $sandbox, 'APIUsername' => $securepay_aus_settings['securepay_aus_api_username'], 'APIPassword' => $securepay_aus_settings['securepay_aus_api_password'], 'APISignature' => $securepay_aus_settings['securepay_aus_api_signature']);
 //	$SecurePay = new Espresso_SecurePay($SecurePayConfig);
 //
 //// Populate data arrays with order data.
@@ -141,7 +141,7 @@ echo "<br />";
 //
 //	$PaymentDetails = array(
 //			'amt' => $payment_data['total_cost'], // Required.  Total amount of order, including shipping, handling, and tax.
-//			'currencycode' => $securepay_settings['currency_format'], // Required.  Three-letter currency code.  Default is USD.
+//			'currencycode' => $securepay_aus_settings['currency_format'], // Required.  Three-letter currency code.  Default is USD.
 //			'itemamt' => '', // Required if you include itemized cart details. (L_AMTn, etc.)  Subtotal of items not including S&H, or tax.
 //			'shippingamt' => '', // Total shipping costs for the order.  If you specify shippingamt, you must also specify itemamt.
 //			'handlingamt' => '', // Total handling costs for the order.  If you specify handlingamt, you must also specify itemamt.
