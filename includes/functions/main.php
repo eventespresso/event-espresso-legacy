@@ -1126,10 +1126,20 @@ if(!function_exists('event_espresso_init_active_gateways')){
 	 * for some gateways (eg: the google checkout gateway needed to be able to add a hook on init for all page loads, which it coudln't do before)
 	 */
 	function event_espresso_init_active_gateways(){
+		//in case any of the gateways do CURL requests, tell CURL where to find the CA file
+		add_action('http_api_curl', 'espresso_curl_ca_file', 10, 1);
 		$active_gateways = apply_filters('action_filter_espresso_active_gateways', get_option('event_espresso_active_gateways', array()));
 		foreach ($active_gateways as $gateway => $path) {
 			event_espresso_require_gateway($gateway . "/init.php",false);
 		}
+	}
+}
+if (!function_exists('event_espresso_require_file')) {
+	/**
+	 * For any CURL requests, add the certificate authority file in gateways. Currently this only does the trick if using CURL...
+	 */
+	function espresso_curl_ca_file( $handle ) {
+		curl_setopt($handle, CURLOPT_CAINFO, EVENT_ESPRESSO_PLUGINFULLPATH . 'gateways/cacert.pem');
 	}
 }
 
