@@ -1139,7 +1139,10 @@ if (!function_exists('event_espresso_require_file')) {
 	 * For any CURL requests, add the certificate authority file in gateways. Currently this only does the trick if using CURL...
 	 */
 	function espresso_curl_ca_file( $handle ) {
-		curl_setopt($handle, CURLOPT_CAINFO, EVENT_ESPRESSO_PLUGINFULLPATH . 'gateways/cacert.pem');
+		//first double-check the user hasn't set their own CA file in PHP.ini
+		if( ! ini_get ('curl.cainfo')){
+			curl_setopt($handle, CURLOPT_CAINFO, EVENT_ESPRESSO_PLUGINFULLPATH . 'gateways/cacert.pem');
+		}
 	}
 }
 
