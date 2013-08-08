@@ -1137,6 +1137,8 @@ if(!function_exists('event_espresso_init_active_gateways')){
 if (!function_exists('event_espresso_require_file')) {
 	/**
 	 * For any CURL requests, add the certificate authority file in gateways. Currently this only does the trick if using CURL...
+	 * The other transports 'WP_HTTP_Stream' and 'WP_HTTP_FSockOpen' don't actually verify the peers anyways, it seems. Or at least
+	 * they didn't complain of needing to know where a CA file was on my (mike's) localhost setup on windows
 	 */
 	function espresso_curl_ca_file( $handle ) {
 		//first double-check the user hasn't set their own CA file in PHP.ini
