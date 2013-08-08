@@ -93,7 +93,7 @@ function event_espresso_display_securepay_aus_settings() {
 						</li>
 						<li>
 							<label for="mechant_password">
-								<?php _e('Merchant Key', 'event_espresso'); ?>
+								<?php _e('API Transaction Password', 'event_espresso'); ?>
 							</label>
 							<input type="text" name="mechant_password" size="35" value="<?php echo $securepay_aus_settings['mechant_password']; ?>">
 						</li>
