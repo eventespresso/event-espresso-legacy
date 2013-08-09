@@ -127,7 +127,7 @@ if (!function_exists('espresso_event_export')) {
 		//echo $sql;
 		$today = date("Y-m-d-Hi", time());
 		$filename = $_REQUEST['all_events'] == "true" ? __('all-events', 'event_espresso') : sanitize_title_with_dashes($event_name);
-		$filename = $filename . "-" . $today;
+		$filename = str_replace(" ","-",$filename) . "-" . $today;
 		switch ($_REQUEST['type']) {
 			case "csv" :
 				$st = "";
