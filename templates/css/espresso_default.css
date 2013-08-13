@@ -534,17 +534,22 @@ table.price_list td{
 	font-weight: bold; font-size:16px; color:#fff; text-shadow:1px 1px 0px rgba(0,0,0,.75); text-decoration: none;
 }
 
-
+.espresso_ical_link img,
+.remove-cart-item img,
+.register-link-footer img,
+.payment-option-lnk img,
+#external-link-msg-pg img,
+.off-site-payment-gateway-img,
+.espresso_payment_overview img,
+#event_espresso_total_wrapper img {
+	-webkit-box-shadow: none !important; -moz-box-shadow: none !important; box-shadow: none !important;
+}
 .ee-ajax-loader-img,
 .espresso_ical_link img,
 .register-link-footer img,
 .remove-cart-item .ee_delete_item_from_cart  {
 	border:none !important; box-shadow: none !important;
 }
-
-
-
-
 /********************************************/
 /****			-==ATTENTION==-			****/
 /**** 	MOVE THIS FILE BEFORE EDITING 	***/
