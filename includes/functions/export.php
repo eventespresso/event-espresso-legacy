@@ -126,8 +126,8 @@ if (!function_exists('espresso_event_export')) {
 
 		//echo $sql;
 		$today = date("Y-m-d-Hi", time());
-		$filename = $_REQUEST['all_events'] == "true" ? __('all-events', 'event_espresso') : sanitize_title_with_dashes($event_name);
-		$filename = $filename . "-" . $today;
+		$filename = $_REQUEST['all_events'] == "true" ? __('all-events', 'event_espresso') : $event_name;
+		$filename = sanitize_title_with_dashes($filename) . "-" . $today;
 		switch ($_REQUEST['type']) {
 			case "csv" :
 				$st = "";
@@ -403,9 +403,9 @@ if (!function_exists('espresso_export_stuff')) {
 
 							$participants = $wpdb->get_results($sql);
 
-							$filename = ( isset($_REQUEST['all_events']) && $_REQUEST['all_events'] == "true" ) ? __('all-events', 'event_espresso') : sanitize_title_with_dashes($event_name);
+							$filename = ( isset($_REQUEST['all_events']) && $_REQUEST['all_events'] == "true" ) ? __('all-events', 'event_espresso') : $event_name;
 
-							$filename = $filename . "-" . $today;
+							$filename = sanitize_title_with_dashes($filename) . "-" . $today;
 							switch ($_REQUEST['type']) {
 								case "csv" :
 									$st = "";

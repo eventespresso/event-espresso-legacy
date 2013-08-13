@@ -748,7 +748,6 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				
 				$attendees			= $wpdb->get_results( $wpdb->prepare( $SQL, $current_session_id ));				
 				$quantity			= 0;
-				$final_total		= 0;
 				$sub_total			= 0;
 				$discounted_total	= 0;
 				$discount_amount	= 0;
@@ -771,10 +770,9 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 						$attendee_email			= $attendee->email;
 						$registration_id		= $attendee->registration_id;
 					}
-					$final_total		+= $attendee->final_price;
+					$quantity			+= (int)$attendee->quantity;
 					$sub_total			+= (int)$attendee->quantity * $attendee->orig_price;
 					$discounted_total	+= (int)$attendee->quantity * $attendee->final_price;
-					$quantity			+= (int)$attendee->quantity;
 				}
 				$discount_amount	= $sub_total - $discounted_total;
 				$total_cost			= $discounted_total;		
@@ -800,7 +798,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				}						
 				
 				//Post the gateway page with the payment options
-				if ( $final_total > 0 ) {
+				if ( $total_cost > 0 ) {
 ?>
 
 <div class="espresso_payment_overview event-display-boxes ui-widget" >
@@ -844,7 +842,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				<td colspan="3"><strong class="event_espresso_name">
 					<?php _e('Total Amount due: ', 'event_espresso'); ?>
 					</strong></td>
-				<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] ?><?php echo number_format($final_total,2); ?></td>
+				<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] ?><?php echo number_format($total_cost,2); ?></td>
 			</tr>
 		</table>
 		<p class="event_espresso_refresh_total">
@@ -871,7 +869,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 						event_espresso_email_confirmations(array('session_id' => $_SESSION['espresso_session']['id'], 'send_admin_email' => 'true', 'send_attendee_email' => 'true', 'multi_reg' => true));
 					}
 					
-				} elseif ( $final_total == 0.00 ) {
+				} elseif ( $total_cost == 0.00 ) {
 					?>
 <p>
 	<?php _e('Thank you! Your registration is confirmed for', 'event_espresso'); ?>

@@ -139,6 +139,7 @@ function event_espresso_dashboard_widget() {
 	global $wp_meta_boxes, $org_options;
 	if (!isset($org_options['espresso_dashboard_widget'])||$org_options['espresso_dashboard_widget'] != 'Y')
 		return;
+	wp_enqueue_style('event_espresso', EVENT_ESPRESSO_PLUGINFULLURL . 'css/admin-styles.css');
 	wp_enqueue_script( 'dataTables',  EVENT_ESPRESSO_PLUGINFULLURL.'scripts/jquery.dataTables.min.js', array('jquery') );//Events core table script
 	wp_add_dashboard_widget('todays_events_widget', __('Upcoming Events', 'event_espresso'), 'custom_dashboard_events');
 }
