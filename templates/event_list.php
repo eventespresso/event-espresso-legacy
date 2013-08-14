@@ -183,7 +183,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		$sql .= $limit > 0 ? ' LIMIT 0, '.$limit : '';  
 		
 		$events = $wpdb->get_results( $wpdb->prepare($sql, ''));
-		echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//		echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		
 		$category_id			= isset($wpdb->last_result[0]->id) ? $wpdb->last_result[0]->id : '';
 		$category_name			= isset($wpdb->last_result[0]->category_name) ? $wpdb->last_result[0]->category_name : '';
