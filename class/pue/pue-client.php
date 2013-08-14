@@ -92,6 +92,7 @@ class PluginUpdateEngineChecker {
 	 */
 	function __construct( $metadataUrl = NULL, $slug = NULL, $options = array() ){
 		$this->metadataUrl = $metadataUrl;
+
 		$this->_incoming_slug = $slug;
 
 		$options_verified = $this->_verify_options( $options );
@@ -200,6 +201,9 @@ class PluginUpdateEngineChecker {
 				$this->_display_errors('slug_array_invalid');
 				return FALSE;
 			}
+		} else {
+			$this->_display_errors('slug_not_array');
+			return FALSE;
 		}
 		
 		$this->_installed_version = $this->getInstalledVersion();
@@ -238,6 +242,13 @@ class PluginUpdateEngineChecker {
 
 			case 'no_version_present' :
 				$msg .= __('For some reason PUE is unable to determine the current version of the plugin. It is possible that the incorrect value was sent for the "plugin_basename" key in the <strong>$options</strong> array.', $this->lang_domain);
+				break;
+
+			case 'slug_not_array' :
+				//Old method for plugin name is just to use the slug and manipulate
+				$pluginame = ucwords(str_replace('-', ' ', $this->_incoming_slug) );
+				$msg .= sprintf( __('The following plugin needs to be updated in order to work with this version of our plugin update script: <strong>%s</strong</p><p>You will have to update this manually.  Contact support for further intstructions', $this->lang_domain), $pluginname);
+				break;
 		}
 
 		$this->_error_msg = '<p>' . $msg . '</p>';
@@ -274,6 +285,7 @@ class PluginUpdateEngineChecker {
 	 * @param mixed (array|string) $slug either an array containing free product slugs or premium product
 	 */
 	private function _set_slug_and_slug_props( $slug, $options ) {
+
 
 		$this->pluginFile = $options['plugin_basename'];
 		$this->lang_domain = isset( $options['lang_domain'] ) && !empty($options['lang_domain']) ? $options['lang_domain'] : NULL;
