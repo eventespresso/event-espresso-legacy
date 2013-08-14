@@ -174,7 +174,7 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 				$start_time_id = '';
 				if (array_key_exists('start_time_id', $_POST) && array_key_exists($event_id, $_POST['start_time_id'])) {
 
-					$updated_events_in_session[$event_id]['start_time_id'] = $wpdb->escape($_POST['start_time_id'][$event_id]);
+					$updated_events_in_session[$event_id]['start_time_id'] = esc_sql($_POST['start_time_id'][$event_id]);
 
 					//unset the post key so it doesn't get added below
 					unset($_POST['start_time_id'][$event_id]);
@@ -199,7 +199,7 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 				if (is_array($price_id)) {
 					foreach ($price_id as $_price_id => $val) {
 						//assign the event type and the quantity
-						$updated_events_in_session[$event_id]['price_id'][$_price_id]['attendee_quantity'] = $wpdb->escape($val);
+						$updated_events_in_session[$event_id]['price_id'][$_price_id]['attendee_quantity'] = esc_sql($val);
 						$updated_events_in_session[$event_id]['price_id'][$_price_id]['price_type'] = $events_in_session[$event_id]['price_id'][$_price_id]['price_type'];
 
 						$attendee_quantity++;
@@ -215,14 +215,14 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 
 				//Get Cost of each event
 				//$updated_events_in_session[$event_id]['cost'] = $event_individual_cost[$event_id];
-				//$updated_events_in_session[$event_id]['event_name'] = $wpdb->escape( $_POST['event_name'][$event_id] );
+				//$updated_events_in_session[$event_id]['event_name'] = esc_sql( $_POST['event_name'][$event_id] );
 
 				if (isset($_POST['event_espresso_coupon_code'])) {
-					$_SESSION['espresso_session']['event_espresso_coupon_code'] = $wpdb->escape($_POST['event_espresso_coupon_code']);
+					$_SESSION['espresso_session']['event_espresso_coupon_code'] = esc_sql($_POST['event_espresso_coupon_code']);
 				}
 				
 				if (isset($_POST['event_espresso_groupon_code'])) {
-					$_SESSION['espresso_session']['groupon_code'] = $wpdb->escape($_POST['event_espresso_groupon_code']);
+					$_SESSION['espresso_session']['groupon_code'] = esc_sql($_POST['event_espresso_groupon_code']);
 				}
 			}
 			

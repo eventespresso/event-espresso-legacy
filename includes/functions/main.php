@@ -865,7 +865,8 @@ if (!function_exists('espresso_registration_id')) {
 
 	function espresso_registration_id($attendee_id) {
 		global $wpdb;
-		$sql = $wpdb->get_results("SELECT registration_id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id ='" . $wpdb->escape($attendee_id) . "'");
+		$SQL = "SELECT registration_id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id =%d ";
+		$wpdb->get_results($wpdb->prepare( $SQL, $attendee_id ));
 		$num_rows = $wpdb->num_rows;
 
 		if ($num_rows > 0) {
@@ -881,7 +882,8 @@ if (!function_exists('espresso_attendee_id')) {
 
 	function espresso_attendee_id($registration_id) {
 		global $wpdb;
-		$sql = $wpdb->get_results("SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id ='" . $wpdb->escape($registration_id) . "'");
+		$SQL = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id =%s ";
+		$wpdb->get_results($wpdb->prepare( $SQL, $registration_id ));
 		$num_rows = $wpdb->num_rows;
 
 		if ($num_rows > 0) {
