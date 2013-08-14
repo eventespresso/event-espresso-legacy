@@ -217,7 +217,7 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			wp_register_script( 'espresso_add_reg_attendees', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_add_reg_attendees.js', array('jquery'), '0.1', TRUE );
 			wp_enqueue_script( 'espresso_add_reg_attendees' );
 
-			$espresso_add_reg_attendees = array( 'additional_limit' => $additional_limit, 'attendee_form' => stripslashes( $attendee_form ));
+			$espresso_add_reg_attendees = array( 'additional_limit' => min( $additional_limit, $available_spaces ), 'attendee_form' => stripslashes( $attendee_form ));
 			wp_localize_script( 'espresso_add_reg_attendees', 'espresso_add_reg_attendees', $espresso_add_reg_attendees );		
 		}
 		return $html;
