@@ -2417,3 +2417,6 @@ jsDatePick is distributed under the terms of the GNU General Public License.
 	padding-left: 20px;
 	background: transparent url(images/accept.png) no-repeat left;
 }
+
+#image-display img {max-width: 100%;}
+
