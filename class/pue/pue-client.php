@@ -321,7 +321,7 @@ class PluginUpdateEngineChecker {
 			//let's go through the conditions on what we use for the slug
 			$set_slug = $this->_is_premium ? $slug['premium'][key($slug['premium'])] : NULL;
 			$set_slug = empty( $set_slug ) && $this->_is_prerelease ? $slug['prerelease'][key($slug['prerelease'])] : $set_slug;
-			$set_slug = empty( $set_slug ) ? $slug['free'][key($slug['free'])] : $set_slug;
+			$set_slug = empty( $set_slug ) && isset( $slug['free'] ) ? $slug['free'][key($slug['free'])] : $set_slug;
 		} else {
 			//first verify that $slug is not empty!
 			if ( empty($slug ) ) {
@@ -503,7 +503,8 @@ class PluginUpdateEngineChecker {
 				$this->_force_premium_upgrade = TRUE;
 				$this->pue_install_key = 'pue_install_key_'.$this->slug;
 				$this->optionName = 'external_updates-' . $this->slug;
-				update_option( 'pue_force_upgrade_' . $this->_incoming_slug['free'][key($this->_incoming_slug['free'])], $this->slug );
+				if ( isset( $this->_incoming_slug['free'] ) )
+					update_option( 'pue_force_upgrade_' . $this->_incoming_slug['free'][key($this->_incoming_slug['free'])], $this->slug );
 			}
 
 			$this->checkForUpdates();
