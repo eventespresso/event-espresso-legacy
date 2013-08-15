@@ -130,7 +130,7 @@ class PluginUpdateEngineChecker {
 	 */
 	private function _check_for_forced_upgrade() {
 		//is this premium?  let's delete any saved options for free
-		if ( $this->_is_premium ) {
+		if ( $this->_is_premium && isset($this->_incoming_slug['free'] ) ) {
 			delete_option( 'pue_force_upgrade_' . $this->_incoming_slug['free'][key($this->_incoming_slug['free'])]);
 		} else {
 
