@@ -8,6 +8,8 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 		<?php _e('Payment Overview', 'event_espresso'); ?>
   </h3>
 	<div class="event-data-display ui-widget-content ui-corner-bottom" >
+	<?php do_action('action_hook_espresso_payment_page_top', $event_id, $event_meta, $all_meta);?>
+
 <?php
 	if ( $total_cost == 0 ) {
 		unset($_SESSION['espresso_session']['id']);
@@ -55,6 +57,6 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 <?php
 }
 ?>
-	
+<?php do_action('action_hook_espresso_payment_page_bottom', $event_id, $event_meta, $all_meta);?>
 	</div><!-- / .event-data-display -->
 </div><!-- / .event-display-boxes -->

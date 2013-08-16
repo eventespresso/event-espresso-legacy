@@ -5,6 +5,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	?>
 		<?php _e('Payment Overview', 'event_espresso'); ?>
   </h3>
 	<div class="event-data-display ui-widget-content ui-corner-bottom" >
+	<?php do_action('action_hook_espresso_payment_overview_page_top', $event_id, $event_meta, $all_meta);?>
   <table>
 		<tr>
 			<td><?php _e('Class/Event:', 'event_espresso'); ?></td>
@@ -57,6 +58,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	?>
 			?>
 		</tr>
 	</table>
+	<?php do_action('action_hook_espresso_payment_overview_page_bottom', $event_id, $event_meta, $all_meta);?>
 	</div>
 </div><!-- / .event-display-boxes -->
 <form>
