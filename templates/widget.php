@@ -22,17 +22,8 @@ if (!class_exists('Event_Espresso_Widget')) {
 
             global $wpdb, $org_options;
             /* Our variables from the widget settings. */
-
-            $title = apply_filters('widget_title', $instance['title']);
-
-            /* Before widget (defined by themes). */
-            echo $before_widget;
-
-            /* Display the widget title if one was input (before and after defined by themes). */
-            if ($title)
-                echo $before_title . $title . $after_title;
-
-            if ($instance['category_name'] != '') {
+            
+			if ($instance['category_name'] != '') {
                 $type = 'category';
             }
 
@@ -43,7 +34,7 @@ if (!class_exists('Event_Espresso_Widget')) {
             $show_deleted = $instance['show_deleted'] == 'false' ? " AND e.event_status != 'D' " : '';
             $show_recurrence = $instance['show_recurrence'] == 'false' ? " AND e.recurrence_id = '0' " : '';
             $limit = $instance['limit'] > 0 ? " LIMIT 0," . $instance['limit'] . " " : ' LIMIT 0,5 ';
-            //$order_by = $order_by != 'NULL'? " ORDER BY ". $order_by ." ASC " : " ORDER BY date(start_date), id ASC ";
+
             $order_by = " ORDER BY date(start_date), id ASC ";
 
             if (isset($type) && $type == 'category') {
@@ -66,12 +57,27 @@ if (!class_exists('Event_Espresso_Widget')) {
             $sql .= $order_by;
             $sql .= $limit;
 
-
+			//Retrieve the events (if any)
             $events = $wpdb->get_results($sql);
+			
+			//If no events, don't show the widget
+			if (count($events) == 0)
+				return;
+			
+			//Get the widget title
+			$title = apply_filters('widget_title', $instance['title']);
 
+            /* Before widget (defined by themes). */
+            echo $before_widget;
+
+            /* Display the widget title if one was input (before and after defined by themes). */
+            if ($title)
+                echo $before_title . $title . $after_title;
+				
             //print_r($events);
             //event_espresso_get_event_details($sql);
             foreach ($events as $event) {
+				
                 $event->id = $event->id;
                 $event->event_name = isset($event->event_name) ? $event->event_name : '';
                 $event->start_date = isset($event->start_date) ? $event->start_date : '';
