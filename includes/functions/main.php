@@ -1559,7 +1559,7 @@ function espresso_update_event_meta( $event_id, $new_meta ){
 add_action('action_hook_espresso_update_event_meta', 'espresso_update_event_meta', 10, 2);
 
 function espresso_add_additional_registration($event_id){
-	$link = '<div class="additional-registration-div"><a href="'.espresso_reg_url($event_id).'" id="add-additional-registration-lnk" class="add-additional-registration-lnk additional-registration-lnk ui-priority-primary " title="' . __('Add Another Registration to This Event', 'event_espresso') . '">' . __('Add Another Registration to This Event', 'event_espresso') . '</a></div>';
+	$link = '<div class="additional-registration-div"><a href="'.espresso_reg_url($event_id).'" id="additional-registration-lnk" class="additional-registration-lnk " title="' . __('Add Another Registration to This Event', 'event_espresso') . '">' . __('Add Another Registration to This Event', 'event_espresso') . '</a></div>';
 	echo $link;
 }
 add_action('action_hook_espresso_payment_page_bottom', 'espresso_add_additional_registration', 10, 1);
