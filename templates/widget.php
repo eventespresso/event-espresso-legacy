@@ -129,7 +129,9 @@ if (!class_exists('Event_Espresso_Widget')) {
                         case 'NOT_ACTIVE':
                             //Don't show the event if any of the above are true
                             break;
-
+						case 'DRAFT':
+							//Don't show the event if event is draft.
+							break;
                         default:
                             ?>
                             <p><a href="<?php echo $registration_url; ?>"><?php echo stripslashes_deep($event->event_name) ?> - <?php echo event_date_display($event->start_date) ?></a>
