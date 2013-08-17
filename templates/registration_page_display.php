@@ -243,7 +243,7 @@ if ( $reg_form_only == false ){
 					wp_nonce_field('reg_nonce', 'reg_form_nonce');
 					
 					//Recaptcha portion
-					if ( $org_options['use_captcha'] == 'Y' && empty($_REQUEST['edit_details']) && ! is_user_logged_in()) {
+					if ( $org_options['use_captcha'] == 'Y' && empty($_REQUEST['edit_details']) && ! is_user_logged_in() && !empty($org_options['recaptcha_publickey']) && !empty($org_options['recaptcha_privatekey'])) {
 					
 						if ( ! function_exists('recaptcha_get_html')) {
 							require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/recaptchalib.php');
