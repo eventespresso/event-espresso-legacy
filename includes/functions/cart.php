@@ -880,7 +880,7 @@ if (!function_exists('event_espresso_confirm_and_pay')) {
 
 				if (is_array($field_value) && array_key_exists($events_in_session, $field_value)) {
 
-					if (is_multi($field_value)) {
+					if (espresso_is_multi($field_value)) {
 
 						//$multi_key= $field_value[$k];
 						foreach ($field_value[$k] as $mkey => $mval) {

@@ -1001,7 +1001,7 @@ function espresso_unserialize($data, $return_format = '') {
 }
 
 //Checks to see if the array is multidimensional
-function is_multi($array) {
+function espresso_is_multi($array) {
 	return (count($array) != count($array, 1));
 }
 
