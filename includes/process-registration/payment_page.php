@@ -81,18 +81,30 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 
 		$display_questions .= '<p>' . $question->question . ':<br /> ' . str_replace(',', '<br />', $question->answer) . '</p>';
 	}
+
+	// update total cost for primary attendee
+	$total_cost = ((float)$final_price * (int)$quantity) - $attendee->amount_pd;
+	$total_attendees = (int)$quantity;
+	$attendee_prices[] = array( 'option' => $attendee->price_option, 'qty' => (int)$quantity, 'price' => (float)( $final_price - $attendee->amount_pd ));
 	
 	// get # of attendees
-	$SQL = "SELECT COUNT(quantity) FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id =%s ";
-	
-	$SQL .= apply_filters('filter_hook_espresso_payment_page_count_attendees_sql_where', '');
-	
-	$num_people = $wpdb->get_var( $wpdb->prepare( $SQL, $registration_id ));
-
-	//If we are using the number of attendees dropdown
-	if ( $quantity > 1 && $quantity > $num_people ) {
-		$num_people = $quantity;
+	$SQL = "SELECT price_option, quantity, final_price, amount_pd  FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id =%s";
+	$prices = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ));
+	//printr( $prices, '$prices  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+	if ( $prices !== FALSE ) {
+		$total_cost = 0;
+		$total_attendees = 0;
+		$attendee_prices = array();
+		// ensure prices is an array
+		$prices = is_array( $prices ) ? $prices : array( $prices );
+		foreach ( $prices as $price ) {
+			// update total cost for all attendees
+			$total_cost += (float)($price->final_price * (int)$price->quantity) - (float)$price->amount_pd;
+			$total_attendees += $price->quantity;
+			$attendee_prices[] = array( 'option' => $price->price_option, 'qty' => (int)$price->quantity, 'price' => (float)( $price->final_price - $price->amount_pd ));
+		}
 	}
+
 
 	$SQL = "SELECT * FROM " . EVENTS_DETAIL_TABLE . " WHERE id = %d";
 	$event = $wpdb->get_row( $wpdb->prepare( $SQL, $event_id ));
@@ -104,12 +116,9 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	$active = isset( $event->is_active ) ? $event->is_active : TRUE;
 	$conf_mail = isset( $event->conf_mail ) ? $event->conf_mail : '';
 
- 	$final_price = (float)$final_price;
     //$event_price_x_attendees = number_format( $final_price * $num_people, 2, '.', '' );
     $event_original_cost = $orig_price;
 	
-	// update total cost for primary attendee
-	$total_cost = (float)$final_price * (int)$num_people;
 
 	// Added for seating chart addon
 	// This code block overrides the cost using seating chart add-on price
