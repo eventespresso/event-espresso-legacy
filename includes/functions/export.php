@@ -340,8 +340,10 @@ if (!function_exists('espresso_export_stuff')) {
 										if (!isset($ignore[$question->id])) {
 											$question_list[$question->id] = $question->question;
 											$question_filter[$question->id] = $question->id;
-											array_push($basic_header, escape_csv_val(stripslashes($question->question)));
-											//array_push($question_sequence, $question->sequence);		
+											$question_text = escape_csv_val( stripslashes( $question->question ));
+											if ( ! in_array( $question_text, $basic_header )) {
+												array_push( $basic_header, $question_text );
+											}																	
 										}
 									}
 								}
