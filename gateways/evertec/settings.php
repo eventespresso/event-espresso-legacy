@@ -3,15 +3,13 @@
 function event_espresso_evertec_payment_settings() {
 	global $active_gateways;
 	if (isset($_POST['update_evertec'])) {
-		$evertec_settings['evertec_id'] = $_POST['evertec_id'];
-		$evertec_settings['tax_override'] = empty($_POST['tax_override']) ? false : true;
-		$evertec_settings['shipping_override'] = empty($_POST['shipping_override']) ? false : true;
+		$evertec_settings['username'] = $_POST['username'];
+		$evertec_settings['password'] = $_POST['password'];
+		$evertec_settings['evertec_pages_language'] = $_POST['evertec_pages_language'];
 		$evertec_settings['image_url'] = $_POST['image_url'];
-		$evertec_settings['currency_format'] = $_POST['currency_format'];
 		$evertec_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
 		$evertec_settings['bypass_payment_page'] = $_POST['bypass_payment_page'];
 		$evertec_settings['force_ssl_return'] = empty($_POST['force_ssl_return']) ? false : true;
-		$evertec_settings['no_shipping'] = $_POST['no_shipping'];
 		$evertec_settings['button_url'] = $_POST['button_url'];
 		update_option('event_espresso_evertec_settings', $evertec_settings);
 		echo '<div id="message" class="updated fade"><p><strong>' . __('Evertec settings saved.', 'event_espresso') . '</strong></p></div>';
@@ -23,15 +21,13 @@ function event_espresso_evertec_payment_settings() {
 		} else {
 			$evertec_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/evertec/btn_stdCheckout2.gif";
 		}
-		$evertec_settings['evertec_id'] = '';
-		$evertec_settings['tax_override'] = false;
-		$evertec_settings['shipping_override'] = false;
+		$evertec_settings['username'] = '';
+		$evertec_settings['password'] = '';
+		$evertec_settings['evertec_pages_language'] = 'es';
 		$evertec_settings['image_url'] = '';
-		$evertec_settings['currency_format'] = 'USD';
 		$evertec_settings['use_sandbox'] = false;
 		$evertec_settings['bypass_payment_page'] = 'N';
 		$evertec_settings['force_ssl_return'] = false;
-		$evertec_settings['no_shipping'] = '0';
 		if (add_option('event_espresso_evertec_settings', $evertec_settings, '', 'no') == false) {
 			update_option('event_espresso_evertec_settings', $evertec_settings);
 		}
@@ -93,105 +89,26 @@ function event_espresso_display_evertec_settings() {
 			<tr>
 				<td valign="top"><ul>
 						<li>
-							<label for="evertec_id">
-								<?php _e('Evertec ID', 'event_espresso'); ?>
+							<label for="username">
+								<?php _e('Username', 'event_espresso'); ?>
 							</label>
-							<input type="text" name="evertec_id" size="35" value="<?php echo $evertec_settings['evertec_id']; ?>">
-							<br />
-							<?php _e('(The email address you use when you log in to your account at Evertec.com)', 'event_espresso'); ?>
+							<input type="text" name="username" size="35" value="<?php echo $evertec_settings['username']; ?>">
 						</li>
 						<li>
-							<label for="tax_override">
-								<?php _e('Override Profile-Based Tax', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=tax_override_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a> <input name="tax_override" type="checkbox" value="1" <?php echo $evertec_settings['tax_override'] ? 'checked="checked"' : '' ?> />
+							<label for="password">
+								<?php _e('Password', 'event_espresso'); ?>
 							</label>
-							
+							<input type="text" name="password" size="35" value="<?php echo $evertec_settings['password']; ?>">
 						</li>
+						
 						<li>
-							<label for="shipping_override">
-								<?php _e('Override Profile-Based Shipping', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=shipping_override_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a> <input name="shipping_override" type="checkbox" value="1" <?php echo $evertec_settings['shipping_override'] ? 'checked="checked"' : '' ?> />
+							<label for="evertec_pages_language">
+								<?php _e("Evertec Payment Pages' Language", 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=evertec_pages_language"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							
+							<?php 
+							$language_options = array(array('id'=>'es','text'=>  __("Spanish", "event_espresso")),array('id'=>'en','text'=>  __("English", "event_espresso")));
+							echo select_input('evertec_pages_language', $language_options, $evertec_settings['evertec_pages_language']); ?>
 						</li>
-						<li>
-							<label for="currency_format">
-								<?php _e('Select the Currency for Your Country', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=currency_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-							</label>
-							<select name="currency_format">
-								<option value="<?php echo $evertec_settings['currency_format']; ?>"><?php echo $evertec_settings['currency_format']; ?></option>
-								<option value="USD">
-									<?php _e('U.S. Dollars ($)', 'event_espresso'); ?>
-								</option>
-								<option value="GBP">
-									<?php _e('Pounds Sterling (&pound;)', 'event_espresso'); ?>
-								</option>
-								<option value="CAD">
-									<?php _e('Canadian Dollars (C $)', 'event_espresso'); ?>
-								</option>
-								<option value="AUD">
-									<?php _e('Australian Dollars (A $)', 'event_espresso'); ?>
-								</option>
-								<option value="BRL">
-									<?php _e('Brazilian Real (only for Brazilian users)', 'event_espresso'); ?>
-								</option>
-								<option value="CHF">
-									<?php _e('Swiss Franc', 'event_espresso'); ?>
-								</option>
-								<option value="CZK">
-									<?php _e('Czech Koruna', 'event_espresso'); ?>
-								</option>
-								<option value="DKK">
-									<?php _e('Danish Krone', 'event_espresso'); ?>
-								</option>
-								<option value="EUR">
-									<?php _e('Euros (&#8364;)', 'event_espresso'); ?>
-								</option>
-								<option value="HKD">
-									<?php _e('Hong Kong Dollar ($)', 'event_espresso'); ?>
-								</option>
-								<option value="HUF">
-									<?php _e('Hungarian Forint', 'event_espresso'); ?>
-								</option>
-								<option value="ILS">
-									<?php _e('Israeli Shekel', 'event_espresso'); ?>
-								</option>
-								<option value="JPY">
-									<?php _e('Yen (&yen;)', 'event_espresso'); ?>
-								</option>
-								<option value="MXN">
-									<?php _e('Mexican Peso', 'event_espresso'); ?>
-								</option>
-								<option value="MYR">
-									<?php _e('Malaysian Ringgits (only for Malaysian users)', 'event_espresso'); ?>
-								</option>
-								<option value="NOK">
-									<?php _e('Norwegian Krone', 'event_espresso'); ?>
-								</option>
-								<option value="NZD">
-									<?php _e('New Zealand Dollar ($)', 'event_espresso'); ?>
-								</option>
-								<option value="PHP">
-									<?php _e('Philippine Pesos', 'event_espresso'); ?>
-								</option>
-								<option value="PLN">
-									<?php _e('Polish Zloty', 'event_espresso'); ?>
-								</option>
-								<option value="SEK">
-									<?php _e('Swedish Krona', 'event_espresso'); ?>
-								</option>
-								<option value="SGD">
-									<?php _e('Singapore Dollar ($)', 'event_espresso'); ?>
-								</option>
-								<option value="THB">
-									<?php _e('Thai Baht', 'event_espresso'); ?>
-								</option>
-								<option value="TRY">
-									<?php _e('Turkish Lira (only for Turkish users)', 'event_espresso'); ?>
-								</option>
-								<option value="TWD">
-									<?php _e('Taiwan New Dollars', 'event_espresso'); ?>
-								</option>
-							</select>
-							 </li>
 						
 						<li>
 							<label for="image_url">
@@ -215,18 +132,6 @@ function event_espresso_display_evertec_settings() {
 						echo select_input('bypass_payment_page', $values, $evertec_settings['bypass_payment_page']);
 						?>
 						</li>
-						<li>
-							<label for="no_shipping">
-								<?php _e('Shipping Address Options', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=no_shipping"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-							</label>
-							<?php
-							$values = array(
-									array('id' => '1', 'text' => __('Do not prompt for an address', 'event_espresso')),
-									array('id' => '0', 'text' => __('Prompt for an address, but do not require one', 'event_espresso')),
-									array('id' => '2', 'text' => __('Prompt for an address, and require one', 'event_espresso')));
-							echo select_input('no_shipping', $values, $evertec_settings['no_shipping']);
-							?>
-							</li>
 						
 						<?php if (espresso_check_ssl() == TRUE || ( isset($evertec_settings['force_ssl_return']) && $evertec_settings['force_ssl_return'] == 1 )) {?>
 						<li>
@@ -248,15 +153,14 @@ function event_espresso_display_evertec_settings() {
 					</ul></td>
 			</tr>
 		</table>
-		<p><strong style="color:#F00"><?php _e('Attention!', 'event_espresso'); ?></strong><br /><?php _e('For Evertec IPN to work, you need a Business or Premier account.', 'event_espresso'); ?>
-		</p>
+		
 			<input type="hidden" name="update_evertec" value="update_evertec">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update Evertec Settings', 'event_espresso') ?>" id="save_evertec_settings" />
 		</p>
-		<p><label for="use_sandbox">
+<!--		<p><label for="use_sandbox">
 								<?php _e('Use the Debugging Feature and the', 'event_espresso'); ?> <a href="https://developer.evertec.com/devscr?cmd=_home||https://cms.evertec.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox||https://cms.evertec.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox_get_started" title="Evertec Sandbox Login||Sandbox Tutorial||Getting Started with Evertec Sandbox" target="_blank"><?php _e('Evertec Sandbox', 'event_espresso'); ?></a><a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=evertec_sandbox_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input name="use_sandbox" type="checkbox" value="1" <?php echo $evertec_settings['use_sandbox'] ? 'checked="checked"' : '' ?> /></p>
+							<input name="use_sandbox" type="checkbox" value="1" <?php echo $evertec_settings['use_sandbox'] ? 'checked="checked"' : '' ?> /></p>-->
 	</form>
 	<div id="evertec_sandbox_info" style="display:none">
 		<h2><?php _e('Evertec Sandbox', 'event_espresso'); ?></h2>
@@ -275,20 +179,16 @@ function event_espresso_display_evertec_settings() {
 			<?php _e('Default - Your business name, if you have a Business account, or your email address, if you have Premier or Personal account.', 'event_espresso'); ?>
 		</p>
 	</div>
-	<div id="currency_info" style="display:none">
-		<h2><?php _e('Evertec Currency', 'event_espresso'); ?></h2>
-		<p><?php _e('Evertec uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, select the currency you wish to use. The dropdown lists all currencies that Evertec (currently) supports.', 'event_espresso'); ?> </p>
+	<div id="evertec_pages_language" style="display:none">
+		<h2><?php _e("Evertec Pages Language", "event_espresso"); ?></h2>
+		<p><?php _e("When users are directed to Evertec's payment pages, these pages may be displayed in either Spanish or English.", 'event_espresso'); ?> </p>
 	</div>
-	<div id="no_shipping" style="display:none">
-		<h2><?php _e('Shipping Address', 'event_espresso'); ?></h2>
-		<p><?php _e('By default, Evertec will display shipping address information on the Evertec payment screen. If you plan on shipping items to a registrant (shirts, invoices, etc) then use this option. Otherwise it should not be used, as it will require a shipping address when someone registers for an event.', 'event_espresso'); ?></p>
-	</div>
-	<div id="tax_override_info" style="display:none">
+	<div id="password_info" style="display:none">
 		<h2><?php _e('Override Profile-Based Tax', 'event_espresso'); ?></h2>
 		<p><?php _e('Overrides any sales taxes that may be applied to all of your Evertec.com payments. These settings can be managed in your Evertec.com Profile > Sales Tax (<a href="https://www.evertec.com/us/cgi-bin/webscr?cmd=_profile-sales-tax" target="_blank">https://www.evertec.com/us/cgi-bin/webscr?cmd=_profile-sales-tax</a>).', 'event_espresso'); ?></p>
 		<p><?php _e('Even if you are using your Profile-based tax settings, you may want to set a special tax rate for some of your items (e.g. if it is a event/product that does not require tax).', 'event_espresso'); ?></p>
 	</div>
-	<div id="shipping_override_info" style="display:none">
+	<div id="evertec_pages_language_info" style="display:none">
 		<h2><?php _e('Override Profile-Based Shipping', 'event_espresso'); ?></h2>
 		<p><?php _e('Overrides any shipping charges that may be applied to all of your Evertec.com payments. These settings can be managed in your Evertec.com Profile > Shipping Calculations  (<a href="https://www.evertec.com/cgi-bin/customerprofileweb?cmd=_profile-shipping" target="_blank">https://www.evertec.com/cgi-bin/customerprofileweb?cmd=_profile-shipping</a>).', 'event_espresso'); ?></p>
 	</div>

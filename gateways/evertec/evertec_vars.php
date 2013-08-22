@@ -2,97 +2,86 @@
 
 function espresso_display_evertec($payment_data) {
 	global $wpdb;
-	extract($payment_data);
-	include_once ('Evertec.php');
-	$myEvertec = new EE_Evertec();
-	echo '<!-- Event Espresso Evertec Gateway Version ' . $myEvertec->gateway_version . '-->';
+	
+	
 	global $org_options;
 	$evertec_settings = get_option('event_espresso_evertec_settings');
 	
-	//Check for an alternate Evertec email address
-	if (isset($event_meta['evertec_email']) && !empty($event_meta['evertec_email']) && filter_var($event_meta['evertec_email'], FILTER_VALIDATE_EMAIL) != FALSE) {
-		//Alternate Evertec email - using the evertec meta key field.
-		$evertec_id = $event_meta['evertec_email'];
-	} else {
-		$evertec_id = empty($evertec_settings['evertec_id']) ? '' : $evertec_settings['evertec_id'];
+//	$xml_request = "
+//	<?xml version='1.0' encoding='utf-8'	
+//	";;
+
+	
+	
+	////////////////////////////////////////
+	$params = array(
+		'Username'=>$evertec_settings['username'],
+		'Password'=>$evertec_settings['password'],
+		'CustomerName'=>$payment_data['fname']." ".$payment_data['lname'],
+		'CustomerID'=>$payment_data['registration_id'],
+		'CustomerEmail'=>'monkey',//$payment_data['attendee_email'],
+		'Total'=>'10.00',//$payment_data['event_cost'],
+		'DescriptionBuy'=>$payment_data['event_name'],
+		'TaxAmount'=>0,
+		'address1'=>$payment_data['address'],
+		'city'=>$payment_data['city'],
+		'zipcode'=>$payment_data['zip'],
+		'telephone'=>$payment_data['phone'],
+		'language'=>$evertec_settings['evertec_pages_language'],
+			);
+	$xml_params = '';
+	foreach($params as $name=>$value){
+		$xml_params.="<$name>$value</$name>";
 	}
-	
-	$evertec_cur = empty($evertec_settings['currency_format']) ? '' : $evertec_settings['currency_format'];
-	$no_shipping = isset($evertec_settings['no_shipping']) ? $evertec_settings['no_shipping'] : '0';
-	$use_sandbox = $evertec_settings['use_sandbox'];
-	if ($use_sandbox) {
-		$myEvertec->enableTestMode();
-	}
-
-	do_action('action_hook_espresso_use_add_on_functions');
-
-	// get attendee_session
-	$SQL = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id=%d";
-	$session_id = $wpdb->get_var( $wpdb->prepare( $SQL, $attendee_id ));
-	// now get all registrations for that session
-	$SQL = "SELECT a.final_price, a.orig_price, a.quantity, ed.event_name, a.price_option, a.fname, a.lname ";
-	$SQL .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
-	$SQL .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON a.event_id=ed.id ";
-	$SQL .= " WHERE attendee_session=%s ORDER BY a.id ASC";
-	
-	$items = $wpdb->get_results( $wpdb->prepare( $SQL, $session_id ));
-	//printr( $items, '$items  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-					
-	foreach ( $items as $key => $item ) {	
-	
-		$item_num=$key+1;
-		$myEvertec->addField('item_name_' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname);
-		$myEvertec->addField('quantity_' . $item_num, absint($item->quantity));
-
-		if ( $item->final_price < $item->orig_price ) {
-			$adjustment = abs( $item->orig_price - $item->final_price );
-			if (absint($item->quantity) > 1){
-				$adjustment = $adjustment * absint($item->quantity);
-			}
-			$myEvertec->addField('amount_' . $item_num, $item->orig_price);
-			$myEvertec->addField('discount_amount_' . $item_num, $adjustment);
-			//$myEvertec->addField('discount_amount2_' . $item_num, $adjustment);//Not sure this line is needed.
+		$raw_xml_body = '<?xml version="1.0" encoding="utf-8" ?>
+			<soap:Envelope	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" >
+			<soap:Body>
+			<MakePayment xmlns="http://tempuri.org/WebMerchant/MerchantService">
+			'.$xml_params.'
+			</MakePayment>
+			</soap:Body>
+			</soap:Envelope>';
+		
+		
+//		echo $response['body'];die;
+		$client = new SoapClient('https://mmpay.evertecinc.com/webservicev2/wscheckoutpayment.asmx?wsdl', array('trace'=>true,'soap_version' => SOAP_1_2));
+//			echo 'echodump of $client->__getFunctions()';
+//			var_dump($client->__getFunctions());
 			
-		} else {
-
-			$myEvertec->addField('amount_' . $item_num, $item->final_price);
-		}
-		
-		if (isset($evertec_settings['tax_override']) && $evertec_settings['tax_override'] == true) {
-			$myEvertec->addField('tax_'.$item_num, '0.00');
-		}
-		if (isset($evertec_settings['shipping_override']) && $evertec_settings['shipping_override'] == true) {
-			$myEvertec->addField('shipping_'.$item_num, '0.00');
-		}
+//			echo 'echodump of $client->__getTypes()';
+//			var_dump($client->__getTypes());
+			try{
+				$makePaymentResponse = $client->MakePayment(array(array('MakePayment'=>$params)));
+//				echo 'echodump of $makePaymentResponse';
+//				var_dump($makePaymentResponse);
+			}catch(Exception $e){
+//				echo 'echodump of $e';
+//				var_dump($e);
+			}
 	
-	}
-	//printr( $myEvertec, '$myEvertec  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-
-	$myEvertec->addField('business', $evertec_id);
-	if ($evertec_settings['force_ssl_return']) {
-		$home = str_replace("http://", "https://", home_url());
-	} else {
-		$home = home_url();
-	}
-	$myEvertec->addField('charset', "utf-8");
-	$myEvertec->addField('return', $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id. '&type=evertec');
-	$myEvertec->addField('cancel_return', $home . '/?page_id=' . $org_options['cancel_return']);
-	$myEvertec->addField('notify_url', $home . '/?page_id=' . $org_options['notify_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=evertec');
-	$event_name = $wpdb->get_var('SELECT event_name FROM ' . EVENTS_DETAIL_TABLE . " WHERE id='" . $event_id . "'");
-	$myEvertec->addField('cmd', '_cart');
-	$myEvertec->addField('upload', '1');
-
-	$myEvertec->addField('currency_code', $evertec_cur);
-	$myEvertec->addField('image_url', empty($evertec_settings['image_url']) ? '' : $evertec_settings['image_url']);
-	$myEvertec->addField('no_shipping ', $no_shipping);
-	$myEvertec->addField('first_name', $fname);
-	$myEvertec->addField('last_name', $lname);
-	$myEvertec->addField('email', $attendee_email);
-	$myEvertec->addField('address1', $address);
-	$myEvertec->addField('city', $city);
-	$myEvertec->addField('state', $state);
-	$myEvertec->addField('zip', $zip);
-		
+			$soap_client_req = '<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" xmlns:ns1="http://tempuri.org/WebMerchant/MerchantService"><env:Body><ns1:MakePayment/></env:Body></env:Envelope>';
+//	echo 'echodump of $client->__getLastRequest ()';
+//	var_dump($client->__getLastRequest ());
+//	echo 'echodump of $client->__getLastRequestHeaders();';
+//	var_dump($client->__getLastRequestHeaders());
+	
+			
+			
+			$response = wp_remote_post('https://mmpay.evertecinc.com/webservicev2/wscheckoutpayment.asmx', 
+				array(
+					'headers'=>array('Content-Type'=>'application/soap+xml; charset=utf-8; action="http://tempuri.org/WebMerchant/MerchantService/MakePayment"'),
+					'method'=>'POST',
+					"User-Agent"=> "PHP-SOAP/5.4.4",
+					'httpversion' => '1.1',
+					'Connection'=> 'Keep-Alive',
+					'body'=>$raw_xml_body,
+					'sslverify' => false));
+		echo 'echodump of $response';
+		var_dump($response);
+	die;
 	if (!empty($evertec_settings['bypass_payment_page']) && $evertec_settings['bypass_payment_page'] == 'Y') {
 		$myEvertec->submitPayment();
 	} else {
