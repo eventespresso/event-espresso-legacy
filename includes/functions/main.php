@@ -206,9 +206,9 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			</a></div>';
 			
 			$attendee_form .= '
-			<div class="additional-attendee-div"><a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk ui-priority-primary " title="' . __('Add Additonal Attendee', 'event_espresso') . '">
-				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add Additonal Attendee', 'event_espresso') . '" />
-				' . __('Add Additonal Attendee', 'event_espresso') . '
+			<div class="additional-attendee-div"><a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk ui-priority-primary " title="' . __('Add Additional Attendee', 'event_espresso') . '">
+				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add Additional Attendee', 'event_espresso') . '" />
+				' . __('Add Additional Attendee', 'event_espresso') . '
 			</a></div>';
 
 
@@ -1003,7 +1003,7 @@ function espresso_unserialize($data, $return_format = '') {
 }
 
 //Checks to see if the array is multidimensional
-function is_multi($array) {
+function espresso_is_multi($array) {
 	return (count($array) != count($array, 1));
 }
 
