@@ -667,3 +667,118 @@ function espresso_selected_price_option($selected){
 	
 	return array('price_id' => $price_id, 'price_type' => $price_type);
 }
+
+add_action('action_hook_espresso_price_display','espresso_price_display_output',10,3);
+function espresso_price_display_output ($event_id, $event_cost, $type){
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+	global $org_options;
+	switch ($type){
+		case 'price_range':
+			do_action('action_hook_espresso_price_range', $event_id);
+		break;
+			
+		case 'price_list':
+			do_action('action_hook_espresso_price_list', $event_id);
+		break;
+		
+		case 'off':
+		break;
+		
+		case 'default':
+		default:
+			echo '<p id="p_event_price-'.$event_id.'" class="event_price"><span class="section-title">'. __('Price: ', 'event_espresso').'</span> '.$org_options['currency_symbol'].$event_cost.'</p>';
+		break;
+	}
+}
+
+
+if (!function_exists('event_espresso_price_list')) {
+ 
+	function event_espresso_price_list($event_id) {
+		$html = '';
+		global $wpdb, $org_options;
+		$sql = "SELECT id, event_cost, surcharge, surcharge_type, price_type";
+		$order_by = 'event_cost';
+		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && is_user_logged_in() ) {
+			$sql .= ", member_price, member_price_type ";
+			$member_event = TRUE;
+			$order_by = 'member_price';
+		}
+		$sql .= " FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' ORDER BY " . $order_by . " ASC";
+		$results = $wpdb->get_results( $wpdb->prepare($sql, '') );
+		if ($wpdb->num_rows > 1) {	
+			//Create a dropdown of prices
+			$html .= '<ul id="price-list-' . $event_id . '" class="espresso-price-list">';
+		 
+			foreach ($results as $result) {
+				if ($member_event == TRUE) {
+					$result->event_cost = $result->member_price;
+					$result->price_type = $result->member_price_type;
+				}
+				// Addition for Early Registration discount
+				if ($early_price_data = early_discount_amount($event_id, $result->event_cost)) {
+					$result->event_cost = $early_price_data['event_price'];
+					$message = __(' Early Pricing', 'event_espresso');
+				} else {
+					$message = '';
+				}
+		 
+				$surcharge = '';
+		 
+				if ($result->surcharge > 0 && $result->event_cost > 0.00) {
+					$surcharge = " + {$org_options['currency_symbol']}{$result->surcharge} " . $surcharge_text;
+					if ($result->surcharge_type == 'pct') {
+						$surcharge = " + {$result->surcharge}% " . $surcharge_text;
+					}
+				}
+				$html .= '<li>' . stripslashes_deep($result->price_type) . ' (' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . ') ' . $surcharge . ' </li>';
+			}
+			$html .= '</ul>';
+		}else{
+			if ($member_event == TRUE) {
+				$event_cost = $wpdb->last_result[0]->member_price;
+				$price_type = $wpdb->last_result[0]->member_price_type;
+			}else{
+				$event_cost = $wpdb->last_result[0]->event_cost;
+				$price_type = $wpdb->last_result[0]->price_type;
+			}
+				$html .= '<p>' . $price_type . ' ' . $org_options['currency_symbol'] . number_format($event_cost, 2) . '</p>';
+		}
+		echo $html;
+		return;
+	}
+}
+add_action('action_hook_espresso_price_list', 'event_espresso_price_list', 20, 2);
+
+if (!function_exists('espresso_price_range')) {
+	function espresso_price_range($event_id, $text = '&mdash;') {
+		global $wpdb, $org_options;
+		$result = array("max" => 0, "min" => 0);
+		if (function_exists('espresso_members_version') && is_user_logged_in()) {
+			$price_field = "member_price";
+		} else {
+			$price_field = "event_cost";
+		}
+			
+		$sql = "SELECT MIN(ep.{$price_field}) AS min_price, MAX(ep.{$price_field}) AS max_price FROM " . EVENTS_PRICES_TABLE . " ep INNER JOIN " . EVENTS_PRICES_TABLE . " ep2 ON ep.event_id = ep2.event_id WHERE ep2.event_id = $event_id ";
+		$price_row = $wpdb->get_row($sql);    
+			
+		if ($price_row !== NULL) {
+			$result['min'] = $price_row->min_price;
+			$result['max'] = $price_row->max_price;
+		} else {
+			echo $org_options['currency_symbol'].'0.00';
+			return;	
+		}
+			
+		if ($result['min'] == $result['max']) {
+			$result = $org_options['currency_symbol'].$result['min'];
+		} else {
+			$result = $org_options['currency_symbol'].$result['min'] . " $text " . $org_options['currency_symbol'].$result['max'];
+		}
+			
+		
+		echo '<p id="p_event_price-'.$event_id.'" class="event_price"><span class="section-title">'.__('Price: ', 'event_espresso').'</span> '.$result.'</p>';
+	}
+}
+add_action('action_hook_espresso_price_range', 'espresso_price_range', 20, 2);

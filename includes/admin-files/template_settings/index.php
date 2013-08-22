@@ -6,6 +6,7 @@ function event_espresso_manage_templates() {
 	if (isset($_POST['update_org'])) {
 		$org_options['display_description_on_multi_reg_page'] = !empty($_POST['display_description_on_multi_reg_page']) ? $_POST['display_description_on_multi_reg_page'] : 'N';
 		$org_options['display_short_description_in_event_list'] = !empty($_POST['display_short_description_in_event_list']) ? $_POST['display_short_description_in_event_list'] : 'N';
+		$org_options['price_display_in_event_list'] = !empty($_POST['price_display_in_event_list']) ? $_POST['price_display_in_event_list'] : 'default';
 		$org_options['display_address_in_event_list'] = !empty($_POST['display_address_in_event_list']) ? $_POST['display_address_in_event_list'] : 'N';
 		$org_options['display_address_in_regform'] = !empty($_POST['display_address_in_regform']) ? $_POST['display_address_in_regform'] : 'N';
 		$org_options['use_custom_post_types'] = !empty($_POST['use_custom_post_types']) ? $_POST['use_custom_post_types'] : 'N';
@@ -45,6 +46,13 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 	$values = array(
 			array('id' => 'Y', 'text' => __('Yes', 'event_espresso')),
 			array('id' => 'N', 'text' => __('No', 'event_espresso'))
+	);
+	
+	$price_formats = array(
+			array('id' => 'default', 'text' => __('Default', 'event_espresso')),
+			array('id' => 'price_range', 'text' => __('Price Range', 'event_espresso')),
+			array('id' => 'price_list', 'text' => __('Price List', 'event_espresso')),
+			array('id' => 'off', 'text' => __('Off', 'event_espresso'))
 	);
 
 	function espresso_themeroller_style_is_selected($name) {
@@ -108,6 +116,14 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 							<div class="padding">
 								<table class="form-table">
 									<tbody>
+										<tr>
+											<th> <label for="price_display_in_event_list">
+													<?php _e('Display prices in the event list as:', 'event_espresso'); ?>
+												</label>
+											</th>
+											<td><?php echo select_input('price_display_in_event_list', $price_formats, isset($org_options['price_display_in_event_list']) ? $org_options['price_display_in_event_list'] : 'Default'); ?><br />
+												<span class="description"><?php _e('Change how the price is displayed.', 'event_espresso'); ?></span></td>
+										</tr>
 										<tr>
 											<th> <label for="display_short_description_in_event_list">
 													<?php _e('Display short descriptions in the event listings?', 'event_espresso'); ?>
