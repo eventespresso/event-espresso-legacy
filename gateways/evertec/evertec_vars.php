@@ -72,11 +72,13 @@ function espresso_display_evertec($payment_data) {
 			
 			$response = wp_remote_post('https://mmpay.evertecinc.com/webservicev2/wscheckoutpayment.asmx', 
 				array(
-					'headers'=>array('Content-Type'=>'application/soap+xml; charset=utf-8; action="http://tempuri.org/WebMerchant/MerchantService/MakePayment"'),
+					'headers'=>array(
+						'Content-Type'=>'text/xml; charset=utf-8;',
+						"User-Agent"=> "PHP-SOAP/5.4.4",
+						'Connection'=> 'Keep-Alive',
+						'SOAPAction'=>'http://tempuri.org/WebMerchant/MerchantService/MakePayment'),
 					'method'=>'POST',
-					"User-Agent"=> "PHP-SOAP/5.4.4",
 					'httpversion' => '1.1',
-					'Connection'=> 'Keep-Alive',
 					'body'=>$raw_xml_body,
 					'sslverify' => false));
 		echo 'echodump of $response';
