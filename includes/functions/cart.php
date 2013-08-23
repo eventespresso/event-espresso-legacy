@@ -1056,7 +1056,7 @@ if (!function_exists('event_espresso_cart_link')) {
 		
 		if ( empty( $event_id )) {
 			$error = "<div class='event_espresso_error'><p><em>Attention</em>";
-			$error .= __('An error occured, a valid event id is required for this shortcode to function properlly.', 'event_espresso');
+			$error .= __('An error occured, a valid event id is required for this shortcode to function properly.', 'event_espresso');
 			$error .= "</p></div>";
 			return $error;
 		}
