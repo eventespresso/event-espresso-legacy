@@ -672,21 +672,21 @@ add_action('action_hook_espresso_price_display','espresso_price_display_output',
 function espresso_price_display_output ($event_id, $event_cost, $type){
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	global $org_options;
-	switch ($type){
-		case 'price_range':
-			do_action('action_hook_espresso_price_range', $event_id);
-		break;
-			
+	switch ($type){			
 		case 'price_list':
 			do_action('action_hook_espresso_price_list', $event_id);
+		break;
+				
+		case 'single':
+			echo '<p id="p_event_price-'.$event_id.'" class="event_price"><span class="section-title">'. __('Price: ', 'event_espresso').'</span> '.$org_options['currency_symbol'].$event_cost.'</p>';
 		break;
 		
 		case 'off':
 		break;
 		
-		case 'default':
+		case 'price_range':
 		default:
-			echo '<p id="p_event_price-'.$event_id.'" class="event_price"><span class="section-title">'. __('Price: ', 'event_espresso').'</span> '.$org_options['currency_symbol'].$event_cost.'</p>';
+			do_action('action_hook_espresso_price_range', $event_id);
 		break;
 	}
 }

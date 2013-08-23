@@ -49,9 +49,9 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 	);
 	
 	$price_formats = array(
-			array('id' => 'default', 'text' => __('Default', 'event_espresso')),
 			array('id' => 'price_range', 'text' => __('Price Range', 'event_espresso')),
 			array('id' => 'price_list', 'text' => __('Price List', 'event_espresso')),
+			array('id' => 'single', 'text' => __('Single Price', 'event_espresso')),
 			array('id' => 'off', 'text' => __('Off', 'event_espresso'))
 	);
 
