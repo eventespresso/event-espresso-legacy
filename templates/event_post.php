@@ -22,7 +22,6 @@ global $wpdb;
   $Organization_zip =$org_options['organization_zip'];
   $contact =$org_options['contact_email'];
   $registrar = $org_options['contact_email'];
-  $currency_format =$org_options['currency_format'];
 
         /**
          * do database stuff
