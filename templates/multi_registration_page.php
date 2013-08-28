@@ -166,19 +166,19 @@ if (!function_exists('multi_register_attendees')) {
 				// SOLD OUT !!!
 				if ($num_attendees >= $reg_limit) {
 					?>
-					<div class="espresso_event_full event-display-boxes <?php echo apply_filters('espresso_filter_hook_registration_css_event_full_event-display-boxes',''); ?>" id="espresso_event_full-<?php echo $event_id; ?>">
-						<h3 class="event_title <?php echo apply_filters('espresso_filter_hook_registration_css_event_title',''); ?>"><?php echo stripslashes_deep($event_name) ?></h3>
-						<p class="event_full <?php echo apply_filters('espresso_filter_hook_registration_css_event_full',''); ?>"><strong><?php _e('We are sorry but this event has reached the maximum number of attendees!', 'event_espresso'); ?></strong></p>
-						<p class="event_full <?php echo apply_filters('espresso_filter_hook_registration_css_event_full',''); ?>"><strong><?php _e('Please check back in the event someone cancels.', 'event_espresso'); ?></strong></p>
-						<p class="num_attendees <?php echo apply_filters('espresso_filter_hook_registration_css_num_attendees',''); ?>"><?php _e('Current Number of Attendees:', 'event_espresso'); ?> <?php echo $num_attendees ?></p>
+					<div class="<?php echo apply_filters('espresso_filter_hook_css_event_full_event_display_boxes','espresso_event_full event-display-boxes'); ?>" id="espresso_event_full-<?php echo $event_id; ?>">
+						<h3 class="<?php echo apply_filters('espresso_filter_hook_css_event_title','event_title'); ?>"><?php echo stripslashes_deep($event_name) ?></h3>
+						<p class="<?php echo apply_filters('espresso_filter_hook_css_event_full','event_full'); ?>"><strong><?php _e('We are sorry but this event has reached the maximum number of attendees!', 'event_espresso'); ?></strong></p>
+						<p class="<?php echo apply_filters('espresso_filter_hook_css_event_full','event_full'); ?>"><strong><?php _e('Please check back in the event someone cancels.', 'event_espresso'); ?></strong></p>
+						<p class="<?php echo apply_filters('espresso_filter_hook_css_num_attendees','num_attendees'); ?>"><?php _e('Current Number of Attendees:', 'event_espresso'); ?> <?php echo $num_attendees ?></p>
 
 						<?php
 						// is there an overflow event ????
 						if (($num_attendees >= $reg_limit) && ($allow_overflow == 'Y' && $overflow_event_id != 0)) {
 						?>
-							<p id="register_link-<?php echo $overflow_event_id ?>" class="register-link-footer <?php echo apply_filters('espresso_filter_hook_registration_css_register-link-footer',''); ?>">
+							<p id="register_link-<?php echo $overflow_event_id ?>" class="<?php echo apply_filters('espresso_filter_hook_css_register_link_footer','register-link-footer'); ?>">
 								<a id="a_register_link-<?php echo $overflow_event_id ?>" 
-									class="a_register_link <?php echo apply_filters('espresso_filter_hook_registration_css_a_register_link',''); ?>" 
+									class="<?php echo apply_filters('espresso_filter_hook_css_a_register_link','a_register_link'); ?>" 
 									href="<?php echo espresso_reg_url($overflow_event_id); ?>" 
 									title="<?php echo stripslashes_deep($event_name) ?>"
 								>

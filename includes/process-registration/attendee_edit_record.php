@@ -194,11 +194,11 @@ function attendee_edit_record() {
 
 ?>
 
-	<div id="edit-attendee-record-dv" class="event-display-boxes <?php echo apply_filters('espresso_filter_hook_registration_css_event-display-boxes','ui-widget'); ?>">
-		<h3 class="event_title <?php echo apply_filters('espresso_filter_hook_registration_css_event_title','ui-widget-header ui-corner-top'); ?> ">
+	<div id="edit-attendee-record-dv" class="<?php echo apply_filters('espresso_filter_hook_css_event_display_boxes','event-display-boxes ui-widget'); ?>">
+		<h3 class="<?php echo apply_filters('espresso_filter_hook_css_event_title','event_title ui-widget-header ui-corner-top'); ?> ">
 			<?php _e('Edit Registration','event_espresso'); ?>
 		</h3>
-		<div class="event_espresso_form_wrapper event-data-display <?php echo apply_filters('espresso_filter_hook_registration_css_form_wrapper_event-data-display','ui-widget-content ui-corner-bottom'); ?>">
+		<div class="<?php echo apply_filters('espresso_filter_hook_css_event_data_display','event_espresso_form_wrapper event-data-display ui-widget-content ui-corner-bottom'); ?>">
 
 <?php if ( $display_attendee_form ) : ?>
 

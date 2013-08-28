@@ -8,18 +8,18 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 $attendee_num = apply_filters('action_hook_espresso_confirmation_page_primary_attendee_count',1);
 ?>
 	<form id="form1" name="form1" method="post" action="<?php echo get_permalink($org_options['event_page_id']);?>">
-		<div class="event-conf-block event-display-boxes <?php echo apply_filters('espresso_filter_hook_registration_css_event-display-boxes','ui-widget'); ?>" >
-		<h3 class="event_title <?php echo apply_filters('espresso_filter_hook_registration_css_event_title',' ui-widget-header ui-corner-top'); ?>">
+		<div class="<?php echo apply_filters('espresso_filter_hook_css_event_display_boxes','event-conf-block event-display-boxes ui-widget'); ?>" >
+		<h3 class="<?php echo apply_filters('espresso_filter_hook_css_event_title','event_title ui-widget-header ui-corner-top'); ?>">
 			<?php _e('Verify Registration','event_espresso'); ?>
 		</h3>
-		<div class="event-data-display <?php echo apply_filters('espresso_filter_hook_registration_css_event_data_display','ui-widget-content ui-corner-bottom'); ?>">
-			<table class="event-display-tables grid <?php echo apply_filters('espresso_filter_hook_registration_css_event-display-tables',''); ?>"  id="event_espresso_attendee_verify">
+		<div class="<?php echo apply_filters('espresso_filter_hook_css_event_data_display','event-data-display ui-widget-content ui-corner-bottom'); ?>">
+			<table class="<?php echo apply_filters('espresso_filter_hook_css_event_display_tables','event-display-tables grid'); ?>"  id="event_espresso_attendee_verify">
 				<tr>
-					<th scope="row" class="header <?php echo apply_filters('espresso_filter_hook_registration_css_event-display-table-header',''); ?>">
+					<th scope="row" class="<?php echo apply_filters('espresso_filter_hook_css_table_header','header'); ?>">
 						<?php _e('Event Name:','event_espresso'); ?>
 					</th>
 					<td>
-						<span class="event_espresso_value <?php echo apply_filters('espresso_filter_hook_registration_css_value',''); ?>"><?php echo stripslashes_deep($event_name)?></span>
+						<span class="<?php echo apply_filters('espresso_filter_hook_css_value','event_espresso_value'); ?>"><?php echo stripslashes_deep($event_name)?></span>
 					</td>
 				</tr>
 <?php
@@ -35,11 +35,11 @@ $attendee_num = apply_filters('action_hook_espresso_confirmation_page_primary_at
 				if ( $display_price ) {
 ?>	
 					<tr>
-						<th scope="row" class="header">
+						<th scope="row" class="<?php echo apply_filters('espresso_filter_hook_css_table_header','header'); ?>">
 							<?php echo empty($price_type) ? __('Price per attendee:','event_espresso') : __('Type/Price per attendee:','event_espresso'); ?>
 						</th>
 						<td>
-							<span class="event_espresso_value <?php echo apply_filters('espresso_filter_hook_registration_css_value',''); ?>"><?php echo empty($price_type) ? $org_options['currency_symbol'] . number_format($final_price,2) : stripslashes_deep($price_type) . ' / ' .$org_options['currency_symbol'].number_format($final_price,2);?></span>
+							<span class="<?php echo apply_filters('espresso_filter_hook_css_value','event_espresso_value'); ?>"><?php echo empty($price_type) ? $org_options['currency_symbol'] . number_format($final_price,2) : stripslashes_deep($price_type) . ' / ' .$org_options['currency_symbol'].number_format($final_price,2);?></span>
 						</td>
 					</tr>
 <?php
@@ -55,18 +55,18 @@ $attendee_num = apply_filters('action_hook_espresso_confirmation_page_primary_at
 					}
 ?>
 					<tr>
-						<th scope="row" class="header <?php echo apply_filters('espresso_filter_hook_registration_css_event-display-table-header',''); ?>"><?php _e('Price:', 'event_espresso'); ?></th>
-						<td><span class="event_espresso_value"><?php echo $price; ?></span></td>
+						<th scope="row" class="<?php echo apply_filters('espresso_filter_hook_css_table_header','header'); ?>"><?php _e('Price:', 'event_espresso'); ?></th>
+						<td><span class="<?php echo apply_filters('espresso_filter_hook_css_value','event_espresso_value'); ?>"><?php echo $price; ?></span></td>
 					</tr>
 <?php
 				}
 ?>
 					<tr>
-					<th scope="row" class="header <?php echo apply_filters('espresso_filter_hook_registration_css_event-display-table-header',''); ?>">
+					<th scope="row" class="<?php echo apply_filters('espresso_filter_hook_css_table_header','header'); ?>">
 						<?php _e('Attendee Name:','event_espresso'); ?>
 					</th>
 					<td  valign="top">
-						<span class="event_espresso_value <?php echo apply_filters('espresso_filter_hook_registration_css_value',''); ?>"><?php echo stripslashes_deep($attendee_name)?> (<?php echo $attendee_email?>) 
+						<span class="<?php echo apply_filters('espresso_filter_hook_css_value','event_espresso_value'); ?>"><?php echo stripslashes_deep($attendee_name)?> (<?php echo $attendee_email?>) 
 <?php 
 						echo '<a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$attendee_id.'&amp;regevent_action=edit_attendee&amp;primary='.$attendee_id.'&amp;event_id='.$event_id.'&amp;attendee_num='.$attendee_num.'">'. __('Edit', 'event_espresso').'</a>';  // removed p_id='.$p_id.'&amp; coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'&amp;
 						
@@ -98,47 +98,47 @@ $attendee_num = apply_filters('action_hook_espresso_confirmation_page_primary_at
 				</tr>
 				<?php if ($attendee_num > 1) { ?>
 				<tr>
-					<th scope="row" class="header <?php echo apply_filters('espresso_filter_hook_registration_css_header',''); ?>">
+					<th scope="row" class="<?php echo apply_filters('espresso_filter_hook_css_table_header','header'); ?>">
 						<?php _e('Total Registrants:','event_espresso'); ?>
 					</th>
 					<td>
-						<span class="event_espresso_value <?php echo apply_filters('espresso_filter_hook_registration_css_value',''); ?>"><?php echo (int)$attendee_num; ?></span>
+						<span class="<?php echo apply_filters('espresso_filter_hook_css_value','event_espresso_value'); ?>"><?php echo (int)$attendee_num; ?></span>
 					</td>
 				</tr>
 				<?php } ?>
 				<tr valign="top">
-					<th scope="row" class="header <?php echo apply_filters('espresso_filter_hook_registration_css_header',''); ?>">
+					<th scope="row" class="<?php echo apply_filters('espresso_filter_hook_css_table_header','header'); ?>">
 						<?php _e('Total Price:','event_espresso'); ?>
 					</th>
 					<td>
-						<span class="event_espresso_value <?php echo apply_filters('espresso_filter_hook_registration_css_value',''); ?>"><?php echo $display_cost;  //echo $event_discount_label;?></span>
+						<span class="<?php echo apply_filters('espresso_filter_hook_css_value','event_espresso_value'); ?>"><?php echo $display_cost;  //echo $event_discount_label;?></span>
 					</td>
 				</tr>
 			</table>
-			<p class="espresso_confirm_registration <?php echo apply_filters('espresso_filter_hook_registration_css_confirm_registration',''); ?>">
-			<input class="btn_event_form_submit <?php echo apply_filters('espresso_filter_hook_registration_css_btn_event_form_submit','ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all'); ?> " type="submit" name="confirm" id="confirm" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
+			<p class="<?php echo apply_filters('espresso_filter_hook_css_confirm_registration','espresso_confirm_registration'); ?>">
+			<input class="<?php echo apply_filters('espresso_filter_hook_css_btn_event_form_submit','btn_event_form_submit ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all'); ?> " type="submit" name="confirm" id="confirm" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
 		    </p>
 		</div>
 		
 		<?php if ($display_questions != '') { ?>
 		
-		<div class="additional-conf-info event-display-boxes <?php echo apply_filters('espresso_filter_hook_registration_css_event-display-boxes','ui-widget'); ?>">
-				<h3 class="event_title <?php echo apply_filters('espresso_filter_hook_registration_css_event_title','ui-widget-header ui-corner-top'); ?> "><?php echo stripslashes_deep($attendee_name)?></h3>
-				<div class="additional-conf-info-inner event-data-display <?php echo apply_filters('espresso_filter_hook_event_list_css_event-data-display','ui-widget-content ui-corner-bottom'); ?>">
-					<table id="event_espresso_attendee_verify_questions" class="event-display-tables grid <?php echo apply_filters('espresso_filter_hook_registration_css_event-display-tables',''); ?>">
+		<div class="<?php echo apply_filters('espresso_filter_hook_css_event_display_boxes','additional-conf-info event-display-boxes ui-widget'); ?>">
+				<h3 class="<?php echo apply_filters('espresso_filter_hook_css_event_title','event_title ui-widget-header ui-corner-top'); ?> "><?php echo stripslashes_deep($attendee_name)?></h3>
+				<div class="<?php echo apply_filters('espresso_filter_hook_event_css_event_data_display','additional-conf-info-inner event-data-display ui-widget-content ui-corner-bottom'); ?>">
+					<table id="event_espresso_attendee_verify_questions" class="<?php echo apply_filters('espresso_filter_hook_css_event_display_tables','event-display-tables grid'); ?>">
 					<?php foreach ($questions as $question) { ?>
 						<tr>
-							<th scope="row" class="header <?php echo apply_filters('espresso_filter_hook_registration_css_header',''); ?>">
+							<th scope="row" class="<?php echo apply_filters('espresso_filter_hook_css_table_header','header'); ?>">
 								<?php echo stripslashes( html_entity_decode( $question->question, ENT_QUOTES, 'UTF-8' )); ?>
 							</th>
 							<td>
-								<span class="event_espresso_value <?php echo apply_filters('espresso_filter_hook_registration_css_value',''); ?>"><?php echo stripslashes( html_entity_decode( $question->answer, ENT_QUOTES, 'UTF-8' )); ?></span>
+								<span class="<?php echo apply_filters('espresso_filter_hook_css_value','event_espresso_value'); ?>"><?php echo stripslashes( html_entity_decode( $question->answer, ENT_QUOTES, 'UTF-8' )); ?></span>
 							</td>
 						</tr>
 					<?php } ?>
 					</table>
-					<p class="espresso_confirm_registration <?php echo apply_filters('espresso_filter_hook_registration_css_confirm_registration',''); ?>">
-						<input class="btn_event_form_submit <?php echo apply_filters('espresso_filter_hook_registration_css_btn_event_form_submit','ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all'); ?> " type="submit" name="confirm2" id="confirm2" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
+					<p class="<?php echo apply_filters('espresso_filter_hook_css_confirm_registration','espresso_confirm_registration'); ?>">
+						<input class="<?php echo apply_filters('espresso_filter_hook_css_btn_event_form_submit','btn_event_form_submit ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all'); ?> " type="submit" name="confirm2" id="confirm2" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
 					</p>             
 				</div>
 				<!-- / .event-data-display -->   

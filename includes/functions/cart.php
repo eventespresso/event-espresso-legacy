@@ -662,7 +662,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 	<form id="event_espresso_checkout_form" method="post" action="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=post_multi_attendee">
 		<?php
 					$err = '';
-					$edit_cart_link = '<a href="?page_id='.$org_options['event_page_id'].'&regevent_action=show_shopping_cart" rel="nofollow" class="btn_event_form_submit inline-link '.apply_filters('espresso_filter_hook_registration_css_btn_event_form_submit','').'">'.__('Edit Cart', 'event_espresso').'</a>';
+					$edit_cart_link = '<a href="?page_id='.$org_options['event_page_id'].'&regevent_action=show_shopping_cart" rel="nofollow" class="'.apply_filters('espresso_filter_hook_css_btn_event_form_submit','btn_event_form_submit inline-link').'">'.__('Edit Cart', 'event_espresso').'</a>';
 	
 					ob_start();
 					//will be used if sj is off or they somehow select more than allotted attendees
@@ -751,7 +751,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 	
 								$err .= "<div class='event_espresso_error'><p><em>Attention</em>";
 								$err .= sprintf(__("For %s, please make sure to select between 1 and %d attendees or delete it from your cart.", 'event_espresso'), stripslashes($r->event_name), $attendee_limit);
-								$err .= '<span class="remove-cart-item '.apply_filters('espresso_filter_hook_registration_css_remove-cart-item','').'"><img class="ee_delete_item_from_cart '.apply_filters('espresso_filter_hook_registration_css_ee_delete_item_from_cart','').'" id="cart_link_' . $event_id . '" alt="Remove this item from your cart" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" /></span> ';
+								$err .= '<span class="'.apply_filters('espresso_filter_hook_css_remove_cart_item','remove-cart-item').'"><img class="'.apply_filters('espresso_filter_hook_css_ee_delete_item_from_cart','ee_delete_item_from_cart').'" id="cart_link_' . $event_id . '" alt="Remove this item from your cart" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" /></span> ';
 								$err .= "</p></div>";
 							}
 	
@@ -788,20 +788,20 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 							# the error code from reCAPTCHA, if any
 							$error = null;
 							?>
-							<p class="event_form_field <?php echo apply_filters('espresso_filter_hook_registration_css_remove-cart-item',''); ?>" id="captcha-<?php echo $event_id; ?>">
+							<p class="<?php echo apply_filters('espresso_filter_hook_css_event_form_field','event_form_field'); ?>" id="captcha-<?php echo $event_id; ?>">
 								<?php _e('Anti-Spam Measure: Please enter the following phrase', 'event_espresso'); ?>
 								<?php echo recaptcha_get_html($org_options['recaptcha_publickey'], $error, is_ssl() ? true : false); ?> 
 							</p>
 			<?php } //End use captcha	?>
 			
-		<div class="event-display-boxes <?php echo apply_filters('espresso_filter_hook_registration_css_event-display-boxes','ui-widget'); ?> ">
-			<div class="mer-event-submit <?php echo apply_filters('espresso_filter_hook_registration_css_mer-event-submit','ui-widget-content ui-corner-all'); ?> ">
-				<input type="submit" class="submit btn_event_form_submit <?php echo apply_filters('espresso_filter_hook_registration_css_btn_event_form_submit','ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all'); ?> " name="payment_page" value="<?php _e('Confirm and go to payment page', 'event_espresso'); ?>&nbsp;&raquo;" />
+		<div class="<?php echo apply_filters('espresso_filter_hook_css_event_display_boxes','event-display-boxes ui-widget'); ?> ">
+			<div class="<?php echo apply_filters('espresso_filter_hook_css_mer_event_submit','mer-event-submit ui-widget-content ui-corner-all'); ?> ">
+				<input type="submit" class="<?php echo apply_filters('espresso_filter_hook_css_btn_event_form_submit','submit btn_event_form_submit ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all'); ?>" name="payment_page" value="<?php _e('Confirm and go to payment page', 'event_espresso'); ?>&nbsp;&raquo;" />
 			</div>
 		</div>
 		<?php } ?> 
-				<p id="event_espresso_edit_cart <?php echo apply_filters('espresso_filter_hook_registration_css_event_espresso_edit_cart',''); ?>">
-					<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=show_shopping_cart" class="btn_event_form_submit inline-link <?php echo apply_filters('espresso_filter_hook_registration_css_btn_event_form_submit',''); ?>">
+				<p id="event_espresso_edit_cart" class="<?php echo apply_filters('espresso_filter_hook_css_event_espresso_edit_cart','event_espresso_edit_cart'); ?>">
+					<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=show_shopping_cart" class="<?php echo apply_filters('espresso_filter_hook_css_btn_event_form_submit','btn_event_form_submit inline-link'); ?>">
 						<?php _e('Edit Cart', 'event_espresso'); ?>
 					</a> 
 				</p>
@@ -837,7 +837,7 @@ function event_espresso_copy_dd($event_id, $meta) {
 
 	$var = '<div class = "copy_dropdown_wrapper"> ';
 	$var .= '<label>Copy from: </label>';
-	$var .= '<select id="multi_regis_form_fields-' . $event_id . '" class="event_espresso_copy_info '.apply_filters('espresso_filter_hook_registration_css_event_espresso_copy_info','').'">';
+	$var .= '<select id="multi_regis_form_fields-' . $event_id . '" class="'.apply_filters('espresso_filter_hook_css_copy_info','event_espresso_copy_info').'">';
 	$var .= "<option value=''></option>";
 
 	/*
@@ -945,7 +945,7 @@ if (!function_exists('event_espresso_multi_qty_dd')) {
 		$counter = 0;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		?>
-<select name="price_id[<?php echo $event_id; ?>][<?php echo $price_id; ?>]" id="price_id-<?php echo $event_id; ?>" class="price_id <?php echo apply_filters('espresso_filter_hook_registration_css_price_id',''); ?>">
+<select name="price_id[<?php echo $event_id; ?>][<?php echo $price_id; ?>]" id="price_id-<?php echo $event_id; ?>" class="<?php echo apply_filters('espresso_filter_hook_css_price_id','price_id'); ?>">
 	<?php
 			for ($i = 0; $i <= $qty; $i++):
 				$selected = ($i == $value) ? ' selected="selected" ' : '';
@@ -981,7 +981,7 @@ if (!function_exists('event_espresso_multi_additional_attendees')) {
 		$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
 ?>
 
-<div class="event_espresso_add_attendee_wrapper-<?php echo $event_id; ?> <?php echo apply_filters('espresso_filter_hook_registration_css_event_espresso_add_attendee_wrapper',''); ?>">
+<div class="event_espresso_add_attendee_wrapper-<?php echo $event_id; ?> <?php echo apply_filters('espresso_filter_hook_css_event_espresso_add_attendee_wrapper','event_espresso_add_attendee_wrapper'); ?>">
 	<?php
 			$i = 1;
 			while (($i < $additional_limit) && ($i < $available_spaces)) {
