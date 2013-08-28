@@ -4,21 +4,21 @@
 //There should be a copy of this file in your wp-content/uploads/espresso/ folder.
 ?>
 <div id="espresso-event-id-<?php echo $event_id; ?>">
-<div id="event_espresso_registration_form" class="event-display-boxes ui-widget">
+<div id="event_espresso_registration_form" class="event-display-boxes <?php echo apply_filters('espresso_filter_hook_registration_css_event-display-boxes','ui-widget'); ?>">
 <?php
-$ui_corner = 'ui-corner-all'; 
+$ui_corner = apply_filters('espresso_filter_hook_registration_css_ui_corner','ui-corner-all'); 
 //This tells the system to hide the event title if we only need to display the registration form.
 if ($reg_form_only == false) { 
 ?>
-	<h3 class="event_title ui-widget-header ui-corner-top" id="event_title-<?php echo $event_id; ?>">
-		<?php echo $event_name ?> <?php echo $is_active['status'] == 'EXPIRED' ? ' - <span class="expired_event">Event Expired</span>' : ''; ?> <?php echo $is_active['status'] == 'PENDING' ? ' - <span class="expired_event">Event is Pending</span>' : ''; ?> <?php echo $is_active['status'] == 'DRAFT' ? ' - <span class="expired_event">Event is a Draft</span>' : ''; ?>
+	<h3 class="event_title <?php echo apply_filters('espresso_filter_hook_registration_css_event_title',' ui-widget-header ui-corner-top'); ?>" id="event_title-<?php echo $event_id; ?>">
+		<?php echo $event_name ?> <?php echo $is_active['status'] == 'EXPIRED' ? ' - <span class="expired_event '.apply_filters('espresso_filter_hook_registration_css_expired_event','').'">Event Expired</span>' : ''; ?> <?php echo $is_active['status'] == 'PENDING' ? ' - <span class="expired_event '.apply_filters('espresso_filter_hook_registration_css_expired_event','').'">Event is Pending</span>' : ''; ?> <?php echo $is_active['status'] == 'DRAFT' ? ' - <span class="expired_event '.apply_filters('espresso_filter_hook_registration_css_expired_event','').'">Event is a Draft</span>' : ''; ?>
 	</h3>
 	
 <?php 
-	$ui_corner = 'ui-corner-bottom';
+	$ui_corner = apply_filters('espresso_filter_hook_registration_css_ui_corner','ui-corner-bottom');
 }
 ?>
- <div class="event_espresso_form_wrapper event-data-display ui-widget-content <?php echo $ui_corner ?>">
+ <div class="event_espresso_form_wrapper event-data-display <?php echo apply_filters('espresso_filter_hook_registration_css_form_wrapper_event-data-display','ui-widget-content'); ?> <?php echo $ui_corner ?>">
  	<?php //Featured image
 		echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');?>
 
@@ -36,10 +36,10 @@ if ($reg_form_only == false) {
 	<?php /* end venue details block */ ?>
 
 	<?php if ($display_desc == "Y") { //Show the description or not ?>
-	<p class="section-title">
+	<p class="section-title <?php echo apply_filters('espresso_filter_hook_registration_css_section-title',''); ?>">
 		<?php _e('Description:', 'event_espresso') ?>
 	</p>
-	<div class="event_description clearfix">
+	<div class="event_description clearfix <?php echo apply_filters('espresso_filter_hook_registration_css_event_description',''); ?>">
 		<?php echo espresso_format_content($event_desc); //Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.   ?>
 		
 	</div>
@@ -51,7 +51,7 @@ if ($reg_form_only == false) {
 		case 'EXPIRED': 
 		
 			//only show the event description.
-			echo '<h3 class="expired_event">' . __('This event has passed.', 'event_espresso') . '</h3>';
+			echo '<h3 class="expired_event '.apply_filters('espresso_filter_hook_registration_css_expired_event','').'">' . __('This event has passed.', 'event_espresso') . '</h3>';
 			break;
 
 		case 'REGISTRATION_CLOSED': 
@@ -59,14 +59,14 @@ if ($reg_form_only == false) {
 			//only show the event description.
 			// if todays date is after $reg_end_date
 ?>
-	<div class="event-registration-closed event-messages ui-corner-all ui-state-highlight">
-		<span class="ui-icon ui-icon-alert"></span>
-		<p class="event_full">
+	<div class="event-registration-closed event-messages <?php echo apply_filters('espresso_filter_hook_registration_css_event-registration-closed_event-messages','ui-corner-all ui-state-highlight'); ?>">
+		<span class="<?php echo apply_filters('espresso_filter_hook_registration_css_icon-alert','ui-icon ui-icon-alert'); ?>"></span>
+		<p class="event_full <?php echo apply_filters('espresso_filter_hook_registration_css_event_full',''); ?>">
 			<strong>
 				<?php _e('We are sorry but registration for this event is now closed.', 'event_espresso'); ?>
 			</strong>
 		</p>
-		<p class="event_full">
+		<p class="event_full <?php echo apply_filters('espresso_filter_hook_registration_css_event_full',''); ?>">
 			<strong>
 				<?php  _e('Please ', 'event_espresso');?><a href="contact" title="<?php  _e('contact us ', 'event_espresso');?>"><?php  _e('contact us ', 'event_espresso');?></a><?php  _e('if you would like to know if spaces are still available.', 'event_espresso'); ?>
 			</strong>
@@ -80,14 +80,14 @@ if ($reg_form_only == false) {
 			// if todays date is after $reg_end_date
 			// if todays date is prior to $reg_start_date
 ?>
-	<div class="event-registration-pending event-messages ui-corner-all ui-state-highlight">
-		<span class="ui-icon ui-icon-alert"></span>
-			<p class="event_full">
+	<div class="event-registration-pending event-messages <?php echo apply_filters('espresso_filter_hook_registration_css_event-registration-pending','ui-corner-all ui-state-highlight'); ?>">
+		<span class="<?php echo apply_filters('espresso_filter_hook_registration_css_icon-alert','ui-icon ui-icon-alert'); ?>"></span>
+			<p class="event_full <?php echo apply_filters('espresso_filter_hook_registration_css_event_full',''); ?>">
 				<strong>
 					<?php _e('We are sorry but this event is not yet open for registration.', 'event_espresso'); ?>
 				</strong>
 			</p>
-			<p class="event_full">
+			<p class="event_full <?php echo apply_filters('espresso_filter_hook_registration_css_event_full',''); ?>">
 				<strong>
 					<?php echo  __('You will be able to register starting ', 'event_espresso') . ' ' . event_espresso_no_format_date($reg_start_date, 'F d, Y'); ?>
 				</strong>
@@ -100,7 +100,7 @@ if ($reg_form_only == false) {
 		
 		do_action('action_hook_espresso_registration_page_top', $event_id, $event_meta, $all_meta);
 ?>
-	<div class="event_espresso_form_wrapper">
+	<div class="event_espresso_form_wrapper <?php echo apply_filters('espresso_filter_hook_registration_css_form_wrapper',''); ?>">
 		<form method="post" action="<?php echo get_permalink( $event_page_id );?>" id="registration_form">
 	<?php
 				
@@ -110,11 +110,11 @@ if ( $reg_form_only == false ){
 					/* Display the address and google map link if available */
 					if ($location != '' && (empty($org_options['display_address_in_regform']) || $org_options['display_address_in_regform'] != 'N')) {
 	?>
-				<p class="event_address" id="event_address-<?php echo $event_id ?>"><span class="section-title"><?php echo __('Address:', 'event_espresso'); ?></span> <br />
-					<span class="address-block">
+				<p class="event_address <?php echo apply_filters('espresso_filter_hook_registration_css_event_address',''); ?>" id="event_address-<?php echo $event_id ?>"><span class="section-title"><?php echo __('Address:', 'event_espresso'); ?></span> <br />
+					<span class="address-block <?php echo apply_filters('espresso_filter_hook_registration_css_address-block',''); ?>">
 						<?php echo stripslashes_deep($venue_title); ?><br />
 						<?php echo stripslashes_deep($location); ?><br />
-						<span class="google-map-link"><?php echo $google_map_link; ?></span>
+						<span class="google-map-link <?php echo apply_filters('espresso_filter_hook_registration_css_google-map-link',''); ?>"><?php echo $google_map_link; ?></span>
 					</span>
 				</p>
 	<?php
@@ -122,25 +122,25 @@ if ( $reg_form_only == false ){
 					do_action('action_hook_espresso_social_display_buttons', $event_id);
 	?>
 
-				<p class="start_date">
+				<p class="start_date <?php echo apply_filters('espresso_filter_hook_registration_css_start_date',''); ?>">
 					<?php if ($end_date !== $start_date) { ?>
-					<span class="span_event_date_label">
+					<span class="span_event_date_label <?php echo apply_filters('espresso_filter_hook_registration_css_span_event_date_label',''); ?>">
 					<?php _e('Start Date: ', 'event_espresso'); ?>
 					</span>
 					<?php } else { ?>
-					<span class="span_event_date_label">
+					<span class="span_event_date_label <?php echo apply_filters('espresso_filter_hook_registration_css_span_event_date_label',''); ?>">
 					<?php _e('Date: ', 'event_espresso'); ?>
 					</span>
 					<?php } ?>
-					<span class="span_event_date_value">
+					<span class="span_event_date_value <?php echo apply_filters('espresso_filter_hook_registration_css_span_event_date_value',''); ?>">
 					<?php echo event_date_display($start_date, get_option('date_format')); ?>
 					</span>
 	<?php if ($end_date !== $start_date) : ?>
 					<br/>
-					<span class="span_event_date_label">
+					<span class="span_event_date_label <?php echo apply_filters('espresso_filter_hook_registration_css_span_event_date_label',''); ?>">
 						<?php _e('End Date: ', 'event_espresso'); ?>
 					</span> 
-					<span class="span_event_date_value">
+					<span class="span_event_date_value <?php echo apply_filters('espresso_filter_hook_registration_css_span_event_date_value',''); ?>">
 					<?php echo event_date_display($end_date, get_option('date_format')); ?>
 					</span> 
 	<?php endif; ?>
@@ -155,7 +155,7 @@ if ( $reg_form_only == false ){
 				
 				do_action('action_hook_espresso_registration_form_top', $event_id, $event_meta, $all_meta);
 	?>
-				<p class="event_time">
+				<p class="event_time <?php echo apply_filters('espresso_filter_hook_registration_css_span_event_time',''); ?>">
 	<?php
 						//This block of code is used to display the times of an event in either a dropdown or text format.
 						if (isset($time_selected) && $time_selected == true) {//If the customer is coming from a page where the time was preselected.
@@ -178,15 +178,15 @@ if ( $reg_form_only == false ){
 					}
 
 					if ($display_price_dropdown == TRUE) {
-						$price_label = '<span class="section-title">'.__('Choose an Option: ', 'event_espresso').'</span>';
+						$price_label = '<span class="section-title '.apply_filters('espresso_filter_hook_registration_css_section-title','').'">'.__('Choose an Option: ', 'event_espresso').'</span>';
 	?>
-						<p class="event_prices">
+						<p class="event_prices <?php echo apply_filters('espresso_filter_hook_registration_css_event_prices',''); ?>">
 							<?php do_action( 'espresso_price_select', $event_id, array('show_label'=>TRUE, 'label'=>$price_label) );?>
 						</p>
 	<?php
 					} else {
 	?>
-						<p class="event_prices">
+						<p class="event_prices <?php echo apply_filters('espresso_filter_hook_registration_css_event_prices',''); ?>">
 							<?php do_action( 'espresso_seating_price_select_action', $event_id );?>
 						</p>
 	<?php
@@ -196,9 +196,9 @@ if ( $reg_form_only == false ){
 					}						
 	?>
 
-				<div id="event-reg-form-groups">
+				<div id="event-reg-form-groups <?php echo apply_filters('espresso_filter_hook_registration_css_event-reg-form-groups',''); ?>">
 				
-					<h3 class="section-heading"><?php _e('Registration Details', 'event_espresso'); ?></h3>
+					<h3 class="section-heading <?php echo apply_filters('espresso_filter_hook_registration_css_section-heading',''); ?>"><?php _e('Registration Details', 'event_espresso'); ?></h3>
 					
 	<?php
 					//Outputs the custom form questions. This function can be overridden using the custom files addon
@@ -253,7 +253,7 @@ if ( $reg_form_only == false ){
 						# the error code from reCAPTCHA, if any
 						$error = null;
 	?>
-				<p class="event_form_field" id="captcha-<?php echo $event_id; ?>">
+				<p class="event_form_field <?php echo apply_filters('espresso_filter_hook_registration_css_event_form_field',''); ?>" id="captcha-<?php echo $event_id; ?>">
 					<?php _e('Anti-Spam Measure: Please enter the following phrase', 'event_espresso'); ?>
 					<?php echo recaptcha_get_html($org_options['recaptcha_publickey'], $error, is_ssl() ? true : false); ?>
 				</p>
@@ -262,8 +262,8 @@ if ( $reg_form_only == false ){
 					} 
 					//End use captcha  
 	?>
-				<p class="event_form_submit" id="event_form_submit-<?php echo $event_id; ?>">
-					<input class="btn_event_form_submit ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="event_form_field-<?php echo $event_id; ?>" type="submit" name="Submit" value="<?php _e('Submit', 'event_espresso'); ?>">
+				<p class="event_form_submit <?php echo apply_filters('espresso_filter_hook_registration_css_event_form_submit',''); ?>" id="event_form_submit-<?php echo $event_id; ?>">
+					<input class="btn_event_form_submit <?php echo apply_filters('espresso_filter_hook_registration_css_btn_event_form_submit','ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all'); ?>" id="event_form_field-<?php echo $event_id; ?>" type="submit" name="Submit" value="<?php _e('Submit', 'event_espresso'); ?>">
 				</p>
 				
 	<?php 

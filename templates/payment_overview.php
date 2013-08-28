@@ -1,10 +1,10 @@
 <?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
 do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	?>
-<div class="espresso_payment_overview event-display-boxes ui-widget" >
-  <h3 class="section-heading ui-widget-header ui-corner-top">
+<div class="espresso_payment_overview event-display-boxes <?php echo apply_filters('espresso_filter_hook_registration_css_espresso_payment_overview','ui-widget'); ?>" >
+  <h3 class="section-heading <?php echo apply_filters('espresso_filter_hook_registration_css_section-heading','ui-widget-header ui-corner-top'); ?> ">
 		<?php _e('Payment Overview', 'event_espresso'); ?>
   </h3>
-	<div class="event-data-display ui-widget-content ui-corner-bottom" >
+	<div class="event-data-display <?php echo apply_filters('espresso_filter_hook_registration_css_event-data-display','ui-widget-content ui-corner-bottom'); ?> " >
 	<?php do_action('action_hook_espresso_payment_overview_page_top', $event_id, $event_meta, $all_meta);?>
   <table>
 		<tr>
