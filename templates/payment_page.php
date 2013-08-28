@@ -43,7 +43,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 		
 	  	<p>
 			<span class="event_espresso_name section-title <?php echo apply_filters('espresso_filter_hook_registration_css_section-title',''); ?>"><?php _e('Amount due: ', 'event_espresso'); ?></span> 
-			<span class="event_espresso_value <?php echo apply_filters('espresso_filter_hook_registration_css_event_espresso_value',''); ?>"><?php echo isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : ''; ?><?php echo number_format($total_cost,2); ?></span>
+			<span class="event_espresso_value <?php echo apply_filters('espresso_filter_hook_registration_css_value',''); ?>"><?php echo isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : ''; ?><?php echo number_format($total_cost,2); ?></span>
 		</p>
 	  	
 		<p>
