@@ -344,7 +344,7 @@ function add_new_event() {
 								<?php /* ?> <p>
                 <br /> <?php echo __('Event Visible On:','event_espresso') . ' <input type="text" size="15" id="visible_on" class="datepicker" name="visible_on" value="" />'; ?> <br />
                                   </p><?php */ ?>
-								<?php echo defined('EVENT_ESPRESSO_RECURRENCE_TABLE') ? '' : '<p class="recurring-available"><a class="inform" href="http://eventespresso.com/?p=3319" target="_blank" title="Visit eventespresso.com for full details">' . __('Recurring Event Manager Now Available!', 'event_espresso') . '</a></p>'; ?></td>
+								<?php echo defined('EVENT_ESPRESSO_RECURRENCE_TABLE') ? '' : '<p class="recurring-available"><a class="inform" href="http://eventespresso.com/product/espresso-recurring/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Recurring+Event+Manager+Now+Available+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url().'&utm_campaign=add_new_event_tab" target="_blank" title="Visit eventespresso.com for full details">' . __('Recurring Event Manager Now Available!', 'event_espresso') . '</a></p>'; ?></td>
 							<?php // ADDED TIME REGISTRATION LIMITS  ?>
 							<td class="b"><fieldset id="add-register-times">
 									<legend>

@@ -173,7 +173,7 @@ function event_espresso_manage_events() {
 	<div id="secondary_info" style="display:none">
 		<h2><?php _e('Waitlist Events', 'event_espresso'); ?></h2>
 		<p><?php _e('These types of events can be used as a overflow or waiting list events.', 'event_espresso'); ?></p>
-		<p><?php _e('If an event is set up as an "Waitlist Event," it can be set to not appear in your event listings template. You may need to customize your event_listing.php file to make this work. For more information, please', 'event_espresso'); ?> <a href="http://eventespresso.com/forums/?p=512" target="_blank"><?php _e('visit the forums', 'event_espresso'); ?></a>.</p>
+		<p><?php _e('If an event is set up as an "Waitlist Event," it can be set to not appear in your event listings template. You may need to customize your event_listing.php file to make this work. For more information, please', 'event_espresso'); ?> <a href="http://eventespresso.com/wiki/create-a-waiting-list-for-your-event/" target="_blank"><?php _e('view the documentation', 'event_espresso'); ?></a>.</p>
 	</div>
 	<div id="external_URL_info" style="display:none">
 		<h2><?php _e('Off-site Registration Page', 'event_espresso'); ?></h2>
@@ -187,8 +187,8 @@ function event_espresso_manage_events() {
 		<h2><?php _e('Event Status Types', 'event_espresso'); ?></h2>
 		<ul>
 			<li><strong><?php _e('Public', 'event_espresso'); ?></strong><br /><?php _e('This type if event will appear in the event listings. It is a live event (not deleted, ongoing or secondary.)', 'event_espresso'); ?></li>
-			<li><strong><?php _e('Waitlist', 'event_espresso'); ?></strong><br /><?php _e('This type of event can be hidden and used as a waiting list for a primary event. Template customizations may be required. For more information, please', 'event_espresso'); ?> <a href="http://eventespresso.com/forums/?p=512" target="_blank"><?php _e('visit the forums', 'event_espresso'); ?></a></li>
-			<li><strong><?php _e('Ongoing', 'event_espresso'); ?></strong><br /><?php _e('This type of an event can be set to appear in your event listings and display a registration page. Template customizations are required. For more information, please', 'event_espresso'); ?> <a href="http://eventespresso.com/forums/?p=518" target="_blank"><?php _e('visit the forums', 'event_espresso'); ?></a></li>
+			<li><strong><?php _e('Waitlist', 'event_espresso'); ?></strong><br /><?php _e('This type of event can be hidden and used as a waiting list for a primary event. Template customizations may be required. For more information, please', 'event_espresso'); ?> <a href="http://eventespresso.com/wiki/create-a-waiting-list-for-your-event/" target="_blank"><?php _e('view the documentation', 'event_espresso'); ?></a></li>
+			<li><strong><?php _e('Ongoing', 'event_espresso'); ?></strong><br /><?php _e('This type of an event can be set to appear in your event listings and display a registration page. Template customizations are required.', 'event_espresso'); ?></li>
 			<li><strong><?php _e('Deleted', 'event_espresso'); ?></strong><br /><?php _e('This is event type will not appear in the event listings and will not dispaly a registrations page. Deleted events can still be accessed in the', 'event_espresso'); ?> <a href="admin.php?page=events"><?php _e('Attendee Reports', 'event_espresso'); ?></a> <?php _e('page', 'event_espresso'); ?>.</li>
 		</ul>
 	</div>
