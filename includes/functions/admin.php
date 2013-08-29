@@ -876,7 +876,7 @@ function event_espresso_display_right_column() {
 					<div class="padding">
 						<ul class="infolinks">
 							<li>
-								<?php echo '<a href="http://eventespresso.com/wiki/installation/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Installation&utm_campaign=plugin_sidebar" target="_blank">'.__('Installation', 'event_espresso') . '</a>  &amp; <a href="http://eventespresso.com/wiki/setting-up-event-espresso/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Usage+Guide+ee_version_'.EVENT_ESPRESSO_VERSION .'&utm_campaign=admin_sidebar" target="_blank">' . __('Usage Guide').'</a>'; ?>
+								<?php echo '<a href="http://eventespresso.com/support/documentation/#getting-started?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Installation&utm_campaign=plugin_sidebar" target="_blank">'.__('Getting Started', 'event_espresso') . '</a>'; ?>
 								</li>
 							<li><a href="http://eventespresso.com/wiki/put-custom-templates/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Template+Customization<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=admin_sidebar" target="_blank">
 									<?php _e('Template Customization', 'event_espresso'); ?>
