@@ -194,154 +194,154 @@
      <div class="plan"  >
    
         <h3>Developer<span>$499.95</span></h3>
-        <a class="signup" href="http://eventespresso.com/product/developer-license/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Developer+Buy+Now<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Buy Now</a>         
+        <a class="signup" href="http://eventespresso.com/product/developer-license/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Developer+Buy+Now<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Buy Now</a>         
         <ul>
             
             <li><b>5 Site Support License</b></li>
 			
-			<li><a href="http://eventespresso.com/product/espresso-json-api/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=JSON+API<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> JSON API</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-json-api/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=JSON+API<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> JSON API</a></li>
 			
-			<li><a href="http://eventespresso.com/product/espresso-ticketing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Mobile+Ticketing+Apps<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Mobile Ticketing Apps</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-ticketing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Mobile+Ticketing+Apps<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Mobile Ticketing Apps</a></li>
 			
-			<li><a href="http://eventespresso.com/features/event-calendar/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Event+Calendar<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Event Calendar</a></li>
+			<li><a href="http://eventespresso.com/features/event-calendar/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Event+Calendar<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Event Calendar</a></li>
 			
-			<li> <a href="http://eventespresso.com/features/multiple-ticket-pricing-options/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Multiple+Ticket+&+Pricing+Options<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Multiple Ticket & Pricing Options</a></li>
+			<li> <a href="http://eventespresso.com/features/multiple-ticket-pricing-options/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Multiple+Ticket+&+Pricing+Options<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Multiple Ticket & Pricing Options</a></li>
 			
-			<li><a href="http://eventespresso.com/features/promotion-codes/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Promotional+Codes+&+Discounts<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Promotional Codes & Discounts</a></li>
+			<li><a href="http://eventespresso.com/features/promotion-codes/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Promotional+Codes+&+Discounts<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Promotional Codes & Discounts</a></li>
             
-			<li><a href="http://eventespresso.com/features/event-registration/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Custom+Registration+Forms<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Custom Registration Forms</a></li>
+			<li><a href="http://eventespresso.com/features/event-registration/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Custom+Registration+Forms<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Custom Registration Forms</a></li>
 			
-			<li><a href="http://eventespresso.com/product/espresso-multiple/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Multiple+Event+Registraion<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Multiple Event Registraion</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-multiple/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Multiple+Event+Registraion<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Multiple Event Registraion</a></li>
 			
-			<li> <a href="http://eventespresso.com/product/espresso-recurring/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Recurring+Events<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Recurring Events</a></li>
+			<li> <a href="http://eventespresso.com/product/espresso-recurring/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Recurring+Events<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Recurring Events</a></li>
 			
-			<li><a href="http://eventespresso.com/features/venue-manager/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Venue+Manager<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Venue Manager</a></li>
+			<li><a href="http://eventespresso.com/features/venue-manager/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Venue+Manager<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Venue Manager</a></li>
 			
-			<li> <a href="http://eventespresso.com/features/staff-manager/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Staff+Manager<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Staff Manager</a></li>
+			<li> <a href="http://eventespresso.com/features/staff-manager/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Staff+Manager<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Staff Manager</a></li>
 			
-			<li><a href="http://eventespresso.com/features/custom-post-types/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Custom+Post+Types<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Custom Post Types</a></li>
+			<li><a href="http://eventespresso.com/features/custom-post-types/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Custom+Post+Types<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Custom Post Types</a></li>
 			
-			<li><a href="http://eventespresso.com/features/customizable-event-designs/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Customizable+Event+Designs<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Customizable Event Designs</a></li>
+			<li><a href="http://eventespresso.com/features/customizable-event-designs/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Customizable+Event+Designs<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Customizable Event Designs</a></li>
 			
-			<li><a href="http://eventespresso.com/features/waiting-lists/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Waiting+Lists<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Waiting Lists</a></li>
+			<li><a href="http://eventespresso.com/features/waiting-lists/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Waiting+Lists<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Waiting Lists</a></li>
             
-			<li> <a href="http://eventespresso.com/features/payment-options/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=15++Payment+Gateways<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">15+ Payment Gateways</a></li>
+			<li> <a href="http://eventespresso.com/features/payment-options/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=15++Payment+Gateways<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">15+ Payment Gateways</a></li>
 			
-			<li><a href="http://eventespresso.com/features/spam-protection/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Spam+Protection<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Spam Protection</a></li>
+			<li><a href="http://eventespresso.com/features/spam-protection/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Spam+Protection<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Spam Protection</a></li>
 			
-			<li><a href="http://eventespresso.com/features/invoices/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Invoice+Payment+Reminders<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Invoice Payment Reminders</a></li>
+			<li><a href="http://eventespresso.com/features/invoices/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Invoice+Payment+Reminders<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Invoice Payment Reminders</a></li>
 			
-			<li><a href="http://eventespresso.com/features/languages/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=15++Languages<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> 15+ Languages</a></li>
+			<li><a href="http://eventespresso.com/features/languages/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=15++Languages<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> 15+ Languages</a></li>
 			
-			<li><a href="http://eventespresso.com/features/admin-pre-approval/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Admin+Pre-approval<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Admin Pre-approval</a></li>
+			<li><a href="http://eventespresso.com/features/admin-pre-approval/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Admin+Pre-approval<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Admin Pre-approval</a></li>
 			
-			<li><a href="http://eventespresso.com/product/espresso-members/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=WP+User+Integration<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> WP User Integration</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-members/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=WP+User+Integration<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> WP User Integration</a></li>
 			
-			<li><a href="http://eventespresso.com/product/espresso-permissions-basic/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Roles+&+Permissions<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Roles & Permissions</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-permissions-basic/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Roles+&+Permissions<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Roles & Permissions</a></li>
            
-		    <li><a href="http://eventespresso.com/product/espresso-permissions-pro/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Roles+&+Permissions+Pro<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Roles & Permissions Pro</a></li>
+		    <li><a href="http://eventespresso.com/product/espresso-permissions-pro/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Roles+&+Permissions+Pro<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Roles & Permissions Pro</a></li>
             
-			<li><a href="http://eventespresso.com/product/espresso-mailchimp/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Mailchimp<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Mailchimp</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-mailchimp/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Mailchimp<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Mailchimp</a></li>
 			
-			<li><a href="http://eventespresso.com/product/espresso-social/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Social+Media+Buttons<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Social Media Buttons</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-social/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Social+Media+Buttons<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Social Media Buttons</a></li>
            
-		    <li><a href="http://eventespresso.com/product/espresso-seating/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Seating+Charts<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Seating Charts</a></li>           
+		    <li><a href="http://eventespresso.com/product/espresso-seating/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Seating+Charts<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Seating Charts</a></li>           
         </ul> 
     </div >
       <div class="plan"  id="most-popular" >
    
         <h3>Business<span>$179.95</span></h3>
-        <a class="signup" href="http://eventespresso.com/product/business-license/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Business+Buy+Now<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Buy Now</a>         
+        <a class="signup" href="http://eventespresso.com/product/business-license/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Business+Buy+Now<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Buy Now</a>         
         <ul>
             
             <li><b>1 Site Support License</b></li>
 			
-			<li><a href="http://eventespresso.com/product/espresso-json-api/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=JSON+API<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> JSON API</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-json-api/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=JSON+API<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> JSON API</a></li>
 			
-			<li><a href="http://eventespresso.com/product/espresso-ticketing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Mobile+Ticketing+Apps<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Mobile Ticketing Apps</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-ticketing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Mobile+Ticketing+Apps<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Mobile Ticketing Apps</a></li>
 			
-			<li><a href="http://eventespresso.com/features/event-calendar/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Event+Calendar<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Event Calendar</a></li>
+			<li><a href="http://eventespresso.com/features/event-calendar/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Event+Calendar<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Event Calendar</a></li>
 			
-			<li> <a href="http://eventespresso.com/features/multiple-ticket-pricing-options/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Multiple+Ticket+&+Pricing+Options<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Multiple Ticket & Pricing Options</a></li>
+			<li> <a href="http://eventespresso.com/features/multiple-ticket-pricing-options/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Multiple+Ticket+&+Pricing+Options<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Multiple Ticket & Pricing Options</a></li>
 			
-			<li><a href="http://eventespresso.com/features/promotion-codes/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Promotional+Codes+&+Discounts<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Promotional Codes & Discounts</a></li>
+			<li><a href="http://eventespresso.com/features/promotion-codes/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Promotional+Codes+&+Discounts<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Promotional Codes & Discounts</a></li>
             
-			<li><a href="http://eventespresso.com/features/event-registration/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Custom+Registration+Forms<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Custom Registration Forms</a></li>
+			<li><a href="http://eventespresso.com/features/event-registration/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Custom+Registration+Forms<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Custom Registration Forms</a></li>
 			
-			<li><a href="http://eventespresso.com/product/espresso-multiple/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Multiple+Event+Registraion<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Multiple Event Registraion</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-multiple/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Multiple+Event+Registraion<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Multiple Event Registraion</a></li>
 			
-			<li> <a href="http://eventespresso.com/product/espresso-recurring/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Recurring+Events<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Recurring Events</a></li>
+			<li> <a href="http://eventespresso.com/product/espresso-recurring/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Recurring+Events<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Recurring Events</a></li>
 			
-			<li><a href="http://eventespresso.com/features/venue-manager/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Venue+Manager<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Venue Manager</a></li>
+			<li><a href="http://eventespresso.com/features/venue-manager/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Venue+Manager<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Venue Manager</a></li>
 			
-			<li> <a href="http://eventespresso.com/features/staff-manager/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Staff+Manager<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Staff Manager</a></li>
+			<li> <a href="http://eventespresso.com/features/staff-manager/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Staff+Manager<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Staff Manager</a></li>
 			
-			<li><a href="http://eventespresso.com/features/custom-post-types/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Custom+Post+Types<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Custom Post Types</a></li>
+			<li><a href="http://eventespresso.com/features/custom-post-types/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Custom+Post+Types<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Custom Post Types</a></li>
 			
-			<li><a href="http://eventespresso.com/features/customizable-event-designs/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Customizable+Event+Designs<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Customizable Event Designs</a></li>
+			<li><a href="http://eventespresso.com/features/customizable-event-designs/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Customizable+Event+Designs<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Customizable Event Designs</a></li>
 			
-			<li><a href="http://eventespresso.com/features/waiting-lists/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Waiting+Lists<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Waiting Lists</a></li>
+			<li><a href="http://eventespresso.com/features/waiting-lists/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Waiting+Lists<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Waiting Lists</a></li>
             
-			<li> <a href="http://eventespresso.com/features/payment-options/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=15++Payment+Gateways<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">15+ Payment Gateways</a></li>
+			<li> <a href="http://eventespresso.com/features/payment-options/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=15++Payment+Gateways<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">15+ Payment Gateways</a></li>
 			
-			<li><a href="http://eventespresso.com/features/spam-protection/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Spam+Protection<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Spam Protection</a></li>
+			<li><a href="http://eventespresso.com/features/spam-protection/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Spam+Protection<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Spam Protection</a></li>
 			
-			<li><a href="http://eventespresso.com/features/invoices/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Invoice+Payment+Reminders<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Invoice Payment Reminders</a></li>
+			<li><a href="http://eventespresso.com/features/invoices/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Invoice+Payment+Reminders<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Invoice Payment Reminders</a></li>
 			
-			<li><a href="http://eventespresso.com/features/languages/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=15++Languages<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> 15+ Languages</a></li>
+			<li><a href="http://eventespresso.com/features/languages/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=15++Languages<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> 15+ Languages</a></li>
 			
-			<li><a href="http://eventespresso.com/features/admin-pre-approval/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Admin+Pre-approval<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Admin Pre-approval</a></li>
+			<li><a href="http://eventespresso.com/features/admin-pre-approval/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Admin+Pre-approval<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Admin Pre-approval</a></li>
 			
-			<li><a href="http://eventespresso.com/product/espresso-members/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=WP+User+Integration<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> WP User Integration</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-members/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=WP+User+Integration<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> WP User Integration</a></li>
 			
-			<li><a href="http://eventespresso.com/product/espresso-permissions-basic/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Roles+&+Permissions<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Roles & Permissions</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-permissions-basic/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Roles+&+Permissions<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Roles & Permissions</a></li>
                        
-			<li><a href="http://eventespresso.com/product/espresso-mailchimp/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Mailchimp<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Mailchimp</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-mailchimp/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Mailchimp<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Mailchimp</a></li>
 			
-			<li><a href="http://eventespresso.com/product/espresso-social/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Social+Media+Buttons<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Social Media Buttons</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-social/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Social+Media+Buttons<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Social Media Buttons</a></li>
            
         </ul> 
     </div >
       <div class="plan"  >
    
         <h3>Personal<span>$89.95</span></h3>
-        <a class="signup" href="http://eventespresso.com/product/personal-license/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Personal+Buy+Now<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Buy Now</a>         
+        <a class="signup" href="http://eventespresso.com/product/personal-license/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Personal+Buy+Now<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Buy Now</a>         
         <ul>
             
             <li><b>1 Site Support License</b></li>
 			
-			<li><a href="http://eventespresso.com/product/espresso-json-api/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=JSON+API<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> JSON API</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-json-api/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=JSON+API<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> JSON API</a></li>
 			
-			<li><a href="http://eventespresso.com/features/event-calendar/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Event+Calendar<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Event Calendar</a></li>
+			<li><a href="http://eventespresso.com/features/event-calendar/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Event+Calendar<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Event Calendar</a></li>
 			
-			<li> <a href="http://eventespresso.com/features/multiple-ticket-pricing-options/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Multiple+Ticket+&+Pricing+Options<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Multiple Ticket & Pricing Options</a></li>
+			<li> <a href="http://eventespresso.com/features/multiple-ticket-pricing-options/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Multiple+Ticket+&+Pricing+Options<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Multiple Ticket & Pricing Options</a></li>
 			
-			<li><a href="http://eventespresso.com/features/promotion-codes/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Promotional+Codes+&+Discounts<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Promotional Codes & Discounts</a></li>
+			<li><a href="http://eventespresso.com/features/promotion-codes/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Promotional+Codes+&+Discounts<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Promotional Codes & Discounts</a></li>
 			
-			<li><a href="http://eventespresso.com/features/event-registration/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Custom+Registration+Forms<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Custom Registration Forms</a></li>
+			<li><a href="http://eventespresso.com/features/event-registration/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Custom+Registration+Forms<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Custom Registration Forms</a></li>
 			
-			<li><a href="http://eventespresso.com/features/venue-manager/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Venue+Manager<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Venue Manager</a></li>
+			<li><a href="http://eventespresso.com/features/venue-manager/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Venue+Manager<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Venue Manager</a></li>
 			
-			<li> <a href="http://eventespresso.com/features/staff-manager/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Staff+Manager<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Staff Manager</a></li>
+			<li> <a href="http://eventespresso.com/features/staff-manager/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Staff+Manager<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Staff Manager</a></li>
 			
-			<li><a href="http://eventespresso.com/features/custom-post-types/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Custom+Post+Types<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Custom Post Types</a></li>
+			<li><a href="http://eventespresso.com/features/custom-post-types/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Custom+Post+Types<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Custom Post Types</a></li>
 			
-			<li><a href="http://eventespresso.com/features/customizable-event-designs/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Customizable+Event+Designs<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Customizable Event Designs</a></li>
+			<li><a href="http://eventespresso.com/features/customizable-event-designs/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Customizable+Event+Designs<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Customizable Event Designs</a></li>
 			
-			<li><a href="http://eventespresso.com/features/waiting-lists/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Waiting+Lists<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Waiting Lists</a></li>
+			<li><a href="http://eventespresso.com/features/waiting-lists/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Waiting+Lists<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Waiting Lists</a></li>
 			
             
-			<li> <a href="http://eventespresso.com/features/payment-options/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=15++Payment+Gateways<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">15+ Payment Gateways</a></li>
+			<li> <a href="http://eventespresso.com/features/payment-options/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=15++Payment+Gateways<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">15+ Payment Gateways</a></li>
 			
-			<li><a href="http://eventespresso.com/features/spam-protection/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Spam+Protection<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Spam Protection</a></li>
+			<li><a href="http://eventespresso.com/features/spam-protection/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Spam+Protection<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Spam Protection</a></li>
 			
-			<li><a href="http://eventespresso.com/features/invoices/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Invoice+Payment+Reminders<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Invoice Payment Reminders</a></li>
+			<li><a href="http://eventespresso.com/features/invoices/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Invoice+Payment+Reminders<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Invoice Payment Reminders</a></li>
 			
-			<li><a href="http://eventespresso.com/features/languages/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=15++Languages<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> 15+ Languages</a></li>
+			<li><a href="http://eventespresso.com/features/languages/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=15++Languages<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> 15+ Languages</a></li>
 			
-			<li><a href="http://eventespresso.com/features/admin-pre-approval/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Admin+Pre-approval<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Admin Pre-approval</a></li>
+			<li><a href="http://eventespresso.com/features/admin-pre-approval/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Admin+Pre-approval<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Admin Pre-approval</a></li>
 			
-			<li><a href="http://eventespresso.com/product/espresso-social/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Social+Media+Buttons<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table"> Social Media Buttons</a></li>
+			<li><a href="http://eventespresso.com/product/espresso-social/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Social+Media+Buttons<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table"> Social Media Buttons</a></li>
 			         
         </ul> 
     </div >
@@ -350,9 +350,9 @@
 
 <!-- price table designed by red-team-design.com -->
             
-			<p><strong>Server Requirements</strong><br />Know Before downloading, please be sure your server <a href="http://eventespresso.com/requirements/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Server+Requirements<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">meets the requirements</a>.</p>
+			<p><strong>Server Requirements</strong><br />Know Before downloading, please be sure your server <a href="http://eventespresso.com/requirements/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Server+Requirements<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">meets the requirements</a>.</p>
             <p><strong>Non-profit Organizations</strong><br />
-            	Non-profit organizations may request a discounted price by completing the <a title="Event Espresso Non-Profit Discounts Coupons" href="http://eventespresso.com/contact/non-profit-discounts/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Non-profit+organizations<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Non-profit Application Form</a>.</p><p>Do your friends a favor and <a href="http://eventespresso.com/non-profit-referral-form/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Do+your+friends+a+favor<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table" target="_blank">tell them about Event Espresso and this discount for non-profits</a>.</p>
+            	Non-profit organizations may request a discounted price by completing the <a title="Event Espresso Non-Profit Discounts Coupons" href="http://eventespresso.com/contact/non-profit-discounts/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Non-profit+organizations<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Non-profit Application Form</a>.</p><p>Do your friends a favor and <a href="http://eventespresso.com/non-profit-referral-form/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Do+your+friends+a+favor<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table" target="_blank">tell them about Event Espresso and this discount for non-profits</a>.</p>
             </div>
           </div>
           </div>
