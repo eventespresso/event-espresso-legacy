@@ -146,7 +146,7 @@ function load_events_to_db() {
 				$event_meta['add_attendee_question_groups'] = unserialize($question_groups);
 				$event_meta['date_submitted'] = date("Y-m-d H:i:s");
 				$event_meta = serialize($event_meta);
-
+				
 				$strings_sql_array = array(
 					'event_name' => sanitize_text_field($strings[1]), //event_name
 					'event_desc' => $strings[2],
@@ -161,14 +161,14 @@ function load_events_to_db() {
 					'event_identifier' => sanitize_title_with_dashes($strings[11]),
 					'start_date' => date('Y-m-d',strtotime($strings[12])),
 					'end_date' => date('Y-m-d', strtotime($strings[13])),
-					'reg_limit' => sanitize_text_field($strings[16]),
-					'allow_multiple' => sanitize_text_field($strings[17]),
-					'additional_limit' => (int) $strings[18],
-					'send_mail' => sanitize_text_field($strings[19]),
-					'is_active' => sanitize_text_field($strings[20]),
-					'conf_mail' => $strings[21],
-					'registration_start' => date('Y-m-d', strtotime($strings[22])),
-					'registration_end' => date('Y-m-d', strtotime($strings[23])),
+					'reg_limit' => sanitize_text_field($strings[16]),//skip 17, it's the price and needs to be accounted for differently
+					'allow_multiple' => sanitize_text_field($strings[18]),
+					'additional_limit' => (int) $strings[19],
+					'send_mail' => sanitize_text_field($strings[20]),
+					'is_active' => sanitize_text_field($strings[21]),
+					'conf_mail' => $strings[22],
+					'registration_start' => date('Y-m-d', strtotime($strings[23])),
+					'registration_end' => date('Y-m-d', strtotime($strings[24])),
 					'question_groups' => $question_groups,
 					'event_meta' => $event_meta
 					);
