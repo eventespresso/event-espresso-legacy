@@ -278,35 +278,35 @@ if (!function_exists('espresso_export_stuff')) {
 					}
 
 					$basic_header = array(
-						__('Group', 'event_espresso'), 
-						__('ID', 'event_espresso'), 
-						__('Reg ID', 'event_espresso'), 
-						__('Payment Method', 'event_espresso'), 
-						__('Reg Date', 'event_espresso'), 
-						__('Pay Status', 'event_espresso'), 
-						__('Type of Payment', 'event_espresso'), 
-						__('Transaction ID', 'event_espresso'), 
-						__('Price', 'event_espresso'), 
-						__('Coupon Code', 'event_espresso'), 
-						__('# Attendees', 'event_espresso'), 
-						__('Amount Paid', 'event_espresso'), 
-						__('Date Paid', 'event_espresso'), 
-						__('Event Name', 'event_espresso'), 
-						__('Price Option', 'event_espresso'), 
-						__('Event Date', 'event_espresso'), 
-						__('Event Time', 'event_espresso'), 
+						__('Group', 'event_espresso'), 		// column # A
+						__('ID', 'event_espresso'), 									// B
+						__('Reg ID', 'event_espresso'),  							// C
+						__('Payment Method', 'event_espresso'),  		// D
+						__('Reg Date', 'event_espresso'),  						// E
+						__('Pay Status', 'event_espresso'),  						// F
+						__('Type of Payment', 'event_espresso'),  			// G
+						__('Transaction ID', 'event_espresso'),  				// H
+						__('Price', 'event_espresso'),  								// I
+						__('Coupon Code', 'event_espresso'),  				// J
+						__('# Attendees', 'event_espresso'),  					// K
+						__('Amount Paid', 'event_espresso'),  				// L
+						__('Date Paid', 'event_espresso'),  						// M
+						__('Event Name', 'event_espresso'),  					// N
+						__('Price Option', 'event_espresso'),  					// O
+						__('Event Date', 'event_espresso'),  					// P
+						__('Event Time', 'event_espresso'),  					// Q
 					);
 					
 					if ( $ticketing_installed ) {
-						$basic_header[] = __('Website Check-in', 'event_espresso');
-						$basic_header[] = __('Tickets Scanned', 'event_espresso');
-						$basic_header[] = __('Check-in Date', 'event_espresso');
+						$basic_header[] = __('Website Check-in', 'event_espresso'); 		// R
+						$basic_header[] = __('Tickets Scanned', 'event_espresso'); 		// S
+						$basic_header[] = __('Check-in Date', 'event_espresso'); 			// T
 					}
 
-					$basic_header[] = __('Seat Tag', 'event_espresso');
-					$basic_header[] = __('First Name', 'event_espresso');
-					$basic_header[] = __('Last Name', 'event_espresso');
-					$basic_header[] = __('Email', 'event_espresso');
+					$basic_header[] = __('Seat Tag', 'event_espresso'); 			// R  	or		U
+					$basic_header[] = __('First Name', 'event_espresso'); 		// S  	or		V
+					$basic_header[] = __('Last Name', 'event_espresso'); 			// T  	or		W
+					$basic_header[] = __('Email', 'event_espresso'); 					// U  	or		X
 
 					$question_groups = maybe_unserialize($question_groups);
 					$event_meta = maybe_unserialize($event_meta);
@@ -504,33 +504,33 @@ if (!function_exists('espresso_export_stuff')) {
 										$scanned_date = "";
 									}
 
-									echo $attendees_group
-									. $s . escape_csv_val($participant->att_id)
-									. $s . escape_csv_val($participant->registration_id)
-									. $s . escape_csv_val(stripslashes($participant->payment))
-									. $s . escape_csv_val(stripslashes(event_date_display($participant->date, get_option('date_format'))))
-									. $s . escape_csv_val(stripslashes($participant->payment_status))
-									. $s . escape_csv_val(stripslashes($participant->txn_type))
-									. $s . escape_csv_val(stripslashes($participant->txn_id))
-									. $s . escape_csv_val($participant->a_final_price * $participant->a_quantity)
-									. $s . escape_csv_val($participant->coupon_code)
-									. $s . escape_csv_val($participant->quantity)
-									. $s . escape_csv_val($participant->amount_pd)
-									. $s . escape_csv_val(event_date_display($participant->payment_date, get_option('date_format')))
-									. $s . escape_csv_val($participant->event_name)
-									. $s . escape_csv_val($participant->price_option)
-									. $s . escape_csv_val(event_date_display($participant->start_date, get_option('date_format')))
-									. $s . escape_csv_val(event_date_display($participant->event_time, get_option('time_format')))
+									echo $attendees_group 																																			// column # A
+									. $s . escape_csv_val($participant->att_id)																											// B
+									. $s . escape_csv_val($participant->registration_id)																								// C
+									. $s . escape_csv_val(stripslashes($participant->payment))																				// D
+									. $s . escape_csv_val(stripslashes(event_date_display($participant->date, get_option('date_format'))))	//E
+									. $s . escape_csv_val(stripslashes($participant->payment_status))																	// F
+									. $s . escape_csv_val(stripslashes($participant->txn_type))																				// G
+									. $s . escape_csv_val(stripslashes($participant->txn_id))																						// H
+									. $s . escape_csv_val($participant->a_final_price * $participant->a_quantity)													// I
+									. $s . escape_csv_val($participant->coupon_code)																								// J
+									. $s . escape_csv_val($participant->quantity)																										// K
+									. $s . escape_csv_val($participant->amount_pd)																									// L
+									. $s . escape_csv_val(event_date_display($participant->payment_date, get_option('date_format')))			// M
+									. $s . escape_csv_val($participant->event_name)																								// N
+									. $s . escape_csv_val($participant->price_option)																								// O
+									. $s . escape_csv_val(event_date_display($participant->start_date, get_option('date_format')))					// P
+									. $s . escape_csv_val(event_date_display($participant->event_time, get_option('time_format')))				// Q
 									;
 									if ( $ticketing_installed == true ) {
-										echo $s . escape_csv_val($participant->checked_in ? "Yes" : "No")
-										. $s . escape_csv_val($participant->checked_in_quantity);										
+										echo $s . escape_csv_val($participant->checked_in ? "Yes" : "No")																// R
+										. $s . escape_csv_val($participant->checked_in_quantity)																				// S
+										. $s . escape_csv_val($scanned_date);																												// T
 									}
-									echo $s . escape_csv_val($scanned_date)
-									. $s . escape_csv_val($participant->seatingchart_tag)
-									. $s . escape_csv_val($participant->fname)
-									. $s . escape_csv_val($participant->lname)
-									. $s . escape_csv_val($participant->email)
+									echo $s . escape_csv_val($participant->seatingchart_tag)																					// R		or		U
+									. $s . escape_csv_val($participant->fname)																											// S		or		V
+									. $s . escape_csv_val($participant->lname)																											// T		or		W
+									. $s . escape_csv_val($participant->email)																											// U		or		X
 									;
 
 
