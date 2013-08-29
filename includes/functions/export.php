@@ -228,7 +228,7 @@ if (!function_exists('espresso_event_export')) {
 if (!function_exists('espresso_export_stuff')) {
 
 	function espresso_export_stuff() {
-
+		global $wpdb, $ticketing_installed;
 		$today = date("Y-m-d-Hi", time());
 		$export_all_events = isset($_REQUEST['all_events']) && $_REQUEST['all_events'] == "true" ? TRUE : FALSE;
 
@@ -237,7 +237,7 @@ if (!function_exists('espresso_export_stuff')) {
 			switch ($_REQUEST['export']) {
 
 				case "report":
-					global $wpdb;
+					
 
 					$event_id = isset($_REQUEST['event_id']) ? $_REQUEST['event_id'] : FALSE;
 
@@ -277,7 +277,7 @@ if (!function_exists('espresso_export_stuff')) {
 						}
 					}
 
-					$basic_header = array(__('Group', 'event_espresso'), __('ID', 'event_espresso'), __('Reg ID', 'event_espresso'), __('Payment Method', 'event_espresso'), __('Reg Date', 'event_espresso'), __('Pay Status', 'event_espresso'), __('Type of Payment', 'event_espresso'), __('Transaction ID', 'event_espresso'), __('Price', 'event_espresso'), __('Coupon Code', 'event_espresso'), __('# Attendees', 'event_espresso'), __('Amount Paid', 'event_espresso'), __('Date Paid', 'event_espresso'), __('Event Name', 'event_espresso'), __('Price Option', 'event_espresso'), __('Event Date', 'event_espresso'), __('Event Time', 'event_espresso'), __('Website Check-in', 'event_espresso'), __('Tickets Scanned', 'event_espresso'), __('Check-in Date', 'event_espresso'),__('Seat Tag', 'event_espresso'), __('First Name', 'event_espresso'), __('Last Name', 'event_espresso'), __('Email', 'event_espresso'));
+					$basic_header = array(__('Group', 'event_espresso'), __('ID', 'event_espresso'), __('Reg ID', 'event_espresso'), __('Payment Method', 'event_espresso'), __('Reg Date', 'event_espresso'), __('Pay Status', 'event_espresso'), __('Type of Payment', 'event_espresso'), __('Transaction ID', 'event_espresso'), __('Price', 'event_espresso'), __('Coupon Code', 'event_espresso'), __('# Attendees', 'event_espresso'), __('Amount Paid', 'event_espresso'), __('Date Paid', 'event_espresso'), __('Event Name', 'event_espresso'), __('Price Option', 'event_espresso'), __('Event Date', 'event_espresso'), __('Event Time', 'event_espresso'), $ticketing_installed == true ? __('Website Check-in', 'event_espresso') :'', $ticketing_installed == true ? __('Tickets Scanned', 'event_espresso'):'', $ticketing_installed == true ? __('Check-in Date', 'event_espresso') : '',__('Seat Tag', 'event_espresso'), __('First Name', 'event_espresso'), __('Last Name', 'event_espresso'), __('Email', 'event_espresso'));
 
 					$question_groups = maybe_unserialize($question_groups);
 					$event_meta = maybe_unserialize($event_meta);
@@ -365,10 +365,11 @@ if (!function_exists('espresso_export_stuff')) {
 								$group = implode(",", $group);
 								$sql .= "(SELECT ed.event_name, ed.start_date, a.id AS att_id, a.registration_id, a.payment, a.date, a.payment_status, a.txn_type, a.txn_id";
 								$sql .= ", a.amount_pd, a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity, ac.date_scanned";
+								$sql .= $ticketing_installed == true ? ", a.checked_in, a.checked_in_quantity, ac.date_scanned" : '';
 								$sql .= ", a.payment_date, a.event_time, a.price_option, a.final_price a_final_price, a.quantity a_quantity, a.fname, a.lname, a.email";
 								$sql .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 								$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=a.event_id ";
-								$sql .= " LEFT JOIN " . $wpdb->prefix . "events_attendee_checkin ac ON a.id=ac.attendee_id ";
+								$sql .= $ticketing_installed == true ? " LEFT JOIN " . $wpdb->prefix . "events_attendee_checkin ac ON a.id=ac.attendee_id " : '';
 								if ($group != '') {
 									$sql .= " JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = ed.id ";
 									$sql .= " JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = r.venue_id ";
@@ -383,7 +384,7 @@ if (!function_exists('espresso_export_stuff')) {
 							$sql .= ", a.payment_date, a.event_time, a.price_option, a.fname, a.lname, a.email";
 							$sql .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 							$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=a.event_id ";
-							$sql .= " LEFT JOIN " . $wpdb->prefix . "events_attendee_checkin ac ON a.id=ac.attendee_id ";
+							$sql .= $ticketing_installed == true ? " LEFT JOIN " . $wpdb->prefix . "events_attendee_checkin ac ON a.id=ac.attendee_id " : '';
 							//$sql .= " JOIN " . EVENTS_ATTENDEE_COST_TABLE . " ac ON a.id=ac.attendee_id ";
 							$sql .= $event_id ? " WHERE ed.id = '" . $event_id . "' " : '';
 
