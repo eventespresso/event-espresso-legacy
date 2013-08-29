@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.36.b
+  Version: 3.1.36.A
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -31,7 +31,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.36.b';
+	return '3.1.36.A';
 }
 
 define("EVENT_ESPRESSO_VERSION", espresso_version());
@@ -1156,8 +1156,15 @@ function espresso_check_data_tables() {
 		}
 	}
 	
+	// check for downgrade from 4.x+
+	foreach ( $espresso_db_update as $prev_version ) {
+		if ( $prev_version && version_compare( $prev_version, '3.2.0', '>=' )) {
+			require_once( EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions/database_install.php' ); 
+			espresso_downgrade_error();
+		}
+	}
 	// if current EE version is NOT in list of db updates, then update the db
-	if ( ! in_array( EVENT_ESPRESSO_VERSION, $espresso_db_update )) {
+	if (( ! in_array( EVENT_ESPRESSO_VERSION, $espresso_db_update ))) {	
 		require_once( EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions/database_install.php' ); 
 		events_data_tables_install();
 	}	
