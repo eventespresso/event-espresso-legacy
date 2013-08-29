@@ -11,7 +11,7 @@ function espresso_charts() {
     <div class="inside">
 <?php 
 	if ($espresso_premium != true){
-		echo '<p><strong>' . __('Graphical reporting charts are now available in the premium versions.', 'event_espresso') . '</strong> <a href="http://eventespresso.com/pricing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Graphical+reporting+charts+are+available+in+the+premium+versions+ee_version_'.EVENT_ESPRESSO_VERSION.'&utm_campaign=reports_tab" target="_blank">' . __('Upgrade Now!', 'event_espresso') . '</a></p>';
+		echo '<p><strong>' . __('Graphical reporting charts are now available in the premium versions.', 'event_espresso') . '</strong> <a href="http://eventespresso.com/download/" target="_blank">' . __('Upgrade Now!', 'event_espresso') . '</a></p>';
 	}else{
 		echo espresso_chart_display($event_id, 'total_reg');
 		echo espresso_chart_display($event_id, 'total_completed');

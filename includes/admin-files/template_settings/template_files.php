@@ -38,7 +38,7 @@
 			<input style="border:#333 1px solid" name="ee_rename_folder" type="submit" value="<?php _e('Rename Templates Directory', 'event_espresso'); ?>" />
 	   </form></p></div>
 	    <p>
-    <?php _e("Modifying your event listings and registration pages is easy."); ?> <?php _e("You just need to edit the appropriate files in the following location.", 'event_espresso'); ?> <?php printf(__("For more information about customizing your template files, please follow <a href='%s' target=\"_blank\">this tutorial</a>.", 'event_espresso'), "http://eventespresso.com/wiki/put-custom-templates/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Modifying+your+event+listings+ee_version_".EVENT_ESPRESSO_VERSION ."+ee_install_url_".site_url()."&utm_campaign=template_settings_tab"); ?>
+    <?php _e("Modifying your event listings and registration pages is easy."); ?> <?php _e("You just need to edit the appropriate files in the following location.", 'event_espresso'); ?> <?php printf(__("For more information about customizing your template files, please follow <a href='%s' target=\"_blank\">this tutorial</a>.", 'event_espresso'), "http://eventespresso.com/wiki/put-custom-templates/"); ?>
 	    </p>
 	    <p> <span class="green_alert">
 	            <?php _e("Path:", 'event_espresso'); ?>
@@ -125,7 +125,7 @@
     <?php _e('If you plan on modifying the look of your event listings, registration page, or attendee list. Use the option below to move these templates to a safe place. Keep in mind, if updates are made or features are added to these templates in the future. You will need to make the updates to your customized templates.', 'event_espresso'); ?>
 	    </p>
 	    <p class="fugue f-warn">
-    <?php printf(__("Your template files have not been moved. If you would like to customize your template files, please follow <a href='%s' target=\"_blank\">this tutorial</a>.", 'event_espresso'), "http://eventespresso.com/wiki/put-custom-templates/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Modifying+your+event+listings+ee_version_".EVENT_ESPRESSO_VERSION ."+ee_install_url_".site_url()."&utm_campaign=template_settings_tab"); ?>
+    <?php printf(__("Your template files have not been moved. If you would like to customize your template files, please follow <a href='%s' target=\"_blank\">this tutorial</a>.", 'event_espresso'), "http://eventespresso.com/wiki/put-custom-templates/"); ?>
 	    </p>
 	    <?php /*?><p class="updated"><?php printf(__("Click here to <a href='%s'>Move your files</a> to a safe place.", 'event_espresso'), wp_nonce_url("admin.php?event_espresso_admin_action=copy_templates", 'copy_templates')); ?> </p><?php */?>
 	    <?php
