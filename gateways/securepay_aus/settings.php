@@ -96,6 +96,7 @@ function event_espresso_display_securepay_aus_settings() {
 								<?php _e('API Transaction Password', 'event_espresso'); ?>
 							</label>
 							<input type="text" name="mechant_password" size="35" value="<?php echo $securepay_aus_settings['mechant_password']; ?>">
+							<br><?php _e("(NOT your login password)", "event_espresso"); ?>
 						</li>
 						<li>
 							<label for="currency_format">
