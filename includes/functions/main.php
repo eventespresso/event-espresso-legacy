@@ -1009,7 +1009,7 @@ function espresso_is_multi($array) {
 
 //escape the commas in csv file export
 function escape_csv_val($val) {
-	return "\"" . eregi_replace("\"", "\"\"", $val) . "\"";
+	return "\"" . str_replace("\"", "\"\"", $val) . "\"";
 }
 
 //return field(s) from a table
