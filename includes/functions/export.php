@@ -365,6 +365,7 @@ if (!function_exists('espresso_export_stuff')) {
 								$group = implode(",", $group);
 								$sql .= "(SELECT ed.event_name, ed.start_date, a.id AS att_id, a.registration_id, a.payment, a.date, a.payment_status, a.txn_type, a.txn_id";
 								$sql .= ", a.amount_pd, a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity, ac.date_scanned";
+								$sql .= $ticketing_installed == true ? ", a.checked_in, a.checked_in_quantity, ac.date_scanned" : '';
 								$sql .= ", a.payment_date, a.event_time, a.price_option, a.final_price a_final_price, a.quantity a_quantity, a.fname, a.lname, a.email";
 								$sql .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 								$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=a.event_id ";
