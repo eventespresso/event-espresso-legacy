@@ -1564,3 +1564,16 @@ function espresso_add_additional_registration($event_id){
 }
 add_action('action_hook_espresso_payment_page_bottom', 'espresso_add_additional_registration', 10, 1);
 add_action('action_hook_espresso_payment_overview_page_bottom', 'espresso_add_additional_registration', 10, 1);
+
+//Function to create and apply CSS filters dynamically
+function espresso_template_css_class($filter_name, $classes, $echo = true) {
+    $classnames = apply_filters("espresso_filter_hook_template_css_$filter_name", $classes);
+    $classnames = apply_filters('espresso_filter_hook_template_css_global', $classnames, $filter_name);
+    if ($echo){
+		echo $classnames;
+	}else{
+		return $classnames;
+	}
+}
+
+

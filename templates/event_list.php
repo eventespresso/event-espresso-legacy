@@ -239,9 +239,9 @@ if (!function_exists('event_espresso_get_event_details')) {
 				$next_no_more = 'no_more';
 			}
 			
-			$espresso_paginate = "<div class='page_navigation'>";
-			$espresso_paginate .= "<a href='#' current_page=1 class='event_paginate $prev_no_more ui-icon ui-icon-seek-first'>&lt;&lt;</a>";
-			$espresso_paginate .= "<a href='#' current_page=$prev class='event_paginate $prev_no_more ui-icon ui-icon-seek-prev'>&lt;</a>";
+			$espresso_paginate = "<div class='".espresso_template_css_class('page_navigation','page_navigation', false)."'>";
+			$espresso_paginate .= "<a href='#' current_page=1 class='".espresso_template_css_class('event_paginate_current_page_1','event_paginate '.$prev_no_more.' ui-icon ui-icon-seek-first', false)."'>&lt;&lt;</a>";
+			$espresso_paginate .= "<a href='#' current_page=$prev class='".espresso_template_css_class('event_paginate_current_page_prev','event_paginate '.$prev_no_more.' ui-icon ui-icon-seek-prev', false)."'>&lt;</a>";
 			if ( $start > 1) {
 				$espresso_paginate .= "<span class='ellipse less'>...</span>";
 			}
@@ -250,22 +250,22 @@ if (!function_exists('event_espresso_get_event_details')) {
 				if ( $i == $current_page) {
 					$active_page = 'active_page';
 				}
-				$espresso_paginate .= "<a class='page_link event_paginate $active_page ' current_page=$i href='#' style='display: block; '>$i</a>";
+				$espresso_paginate .= "<a class='".espresso_template_css_class('page_link_event_paginate_active_page','page_link event_paginate '.$active_page, false)."' current_page=$i href='#' style='display: block; '>$i</a>";
 			}
 			if ( $end < $total_pages) {
 				$espresso_paginate .= "<span class='ellipse more'>...</span>";
 			}
-			$espresso_paginate .= "<a href='#' current_page=$next class='event_paginate $next_no_more ui-icon ui-icon-seek-next'>&gt;</a>";
-			$espresso_paginate .= "<a href='#' current_page=$total_pages class='event_paginate $next_no_more ui-icon ui-icon-seek-end'>&gt;&gt;</a>";
+			$espresso_paginate .= "<a href='#' current_page=$next class='".espresso_template_css_class('event_paginate_current_page_next','event_paginate '. $next_no_more .' ui-icon ui-icon-seek-next', false)."'>&gt;</a>";
+			$espresso_paginate .= "<a href='#' current_page=$total_pages class='".espresso_template_css_class('event_paginate_current_page_total_pages','event_paginate '.$next_no_more.' ui-icon ui-icon-seek-end', false)."'>&gt;&gt;</a>";
 			$espresso_paginate .= "</div>";	
 		}
-		echo "<div id='event_content' class='event_content'>";
+		echo "<div id='event_content' class='".espresso_template_css_class('event_content','event_content', false)."'>";
 		if ( count($events) < 1) {
 			//echo $sql;
 			echo __('No events available...', 'event_espresso');
 		}
 		 if ($display_desc == 'Y') {
-			echo '<p id="events_category_name-' . $category_id . '" class="events_category_name">' . stripslashes_deep($category_name) . '</p>';
+			echo '<p id="events_category_name-' . $category_id . '" class="'.espresso_template_css_class('events_category_name','events_category_name', false).'">' . stripslashes_deep($category_name) . '</p>';
 			echo espresso_format_content($category_desc);
 		}
 		if ( $events ) {
@@ -412,7 +412,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 									//Uncomment to show active status array
 									//print_r( event_espresso_get_is_active($event_id));
 
-									echo '<div class="pending_event">';
+									echo '<div class="'.espresso_template_css_class('events_pending_event','pending_event').'">';
 									if ( empty( $path ) ) {
 									  include( $template_name );
 									} else {
