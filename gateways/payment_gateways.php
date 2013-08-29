@@ -52,7 +52,7 @@ function event_espresso_gateways_options() {
 			global $espresso_premium;
 			if ($espresso_premium != true) {
 				?>
-				<h2><?php _e('Need more payment options?', 'event_espresso'); ?><a href="http://eventespresso.com/pricing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Upgrade+Now!<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=payment_gateways" target="_blank"><?php _e('Upgrade Now!', 'event_espresso'); ?></a></h2>
+				<h2><?php _e('Need more payment options?', 'event_espresso'); ?><a href="http://eventespresso.com/download/" target="_blank"><?php _e('Upgrade Now!', 'event_espresso'); ?></a></h2>
 			<?php } ?>
 		</div><!-- / .meta-box-sortables -->
 		<?php

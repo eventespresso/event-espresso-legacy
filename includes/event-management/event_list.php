@@ -62,7 +62,7 @@ function event_espresso_edit_list() {
 		?>
 		<p>
 			<strong><?php _e('Advanced filters are available in the premium versions.', 'event_espresso');?></strong> 
-			<a href="http://eventespresso.com/pricing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Advanced+filters+are+available+in+the+premium+versions<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=event_overview_tab" target="_blank">
+			<a href="http://eventespresso.com/download/" target="_blank">
 				<?php _e('Upgrade Now!', 'event_espresso');?>
 			</a>
 		</p>
