@@ -277,7 +277,36 @@ if (!function_exists('espresso_export_stuff')) {
 						}
 					}
 
-					$basic_header = array(__('Group', 'event_espresso'), __('ID', 'event_espresso'), __('Reg ID', 'event_espresso'), __('Payment Method', 'event_espresso'), __('Reg Date', 'event_espresso'), __('Pay Status', 'event_espresso'), __('Type of Payment', 'event_espresso'), __('Transaction ID', 'event_espresso'), __('Price', 'event_espresso'), __('Coupon Code', 'event_espresso'), __('# Attendees', 'event_espresso'), __('Amount Paid', 'event_espresso'), __('Date Paid', 'event_espresso'), __('Event Name', 'event_espresso'), __('Price Option', 'event_espresso'), __('Event Date', 'event_espresso'), __('Event Time', 'event_espresso'), $ticketing_installed == true ? __('Website Check-in', 'event_espresso') :'', $ticketing_installed == true ? __('Tickets Scanned', 'event_espresso'):'', $ticketing_installed == true ? __('Check-in Date', 'event_espresso') : '',__('Seat Tag', 'event_espresso'), __('First Name', 'event_espresso'), __('Last Name', 'event_espresso'), __('Email', 'event_espresso'));
+					$basic_header = array(
+						__('Group', 'event_espresso'), 
+						__('ID', 'event_espresso'), 
+						__('Reg ID', 'event_espresso'), 
+						__('Payment Method', 'event_espresso'), 
+						__('Reg Date', 'event_espresso'), 
+						__('Pay Status', 'event_espresso'), 
+						__('Type of Payment', 'event_espresso'), 
+						__('Transaction ID', 'event_espresso'), 
+						__('Price', 'event_espresso'), 
+						__('Coupon Code', 'event_espresso'), 
+						__('# Attendees', 'event_espresso'), 
+						__('Amount Paid', 'event_espresso'), 
+						__('Date Paid', 'event_espresso'), 
+						__('Event Name', 'event_espresso'), 
+						__('Price Option', 'event_espresso'), 
+						__('Event Date', 'event_espresso'), 
+						__('Event Time', 'event_espresso'), 
+					);
+					
+					if ( $ticketing_installed ) {
+						$basic_header[] = __('Website Check-in', 'event_espresso');
+						$basic_header[] = __('Tickets Scanned', 'event_espresso');
+						$basic_header[] = __('Check-in Date', 'event_espresso');
+					}
+
+					$basic_header[] = __('Seat Tag', 'event_espresso');
+					$basic_header[] = __('First Name', 'event_espresso');
+					$basic_header[] = __('Last Name', 'event_espresso');
+					$basic_header[] = __('Email', 'event_espresso');
 
 					$question_groups = maybe_unserialize($question_groups);
 					$event_meta = maybe_unserialize($event_meta);
