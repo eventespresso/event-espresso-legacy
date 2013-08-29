@@ -722,7 +722,7 @@ function organization_config_mnu() {
 			
 			// process the remove link in the metabox
 			jQuery('#remove-image').click(function(){
-				var answer = confirm('<?php _e('Do you really want to delete this image? Please remember to save your settings to complete the removal.', 'event_espresso'); ?>');
+				var answer = confirm("<?php _e('Do you really want to delete this image? Please remember to save your settings to complete the removal.', 'event_espresso'); ?>");
 				if (answer){
 					jQuery("#upload_image").val('');
 					jQuery("p.default-logo-thumb").remove();
