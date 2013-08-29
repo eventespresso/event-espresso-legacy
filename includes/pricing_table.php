@@ -13,7 +13,7 @@
     #pricing-table {
         margin: 20px auto 20px auto;
         text-align: center;
-        width: 760px; /* total computed width = 222 x 3 + 226 */
+        width: 892px; /* total computed width = 222 x 3 + 226 */
     }
 
     #pricing-table .plan {
@@ -23,7 +23,7 @@
         border: 1px solid #ddd;
         color: #333;
         padding: 20px;
-        width: 190px; /* plan width = 180 + 20 + 20 + 1 + 1 = 222px */      
+        width: 180px; /* plan width = 180 + 20 + 20 + 1 + 1 = 222px */      
         float: left;
         position: relative;
     }
@@ -305,7 +305,7 @@
       <div class="plan"  >
    
         <h3>Personal<span>$89.95</span></h3>
-        <a class="signup" href="http://eventespresso.com/product/personal-license/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Personal+Buy+Now<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Buy Now</a>         
+        <a class="signup" href="http://eventespresso.com/product/personal-license/?source_version=<?php echo $version; ?>">Buy Now</a>         
         <ul>
             
             <li><b>1 Site Support License</b></li>
@@ -349,10 +349,9 @@
 </div>
 
 <!-- price table designed by red-team-design.com -->
-            
-			<p><strong>Server Requirements</strong><br />Know Before downloading, please be sure your server <a href="http://eventespresso.com/requirements/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Server+Requirements<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">meets the requirements</a>.</p>
-            <p><strong>Non-profit Organizations</strong><br />
-            	Non-profit organizations may request a discounted price by completing the <a title="Event Espresso Non-Profit Discounts Coupons" href="http://eventespresso.com/contact/non-profit-discounts/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Non-profit+organizations<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table">Non-profit Application Form</a>.</p><p>Do your friends a favor and <a href="http://eventespresso.com/non-profit-referral-form/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Do+your+friends+a+favor<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=pricing_table" target="_blank">tell them about Event Espresso and this discount for non-profits</a>.</p>
+	
+            <p>Before downloading, please be sure your server <a href="http://eventespresso.com/requirements/?source_version=<?php echo $version; ?>">meets the requirements</a>.</p>
+            <p>Non-profit organizations may request a discounted price for the "1 Site Support License" by completing the <a href="http://eventespresso.com/non-profit-discounts/?source_version=<?php echo $version; ?>">Non-profit Application Form</a>.</p>
             </div>
           </div>
           </div>
