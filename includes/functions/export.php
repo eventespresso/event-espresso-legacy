@@ -364,7 +364,7 @@ if (!function_exists('espresso_export_stuff')) {
 								$group = maybe_unserialize($group);
 								$group = implode(",", $group);
 								$sql .= "(SELECT ed.event_name, ed.start_date, a.id AS att_id, a.registration_id, a.payment, a.date, a.payment_status, a.txn_type, a.txn_id";
-								$sql .= ", a.amount_pd, a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity, ac.date_scanned";
+								$sql .= ", a.amount_pd, a.quantity, a.coupon_code";
 								$sql .= $ticketing_installed == true ? ", a.checked_in, a.checked_in_quantity, ac.date_scanned" : '';
 								$sql .= ", a.payment_date, a.event_time, a.price_option, a.final_price a_final_price, a.quantity a_quantity, a.fname, a.lname, a.email";
 								$sql .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
@@ -379,8 +379,9 @@ if (!function_exists('espresso_export_stuff')) {
 								$sql .= ") UNION (";
 							}
 							$sql .= "SELECT ed.event_name, ed.start_date, a.id AS att_id, a.registration_id, a.payment, a.date, a.payment_status, a.txn_type, a.txn_id";
-							$sql .= ", a.quantity, a.coupon_code, a.checked_in, a.checked_in_quantity, ac.date_scanned, a.final_price a_final_price, a.amount_pd, a.quantity a_quantity";
-
+							$sql .= ", a.quantity, a.coupon_code, a.final_price a_final_price, a.amount_pd, a.quantity a_quantity";
+							$sql .= $ticketing_installed == true ? ", a.checked_in, a.checked_in_quantity, ac.date_scanned" : '';
+								
 							$sql .= ", a.payment_date, a.event_time, a.price_option, a.fname, a.lname, a.email";
 							$sql .= " FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 							$sql .= " JOIN " . EVENTS_DETAIL_TABLE . " ed ON ed.id=a.event_id ";
@@ -491,9 +492,12 @@ if (!function_exists('espresso_export_stuff')) {
 									. $s . escape_csv_val($participant->price_option)
 									. $s . escape_csv_val(event_date_display($participant->start_date, get_option('date_format')))
 									. $s . escape_csv_val(event_date_display($participant->event_time, get_option('time_format')))
-									. $s . escape_csv_val($participant->checked_in ? "Yes" : "No")
-									. $s . escape_csv_val($participant->checked_in_quantity)
-									. $s . escape_csv_val($scanned_date)
+									;
+									if ( $ticketing_installed == true ) {
+										echo $s . escape_csv_val($participant->checked_in ? "Yes" : "No")
+										. $s . escape_csv_val($participant->checked_in_quantity);										
+									}
+									echo $s . escape_csv_val($scanned_date)
 									. $s . escape_csv_val($participant->seatingchart_tag)
 									. $s . escape_csv_val($participant->fname)
 									. $s . escape_csv_val($participant->lname)
