@@ -876,34 +876,34 @@ function event_espresso_display_right_column() {
 					<div class="padding">
 						<ul class="infolinks">
 							<li>
-								<?php echo '<a href="http://eventespresso.com/support/documentation/#getting-started?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Installation+ee_version_'.EVENT_ESPRESSO_VERSION .'&utm_campaign=plugin_sidebar" target="_blank">'.__('Getting Started', 'event_espresso') . '</a>'; ?>
+								<?php echo '<a href="http://eventespresso.com/support/documentation/#getting-started?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Installation&utm_campaign=plugin_sidebar" target="_blank">'.__('Getting Started', 'event_espresso') . '</a>'; ?>
 								</li>
-							<li><a href="http://eventespresso.com/wiki/put-custom-templates/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Template+Customization<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank">
+							<li><a href="http://eventespresso.com/wiki/put-custom-templates/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Template+Customization<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=admin_sidebar" target="_blank">
 									<?php _e('Template Customization', 'event_espresso'); ?>
 								</a></li>
-							<li><a href="http://eventespresso.com/support/forums/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Support+Forums<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank">
+							<li><a href="http://eventespresso.com/support/forums/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Support+Forums<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=admin_sidebar" target="_blank">
 									<?php _e('Support Forums', 'event_espresso'); ?>
 								</a></li>
 							
-							<li><a href="http://eventespresso.com/wiki/change-log/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Changelog<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank">
+							<li><a href="http://eventespresso.com/wiki/change-log/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Changelog<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=admin_sidebar" target="_blank">
 									<?php _e('Changelog', 'event_espresso'); ?>
 								</a></li>
-							<li><a href="http://eventespresso.com/about/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Meet+the+Team<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank">
+							<li><a href="http://eventespresso.com/about/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Meet+the+Team<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=admin_sidebar" target="_blank">
 									<?php _e('Meet the Team', 'event_espresso'); ?>
 								</a></li>
-							<li><a href="http://eventespresso.com/rich-features/sponsor-new-features/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Sponsor+New+Features<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank">
+							<li><a href="http://eventespresso.com/rich-features/sponsor-new-features/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Sponsor+New+Features<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=admin_sidebar" target="_blank">
 									<?php _e('Sponsor New Features!', 'event_espresso'); ?>
 								</a></li>
 							<li>
 									<?php echo '<a href="http://eventespresso.com/pricing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Plugins&utm_campaign=admin_sidebar" target="_blank">'.__('Plugins', 'event_espresso'). '</a> &amp; <a href="http://eventespresso.com/add-ons/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Addons+ee_version_'.EVENT_ESPRESSO_VERSION .'&utm_campaign=admin_sidebar" target="_blank">' .__('Addons', 'event_espresso').'</a>'; ?><br />
 									<br />
 									<ol>
-						<li><a href="http://eventespresso.com/product/espresso-json-api/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+JSON+API<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('JSON API', 'event_espresso'); ?></a></li>
-						<li><a href="http://eventespresso.com/product/espresso-ticketing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Ticket+Scanning<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('Ticket Scanning', 'event_espresso'); ?></a></li>
-						<li><a href="http://eventespresso.com/product/espresso-multiple/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Multiple+Event+Registration<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('Multiple Event Registration', 'event_espresso'); ?></a></li>
-						<li><a href="http://eventespresso.com/product/espresso-recurring/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Recurring+Events<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('Recurring Events', 'event_espresso'); ?></a></li>
-						<li><a href="http://eventespresso.com/product/espresso-members/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+WP+User+Integration<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('WP User Integration', 'event_espresso'); ?></a></li>
-						<li><a href="http://eventespresso.com/product/espresso-seating/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Seating+Chart<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('Seating Chart', 'event_espresso'); ?></a></li>
+						<li><a href="http://eventespresso.com/product/espresso-json-api/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+JSON+API<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('JSON API', 'event_espresso'); ?></a></li>
+						<li><a href="http://eventespresso.com/product/espresso-ticketing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Ticket+Scanning<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('Ticket Scanning', 'event_espresso'); ?></a></li>
+						<li><a href="http://eventespresso.com/product/espresso-multiple/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Multiple+Event+Registration<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('Multiple Event Registration', 'event_espresso'); ?></a></li>
+						<li><a href="http://eventespresso.com/product/espresso-recurring/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Recurring+Events<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('Recurring Events', 'event_espresso'); ?></a></li>
+						<li><a href="http://eventespresso.com/product/espresso-members/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+WP+User+Integration<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('WP User Integration', 'event_espresso'); ?></a></li>
+						<li><a href="http://eventespresso.com/product/espresso-seating/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Seating+Chart<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION .'+ee_install_url_'.site_url(); ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('Seating Chart', 'event_espresso'); ?></a></li>
 					</ol>
 								</li>
 						</ul>
