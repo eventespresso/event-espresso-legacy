@@ -15,7 +15,10 @@ function csv_import() { ?>
 			<p>This is the first pass at the uploader, but for those of you who have alot of events, particularly events that are similar in setup, this will be a time saver.</p>
 			<?php
 			espresso_uploader();
-			load_events_to_db();
+			if( $_SERVER['REQUEST_METHOD'] == 'POST' ){
+				load_events_to_db();
+			}
+			
 			?>
 		</li>
 	</ul>
@@ -91,6 +94,7 @@ function espresso_uploader($num_of_uploads = 1, $file_types_array = array("csv")
 }
 
 function load_events_to_db() {
+	
 	global $wpdb, $current_user;
 
 	$csvfile = "../wp-content/uploads/events.csv";
@@ -120,7 +124,7 @@ function load_events_to_db() {
 
 	$num_of_imported_events = 0;
 	while ($strings = fgetcsv($file_handle)) {
-		++$num_of_imported_events;
+		
 		$question_groups_rs = $wpdb->get_results("select * from " . EVENTS_QST_GROUP_TABLE . " where wp_user = " . $current_user->ID . " and system_group = 1");
 		$question_groups_ar = array();
 		foreach ($question_groups_rs as $question_group) {
@@ -133,6 +137,7 @@ function load_events_to_db() {
 			//echo "The  element is in the array";
 			$skip = $strings[0];
 			if ($skip >= "1") {
+				++$num_of_imported_events;
 				// Event meta info -
 				$event_meta = array();
 				$event_meta['default_payment_status'] = "";
@@ -240,11 +245,15 @@ function load_events_to_db() {
 					$category_sql = "SELECT cd.id FROM " . EVENTS_CATEGORY_TABLE . " cd WHERE category_name='%s'";
 					$cat_id = $wpdb->get_var($wpdb->prepare($category_sql, $category_name));
 					if ($cat_id == false) {
+						//fool the admin code into thinking we're adding a category via a POSt
+						$old_REQUEST_action = $_REQUEST['action'];
 						$_REQUEST['action'] = 'add';
 						$_REQUEST['category_name'] = $category_name;
 						require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/category-management/add_cat_to_db.php');
 						add_cat_to_db();
 						$cat_id = $wpdb->get_var($wpdb->prepare($category_sql, $category_name));
+						//ok, now that we've fooled it and added teh category, revert the $_REQUEST params
+						$_REQUEST['action'] = $old_REQUEST_action;
 					}
 					$cat_sql_2 = "INSERT INTO " . EVENTS_CATEGORY_REL_TABLE . " (event_id, cat_id) VALUES (%d, %d)";
 					if ($wpdb->query($wpdb->prepare($cat_sql_2, $last_event_id, $cat_id)) === false) {
