@@ -1146,9 +1146,24 @@ if(!function_exists('event_espresso_init_active_gateways')){
 	 * for some gateways (eg: the google checkout gateway needed to be able to add a hook on init for all page loads, which it coudln't do before)
 	 */
 	function event_espresso_init_active_gateways(){
+		//in case any of the gateways do CURL requests, tell CURL where to find the CA file
+		add_action('http_api_curl', 'espresso_curl_ca_file', 10, 1);
 		$active_gateways = apply_filters('action_filter_espresso_active_gateways', get_option('event_espresso_active_gateways', array()));
 		foreach ($active_gateways as $gateway => $path) {
 			event_espresso_require_gateway($gateway . "/init.php",false);
+		}
+	}
+}
+if (!function_exists('event_espresso_require_file')) {
+	/**
+	 * For any CURL requests, add the certificate authority file in gateways. Currently this only does the trick if using CURL...
+	 * The other transports 'WP_HTTP_Stream' and 'WP_HTTP_FSockOpen' don't actually verify the peers anyways, it seems. Or at least
+	 * they didn't complain of needing to know where a CA file was on my (mike's) localhost setup on windows
+	 */
+	function espresso_curl_ca_file( $handle ) {
+		//first double-check the user hasn't set their own CA file in PHP.ini
+		if( ! ini_get ('curl.cainfo')){
+			curl_setopt($handle, CURLOPT_CAINFO, EVENT_ESPRESSO_PLUGINFULLPATH . 'gateways/cacert.pem');
 		}
 	}
 }
