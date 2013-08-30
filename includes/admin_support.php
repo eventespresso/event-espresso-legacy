@@ -87,7 +87,7 @@ function event_espresso_support() {
 								<div class="padding">
 									<p>
 	<?php _e('For the latest installation instructions please visit:', 'event_espresso'); ?>
-										<a href="http://eventespresso.com/wiki/installing-event-espresso/" target="_blank">http://eventespresso.com/wiki/installing-event-espresso/</a></p>
+										<a href="http://eventespresso.com/wiki/installing-event-espresso/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=latest+installation+instructions<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">http://eventespresso.com/wiki/installing-event-espresso/</a></p>
 								</div>
 							</div>
 						</div>
@@ -116,8 +116,8 @@ function event_espresso_support() {
 	<?php _e('StickerGiant.com', 'event_espresso'); ?>
 										</a> </dt>
 										<dd><a href="http://www.stickergiant.com/?referral=eventespresso.com" target="_blank"><img src="http://www.stickergiant.com/banners/120x60.gif" class="alignright" width="120" height="60" border="0"></a>StickerGiant is two businesses in one. We are a printing company that prints stickers and labels for thousands of customers all over the United States and Canada. We also have a fun online sticker store that has over 26,000 designs from bands to sports and everything in between. Our selection of Embroidered Patches is vast. </dd>
-										<dt> <a href="http://eventespresso.com/contact/?referral=eventespresso_plugin" target="_blank">
-	<?php _e('Add a Merketing Resource', 'event_espresso'); ?>
+										<dt> <a href="http://eventespresso.com/contact/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Add+a+Marketing+Resource<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">
+	<?php _e('Add a Marketing Resource', 'event_espresso'); ?>
 										</a> </dt>
 										<dd>Have a marketing resource you would like to see listed here? Please let us know!</dd>
 									</dl>
@@ -136,7 +136,7 @@ function event_espresso_support() {
 								<a name="partners" id="partners"></a></h3>
 							<div class="inside">
 								<div class="padding">
-								<p>The following developers have experience with Event Espresso for their clients and have requested to be listed in this directory. Event Espresso does not make any guarantees about their services. This directory is offered as a community benefit to Event Espresso users. We offer our recommendations on <a href="/support/how-to-select-a-developer/">how to select a developer</a>.</p>
+								<p>The following developers have experience with Event Espresso for their clients and have requested to be listed in this directory. Event Espresso does not make any guarantees about their services. This directory is offered as a community benefit to Event Espresso users. We offer our recommendations on <a href="http://eventespresso.com/support/how-to-select-a-developer/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=how+to+select+a+developer<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab">how to select a developer</a>.</p>
 									<dl id="partners">
 									
 									<dt><a href="http://www.ivycat.com/?referral=eventespresso.com" target="_blank">Ivy Cat</a></dt>
@@ -152,7 +152,7 @@ function event_espresso_support() {
 										<dd>We create affordable websites for small businesses and non-profits.</dd>
 										
 										
-										<dt> <a href="http://eventespresso.com/contact/?referral=eventespresso_plugin" target="_blank">
+										<dt> <a href="http://eventespresso.com/contact/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Become+a+Partner<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">
 	<?php _e('Become a Partner', 'event_espresso'); ?>
 										</a> </dt>
 										<dd>Have experience developing websites around Event Espresso? Become a partner!</dd>
@@ -174,7 +174,7 @@ function event_espresso_support() {
 								<div class="padding">
 
 									<dl id="hire_devs">
-										<dt> <a href="http://jobs.eventespresso.com/?referral=eventespresso.com" target="_blank">
+										<dt> <a href="http://jobs.eventespresso.com/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Event+Espresso+Job+Board<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">
 	<?php _e('Event Espresso Job Board', 'event_espresso'); ?>
 										</a> </dt>
 										<dd>A dedicated job board that lists the opportunities to work with Event Espresso or our clients.</dd>
@@ -302,7 +302,7 @@ function event_espresso_support() {
 									<p>
 	<?php _e('For more information, please visit:', 'event_espresso'); ?>
 										<br />
-										<a href="http://eventespresso.com/forums/2010/10/post-type-variables-and-shortcodes/" target="_blank">http://eventespresso.com/forums/2010/10/post-type-variables-and-shortcodes/</a></p>
+										<a href="http://eventespresso.com/wiki/shortcodes-template-variables/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Shortcodes+Help<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">http://eventespresso.com/wiki/shortcodes-template-variables/</a></p>
 									<hr />
 									<div class="shortcode-box">
 										<h4>
@@ -318,7 +318,7 @@ function event_espresso_support() {
 											<?php _e('Add Events to Cart', 'event_espresso'); ?>
 										</h4>
 										<p>
-	<?php _e('Displays an "Add Event to Cart" link that can be added to the event details, page, or post. Requires the <a href="http://eventespresso.com/download/plugins-and-addons/multiple-event-registration/" target="_blank">Multiple Event Registration addon</a>.', 'event_espresso'); ?>
+	<?php _e('Displays an "Add Event to Cart" link that can be added to the event details, page, or post. Requires the <a href="http://eventespresso.com/product/espresso-multiple/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Multiple+Event+Registration+ee_version_'.EVENT_ESPRESSO_VERSION.'&utm_campaign=help_support_tab" target="_blank">Multiple Event Registration addon</a>.', 'event_espresso'); ?>
 										</p>
 										<p><span class="highlight">[ESPRESSO_CART_LINK]</span></p>
 										<h5>
@@ -388,7 +388,7 @@ function event_espresso_support() {
 											<li><span class="highlight">[LISTATTENDEES staff_id="staff_id_number"]</span> //Show a list of events that are assigned to a staff member</li>
 										</ul>
 										<p>
-	<?php _e('For more information about the attendee listing shortcodes and customizations. Please view the <a href="http://eventespresso.com/wiki/shortcodes-template-variables/">Attendee Listing Shortcodes</a> page.', 'event_espresso'); ?>
+	<?php _e('For more information about the attendee listing shortcodes and customizations. Please view the <a href="http://eventespresso.com/wiki/shortcodes-template-variables/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Attendee+Listing+Shortcodes+ee_version_'.EVENT_ESPRESSO_VERSION.'&utm_campaign=help_support_tab">Attendee Listing Shortcodes</a> page.', 'event_espresso'); ?>
 										</p>
 									</div>
 									<div class="shortcode-box">
@@ -654,7 +654,7 @@ function event_espresso_support() {
 								<div class="padding">
 									<h4>Before Contacting Support</h4>
 									<p>Please understand that our primary goal is to offer Event Espresso as a very low cost solution compared to building your own system or using a 3rd party service to handle your registrations.</p><p> As with most open source programs (and closed licensed programs), chances are you will find the occasional bug, glitch, white screen of death, and/or general failure. Please don't panic!</p>
-									<p>If your problems are not urgent, please post in our <a href="http://eventespresso.com/support/forums/" target="_blank">support forums</a>. If you need immediate help. Please purchase a support token below, at which time you can schedule time with a dedicated support tech or core developer.</p>
+									<p>If your problems are not urgent, please post in our <a href="http://eventespresso.com/support/forums/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Before+Contacting+Support<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">support forums</a>. If you need immediate help. Please purchase a support token below, at which time you can schedule time with a dedicated support tech or core developer.</p>
 									<p class="attention-block"><strong class="red_text">
 										<?php _e('Attention:', 'event_espresso'); ?>
 										</strong><br />
@@ -674,16 +674,16 @@ function event_espresso_support() {
 										<?php _e('A support token can be used to get priority support for a single  incident. It can be used to schedule support via phone or IM for a  single incident (up to 30 minutes), or to receive priority e-mail  support. A support token can be used for &ldquo;how to&rdquo; questions, technical  issues, &ldquo;best practice&rdquo; questions or for custom development consulting. A  support token consists of the PayPal Transaction ID you received from  PayPal at the time of your purchase.', 'event_espresso'); ?>
 									</p>
 									<p>
-	<?php _e('<strong>You can purchase support tokens</strong> on the <a href="http://eventespresso.com/product/priority-support-tokens/">Premium Support page</a>. Tokens can be purchased one at a time, or in blocks of three at a discount.', 'event_espresso'); ?>
+	<?php _e('<strong>You can purchase support tokens</strong> on the <a href="http://eventespresso.com/product/priority-support-tokens/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=support+tokens+ee_version_'.EVENT_ESPRESSO_VERSION.'&utm_campaign=help_support_tab">Premium Support page</a>. Tokens can be purchased one at a time, or in blocks of three at a discount.', 'event_espresso'); ?>
 									</p>
-									<p>Support tokens can be used to schedule live support (phone or IM) or for priority e-mail support. See <a href="http://eventespresso.com/support/">details on premium support</a>.</p>
+									<p>Support tokens can be used to schedule live support (phone or IM) or for priority e-mail support. See <a href="http://eventespresso.com/support/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=details+on+premium+support<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab">details on premium support</a>.</p>
 									<div class="support-tokens">
-										<h6><a href="http://eventespresso.com/product/priority-support-tokens/" target="_blank">1 Premium Support Token</a></h6>
+										<h6><a href="http://eventespresso.com/product/priority-support-tokens/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=1+Premium+Support+Token<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">1 Premium Support Token</a></h6>
 										<p>Single incident, up to 30 minutes of live support or priority e-mail support.</p>
 										<p class="support-prices"><span class="price">Price: $65.00 </span></p>
 									</div>
 									<div class="support-tokens">
-										<h6><a href="http://eventespresso.com/product/3-premium-support-tokens/" target="_blank">3 Premium Support Tokens</a></h6>
+										<h6><a href="http://eventespresso.com/product/3-premium-support-tokens/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=3+Premium+Support+Tokens<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">3 Premium Support Tokens</a></h6>
 										<p>Up to 90 minutes of live support or priority e-mail support.</p>
 										<p class="support-prices"><span class="price">Price: $150.00 </span></p>
 									</div>
@@ -691,17 +691,17 @@ function event_espresso_support() {
 	<?php _e('Installation &amp; Consulting', 'event_espreso'); ?>
 									</h5>
 									<div class="install-options">
-										<h6><a href="http://eventespresso.com/product/basic-install/" target="_blank">Basic Install</a></h6>
+										<h6><a href="http://eventespresso.com/product/basic-install/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Basic+Install<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">Basic Install</a></h6>
 										<p>Includes plugin installation and setting up basic pages for the plugin.</p>
 										<p class="support-prices"><span class="price">Price: $35.00 </span></p>
 									</div>
 									<div class="install-options">
-										<h6><a href="http://eventespresso.com/product/basic-install-with-configuration/" target="_blank">Basic Install with Configuration</a></h6>
+										<h6><a href="http://eventespresso.com/product/basic-install-with-configuration/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Basic+Install+with+Configuration<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">Basic Install with Configuration</a></h6>
 										<p>Includes configuration and testing Payment Gateway's .</p>
 										<p class="support-prices"><span class="price">Price: $65.00 </span></p>
 									</div>
 									<div class="install-options">
-										<h6><a href="http://eventespresso.com/product/consultation/" target="_blank">Consulting (1 hour)</a></h6>
+										<h6><a href="http://eventespresso.com/product/consultation/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Consulting+(1+hour)<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">Consulting (1 hour)</a></h6>
 										<p>Developer support and implementation consulting for the Advanced Events Registration plugin for WordPress.</p>
 										<p class="support-prices"><span class="price">Price: $135.00 </span></p>
 									</div>
@@ -758,7 +758,7 @@ function event_espresso_support() {
 											<p class="more-info">
 	<?php _e('More information can be found here:', 'event_espresso'); ?>
 												<br />
-												<a href="http://eventespresso.com/forums/?submit.x=0&submit.y=0&s=ipn" target="_blank"> http://eventespresso.com/forums/?submit.x=0&amp;submit.y=0&amp;s=ipn</a></p>
+												<a href="http://eventespresso.com/wiki/how-to-set-up-paypal-ipn/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=how-to-set-up-paypal-ipn<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">http://eventespresso.com/wiki/how-to-set-up-paypal-ipn/</a></p>
 										</dd>
 										<dt>
 											<?php _e('Why are mails are not being sent when someone registers?', 'event_espresso'); ?>
@@ -777,7 +777,7 @@ function event_espresso_support() {
 										</dt>
 										<dd>
 											<p>
-	<?php _e('Check your CSV for any apotrophes in the title or description. Using Excel (or someother spreadsheet application) find and replace all apostrophes with <tt>\&amp;#039;</tt>.  This is the HTML entity for \' and is how the titles are entered into the database.  For more information, see <a href="http://eventespresso.com/forums/2011/08/import-csv-malfunction" target="_blank">this forum post</a>.', 'event_espresso'); ?>
+	<?php _e('Check your CSV for any apotrophes in the title or description. Using Excel (or someother spreadsheet application) find and replace all apostrophes with <tt>\&amp;#039;</tt>.  This is the HTML entity for \' and is how the titles are entered into the database. For more information, see <a href="http://eventespresso.com/wiki/how-to-import-events/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=CSV+upload+tool+ee_version_'.EVENT_ESPRESSO_VERSION.'&utm_campaign=help_support_tab" target="_blank">this forum post</a>.', 'event_espresso'); ?>
 											</p>
 										</dd>
 									</dl>

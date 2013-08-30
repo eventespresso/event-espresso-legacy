@@ -203,16 +203,16 @@ if (!function_exists('event_espresso_time_dropdown')) {
 	//printr( $event_times, '$event_times  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' ); 
 	 	// If one result, then display the times.
         if ($wpdb->num_rows == 1) {
-            $html .= $label == 1 ? '<span class="span_event_time_label">' . __('Start Time:', 'event_espresso') . '</span>' : '';
+            $html .= $label == 1 ? '<span class="'.espresso_template_css_class('event_time_label','span_event_time_label', false).'">' . __('Start Time:', 'event_espresso') . '</span>' : '';
             foreach ($event_times as $time) {
-                $html .= ' <span class="span_event_time_value">' . event_date_display($time->start_time, get_option('time_format')) . '</span>';
-                $html .= $label == 1 ? '<br/><span class="span_event_time_label">' . __('End Time: ', 'event_espresso') . '</span>' : __(' to ', 'event_espresso');
-                $html .= ' <span class="span_event_time_value">' . event_date_display($time->end_time, get_option('time_format')) . '</span>';
+                $html .= ' <span class="'.espresso_template_css_class('event_time_value','span_event_time_value', false).'">' . event_date_display($time->start_time, get_option('time_format')) . '</span>';
+                $html .= $label == 1 ? '<br/><span class="'.espresso_template_css_class('event_time_label','span_event_time_label', false).'">' . __('End Time: ', 'event_espresso') . '</span>' : __(' to ', 'event_espresso');
+                $html .= ' <span class="'.espresso_template_css_class('event_time_value','span_event_time_value', false).'">' . event_date_display($time->end_time, get_option('time_format')) . '</span>';
                 $html .= '<input type="hidden" name="start_time_id' . $multi_name_adjust . '" id="start_time_id_' . $time->id . '" value="' . $time->id . '" />';
             }
         } else if ($wpdb->num_rows > 1) {//If more than one result, then display the dropdown
 			//print_r($event_times);
-            $html .= $label == 1 ? '<label class="start_time_id" for="start_time_id">' . __('Choose a Time: ', 'event_espresso') . '</label>' : '';
+            $html .= $label == 1 ? '<label class="'.espresso_template_css_class('start_time_id','start_time_id', false).'" for="start_time_id">' . __('Choose a Time: ', 'event_espresso') . '</label>' : '';
             $html .= '<select name="start_time_id' . $multi_name_adjust . '" id="start_time_id-' . $event_id . '">';
 			//$html .= $label == 0 ?'<option  value="">' .__('Select a Time', 'event_espresso') . '</option>':'';
             foreach ($event_times as $time) {
@@ -327,7 +327,7 @@ if (!function_exists('event_espresso_display_selected_time')) {
                     $html .= event_date_display($time->end_time, get_option('time_format'));
                     break;
                 default :
-                   $html .= '<span class="section-title">'.__('Time:  ', 'event_espresso').'</span>';
+                   $html .= '<span class="'.espresso_template_css_class('section_title','section-title', false).'">'.__('Time:  ', 'event_espresso').'</span>';
 				   $html .= event_date_display($time->start_time, get_option('time_format')) . ' - '. event_date_display($time->end_time, get_option('time_format'));
                    break;
             }

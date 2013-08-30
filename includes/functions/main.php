@@ -718,7 +718,7 @@ function event_espresso_update_alert($url = '') {
 
 function espresso_registration_footer() {
 	global $espresso_premium, $org_options;
-	$url = (!isset($org_options['affiliate_id']) || $org_options['affiliate_id'] == '' || $org_options['affiliate_id'] == 0) ? 'http://eventespresso.com/' : 'https://www.e-junkie.com/ecom/gb.php?cl=113214&c=ib&aff=' . $org_options['affiliate_id'];
+	$url = (!isset($org_options['affiliate_id']) || $org_options['affiliate_id'] == '' || $org_options['affiliate_id'] == 0) ? 'http://eventespresso.com/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Event+Registration+and+Ticketing+Powered+by+ee_version_'.EVENT_ESPRESSO_VERSION .'&utm_campaign=espresso_admin_footer' : 'https://www.e-junkie.com/ecom/gb.php?cl=113214&c=ib&aff=' . $org_options['affiliate_id'];
 	if ($espresso_premium != true || (isset($org_options['show_reg_footer']) && $org_options['show_reg_footer'] == 'Y')) {
 		return '<p style="font-size: 12px;"><a href="' . $url . '" title="Event Registration Powered by Event Espresso" target="_blank">Event Registration and Ticketing</a> Powered by <a href="' . $url . '" title="Event Espresso - Event Registration and Management System for WordPress" target="_blank">Event Espresso</a></p>';
 	}
@@ -1572,3 +1572,23 @@ function espresso_update_event_meta( $event_id, $new_meta ){
 
 }
 add_action('action_hook_espresso_update_event_meta', 'espresso_update_event_meta', 10, 2);
+
+function espresso_add_additional_registration($event_id){
+	$link = '<div class="additional-registration-div"><a href="'.espresso_reg_url($event_id).'" id="additional-registration-lnk" class="additional-registration-lnk " title="' . __('Add Another Registration to This Event', 'event_espresso') . '">' . __('Add Another Registration to This Event', 'event_espresso') . '</a></div>';
+	echo $link;
+}
+add_action('action_hook_espresso_payment_page_bottom', 'espresso_add_additional_registration', 10, 1);
+add_action('action_hook_espresso_payment_overview_page_bottom', 'espresso_add_additional_registration', 10, 1);
+
+//Function to create and apply CSS filters dynamically
+function espresso_template_css_class($filter_name, $classes, $echo = true) {
+    $classnames = apply_filters("espresso_filter_hook_template_css_$filter_name", $classes);
+    $classnames = apply_filters('espresso_filter_hook_template_css_global', $classnames, $filter_name);
+    if ($echo){
+		echo $classnames;
+	}else{
+		return $classnames;
+	}
+}
+
+
