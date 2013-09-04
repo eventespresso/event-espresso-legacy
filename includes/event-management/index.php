@@ -53,6 +53,7 @@ function event_espresso_manage_events() {
 			if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'copy_event') {
 				require_once("copy_event.php");
 				copy_event();
+				$_REQUEST['event_id'] = '';
 			}
 
 			if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'delete') {
