@@ -361,7 +361,7 @@ if (!function_exists('espresso_export_stuff')) {
 								$quest_sql .= " ORDER BY q.sequence, q.id ASC ";
 
 								$questions = $wpdb->get_results($quest_sql);
-								$ignore = array(1, 2, 3);
+								$ignore = array('1'=>1, '2'=>2, '3'=>3);
 
 								$num_rows = $wpdb->num_rows;
 								if ($num_rows > 0) {
