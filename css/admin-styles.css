@@ -2415,8 +2415,14 @@ jsDatePick is distributed under the terms of the GNU General Public License.
 
 .pue-sl-verified {
 	padding-left: 20px;
+	padding-top: 2px;
 	background: transparent url(images/accept.png) no-repeat left;
 }
 
+.pue-sl-not-verified {
+	padding-left: 20px;
+	padding-top: 2px;
+	background: transparent url(images/cancel.png) no-repeat left;
+}
 #image-display img {max-width: 100%;}
 

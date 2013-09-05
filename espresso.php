@@ -637,8 +637,8 @@ if (is_admin()) {
 	}
 
 	//Event styles & template layouts Subpage
-	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/template_settings/index.php')) {
-		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/template_settings/index.php');
+	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/template_settings/index.php')) {
+		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/template_settings/index.php');
 	}
 
 	//Plugin Support
