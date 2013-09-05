@@ -184,7 +184,7 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 						<div class="inside">
 							<div class="padding">
 								<?php
-								if (isset($org_options['enable_default_style'])) {
+								if (isset($org_options['enable_default_style']) && $espresso_premium == true) {
 									include('style_settings.php');
 								}
 								?>
@@ -262,7 +262,7 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 				
 				<input type="hidden" name="update_org" value="update" />
 		</form>
-		
+		<?php if ($espresso_premium == true) { ?>
 		<h2>
 					<?php _e('Developers Only', 'event_espresso') ?>
 				</h2>
@@ -284,6 +284,7 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 					</div>
 					<!-- / .postbox --> 
 				</div>
+				<?php }?>
 				<!-- / .metabox-holder -->
 				<?php #### finish metaboxes #### ?>
 				
