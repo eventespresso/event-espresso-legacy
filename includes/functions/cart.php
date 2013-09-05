@@ -744,7 +744,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 	
 							if ($attendee_overflow) {
 	
-								$err .= "<div class='event_espresso_error'><p><em>Attention</em>";
+								$err .= "<div class='event_espresso_error'><p><em>" . __('Attention', 'event_espresso') . "</em><br />";
 								$err .= sprintf(__("For %s, please make sure to select between 1 and %d attendees or delete it from your cart.", 'event_espresso'), stripslashes($r->event_name), $attendee_limit);
 								$err .= '<span class="remove-cart-item"><img class="ee_delete_item_from_cart" id="cart_link_' . $event_id . '" alt="Remove this item from your cart" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" /></span> ';
 								$err .= "</p></div>";
@@ -1088,8 +1088,8 @@ if (!function_exists('event_espresso_cart_link')) {
 			$event_id =implode( '-', $event_ids );
 			
 			if ( empty( $event_id )) {
-				$error = "<div class='event_espresso_error'><p><em>Attention</em>";
-				$error .= __('We\re sorry. Either an error occured or the event(s) you were attempting to register for may no longer be open for registration.', 'event_espresso');
+				$error = "<div class='event_espresso_error'><p><em>" . __('Attention', 'event_espresso') . "</em><br />";
+				$error .= __('We\'re sorry. Either an error occurred or the event(s) you were attempting to register for may no longer be open for registration.', 'event_espresso');
 				$error .= "</p></div>";
 				return empty( $events_in_session ) ? $error : '';
 			}
