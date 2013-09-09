@@ -30,7 +30,7 @@ if (!function_exists('event_espresso_add_item_to_session')) {
 		 */
 		$id = str_replace( 'cart_link_', '', sanitize_text_field( $_POST['id'] ));
 		$direct_to_cart = isset($_POST['direct_to_cart']) ? $_POST['direct_to_cart'] : 0;
-		$moving_to_cart = isset($_POST['moving_to_cart']) ? urldecode($_POST['moving_to_cart']) : "Please wait redirecting to cart page";
+		$moving_to_cart = isset($_POST['moving_to_cart']) ? urldecode($_POST['moving_to_cart']) :  __('Please wait redirecting to cart page', 'event_espresso');
 		//One link, multiple events
 		if (strpos($id, "-")) {
 			
