@@ -534,10 +534,13 @@ if (!function_exists('espresso_export_stuff')) {
 									;
 
 
-									$SQL = "SELECT question_id, answer FROM " . EVENTS_ANSWER_TABLE . " ";
-									$SQL .= "WHERE question_id IN ($question_filter) AND attendee_id = %d";
-
-									$answers = $wpdb->get_results($wpdb->prepare($SQL, $participant->att_id), OBJECT_K);
+									if ( ! empty( $question_filter )) {
+										$SQL = "SELECT question_id, answer FROM " . EVENTS_ANSWER_TABLE . " ";
+										$SQL .= "WHERE question_id IN ($question_filter) AND attendee_id = %d";
+										$answers = $wpdb->get_results($wpdb->prepare($SQL, $participant->att_id), OBJECT_K);										
+									} else {
+										$answers = array();
+									}
 
 									foreach ($question_list as $k => $v) {
 
