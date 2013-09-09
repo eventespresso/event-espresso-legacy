@@ -206,9 +206,9 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			</a></div>';
 			
 			$attendee_form .= '
-			<div class="additional-attendee-div"><a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk ui-priority-primary " title="' . __('Add Additonal Attendee', 'event_espresso') . '">
-				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add Additonal Attendee', 'event_espresso') . '" />
-				' . __('Add Additonal Attendee', 'event_espresso') . '
+			<div class="additional-attendee-div"><a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk ui-priority-primary " title="' . __('Add Additional Attendee', 'event_espresso') . '">
+				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add Additional Attendee', 'event_espresso') . '" />
+				' . __('Add Additional Attendee', 'event_espresso') . '
 			</a></div>';
 
 
@@ -217,7 +217,7 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			wp_register_script( 'espresso_add_reg_attendees', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_add_reg_attendees.js', array('jquery'), '0.1', TRUE );
 			wp_enqueue_script( 'espresso_add_reg_attendees' );
 
-			$espresso_add_reg_attendees = array( 'additional_limit' => $additional_limit, 'attendee_form' => stripslashes( $attendee_form ));
+			$espresso_add_reg_attendees = array( 'additional_limit' => min( $additional_limit, $available_spaces ), 'attendee_form' => stripslashes( $attendee_form ));
 			wp_localize_script( 'espresso_add_reg_attendees', 'espresso_add_reg_attendees', $espresso_add_reg_attendees );		
 		}
 		return $html;
@@ -885,7 +885,8 @@ if (!function_exists('espresso_registration_id')) {
 
 	function espresso_registration_id($attendee_id) {
 		global $wpdb;
-		$sql = $wpdb->get_results("SELECT registration_id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id ='" . $wpdb->escape($attendee_id) . "'");
+		$SQL = "SELECT registration_id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id =%d ";
+		$wpdb->get_results($wpdb->prepare( $SQL, $attendee_id ));
 		$num_rows = $wpdb->num_rows;
 
 		if ($num_rows > 0) {
@@ -901,7 +902,8 @@ if (!function_exists('espresso_attendee_id')) {
 
 	function espresso_attendee_id($registration_id) {
 		global $wpdb;
-		$sql = $wpdb->get_results("SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id ='" . $wpdb->escape($registration_id) . "'");
+		$SQL = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id =%s ";
+		$wpdb->get_results($wpdb->prepare( $SQL, $registration_id ));
 		$num_rows = $wpdb->num_rows;
 
 		if ($num_rows > 0) {
@@ -1021,7 +1023,7 @@ function espresso_unserialize($data, $return_format = '') {
 }
 
 //Checks to see if the array is multidimensional
-function is_multi($array) {
+function espresso_is_multi($array) {
 	return (count($array) != count($array, 1));
 }
 
