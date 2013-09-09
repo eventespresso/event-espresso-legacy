@@ -44,7 +44,7 @@ class Espresso_Eway extends Espresso_PaymentGateway {
     protected function prepareSubmit() {
 		$ewayurl = "?";
 		foreach ($this->fields as $name => $value) {
-			$ewayurl .= $name . '=' . $value . '&';
+			$ewayurl .= $name . '=' . str_replace(array('#','&'),array('%23','%26'),htmlspecialchars_decode  ($value,ENT_QUOTES )) . '&';
 		}
 		$ewayurl = rtrim($ewayurl, "&");
         $spacereplace = str_replace(" ", "%20", $ewayurl);
@@ -58,7 +58,7 @@ class Espresso_Eway extends Espresso_PaymentGateway {
 
         $response = curl_exec($ch);
 				$error["result"] = curl_error($ch);
-
+	
         function fetch_data($string, $start_tag, $end_tag) {
             $position = stripos($string, $start_tag);
             $str = substr($string, $position);

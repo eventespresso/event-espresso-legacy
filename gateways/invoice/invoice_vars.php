@@ -53,7 +53,7 @@ function espresso_display_invoice($payment_data) {
 			</p>
 		
 			<p>
-				<a href="<?php echo home_url(); ?>/?invoice_type=<?php echo empty($invoice_type) ? '' : $invoice_type; ?>&amp;download_invoice=true&amp;attendee_id=<?php echo $attendee_id; ?>&amp;r_id=<?php echo $registration_id ?>" class="inline-link" id="invoice_download_link"><?php _e('Download PDF Invoice', 'event_espresso'); ?></a>
+				<a href="<?php echo home_url(); ?>/?invoice_type=<?php echo empty($invoice_type) ? '' : $invoice_type; ?>&amp;download_invoice=true&amp;attendee_id=<?php echo $attendee_id; ?>&amp;r_id=<?php echo $registration_id ?>" class="inline-link allow-leave-page" id="invoice_download_link"><?php _e('Download PDF Invoice', 'event_espresso'); ?></a>
 			</p>
 		
 		<?php if ( isset( $invoice_payment_settings['payment_address'] )) { ?>
