@@ -30,7 +30,7 @@ jQuery(document).ready(function() {
 
         progress: function(container){
 
-            jQuery(container).html('<img src="' + EEGlobals.plugin_url + 'images/ajax-loader.gif">');
+            jQuery(container).html('<img src="' + EEGlobals.plugin_url + 'images/ajax-loader.gif" style="box-shadow:none !important;">');
 
         },
         add_item : function(params){

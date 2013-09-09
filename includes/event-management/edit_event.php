@@ -99,6 +99,7 @@ function edit_event($event_id = 0) {
 
 		$question_groups		= unserialize($event->question_groups);
 
+		global $event_meta;
 		$event_meta				= unserialize($event->event_meta);
 
 		$recurrence_id			= $event->recurrence_id;
@@ -203,6 +204,7 @@ function edit_event($event_id = 0) {
 	<!-- /submitdiv -->
 
 	<?php
+	if ( $espresso_premium == true ){do_action('action_hook_espresso_edit_event_right_column_top', $event_id);}
 	$advanced_options = '';
 	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/event-management/advanced_settings.php')) {
 		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "includes/admin-files/event-management/advanced_settings.php");
@@ -394,10 +396,11 @@ function edit_event($event_id = 0) {
 		</div>
 		<!-- /groupon-options -->
 			<?php
-			}
-			$sidebar_content = ob_get_clean();
-			ob_start();
-			?>
+	}
+	if ( $espresso_premium == true ){do_action('action_hook_espresso_edit_event_right_column_bottom', $event_id);}
+	$sidebar_content = ob_get_clean();
+	ob_start();
+	?>
 	<div id="titlediv"> <strong>
 	<?php _e('Event Title', 'event_espresso'); ?>
 		</strong>
@@ -560,6 +563,7 @@ function edit_event($event_id = 0) {
 		<h2>
 	<?php _e('Advanced Options', 'event_espresso'); ?>
 		</h2>
+		<?php if ( $espresso_premium == true ){do_action('action_hook_espresso_edit_event_left_column_advanced_options_top', $event_id);}?>
 		<div id="event-location" class="postbox">
 			<div class="handlediv" title="Click to toggle"><br />
 			</div>

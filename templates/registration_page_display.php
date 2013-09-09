@@ -97,13 +97,15 @@ if ($reg_form_only == false) {
 		break;
 
 		default: //This will display the registration form
+		
+		do_action('action_hook_espresso_registration_page_top', $event_id, $event_meta, $all_meta);
 ?>
 	<div class="event_espresso_form_wrapper">
 		<form method="post" action="<?php echo get_permalink( $event_page_id );?>" id="registration_form">
 	<?php
 				
 			//This hides the date/times and location when usign custom post types or the ESPRESSO_REG_FORM shortcode
-				if ( $reg_form_only == false ){	
+if ( $reg_form_only == false ){	
 						
 					/* Display the address and google map link if available */
 					if ($location != '' && (empty($org_options['display_address_in_regform']) || $org_options['display_address_in_regform'] != 'N')) {
@@ -149,7 +151,9 @@ if ($reg_form_only == false) {
 
 			// * * This section shows the registration form if it is an active event * *
 
-				if ($display_reg_form == 'Y') {
+			if ($display_reg_form == 'Y') {
+				
+				do_action('action_hook_espresso_registration_form_top', $event_id, $event_meta, $all_meta);
 	?>
 				<p class="event_time">
 	<?php
@@ -262,12 +266,16 @@ if ($reg_form_only == false) {
 					<input class="btn_event_form_submit ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="event_form_field-<?php echo $event_id; ?>" type="submit" name="Submit" value="<?php _e('Submit', 'event_espresso'); ?>">
 				</p>
 				
-	<?php } ?>
+	<?php 
+				do_action('action_hook_espresso_registration_form_bottom', $event_id, $event_meta, $all_meta);
+			}
+	 ?>
 
 	    </form>
 	</div>
 	
 <?php 
+				do_action('action_hook_espresso_registration_page_bottom', $event_id, $event_meta, $all_meta);
 				break;
 				
 			}

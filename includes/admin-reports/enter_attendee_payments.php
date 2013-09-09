@@ -88,12 +88,14 @@ function enter_attendee_payments() {
 					}
 
 					// compare new total_cost with amount_pd
-					if ( $new_payment == $total_owing ) {
-						$upd_payment_status = 'Completed';
-					} elseif ( $new_payment < $total_owing ) {
-						$upd_payment_status = isset($_POST[ 'payment_status' ]) && $_POST[ 'payment_status' ] == 'Incomplete' ? 'Incomplete' : 'Pending';
-					} elseif ( $new_payment > $total_owing ) {
-						$upd_payment_status = 'Refund';
+					if ( $new_payment != 'Cancelled' ) {
+						if ( $new_payment == $total_owing ) {
+							$upd_payment_status = 'Completed';
+						} elseif ( $new_payment < $total_owing ) {
+							$upd_payment_status = isset($_POST[ 'payment_status' ]) && $_POST[ 'payment_status' ] == 'Incomplete' ? 'Incomplete' : 'Pending';
+						} elseif ( $new_payment > $total_owing ) {
+							$upd_payment_status = 'Refund';
+						}
 					}
 					
 					//Update payment status information for primary attendee
@@ -430,6 +432,7 @@ function enter_attendee_payments() {
 													array('id'=>'Completed','text'=> __('Completed','event_espresso')),
 													array('id'=>'Pending','text'=> __('Pending','event_espresso')),
 													array('id'=>'Payment Declined','text'=> __('Payment Declined','event_espresso')),
+													array('id'=>'Cancelled','text'=> __('Cancelled','event_espresso')),
 													array('id'=>'Incomplete','text'=> __('Incomplete','event_espresso')),
 													array('id'=>'Refund','text'=> __('Overpaid','event_espresso'))
 												);
@@ -491,7 +494,7 @@ function enter_attendee_payments() {
 //												);
 //												echo select_input('txn_type', $txn_values, $txn_type);
 										?>
-											<input type="text" class="medium-text" name="txn_type" size="45" value ="<?php echo $txn_type; ?>" />
+											<input type="text" class="medium-text" name="txn_type" size="45" value ="<?php echo stripslashes_deep(htmlentities($txn_type)); ?>" />
 										</li>
 									<li>
 										<label>

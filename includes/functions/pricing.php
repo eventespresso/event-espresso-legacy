@@ -5,7 +5,10 @@ function event_espresso_paid_status_icon($payment_status ='') {
 
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
     switch ($payment_status) {
-        case 'Checkedin':
+       case 'Cancelled':
+            echo '<img align="absmiddle" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/cancel.png" width="16" height="16" alt="' . __('Cancelled', 'event_espresso') . '" title="' . __('Cancelled', 'event_espresso') . '" />';
+            break;
+	    case 'Checkedin':
             echo '<img align="absmiddle" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/accept.png" width="16" height="16" alt="' . __('Checked-in', 'event_espresso') . '" title="' . __('Checked-in', 'event_espresso') . '" />';
             break;
         case 'NotCheckedin':
@@ -198,7 +201,7 @@ if (!function_exists('event_espresso_get_orig_price_and_surcharge')) {
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 
 		if ( ! $price_id || ! $event_id ) {
-			return 10000000;
+			return FALSE;
 		}
 		
 		global $wpdb;
@@ -276,7 +279,7 @@ if (!function_exists('event_espresso_get_final_price')) {
 	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if ( ! $price_id || ! $event_id ) {
-			return 1000000;
+			return FALSE;
 		}
 		
 		if ( event_espresso_verify_price_id( $price_id, $event_id ) == FALSE ){

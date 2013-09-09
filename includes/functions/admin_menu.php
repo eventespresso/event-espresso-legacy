@@ -47,7 +47,7 @@ if (!function_exists('add_event_espresso_menus')) {
         //EventCategories
         add_submenu_page('event_espresso', __('Event Espresso - Manage Event Categories', 'event_espresso'), __('Categories', 'event_espresso'), apply_filters('espresso_management_capability', $default_role, isset($espresso_manager['espresso_manager_categories']) && !empty($espresso_manager['espresso_manager_categories']) ? $espresso_manager['espresso_manager_categories'] : $default_role), 'event_categories', 'event_espresso_categories_config_mnu');
 
-		do_action( 'action_hook_espresso_add_new_ee_submenu' );
+		do_action( 'action_hook_espresso_add_new_ee_submenu', $espresso_manager );
 
         //Discounts
         if (function_exists('event_espresso_discount_config_mnu') && $espresso_premium == true) {
@@ -92,6 +92,11 @@ if (!function_exists('add_event_espresso_menus')) {
 		//Infusionsoft Integration Settings
         if (function_exists('event_espresso_infusionsoft_settings') && $espresso_premium == true) {
             add_submenu_page('event_espresso', __('Event Espresso - Infusionsoft Settings', 'event_espresso'), __('Infusionsoft Settings', 'event_espresso'), $default_role, 'espresso-infusionsoft', 'event_espresso_infusionsoft_settings');
+        }
+		
+		//Eventbrite Integration Settings
+        if (function_exists('espresso_eventbrite_settings') && $espresso_premium == true) {
+            add_submenu_page('event_espresso', __('Event Espresso - Eventbrite Settings', 'event_espresso'), __('Eventbrite Settings', 'event_espresso'), $default_role, 'espresso-eventbrite', 'espresso_eventbrite_settings');
         }
 		
 		//Ticketing Settings

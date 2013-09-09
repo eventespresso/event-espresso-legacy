@@ -14,6 +14,9 @@ function event_espresso_config_page_styles() {
 			case ( 'espresso_reports' ):
 				wp_enqueue_style('jquery-ui-style', EVENT_ESPRESSO_PLUGINFULLURL . 'css/jquery-ui-1.9.2.custom.min.css');
 				break;
+			case ( 'payment_gateways'):
+				wp_enqueue_media();
+				break;
 		}
 		if (isset($_REQUEST['event_admin_reports'])) {
 			switch ($_REQUEST['event_admin_reports']) {
@@ -141,7 +144,10 @@ if (!function_exists('event_espresso_delete_event')) {
 				$event_post = $wpdb->get_row("SELECT post_id FROM " . EVENTS_DETAIL_TABLE . " WHERE id =" . $event_id, ARRAY_A);
 				wp_delete_post($event_post['post_id']);
 				//echo $event_post['post_id'];
+				do_action('action_hook_espresso_delete_event_success',$event_id);
+				
 			}
+			
 		} else {
 			echo '<h1>' . __('No ID  Supplied', 'event_espresso') . '</h1>';
 		}
@@ -171,10 +177,10 @@ function event_espresso_empty_event_trash($event_id) {
 	$sql = "DELETE FROM " . EVENTS_DISCOUNT_REL_TABLE . " WHERE event_id='" . $event_id . "'";
 	$wpdb->query($sql);
 
-
-
 	$sql = "DELETE FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id='" . $event_id . "'";
 	$wpdb->query($sql);
+	
+	do_action('action_hook_espresso_empty_event_trash_success',$event_id);
 
 	/* delete_price_from_event($event_id);
 	  delete_category_from_event($event_id);

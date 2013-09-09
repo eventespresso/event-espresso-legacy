@@ -18,7 +18,7 @@ function espresso_display_usaepay_onsite($data) {
 			$home = home_url();
 		}
 
-	wp_register_script( 'usaepay_onsite', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/usaepay_onsite/usaepay_onsite.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
+	wp_register_script( 'usaepay_onsite', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/usaepay_onsite/usaepay_onsite.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'usaepay_onsite' );	
 
 ?>

@@ -4,7 +4,7 @@ function espresso_display_paypal_pro($data) {
 	global $org_options;
 	$paypal_pro_settings = get_option('event_espresso_paypal_pro_settings');
 	$use_sandbox = $paypal_pro_settings['paypal_pro_use_sandbox'];
-	wp_register_script( 'paypal_pro', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/paypal_pro/paypal_pro.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
+	wp_register_script( 'paypal_pro', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/paypal_pro/paypal_pro.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'paypal_pro' );		
 	?>
 <div id="paypal_pro-payment-option-dv" class="payment-option-dv">

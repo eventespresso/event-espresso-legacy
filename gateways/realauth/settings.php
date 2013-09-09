@@ -122,7 +122,8 @@ function event_espresso_display_realauth_settings() {
 							</li>
 							<li>
 								<label for="button_url"><?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a></label> 
-								<input class="regular-text" type="text" name="button_url" size="34" value="<?php echo $realauth_settings['button_url']; ?>" /> <a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
+								<input class="upload_url_input" type="text" name="button_url" size="34" value="<?php echo $realauth_settings['button_url']; ?>" />
+								<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
 							</li>
 						</ul>
 					</td>

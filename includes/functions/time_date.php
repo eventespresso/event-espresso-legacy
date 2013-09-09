@@ -203,9 +203,9 @@ if (!function_exists('event_espresso_time_dropdown')) {
         if ($wpdb->num_rows == 1) {
             $html .= $label == 1 ? '<span class="span_event_time_label">' . __('Start Time:', 'event_espresso') . '</span>' : '';
             foreach ($event_times as $time) {
-                $html .= '<span class="span_event_time_value">' . event_date_display($time->start_time, get_option('time_format')) . '</span>';
+                $html .= ' <span class="span_event_time_value">' . event_date_display($time->start_time, get_option('time_format')) . '</span>';
                 $html .= $label == 1 ? '<br/><span class="span_event_time_label">' . __('End Time: ', 'event_espresso') . '</span>' : __(' to ', 'event_espresso');
-                $html .= '<span class="span_event_time_value">' . event_date_display($time->end_time, get_option('time_format')) . '</span>';
+                $html .= ' <span class="span_event_time_value">' . event_date_display($time->end_time, get_option('time_format')) . '</span>';
                 $html .= '<input type="hidden" name="start_time_id' . $multi_name_adjust . '" id="start_time_id_' . $time->id . '" value="' . $time->id . '" />';
             }
         } else if ($wpdb->num_rows > 1) {//If more than one result, then display the dropdown

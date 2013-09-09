@@ -91,8 +91,10 @@ function add_event_to_db($recurrence_arr = array()) {
 		$externalURL		= isset($_REQUEST['externalURL']) ? sanitize_text_field($_REQUEST['externalURL']) : '';
 		$post_type			= !empty($_REQUEST['espresso_post_type']) ? sanitize_text_field($_REQUEST['espresso_post_type']) : '';
 		$reg_limit			= !empty($_REQUEST['reg_limit']) ? sanitize_text_field($_REQUEST['reg_limit']) : '999999';
+		$_REQUEST['reg_limit'] = $reg_limit;
 		$allow_multiple		= !empty($_REQUEST['allow_multiple']) ? sanitize_text_field($_REQUEST['allow_multiple']) : 'N';
 		$additional_limit	= !empty($_REQUEST['additional_limit']) && $_REQUEST['additional_limit'] > 0 ? sanitize_text_field($_REQUEST['additional_limit']) : '5';
+		$_REQUEST['additional_limit'] = $additional_limit;
 		$member_only		= !empty($_REQUEST['member_only']) ? sanitize_text_field($_REQUEST['member_only']) : 'N';
 		$is_active			= !empty($_REQUEST['is_active']) ? sanitize_text_field($_REQUEST['is_active']) : 'Y';
 		$event_status		= !empty($_REQUEST['event_status']) ? sanitize_text_field($_REQUEST['event_status']) : 'A';
@@ -101,7 +103,9 @@ function add_event_to_db($recurrence_arr = array()) {
 		
 		//Get the first instance of the start and end times
 		$start_time			= !empty($_REQUEST['start_time'][0]) ? sanitize_text_field($_REQUEST['start_time'][0]) : '8:00 AM';
+		$_REQUEST['event_start_time'] = $start_time;
 		$end_time			= !empty($_REQUEST['end_time'][0]) ? sanitize_text_field($_REQUEST['end_time'][0]) : '5:00 PM';
+		$_REQUEST['event_end_time'] = $end_time;
 		
 		// Add Timezone
 		$timezone_string	= isset($_REQUEST['timezone_string']) ? sanitize_text_field($_REQUEST['timezone_string']) : '';
@@ -189,6 +193,8 @@ function add_event_to_db($recurrence_arr = array()) {
 		} else {
 			$start_date = !empty($_REQUEST['start_date']) ? sanitize_text_field($_REQUEST['start_date']) : date('Y-m-d',time() + (60 * 60 * 24 * 30));
 		}
+		
+		$_REQUEST['start_date'] = $start_date;
 
 		if (array_key_exists('recurrence_event_end_date', $recurrence_arr)) {
 			
@@ -205,7 +211,8 @@ function add_event_to_db($recurrence_arr = array()) {
 		} else {
 			$end_date = !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] : date('Y-m-d',time() + (60 * 60 * 24 * 30));
 		}
-
+		$_REQUEST['end_date'] = $end_date;
+		
 		if (array_key_exists('visible_on', $recurrence_arr)) {
 			
 			//If this is a Recurring event
@@ -562,8 +569,11 @@ function add_event_to_db($recurrence_arr = array()) {
 		}
 	}
 	
+	$_REQUEST['event_id'] = $last_event_id;
+	do_action('action_hook_espresso_insert_event_success',$_REQUEST);
+	
 	//If not using the FEM addon, then we return the event id
 	if ( !$use_fem === TRUE )
 		return @$last_event_id;
-
+	
 }//End add_event_funct_to_db()

@@ -104,13 +104,13 @@ function event_espresso_display_paypal_settings() {
 							<label for="tax_override">
 								<?php _e('Override Profile-Based Tax', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=tax_override_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a> <input name="tax_override" type="checkbox" value="1" <?php echo $paypal_settings['tax_override'] ? 'checked="checked"' : '' ?> />
 							</label>
-							
+
 						</li>
 						<li>
 							<label for="shipping_override">
 								<?php _e('Override Profile-Based Shipping', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=shipping_override_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a> <input name="shipping_override" type="checkbox" value="1" <?php echo $paypal_settings['shipping_override'] ? 'checked="checked"' : '' ?> />
 							</label>
-							
+
 						</li>
 						<li>
 							<label for="currency_format">
@@ -191,29 +191,29 @@ function event_espresso_display_paypal_settings() {
 									<?php _e('Taiwan New Dollars', 'event_espresso'); ?>
 								</option>
 							</select>
-							 </li>
-						
+						</li>
+
 						<li>
 							<label for="image_url">
 								<?php _e('Image URL (logo for payment page)', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=image_url_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input type="text" name="image_url" size="35" value="<?php echo $paypal_settings['image_url']; ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=image_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a><br />
+							<input class="upload_url_input" type="text" name="image_url" size="35" value="<?php echo $paypal_settings['image_url']; ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a><br />
 							<?php _e('(used for your business/personal logo on the PayPal page)', 'event_espresso'); ?>
 						</li>
-						
-						
+
+
 					</ul></td>
 				<td valign="top"><ul><li>
-						<label for="bypass_payment_page">
-							<?php _e('Bypass Payment Overview Page', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=bypass_confirmation"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-						</label>
-						<?php
-						$values = array(
-								array('id' => 'N', 'text' => __('No', 'event_espresso')),
-								array('id' => 'Y', 'text' => __('Yes', 'event_espresso')));
-						echo select_input('bypass_payment_page', $values, $paypal_settings['bypass_payment_page']);
-						?>
+							<label for="bypass_payment_page">
+								<?php _e('Bypass Payment Overview Page', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=bypass_confirmation"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							</label>
+							<?php
+							$values = array(
+									array('id' => 'N', 'text' => __('No', 'event_espresso')),
+									array('id' => 'Y', 'text' => __('Yes', 'event_espresso')));
+							echo select_input('bypass_payment_page', $values, $paypal_settings['bypass_payment_page']);
+							?>
 						</li>
 						<li>
 							<label for="no_shipping">
@@ -226,23 +226,24 @@ function event_espresso_display_paypal_settings() {
 									array('id' => '2', 'text' => __('Prompt for an address, and require one', 'event_espresso')));
 							echo select_input('no_shipping', $values, $paypal_settings['no_shipping']);
 							?>
-							</li>
-						
-						<?php if (espresso_check_ssl() == TRUE || ( isset($paypal_settings['force_ssl_return']) && $paypal_settings['force_ssl_return'] == 1 )) {?>
-						<li>
-							<label for="force_ssl_return">
-								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
-								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-							</label>
-							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $paypal_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
-							<?php }?>
-						
+						</li>
+
+						<?php if (espresso_check_ssl() == TRUE || ( isset($paypal_settings['force_ssl_return']) && $paypal_settings['force_ssl_return'] == 1 )) { ?>
+							<li>
+								<label for="force_ssl_return">
+									<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
+									<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+								</label>
+								<input name="force_ssl_return" type="checkbox" value="1" <?php echo $paypal_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+						<?php } ?>
+
 						<li>
 							<label for="button_url">
 								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input type="text" name="button_url" size="34" value="<?php echo $paypal_settings['button_url']; ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>  </li><li>
+							<input class="upload_url_input" type="text" name="button_url" size="34" value="<?php echo $paypal_settings['button_url']; ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>  </li>
+						<li>
 							<label><?php _e('Current Button Image:', 'event_espresso'); ?></label>
 							<?php echo '<img src="' . $paypal_settings['button_url'] . '" />'; ?></li>
 					</ul></td>
@@ -250,13 +251,13 @@ function event_espresso_display_paypal_settings() {
 		</table>
 		<p><strong style="color:#F00"><?php _e('Attention!', 'event_espresso'); ?></strong><br /><?php _e('For PayPal IPN to work, you need a Business or Premier account.', 'event_espresso'); ?>
 		</p>
-			<input type="hidden" name="update_paypal" value="update_paypal">
-			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update PayPal Settings', 'event_espresso') ?>" id="save_paypal_settings" />
-		</p>
-		<p><label for="use_sandbox">
-								<?php _e('Use the Debugging Feature and the', 'event_espresso'); ?> <a href="https://developer.paypal.com/devscr?cmd=_home||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox_get_started" title="PayPal Sandbox Login||Sandbox Tutorial||Getting Started with PayPal Sandbox" target="_blank"><?php _e('PayPal Sandbox', 'event_espresso'); ?></a><a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=paypal_sandbox_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-							</label>
-							<input name="use_sandbox" type="checkbox" value="1" <?php echo $paypal_settings['use_sandbox'] ? 'checked="checked"' : '' ?> /></p>
+		<input type="hidden" name="update_paypal" value="update_paypal">
+		<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update PayPal Settings', 'event_espresso') ?>" id="save_paypal_settings" />
+	</p>
+	<p><label for="use_sandbox">
+			<?php _e('Use the Debugging Feature and the', 'event_espresso'); ?> <a href="https://developer.paypal.com/devscr?cmd=_home||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox||https://cms.paypal.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox_get_started" title="PayPal Sandbox Login||Sandbox Tutorial||Getting Started with PayPal Sandbox" target="_blank"><?php _e('PayPal Sandbox', 'event_espresso'); ?></a><a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=paypal_sandbox_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+		</label>
+		<input name="use_sandbox" type="checkbox" value="1" <?php echo $paypal_settings['use_sandbox'] ? 'checked="checked"' : '' ?> /></p>
 	</form>
 	<div id="paypal_sandbox_info" style="display:none">
 		<h2><?php _e('PayPal Sandbox', 'event_espresso'); ?></h2>
@@ -293,7 +294,6 @@ function event_espresso_display_paypal_settings() {
 		<p><?php _e('Overrides any shipping charges that may be applied to all of your PayPal.com payments. These settings can be managed in your PayPal.com Profile > Shipping Calculations  (<a href="https://www.paypal.com/cgi-bin/customerprofileweb?cmd=_profile-shipping" target="_blank">https://www.paypal.com/cgi-bin/customerprofileweb?cmd=_profile-shipping</a>).', 'event_espresso'); ?></p>
 	</div>
 	<?php
-	
 }
 
-add_action('action_hook_espresso_display_gateway_settings','event_espresso_paypal_payment_settings');
+add_action('action_hook_espresso_display_gateway_settings', 'event_espresso_paypal_payment_settings');

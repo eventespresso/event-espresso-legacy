@@ -270,15 +270,6 @@ function espresso_prepare_email_data($attendee_id, $multi_reg, $custom_data='') 
 		$data->event->venue_name = '';
 
 	//Table of events registered for
-/*	$data->event_table .= "
-		<tr>
-			<td>" . stripslashes_deep($data->event->event_name) . " | " . $data->attendee->price_option . "</td>
-			<td>" . event_date_display($data->attendee->start_date) . ' - ' . event_date_display($data->attendee->end_date) . "</td>
-			<td>" . event_date_display($data->attendee->event_time, get_option('time_format')) . " - " . event_date_display($data->attendee->end_time, get_option('time_format')) . "</td>
-			<td>" . $data->event->venue_name . "<br />$data->location <br />$data->google_map_link</td>" .
-					($data->attendee->quantity > 0 ? '<td>' . $data->attendee->quantity . __(' attendees', 'event_espresso') . '</td>' : '') .
-					"</tr>";*/
-					
 	$data->event_table .= espresso_generate_attendee_event_list( $data );
 
 	//Output custom questions
@@ -317,7 +308,8 @@ function espresso_prepare_email_data($attendee_id, $multi_reg, $custom_data='') 
 		$data->event->conf_mail = $custom_data_payment_message;
 		$data->event->send_mail = 'Y'; 
         $data->event->email_id = 0;
-	}  
+	} 
+	
 	//Build reminder email
 	if ($custom_data_email_type == 'reminder') {
 		$data->email_subject = $custom_data_email_subject;
@@ -478,7 +470,6 @@ function espresso_prepare_admin_email($data) {
 }
 
 //End espresso_prepare_admin_email()
-
 function email_by_attendee_id($attendee_id, $send_attendee_email = TRUE, $send_admin_email = TRUE, $multi_reg = FALSE, $custom_data='') {
     
 	$data = espresso_prepare_email_data($attendee_id, $multi_reg, $custom_data);
@@ -495,7 +486,6 @@ function email_by_attendee_id($attendee_id, $send_attendee_email = TRUE, $send_a
 }
 
 //End email_by_attendee_id()
-
 function email_by_session_id($session_id, $send_attendee_email = TRUE, $send_admin_email = TRUE, $multi_reg = FALSE) {
 	global $wpdb;
 	$sql = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE attendee_session = %s";
@@ -521,9 +511,7 @@ function email_by_session_id($session_id, $send_attendee_email = TRUE, $send_adm
 	if ($send_admin_email == 'true') {
 		event_espresso_send_email($admin_email_params);
 	}
-}
-
-//End email_by_session_id()
+}//End email_by_session_id()
 
 if ( ! function_exists('event_espresso_email_confirmations')) {
 
@@ -558,6 +546,8 @@ if ( ! function_exists('event_espresso_email_confirmations')) {
 	}
 
 }//End event_espresso_email_confirmations()
+
+
 //Email sender
 if (!function_exists('event_espresso_send_email')) {
 
@@ -566,7 +556,7 @@ if (!function_exists('event_espresso_send_email')) {
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		extract($params);
 		//Define email headers
-		$headers = "MIME-Version: 1.0\r\n";
+		$headers = "";
 		if ($org_options['email_fancy_headers']=='Y') {
 			$headers .= "From: " . $org_options['organization'] . " <" . $org_options['contact_email'] . ">\r\n";
 			$headers .= "Reply-To: " . $org_options['organization'] . "  <" . $org_options['contact_email'] . ">\r\n";
@@ -588,6 +578,8 @@ if (!function_exists('event_espresso_send_email')) {
 	}
 
 }//End event_espresso_send_email()
+
+
 //Send Invoice
 if (!function_exists('event_espresso_send_invoice')) {
 
@@ -607,6 +599,8 @@ if (!function_exists('event_espresso_send_invoice')) {
 	}
 
 }//End event_espresso_send_invoice()
+
+
 //Payment Confirmations
 if (!function_exists('event_espresso_send_payment_notification')) {
 
@@ -689,7 +683,7 @@ if (!function_exists('event_espresso_send_cancellation_notice')) {
 		global $wpdb, $org_options;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		//Define email headers
-		$headers = "MIME-Version: 1.0\r\n";
+		$headers = "";
 		if ($org_options['email_fancy_headers']=='Y') {
 			$headers .= "From: " . $org_options['organization'] . " <" . $org_options['contact_email'] . ">\r\n";
 			$headers .= "Reply-To: " . $org_options['organization'] . "  <" . $org_options['contact_email'] . ">\r\n";

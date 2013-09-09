@@ -116,18 +116,11 @@ function event_espresso_display_authnet_settings() {
 							<input type="text" name="authnet_transaction_key" size="35" value="<?php echo $authnet_settings['authnet_transaction_key']; ?>">
 						</li>
 						<li>
-							<label for="button_url">
-								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-							</label>
-							<input type="text" name="button_url" size="35" value="<?php echo $authnet_settings['button_url']; ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
-						</li>
-						<li>
 							<label for="image_url">
 								<?php _e('Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=authnet_image_url_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input type="text" name="image_url" size="35" value="<?php echo $authnet_settings['image_url']; ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=image_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
+							<input class="upload_url_input" type="text" name="image_url" size="35" value="<?php echo $authnet_settings['image_url']; ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
 							<br />
 							<?php _e('(used for your business/personal logo on the Authorize.net SIM payment page)', 'event_espresso'); ?>
 						</li>
@@ -184,6 +177,13 @@ function event_espresso_display_authnet_settings() {
 									array('id' => 'N', 'text' => __('No', 'event_espresso')));
 							echo select_input('bypass_payment_page', $values, $authnet_settings['bypass_payment_page']);
 							?>
+						</li>
+						<li>
+							<label for="button_url">
+								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							</label>
+							<input class="upload_url_input" type="text" name="button_url" size="35" value="<?php echo $authnet_settings['button_url']; ?>" />
+							<a  class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
 						</li>
 						<li>
 							<label><?php _e('Current Button Image', 'event_espresso'); ?></label>
