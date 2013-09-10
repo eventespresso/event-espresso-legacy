@@ -238,7 +238,7 @@ function event_espresso_display_google_checkout_settings() {
 			by clicking \"Settings\", then \"Integration\". You must enter them into Event Espresso's 'Google Wallet (Checkout) payment settings.","event_espresso");?>
 	</p>
 	<p>
-		<?php printf(__("On the Google Wallet (Checkout) Settings Integration page, set the 'API callback URL' in Google Checkout to the following:%s (a page on your website with an added GET query parameter of 'type=google_checkout'). Leave the \"Callback Contents\" as \"Notification Serial Number\".","event_espresso"),home_url()."?type=google_checkout");?>
+		<?php printf(__("On the Google Wallet (Checkout) Settings Integration page, set the 'API callback URL' in Google Checkout to the following:%s (a page on your website with the added GET query parameters 'type=google_checkout&ipn=true'). Leave the \"Callback Contents\" as \"Notification Serial Number\".","event_espresso"),home_url()."?type=google_checkout&ipn=true");?>
 		
 	</p>
 	<p>
