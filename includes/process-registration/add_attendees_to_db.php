@@ -227,7 +227,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$attendee_quantity = 1;
 				$final_price	= (float)$data_source['event_cost'];
 				$orig_price		= (float)$data_source['event_cost'];
-				$price_type		=  __('Admin', 'event_espresso');
+				$price_type		=  isset($data_source['seat_id']) ? $data_source['seat_id'] : __('Admin', 'event_espresso');
 			
 			} elseif (isset($data_source['seat_id'])) {
 				
