@@ -54,12 +54,12 @@ function espresso_display_evertec($payment_data) {
 			</soap:Body>
 			</soap:Envelope>';
 		
-		echo htmlentities($raw_xml_body);
+//		echo htmlentities($raw_xml_body);
 //		echo $response['body'];die;
 //		$client = new SoapClient('https://mmpay.evertecinc.com/webservicev2/wscheckoutpayment.asmx?wsdl', array('trace'=>true,'soap_version' => SOAP_1_2));
 //			echo 'echodump of $client->__getFunctions()';
 //			var_dump($client->__getFunctions());
-			
+	
 //			echo 'echodump of $client->__getTypes()';
 //			var_dump($client->__getTypes());
 //			try{
@@ -91,11 +91,40 @@ function espresso_display_evertec($payment_data) {
 					'httpversion' => '1.1',
 					'body'=>$raw_xml_body,
 					'sslverify' => false));
-		echo 'echodump of $response';
-		var_dump($response);
-	die;
+//		echo 'echodump of $response';
+//		var_dump($response);
+		if(isset($response['body'])){
+			$xml   = simplexml_load_string($response['body']);
+			//in order to get elements in the default namesapce, you have to register it (see comment by gkokmdam on http://php.net/manual/en/simplexml.examples-basic.php)
+			$xml->registerXPathNamespace("def", "http://tempuri.org/WebMerchant/MerchantService");
+			$paymentResultElements = $xml->xpath('//def:MakePaymentResult');
+			if($paymentResultElements){
+				$paymentResult = $paymentResultElements[0];
+				if(strpos($paymentResult, 'http')){
+					//they sent back a URL. we can link the user ot taht
+					$redirect_url = $paymentResult;
+					$error_message = false;
+				}else{
+					//they sent back an error message
+					$redirect_url = false;
+					$error_message = $paymentResult;
+				}
+			}else{
+				$redirect_url = false;
+				$error_message = __("Did not receive a proper XML response from Evertec", "event_espresso");
+				if(WP_DEBUG){
+					$error_message.=print_r($response,true);
+				}
+			}
+		}else{
+				$error_message = __("Did not receive a proper XML response from Evertec", "event_espresso");
+		}
+	if( $error_message ){
+		echo __("An error occurred communicating with Evertec:", "event_espresso").$error_message; return;
+	}
+	
 	if (!empty($evertec_settings['bypass_payment_page']) && $evertec_settings['bypass_payment_page'] == 'Y') {
-		$myEvertec->submitPayment();
+		wp_redirect($redirect_url);
 	} else {
 		if (empty($evertec_settings['button_url'])) {
 			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/evertec/btn_stdCheckout2.gif")) {
@@ -108,7 +137,14 @@ function espresso_display_evertec($payment_data) {
 		} else {
 			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/evertec/btn_stdCheckout2.gif";
 		}
-		$myEvertec->submitButton($button_url, 'evertec');
+		?>
+			 <div id="evertec-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+				 <a href='<?php echo $redirect_url?>'>
+			<img class="payment-option-lnk allow-leave-page" src="<?php echo $button_url?>" alt="click to visit this payment gateway">
+				</a>
+			 </div>
+		<?php
+	
 	}
 
 	if ($use_sandbox) {
