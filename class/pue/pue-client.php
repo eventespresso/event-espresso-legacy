@@ -36,7 +36,7 @@ if ( !class_exists('PluginUpdateEngineChecker') ):
  * @original author (c) Janis Elsts
  * @heavily modified by Darren Ethier
  * @license GPL2 or greater. 
- * @version 1.1
+ * @version 1.2
  * @access public
  */
 class PluginUpdateEngineChecker {
