@@ -22,12 +22,22 @@ function espresso_display_evertec($payment_data) {
 		'CustomerEmail'=>'monkey',//$payment_data['attendee_email'],
 		'Total'=>'10.00',//$payment_data['event_cost'],
 		'DescriptionBuy'=>$payment_data['event_name'],
-		'TaxAmount'=>0,
+		'TaxAmount1'=>0,
 		'address1'=>$payment_data['address'],
+		'address2'=>isset($payment_data['address2']) ? $payment_data['address2'] : '',
 		'city'=>$payment_data['city'],
 		'zipcode'=>$payment_data['zip'],
 		'telephone'=>$payment_data['phone'],
+		'fax'=>'',
+		'ignoreValues'=>'',  
 		'language'=>$evertec_settings['evertec_pages_language'],
+		'TaxAmount2'=>'',
+		'TaxAmount3'=>'',
+		'TaxAmount4'=>'',
+		'TaxAmount5'=>'',
+		'filler1'=>'',
+		'filler2'=>'',
+		'filler3'=>''
 			);
 	$xml_params = '';
 	foreach($params as $name=>$value){
@@ -44,22 +54,22 @@ function espresso_display_evertec($payment_data) {
 			</soap:Body>
 			</soap:Envelope>';
 		
-		
+		echo htmlentities($raw_xml_body);
 //		echo $response['body'];die;
-		$client = new SoapClient('https://mmpay.evertecinc.com/webservicev2/wscheckoutpayment.asmx?wsdl', array('trace'=>true,'soap_version' => SOAP_1_2));
+//		$client = new SoapClient('https://mmpay.evertecinc.com/webservicev2/wscheckoutpayment.asmx?wsdl', array('trace'=>true,'soap_version' => SOAP_1_2));
 //			echo 'echodump of $client->__getFunctions()';
 //			var_dump($client->__getFunctions());
 			
 //			echo 'echodump of $client->__getTypes()';
 //			var_dump($client->__getTypes());
-			try{
-				$makePaymentResponse = $client->MakePayment(array(array('MakePayment'=>$params)));
+//			try{
+//				$makePaymentResponse = $client->MakePayment(array(array('MakePayment'=>$params)));
 //				echo 'echodump of $makePaymentResponse';
 //				var_dump($makePaymentResponse);
-			}catch(Exception $e){
+//			}catch(Exception $e){
 //				echo 'echodump of $e';
 //				var_dump($e);
-			}
+//			}
 	
 			$soap_client_req = '<?xml version="1.0" encoding="UTF-8"?>
 <env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" xmlns:ns1="http://tempuri.org/WebMerchant/MerchantService"><env:Body><ns1:MakePayment/></env:Body></env:Envelope>';
@@ -70,7 +80,7 @@ function espresso_display_evertec($payment_data) {
 	
 			
 			
-			$response = wp_remote_post('https://mmpay.evertecinc.com/webservicev2/wscheckoutpayment.asmx', 
+			$response = wp_remote_post('https://everpaycert.evertecinc.com/wscheckoutpayment/wsCheckoutPayment.asmx?op=MakePayment',//https://mmpay.evertecinc.com/webservicev2/wscheckoutpayment.asmx', 
 				array(
 					'headers'=>array(
 						'Content-Type'=>'text/xml; charset=utf-8;',
