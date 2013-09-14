@@ -99,7 +99,7 @@ $this_event_id = $event_id;
 		<?php
 	}
 
-	$num_attendees = apply_filters('action_hook_espresso_get_num_attendees', $event_id); 
+	$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $event_id); 
 	
 	if ($num_attendees >= $reg_limit) {
 		?>

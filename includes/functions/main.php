@@ -712,7 +712,7 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 
 }
 
-add_filter('action_hook_espresso_get_num_attendees', 'espresso_get_num_attendees', 10, 1);
+add_filter('filter_hook_espresso_get_num_attendees', 'espresso_get_num_attendees', 10, 1);
 function espresso_get_num_attendees($event_id){
 	$num_attendees = 0;
 	global $wpdb, $org_options;
