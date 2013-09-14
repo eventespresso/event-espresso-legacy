@@ -97,7 +97,7 @@ function event_espresso_edit_list_widget(){
                <td class="author column-author"><?php echo event_date_display($start_date,get_option('date_format'))?> <br />
 <?php echo event_espresso_get_time($event_id, 'start_time') ?></td>
               <td class="date column-date"><?php echo $status['display'] ?></td>
-              <td align="center" class="author column-attendees"><a href="admin.php?page=events&amp;event_admin_reports=list_attendee_payments&amp;event_id=<?php echo $event_id?>"><?php echo get_number_of_attendees_reg_limit($event_id, 'num_attendees');?></a></td>              
+              <td align="center" class="author column-attendees"><a href="admin.php?page=events&amp;event_admin_reports=list_attendee_payments&amp;event_id=<?php echo $event_id?>"><?php echo apply_filters('filter_hook_espresso_get_num_attendees', $event_id);?></a></td>              
               
       </tr>
     <?php } 

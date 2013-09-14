@@ -55,9 +55,9 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			}
 			//If the event is still active, then show it.
 			if (event_espresso_get_status($r->id) == 'ACTIVE') {
-				$num_attendees = get_number_of_attendees_reg_limit( $r->id, 'num_attendees' ); //Get the number of attendees
-				$available_spaces = get_number_of_attendees_reg_limit( $r->id, 'available_spaces' ); //Gets a count of the available spaces
-				$number_available_spaces = get_number_of_attendees_reg_limit( $r->id, 'number_available_spaces' ); //Gets the number of available spaces
+				$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $r->id);//Get the number of attendees
+			$available_spaces = apply_filters('filter_hook_espresso_available_spaces_text', $r->id);//Gets a count of the available spaces
+			$number_available_spaces = apply_filters('filter_hook_espresso_get_num_available_spaces', $r->id);//Gets the number of available spaces
 				//echo "<pre>$r->id, $num_attendees,$available_spaces,$number_available_spaces</pre>";
 		?>
 				<div class="<?php espresso_template_css_class('event_display_boxes','multi_reg_cart_block event-display-boxes ui-widget'); ?>"  id ="multi_reg_cart_block-<?php echo $r->id ?>">

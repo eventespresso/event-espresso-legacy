@@ -768,13 +768,12 @@ function edit_attendee_record() {
 															// number of tickets currently purchased
 															$quantity = ! empty( $quantity ) ? $quantity : 1; 
 															 // availalbe spaces left for event
-															$available_spaces = get_number_of_attendees_reg_limit( $event_id, 'number_available_spaces');
-															if ( $available_spaces != 'Unlimited' ) {
-																// first add our purchased tickets ($quantity) back into available spaces 
-																// ( becuase a sold out show incluldes these tickets here, so admin should be allowed to play with these numbers - think about it )
-																$available_spaces += $quantity;
-																$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
-															}
+															$available_spaces = apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);
+															// first add our purchased tickets ($quantity) back into available spaces 
+															// ( becuase a sold out show incluldes these tickets here, so admin should be allowed to play with these numbers - think about it )
+															$available_spaces += $quantity;
+															$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
+															
 															// final check to make sure that attendee limit has to at LEAST be the number of tickets this attendee has already purchased
 															// otherwise the ticket quantity selector may display less than what this attendee has already purchased													
 															$attendee_limit = $attendee_limit < $quantity ? $quantity : $attendee_limit;
