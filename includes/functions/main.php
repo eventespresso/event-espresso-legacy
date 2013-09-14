@@ -712,6 +712,37 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 
 }
 
+add_filter('action_hook_espresso_get_num_attendees', 'espresso_get_num_attendees', 10, 1);
+function espresso_get_num_attendees($event_id){
+	$num_attendees = 0;
+	global $wpdb, $org_options;
+	$minutes_in_past = isset($org_options['ticket_reservation_time']) ? $org_options['ticket_reservation_time']: 30;
+	$current_users_session =  isset($_SESSION['espresso_session']['id']) && !empty($_SESSION['espresso_session']['id']) ? $_SESSION['espresso_session']['id'] : '';
+	//NOTE: we count incomplete and declined payments temporarily if they were initiated by someone else.
+	//if they're yours, then pretend they dont exist.
+	//$x_minutes_ago_timestmap = strtotime("- ".$minutes_in_past." minute",);
+	$x_minutes_ago = date("Y-m-d H:i:s",strtotime(current_time('mysql'))-($minutes_in_past*60));
+	$sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " 
+		WHERE 
+			event_id=%d AND 
+				(	payment_status='Completed' OR 
+					payment_status='Pending' OR
+					payment_status='Refund' OR
+					(
+						payment_status IN ('Payment Declined','Incomplete') AND 
+						date > %s AND
+						attendee_session != %s
+					)
+				)";
+	$query = $wpdb->prepare( $sql, $event_id, $x_minutes_ago, $current_users_session );
+	//echo "query:$query";
+	$wpdb->get_results( $query , ARRAY_A);
+	if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
+		$num_attendees = $wpdb->last_result[0]->quantity;
+	}
+	return $num_attendees;
+}
+
 function event_espresso_update_alert($url = '') {
 	return wp_remote_retrieve_body(wp_remote_get($url));
 }

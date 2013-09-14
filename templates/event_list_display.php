@@ -99,7 +99,8 @@ $this_event_id = $event_id;
 		<?php
 	}
 
-	$num_attendees = get_number_of_attendees_reg_limit($event_id, 'num_attendees'); //Get the number of attendees. Please visit http://eventespresso.com/forums/?p=247 for available parameters for the get_number_of_attendees_reg_limit() function.
+	$num_attendees = apply_filters('action_hook_espresso_get_num_attendees', $event_id); 
+	
 	if ($num_attendees >= $reg_limit) {
 		?>
 		<p id="available_spaces-<?php echo $event_id ?>" class="<?php espresso_template_css_class('available_spaces','available-spaces'); ?>"><span class="<?php espresso_template_css_class('section_title','section-title'); ?>"><?php _e('Available Spaces:', 'event_espresso') ?> </span><?php echo get_number_of_attendees_reg_limit($event_id, 'available_spaces', 'All Seats Reserved') ?></p>
