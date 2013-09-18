@@ -44,7 +44,7 @@ function espresso_process_mwarrior($payment_data) {
 				<p><strong>Error:</strong> (<?php echo $resp['responseCode']; ?> - <?php echo $resp['responseMessage']; ?>) - <?php echo urldecode($resp['authMessage']); ?></p>
 				<?php
 			}
-			$payment_data['payment_status'] = 'Declined';
+			$payment_data['payment_status'] = 'Payment Declined';
 		}
 
 		//Debugging option
