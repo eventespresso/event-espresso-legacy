@@ -59,14 +59,29 @@ function espresso_downgrade_error() {
 
 
 
+/**
+ * deactivate_event_espresso
+ *
+ * 	@return void
+ */
+function deactivate_event_espresso() {
+	$active_plugins = array_flip( get_option( 'active_plugins' ));
+	unset( $active_plugins[ EVENT_ESPRESSO_MAIN_FILE ] );
+	update_option( 'active_plugins', array_flip( $active_plugins ));	
+}
+
+
+
+
 function events_data_tables_install() {
 
     if ( ! current_user_can( 'activate_plugins' )) {
 		 return;
-	}
-       
-    $plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
+	}       
+    
+	$plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
     check_admin_referer( "activate-plugin_{$plugin}" );
+
 
 	function event_espresso_install_system_names() {
 		global $wpdb;
