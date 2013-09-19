@@ -41,6 +41,8 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	?>
 					case 'Payment Declined':
 						$payment_status_translated = __( 'Payment Declined', 'event_espresso' );
 						break;
+					default:
+						$payment_status_translated = __("Error", "event_espresso");
 				}
 			?>
 			<td><?php echo $payment_status_translated; ?></td>
