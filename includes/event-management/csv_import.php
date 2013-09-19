@@ -4,15 +4,15 @@ function csv_import() { ?>
 	<h3>Event Import</h3>
 	<ul>
 		<li>
-			<p>This page is for importing your events from a comma seperated file (CSV) directly into the the events database.  The limitation of this upload is that it does not support the extra questions, only the core event configuration. </p>
+			<p><?php _e('This page is for importing your events from a comma seperated file (CSV) directly into the the events database.  The limitation of this upload is that it does not support the extra questions, only the core event configuration.', 'event_espresso'); ?> </p>
 			<ul>
-				<li>Please use Y where you want to say Yes and N where you want No.</li>
-				<li>Dates should be formatted YYYY-MM-DD (2009-07-04).</li>
-				<li>I have included a template file <a href="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>events.csv">here</a> that I recommend you download and use.  It is very easy to work with it in excel, just remember to save it as a csv and not excel sheet.</li>
-				<li>The file name should be events.csv in order for it to work. I will fix this issue later, I just wanted to get this working first.</li>
+				<li><?php _e('Please use Y where you want to say Yes and N where you want No.', 'event_espresso'); ?></li>
+				<li><?php _e('Dates should be formatted YYYY-MM-DD (2009-07-04).', 'event_espresso'); ?></li>
+				<li><?php _e('We have included a template file <a href="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>events.csv">here</a> that I recommend you download and use.  It is very easy to work with it in excel, just remember to save it as a csv and not excel sheet.', 'event_espresso'); ?></li>
+				<li><?php _e('The file name should be events.csv in order for it to work. I will fix this issue later, I just wanted to get this working first.', 'event_espresso'); ?></li>
 			</ul>
-			<p>One final note, you will see that the header row, fist column has a 0 while other rows have a 1.  This tells the upload to ignore rows that have the 0 identifier and only use rows with the 1.</p>
-			<p>This is the first pass at the uploader, but for those of you who have alot of events, particularly events that are similar in setup, this will be a time saver.</p>
+			<p><?php _e('One final note, you will see that the header row, fist column has a 0 while other rows have a 1.  This tells the upload to ignore rows that have the 0 identifier and only use rows with the 1.', 'event_espresso'); ?></p>
+			<p><?php _e('This is the first pass at the uploader, but for those of you who have alot of events, particularly events that are similar in setup, this will be a time saver.', 'event_espresso'); ?></p>
 			<?php
 			espresso_uploader();
 			if( $_SERVER['REQUEST_METHOD'] == 'POST' ){
