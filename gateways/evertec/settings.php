@@ -16,10 +16,10 @@ function event_espresso_evertec_payment_settings() {
 	}
 	$evertec_settings = get_option('event_espresso_evertec_settings');
 	if (empty($evertec_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/evertec/btn_stdCheckout2.gif")) {
-			$evertec_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/evertec/btn_stdCheckout2.gif";
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/evertec/logo_evertec.png")) {
+			$evertec_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/evertec/logo_evertec.png";
 		} else {
-			$evertec_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/evertec/btn_stdCheckout2.gif";
+			$evertec_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/evertec/logo_evertec.png";
 		}
 		$evertec_settings['username'] = '';
 		$evertec_settings['password'] = '';

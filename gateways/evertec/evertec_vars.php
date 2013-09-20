@@ -6,7 +6,15 @@ function espresso_display_evertec($payment_data) {
 	
 	global $org_options;
 	$evertec_settings = get_option('event_espresso_evertec_settings');
+	echo 'echodump of $evertec_settings';
+	var_dump($evertec_settings);
+	if($evertec_settings['use_sandbox']){
+		$server_url = 'https://everpaycert.evertecinc.com/wscheckoutpayment/wsCheckoutPayment.asmx?op=MakePayment';
+	}else{
+		$server_url = 'https://mmpay.evertecinc.com/webservicev2/wscheckoutpayment.asmx';
+	}
 	
+			
 //	$xml_request = "
 //	<?xml version='1.0' encoding='utf-8'	
 //	";;
@@ -79,8 +87,7 @@ function espresso_display_evertec($payment_data) {
 //	var_dump($client->__getLastRequestHeaders());
 	
 			
-			
-			$response = wp_remote_post('https://everpaycert.evertecinc.com/wscheckoutpayment/wsCheckoutPayment.asmx?op=MakePayment',//https://mmpay.evertecinc.com/webservicev2/wscheckoutpayment.asmx', 
+			$response = wp_remote_post($server_url,
 				array(
 					'headers'=>array(
 						'Content-Type'=>'text/xml; charset=utf-8;',
@@ -100,7 +107,7 @@ function espresso_display_evertec($payment_data) {
 			$paymentResultElements = $xml->xpath('//def:MakePaymentResult');
 			if($paymentResultElements){
 				$paymentResult = $paymentResultElements[0];
-				if(strpos($paymentResult, 'http')){
+				if(strpos($paymentResult, 'http') !== FALSE){
 					//they sent back a URL. we can link the user ot taht
 					$redirect_url = $paymentResult;
 					$error_message = false;
