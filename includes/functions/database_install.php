@@ -66,7 +66,7 @@ function espresso_downgrade_error() {
  */
 function deactivate_event_espresso() {
 	$active_plugins = array_flip( get_option( 'active_plugins' ));
-	unset( $active_plugins[ EVENT_ESPRESSO_MAIN_FILE ] );
+	unset( $active_plugins[ EVENT_ESPRESSO_WPPLUGINPATH ] );
 	update_option( 'active_plugins', array_flip( $active_plugins ));	
 }
 
