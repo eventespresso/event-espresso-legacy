@@ -69,6 +69,10 @@ if (!function_exists('event_espresso_add_event_process')) {
 	function event_espresso_add_event_process($event_id, $event_name) {
 	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+		
+		if (event_espresso_get_status($event_id) != 'ACTIVE') {
+			return false;
+		}
 
 		$_SESSION['espresso_session']['events_in_session'][$event_id] = array(
 				'id' => $event_id,
