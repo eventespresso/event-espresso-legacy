@@ -343,6 +343,11 @@ if (!function_exists('event_espresso_get_is_active')) {
 			$sql .= "LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id = e.id ";
 			$sql .= "WHERE e.id = '" . $event_id . "' LIMIT 0,1";
 			$events = $wpdb->get_results($sql);
+			if (empty($events)) {
+				$event_status = array('status' => 'INVALID', 'display' => '<span style="color: #000; font-weight:bold;">' . __('INVALID', 'event_espresso') . '</span>', 'display_custom' => '<span class="espresso_deleted">' . __('Invalid', 'event_espresso') . '</span>');
+				//print_r( $event_status);
+				return $event_status;
+			}
 			$start_date = $wpdb->last_result[0]->start_date;
 			$is_active = $wpdb->last_result[0]->is_active;
 			$event_status = $wpdb->last_result[0]->event_status;
@@ -467,6 +472,7 @@ if (!function_exists('event_espresso_get_status')) {
 			case 'DELETED':
 			case 'REGISTRATION_CLOSED':
 			case 'DENIED':
+			case 'INVALID':
 				//case 'REGISTRATION_NOT_OPEN':
 				return 'NOT_ACTIVE';
 				break;

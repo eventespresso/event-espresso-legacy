@@ -69,6 +69,10 @@ if (!function_exists('event_espresso_add_event_process')) {
 	function event_espresso_add_event_process($event_id, $event_name) {
 	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+		
+		if (event_espresso_get_status($event_id) != 'ACTIVE') {
+			return false;
+		}
 
 		$_SESSION['espresso_session']['events_in_session'][$event_id] = array(
 				'id' => $event_id,
@@ -651,13 +655,19 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 			//will hold data to pass to the form builder function
 			$meta = array();
 			//echo "<pre>", print_r($_POST), "</pre>";
+			
+			$reg_page_url = add_query_arg('regevent_action', 'post_multi_attendee', get_permalink($org_options['event_page_id']));
+			
 			?>
 
 <div class = "event_espresso_form_wrapper">
-	<form id="event_espresso_checkout_form" method="post" action="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=post_multi_attendee">
+	<form id="event_espresso_checkout_form" method="post" action="<?php echo $reg_page_url ?>">
 		<?php
 					$err = '';
-					$edit_cart_link = '<a href="?page_id='.$org_options['event_page_id'].'&regevent_action=show_shopping_cart" rel="nofollow" class="btn_event_form_submit inline-link">'.__('Edit Cart', 'event_espresso').'</a>';
+					
+					$cart_page_url = add_query_arg('regevent_action', 'show_shopping_cart', get_permalink($org_options['event_page_id']));
+					
+					$edit_cart_link = '<a href="'.$cart_page_url.'" rel="nofollow" class="btn_event_form_submit inline-link">'.__('Edit Cart', 'event_espresso').'</a>';
 	
 					ob_start();
 					//will be used if sj is off or they somehow select more than allotted attendees
@@ -796,7 +806,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 		</div>
 		<?php } ?> 
 				<p id="event_espresso_edit_cart">
-					<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=show_shopping_cart" class="btn_event_form_submit inline-link">
+					<a href="<?php echo $cart_page_url ?>" class="btn_event_form_submit inline-link">
 						<?php _e('Edit Cart', 'event_espresso'); ?>
 					</a> 
 				</p>
@@ -1062,8 +1072,8 @@ if (!function_exists('event_espresso_cart_link')) {
 
 		// if event is already in session, return the view cart link  		array_key_exists($event_id, $events_in_session)
 		if ( $view_cart || is_array( $events_in_session ) && isset( $events_in_session[ $event_id ] )) {
-		
-			$registration_cart_url = get_option('siteurl') . '/?page_id=' . $event_page_id . '&regevent_action=show_shopping_cart';
+			$registration_cart_url = add_query_arg('regevent_action', 'show_shopping_cart', get_permalink($org_options['event_page_id']));
+			//$registration_cart_url = get_option('siteurl') . '/?page_id=' . $event_page_id . '&regevent_action=show_shopping_cart';
 			$anchor = __("View Cart", 'event_espresso');
 			
 		} else {
@@ -1089,9 +1099,8 @@ if (!function_exists('event_espresso_cart_link')) {
 							unset( $events_in_session[ $event->id ] );
 						}
 					}
-					$event_ids = array_flip( $event_ids );
 				}
-				
+				$event_ids = array_flip( $event_ids );
 			}
 			$event_id =implode( '-', $event_ids );
 			
@@ -1101,9 +1110,8 @@ if (!function_exists('event_espresso_cart_link')) {
 				$error .= "</p></div>";
 				return empty( $events_in_session ) ? $error : '';
 			}
-					
 			//show them the add to cart link
-			$registration_cart_url = isset($externalURL) && $externalURL != '' ? $externalURL : get_option('siteurl') . '/?page_id=' . $event_page_id . '&event_id=' . $event_id . '&name_of_event=' . stripslashes_deep($event_name);
+			$registration_cart_url = isset($externalURL) && $externalURL != '' ? $externalURL : add_query_arg('event_id', $event_id, get_permalink($org_options['event_page_id']));
 			$registration_cart_class = 'ee_add_item_to_cart';
 			
 		}

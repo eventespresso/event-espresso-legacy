@@ -34,10 +34,12 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			$sql .= " ORDER BY e.start_date ";
 
 			$result = $wpdb->get_results( $sql );
+			
+			$reg_page_url = add_query_arg('regevent_action', 'load_checkout_page', get_permalink($org_options['event_page_id']));
 
 ?>
 
-<form action='?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=load_checkout_page' method='post' id="event_espresso_shopping_cart">
+<form action="<?php echo $reg_page_url ?>" method='post' id="event_espresso_shopping_cart">
 
 <?php
 		$counter = 1; //Counter that will keep track of the first events
