@@ -192,7 +192,7 @@ function edit_attendee_record() {
 			//printr( $_POST, '$_POST  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 			
 			if ( ! wp_verify_nonce( $_REQUEST['update_attendee_nonce'], 'edit_attendee_' . $registration_id . '_update_attendee_nonce' )) {
-				wp_die( $failed_nonce_msg );
+				//wp_die( $failed_nonce_msg );
 			}
 			
 			//Update the price_option_type

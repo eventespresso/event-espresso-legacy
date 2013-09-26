@@ -96,7 +96,7 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 		$SQL .= 'SUM(a.quantity) quantity';
 	} else if ( ! $count && $attendees ) {
 		// get attendees
-		$SQL .= 'a.*, e.id event_id, e.event_name, a.checked_in';
+		$SQL .= 'a.*, e.id event_id, e.event_name';
 		$SQL .= $ticketing_installed ? ', ac.date_scanned, ac.checked_in ac_checked_in' : '';
 	} else if ( $count && ! $attendees ) {
 		// count events

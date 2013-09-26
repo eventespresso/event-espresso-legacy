@@ -1,7 +1,7 @@
 <?php
 
 function event_espresso_manage_templates() {
-	global $wpdb, $org_options;
+	global $wpdb, $org_options, $espresso_premium;
 	//print_r($org_options);
 	if (isset($_POST['update_org'])) {
 		$org_options['display_description_on_multi_reg_page'] = !empty($_POST['display_description_on_multi_reg_page']) ? $_POST['display_description_on_multi_reg_page'] : 'N';
@@ -116,7 +116,7 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 											<td><?php echo select_input('display_short_description_in_event_list', $values, isset($org_options['display_short_description_in_event_list']) ? $org_options['display_short_description_in_event_list'] : 'N'); ?><br />
 												<span class="description"><?php _e('Be sure to use the "More..." tag in your event description', 'event_espresso'); ?></span></td>
 										</tr>
-										<?php if (function_exists('event_espresso_multi_reg_init')) { ?>
+										<?php if (function_exists('event_espresso_multi_reg_init') && $espresso_premium == true) { ?>
 											<tr>
 												<th><label for="display_description_on_multi_reg_page">
 														<?php _e('Display event descriptions in the multiple event registration pages?', 'event_espresso'); ?>
@@ -137,6 +137,7 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 											<td><?php echo select_input('display_address_in_regform', $values, isset($org_options['display_address_in_regform']) ? $org_options['display_address_in_regform'] : 'Y'); ?><br />
 												<span class="description"><?php _e('Disable the address if you are using the venue manager shortcodes in your event description.', 'event_espresso'); ?></span></td>
 										</tr>
+										<?php if ($espresso_premium == true) { ?>
 										<tr>
 											<th><label for="use_custom_post_types">
 													<?php _e('Use the custom post types feature?', 'event_espresso'); ?>
@@ -157,6 +158,7 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 											<td><?php echo select_input('display_featured_image', $values, isset($org_options['display_featured_image']) ? $org_options['display_featured_image'] : 'N'); ?><br />
 												<span class="description"><?php _e('This setting offers an simple solution to display featured images in your event templates. Height and width attributes are set within the featured image upload tool. Some customization may be required to produce the desired results within your WordPress theme.', 'event_espresso'); ?></span></td>
 										</tr>
+										<?php } ?>
 									</tbody>
 								</table>
 
@@ -182,7 +184,7 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 						<div class="inside">
 							<div class="padding">
 								<?php
-								if (isset($org_options['enable_default_style'])) {
+								if (isset($org_options['enable_default_style']) && $espresso_premium == true) {
 									include('style_settings.php');
 								}
 								?>
@@ -233,6 +235,7 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 													<?php _e('Remove style sheet?', 'event_espresso'); ?></td>
 											</tr>
 										<?php } ?>
+										<?php if ($espresso_premium == true) { ?>
 										<tr>
 											<th> <label>
 													<?php _e('Add a custom style sheet?', 'event_espresso'); ?>
@@ -240,6 +243,7 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 											</th>
 											<td><input type="file" name="css" id="css" /></td>
 										</tr>
+										<?php } ?>
 									</tbody>
 								</table>
 								<p>
@@ -258,7 +262,7 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 				
 				<input type="hidden" name="update_org" value="update" />
 		</form>
-		
+		<?php if ($espresso_premium == true) { ?>
 		<h2>
 					<?php _e('Developers Only', 'event_espresso') ?>
 				</h2>
@@ -280,6 +284,7 @@ $org_options['display_featured_image'] = !empty($_POST['display_featured_image']
 					</div>
 					<!-- / .postbox --> 
 				</div>
+				<?php }?>
 				<!-- / .metabox-holder -->
 				<?php #### finish metaboxes #### ?>
 				
