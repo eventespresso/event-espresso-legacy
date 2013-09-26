@@ -712,6 +712,83 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 
 }
 
+//Gets the number of attendees for an event
+add_filter('filter_hook_espresso_get_num_attendees', 'espresso_get_num_attendees', 10, 1);
+function espresso_get_num_attendees($event_id){
+	$num_attendees = 0;
+	global $wpdb, $org_options;
+	$minutes_in_past = isset($org_options['ticket_reservation_time']) ? $org_options['ticket_reservation_time']: 30;
+	$current_users_session =  isset($_SESSION['espresso_session']['id']) && !empty($_SESSION['espresso_session']['id']) ? $_SESSION['espresso_session']['id'] : '';
+	//NOTE: we count incomplete and declined payments temporarily if they were initiated by someone else.
+	//if they're yours, then pretend they dont exist.
+	//$x_minutes_ago_timestmap = strtotime("- ".$minutes_in_past." minute",);
+	$x_minutes_ago = date("Y-m-d H:i:s",strtotime(current_time('mysql'))-($minutes_in_past*60));
+	$sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " 
+		WHERE 
+			event_id=%d AND 
+				(	payment_status='Completed' OR 
+					payment_status='Pending' OR
+					payment_status='Refund' OR
+					(
+						payment_status IN ('Payment Declined','Incomplete') AND 
+						date > %s AND
+						attendee_session != %s
+					)
+				)";
+	$query = $wpdb->prepare( $sql, $event_id, $x_minutes_ago, $current_users_session );
+	//echo "query:$query";
+	$wpdb->get_results( $query , ARRAY_A);
+	if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
+		$num_attendees = $wpdb->last_result[0]->quantity;
+	}
+	return $num_attendees;
+}
+
+//Gets the number of available spaces for an event
+add_filter('filter_hook_espresso_get_num_available_spaces', 'espresso_num_available_spaces', 10, 1);
+function espresso_num_available_spaces($event_id){
+	global $wpdb;
+	$number_available_spaces = 0;
+	$sql_reg_limit = "SELECT reg_limit FROM " . EVENTS_DETAIL_TABLE . " WHERE id=%d";
+	$reg_limit = $wpdb->get_var( $wpdb->prepare( $sql_reg_limit, $event_id ));
+	$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $event_id); 
+	if (empty($num_attendees))
+		$num_attendees = 0;
+	if ($reg_limit > $num_attendees) {
+		$number_available_spaces = $reg_limit - $num_attendees;
+	}
+	
+	return $number_available_spaces;
+}
+
+//Gets the number of available spaces for an event. If there are over 99,999 available spaces, then it displays the text Unlimited".
+add_filter('filter_hook_espresso_available_spaces_text', 'espresso_available_spaces_text', 10, 1);
+function espresso_available_spaces_text($event_id){
+	global $wpdb;
+	$number_available_spaces = 0;
+	$sql_reg_limit = "SELECT reg_limit FROM " . EVENTS_DETAIL_TABLE . " WHERE id=%d";
+	$reg_limit = $wpdb->get_var( $wpdb->prepare( $sql_reg_limit, $event_id ));
+	$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $event_id); 
+	if (empty($num_attendees))
+		$num_attendees = 0;
+	if ($reg_limit > $num_attendees) {
+		$number_available_spaces = $reg_limit - $num_attendees;
+	}
+	if ($reg_limit >= 99999) {
+		$number_available_spaces = "Unlimited";
+	}
+	return $number_available_spaces;
+}
+
+//Gets the registration limit for an event
+add_filter('filter_hook_espresso_get_reg_limit', 'espresso_get_reg_limit', 10, 1);
+function espresso_get_reg_limit($event_id){
+	global $wpdb;
+	$sql_reg_limit = "SELECT reg_limit FROM " . EVENTS_DETAIL_TABLE . " WHERE id=%d";
+	$reg_limit = $wpdb->get_var( $wpdb->prepare( $sql_reg_limit, $event_id ));
+	return $reg_limit;
+}
+
 function event_espresso_update_alert($url = '') {
 	return wp_remote_retrieve_body(wp_remote_get($url));
 }

@@ -177,9 +177,9 @@ if (!function_exists('register_attendees')) {
                 $additional_limit = '5';
             }
 
-            $num_attendees				= get_number_of_attendees_reg_limit($event_id, 'num_attendees'); //Get the number of attendees
-            $available_spaces			= get_number_of_attendees_reg_limit($event_id, 'available_spaces'); //Gets a count of the available spaces
-            $number_available_spaces	= get_number_of_attendees_reg_limit($event_id, 'number_available_spaces'); //Gets the number of available spaces
+			$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $event_id);//Get the number of attendees
+			$available_spaces = apply_filters('filter_hook_espresso_available_spaces_text', $event_id);//Gets a count of the available spaces
+			$number_available_spaces = apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);//Gets the number of available spaces
             //echo $number_available_spaces;
 
 
@@ -243,7 +243,7 @@ if (!function_exists('register_attendees')) {
                         <p class="<?php espresso_template_css_class('num_attendees','num_attendees'); ?>"><?php _e('Current Number of Attendees:', 'event_espresso'); ?> <?php echo $num_attendees ?></p>
                     </div>
                 <?php
-                $num_attendees = get_number_of_attendees_reg_limit($event_id, 'num_attendees'); //Get the number of attendees. Please visit http://eventespresso.com/forums/?p=247 for available parameters for the get_number_of_attendees_reg_limit() function.
+              	$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $event_id);
                 if (($num_attendees >= $reg_limit) && ($allow_overflow == 'Y' && $overflow_event_id != 0)) {
                     ?>
                         <p id="register_link-<?php echo $overflow_event_id ?>" class="<?php espresso_template_css_class('register_link_footer','register-link-footer'); ?>"><a class="<?php espresso_template_css_class('a_register_link','a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all'); ?>" id="a_register_link-<?php echo $overflow_event_id ?>" href="<?php echo espresso_reg_url($overflow_event_id); ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Join Waiting List', 'event_espresso'); ?></a></p>

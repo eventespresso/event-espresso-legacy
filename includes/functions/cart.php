@@ -699,12 +699,11 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 							//function properly, allowing for registering more than allowed limit.
 							//The info from the following 5 lines will determine
 							//if they have surpassed the limit.
-							$available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');
+							$available_spaces =  apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);
 	
 							$attendee_limit = $r->additional_limit + 1;
 	
-							if ($available_spaces != 'Unlimited')
-								$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
+							$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
 	
 							$total_attendees_per_event = 0;
 	
@@ -1164,7 +1163,7 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 			
 <table class="price_list">
 	<?php
-			$available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');
+			$available_spaces = apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);
 			foreach ($results as $result) {
 
 				//Setting this field for use on the registration form
@@ -1200,9 +1199,7 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 				
 				if ($result->allow_multiple == 'Y') {			
 					$attendee_limit = $result->additional_limit;
-					if ($available_spaces != 'Unlimited') {
-						$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
-					}
+					$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
 				}
 					
 				event_espresso_multi_qty_dd( $event_id, $result->id,  $attendee_limit, $att_qty );

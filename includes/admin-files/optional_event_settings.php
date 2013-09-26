@@ -60,7 +60,7 @@ $values=array(
             </label>
             <?php	echo select_input('espresso_dashboard_widget', $values, isset($org_options['espresso_dashboard_widget']) ? $org_options['espresso_dashboard_widget'] : '');?>
             <?php _e('Show the next', 'event_espresso'); ?>
-            <input name="events_in_dasboard" size="5" style="width:50px;" type="text" value="<?php echo isset($org_options['events_in_dasboard']) || $org_options['events_in_dasboard'] == ''? '30':stripslashes_deep($org_options['events_in_dasboard']);?>" />
+            <input name="events_in_dasboard" size="5" style="width:50px;" type="text" value="<?php echo !isset($org_options['events_in_dasboard']) || $org_options['events_in_dasboard'] == ''? '30':stripslashes_deep($org_options['events_in_dasboard']);?>" />
             <?php _e('days of events in the dashboard.', 'event_espresso'); ?>
           </li>
           <li>

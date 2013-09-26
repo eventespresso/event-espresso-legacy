@@ -11,7 +11,7 @@ if ( ! function_exists('espresso_verify_sufficient_remaining_tickets' )){
 	function espresso_verify_sufficient_remaining_tickets($event_id,$data_source){
 		//query for availables spaces, counting INCOMPLETE tickets being purchased by OTHERS within the last X
 		//minutes as being 'reserved'
-		$available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');
+		$available_spaces =  apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);
 		$tickets_requested = espresso_count_tickets_requested($data_source);
 		if( $available_spaces >= $tickets_requested){
 			return true;
