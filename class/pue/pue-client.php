@@ -76,7 +76,7 @@ class PluginUpdateEngineChecker {
 		$this->metadataUrl = $metadataUrl;
 		if ( is_array($slug ) ) {
 			$premium = array_values($slug['premium']);
-			$slug = $premium[1];
+			$slug = $premium[0];
 		}
 		$this->slug = $slug;
 		$tr_slug = str_replace('-','_',$this->slug);
