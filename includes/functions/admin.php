@@ -1744,9 +1744,9 @@ function ee_core_load_pue_update() {
 			$api_key = isset($org_options['site_license_key']) ? $org_options['site_license_key'] : '';
 			$host_server_url = 'http://eventespresso.com'; //this needs to be the host server where plugin update engine is installed.
 			$plugin_slug = array(
-				'free' => array('L', 'event-espresso-free'),
-				'premium' => array('P', 'event-espresso'),
-				'prerelease' => array('B', 'event-espresso-pr'),
+				'free' => array('L' => 'event-espresso-free'),
+				'premium' => array('P' => 'event-espresso'),
+				'prerelease' => array('B' => 'event-espresso-pr'),
 				); 
 			$options = array(
 			//	'optionName' => '', //(optional) - used as the reference for saving update information in the clients options table.  Will be automatically set if left blank.
