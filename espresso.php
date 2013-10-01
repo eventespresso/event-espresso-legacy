@@ -669,6 +669,7 @@ if (is_admin()) {
 
 //Load the required Javascripts
 add_action('wp_enqueue_scripts', 'espresso_load_javascript_files');
+add_action('wp_enqueue_scripts', 'espresso_register_validation_for_shortcodes');
 add_action('wp_enqueue_scripts', 'espresso_load_jquery', 10);
 add_action('admin_enqueue_scripts', 'espresso_load_EEGlobals_jquery', 10);
 add_action('wp_enqueue_scripts', 'espresso_load_pagination_scripts');
@@ -689,6 +690,19 @@ if (!function_exists('espresso_load_javascript_files')) {
 
 		wp_register_script('validation', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/validation.js"), array('jquery.validate.js'), EVENT_ESPRESSO_VERSION, TRUE);
 		wp_enqueue_script('validation');
+                
+	}
+}
+
+if (!function_exists('espresso_register_validation_for_shortcodes')) {
+	function espresso_register_validation_for_shortcodes() {
+
+		// registers the jQuery validation scripts for use with the [ESPRESSO_REG_PAGE], [ESPRESSO_REG_FORM], and [SINGLEEVENT] shortcodes
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+
+		wp_register_script('jquery.validate.js', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/jquery.validate.min.js"), array('jquery'), '1.8.1', TRUE);
+
+		wp_register_script('validation', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/validation.js"), array('jquery.validate.js'), EVENT_ESPRESSO_VERSION, TRUE);	
                 
 	}
 }
