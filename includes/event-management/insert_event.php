@@ -81,7 +81,7 @@ function add_event_to_db($recurrence_arr = array()) {
 		$event_code			= uniqid($current_user->ID . '-');
 		$event_name			= !empty($_REQUEST['event']) ? sanitize_text_field($_REQUEST['event']) : $event_code;
 		if (!isset($_REQUEST['event_identifier']) || $_REQUEST['event_identifier'] == ''){
-			$event_identifier = sanitize_title_with_dashes($event_name . '-' . $event_code);
+			$event_identifier = sanitize_title_with_dashes(remove_accents($event_name . '-' . $event_code));
 		}else{
 			$event_identifier = sanitize_title_with_dashes($_REQUEST['event_identifier']) . $event_code;
 		}
