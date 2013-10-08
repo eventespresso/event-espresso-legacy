@@ -63,7 +63,7 @@ function event_espresso_time_editor($event_id = 0) {
 			</label>
 			<input size="10"  type="text" id="add-end-time" name="end_time[]" />
 		</p>
-		<?php echo (isset($org_options['time_reg_limit']) && $org_options['time_reg_limit'] == 'Y' ? '<p><label>'.__('Qty', 'event_espresso') . '</label> <input size="3"  type="text" name="time_qty[]" /></p>' : '') ?> </li>
+		<?php echo (isset($org_options['time_reg_limit']) && $org_options['time_reg_limit'] == 'Y' ? '<p><label>'.__('Qty', 'event_espresso') . '</label> <input size="3"  type="text" name="time_qty[]" /></p><p><em class="important">Event time slot quantities should only be set for events where group registrations are disabled.</em></p>' : '') ?> </li>
 	<?php
         }
         ?>
