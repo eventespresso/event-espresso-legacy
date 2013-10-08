@@ -66,7 +66,10 @@ $values=array(
           <li>
             <label for="time_reg_limit">
               <?php _e('Use registration limits on time slots?<br />
-							<em class="important">(This function is experimental and may not function as expected.<br> It should not be used for events where group registrations are enabled.</em><br> You should adjust your attendee limit accordingly.)','event_espresso'); ?>
+							<em class="important">(This function is experimental and may not function as expected. You should adjust your attendee limit accordingly.)</em>','event_espresso'); ?>
+              <br><em class="important">
+                <?php _e('It should not be used for events where group registrations are enabled.', 'event_espresso'); ?>
+              </em>
             </label>
             <?php	echo select_input('time_reg_limit', $values, isset($org_options['time_reg_limit']) ? $org_options['time_reg_limit'] : '');?>
           </li>
