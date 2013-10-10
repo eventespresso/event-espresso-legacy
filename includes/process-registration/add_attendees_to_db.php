@@ -912,7 +912,7 @@ function espresso_verify_recaptcha( $skip_check = FALSE ) {
 		
 		// check $remote_addr
 		if ( ! $remote_addr ) {
-			echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, an error occured and the anti-spam settings could not be verified. Please contact the site admin or click your browser\'s back button and try again.', 'event_espresso') . '</strong></p></div>';
+			echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, an error occurred and the anti-spam settings could not be verified. Please contact the site admin or click your browser\'s back button and try again.', 'event_espresso') . '</strong></p></div>';
 			return FALSE;			
 		}
 		
