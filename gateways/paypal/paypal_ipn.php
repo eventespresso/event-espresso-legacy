@@ -18,8 +18,8 @@ function espresso_process_paypal($payment_data) {
 	echo '<!--Event Espresso PayPal Gateway Version ' . $myPaypal->gateway_version . '-->';
 	$myPaypal->ipnLog = TRUE;
 	$paypal_settings = get_option('event_espresso_paypal_settings');
-	if (!empty($event_meta['paypal_sandbox'])) {
-		$use_sandbox = $event_meta['paypal_sandbox'];
+	if (!empty($payment_data['event_meta']['paypal_sandbox'])) {
+	  $use_sandbox = $payment_data['event_meta']['paypal_sandbox'];
 	} else {
 		$use_sandbox = $paypal_settings['use_sandbox'];
 	}
