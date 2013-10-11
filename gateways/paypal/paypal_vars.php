@@ -19,7 +19,11 @@ function espresso_display_paypal($payment_data) {
 
 	$paypal_cur = empty($paypal_settings['currency_format']) ? '' : $paypal_settings['currency_format'];
 	$no_shipping = isset($paypal_settings['no_shipping']) ? $paypal_settings['no_shipping'] : '0';
-	$use_sandbox = $paypal_settings['use_sandbox'];
+	if (!empty($event_meta['paypal_sandbox'])) {
+		$use_sandbox = $event_meta['paypal_sandbox'];
+	} else {
+		$use_sandbox = $paypal_settings['use_sandbox'];
+	}
 	if ($use_sandbox) {
 		$myPaypal->enableTestMode();
 	}
