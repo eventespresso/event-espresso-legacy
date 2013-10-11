@@ -113,6 +113,7 @@ $purchaseOrderNum = $payment_data['registration_id'];
 			if($transaction_result->approved == 'Yes'){
 				//oh wonderful payment was approved
 				$payment_data['payment_status'] = 'Completed';
+				$payment_data['txn_id'] = $transaction_result->txnID;
 			}else{
 				$payment_data['paymnet_status'] = 'Payment Declined';
 				echo '<p><strong class="credit_card_failure">'.__('Attention: Your transaction was declined for the following reason:','event_espresso').'</strong><br />';
