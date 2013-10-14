@@ -943,7 +943,7 @@ if (!function_exists('espresso_event_category_data')) {
 		$wpdb->get_results( $wpdb->prepare( $sql, $event_id ));
 		$num_rows = $wpdb->num_rows;
 
-		if ($num_rows > 0 && $all_cats = FALSE) {
+		if ($num_rows > 0 && $all_cats == FALSE) {
 			$category_data = array('category_identifier' => $wpdb->last_result[0]->category_identifier, 'category_name' => $wpdb->last_result[0]->category_name, 'category_desc' => $wpdb->last_result[0]->category_desc, 'display_desc' => $wpdb->last_result[0]->display_desc, 'category_meta' => $wpdb->last_result[0]->category_meta);
 			return $category_data;
 		} elseif ($num_rows > 0) {

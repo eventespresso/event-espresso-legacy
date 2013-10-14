@@ -303,7 +303,7 @@ if (!function_exists('espresso_category_name_sc')) {
 		global $wpdb, $org_options;
 		extract(shortcode_atts(array('event_id' => '0'), $atts));
 		$event_id = "{$event_id}";
-		$category_name = espresso_event_category_data($event_id);
+		$category_name = espresso_event_category_data($event_id, TRUE);
 		return $category_name['category_name'];
 	}
 
