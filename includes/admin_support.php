@@ -688,7 +688,7 @@ function event_espresso_support() {
 										<p class="support-prices"><span class="price">Price: $150.00 </span></p>
 									</div>
 									<h5>
-	<?php _e('Installation &amp; Consulting', 'event_espreso'); ?>
+	<?php _e('Installation &amp; Consulting', 'event_espresso'); ?>
 									</h5>
 									<div class="install-options">
 										<h6><a href="http://eventespresso.com/product/basic-install/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Basic+Install<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">Basic Install</a></h6>

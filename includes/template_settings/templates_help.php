@@ -34,7 +34,7 @@
         	<p><?php _e('These two drop down options provide a choice of stylesheets with various stylings.', 'event_espresso'); ?></p>
     			<p><?php _e('These options are available as long as you have not copied the main stylesheet <i>event_espresso_style.css</i> to the uploads folder to customize yourself.', 'event_espresso'); ?></p>
     			<p><?php _e('By default the general espresso stylesheet will be loaded if you have selected <i>Yes</i> in the <i>Enable built in style sheets</i> option, You may then choose to select from one of the alternative base stylesheets along with an optional sheet to select a color scheme.', 'event_espresso'); ?></p>
-						<p><?php _e('These selections replace the default espresso stylesheet and offer enhanced styling for your event pages details.', 'events_espreso') ?></p>
+						<p><?php _e('These selections replace the default espresso stylesheet and offer enhanced styling for your event pages details.', 'event_espresso') ?></p>
 
 					</div>
     </div>

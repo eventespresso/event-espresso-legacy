@@ -46,9 +46,9 @@ if (!function_exists('event_espresso_show_attendess')) {
 		foreach ($events as $event){
 			$event_id = $event->id;
 			$event_name = stripslashes_deep($event->event_name);
-			if (!$this_is_a_reg_page){
+			/*if (!$this_is_a_reg_page){
 				$event_desc = do_shortcode(stripslashes_deep($event->event_desc));
-			}
+			}*/
 
 			//This variable is only available using the espresso_event_status function which is loacted in the Custom Files Addon (http://eventespresso.com/download/plugins-and-addons/custom-files-addon/)
 			$event_status = function_exists('espresso_event_status') ? ' - ' . espresso_event_status($event_id) : '';
