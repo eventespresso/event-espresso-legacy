@@ -249,9 +249,9 @@ if ( $reg_form_only == false ){
 							require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/recaptchalib.php');
 						}
 						# the response from reCAPTCHA
-						$resp = null;
+						$resp = NULL;
 						# the error code from reCAPTCHA, if any
-						$error = null;
+						$error = NULL;
 	?>
 				<p class="<?php espresso_template_css_class('event_form_field','event_form_field'); ?>" id="captcha-<?php echo $event_id; ?>">
 					<?php _e('Anti-Spam Measure: Please enter the following phrase', 'event_espresso'); ?>

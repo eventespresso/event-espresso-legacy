@@ -139,7 +139,7 @@ if (!function_exists('multi_register_attendees')) {
 			$add_attendee_question_groups = $event_meta['add_attendee_question_groups'];
 
 
-			if ($org_options['use_captcha'] == 'Y' && isset( $_REQUEST['edit_details'] ) && $_REQUEST['edit_details'] != 'true') {
+			if ( $org_options['use_captcha'] == 'Y' && isset($_REQUEST['edit_details']) && ! is_user_logged_in() && !empty($org_options['recaptcha_publickey']) && !empty($org_options['recaptcha_privatekey'])) {
 				?>
 				<script type="text/javascript">
 					var RecaptchaOptions = {
