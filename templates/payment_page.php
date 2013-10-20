@@ -8,7 +8,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 		<?php _e('Payment Overview', 'event_espresso'); ?>
   </h3>
 	<div class="<?php espresso_template_css_class('event_data_display','event-data-display ui-widget-content ui-corner-bottom'); ?>" >
-	<?php do_action('action_hook_espresso_payment_page_top', $event_id, $event_meta, $all_meta);?>
+	<?php do_action('action_hook_espresso_payment_page_top', $event_id, isset($event_meta) ? $event_meta : '', isset($all_meta) ? $all_meta : '');?>
 
 <?php
 	if ( $total_cost == 0 ) {
@@ -57,6 +57,6 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 <?php
 }
 ?>
-<?php do_action('action_hook_espresso_payment_page_bottom', $event_id, $event_meta, $all_meta);?>
+<?php do_action('action_hook_espresso_payment_page_bottom', $event_id, isset($event_meta) ? $event_meta : '', isset($all_meta) ? $all_meta : '');?>
 	</div><!-- / .event-data-display -->
 </div><!-- / .event-display-boxes -->
