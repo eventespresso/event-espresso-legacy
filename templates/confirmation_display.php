@@ -150,17 +150,15 @@ $attendee_num = apply_filters('action_hook_espresso_confirmation_page_primary_at
 						</tr>
 					<?php } ?>
 					</table>
-					<p class="<?php espresso_template_css_class('confirm_registration','espresso_confirm_registration'); ?>">
-						<input class="<?php espresso_template_css_class('btn_event_form_submit','btn_event_form_submit ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all'); ?> " type="submit" name="confirm2" id="confirm2" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
-					</p>             
+					      
 				</div>
 				<!-- / .event-data-display -->   
 			</div>
 			<!-- / .event-display-boxes -->   
 			
-			<p class="espresso_confirm_registration">
-				<input class="btn_event_form_submit ui-priority-primary ui-widget-content ui-corner-all" type="submit" name="confirm2" id="confirm2" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
-			</p>
+			<p class="<?php espresso_template_css_class('confirm_registration','espresso_confirm_registration'); ?>">
+				<input class="<?php espresso_template_css_class('btn_event_form_submit','btn_event_form_submit ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all'); ?> " type="submit" name="confirm2" id="confirm2" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
+			</p>       
 			
 		<?php	} ?>
 								
