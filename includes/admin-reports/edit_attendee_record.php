@@ -557,7 +557,7 @@ function edit_attendee_record() {
 									<?php 
 									
 									echo $price_type_select;
-									$price_type_select_notice = '<br /><span class="red_text">'.__('Please Note: Changing the price type will not affect "Attendee Ticket Fees" on the right side of this page. Price changes will need to be udpated manually.', 'event_espresso').'</span>';
+									$price_type_select_notice = '<div style="width:80%;" class="red_text">'.__('Please Note: Changing the price type will not affect "Attendee Ticket Fees" on the right side of this page. Price changes will need to be udpated manually.', 'event_espresso').'</div>';
 									
 									?>
 									
