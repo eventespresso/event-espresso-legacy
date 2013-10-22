@@ -238,7 +238,9 @@ function edit_attendee_record() {
 				$price_options = espresso_selected_price_option($selected_price_option);
 				$price_type = $price_options['price_type'];
 				$price_id = $price_options['price_id'];
-				$event_cost = number_format(event_espresso_get_orig_price( $price_id ), 2, '.', '' );
+				$which_price = $_POST['price_option_type'] == 'MEMBER' ? "member_price" : "event_cost";
+				$results = $wpdb->get_row( $wpdb->prepare("SELECT " . $which_price . " as cost, surcharge, surcharge_type FROM " . EVENTS_PRICES_TABLE . " WHERE id='%d' ORDER BY id ASC", $price_id), ARRAY_A );
+				$event_cost = number_format($results['cost']+event_espresso_calculate_surcharge($results['cost'], $results['surcharge'], $results['surcharge_type']), 2, '.', '' );
 			
 			}else{
 				//If not using the price selection
@@ -826,12 +828,16 @@ function edit_attendee_record() {
 					
 					if(selectValue == 'DEFAULT'){
 						jQuery('#members_price_selection').hide();
+						var standard_SelectValue = jQuery('select#price_option-<?php echo $event_id ?> option:selected').val();
+						jQuery('#new_price_option-<?php echo $event_id ?>').val(standard_SelectValue);
 						jQuery('select#price_option-<?php echo $event_id ?>').bind('change', function() {
 							var new_standard_SelectValue = jQuery('select#price_option-<?php echo $event_id ?> option:selected').val();
 							jQuery('#new_price_option-<?php echo $event_id ?>').val(new_standard_SelectValue);
 						});	
 					}else{
 						jQuery('#standard_price_selection').hide();
+						var member_SelectValue = jQuery('select#members_price_option-<?php echo $event_id ?> option:selected').val();
+						jQuery('#new_price_option-<?php echo $event_id ?>').val(member_SelectValue);
 						jQuery('select#members_price_option-<?php echo $event_id ?>').bind('change', function() {
 						var new_member_SelectValue = jQuery('select#members_price_option-<?php echo $event_id ?> option:selected').val();
 							jQuery('#new_price_option-<?php echo $event_id ?>').val(new_member_SelectValue);
