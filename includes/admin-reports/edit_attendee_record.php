@@ -245,17 +245,17 @@ function edit_attendee_record() {
 				$wpdb->get_results("SELECT price_type, event_cost FROM " . EVENTS_PRICES_TABLE . " WHERE id ='" . absint( $_POST['price_id'] ) . "'");
 				$num_rows = $wpdb->num_rows;
 				if ($num_rows > 0) {
-					$event_cost = $wpdb->last_result[0]->event_cost;
+					//$event_cost = $wpdb->last_result[0]->event_cost;
 					$price_type = $wpdb->last_result[0]->price_type;
 				}
 			}
 			
-			//Don't updat the price if the attendee is moved
+			//Don't update the price if the attendee is moved
 			if ( !isset($_POST['move_attendee']) ){
 				$cols_and_values['price_option'] = $price_type;
-				$cols_and_values['final_price'] = $event_cost;
-				$cols_and_values['orig_price'] = $event_cost;
-				array_push( $cols_and_values_format, '%s', '%f', '%f' );
+				//$cols_and_values['final_price'] = $event_cost;
+				//$cols_and_values['orig_price'] = $event_cost;
+				array_push( $cols_and_values_format, '%s' );
 			}
 			
 			//echo "<pre>".print_r($cols_and_values,true)."</pre>";
@@ -552,13 +552,20 @@ function edit_attendee_record() {
 							<fieldset>
 								<ul>
 									
-									<?php echo $price_type_select;?>
+									<?php 
+									
+									echo $price_type_select;
+									$price_type_select_notice = '<br /><span class="red_text">'.__('Please Note: Changing the price type will not affect "Attendee Ticket Fees" on the right side of this page. Price changes will need to be udpated manually.', 'event_espresso').'</span>';
+									
+									?>
 									
 									<li id="standard_price_selection">
-										<?php do_action( 'action_hook_espresso_attendee_admin_price_dropdown', $event_id, array('show_label'=>TRUE, 'label'=>'Price Option', 'current_value'=>$price_option) );?> 
+										<?php do_action( 'action_hook_espresso_attendee_admin_price_dropdown', $event_id, array('show_label'=>TRUE, 'label'=>'Price Option', 'current_value'=>$price_option) );?>
+										<?php echo $price_type_select_notice; ?>
 									</li>
 									<li id="members_price_selection">
-										<?php do_action( 'action_hook_espresso_attendee_admin_price_dropdown_member', $event_id, array('show_label'=>TRUE, 'label'=>'Member Price Option', 'current_value'=>$price_option) );?> 
+										<?php do_action( 'action_hook_espresso_attendee_admin_price_dropdown_member', $event_id, array('show_label'=>TRUE, 'label'=>'Member Price Option', 'current_value'=>$price_option) );?>
+										<?php echo $price_type_select_notice; ?>
 									</li>
 									
 									<li>
