@@ -1068,7 +1068,6 @@ if (!function_exists('event_espresso_cart_link')) {
 		
 
 		$registration_cart_class = '';
-		ob_start();
 
 		// if event is already in session, return the view cart link  		array_key_exists($event_id, $events_in_session)
 		if ( $view_cart || is_array( $events_in_session ) && isset( $events_in_session[ $event_id ] )) {
@@ -1115,7 +1114,9 @@ if (!function_exists('event_espresso_cart_link')) {
 			$registration_cart_class = 'ee_add_item_to_cart';
 			
 		}
-
+                
+		ob_start();
+                
 		if ($view_cart && $direct_to_cart == 1) {
 			echo "<span id='moving_to_cart'>{$moving_to_cart}</span>";
 			echo "<script language='javascript'>window.location='" . $registration_cart_url . "';</script>";
