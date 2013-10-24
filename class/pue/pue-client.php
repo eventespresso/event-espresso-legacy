@@ -737,7 +737,7 @@ class PluginUpdateEngineChecker {
 				$msg = str_replace('%version%', $this->json_error->version, $msg);
 				$msg = sprintf( __('It appears you\'ve tried entering an api key to upgrade to the premium version of %s, however, the key does not appear to be valid.  This is the message received back from the server:', $this->lang_domain ), $this->pluginName ) . '</p><p>' . $msg;
 		} else {
-			$msg = sprintf( __('Congratulations!  You have entered in a valid api key for the premium version of %s.  You can click the button below to upgrade to this version immediately.', $this->_lang_domain), $this->pluginName );
+			$msg = sprintf( __('Congratulations!  You have entered in a valid api key for the premium version of %s.  You can click the button below to upgrade to this version immediately.', $this->lang_domain), $this->pluginName );
 		}
 
 		//todo add in upgrade button in here.
