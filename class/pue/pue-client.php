@@ -221,37 +221,40 @@ class PluginUpdateEngineChecker {
 
 	private function _display_errors( $type ) {
 		$msg = '';
+		if ( defined('WP_DEBUG') && WP_DEBUG ) {
+			switch ( $type ) {
+				case 'options' :
+					$msg .= sprintf( __('Plugin Update Engine is unable to setup correctly for the plugin with the slug "%s" because there are the following keys missing from the options array sent to the PluginUpdateEngineChecker class when it is instantiated:', $this->lang_domain), $this->_incoming_slug ) . '</p><p>';
+					$msg .= '<ul>';
+					foreach ( $this->_pue_errors as $error ) {
+						$msg .= '<li>' . $error . '</li>';
+					}
+					$msg .= '</ul>';
+					break;
 
-		switch ( $type ) {
-			case 'options' :
-				$msg .= __('Plugin Update Engine is unable to setup correctly because there are the following keys missing from the options array sent to the PluginUpdateEngineChecker class when it is instantiated:', $this->lang_domain) . '</p><p>';
-				$msg .= '<ul>';
-				foreach ( $this->_pue_errors as $error ) {
-					$msg .= '<li>' . $error . '</li>';
-				}
-				$msg .= '</ul>';
-				break;
+				case 'slug_array_invalid' :
+					$msg .= __('An array was sent to the PluginUpdateEngineChecker class as the value for the $plugin_slug property, however the array is missing the "premium" index.', $this->lang_domain);
+					break;
 
-			case 'slug_array_invalid' :
-				$msg .= __('An array was sent to the PluginUpdateEngineChecker class as the value for the $plugin_slug property, however the array is missing either the "premium" index.', $this->lang_domain);
-				break;
+				case 'slug_string_invalid' :
+					$msg .= __('A string was sent to the PluginUpdateEngineChecker class as the value for the $plugin_slug property, however the string is empty', $this->lang_domain);
+					break;
 
-			case 'slug_string_invalid' :
-				$msg .= __('A string was sent to the PluginUpdateEngineChecker class as the value for the $plugin_slug property, however the string is empty', $this->lang_domain);
-				break;
+				case 'no_version_present' :
+					$msg .= __('For some reason PUE is unable to determine the current version of the plugin. It is possible that the incorrect value was sent for the "plugin_basename" key in the <strong>$options</strong> array.', $this->lang_domain);
+					break;
 
-			case 'no_version_present' :
-				$msg .= __('For some reason PUE is unable to determine the current version of the plugin. It is possible that the incorrect value was sent for the "plugin_basename" key in the <strong>$options</strong> array.', $this->lang_domain);
-				break;
-
-			case 'slug_not_array' :
-				//Old method for plugin name is just to use the slug and manipulate
-				$pluginame = ucwords(str_replace('-', ' ', $this->_incoming_slug) );
-				$msg .= sprintf( __('The following plugin needs to be updated in order to work with this version of our plugin update script: <strong>%s</strong</p><p>You will have to update this manually.  Contact support for further intstructions', $this->lang_domain), $pluginname);
-				break;
+				case 'slug_not_array' :
+					//Old method for plugin name is just to use the slug and manipulate
+					$pluginame = ucwords(str_replace('-', ' ', $this->_incoming_slug) );
+					$msg .= sprintf( __('The following plugin needs to be updated in order to work with this version of our plugin update script: <strong>%s</strong</p><p>You will have to update this manually.  Contact support for further intstructions', $this->lang_domain), $pluginname);
+					break;
+			}
+		} else {
+			$msg .= sprintf( __('Unable to setup automatic updates for the plugin with the slug "%s" because it\'s running an old version of the code used for updates.  To get the new code please update this plugin manually.', $this->lang_domain), $this->_incoming_slug ) . '</p><p>';
 		}
 
-		$this->_error_msg = '<p>' . $msg . '</p>';
+		$this->_error_msg = apply_filters('PUE__display_errors', '<p>' . $msg . '</p>', $type, $this->_pue_errors, $this->_incoming_slug);
 		add_action( 'admin_notices', array( $this, 'show_pue_client_errors'), 10 );
 	}
 
@@ -752,7 +755,7 @@ class PluginUpdateEngineChecker {
 		$button = '<a href="' . $button_link . '" class="button-secondary pue-upgrade-now-button" value="no">' . __('Upgrade Now', $this->lang_domain) . '</a>';
 
 		$content = '<div class="updated" style="padding:15px; position:relative;" id="pue_update_now_container"><p>' . $msg . '</p>';
-		$content .= empty($this->json_error) ? $button : '';
+		$content .= $button;
 		$content .= '</div>';
 
 		echo $content;
