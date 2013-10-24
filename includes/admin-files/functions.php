@@ -51,7 +51,6 @@ if ( !function_exists( 'espresso_venue_dd' ) ){
 			if(	$espresso_manager['event_manager_venue'] == "Y" ){
 				//show only venues inside their assigned locales.
 				$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-				$group = unserialize($group);
 				$sql .= " $WHERE lr.locale_id IN (" . implode(",", $group) . ")";
 				$sql .= " OR ev.wp_user = ".$current_user->ID ;
 				$WHERE = " AND ";
