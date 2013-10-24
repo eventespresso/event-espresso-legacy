@@ -24,7 +24,6 @@ if ( !function_exists( 'espresso_user_has_venue_permission' ) ) {
                      ( isset( $espresso_manager[ 'event_manager_venue' ] ) && "y" == strtolower( $espresso_manager[ 'event_manager_venue' ] ) ) 
                 ) {
                 $group = get_user_meta( espresso_member_data( 'id' ), "espresso_group", true );
-				$group = unserialize( $group );
                 if (is_array( $group ) && count( $group ) > 0 ) {
                     $sql = " SELECT * FROM " . EVENTS_VENUE_TABLE . " v LEFT JOIN " . EVENTS_LOCALE_REL_TABLE . " lr ON v.id = lr.venue_id WHERE v.id = '" . $venue_id . "' AND lr.locale_id IN (" . implode( ',', $group ) . ") ";
                     $rs = $wpdb->get_results( $sql );
