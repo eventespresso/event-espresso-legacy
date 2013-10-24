@@ -675,7 +675,7 @@ class PluginUpdateEngineChecker {
 	
 	}
 	
-	function display_json_error() {
+	function display_json_error($echo = TRUE, $ignore_version_check = FALSE, $alt_content = '') {
 		$pluginInfo = $this->json_error;
 		$update_dismissed = get_option($this->dismiss_upgrade);
 		$msg = '';
@@ -690,7 +690,7 @@ class PluginUpdateEngineChecker {
 			update_option( 'pue_verification_error_' . $this->pluginFile, __('No API key is present', $this->lang_domain) );
 		
 		//only display messages if there is a new version of the plugin.  
-		if ( version_compare($pluginInfo->version, $this->_installed_version, '>') ) {
+		if ( version_compare($pluginInfo->version, $this->_installed_version, '>') || $ignore_version_check ) {
 			if ( $pluginInfo->api_invalid ) {
 				$msg = str_replace('%plugin_name%', $this->pluginName, $pluginInfo->api_invalid_message);
 				$msg = str_replace('%version%', $pluginInfo->version, $msg);
@@ -700,8 +700,9 @@ class PluginUpdateEngineChecker {
 			update_option( 'pue_verification_error_' . $this->pluginFile, $msg );
 
 			//Dismiss code idea below is obtained from the Gravity Forms Plugin by rocketgenius.com
+			ob_start();
 			?>
-				<div class="updated" style="padding:15px; position:relative;" id="pu_dashboard_message"><?php echo $msg ?>
+			<div class="updated" style="padding:15px; position:relative;" id="pu_dashboard_message"><?php echo $alt_content . $msg ?>
 				<a href="javascript:void(0);" onclick="PUDismissUpgrade();" style='float:right;'><?php _e("Dismiss") ?></a>
             </div>
             <script type="text/javascript">
@@ -711,6 +712,12 @@ class PluginUpdateEngineChecker {
                 }
             </script>
 			<?php
+			$content = ob_get_contents();
+			ob_end_clean();
+			if ( $echo )
+				echo $content;
+			else
+				return $content;
 		}
 	}
 
@@ -733,9 +740,9 @@ class PluginUpdateEngineChecker {
 			return;
 		//first any json errors?
 		if ( !empty( $this->json_error ) && isset($this->json_error->api_invalid) ) {
-				$msg = str_replace('%plugin_name%', $this->pluginName, $this->json_error->api_invalid_message);
-				$msg = str_replace('%version%', $this->json_error->version, $msg);
-				$msg = sprintf( __('It appears you\'ve tried entering an api key to upgrade to the premium version of %s, however, the key does not appear to be valid.  This is the message received back from the server:', $this->lang_domain ), $this->pluginName ) . '</p><p>' . $msg;
+				$msg = $this->display_json_error(FALSE, TRUE, '<p>' . sprintf( __('It appears you\'ve tried entering an api key to upgrade to the premium version of %s, however, the key does not appear to be valid.  This is the message received back from the server:', $this->lang_domain ), $this->pluginName ) . '</p>');
+				echo $msg;
+				return;
 		} else {
 			$msg = sprintf( __('Congratulations!  You have entered in a valid api key for the premium version of %s.  You can click the button below to upgrade to this version immediately.', $this->lang_domain), $this->pluginName );
 		}
