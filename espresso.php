@@ -561,6 +561,15 @@ if (is_admin()) {
 	do_action('action_hook_espresso_infusionsoft_update_api');
 	do_action('action_hook_espresso_attendee_mover_update_api');
 	
+	//Custom templates addon
+	do_action('action_hook_espresso_template_calendar_table_update_api');
+	do_action('action_hook_espresso_template_category_accordion_update_api');
+	do_action('action_hook_espresso_template_date_range_update_api');
+	do_action('action_hook_espresso_template_grid_update_api');
+	do_action('action_hook_espresso_template_masonry_grid_update_api');
+	do_action('action_hook_espresso_template_recurring_dropdown_update_api');
+	do_action('action_hook_espresso_template_vector_map_update_api');
+	
 	//New form builder
 	require_once("includes/form-builder/index.php");
 	require_once("includes/form-builder/groups/index.php");
@@ -568,9 +577,6 @@ if (is_admin()) {
 	//Install/Update Tables when plugin is activated
 	register_activation_hook(__FILE__, 'espresso_check_data_tables'); 
 	register_activation_hook(__FILE__, 'espresso_update_active_gateways');
-
-	
-
 	
 	//Premium funtions. If this is a paid version, then we need to include these files.
 	//Premium upgrade options if the piad plugin is not installed
