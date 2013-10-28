@@ -1,5 +1,4 @@
 <?php
-if (!defined('EVENT_ESPRESSO_VERSION')) { exit(); }
 if (!class_exists('Event_Espresso_Widget')) {
 
     class Event_Espresso_Widget extends WP_Widget {
