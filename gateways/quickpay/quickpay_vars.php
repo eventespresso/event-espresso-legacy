@@ -50,7 +50,7 @@ function espresso_display_quickpay($payment_data) {
 			$sql .= " where ea.registration_id = '" . $other_attendee_registration_id . "' order by ed.event_name ";
 			$tmp_attendees = $wpdb->get_results($sql, ARRAY_A);
 			foreach ($tmp_attendees as $tmp_attendee) {
-				$amount += $tmp_attendee["final_price"] * $tmp_attendee["quantity"];
+				$amount += $tmp_attendee["final_price"];
 			}
 		}
 	}

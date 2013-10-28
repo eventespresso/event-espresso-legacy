@@ -36,11 +36,10 @@ if ($reg_form_only == false) {
 	<?php /* end venue details block */ ?>
 
 	<?php if ($display_desc == "Y") { //Show the description or not ?>
-	
+	<p class="section-title">
+		<?php _e('Description:', 'event_espresso') ?>
+	</p>
 	<div class="event_description clearfix">
-		<p class="section-title">
-			<?php _e('Description:', 'event_espresso') ?>
-		</p>
 		<?php echo espresso_format_content($event_desc); //Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.   ?>
 		
 	</div>

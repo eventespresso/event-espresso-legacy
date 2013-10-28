@@ -228,7 +228,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$attendee_quantity = 1;
 				$final_price	= (float)$data_source['event_cost'];
 				$orig_price		= (float)$data_source['event_cost'];
-				$price_type		=  isset($data_source['seat_id']) ? $data_source['seat_id'] : __('Admin', 'event_espresso');
+				$price_type		=  __('Admin', 'event_espresso');
 			
 			} elseif (isset($data_source['seat_id'])) {
 				
@@ -918,7 +918,7 @@ function espresso_verify_recaptcha( $skip_check = FALSE ) {
 		
 		// check $remote_addr
 		if ( ! $remote_addr ) {
-			echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, an error occurred and the anti-spam settings could not be verified. Please contact the site admin or click your browser\'s back button and try again.', 'event_espresso') . '</strong></p></div>';
+			echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, an error occured and the anti-spam settings could not be verified. Please contact the site admin or click your browser\'s back button and try again.', 'event_espresso') . '</strong></p></div>';
 			return FALSE;			
 		}
 		

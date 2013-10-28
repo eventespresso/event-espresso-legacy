@@ -14,11 +14,6 @@
 	padding:10px;
 }
 
-/* Widget Style */
-.widget.events ol {
-	list-style:none;
-}
-
 /* Payment Page Styles */
 #espresso-payment_page-dv .payment_container, .payment-option-dv { position: relative; margin:0 .25em .25em 0;  }
 #espresso-payment_page-dv .payment-option-closed { display: inline-block !important; }

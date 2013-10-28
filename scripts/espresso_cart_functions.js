@@ -31,6 +31,7 @@ jQuery(document).ready(function() {
         progress: function(container){
 
             jQuery(container).html('<img class="ee-ajax-loader-img" src="' + EEGlobals.plugin_url + 'images/ajax-loader.gif">');
+
         },
         add_item : function(params){
             var _eecart = this;

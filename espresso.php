@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.36.1.B
+  Version: 3.1.36.b
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -31,7 +31,7 @@
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.36.1.B';
+	return '3.1.36.b';
 }
 
 define("EVENT_ESPRESSO_VERSION", espresso_version());
@@ -452,7 +452,6 @@ event_espresso_require_template('widget.php');
 
 function load_event_espresso_widget() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	if (!class_exists('Event_Espresso_Widget')) return;
 	register_widget('Event_Espresso_Widget');
 }
 
@@ -562,15 +561,6 @@ if (is_admin()) {
 	do_action('action_hook_espresso_infusionsoft_update_api');
 	do_action('action_hook_espresso_attendee_mover_update_api');
 	
-	//Custom templates addon
-	do_action('action_hook_espresso_template_calendar_table_update_api');
-	do_action('action_hook_espresso_template_category_accordion_update_api');
-	do_action('action_hook_espresso_template_date_range_update_api');
-	do_action('action_hook_espresso_template_grid_update_api');
-	do_action('action_hook_espresso_template_masonry_grid_update_api');
-	do_action('action_hook_espresso_template_recurring_dropdown_update_api');
-	do_action('action_hook_espresso_template_vector_map_update_api');
-	
 	//New form builder
 	require_once("includes/form-builder/index.php");
 	require_once("includes/form-builder/groups/index.php");
@@ -578,6 +568,9 @@ if (is_admin()) {
 	//Install/Update Tables when plugin is activated
 	register_activation_hook(__FILE__, 'espresso_check_data_tables'); 
 	register_activation_hook(__FILE__, 'espresso_update_active_gateways');
+
+	
+
 	
 	//Premium funtions. If this is a paid version, then we need to include these files.
 	//Premium upgrade options if the piad plugin is not installed
@@ -644,8 +637,8 @@ if (is_admin()) {
 	}
 
 	//Event styles & template layouts Subpage
-	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/template_settings/index.php')) {
-		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/template_settings/index.php');
+	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/template_settings/index.php')) {
+		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/template_settings/index.php');
 	}
 
 	//Plugin Support
@@ -706,7 +699,6 @@ if (is_admin()) {
 
 //Load the required Javascripts
 add_action('wp_enqueue_scripts', 'espresso_load_javascript_files');
-add_action('wp_enqueue_scripts', 'espresso_register_validation_for_shortcodes');
 add_action('wp_enqueue_scripts', 'espresso_load_jquery', 10);
 add_action('admin_enqueue_scripts', 'espresso_load_EEGlobals_jquery', 10);
 add_action('wp_enqueue_scripts', 'espresso_load_pagination_scripts');
@@ -727,19 +719,6 @@ if (!function_exists('espresso_load_javascript_files')) {
 
 		wp_register_script('validation', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/validation.js"), array('jquery.validate.js'), EVENT_ESPRESSO_VERSION, TRUE);
 		wp_enqueue_script('validation');
-                
-	}
-}
-
-if (!function_exists('espresso_register_validation_for_shortcodes')) {
-	function espresso_register_validation_for_shortcodes() {
-
-		// registers the jQuery validation scripts for use with the [ESPRESSO_REG_PAGE], [ESPRESSO_REG_FORM], and [SINGLEEVENT] shortcodes
-		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-
-		wp_register_script('jquery.validate.js', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/jquery.validate.min.js"), array('jquery'), '1.8.1', TRUE);
-
-		wp_register_script('validation', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/validation.js"), array('jquery.validate.js'), EVENT_ESPRESSO_VERSION, TRUE);	
                 
 	}
 }
@@ -1177,23 +1156,9 @@ function espresso_check_data_tables() {
 		}
 	}
 	
-	// check for downgrade from 4.x+
-	foreach ( $espresso_db_update as $prev_version ) {
-		if ( $prev_version && version_compare( $prev_version, '3.2.0', '>=' )) {
-			require_once( EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions/database_install.php' ); 
-			//deactivating event espresso so that their db doesn't get messed up'
-			deactivate_event_espresso();
-			// none shall pass!!!
-			espresso_downgrade_error();
-		}
-	}
-	
 	// if current EE version is NOT in list of db updates, then update the db
-	if (( ! in_array( EVENT_ESPRESSO_VERSION, $espresso_db_update ))) {	
-		require_once( EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions/database_install.php' );
-		// fake plugin activation nonce
-	    $_REQUEST['plugin'] = plugin_basename(__FILE__);
-		$_REQUEST['_wpnonce'] = wp_create_nonce( 'activate-plugin_' . $_REQUEST['plugin'] );
+	if ( ! in_array( EVENT_ESPRESSO_VERSION, $espresso_db_update )) {
+		require_once( EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions/database_install.php' ); 
 		events_data_tables_install();
 	}	
 	

@@ -67,7 +67,6 @@ $this_event_id = $event_id;
 			<?php //Featured image
 			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');?>
 			<?php if ( $event->event_cost != '0.00' ) { 
-			?>
 				 	echo do_action('action_hook_espresso_price_display', $event_id, $event->event_cost, $org_options['price_display_in_event_list']);
 				 } else { ?>
 					<p id="p_event_price-<?php echo $event_id ?>" class="event_price"><?php echo __('Free Event', 'event_espresso'); ?></p>

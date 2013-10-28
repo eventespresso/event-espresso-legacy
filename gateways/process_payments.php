@@ -263,36 +263,3 @@ if ( isset( $_POST[ 'name' ] ) && isset( $_POST[ 'MC_type'] ) && 'worldpay' == $
 	unset($_REQUEST['name']);
 }
 
-
-/**
- * Builds strings which can be used for the notify_url, return_url, etc which are sent to gateways.
- * 
- * @param string $type usually either 'notify_url','return_url', or 'cancel_url' (keys in the global $org_options
- * @param array $payment_data specifically, this array should contain keys 'attendee_id', 'registration_id', 
- * @param string $gateway_slug name of teh gateway folder, eg 'paypal','mwarrior','eway_rapid3' etc. This is used to get the gateway's option, that option should have a key 'force_ssl_return',
- * @param array $extra_args any extra querystring args to be added to the URL.
- * @return string which can be sent to the gateway
- */
-function espresso_build_gateway_url($type, $payment_data, $gateway_slug, $extra_args = array() ){
-	global $org_options;
-	$url = get_permalink($org_options[$type]);
-	$gateway_settings = get_option("event_espresso_{$gateway_slug}_settings");
-	if($gateway_settings['force_ssl_return']){
-		$url = str_replace("http://","https://",$url);
-	}
-	
-	$query_args = array(
-		'id'=>$payment_data['attendee_id'],
-		'r_id'=>$payment_data['registration_id'],
-		'type'=>$gateway_slug
-	);
-	switch($type){
-		case 'notify_url':
-		case 'return_url':
-			$query_args['attendee_action']='post_payment';
-			$query_args['form_action']='payment';
-	}
-	$query_args = array_merge($query_args,$extra_args);
-	$full_url = add_query_arg($query_args,$url);
-	return $full_url;
-}

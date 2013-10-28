@@ -39,7 +39,7 @@ function espresso_display_psigate($payment_data){
 	$user_ip = $_SERVER["REMOTE_ADDR"];
 	
 	$button_url = espresso_select_button_for_display($psigate_settings['button_url'], "psigate/psigate.gif");
-	$submit_html="<input class='allow-leave-page payment-option-lnk' type='image' src='$button_url'/>";
+	$submit_html="<input type='image' src='$button_url'/>";
 
 	if($bypass_payment_page){
 		$bypass_payment_page_js="<script>document.getElementById('psigate_form').submit();</script>";

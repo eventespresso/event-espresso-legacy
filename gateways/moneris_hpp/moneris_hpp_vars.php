@@ -52,7 +52,6 @@ function espresso_display_moneris_hpp( $payment_data ) {
 	//printr( $items, '$items  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 	
 	$total = 0;					
-	$paid = 0;
 	foreach ( $items as $item_num => $item ) {		
 		$item_num++;
 		// if this the primary attendee
@@ -60,7 +59,7 @@ function espresso_display_moneris_hpp( $payment_data ) {
 			// cust_id   		This is an ID field that can be used to identify the client  MAX 50 chars.
 			$EE_Moneris_HPP->addField( 'cust_id', $registration_id );
 			// order_id  	MUST be unique per transaction MAX 50 chars.
-//			$EE_Moneris_HPP->addField( 'order_id', $registration_id );
+			$EE_Moneris_HPP->addField( 'order_id', $registration_id );
 			// email  			Customer email address. MAX 50 chars. 
 			$EE_Moneris_HPP->addField( 'email', $attendee_email );		
 		}
@@ -71,36 +70,20 @@ function espresso_display_moneris_hpp( $payment_data ) {
 		// quantityn  		Quantity of Goods Purchased - (max - 4 digits)
 		$EE_Moneris_HPP->addField( 'quantity' . $item_num, absint( $item->quantity ));
 		// pricen  			Unit Price - (max - "7"."2" digits, i.e. min 0.00 & max 9999999.99)
-		$EE_Moneris_HPP->addField( 'price' . $item_num, number_format( $item->final_price, 2, '.', '' ));
+		$EE_Moneris_HPP->addField( 'price' . $item_num, $item->final_price );
 		// subtotaln  		Quantity X Price of Product - ( max - "7"."2" digits, i.e. min 0.00 & max 9999999.99)		
-		$EE_Moneris_HPP->addField( 'subtotal' . $item_num, number_format( $item->final_price * absint( $item->quantity ), 2, '.', '' ));	
+		$EE_Moneris_HPP->addField( 'subtotal' . $item_num, $item->final_price * absint( $item->quantity ));	
 		$total += $item->final_price * absint( $item->quantity );
-		$paid += $item->amount_pd;
 	}
 
-
-	if ( (float)$paid > 0 ) {
-		// idn  					Product Code - SKU (max 10 chars)
-		$EE_Moneris_HPP->addField( 'id' . $item_num, '' );
-		// descriptionn  	Product Description - (max 15 chars)
-		$EE_Moneris_HPP->addField( 'description' . $item_num, 'Total paid to date' );
-		// quantityn  		Quantity of Goods Purchased - (max - 4 digits)
-		$EE_Moneris_HPP->addField( 'quantity' . $item_num, 1 );
-		// pricen  			Unit Price - (max - "7"."2" digits, i.e. min 0.00 & max 9999999.99)
-		$EE_Moneris_HPP->addField( 'price' . $item_num, number_format( $paid * -1, 2, '.', '' ));
-		// subtotaln  		Quantity X Price of Product - ( max - "7"."2" digits, i.e. min 0.00 & max 9999999.99)		
-		$EE_Moneris_HPP->addField( 'subtotal' . $item_num, number_format( $paid * -1, 2, '.', '' ));			
-	}
 	// gst   	 				This is where you would include Goods and Services Tax charged,  (min 0.00 & max 9999999.99)
 	// pst   	 				This is where you would include Provincial Sales Tax charged,  (min 0.00 & max 9999999.99)
 	// hst   	 				This is where you would include Harmonized Sales Tax charged,  (min 0.00 & max 9999999.99)
 
-	$total = number_format(( $total - $paid ), 2, '.', '' );
+	$total = number_format( $total, 2, '.', '' );
 	
 	if ( WP_DEBUG && current_user_can( 'update_core' )) {
-//		$current_user = wp_get_current_user();
-//		$user_id = $current_user->ID;
-//		$total = $user_id < 3 ? 0.01 : $total;
+//		$total = 0.01;
 	}
 	// charge_total  	Final purchase Amount - no $, must include 2 decimal places
 	$EE_Moneris_HPP->addField( 'charge_total', $total );

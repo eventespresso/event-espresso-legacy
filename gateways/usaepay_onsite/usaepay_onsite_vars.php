@@ -7,7 +7,7 @@ function espresso_display_usaepay_onsite($data) {
 	?>
 		<?php
 		if ($use_sandbox) {
-			echo '<div id="sandbox-panel"><h2 class="section-title">' . __('PayPal Sandbox Mode', 'event_espresso') . '</h2><p>Test Master Card # 5424180818927383</p>';
+			echo '<div id="sandbox-panel"><h2 class="section-title">' . __('PayPal Sandbox Mode', 'event_espreso') . '</h2><p>Test Master Card # 5424180818927383</p>';
 			echo '<p>Exp: 10/2012</p>';
 			echo '<p>CVV2: 123 </p>';
 			echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3></div>';

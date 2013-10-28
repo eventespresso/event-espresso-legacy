@@ -11,7 +11,7 @@ function espresso_process_megasoft($payment_data){
 	$megasoft_settings = get_option('event_espresso_megasoft_settings');
 	$use_sandbox = $megasoft_settings['use_sandbox'];
 	if ($use_sandbox) {
-		$url = "https://200.71.151.226:8443/payment/action/procesar-compra";// "https://paytest.megasoft.com.ve:8443/payment/action/procesar-compra";
+		$url = "https://paytest.megasoft.com.ve:8443/payment/action/procesar-compra";
 	} else {
 		$url = "https://payment.megasoft.com.ve/payment/action/procesar-compra";
 	}

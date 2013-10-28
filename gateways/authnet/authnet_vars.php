@@ -27,7 +27,12 @@ function espresso_display_authnet($payment_data) {
 
 	$myAuthorize->setUserInfo($authnet_login_id, $authnet_transaction_key);
 
-	$myAuthorize->addField('x_Relay_URL',espresso_build_gateway_url('return_url', $payment_data, 'authnet') );
+	if ($authnet_settings['force_ssl_return']) {
+		$home = str_replace('http:', 'https:', home_url());
+	} else {
+		$home = home_url();
+	}
+	$myAuthorize->addField('x_Relay_URL', $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id . '&type=authnet');
 	$myAuthorize->addField('x_Description', stripslashes_deep($event_name) . ' | ' . __('Reg. ID:', 'event_espresso') . ' ' . $attendee_id . ' | ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($fname . ' ' . $lname) . ' | ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity);
 	$myAuthorize->addField('x_Amount', number_format($event_cost, 2));
 	$myAuthorize->addField('x_Logo_URL', $image_url);
