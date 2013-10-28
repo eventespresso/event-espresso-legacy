@@ -449,12 +449,10 @@ if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/custom_pos
 //Widget - Display the list of events in your sidebar
 //The widget can be over-ridden with the custom files addon
 event_espresso_require_template('widget.php');
-event_espresso_require_template('cart-widget.php');
 
 function load_event_espresso_widget() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	register_widget('Event_Espresso_Widget');
-	register_widget('Espresso_CartWidget');
 }
 
 add_action('widgets_init', 'load_event_espresso_widget');
