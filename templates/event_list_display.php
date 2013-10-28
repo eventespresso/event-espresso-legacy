@@ -61,8 +61,16 @@ $this_event_id = $event_id;
 	<?php //echo $venue_zip != ''?'<p id="event_venue_zip-'.$event_id.'" class="event_venue_zip">'.stripslashes_deep($venue_zip).'</p>':''?>
 	<?php //echo $venue_country != ''?'<p id="event_venue_country-'.$event_id.'" class="event_venue_country">'.stripslashes_deep($venue_country).'</p>':''
 	$event->event_cost = empty($event->event_cost) ? '' : $event->event_cost;
+	
+//Show short descriptions
+	if (!empty($event_desc) && isset($org_options['display_short_description_in_event_list']) && $org_options['display_short_description_in_event_list'] == 'Y') {
+		?>
+		<div class="event-desc">
+			<?php echo espresso_format_content($event_desc); ?>
+		</div>
+		<?php
+	}
 	?>
-
 	<div class="event-meta">
 			<?php //Featured image
 			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');
@@ -78,16 +86,6 @@ $this_event_id = $event_id;
 			echo apply_filters('filter_hook_espresso_display_ical', $all_meta);?>
 		</p>
 	</div>
-	<?php
-//Show short descriptions
-	if (!empty($event_desc) && isset($org_options['display_short_description_in_event_list']) && $org_options['display_short_description_in_event_list'] == 'Y') {
-		?>
-		<div class="event-desc">
-			<?php echo espresso_format_content($event_desc); ?>
-		</div>
-		<?php
-	}
-	?>
 
 	<?php if ( (isset($location) && $location != '' ) && (isset($org_options['display_address_in_event_list']) && $org_options['display_address_in_event_list'] == 'Y') ) { ?>
 		<p class="event_address" id="event_address-<?php echo $event_id ?>"><span class="section-title"><?php echo __('Address:', 'event_espresso'); ?></span> <br />
