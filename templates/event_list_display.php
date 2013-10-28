@@ -102,14 +102,14 @@ $this_event_id = $event_id;
 	$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $event_id); 
 	if ($num_attendees >= $reg_limit) {
 		?>
-		<p id="available_spaces-<?php echo $event_id ?>" class="<?php espresso_template_css_class('available_spaces','available-spaces'); ?>"><span class="<?php espresso_template_css_class('section_title','section-title'); ?>"><?php _e('Available Spaces:', 'event_espresso') ?> </span><?php echo apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id) ?></p>
+		<p id="available_spaces-<?php echo $event_id ?>" class="<?php espresso_template_css_class('available_spaces','available-spaces'); ?>"><span class="<?php espresso_template_css_class('section_title','section-title'); ?>"><?php _e('Available Spaces:', 'event_espresso') ?> </span><?php echo apply_filters('filter_hook_espresso_available_spaces_text', $event_id) ?></p>
 		<?php if ($overflow_event_id != '0' && $allow_overflow == 'Y') { ?>
 			<p id="register_link-<?php echo $overflow_event_id ?>" class="<?php espresso_template_css_class('register_link-footer','register-link-footer'); ?>"><a class="<?php espresso_template_css_class('a_register_link','a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all'); ?>" id="a_register_link-<?php echo $overflow_event_id ?>" href="<?php echo espresso_reg_url($overflow_event_id); ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Join Waiting List', 'event_espresso'); ?></a></p>
 			<?php
 		}
 	} else {
 		if ($display_reg_form == 'Y' && $externalURL == '') {
-			?> <p id="available_spaces-<?php echo $event_id ?>" class="<?php espresso_template_css_class('spaces_available','spaces-available'); ?>"><span class="<?php espresso_template_css_class('section_title','section-title'); ?>"><?php _e('Available Spaces:', 'event_espresso') ?></span> <?php echo apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id) ?></p>
+			?> <p id="available_spaces-<?php echo $event_id ?>" class="<?php espresso_template_css_class('spaces_available','spaces-available'); ?>"><span class="<?php espresso_template_css_class('section_title','section-title'); ?>"><?php _e('Available Spaces:', 'event_espresso') ?></span> <?php echo apply_filters('filter_hook_espresso_available_spaces_text', $event_id) ?></p>
 			<?php
 		}
 
