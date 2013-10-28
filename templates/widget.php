@@ -23,6 +23,14 @@ if (!class_exists('Event_Espresso_Widget')) {
             global $wpdb, $org_options;
             /* Our variables from the widget settings. */
             
+
+            /* Before widget (defined by themes). */
+            echo $before_widget;
+			
+            /* Display the widget title if one was input (before and after defined by themes). */
+            if ($title)
+                echo $before_title . $title . $after_title;
+
 			if ($instance['category_name'] != '') {
                 $type = 'category';
             }
@@ -76,6 +84,7 @@ if (!class_exists('Event_Espresso_Widget')) {
 				
             //print_r($events);
             //event_espresso_get_event_details($sql);
+			echo '<ol>';
             foreach ($events as $event) {
 				
                 $event->id = $event->id;
@@ -134,7 +143,7 @@ if (!class_exists('Event_Espresso_Widget')) {
 							break;
                         default:
                             ?>
-                            <p><a href="<?php echo $registration_url; ?>"><?php echo stripslashes_deep($event->event_name) ?> - <?php echo event_date_display($event->start_date) ?></a>
+                            <li><a href="<?php echo $registration_url; ?>"><?php echo stripslashes_deep($event->event_name) ?> - <span class="widget-event-date"><?php echo event_date_display($event->start_date) ?></span></a>
                             <?php /* These are custom messages that can be displayed based on the event status. Just comment the one you want to use. */ ?>
                                 <?php //echo $status_display; //Turn this on to display the overall status of the event.  ?>
                                 <?php //echo $status_display_ongoing; //Turn this on to display the ongoing message. ?>
@@ -144,12 +153,13 @@ if (!class_exists('Event_Espresso_Widget')) {
                                 <?php //echo $status_display_not_open; //Turn this on to display the secondary message. ?>
                                 <?php //echo $status_display_open; //Turn this on to display the secondary message. ?>
                                 <?php //echo $status_display_custom_closed; //Turn this on to display the secondary message. ?>
-                            </p>
+                            </li>
                                 <?php
                                 break;
                         }
                     }
                 }
+				echo '</ol>';
                 /* After widget (defined by themes). */
                 echo $after_widget;
             }

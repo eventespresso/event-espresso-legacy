@@ -48,6 +48,11 @@ function espresso_process_aim($payment_data) {
 	if ($authnet_aim_settings['test_transactions']) {
 		$transaction->test_request = "true";
 	}
+	
+	//Prevent duplicate transactions within a certain amount of time:
+	$transaction->duplicate_window = apply_filters('filter_hook_espresso_aim_duplicate_window', 300);//300 seconds = 5 minutes
+	//The largest value Authorize.net will accept for x_duplicate_window is 28800, which equals eight hours. If a value greater than 28800 sent, the payment gateway will default to 28800. If x_duplicate_window is set to 0 or to a negative number, no duplicate transaction window will be enforced for your software's transactions. If no value is sent, the default value of 120 (two minutes) would be used.
+	
 
 	$sql = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id='" . $attendee_id . "'";
 	$session_id = $wpdb->get_var($sql);

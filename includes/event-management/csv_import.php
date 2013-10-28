@@ -4,18 +4,21 @@ function csv_import() { ?>
 	<h3>Event Import</h3>
 	<ul>
 		<li>
-			<p>This page is for importing your events from a comma seperated file (CSV) directly into the the events database.  The limitation of this upload is that it does not support the extra questions, only the core event configuration. </p>
+			<p><?php _e('This page is for importing your events from a comma seperated file (CSV) directly into the the events database.  The limitation of this upload is that it does not support the extra questions, only the core event configuration.', 'event_espresso'); ?> </p>
 			<ul>
-				<li>Please use Y where you want to say Yes and N where you want No.</li>
-				<li>Dates should be formatted YYYY-MM-DD (2009-07-04).</li>
-				<li>I have included a template file <a href="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>events.csv">here</a> that I recommend you download and use.  It is very easy to work with it in excel, just remember to save it as a csv and not excel sheet.</li>
-				<li>The file name should be events.csv in order for it to work. I will fix this issue later, I just wanted to get this working first.</li>
+				<li><?php _e('Please use Y where you want to say Yes and N where you want No.', 'event_espresso'); ?></li>
+				<li><?php _e('Dates should be formatted YYYY-MM-DD (2009-07-04).', 'event_espresso'); ?></li>
+				<li><?php _e('We have included a template file <a href="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>events.csv">here</a> that I recommend you download and use.  It is very easy to work with it in excel, just remember to save it as a csv and not excel sheet.', 'event_espresso'); ?></li>
+				<li><?php _e('The file name should be events.csv in order for it to work. I will fix this issue later, I just wanted to get this working first.', 'event_espresso'); ?></li>
 			</ul>
-			<p>One final note, you will see that the header row, fist column has a 0 while other rows have a 1.  This tells the upload to ignore rows that have the 0 identifier and only use rows with the 1.</p>
-			<p>This is the first pass at the uploader, but for those of you who have alot of events, particularly events that are similar in setup, this will be a time saver.</p>
+			<p><?php _e('One final note, you will see that the header row, fist column has a 0 while other rows have a 1.  This tells the upload to ignore rows that have the 0 identifier and only use rows with the 1.', 'event_espresso'); ?></p>
+			<p><?php _e('This is the first pass at the uploader, but for those of you who have alot of events, particularly events that are similar in setup, this will be a time saver.', 'event_espresso'); ?></p>
 			<?php
 			espresso_uploader();
-			load_events_to_db();
+			if( $_SERVER['REQUEST_METHOD'] == 'POST' ){
+				load_events_to_db();
+			}
+			
 			?>
 		</li>
 	</ul>
@@ -91,6 +94,7 @@ function espresso_uploader($num_of_uploads = 1, $file_types_array = array("csv")
 }
 
 function load_events_to_db() {
+	
 	global $wpdb, $current_user;
 
 	$csvfile = "../wp-content/uploads/events.csv";
@@ -120,7 +124,7 @@ function load_events_to_db() {
 
 	$num_of_imported_events = 0;
 	while ($strings = fgetcsv($file_handle)) {
-		++$num_of_imported_events;
+		
 		$question_groups_rs = $wpdb->get_results("select * from " . EVENTS_QST_GROUP_TABLE . " where wp_user = " . $current_user->ID . " and system_group = 1");
 		$question_groups_ar = array();
 		foreach ($question_groups_rs as $question_group) {
@@ -133,6 +137,7 @@ function load_events_to_db() {
 			//echo "The  element is in the array";
 			$skip = $strings[0];
 			if ($skip >= "1") {
+				++$num_of_imported_events;
 				// Event meta info -
 				$event_meta = array();
 				$event_meta['default_payment_status'] = "";
@@ -141,7 +146,7 @@ function load_events_to_db() {
 				$event_meta['add_attendee_question_groups'] = unserialize($question_groups);
 				$event_meta['date_submitted'] = date("Y-m-d H:i:s");
 				$event_meta = serialize($event_meta);
-
+				
 				$strings_sql_array = array(
 					'event_name' => sanitize_text_field($strings[1]), //event_name
 					'event_desc' => $strings[2],
@@ -156,7 +161,7 @@ function load_events_to_db() {
 					'event_identifier' => sanitize_title_with_dashes($strings[11]),
 					'start_date' => date('Y-m-d',strtotime($strings[12])),
 					'end_date' => date('Y-m-d', strtotime($strings[13])),
-					'reg_limit' => sanitize_text_field($strings[16]),
+					'reg_limit' => sanitize_text_field($strings[16]),//skip 17, it's the price and needs to be accounted for differently
 					'allow_multiple' => sanitize_text_field($strings[18]),
 					'additional_limit' => (int) $strings[19],
 					'send_mail' => sanitize_text_field($strings[20]),
@@ -240,11 +245,15 @@ function load_events_to_db() {
 					$category_sql = "SELECT cd.id FROM " . EVENTS_CATEGORY_TABLE . " cd WHERE category_name='%s'";
 					$cat_id = $wpdb->get_var($wpdb->prepare($category_sql, $category_name));
 					if ($cat_id == false) {
+						//fool the admin code into thinking we're adding a category via a POSt
+						$old_REQUEST_action = $_REQUEST['action'];
 						$_REQUEST['action'] = 'add';
 						$_REQUEST['category_name'] = $category_name;
 						require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/category-management/add_cat_to_db.php');
 						add_cat_to_db();
 						$cat_id = $wpdb->get_var($wpdb->prepare($category_sql, $category_name));
+						//ok, now that we've fooled it and added teh category, revert the $_REQUEST params
+						$_REQUEST['action'] = $old_REQUEST_action;
 					}
 					$cat_sql_2 = "INSERT INTO " . EVENTS_CATEGORY_REL_TABLE . " (event_id, cat_id) VALUES (%d, %d)";
 					if ($wpdb->query($wpdb->prepare($cat_sql_2, $last_event_id, $cat_id)) === false) {

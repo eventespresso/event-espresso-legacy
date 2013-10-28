@@ -133,9 +133,7 @@ class EE_Moneris_HPP extends Espresso_PaymentGateway {
 
 			if ( absint( $verification->response_code ) <= 50 && (float)$verification->amount == (float)$this->ipnData['charge_total'] && $verification->status == 'Valid-Approved' ) {
 				return TRUE;
-			} /*elseif ( $this->testMode ) {
-				return TRUE;
-			}*/ else {
+			} else {
 				$log_entry = 'Transaction failed verification, & ';
 				$log_entry .= 'order_id = ' . $verification->order_id . ', & ';
 				$log_entry .= 'response_code = ' . $verification->response_code . ', & ';

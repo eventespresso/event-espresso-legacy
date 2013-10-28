@@ -46,7 +46,7 @@ function event_espresso_time_editor($event_id = 0) {
         $times = $wpdb->get_results("SELECT * FROM " . EVENTS_START_END_TABLE . " WHERE event_id = '" . $event_id . "' ORDER BY id");
         if ($wpdb->num_rows > 0) {
             foreach ($times as $time) {
-                echo '<li><p><label for="add-start-time">' . __('Start', 'event_espresso') . ' ' . $time_counter++ . '</label><input size="10"  type="text" id="add-start-time" name="start_time[]" value="' . event_date_display($time->start_time, get_option('time_format')) . '" /></p><p><label for="add-end-time"> ' . __('End', 'event_espresso') . '</label> <input size="10"  type="text" id="add-end-time" name="end_time[]" value="' . event_date_display($time->end_time, get_option('time_format')) . '"></p>' . (isset($org_options['time_reg_limit']) && $org_options['time_reg_limit'] == 'Y' ? '<p><label>'.__('Qty', 'event_espresso') . '</label> <input size="3"  type="text" name="time_qty[]" value="' . $time->reg_limit . '"></p>' : '') . '<p><input class="remove-item xtra-time" type="button" value="Remove" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);" /></p></li>';
+                echo '<li><p><label for="add-start-time">' . __('Start', 'event_espresso') . ' ' . $time_counter++ . '</label><input size="10"  type="text" id="add-start-time" name="start_time[]" value="' . event_date_display($time->start_time, get_option('time_format')) . '" /></p><p><label for="add-end-time"> ' . __('End', 'event_espresso') . '</label> <input size="10"  type="text" id="add-end-time" name="end_time[]" value="' . event_date_display($time->end_time, get_option('time_format')) . '"></p>' . (isset($org_options['time_reg_limit']) && $org_options['time_reg_limit'] == 'Y' ? '<p><label>'.__('Qty', 'event_espresso') . '</label> <input size="3"  type="text" name="time_qty[]" value="' . $time->reg_limit . '"></p><p><em class="important">'.__('Event time slot quantities should only be set for events where group registrations are disabled.', 'event_espresso').'</em></p>' : '') . '<p><input class="remove-item xtra-time" type="button" value="Remove" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);" /></p></li>';
             }
         } else {
             ?>
@@ -63,7 +63,7 @@ function event_espresso_time_editor($event_id = 0) {
 			</label>
 			<input size="10"  type="text" id="add-end-time" name="end_time[]" />
 		</p>
-		<?php echo (isset($org_options['time_reg_limit']) && $org_options['time_reg_limit'] == 'Y' ? '<p><label>'.__('Qty', 'event_espresso') . '</label> <input size="3"  type="text" name="time_qty[]" /></p>' : '') ?> </li>
+		<?php echo (isset($org_options['time_reg_limit']) && $org_options['time_reg_limit'] == 'Y' ? '<p><label>'.__('Qty', 'event_espresso') . '</label> <input size="3"  type="text" name="time_qty[]" /></p><p><em class="important">'.__('Event time slot quantities should only be set for events where group registrations are disabled.', 'event_espresso').'</em></p>' : '') ?> </li>
 	<?php
         }
         ?>

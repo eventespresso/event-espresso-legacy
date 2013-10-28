@@ -17,8 +17,7 @@ if (!function_exists('show_single_event')) {
 	function show_single_event($atts) {
 		extract(shortcode_atts(array('single_event_id' => __('No ID Supplied', 'event_espresso')), $atts));
 		$single_event_id = "{$single_event_id}";
-		global $load_espresso_scripts;
-		$load_espresso_scripts = true; //This tells the plugin to load the required scripts
+		wp_enqueue_script('validation'); //This tells the plugin to load the required scripts
 		//echo $single_event_id;
 		ob_start();
 		register_attendees($single_event_id);
@@ -44,8 +43,6 @@ if (!function_exists('show_event_category')) {
 		extract(shortcode_atts(array('event_category_id' => __('No Category ID Supplied', 'event_espresso'), 'css_class' => ''), $atts));
 		$event_category_id = "{$event_category_id}";
 		$css_class = "{$css_class}";
-		global $load_espresso_scripts;
-		$load_espresso_scripts = true; //This tells the plugin to load the required scripts
 		ob_start();
 		display_event_espresso_categories($event_category_id, $css_class); //This function is called from the "/templates/event_list.php" file.
 		$buffer = ob_get_contents();
@@ -192,8 +189,6 @@ if (!function_exists('event_espresso_list_attendees')) {
 	function event_espresso_list_attendees($atts) {
 		//echo $atts;
 		extract(shortcode_atts(array('event_id' => 'NULL', 'event_identifier' => 'NULL', 'category_identifier' => 'NULL', 'event_category_id' => 'NULL', 'show_gravatar' => 'NULL', 'show_expired' => 'NULL', 'show_secondary' => 'NULL', 'show_deleted' => 'NULL', 'show_recurrence' => 'NULL', 'limit' => 'NULL', 'paid_only' => 'NULL'), $atts));
-		global $load_espresso_scripts;
-		$load_espresso_scripts = true; //This tells the plugin to load the required scripts
 		//get the event identifiers
 		$event_id = "{$event_id}";
 		$event_identifier = "{$event_identifier}";
@@ -261,8 +256,7 @@ add_shortcode('EVENT_TIME', 'espresso_event_time_sc');
 if (!function_exists('espresso_reg_page_sc')) {
 
 	function espresso_reg_page_sc($atts) {
-		global $load_espresso_scripts;
-		$load_espresso_scripts = true; //This tells the plugin to load the required scripts
+		wp_enqueue_script('validation'); //This tells the plugin to load the required scripts
 		extract(shortcode_atts(array('event_id' => '0'), $atts));
 		$event_id = "{$event_id}";
 		ob_start();
@@ -284,8 +278,7 @@ add_shortcode('ESPRESSO_REG_PAGE', 'espresso_reg_page_sc');
 if (!function_exists('espresso_reg_form_sc')) {
 
 	function espresso_reg_form_sc($atts) {
-		global $load_espresso_scripts;
-		$load_espresso_scripts = true; //This tells the plugin to load the required scripts
+		wp_enqueue_script('validation'); //This tells the plugin to load the required scripts
 		extract(shortcode_atts(array('event_id' => '0'), $atts));
 		$event_id = "{$event_id}";
 		ob_start();
@@ -398,9 +391,7 @@ add_shortcode('ATTENDEE_NUMBERS', 'espresso_attendees_data_sc');
 if (!function_exists('display_event_list_sc')) {
 
 	function display_event_list_sc($attributes) {
-		global $load_espresso_scripts;
-		$load_espresso_scripts = true; //This tells the plugin to load the required scripts
-		//template located in event_list_dsiplay.php
+		//template located in event_list_display.php
 		ob_start();
 		//echo $sql;
         event_espresso_get_event_details($attributes);
@@ -850,8 +841,6 @@ if (!function_exists('espresso_venue_event_list_sc')) {
 
 	function espresso_venue_event_list_sc($atts) {
 		global $wpdb;
-		global $load_espresso_scripts;
-		$load_espresso_scripts = true; //This tells the plugin to load the required scripts
 		if (empty($atts))
 			return 'No venue id supplied!';
 		extract($atts);
