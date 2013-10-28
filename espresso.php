@@ -452,6 +452,7 @@ event_espresso_require_template('widget.php');
 
 function load_event_espresso_widget() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+	if (!class_exists('Event_Espresso_Widget')) return;
 	register_widget('Event_Espresso_Widget');
 }
 
