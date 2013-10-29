@@ -78,7 +78,7 @@ $this_event_id = $event_id;
 			?>
 					<p id="p_event_price-<?php echo $event_id ?>" class="event_price"><span class="section-title"><?php  echo __('Price: ', 'event_espresso'); ?></span> <?php echo  $org_options['currency_symbol'].$event->event_cost; ?></p>
 			<?php } else { ?> 
-					<p id="p_event_price-<?php echo $event_id ?>" class="event_price"><?php echo __('Free Event', 'event_espresso'); ?></p>
+					<p id="p_event_price-<?php echo $event_id ?>" class="event_price"><span class="section-title"><?php  echo __('Price: ', 'event_espresso'); ?></span> <?php echo __('Free Event', 'event_espresso'); ?></p>
 			<?php } ?>
 
 		<p id="event_date-<?php echo $event_id ?>"><span class="section-title"><?php _e('Date:', 'event_espresso'); ?></span>  <?php echo event_date_display($start_date, get_option('date_format')) ?> 
