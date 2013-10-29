@@ -62,8 +62,8 @@ $this_event_id = $event_id;
 	<?php //echo $venue_country != ''?'<p id="event_venue_country-'.$event_id.'" class="event_venue_country">'.stripslashes_deep($venue_country).'</p>':''
 	$event->event_cost = empty($event->event_cost) ? '' : $event->event_cost;
 	 //Featured image
-			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');
-//Show short descriptions
+	echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');
+	//Show short descriptions
 	if (!empty($event_desc) && isset($org_options['display_short_description_in_event_list']) && $org_options['display_short_description_in_event_list'] == 'Y') {
 		?>
 		<div class="event-desc">
@@ -109,7 +109,7 @@ $this_event_id = $event_id;
 		}
 	} else {
 		if ($display_reg_form == 'Y' && $externalURL == '') {
-			?>			<p id="available_spaces-<?php echo $event_id ?>" class="spaces-available"><span class="section-title"><?php _e('Available Spaces:', 'event_espresso') ?></span> <?php echo get_number_of_attendees_reg_limit($event_id, 'available_spaces') ?></p>
+			?><p id="available_spaces-<?php echo $event_id ?>" class="spaces-available"><span class="section-title"><?php _e('Available Spaces:', 'event_espresso') ?></span> <?php echo get_number_of_attendees_reg_limit($event_id, 'available_spaces') ?></p>
 			<?php
 		}
 
