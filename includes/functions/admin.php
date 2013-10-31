@@ -1752,7 +1752,9 @@ function ee_core_load_pue_update() {
 				$extra_stats['ticketing_active'] = 1;
 
 			
-
+			//REM active? if there are any recurring events present then its in use.
+			
+			
 
 
 
@@ -1852,4 +1854,4 @@ function espresso_data_optin_ajax_handler() {
 /**
  * specific uxip tracking hooks for addons that are NOT restricted to is_admin() because we need to be able to hook into addon runtimes.
  */
-require_once EVENT_ESPRESSO_PLUGEVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions.uxip-hooks.php';
+require_once EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions/uxip-hooks.php';

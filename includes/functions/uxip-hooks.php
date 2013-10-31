@@ -1,5 +1,5 @@
 <?php
-if (!defined('ABS_PATH') )
+if (!defined('EVENT_ESPRESSO_VERSION') )
 	exit('NO direct script access allowed');
 /**
  * This file just contains all the uxip tracking stuff that are hooked into various addons.
