@@ -1755,7 +1755,12 @@ function ee_core_load_pue_update() {
 
 			
 			//REM active? if there are any recurring events present then its in use.
-			if ( defined)
+			//if IS active then we return the count of recurring events.
+			$active_rem = get_option('uxip_ee_rem_active');
+			if ( !empty( $active_rem ) )
+				$extra_stats['rem_active'] = $active_rem;
+
+			
 			
 
 
