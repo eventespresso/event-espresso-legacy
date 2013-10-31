@@ -82,7 +82,7 @@ function espresso_uxip_seating_chart_active() {
 		$count = $wpdb->get_var($query);
 		if ( $count > 0 )
 			update_option('uxip_ee_seating_chart_active', $count);
-		set_transient( 'ee_seating_chart_check' );
+		set_transient( 'ee_seating_chart_check', 1, MONTH_IN_SECONDS );
 	}
 }
 add_action('admin_init', 'espresso_uxip_seating_chart_active');
@@ -105,7 +105,7 @@ function espresso_uxip_members_active() {
 		$count = $wpdb->get_var($query);
 		if ( $count > 0 )
 			update_option('uxip_ee_members_events', $count);
-		set_transient('ee_members_active_check', $count );
+		set_transient('ee_members_active_check', 1, MONTH_IN_SECONDS );
 	}
 
 }
