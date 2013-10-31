@@ -1766,7 +1766,12 @@ function ee_core_load_pue_update() {
 			if ( !empty( $active_sc ) )
 				$extra_stats['seating_chart_active'] = $active_sc;
 
-			
+			//member only events being run?
+			$member_only_events = get_option('uxip_ee_members_events');
+			if ( !empty( $member_only_events ) )
+				$extra_stats['member_only_events'] = $member_only_events;
+
+
 
 
 

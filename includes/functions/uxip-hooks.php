@@ -86,3 +86,27 @@ function espresso_uxip_seating_chart_active() {
 	}
 }
 add_action('admin_init', 'espresso_uxip_seating_chart_active');
+
+
+/**
+ * Espresso Members ADdon tracking (User Integration addon)
+ */
+
+function espresso_uxip_members_active() {
+	if ( !defined('EVENTS_MEMBER_REL_TABLE') )
+		return; //get out cause members isn't even active
+
+	if ( false === ( $transient = get_transient( 'ee_members_active_check' ) ) ) {
+		global $wpdb;
+
+		//first let's check if there are any member only events and set that.
+		$table = EVENTS_MEMBER_REL_TABLE;
+		$query = "SELECT COUNT('id') FROM $table";
+		$count = $wpdb->get_var($query);
+		if ( $count > 0 )
+			update_option('uxip_ee_members_events', $count);
+		set_transient('ee_members_active_check', $count );
+	}
+
+}
+add_action('admin_init', 'espresso_uxip_members_active' );
