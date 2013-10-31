@@ -1734,6 +1734,13 @@ function ee_core_load_pue_update() {
 				}
 			}
 
+			//MER active?
+			$active_plugins = get_option('active_plugins');
+			if ( preg_match('/espresso-multi-registration/', implode(',', $active_plugins ) ) )
+				$extra_stats['MER_active'] = 1;
+
+			//
+
 			//set transient
 			set_transient( 'ee_extra_data', $extra_stats, WEEK_IN_SECONDS );
 		}
