@@ -1746,7 +1746,7 @@ function ee_core_load_pue_update() {
 			}
 
 
-			//ticketing addon in use?  considered active if a ticket is selected in an event
+			//ticketing addon in use?  considered active if "espresso_ticket_launch" has been called with the corresponding _REQUEST var that triggers ticket generation.
 			$active_ticketing = get_option('uxip_ee_ticketing_active');
 			if ( !empty( $active_ticketing ) )
 				$extra_stats['ticketing_active'] = 1;
