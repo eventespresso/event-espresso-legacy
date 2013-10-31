@@ -51,7 +51,7 @@ function espresso_uxip_rem_active() {
 	if ( false === ( $transient = get_transient('ee_rem_check' ) ) ) {
 
 		global $wpdb;
-		$table = $wpdb->prefix . EVENT_ESPRESSO_RECURRENCE_TABLE;
+		$table = EVENT_ESPRESSO_RECURRENCE_TABLE;
 		$query = "SELECT COUNT('recurrence_id') FROM $table";
 		$count = $wpdb->get_var($query);
 		if ( $count > 1 )
@@ -77,7 +77,7 @@ function espresso_uxip_seating_chart_active() {
 	//we don't wan this running on EVERY admin page load but at least once very month.
 	if ( false === ( $transient = get_transient('ee_seating_chart_check' ) ) ) {
 		global $wpdb;
-		$table = $wpdb->prefix . EVENTS_SEATING_CHART_EVENT_TABLE;
+		$table = EVENTS_SEATING_CHART_EVENT_TABLE;
 		$query = "SELECT COUNT('event_id') FROM $table";
 		$count = $wpdb->get_var($query);
 		if ( $count > 0 )
