@@ -60,3 +60,29 @@ function espresso_uxip_rem_active() {
 	}
 }
 add_action('admin_init', 'espresso_uxip_rem_active');
+
+
+
+/**
+ * Espresso Seating Chart addon tracking
+ */
+/**
+ * record if the seating chart addon is active (and being used)
+ * @return void
+ */
+function espresso_uxip_seating_chart_active() {
+	if ( !defined('ESPRESSO_SEATING_VERSION') )
+		return; //get out cause seating chart isn't even active.
+
+	//we don't wan this running on EVERY admin page load but at least once very month.
+	if ( false === ( $transient = get_transient('ee_seating_chart_check' ) ) ) {
+		global $wpdb;
+		$table = $wpdb->prefix . EVENTS_SEATING_CHART_EVENT_TABLE;
+		$query = "SELECT COUNT('event_id') FROM $table";
+		$count = $wpdb->get_var($query);
+		if ( $count > 0 )
+			update_option('uxip_ee_seating_chart_active', $count);
+		set_transient( 'ee_seating_chart_check' );
+	}
+}
+add_action('admin_init', 'espresso_uxip_seating_chart_active');
