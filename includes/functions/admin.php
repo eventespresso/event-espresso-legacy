@@ -1734,26 +1734,28 @@ function ee_core_load_pue_update() {
 				}
 			}
 
-			//MER active?
+			//MER active? 1 if yes. not set if not.
 			$active_plugins = get_option('active_plugins');
 			if ( preg_match('/espresso-multi-registration/', implode(',', $active_plugins ) ) )
 				$extra_stats['MER_active'] = 1;
 
 			//calendar active? considered active if the calendar page has been loaded in the past week (we use the espresso_calendar shortcode for this check)
+			//if it is active (meeting the criteria), we send the timestamp.  if it isn't then we dont' set.
 			$active_calendar = get_option('uxip_ee_calendar_active');
 			if ( strtotime('+ 1week', (int) $active_calendar) >= time() ) {
-				$extra_stats['calendar_active'] = 1;
+				$extra_stats['calendar_active'] = $active_calendar;
 			}
 
 
 			//ticketing addon in use?  considered active if "espresso_ticket_launch" has been called with the corresponding _REQUEST var that triggers ticket generation.
+			//if it is active we send the timestamp for the last time a ticket was generated.  If NOT active we don't set.
 			$active_ticketing = get_option('uxip_ee_ticketing_active');
 			if ( !empty( $active_ticketing ) )
-				$extra_stats['ticketing_active'] = 1;
+				$extra_stats['ticketing_active'] = $active_ticketing;
 
 			
 			//REM active? if there are any recurring events present then its in use.
-			
+			if ( defined)
 			
 
 
