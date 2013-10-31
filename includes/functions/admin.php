@@ -1741,11 +1741,19 @@ function ee_core_load_pue_update() {
 
 			//calendar active? considered active if the calendar page has been loaded in the past week (we use the espresso_calendar shortcode for this check)
 			$active_calendar = get_option('uxip_ee_calendar_active');
-			if ( strtotime('+ 1week', $active_calendar) >= time() ) {
+			if ( strtotime('+ 1week', (int) $active_calendar) >= time() ) {
 				$extra_stats['calendar_active'] = 1;
 			}
 
+
+			//ticketing addon in use?  considered active if a ticket is selected in an event
+			$active_ticketing = get_option('uxip_ee_ticketing_active');
+			if ( !empty( $active_ticketing ) )
+				$extra_stats['ticketing_active'] = 1;
+
 			
+
+
 
 
 			//set transient
