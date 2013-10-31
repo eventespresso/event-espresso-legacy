@@ -1739,7 +1739,14 @@ function ee_core_load_pue_update() {
 			if ( preg_match('/espresso-multi-registration/', implode(',', $active_plugins ) ) )
 				$extra_stats['MER_active'] = 1;
 
-			//
+			//calendar active? considered active if the calendar page has been loaded in the past week (we use the espresso_calendar shortcode for this check)
+			$active_calendar = get_option('uxip_ee_calendar_active');
+			if ( strtotime('+ 1week', $active_calendar) >= time() ) {
+				$extra_stats['calendar_active'] = 1;
+			}
+
+			
+
 
 			//set transient
 			set_transient( 'ee_extra_data', $extra_stats, WEEK_IN_SECONDS );
@@ -1831,3 +1838,10 @@ function espresso_data_optin_ajax_handler() {
 	update_option('ee_ueip_has_notified', 1);
 	exit();
 }
+
+
+
+/**
+ * specific uxip tracking hooks for addons that are NOT restricted to is_admin() because we need to be able to hook into addon runtimes.
+ */
+require_once EVENT_ESPRESSO_PLUGEVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions.uxip-hooks.php';
