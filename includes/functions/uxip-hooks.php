@@ -110,3 +110,16 @@ function espresso_uxip_members_active() {
 
 }
 add_action('admin_init', 'espresso_uxip_members_active' );
+
+
+/**
+ * Track active theme info
+ */
+function espresso_uxip_track_active_theme() {
+	if ( false === ( $transient = get_transient( 'ee_active_theme_check' ) ) ) {
+		$theme = wp_get_theme();
+		update_option('uxip_ee_active_theme', $theme->get('Name') );
+		set_transient('ee_active_theme_check', 1, MONTH_IN_SECONDS );
+	}
+}
+add_action('admin_init', 'espresso_uxip_track_active_theme');

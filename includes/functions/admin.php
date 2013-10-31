@@ -1772,7 +1772,10 @@ function ee_core_load_pue_update() {
 				$extra_stats['member_only_events'] = $member_only_events;
 
 
-
+			//what is the current active theme?
+			$active_theme = get_option('uxip_ee_active_theme');
+			if ( !empty( $active_theme ) )
+				$extra_stats['active_theme'] = $active_theme;
 
 
 			//set transient
