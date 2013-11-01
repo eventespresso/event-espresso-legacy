@@ -15,11 +15,13 @@ function espresso_display_atos($payment_data) {
 	$parm .= number_format($event_cost, 0, '', '');
 	$parm .= " currency_code=".$settings['currency_code'];
 	$parm .= " pathfile=".dirname(__FILE__).DS.$settings['provider'].DS.'pathfile';
-	$normal_return_url = home_url() . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=atos';
+		
+	$normal_return_url = add_query_arg(array('r_id'=>$registration_id,'id'=>$attendee_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'atos'), get_permalink($org_options['return_url']));
 	$parm .= " normal_return_url=".$normal_return_url;
-	$cancel_return_url = home_url() . '/?page_id=' . $org_options['cancel_return'];
+	$cancel_return_url = get_permalink($org_options['cancel_return']);
 	$parm .= " cancel_return_url=".$cancel_return_url;
-	$automatic_response_url = home_url() . '/?page_id=' . $org_options['notify_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=atos';
+	
+	$automatic_response_url = add_query_arg(array('r_id'=>$registration_id,'id'=>$attendee_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'atos'), get_permalink($org_options['notify_url']));
 	$parm .= " automatic_response_url=".$automatic_response_url;
 	$parm .= " language=".$settings['language'];
 	$payment_means = '';
