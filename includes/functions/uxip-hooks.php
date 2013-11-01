@@ -96,6 +96,7 @@ function espresso_uxip_members_active() {
 	if ( !defined('EVENTS_MEMBER_REL_TABLE') )
 		return; //get out cause members isn't even active
 
+	//we only check this once a month.
 	if ( false === ( $transient = get_transient( 'ee_members_active_check' ) ) ) {
 		global $wpdb;
 
@@ -116,6 +117,7 @@ add_action('admin_init', 'espresso_uxip_members_active' );
  * Track active theme info
  */
 function espresso_uxip_track_active_theme() {
+	//we only check this once a month.
 	if ( false === ( $transient = get_transient( 'ee_active_theme_check' ) ) ) {
 		$theme = wp_get_theme();
 		update_option('uxip_ee_active_theme', $theme->get('Name') );
@@ -123,3 +125,27 @@ function espresso_uxip_track_active_theme() {
 	}
 }
 add_action('admin_init', 'espresso_uxip_track_active_theme');
+
+
+/**
+ * track events info
+ */
+function espresso_uxip_track_event_info() {
+	//we only check this once every couple weeks.
+	if ( false === ( $transient = get_transient( 'ee_event_info_check') ) ) {
+		//first let's get the number for ALL events
+		global $wpdb;
+		$table = EVENTS_DETAIL_TABLE;
+		$query = "SELECT COUNT('id') FROM $table";
+		$count = $wpdb->get_var($query);
+		if ( $count > 0 )
+			update_option('uxip_ee_all_events_count', $count);
+
+		//next let's just get the number of ACTIVE events
+		$query = $query . " WHERE is_active = 'Y' AND event_status != 'D' AND DATE(start_date) > NOW()";
+		$count = $wpdb->get_var($query);
+		if ( $count > 0 )
+			update_option('uxip_ee_active_events_count', $count);
+		set_transient( 'ee_event_info_check', 1, WEEK_IN_SECONDS * 2 );
+	} 
+}

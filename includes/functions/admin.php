@@ -1777,6 +1777,14 @@ function ee_core_load_pue_update() {
 			if ( !empty( $active_theme ) )
 				$extra_stats['active_theme'] = $active_theme;
 
+			//event info regarding an all event count and all "active" event count
+			$all_events_count = get_option('uxip_ee_all_events_count');
+			if ( !empty( $all_events_count ) )
+				$extra_stats['all_events_count'] = $all_events_count;
+			$active_events_count = get_option('uxip_ee_active_events_count');
+			if ( !empty( $active_events_count ) )
+				$extra_stats['active_events_count'] = $active_events_count;
+
 
 			//set transient
 			set_transient( 'ee_extra_data', $extra_stats, WEEK_IN_SECONDS );
