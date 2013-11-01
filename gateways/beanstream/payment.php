@@ -314,11 +314,6 @@ function espresso_display_beanstream($data) {
 	global $org_options;
 	$beanstream_settings = get_option('event_espresso_beanstream_settings');
 	$use_sandbox = $beanstream_settings['beanstream_use_sandbox'];
-	if ($beanstream_settings['force_ssl_return']) {
-		$home = str_replace('http://', 'https://', home_url());
-	} else {
-		$home = home_url();
-	}
 
 	wp_register_script( 'beanstream', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/beanstream/beanstream.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'beanstream' );	
@@ -346,7 +341,7 @@ function espresso_display_beanstream($data) {
 			<?php }	?>
 			
 				<div class = "event_espresso_form_wrapper">
-					<form id="beanstream_payment_form" name="beanstream_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
+					<form id="beanstream_payment_form" name="beanstream_payment_form" method="post" action="<?php echo add_query_arg(array('r_id'=>$registration_id), get_permalink($org_options['return_url'])); ?>">
 					
 						<fieldset id="beanstream-billing-info-dv">
 							<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>
