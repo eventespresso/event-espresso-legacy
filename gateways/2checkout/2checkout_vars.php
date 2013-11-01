@@ -37,7 +37,7 @@ function espresso_display_2checkout($payment_data) {
 	$my2checkout->addField('sid', $twocheckout_id);
 	$my2checkout->addField('cart_order_id', rand(1, 100));
 	
-	$my2checkout->addField('x_Receipt_Link_URL', add_query_arg(array('r_id'=>$registration_id,'eway_rapid3'=>'true','id'=>$attendee_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'2co'), get_permalink($org_options['return_url'])));
+	$my2checkout->addField('x_Receipt_Link_URL', espresso_build_gateway_url('return_url', $payment_data, '2checkout'));
 	$my2checkout->addField('total', number_format($event_cost, 2, '.', ''));
 	$my2checkout->addField('tco_currency', $twocheckout_cur);
 
