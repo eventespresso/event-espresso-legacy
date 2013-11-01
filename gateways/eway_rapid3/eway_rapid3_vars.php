@@ -41,7 +41,7 @@ function espresso_display_eway_rapid3($data) {
 				'CurrencyCode'=>$eway_rapid3_settings['currency_format']
 		);
 		$eway_rapid3RequestData = array('Payment'=>$payment);
-		$redirectUrl = add_query_arg(array('r_id'=>$registration_id,'eway_rapid3'=>'true','id'=>$attendee_id), get_permalink($org_options['return_url']));
+		$redirectUrl = espresso_build_gateway_url('return_url', $payment_data, 'eway_rapid3', array('eway_rapid3'=>'true'));
 		$rapid3Response= $rapid3Client->createAccessCode($eway_rapid3RequestData,$redirectUrl,'ProcessPayment');
 		if( empty($rapid3Response)){
 			echo '<div id="message" class="clear"><p class="error">**' . __( 'An error occcurred communicating with EWay Rapid 3 Gateway\'s Server. You probably have the wrong API Key', 'event_espresso' ) . '</p></div>';
