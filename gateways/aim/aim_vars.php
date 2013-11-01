@@ -30,7 +30,7 @@ function espresso_display_aim($data) {
 ?>
 		<h3 class="payment_header"><?php echo $authnet_aim_settings['header']; ?></h3><?php } ?>
 
-		<form id="aim_payment_form" name="aim_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
+		<form id="aim_payment_form" name="aim_payment_form" method="post" action="<?php echo add_query_arg(array('r_id'=>$registration_id), get_permalink($org_options['return_url'])); ?>">
 			<div class = "event_espresso_form_wrapper">
 
 				<fieldset id="aim-billing-info-dv">
