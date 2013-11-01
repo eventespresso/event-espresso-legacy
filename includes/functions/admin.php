@@ -1734,6 +1734,58 @@ function ee_core_load_pue_update() {
 				}
 			}
 
+			//MER active? 1 if yes. not set if not.
+			$active_plugins = get_option('active_plugins');
+			if ( preg_match('/espresso-multi-registration/', implode(',', $active_plugins ) ) )
+				$extra_stats['MER_active'] = 1;
+
+			//calendar active? considered active if the calendar page has been loaded in the past week (we use the espresso_calendar shortcode for this check)
+			//if it is active (meeting the criteria), we send the timestamp.  if it isn't then we dont' set.
+			$active_calendar = get_option('uxip_ee_calendar_active');
+			if ( strtotime('+ 1week', (int) $active_calendar) >= time() ) {
+				$extra_stats['calendar_active'] = $active_calendar;
+			}
+
+
+			//ticketing addon in use?  considered active if "espresso_ticket_launch" has been called with the corresponding _REQUEST var that triggers ticket generation.
+			//if it is active we send the timestamp for the last time a ticket was generated.  If NOT active we don't set.
+			$active_ticketing = get_option('uxip_ee_ticketing_active');
+			if ( !empty( $active_ticketing ) )
+				$extra_stats['ticketing_active'] = $active_ticketing;
+
+			
+			//REM active? if there are any recurring events present then its in use.
+			//if IS active then we return the count of recurring events.
+			$active_rem = get_option('uxip_ee_rem_active');
+			if ( !empty( $active_rem ) )
+				$extra_stats['rem_active'] = $active_rem;
+
+
+			//seating chart active?  if there are any seating charts attached to an even then its considered active and we'll send along the count of seating charts in use.  Otherwise nothing is sent.
+			$active_sc = get_option('uxip_ee_seating_chart_active');
+			if ( !empty( $active_sc ) )
+				$extra_stats['seating_chart_active'] = $active_sc;
+
+			//member only events being run?
+			$member_only_events = get_option('uxip_ee_members_events');
+			if ( !empty( $member_only_events ) )
+				$extra_stats['member_only_events'] = $member_only_events;
+
+
+			//what is the current active theme?
+			$active_theme = get_option('uxip_ee_active_theme');
+			if ( !empty( $active_theme ) )
+				$extra_stats['active_theme'] = $active_theme;
+
+			//event info regarding an all event count and all "active" event count
+			$all_events_count = get_option('uxip_ee_all_events_count');
+			if ( !empty( $all_events_count ) )
+				$extra_stats['all_events_count'] = $all_events_count;
+			$active_events_count = get_option('uxip_ee_active_events_count');
+			if ( !empty( $active_events_count ) )
+				$extra_stats['active_events_count'] = $active_events_count;
+
+
 			//set transient
 			set_transient( 'ee_extra_data', $extra_stats, WEEK_IN_SECONDS );
 		}
@@ -1824,3 +1876,10 @@ function espresso_data_optin_ajax_handler() {
 	update_option('ee_ueip_has_notified', 1);
 	exit();
 }
+
+
+
+/**
+ * specific uxip tracking hooks for addons that are NOT restricted to is_admin() because we need to be able to hook into addon runtimes.
+ */
+require_once EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions/uxip-hooks.php';
