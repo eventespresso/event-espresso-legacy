@@ -563,6 +563,7 @@ if (is_admin()) {
 	do_action('action_hook_espresso_attendee_mover_update_api');
 	
 	//Custom templates addon
+	do_action('action_hook_espresso_custom_templates_update_api');
 	do_action('action_hook_espresso_template_calendar_table_update_api');
 	do_action('action_hook_espresso_template_category_accordion_update_api');
 	do_action('action_hook_espresso_template_date_range_update_api');
