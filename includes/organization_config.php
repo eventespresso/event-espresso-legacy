@@ -129,8 +129,8 @@ function organization_config_mnu() {
 	$org_options = get_option('events_organization_settings');
 	$ueip_optin = get_option('ee_ueip_optin');
 	$plugin_basename = plugin_basename(EVENT_ESPRESSO_PLUGINPATH);
-	$verify_fail = get_option( 'pue_verification_error_' . $plugin_basename );
-	$site_license_key_verified = !empty( $verify_fail ) ? '<span class"pue-sl-not-verified"></span>' : '<span class="pue-sl-verified"></span>';
+	/*$verify_fail = get_option( 'pue_verification_error_' . $plugin_basename );
+	$site_license_key_verified = !empty( $verify_fail ) ? '<span class"pue-sl-not-verified"></span>' : '<span class="pue-sl-verified"></span>';/**/ //to be added for 3.1.37
 	$values = array(
 			array('id' => 'Y', 'text' => __('Yes', 'event_espresso')),
 			array('id' => 'N', 'text' => __('No', 'event_espresso')));
@@ -621,7 +621,7 @@ function organization_config_mnu() {
 		<?php _e('Site License Key:', 'event_espresso'); ?>
 													</label>
 													<input type="text" name="site_license_key" size="45" value="<?php echo isset( $org_options['site_license_key'] ) ? stripslashes_deep($org_options['site_license_key']) : ''; ?>" />
-													<?php echo $site_license_key_verified; ?>
+													<?php //echo $site_license_key_verified; ?>
 												</li>
 
 											</ul>
