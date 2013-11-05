@@ -6,8 +6,6 @@ function espresso_display_evertec($payment_data) {
 	
 	global $org_options;
 	$evertec_settings = get_option('event_espresso_evertec_settings');
-	echo 'echodump of $evertec_settings';
-	var_dump($evertec_settings);
 	if($evertec_settings['use_sandbox']){
 		$server_url = 'https://everpaycert.evertecinc.com/wscheckoutpayment/wsCheckoutPayment.asmx?op=MakePayment';
 	}else{
