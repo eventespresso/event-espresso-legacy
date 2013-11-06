@@ -80,7 +80,11 @@ function espresso_pending_registration_approval($registration_id) {
 		$pre_approve = $attendee->pre_approve;
 			
 		event_espresso_send_attendee_registration_approval_pending($registration_id);
-		require_once(EVENT_ESPRESSO_PLUGINFULLPATH."templates/pending_approval.php");		
+		if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . "pending_approval.php")) {
+    		require_once(EVENT_ESPRESSO_TEMPLATE_DIR . "pending_approval.php");
+		} else {
+    		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "templates/pending_approval.php");
+		}		
 	} else {
 		wp_die( _e('An error occured. The primary attendee could not be located.', 'event_espresso'));		
 	}
