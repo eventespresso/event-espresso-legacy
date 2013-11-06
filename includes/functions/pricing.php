@@ -441,6 +441,7 @@ if (!function_exists('event_espresso_price_dropdown')) {
                     $html .= '<span class="'.espresso_template_css_class('event_price_label','event_price_label', false).'">' . __('Price:', 'event_espresso') . '</span> <span class="'.espresso_template_css_class('event_price_value','event_price_value', false).'">' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . $surcharge . '</span>';
                     $html .= '<input type="hidden" name="price_id' . $multi_name_adjust . '" id="price_id-' . $result->id . '" value="' . $result->id . '" />';
                     $html .= '<span class="'.espresso_template_css_class('free_event','free_event', false).'">' . $result->price_type . '</span>';
+				}
             }
         }
        	echo $html;
@@ -661,4 +662,5 @@ function espresso_selected_price_option($selected){
 	$price_type = $price_options[1];
 	
 	return array('price_id' => $price_id, 'price_type' => $price_type);
+
 }
