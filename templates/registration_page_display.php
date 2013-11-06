@@ -36,10 +36,14 @@ if ($reg_form_only == false) {
 	<?php /* end venue details block */ ?>
 
 	<?php if ($display_desc == "Y") { //Show the description or not ?>
-	<p class="<?php espresso_template_css_class('section_title','section-title'); ?>">
+	<div class="event_description clearfix">
+		<p class="<?php espresso_template_css_class('section_title','section-title'); ?>">
+			<?php _e('Description:', 'event_espresso') ?>
+		</p>
+	<div class="<?php espresso_template_css_class('event_description','event_description clearfix'); ?>">
+<p class="<?php espresso_template_css_class('section_title','section-title'); ?>">
 		<?php _e('Description:', 'event_espresso') ?>
 	</p>
-	<div class="<?php espresso_template_css_class('event_description','event_description clearfix'); ?>">
 		<?php echo espresso_format_content($event_desc); //Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.   ?>
 		
 	</div>
@@ -105,21 +109,53 @@ if ($reg_form_only == false) {
 	<?php
 				
 			//This hides the date/times and location when usign custom post types or the ESPRESSO_REG_FORM shortcode
-if ( $reg_form_only == false ){	
+		if ( $reg_form_only == false ){	
 						
-					/* Display the address and google map link if available */
-					if ($location != '' && (empty($org_options['display_address_in_regform']) || $org_options['display_address_in_regform'] != 'N')) {
+					
+				do_action('action_hook_espresso_social_display_buttons', $event_id);
+					
+				if ($display_reg_form == 'Y') {
+				
+					// Added for seating chart addon
+					$display_price_dropdown = TRUE;
+
+					if (defined('ESPRESSO_SEATING_CHART')) {
+						$seating_chart_id = seating_chart::check_event_has_seating_chart($event_id);
+						if ($seating_chart_id !== FALSE) {
+							$display_price_dropdown = FALSE;
+						}
+					}
+
+					if ($display_price_dropdown == TRUE) {
+						$price_label = '<span class="section-title">'.__('Choose an Option: ', 'event_espresso').'</span>';
 	?>
-				<p class="<?php espresso_template_css_class('event_address','event_address'); ?>" id="event_address-<?php echo $event_id ?>"><span class="section-title"><?php echo __('Address:', 'event_espresso'); ?></span> <br />
-					<span class="<?php espresso_template_css_class('address_block','address-block'); ?>">
-						<?php echo stripslashes_deep($venue_title); ?><br />
-						<?php echo stripslashes_deep($location); ?><br />
-						<span class="<?php espresso_template_css_class('google_map_link','google-map-link'); ?>"><?php echo $google_map_link; ?></span>
-					</span>
+						<p class="event_prices">
+							<?php do_action( 'espresso_price_select', $event_id, array('show_label'=>TRUE, 'label'=>$price_label) );?>
+						</p>
+	<?php
+					} else {
+	?>
+						<p class="event_prices">
+							<?php do_action( 'espresso_seating_price_select_action', $event_id );?>
+						</p>
+	<?php
+						// Seating chart selector
+						do_action('espresso_seating_chart_select', $event_id);
+							
+					}						
+	?>
+				<p class="event_time">
+	<?php
+						//This block of code is used to display the times of an event in either a dropdown or text format.
+						if (isset($time_selected) && $time_selected == true) {//If the customer is coming from a page where the time was preselected.
+							echo event_espresso_display_selected_time($time_id); //Optional parameters start, end, default
+						} else {
+							echo event_espresso_time_dropdown($event_id);
+						}//End time selected
+	?>
 				</p>
 	<?php
-					}
-					do_action('action_hook_espresso_social_display_buttons', $event_id);
+				}
 	?>
 
 				<p class="<?php espresso_template_css_class('start_date','start_date'); ?>">
@@ -146,56 +182,29 @@ if ( $reg_form_only == false ){
 	<?php endif; ?>
 					<?php echo apply_filters('filter_hook_espresso_display_ical', $all_meta); ?>
 				</p>
+				
+				<?php
+					/* Display the address and google map link if available */
+					if ($location != '' && (empty($org_options['display_address_in_regform']) || $org_options['display_address_in_regform'] != 'N')) {
+	?>
+						<p class="event_address" id="event_address-<?php echo $event_id ?>"><span class="section-title"><?php echo __('Address:', 'event_espresso'); ?></span> <br />
+							<span class="address-block">
+								<?php echo stripslashes_deep($venue_title); ?><br />
+								<?php echo stripslashes_deep($location); ?><br />
+								<span class="google-map-link"><?php echo $google_map_link; ?></span>
+							</span>
+						</p>
 	<?php
-				}
+					}
+		}
 
 			// * * This section shows the registration form if it is an active event * *
 
 			if ($display_reg_form == 'Y') {
 				
 				do_action('action_hook_espresso_registration_form_top', $event_id, $event_meta, $all_meta);
-	?>
-				<p class="<?php espresso_template_css_class('span_event_time','event_time'); ?>">
-	<?php
-						//This block of code is used to display the times of an event in either a dropdown or text format.
-						if (isset($time_selected) && $time_selected == true) {//If the customer is coming from a page where the time was preselected.
-							echo event_espresso_display_selected_time($time_id); //Optional parameters start, end, default
-						} else {
-							echo event_espresso_time_dropdown($event_id);
-						}//End time selected
-	?>
-				</p>
-	<?php
 
-					// Added for seating chart addon
-					$display_price_dropdown = TRUE;
-
-					if (defined('ESPRESSO_SEATING_CHART')) {
-						$seating_chart_id = seating_chart::check_event_has_seating_chart($event_id);
-						if ($seating_chart_id !== FALSE) {
-							$display_price_dropdown = FALSE;
-						}
-					}
-
-					if ($display_price_dropdown == TRUE) {
-						$price_label = '<span class="'.espresso_template_css_class('section_title','section-title', false).'">'.__('Choose an Option: ', 'event_espresso').'</span>';
 	?>
-						<p class="<?php espresso_template_css_class('event_prices','event_prices'); ?>">
-							<?php do_action( 'espresso_price_select', $event_id, array('show_label'=>TRUE, 'label'=>$price_label) );?>
-						</p>
-	<?php
-					} else {
-	?>
-						<p class="<?php espresso_template_css_class('event_prices','event_prices'); ?>">
-							<?php do_action( 'espresso_seating_price_select_action', $event_id );?>
-						</p>
-	<?php
-						// Seating chart selector
-						do_action('espresso_seating_chart_select', $event_id);
-							
-					}						
-	?>
-
 				<div id="event-reg-form-groups" class="<?php espresso_template_css_class('event_reg_form_groups','event-reg-form-groups'); ?>">
 				
 					<h3 class="<?php espresso_template_css_class('section_heading','section-heading'); ?>"><?php _e('Registration Details', 'event_espresso'); ?></h3>

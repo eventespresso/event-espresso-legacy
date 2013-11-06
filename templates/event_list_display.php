@@ -61,15 +61,24 @@ $this_event_id = $event_id;
 	<?php //echo $venue_zip != ''?'<p id="event_venue_zip-'.$event_id.'" class="event_venue_zip">'.stripslashes_deep($venue_zip).'</p>':''?>
 	<?php //echo $venue_country != ''?'<p id="event_venue_country-'.$event_id.'" class="event_venue_country">'.stripslashes_deep($venue_country).'</p>':''
 	$event->event_cost = empty($event->event_cost) ? '' : $event->event_cost;
+	 //Featured image
+	echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');
+	//Show short descriptions
+	if (!empty($event_desc) && isset($org_options['display_short_description_in_event_list']) && $org_options['display_short_description_in_event_list'] == 'Y') {
+		?>
+		<div class="event-desc">
+		
+			<?php echo espresso_format_content($event_desc); ?>
+		</div>
+		<?php
+	}
 	?>
-
 	<div class="<?php espresso_template_css_class('event-meta','event-meta'); ?>">
-			<?php //Featured image
-			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');?>
-			<?php if ( $event->event_cost != '0.00' ) { ?>
-				 <p id="p_event_price-<?php echo $event_id ?>" class="<?php espresso_template_css_class('event_price','event_price'); ?>"><span class="<?php espresso_template_css_class('section_title','section-title'); ?>"><?php  echo __('Price: ', 'event_espresso'); ?></span> <?php echo  $org_options['currency_symbol'].$event->event_cost; ?></p>
-			<?php } else { ?>
-				<p id="p_event_price-<?php echo $event_id ?>" class="<?php espresso_template_css_class('event_price','event_price'); ?>"><?php echo __('Free Event', 'event_espresso'); ?></p>
+			<?php 				if ( $event->event_cost != '0.00' ) {
+			?>
+					<p id="p_event_price-<?php echo $event_id ?>" class="<?php espresso_template_css_class('event_price','event_price'); ?>"><span class="<?php espresso_template_css_class('section_title','section-title'); ?>"><?php  echo __('Price: ', 'event_espresso'); ?></span> <?php echo  $org_options['currency_symbol'].$event->event_cost; ?></p>
+			<?php } else { ?> 
+					<p id="p_event_price-<?php echo $event_id ?>" class="<?php espresso_template_css_class('event_price','event_price'); ?>"><span class="section-title"><?php  echo __('Price: ', 'event_espresso'); ?></span> <?php echo __('Free Event', 'event_espresso'); ?></p>
 			<?php } ?>
 
 		<p id="event_date-<?php echo $event_id ?>"><span class="<?php espresso_template_css_class('section_title','section-title'); ?>"><?php _e('Date:', 'event_espresso'); ?></span>  <?php echo event_date_display($start_date, get_option('date_format')) ?> 
@@ -77,16 +86,6 @@ $this_event_id = $event_id;
 			echo apply_filters('filter_hook_espresso_display_ical', $all_meta);?>
 		</p>
 	</div>
-	<?php
-//Show short descriptions
-	if (!empty($event_desc) && isset($org_options['display_short_description_in_event_list']) && $org_options['display_short_description_in_event_list'] == 'Y') {
-		?>
-		<div class="<?php espresso_template_css_class('section_title','event-desc'); ?>">
-			<?php echo espresso_format_content($event_desc); ?>
-		</div>
-		<?php
-	}
-	?>
 
 	<?php if ( (isset($location) && $location != '' ) && (isset($org_options['display_address_in_event_list']) && $org_options['display_address_in_event_list'] == 'Y') ) { ?>
 		<p class="<?php espresso_template_css_class('event_address','event_address'); ?>" id="event_address-<?php echo $event_id ?>"><span class="<?php espresso_template_css_class('section_title','section-title'); ?>"><?php echo __('Address:', 'event_espresso'); ?></span> <br />

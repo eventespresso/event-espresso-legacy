@@ -1523,7 +1523,7 @@ if (!function_exists('espresso_display_featured_image')) {
 		$class = empty($class) ? 'ee-featured-image' : $class;
 		$title = empty($title) ? __('Featured Image', 'event_espresso') : $title;
 		$align = empty($align) ? 'right' : $align;
-		$output = '<div class="' . $class . '" id="espresso_featured_image-'.$event_id.'"><img title="' . $title . '" src="'.$image_url.'" /></div>';
+		$output = '<div class="' . $class . '" id="espresso_featured_image-'.$event_id.'"><a href="'.espresso_reg_url($event_id).'"><img title="' . $title . '" src="'.$image_url.'" /></a></div>';
 		return $output; 
 	}
 }
