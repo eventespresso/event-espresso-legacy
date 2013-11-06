@@ -29,8 +29,9 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 	  	<p class="<?php espresso_template_css_class('instruct','instruct'); ?>">
 			<?php _e('A confirmation email has been sent with additional details of your registration.', 'event_espresso'); ?>
 	  	</p>
+		<?php do_action('action_hook_espresso_payment_page_free_event', $event_id, isset($event_meta) ? $event_meta : '', isset($all_meta) ? $all_meta : '');
 
-<?php }else{ ?>
+	}else{ ?>
 
 		<h2><?php echo $fname ?> <?php echo $lname ?>,</h2>
 	  
