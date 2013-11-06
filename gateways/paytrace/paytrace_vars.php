@@ -4,7 +4,6 @@ function espresso_display_paytrace($payment_data) {
 	extract($payment_data);
 	global $org_options;
 	$paytrace_settings = get_option('event_espresso_paytrace_settings');
-	$home = $paytrace_settings['force_ssl_return'] ? str_replace('http://', 'https://', home_url()) : home_url();
 	
 	wp_register_script( 'paytrace', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/paytrace/paytrace.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'paytrace' );
@@ -20,7 +19,7 @@ function espresso_display_paytrace($payment_data) {
 		<?php if ($paytrace_settings['display_header']) { ?><h3 class="payment_header"><?php echo $paytrace_settings['header']; ?></h3><?php } ?>
 
 		<div class = "event_espresso_form_wrapper">
-			<form id="paytrace_payment_form" name="paytrace_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
+			<form id="paytrace_payment_form" name="paytrace_payment_form" method="post" action="<?php echo add_query_arg(array('r_id'=>$registration_id), get_permalink($org_options['return_url'])); ?>">
 
 				<fieldset id="paytrace-billing-info-dv">
 					<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>

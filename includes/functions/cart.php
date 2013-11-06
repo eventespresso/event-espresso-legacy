@@ -754,7 +754,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 							if ($attendee_overflow) {
 	
 								$err .= "<div class='event_espresso_error'><p><em>" . __('Attention', 'event_espresso') . "</em><br />";
-								$err .= sprintf(__("For %s, please make sure to select between 1 and %d attendees or delete it from your cart.", 'event_espresso'), stripslashes($r->event_name), $attendee_limit);
+								$err .= sprintf(__("For %s, please make sure to select at least one attendee or delete it from your cart.", 'event_espresso'), stripslashes($r->event_name), $attendee_limit);
 								$err .= '<span class="'.espresso_template_css_class('remove_cart_item','remove-cart-item', false).'"><img class="'.espresso_template_css_class('ee_delete_item_from_cart','ee_delete_item_from_cart', false).'" id="cart_link_' . $event_id . '" alt="Remove this item from your cart" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" /></span> ';
 								$err .= "</p></div>";
 							}
@@ -1067,7 +1067,6 @@ if (!function_exists('event_espresso_cart_link')) {
 		
 
 		$registration_cart_class = '';
-		ob_start();
 
 		// if event is already in session, return the view cart link  		array_key_exists($event_id, $events_in_session)
 		if ( $view_cart || is_array( $events_in_session ) && isset( $events_in_session[ $event_id ] )) {
@@ -1114,7 +1113,9 @@ if (!function_exists('event_espresso_cart_link')) {
 			$registration_cart_class = 'ee_add_item_to_cart';
 			
 		}
-
+                
+		ob_start();
+                
 		if ($view_cart && $direct_to_cart == 1) {
 			echo "<span id='moving_to_cart'>{$moving_to_cart}</span>";
 			echo "<script language='javascript'>window.location='" . $registration_cart_url . "';</script>";
