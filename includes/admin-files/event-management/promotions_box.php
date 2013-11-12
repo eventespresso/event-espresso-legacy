@@ -57,6 +57,9 @@
 			<div class='promocodes-in-use'>
 				<?php
 				global $wpdb;
+				if( ! isset($event_id)){
+					$event_id = null;
+				}
 				if (!empty($event_id)) {
 					$sql = $wpdb->prepare("SELECT d.id, d.coupon_code FROM " . EVENTS_DISCOUNT_CODES_TABLE . " AS d 
 						INNER JOIN " . EVENTS_DISCOUNT_REL_TABLE . " AS r ON d.id=r.discount_id WHERE apply_to_all=0 AND event_id=%d ",$event_id);
