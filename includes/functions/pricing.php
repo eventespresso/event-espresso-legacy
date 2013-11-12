@@ -487,9 +487,9 @@ function espresso_attendee_admin_price_dropdown($event_id, $atts) {
 			$surcharge = '';
 
 			if ($result->surcharge > 0 && $result->event_cost > 0.00) {
-				$surcharge = " + {$org_options['currency_symbol']}{$result->surcharge} " . $surcharge_text;
+				$surcharge = " + {$org_options['currency_symbol']}{$result->surcharge} ";
 				if ($result->surcharge_type == 'pct') {
-					$surcharge = " + {$result->surcharge}% " . $surcharge_text;
+					$surcharge = " + {$result->surcharge}% ";
 				}
 			}
 
