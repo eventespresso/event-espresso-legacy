@@ -169,10 +169,10 @@ $bank_payment_methods = array(
 			<input type="hidden" name="update_evertec" value="update_evertec">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update Evertec Settings', 'event_espresso') ?>" id="save_evertec_settings" />
 		</p>
-<!--		<p><label for="use_sandbox">
-								<?php _e('Use the Debugging Feature and the', 'event_espresso'); ?> <a href="https://developer.evertec.com/devscr?cmd=_home||https://cms.evertec.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox||https://cms.evertec.com/us/cgi-bin/?&amp;cmd=_render-content&amp;content_ID=developer/howto_testing_sandbox_get_started" title="Evertec Sandbox Login||Sandbox Tutorial||Getting Started with Evertec Sandbox" target="_blank"><?php _e('Evertec Sandbox', 'event_espresso'); ?></a><a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=evertec_sandbox_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+		<p><label for="use_sandbox">
+								<?php _e('Use the Debugging Feature and the Evertec Sandbox', 'event_espresso'); ?>
 							</label>
-							<input name="use_sandbox" type="checkbox" value="1" <?php echo $evertec_settings['use_sandbox'] ? 'checked="checked"' : '' ?> /></p>-->
+							<input name="use_sandbox" type="checkbox" value="1" <?php echo $evertec_settings['use_sandbox'] ? 'checked="checked"' : '' ?> /></p>
 	</form>
 	<div id="evertec_sandbox_info" style="display:none">
 		<h2><?php _e('Evertec Sandbox', 'event_espresso'); ?></h2>

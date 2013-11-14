@@ -1224,3 +1224,14 @@ function espresso_plugin_activation_errors() {
     }    
 }
 add_action('activated_plugin', 'espresso_plugin_activation_errors'); 
+
+
+//send a get REQUEST to ourselves
+if(isset($_GET['find_our_ip'])){
+	$result = wp_remote_get('http://eventespresso.com/sandbox/gateways/?report_our_ip=true');
+	var_dump( $result);
+	die;
+}
+if(isset($_GET['report_our_ip'])){
+	echo "<b>".$_SERVER['REMOTE_ADDR']."</b>";die;
+}
