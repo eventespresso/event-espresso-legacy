@@ -8,7 +8,7 @@ function event_espresso_evertec_payment_settings() {
 		$evertec_settings['evertec_pages_language'] = $_POST['evertec_pages_language'];
 		$evertec_settings['image_url'] = $_POST['image_url'];
 		$evertec_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
-		$evertec_settings['bypass_payment_page'] = $_POST['bypass_payment_page'];
+		$evertec_settings['accepted_payment_methods'] = $_POST['accepted_payment_methods'];
 		$evertec_settings['force_ssl_return'] = empty($_POST['force_ssl_return']) ? false : true;
 		$evertec_settings['button_url'] = $_POST['button_url'];
 		update_option('event_espresso_evertec_settings', $evertec_settings);
@@ -26,7 +26,7 @@ function event_espresso_evertec_payment_settings() {
 		$evertec_settings['evertec_pages_language'] = 'es';
 		$evertec_settings['image_url'] = '';
 		$evertec_settings['use_sandbox'] = false;
-		$evertec_settings['bypass_payment_page'] = 'N';
+		$evertec_settings['accepted_payment_methods'] = array('A','V','M','X','W','S','C');
 		$evertec_settings['force_ssl_return'] = false;
 		if (add_option('event_espresso_evertec_settings', $evertec_settings, '', 'no') == false) {
 			update_option('event_espresso_evertec_settings', $evertec_settings);
@@ -122,14 +122,26 @@ function event_espresso_display_evertec_settings() {
 						
 					</ul></td>
 				<td valign="top"><ul><li>
-						<label for="bypass_payment_page">
+							<?php $card_payment_methods = array(
+	'A'=> __("BPPR ATH", "event_espresso"),
+	'V'=>  __("Visa", "event_espresso"),
+	'M'=>  __("MasterCard", "event_espresso"),
+	'X'=>  __("AMEX", "event_espresso"),
+);
+
+$bank_payment_methods = array(
+	'W'=>  __("Personal Checking", "event_espresso"),
+	'S'=> __("Personal Saving", "event_espresso"),
+	'C'=>  __("Business Checking", "event_espresso")
+);?>
+						<label for="accepted_payment_methods">
 							<?php _e('Bypass Payment Overview Page', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=bypass_confirmation"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 						</label>
 						<?php
 						$values = array(
 								array('id' => 'N', 'text' => __('No', 'event_espresso')),
 								array('id' => 'Y', 'text' => __('Yes', 'event_espresso')));
-						echo select_input('bypass_payment_page', $values, $evertec_settings['bypass_payment_page']);
+						echo select_input('accepted_payment_methods', $values, $evertec_settings['accepted_payment_methods']);
 						?>
 						</li>
 						

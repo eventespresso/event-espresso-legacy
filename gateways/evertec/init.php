@@ -3,8 +3,8 @@ event_espresso_require_gateway("evertec/evertec_vars.php");
 
 
 // This is for the transaction processing
-event_espresso_require_gateway("evertec/evertec_ipn.php");
 if (!empty($_REQUEST['type']) && $_REQUEST['type'] == 'evertec') {
+	event_espresso_require_gateway("evertec/DoDirectPayment.php");
 	add_filter('filter_hook_espresso_transactions_get_attendee_id', 'espresso_transactions_evertec_get_attendee_id');
 	add_filter('filter_hook_espresso_transactions_get_payment_data', 'espresso_process_evertec');
 }
