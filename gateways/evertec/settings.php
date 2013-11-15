@@ -118,6 +118,12 @@ function event_espresso_display_evertec_settings() {
 							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=image_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a><br />
 							<?php _e('(used for your business/personal logo on the Evertec page)', 'event_espresso'); ?>
 						</li>
+						<li>
+							<p><label for="evertec_use_sandbox">
+								<input name="use_sandbox" type="checkbox" value="1" id="evertec_use_sandbox" <?php echo $evertec_settings['use_sandbox'] ? 'checked="checked"' : '' ?> /><?php _e('Use the Debugging Feature and the Evertec Sandbox', 'event_espresso'); ?>
+							</label>
+							</p>
+						</li>
 						
 						
 					</ul></td>
@@ -134,15 +140,15 @@ $bank_payment_methods = array(
 	'S'=> __("Personal Saving", "event_espresso"),
 	'C'=>  __("Business Checking", "event_espresso")
 );?>
-						<label for="accepted_payment_methods">
-							<?php _e('Bypass Payment Overview Page', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=bypass_confirmation"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-						</label>
-						<?php
-						$values = array(
-								array('id' => 'N', 'text' => __('No', 'event_espresso')),
-								array('id' => 'Y', 'text' => __('Yes', 'event_espresso')));
-						echo select_input('accepted_payment_methods', $values, $evertec_settings['accepted_payment_methods']);
-						?>
+							<b><?php _e("Credit Card Payment Options", "event_espresso");?></b>
+					<?php foreach($card_payment_methods as $card_code => $i18n_name){
+						$checked = isset($evertec_settings['accepted_payment_methods'][$card_code]) ? 'checked="checked"' : '';
+						?><label for="accepted_payment_method_<?php echo $card_code?>"><input type="checkbox" <?php echo $checked?> name="accepted_payment_methods[<?php echo $card_code?>]" id="accepted_payment_method_<?php echo $card_code?>" value="<?php echo $i18n_name?>"><?php echo $i18n_name?></label><?php 
+						}?><b><?php _e("Bank Account Payment Options", "event_espresso");?></b>
+					<?php foreach($bank_payment_methods as $card_code => $i18n_name){
+						$checked = isset($evertec_settings['accepted_payment_methods'][$card_code]) ? 'checked="checked"' : '';
+						?><label for="accepted_payment_method_<?php echo $card_code?>"><input type="checkbox" <?php echo $checked?> name="accepted_payment_methods[<?php echo $card_code?>]" id="accepted_payment_method_<?php echo $card_code?>" value="<?php echo $i18n_name?>"><?php echo $i18n_name?></label><?php 
+						}?>
 						</li>
 						
 						<?php if (espresso_check_ssl() == TRUE || ( isset($evertec_settings['force_ssl_return']) && $evertec_settings['force_ssl_return'] == 1 )) {?>
@@ -169,10 +175,6 @@ $bank_payment_methods = array(
 			<input type="hidden" name="update_evertec" value="update_evertec">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update Evertec Settings', 'event_espresso') ?>" id="save_evertec_settings" />
 		</p>
-		<p><label for="use_sandbox">
-								<?php _e('Use the Debugging Feature and the Evertec Sandbox', 'event_espresso'); ?>
-							</label>
-							<input name="use_sandbox" type="checkbox" value="1" <?php echo $evertec_settings['use_sandbox'] ? 'checked="checked"' : '' ?> /></p>
 	</form>
 	<div id="evertec_sandbox_info" style="display:none">
 		<h2><?php _e('Evertec Sandbox', 'event_espresso'); ?></h2>

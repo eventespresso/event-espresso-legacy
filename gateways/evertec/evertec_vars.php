@@ -1,162 +1,161 @@
 <?php
 
-function espresso_display_evertec($payment_data) {
-	global $wpdb;
-	
-	
+function espresso_display_evertec($payment_data) {	
 	global $org_options;
+	$registration_id = $payment_data['registration_id'];
 	$evertec_settings = get_option('event_espresso_evertec_settings');
-	if($evertec_settings['use_sandbox']){
-		$server_url = 'https://everpaycert.evertecinc.com/wscheckoutpayment/wsCheckoutPayment.asmx?op=MakePayment';
-	}else{
-		$server_url = 'https://mmpay.evertecinc.com/webservicev2/wscheckoutpayment.asmx';
-	}
-	
-			
-//	$xml_request = "
-//	<?xml version='1.0' encoding='utf-8'	
-//	";;
+	$use_sandbox = $evertec_settings['use_sandbox'];
+	wp_register_script( 'evertec', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/evertec/evertec.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
+	wp_enqueue_script( 'evertec' );		
+	?>
+<div id="evertec-payment-option-dv" class="payment-option-dv">
 
-	
-	
-	////////////////////////////////////////
-	$params = array(
-		'Username'=>$evertec_settings['username'],
-		'Password'=>$evertec_settings['password'],
-		'CustomerName'=>$payment_data['fname']." ".$payment_data['lname'],
-		'CustomerID'=>$payment_data['registration_id'],
-		'CustomerEmail'=>'monkey',//$payment_data['attendee_email'],
-		'Total'=>'10.00',//$payment_data['event_cost'],
-		'DescriptionBuy'=>$payment_data['event_name'],
-		'TaxAmount1'=>0,
-		'address1'=>$payment_data['address'],
-		'address2'=>isset($payment_data['address2']) ? $payment_data['address2'] : '',
-		'city'=>$payment_data['city'],
-		'zipcode'=>$payment_data['zip'],
-		'telephone'=>$payment_data['phone'],
-		'fax'=>'',
-		'ignoreValues'=>'',  
-		'language'=>$evertec_settings['evertec_pages_language'],
-		'TaxAmount2'=>'',
-		'TaxAmount3'=>'',
-		'TaxAmount4'=>'',
-		'TaxAmount5'=>'',
-		'filler1'=>'',
-		'filler2'=>'',
-		'filler3'=>''
-			);
-	$xml_params = '';
-	foreach($params as $name=>$value){
-		$xml_params.="<$name>$value</$name>";
-	}
-		$raw_xml_body = '<?xml version="1.0" encoding="utf-8" ?>
-			<soap:Envelope	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-			xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" >
-			<soap:Body>
-			<MakePayment xmlns="http://tempuri.org/WebMerchant/MerchantService">
-			'.$xml_params.'
-			</MakePayment>
-			</soap:Body>
-			</soap:Envelope>';
-		
-//		echo htmlentities($raw_xml_body);
-//		echo $response['body'];die;
-//		$client = new SoapClient('https://mmpay.evertecinc.com/webservicev2/wscheckoutpayment.asmx?wsdl', array('trace'=>true,'soap_version' => SOAP_1_2));
-//			echo 'echodump of $client->__getFunctions()';
-//			var_dump($client->__getFunctions());
-	
-//			echo 'echodump of $client->__getTypes()';
-//			var_dump($client->__getTypes());
-//			try{
-//				$makePaymentResponse = $client->MakePayment(array(array('MakePayment'=>$params)));
-//				echo 'echodump of $makePaymentResponse';
-//				var_dump($makePaymentResponse);
-//			}catch(Exception $e){
-//				echo 'echodump of $e';
-//				var_dump($e);
-//			}
-	
-			$soap_client_req = '<?xml version="1.0" encoding="UTF-8"?>
-<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" xmlns:ns1="http://tempuri.org/WebMerchant/MerchantService"><env:Body><ns1:MakePayment/></env:Body></env:Envelope>';
-//	echo 'echodump of $client->__getLastRequest ()';
-//	var_dump($client->__getLastRequest ());
-//	echo 'echodump of $client->__getLastRequestHeaders();';
-//	var_dump($client->__getLastRequestHeaders());
-	
-			
-			$response = wp_remote_post($server_url,
-				array(
-					'headers'=>array(
-						'Content-Type'=>'text/xml; charset=utf-8;',
-						"User-Agent"=> "PHP-SOAP/5.4.4",
-						'Connection'=> 'Keep-Alive',
-						'SOAPAction'=>'http://tempuri.org/WebMerchant/MerchantService/MakePayment'),
-					'method'=>'POST',
-					'httpversion' => '1.1',
-					'body'=>$raw_xml_body,
-					'sslverify' => false));
-//		echo 'echodump of $response';
-//		var_dump($response);
-		if(isset($response['body'])){
-			$xml   = simplexml_load_string($response['body']);
-			//in order to get elements in the default namesapce, you have to register it (see comment by gkokmdam on http://php.net/manual/en/simplexml.examples-basic.php)
-			$xml->registerXPathNamespace("def", "http://tempuri.org/WebMerchant/MerchantService");
-			$paymentResultElements = $xml->xpath('//def:MakePaymentResult');
-			if($paymentResultElements){
-				$paymentResult = $paymentResultElements[0];
-				if(strpos($paymentResult, 'http') !== FALSE){
-					//they sent back a URL. we can link the user ot taht
-					$redirect_url = $paymentResult;
-					$error_message = false;
-				}else{
-					//they sent back an error message
-					$redirect_url = false;
-					$error_message = $paymentResult;
-				}
-			}else{
-				$redirect_url = false;
-				$error_message = __("Did not receive a proper XML response from Evertec", "event_espresso");
-				if(WP_DEBUG){
-					$error_message.=print_r($response,true);
-				}
+	<a id="evertec-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="evertec-payment-option-form" style="cursor:pointer;">
+		<img alt="Pay using Credit Card" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/pay-by-credit-card.png">
+	</a>	
+
+	<div id="evertec-payment-option-form-dv" class="hide-if-js">	
+		<div class="event-display-boxes">
+			<?php
+			if ($use_sandbox) {
+				echo '<div id="sandbox-panel"><h2 class="section-title">' . __('Evertec Sandbox Mode', 'event_espreso') . '</h2><p>Test Master Card # 5310509031377124</p>';
+				echo '<p>Exp: 12/2015</p>';
+				echo '<p>CVV2: 996 </p>';
+				echo '</h2><p>Test Visa Card # 4548400000000631</p>';
+				echo '<p>Exp: 12/2019</p>';
+				echo '<p>CVV2: 781 </p>';
+				echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3></div>';
 			}
-		}else{
-				$error_message = __("Did not receive a proper XML response from Evertec", "event_espresso");
-		}
-	if( $error_message ){
-		echo __("An error occurred communicating with Evertec:", "event_espresso").$error_message; return;
-	}
-	
-	if (!empty($evertec_settings['bypass_payment_page']) && $evertec_settings['bypass_payment_page'] == 'Y') {
-		wp_redirect($redirect_url);
-	} else {
-		if (empty($evertec_settings['button_url'])) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/evertec/btn_stdCheckout2.gif")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/evertec/btn_stdCheckout2.gif";
+			if ($evertec_settings['force_ssl_return']) {
+				$home = str_replace('http://', 'https://', home_url());
 			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/evertec/btn_stdCheckout2.gif";
+				$home = home_url();
 			}
-		} elseif (isset($evertec_settings['button_url'])) {
-			$button_url = $evertec_settings['button_url'];
-		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/evertec/btn_stdCheckout2.gif";
-		}
-		?>
-			 <div id="evertec-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
-				 <a href='<?php echo $redirect_url?>'>
-			<img class="payment-option-lnk allow-leave-page" src="<?php echo $button_url?>" alt="click to visit this payment gateway">
-				</a>
-			 </div>
-		<?php
-	
-	}
+			if ($evertec_settings['display_header']) {
+?>
+			<h3 class="payment_header"><?php echo $evertec_settings['header']; ?></h3><?php } ?>
 
-	if ($use_sandbox) {
+			<div class = "event_espresso_form_wrapper">
+				<form id="evertec_payment_form" name="evertec_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
+					
+					<fieldset id="evertec-billing-info-dv">
+						<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>
+						<p>
+							<label for="first_name"><?php _e('First Name', 'event_espresso'); ?></label>
+				        	<input name="first_name" type="text" id="evertec_first_name" class="required" value="<?php echo $payment_data['fname'] ?>" />
+						</p>
+						<p>
+					        <label for="last_name"><?php _e('Last Name', 'event_espresso'); ?></label>
+					        <input name="last_name" type="text" id="evertec_last_name" class="required" value="<?php echo $payment_data['lname'] ?>" />
+						</p>
+						<p>
+					        <label for="email"><?php _e('Email Address', 'event_espresso'); ?></label>
+					        <input name="email" type="text" id="evertec_email" class="required" value="<?php echo $payment_data['attendee_email'] ?>" />
+						</p>
+						<p>
+					        <label for="address"><?php _e('Address', 'event_espresso'); ?></label>
+					        <input name="address" type="text" id="evertec_address" class="required" value="<?php echo $payment_data['address'] ?>" />
+						</p>
+						<p>
+					        <label for="address2"><?php _e("Address (cont'd)", 'event_espresso'); ?></label>
+					        <input name="address2" type="text" id="evertec_address2" class="required" value="<?php echo $payment_data['address2'] ?>" />
+						</p>
+						<p>
+					        <label for="city"><?php _e('City', 'event_espresso'); ?></label>
+					        <input name="city" type="text" id="evertec_city" class="required" value="<?php echo $payment_data['city'] ?>" />
+						</p>
+						<p>
+					        <label for="state"><?php _e('State', 'event_espresso'); ?></label>
+					        <input name="state" type="text" id="evertec_state" class="required" value="<?php echo $payment_data['state'] ?>" />
+						</p>
+						<p>
+					        <label for="zip"><?php _e('Zip', 'event_espresso'); ?></label>
+					        <input name="zip" type="text" id="evertec_zip" class="required" value="<?php echo $payment_data['zip'] ?>" />
+						</p>
+						<p>
+					        <label for="phone"><?php _e('Phone', 'event_espresso'); ?></label>
+					        <input name="phone" type="text" id="evertec_phone" class="required" value="<?php echo $payment_data['phone'] ?>" />
+						</p>
+					</fieldset>
+					<select id="evertec_payment_method" name="evertec_payment_method">
+						<option id='none' value='none'><?php _e("Please select one...", "event_espresso");?></option>
+						<?php foreach($evertec_settings['accepted_payment_methods'] as $name => $i18n_name){
+							echo "<option id='$name' value='$name'>$i18n_name</option>";
+						}?>
+					</select>
+					<fieldset id="evertec-credit-card-info-dv" style='display:none'>
+						<h4 class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></h4>
+						<p>
+					        <label for="card_num"><?php _e('Card Number', 'event_espresso'); ?></label>
+					        <input type="text" name="card_num" class="required" id="evertec_card_num" autocomplete="off" />
+						</p>
+						<p>
+					        <label for="card-exp"><?php _e('Expiration Month', 'event_espresso'); ?></label>
+					        <select id="evertec_card-exp" name ="expmonth" class="med required">
+										<?php
+										for ($i = 1; $i < 13; $i++){
+											$padded_month = str_pad($i,2,"0",STR_PAD_LEFT);
+											echo "<option value='$padded_month'>$padded_month</option>";
+										}
+										?>
+					        </select>
+						</p>
+						<p>
+					        <label for="exp-year"><?php _e('Expiration Year', 'event_espresso'); ?></label>
+					        <select id="evertec_exp-year" name ="expyear" class="med required">
+										<?php
+										$curr_year = date("y");
+										for ($i = 0; $i < 10; $i++) {
+											$disp_year = $curr_year + $i;
+											echo "<option value='$disp_year'>$disp_year</option>";
+										}
+										?>
+					        </select>
+						</p>
+						<p>
+					        <label for="cvv"><?php _e('CVV Code', 'event_espresso'); ?></label>
+					        <input type="text" name="cvv" id="evertec_exp_date" autocomplete="off"  class="small required"/>
+						</p>
+					</fieldset>
+					<fieldset id="evertec-bank-info-dv" style='display:none'>
+						<h4 class="section-title"><?php _e('Bank Account Information', 'event_espresso'); ?></h4>
+						<p>
+					        <label for="bankRoutingNumber"><?php _e('Routing Number', 'event_espresso'); ?></label>
+					        <input type="text" name="bankRoutingNumber" class="required" id="bankRoutingNumber" autocomplete="off" />
+						</p>
+						<p>
+					        <label for="bankAccountNumber"><?php _e('Account Number', 'event_espresso'); ?></label>
+					        <input type="text" name="bankAccountNumber" class="required" id="bankAccountNumber" autocomplete="off" />
+						</p>
+						<p>
+					        <label for="bankClientName"><?php _e('Account Number', 'event_espresso'); ?></label>
+					        <input type="text" name="bankClientName" class="required" id="bankClientName" autocomplete="off" />
+						</p>
+						<p>
+							<label for='authorizationBit'><?php	_e("I authorize these funds be withdrawn from my account", "event_espresso");?></label>
+							<input type="checkbox" name="authorizationBit" id="authorizationBit" value="1"/>
+						</p>
+					</fieldset>
+					
+					<input name="amount" type="hidden" value="<?php echo number_format($event_cost, 2) ?>" />
+					<input name="evertec" type="hidden" value="true" />
+					<input name="r_id" type="hidden" value="<?php echo $registration_id ?>" />
+					<p class="event_form_submit">
+						<input name="evertec_submit" id="evertec_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />						
+						<div class="clear"></div>
+					</p>
+					<span id="processing"></span>
+				</form>
 
-		echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Evertec Debug Mode Is Turned On', 'event_espresso') . '</h3>';
-		$myEvertec->dump_fields();
-	}
+			</div><!-- / .event_espresso_or_wrapper -->
+		</div>
+		<br/>
+		<p class="choose-diff-pay-option-pg">
+			<a class="hide-the-displayed" rel="evertec-payment-option-form" style="cursor:pointer;"><?php _e('Choose a different payment option', 'event_espresso'); ?></a>
+		</p>
+
+	</div>
+</div>		<?php
 }
 
 add_action('action_hook_espresso_display_offsite_payment_gateway', 'espresso_display_evertec');
