@@ -43,6 +43,7 @@ if($evertec_settings['use_sandbox']){
 		'DescriptionBuy'=>$payment_data['event_name'],
 		'channel'=>6,//not sure what this is for
 		'ignoreValues'=>'',  
+		'operatorId'=>'',
 		'language'=>$evertec_settings['evertec_pages_language'],
 		'tax1'=>'',//0
 		'tax2'=>'',
@@ -53,7 +54,7 @@ if($evertec_settings['use_sandbox']){
 		'filler1'=>'',
 		'filler2'=>'',
 		'filler3'=>'',
-		'fillter4'=>'',
+		'filler4'=>'',
 		'note'=>'',
 		'paymentType'=>$r['evertec_payment_method'],	
 			);
@@ -76,6 +77,8 @@ if($evertec_settings['use_sandbox']){
 			'bankClientName'=>$bankClientName,
 			'authorizationBit'=>$authorizationBit
 		));
+echo 'echodump of $xml_params';
+var_dump($params);
 	$xml_params = '';
 	foreach($params as $name=>$value){
 		$xml_params.="<$name>$value</$name>";
@@ -90,7 +93,7 @@ if($evertec_settings['use_sandbox']){
 			</SendTransactions>
 			</soap:Body>
 			</soap:Envelope>';
-		
+		echo htmlspecialchars($raw_xml_body);
 //		echo htmlentities($raw_xml_body);
 //		echo $response['body'];die;
 //		$client = new SoapClient('https://mmpay.evertecinc.com/webservicev2/wscheckoutpayment.asmx?wsdl', array('trace'=>true,'soap_version' => SOAP_1_2));
@@ -114,7 +117,14 @@ if($evertec_settings['use_sandbox']){
 //	echo 'echodump of $client->__getLastRequestHeaders();';
 //	var_dump($client->__getLastRequestHeaders());
 	
-			
+//			$response = wp_remote_post($server_url."/SendTransactions",
+//					array('headers'=>array(
+//						'Content-Type'=>'application/x-www-form-urlencoded',
+//						'Connection'=> 'Keep-Alive'),
+//					'body'=>$params,
+//					'method'=>'POST',
+//					'sslverify'=>false));
+					
 			$response = wp_remote_post($server_url,
 				array(
 					'headers'=>array(
@@ -127,7 +137,7 @@ if($evertec_settings['use_sandbox']){
 					'body'=>$raw_xml_body,
 					'sslverify' => false));
 		echo 'echodump of $response';
-		echo $response['body'];
+		echo htmlspecialchars($response['body']);
 		die;
 		if(isset($response['body'])){
 			$xml   = simplexml_load_string($response['body']);
