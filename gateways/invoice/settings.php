@@ -111,7 +111,7 @@ function event_espresso_display_invoice_payment_settings() {
 							<label for="payment_address">
 								<?php _e('Address to Send Payment', 'event_espresso'); ?>
 							</label>
-							<textarea name="payment_address" cols="30" rows="5"><?php echo stripslashes_deep($invoice_payment_settings['payment_address']); ?></textarea>
+							<textarea name="payment_address" cols="30" rows="5"><?php echo stripslashes_deep(str_replace("<br />", ",&nbsp", $invoice_payment_settings['payment_address'])); ?></textarea>
 						</li>
 					</ul>
 				</td>
