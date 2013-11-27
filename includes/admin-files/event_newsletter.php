@@ -2,7 +2,8 @@
 function event_newsletter($event_id=0){
 	//print_r($_POST);
 	if ( isset($_POST['action']) && $_POST['action']=='send_newsletter'){
-		espresso_event_reminder($event_id, $_POST['email_subject'], $_POST['email_text'], $_POST['email_name']);
+            $email_name = empty($_POST['email_name']) ? 0 : $_POST['email_name'];
+            espresso_event_reminder($event_id, $_POST['email_subject'], $_POST['email_text'], $email_name, $_POST['filter']);
 	}
 	//echo $event_id;
 	global $wpdb, $org_options;
@@ -44,6 +45,14 @@ function event_newsletter($event_id=0){
    <?php wp_editor('','email_text'); ?>
       <br />
 <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=custom_email_info"><?php _e('View Custom Email Tags', 'event_espresso'); ?></a>  | <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=custom_email_example"> <?php _e('Email Example','event_espresso'); ?></a>
+   </li>
+   <li>
+       <select name="filter">
+           <option value="all"><?php _e("All attendees of this event", "event_espresso"); ?></opton>
+           <option value="completed"><?php _e("Completed payment status attendees", "event_espresso"); ?></opton>
+           <option value="incomplete"><?php _e("Incomplete payment status attendees", "event_espresso"); ?></opton>
+           <option value="pending"><?php _e("Pending payment status attendees", "event_espresso"); ?></opton>           
+       </select>
    </li>
    <li>
     <p>

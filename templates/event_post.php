@@ -142,7 +142,7 @@ global $wpdb;
             $virtual_phone = stripslashes_deep($data->event->virtual_phone);
 
             //Address formatting
-            $location = ($event_address != '' ? $event_address : '') . ($event_address2 != '' ? '<br />' . $event_address2 : '') . ($event_city != '' ? '<br />' . $event_city : '') . ($event_state != '' ? ', ' . $event_state : '') . ($event_zip != '' ? '<br />' . $event_zip : '') . ($event_country != '' ? '<br />' . $event_country : '');
+            $location = (!empty($event_address) ? $event_address : '') . (!empty($event_address2) ? '<br />' . $event_address2 : '') . (!empty($event_city) ? '<br />' . $event_city : '') . (!empty($event_state) ? ', ' . $event_state : '') . (!empty($event_zip) ? '<br />' . $event_zip : '') . (!empty($event_country) ? '<br />' . $event_country : '');
 
             //Google map link creation
             $google_map_link = espresso_google_map_link(array('address' => $event_address, 'city' => $event_city, 'state' => $event_state, 'zip' => $event_zip, 'country' => $event_country, 'text' => 'Map and Directions', 'type' => 'text'));
@@ -227,51 +227,15 @@ global $wpdb;
                 //'registration' => event_espresso_add_question_groups($question_groups),
                 //'additional_attendees' => $allow_multiple == "Y" && $number_available_spaces > 1 ? event_espresso_additional_attendees($event_id, $additional_limit, $number_available_spaces, '', false, $event_meta) : '<input type="hidden" name="num_people" id="num_people-' . $event_id . '" value="1">',
             );
-            $registration_url = $externalURL != '' ? $externalURL : espresso_reg_url($event_id);
-            //print_r($all_meta);
-//This function gets the status of the event.
-                $is_active = array();
-                $is_active = event_espresso_get_is_active(0, $all_meta); }
+			$registration_url = $externalURL != '' ? $externalURL : espresso_reg_url($event_id);
+			//print_r($all_meta);
+			//This function gets the status of the event.
+			$is_active = array();
+			$is_active = event_espresso_get_is_active(0, $all_meta); }
 
-/**
- * this is the original database stuff
- */
-/*
-	$sql  = "SELECT * FROM " .EVENTS_DETAIL_TABLE. " WHERE event_status != 'D' AND id = " . $event_id;
-
-	if ($wpdb->get_results($sql)){
-			$events = $wpdb->get_results($sql);
-			foreach ($events as $event){ //These are the variables that can be used throughout the regsitration page
-					$event_id = $event->id;
-					$event_name = stripslashes_deep($event->event_name);
-					$event_desc = stripslashes_deep($event->event_desc);
-					$display_desc = $event->display_desc;
-					$event_address = $event->address;
-					$event_address2 = $event->address2;
-					$event_city = $event->city;
-					$event_state = $event->state;
-					$event_zip = $event->zip;
-					$event_country = $event->country;
-					$event_description = stripslashes_deep($event->event_desc);
-					$event_identifier = $event->event_identifier;
-					$event_cost = empty($event->event_cost) ? 0 : $event->event_cost;
-					$member_only = $event->member_only;
-					$active = $event->is_active;
-					$reg_limit = $event->reg_limit;
-					$allow_multiple = $event->allow_multiple;
-					$start_date =  $event->start_date;
-					$end_date =  $event->end_date;
-					$reg_limit=$event->reg_limit;
-					$additional_limit = $event->additional_limit;
-
-					$regurl=espresso_reg_url($event_id);
-
-					$google_map_link = espresso_google_map_link(array('address' => $event_address, 'city' => $event_city, 'state' => $event_state, 'zip' => $event_zip, 'country' => $event_country, 'text' => 'Map and Directions', 'type' => 'text'));
-			}//End foreach ($events as $event)
-	} */
 ?>
 <p><?php echo event_date_display($start_date, get_option('date_format')) . " - " . event_date_display($end_date, get_option('date_format')); ?></p>
-<p><?php echo $event_address ?></p>
+<p><?php echo $location ?></p>
 <p><img style="padding-right: 5px;" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL?>images/map.png" border="0" alt="<?php _e('View Map', 'event_espresso'); ?>" /><?php echo $google_map_link; ?> | <a class="a_register_link" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Register', 'event_espresso'); ?></a></p>
 <?php
 if ($display_desc == 'Y'){ ?>

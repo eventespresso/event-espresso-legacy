@@ -1,5 +1,7 @@
 <?php
-
+//sometimes (upon gateway activation and some other actions I think) the init.php file
+//isn't included. But we need to include it because it has constants we want
+event_espresso_require_gateway('/qbms/init.php');
 function event_espresso_qbms_payment_settings() {
 	global $espresso_premium, $active_gateways;
 	

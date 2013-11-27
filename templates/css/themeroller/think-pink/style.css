@@ -8,14 +8,57 @@
 ----------------------------------*/
 *{
 	text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+  	-webkit-font-smoothing: antialiased;
   }
- .fc-header-title {
+table.fc-agenda-slots td.ui-widget-content {
+ 	border-top: 1px solid #ededed !important;
+ }
+ .entry-content td, 
+ .comment-content td {
+ 	border-top: 0px solid #ededed !important;
+ }
+  .entry-content th {
+  	color: #fff !important;
+  }
+ .fc-header-title h2{
+ 	color: #C43680;
  	background:url(images/pink-ribbon.png) no-repeat left;
  	padding-left:32px;
- 	height:32px;
+ 	height:73px;
+ 	margin: 0 !important;
  }
-  .ui-helper-hidden {
+.fc-border-separate th, .fc-border-separate td {
+	border-width: 0px 0 0 0px !important;
+}
+.fc-event {
+	color: #fff;
+	font-size: 12px;
+}
+.ui-tooltip-title {
+	font-size: 14px !important;
+	font-weight: 600;
+	margin: 0 !important;
+	padding: 10px;;
+}
+.ui-tooltip-content p {
+	font-size: 14px !important;
+	line-height: 1.4;
+}
+p.time_cal_qtip {
+	border-top: 1px dashed #c43680;
+	border-bottom: 1px dashed #c43680;
+}
+select.ee-category-select, select.ee-venue-select {
+	background: #F9A3D2 url(images/ui-bg_highlight-soft_65_F9A3D2_1x100.png) 50% 50% repeat-x;
+	border: 1px solid #F9A3D2;
+	color: #C43680;
+	font-size: 12px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+#filter-calendar-form option{
+	background: pink;
+}
+.ui-helper-hidden {
 	display: none;
 }
 .ui-helper-hidden-accessible {
@@ -823,7 +866,7 @@ body .ui-tooltip {
 	font-weight: bold;
 }
 .ui-widget-header a {
-	color: #ffffff;
+	color: #ffffff !important;
 }
 
 /* Interaction states
@@ -850,8 +893,8 @@ body .ui-tooltip {
 .ui-widget-header .ui-state-focus {
 	border: 1px solid #F6BBD9;
 	background: #F6BBD9 url(images/ui-bg_highlight-soft_45_F6BBD9_1x100.png) 50% 50% repeat-x;
-	font-weight: normal;
-	color: #222222;
+	font-weight: 400 !important;
+	color: #C43680 !important;
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,
@@ -864,7 +907,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
 	border: 1px solid #F6BBD9;
-	background: #C43680 url(images/ui-bg_highlight-soft_25_C43680_1x100.png) 50% 50% repeat-x;
+	background: #C43680 url(images/ui-bg_highlight-soft_25_C43680_1x100.png) 50% 50% repeat-x !important;
 	font-weight: normal;
 	color: #ffffff;
 }
@@ -881,7 +924,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
 	border: 1px solid #F8F1B6;
-	background: #F8F1B6 url(images/ui-bg_inset-hard_55_F8F1B6_1x100.png) 50% bottom repeat-x;
+	background: #F8F3D4;
 	color: #222222;
 }
 .ui-state-highlight a,
@@ -949,7 +992,7 @@ body .ui-tooltip {
 }
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon {
-	background-image: url(images/ui-icons_222222_256x240.png);
+	background-image: url(images/ui-icons_774779_256x240.png);
 }
 .ui-state-active .ui-icon {
 	background-image: url(images/ui-icons_ffffff_256x240.png);

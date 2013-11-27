@@ -32,7 +32,7 @@ function espresso_display_paypal_pro($data) {
 			<h3 class="payment_header"><?php echo $paypal_pro_settings['header']; ?></h3><?php } ?>
 
 			<div class = "event_espresso_form_wrapper">
-				<form id="paypal_pro_payment_form" name="paypal_pro_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
+				<form id="paypal_pro_payment_form" name="paypal_pro_payment_form" method="post" action="<?php echo add_query_arg(array('r_id'=>$registration_id), get_permalink($org_options['return_url'])); ?>">
 					
 					<fieldset id="paypal-billing-info-dv">
 						<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>

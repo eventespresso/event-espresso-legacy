@@ -139,7 +139,7 @@ if (!function_exists('multi_register_attendees')) {
 			$add_attendee_question_groups = $event_meta['add_attendee_question_groups'];
 
 
-			if ($org_options['use_captcha'] == 'Y' && isset( $_REQUEST['edit_details'] ) && $_REQUEST['edit_details'] != 'true') {
+			if ( $org_options['use_captcha'] == 'Y' && isset($_REQUEST['edit_details']) && ! is_user_logged_in() && !empty($org_options['recaptcha_publickey']) && !empty($org_options['recaptcha_privatekey'])) {
 				?>
 				<script type="text/javascript">
 					var RecaptchaOptions = {
@@ -155,8 +155,7 @@ if (!function_exists('multi_register_attendees')) {
 			$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $event_id);//Get the number of attendees
 			$available_spaces = apply_filters('filter_hook_espresso_available_spaces_text', $event_id);//Gets a count of the available spaces
 			$number_available_spaces = apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);//Gets the number of available spaces
-			
-			if ($available_spaces >= $number_available_spaces) {
+			if ($available_spaces == 'Unlimited' || $available_spaces >= $number_available_spaces) {
 				//(Shows the regsitration form if enough spaces exist)
 				
 				// SOLD OUT !!!
