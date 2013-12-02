@@ -23,7 +23,7 @@ $sql_in_common = $wpdb->prepare(" FROM " . EVENTS_DISCOUNT_CODES_TABLE . " WHERE
 if (function_exists('espresso_member_data') && !empty($event_id)) {
 	$wpdb->get_results("SELECT wp_user FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'");
 	$wp_user = $wpdb->last_result[0]->wp_user != '' ? $wpdb->last_result[0]->wp_user : espresso_member_data('id');
-	$sql_in_common .= " WHERE ";
+	$sql_in_common .= " AND ";
 	if ($wp_user == 0 || $wp_user == 1) {
 		$sql_in_common .= " (wp_user = '0' OR wp_user = '1') ";
 	} else {
