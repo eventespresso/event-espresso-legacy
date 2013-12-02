@@ -274,7 +274,7 @@ function update_event($recurrence_arr = array()) {
         $event_meta['default_payment_status'] = !empty($_REQUEST['default_payment_status']) ? sanitize_text_field($_REQUEST['default_payment_status']) : '';
         $event_meta['venue_id'] = empty($_REQUEST['venue_id']) ? '' : (int)$_REQUEST['venue_id'][0];
         $event_meta['additional_attendee_reg_info'] = !empty($_REQUEST['additional_attendee_reg_info']) ? sanitize_text_field($_REQUEST['additional_attendee_reg_info']) : '';
-        $event_meta['add_attendee_question_groups'] = $add_attendee_question_groups;
+		$event_meta['add_attendee_question_groups'] = $add_attendee_question_groups;
         $event_meta['date_submitted'] = sanitize_text_field($_REQUEST['date_submitted']);
 		
 		//Added for seating chart addon
@@ -472,7 +472,9 @@ function update_event($recurrence_arr = array()) {
         $del_discounts = "DELETE FROM " . EVENTS_DISCOUNT_REL_TABLE . " WHERE event_id = '" . $event_id . "'";
         $wpdb->query($wpdb->prepare($del_discounts, NULL));
 
-		if (!empty($_REQUEST['event_discount'])) {
+		if (!empty($_REQUEST['event_discount']) && $_REQUEST['use_coupon_code'] == 'Y') {
+			//only re-add the coupon codes if they've specified to use all global coupon codes
+			//and 'specific' coupon codes
 			foreach ($_REQUEST['event_discount'] as $k => $v) {
 				if (!empty($v)) {
 					$sql_discount = "INSERT INTO " . EVENTS_DISCOUNT_REL_TABLE . " (event_id, discount_id) VALUES ('" . $event_id . "', '" . (int)$v . "')";

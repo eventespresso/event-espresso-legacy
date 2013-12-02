@@ -57,8 +57,8 @@ function enter_attendee_payments() {
 					$notifications['error'][] = __('An error occured. The primary attendee details could not be retrieved from the database.', 'event_espresso'); 
 				} else {
 
-					$txn_type = isset($_POST[ 'txn_type' ]) ? $_POST[ 'txn_type' ] : FALSE;
-					$txn_id = isset($_POST[ 'txn_id' ]) ? $_POST[ 'txn_id' ] : FALSE;
+					$txn_type = isset($_POST[ 'txn_type' ]) ? $_POST[ 'txn_type' ] : apply_filters('filter_hook_event_espresso_enter_attendee_payments_remove_require_txn_type', FALSE);
+					$txn_id = isset($_POST[ 'txn_id' ]) ? $_POST[ 'txn_id' ] : apply_filters('filter_hook_event_espresso_enter_attendee_payments_remove_require_txn_id', FALSE);
 					$payment_date = isset($_POST[ 'payment_date' ]) ? date_i18n( get_option('date_format'), strtotime( $_POST[ 'payment_date' ] )) : FALSE;
 					$coupon_code = isset($_POST[ 'coupon_code' ]) ? $_POST[ 'coupon_code' ] : '';
 					$total_owing = isset($_POST[ 'total_owing' ]) ? (float)number_format( sanitize_text_field( $_POST[ 'total_owing' ] ), 2, '.', '' ) : 0.00;

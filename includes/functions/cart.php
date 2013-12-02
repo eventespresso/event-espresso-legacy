@@ -77,7 +77,7 @@ if (!function_exists('event_espresso_add_event_process')) {
 		$_SESSION['espresso_session']['events_in_session'][$event_id] = array(
 				'id' => $event_id,
 				'event_name' => stripslashes_deep($event_name),
-				'attendee_quantitiy' => 1,
+				'attendee_quantity' => 1,
 				'start_time_id' => '',
 				'price_id' => array(),
 				'cost' => 0.00,
@@ -215,7 +215,7 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 					}
 				}
 
-				$updated_events_in_session[$event_id]['attendee_quantitiy'] = $attendee_quantity;
+				$updated_events_in_session[$event_id]['attendee_quantity'] = $attendee_quantity;
 
 				//Get Cost of each event
 				//$updated_events_in_session[$event_id]['cost'] = $event_individual_cost[$event_id];
@@ -754,9 +754,9 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 	
 							if ($attendee_overflow) {
 	
-								$err .= "<div class='event_espresso_error'><p><em>" . __('Attention', 'event_espresso') . "</em><br />";
-								$err .= sprintf(__("For %s, please make sure to select between 1 and %d attendees or delete it from your cart.", 'event_espresso'), stripslashes($r->event_name), $attendee_limit);
-								$err .= '<span class="remove-cart-item"><img class="ee_delete_item_from_cart" id="cart_link_' . $event_id . '" alt="Remove this item from your cart" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" /></span> ';
+								$err .= "<div class='event_espresso_error'><p><em>" . __('Attention', 'event_espresso') . "</em><br /> ";
+								$err .= sprintf(__("For %s, please make sure to select at least one attendee or delete it from your cart.", 'event_espresso'), stripslashes($r->event_name));
+								$err .= ' <span class="remove-cart-item"><img class="ee_delete_item_from_cart" id="cart_link_' . $event_id . '" alt="Remove this item from your cart" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" /></span> ';
 								$err .= "</p></div>";
 							}
 	
@@ -1059,8 +1059,15 @@ if (!function_exists('event_espresso_cart_link')) {
 			)
 		);
 		
+		if ( empty( $event_id )) {
+			$error = "<div class='event_espresso_error'><p><em>".__('Attention', 'event_espresso')."</em>";
+			$error .= __('An error occured, a valid event id is required for this shortcode to function properly.', 'event_espresso');
+			$error .= "</p></div>";
+			return $error;
+		}
+		
+
 		$registration_cart_class = '';
-		ob_start();
 
 		// if event is already in session, return the view cart link  		array_key_exists($event_id, $events_in_session)
 		if ( $view_cart || is_array( $events_in_session ) && isset( $events_in_session[ $event_id ] )) {
@@ -1107,7 +1114,9 @@ if (!function_exists('event_espresso_cart_link')) {
 			$registration_cart_class = 'ee_add_item_to_cart';
 			
 		}
-
+                
+		ob_start();
+                
 		if ($view_cart && $direct_to_cart == 1) {
 			echo "<span id='moving_to_cart'>{$moving_to_cart}</span>";
 			echo "<script language='javascript'>window.location='" . $registration_cart_url . "';</script>";

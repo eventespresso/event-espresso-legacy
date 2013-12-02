@@ -236,21 +236,21 @@ function espresso_system_status() {
 				<tr>
                     <td><?php _e('WP Max Upload Size','event_espresso'); ?></td>
                     <td><?php
-                    	echo wp_convert_bytes_to_hr( wp_max_upload_size() );
+                    	echo size_format( wp_max_upload_size() );
                     ?></td>
                 </tr>
                 <tr>
                     <td><?php _e('Server upload_max_filesize','event_espresso')?></td>
                     <td><?php
                     	if(function_exists('phpversion'))
-                    		echo wp_convert_bytes_to_hr( espresso_let_to_num( ini_get('upload_max_filesize') ) );
+                    		echo size_format( espresso_let_to_num( ini_get('upload_max_filesize') ) );
                     ?></td>
                 </tr>
                 <tr>
                     <td><?php _e('Server post_max_size','event_espresso')?></td>
                     <td><?php
                     	if(function_exists('phpversion'))
-                    		echo wp_convert_bytes_to_hr( espresso_let_to_num( ini_get('post_max_size') ) );
+                    		echo size_format( espresso_let_to_num( ini_get('post_max_size') ) );
                     ?></td>
                 </tr>
                 <tr>
@@ -259,9 +259,9 @@ function espresso_system_status() {
                     	$memory = espresso_let_to_num( WP_MEMORY_LIMIT );
 
                     	if ( $memory < 67108864 ) {
-                    		echo '<mark class="error">' . sprintf( __('%s - We recommend setting memory to at least 64MB. See: <a href="%s">Increasing memory allocated to PHP</a>', 'event_espresso'), wp_convert_bytes_to_hr( $memory ), 'http://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP' ) . '</mark>';
+                    		echo '<mark class="error">' . sprintf( __('%s - We recommend setting memory to at least 64MB. See: <a href="%s">Increasing memory allocated to PHP</a>', 'event_espresso'), size_format( $memory ), 'http://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP' ) . '</mark>';
                     	} else {
-                    		echo '<mark class="yes">' . wp_convert_bytes_to_hr( $memory ) . '</mark>';
+                    		echo '<mark class="yes">' . size_format( $memory ) . '</mark>';
                     	}
                     ?></td>
                 </tr>

@@ -45,7 +45,15 @@ $values=array(
 						);
  _e(' Default Payment Status (this value will be automatically filled in for each person\'s payment status, until payment is made, for each event): ','event_espresso'); ?>
             </label>
-            <?php echo select_input('default_payment_status', $default_payment_status, $org_options['default_payment_status']); ?> </li>
+            <?php echo select_input('default_payment_status', $default_payment_status, $org_options['default_payment_status']); ?> 
+		  </li>
+		  <li>
+			   <label for="ticket_reservation_time">
+              <?php
+ _e('Ticket Reservation Time (number of minutes registrants have to complete their registration before others can register in their place. Longer times (eg, 60 minutes) are good because they reduce the likelyhood of accidental overbooking, but shorter times (eg, 15 minutes) reduce wait time for registrants who are waiting on an abandoned registration)  ','event_espresso'); ?>
+            </label>
+			  <input type="text" id='ticket_reservation_time' name="ticket_reservation_time" size="2" value="<?php echo (isset($org_options['ticket_reservation_time']))?$org_options['ticket_reservation_time'] : 30;?>" /> <?php _e("minutes", "event_espresso");?>
+		  </li>
           <li>
             <label for="espresso_dashboard_widget">
               <?php _e('Show the Upcoming Events widget in the dashboard?','event_espresso'); ?>
@@ -59,6 +67,9 @@ $values=array(
             <label for="time_reg_limit">
               <?php _e('Use registration limits on time slots?<br />
 							<em class="important">(This function is experimental and may not function as expected. You should adjust your attendee limit accordingly.)</em>','event_espresso'); ?>
+              <br><em class="important">
+                <?php _e('It should not be used for events where group registrations are enabled.', 'event_espresso'); ?>
+              </em>
             </label>
             <?php	echo select_input('time_reg_limit', $values, isset($org_options['time_reg_limit']) ? $org_options['time_reg_limit'] : '');?>
           </li>

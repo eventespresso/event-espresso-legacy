@@ -10,7 +10,7 @@ function add_event_to_db($recurrence_arr = array()) {
 	//Security check using nonce
 	if ( empty($_POST['nonce_verify_insert_event']) || !wp_verify_nonce($_POST['nonce_verify_insert_event'],'espresso_verify_insert_event_nonce') ){
 		
-		if ($recurrence_arr['bypass_nonce'] == FALSE){
+		if (!isset($recurrence_arr['bypass_nonce'])){
 			print '<h3 class="error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
 			return;
 		}
@@ -416,7 +416,9 @@ function add_event_to_db($recurrence_arr = array()) {
 		}
 		
 		//Process the discounts
-		if (isset($_REQUEST['event_discount']) && !empty($_REQUEST['event_discount'])) {
+		if (isset($_REQUEST['event_discount']) && !empty($_REQUEST['event_discount']) && $_REQUEST['use_coupon_code']=='Y') {
+			//if they have specified to use specific coupon codes, THEN we add entries ot teh discount rel table
+			//otherwise we shouldn't
 			foreach ($_REQUEST['event_discount'] as $k => $v) {
 				if ($v != '') {
 					$sql_cat = "INSERT INTO " . EVENTS_DISCOUNT_REL_TABLE . " (event_id, discount_id) VALUES ('" . $last_event_id . "', '" . $v . "')";
@@ -569,7 +571,7 @@ function add_event_to_db($recurrence_arr = array()) {
 		}
 	}
 	
-	$_REQUEST['event_id'] = $last_event_id;
+	$_REQUEST['event_id'] = !empty($last_event_id) ? $last_event_id : '';
 	do_action('action_hook_espresso_insert_event_success',$_REQUEST);
 	
 	//If not using the FEM addon, then we return the event id

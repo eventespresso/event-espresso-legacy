@@ -17,7 +17,7 @@ function espresso_process_firstdata_e4($payment_data) {
 
 	$myE4 = new Espresso_E4();
 
-	echo '<!--Event Espresso Exact.com Gateway Version ' . $myE4->gateway_version . '-->';
+	echo '<!--Event Espresso FirstData E4 Gateway Version ' . $myE4->gateway_version . '-->';
 // Log the IPN results
 	$myE4->ipnLog = TRUE;
 
@@ -40,12 +40,12 @@ function espresso_process_firstdata_e4($payment_data) {
 	} else {
 		$payment_data['txn_id'] = 0;
 	}
-	$payment_data['txn_details'] = serialize($_REQUEST);
-	$curl_session_id = uniqid('', true);
-	global $wpdb;
-	$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET attendee_session = '" . $curl_session_id . "' WHERE attendee_session ='" . $payment_data['attendee_session'] . "' ";
-	$wpdb->query($sql);
-	$payment_data['attendee_session'] = $curl_session_id;
+//	$payment_data['txn_details'] = serialize($_REQUEST);
+//	$curl_session_id = uniqid('', true);
+//	global $wpdb;
+//	$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET attendee_session = '" . $curl_session_id . "' WHERE attendee_session ='" . $payment_data['attendee_session'] . "' ";
+//	$wpdb->query($sql);
+//	$payment_data['attendee_session'] = $curl_session_id;
 
 // Specify your authorize login and secret
 	$myE4->setUserInfo($firstdata_e4_login_id, $firstdata_e4_transaction_key);
@@ -78,8 +78,8 @@ function espresso_process_firstdata_e4($payment_data) {
 		$email_transaction_dump = true;
 		if ($email_transaction_dump == true) {
 // For this, we'll just email ourselves ALL the data as plain text output.
-			$subject = 'Exact.com Notification - Gateway Variable Dump';
-			$body = "An authorize.net payment notification was successfully recieved\n";
+			$subject = 'First Data e4 Notification - Gateway Variable Dump';
+			$body = "A Firstdata e4 payment notification was successfully recieved\n";
 			$body .= "from " . $myE4->ipnData['x_email'] . " on " . date('m/d/Y');
 			$body .= " at " . date('g:i A') . "\n\nDetails:\n";
 			foreach ($myE4->ipnData as $key => $value) {

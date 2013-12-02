@@ -5,17 +5,29 @@ function add_new_attendee($event_id){
 		require_once(EVENT_ESPRESSO_PLUGINFULLPATH."includes/functions/attendee_functions.php");
 		require_once(EVENT_ESPRESSO_PLUGINFULLPATH."includes/process-registration/add_attendees_to_db.php");
 		$attendee_id = event_espresso_add_attendees_to_db();
-		// SEND CONFIRMATION EMAIL MESSAGES
-		event_espresso_email_confirmations(array('attendee_id' => $attendee_id, 'send_admin_email' => 'true', 'send_attendee_email' => 'true'));
-		//echo $attendee_id;
-		?>
-<div id="message" class="updated fade">
-  <p><strong>
-    <?php _e('Added Attendee to Database','event_espresso'); ?>
-    </strong></p>
-</div>
 
-<?php
+		if ( $attendee_id ) {
+			// SEND CONFIRMATION EMAIL MESSAGES
+			event_espresso_email_confirmations(array('attendee_id' => $attendee_id, 'send_admin_email' => 'true', 'send_attendee_email' => 'true'));
+			//echo $attendee_id;
+			?>
+			<div id="message" class="updated fade">
+			  <p><strong>
+			    <?php _e('Added Attendee to Database','event_espresso'); ?>
+			    </strong></p>
+			</div>
+		<?php
+		} else {
+			global $notifications;
+			$error_msg = implode( $notifications['error'], '<br />');
+			?>
+			<div id="message" class="error">
+				<p>
+					<strong><?php echo $error_msg; ?></strong>
+				</p>
+			</div>
+			<?php
+		}
 	}
 	wp_register_script('reCopy', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/reCopy.js"), false, '1.1.0');
         wp_print_scripts('reCopy');

@@ -65,12 +65,12 @@ if (!function_exists('add_event_espresso_menus')) {
         }
 		
 		//Event styles & templates
-		if (function_exists('event_espresso_manage_templates') && $espresso_premium == true) {
+		if (function_exists('event_espresso_manage_templates')) {
         	add_submenu_page('event_espresso', __('Event Espresso - Template Settings', 'event_espresso'), __('Template Settings', 'event_espresso'), $default_role, 'template_confg', 'event_espresso_manage_templates');
 		}
 
         //Calendar Settings 
-        if (function_exists('espresso_calendar_config_mnu') && $espresso_premium == true) {
+        if (function_exists('espresso_calendar_config_mnu')) {
             add_submenu_page('event_espresso', __('Event Espresso - Calendar Settings', 'event_espresso'), __('Calendar Settings', 'event_espresso'), apply_filters('espresso_management_capability', $default_role, isset($espresso_manager['espresso_manager_calendar']) && !empty($espresso_manager['espresso_manager_calendar']) ? $espresso_manager['espresso_manager_calendar'] : $default_role), 'espresso_calendar', 'espresso_calendar_config_mnu');
         }
 

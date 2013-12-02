@@ -54,7 +54,7 @@ function add_new_event() {
 	$reg_limit = isset($reg_limit) ? $reg_limit : '';
  
 	$additional_limit = isset($additional_limit) ? $additional_limit : '';
-	postbox(
+	espresso_postbox(
 		'event-status', 'Event Options', '<p>' . __('Attendee Limit', 'event_espresso') . ': <input name="reg_limit" size="10" type="text" value="' . 
 		$reg_limit . '"><br />' .
 		'(' . __('leave blank for unlimited', 'event_espresso') . ')</p>' .

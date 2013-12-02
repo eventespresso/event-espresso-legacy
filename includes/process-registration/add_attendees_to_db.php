@@ -1,6 +1,64 @@
 <?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
 do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	
-	
+if ( ! function_exists('espresso_verify_sufficient_remaining_tickets' )){
+	/**
+	 * Checks if the specified event still has $tickets_requested available, and returns true or false.
+	 * Takes into account INCOMPLETE registrations for a few minutes (specified by admin by the "Ticket Reservation Time".
+	 * @param int $event_id
+	 * @param array $data_source like $_POST
+	 * @return boolean
+	 */
+	function espresso_verify_sufficient_remaining_tickets($event_id,$data_source){
+		//query for availables spaces, counting INCOMPLETE tickets being purchased by OTHERS within the last X
+		//minutes as being 'reserved'
+		
+		$available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');
+		$tickets_requested = espresso_count_tickets_requested($data_source);
+		if( $available_spaces >= $tickets_requested){
+			return true;
+		}else{
+			//the global $only_show_event_full_message_once_for is ONLY used here.
+			//it is used to make sure that for MER, we only show this message once per event
+			//because code will pass through this function once for EACH attendee
+			global $wpdb,$only_show_event_full_message_once_for;
+			$event_name = $wpdb->get_var($wpdb->prepare("SELECT event_name FROM ".EVENTS_DETAIL_TABLE." WHERE id=%d",$event_id));
+			if($only_show_event_full_message_once_for[$event_id]){
+				echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . sprintf(__('Sorry, you have requested %1$d ticket(s) for \'%2$s\', but only %3$d remains(s). ', 'event_espresso'),$tickets_requested,$event_name,$available_spaces) .
+				__("All other tickets for this event have been sold, or are being purchased. You may want to try registering later, in case someone doesn't finish registering or cancels", "event_espresso").'</strong></p></div>';
+			}
+			$only_show_event_full_message_once_for[$event_id] = true;
+			return false;
+		}
+	}
+}	
+
+if ( ! function_exists('espresso_count_tickets_requested') ){
+	/**
+	 * Checks the POST data to determine how many tickets have been requested in the
+	 * request. This takes into account the two formats: providing additional attendee
+	 * info or not.
+	 * @param $data_source ARRAY like $_POST, containing 
+	 * @return int
+	 */
+	function espresso_count_tickets_requested($data_source){
+		//If we are using the number of attendees dropdown, find out how many tickets they want.
+		//echo $data_source['espresso_addtl_limit_dd'];
+		if (isset($data_source['num_people'])) {
+			$num_people = absint($data_source ['num_people']);
+		//if $data_source is from MER, and we are requriing additional attendee info,
+		//foreach attendee, the 'attendee_quantity' should be set.
+		//and yes, it has a typo.
+		} elseif(isset($data_source['attendee_quantity'])){
+			$num_people = absint($data_source['attendee_quantity']);
+		}else {
+			//we asked for additional info about the other attendees, so count the other attemdee infos
+			$additional_attendees = isset($data_source['x_attendee_fname']) ? count($data_source['x_attendee_fname']) : 0;
+			$num_people = 1 + $additional_attendees;
+		}
+		return $num_people;
+	}
+}
+
 if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 	//This entire function can be overridden using the "Custom Files" addon
 	function event_espresso_add_attendees_to_db( $event_id = NULL, $session_vars = NULL, $skip_check = FALSE ) {
@@ -13,12 +71,15 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 		}
 
 		global $wpdb, $org_options, $espresso_premium;
+
+
 		
 		//Defaults
 		$data_source = $_POST;
 		$att_data_source = $_POST;
 		$multi_reg = FALSE;
 		$notifications = array( 'coupons' => '', 'groupons' => '' );
+		$notifications['error'] = array();
 		
 		if ( ! is_null($event_id) && ! is_null($session_vars)) {
 			//event details, ie qty, price, start..
@@ -94,8 +155,10 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 		//Check if added admin
 		$skip_check = $skip_check || isset( $data_source['admin'] ) ? TRUE : FALSE;
 		
+		
+		
 		//If added by admin, skip the recaptcha check
-		if ( espresso_verify_recaptcha( $skip_check )) {
+		if ( espresso_verify_recaptcha( $skip_check ) && espresso_verify_sufficient_remaining_tickets($event_id,$data_source)) {
 
 			array_walk_recursive($data_source, 'wp_strip_all_tags');
 			array_walk_recursive($att_data_source, 'wp_strip_all_tags');
@@ -132,6 +195,27 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$email		= isset($att_data_source['email']) ? ee_sanitize_value($att_data_source['email']) : '';
 
 
+			//initial verification of required fields for now I'm just making this an admin side verification cause there hasn't been complaints about frontend?  I'm assuming frontend has its own js verification?
+			if ( is_admin() ) {
+				global $notifications;
+				if ( empty($fname) ) {
+					$notifications['error'][] = __('You must enter the first name for the attendee', 'event_espresso');
+				}
+
+				if ( empty($lname) ) {
+					$notifications['error'][] = __('You must enter the last name for the attendee', 'event_espresso');
+				}
+
+				if ( empty($email) ) {
+					$notifications['error'][] = __('You must add an email address for the attendee', 'event_espresso');
+				}
+
+				if ( !empty( $notifications['error'] ) ) {
+					return FALSE;
+				}
+			}
+
+
 			$SQL = "SELECT question_groups, event_meta FROM " . EVENTS_DETAIL_TABLE . " WHERE id = %d";
 			$questions = $wpdb->get_row( $wpdb->prepare( $SQL, $event_id ));
 			//echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
@@ -143,7 +227,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$attendee_quantity = 1;
 				$final_price	= (float)$data_source['event_cost'];
 				$orig_price		= (float)$data_source['event_cost'];
-				$price_type		=  __('Admin', 'event_espresso');
+				$price_type		=  isset($data_source['seat_id']) ? $data_source['seat_id'] : __('Admin', 'event_espresso');
 			
 			} elseif (isset($data_source['seat_id'])) {
 				
@@ -196,6 +280,8 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				print '<h3 class="error">'.__('An error occured, a valid price was not submitted.', 'event_espresso').'</h3>';
 				return;
 			}
+			
+			
 			
 			$final_price		= apply_filters( 'filter_hook_espresso_attendee_cost', $final_price );
 			$attendee_quantity	= isset( $data_source['num_people'] ) ? $data_source['num_people'] : 1;
@@ -253,15 +339,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			}
 
 
-			//If we are using the number of attendees dropdown, add that number to the DB
-			//echo $data_source['espresso_addtl_limit_dd'];
-			if (isset($data_source['espresso_addtl_limit_dd'])) {
-				$num_people = absint($data_source ['num_people']);
-			} elseif (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) {
-				$num_people = absint($data_source ['num_people']);
-			} else {
-				$num_people = 1;
-			}
+			
 
 			
 			// check for coupon 
@@ -305,6 +383,16 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$orig_price			= number_format( (float)$orig_price, 2, '.', '' );
 			$final_price		= number_format( (float)$final_price, 2, '.', '' );
 			$total_cost			= $total_cost + $final_price;
+			
+			//If we are using the number of attendees dropdown, find out how many tickets they want.
+			//echo $data_source['espresso_addtl_limit_dd'];
+			if (isset($data_source['espresso_addtl_limit_dd'])) {
+				$num_people = absint($data_source ['num_people']);
+			} elseif (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) {
+				$num_people = absint($data_source ['num_people']);
+			} else {
+				$num_people = 1;
+			}
 
 			$columns_and_values = array(
 				'registration_id'		=> $registration_id,
@@ -320,6 +408,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				'zip'					=> $zip,
 				'email'					=> $email,
 				'phone'					=> $phone,
+				'date'					=> current_time('mysql'),
 				'payment'				=> $payment,
 				'txn_type'				=> $txn_type,
 				'coupon_code'			=> $coupon_code,
@@ -339,7 +428,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			);
 			
 
-			$data_formats = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%f', '%f', '%f' );
+			$data_formats = array( '%s', '%s', '%s','%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%f', '%f', '%f' );
 
 			// save the attendee details - FINALLY !!!
 			if ( ! $wpdb->insert( EVENTS_ATTENDEE_TABLE, $columns_and_values, $data_formats )) {
@@ -456,6 +545,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 									'state'				=> empty($att_data_source['x_attendee_state'][$k]) ? '' : ee_sanitize_value($att_data_source['x_attendee_state'][$k]),
 									'zip'				=> empty($att_data_source['x_attendee_zip'][$k]) ? '' : ee_sanitize_value($att_data_source['x_attendee_zip'][$k]),
 									'phone'				=> empty($att_data_source['x_attendee_phone'][$k]) ? '' : ee_sanitize_value($att_data_source['x_attendee_phone'][$k]),
+									'date'				=> current_time('mysql'),
 									'payment'			=> $payment,
 									'event_time'		=> $start_time,
 									'end_time'			=> $end_time,
@@ -473,7 +563,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 									'final_price'		=> $final_price										
 								);
 								
-								$format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%f', '%f', '%f' );
+								$format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%f', '%f', '%f' );
 								$wpdb->insert( EVENTS_ATTENDEE_TABLE, $ext_att_data_source, $format );
 								
 								//Added by Imon
@@ -570,7 +660,6 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 	//This function is called from the shopping cart
 	function event_espresso_add_attendees_to_db_multi() {
-	
 		//echo '<h3>'. __CLASS__ . '->' . __FUNCTION__ . ' <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h3>';
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 		
@@ -594,11 +683,6 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 
 			// If there are events in the session, add them one by one to the attendee table
 			if ($count_of_events > 0) {
-			
-				//first event key will be used to find the first attendee
-				$first_event_id = key($events_in_session);
-
-				reset($events_in_session);
 				foreach ($events_in_session as $event_id => $event) {
 
 					$event_meta = event_espresso_get_event_meta($event_id);
@@ -828,7 +912,7 @@ function espresso_verify_recaptcha( $skip_check = FALSE ) {
 		
 		// check $remote_addr
 		if ( ! $remote_addr ) {
-			echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, an error occured and the anti-spam settings could not be verified. Please contact the site admin or click your browser\'s back button and try again.', 'event_espresso') . '</strong></p></div>';
+			echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, an error occurred and the anti-spam settings could not be verified. Please contact the site admin or click your browser\'s back button and try again.', 'event_espresso') . '</strong></p></div>';
 			return FALSE;			
 		}
 		

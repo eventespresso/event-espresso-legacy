@@ -192,7 +192,7 @@ function event_espresso_empty_event_trash($event_id) {
 /**
  * Create a postbox widget
  */
-function postbox($id, $title, $content) {
+function espresso_postbox($id, $title, $content) {
 	?>
 
 	<div id="<?php echo $id; ?>" class="postbox">
@@ -294,9 +294,12 @@ function event_espresso_create_upload_directories() {
 			EVENT_ESPRESSO_UPLOAD_DIR . '/logs/',
 			EVENT_ESPRESSO_UPLOAD_DIR . '/languages/',
 	);
+
+	$folder_permissions = apply_filters( 'espresso_folder_permissions', 0755 );
+
 	foreach ($folders as $folder) {
 		wp_mkdir_p($folder);
-		@ chmod($folder, 0755);
+		@ chmod($folder, $folder_permissions);
 	}
 	
 	if (!file_exists(EVENT_ESPRESSO_UPLOAD_DIR . 'logs/.htaccess')) {
@@ -363,12 +366,14 @@ function event_espresso_trigger_copy_gateways() {
 }
 
 //Functions for copying and moving files and themes
-function event_espresso_smartCopy($source, $dest, $folderPermission = 0755, $filePermission = 0644) {
+function event_espresso_smartCopy($source, $dest, $folder_permissions = 0755, $file_permissions = 0644) {
 # source=file & dest=dir => copy file from source-dir to dest-dir
 # source=file & dest=file / not there yet => copy file from source-dir to dest and overwrite a file there, if present
 # source=dir & dest=dir => copy all content from source to dir
 # source=dir & dest not there yet => copy all content from source to a, yet to be created, dest-dir
 	$result = false;
+	$folder_permissions = apply_filters( 'espresso_folder_permissions', $folder_permissions );
+	$file_permissions = apply_filters( 'espresso_file_permissions', $file_permissions );
 
 	if (is_file($source)) { # $source is file
 		if (is_dir($dest)) { # $dest is folder
@@ -380,11 +385,11 @@ function event_espresso_smartCopy($source, $dest, $folderPermission = 0755, $fil
 			$__dest = $dest;
 		}
 		$result = copy($source, $__dest);
-		chmod($__dest, $filePermission);
+		chmod($__dest, $file_permissions);
 	} elseif (is_dir($source)) { # $source is dir
 		if (!is_dir($dest)) { # dest-dir not there yet, create it
-			@mkdir($dest, $folderPermission);
-			chmod($dest, $folderPermission);
+			@mkdir($dest, $folder_permissions);
+			chmod($dest, $folder_permissions);
 		}
 		if ($source[strlen($source) - 1] != '/') # add '/' if necessary
 			$source = $source . "/";
@@ -397,7 +402,7 @@ function event_espresso_smartCopy($source, $dest, $folderPermission = 0755, $fil
 		while ($file = readdir($dirHandle)) { # note that $file can also be a folder
 			if ($file != "." && $file != "..") { # filter starting elements and pass the rest to this function again
 #                echo "$source$file ||| $dest$file<br />\n";
-				$result = event_espresso_smartCopy($source . $file, $dest . $file, $folderPermission, $filePermission);
+				$result = event_espresso_smartCopy($source . $file, $dest . $file, $folder_permissions, $file_permissions);
 			}
 		}
 		closedir($dirHandle);
@@ -1680,3 +1685,201 @@ function espresso_check_ssl() {
 	}
 	return TRUE;
 }
+
+/**
+*
+* Update notifications
+*
+**/
+
+//Setup default values
+/*global $ee_pue_checkPeriod, $lang_domain, $ee_pue_option_key;
+$ee_pue_checkPeriod = 1;
+$lang_domain = 'event_espresso';
+$ee_pue_option_key = 'site_license_key';*/
+
+add_action('action_hook_espresso_core_update_api', 'ee_core_load_pue_update');
+function ee_core_load_pue_update() {
+	global $org_options, $espresso_check_for_updates;
+	
+	if ( $espresso_check_for_updates == false )
+		return;
+
+	$ueip_optin = get_option('ee_ueip_optin');
+	$ueip_has_notified = isset($_POST['ueip_optin']) ? TRUE : get_option('ee_ueip_has_notified');
+
+	//has optin been selected for datacollection?
+	$espresso_data_optin = !empty($ueip_optin) ? $ueip_optin : NULL;
+
+	if ( empty($ueip_has_notified) ) {
+		add_action('admin_notices', 'espresso_data_collection_optin_notice', 10 );
+		add_action('admin_enqueue_scripts', 'espresso_data_collection_enqueue_scripts', 10 );
+		add_action('wp_ajax_espresso_data_optin', 'espresso_data_optin_ajax_handler', 10 );
+		update_option('ee_ueip_optin', 'yes');
+		$espresso_data_optin = 'yes';
+	}
+
+	//let's prepare extra stats
+	$extra_stats = array();
+
+	//only collect extra stats if the plugin user has opted in.
+	if ( !empty($espresso_data_optin) && $espresso_data_optin == 'yes' ) {
+		//let's only setup extra data if transient has expired
+		if ( false === ( $transient = get_transient('ee_extra_data') ) ) {
+			//active gateways
+			$active_gateways = get_option('event_espresso_active_gateways');
+			if ( !empty($active_gateways ) ) {
+				foreach ( (array) $active_gateways as $gateway => $ignore ) {
+					$extra_stats[$gateway . '_gateway_active'] = 1;
+				}
+			}
+
+			//MER active? 1 if yes. not set if not.
+			$active_plugins = get_option('active_plugins');
+			if ( preg_match('/espresso-multi-registration/', implode(',', $active_plugins ) ) )
+				$extra_stats['MER_active'] = 1;
+
+			//calendar active? considered active if the calendar page has been loaded in the past week (we use the espresso_calendar shortcode for this check)
+			//if it is active (meeting the criteria), we send the timestamp.  if it isn't then we dont' set.
+			$active_calendar = get_option('uxip_ee_calendar_active');
+			if ( strtotime('+ 1week', (int) $active_calendar) >= time() ) {
+				$extra_stats['calendar_active'] = $active_calendar;
+			}
+
+
+			//ticketing addon in use?  considered active if "espresso_ticket_launch" has been called with the corresponding _REQUEST var that triggers ticket generation.
+			//if it is active we send the timestamp for the last time a ticket was generated.  If NOT active we don't set.
+			$active_ticketing = get_option('uxip_ee_ticketing_active');
+			if ( !empty( $active_ticketing ) )
+				$extra_stats['ticketing_active'] = $active_ticketing;
+
+			
+			//REM active? if there are any recurring events present then its in use.
+			//if IS active then we return the count of recurring events.
+			$active_rem = get_option('uxip_ee_rem_active');
+			if ( !empty( $active_rem ) )
+				$extra_stats['rem_active'] = $active_rem;
+
+
+			//seating chart active?  if there are any seating charts attached to an even then its considered active and we'll send along the count of seating charts in use.  Otherwise nothing is sent.
+			$active_sc = get_option('uxip_ee_seating_chart_active');
+			if ( !empty( $active_sc ) )
+				$extra_stats['seating_chart_active'] = $active_sc;
+
+			//member only events being run?
+			$member_only_events = get_option('uxip_ee_members_events');
+			if ( !empty( $member_only_events ) )
+				$extra_stats['member_only_events'] = $member_only_events;
+
+
+			//what is the current active theme?
+			$active_theme = get_option('uxip_ee_active_theme');
+			if ( !empty( $active_theme ) )
+				$extra_stats['active_theme'] = $active_theme;
+
+			//event info regarding an all event count and all "active" event count
+			$all_events_count = get_option('uxip_ee_all_events_count');
+			if ( !empty( $all_events_count ) )
+				$extra_stats['all_events_count'] = $all_events_count;
+			$active_events_count = get_option('uxip_ee_active_events_count');
+			if ( !empty( $active_events_count ) )
+				$extra_stats['active_events_count'] = $active_events_count;
+
+
+			//set transient
+			set_transient( 'ee_extra_data', $extra_stats, WEEK_IN_SECONDS );
+		}
+	}
+
+	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'class/pue/pue-client.php')) { //include the file 
+			require(EVENT_ESPRESSO_PLUGINFULLPATH . 'class/pue/pue-client.php' );
+			$api_key = isset($org_options['site_license_key']) ? $org_options['site_license_key'] : '';
+			$host_server_url = 'http://eventespresso.com'; //this needs to be the host server where plugin update engine is installed.
+			$plugin_slug = array(
+				'free' => array('L' => 'event-espresso-free'),
+				'premium' => array('P' => 'event-espresso'),
+				'prerelease' => array('B' => 'event-espresso-pr'),
+				); 
+			$options = array(
+			//	'optionName' => '', //(optional) - used as the reference for saving update information in the clients options table.  Will be automatically set if left blank.
+				'apikey' => $api_key, //(required), you will need to obtain the apikey that the client gets from your site and then saves in their sites options table (see 'getting an api-key' below)
+				'lang_domain' => 'event_espresso', //(optional) - put here whatever reference you are using for the localization of your plugin (if it's localized).  That way strings in this file will be included in the translation for your plugin.
+				'checkPeriod' => '12', //(optional) - use this parameter to indicate how often you want the client's install to ping your server for update checks.  The integer indicates hours.  If you don't include this parameter it will default to 12 hours.
+				'option_key' => 'site_license_key', //this is what is used to reference the api_key in your plugin options.  PUE uses this to trigger updating your information message whenever this option_key is modified.
+				'options_page_slug' => 'event_espresso',
+				'plugin_basename' => EVENT_ESPRESSO_WPPLUGINPATH,
+				'use_wp_update' => TRUE, //if TRUE then you want FREE versions of the plugin to be updated from WP
+				'extra_stats' => $extra_stats
+			);
+			$check_for_updates = new PluginUpdateEngineChecker($host_server_url, $plugin_slug, $options); //initiate the class and start the plugin update engine!
+		}
+}
+
+
+/**
+ * The purpose of this function is to display information about Event Espresso data collection and a optin selection for extra data collecting by users.
+ * @return string html.
+ */
+ function espresso_data_collection_optin_text() {
+	 echo '<h4>'.__('User eXperience Improvement Program (UXIP)', 'event_espresso').'</h4>';
+	 echo sprintf( __('%sPlease help us make Event Espresso better and vote for your favorite features.%s With this version of Event Espresso a feature, called the %sUser eXperience Improvement Program (UXIP)%s, has been implemented to automatically send information to us about how you use our products and services, and support-related data. We use this information to improve our products and features, that you use most often, and to help track problems. Participation in the program is enabled by default, and the end results are software improvements to better meet the needs of our customers. The data we collect will never be sold, traded, or misused in any way. %sPlease see our %sPrivacy Policy%s for more information. You can choose to not be part of the solution and opt-out of this program by changing the %sEvent Espresso > General Settings > UXIP Settings%s within your WordPress General Settings.', 'event_espresso'), '<em>', '</em><br />','<a href="http://eventespresso.com/about/user-experience-improvement-program-uxip/" target="_blank">','</a>','<br><br>','<a href="http://eventespresso.com/about/privacy-policy/" target="_blank">','</a>','<a href="admin.php?page=event_espresso#ueip_optin">','</a>' );
+}
+
+function espresso_data_collection_optin_notice() {
+	$ueip_has_notified = get_option('ee_ueip_has_notified');
+	?>
+	<div class="updated data-collect-optin" id="espresso-data-collect-optin-container">
+		<p><?php echo espresso_data_collection_optin_text(); ?></p>
+		<div id="data-collect-optin-options-container">
+			<span style="display: none" id="data-optin-nonce"><?php echo wp_create_nonce('ee-data-optin'); ?></span>
+			<?php
+			if ( empty($ueip_has_notified) ) {
+				echo '<a href="admin.php?page=event_espresso#ueip_optin">'.__('Opt-out now?', 'event_espresso').'</a>';
+			}
+			?>
+			<button class="button-secondary data-optin-button" value="no"><?php _e('Dismiss', 'event_espresso'); ?></button>
+			<!--<button class="button-primary data-optin-button" value="yes"><?php _e('Yes! I\'m In', 'event_espresso'); ?></button>-->
+			<div style="clear:both"></div>
+		</div>
+	</div>
+	<?php
+}
+
+
+	
+/**
+ * enqueue scripts/styles needed for data collection optin
+ * @return void
+ */
+function espresso_data_collection_enqueue_scripts() {
+	wp_register_script( 'ee-data-optin-js', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/ee-data-optin.js', array('jquery'), EVENT_ESPRESSO_VERSION, TRUE );
+	wp_register_style( 'ee-data-optin-css', EVENT_ESPRESSO_PLUGINFULLURL . 'css/ee-data-optin.css', array(), EVENT_ESPRESSO_VERSION );
+
+	wp_enqueue_script('ee-data-optin-js');
+	wp_enqueue_style('ee-data-optin-css');
+}
+
+
+/**
+ * This just handles the setting of the selected option for data optin via ajax
+ * @return void
+ */
+function espresso_data_optin_ajax_handler() {
+
+	//verify nonce
+	if ( isset($_POST['nonce']) && !wp_verify_nonce($_POST['nonce'], 'ee-data-optin') ) exit();
+
+	//made it here so let's save the selection
+	$ueip_optin = isset( $_POST['selection'] ) ? $_POST['selection'] : 'no';
+
+	//update_option('ee_ueip_optin', $ueip_optin);
+	update_option('ee_ueip_has_notified', 1);
+	exit();
+}
+
+
+
+/**
+ * specific uxip tracking hooks for addons that are NOT restricted to is_admin() because we need to be able to hook into addon runtimes.
+ */
+require_once EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions/uxip-hooks.php';

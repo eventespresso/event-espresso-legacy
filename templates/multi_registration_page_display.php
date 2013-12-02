@@ -4,7 +4,7 @@
 //There should be a copy of this file in your wp-content/uploads/espresso/ folder.
 global $this_event_id;
 $this_event_id = $event_id;
-$num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$event_id]['attendee_quantitiy'] . __(' attendees', 'event_espresso');
+$num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$event_id]['attendee_quantity'] . __(' attendees', 'event_espresso');
 $attendee_quantity = ' x '.sprintf(_n('%d attendee', '%d attendees', $meta['attendee_quantity'], 'event_espresso'), $meta['attendee_quantity']);
 $display_description_on_multi_reg_page = isset( $org_options['display_description_on_multi_reg_page'] ) ? $org_options['display_description_on_multi_reg_page'] : 'N';
 ?>

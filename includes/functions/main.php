@@ -595,8 +595,28 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 			case 'num_attendees_slash_reg_limit' :
 			case 'avail_spaces_slash_reg_limit' :
 				$num_attendees = 0;
-				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id=%d AND (payment_status='Completed' OR payment_status='Pending' OR payment_status='Refund') ";
-				$wpdb->get_results( $wpdb->prepare( $a_sql, $event_id ), ARRAY_A);
+				global $org_options;
+				$minutes_in_past = isset($org_options['ticket_reservation_time']) ? $org_options['ticket_reservation_time']: 30;
+				$current_users_session =  isset($_SESSION['espresso_session']['id']) && !empty($_SESSION['espresso_session']['id']) ? $_SESSION['espresso_session']['id'] : '';
+				//NOTE: we count incomplete and declined payments temporarily if they were initiated by someone else.
+				//if they're yours, then pretend they dont exist.
+				//$x_minutes_ago_timestmap = strtotime("- ".$minutes_in_past." minute",);
+				$x_minutes_ago = date("Y-m-d H:i:s",strtotime(current_time('mysql'))-($minutes_in_past*60));
+					$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " 
+						WHERE 
+							event_id=%d AND 
+							(	payment_status='Completed' OR 
+								payment_status='Pending' OR
+								payment_status='Refund' OR
+								(
+									payment_status IN ('Payment Declined','Incomplete') AND 
+									date > %s AND
+									attendee_session != %s
+								)
+							)";
+				$query = $wpdb->prepare( $a_sql, $event_id, $x_minutes_ago, $current_users_session );
+				//echo "query:$query";
+				$wpdb->get_results( $query , ARRAY_A);
 				if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
 					$num_attendees = $wpdb->last_result[0]->quantity;
 				}
@@ -1331,8 +1351,18 @@ function espresso_get_attendee_coupon_discount($attendee_id, $cost) {
 	if (!is_null($row['coupon_code']) && !empty($row['coupon_code'])) {
 		$coupon_code = $row['coupon_code'];
 		$event_id = $row['event_id'];
+		$use_coupon_code_for_event = $wpdb->get_var("SELECT use_coupon_code FROM ".EVENTS_DETAIL_TABLE." WHERE id=%d",$event_id);
+		if($use_coupon_code_for_event == 'A'){
+			//if we're using ALL coupons codes (even non-global ones), we don't care about the rel table
+			$discounts = $wpdb->get_results("SELECT * FROM ".EVENTS_DISCOUNT_CODES_TABLE." WHERE coupon_code=%d",$coupon_code);
+		}else{
+			$discounts = $wpdb->get_results("SELECT d.* FROM " 
+				. EVENTS_DISCOUNT_CODES_TABLE . " d JOIN " 
+				. EVENTS_DISCOUNT_REL_TABLE . " r ON r.discount_id  = d.id WHERE d.coupon_code = '" . $coupon_code . "'  AND r.event_id = '" . $event_id . "' ");
+		
+		}
 		//$results = $wpdb->get_results("SELECT * FROM ". EVENTS_DISCOUNT_CODES_TABLE ." WHERE coupon_code = '".$_REQUEST['coupon_code']."'");
-		$discounts = $wpdb->get_results("SELECT d.* FROM " . EVENTS_DISCOUNT_CODES_TABLE . " d JOIN " . EVENTS_DISCOUNT_REL_TABLE . " r ON r.discount_id  = d.id WHERE d.coupon_code = '" . $coupon_code . "'  AND r.event_id = '" . $event_id . "' ");
+		
 		if ($wpdb->num_rows > 0) {
 			$valid_discount = true;
 			foreach ($discounts as $discount) {
@@ -1401,7 +1431,7 @@ if (!function_exists('espresso_display_featured_image')) {
 		$class = empty($class) ? 'ee-featured-image' : $class;
 		$title = empty($title) ? __('Featured Image', 'event_espresso') : $title;
 		$align = empty($align) ? 'right' : $align;
-		$output = '<div class="' . $class . '" id="espresso_featured_image-'.$event_id.'"><img title="' . $title . '" src="'.$image_url.'" /></div>';
+		$output = '<div class="' . $class . '" id="espresso_featured_image-'.$event_id.'"><a href="'.espresso_reg_url($event_id).'"><img title="' . $title . '" src="'.$image_url.'" /></a></div>';
 		return $output; 
 	}
 }

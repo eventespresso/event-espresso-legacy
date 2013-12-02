@@ -36,10 +36,11 @@ if ($reg_form_only == false) {
 	<?php /* end venue details block */ ?>
 
 	<?php if ($display_desc == "Y") { //Show the description or not ?>
-	<p class="section-title">
-		<?php _e('Description:', 'event_espresso') ?>
-	</p>
+	
 	<div class="event_description clearfix">
+		<p class="section-title">
+			<?php _e('Description:', 'event_espresso') ?>
+		</p>
 		<?php echo espresso_format_content($event_desc); //Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.   ?>
 		
 	</div>
@@ -105,68 +106,13 @@ if ($reg_form_only == false) {
 	<?php
 				
 			//This hides the date/times and location when usign custom post types or the ESPRESSO_REG_FORM shortcode
-if ( $reg_form_only == false ){	
+		if ( $reg_form_only == false ){	
 						
-					/* Display the address and google map link if available */
-					if ($location != '' && (empty($org_options['display_address_in_regform']) || $org_options['display_address_in_regform'] != 'N')) {
-	?>
-				<p class="event_address" id="event_address-<?php echo $event_id ?>"><span class="section-title"><?php echo __('Address:', 'event_espresso'); ?></span> <br />
-					<span class="address-block">
-						<?php echo stripslashes_deep($venue_title); ?><br />
-						<?php echo stripslashes_deep($location); ?><br />
-						<span class="google-map-link"><?php echo $google_map_link; ?></span>
-					</span>
-				</p>
-	<?php
-					}
-					do_action('action_hook_espresso_social_display_buttons', $event_id);
-	?>
-
-				<p class="start_date">
-					<?php if ($end_date !== $start_date) { ?>
-					<span class="span_event_date_label">
-					<?php _e('Start Date: ', 'event_espresso'); ?>
-					</span>
-					<?php } else { ?>
-					<span class="span_event_date_label">
-					<?php _e('Date: ', 'event_espresso'); ?>
-					</span>
-					<?php } ?>
-					<span class="span_event_date_value">
-					<?php echo event_date_display($start_date, get_option('date_format')); ?>
-					</span>
-	<?php if ($end_date !== $start_date) : ?>
-					<br/>
-					<span class="span_event_date_label">
-						<?php _e('End Date: ', 'event_espresso'); ?>
-					</span> 
-					<span class="span_event_date_value">
-					<?php echo event_date_display($end_date, get_option('date_format')); ?>
-					</span> 
-	<?php endif; ?>
-					<?php echo apply_filters('filter_hook_espresso_display_ical', $all_meta); ?>
-				</p>
-	<?php
-				}
-
-			// * * This section shows the registration form if it is an active event * *
-
-			if ($display_reg_form == 'Y') {
+					
+				do_action('action_hook_espresso_social_display_buttons', $event_id);
+					
+				if ($display_reg_form == 'Y') {
 				
-				do_action('action_hook_espresso_registration_form_top', $event_id, $event_meta, $all_meta);
-	?>
-				<p class="event_time">
-	<?php
-						//This block of code is used to display the times of an event in either a dropdown or text format.
-						if (isset($time_selected) && $time_selected == true) {//If the customer is coming from a page where the time was preselected.
-							echo event_espresso_display_selected_time($time_id); //Optional parameters start, end, default
-						} else {
-							echo event_espresso_time_dropdown($event_id);
-						}//End time selected
-	?>
-				</p>
-	<?php
-
 					// Added for seating chart addon
 					$display_price_dropdown = TRUE;
 
@@ -195,7 +141,67 @@ if ( $reg_form_only == false ){
 							
 					}						
 	?>
+				<p class="event_time">
+	<?php
+						//This block of code is used to display the times of an event in either a dropdown or text format.
+						if (isset($time_selected) && $time_selected == true) {//If the customer is coming from a page where the time was preselected.
+							echo event_espresso_display_selected_time($time_id); //Optional parameters start, end, default
+						} else {
+							echo event_espresso_time_dropdown($event_id);
+						}//End time selected
+	?>
+				</p>
+	<?php
+				}
+	?>
 
+				<p class="start_date">
+					<?php if ($end_date !== $start_date) { ?>
+					<span class="span_event_date_label">
+					<?php _e('Start Date: ', 'event_espresso'); ?>
+					</span>
+					<?php } else { ?>
+					<span class="span_event_date_label">
+					<?php _e('Date: ', 'event_espresso'); ?>
+					</span>
+					<?php } ?>
+					<span class="span_event_date_value">
+					<?php echo event_date_display($start_date, get_option('date_format')); ?>
+					</span>
+	<?php if ($end_date !== $start_date) : ?>
+					<br/>
+					<span class="span_event_date_label">
+						<?php _e('End Date: ', 'event_espresso'); ?>
+					</span> 
+					<span class="span_event_date_value">
+					<?php echo event_date_display($end_date, get_option('date_format')); ?>
+					</span> 
+	<?php endif; ?>
+					<?php echo apply_filters('filter_hook_espresso_display_ical', $all_meta); ?>
+				</p>
+				
+				<?php
+					/* Display the address and google map link if available */
+					if ($location != '' && (empty($org_options['display_address_in_regform']) || $org_options['display_address_in_regform'] != 'N')) {
+	?>
+						<p class="event_address" id="event_address-<?php echo $event_id ?>"><span class="section-title"><?php echo __('Address:', 'event_espresso'); ?></span> <br />
+							<span class="address-block">
+								<?php echo stripslashes_deep($venue_title); ?><br />
+								<?php echo stripslashes_deep($location); ?><br />
+								<span class="google-map-link"><?php echo $google_map_link; ?></span>
+							</span>
+						</p>
+	<?php
+					}
+		}
+
+			// * * This section shows the registration form if it is an active event * *
+
+			if ($display_reg_form == 'Y') {
+				
+				do_action('action_hook_espresso_registration_form_top', $event_id, $event_meta, $all_meta);
+
+	?>
 				<div id="event-reg-form-groups">
 				
 					<h3 class="section-heading"><?php _e('Registration Details', 'event_espresso'); ?></h3>
@@ -211,7 +217,7 @@ if ( $reg_form_only == false ){
 	?>
 				<input type="hidden" name="use_coupon[<?php echo $event_id; ?>]" value="<?php echo $use_coupon_code; ?>" />
 	<?php
-					if ( $use_coupon_code == 'Y' && function_exists( 'event_espresso_coupon_registration_page' )) {
+					if ( in_array( $use_coupon_code, array('Y','G','A')) && function_exists( 'event_espresso_coupon_registration_page' )) {
 						echo event_espresso_coupon_registration_page($use_coupon_code, $event_id);
 					}
 					//End coupons display

@@ -219,6 +219,8 @@ function espresso_confirm_registration() {
 		wp_die(__('An error has occured. The registration ID could not be found.', 'event_espresso'));
 	}
 	
+	echo '<div id="espresso-payment_page-dv" >';
+	
 	do_action('action_hook_espresso_confirmation_page_before',$registration_id);
 
 	//Get the questions for the attendee
@@ -329,7 +331,7 @@ function espresso_confirm_registration() {
 
 	if ( $attendee_pre_approved ) {
 
-		//Pull in the "Thank You" page template
+		//Pull in the "Payment Overview" page template
 		if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . "payment_page.php")) {
 			require_once(EVENT_ESPRESSO_TEMPLATE_DIR . "payment_page.php"); //This is the path to the template file if available
 		} else {
@@ -344,7 +346,7 @@ function espresso_confirm_registration() {
 			} else {
 				require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "gateways/gateway_display.php");
 			}
-			
+
 			//Check to see if the site owner wants to send an confirmation eamil before payment is recieved.
 			if ($org_options['email_before_payment'] == 'Y') {
 				event_espresso_email_confirmations(array('session_id' => $session_id, 'send_admin_email' => 'true', 'send_attendee_email' => 'true'));
@@ -363,6 +365,8 @@ function espresso_confirm_registration() {
 		}
 		
 	}
+
+	echo '</div>';
 	
 }
 
@@ -405,7 +409,6 @@ function event_espresso_pay() {
 		}
 			
 		if ( $payment_data['payment_status'] != 'Completed' && $payment_data['payment_status'] != 'Refund' ) {
-		
 			
 			$payment_data = apply_filters('filter_hook_espresso_thank_you_get_payment_data', $payment_data);
 			
@@ -444,14 +447,47 @@ function event_espresso_pay() {
 			}
 		}
 	}
+	if (isset($payment_data['attendee_session'])){
+		event_espresso_clear_session_of_attendee($payment_data['attendee_session']);
+	}
 	$_REQUEST['page_id'] = $org_options['return_url'];
-	unset( $_SESSION['espresso_session']['id'] );
-	ee_init_session();
 	
 	$espresso_content = ob_get_contents();
 	ob_end_clean();
 	add_shortcode('ESPRESSO_PAYMENTS', 'espresso_return_espresso_content');
 	return $espresso_content;
 	
+}
+/**
+ * Clears the event espresso session (containing info about events being registered for)
+ * for the attendee with this $attendee_session ('attendee_session' on teh events_attendee table).
+ * Before we simply cleared the session of the CURRENT user. That worked 95% of the time, except SOME gateways
+ * (notably Worldpay, and probably Authnet) send the request to the thank you page directly (instead of redirecting
+ * the user to teh thank you page). When THEY send the request on behalf of the user, they're on a different session.
+ * So what's the use in clearing the session in that case? (Because we're clearing the session of teh gateway sending the request
+ * instead of the user's session). So, instead we need to use the attendee's 'attendee_session', which contains info about
+ * the php session. So we load that session (the user's) and modify IT, instead of the current requestor's session
+ * (because they could be the gateway, instead of the user).
+ * @param string $attendee_session
+ * @return void 
+ */
+function event_espresso_clear_session_of_attendee($attendee_session){
+	//first, check that the $attendee_session isn't blank
+	if( ! $attendee_session ){
+		return;
+	}
+	//extract the PHP session portion of attendee_session, the part before the "-"
+	$pos_of_dash = strpos($attendee_session, "-");
+	$php_session_id = substr($attendee_session, 0, $pos_of_dash);
+	//if the current session doesn't have id == $php_session_id, (probably
+	//because its the gateway who's sent the request to the current page, not the user themselves)
+	//effectively this overwrites the session (which has id == $php_session_id) to be identical
+	//to teh current session. That means if the user's session had events queued in it, they're gone.
+	session_id($php_session_id);
+	
+	//in case the current session's id == $php_session_id (ie, the current request IS NOT a
+	//gateway sending a request to thank you page, but IT IS the actual user themselves sending the request)
+	//then we need to reset their ee session using the following
+	ee_init_session();
 }
 

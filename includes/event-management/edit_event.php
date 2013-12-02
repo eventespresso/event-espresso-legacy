@@ -208,6 +208,7 @@ function edit_event($event_id = 0) {
 	$advanced_options = '';
 	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/event-management/advanced_settings.php')) {
 		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "includes/admin-files/event-management/advanced_settings.php");
+		
 	} else {
 		//Display Lite version options
 		$status = array(array('id' => 'A', 'text' => __('Active', 'event_espresso')), array('id' => 'D', 'text' => __('Deleted', 'event_espresso')));
@@ -216,7 +217,7 @@ function edit_event($event_id = 0) {
 						. '<p><label>' . __('Display  description? ', 'event_espresso') . '</label>' . select_input('display_desc', $values, $display_desc) . '</p>'
 						. '<p><label>' . __('Display  registration form? ', 'event_espresso') . '</label>' . select_input('display_reg_form', $values, $display_reg_form) . '</p>';
 	}//Display Lite version options - End
-	postbox('event-status', 'Event Options', '<p><label for"reg-limit">' . __('Attendee Limit', 'event_espresso') . ': </label><input name="reg_limit" id="reg-limit" size="10" type="text" value="' . $reg_limit . '" /><br />' .
+	espresso_postbox('event-status', 'Event Options', '<p><label for"reg-limit">' . __('Attendee Limit', 'event_espresso') . ': </label><input name="reg_limit" id="reg-limit" size="10" type="text" value="' . $reg_limit . '" /><br />' .
 					'<span>(' . __('leave blank for unlimited', 'event_espresso') . ')</span></p>' .
 					'<p><label>' . __('Allow group registrations?', 'event_espresso') . '</label> ' . select_input('allow_multiple', $values, $allow_multiple) . '</p>' .
 					'<p><label for="addit-limit">' . __('Max Group Registrants', 'event_espresso') . ':</label> <input type="text" id="addit-limit" name="additional_limit" value="' . $additional_limit . '" size="4" />' . '</p>' .
@@ -257,10 +258,10 @@ function edit_event($event_id = 0) {
 					<?php _e('Add Featured Image', 'event_espresso'); ?>
 				</label>
 				<input id="upload_image" type="hidden" size="36" name="upload_image" value="<?php echo $event_thumb ?>" />
-				<input id="upload_image_button" type="button" value="Upload Image" />
+				<input id="upload_image_button" type="button" value="<?php _e('Upload Image', 'event_espresso'); ?>" />
 				<?php if ($event_thumb) { ?>
-					<p class="event-featured-thumb"><img  src="<?php echo $event_thumb ?>" alt="" /></p>
-					<a id='remove-image' href='#' title='Remove this image' onclick='return false;'><?php _e('Remove Image', 'event_espresso'); ?></a>
+					<p class="event-featured-thumb"><img style="width: 100%;"  src="<?php echo $event_thumb ?>" alt="" /></p>
+					<a id='remove-image' href='#' title='<?php _e('Remove Image', 'event_espresso'); ?>' onclick='return false;'><?php _e('Remove Image', 'event_espresso'); ?></a>
 				<?php } ?>
 			</div>
 			
@@ -823,7 +824,7 @@ function edit_event($event_id = 0) {
 		
 			// process the remove link in the metabox
 			jQuery('#remove-image').click(function(){
-				var answer = confirm('<?php _e('Do you really want to delete this image? Please remember to update your event to complete the removal.', 'event_espresso'); ?>');
+				var answer = confirm("<?php _e("Do you really want to delete this image? Please remember to update your event to complete the removal.", 'event_espresso'); ?>");
 				if (answer){
 					jQuery("#upload_image").val('');
 					jQuery("p.event-featured-thumb").remove();
