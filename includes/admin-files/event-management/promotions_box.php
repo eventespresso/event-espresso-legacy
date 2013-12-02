@@ -33,21 +33,21 @@
 		<p class="disc-codes">
 			<label><?php _e('Allow Promo Codes?', 'event_espresso'); ?>
 			</label>
-
-			<?php
-			$coupon_code_select_values = array(
-				array('id' => 'N', 'text' => __("No Promo Codes", "event_espresso")),
-				array('id' => 'G', 'text' => __("Only Global Promo Codes", "event_espresso")),
-				array('id' => 'Y', 'text' => __("Global Promo Codes and Specific Ones...", "event_espresso")),
-				array('id' => 'A', 'text' => __("All Promo Codes (even Non-Globals)", "event_espresso"))
-			);
-			echo select_input('use_coupon_code', $coupon_code_select_values, !isset($use_coupon_code) || $use_coupon_code == '' ? apply_filters('FHEE_default_use_coupon_code_value','G') : $use_coupon_code);
-			?>
-			<a class="thickbox"
+<a class="thickbox"
 			   href="#TB_inline?height=300&width=400&inlineId=coupon_code_info"><img
 					src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png"
 					width="16" height="16" />
 			</a>
+			<?php
+			$coupon_code_select_values = array(
+				array('id' => 'N', 'text' => __("No Promo Codes", "event_espresso")),
+				array('id' => 'G', 'text' => __("Global Promo Codes Only", "event_espresso")),
+				array('id' => 'Y', 'text' => __("Global and Specific Promo Codes", "event_espresso")),
+				array('id' => 'A', 'text' => __("All Promo Codes (even Non-Globals)", "event_espresso"))
+			);
+			echo select_input('use_coupon_code', $coupon_code_select_values, !isset($use_coupon_code) || $use_coupon_code == '' ? apply_filters('FHEE_default_use_coupon_code_value','G') : $use_coupon_code);
+			?>
+			
 		</p>
 
 		<div id='espresso_select_promocodes_area'>
@@ -57,6 +57,9 @@
 			<div class='promocodes-in-use'>
 				<?php
 				global $wpdb;
+				if( ! isset($event_id)){
+					$event_id = null;
+				}
 				if (!empty($event_id)) {
 					$sql = $wpdb->prepare("SELECT d.id, d.coupon_code FROM " . EVENTS_DISCOUNT_CODES_TABLE . " AS d 
 						INNER JOIN " . EVENTS_DISCOUNT_REL_TABLE . " AS r ON d.id=r.discount_id WHERE apply_to_all=0 AND event_id=%d ",$event_id);

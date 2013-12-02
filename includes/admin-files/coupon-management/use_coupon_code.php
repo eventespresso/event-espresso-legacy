@@ -143,13 +143,13 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 						
 						$msg = '<p id="event_espresso_valid_coupon" style="margin:0;">';
 						$msg .= '<strong>' . __('Promotional code ', 'event_espresso') . $coupon_code . '</strong> ( ' . $discount_type_price . __(' discount', 'event_espresso') . ' )<br/>';
-	          		    $msg .= __('has being successfully applied to the following events', 'event_espresso') . ':<br/>';
+	          		    $msg .= __('has been successfully applied to the following events', 'event_espresso') . ':<br/>';
 						
 					} else {
 					
 						$msg = '<p id="event_espresso_valid_coupon" style="margin:0;">';
 						$msg .= '<strong>' . __('Promotional code ', 'event_espresso') . $coupon_code . '</strong> ( ' . $discount_type_price . __(' discount', 'event_espresso') . ' )<br/>';
-	          		    $msg .= __('has being successfully applied to your registration', 'event_espresso');
+	          		    $msg .= __('has been successfully applied to your registration', 'event_espresso');
 	          		    $msg .= '</p>';
 						
 					}							
