@@ -241,6 +241,7 @@ a.post-edit-link {
 	color: #000;
 	text-shadow:1px 1px #fff;
 	cursor: pointer;
+	display: inline-block;
 }
 .remove-additional-attendee-lnk {
 	padding: 1em 2em 1.25em; 
@@ -250,6 +251,7 @@ a.post-edit-link {
 	border-radius:3px;
 	color: #000; text-shadow:1px 1px #fff;
 	cursor:pointer;
+	display: inline-block;
 }
 
 /*___ Attendee list ___*/
