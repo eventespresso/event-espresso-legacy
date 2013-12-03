@@ -41,7 +41,7 @@ function espresso_display_megasoft($data) {
 					  <label for="cid_code"><?php _e('Número de Identificación', 'event_espresso'); ?></label>
 					  <select id="cid_code" name ="cid_code" class="required">
 							<option value='V'><?php _e('Venezolano','event_espresso'); ?></option>
-							<option value='J'><?php _e('Juridico','event_espress');?></option>
+							<option value='J'><?php _e('Juridico','event_espresso');?></option>
 							<option value='E'><?php _e('Extranjero','event_espresso'); ?></option>
 							<option value='G'><?php _e("Gubernamental",'event_espresso');?></option>
 							<option value='P'><?php _e("Pasaporte",'event_espresso');?></option>
