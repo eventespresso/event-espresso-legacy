@@ -337,23 +337,21 @@ function edit_attendee_record() {
 						case "TEXTAREA" :
 						case "SINGLE" :
 						case "DROPDOWN" :
-
 							if ( $question->system_name != '' ) {
 								$post_val = isset( $_POST[ $question->system_name ] ) ? $_POST[ $question->system_name ] : '';
 							} else {
-								$post_val = isset( $_POST[ $question->question_type . '_' . $question->question_id ] ) ? $_POST[ $question->question_type . '_' . $question->question_id ] : '';
+								$post_val = isset( $_POST[ $question->question_type . '_' . $question->q_id ] ) ? $_POST[ $question->question_type . '_' . $question->q_id ] : '';
 							}
 							
 							$post_val = apply_filters( 'filter_hook_espresso_admin_question_response', $post_val, $question );
 							$post_val = ee_sanitize_value( stripslashes( $post_val ));
-							
 							break;
 							
 						case "MULTIPLE" :
 						
 							$post_val = '';
-							for ( $i = 0; $i < count( $_POST[ $question->question_type . '_' . $question->question_id ] ); $i++ ) {
-								$pval = apply_filters( 'filter_hook_espresso_admin_question_response', trim( $_POST[ $question->question_type . '_' . $question->question_id ][$i] ), $question );
+							for ( $i = 0; $i < count( $_POST[ $question->question_type . '_' . $question->q_id ] ); $i++ ) {
+								$pval = apply_filters( 'filter_hook_espresso_admin_question_response', trim( $_POST[ $question->question_type . '_' . $question->q_id ][$i] ), $question );
 								$post_val .= $pval . ",";
 							}
 							$post_val = ee_sanitize_value( substr( stripslashes( $post_val ), 0, -1 ));
@@ -374,7 +372,7 @@ function edit_attendee_record() {
 						$where_format = array( '%d', '%d' );
 						// run the update
 						$upd_success = $wpdb->update( EVENTS_ANSWER_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
-						//echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//						echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 					} else {
 						// new answer
@@ -387,7 +385,7 @@ function edit_attendee_record() {
 						$set_format = array( '%s', '%d', '%d', '%s'  );
 						// run the insert
 						$upd_success = $wpdb->insert( EVENTS_ANSWER_TABLE, $set_cols_and_values, $set_format );
-						//echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//						echo '<h4>INSERlast_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 					}				
 				}
