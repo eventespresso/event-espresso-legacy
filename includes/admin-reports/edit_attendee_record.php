@@ -337,11 +337,11 @@ function edit_attendee_record() {
 						case "TEXTAREA" :
 						case "SINGLE" :
 						case "DROPDOWN" :
-						
+
 							if ( $question->system_name != '' ) {
 								$post_val = isset( $_POST[ $question->system_name ] ) ? $_POST[ $question->system_name ] : '';
 							} else {
-								$post_val = isset( $_POST[ $question->question_type . '_' . $question->a_id ] ) ? $_POST[ $question->question_type . '_' . $question->a_id ] : '';
+								$post_val = isset( $_POST[ $question->question_type . '_' . $question->question_id ] ) ? $_POST[ $question->question_type . '_' . $question->question_id ] : '';
 							}
 							
 							$post_val = apply_filters( 'filter_hook_espresso_admin_question_response', $post_val, $question );
@@ -352,8 +352,8 @@ function edit_attendee_record() {
 						case "MULTIPLE" :
 						
 							$post_val = '';
-							for ( $i = 0; $i < count( $_POST[ $question->question_type . '_' . $question->a_id ] ); $i++ ) {
-								$pval = apply_filters( 'filter_hook_espresso_admin_question_response', trim( $_POST[ $question->question_type . '_' . $question->a_id ][$i] ), $question );
+							for ( $i = 0; $i < count( $_POST[ $question->question_type . '_' . $question->question_id ] ); $i++ ) {
+								$pval = apply_filters( 'filter_hook_espresso_admin_question_response', trim( $_POST[ $question->question_type . '_' . $question->question_id ][$i] ), $question );
 								$post_val .= $pval . ",";
 							}
 							$post_val = ee_sanitize_value( substr( stripslashes( $post_val ), 0, -1 ));
