@@ -306,18 +306,21 @@ function edit_attendee_record() {
 			
 			$group_name = '';
 			$counter = 0;
-
+			
+			$FILTER = '';
+			if (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == '2' && isset($_REQUEST['attendee_num']) && $_REQUEST['attendee_num'] > 1) {
+				$FILTER .= " AND qg.system_group = 1 ";
+			}
 			//pull the list of questions that are relevant to this event
-			$SQL = "SELECT q.*, q.id AS q_id, at.id AS a_id, at.*, qg.group_name, qg.show_group_description, qg.show_group_name ";
+			$SQL = "SELECT q.*, q.id AS q_id,  qg.group_name, qg.show_group_description, qg.show_group_name ";
 			$SQL .= "FROM " . EVENTS_QUESTION_TABLE . " q ";
-			$SQL .= "LEFT JOIN " . EVENTS_ANSWER_TABLE . " at on q.id = at.question_id ";
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
 			$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
-			$SQL .= "AND (at.attendee_id IS NULL OR at.attendee_id = '%d') ";
-			$SQL .= "ORDER BY qg.id, q.id ASC";		
+			$SQL .= $FILTER . " ";
+			$SQL .= "ORDER BY qg.id, q.id ASC";
+			$questions = $wpdb->get_results( $SQL);
 			
-			$questions = $wpdb->get_results( $wpdb->prepare( $SQL, $id ));			
 //			printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 			
 			$SQL = "SELECT id, question_id, answer FROM " . EVENTS_ANSWER_TABLE . " at WHERE at.attendee_id = %d";		
