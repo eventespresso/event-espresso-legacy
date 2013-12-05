@@ -26,6 +26,11 @@
 
 /* body text */
 
+/* Widget Style */
+.widget.events ol {
+	list-style: none;
+}
+
 /* Managed by themeroller */
 /*___ General site wide styles for event-data / espresso_events ___*/
 .ee-featured-image{
