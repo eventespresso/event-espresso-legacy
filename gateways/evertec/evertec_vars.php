@@ -58,7 +58,7 @@ function espresso_display_evertec($payment_data) {
 						</p>
 						<p>
 					        <label for="address2"><?php _e("Address (cont'd)", 'event_espresso'); ?></label>
-					        <input name="address2" type="text" id="evertec_address2" class="required" value="<?php echo $payment_data['address2'] ?>" />
+					        <input name="address2" type="text" id="evertec_address2" class="required" value="<?php echo isset($payment_data['address2']) ? $payment_data['address2'] : '' ?>" />
 						</p>
 						<p>
 					        <label for="city"><?php _e('City', 'event_espresso'); ?></label>
@@ -104,9 +104,9 @@ function espresso_display_evertec($payment_data) {
 					        <label for="exp-year"><?php _e('Expiration Year', 'event_espresso'); ?></label>
 					        <select id="evertec_exp-year" name ="expyear" class="med required">
 										<?php
-										$curr_year = date("y");
+										$curr_year = date("Y");
 										for ($i = 0; $i < 10; $i++) {
-											$disp_year = $curr_year + $i;
+											$disp_year = intval($curr_year) + $i;
 											echo "<option value='$disp_year'>$disp_year</option>";
 										}
 										?>
@@ -137,7 +137,7 @@ function espresso_display_evertec($payment_data) {
 						</p>
 					</fieldset>
 					
-					<input name="amount" type="hidden" value="<?php echo number_format($event_cost, 2) ?>" />
+					<input name="amount" type="hidden" value="<?php echo number_format($payment_data['event_cost'], 2) ?>" />
 					<input name="evertec" type="hidden" value="true" />
 					<input name="r_id" type="hidden" value="<?php echo $registration_id ?>" />
 					<p class="event_form_submit">

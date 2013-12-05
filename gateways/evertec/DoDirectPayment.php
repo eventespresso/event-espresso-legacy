@@ -44,7 +44,7 @@ if($evertec_settings['use_sandbox']){
 		'channel'=>6,//not sure what this is for
 		'ignoreValues'=>'',  
 		'operatorId'=>'',
-		'language'=>$evertec_settings['evertec_pages_language'],
+//		'language'=>$evertec_settings['evertec_pages_language'],
 		'tax1'=>'',//0
 		'tax2'=>'',
 		'tax3'=>'',
