@@ -122,7 +122,7 @@ get_header(); ?>
 
                 </div>
 
-                <?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'twentyten' ), 'after' => '</div>' ) ); ?>
+                <?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'event_espresso' ), 'after' => '</div>' ) ); ?>
 
                 <?php endwhile; // end of the loop. ?>
                 <?php $wp_query = null; $wp_query = $temp; // put the old query back where we left it ?>

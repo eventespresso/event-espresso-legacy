@@ -33,7 +33,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	// GET ATTENDEE
 	$SQL = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id =%d";
 	$attendee = $wpdb->get_row( $wpdb->prepare( $SQL, $attendee_id ));
-	
+	do_action('action_hook_espresso_pre_confirmation_page', $attendee);
 	//printr( $attendee, '$attendee  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 
 	$attendee_last = $attendee->lname;

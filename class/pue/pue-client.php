@@ -393,7 +393,6 @@ class PluginUpdateEngineChecker {
 		if ( $this->checkPeriod > 0 ){
 			
 			//Trigger the check via Cron
-			add_filter('cron_schedules', array($this, '_addCustomSchedule'));
 			if ( !wp_next_scheduled($cronHook) && !defined('WP_INSTALLING') ) {
 				wp_schedule_event(time(), 'daily', $cronHook);
 			}
@@ -686,7 +685,7 @@ class PluginUpdateEngineChecker {
 			//Dismiss code idea below is obtained from the Gravity Forms Plugin by rocketgenius.com
 			ob_start();
 			?>
-			<div class="updated" style="padding:15px; position:relative;" id="pu_dashboard_message"><?php echo $alt_content . $msg ?>
+				<div class="updated" style="padding:15px; position:relative;" id="pu_dashboard_message"><?php echo $msg ?>
 				<a href="javascript:void(0);" onclick="PUDismissUpgrade();" style='float:right;'><?php _e("Dismiss") ?></a>
             </div>
             <script type="text/javascript">
@@ -724,9 +723,9 @@ class PluginUpdateEngineChecker {
 			return;
 		//first any json errors?
 		if ( !empty( $this->json_error ) && isset($this->json_error->api_invalid) ) {
-				$msg = $this->display_json_error(FALSE, TRUE, '<p>' . sprintf( __('It appears you\'ve tried entering an api key to upgrade to the premium version of %s, however, the key does not appear to be valid.  This is the message received back from the server:', $this->lang_domain ), $this->pluginName ) . '</p>');
-				echo $msg;
-				return;
+				$msg = str_replace('%plugin_name%', $this->pluginName, $this->json_error->api_invalid_message);
+				$msg = str_replace('%version%', $this->json_error->version, $msg);
+				$msg = sprintf( __('It appears you\'ve tried entering an api key to upgrade to the premium version of %s, however, the key does not appear to be valid.  This is the message received back from the server:', $this->lang_domain ), $this->pluginName ) . '</p><p>' . $msg;
 		} else {
 			$msg = sprintf( __('Congratulations!  You have entered in a valid api key for the premium version of %s.  You can click the button below to upgrade to this version immediately.', $this->lang_domain), $this->pluginName );
 		}
@@ -736,7 +735,7 @@ class PluginUpdateEngineChecker {
 		$button = '<a href="' . $button_link . '" class="button-secondary pue-upgrade-now-button" value="no">' . __('Upgrade Now', $this->lang_domain) . '</a>';
 
 		$content = '<div class="updated" style="padding:15px; position:relative;" id="pue_update_now_container"><p>' . $msg . '</p>';
-		$content .= $button;
+		$content .= empty($this->json_error) ? $button : '';
 		$content .= '</div>';
 
 		echo $content;
