@@ -50,6 +50,7 @@ function organization_config_mnu() {
 		$org_options['affiliate_id'] = isset($_POST['affiliate_id']) && !empty($_POST['affiliate_id']) ? $_POST['affiliate_id'] : '';
 		$org_options['site_license_key'] = isset($_POST['site_license_key']) && !empty($_POST['site_license_key']) ? trim($_POST['site_license_key']) : '';
 		$org_options['default_payment_status'] = isset($_POST['default_payment_status']) && !empty($_POST['default_payment_status']) ? $_POST['default_payment_status'] : '';
+		$org_options['default_promocode_usage'] = isset($_POST['default_promocode_usage']) && !empty($_POST['default_promocode_usage']) ? $_POST['default_promocode_usage'] : 'N';
 		$org_options['ticket_reservation_time'] = isset($_POST['ticket_reservation_time']) && !empty($_POST['ticket_reservation_time']) ? $_POST['ticket_reservation_time'] : '30';
 		$ueip_optin = isset($_POST['ueip_optin']) && !empty($_POST['ueip_optin']) ? $_POST['ueip_optin'] : 'yes';
 		

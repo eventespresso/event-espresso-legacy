@@ -48,6 +48,19 @@ $values=array(
             <?php echo select_input('default_payment_status', $default_payment_status, $org_options['default_payment_status']); ?> 
 		  </li>
 		  <li>
+            <label for="default_promocode_usage">
+              <?php
+					  $default_promocode_usage = array(
+							array('id'=>'N', 'text'=>  __("No Promo Codes", "event_espresso")),
+							array('id'=>'G', 'text' => __("Global Promo Codes Only", "event_espresso")),
+							array('id'=>'Y', 'text'=>  __("Global and Specific Promo Codes", "event_espresso")),
+							array('id'=>'A', 'text'=>  __("All Promo Codes (even Non-Globals)", "event_espresso"))
+						);
+ _e(' Default Promocode Usage on New Events: ','event_espresso'); ?>
+            </label>
+            <?php echo select_input('default_promocode_usage', $default_promocode_usage, isset($org_options['default_promocode_usage']) ? $org_options['default_promocode_usage'] : 'N'); ?> 
+		  </li>
+		  <li>
 			   <label for="ticket_reservation_time">
               <?php
  _e('Ticket Reservation Time (number of minutes registrants have to complete their registration before others can register in their place. Longer times (eg, 60 minutes) are good because they reduce the likelyhood of accidental overbooking, but shorter times (eg, 15 minutes) reduce wait time for registrants who are waiting on an abandoned registration)  ','event_espresso'); ?>
