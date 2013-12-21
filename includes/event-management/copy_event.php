@@ -226,5 +226,5 @@ function copy_event( $recurrence_array = array() ){
 	
 <?php	
 		endif;
-		        
+	return $new_id;
 }

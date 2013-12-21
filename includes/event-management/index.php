@@ -52,8 +52,12 @@ function event_espresso_manage_events() {
 			<?php
 			if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'copy_event') {
 				require_once("copy_event.php");
-				copy_event();
-				$_REQUEST['event_id'] = '';
+				$new_id = copy_event();
+				$_REQUEST['action'] = 'edit';
+				$_REQUEST['event_id'] = $new_id;
+				$form_action = add_query_arg(array('action' => 'edit', 'event_id' => $new_id));
+			} else {
+				$form_action = $_SERVER["REQUEST_URI"];
 			}
 
 			if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'delete') {
@@ -89,7 +93,7 @@ function event_espresso_manage_events() {
 			//If we need to add or edit a new event then we show the add or edit forms
 			if (isset($_REQUEST['action']) && ($_REQUEST['action'] == 'add_new_event' || $_REQUEST['action'] == 'edit')) {
 				?>
-				<form id="espresso_event_editor" name="form" method="post" action="<?php echo $_SERVER["REQUEST_URI"] ?>">
+				<form id="espresso_event_editor" name="form" method="post" action="<?php echo $form_action ?>">
 					<?php
 					if ($_REQUEST['action'] == 'edit') {//show the edit form
 						require_once("edit_event.php");
