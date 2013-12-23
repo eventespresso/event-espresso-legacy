@@ -610,7 +610,7 @@ function update_event($recurrence_arr = array()) {
                         update_post_meta($post_id, 'event_id', $event_id);
 						update_post_meta($post_id, 'event_meta', $event_meta);
                         update_post_meta($post_id, 'event_identifier', $event_identifier);
-                        update_post_meta($post_id, 'event_start_date', $start_date . ' ' . date("H:i", strtotime($start_time)));
+                        update_post_meta($post_id, 'event_start_date', $start_date);
                         update_post_meta($post_id, 'event_end_date', $end_date);
                         update_post_meta($post_id, 'event_location', $event_location);
 						update_post_meta($post_id, 'event_thumbnail_url', $event_thumbnail_url);
@@ -640,7 +640,7 @@ function update_event($recurrence_arr = array()) {
                         add_post_meta($post_id, 'event_id', $event_id);
 						add_post_meta($post_id, 'event_meta', $event_meta);
                         add_post_meta($post_id, 'event_identifier', $event_identifier);
-                        add_post_meta($post_id, 'event_start_date', $start_date . ' ' . date("H:i", strtotime($start_time)));
+                        add_post_meta($post_id, 'event_start_date', $start_date);
                         add_post_meta($post_id, 'event_end_date', $end_date);
                         add_post_meta($post_id, 'event_location', $event_location);
 						add_post_meta($post_id, 'event_thumbnail_url', $event_thumbnail_url);
