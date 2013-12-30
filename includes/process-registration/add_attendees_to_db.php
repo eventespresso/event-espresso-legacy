@@ -570,7 +570,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								//Added by Imon
 								$ext_attendee_id = $wpdb->insert_id;
 								
-								$ext_att_data_source['attendee_id'] = $attendee_id;
+								$ext_att_data_source['attendee_id'] = $ext_attendee_id;
 								$ext_att_data_source['event_meta'] = $event_meta;
 			
 			
