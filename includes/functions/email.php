@@ -149,6 +149,8 @@ function replace_shortcodes($message, $data) {
 			}
 		}
 	}
+	apply_filters('filter_hook_espresso_post_replace_shortcode_search_values', $SearchValues);
+	apply_filters('filter_hook_espresso_post_replace_shortcode_replace_values', $ReplaceValues);
 	//Perform the replacement
 	return str_replace($SearchValues, $ReplaceValues, $message);
 }
@@ -318,6 +320,7 @@ function espresso_prepare_email_data($attendee_id, $multi_reg, $custom_data='') 
 		$data->event->email_id = $custom_data_email_id > 0 ? $custom_data_email_id : '';
 	}
 
+	apply_filters('filter_hook_espresso_post_prepare_email_data', $data);
 	return $data;
 }
 
