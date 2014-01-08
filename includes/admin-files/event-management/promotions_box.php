@@ -45,7 +45,7 @@
 				array('id' => 'Y', 'text' => __("Global and Specific Promo Codes", "event_espresso")),
 				array('id' => 'A', 'text' => __("All Promo Codes (even Non-Globals)", "event_espresso"))
 			);
-			echo select_input('use_coupon_code', $coupon_code_select_values, !isset($use_coupon_code) || $use_coupon_code == '' ? apply_filters('FHEE_default_use_coupon_code_value','G') : $use_coupon_code);
+			echo select_input('use_coupon_code', $coupon_code_select_values, !isset($use_coupon_code) || $use_coupon_code == '' ? apply_filters('FHEE_default_use_coupon_code_value',isset($org_options['default_promocode_usage']) ? $org_options['default_promocode_usage'] : 'N') : $use_coupon_code);
 			?>
 			
 		</p>
