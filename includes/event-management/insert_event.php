@@ -513,7 +513,7 @@ function add_event_to_db($recurrence_arr = array()) {
 			add_post_meta($post_id, 'event_meta', $event_meta);
 			add_post_meta($post_id, 'event_identifier', $event_identifier);
 			add_post_meta($post_id, 'event_start_date', $start_date);
-			add_post_meta($post_id, 'event_end_date', $end_date);
+			add_post_meta($post_id, 'event_start_date', $start_date . ' ' . date("H:i", strtotime($start_time)));
 			add_post_meta($post_id, 'event_location', $event_location);
 			add_post_meta($post_id, 'event_thumbnail_url', $event_thumbnail_url);
 			add_post_meta($post_id, 'virtual_url', $virtual_url);
