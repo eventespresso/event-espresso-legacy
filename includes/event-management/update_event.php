@@ -490,8 +490,8 @@ function update_event($recurrence_arr = array()) {
             foreach ($_REQUEST['start_time'] as $k => $v) {
                 if (!empty($v)) {
                     $time_qty = empty($_REQUEST['time_qty'][$k]) ? '0' : "'" . (int)$_REQUEST['time_qty'][$k] . "'";
-                    $sql_times = "INSERT INTO " . EVENTS_START_END_TABLE . " (event_id, start_time, end_time, description, reg_limit) VALUES ('" . $event_id . "', '" . event_date_display(sanitize_text_field($v), 'H:i') . "', '" . event_date_display(sanitize_text_field($_REQUEST['end_time'][$k]), 'H:i') . "', '" . $_REQUEST['time_desc'][$k] . "', " . $time_qty . ")";
-					$wpdb->query($wpdb->prepare($sql_times, array()) );
+                    $sql_times = "INSERT INTO " . EVENTS_START_END_TABLE . " (event_id, start_time, end_time, description, reg_limit) VALUES ('" . $event_id . "', '" . event_date_display(sanitize_text_field($v), 'H:i') . "', '" . event_date_display(sanitize_text_field($_REQUEST['end_time'][$k]), 'H:i') . "', '%s', " . $time_qty . ")";
+					$wpdb->query($wpdb->prepare($sql_times, array(sanitize_text_field(stripslashes_deep($_REQUEST['time_desc'][$k])))) );
                 }
             }
         }

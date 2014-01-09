@@ -436,8 +436,8 @@ function add_event_to_db($recurrence_arr = array()) {
 				$v = !empty($v) ? $v : $start_time;
 				$_REQUEST['end_time'][$k] = !empty($_REQUEST['end_time'][$k]) ? $_REQUEST['end_time'][$k] : $end_time;
 				$_REQUEST['time_desc'][$k] = !empty($_REQUEST['time_desc'][$k]) ? $_REQUEST['time_desc'][$k] : '';
-				$sql3 = "INSERT INTO " . EVENTS_START_END_TABLE . " (event_id, start_time, end_time, description, reg_limit) VALUES ('" . $last_event_id . "', '" . event_date_display($v, 'H:i') . "', '" . event_date_display($_REQUEST['end_time'][$k], 'H:i') . "', '" . $_REQUEST['time_desc'][$k] . "', " . $time_qty . ")";
-				if ( !$wpdb->query( $wpdb->prepare($sql3, NULL) ) ) {
+				$sql3 = "INSERT INTO " . EVENTS_START_END_TABLE . " (event_id, start_time, end_time, description, reg_limit) VALUES ('" . $last_event_id . "', '" . event_date_display($v, 'H:i') . "', '" . event_date_display($_REQUEST['end_time'][$k], 'H:i') . "', '%s', " . $time_qty . ")";
+				if ( !$wpdb->query( $wpdb->prepare($sql3, sanitize_text_field(stripslashes_deep($_REQUEST['time_desc'][$k]))) ) ) {
 					$error = true;
 				}
 			}
