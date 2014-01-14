@@ -343,10 +343,13 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			//echo $data_source['espresso_addtl_limit_dd'];
 			if (isset($data_source['espresso_addtl_limit_dd'])) {
 				$num_people = absint($data_source ['num_people']);
+				$additional = 0;
 			} elseif (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) {
 				$num_people = absint($data_source ['num_people']);
+				$additional = 0;
 			} else {
 				$num_people = 1;
+				$additional = isset($att_data_source['x_attendee_fname']) ? count($att_data_source['x_attendee_fname']) : 0;
 			}
 						
 			// check for coupon 
@@ -364,7 +367,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 						}
 						if ($orig_price != $final_price && $org_options['apply_mer_discounts_once']=='Y') {
 							$discount = $orig_price - $final_price;
-							$discount_per_ticket = $discount/$num_people;
+							$discount_per_ticket = $discount/($num_people + $additional);
 							$final_price = $orig_price - $discount_per_ticket;
 							$apply_coupon = FALSE;
 						}
