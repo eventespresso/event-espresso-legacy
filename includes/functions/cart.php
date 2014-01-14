@@ -287,6 +287,7 @@ if (!function_exists('event_espresso_update_item_in_session')) {
  */
 if (!function_exists('event_espresso_calculate_total')) {
 	function event_espresso_calculate_total( $update_section = FALSE, $mer = TRUE ) {
+		global $org_options;
 
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		
@@ -362,6 +363,7 @@ if (!function_exists('event_espresso_calculate_total')) {
 					
 					//echo '<h4>event_cost : ' . $event_individual_cost[$event_id] . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
+					$apply_coupon = TRUE;
 					if ( is_array( $event_price )) {
 					
 						foreach ( $event_price as $_price_id => $qty ) {					
@@ -369,12 +371,20 @@ if (!function_exists('event_espresso_calculate_total')) {
 							if ( $attendee_quantity > 0 ) {
 							
 								// Process coupons
-								$coupon_results['event_cost'] = event_espresso_get_final_price( $_price_id, $event_id );
-								$coupon_results = apply_filters( 'filter_hook_espresso_coupon_results', $coupon_results, $event_id, $mer );
-								$coupon_notifications = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $coupon_notifications, $coupon_results['msg'] );
-								$coupon_errors = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $coupon_errors, $coupon_results['error'] );
-								if ( $coupon_results['valid'] ) {
-									$coupon_events = apply_filters( 'filter_hook_espresso_cart_coupon_events_array', $coupon_events, $event['event_name'] );
+								$pre_discount_price = $coupon_results['event_cost'] = event_espresso_get_final_price( $_price_id, $event_id );
+								if ($apply_coupon) {
+									$coupon_results = apply_filters( 'filter_hook_espresso_coupon_results', $coupon_results, $event_id, $mer );
+									$coupon_notifications = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $coupon_notifications, $coupon_results['msg'] );
+									$coupon_errors = apply_filters( 'filter_hook_espresso_cart_modifier_strings', $coupon_errors, $coupon_results['error'] );
+									if ( $coupon_results['valid'] ) {
+										$coupon_events = apply_filters( 'filter_hook_espresso_cart_coupon_events_array', $coupon_events, $event['event_name'] );
+									}
+									if ($pre_discount_price != $coupon_results['event_cost'] && $org_options['apply_mer_discounts_once']=='Y') {
+										$discount = $pre_discount_price - $coupon_results['event_cost'];
+										$discount_per_ticket = $discount/$qty;
+										$coupon_results['event_cost'] = $pre_discount_price - $discount_per_ticket;
+										$apply_coupon = FALSE;
+									}
 								}
 								$event_cost = $coupon_results['event_cost'];
 								

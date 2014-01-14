@@ -34,6 +34,7 @@ function organization_config_mnu() {
 		$org_options['time_reg_limit'] = isset($_POST['time_reg_limit']) && !empty($_POST['time_reg_limit']) ? $_POST['time_reg_limit'] : '';
 		$org_options['skip_confirmation_page'] = isset($_POST['skip_confirmation_page']) ? $_POST['skip_confirmation_page'] : 'N';
 		$org_options['allow_mer_discounts'] = isset($_POST['allow_mer_discounts']) ? $_POST['allow_mer_discounts'] : 'N';
+		$org_options['apply_mer_discounts_once'] = isset($_POST['apply_mer_discounts_once']) ? $_POST['apply_mer_discounts_once'] : 'N';
 		$org_options['allow_mer_vouchers'] = isset($_POST['allow_mer_vouchers']) ? $_POST['allow_mer_vouchers'] : 'N';
 		$org_options['use_attendee_pre_approval'] = isset($_POST['use_attendee_pre_approval']) && !empty($_POST['use_attendee_pre_approval']) ? $_POST['use_attendee_pre_approval'] : '';
 		if (!empty($_POST['event_ssl_active']))

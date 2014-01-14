@@ -103,7 +103,13 @@ $values=array(
               <?php _e('Allow discounts in the shopping cart?','event_espresso'); ?>
             </label>
             <?php echo select_input('allow_mer_discounts', $values, isset($org_options['allow_mer_discounts']) ? $org_options['allow_mer_discounts'] : ''); ?> <br />
-          </li>
+      </li>
+			<li>
+            <label>
+              <?php _e('Apply discounts in the shopping cart once only?','event_espresso'); ?>
+            </label>
+            <?php echo select_input('apply_mer_discounts_once', $values, isset($org_options['apply_mer_discounts_once']) ? $org_options['apply_mer_discounts_once'] : ''); ?> <br />
+      </li>
 		  <?php endif; ?>
 		  <?php if ( function_exists( 'event_espresso_groupon_payment_page' ) ) : ?>
 		   <li>

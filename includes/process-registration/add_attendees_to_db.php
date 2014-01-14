@@ -339,22 +339,37 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$end_date		= $time->end_date;
 			}
 
-
-			
-
-			
+			//If we are using the number of attendees dropdown, find out how many tickets they want.
+			//echo $data_source['espresso_addtl_limit_dd'];
+			if (isset($data_source['espresso_addtl_limit_dd'])) {
+				$num_people = absint($data_source ['num_people']);
+			} elseif (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) {
+				$num_people = absint($data_source ['num_people']);
+			} else {
+				$num_people = 1;
+			}
+						
 			// check for coupon 
 			if ( function_exists( 'event_espresso_process_coupon' )) {
-				if ( $coupon_results = event_espresso_process_coupon( $event_id, $final_price, $multi_reg )) {
-					//printr( $coupon_results, '$coupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-					if ( $coupon_results['valid'] ) {
-						$final_price = number_format( $coupon_results['event_cost'], 2, '.', '' );
-						$coupon_code = $coupon_results['code'];
-					}
-					if ( ! $multi_reg && ! empty( $coupon_results['msg'] )) {
-						$notifications['coupons'] = $coupon_results['msg'];
-					}
-				}					
+				static $apply_coupon = TRUE;
+				if ($apply_coupon) {
+					if ( $coupon_results = event_espresso_process_coupon( $event_id, $final_price, $multi_reg )) {
+						//printr( $coupon_results, '$coupon_results  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+						if ( $coupon_results['valid'] ) {
+							$final_price = number_format( $coupon_results['event_cost'], 2, '.', '' );
+							$coupon_code = $coupon_results['code'];
+						}
+						if ( ! $multi_reg && ! empty( $coupon_results['msg'] )) {
+							$notifications['coupons'] = $coupon_results['msg'];
+						}
+						if ($orig_price != $final_price && $org_options['apply_mer_discounts_once']=='Y') {
+							$discount = $orig_price - $final_price;
+							$discount_per_ticket = $discount/$num_people;
+							$final_price = $orig_price - $discount_per_ticket;
+							$apply_coupon = FALSE;
+						}
+					}					
+				}
 			} 
 
 			// check for groupon 
@@ -384,16 +399,6 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$orig_price			= number_format( (float)$orig_price, 2, '.', '' );
 			$final_price		= number_format( (float)$final_price, 2, '.', '' );
 			$total_cost			= $total_cost + $final_price;
-			
-			//If we are using the number of attendees dropdown, find out how many tickets they want.
-			//echo $data_source['espresso_addtl_limit_dd'];
-			if (isset($data_source['espresso_addtl_limit_dd'])) {
-				$num_people = absint($data_source ['num_people']);
-			} elseif (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) {
-				$num_people = absint($data_source ['num_people']);
-			} else {
-				$num_people = 1;
-			}
 
 			$columns_and_values = array(
 				'registration_id'		=> $registration_id,
