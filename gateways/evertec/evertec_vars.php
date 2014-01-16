@@ -142,7 +142,7 @@ function espresso_display_evertec($payment_data) {
 					<input name="r_id" type="hidden" value="<?php echo $registration_id ?>" />
 					<p class="event_form_submit" style="display:none">
 						<input name="evertec_submit" id="evertec_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />					
-						<div class="clear" id="processing"></div>
+						<div class="clear" id="processing" style="display:none"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL?>images/ajax-loader.gif"></div>
 					</p>
 					
 				</form>

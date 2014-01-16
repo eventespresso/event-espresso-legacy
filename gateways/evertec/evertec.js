@@ -49,9 +49,8 @@ jQuery(document).ready(function($) {
 	});
 	$('#evertec_payment_form').submit(function(){
 		if ($('#evertec_payment_form').valid()){
-			alert("use image at "+EEGlobals.plugin_url + 'images/ajax-loader.gif');
-			$('#processing').html('<img src="' + EEGlobals.plugin_url + 'images/ajax-loader.gif">');
-			$('input[name="evertec_submit"]').attr('disabled', 'disabled');
+			$('#processing').css('display','block');
+			$('#evertec_submit').attr('disabled', 'disabled');
 		}
 	});
 	$('#evertec_payment_method').change(update_form_with_payment_option_selection);
