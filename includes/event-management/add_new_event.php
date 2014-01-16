@@ -35,29 +35,33 @@ function add_new_event() {
 		</div>
 		<!-- /submitdiv -->
 		
-		<?php
-            $values = array(array('id' => 'Y', 'text' => __('Yes', 'event_espresso')), array('id' => 'N', 'text' => __('No', 'event_espresso')));
+<?php
+	if ( $espresso_premium == true ){do_action('action_hook_espresso_new_event_right_column_top');}
+	$values = array(array('id' => 'Y', 'text' => __('Yes', 'event_espresso')), array('id' => 'N', 'text' => __('No', 'event_espresso')));
+	$event_meta = isset($event_meta) ? $event_meta : array();
 
-            $advanced_options = '';
-            if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/event-management/advanced_settings.php')) {
-                require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "includes/admin-files/event-management/advanced_settings.php");
-            } else {
-                //Display Lite version options
-                $status = array(array('id' => 'A', 'text' => __('Active', 'event_espresso')), array('id' => 'D', 'text' => __('Deleted', 'event_espresso')));
-                $advanced_options = '<p><strong>' . __('Advanced Options:', 'event_espresso') . '</strong></p>'
-                        . '<p>' . __('Is this an active event? ', 'event_espresso') . __(select_input('is_active', $values, $is_active)) . '</p>'
-                        . '<p>' . __('Display  description? ', 'event_espresso') . select_input('display_desc', $values, $display_desc) . '</p>'
-                        . '<p>' . __('Display  registration form? ', 'event_espresso') . select_input('display_reg_form', $values, $display_reg_form) . '</p>';
-            }//Display Lite version options - End
-            $reg_limit = isset($reg_limit) ? $reg_limit : '';
-            //$event_meta = isset($event_meta) ? $event_meta : array();
-            $additional_limit = isset($additional_limit) ? $additional_limit : '';
-            postbox('event-status', 'Event Options', '<p>' . __('Attendee Limit', 'event_espresso') . ': <input name="reg_limit" size="10" type="text" value="' . $reg_limit . '"><br />' .
-                    '(' . __('leave blank for unlimited', 'event_espresso') . ')</p>' .
-                    '<p>' . __('Allow group registrations?', 'event_espresso') . ' ' . select_input('allow_multiple', $values, 'N') .
-                    '<p>' . __('Max Group Registrants', 'event_espresso') . ': <input type="text" name="additional_limit" value="' . $additional_limit . '" size="4">' .
-                    $advanced_options
-            );
+	$advanced_options = '';
+	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/event-management/advanced_settings.php')) {
+		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "includes/admin-files/event-management/advanced_settings.php");
+	} else {
+	//Display Lite version options
+	$status = array(array('id' => 'A', 'text' => __('Active', 'event_espresso')), array('id' => 'D', 'text' => __('Deleted', 'event_espresso')));
+	$advanced_options = '<p><strong>' . __('Advanced Options:', 'event_espresso') . '</strong></p>'
+		. '<p>' . __('Is this an active event? ', 'event_espresso') . __(select_input('is_active', $values, $is_active)) . '</p>'
+		. '<p>' . __('Display  description? ', 'event_espresso') . select_input('display_desc', $values, $display_desc) . '</p>'
+		. '<p>' . __('Display  registration form? ', 'event_espresso') . select_input('display_reg_form', $values, $display_reg_form) . '</p>';
+	}//Display Lite version options - End
+	$reg_limit = isset($reg_limit) ? $reg_limit : '';
+ 
+	$additional_limit = isset($additional_limit) ? $additional_limit : '';
+	espresso_postbox(
+		'event-status', 'Event Options', '<p>' . __('Attendee Limit', 'event_espresso') . ': <input name="reg_limit" size="10" type="text" value="' . 
+		$reg_limit . '"><br />' .
+		'(' . __('leave blank for unlimited', 'event_espresso') . ')</p>' .
+		'<p>' . __('Allow group registrations?', 'event_espresso') . ' ' . select_input('allow_multiple', $values, 'N') .
+		'<p>' . __('Max Group Registrants', 'event_espresso') . ': <input type="text" name="additional_limit" value="' . $additional_limit . '" size="4">' .
+		$advanced_options
+	);
 	if (function_exists('espresso_ticket_dd') && $espresso_premium == true) {
 	?>
 		<div id="event-category" class="postbox">
@@ -199,19 +203,9 @@ function add_new_event() {
 		<!-- /event-questions -->
 		
 		<?php
-         if (function_exists('espresso_personnel_cb') && isset($org_options['use_personnel_manager']) && $org_options['use_personnel_manager'] == 'Y' && $espresso_premium == true) {
-				?>
-		<div id="event-category" class="postbox">
-			<div class="handlediv" title="Click to toggle"><br>
-			</div>
-			<h3 class="hndle"> <span>
-				<?php _e('Event Staff / Speakers', 'event_espresso'); ?>
-				</span> </h3>
-			<div class="inside"> <?php echo espresso_personnel_cb(); ?> </div>
-		</div>
-		<?php	}
+        do_action('action_hook_espresso_staff_cb');
 
-			if (defined('EVENTS_GROUPON_CODES_TABLE') && $espresso_premium == true) { ?>
+	if (defined('EVENTS_GROUPON_CODES_TABLE') && $espresso_premium == true) { ?>
 		<div id="groupon-options" class="postbox">
 			<div class="handlediv" title="Click to toggle"><br />
 			</div>
@@ -223,10 +217,12 @@ function add_new_event() {
 			</div>
 		</div>
 		<!-- /groupon-options -->
-		<?php }
-		$sidebar_content = ob_get_clean();
-		ob_start();
-		?>
+	<?php
+	}
+	if ( $espresso_premium == true ){do_action('action_hook_espresso_new_event_right_column_bottom');}
+	$sidebar_content = ob_get_clean();
+	ob_start();
+	?>
 <!-- Left Column-->
 		<div id="titlediv"> <strong>
 			<?php _e('Event Title', 'event_espresso'); ?>
@@ -400,7 +396,7 @@ function add_new_event() {
 		//If the members addon is installed, define member only event settings
 		if  (defined('EVENTS_MEMBER_REL_TABLE') && $espresso_premium == true) { ?>
 							<td id="member-pricing" class="b"><?php echo event_espresso_member_only_pricing(); //Show the the member only pricing options. ?></td>
-							<?php
+<?php
 		}
 ?>
 						</tr>
@@ -410,6 +406,7 @@ function add_new_event() {
 			<h2>
 				<?php _e('Advanced Options', 'event_espresso'); ?>
 			</h2>
+			<?php if ( $espresso_premium == true ){do_action('action_hook_espresso_new_event_left_column_advanced_options_top');}?>
 			<div id="event-location" class="postbox">
 				<div class="handlediv" title="Click to toggle"><br />
 				</div>

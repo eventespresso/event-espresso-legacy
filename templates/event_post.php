@@ -271,7 +271,7 @@ global $wpdb;
 			}//End foreach ($events as $event)
 	} */
 ?>
-<p><?php echo date('l F j, Y',strtotime($start_date)) . " - " . date('l F j, Y',strtotime($end_date)); ?></p>
+<p><?php echo event_date_display($start_date, get_option('date_format')) . " - " . event_date_display($end_date, get_option('date_format')); ?></p>
 <p><?php echo $event_address ?></p>
 <p><img style="padding-right: 5px;" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL?>/images/map.png" border="0" alt="<?php _e('View Map', 'event_espresso'); ?>" /><?php echo $google_map_link; ?> | <a class="a_register_link" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Register', 'event_espresso'); ?></a></p>
 <?php

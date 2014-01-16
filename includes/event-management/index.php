@@ -88,7 +88,7 @@ function event_espresso_manage_events() {
 			//If we need to add or edit a new event then we show the add or edit forms
 			if (isset($_REQUEST['action']) && ($_REQUEST['action'] == 'add_new_event' || $_REQUEST['action'] == 'edit')) {
 				?>
-				<form name="form" method="post" action="<?php echo $_SERVER["REQUEST_URI"] ?>">
+				<form id="espresso_event_editor" name="form" method="post" action="<?php echo $_SERVER["REQUEST_URI"] ?>">
 					<?php
 					if ($_REQUEST['action'] == 'edit') {//show the edit form
 						require_once("edit_event.php");
@@ -165,7 +165,8 @@ function event_espresso_manage_events() {
 		<p><?php _e('These emails will override the custom email if a pre-existing email is selected. You must select "Yes" in the "Send custom confirmation emails for this event?" above.', 'event_espresso'); ?></p>
 	</div>
 	<div id="coupon_code_info" style="display:none">
-		<h2><?php _e('Coupon/Promo Code', 'event_espresso'); ?></h2><p><?php _e('This is used to apply discounts to events.', 'event_espresso'); ?></p><p><?php _e('A coupon or promo code could can be anything you want. For example: Say you have an event that costs', 'event_espresso'); ?> <?php echo $org_options['currency_symbol'] ?>200. <?php _e('If you supplied a promo like "PROMO50" and entered 50.00 into the "Discount w/Promo Code" field your event will be discounted', 'event_espresso'); ?>  <?php echo $org_options['currency_symbol'] ?>50.00, <?php _e('Bringing the cost of the event to', 'event_espresso'); ?> <?php echo $org_options['currency_symbol'] ?>150.</p>
+		<h2><?php _e('Coupon/Promo Code', 'event_espresso'); ?></h2><p><?php _e('This is used to apply discounts to events.', 'event_espresso'); ?></p><p><?php _e('A coupon or promo code could can be anything you want. For example: Say you have an event that costs', 'event_espresso'); ?> <?php echo $org_options['currency_symbol'] ?>200. <?php _e('If you supplied a promo like "PROMO50" and entered 50.00 into the "Discount w/Promo Code" field your event will be discounted', 'event_espresso'); ?>  <?php echo $org_options['currency_symbol'] ?>50.00, <?php _e('Bringing the cost of the event to', 'event_espresso'); ?> <?php echo $org_options['currency_symbol'] ?>150. </p>
+			<p><?php	_e("Note: Promo Codes which are marked to 'apply to all events', although not explicitly enumerated, can also be used for this event, provided it allows promo codes.", "event_espresso");?></p>
 	</div>
 	<div id="unique_id_info" style="display:none">
 		<h2><?php _e('Event Identifier', 'event_espresso'); ?></h2><p><?php _e('This should be a unique identifier for the event. Example: "Event1" (without quotes.)</p><p>The unique ID can also be used in individual pages using the', 'event_espresso'); ?> [SINGLEEVENT single_event_id="<?php _e('Unique Event ID', 'event_espresso'); ?>"] <?php _e('shortcode', 'event_espresso'); ?>.</p>

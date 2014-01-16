@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.34.1.P
+  Version: 3.1.36.1.P
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -28,11 +28,10 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-
 //Define the version of the plugin
 function espresso_version() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.34.1.P';
+	return '3.1.36.1.P';
 }
 
 define("EVENT_ESPRESSO_VERSION", espresso_version());
@@ -192,10 +191,15 @@ if (is_ssl()) {
 
 	$wp_plugin_url = str_replace('http://', 'https://', WP_PLUGIN_URL);
 	$wp_content_url = str_replace('http://', 'https://', WP_CONTENT_URL);
+
+	//force admin-ajax.php to use https:// ssl
+	if ( !is_admin() )
+		add_filter('admin_url', 'ee_force_admin_ajax_ssl', 200, 2);
 }
 
 //Define the plugin directory and path
 define("EVENT_ESPRESSO_PLUGINPATH", "/" . plugin_basename(dirname(__FILE__)) . "/");
+define('EVENT_ESPRESSO_WPPLUGINPATH', plugin_basename(__FILE__) );
 define("EVENT_ESPRESSO_PLUGINFULLPATH", WP_PLUGIN_DIR . EVENT_ESPRESSO_PLUGINPATH);
 define("EVENT_ESPRESSO_PLUGINFULLURL", $wp_plugin_url . EVENT_ESPRESSO_PLUGINPATH);
 //End - Define the plugin directory and path
@@ -261,6 +265,12 @@ define("EVENTS_LOCALE_REL_TABLE", $wpdb->prefix . "events_locale_rel");
 define("EVENTS_PERSONNEL_TABLE", $wpdb->prefix . "events_personnel");
 define("EVENTS_PERSONNEL_REL_TABLE", $wpdb->prefix . "events_personnel_rel");
 
+//$ten_thousand = 3000;
+//$count = 2;
+//global $wpdb;
+//while($count++<$ten_thousand){
+//	$wpdb->insert(EVENTS_DISCOUNT_CODES_TABLE,array('coupon_code'=>"code$count",'use_percentage'=>'Y','coupon_code_price'=>$count),array('%s','%s','%s'));
+//}
 //Added by Imon
 define("EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE", $wpdb->prefix . "events_multi_event_registration_id_group");
 //define("EVENTS_ATTENDEE_COST_TABLE", $wpdb->prefix . "events_attendee_cost");
@@ -283,6 +293,15 @@ function espresso_load_language_files() {
 	}
 }
 add_action( 'plugins_loaded', 'espresso_load_language_files', 11 );
+
+
+
+function ee_force_admin_ajax_ssl( $url, $scheme ) {
+	if ( preg_match('/admin-ajax.php/', $url ) ) {
+		$url = preg_replace( '#^.+://#', 'https' . '://', $url );
+	}
+	return $url;
+}
 
 
 function espresso_sideload_current_lang() {
@@ -334,8 +353,8 @@ function espresso_sideload_current_lang() {
 	}
 	
 	//set correct permissions
-	$perms = 0644;
-	@ chmod( $new_path, $perms);
+	$file_permissions = apply_filters( 'espresso_file_permissions', 0644 );
+	@ chmod( $new_path, $file_permissions);
 
 	//made it this far all looks good. So let's save option flag
 	update_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION, 1);
@@ -433,6 +452,7 @@ event_espresso_require_template('widget.php');
 
 function load_event_espresso_widget() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+	if (!class_exists('Event_Espresso_Widget')) return;
 	register_widget('Event_Espresso_Widget');
 }
 
@@ -447,6 +467,30 @@ function event_espresso_pagination() {
     event_espresso_get_event_details($_REQUEST); 
     die();
 }
+
+/**
+ * displays HTML for the discoutn code page within the widget
+ * onthe event details page. Assumed to be used for JSON, so we 
+ * DIE at the end of the function
+ * @return void
+ */
+function event_espresso_discount_code_pagination(){
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+    require(EVENT_ESPRESSO_PLUGINFULLPATH.'/includes/admin-files/event-management/promotions_page_for_box.php');
+    die();
+}
+
+add_action('wp_ajax_event_espresso_get_discount_codes', 'event_espresso_discount_code_pagination');
+	//add_action('wp_ajax_nopriv_event_espresso_add_item', 'event_espresso_add_item_to_session');
+
+function event_espresso_get_discount_codes_for_jquery_datatables(){
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+    require(EVENT_ESPRESSO_PLUGINFULLPATH.'/includes/admin-files/coupon-management/search.php');
+	espresso_promocodes_datatables_search();
+    die();
+}
+
+add_action('wp_ajax_event_espresso_get_discount_codes_for_jquery_datatables', 'event_espresso_get_discount_codes_for_jquery_datatables');
 
 //Load these files if we are in an actuial registration page
 if ($this_is_a_reg_page == TRUE) {
@@ -518,6 +562,16 @@ if (is_admin()) {
 	do_action('action_hook_espresso_infusionsoft_update_api');
 	do_action('action_hook_espresso_attendee_mover_update_api');
 	
+	//Custom templates addon
+	do_action('action_hook_espresso_custom_templates_update_api');
+	do_action('action_hook_espresso_template_calendar_table_update_api');
+	do_action('action_hook_espresso_template_category_accordion_update_api');
+	do_action('action_hook_espresso_template_date_range_update_api');
+	do_action('action_hook_espresso_template_grid_update_api');
+	do_action('action_hook_espresso_template_masonry_grid_update_api');
+	do_action('action_hook_espresso_template_recurring_dropdown_update_api');
+	do_action('action_hook_espresso_template_vector_map_update_api');
+	
 	//New form builder
 	require_once("includes/form-builder/index.php");
 	require_once("includes/form-builder/groups/index.php");
@@ -525,9 +579,6 @@ if (is_admin()) {
 	//Install/Update Tables when plugin is activated
 	register_activation_hook(__FILE__, 'espresso_check_data_tables'); 
 	register_activation_hook(__FILE__, 'espresso_update_active_gateways');
-
-	
-
 	
 	//Premium funtions. If this is a paid version, then we need to include these files.
 	//Premium upgrade options if the piad plugin is not installed
@@ -594,8 +645,8 @@ if (is_admin()) {
 	}
 
 	//Event styles & template layouts Subpage
-	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/template_settings/index.php')) {
-		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/template_settings/index.php');
+	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/template_settings/index.php')) {
+		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/template_settings/index.php');
 	}
 
 	//Plugin Support
@@ -655,10 +706,11 @@ if (is_admin()) {
 }
 
 //Load the required Javascripts
-add_action('wp_footer', 'espresso_load_javascript_files');
-add_action('init', 'espresso_load_jquery', 10);
-add_action('init', 'espresso_load_EEGlobals_jquery', 10);
-
+add_action('wp_enqueue_scripts', 'espresso_load_javascript_files');
+add_action('wp_enqueue_scripts', 'espresso_register_validation_for_shortcodes');
+add_action('wp_enqueue_scripts', 'espresso_load_jquery', 10);
+add_action('admin_enqueue_scripts', 'espresso_load_EEGlobals_jquery', 10);
+add_action('wp_enqueue_scripts', 'espresso_load_pagination_scripts');
 
 if (!function_exists('espresso_load_javascript_files')) {
 	function espresso_load_javascript_files() {
@@ -668,36 +720,53 @@ if (!function_exists('espresso_load_javascript_files')) {
 		
 		if (!$load_espresso_scripts)
 			return;
-		wp_register_script('reCopy', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/reCopy.js"), array('jquery'), '1.1.0');
-		wp_print_scripts('reCopy');
+		wp_register_script('reCopy', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/reCopy.js"), array('jquery'), '1.1.0', TRUE);
+		wp_enqueue_script('reCopy');
 
-		wp_register_script('jquery.validate.js', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/jquery.validate.min.js"), array('jquery'), '1.8.1');
-		wp_print_scripts('jquery.validate.js');
+		wp_register_script('jquery.validate.js', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/jquery.validate.min.js"), array('jquery'), '1.8.1', TRUE);
+		wp_enqueue_script('jquery.validate.js');
 
-		wp_register_script('validation', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/validation.js"), array('jquery'), EVENT_ESPRESSO_VERSION);
-		wp_print_scripts('validation');
-        
-        wp_register_script('ee_pagination_plugin', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/jquery.pajinate.min.js"), array('jquery'), EVENT_ESPRESSO_VERSION);
-		wp_print_scripts('ee_pagination_plugin');
-        
-        wp_register_script('ee_pagination', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/pagination.js"), array('jquery'), EVENT_ESPRESSO_VERSION);
-        $data = array( 'ajaxurl' => admin_url( 'admin-ajax.php'  ));
-        wp_localize_script( 'ee_pagination', 'ee_pagination', $data );
-		wp_print_scripts('ee_pagination');
-        
+		wp_register_script('validation', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/validation.js"), array('jquery.validate.js'), EVENT_ESPRESSO_VERSION, TRUE);
+		wp_enqueue_script('validation');
+                
 	}
 }
 
+if (!function_exists('espresso_register_validation_for_shortcodes')) {
+	function espresso_register_validation_for_shortcodes() {
 
+		// registers the jQuery validation scripts for use with the [ESPRESSO_REG_PAGE], [ESPRESSO_REG_FORM], and [SINGLEEVENT] shortcodes
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 
-//Used for the drap and drop questions
+		wp_register_script('jquery.validate.js', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/jquery.validate.min.js"), array('jquery'), '1.8.1', TRUE);
+
+		wp_register_script('validation', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/validation.js"), array('jquery.validate.js'), EVENT_ESPRESSO_VERSION, TRUE);	
+                
+	}
+}
+
+if (!function_exists('espresso_load_pagination_scripts')) {
+	function espresso_load_pagination_scripts() {
+		wp_register_script('ee_pagination_plugin', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/jquery.pajinate.min.js"), array('jquery'), EVENT_ESPRESSO_VERSION, TRUE);
+		wp_enqueue_script('ee_pagination_plugin');
+        
+		wp_register_script('ee_pagination', (EVENT_ESPRESSO_PLUGINFULLURL . "scripts/pagination.js"), array('ee_pagination_plugin'), EVENT_ESPRESSO_VERSION, TRUE);
+		wp_enqueue_script('ee_pagination');
+		$data = array( 'ajaxurl' => admin_url( 'admin-ajax.php'  ));
+		wp_localize_script( 'ee_pagination', 'ee_pagination', $data );
+		
+
+	}
+}
+
+//Used for the drag and drop questions
 if (!function_exists('espresso_load_EEGlobals_jquery')) {	
 	function espresso_load_EEGlobals_jquery(){
 	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if ( isset($_REQUEST['page']) && ( $_REQUEST['page'] == 'form_builder' || $_REQUEST['page'] == 'form_groups') ){
-			wp_enqueue_script( 'jquery' );
-			wp_enqueue_script('ee_ajax_request', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_EEGlobals_functions.js', array('jquery'));
+			//wp_enqueue_script( 'jquery' );
+			wp_enqueue_script('ee_ajax_request', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_EEGlobals_functions.js', array('jquery'), EVENT_ESPRESSO_VERSION, TRUE);
 			wp_localize_script( 'ee_ajax_request', 'EEGlobals', array('ajaxurl' => admin_url('admin-ajax.php'), 'plugin_url' => EVENT_ESPRESSO_PLUGINFULLURL) );
 		}
 		
@@ -713,15 +782,15 @@ if (!function_exists('espresso_load_jquery')) {
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if (!is_admin() ) {
 			global $org_options;
-			wp_enqueue_script('jquery');
+			//wp_enqueue_script('jquery');
 			if ( function_exists('event_espresso_multi_reg_init') ) {
-				wp_enqueue_script('ee_ajax_request', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_cart_functions.js', array('jquery'));
+				wp_enqueue_script('ee_ajax_request', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_cart_functions.js', array('jquery'), EVENT_ESPRESSO_VERSION);
 				$EEGlobals = array('ajaxurl' => admin_url('admin-ajax.php'), 'plugin_url' => EVENT_ESPRESSO_PLUGINFULLURL, 'event_page_id' => $org_options['event_page_id']);
 				wp_localize_script('ee_ajax_request', 'EEGlobals',$EEGlobals );
 				
 				//Load the jQuery migrate scripts if WP is older than 3.6
 				if ( !version_compare($wp_version, '3.6', '>=' ) ) {
-					wp_register_script('jquery-migrate', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/jquery-migrate-1.1.1.min.js', array('jquery'));
+					wp_register_script('jquery-migrate', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/jquery-migrate-1.1.1.min.js', array('jquery'), EVENT_ESPRESSO_VERSION);
 				}
 				wp_enqueue_script('jquery-migrate');
 			}
@@ -735,7 +804,7 @@ if (!function_exists('espresso_load_jquery')) {
 //Load the style sheets for the reegistration pages
 
 //This is the old style settings. Will be deprecated/removed soon.
-add_action('wp_print_styles', 'add_event_espresso_stylesheet');
+add_action('wp_enqueue_scripts', 'add_event_espresso_stylesheet');
 if (!function_exists('add_event_espresso_stylesheet')) {
 
 	function add_event_espresso_stylesheet() {
@@ -761,13 +830,13 @@ if (!function_exists('add_event_espresso_stylesheet')) {
 			$event_espresso_style_sheet = EVENT_ESPRESSO_UPLOAD_URL . 'templates/event_espresso_style.css';
 		}
 
-		wp_register_style('event_espresso_style_sheets', $event_espresso_style_sheet);
+		wp_register_style('event_espresso_style_sheets', $event_espresso_style_sheet, array(), EVENT_ESPRESSO_VERSION );
 		wp_enqueue_style('event_espresso_style_sheets');
 
 		if (!file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "templates/event_espresso_style.css") && !empty($org_options['style_color'])) {
 			$event_espresso_style_color = EVENT_ESPRESSO_PLUGINFULLURL . 'templates/css/colors/' . $org_options['style_color'];
 
-			wp_register_style('event_espresso_style_color', $event_espresso_style_color);
+			wp_register_style('event_espresso_style_color', $event_espresso_style_color, array(), EVENT_ESPRESSO_VERSION);
 			wp_enqueue_style('event_espresso_style_color');
 		}
 	}
@@ -775,7 +844,7 @@ if (!function_exists('add_event_espresso_stylesheet')) {
 }
 
 //Themeroller stuff
-add_action('wp_print_styles', 'add_espresso_themeroller_stylesheet');
+add_action('wp_enqueue_scripts', 'add_espresso_themeroller_stylesheet');
 function add_espresso_themeroller_stylesheet() {
 
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
@@ -793,7 +862,7 @@ function add_espresso_themeroller_stylesheet() {
 
 		//Load custom style sheet if available
 		if (!empty($org_options['style_settings']['css_name'])) {
-			wp_register_style('espresso_custom_css', EVENT_ESPRESSO_UPLOAD_URL . 'css/' . $org_options['style_settings']['css_name']);
+			wp_register_style('espresso_custom_css', EVENT_ESPRESSO_UPLOAD_URL . 'css/' . $org_options['style_settings']['css_name'], array(), EVENT_ESPRESSO_VERSION);
 			wp_enqueue_style('espresso_custom_css');
 		}
 
@@ -805,7 +874,7 @@ function add_espresso_themeroller_stylesheet() {
 			if (file_exists(EVENT_ESPRESSO_UPLOAD_DIR . 'themeroller/themeroller-base.css')) {
 				wp_register_style('espresso_themeroller_base', $themeroller_style_path . 'themeroller-base.css');
 			} else {
-				wp_register_style('espresso_themeroller_base', EVENT_ESPRESSO_PLUGINFULLURL . 'templates/css/themeroller/themeroller-base.css');
+				wp_register_style('espresso_themeroller_base', EVENT_ESPRESSO_PLUGINFULLURL . 'templates/css/themeroller/themeroller-base.css', array(), EVENT_ESPRESSO_VERSION);
 			}
 			wp_enqueue_style('espresso_themeroller_base');
 
@@ -815,7 +884,7 @@ function add_espresso_themeroller_stylesheet() {
 			}
 
 			//Load the selected themeroller style
-			wp_register_style('espresso_themeroller', $themeroller_style_path . $org_options['themeroller']['themeroller_style'] . '/style.css');
+			wp_register_style('espresso_themeroller', $themeroller_style_path . $org_options['themeroller']['themeroller_style'] . '/style.css', array(), EVENT_ESPRESSO_VERSION);
 			wp_enqueue_style('espresso_themeroller');
 		}
 		
@@ -831,7 +900,7 @@ function add_espresso_themeroller_stylesheet() {
 			$event_espresso_style_sheet = EVENT_ESPRESSO_UPLOAD_URL . 'templates/css/espresso_default.css';
 		}
 
-		wp_register_style('event_espresso_style_sheets', $event_espresso_style_sheet);
+		wp_register_style('event_espresso_style_sheets', $event_espresso_style_sheet, array(), EVENT_ESPRESSO_VERSION);
 		wp_enqueue_style('event_espresso_style_sheets');
 	}
 }
@@ -1039,6 +1108,7 @@ function espresso_export_ticket() {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	//Version 2.0
 	if (isset($_REQUEST['ticket_launch']) && $_REQUEST['ticket_launch'] == 'true') {
+		do_action('action_hook_espresso_before_espresso_ticket_launch');
 		echo espresso_ticket_launch( ee_sanitize_value( absint($_REQUEST['id'])), ee_sanitize_value($_REQUEST['r_id']) );
 	}
 	//End Version 2.0
@@ -1109,9 +1179,23 @@ function espresso_check_data_tables() {
 		}
 	}
 	
+	// check for downgrade from 4.x+
+	foreach ( $espresso_db_update as $prev_version ) {
+		if ( $prev_version && version_compare( $prev_version, '3.2.0', '>=' )) {
+			require_once( EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions/database_install.php' ); 
+			//deactivating event espresso so that their db doesn't get messed up'
+			deactivate_event_espresso();
+			// none shall pass!!!
+			espresso_downgrade_error();
+		}
+	}
+	
 	// if current EE version is NOT in list of db updates, then update the db
-	if ( ! in_array( EVENT_ESPRESSO_VERSION, $espresso_db_update )) {
-		require_once( EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions/database_install.php' ); 
+	if (( ! in_array( EVENT_ESPRESSO_VERSION, $espresso_db_update ))) {	
+		require_once( EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions/database_install.php' );
+		// fake plugin activation nonce
+	    $_REQUEST['plugin'] = plugin_basename(__FILE__);
+		$_REQUEST['_wpnonce'] = wp_create_nonce( 'activate-plugin_' . $_REQUEST['plugin'] );
 		events_data_tables_install();
 	}	
 	

@@ -171,11 +171,16 @@ function attendee_edit_record() {
 					}
 				}
 
-				//If this is not an attendee returing to edit their details, then we need to return to the payment page
+				//If this is not an attendee returing to edit their details, then we need to return a message.
 				if ( ! isset($_REQUEST['single'] )) {
 					if ( espresso_registration_id( $req_primary ) == $registration_id && espresso_registration_id( $id ) == $registration_id ){
-						return events_payment_page( $req_primary );
-						exit();
+						if($payment_status == 'Completed'){
+							_e('Your registration details have been updated.', 'event_espresso');
+							return;
+						}else{
+							return events_payment_page( $req_primary );
+							exit();
+						}
 					}else{
 						_e('Sorry, it seems there was an error verifying the attendee id or primary attendee id record.', 'event_espresso');
 						return;

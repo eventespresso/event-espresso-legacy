@@ -39,6 +39,7 @@ foreach ($attendees as $attendee) {
 	$attendee_last = html_entity_decode(stripslashes($attendee->lname), ENT_QUOTES, "UTF-8");
 	$attendee_first = html_entity_decode(stripslashes($attendee->fname), ENT_QUOTES, "UTF-8");
 	$attendee_address = html_entity_decode(stripslashes($attendee->address), ENT_QUOTES, "UTF-8");
+	$attendee_address .= isset($attendee->address2) ? "\n" . html_entity_decode(stripslashes($attendee->address2), ENT_QUOTES, "UTF-8") : '';
 	$attendee_city = html_entity_decode(stripslashes($attendee->city), ENT_QUOTES, "UTF-8");
 	$attendee_state = html_entity_decode(stripslashes($attendee->state), ENT_QUOTES, "UTF-8");
 	$attendee_zip = $attendee->zip;
@@ -61,19 +62,19 @@ foreach ($attendees as $attendee) {
 #$num_people = isset($num_people) && $num_people > 0 ? $num_people : espresso_count_attendees_for_registration($attendee_id);
 #$event_meta = event_espresso_get_event_meta($event_id);
 //	$event_data['additional_attendee_reg_info']
-if ($payment_status != 'Completed') {
-	$payment_status = 'Pending';
-	$txn_type = 'INV';
-	$payment_date = date('Y-m-d-H:i:s');
+//if ($payment_status != 'Completed') {
+//	$payment_status = 'Pending';
+//	$txn_type = 'INV';
+//	$payment_date = date('Y-m-d-H:i:s');
 
 //Added by Imon
-	if (count($registration_ids) > 0 && $admin == false) {
-		foreach ($registration_ids as $reg_id) {
-			$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET payment_status = '" . $payment_status . "', txn_type = '" . $txn_type . "', payment_date ='" . $payment_date . "'  WHERE registration_id ='" . $reg_id['registration_id'] . "' AND txn_type ='' ";
-			$wpdb->query($sql);
-		}
-	}
-}
+//	if (count($registration_ids) > 0 && $admin == false) {
+//		foreach ($registration_ids as $reg_id) {
+//			$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET payment_status = '" . $payment_status . "', txn_type = '" . $txn_type . "', payment_date ='" . $payment_date . "'  WHERE registration_id ='" . $reg_id['registration_id'] . "' AND txn_type ='' ";
+//			$wpdb->query($sql);
+//		}
+//	}
+//}
 //Query Database for event and get variable
 /* 	$events = $wpdb->get_results("SELECT * FROM " . EVENTS_DETAIL_TABLE . " WHERE id='" . $event_id . "'");
   foreach ($events as $event){

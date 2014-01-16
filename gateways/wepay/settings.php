@@ -157,8 +157,8 @@ function event_espresso_display_wepay_settings() {
 							<label for="button_url">
 								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input type="text" name="button_url" size="34" value="<?php echo (($wepay_settings['button_url'] == '') ? '' : $wepay_settings['button_url'] ); ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
+							<input class="upload_url_input" type="text" name="button_url" size="34" value="<?php echo (($wepay_settings['button_url'] == '') ? '' : $wepay_settings['button_url'] ); ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
 						</li>
 						<li>
 							<?php _e('Current Button Image', 'event_espresso'); ?>
@@ -184,13 +184,13 @@ function event_espresso_display_wepay_settings() {
 		<?php _e('To use WePay, follow these steps:'); ?>
 		<ol>
 			<li>
-				<?php _e('At WePay.com (or stage.wepay.com for sandbox) sign up as a user.'); ?>
+				<?php _e('At WePay.com (or stage.wepay.com for sandbox) sign up as a user.','event_espresso'); ?>
 			</li>
 			<li>
-				<?php _e('Add Event Espresso as an API application in your account.'); ?>
+				<?php _e('Add Event Espresso as an API application in your account. (If you are using a LIVE account, WePay may need to approve your application before using it.)','event_espresso'); ?>
 			</li>
 			<li>
-				<?php _e('Copy your client id, client secret, account id, and access token from yourAPI application\'s API Keys page and paste them here.'); ?>
+				<?php _e('Copy your client id, client secret, account id, and access token from yourAPI application\'s API Keys page and paste them here.','event_espresso'); ?>
 			</li>
 		</ol>
 	</div>

@@ -4,7 +4,7 @@ function espresso_display_paypal_pro($data) {
 	global $org_options;
 	$paypal_pro_settings = get_option('event_espresso_paypal_pro_settings');
 	$use_sandbox = $paypal_pro_settings['paypal_pro_use_sandbox'];
-	wp_register_script( 'paypal_pro', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/paypal_pro/paypal_pro.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
+	wp_register_script( 'paypal_pro', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/paypal_pro/paypal_pro.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'paypal_pro' );		
 	?>
 <div id="paypal_pro-payment-option-dv" class="payment-option-dv">
@@ -17,7 +17,7 @@ function espresso_display_paypal_pro($data) {
 		<div class="event-display-boxes">
 			<?php
 			if ($use_sandbox) {
-				echo '<div id="sandbox-panel"><h2 class="section-title">' . __('PayPal Sandbox Mode', 'event_espreso') . '</h2><p>Test Master Card # 5424180818927383</p>';
+				echo '<div id="sandbox-panel"><h2 class="section-title">' . __('PayPal Sandbox Mode', 'event_espresso') . '</h2><p>Test Master Card # 5424180818927383</p>';
 				echo '<p>Exp: 10/2012</p>';
 				echo '<p>CVV2: 123 </p>';
 				echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3></div>';
@@ -111,6 +111,7 @@ function espresso_display_paypal_pro($data) {
 					<input name="amount" type="hidden" value="<?php echo number_format($event_cost, 2) ?>" />
 					<input name="paypal_pro" type="hidden" value="true" />
 					<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
+					<input name='invoice' type='hidden' value='<?php echo md5(uniqid(rand(), true)) ?>'/>
 					<p class="event_form_submit">
 						<input name="paypal_pro_submit" id="paypal_pro_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />						
 						<div class="clear"></div>

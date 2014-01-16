@@ -123,26 +123,26 @@ if (!class_exists('Espresso_PaymentGateway')) {
          */
         public function submitPayment( $fields = FALSE ) {
             $this->prepareSubmit();
-            echo "<html>\n";
-            echo "<head><title>Processing Payment...</title></head>\n";
-            echo "<body onLoad=\"document.forms['gateway_form'].submit();\">\n";
-            echo "<p style=\"text-align:center;\"><h2>Please wait, your order is being processed and you";
-            echo " will be redirected to the payment website.</h2></p>\n";
-            echo "<form method=\"POST\" name=\"gateway_form\" ";
+//            echo "<html>\n";
+//            echo "<head><title>Processing Payment...</title></head>\n";
+//            echo "<body>\n"; // onLoad=\"document.forms['gateway_form'].submit();\"
+            echo "<div id=\"bypass_payment_page-dv\">\n"; // onLoad=\"document.forms['gateway_form'].submit();\"
+            echo "<p style=\"text-align:center;\"><h2>Please wait, your order is being processed and you will be redirected to the payment website.</h2></p>\n";
+            echo "<form id=\"bypass_payment_page_gateway_form\" method=\"POST\" name=\"gateway_form\" ";
             echo "action=\"" . $this->gatewayUrl . "\">\n";
             foreach ($this->fields as $name => $value) {
                 echo "<input type=\"hidden\" name=\"$name\" value=\"$value\"/>\n";
                 //echo 'Field name: ' . $name . ' Field value : ' . $value . '<br>';
             }
-            echo "<input type=\"hidden\" id=\"bypass_payment_page\" name=\"bypass_payment_page\" value=\"true\"/>\n";
-            echo "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to ";
-            echo "the payment website within 5 seconds...<br/><br/>\n";
+             echo "<input type=\"hidden\" id=\"bypass_payment_page\" name=\"bypass_payment_page\" value=\"true\"/>\n";
+            echo "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to  the payment website within 5 seconds...<br/><br/>\n";
             echo "<input type=\"submit\" value=\"Click Here\"></p>\n";
             echo "</form>\n";
             echo "</body></html>\n";
+//            echo "</body></html>\n";
         }
 
-        /**
+        /** 
          * Perform any pre-posting actions
          *
          * @param none

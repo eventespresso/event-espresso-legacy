@@ -8,8 +8,11 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			//echo "<pre>", print_r( $_SESSION ), "</pre>";
 			$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
 			
-			if ( event_espresso_invoke_cart_error( $events_in_session ) )
+			if ( event_espresso_invoke_cart_error( $events_in_session )) {
 				return false;
+			}
+				
+			$events_IN = array();
 
 			if ( count( $events_in_session ) > 0 ){
 				foreach ( $events_in_session as $event ) {
@@ -19,6 +22,10 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 				}
 
 			$events_IN = implode( ',', $events_IN );
+			
+			if ( empty( $events_IN )) {
+				return FALSE;
+			}
 
 			$sql = "SELECT e.* FROM " . EVENTS_DETAIL_TABLE . " e ";
 			$sql = apply_filters( 'filter_hook_espresso_shopping_cart_SQL_select', $sql );
@@ -27,10 +34,12 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			$sql .= " ORDER BY e.start_date ";
 
 			$result = $wpdb->get_results( $sql );
+			
+			$reg_page_url = add_query_arg('regevent_action', 'load_checkout_page', get_permalink($org_options['event_page_id']));
 
 ?>
 
-<form action='?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=load_checkout_page' method='post' id="event_espresso_shopping_cart">
+<form action="<?php echo $reg_page_url ?>" method='post' id="event_espresso_shopping_cart">
 
 <?php
 		$counter = 1; //Counter that will keep track of the first events

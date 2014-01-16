@@ -14,26 +14,31 @@
 	padding:10px;
 }
 
-/* Payment Page Styles */
-.payment_container, .payment-option-dv { position: relative; margin:0 .25em .25em 0;  }
-.payment-option-closed { display: inline-block !important; }
+/* Widget Style */
+.widget.events ol {
+	list-style:none;
+}
 
-.payment-option-dv .payment-option-lnk {
-	display: inline-block; position: relative; max-width:140px; min-height:53px; height: auto; padding:20px; margin:0 0 1em; 
+/* Payment Page Styles */
+#espresso-payment_page-dv .payment_container, .payment-option-dv { position: relative; margin:0 .25em .25em 0;  }
+#espresso-payment_page-dv .payment-option-closed { display: inline-block !important; }
+
+#espresso-payment_page-dv .payment-option-dv .payment-option-lnk {
+	display: inline-block; position: relative; max-width:140px; min-height:53px; padding:20px; margin:0 0 1em; 
 	border:1px solid #ddd; border-radius:3px;
 	text-align: center; line-height:1em; vertical-align: middle; cursor:pointer;
 
 }
-.payment-option-dv .payment-option-lnk:hover {
+#espresso-payment_page-dv .payment-option-dv .payment-option-lnk:hover {
 	top:-1px; border-color:#d5d5d5; text-decoration:none;
 	-webkit-box-shadow: 4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025); 
 	-moz-box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025); 
 	box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025);	
 }
-.payment-option-dv .payment-option-lnk img { max-width:140px !important; padding:0; margin:0; border:none; box-shadow: none; }
-.payment-option-dv .payment-option-lnk.algn-vrt { display: table !important; height:30px; }
-.payment-option-dv .payment-option-lnk.algn-vrt .vrt-cell { display: table-cell !important; vertical-align: middle; width:140px; }
-.payment-option-dv .payment-option-lnk.algn-vrt .vrt-cell div { word-wrap: normal; }
+#espresso-payment_page-dv .payment-option-dv .payment-option-lnk img { max-width:140px !important; padding:0; margin:0; border:none; box-shadow: none; }
+#espresso-payment_page-dv .payment-option-dv .payment-option-lnk.algn-vrt { display: table; height:30px; }
+#espresso-payment_page-dv .payment-option-dv .payment-option-lnk.algn-vrt .vrt-cell { display: table-cell !important; vertical-align: middle; width:140px; }
+#espresso-payment_page-dv .payment-option-dv .payment-option-lnk.algn-vrt .vrt-cell div { word-wrap: normal; }
 
 #event_espresso_checkout_form { margin: 5px 0; padding: 5px; }
 
@@ -543,6 +548,12 @@ table.price_list td{
 .espresso_payment_overview img,
 #event_espresso_total_wrapper img {
 	-webkit-box-shadow: none !important; -moz-box-shadow: none !important; box-shadow: none !important;
+}
+.ee-ajax-loader-img,
+.espresso_ical_link img,
+.register-link-footer img,
+.remove-cart-item .ee_delete_item_from_cart  {
+	border:none !important; box-shadow: none !important;
 }
 /********************************************/
 /****			-==ATTENTION==-			****/

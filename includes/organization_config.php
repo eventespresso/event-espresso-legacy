@@ -50,6 +50,7 @@ function organization_config_mnu() {
 		$org_options['affiliate_id'] = isset($_POST['affiliate_id']) && !empty($_POST['affiliate_id']) ? $_POST['affiliate_id'] : '';
 		$org_options['site_license_key'] = isset($_POST['site_license_key']) && !empty($_POST['site_license_key']) ? trim($_POST['site_license_key']) : '';
 		$org_options['default_payment_status'] = isset($_POST['default_payment_status']) && !empty($_POST['default_payment_status']) ? $_POST['default_payment_status'] : '';
+		$org_options['ticket_reservation_time'] = isset($_POST['ticket_reservation_time']) && !empty($_POST['ticket_reservation_time']) ? $_POST['ticket_reservation_time'] : '30';
 		$ueip_optin = isset($_POST['ueip_optin']) && !empty($_POST['ueip_optin']) ? $_POST['ueip_optin'] : 'yes';
 		
 		$org_options['default_logo_url'] = isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ? $_REQUEST['upload_image'] : '';
@@ -127,6 +128,9 @@ function organization_config_mnu() {
 
 	$org_options = get_option('events_organization_settings');
 	$ueip_optin = get_option('ee_ueip_optin');
+	$plugin_basename = plugin_basename(EVENT_ESPRESSO_PLUGINPATH);
+	/*$verify_fail = get_option( 'pue_verification_error_' . $plugin_basename );
+	$site_license_key_verified = !empty( $verify_fail ) ? '<span class"pue-sl-not-verified"></span>' : '<span class="pue-sl-verified"></span>';/**/ //to be added for 3.1.37
 	$values = array(
 			array('id' => 'Y', 'text' => __('Yes', 'event_espresso')),
 			array('id' => 'N', 'text' => __('No', 'event_espresso')));
@@ -617,6 +621,7 @@ function organization_config_mnu() {
 		<?php _e('Site License Key:', 'event_espresso'); ?>
 													</label>
 													<input type="text" name="site_license_key" size="45" value="<?php echo isset( $org_options['site_license_key'] ) ? stripslashes_deep($org_options['site_license_key']) : ''; ?>" />
+													<?php //echo $site_license_key_verified; ?>
 												</li>
 
 											</ul>

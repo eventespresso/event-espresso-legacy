@@ -5,7 +5,10 @@ function event_espresso_paid_status_icon($payment_status ='') {
 
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
     switch ($payment_status) {
-        case 'Checkedin':
+       case 'Cancelled':
+            echo '<img align="absmiddle" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/cancel.png" width="16" height="16" alt="' . __('Cancelled', 'event_espresso') . '" title="' . __('Cancelled', 'event_espresso') . '" />';
+            break;
+	    case 'Checkedin':
             echo '<img align="absmiddle" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/accept.png" width="16" height="16" alt="' . __('Checked-in', 'event_espresso') . '" title="' . __('Checked-in', 'event_espresso') . '" />';
             break;
         case 'NotCheckedin':
@@ -198,7 +201,7 @@ if (!function_exists('event_espresso_get_orig_price_and_surcharge')) {
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 
 		if ( ! $price_id || ! $event_id ) {
-			return 10000000;
+			return FALSE;
 		}
 		
 		global $wpdb;
@@ -276,7 +279,7 @@ if (!function_exists('event_espresso_get_final_price')) {
 	
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		if ( ! $price_id || ! $event_id ) {
-			return 1000000;
+			return FALSE;
 		}
 		
 		if ( event_espresso_verify_price_id( $price_id, $event_id ) == FALSE ){
@@ -426,7 +429,7 @@ if (!function_exists('event_espresso_price_dropdown')) {
 
                 $surcharge = '';
 
-                if ($result->surcharge > 0 && $result->event_cost > 0.00) {
+                if ($result->surcharge > 0) {
                     $surcharge = " + {$org_options['currency_symbol']}{$result->surcharge} " . $surcharge_text;
                     if ($result->surcharge_type == 'pct') {
                         $surcharge = " + {$result->surcharge}% " . $surcharge_text;
@@ -434,15 +437,10 @@ if (!function_exists('event_espresso_price_dropdown')) {
                 }
                 $message = isset($message) ? $message : '';
 
-                if ( $result->event_cost != '0.00' ) {
-                    $html .= '<span class="event_price_label">' . __('Price:', 'event_espresso') . '</span> <span class="event_price_value">' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . $surcharge . '</span>';
-                    $html .= '<input type="hidden" name="price_id' . $multi_name_adjust . '" id="price_id-' . $result->id . '" value="' . $result->id . '" />';
-                } else {
-//                    $html .= '<span class="free_event">' . __('Free Event', 'event_espresso') . '</span>';
-                    $html .= '<span class="free_event">' . $result->price_type . '</span>';
-                    $html .= '<input type="hidden" name="payment' . $multi_name_adjust . '" id="payment-' . $event_id . '" value="' . __('free event', 'event_espresso') . '" />';
-                    $html .= '<input type="hidden" name="price_id' . $multi_name_adjust . '" id="price_id-' . $result->id . '" value="' . $result->id . '" />';
-                }
+              
+                $html .= '<span class="event_price_label">' . __('Price:', 'event_espresso') . '</span> <span class="event_price_value">' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . $surcharge . '</span>';
+                $html .= '<input type="hidden" name="price_id' . $multi_name_adjust . '" id="price_id-' . $result->id . '" value="' . $result->id . '" />';
+               
             }
         }
        	echo $html;
@@ -489,9 +487,9 @@ function espresso_attendee_admin_price_dropdown($event_id, $atts) {
 			$surcharge = '';
 
 			if ($result->surcharge > 0 && $result->event_cost > 0.00) {
-				$surcharge = " + {$org_options['currency_symbol']}{$result->surcharge} " . $surcharge_text;
+				$surcharge = " + {$org_options['currency_symbol']}{$result->surcharge} ";
 				if ($result->surcharge_type == 'pct') {
-					$surcharge = " + {$result->surcharge}% " . $surcharge_text;
+					$surcharge = " + {$result->surcharge}% ";
 				}
 			}
 

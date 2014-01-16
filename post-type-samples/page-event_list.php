@@ -88,10 +88,12 @@ get_header(); ?>
                             <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title(); ?>">
                         <?php } the_title(); ?></a></h2>
                     <div class="event_meta">
-                        <p id="p_event_price-<?php echo $event_id ?>" class="event_price">
-                            <span class="section-title">Price: </span>
-                            <?php echo $event_price; ?>
-                        </p>
+                        <?php
+                            $default_price_output = '<p id="p_event_price-' . $event_id . '" class="event_price">';
+                            $default_price_output .= '<span class="section-title">Price: </span>';
+                            $default_price_output .= $event_price . '</p>';
+                            echo apply_filters('filter_hooks_espresso_page_event_list_price_display', $default_price_output, $event_price);
+                        ?>
                         <p id="event_date-<?php echo $event_id ?>">
                             <span class="section-title">Date: </span>
                             <?php echo $event_date; ?><br />

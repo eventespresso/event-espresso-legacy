@@ -37,7 +37,51 @@ function event_espresso_rename_tables($old_table_name, $new_table_name) {
 
 
 
+function espresso_downgrade_error() {
+	wp_die( '
+<h2 style="color:red; font-size:2em; text-align:center;">' . __( 'Warning!', 'event_espresso' ) . '</h2>
+<p style="font-size:1.4em; text-align:center;">
+	' . __( 'THE DATABASE SCHEMA FOR EVENT ESPRESSO 4.x VERSIONS<br/> IS INCOMPATIBLE WITH OLDER 3.x VERSIONS.', 'event_espresso' ) . '</p>
+<p style="font-size:1.2em; text-align:center;">
+	' . __( 'If you really wish to downgrade and re-activate an older version of Event Espresso:', 'event_espresso' ) . '</p>
+<ul style="font-size:1.4em; line-height:1em;">
+	<li style="margin:0 0 .5em 25%;">' . __( 'utilize a fresh install of WordPress', 'event_espresso' ) . '</li>
+	<li style="margin:0 0 .5em 25%;">' . __( 'or...', 'event_espresso' ) . '</li>
+	<li style="margin:0 0 .5em 25%;">' . __( 'backup your existing database first (important)', 'event_espresso' ) . '</li>
+	<li style="margin:0 0 .5em 25%;">' . __( 'remove all existing Event Espresso 4.x tables from the database', 'event_espresso' ) . '</li>
+	<li style="margin:0 0 .5em 25%;">' . __( 'then activate the older version of Event Espresso', 'event_espresso' ) . '</li>
+</ul>
+<p style="font-size:1.1em; line-height:1.1em; text-align:center; color:#007BAE;">
+	' . __( 'To exit this error screen:<br/>Please press the <b><span style="font-size:1.4em;">&lsaquo;</span> back button</b> on your browser to return to the WordPress Plugins page.', 'event_espresso' ) . '</p>'
+	);		
+}
+
+
+
+
+/**
+ * deactivate_event_espresso
+ *
+ * 	@return void
+ */
+function deactivate_event_espresso() {
+	$active_plugins = array_flip( get_option( 'active_plugins' ));
+	unset( $active_plugins[ EVENT_ESPRESSO_WPPLUGINPATH ] );
+	update_option( 'active_plugins', array_flip( $active_plugins ));	
+}
+
+
+
+
 function events_data_tables_install() {
+
+    if ( ! current_user_can( 'activate_plugins' )) {
+		 return;
+	}       
+    
+	$plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
+    check_admin_referer( "activate-plugin_{$plugin}" );
+
 
 	function event_espresso_install_system_names() {
 		global $wpdb;
@@ -656,7 +700,7 @@ function events_data_tables_install() {
 			  	KEY event_id (event_id),
 			  	KEY person_id (person_id)";
 	event_espresso_run_install($table_name, '', $sql);
-
+	
 	$table_name = "events_discount_rel";
 	$sql = "id int(11) NOT NULL AUTO_INCREMENT,
 				event_id int(11) DEFAULT NULL,
@@ -698,6 +742,7 @@ function events_data_tables_install() {
 				coupon_code_description TEXT,
 				each_attendee VARCHAR(1) DEFAULT NULL,
 				wp_user int(22) DEFAULT '1',
+				apply_to_all TINYINT(1) NOT NULL DEFAULT '0',
 				PRIMARY KEY  (id),
 			  	KEY coupon_code (coupon_code),
 			  	KEY wp_user (wp_user)";
@@ -781,8 +826,11 @@ function events_data_tables_install() {
 	$espresso_db_update = get_option( 'espresso_db_update', array() );
 	// make sure it's an array
 	$espresso_db_update = is_array( $espresso_db_update ) ? $espresso_db_update : array( $espresso_db_update );
-	// add current EE version to list
-	$espresso_db_update[] = EVENT_ESPRESSO_VERSION;
+	// check if current version is already in list of activated versions
+	if ( ! in_array( EVENT_ESPRESSO_VERSION, $espresso_db_update )) {
+		// add current EE version to list
+		$espresso_db_update[] = EVENT_ESPRESSO_VERSION;
+	}
 	// resave
 	update_option( 'espresso_db_update', $espresso_db_update );
 

@@ -1,15 +1,22 @@
 jQuery(document).ready(function($) {
 
-	var bypass_payment_page = $('#bypass_payment_page').val();
 	var preventLeavePage = true;
+	var bypass_payment_page = $('#bypass_payment_page').val();
 	if ( $('#allow_leave_page').val() == 'true' ) {
 		preventLeavePage = false;
 	}
-
+	if( bypass_payment_page == 'true' ) {
+		var bpp = $('#bypass_payment_page-dv').html();
+		$('#espresso-payment_page-dv').html( bpp );
+		$('.payment_option_title').hide();
+		$('.payment-option-dv').hide();
+		$('.payment-option-dv a').hide();
+		$('#bypass_payment_page_gateway_form').submit();
+	}
+	
 	$('.hide-if-js').hide();
 	$('.payment_container').toggleClass('payment-option-closed'); 
 	$('.payment-option-dv').toggleClass('payment-option-closed'); 
-	
 	
 	// generic click event for displaying and giving focus to an element and hiding control 
 	$('.display-the-hidden').on( 'click', function() {
@@ -46,8 +53,6 @@ jQuery(document).ready(function($) {
 	window.onbeforeunload = function() {
 		if ( preventLeavePage && bypass_payment_page != 'true' ) {
 	  	  return 'Warning!!! Using the back button will overwrite your existing registration.';
-		} 
-	}
-	//alert( 'preventLeavePage = ' + preventLeavePage );  //submit-payment-btn
-
+		}
+	}	
 });	

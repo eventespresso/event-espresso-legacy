@@ -320,7 +320,7 @@ function espresso_display_beanstream($data) {
 		$home = home_url();
 	}
 
-	wp_register_script( 'beanstream', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/beanstream/beanstream.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
+	wp_register_script( 'beanstream', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/beanstream/beanstream.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'beanstream' );	
 	
 	?>
@@ -334,7 +334,7 @@ function espresso_display_beanstream($data) {
 			<div class="event-display-boxes">
 			<?php if ($use_sandbox) { ?>
 				<div id="sandbox-panel">
-					<h2 class="section-title"><?php _e('Beanstream Sandbox Mode', 'event_espreso'); ?></h2>
+					<h2 class="section-title"><?php _e('Beanstream Sandbox Mode', 'event_espresso'); ?></h2>
 					<p>Test Master Card # 5100000010001004</p>
 					<p>Exp: 10/2012</p>
 					<p>CVV2: 123 </p>

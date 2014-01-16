@@ -23,24 +23,15 @@ function espresso_display_worldpay($payment_data) {
 	$myworldpay->addField('amount', $event_cost);
 	$myworldpay->addField('MC_id', $attendee_id);
 	$myworldpay->addField('MC_registration_id', $registration_id);
+	//$myworldpay->addField('MC_session_id', session_id());
 	$myworldpay->addField('MC_type', 'worldpay');
 	$myworldpay->addField('currency', $worldpay_settings['currency_format']);
+	$myworldpay->addField('MC_callback', get_permalink($org_options['return_url']));
 
 	if (!empty($worldpay_settings['bypass_payment_page'])) {
 		$myworldpay->submitPayment(); //Enable auto redirect to payment site
 	} else {
-		if (empty($worldpay_settings['button_url']) || ! file_exists($worldpay_settings['button_url'])) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/worldpay/worldpay-logo.png")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/worldpay/worldpay-logo.png";
-			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/worldpay/worldpay-logo.png";
-			}
-		} elseif (isset($worldpay_settings['button_url'])) {
-			$button_url = $worldpay_settings['button_url'];
-		} else {
-			//If no other buttons exist, then use the default location
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/worldpay/worldpay-logo.png";
-		}
+		$button_url = espresso_select_button_for_display($worldpay_settings['button_url'], "worldpay/worldpay-logo.png");
 		$myworldpay->submitButton($button_url, 'worldpay'); //Display payment button
 	}
 

@@ -23,7 +23,7 @@ class Espresso_Worldpay extends Espresso_PaymentGateway {
 		// Some default values of the class
 		$this->gatewayUrl = 'https://secure.worldpay.com/wcc/purchase';
 		$this->ipnLogFile = 'worldpay.ipn_results.log';
-				$this->worldpay_gateway_version = '1.0';
+		$this->worldpay_gateway_version = '1.0';
 	}
 
 	/**
@@ -34,6 +34,7 @@ class Espresso_Worldpay extends Espresso_PaymentGateway {
 	 */
 	public function enableTestMode() {
 		$this->testMode = TRUE;
+		$this->gatewayUrl = 'https://secure-test.worldpay.com/wcc/purchase';
 	}
 
 	public function logErrors($errors) {

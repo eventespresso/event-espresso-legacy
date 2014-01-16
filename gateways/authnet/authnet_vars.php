@@ -27,12 +27,7 @@ function espresso_display_authnet($payment_data) {
 
 	$myAuthorize->setUserInfo($authnet_login_id, $authnet_transaction_key);
 
-	if ($authnet_settings['force_ssl_return']) {
-		$home = str_replace('http:', 'https:', home_url());
-	} else {
-		$home = home_url();
-	}
-	$myAuthorize->addField('x_Relay_URL', $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id . '&type=authnet');
+	$myAuthorize->addField('x_Relay_URL',espresso_build_gateway_url('return_url', $payment_data, 'authnet') );
 	$myAuthorize->addField('x_Description', stripslashes_deep($event_name) . ' | ' . __('Reg. ID:', 'event_espresso') . ' ' . $attendee_id . ' | ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($fname . ' ' . $lname) . ' | ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity);
 	$myAuthorize->addField('x_Amount', number_format($event_cost, 2));
 	$myAuthorize->addField('x_Logo_URL', $image_url);
@@ -74,19 +69,7 @@ function espresso_display_authnet($payment_data) {
 	if (!empty($authnet_settings['bypass_payment_page']) && $authnet_settings['bypass_payment_page'] == 'Y') {
 		$myAuthorize->submitPayment(); //Enable auto redirect to payment site
 	} else {
-		if (empty($authnet_settings['button_url'])) {
-			//$button_url = EVENT_ESPRESSO_GATEWAY_URL . "authnet/authnet-logo.png";
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/pay-by-credit-card.png")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/pay-by-credit-card.png";
-			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
-			}
-		} elseif (file_exists($authnet_settings['button_url'])) {
-			$button_url = $authnet_settings['button_url'];
-		} else {
-			//If no other buttons exist, then use the default location
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
-		}
+		$button_url = espresso_select_button_for_display($authnet_settings['button_url'], "authnet/btn_cc_vmad.gif");
 		$myAuthorize->submitButton($button_url, 'authnet'); //Display payment button
 	}
 

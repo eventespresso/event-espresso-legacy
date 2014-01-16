@@ -2,7 +2,6 @@
 if (!function_exists('event_form_build')) {
 
 	function event_form_build( $question, $answer = "", $event_id = null, $multi_reg = 0, $extra = array(), $class = 'ee-reg-page-questions', $disabled = '' ) {
-
 		if ($question->admin_only == 'Y' && empty($extra['admin_only'])) {
 			return;
 		}
@@ -65,47 +64,47 @@ if (!function_exists('event_form_build')) {
 						switch ($question->system_name) {
 						
 							case $question->system_name == 'fname':							
-								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( $current_user->first_name ), ENT_QUOTES, 'UTF-8' ) : $answer;
+								$answer = $attendee_number === 1 && ! $answer ? htmlspecialchars( stripslashes( $current_user->first_name ), ENT_QUOTES, 'UTF-8' ) : $answer;
 								$html .= empty($answer) ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 								break;
 								
 							case $question->system_name == 'lname':								
-								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( $current_user->last_name ), ENT_QUOTES, 'UTF-8' ) : $answer;
+								$answer = $attendee_number === 1 && ! $answer ? htmlspecialchars( stripslashes( $current_user->last_name ), ENT_QUOTES, 'UTF-8' ) : $answer;
 								$html .= empty($answer) ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 								break;
 								
 							case $question->system_name == 'email':								
-								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( $user_email ), ENT_QUOTES, 'UTF-8' ) : $answer;
+								$answer = $attendee_number === 1 && ! $answer ? htmlspecialchars( stripslashes( $user_email ), ENT_QUOTES, 'UTF-8' ) : $answer;
 								$html .= empty($answer) ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 								break;
 								
 							case $question->system_name == 'address':								
-								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_address', TRUE ) ), ENT_QUOTES, 'UTF-8' ) : $answer;
+								$answer = $attendee_number === 1 && ! $answer  ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_address', TRUE ) ), ENT_QUOTES, 'UTF-8' ) : $answer;
 								$html .= empty($answer) ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 								break;
 								
 							case $question->system_name == 'city':								
-								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_city', TRUE ) ), ENT_QUOTES, 'UTF-8' ) : $answer;
+								$answer = $attendee_number === 1 && ! $answer ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_city', TRUE ) ), ENT_QUOTES, 'UTF-8' ) : $answer;
 								$html .= empty($answer) ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 								break;
 								
 							case $question->system_name == 'state':								
-								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_state', TRUE ) ), ENT_QUOTES, 'UTF-8' ) : $answer;
+								$answer = $attendee_number === 1 && ! $answer ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_state', TRUE ) ), ENT_QUOTES, 'UTF-8' ) : $answer;
 								$html .= empty($answer) ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 								break;
 								
 							case $question->system_name == 'zip':								
-								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_zip', TRUE ) ), ENT_QUOTES, 'UTF-8' ) : $answer;
+								$answer = $attendee_number === 1 && ! $answer ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_zip', TRUE ) ), ENT_QUOTES, 'UTF-8' ) : $answer;
 								$html .= empty($answer) ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 								break;
 								
 							case $question->system_name == 'phone':								
-								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_phone', TRUE ) ), ENT_QUOTES, 'UTF-8' ) : $answer;
+								$answer = $attendee_number === 1 && ! $answer ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_phone', TRUE ) ), ENT_QUOTES, 'UTF-8' ) : $answer;
 								$html .= empty($answer) ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 								break;
 								
 							case $question->system_name == 'country':								
-								$answer = $attendee_number === 1 ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_country', TRUE ) ), ENT_QUOTES, 'UTF-8' ) : $answer;
+								$answer = $attendee_number === 1 && ! $answer ? htmlspecialchars( stripslashes( get_user_meta($userid, 'event_espresso_country', TRUE ) ), ENT_QUOTES, 'UTF-8' ) : $answer;
 								$html .= empty($answer) ? '' : '<input name="' . $question->system_name . $multi_name_adjust . '" type="hidden" value="' . $answer . '" class="' . $class . '" />';
 								break;
 								

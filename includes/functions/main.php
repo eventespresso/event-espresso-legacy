@@ -206,9 +206,9 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			</a></div>';
 			
 			$attendee_form .= '
-			<div class="additional-attendee-div"><a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk ui-priority-primary " title="' . __('Add Additonal Attendee', 'event_espresso') . '">
-				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add Additonal Attendee', 'event_espresso') . '" />
-				' . __('Add Additonal Attendee', 'event_espresso') . '
+			<div class="additional-attendee-div"><a id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="add-additional-attendee-lnk additional-attendee-lnk ui-priority-primary " title="' . __('Add Additional Attendee', 'event_espresso') . '">
+				<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add Additional Attendee', 'event_espresso') . '" />
+				' . __('Add Additional Attendee', 'event_espresso') . '
 			</a></div>';
 
 
@@ -217,7 +217,7 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			wp_register_script( 'espresso_add_reg_attendees', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_add_reg_attendees.js', array('jquery'), '0.1', TRUE );
 			wp_enqueue_script( 'espresso_add_reg_attendees' );
 
-			$espresso_add_reg_attendees = array( 'additional_limit' => $additional_limit, 'attendee_form' => stripslashes( $attendee_form ));
+			$espresso_add_reg_attendees = array( 'additional_limit' => min( $additional_limit, $available_spaces ), 'attendee_form' => stripslashes( $attendee_form ));
 			wp_localize_script( 'espresso_add_reg_attendees', 'espresso_add_reg_attendees', $espresso_add_reg_attendees );		
 		}
 		return $html;
@@ -343,6 +343,11 @@ if (!function_exists('event_espresso_get_is_active')) {
 			$sql .= "LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id = e.id ";
 			$sql .= "WHERE e.id = '" . $event_id . "' LIMIT 0,1";
 			$events = $wpdb->get_results($sql);
+			if (empty($events)) {
+				$event_status = array('status' => 'INVALID', 'display' => '<span style="color: #000; font-weight:bold;">' . __('INVALID', 'event_espresso') . '</span>', 'display_custom' => '<span class="espresso_deleted">' . __('Invalid', 'event_espresso') . '</span>');
+				//print_r( $event_status);
+				return $event_status;
+			}
 			$start_date = $wpdb->last_result[0]->start_date;
 			$is_active = $wpdb->last_result[0]->is_active;
 			$event_status = $wpdb->last_result[0]->event_status;
@@ -467,6 +472,7 @@ if (!function_exists('event_espresso_get_status')) {
 			case 'DELETED':
 			case 'REGISTRATION_CLOSED':
 			case 'DENIED':
+			case 'INVALID':
 				//case 'REGISTRATION_NOT_OPEN':
 				return 'NOT_ACTIVE';
 				break;
@@ -589,8 +595,28 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 			case 'num_attendees_slash_reg_limit' :
 			case 'avail_spaces_slash_reg_limit' :
 				$num_attendees = 0;
-				$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id=%d AND (payment_status='Completed' OR payment_status='Pending' OR payment_status='Refund') ";
-				$wpdb->get_results( $wpdb->prepare( $a_sql, $event_id ), ARRAY_A);
+				global $org_options;
+				$minutes_in_past = isset($org_options['ticket_reservation_time']) ? $org_options['ticket_reservation_time']: 30;
+				$current_users_session =  isset($_SESSION['espresso_session']['id']) && !empty($_SESSION['espresso_session']['id']) ? $_SESSION['espresso_session']['id'] : '';
+				//NOTE: we count incomplete and declined payments temporarily if they were initiated by someone else.
+				//if they're yours, then pretend they dont exist.
+				//$x_minutes_ago_timestmap = strtotime("- ".$minutes_in_past." minute",);
+				$x_minutes_ago = date("Y-m-d H:i:s",strtotime(current_time('mysql'))-($minutes_in_past*60));
+					$a_sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " 
+						WHERE 
+							event_id=%d AND 
+							(	payment_status='Completed' OR 
+								payment_status='Pending' OR
+								payment_status='Refund' OR
+								(
+									payment_status IN ('Payment Declined','Incomplete') AND 
+									date > %s AND
+									attendee_session != %s
+								)
+							)";
+				$query = $wpdb->prepare( $a_sql, $event_id, $x_minutes_ago, $current_users_session );
+				//echo "query:$query";
+				$wpdb->get_results( $query , ARRAY_A);
 				if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
 					$num_attendees = $wpdb->last_result[0]->quantity;
 				}
@@ -865,7 +891,8 @@ if (!function_exists('espresso_registration_id')) {
 
 	function espresso_registration_id($attendee_id) {
 		global $wpdb;
-		$sql = $wpdb->get_results("SELECT registration_id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id ='" . $wpdb->escape($attendee_id) . "'");
+		$SQL = "SELECT registration_id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id =%d ";
+		$wpdb->get_results($wpdb->prepare( $SQL, $attendee_id ));
 		$num_rows = $wpdb->num_rows;
 
 		if ($num_rows > 0) {
@@ -881,7 +908,8 @@ if (!function_exists('espresso_attendee_id')) {
 
 	function espresso_attendee_id($registration_id) {
 		global $wpdb;
-		$sql = $wpdb->get_results("SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id ='" . $wpdb->escape($registration_id) . "'");
+		$SQL = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id =%s ";
+		$wpdb->get_results($wpdb->prepare( $SQL, $registration_id ));
 		$num_rows = $wpdb->num_rows;
 
 		if ($num_rows > 0) {
@@ -1001,13 +1029,13 @@ function espresso_unserialize($data, $return_format = '') {
 }
 
 //Checks to see if the array is multidimensional
-function is_multi($array) {
+function espresso_is_multi($array) {
 	return (count($array) != count($array, 1));
 }
 
 //escape the commas in csv file export
 function escape_csv_val($val) {
-	return "\"" . eregi_replace("\"", "\"\"", $val) . "\"";
+	return "\"" . str_replace("\"", "\"\"", $val) . "\"";
 }
 
 //return field(s) from a table
@@ -1189,7 +1217,7 @@ if (!function_exists('event_espresso_cleanup_multi_event_registration_id_group_d
 function espresso_check_scripts() {
 	if (function_exists('wp_script_is')) {
 		if (!wp_script_is('jquery')) {
-			echo '<div class="event_espresso_error"><p><em>' . __('Jquery is not loaded!', 'event_espresso') . '</em><br />' . __('Event Espresso is unable to load Jquery do to a conflict with your theme or another plugin.', 'event_espresso') . '</p></div>';
+			//echo '<div class="event_espresso_error"><p><em>' . __('Jquery is not loaded!', 'event_espresso') . '</em><br />' . __('Event Espresso is unable to load Jquery do to a conflict with your theme or another plugin.', 'event_espresso') . '</p></div>';
 		}
 	}
 	if (!function_exists('wp_head')) {
@@ -1323,8 +1351,18 @@ function espresso_get_attendee_coupon_discount($attendee_id, $cost) {
 	if (!is_null($row['coupon_code']) && !empty($row['coupon_code'])) {
 		$coupon_code = $row['coupon_code'];
 		$event_id = $row['event_id'];
+		$use_coupon_code_for_event = $wpdb->get_var("SELECT use_coupon_code FROM ".EVENTS_DETAIL_TABLE." WHERE id=%d",$event_id);
+		if($use_coupon_code_for_event == 'A'){
+			//if we're using ALL coupons codes (even non-global ones), we don't care about the rel table
+			$discounts = $wpdb->get_results("SELECT * FROM ".EVENTS_DISCOUNT_CODES_TABLE." WHERE coupon_code=%d",$coupon_code);
+		}else{
+			$discounts = $wpdb->get_results("SELECT d.* FROM " 
+				. EVENTS_DISCOUNT_CODES_TABLE . " d JOIN " 
+				. EVENTS_DISCOUNT_REL_TABLE . " r ON r.discount_id  = d.id WHERE d.coupon_code = '" . $coupon_code . "'  AND r.event_id = '" . $event_id . "' ");
+		
+		}
 		//$results = $wpdb->get_results("SELECT * FROM ". EVENTS_DISCOUNT_CODES_TABLE ." WHERE coupon_code = '".$_REQUEST['coupon_code']."'");
-		$discounts = $wpdb->get_results("SELECT d.* FROM " . EVENTS_DISCOUNT_CODES_TABLE . " d JOIN " . EVENTS_DISCOUNT_REL_TABLE . " r ON r.discount_id  = d.id WHERE d.coupon_code = '" . $coupon_code . "'  AND r.event_id = '" . $event_id . "' ");
+		
 		if ($wpdb->num_rows > 0) {
 			$valid_discount = true;
 			foreach ($discounts as $discount) {
@@ -1393,7 +1431,7 @@ if (!function_exists('espresso_display_featured_image')) {
 		$class = empty($class) ? 'ee-featured-image' : $class;
 		$title = empty($title) ? __('Featured Image', 'event_espresso') : $title;
 		$align = empty($align) ? 'right' : $align;
-		$output = '<div class="' . $class . '" id="espresso_featured_image-'.$event_id.'"><img title="' . $title . '" src="'.$image_url.'" /></div>';
+		$output = '<div class="' . $class . '" id="espresso_featured_image-'.$event_id.'"><a href="'.espresso_reg_url($event_id).'"><img title="' . $title . '" src="'.$image_url.'" /></a></div>';
 		return $output; 
 	}
 }
@@ -1477,3 +1515,53 @@ add_filter('action_hook_espresso_get_attendee_meta_value', 'espresso_get_attende
 function ee_sanitize_value($value) {
 	return wp_strip_all_tags( html_entity_decode( trim( sanitize_text_field(wp_strip_all_tags($value)) ), ENT_QUOTES, 'UTF-8' ) );
 }
+
+function espresso_select_button_for_display($settings_location, $default_location) {
+	if (empty($settings_location)) {
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . $default_location)) {
+			$button_url = EVENT_ESPRESSO_GATEWAY_URL . $default_location;
+		} else {
+			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/" . $default_location;
+		}
+	} elseif (@fopen($settings_location,"r")==true) {
+		$button_url = $settings_location;
+	} else {
+		//If no other buttons exist, then use the default location
+		$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/" . $default_location;
+	}
+	return $button_url;
+}
+
+function espresso_update_event_meta( $event_id, $new_meta ){
+	global $wpdb;
+	//Get the event meta
+	$sql = "SELECT e.event_meta";
+	$sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
+	$sql.= " WHERE e.id = %d";
+	$event_meta = $wpdb->get_var( $wpdb->prepare( $sql, $event_id ));
+	// fail?
+	if ( $event_meta === FALSE ) {
+		return FALSE;
+	}	
+	//Unserilaize the old meta
+	$event_meta = unserialize( $event_meta );			
+	//Merge the new meta into the old meta
+	if ( ! empty( $new_meta ) && is_array( $new_meta )) {
+		$event_meta = array_replace_recursive( $event_meta, $new_meta );
+	} else {
+		return FALSE;
+	}					
+
+	//Update the event meta
+	$results = $wpdb->update( 
+		EVENTS_DETAIL_TABLE, 
+		array( 'event_meta' => serialize( $event_meta )), 
+		array( 'id' => $event_id ), 
+		array('%s'), 
+		array('%d')
+	);
+	
+	return $results !== FALSE ? TRUE : FALSE;
+
+}
+add_action('action_hook_espresso_update_event_meta', 'espresso_update_event_meta', 10, 2);

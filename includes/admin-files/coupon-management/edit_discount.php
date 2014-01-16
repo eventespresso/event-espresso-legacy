@@ -13,6 +13,7 @@ function edit_event_discount(){
 				$coupon_code_price = $event_discount->coupon_code_price;
 				$coupon_code_description = $event_discount->coupon_code_description;
 				$use_percentage = $event_discount->use_percentage;
+				$apply_to_all = $event_discount->apply_to_all;
 			}
 ?>
 <!--Add event display-->
@@ -48,6 +49,15 @@ function edit_event_discount(){
               array('id'=>'Y','text'=> __('Yes','event_espresso')));				
 
       				echo select_input('use_percentage', $values, $use_percentage); ?>
+					</li>
+					<li>
+						<?php _e('Global? (Apply to All Events by Default)','event_espresso'); ?>
+						<?php $values=array(					
+
+              array('id'=>0,'text'=> __('No','event_espresso')),
+
+              array('id'=>1,'text'=> __('Yes','event_espresso')));				
+      				echo select_input('apply_to_all', $values, $apply_to_all); ?>
 					</li>
 					<li><strong>
 						<?php _e('Promotional Code Description','event_espresso'); ?>

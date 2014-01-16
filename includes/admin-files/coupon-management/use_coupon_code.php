@@ -49,7 +49,7 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 		}
 //		echo '<h4>$use_coupon_code : ' . $use_coupon_code . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		
-		if ( $use_coupon_code == 'Y' && $event_cost > 0 ) {
+		if ( in_array($use_coupon_code, array('Y',"G","A")) && $event_cost > 0 ) {
 			if ( $coupon_code ){
 
 				global $wpdb;
@@ -77,13 +77,18 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 					}
 					
 				} else {
-				
-					$SQL = "SELECT d.* FROM " . EVENTS_DISCOUNT_CODES_TABLE . " d ";
-					$SQL .= "JOIN " . EVENTS_DISCOUNT_REL_TABLE . " r ON r.discount_id  = d.id ";
-					$SQL .= "WHERE d.coupon_code = %s";
-				    $SQL .= $event_id ? " AND r.event_id = '" . $event_id . "'" : '';
 					
-					if ( $coupon = $wpdb->get_row( $wpdb->prepare( $SQL, $coupon_code ))) {	
+					$SQL = "SELECT d.* FROM " . EVENTS_DISCOUNT_CODES_TABLE . " d ";
+					$SQL .= " LEFT JOIN " . EVENTS_DISCOUNT_REL_TABLE . " r ON r.discount_id  = d.id ";
+					$SQL .= "WHERE d.coupon_code = %s ";
+					if($use_coupon_code != 'A'){//if $use_coupon_code is 'A', then we use ALL coupon codes, regardless of whether htey 'apply_to_all', or have a relation to this event
+						$SQL .= " AND ";
+						$SQL .= $event_id ? " (r.event_id = '" . $event_id . "' OR " : '';
+						$SQL .= " d.apply_to_all = 1";
+						$SQL .= $event_id ? " ) ": '';
+					}
+					$prepared_SQL = $wpdb->prepare( $SQL, $coupon_code );
+					if ( $coupon = $wpdb->get_row( $prepared_SQL )) {	
 					
 						$valid = TRUE;
 						$coupon_id = $coupon->id;
@@ -138,13 +143,13 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 						
 						$msg = '<p id="event_espresso_valid_coupon" style="margin:0;">';
 						$msg .= '<strong>' . __('Promotional code ', 'event_espresso') . $coupon_code . '</strong> ( ' . $discount_type_price . __(' discount', 'event_espresso') . ' )<br/>';
-	          		    $msg .= __('has being successfully applied to the following events', 'event_espresso') . ':<br/>';
+	          		    $msg .= __('has been successfully applied to the following events', 'event_espresso') . ':<br/>';
 						
 					} else {
 					
 						$msg = '<p id="event_espresso_valid_coupon" style="margin:0;">';
 						$msg .= '<strong>' . __('Promotional code ', 'event_espresso') . $coupon_code . '</strong> ( ' . $discount_type_price . __(' discount', 'event_espresso') . ' )<br/>';
-	          		    $msg .= __('has being successfully applied to your registration', 'event_espresso');
+	          		    $msg .= __('has been successfully applied to your registration', 'event_espresso');
 	          		    $msg .= '</p>';
 						
 					}							
@@ -218,7 +223,7 @@ if (!function_exists('event_espresso_coupon_registration_page')) {
 			return;
 		}
             
-        if ( $use_coupon_code == "Y" ) {
+        if ( in_array($use_coupon_code,array("Y", "G", "A")) ) {
 
             $multi_reg_adjust = $multi_reg ? "[$event_id]" : '';	 
 

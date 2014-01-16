@@ -62,19 +62,7 @@ function espresso_display_exact($payment_data) {
 	if (!empty($exact_settings['bypass_payment_page']) && $exact_settings['bypass_payment_page'] == 'Y') {
 		$myExact->submitPayment(); //Enable auto redirect to payment site
 	} else {
-		if (empty($exact_settings['button_url'])) {
-			//$button_url = EVENT_ESPRESSO_GATEWAY_URL . "exact/exact-logo.png";
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/exact/exact-logo.png")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/exact/exact-logo.png";
-			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/exact-logo.png";
-			}
-		} elseif (file_exists($exact_settings['button_url'])) {
-			$button_url = $exact_settings['button_url'];
-		} else {
-			//If no other buttons exist, then use the default location
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/exact-logo.png";
-		}
+		$button_url = espresso_select_button_for_display($exact_settings['button_url'], "exact/exact-logo.png");
 		$myExact->submitButton($button_url, 'exact'); //Display payment button
 	}
 

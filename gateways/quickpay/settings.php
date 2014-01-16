@@ -199,8 +199,8 @@ function event_espresso_display_quickpay_settings() {
 								<?php _e('Button Image URL', 'event_espresso'); ?> 
 							</label>
 							<?php $quickpay_settings['button_url'] = $quickpay_settings['button_url'] == '' ? EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/pay-by-credit-card.png' : $quickpay_settings['button_url']; ?>
-							<input type="text" name="button_url" size="34" value="<?php echo $quickpay_settings['button_url']; ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a></li>
+							<input class="upload_url_input" type="text" name="button_url" size="34" value="<?php echo $quickpay_settings['button_url']; ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a></li>
 						<li>
 							<?php _e('Current Button Image', 'event_espresso'); ?>
 							<br />
