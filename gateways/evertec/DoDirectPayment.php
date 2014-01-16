@@ -126,7 +126,8 @@ function espresso_process_evertec($payment_data) {
 				$error_message = __("Did not receive a proper XML response from Evertec", "event_espresso");
 		}
 	if( $error_message ){
-		printf(__("An error occurred processing your payment: %s", "event_espresso"),$error_message);
+		?><b><?php _e("An error occurred processing your payment: %s", "event_espresso");?></b><?php echo $error_message?><br/>
+		<?php
 	}
 	return $payment_data;
 }
