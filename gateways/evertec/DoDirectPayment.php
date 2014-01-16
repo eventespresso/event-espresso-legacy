@@ -9,10 +9,10 @@ function espresso_transactions_evertec_get_attendee_id($attendee_id) {
 }
 
 function espresso_process_evertec($payment_data) {
-	echo 'echodump of $payment_data';
-	var_dump($payment_data);
-	echo 'echodump of $_REQUEST';
-	var_dump($_REQUEST);
+// 	echo 'echodump of $payment_data';
+// 	var_dump($payment_data);
+// 	echo 'echodump of $_REQUEST';
+// 	var_dump($_REQUEST);
 	$r=$_REQUEST;
 	$evertec_settings = get_option('event_espresso_evertec_settings');
 
@@ -29,33 +29,33 @@ if($evertec_settings['use_sandbox']){
 	////////////////////////////////////////
 	$params = array(
 		'userName'=>$evertec_settings['username'],
-		'password'=>$evertec_settings['password'],
-		'CustomerName'=>$r['first_name']." ".$r['last_name'],
-		'CustomerID'=>$payment_data['registration_id'],
-		'CustomerEmail'=>$r['email'],//$payment_data['attendee_email'],
+		'passWord'=>$evertec_settings['password'],
+		'customerName'=>$r['first_name']." ".$r['last_name'],
+		'customerID'=>$payment_data['registration_id'],
+		'customerEmail'=>$r['email'],//$payment_data['attendee_email'],
 		'address1'=>$r['address'],
 		'address2'=>isset($r['address2']) ? $r['address2'] : '',
 		'city'=>$r['city'],
 		'state'=>$r['state'],
-		'zipcode'=>$r['zip'],
+		'zipCode'=>$r['zip'],
 		'telephone'=>$r['phone'],
 		'fax'=>'',
-		'DescriptionBuy'=>$payment_data['event_name'],
+		'descriptionBuy'=>$payment_data['event_name'],
+		'operatorId'=>'',
 		'channel'=>6,//not sure what this is for
 		'ignoreValues'=>'',  
-		'operatorId'=>'',
-//		'language'=>$evertec_settings['evertec_pages_language'],
+		'language'=>$evertec_settings['evertec_pages_language'],
 		'tax1'=>'',//0
 		'tax2'=>'',
 		'tax3'=>'',
 		'tax4'=>'',
-		'merchantTransId'=>$payment_data['registration_id'],
+		'MerchantTransId'=>$payment_data['registration_id'],
 		'amount'=>'10.00',//$payment_data['event_cost'],
 		'filler1'=>'',
 		'filler2'=>'',
 		'filler3'=>'',
 		'filler4'=>'',
-		'note'=>'',
+		'Note'=>'',
 		'paymentType'=>$r['evertec_payment_method'],	
 			);
 	//was it ac redit card purchase?
@@ -71,29 +71,20 @@ if($evertec_settings['use_sandbox']){
 		$params = array_merge($params,array(
 			'cardNumber'=>$cardNumber,
 			'expirationDate'=>$expirationDate,
-			'securityCardCode'=>$securityCardCode,
+			'SecurityCardCode'=>$securityCardCode,
 			'bankRoutingNumber'=>$bankRoutingNumber,
 			'bankAccountNumber'=>$bankAccountNumber,
 			'bankClientName'=>$bankClientName,
 			'authorizationBit'=>$authorizationBit
 		));
-echo 'echodump of $xml_params';
-var_dump($params);
 	$xml_params = '';
 	foreach($params as $name=>$value){
 		$xml_params.="<$name>$value</$name>";
 	}
-		$raw_xml_body = '<?xml version="1.0" encoding="utf-8" ?>
-			<soap:Envelope	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		$raw_xml_body = '<?xml version="1.0" encoding="utf-8" ?><soap:Envelope	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-			xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" >
-			<soap:Body>
-			<SendTransactions xmlns="http://tempuri.org/cpsh2h/serviceh2h">
-			'.$xml_params.'
-			</SendTransactions>
-			</soap:Body>
-			</soap:Envelope>';
-		echo htmlspecialchars($raw_xml_body);
+			xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" ><soap:Body><SendTransactions xmlns="http://tempuri.org/cpsh2h/serviceh2h">'.$xml_params.'</SendTransactions></soap:Body></soap:Envelope>';
+		
 //		echo htmlentities($raw_xml_body);
 //		echo $response['body'];die;
 //		$client = new SoapClient('https://mmpay.evertecinc.com/webservicev2/wscheckoutpayment.asmx?wsdl', array('trace'=>true,'soap_version' => SOAP_1_2));
@@ -111,20 +102,13 @@ var_dump($params);
 //				var_dump($e);
 //			}
 	
-			$soap_client_req = '<?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" xmlns:ns1="http://tempuri.org/WebMerchant/MerchantService"><env:Body><ns1:MakePayment/></env:Body></env:Envelope>';
+ 			$soap_client_req = '<?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" xmlns:ns1="http://tempuri.org/WebMerchant/MerchantService"><env:Body><ns1:MakePayment/></env:Body></env:Envelope>';
 //	echo 'echodump of $client->__getLastRequest ()';
 //	var_dump($client->__getLastRequest ());
 //	echo 'echodump of $client->__getLastRequestHeaders();';
 //	var_dump($client->__getLastRequestHeaders());
 	
-//			$response = wp_remote_post($server_url."/SendTransactions",
-//					array('headers'=>array(
-//						'Content-Type'=>'application/x-www-form-urlencoded',
-//						'Connection'=> 'Keep-Alive'),
-//					'body'=>$params,
-//					'method'=>'POST',
-//					'sslverify'=>false));
-					
+// 	echo "raw xml:".htmlentities($raw_xml_body)."<hr>";		
 			$response = wp_remote_post($server_url,
 				array(
 					'headers'=>array(
@@ -137,26 +121,36 @@ var_dump($params);
 					'body'=>$raw_xml_body,
 					'sslverify' => false));
 		echo 'echodump of $response';
-		echo htmlspecialchars($response['body']);
-		die;
+		echo htmlentities($response['body']);
+// 		die;
+		
+		$payment_data['payment_status'] = 'Incomplete';
+		$payment_data['txn_type'] = 'evertec';
+		$payment_data['txn_id'] = 0;
+		$payment_data['txn_details'] = serialize($_REQUEST);
+		
 		if(isset($response['body'])){
 			$xml   = simplexml_load_string($response['body']);
 			//in order to get elements in the default namesapce, you have to register it (see comment by gkokmdam on http://php.net/manual/en/simplexml.examples-basic.php)
-			$xml->registerXPathNamespace("def", "http://tempuri.org/WebMerchant/MerchantService");
-			$paymentResultElements = $xml->xpath('//def:MakePaymentResult');
-			if($paymentResultElements){
+			$xml->registerXPathNamespace("def", "http://tempuri.org/cpsh2h/serviceh2h");
+			$paymentResultElements = $xml->xpath('//StatusCode');
+			$statusDescriptionElements = $xml->xpath('//StatusDescription');
+			$confirmationNumberElements = $xml->xpath('//ConfirmationNumber');
+			$authorizationNumberElements = $xml->xpath('//AuthorizationNumber');
+			if(is_array($paymentResultElements) && is_array($statusDescriptionElements)){
 				$paymentResult = $paymentResultElements[0];
-				if(strpos($paymentResult, 'http') !== FALSE){
-					//they sent back a URL. we can link the user ot taht
-					$redirect_url = $paymentResult;
+				$statusDescription = $statusDescriptionElements[0];
+				$confirmationNumber = is_array($confirmationNumberElements) ? $confirmationNumberElements[0] : NULL;
+				$authorizationNumber = is_array($authorizationNumberElements) ? $authorizationNumberElements[0] : NULL;
+				if($paymentResult == '0000' && $confirmationNumber && $authorizationNumber){
+					$payment_data['payment_status'] = 'Completed';
+					$payment_data['txn_id'] = 'conf:'.$confirmationNumber.",auth:'".$authorizationNumber;
 					$error_message = false;
 				}else{
 					//they sent back an error message
-					$redirect_url = false;
-					$error_message = $paymentResult;
+					$error_message = $statusDescription;
 				}
 			}else{
-				$redirect_url = false;
 				$error_message = __("Did not receive a proper XML response from Evertec", "event_espresso");
 				if(WP_DEBUG){
 					$error_message.=print_r($response,true);
@@ -166,38 +160,14 @@ var_dump($params);
 				$error_message = __("Did not receive a proper XML response from Evertec", "event_espresso");
 		}
 	if( $error_message ){
-		echo __("An error occurred communicating with Evertec:", "event_espresso").$error_message; return;
-	}
-	
-	if (!empty($evertec_settings['bypass_payment_page']) && $evertec_settings['bypass_payment_page'] == 'Y') {
-		wp_redirect($redirect_url);
-	} else {
-		if (empty($evertec_settings['button_url'])) {
-			if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/evertec/btn_stdCheckout2.gif")) {
-				$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/evertec/btn_stdCheckout2.gif";
-			} else {
-				$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/evertec/btn_stdCheckout2.gif";
-			}
-		} elseif (isset($evertec_settings['button_url'])) {
-			$button_url = $evertec_settings['button_url'];
-		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/evertec/btn_stdCheckout2.gif";
-		}
-		?>
-			 <div id="evertec-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
-				 <a href='<?php echo $redirect_url?>'>
-			<img class="payment-option-lnk allow-leave-page" src="<?php echo $button_url?>" alt="click to visit this payment gateway">
-				</a>
-			 </div>
-		<?php
-	
+		printf(__("An error occurred processing your payment: %s", "event_espresso"),$error_message);
 	}
 
-	if ($use_sandbox) {
-
-		echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Evertec Debug Mode Is Turned On', 'event_espresso') . '</h3>';
-		$myEvertec->dump_fields();
-	}
+//	if ($use_sandbox) {
+//
+//		echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Evertec Debug Mode Is Turned On', 'event_espresso') . '</h3>';
+//		$myEvertec->dump_fields();
+//	}
 	return $payment_data;
 }
 
