@@ -97,6 +97,7 @@ function espresso_process_evertec($payment_data) {
 		
 		if(isset($response['body'])){
 			$xml   = simplexml_load_string($response['body']);
+			$payment_data['txn_details'] = $response['body'];
 			//in order to get elements in the default namesapce, you have to register it (see comment by gkokmdam on http://php.net/manual/en/simplexml.examples-basic.php)
 			$xml->registerXPathNamespace("def", "http://tempuri.org/cpsh2h/serviceh2h");
 			$paymentResultElements = $xml->xpath('//StatusCode');
