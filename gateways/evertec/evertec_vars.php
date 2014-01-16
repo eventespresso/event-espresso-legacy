@@ -30,10 +30,7 @@ function espresso_display_evertec($payment_data) {
 				$home = str_replace('http://', 'https://', home_url());
 			} else {
 				$home = home_url();
-			}
-			if ($evertec_settings['display_header']) {
-?>
-			<h3 class="payment_header"><?php echo $evertec_settings['header']; ?></h3><?php } ?>
+			}?>
 
 			<div class = "event_espresso_form_wrapper">
 				<form id="evertec_payment_form" name="evertec_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
