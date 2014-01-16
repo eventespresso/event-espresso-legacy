@@ -1,6 +1,21 @@
 jQuery(document).ready(function($) {
 	$('#evertec_payment_form').validate({
 		rules:{
+			"email":{
+				email: true
+			},
+			"state":{
+				"maxlength":2
+			},
+			"zip":{
+				"digits":true,
+				"maxlength":5,
+				"minlength":5
+			},
+			"phone":{
+				"minlength":10,
+				"maxlength":12
+			},
 			//credit card fields are only required when making a credit card pruhcase
 			//same goes for bank fields
 			//credit card fields
@@ -34,12 +49,16 @@ jQuery(document).ready(function($) {
 	});
 	$('#evertec_payment_form').submit(function(){
 		if ($('#evertec_payment_form').valid()){
+			alert("use image at "+EEGlobals.plugin_url + 'images/ajax-loader.gif');
 			$('#processing').html('<img src="' + EEGlobals.plugin_url + 'images/ajax-loader.gif">');
-			$(':input[name="evertec_submit"]').attr('disabled', 'disabled');
+			$('input[name="evertec_submit"]').attr('disabled', 'disabled');
 		}
 	});
-	$('#evertec_payment_method').change(function(event){
-		method = jQuery(this).val();
+	$('#evertec_payment_method').change(update_form_with_payment_option_selection);
+	update_form_with_payment_option_selection();
+});
+function update_form_with_payment_option_selection(){
+	method = jQuery(this).val();
 		jQuery('#evertec-credit-card-info-dv').hide();
 		jQuery('#evertec-bank-info-dv').hide();
 		
@@ -48,8 +67,8 @@ jQuery(document).ready(function($) {
 		}else if(is_bank_method(method)){
 				jQuery('#evertec-bank-info-dv').toggle('slow');
 		}
-	});
-});
+		jQuery('.event_form_submit').css('display','block');
+}
 
 function evertec_form_is_using_credit_card_payment_method(element){
 	method = get_evertec_payment_method();

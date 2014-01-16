@@ -42,39 +42,39 @@ function espresso_display_evertec($payment_data) {
 						<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>
 						<p>
 							<label for="first_name"><?php _e('First Name', 'event_espresso'); ?></label>
-				        	<input name="first_name" type="text" id="evertec_first_name" class="required" value="<?php echo $payment_data['fname'] ?>" />
+				        	<input name="first_name" type="text" id="evertec_first_name" class="required" value="<?php echo isset($_REQUEST['fname']) ? $_REQUEST['fname'] : $payment_data['fname'] ?>" />
 						</p>
 						<p>
 					        <label for="last_name"><?php _e('Last Name', 'event_espresso'); ?></label>
-					        <input name="last_name" type="text" id="evertec_last_name" class="required" value="<?php echo $payment_data['lname'] ?>" />
+					        <input name="last_name" type="text" id="evertec_last_name" class="required" value="<?php echo isset($_REQUEST['lname']) ? $_REQUEST['lname'] : $payment_data['lname'] ?>" />
 						</p>
 						<p>
 					        <label for="email"><?php _e('Email Address', 'event_espresso'); ?></label>
-					        <input name="email" type="text" id="evertec_email" class="required" value="<?php echo $payment_data['attendee_email'] ?>" />
+					        <input name="email" type="text" id="evertec_email" class="required" value="<?php echo isset($_REQUEST['attendee_email']) ? $_REQUEST['attendee_email'] : $payment_data['attendee_email'] ?>" />
 						</p>
 						<p>
 					        <label for="address"><?php _e('Address', 'event_espresso'); ?></label>
-					        <input name="address" type="text" id="evertec_address" class="required" value="<?php echo $payment_data['address'] ?>" />
+					        <input name="address" type="text" id="evertec_address" class="required" value="<?php echo isset($_REQUEST['address']) ? $_REQUEST['address'] : $payment_data['address'] ?>" />
 						</p>
 						<p>
 					        <label for="address2"><?php _e("Address (cont'd)", 'event_espresso'); ?></label>
-					        <input name="address2" type="text" id="evertec_address2" class="required" value="<?php echo isset($payment_data['address2']) ? $payment_data['address2'] : '' ?>" />
+					        <input name="address2" type="text" id="evertec_address2" value="<?php echo isset($payment_data['address2']) ? $payment_data['address2'] : '' ?>" />
 						</p>
 						<p>
 					        <label for="city"><?php _e('City', 'event_espresso'); ?></label>
-					        <input name="city" type="text" id="evertec_city" class="required" value="<?php echo $payment_data['city'] ?>" />
+					        <input name="city" type="text" id="evertec_city" class="required" value="<?php echo isset($_REQUEST['city']) ? $_REQUEST['city'] : $payment_data['city'] ?>" />
 						</p>
 						<p>
 					        <label for="state"><?php _e('State', 'event_espresso'); ?></label>
-					        <input name="state" type="text" id="evertec_state" class="required" value="<?php echo $payment_data['state'] ?>" />
+					        <input name="state" type="text" id="evertec_state" class="required" value="<?php echo isset($_REQUEST['state']) ? $_REQUEST['state'] : $payment_data['state'] ?>" />
 						</p>
 						<p>
 					        <label for="zip"><?php _e('Zip', 'event_espresso'); ?></label>
-					        <input name="zip" type="text" id="evertec_zip" class="required" value="<?php echo $payment_data['zip'] ?>" />
+					        <input name="zip" type="text" id="evertec_zip" class="required" value="<?php echo isset($_REQUEST['zip']) ? $_REQUEST['zip'] : $payment_data['zip'] ?>" />
 						</p>
 						<p>
 					        <label for="phone"><?php _e('Phone', 'event_espresso'); ?></label>
-					        <input name="phone" type="text" id="evertec_phone" class="required" value="<?php echo $payment_data['phone'] ?>" />
+					        <input name="phone" type="text" id="evertec_phone" class="required" value="<?php echo isset($_REQUEST['phone']) ? $_REQUEST['phone'] : $payment_data['phone'] ?>" />
 						</p>
 					</fieldset>
 					<select id="evertec_payment_method" name="evertec_payment_method">
@@ -140,11 +140,11 @@ function espresso_display_evertec($payment_data) {
 					<input name="amount" type="hidden" value="<?php echo number_format($payment_data['event_cost'], 2) ?>" />
 					<input name="evertec" type="hidden" value="true" />
 					<input name="r_id" type="hidden" value="<?php echo $registration_id ?>" />
-					<p class="event_form_submit">
-						<input name="evertec_submit" id="evertec_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />						
-						<div class="clear"></div>
+					<p class="event_form_submit" style="display:none">
+						<input name="evertec_submit" id="evertec_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />					
+						<div class="clear" id="processing"></div>
 					</p>
-					<span id="processing"></span>
+					
 				</form>
 
 			</div><!-- / .event_espresso_or_wrapper -->
