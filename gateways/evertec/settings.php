@@ -5,11 +5,8 @@ function event_espresso_evertec_payment_settings() {
 	if (isset($_POST['update_evertec'])) {
 		$evertec_settings['username'] = $_POST['username'];
 		$evertec_settings['password'] = $_POST['password'];
-		$evertec_settings['evertec_pages_language'] = $_POST['evertec_pages_language'];
-		$evertec_settings['image_url'] = $_POST['image_url'];
 		$evertec_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
 		$evertec_settings['accepted_payment_methods'] = $_POST['accepted_payment_methods'];
-		$evertec_settings['force_ssl_return'] = empty($_POST['force_ssl_return']) ? false : true;
 		$evertec_settings['button_url'] = $_POST['button_url'];
 		update_option('event_espresso_evertec_settings', $evertec_settings);
 		echo '<div id="message" class="updated fade"><p><strong>' . __('Evertec settings saved.', 'event_espresso') . '</strong></p></div>';
@@ -23,11 +20,8 @@ function event_espresso_evertec_payment_settings() {
 		}
 		$evertec_settings['username'] = '';
 		$evertec_settings['password'] = '';
-		$evertec_settings['evertec_pages_language'] = 'es';
-		$evertec_settings['image_url'] = '';
 		$evertec_settings['use_sandbox'] = false;
 		$evertec_settings['accepted_payment_methods'] = array('A','V','M','X','W','S','C');
-		$evertec_settings['force_ssl_return'] = false;
 		if (add_option('event_espresso_evertec_settings', $evertec_settings, '', 'no') == false) {
 			update_option('event_espresso_evertec_settings', $evertec_settings);
 		}
@@ -100,24 +94,6 @@ function event_espresso_display_evertec_settings() {
 							</label>
 							<input type="text" name="password" size="35" value="<?php echo $evertec_settings['password']; ?>">
 						</li>
-						
-						<li>
-							<label for="evertec_pages_language">
-								<?php _e("Evertec Payment Pages' Language", 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=evertec_pages_language"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-							</label>
-							<?php 
-							$language_options = array(array('id'=>'es','text'=>  __("Spanish", "event_espresso")),array('id'=>'en','text'=>  __("English", "event_espresso")));
-							echo select_input('evertec_pages_language', $language_options, $evertec_settings['evertec_pages_language']); ?>
-						</li>
-						
-						<li>
-							<label for="image_url">
-								<?php _e('Image URL (logo for payment page)', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=image_url_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-							</label>
-							<input type="text" name="image_url" size="35" value="<?php echo $evertec_settings['image_url']; ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=image_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a><br />
-							<?php _e('(used for your business/personal logo on the Evertec page)', 'event_espresso'); ?>
-						</li>
 						<li>
 							<p><label for="evertec_use_sandbox">
 								<input name="use_sandbox" type="checkbox" value="1" id="evertec_use_sandbox" <?php echo $evertec_settings['use_sandbox'] ? 'checked="checked"' : '' ?> /><?php _e('Use the Debugging Feature and the Evertec Sandbox', 'event_espresso'); ?>
@@ -125,8 +101,11 @@ function event_espresso_display_evertec_settings() {
 							</p>
 						</li>
 						
-						
-					</ul></td>
+					</ul>
+				<?php if (espresso_check_ssl() == FALSE) {
+							
+							espresso_ssl_required_gateway_message();
+						}?></td>
 				<td valign="top"><ul><li>
 							<?php $card_payment_methods = array(
 	'A'=> __("BPPR ATH", "event_espresso"),
@@ -149,17 +128,7 @@ $bank_payment_methods = array(
 						$checked = isset($evertec_settings['accepted_payment_methods'][$card_code]) ? 'checked="checked"' : '';
 						?><label for="accepted_payment_method_<?php echo $card_code?>"><input type="checkbox" <?php echo $checked?> name="accepted_payment_methods[<?php echo $card_code?>]" id="accepted_payment_method_<?php echo $card_code?>" value="<?php echo $i18n_name?>"><?php echo $i18n_name?></label><?php 
 						}?>
-						</li>
-						
-						<?php if (espresso_check_ssl() == TRUE || ( isset($evertec_settings['force_ssl_return']) && $evertec_settings['force_ssl_return'] == 1 )) {?>
-						<li>
-							<label for="force_ssl_return">
-								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
-								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
-							</label>
-							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $evertec_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
-							<?php }?>
-						
+						</li>						
 						<li>
 							<label for="button_url">
 								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
@@ -182,29 +151,10 @@ $bank_payment_methods = array(
 		<hr />
 		<p><?php _e('The Evertec Sandbox is a testing environment that is a duplicate of the live Evertec site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live Evertec environment. Create and manage test accounts, and view emails and API credentials for those test accounts.', 'event_espresso'); ?></p>
 	</div>
-	<div id="image_url_info" style="display:none">
-		<h2>
-			<?php _e('Evertec Image URL (logo for payment page)', 'event_espresso'); ?>
-		</h2>
-		<p>
-			<?php _e('The URL of the 150x50-pixel image displayed as your logo in the upper left corner of the Evertec checkout pages.', 'event_espresso'); ?>
-		</p>
-		<p>
-			<?php _e('Default - Your business name, if you have a Business account, or your email address, if you have Premier or Personal account.', 'event_espresso'); ?>
-		</p>
-	</div>
-	<div id="evertec_pages_language" style="display:none">
-		<h2><?php _e("Evertec Pages Language", "event_espresso"); ?></h2>
-		<p><?php _e("When users are directed to Evertec's payment pages, these pages may be displayed in either Spanish or English.", 'event_espresso'); ?> </p>
-	</div>
 	<div id="password_info" style="display:none">
 		<h2><?php _e('Override Profile-Based Tax', 'event_espresso'); ?></h2>
 		<p><?php _e('Overrides any sales taxes that may be applied to all of your Evertec.com payments. These settings can be managed in your Evertec.com Profile > Sales Tax (<a href="https://www.evertec.com/us/cgi-bin/webscr?cmd=_profile-sales-tax" target="_blank">https://www.evertec.com/us/cgi-bin/webscr?cmd=_profile-sales-tax</a>).', 'event_espresso'); ?></p>
 		<p><?php _e('Even if you are using your Profile-based tax settings, you may want to set a special tax rate for some of your items (e.g. if it is a event/product that does not require tax).', 'event_espresso'); ?></p>
-	</div>
-	<div id="evertec_pages_language_info" style="display:none">
-		<h2><?php _e('Override Profile-Based Shipping', 'event_espresso'); ?></h2>
-		<p><?php _e('Overrides any shipping charges that may be applied to all of your Evertec.com payments. These settings can be managed in your Evertec.com Profile > Shipping Calculations  (<a href="https://www.evertec.com/cgi-bin/customerprofileweb?cmd=_profile-shipping" target="_blank">https://www.evertec.com/cgi-bin/customerprofileweb?cmd=_profile-shipping</a>).', 'event_espresso'); ?></p>
 	</div>
 	<?php
 	
