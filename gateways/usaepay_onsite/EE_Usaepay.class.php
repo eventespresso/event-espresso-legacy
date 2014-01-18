@@ -1226,6 +1226,7 @@ class EE_umTransaction {
  * @param ccnum string
  * @return int
  */
+if ( ! function_exists( 'umVerifyCreditCardNumber' ) ) {
 function umVerifyCreditCardNumber($ccnum)
 {
 	global $umErrStr;
@@ -1300,7 +1301,7 @@ function umVerifyCreditCardNumber($ccnum)
 	$umErrStr="Cardnumber did not match any known creditcard profiles";
 	return 0;
 }
-
+}
 
 function _uePhpLibPrivateXMLEntities($num)
 {
