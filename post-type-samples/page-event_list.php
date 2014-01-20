@@ -25,7 +25,7 @@ get_header(); ?>
                                 )
                             ),
                         'orderby' => 'meta_value',
-                        'order' => 'DESC' // change this to ASC if you want newer events on top
+                        'order' => 'ASC' // change this to DESC if you want furthest events away in time to be on top
                     );
             // this saves the query to a temporary location so we can go back to it later after we run our query
             $temp = $wp_query;

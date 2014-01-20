@@ -1058,24 +1058,6 @@ add_shortcode('ESPRESSO_CANCELLED', 'espresso_cancelled');
 //this COULD be done only on the ee critical pages (events, transactions, thank you)
 add_action('plugins_loaded','event_espresso_init_active_gateways');
 
-/*
- * These actions need to be loaded a the bottom of this script to prevent errors when post/get requests are received.
- */
-
-// Export iCal file
-if (!empty($_REQUEST['iCal'])) {
-	espresso_ical();
-}
-
-//Export PDF invoice
-if (isset($_REQUEST['download_invoice']) && $_REQUEST['download_invoice'] == 'true') {
-	if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/invoice/template.php")) {
-		require_once(EVENT_ESPRESSO_GATEWAY_DIR . "/invoice/template.php");
-	} else {
-		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "gateways/invoice/template.php");
-	}
-}
-
 if (is_admin()) {
 
 	add_action('admin_init', 'espresso_check_data_tables' );
@@ -1102,6 +1084,27 @@ if (is_admin()) {
 		add_action('admin_notices', 'event_espresso_activation_notice', 5);
 	}
 }
+
+/*
+ * These actions need to be loaded a the bottom of this script to prevent errors when post/get requests are received.
+ */
+
+// Export iCal file
+if (!empty($_REQUEST['iCal'])) {
+	espresso_ical();
+}
+
+//Export PDF invoice
+function espresso_export_invoice() {
+	if (isset($_REQUEST['download_invoice']) && $_REQUEST['download_invoice'] == 'true') {
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/invoice/template.php")) {
+			require_once(EVENT_ESPRESSO_GATEWAY_DIR . "/invoice/template.php");
+		} else {
+			require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "gateways/invoice/template.php");
+		}
+	}
+}
+add_action('init', 'espresso_export_invoice', 30);
 
 //Export PDF Ticket (new)
 function espresso_export_ticket() {
@@ -1131,7 +1134,7 @@ function espresso_export_ticket() {
 	}
 	//End Deprecated version 1.0
 }
-add_action('plugins_loaded', 'espresso_export_ticket', 40);
+add_action('init', 'espresso_export_ticket', 40);
 
 
 
@@ -1141,7 +1144,7 @@ function espresso_export_certificate() {
 		echo espresso_certificate_launch($_REQUEST['id'], $_REQUEST['r_id']);
 	}
 }
-add_action('plugins_loaded', 'espresso_export_certificate', 30);
+add_action('init', 'espresso_export_certificate', 30);
 
 
 
