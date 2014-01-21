@@ -570,7 +570,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								//Added by Imon
 								$ext_attendee_id = $wpdb->insert_id;
 								
-								$ext_att_data_source['attendee_id'] = $attendee_id;
+								$ext_att_data_source['attendee_id'] = $ext_attendee_id;
 								$ext_att_data_source['event_meta'] = $event_meta;
 			
 			
@@ -713,11 +713,13 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 
 								// ADD ATTENDEE TO DB
 								$return_data = event_espresso_add_attendees_to_db( $event_id, $session_vars, TRUE );
+								if (!empty($return_data['registration_id'])) $session_vars['data']['attendee_quantity']--;
 								if ( ! $return_data){
 									//something went wrong when adding them to the DB, 
 									//like the event sold out
 									return;
 								}
+
 								$tmp_registration_id = $return_data['registration_id'];
 								$notifications = $return_data['notifications'];
 
