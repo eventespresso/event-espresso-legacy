@@ -150,7 +150,7 @@ function replace_shortcodes($message, $data) {
 		}
 	}
 	apply_filters('filter_hook_espresso_post_replace_shortcode_search_values', $SearchValues);
-	apply_filters('filter_hook_espresso_post_replace_shortcode_replace_values', $ReplaceValues);
+	apply_filters('filter_hook_espresso_post_replace_shortcode_replace_values', $ReplaceValues, $data);
 	//Perform the replacement
 	return str_replace($SearchValues, $ReplaceValues, $message);
 }
