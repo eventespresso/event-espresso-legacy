@@ -174,6 +174,7 @@ function attendee_edit_record() {
 				//If this is not an attendee returing to edit their details, then we need to return a message.
 				if ( ! isset($_REQUEST['single'] )) {
 					if ( espresso_registration_id( $req_primary ) == $registration_id && espresso_registration_id( $id ) == $registration_id ){
+						do_action ( 'action_hook_espresso_update_registration_details_by_attendee', $registration_id );
 						if($payment_status == 'Completed'){
 							_e('Your registration details have been updated.', 'event_espresso');
 							return;
