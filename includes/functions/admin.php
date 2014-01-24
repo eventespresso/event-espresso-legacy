@@ -1785,6 +1785,9 @@ function ee_core_load_pue_update() {
 			if ( !empty( $active_events_count ) )
 				$extra_stats['active_events_count'] = $active_events_count;
 
+			//phpversion checking
+			$extra_stats['phpversion'] = function_exists('phpversion') ? phpversion() : 'unknown';
+
 
 			//set transient
 			set_transient( 'ee_extra_data', $extra_stats, WEEK_IN_SECONDS );
