@@ -61,9 +61,20 @@ function espresso_display_evertec($payment_data) {
 					        <label for="city"><?php _e('City', 'event_espresso'); ?></label>
 					        <input name="city" type="text" id="evertec_city" class="required" value="<?php echo isset($_REQUEST['city']) ? $_REQUEST['city'] : $payment_data['city'] ?>" />
 						</p>
+						<?php 
+					$states = array('AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FL','GA','GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MP','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','PR','RI','SC','SD','TN','TX','UT','VT','VI','VA','WA','WV','WI','WY');
+
+
+						
+						?>
 						<p>
 					        <label for="state"><?php _e('State', 'event_espresso'); ?></label>
-					        <input name="state" type="text" id="evertec_state" class="required" value="<?php echo isset($_REQUEST['state']) ? $_REQUEST['state'] : $payment_data['state'] ?>" />
+							<select name="state" id="evertec_state">
+								<?php foreach($states as $state){
+									$selected = isset($_REQUEST['state']) && $state == $_REQUEST['state']? 'selected':'';
+									?><option <?php echo $selected?>><?php echo $state?></option>
+								<?php }?>
+							</select>
 						</p>
 						<p>
 					        <label for="zip"><?php _e('Zip', 'event_espresso'); ?></label>
@@ -125,7 +136,7 @@ function espresso_display_evertec($payment_data) {
 					        <input type="text" name="bankAccountNumber" class="required" id="bankAccountNumber" autocomplete="off" />
 						</p>
 						<p>
-					        <label for="bankClientName"><?php _e('Account Number', 'event_espresso'); ?></label>
+					        <label for="bankClientName"><?php _e('Client Name', 'event_espresso'); ?></label>
 					        <input type="text" name="bankClientName" class="required" id="bankClientName" autocomplete="off" />
 						</p>
 						<p>
