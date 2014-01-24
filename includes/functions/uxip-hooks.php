@@ -149,3 +149,4 @@ function espresso_uxip_track_event_info() {
 		set_transient( 'ee_event_info_check', 1, WEEK_IN_SECONDS * 2 );
 	} 
 }
+add_action('admin_init', 'espresso_uxip_track_event_info');

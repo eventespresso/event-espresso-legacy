@@ -306,18 +306,21 @@ function edit_attendee_record() {
 			
 			$group_name = '';
 			$counter = 0;
-
+			
+			$FILTER = '';
+			if (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == '2' && isset($_REQUEST['attendee_num']) && $_REQUEST['attendee_num'] > 1) {
+				$FILTER .= " AND qg.system_group = 1 ";
+			}
 			//pull the list of questions that are relevant to this event
-			$SQL = "SELECT q.*, q.id AS q_id, at.id AS a_id, at.*, qg.group_name, qg.show_group_description, qg.show_group_name ";
+			$SQL = "SELECT q.*, q.id AS q_id,  qg.group_name, qg.show_group_description, qg.show_group_name ";
 			$SQL .= "FROM " . EVENTS_QUESTION_TABLE . " q ";
-			$SQL .= "LEFT JOIN " . EVENTS_ANSWER_TABLE . " at on q.id = at.question_id ";
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
 			$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
-			$SQL .= "AND (at.attendee_id IS NULL OR at.attendee_id = '%d') ";
-			$SQL .= "ORDER BY qg.id, q.id ASC";		
+			$SQL .= $FILTER . " ";
+			$SQL .= "ORDER BY qg.id, q.id ASC";
+			$questions = $wpdb->get_results( $SQL);
 			
-			$questions = $wpdb->get_results( $wpdb->prepare( $SQL, $id ));			
 //			printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 			
 			$SQL = "SELECT id, question_id, answer FROM " . EVENTS_ANSWER_TABLE . " at WHERE at.attendee_id = %d";		
@@ -337,23 +340,21 @@ function edit_attendee_record() {
 						case "TEXTAREA" :
 						case "SINGLE" :
 						case "DROPDOWN" :
-						
 							if ( $question->system_name != '' ) {
 								$post_val = isset( $_POST[ $question->system_name ] ) ? $_POST[ $question->system_name ] : '';
 							} else {
-								$post_val = isset( $_POST[ $question->question_type . '_' . $question->a_id ] ) ? $_POST[ $question->question_type . '_' . $question->a_id ] : '';
+								$post_val = isset( $_POST[ $question->question_type . '_' . $question->q_id ] ) ? $_POST[ $question->question_type . '_' . $question->q_id ] : '';
 							}
 							
 							$post_val = apply_filters( 'filter_hook_espresso_admin_question_response', $post_val, $question );
 							$post_val = ee_sanitize_value( stripslashes( $post_val ));
-							
 							break;
 							
 						case "MULTIPLE" :
 						
 							$post_val = '';
-							for ( $i = 0; $i < count( $_POST[ $question->question_type . '_' . $question->a_id ] ); $i++ ) {
-								$pval = apply_filters( 'filter_hook_espresso_admin_question_response', trim( $_POST[ $question->question_type . '_' . $question->a_id ][$i] ), $question );
+							for ( $i = 0; $i < count( $_POST[ $question->question_type . '_' . $question->q_id ] ); $i++ ) {
+								$pval = apply_filters( 'filter_hook_espresso_admin_question_response', trim( $_POST[ $question->question_type . '_' . $question->q_id ][$i] ), $question );
 								$post_val .= $pval . ",";
 							}
 							$post_val = ee_sanitize_value( substr( stripslashes( $post_val ), 0, -1 ));
@@ -374,7 +375,7 @@ function edit_attendee_record() {
 						$where_format = array( '%d', '%d' );
 						// run the update
 						$upd_success = $wpdb->update( EVENTS_ANSWER_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
-						//echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//						echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 					} else {
 						// new answer
@@ -387,7 +388,7 @@ function edit_attendee_record() {
 						$set_format = array( '%s', '%d', '%d', '%s'  );
 						// run the insert
 						$upd_success = $wpdb->insert( EVENTS_ANSWER_TABLE, $set_cols_and_values, $set_format );
-						//echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+//						echo '<h4>INSERlast_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 					}				
 				}
@@ -557,7 +558,7 @@ function edit_attendee_record() {
 									<?php 
 									
 									echo $price_type_select;
-									$price_type_select_notice = '<div style="width:80%;" class="red_text">'.__('Please Note: Changing the price type will not affect "Attendee Ticket Fees" on the right side of this page. Price changes will need to be udpated manually.', 'event_espresso').'</div>';
+									$price_type_select_notice = '<div style="width:80%;" class="red_text">'.__('Please Note: Changing the price type will not affect "Attendee Ticket Fees" on the right side of this page. Price changes will need to be updated manually.', 'event_espresso').'</div>';
 									
 									?>
 									

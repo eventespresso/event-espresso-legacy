@@ -53,16 +53,18 @@ function espresso_get_total_cost($payment_data) {
 		$payment_data['attendee_session']=$session_id;
 	}
 	//find all the attendee rows
-	$sql = "SELECT a.final_price, a.quantity FROM " . EVENTS_ATTENDEE_TABLE . " a ";
+	$sql = "SELECT a.final_price, a.quantity, a.amount_pd FROM " . EVENTS_ATTENDEE_TABLE . " a ";
 	$sql .= " WHERE a.attendee_session='" . $payment_data['attendee_session'] . "' ORDER BY a.id ASC";
 	$tickets = $wpdb->get_results($sql, ARRAY_A);
 	$total_cost = 0;
 	$total_quantity = 0;
+	$amount_pd = 0;
 	
 	//sum up their final_prices, as this should already take into account discounts
 	foreach ($tickets as $ticket) {
 		$total_cost += $ticket['quantity'] * $ticket['final_price'];
 		$total_quantity += $ticket['quantity'];
+		$amount_pd += $ticket['amount_pd'];
 	}
 	
 //	if (!empty($tickets[0]['coupon_code_price'])) {
@@ -77,6 +79,8 @@ function espresso_get_total_cost($payment_data) {
 	
 	$payment_data['total_cost'] = number_format( $total_cost, 2, '.', '' );
 	$payment_data['quantity'] = $total_quantity;
+	$payment_data['amount_pd'] = number_format( $amount_pd, 2, '.', '' );
+	$payment_data['amount_owed'] = number_format( $total_cost-$amount_pd, 2, '.', '');
 	//printr( $payment_data, '$payment_data' );
 	return $payment_data;
 }
@@ -192,7 +196,7 @@ function event_espresso_txn() {
 		if( espresso_return_reg_id() == false || $payment_data['registration_id'] != espresso_return_reg_id()) {
 			wp_die(__('There was a problem finding your Registration ID', 'event_espresso'));
 		}
-		if ( $payment_data['payment_status'] != 'Completed' && $payment_data['payment_status'] != 'Refund' ) {
+		if ( $payment_data['amount_owed'] > 0.00 && $payment_data['payment_status'] != 'Refund' ) {
 			$payment_data = apply_filters('filter_hook_espresso_transactions_get_payment_data', $payment_data);
 			espresso_log::singleton()->log(array('file' => __FILE__, 'function' => __FUNCTION__, 'status' => 'Payment for: '. $payment_data['lname'] . ', ' . $payment_data['fname'] . '|| registration id: ' . $payment_data['registration_id'] . '|| transaction details: ' . (isset($payment_data['txn_details']) ? $payment_data['txn_details'] : '')));
 
@@ -211,7 +215,7 @@ function event_espresso_txn() {
 	}
 	$_REQUEST['page_id'] = $org_options['return_url'];
 	//include payment_page as it contains the next function we're going to call
-	require_once("includes/process-registration/payment_page.php"); 
+	require_once(EVENT_ESPRESSO_INCLUDES_DIR . "process-registration/payment_page.php"); 
 	event_espresso_clear_session_of_attendee($payment_data['attendee_session']);
 	ee_init_session();
 

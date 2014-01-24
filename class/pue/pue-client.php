@@ -395,8 +395,7 @@ class PluginUpdateEngineChecker {
 			//Trigger the check via Cron
 			add_filter('cron_schedules', array($this, '_addCustomSchedule'));
 			if ( !wp_next_scheduled($cronHook) && !defined('WP_INSTALLING') ) {
-				$scheduleName = 'every' . $this->checkPeriod . 'hours';
-				wp_schedule_event(time(), $scheduleName, $cronHook);
+				wp_schedule_event(time(), 'daily', $cronHook);
 			}
 			add_action($cronHook, array($this, 'checkForUpdates'));
 			
@@ -412,23 +411,6 @@ class PluginUpdateEngineChecker {
 		add_action( "wp_ajax_".$this->dismiss_upgrade, array($this, 'dashboard_dismiss_upgrade')); 
 	}
 	
-	
-	/**
-	 * Add our custom schedule to the array of Cron schedules used by WP.
-	 * 
-	 * @param array $schedules
-	 * @return array
-	 */
-	function _addCustomSchedule($schedules){
-		if ( $this->checkPeriod && ($this->checkPeriod > 0) ){
-			$scheduleName = 'every' . $this->checkPeriod . 'hours';
-			$schedules[$scheduleName] = array(
-				'interval' => $this->checkPeriod * 3600, 
-				'display' => sprintf('Every %d hours', $this->checkPeriod),
-			);
-		}		
-		return $schedules;
-	}
 
 
 	function hook_into_wp_update_api() {
