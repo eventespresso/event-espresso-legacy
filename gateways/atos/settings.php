@@ -12,9 +12,54 @@ function event_espresso_atos_payment_settings() {
 		$settings['language'] = $_POST['language'];
 		$settings['payment_means'] = $_POST['payment_means'];
 		$settings['debug_mode'] = $_POST['debug_mode'];
+		
+		$file = file_get_contents(dirname(__FILE__) . "/" . $settings["provider"] . "/pathfile");
+		$lines = explode("\n", $file);
+		$new_file = "";
+		foreach ($lines as $line) {
+			if (empty($line[0])) {
+				continue;
+			} elseif ($line[0] == "#") {
+				$new_file .= $line . "\n";
+				continue;
+			}
+			$vars = explode("!", $line);
+			switch ($vars[0]) {
+				case "DEBUG":
+					if ($settings['debug_mode']) {
+						$new_file .= "DEBUG!YES!\n";
+					} else {
+						$new_file .= "DEBUG!NO!\n";
+					}
+					break;
+
+				case "D_LOGO":
+					if (dirname(__FILE__) == EVENT_ESPRESSO_GATEWAY_DIR."atos") {
+						$url = EVENT_ESPRESSO_GATEWAY_URL."atos/";
+					} else {
+						$url = EVENT_ESPRESSO_PLUGINFULLURL."gateways/atos/";
+					}
+					$new_file .= "D_LOGO!" . $url . "logos/!\n";
+					break;
+
+				case "F_DEFAULT":
+					$new_file .= "F_DEFAULT!" . dirname(__FILE__) . "/" . $settings["provider"] . "/parmcom." . $settings["provider"] . "!\n";
+					break;
+
+				case "F_PARAM":
+					$new_file .= "F_PARAM!" . dirname(__FILE__) . "/" . $settings["provider"] . "/parmcom!\n";
+					break;
+
+				case "F_CERTIFICATE":
+					$new_file .= "F_CERTIFICATE!" . dirname(__FILE__) . "/" . $settings["provider"] . "/certif!\n";
+					break;
+			}
+		}
+		$result = file_put_contents(dirname(__FILE__) . "/" . $settings["provider"] . "/pathfile", $new_file);
+
 
 		update_option('event_espresso_atos_settings', $settings);
-		echo '<div id="message" class="updated fade"><p><strong>' . __('Authorize.net settings saved.', 'event_espresso') . '</strong></p></div>';
+		echo '<div id="message" class="updated fade"><p><strong>' . __('Atos settings saved.', 'event_espresso') . '</strong></p></div>';
 	}
 	$settings = get_option('event_espresso_atos_settings');
 	if (empty($settings)) {
@@ -70,51 +115,6 @@ function event_espresso_atos_payment_settings() {
 			update_option('event_espresso_atos_settings', $settings);
 		}
 	}
-
-
-	$file = file_get_contents(dirname(__FILE__) . "/" . $settings["provider"] . "/pathfile");
-	$lines = explode("\n", $file);
-	$new_file = "";
-	foreach ($lines as $line) {
-		if (empty($line[0])) {
-			continue;
-		} elseif ($line[0] == "#") {
-			$new_file .= $line . "\n";
-			continue;
-		}
-		$vars = explode("!", $line);
-		switch ($vars[0]) {
-			case "DEBUG":
-				if ($settings['debug_mode']) {
-					$new_file .= "DEBUG!YES!\n";
-				} else {
-					$new_file .= "DEBUG!NO!\n";
-				}
-				break;
-
-			case "D_LOGO":
-				if (dirname(__FILE__) == EVENT_ESPRESSO_GATEWAY_DIR."atos") {
-					$url = EVENT_ESPRESSO_GATEWAY_URL."atos/";
-				} else {
-					$url = EVENT_ESPRESSO_PLUGINFULLURL."gateways/atos/";
-				}
-				$new_file .= "D_LOGO!" . $url . "logos/!\n";
-				break;
-
-			case "F_DEFAULT":
-				$new_file .= "F_DEFAULT!" . dirname(__FILE__) . "/" . $settings["provider"] . "/parmcom." . $settings["provider"] . "!\n";
-				break;
-
-			case "F_PARAM":
-				$new_file .= "F_PARAM!" . dirname(__FILE__) . "/" . $settings["provider"] . "/parmcom!\n";
-				break;
-
-			case "F_CERTIFICATE":
-				$new_file .= "F_CERTIFICATE!" . dirname(__FILE__) . "/" . $settings["provider"] . "/certif!\n";
-				break;
-		}
-	}
-	$result = file_put_contents(dirname(__FILE__) . "/" . $settings["provider"] . "/pathfile", $new_file);
 
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_atos'])

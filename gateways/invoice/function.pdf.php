@@ -1,10 +1,11 @@
 <?php
-		// this temp stop gap for Euro decode issue
-		if(getCountryZoneId($org_options['organization_country']) == '2'){
-		$currency_sign = 'EUR ';
-		}else{
-		$currency_sign = html_entity_decode( $org_options[ 'currency_symbol' ], ENT_QUOTES, 'ISO-8859-15' );
-		}
+global $org_options;
+// this temp stop gap for Euro decode issue
+if(getCountryZoneId($org_options['organization_country']) == '2'){
+	$currency_sign = 'EUR ';
+}else{
+	$currency_sign = html_entity_decode( $org_options[ 'currency_symbol' ], ENT_QUOTES, 'ISO-8859-15' );
+}
 class Espresso_PDF extends Espresso_FPDF{
 	//Page header
 	function Header(){

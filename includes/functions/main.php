@@ -1012,7 +1012,11 @@ if (!function_exists('espresso_ticket_information')) {
 				$sql = $wpdb->get_results("SELECT * FROM " . EVENTS_PRICES_TABLE . " WHERE id ='" . $price_option . "'");
 				$num_rows = $wpdb->num_rows;
 				if ($num_rows > 0) {
-					return $wpdb->last_result[0]->price_type;
+					if (defined("EVENT_ESPRESSO_MEMBERS_DIR") && espresso_above_member_threshold()) {
+						return $wpdb->last_result[0]->member_price_type;
+					} else {
+						return $wpdb->last_result[0]->price_type;
+					}
 				}
 				break;
 		}

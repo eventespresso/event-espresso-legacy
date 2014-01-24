@@ -71,7 +71,7 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 				<div class="multi_regis_wrapper_attendee-<?php echo $is_primary; ?> <?php espresso_template_css_class('multi_regis_wrapper_attendee','multi_regis_wrapper_attendee'); ?>">
 					<div class="<?php espresso_template_css_class('event_display_boxes','event-display-boxes'); ?>">
 						
-						<h4 class="<?php espresso_template_css_class('section_heading','section-heading')?>"><strong><?php _e('Price Type:')?></strong><?php echo stripslashes_deep($meta['price_type']).$attendee_quantity?></h4>
+						<h4 class="<?php espresso_template_css_class('section_heading','section-heading')?>"><strong><?php _e('Price Type: ', 'event_espresso')?></strong><?php echo stripslashes_deep($meta['price_type']).$attendee_quantity?></h4>
 						<h3 class="<?php espresso_template_css_class('section_heading','section-heading')?>"><?php echo __('Attendee ', 'event_espresso') . $attendee_number?></h3>
 					<?php
 						//This will be the main attendee

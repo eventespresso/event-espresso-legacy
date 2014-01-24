@@ -1432,7 +1432,7 @@ function espresso_admin_performance($show = 0) {
 		$show_many = isset($_GET['debug_queries']);
 
 		if ($wpdb->num_queries > 500 && !$show_many)
-			$out .= "<p>" . sprintf(__('There are too many queries to show easily! <a href="%s">Show them anyway</a>', 'debug-bar'), add_query_arg('debug_queries', 'true')) . "</p>";
+			$out .= "<p>" . sprintf(__('There are too many queries to show easily! <a href="%s">Show them anyway</a>', 'event_espresso'), add_query_arg('debug_queries', 'true')) . "</p>";
 
 		$out .= '<ol class="wpd-queries">';
 		$counter = 0;
@@ -1456,13 +1456,13 @@ function espresso_admin_performance($show = 0) {
 		$out .= '</ol>';
 	} else {
 		if ($wpdb->num_queries == 0)
-			$out .= "<p><strong>" . __('There are no queries on this page.', 'debug-bar') . "</strong></p>";
+			$out .= "<p><strong>" . __('There are no queries on this page.', 'event_espresso') . "</strong></p>";
 		else
-			$out .= "<p><strong>" . __('SAVEQUERIES must be defined to show the query log.', 'debug-bar') . "</strong></p>";
+			$out .= "<p><strong>" . __('SAVEQUERIES must be defined to show the query log.', 'event_espresso') . "</strong></p>";
 	}
 
 	if (!empty($EZSQL_ERROR)) {
-		$out .= '<h3>' . __('Database Errors', 'debug-bar') . '</h3>';
+		$out .= '<h3>' . __('Database Errors', 'event_espresso') . '</h3>';
 		$out .= '<ol class="wpd-queries">';
 
 		foreach ($EZSQL_ERROR as $e) {

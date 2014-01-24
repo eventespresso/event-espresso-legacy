@@ -202,7 +202,7 @@ function copy_event( $recurrence_array = array() ){
 
 	if ( empty( $error )) {
 		$event_url = add_query_arg( array( 'action' => 'edit', 'event_id' => $event_id ), admin_url( 'admin.php?page=events' ));
-		$success[] =  __('The event','event_espresso') . ' <a href="' . $event_url . '">' . stripslashes( $event->event_name ) . '</a> ' . __('has been successfully copied.','event_espresso');
+		$success[] =  __('The event','event_espresso') . ' <a href="' . $event_url . '">' . stripslashes( $event->event_name ) . '</a> ' . __('has been successfully copied. You are now editing the copy.','event_espresso');
 	}
 
 	if ( ! empty( $success )) : 
@@ -226,5 +226,5 @@ function copy_event( $recurrence_array = array() ){
 	
 <?php	
 		endif;
-		        
+	return $new_id;
 }
