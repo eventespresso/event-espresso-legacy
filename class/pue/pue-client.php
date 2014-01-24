@@ -393,6 +393,7 @@ class PluginUpdateEngineChecker {
 		if ( $this->checkPeriod > 0 ){
 			
 			//Trigger the check via Cron
+			add_filter('cron_schedules', array($this, '_addCustomSchedule'));
 			if ( !wp_next_scheduled($cronHook) && !defined('WP_INSTALLING') ) {
 				wp_schedule_event(time(), 'daily', $cronHook);
 			}

@@ -719,7 +719,6 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 									//like the event sold out
 									return;
 								}
-
 								$tmp_registration_id = $return_data['registration_id'];
 								$notifications = $return_data['notifications'];
 
