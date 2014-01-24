@@ -192,7 +192,7 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 				 * - from a dropdown >> price_id[event_id][price_id]
 				 * - from a radio >> price_id[event_id] with a value of price_id
 				 */
-				$attendee_quantity = 1;
+				$attendee_quantity = 0;
 				
 				if ( isset( $_POST['price_id'][$event_id] )) {
 					$price_id = $_POST['price_id'][$event_id];
@@ -203,10 +203,9 @@ if (!function_exists('event_espresso_update_item_in_session')) {
 				if (is_array($price_id)) {
 					foreach ($price_id as $_price_id => $val) {
 						//assign the event type and the quantity
-						$updated_events_in_session[$event_id]['price_id'][$_price_id]['attendee_quantity'] = esc_sql($val);
+						$attendee_quantity += $updated_events_in_session[$event_id]['price_id'][$_price_id]['attendee_quantity'] = esc_sql($val);
 						$updated_events_in_session[$event_id]['price_id'][$_price_id]['price_type'] = $events_in_session[$event_id]['price_id'][$_price_id]['price_type'];
 
-						$attendee_quantity++;
 					}
 				} else if ( $price_id !== FALSE ) {
 					if (isset($price_id)) {

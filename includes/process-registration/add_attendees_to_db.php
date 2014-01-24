@@ -711,7 +711,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 
 								// ADD ATTENDEE TO DB
 								$return_data = event_espresso_add_attendees_to_db( $event_id, $session_vars, TRUE );
-								
+								if (!empty($return_data['registration_id'])) $session_vars['data']['attendee_quantity']--;
 								$tmp_registration_id = $return_data['registration_id'];
 								$notifications = $return_data['notifications'];
 
