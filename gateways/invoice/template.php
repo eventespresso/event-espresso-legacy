@@ -211,7 +211,11 @@ if (isset($invoice_payment_settings['pdf_instructions'])) {
 $payment_link = home_url() . "/?page_id=" . $org_options['return_url'] . "&r_id=" . $registration_id;
 
 $pdf->SetFont('Arial', 'BU', 20);
-$pdf->Cell(200, 20, 'Pay Online', 0, 1, 'C', 0, $payment_link); //Set payment link
+add_action( 'action_hook_espresso_invoice_payment_link', 'espresso_invoice_payment_link', 10, 2 );
+function espresso_invoice_payment_link( $pdf, $payment_link ){
+	$pdf->Cell(200, 20, __('Pay Online', 'event_espresso'), 0, 1, 'C', 0, $payment_link); //Set payment link
+}
+do_action( 'action_hook_espresso_invoice_payment_link', $pdf, $payment_link );
 
 $pdf->Output('Invoice_' . $attendee_id . '_' . $event_identifier . '.pdf', 'D');
 exit;

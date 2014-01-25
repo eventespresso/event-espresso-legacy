@@ -1186,17 +1186,7 @@ function espresso_check_data_tables() {
 		}
 	}
 	
-	// check for downgrade from 4.x+
-	foreach ( $espresso_db_update as $prev_version ) {
-		if ( $prev_version && version_compare( $prev_version, '3.2.0', '>=' )) {
-			require_once( EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions/database_install.php' ); 
-			//deactivating event espresso so that their db doesn't get messed up'
-			deactivate_event_espresso();
-			// none shall pass!!!
-			espresso_downgrade_error();
-		}
-	}
-	
+
 	// if current EE version is NOT in list of db updates, then update the db
 	if (( ! in_array( EVENT_ESPRESSO_VERSION, $espresso_db_update ))) {	
 		require_once( EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/functions/database_install.php' );
