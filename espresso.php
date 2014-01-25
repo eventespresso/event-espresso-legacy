@@ -1,16 +1,12 @@
 <?php
 /*
-  Plugin Name: Event Espresso (evertec)
+  Plugin Name: Event Espresso
   Plugin URI: http://eventespresso.com/
   Description: Out-of-the-box Events Registration integrated with PayPal IPN for your WordPress blog/website. <a href="admin.php?page=support" >Support</a>
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-<<<<<<< HEAD
   Version: 3.1.38-dev
-=======
-  Version: 3.1.37.0.P
->>>>>>> FET-3346-evertec-gateway
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -1306,13 +1302,3 @@ function espresso_plugin_activation_errors() {
 }
 add_action('activated_plugin', 'espresso_plugin_activation_errors'); 
 
-
-//send a get REQUEST to ourselves
-if(isset($_GET['find_our_ip'])){
-	$result = wp_remote_get('http://eventespresso.com/sandbox/gateways/?report_our_ip=true');
-	var_dump( $result);
-	die;
-}
-if(isset($_GET['report_our_ip'])){
-	echo "<b>".$_SERVER['REMOTE_ADDR']."</b>";die;
-}
