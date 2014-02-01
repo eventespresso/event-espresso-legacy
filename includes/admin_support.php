@@ -200,7 +200,7 @@ function event_espresso_support() {
 								<div class="padding">
 									<dl id="developers">
 										<dt><a href="http://www.mojo-themes.com/?referral=eventespresso.com" target="_blank">MOJO Themes</a></dt>
-										<dd>It's simple really ‚Äì MOJO themes is a marketplace for everyone to <strong><em>buy</em></strong> or <strong><em>sell</em></strong> themes and templates.</dd>
+										<dd>It's simple really‚ MOJO themes is a marketplace for everyone to <strong><em>buy</em></strong> or <strong><em>sell</em></strong> themes and templates.</dd>
 										<dt><a href="http://www.appthemes.com/cp/go.php?r=12413&i=l0" target="_blank">AppThemes</a></dt>
 										<dd>AppThemes are built for businesses of all sizes and run on WordPress so  you don't have to worry about the headache of setting up a complex  server environment.</dd>
 										<dt><a href="http://www.woothemes.com/amember/go.php?r=28039&amp;i=b16" target="_blank">WooThemes</a></dt>
