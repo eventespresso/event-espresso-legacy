@@ -63,6 +63,7 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 		$pieces = explode('-', $month_range, 3);
 		$year_r = $pieces[0];
 		$month_r = $pieces[1];
+		$days_this_month = date('t', strtotime($month_range));
 	}
 
 	//Check if the venue manager is turned on
