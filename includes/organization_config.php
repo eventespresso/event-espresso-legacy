@@ -131,7 +131,7 @@ function organization_config_mnu() {
 	$ueip_optin = get_option('ee_ueip_optin');
 	$plugin_basename = plugin_basename(EVENT_ESPRESSO_PLUGINPATH);
 	$verify_fail = get_option( 'pue_verification_error_' . $plugin_basename );
-	$site_license_key_verified = !empty( $verify_fail ) ? '<span class"pue-sl-not-verified"></span>' : '<span class="pue-sl-verified"></span>';/**/ 
+	$site_license_key_verified = $verify_fail || !empty( $verify_fail ) ? '<span class"pue-sl-not-verified"></span>' : '<span class="pue-sl-verified"></span>';/**/ 
 	$values = array(
 			array('id' => 'Y', 'text' => __('Yes', 'event_espresso')),
 			array('id' => 'N', 'text' => __('No', 'event_espresso')));
