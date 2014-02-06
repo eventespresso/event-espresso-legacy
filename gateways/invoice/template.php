@@ -112,8 +112,8 @@ if (isset($invoice_payment_settings['pdf_title'])) {
 $pdf->AddPage();
 //Create the top right of invoice below header
 $pdf->SetFont('Times', '', 12);
-$pdf->Cell(180, 0, __('Date: ', 'event_espresso') . date(get_option('date_format')), 0, 1, 'R'); //Set invoice date
-$pdf->Cell(180, 10, __('Primary Attendee ID: ', 'event_espresso') . $attendee_id, 0, 0, 'R'); //Set Invoice number
+$pdf->Cell(180, 0, pdftext(__('Date: ', 'event_espresso') . date(get_option('date_format'))), 0, 1, 'R'); //Set invoice date
+$pdf->Cell(180, 10, pdftext(__('Primary Attendee ID: ', 'event_espresso') . $attendee_id), 0, 0, 'R'); //Set Invoice number
 $pdf->Ln(0);
 
 //Set the top left of invoice below header
@@ -133,14 +133,14 @@ $pdf->Ln(5);
 
 //Set the biiling information
 $pdf->SetFont('Times', 'B', 12);
-$pdf->Cell(50, 5, __('Bill To: ', 'event_espresso'), 0, 1, 'L'); //Set biil to
+$pdf->Cell(50, 5, pdftext(__('Bill To: ', 'event_espresso')), 0, 1, 'L'); //Set biil to
 $pdf->SetFont('Times', '', 12);
 $pdf->Cell(50, 5, pdftext($attendee_first . ' ' . $attendee_last), 0, 1, 'L'); //Set attendee name
-$pdf->Cell(50, 5, $attendee_email, 0, 1, 'L'); //Set attendee email
+$pdf->Cell(50, 5, pdftext($attendee_email), 0, 1, 'L'); //Set attendee email
 //Set attendee address
-$attendee_address != '' ? $pdf->Cell(100, 5, $attendee_address, 0, 1, 'L') : '';
+$attendee_address != '' ? $pdf->Cell(100, 5, pdftext($attendee_address), 0, 1, 'L') : '';
 $pdf->Cell(100, 5, (pdftext($attendee_city != '' ? $attendee_city : '') . ($attendee_state != '' ? ' ' . $attendee_state : '')), 0, 1, 'L');
-$attendee_zip != '' ? $pdf->Cell(50, 5, $attendee_zip, 0, 1, 'L') : '';
+$attendee_zip != '' ? $pdf->Cell(50, 5, pdftext($attendee_zip), 0, 1, 'L') : '';
 
 $pdf->Ln(10);
 
@@ -174,7 +174,7 @@ foreach ($registration_ids as $reg_id) {
 		$event_identifier = $tmp_attendee["event_identifier"];
 	}
 }
-$header = array(__('Event & Attendee', 'event_espresso'), __('Quantity', 'event_espresso'), __('Per Unit', 'event_espresso'), __('Sub total', 'event_espresso'));
+$header = array(pdftext(__('Event & Attendee', 'event_espresso')), pdftext(__('Quantity', 'event_espresso')), pdftext(__('Per Unit', 'event_espresso')), pdftext(__('Sub total', 'event_espresso')));
 $w = array(100, 25, 30, 30);
 $alling = array('L', 'L', 'C', 'C', 'C');
 $left = 100 + 25 + 30;
@@ -184,8 +184,8 @@ $pdf->ImprovedTable($header, $attendees, $w, $alling);
 
 $pdf->Ln();
 //if ( $total_amount_pd != $total_cost ) {
-$pdf->InvoiceTotals(__('Total:', 'event_espresso'), $total_cost, $left, $right);
-$text = __('Amount Paid:', 'event_espresso');
+$pdf->InvoiceTotals(pdftext(__('Total:', 'event_espresso')), $total_cost, $left, $right);
+$text = pdftext(__('Amount Paid:', 'event_espresso'));
 $pdf->InvoiceTotals($text, $total_amount_pd, $left, $right);
 //	$discount = $total_orig_cost - $total_cost;
 //	if ($discount > 0) {
@@ -196,7 +196,7 @@ $pdf->InvoiceTotals($text, $total_amount_pd, $left, $right);
 //	}
 //}
 $total_owing = $total_cost - $total_amount_pd;
-$text = __("Total due:", 'event_espresso');
+$text = pdftext(__("Total due:", 'event_espresso'));
 $pdf->InvoiceTotals($text, $total_owing, $left, $right);
 $pdf->Ln(10);
 
@@ -213,7 +213,7 @@ $payment_link = home_url() . "/?page_id=" . $org_options['return_url'] . "&r_id=
 $pdf->SetFont('Arial', 'BU', 20);
 add_action( 'action_hook_espresso_invoice_payment_link', 'espresso_invoice_payment_link', 10, 2 );
 function espresso_invoice_payment_link( $pdf, $payment_link ){
-	$pdf->Cell(200, 20, __('Pay Online', 'event_espresso'), 0, 1, 'C', 0, $payment_link); //Set payment link
+	$pdf->Cell(200, 20, pdftext(__('Pay Online', 'event_espresso')), 0, 1, 'C', 0, $payment_link); //Set payment link
 }
 do_action( 'action_hook_espresso_invoice_payment_link', $pdf, $payment_link );
 
