@@ -62,9 +62,9 @@ function update_form_with_payment_option_selection(){
 		jQuery('#evertec-bank-info-dv').hide();
 		
 		if(is_credit_card_method(method)){
-				jQuery('#evertec-credit-card-info-dv').toggle('slow');
+				jQuery('#evertec-credit-card-info-dv').show('slow');
 		}else if(is_bank_method(method)){
-				jQuery('#evertec-bank-info-dv').toggle('slow');
+				jQuery('#evertec-bank-info-dv').show('slow');
 		}
 		jQuery('.event_form_submit').css('display','block');
 }
