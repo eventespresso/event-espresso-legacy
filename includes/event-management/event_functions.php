@@ -46,7 +46,7 @@ function event_espresso_time_editor($event_id = 0) {
         $times = $wpdb->get_results("SELECT * FROM " . EVENTS_START_END_TABLE . " WHERE event_id = '" . $event_id . "' ORDER BY id");
         if ($wpdb->num_rows > 0) {
             foreach ($times as $time) {
-                echo '<li><p><label for="add-start-time">' . __('Start', 'event_espresso') . ' ' . $time_counter++ . '</label><input size="10"  type="text" id="add-start-time" name="start_time[]" value="' . event_date_display($time->start_time, get_option('time_format')) . '" /></p><p><label for="add-end-time"> ' . __('End', 'event_espresso') . '</label> <input size="10"  type="text" id="add-end-time" name="end_time[]" value="' . event_date_display($time->end_time, get_option('time_format')) . '"></p>' . (isset($org_options['time_reg_limit']) && $org_options['time_reg_limit'] == 'Y' ? '<p><label>'.__('Qty', 'event_espresso') . '</label> <input size="3"  type="text" name="time_qty[]" value="' . $time->reg_limit . '"></p><p><em class="important">'.__('Event time slot quantities should only be set for events where group registrations are disabled.', 'event_espresso').'</em></p>' : '') . '<p><input class="remove-item xtra-time" type="button" value="Remove" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);" /></p></li>';
+                echo '<li><p><label for="add-start-time">' . __('Start', 'event_espresso') . ' ' . $time_counter++ . '</label><input size="10"  type="text" id="add-start-time" name="start_time[]" value="' . event_date_display($time->start_time, get_option('time_format')) . '" /></p><p><label for="add-end-time"> ' . __('End', 'event_espresso') . '</label> <input size="10"  type="text" id="add-end-time" name="end_time[]" value="' . event_date_display($time->end_time, get_option('time_format')) . '"></p><p><label for="time_slot_desc"> ' . __('Description (max. 30 characters)', 'event_espresso') . '</label> <input size="30"  type="text" id="time_slot_desc" name="time_desc[]" value="' . htmlentities(stripslashes_deep($time->description)) . '"></p>' . (isset($org_options['time_reg_limit']) && $org_options['time_reg_limit'] == 'Y' ? '<p><label>'.__('Qty', 'event_espresso') . '</label> <input size="3"  type="text" name="time_qty[]" value="' . $time->reg_limit . '"></p><p><em class="important">'.__('Event time slot quantities should only be set for events where group registrations are disabled.', 'event_espresso').'</em></p>' : '') . '<p><input class="remove-item xtra-time" type="button" value="Remove" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);" /></p></li>';
             }
         } else {
             ?>
@@ -62,6 +62,12 @@ function event_espresso_time_editor($event_id = 0) {
 				<?php _e('End', 'event_espresso'); ?>
 			</label>
 			<input size="10"  type="text" id="add-end-time" name="end_time[]" />
+		</p>
+		<p>
+			<label for="time_slot_desc">
+				<?php _e('Description (max. 30 characters)', 'event_espresso'); ?>
+			</label>
+			<input size="30"  type="text" id="time_slot_desc" name="time_desc[]" />
 		</p>
 		<?php echo (isset($org_options['time_reg_limit']) && $org_options['time_reg_limit'] == 'Y' ? '<p><label>'.__('Qty', 'event_espresso') . '</label> <input size="3"  type="text" name="time_qty[]" /></p><p><em class="important">'.__('Event time slot quantities should only be set for events where group registrations are disabled.', 'event_espresso').'</em></p>' : '') ?> </li>
 	<?php
@@ -79,7 +85,7 @@ function event_espresso_time_editor($event_id = 0) {
         var counter = <?php echo $time_counter++ ?>;
         function addTimeInput(divName){
             var newdiv = document.createElement('li');
-            newdiv.innerHTML = "<p><label for='add-start-time-"+ (counter) +"'><?php _e('Start', 'event_espresso'); ?> " + (counter) + "</label> <input type='text'id='add-start-time-"+ (counter) +"' name='start_time[]'></p><p><label for='add-end-time-"+ (counter) +"'> <?php _e('End', 'event_espresso'); ?>:</label> <input type='text' id='add-end-time-"+ (counter) +"' name='end_time[]'></p><?php echo $org_options['time_reg_limit'] == 'Y' ? '<p><label>'.__('Qty', 'event_espresso') . "</label> <input type='text'  size='3' name='time_qty[]'></p>" : ''; ?><p><input class='remove-this xtra-time' id='remove-added-time' type='button' value='Remove' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'/></p>";
+            newdiv.innerHTML = "<p><label for='add-start-time-"+ (counter) +"'><?php _e('Start', 'event_espresso'); ?> " + (counter) + "</label> <input type='text' id='add-start-time-"+ (counter) +"' name='start_time[]'></p><p><label for='add-end-time-"+ (counter) +"'> <?php _e('End', 'event_espresso'); ?>:</label> <input type='text' id='add-end-time-"+ (counter) +"' name='end_time[]'></p><p><label for='time_slot_desc-"+ (counter) +"'><?php _e('Description (max. 30 characters)', 'event_espresso'); ?> " + (counter) + "</label> <input size='30' type='text' id='time_slot_desc-"+ (counter) +"' name='time_desc[]'></p><?php echo $org_options['time_reg_limit'] == 'Y' ? '<p><label>'.__('Qty', 'event_espresso') . "</label> <input type='text'  size='3' name='time_qty[]'></p>" : ''; ?><p><input class='remove-this xtra-time' id='remove-added-time' type='button' value='Remove' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'/></p>";
             document.getElementById(divName).appendChild(newdiv);
             counter++;
         }
@@ -105,7 +111,7 @@ function event_espresso_multi_price_update($event_id) {
                         $price->price_type = "General Admission";
                     if (!isset($price->event_cost))
                         $price->event_cost = "0.00";
-                    echo '<p class="event_form_field ee_fem_form_field dynamic-price-input-field"><label class="dynamic-price-input-label price-name" for="add-price-type-' . $price_counter++ . '">' . __('Name', 'event_espresso') . ' ' . $price_counter++ . '</label> <input class="dynamic-price-input price-name-input price-input" id="add-price-type' . $price_counter++ . '" type="text" name="price_type[]" value="' . stripslashes_deep($price->price_type) . '" /></p> ';
+                    echo '<p class="event_form_field ee_fem_form_field dynamic-price-input-field"><label class="dynamic-price-input-label price-name" for="add-price-type-' . $price_counter++ . '">' . __('Name', 'event_espresso') . ' ' . $price_counter++ . '</label> <input class="dynamic-price-input price-name-input price-input" id="add-price-type' . $price_counter++ . '" type="text" name="price_type[]" value="' . htmlentities(stripslashes_deep($price->price_type)) . '" /></p> ';
                     echo '<p class="event_form_field ee_fem_form_field dynamic-price-input-field"><label class="dynamic-price-input-label" for="add-price">' . __('Price', 'event_espresso') . ' ' . $org_options['currency_symbol'] . '</label><input class="dynamic-price-input price-input" id="add-price" type="text" name="event_cost[]" value="' . $price->event_cost . '" /></p> ';
 
                     echo '<p class="event_form_field ee_fem_form_field dynamic-price-input-field"><label class="dynamic-price-input-label" for="add-surcharge">' . __('Surcharge', 'event_espresso') . '</label> <input class="dynamic-price-input price-input" id="add-surcharge" type="text"  name="surcharge[]" value="' . $price->surcharge . '" /></p> ';

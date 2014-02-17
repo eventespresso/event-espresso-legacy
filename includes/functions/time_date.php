@@ -207,7 +207,7 @@ if (!function_exists('event_espresso_time_dropdown')) {
             foreach ($event_times as $time) {
                 $html .= ' <span class="'.espresso_template_css_class('event_time_value','span_event_time_value', false).'">' . event_date_display($time->start_time, get_option('time_format')) . '</span>';
                 $html .= $label == 1 ? '<br/><span class="'.espresso_template_css_class('event_time_label','span_event_time_label', false).'">' . __('End Time: ', 'event_espresso') . '</span>' : __(' to ', 'event_espresso');
-                $html .= ' <span class="'.espresso_template_css_class('event_time_value','span_event_time_value', false).'">' . event_date_display($time->end_time, get_option('time_format')) . '</span>';
+                $html .= ' <span class="'.espresso_template_css_class('event_time_value','span_event_time_value', false).'">' . event_date_display($time->end_time, get_option('time_format')) . ' ' . $time->description . '</span>';
                 $html .= '<input type="hidden" name="start_time_id' . $multi_name_adjust . '" id="start_time_id_' . $time->id . '" value="' . $time->id . '" />';
             }
         } else if ($wpdb->num_rows > 1) {//If more than one result, then display the dropdown
@@ -224,11 +224,11 @@ if (!function_exists('event_espresso_time_dropdown')) {
                         //if (($time->reg_limit == 0)||($time->reg_limit > 0 && $time->reg_limit >=$num_attendees))
                         //If enough spaces are available, then show this time slot
                         if ($time->available_spaces > 0)
-                            $html .= '<option' . $selected . ' value="' . $time->id . '">' . event_date_display($time->start_time, get_option('time_format')) . ' - ' . event_date_display($time->end_time, get_option('time_format')) . " ($time->available_spaces " . __('available spaces', 'event_espresso') . ")" . '</option>';
+                            $html .= '<option' . $selected . ' value="' . $time->id . '">' . event_date_display($time->start_time, get_option('time_format')) . ' - ' . event_date_display($time->end_time, get_option('time_format')) . " ($time->available_spaces " . __('available spaces', 'event_espresso') . ")" . ' ' . $time->description . '</option>';
                         break;
                     case 'N'://If time slots are not controlled by registration limits, then we show the default dropdown list of times.
                     default:
-                        $html .= '<option ' . $selected . ' value="' . $time->id . '">' . event_date_display($time->start_time, get_option('time_format')) . ' - ' . event_date_display($time->end_time, get_option('time_format')) . '</option>';
+                        $html .= '<option ' . $selected . ' value="' . $time->id . '">' . event_date_display($time->start_time, get_option('time_format')) . ' - ' . event_date_display($time->end_time, get_option('time_format')) . ' ' . $time->description . '</option>';
                         break;
                 }
             }

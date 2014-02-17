@@ -715,6 +715,7 @@ function events_data_tables_install() {
 				start_time varchar(10) DEFAULT NULL,
 				end_time varchar(10) DEFAULT NULL,
 				reg_limit int (15) DEFAULT '0',
+				description varchar(30) DEFAULT NULL,
 				PRIMARY KEY  (id),
 			  	KEY event_id (event_id)";
 	event_espresso_run_install($table_name, '', $sql);
