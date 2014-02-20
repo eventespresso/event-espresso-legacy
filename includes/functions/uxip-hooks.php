@@ -5,6 +5,9 @@ if (!defined('EVENT_ESPRESSO_VERSION') )
  * This file just contains all the uxip tracking stuff that are hooked into various addons.
  */
 
+if ( !defined( 'MONTH_IN_SECONDS' ) )
+	define('MONTH_IN_SECONDS', WEEK_IN_SECONDS * 4);
+
 /**
  * Espresso Calendar tracking
  */
