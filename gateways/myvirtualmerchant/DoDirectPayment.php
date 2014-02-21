@@ -1,6 +1,4 @@
 <?php
-//demo https://demo.myvirtualmerchant.com/VirtualMerchantDemo/process.do
-//prod https://www.myvirtualmerchant.com/VirtualMerchant/process.do 
 
 function espresso_transactions_myvirtualmerchant_get_attendee_id($attendee_id) {
 	if (!empty($_REQUEST['id'])) {
@@ -10,12 +8,35 @@ function espresso_transactions_myvirtualmerchant_get_attendee_id($attendee_id) {
 }
 
 function espresso_process_myvirtualmerchant($payment_data) {
+
 	extract($payment_data);
 
 	$myvirtualmerchant_settings = get_option('event_espresso_myvirtualmerchant_settings');
-
-	$sandbox = $myvirtualmerchant_settings['myvirtualmerchant_use_sandbox'];
-
+	$endpoint = $myvirtualmerchant_settings['myvirtualmerchant_use_sandbox'] ? 'https://demo.myvirtualmerchant.com/VirtualMerchantDemo/process.do' : 'https://www.myvirtualmerchant.com/VirtualMerchant/process.do';
+	
+	$request = array(
+		'ssl_transaction_type'=>'ccsale',
+		'ssl_merchant_id'=>$myvirtualmerchant_settings['ssl_merchant_id'],
+		'ssl_user_id'=>$myvirtualmerchant_settings['ssl_user_id'],
+		'ssl_pin'=>$myvirtualmerchant_settings['ssl_pin'],
+		'ssl_show_form'=>'false',//we just want to process the payment, not get the HTML to show a form or anything
+		'ssl_card_number'=>$_POST['card_num'],
+		'ssl_exp_date'=>$_POST['expmonth'] . $_POST['expyear'],
+		'ssl_amount'=>$payment_data['total_cost'],
+		'ssl_avs_zip'=>$_POST['zip'],
+		'ssl_avs_address'=>$_POST['address'].", ".$_POST['city'].", ".$_POST['state'],
+		'ssl_cvv2cvc2'=>$_POST['cvv'],
+		'ssl_invoice_number'=>$_POST['invoice'],
+//		'ssl_transaction_currency'=>$myvirtualmerchant_settings['currency_format'],
+		'ssl_result_format'=>'ASCII',
+		
+	);
+	$result = wp_remote_post($endpoint, array(
+		'method'=>'POST',
+		'body'=>$request));
+	echo $result['body'];
+	var_dump($result);die;
+	
 	$payment_data['payment_status'] = 'Incomplete';
 	$payment_data['txn_type'] = 'MyVirtualMerchant';
 	$payment_data['txn_id'] = 0;

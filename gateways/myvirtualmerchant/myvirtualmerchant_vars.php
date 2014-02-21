@@ -85,7 +85,7 @@ function espresso_display_myvirtualmerchant($data) {
 					        <label for="exp-year"><?php _e('Expiration Year', 'event_espresso'); ?></label>
 					        <select id="ppp_exp-year" name ="expyear" class="med required">
 										<?php
-										$curr_year = date("Y");
+										$curr_year = date("y");
 										for ($i = 0; $i < 10; $i++) {
 											$disp_year = $curr_year + $i;
 											echo "<option value='$disp_year'>$disp_year</option>";
