@@ -116,7 +116,7 @@ function event_espresso_display_myvirtualmerchant_settings() {
 						</li>
 						<li>
 							<label for="currency_format">
-								<?php _e('Select the Currency for Your Country', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=currency_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+								<?php _e('Select the Currency for Your Country', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=myvirtualmerchant_currency_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<select name="currency_format">
 								<option value="<?php echo $myvirtualmerchant_settings['currency_format']; ?>"><?php echo $myvirtualmerchant_settings['currency_format']; ?></option>
@@ -218,8 +218,10 @@ function event_espresso_display_myvirtualmerchant_settings() {
 							</label>
 							<input type="text" name="header" size="35" value="<?php echo $myvirtualmerchant_settings['header']; ?>">
 						</li>
+						<li><a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=myvirtualmerchant_fields"><?php	_e("Want Event Names and Registration IDs to appear in your Virtual Terminal? Read this", 'event_espresso');?><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a></li>
 					</ul>
 				</td>
+				
 			</tr>
 		</table>
 		<?php 
@@ -238,10 +240,20 @@ function event_espresso_display_myvirtualmerchant_settings() {
 		<hr />
 		<p><?php _e('The My Virtual Merchant demo site is a testing environment that is a duplicate of the live site, except that no real money changes hands. The Demo Site allows you to test your entire integration before submitting transactions to the live environment.', 'event_espresso'); ?></p>
 	</div>
-	<div id="currency_info" style="display:none">
+	<div id="myvirtualmerchant_currency_info" style="display:none">
 		<h2><?php _e('My Virtual Merchant Currency', 'event_espresso'); ?></h2>
-		<p><?php _e('PayPal uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, select the currency you wish to use. The dropdown lists all currencies that PayPal (currently) supports.', 'event_espresso'); ?> </p>
+		<p><?php _e('My Virtual Merchant uses 3-character ISO-4217 codes for specifying currencies in fields and variables. The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, you first NEED TO ENABLE MULTI-CURRENCY in your My Virtual Merchant terminal, then select the currency you wish to use in Event espresso.', 'event_espresso'); ?> </p>
 	</div>
+<div id="myvirtualmerchant_fields" style="display:none">
+	<h2><?php		_e("My Virtual Merchant Custom Fields", 'event_espresso');?></h2>
+	<p><?php		printf(__("When a payment is made using the My Virtual Merchant gateway, Event Espresso sends the event's name and registration ID along with the payment information to My Virtual Merchant as part of the description, and as seperate custom fields. However, My Virtual Merchant's terminal, by default, doesn't show the description, or record the seperate custom fields. To enable these features, login to %s My Virtual Merchant Terminal%s, and navigate to the %s Payment Fields section%s and do the following...", 'event_espresso'),"<a href='https://www.myvirtualmerchant.com/VirtualMerchant/'>","</a>","<a href='https://docs.google.com/a/eventespresso.com/file/d/0B5P8GXTvZgfMZ1ZZUjE2UmFnQ00/edit?usp=drivesdk'>","</a>");?></p>
+	<h3><?php		_e("To Show the Description in your Virtual Terminal...", 'event_espresso');?></h3>
+	<p><?php printf(__("From the Payment Fields page, %s click on 'Description'%s, then %s set the Description field to 'Show in Virtual Terminal'%s (and possibly make it a required field so you can search by it your Virtual Terminal). ", "event_espresso"),"<a href='https://docs.google.com/a/eventespresso.com/file/d/0B5P8GXTvZgfMeVFZcmZVZXd3YlU/edit?usp=drivesdk'>","</a>","<a href='https://docs.google.com/a/eventespresso.com/file/d/0B5P8GXTvZgfMMjQ4cFJGRG5Fa1k/edit?usp=drivesdk'>","</a>");	?></p>
+	<h3><?php		_e("To Show the Event Name and Registration ID in your Virtual Terminal...", 'event_espresso');?></h3>
+	<p><?php		printf(__("From the Payment Fields page, %sadd a new field named 'event_name'%s, and then %sadd a new field named 'registration_id'%s (and have them show in your Virtual Terminal; all other fields are optional).", "event_espresso"),"<a href='https://docs.google.com/a/eventespresso.com/file/d/0B5P8GXTvZgfMS3cxZHhaS0hSV1k/edit?usp=drivesdk'>","</a>","<a href='https://docs.google.com/a/eventespresso.com/file/d/0B5P8GXTvZgfMdzlDUGlxZXY4Slk/edit?usp=drivesdk'>","</a>");?></p>
+	<br/>
+	<p><?php		printf(__("After you are done both the above steps, all new transactions will %srecord the event name and registration id, and show the description%s", 'event_espresso'),"<a href='https://docs.google.com/a/eventespresso.com/file/d/0B5P8GXTvZgfMckVDaXFiRkl1ME0/edit?usp=drivesdk'>","</a>");?></p>
+</div>
 	<?php
 }
 
