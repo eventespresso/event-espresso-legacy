@@ -9,7 +9,6 @@ function espresso_display_myvirtualmerchant($data) {
 	wp_enqueue_script( 'myvirtualmerchant' );		
 	
 $countries = array(
-	''=>'Please select...',
 'AFG'=>'Afghanistan','LBR'=>'Liberia', 
 'ALA'=>'Åland Islands', 'LBY'=>'Libya', 
 'ALB'=>'Albania', 'LIE'=>'Liechtenstein', 
@@ -197,7 +196,7 @@ $countries = array(
 						<p>
 							
 					        <label for="country"><?php _e('Country', 'event_espresso'); ?></label>
-							<?php ksort($countries);?>
+							<?php asort($countries); $countries = array(''=>  __("Please select...", 'event_espresso')) + $countries;?>
 							<select name="country" id="mvm_country" class="required">
 								<?php foreach ($countries as $iso=>$name){
 									?><option value="<?php echo $iso?>" <?php echo $iso == $country || $name == $country ? 'selected="selected"':''?>><?php echo $name?></option><?php
