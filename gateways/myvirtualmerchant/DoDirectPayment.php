@@ -32,12 +32,16 @@ function espresso_process_myvirtualmerchant($payment_data) {
 		'ssl_avs_zip'=>$_POST['zip'],
 		'ssl_cvv2cvc2'=>$_POST['cvv'],
 		'ssl_invoice_number'=>$_POST['invoice'],
-//		'ssl_transaction_currency'=>$myvirtualmerchant_settings['currency_format'],
+//		
 		'ssl_description'=>  sprintf(__("Registration %s for event %s", "event_espresso"),$payment_data['registration_id'],$payment_data['event_name']),
 		'event_name'=>$payment_data['event_name'],
 		'registration_id'=>$payment_data['registration_id']
 		
 	);
+	//if they have mutli-currency enabled in my virtual merchant, use it
+	if($myvirtualmerchant_settings['use_custom_currency']){
+		$request['ssl_transaction_currency'] = $myvirtualmerchant_settings['currency_format'];
+	}
 	$result = wp_remote_post($endpoint, array(
 		'method'=>'POST',
 		'body'=>$request));

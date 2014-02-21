@@ -8,6 +8,7 @@ function event_espresso_myvirtualmerchant_payment_settings() {
 		$myvirtualmerchant_settings['ssl_merchant_id'] = $_POST['ssl_merchant_id'];
 		$myvirtualmerchant_settings['ssl_user_id'] = $_POST['ssl_user_id'];
 		$myvirtualmerchant_settings['ssl_pin'] = $_POST['ssl_pin'];
+		$myvirtualmerchant_settings['use_custom_currency'] = empty($_POST['use_custom_currency']) ? false : true;
 		$myvirtualmerchant_settings['currency_format'] = $_POST['currency_format'];
 		$myvirtualmerchant_settings['myvirtualmerchant_use_sandbox'] = empty($_POST['myvirtualmerchant_use_sandbox']) ? false : true;
 		$myvirtualmerchant_settings['header'] = $_POST['header'];
@@ -20,6 +21,7 @@ function event_espresso_myvirtualmerchant_payment_settings() {
 		$myvirtualmerchant_settings['ssl_merchant_id'] = '';
 		$myvirtualmerchant_settings['ssl_user_id'] = '';
 		$myvirtualmerchant_settings['ssl_pin'] = '';
+		$myvirtualmerchant_settings['use_custom_currency'] = false;
 		$myvirtualmerchant_settings['currency_format'] = 'USD';
 		$myvirtualmerchant_settings['myvirtualmerchant_use_sandbox'] = false;
 		$myvirtualmerchant_settings['header'] = 'Payment Transactions by MyVirtualMerchant';
@@ -102,6 +104,15 @@ function event_espresso_display_myvirtualmerchant_settings() {
 								<?php _e('PIN', 'event_espresso'); ?>
 							</label>
 							<input type="text" name="ssl_pin" size="35" value="<?php echo $myvirtualmerchant_settings['ssl_pin']; ?>">
+						</li>
+						
+						
+						
+						<li>
+							<label for="use_custom_currency">
+								<?php _e('I have enabled Multi-Currency in My Virtual Merchant', 'event_espresso'); ?>
+							</label>
+							<input name="use_custom_currency" type="checkbox" value="1" <?php echo $myvirtualmerchant_settings['use_custom_currency'] ? 'checked="checked"' : '' ?> />
 						</li>
 						<li>
 							<label for="currency_format">
@@ -222,13 +233,13 @@ function event_espresso_display_myvirtualmerchant_settings() {
 		</p>
 	</form>
 	<div id="myvirtualmerchant_sandbox_info" style="display:none">
-		<h2><?php _e('PayPal Sandbox', 'event_espresso'); ?></h2>
-		<p><?php _e('In addition to using the PayPal Sandbox feature. The debugging feature will also output the form variables to the payment page, send an email to the admin that contains the all PayPal variables.', 'event_espresso'); ?></p>
+		<h2><?php _e('My Virtual Merchant Demo Site', 'event_espresso'); ?></h2>
+		<p><?php _e('If you request access from My Virtual Merchant, you can have temporary access to the demo site, in order to test your integration between Event Espresso and My Virtual Merchant. If you are using a Demo account, set this switch to use the Demo Site.', 'event_espresso'); ?></p>
 		<hr />
-		<p><?php _e('The PayPal Sandbox is a testing environment that is a duplicate of the live PayPal site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live PayPal environment. Create and manage test accounts, and view emails and API credentials for those test accounts.', 'event_espresso'); ?></p>
+		<p><?php _e('The My Virtual Merchant demo site is a testing environment that is a duplicate of the live site, except that no real money changes hands. The Demo Site allows you to test your entire integration before submitting transactions to the live environment.', 'event_espresso'); ?></p>
 	</div>
 	<div id="currency_info" style="display:none">
-		<h2><?php _e('PayPal Currency', 'event_espresso'); ?></h2>
+		<h2><?php _e('My Virtual Merchant Currency', 'event_espresso'); ?></h2>
 		<p><?php _e('PayPal uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, select the currency you wish to use. The dropdown lists all currencies that PayPal (currently) supports.', 'event_espresso'); ?> </p>
 	</div>
 	<?php
