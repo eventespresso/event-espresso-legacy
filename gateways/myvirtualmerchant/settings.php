@@ -1,0 +1,237 @@
+<?php
+
+function event_espresso_myvirtualmerchant_payment_settings() {
+	global $espresso_premium, $active_gateways;
+	if (!$espresso_premium)
+		return;
+	if (isset($_POST['update_myvirtualmerchant'])) {
+		$myvirtualmerchant_settings['ssl_merchant_id'] = $_POST['ssl_merchant_id'];
+		$myvirtualmerchant_settings['ssl_user_id'] = $_POST['ssl_user_id'];
+		$myvirtualmerchant_settings['ssl_pin'] = $_POST['ssl_pin'];
+		$myvirtualmerchant_settings['currency_format'] = $_POST['currency_format'];
+		$myvirtualmerchant_settings['myvirtualmerchant_use_sandbox'] = empty($_POST['myvirtualmerchant_use_sandbox']) ? false : true;
+		$myvirtualmerchant_settings['header'] = $_POST['header'];
+		$myvirtualmerchant_settings['display_header'] = empty($_POST['display_header']) ? false : true;
+		update_option('event_espresso_myvirtualmerchant_settings', $myvirtualmerchant_settings);
+		echo '<div id="message" class="updated fade"><p><strong>' . __('MyVirtualMerchant settings saved.', 'event_espresso') . '</strong></p></div>';
+	}
+	$myvirtualmerchant_settings = get_option('event_espresso_myvirtualmerchant_settings');
+	if (empty($myvirtualmerchant_settings)) {
+		$myvirtualmerchant_settings['ssl_merchant_id'] = '';
+		$myvirtualmerchant_settings['ssl_user_id'] = '';
+		$myvirtualmerchant_settings['ssl_pin'] = '';
+		$myvirtualmerchant_settings['currency_format'] = 'USD';
+		$myvirtualmerchant_settings['myvirtualmerchant_use_sandbox'] = false;
+		$myvirtualmerchant_settings['header'] = 'Payment Transactions by MyVirtualMerchant';
+		$myvirtualmerchant_settings['display_header'] = false;
+		if (add_option('event_espresso_myvirtualmerchant_settings', $myvirtualmerchant_settings, '', 'no') == false) {
+			update_option('event_espresso_myvirtualmerchant_settings', $myvirtualmerchant_settings);
+		}
+	}
+
+	if ( ! isset( $myvirtualmerchant_settings['button_url'] ) || ! file_exists( $myvirtualmerchant_settings['button_url'] )) {
+		$myvirtualmerchant_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+
+	//Open or close the postbox div
+	if (empty($_REQUEST['deactivate_myvirtualmerchant'])
+					&& (!empty($_REQUEST['activate_myvirtualmerchant'])
+					|| array_key_exists('myvirtualmerchant', $active_gateways))) {
+		$postbox_style = '';
+	} else {
+		$postbox_style = 'closed';
+	}
+	?>
+
+	<div class="metabox-holder">
+		<div class="postbox <?php echo $postbox_style; ?>">
+			<div title="Click to toggle" class="handlediv"><br /></div>
+			<h3 class="hndle">
+				<?php _e('MyVirtualMerchant Settings', 'event_espresso'); ?>
+			</h3>
+			<div class="inside">
+				<div class="padding">
+					<?php
+					if (!empty($_REQUEST['activate_myvirtualmerchant'])) {
+						$active_gateways['myvirtualmerchant'] = dirname(__FILE__);
+						update_option('event_espresso_active_gateways', $active_gateways);
+					}
+					if (!empty($_REQUEST['deactivate_myvirtualmerchant'])) {
+						unset($active_gateways['myvirtualmerchant']);
+						update_option('event_espresso_active_gateways', $active_gateways);
+					}
+					echo '<ul>';
+					if (array_key_exists('myvirtualmerchant', $active_gateways)) {
+						echo '<li id="deactivate_myvirtualmerchant" style="width:30%;" onclick="location.href=\'' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=payment_gateways&deactivate_myvirtualmerchant=true\';" class="red_alert pointer"><strong>' . __('Deactivate MyVirtualMerchant?', 'event_espresso') . '</strong></li>';
+						event_espresso_display_myvirtualmerchant_settings();
+					} else {
+						echo '<li id="activate_myvirtualmerchant" style="width:30%;" onclick="location.href=\'' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=payment_gateways&activate_myvirtualmerchant=true\';" class="green_alert pointer"><strong>' . __('Activate MyVirtualMerchant?', 'event_espresso') . '</strong></li>';
+					}
+					echo '</ul>';
+					?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
+}
+
+//PayPal Settings Form
+function event_espresso_display_myvirtualmerchant_settings() {
+	$myvirtualmerchant_settings = get_option('event_espresso_myvirtualmerchant_settings');
+	?>
+	<form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
+		<table width="99%" border="0" cellspacing="5" cellpadding="5">
+			<tr>
+				<td valign="top">
+					<ul>
+						<li>
+							<label for="ssl_merchant_id">
+								<?php _e('SSL Merchant ID', 'event_espresso'); ?>
+							</label>
+							<input type="text" name="ssl_merchant_id" size="35" value="<?php echo $myvirtualmerchant_settings['ssl_merchant_id']; ?>">
+						</li>
+						<li>
+							<label for="ssl_user_id">
+								<?php _e('SSL User ID', 'event_espresso'); ?>
+							</label>
+							<input type="text" name="ssl_user_id" size="35" value="<?php echo $myvirtualmerchant_settings['ssl_user_id']; ?>">
+						</li>
+						<li>
+							<label for="ssl_pin">
+								<?php _e('PIN', 'event_espresso'); ?>
+							</label>
+							<input type="text" name="ssl_pin" size="35" value="<?php echo $myvirtualmerchant_settings['ssl_pin']; ?>">
+						</li>
+						<li>
+							<label for="currency_format">
+								<?php _e('Select the Currency for Your Country', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=currency_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							</label>
+							<select name="currency_format">
+								<option value="<?php echo $myvirtualmerchant_settings['currency_format']; ?>"><?php echo $myvirtualmerchant_settings['currency_format']; ?></option>
+								<option value="USD">
+									<?php _e('U.S. Dollars ($)', 'event_espresso'); ?>
+								</option>
+								<option value="GBP">
+									<?php _e('Pounds Sterling (&pound;)', 'event_espresso'); ?>
+								</option>
+								<option value="CAD">
+									<?php _e('Canadian Dollars (C $)', 'event_espresso'); ?>
+								</option>
+								<option value="AUD">
+									<?php _e('Australian Dollars (A $)', 'event_espresso'); ?>
+								</option>
+								<option value="BRL">
+									<?php _e('Brazilian Real (only for Brazilian users)', 'event_espresso'); ?>
+								</option>
+								<option value="CHF">
+									<?php _e('Swiss Franc', 'event_espresso'); ?>
+								</option>
+								<option value="CZK">
+									<?php _e('Czech Koruna', 'event_espresso'); ?>
+								</option>
+								<option value="DKK">
+									<?php _e('Danish Krone', 'event_espresso'); ?>
+								</option>
+								<option value="EUR">
+									<?php _e('Euros (&#8364;)', 'event_espresso'); ?>
+								</option>
+								<option value="HKD">
+									<?php _e('Hong Kong Dollar ($)', 'event_espresso'); ?>
+								</option>
+								<option value="HUF">
+									<?php _e('Hungarian Forint', 'event_espresso'); ?>
+								</option>
+								<option value="ILS">
+									<?php _e('Israeli Shekel', 'event_espresso'); ?>
+								</option>
+								<option value="JPY">
+									<?php _e('Yen (&yen;)', 'event_espresso'); ?>
+								</option>
+								<option value="MXN">
+									<?php _e('Mexican Peso', 'event_espresso'); ?>
+								</option>
+								<option value="MYR">
+									<?php _e('Malaysian Ringgits (only for Malaysian users)', 'event_espresso'); ?>
+								</option>
+								<option value="NOK">
+									<?php _e('Norwegian Krone', 'event_espresso'); ?>
+								</option>
+								<option value="NZD">
+									<?php _e('New Zealand Dollar ($)', 'event_espresso'); ?>
+								</option>
+								<option value="PHP">
+									<?php _e('Philippine Pesos', 'event_espresso'); ?>
+								</option>
+								<option value="PLN">
+									<?php _e('Polish Zloty', 'event_espresso'); ?>
+								</option>
+								<option value="SEK">
+									<?php _e('Swedish Krona', 'event_espresso'); ?>
+								</option>
+								<option value="SGD">
+									<?php _e('Singapore Dollar ($)', 'event_espresso'); ?>
+								</option>
+								<option value="THB">
+									<?php _e('Thai Baht', 'event_espresso'); ?>
+								</option>
+								<option value="TRY">
+									<?php _e('Turkish Lira (only for Turkish users)', 'event_espresso'); ?>
+								</option>
+								<option value="TWD">
+									<?php _e('Taiwan New Dollars', 'event_espresso'); ?>
+								</option>
+							</select>
+							 </li>
+					</ul>
+				</td>
+				<td valign="top">
+					<ul>
+						<li>
+							<label for="myvirtualmerchant_use_sandbox">
+								<?php _e('Use MyVirtualMerchant in Demo Mode', 'event_espresso'); ?>
+							</label>
+							<input name="myvirtualmerchant_use_sandbox" type="checkbox" value="1" <?php echo $myvirtualmerchant_settings['myvirtualmerchant_use_sandbox'] ? 'checked="checked"' : '' ?> />
+							<br />
+							<?php _e('(Make sure you enter the sandbox credentials above.)', 'event_espresso'); ?>
+						</li>
+						<li>
+							<label for="display_header">
+								<?php _e('Display a Form Header', 'event_espresso'); ?>
+								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=display_header"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							</label>
+							<input name="display_header" type="checkbox" value="1" <?php echo $myvirtualmerchant_settings['display_header'] ? 'checked="checked"' : '' ?> /></li>
+						<li>
+							<label for="header">
+								<?php _e('Header Text', 'event_espresso'); ?>
+							</label>
+							<input type="text" name="header" size="35" value="<?php echo $myvirtualmerchant_settings['header']; ?>">
+						</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+		<?php 
+		if (espresso_check_ssl() == FALSE){
+			espresso_ssl_required_gateway_message();
+		}
+		?>
+		<p>
+			<input type="hidden" name="update_myvirtualmerchant" value="update_myvirtualmerchant">
+			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update MyVirtualMerchant Settings', 'event_espresso') ?>" id="save_paypal_settings" />
+		</p>
+	</form>
+	<div id="myvirtualmerchant_sandbox_info" style="display:none">
+		<h2><?php _e('PayPal Sandbox', 'event_espresso'); ?></h2>
+		<p><?php _e('In addition to using the PayPal Sandbox feature. The debugging feature will also output the form variables to the payment page, send an email to the admin that contains the all PayPal variables.', 'event_espresso'); ?></p>
+		<hr />
+		<p><?php _e('The PayPal Sandbox is a testing environment that is a duplicate of the live PayPal site, except that no real money changes hands. The Sandbox allows you to test your entire integration before submitting transactions to the live PayPal environment. Create and manage test accounts, and view emails and API credentials for those test accounts.', 'event_espresso'); ?></p>
+	</div>
+	<div id="currency_info" style="display:none">
+		<h2><?php _e('PayPal Currency', 'event_espresso'); ?></h2>
+		<p><?php _e('PayPal uses 3-character ISO-4217 codes for specifying currencies in fields and variables. </p><p>The default currency code is US Dollars (USD). If you want to require or accept payments in other currencies, select the currency you wish to use. The dropdown lists all currencies that PayPal (currently) supports.', 'event_espresso'); ?> </p>
+	</div>
+	<?php
+}
+
+add_action('action_hook_espresso_display_gateway_settings', 'event_espresso_myvirtualmerchant_payment_settings');
