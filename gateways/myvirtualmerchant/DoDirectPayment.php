@@ -8,14 +8,13 @@ function espresso_transactions_myvirtualmerchant_get_attendee_id($attendee_id) {
 }
 
 function espresso_process_myvirtualmerchant($payment_data) {
-
 	extract($payment_data);
-
 	$myvirtualmerchant_settings = get_option('event_espresso_myvirtualmerchant_settings');
 	$endpoint = $myvirtualmerchant_settings['myvirtualmerchant_use_sandbox'] ? 'https://demo.myvirtualmerchant.com/VirtualMerchantDemo/process.do' : 'https://www.myvirtualmerchant.com/VirtualMerchant/process.do';
 	
 	$request = array(
 		'ssl_transaction_type'=>'ccsale',
+		'ssl_result_format'=>'ASCII',
 		'ssl_merchant_id'=>$myvirtualmerchant_settings['ssl_merchant_id'],
 		'ssl_user_id'=>$myvirtualmerchant_settings['ssl_user_id'],
 		'ssl_pin'=>$myvirtualmerchant_settings['ssl_pin'],
@@ -23,12 +22,20 @@ function espresso_process_myvirtualmerchant($payment_data) {
 		'ssl_card_number'=>$_POST['card_num'],
 		'ssl_exp_date'=>$_POST['expmonth'] . $_POST['expyear'],
 		'ssl_amount'=>$payment_data['total_cost'],
+		'ssl_first_name'=>$_POST['first_name'],
+		'ssl_last_name'=>$_POST['last_name'],
+		'ssl_email'=>$_POST['email'],
+		'ssl_avs_address'=>$_POST['address'],
+		'ssl_city'=>$_POST['city'],
+		'ssl_state'=>$_POST['state'],
+		'ssl_country'=>$_POST['country'],
 		'ssl_avs_zip'=>$_POST['zip'],
-		'ssl_avs_address'=>$_POST['address'].", ".$_POST['city'].", ".$_POST['state'],
 		'ssl_cvv2cvc2'=>$_POST['cvv'],
 		'ssl_invoice_number'=>$_POST['invoice'],
 //		'ssl_transaction_currency'=>$myvirtualmerchant_settings['currency_format'],
-		'ssl_result_format'=>'ASCII',
+		'ssl_description'=>  sprintf(__("Registration %s for event %s", "event_espresso"),$payment_data['registration_id'],$payment_data['event_name']),
+		'event_name'=>$payment_data['event_name'],
+		'registration_id'=>$payment_data['registration_id']
 		
 	);
 	$result = wp_remote_post($endpoint, array(
