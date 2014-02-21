@@ -34,86 +34,46 @@ function espresso_process_myvirtualmerchant($payment_data) {
 	$result = wp_remote_post($endpoint, array(
 		'method'=>'POST',
 		'body'=>$request));
-	echo $result['body'];
-	var_dump($result);die;
 	
 	$payment_data['payment_status'] = 'Incomplete';
 	$payment_data['txn_type'] = 'MyVirtualMerchant';
 	$payment_data['txn_id'] = 0;
-	$payment_data['txn_details'] = serialize($_REQUEST);
+	$payment_data['txn_details'] = serialize($result['body']);
 	$payment_data = apply_filters('filter_hook_espresso_prepare_event_link', $payment_data);
 	$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
-	$Errors = GetErrors($PayPalResult);
-	if (!empty($PayPalResult)) {
-		unset($PayPalResult['REQUESTDATA']['CREDITCARDTYPE']);
-		unset($PayPalResult['REQUESTDATA']['ACCT']);
-		unset($PayPalResult['REQUESTDATA']['EXPDATE']);
-		unset($PayPalResult['REQUESTDATA']['CVV2']);
-		unset($PayPalResult['RAWREQUEST']);
-		
-		$payment_data['txn_id'] = isset( $PayPalResult['TRANSACTIONID'] ) ? $PayPalResult['TRANSACTIONID'] : '';
-		$payment_data['txn_details'] = serialize($PayPalResult);
-		if (!APICallSuccessful($PayPalResult['ACK'])) {
-			DisplayErrors($Errors);
-		} else {
-			$payment_data['payment_status'] = 'Completed';
+	
+	if (!empty($result['body'])) {
+		$txn_details = espresso_myvirtualmerchant_parse_response($result['body']);
+		$payment_data['txn_id'] = isset( $txn_details['ssl_txn_id'] ) ? $txn_details['ssl_txn_id'] : '';
+		if( ! isset($txn_details['errorCode'])){//no validation error, so at least mvm attempted to process the payment...
+			if ( $txn_details['ssl_result'] == '0') {
+				$payment_data['payment_status'] = 'Completed';
+			} else {
+				$payment_data['payment_status'] = 'Payment Declined';
+				?><p><?php	printf(__("Payment failed because: %s", 'event_espresso'),$txn_details['ssl_result_message']);?></p><?php
+			}
+		}else{//there was an error
+			$payment_data['payment_status'] = 'Payment Declined';
+			?><p><?php printf(__("An error occurred processing your payment: %s (%s), %s", 'event_espresso'),$txn_details['errorName'],$txn_details['errorCode'],$txn_details['errorMessage']); ?></p> <?php
 		}
 	} else {
 		?>
 		<p><?php _e('There was no response from MyVirtualMerchant.', 'event_espresso'); ?></p>
 		<?php
 	}
-	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }
-
-function APICallSuccessful($ack) {
-	if (strtoupper($ack) != 'SUCCESS' && strtoupper($ack) != 'SUCCESSWITHWARNING' && strtoupper($ack) != 'PARTIALSUCCESS')
-		return false;
-	else
-		return true;
-}
-
-function GetErrors($DataArray) {
-
-	$Errors = array();
-	$n = 0;
-	while (isset($DataArray['L_ERRORCODE' . $n . ''])) {
-		$LErrorCode = isset($DataArray['L_ERRORCODE' . $n . '']) ? $DataArray['L_ERRORCODE' . $n . ''] : '';
-		$LShortMessage = isset($DataArray['L_SHORTMESSAGE' . $n . '']) ? $DataArray['L_SHORTMESSAGE' . $n . ''] : '';
-		$LLongMessage = isset($DataArray['L_LONGMESSAGE' . $n . '']) ? $DataArray['L_LONGMESSAGE' . $n . ''] : '';
-		$LSeverityCode = isset($DataArray['L_SEVERITYCODE' . $n . '']) ? $DataArray['L_SEVERITYCODE' . $n . ''] : '';
-
-		$CurrentItem = array(
-				'L_ERRORCODE' => $LErrorCode,
-				'L_SHORTMESSAGE' => $LShortMessage,
-				'L_LONGMESSAGE' => $LLongMessage,
-				'L_SEVERITYCODE' => $LSeverityCode
-		);
-
-		array_push($Errors, $CurrentItem);
-		$n++;
+/**
+ * Converts myvritualmercahtn's ASCII response (which looks like "name1=val1\nname2=val2\n...") into an associative array
+ * @param string $response_string
+ * @return array
+ */
+function espresso_myvirtualmerchant_parse_response($response_string){
+	$response_array = array();
+	$lines = explode("\n",$response_string);
+	foreach($lines as $line){
+		list($name,$value) = explode("=",$line,2);
+		$response_array[$name] = $value;
 	}
-
-	return $Errors;
-}
-
-function DisplayErrors($Errors) {
-	echo '<p><strong class="credit_card_failure">Attention: Your transaction was declined for the following reason(s):</strong><br />';
-	foreach ($Errors as $ErrorVar => $ErrorVal) {
-		$CurrentError = $Errors[$ErrorVar];
-		foreach ($CurrentError as $CurrentErrorVar => $CurrentErrorVal) {
-			if ($CurrentErrorVar == 'L_ERRORCODE')
-				$CurrentVarName = 'Error Code';
-			elseif ($CurrentErrorVar == 'L_SHORTMESSAGE')
-				$CurrentVarName = 'Short Message';
-			elseif ($CurrentErrorVar == 'L_LONGMESSAGE')
-				$CurrentVarName == 'Long Message';
-			elseif ($CurrentErrorVar == 'L_SEVERITYCODE')
-				$CurrentVarName = 'Severity Code';
-
-			echo $CurrentVarName . ': ' . $CurrentErrorVal . '<br />';
-		}
-		echo '<br />';
-	}
+	return $response_array;
 }
