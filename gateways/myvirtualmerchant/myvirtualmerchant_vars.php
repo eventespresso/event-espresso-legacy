@@ -113,8 +113,8 @@ function espresso_display_myvirtualmerchant($data) {
 					<input name="id" type="hidden" value="<?php echo $attendee_id ?>" />
 					<input name='invoice' type='hidden' value='<?php echo uniqid(); ?>'/>
 					<p class="event_form_submit">
-						<input name="myvirtualmerchant_submit" id="myvirtualmerchant_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />						
-						<div class="clear"></div>
+						<input name="myvirtualmerchant_submit" id="myvirtualmerchant_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />		
+						<div class="clear" id="processing" style="display:none"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL?>images/ajax-loader.gif"></div>
 					</p>
 					<span id="processing"></span>
 				</form>
