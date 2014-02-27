@@ -1,6 +1,5 @@
 <?php
 function espresso_display_myvirtualmerchant($data) {
-	$data = array_merge($data,$_POST);
 	extract($data);
 	global $org_options;
 	$myvirtualmerchant_settings = get_option('event_espresso_myvirtualmerchant_settings');
