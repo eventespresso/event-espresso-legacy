@@ -301,8 +301,8 @@ function event_form_build_edit( $question, $answer, $show_admin_only = false, $c
 	$label = '<label for="' . $field_name . '">' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '</label>';
 	
 	// used to filter answers
-	$find = array( '&#039;', "\xC2\xA0", "\x20", "&#160;", '&nbsp;' );
-	$replace = array( "'", ' ', ' ', ' ', ' '  );
+	$find = array( '&#039;', "\xC2\xA0", "\x20", "&#160;", '&nbsp;', '  ' );
+	$replace = array( "'", ' ', ' ', ' ', ' ', ' ' );
 	
 	switch ($question->question_type) {
 	

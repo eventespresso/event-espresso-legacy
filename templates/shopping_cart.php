@@ -57,16 +57,16 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			}
 			//If the event is still active, then show it.
 			if (event_espresso_get_status($r->id) == 'ACTIVE') {
-				$num_attendees = get_number_of_attendees_reg_limit( $r->id, 'num_attendees' ); //Get the number of attendees
-				$available_spaces = get_number_of_attendees_reg_limit( $r->id, 'available_spaces' ); //Gets a count of the available spaces
-				$number_available_spaces = get_number_of_attendees_reg_limit( $r->id, 'number_available_spaces' ); //Gets the number of available spaces
+				$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $r->id);//Get the number of attendees
+			$available_spaces = apply_filters('filter_hook_espresso_available_spaces_text', $r->id);//Gets a count of the available spaces
+			$number_available_spaces = apply_filters('filter_hook_espresso_get_num_available_spaces', $r->id);//Gets the number of available spaces
 				//echo "<pre>$r->id, $num_attendees,$available_spaces,$number_available_spaces</pre>";
 		?>
-				<div class="multi_reg_cart_block event-display-boxes ui-widget"  id ="multi_reg_cart_block-<?php echo $r->id ?>">
+				<div class="<?php espresso_template_css_class('event_display_boxes','multi_reg_cart_block event-display-boxes ui-widget'); ?>"  id ="multi_reg_cart_block-<?php echo $r->id ?>">
 		
-					<h3 class="event_title ui-widget-header ui-corner-top"><?php echo stripslashes_deep( $r->event_name ) ?> <span class="remove-cart-item"> <img class="ee_delete_item_from_cart" id="cart_link_<?php echo $r->id ?>" alt="Remove this item from your cart" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>images/icons/remove.gif" /> </span> </h3>
-						<div class="event-data-display ui-widget-content ui-corner-bottom">
-							<table id="cart-reg-details" class="event-display-tables">
+					<h3 class="<?php espresso_template_css_class('event_title','event_title ui-widget-header ui-corner-top'); ?>"><?php echo stripslashes_deep( $r->event_name ) ?> <span class="<?php espresso_template_css_class('remove_cart_item','remove-cart-item'); ?>"> <img class="<?php espresso_template_css_class('ee_delete_item_from_cart','ee_delete_item_from_cart'); ?>" id="cart_link_<?php echo $r->id ?>" alt="<?php _e('Remove this item from your cart', 'event_espresso'); ?>" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>images/icons/remove.gif" /> </span> </h3>
+						<div class="<?php espresso_template_css_class('event_data_display','event-data-display ui-widget-content ui-corner-bottom'); ?>">
+							<table id="cart-reg-details" class="<?php espresso_template_css_class('event_display_tables','event-display-tables ui-widget-content ui-corner-bottom'); ?>">
 								<thead>
 									<tr>
 										<th><?php _e( 'Date', 'event_espresso' ); ?></th>
@@ -106,14 +106,14 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 		//echo $_SESSION['espresso_session']['groupon_used'];
 //		printr( $_SESSION, '$_SESSION  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		?>
-		<div class="event-display-boxes ui-widget">
-			<div class="mer-event-submit ui-widget-content ui-corner-all">
+		<div class="<?php espresso_template_css_class('event_display_boxes','event-display-boxes ui-widgetevent-display-tables'); ?> ">
+			<div class="<?php espresso_template_css_class('mer_event_submit','mer-event-submit ui-widget-content ui-corner-all'); ?> ">
 				<input type="hidden" name="event_name[<?php echo $r->id; ?>]" value="<?php echo stripslashes_deep( $r->event_name ); ?>" />
 				<input type="hidden" name="regevent_action" value="load_checkout_page" />
 					
 			<?php if ( function_exists( 'event_espresso_coupon_payment_page' ) && isset($org_options['allow_mer_discounts']) && $org_options['allow_mer_discounts'] == 'Y' ) : //Discount code display ?>
-			<div id="event_espresso_coupon_wrapper" class="clearfix event-data-display">
-				<label class="coupon-code" for="event_espresso_coupon_code"><?php _e( 'Enter Coupon Code ', 'event_espresso' ); ?></label>
+			<div id="event_espresso_coupon_wrapper" class="<?php espresso_template_css_class('coupon_wrapper','clearfix event-data-display'); ?>">
+				<label class="<?php espresso_template_css_class('coupon_code','coupon-code'); ?>" for="event_espresso_coupon_code"><?php _e( 'Enter Coupon Code ', 'event_espresso' ); ?></label>
 				<input type="text" 
 							name="event_espresso_coupon_code" 
 							id ="event_espresso_coupon_code" 
@@ -124,8 +124,8 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			<?php endif; ?>
 			
 			<?php if ( function_exists( 'event_espresso_groupon_payment_page' ) && isset($org_options['allow_mer_vouchers']) && $org_options['allow_mer_vouchers'] == 'Y' ) : //Voucher code display ?>
-			<div id="event_espresso_coupon_wrapper" class="clearfix event-data-display" >
-				<label class="coupon-code" for="event_espresso_groupon_code"><?php _e( 'Enter Voucher Code ', 'event_espresso' ); ?></label>
+			<div id="event_espresso_coupon_wrapper" class="<?php espresso_template_css_class('coupon_wrapper','clearfix event-data-display'); ?>">
+				<label class="<?php espresso_template_css_class('coupon_code','coupon-code'); ?>" for="event_espresso_groupon_code"><?php _e( 'Enter Voucher Code ', 'event_espresso' ); ?></label>
 				<input type="text" 
 							name="event_espresso_groupon_code" 
 							id ="event_espresso_groupon_code" 
@@ -137,9 +137,9 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 			
              <div id="event_espresso_notifications" class="clearfix event-data-display" style=""></div> 			
 
-			<div id="event_espresso_total_wrapper" class="clearfix event-data-display">					
+			<div id="event_espresso_total_wrapper" class="<?php espresso_template_css_class('total_wrapper','clearfix event-data-display'); ?>">					
 				<?php do_action( 'action_hook_espresso_shopping_cart_before_total' ); ?>				
-				<span class="event_total_price">
+				<span class="<?php espresso_template_css_class('total_price','event_total_price'); ?>">
 					<?php echo __( 'Total ', 'event_espresso' ) . $org_options['currency_symbol'];?> <span id="event_total_price"><?php echo $_SESSION['espresso_session']['grand_total'];?></span>
 				</span>
 				<?php do_action( 'action_hook_espresso_shopping_cart_after_total' ); ?>

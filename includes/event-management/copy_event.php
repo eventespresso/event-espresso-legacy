@@ -20,63 +20,63 @@ function copy_event( $recurrence_array = array() ){
 				'event_name'					=> $event->event_name, 
 				'event_desc'					=> $event->event_desc, 
 				'display_desc'					=> $event->display_desc, 
-				'display_reg_form'			=> $event->display_reg_form, 
-				'event_identifier'			=> substr( $event->event_identifier, 0, 13 ) . uniqid('-'), 
-				'start_date'						=> $event->start_date, 
+				'display_reg_form'				=> $event->display_reg_form, 
+				'event_identifier'				=> substr( $event->event_identifier, 0, 13 ) . uniqid('-'), 
+				'start_date'					=> $event->start_date, 
 				'end_date'						=> $event->end_date, 
 				'registration_start'			=> $event->registration_start, 
-				'registration_end'			=> $event->registration_end, 
-				'registration_startT' 		=> $event->registration_startT, 
-				'registration_endT' 		=> $event->registration_endT, 
+				'registration_end'				=> $event->registration_end, 
+				'registration_startT'			=> $event->registration_startT, 
+				'registration_endT'				=> $event->registration_endT, 
 				'phone'							=> $event->phone, 
-				'virtual_url'						=> $event->virtual_url,				
-				'virtual_phone'				=> $event->virtual_phone, 
+				'virtual_url'					=> $event->virtual_url,				
+				'virtual_phone'					=> $event->virtual_phone, 
 				'reg_limit'						=> $event->reg_limit, 
 				'allow_multiple'				=> $event->allow_multiple, 
-				'additional_limit'			=> $event->additional_limit,
+				'additional_limit'				=> $event->additional_limit,
 				'send_mail'						=> $event->send_mail, 
-				'is_active'							=> $event->is_active, 
+				'is_active'						=> $event->is_active, 
 				
 				'event_status'					=> $event->event_status, 
 				'conf_mail'						=> $event->conf_mail, 
-				'use_coupon_code'			=> $event->use_coupon_code, 
-				'use_groupon_code'		=> $event->use_groupon_code,				
+				'use_coupon_code'				=> $event->use_coupon_code, 
+				'use_groupon_code'				=> $event->use_groupon_code,				
 				'coupon_id'						=> $event->coupon_id,
-				'member_only'				=> $event->member_only,				
-				'post_id' 							=> $event->post_id,
-				'post_type' 						=> $event->post_type,				 
+				'member_only'					=> $event->member_only,				
+				'post_id' 						=> apply_filters('filter_hook_espresso_existing_post_id', $event->post_id),//IF using this filter, just use NULL or 0 for the post_id
+				'post_type' 					=> $event->post_type,				 
 				'externalURL' 					=> $event->externalURL, 
-				'early_disc' 						=> $event->early_disc,
+				'early_disc' 					=> $event->early_disc,
 				
-				'early_disc_date' 			=> $event->early_disc_date, 
-				'early_disc_percentage' 	=> $event->early_disc_percentage,				
-				'question_groups' 			=> $event->question_groups, 
+				'early_disc_date' 				=> $event->early_disc_date, 
+				'early_disc_percentage' 		=> $event->early_disc_percentage,				
+				'question_groups' 				=> $event->question_groups, 
 				'allow_overflow' 				=> $event->allow_overflow, 
-				'overflow_event_id' 		=> $event->overflow_event_id, 
-				'recurrence_id'				=> $event->recurrence_id, 
+				'overflow_event_id' 			=> $event->overflow_event_id, 
+				'recurrence_id'					=> $event->recurrence_id, 
 				'email_id' 						=> $event->email_id, 
-				'alt_email' 						=> $event->alt_email,
+				'alt_email' 					=> $event->alt_email,
 				'event_meta' 					=> $event->event_meta, 
 				'wp_user' 						=> $current_user->ID,
 				
-				'require_pre_approval' 	=> $event->require_pre_approval, 
-				'timezone_string' 			=> $event->timezone_string, 
+				'require_pre_approval' 			=> $event->require_pre_approval, 
+				'timezone_string' 				=> $event->timezone_string, 
 				'submitted' 					=> date('Y-m-d H:i:s', time()), 
-				'ticket_id' 						=> $event->ticket_id,
+				'ticket_id' 					=> $event->ticket_id,
 				
 				//Legacy venue information
-				'address' => $event->address, 
-				'address2' => $event->address2, 
-				'city' => $event->city, 
-				'state' => $event->state, 
-				'zip' => $event->zip, 
-				'country' => $event->country, 
-				'phone' => $event->phone,
+				'address'						=> $event->address, 
+				'address2'						=> $event->address2, 
+				'city'							=> $event->city, 
+				'state'							=> $event->state, 
+				'zip'							=> $event->zip, 
+				'country'						=> $event->country, 
+				'phone'							=> $event->phone,
 				
-				'venue_phone'=> $event->venue_phone,
-				'venue_title' => $event->venue_title,
-				'venue_url' => $event->venue_url,
-				'venue_image' => $event->venue_image,
+				'venue_phone'					=> $event->venue_phone,
+				'venue_title'					=> $event->venue_title,
+				'venue_url'						=> $event->venue_url,
+				'venue_image'					=> $event->venue_image,
 
 		);
 		
@@ -202,7 +202,7 @@ function copy_event( $recurrence_array = array() ){
 
 	if ( empty( $error )) {
 		$event_url = add_query_arg( array( 'action' => 'edit', 'event_id' => $event_id ), admin_url( 'admin.php?page=events' ));
-		$success[] =  __('The event','event_espresso') . ' <a href="' . $event_url . '">' . stripslashes( $event->event_name ) . '</a> ' . __('has been successfully copied.','event_espresso');
+		$success[] =  __('The event','event_espresso') . ' <a href="' . $event_url . '">' . stripslashes( $event->event_name ) . '</a> ' . __('has been successfully copied. You are now editing the copy.','event_espresso');
 	}
 
 	if ( ! empty( $success )) : 
@@ -226,5 +226,5 @@ function copy_event( $recurrence_array = array() ){
 	
 <?php	
 		endif;
-		        
+	return $new_id;
 }

@@ -13,6 +13,9 @@
 	margin:5px;
 	padding:10px;
 }
+.event-data-display {
+	overflow: auto;
+}
 
 /* Widget Style */
 .widget.events ol {
@@ -178,17 +181,25 @@ p.error,
 .event_espresso_form_wrapper .coupon_code { margin:2em 0; }
 
 /* Additional Attendees Form */
-.add-additional-attendee-lnk {
-	padding:1em 2em 1.25em; margin: 0 0 1em 0;
-	background-color: #FFC; border: #FC6 1px solid; border-radius:3px;
-	color: #000; text-shadow:1px 1px #fff;
-	cursor: pointer;
-}
+.add-additional-attendee-lnk,
 .remove-additional-attendee-lnk {
-	padding: 1em 2em 1.25em; margin: 0 0 1em 0; 
-	background-color:#FFEEEE; border: #FF0000 1px solid; border-radius:3px;
-	color: #000; text-shadow:1px 1px #fff;
+	padding:1em 2em 1.25em;
+	margin: 0 0 1em 0;
+	border-radius:3px;
+	color: #000;
+	text-shadow:1px 1px #fff;
 	cursor: pointer;
+	display: inline-block;
+}
+
+.add-additional-attendee-lnk {
+	background-color: #FFC;
+	border: #FC6 1px solid;
+}
+
+.remove-additional-attendee-lnk {
+	background-color:#FFEEEE;
+	border: #FF0000 1px solid;
 }
 
 

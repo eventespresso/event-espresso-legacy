@@ -596,7 +596,7 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 			case 'avail_spaces_slash_reg_limit' :
 				$num_attendees = 0;
 				global $org_options;
-				$minutes_in_past = isset($org_options['ticket_reservation_time']) ? $org_options['ticket_reservation_time']: 30;
+				$minutes_in_past = $org_options['ticket_reservation_time'];
 				$current_users_session =  isset($_SESSION['espresso_session']['id']) && !empty($_SESSION['espresso_session']['id']) ? $_SESSION['espresso_session']['id'] : '';
 				//NOTE: we count incomplete and declined payments temporarily if they were initiated by someone else.
 				//if they're yours, then pretend they dont exist.
@@ -718,13 +718,90 @@ if (!function_exists('get_number_of_attendees_reg_limit')) {
 
 }
 
+//Gets the number of attendees for an event
+add_filter('filter_hook_espresso_get_num_attendees', 'espresso_get_num_attendees', 10, 1);
+function espresso_get_num_attendees($event_id){
+	$num_attendees = 0;
+	global $wpdb, $org_options;
+	$minutes_in_past = isset($org_options['ticket_reservation_time']) ? $org_options['ticket_reservation_time']: 30;
+	$current_users_session =  isset($_SESSION['espresso_session']['id']) && !empty($_SESSION['espresso_session']['id']) ? $_SESSION['espresso_session']['id'] : '';
+	//NOTE: we count incomplete and declined payments temporarily if they were initiated by someone else.
+	//if they're yours, then pretend they dont exist.
+	//$x_minutes_ago_timestmap = strtotime("- ".$minutes_in_past." minute",);
+	$x_minutes_ago = date("Y-m-d H:i:s",strtotime(current_time('mysql'))-($minutes_in_past*60));
+	$sql = "SELECT SUM(quantity) quantity FROM " . EVENTS_ATTENDEE_TABLE . " 
+		WHERE 
+			event_id=%d AND 
+				(	payment_status='Completed' OR 
+					payment_status='Pending' OR
+					payment_status='Refund' OR
+					(
+						payment_status IN ('Payment Declined','Incomplete') AND 
+						date > %s AND
+						attendee_session != %s
+					)
+				)";
+	$query = $wpdb->prepare( $sql, $event_id, $x_minutes_ago, $current_users_session );
+	//echo "query:$query";
+	$wpdb->get_results( $query , ARRAY_A);
+	if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->quantity != NULL) {
+		$num_attendees = $wpdb->last_result[0]->quantity;
+	}
+	return $num_attendees;
+}
+
+//Gets the number of available spaces for an event
+add_filter('filter_hook_espresso_get_num_available_spaces', 'espresso_num_available_spaces', 10, 1);
+function espresso_num_available_spaces($event_id){
+	global $wpdb;
+	$number_available_spaces = 0;
+	$sql_reg_limit = "SELECT reg_limit FROM " . EVENTS_DETAIL_TABLE . " WHERE id=%d";
+	$reg_limit = $wpdb->get_var( $wpdb->prepare( $sql_reg_limit, $event_id ));
+	$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $event_id); 
+	if (empty($num_attendees))
+		$num_attendees = 0;
+	if ($reg_limit > $num_attendees) {
+		$number_available_spaces = $reg_limit - $num_attendees;
+	}
+	
+	return $number_available_spaces;
+}
+
+//Gets the number of available spaces for an event. If there are over 99,999 available spaces, then it displays the text Unlimited".
+add_filter('filter_hook_espresso_available_spaces_text', 'espresso_available_spaces_text', 10, 1);
+function espresso_available_spaces_text($event_id){
+	global $wpdb;
+	$number_available_spaces = 0;
+	$sql_reg_limit = "SELECT reg_limit FROM " . EVENTS_DETAIL_TABLE . " WHERE id=%d";
+	$reg_limit = $wpdb->get_var( $wpdb->prepare( $sql_reg_limit, $event_id ));
+	$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $event_id); 
+	if (empty($num_attendees))
+		$num_attendees = 0;
+	if ($reg_limit > $num_attendees) {
+		$number_available_spaces = $reg_limit - $num_attendees;
+	}
+	if ($reg_limit >= 99999) {
+		$number_available_spaces = "Unlimited";
+	}
+	return $number_available_spaces;
+}
+
+//Gets the registration limit for an event
+add_filter('filter_hook_espresso_get_reg_limit', 'espresso_get_reg_limit', 10, 1);
+function espresso_get_reg_limit($event_id){
+	global $wpdb;
+	$sql_reg_limit = "SELECT reg_limit FROM " . EVENTS_DETAIL_TABLE . " WHERE id=%d";
+	$reg_limit = $wpdb->get_var( $wpdb->prepare( $sql_reg_limit, $event_id ));
+	return $reg_limit;
+}
+
 function event_espresso_update_alert($url = '') {
 	return wp_remote_retrieve_body(wp_remote_get($url));
 }
 
 function espresso_registration_footer() {
 	global $espresso_premium, $org_options;
-	$url = (!isset($org_options['affiliate_id']) || $org_options['affiliate_id'] == '' || $org_options['affiliate_id'] == 0) ? 'http://eventespresso.com/' : 'https://www.e-junkie.com/ecom/gb.php?cl=113214&c=ib&aff=' . $org_options['affiliate_id'];
+	$url = (!isset($org_options['affiliate_id']) || $org_options['affiliate_id'] == '' || $org_options['affiliate_id'] == 0) ? 'http://eventespresso.com/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Event+Registration+and+Ticketing+Powered+by+ee_version_'.EVENT_ESPRESSO_VERSION .'&utm_campaign=espresso_admin_footer' : 'https://www.e-junkie.com/ecom/gb.php?cl=113214&c=ib&aff=' . $org_options['affiliate_id'];
 	if ($espresso_premium != true || (isset($org_options['show_reg_footer']) && $org_options['show_reg_footer'] == 'Y')) {
 		return '<p style="font-size: 12px;"><a href="' . $url . '" title="Event Registration Powered by Event Espresso" target="_blank">Event Registration and Ticketing</a> Powered by <a href="' . $url . '" title="Event Espresso - Event Registration and Management System for WordPress" target="_blank">Event Espresso</a></p>';
 	}
@@ -866,7 +943,7 @@ if (!function_exists('espresso_event_category_data')) {
 		$wpdb->get_results( $wpdb->prepare( $sql, $event_id ));
 		$num_rows = $wpdb->num_rows;
 
-		if ($num_rows > 0 && $all_cats = FALSE) {
+		if ($num_rows > 0 && $all_cats == FALSE) {
 			$category_data = array('category_identifier' => $wpdb->last_result[0]->category_identifier, 'category_name' => $wpdb->last_result[0]->category_name, 'category_desc' => $wpdb->last_result[0]->category_desc, 'display_desc' => $wpdb->last_result[0]->display_desc, 'category_meta' => $wpdb->last_result[0]->category_meta);
 			return $category_data;
 		} elseif ($num_rows > 0) {
@@ -935,7 +1012,11 @@ if (!function_exists('espresso_ticket_information')) {
 				$sql = $wpdb->get_results("SELECT * FROM " . EVENTS_PRICES_TABLE . " WHERE id ='" . $price_option . "'");
 				$num_rows = $wpdb->num_rows;
 				if ($num_rows > 0) {
-					return $wpdb->last_result[0]->price_type;
+					if (defined("EVENT_ESPRESSO_MEMBERS_DIR") && espresso_above_member_threshold()) {
+						return $wpdb->last_result[0]->member_price_type;
+					} else {
+						return $wpdb->last_result[0]->price_type;
+					}
 				}
 				break;
 		}
@@ -1154,9 +1235,24 @@ if(!function_exists('event_espresso_init_active_gateways')){
 	 * for some gateways (eg: the google checkout gateway needed to be able to add a hook on init for all page loads, which it coudln't do before)
 	 */
 	function event_espresso_init_active_gateways(){
+		//in case any of the gateways do CURL requests, tell CURL where to find the CA file
+		add_action('http_api_curl', 'espresso_curl_ca_file', 10, 1);
 		$active_gateways = apply_filters('action_filter_espresso_active_gateways', get_option('event_espresso_active_gateways', array()));
 		foreach ($active_gateways as $gateway => $path) {
 			event_espresso_require_gateway($gateway . "/init.php",false);
+		}
+	}
+}
+if (!function_exists('event_espresso_require_file')) {
+	/**
+	 * For any CURL requests, add the certificate authority file in gateways. Currently this only does the trick if using CURL...
+	 * The other transports 'WP_HTTP_Stream' and 'WP_HTTP_FSockOpen' don't actually verify the peers anyways, it seems. Or at least
+	 * they didn't complain of needing to know where a CA file was on my (mike's) localhost setup on windows
+	 */
+	function espresso_curl_ca_file( $handle ) {
+		//first double-check the user hasn't set their own CA file in PHP.ini
+		if( ! ini_get ('curl.cainfo')){
+			curl_setopt($handle, CURLOPT_CAINFO, EVENT_ESPRESSO_PLUGINFULLPATH . 'gateways/cacert.pem');
 		}
 	}
 }
@@ -1565,3 +1661,23 @@ function espresso_update_event_meta( $event_id, $new_meta ){
 
 }
 add_action('action_hook_espresso_update_event_meta', 'espresso_update_event_meta', 10, 2);
+
+function espresso_add_additional_registration($event_id){
+	$link = '<div class="additional-registration-div"><a href="'.espresso_reg_url($event_id).'" id="additional-registration-lnk" class="additional-registration-lnk " title="' . __('Add Another Registration to This Event', 'event_espresso') . '">' . __('Add Another Registration to This Event', 'event_espresso') . '</a></div>';
+	echo $link;
+}
+add_action('action_hook_espresso_payment_page_bottom', 'espresso_add_additional_registration', 10, 1);
+add_action('action_hook_espresso_payment_overview_page_bottom', 'espresso_add_additional_registration', 10, 1);
+
+//Function to create and apply CSS filters dynamically
+function espresso_template_css_class($filter_name, $classes, $echo = true) {
+    $classnames = apply_filters("espresso_filter_hook_template_css_$filter_name", $classes);
+    $classnames = apply_filters('espresso_filter_hook_template_css_global', $classnames, $filter_name);
+    if ($echo){
+		echo $classnames;
+	}else{
+		return $classnames;
+	}
+}
+
+

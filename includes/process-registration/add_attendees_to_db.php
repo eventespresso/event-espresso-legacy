@@ -11,8 +11,7 @@ if ( ! function_exists('espresso_verify_sufficient_remaining_tickets' )){
 	function espresso_verify_sufficient_remaining_tickets($event_id,$data_source){
 		//query for availables spaces, counting INCOMPLETE tickets being purchased by OTHERS within the last X
 		//minutes as being 'reserved'
-		
-		$available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');
+		$available_spaces =  apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);
 		$tickets_requested = espresso_count_tickets_requested($data_source);
 		if( $available_spaces >= $tickets_requested){
 			return true;
@@ -21,8 +20,11 @@ if ( ! function_exists('espresso_verify_sufficient_remaining_tickets' )){
 			//it is used to make sure that for MER, we only show this message once per event
 			//because code will pass through this function once for EACH attendee
 			global $wpdb,$only_show_event_full_message_once_for;
+			if( ! is_array($only_show_event_full_message_once_for)){
+				$only_show_event_full_message_once_for = array();
+			}
 			$event_name = $wpdb->get_var($wpdb->prepare("SELECT event_name FROM ".EVENTS_DETAIL_TABLE." WHERE id=%d",$event_id));
-			if($only_show_event_full_message_once_for[$event_id]){
+			if( ! $only_show_event_full_message_once_for[$event_id]){
 				echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . sprintf(__('Sorry, you have requested %1$d ticket(s) for \'%2$s\', but only %3$d remains(s). ', 'event_espresso'),$tickets_requested,$event_name,$available_spaces) .
 				__("All other tickets for this event have been sold, or are being purchased. You may want to try registering later, in case someone doesn't finish registering or cancels", "event_espresso").'</strong></p></div>';
 			}
@@ -47,7 +49,6 @@ if ( ! function_exists('espresso_count_tickets_requested') ){
 			$num_people = absint($data_source ['num_people']);
 		//if $data_source is from MER, and we are requriing additional attendee info,
 		//foreach attendee, the 'attendee_quantity' should be set.
-		//and yes, it has a typo.
 		} elseif(isset($data_source['attendee_quantity'])){
 			$num_people = absint($data_source['attendee_quantity']);
 		}else {
@@ -569,7 +570,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								//Added by Imon
 								$ext_attendee_id = $wpdb->insert_id;
 								
-								$ext_att_data_source['attendee_id'] = $attendee_id;
+								$ext_att_data_source['attendee_id'] = $ext_attendee_id;
 								$ext_att_data_source['event_meta'] = $event_meta;
 			
 			
@@ -692,6 +693,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 					
 						$counter = 1;
 						//foreach price type in event attendees
+						
 						foreach ( $event['event_attendees'] as $price_id => $event_attendees ) { 
 						
 							$session_vars['data'] = $event;
@@ -712,6 +714,11 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 								// ADD ATTENDEE TO DB
 								$return_data = event_espresso_add_attendees_to_db( $event_id, $session_vars, TRUE );
 								if (!empty($return_data['registration_id'])) $session_vars['data']['attendee_quantity']--;
+								if ( ! $return_data){
+									//something went wrong when adding them to the DB, 
+									//like the event sold out
+									return;
+								}
 								$tmp_registration_id = $return_data['registration_id'];
 								$notifications = $return_data['notifications'];
 

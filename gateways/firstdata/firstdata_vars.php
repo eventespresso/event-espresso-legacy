@@ -8,11 +8,7 @@ function espresso_display_firstdata($data) {
 	if ($use_sandbox) {
 		echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3>';
 	}
-	if ($firstdata_settings['force_ssl_return']) {
-		$home = str_replace('http://', 'https://', home_url());
-	} else {
-		$home = home_url();
-	}
+	
 	wp_register_script( 'firstdata', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/firstdata/firstdata.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'firstdata' );	
 	
@@ -28,8 +24,7 @@ function espresso_display_firstdata($data) {
 			<?php if ($firstdata_settings['display_header']) { ?>
 				<h3 class="payment_header"><?php echo $firstdata_settings['header']; ?></h3><?php } ?>
 			<div class = "event_espresso_form_wrapper">
-				<form id="firstdata_payment_form" name="firstdata_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id;
-		; ?>">
+				<form id="firstdata_payment_form" name="firstdata_payment_form" method="post" action="<?php echo add_query_arg(array('r_id'=>$registration_id), get_permalink($org_options['return_url'])); ?>">
 					<fieldset id="firstdata-billing-info-dv">
 						<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>
 						<p>

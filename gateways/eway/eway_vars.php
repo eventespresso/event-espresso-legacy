@@ -45,13 +45,9 @@ function espresso_display_eway($payment_data) {
 	$myeway->addField('CustomerEmail', $attendee_email);
 	$myeway->addField('CustomerPhone', $phone);
 	$myeway->addField('InvoiceDescription', stripslashes_deep($event_name) . ' | ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($fname . ' ' . $lname) . ' | ' . __('Registrant Email:', 'event_espresso') . ' ' . $attendee_email . ' | ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity);
-	$myeway->addField('CancelURL', str_replace("&", "%26", home_url() . '/?page_id=' . $org_options['cancel_return']));
-	if ($eway_settings['force_ssl_return']) {
-		$home = str_replace("http://", "https://", home_url());
-	} else {
-		$home = home_url();
-	}
-	$return_url = str_replace("&","%26", $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=eway');
+	$myeway->addField('CancelURL', str_replace("&", "%26", get_permalink($org_options['cancel_return'])));
+
+	$return_url = str_replace("&","%26", espresso_build_gateway_url('return_url', $payment_data, 'eway'));
 	$myeway->addField('ReturnURL', $return_url);
 	$myeway->addField('CompanyLogo', $eway_settings['image_url']);
 	$myeway->addField('PageBanner', '');

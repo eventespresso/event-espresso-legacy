@@ -174,6 +174,7 @@ function attendee_edit_record() {
 				//If this is not an attendee returing to edit their details, then we need to return a message.
 				if ( ! isset($_REQUEST['single'] )) {
 					if ( espresso_registration_id( $req_primary ) == $registration_id && espresso_registration_id( $id ) == $registration_id ){
+						do_action ( 'action_hook_espresso_update_registration_details_by_attendee', $registration_id );
 						if($payment_status == 'Completed'){
 							_e('Your registration details have been updated.', 'event_espresso');
 							return;
@@ -197,11 +198,11 @@ function attendee_edit_record() {
 
 ?>
 
-	<div id="edit-attendee-record-dv" class="event-display-boxes ui-widget">
-		<h3 class="event_title ui-widget-header ui-corner-top">
+	<div id="edit-attendee-record-dv" class="<?php espresso_template_css_class('event_display_boxes','event-display-boxes ui-widget'); ?>">
+		<h3 class="<?php espresso_template_css_class('event_title','event_title ui-widget-header ui-corner-top'); ?> ">
 			<?php _e('Edit Registration','event_espresso'); ?>
 		</h3>
-		<div class="event_espresso_form_wrapper event-data-display ui-widget-content ui-corner-bottom">
+		<div class="<?php espresso_template_css_class('event_data_display','event_espresso_form_wrapper event-data-display ui-widget-content ui-corner-bottom'); ?>">
 
 <?php if ( $display_attendee_form ) : ?>
 

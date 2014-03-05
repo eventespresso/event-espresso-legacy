@@ -56,16 +56,16 @@ if (!function_exists('event_espresso_show_attendess')) {
 			/*<h2><?php _e('Attendee Listing For: ','event_espresso'); ?><?php echo $event_name . ' - ' . $event_status?> </h2>*/
 ?>
 
-<div class="event-display-boxes ui-widget">
+<div class="<?php espresso_template_css_class('event_display_boxes','event-display-boxes ui-widget'); ?>">
 
-		<h2 class="event_title ui-widget-header ui-corner-top">
+		<h2 class="<?php espresso_template_css_class('event_title','event_title ui-widget-header ui-corner-top'); ?>">
 	<?php _e('Attendee Listing For: ','event_espresso'); ?>
 	<?php echo $event_name . $event_status?></h2>
 
-		<div class="event-data-display ui-widget-content ui-corner-bottom">
+		<div class="<?php espresso_template_css_class('event_data_display','event-data-display ui-widget-content ui-corner-bottom'); ?>">
 
 		<?php //echo wpautop($event_desc); ?>
-			<ol class="attendee_list">
+			<ol class="<?php espresso_template_css_class('attendee_list','attendee_list'); ?>">
 				<?php
 					$a_sql = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE . " WHERE event_id='" . $event_id . "'";
 					$a_sql .= $paid_only == 'true'? " AND (payment_status='Completed' OR payment_status='Pending' OR payment_status='Refund') ":'';
@@ -88,7 +88,7 @@ if (!function_exists('event_espresso_show_attendess')) {
 						//$custom_question_2 = '<br />'.do_shortcode('[EE_ANSWER q="13" a="'.$id.'"]');
 				
 				?>
-						<li class="attendee_details"> <span class="espresso_attendee"><?php echo $gravatar ?><?php echo stripslashes_deep($fname . ' ' . $lname) . $city_state .'</p>'; ?> </span>
+						<li class="<?php espresso_template_css_class('attendee_details','attendee_details'); ?>"> <span class="<?php espresso_template_css_class('espresso_attendee','espresso_attendee'); ?>"><?php echo $gravatar ?><?php echo stripslashes_deep($fname . ' ' . $lname) . $city_state .'</p>'; ?> </span>
 							<div class="clear"></div>
 						</li>
 				<?php

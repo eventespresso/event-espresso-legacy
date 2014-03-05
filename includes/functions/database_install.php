@@ -478,7 +478,7 @@ function events_data_tables_install() {
 					  price_option VARCHAR(100) DEFAULT NULL,
 					  orig_price decimal(20,2) DEFAULT '0.00',
 					  final_price decimal(20,2) DEFAULT '0.00',
-					  quantity tinyint(1) DEFAULT '0',
+					  quantity INT(11) DEFAULT '0',
 					  total_cost decimal(20,2) DEFAULT '0.00',
 					  amount_pd decimal(20,2) DEFAULT '0.00',
 					  coupon_code VARCHAR(45) DEFAULT NULL,
@@ -715,6 +715,7 @@ function events_data_tables_install() {
 				start_time varchar(10) DEFAULT NULL,
 				end_time varchar(10) DEFAULT NULL,
 				reg_limit int (15) DEFAULT '0',
+				description varchar(30) DEFAULT NULL,
 				PRIMARY KEY  (id),
 			  	KEY event_id (event_id)";
 	event_espresso_run_install($table_name, '', $sql);

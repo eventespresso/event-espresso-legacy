@@ -50,6 +50,7 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 //		echo '<h4>$use_coupon_code : ' . $use_coupon_code . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		
 		if ( in_array($use_coupon_code, array('Y',"G","A")) && $event_cost > 0 ) {
+//			echo "cuopon code $coupon_code";
 			if ( $coupon_code ){
 
 				global $wpdb;
@@ -60,10 +61,8 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 				$event_id = absint( $event_id );
 				$coupon_id = FALSE;
 						
-				
-				if ( isset( $_SESSION['espresso_session']['events_in_session'][ $event_id ] ) && isset( $_SESSION['espresso_session']['events_in_session'][ $event_id ]['coupon']['code'] )) {
+				if ( isset( $_SESSION['espresso_session']['events_in_session'][ $event_id ] ) && isset( $_SESSION['espresso_session']['events_in_session'][ $event_id ]['coupon']['code'] ) && $_SESSION['espresso_session']['events_in_session'][ $event_id ]['coupon']['code'] == $coupon_code) {
 					// check if coupon has already been added to session
-					if ( $_SESSION['espresso_session']['events_in_session'][ $event_id ]['coupon']['code'] == $coupon_code ) {
 						// grab values from session
 						$coupon = $_SESSION['espresso_session']['events_in_session'][ $event_id ]['coupon'];
 						//printr( $coupon, '$coupon  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
@@ -74,9 +73,8 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 	                	$coupon_code_description = $coupon['coupon_code_description'];
 	                	$use_percentage = $coupon['use_percentage'];
 
-					}
 					
-				} else {
+				} else {//ask teh DB if the promocode is valid
 					
 					$SQL = "SELECT d.* FROM " . EVENTS_DISCOUNT_CODES_TABLE . " d ";
 					$SQL .= " LEFT JOIN " . EVENTS_DISCOUNT_REL_TABLE . " r ON r.discount_id  = d.id ";
@@ -143,8 +141,7 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 						
 						$msg = '<p id="event_espresso_valid_coupon" style="margin:0;">';
 						$msg .= '<strong>' . __('Promotional code ', 'event_espresso') . $coupon_code . '</strong> ( ' . $discount_type_price . __(' discount', 'event_espresso') . ' )<br/>';
-	          		    $msg .= __('has been successfully applied to the following events', 'event_espresso') . ':<br/>';
-						
+	          		    $msg .= __('has been successfully applied to the following events', 'event_espresso') . ':<br/>';						
 					} else {
 					
 						$msg = '<p id="event_espresso_valid_coupon" style="margin:0;">';

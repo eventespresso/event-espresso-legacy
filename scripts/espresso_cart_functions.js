@@ -83,9 +83,11 @@ jQuery(document).ready(function() {
         calculate_total: function(grand_total){
             var _eecart = this;
             _eecart.progress(jQuery('#event_total_price'));
+			_eecart.progress(jQuery('#event_total_price_widget'));
 
             if (grand_total){
                 jQuery('#event_total_price').html(grand_total);
+				jQuery('#event_total_price_widget').html(grand_total);
                 return;
             }
 
@@ -93,6 +95,7 @@ jQuery(document).ready(function() {
 
             event_espresso_do_ajax(data,function(r){
 				jQuery('#event_total_price').html(r.grand_total);
+				jQuery('#event_total_price_widget').html(r.grand_total);
 				if ( r.msg != undefined && r.msg != '' ) {
 					jQuery('#event_espresso_notifications').hide().html(r.msg).fadeIn();
 				} else {

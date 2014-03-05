@@ -116,7 +116,7 @@ function event_list_attendees() {
 		?>
 		<p>
 			<strong><?php _e('Advanced filters are available in the premium versions.', 'event_espresso'); ?></strong> 
-			<a href="http://eventespresso.com/download/" target="_blank">
+			<a href="http://eventespresso.com/pricing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Advanced+filters+are+available+in+the+premium+versions<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=attendee_overview_tab" target="_blank">
 		<?php _e('Upgrade Now!', 'event_espresso'); ?>
 			</a>
 		</p>
