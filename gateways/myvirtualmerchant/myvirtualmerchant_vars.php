@@ -204,7 +204,11 @@ $countries = array(
 						</p>
 						<p>
 					        <label for="zip"><?php _e('Zip', 'event_espresso'); ?></label>
-					        <input name="zip" type="text" id="mvm_zip" class="required" value="<?php echo $zip ?>" />
+					        <input name="zip" type="text" id="mvm_zip" class="required" />
+						</p>
+						<p>
+					        <label for="phone"><?php _e('Phone', 'event_espresso'); ?></label>
+					        <input name="phone" type="text" id="mvm_phone" class="required" value="<?php echo $phone ?>" />
 						</p>
 					</fieldset>
 

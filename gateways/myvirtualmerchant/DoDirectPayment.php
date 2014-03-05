@@ -19,7 +19,7 @@ function espresso_process_myvirtualmerchant($payment_data) {
 		'ssl_user_id'=>$myvirtualmerchant_settings['ssl_user_id'],
 		'ssl_pin'=>$myvirtualmerchant_settings['ssl_pin'],
 		'ssl_show_form'=>'false',//we just want to process the payment, not get the HTML to show a form or anything
-		'ssl_card_number'=>$_POST['card_num'],
+		'ssl_card_number'=>preg_replace('/\s+/', '', $_POST['card_num']),
 		'ssl_exp_date'=>$_POST['expmonth'] . $_POST['expyear'],
 		'ssl_amount'=>$payment_data['total_cost'],
 		'ssl_first_name'=>$_POST['first_name'],
@@ -29,6 +29,7 @@ function espresso_process_myvirtualmerchant($payment_data) {
 		'ssl_city'=>$_POST['city'],
 		'ssl_state'=>$_POST['state'],
 		'ssl_country'=>$_POST['country'],
+		'ssl_phone'=>$_POST['phone'],
 		'ssl_avs_zip'=>$_POST['zip'],
 		'ssl_cvv2cvc2'=>$_POST['cvv'],
 		'ssl_invoice_number'=>$_POST['invoice'],
