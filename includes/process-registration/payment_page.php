@@ -310,7 +310,7 @@ function espresso_confirm_registration() {
 	$address2 = isset( $attendee->address2 ) ? htmlspecialchars( stripslashes( $attendee->address2 ), ENT_QUOTES, 'UTF-8' ) : '';
 	$city = isset( $attendee->city ) ? htmlspecialchars( stripslashes( $attendee->city ), ENT_QUOTES, 'UTF-8' ) : '';
 	$state = isset( $attendee->state ) ? htmlspecialchars( stripslashes( $attendee->state ), ENT_QUOTES, 'UTF-8' ) : '';
-	$country = isset( $attendee->country ) ? htmlspecialchars( stripslashes( $attendee->country ), ENT_QUOTES, 'UTF-8' ) : '';
+	$country = isset( $attendee->country_id ) ? htmlspecialchars( stripslashes( $attendee->country_id ), ENT_QUOTES, 'UTF-8' ) : '';
 	$zip =  isset( $attendee->zip ) ? $attendee->zip : '';
 	$payment_status = $attendee->payment_status;
 	$txn_type = $attendee->txn_type;
