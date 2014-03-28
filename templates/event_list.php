@@ -62,7 +62,8 @@ if (!function_exists('event_espresso_get_event_details')) {
 			'current_page'				=> 1,
 			'events_per_page'			=> 50,
 			'num_page_links_to_display'	=>10,
-			'use_wrapper'				=> true
+			'use_wrapper'				=> true,
+			'exclude_closed_events'		=> false
 		);
 		// loop thru default atts
 		foreach ($default_attributes as $key => $default_attribute) {
@@ -145,7 +146,17 @@ if (!function_exists('event_espresso_get_event_details')) {
 		//User sql
 		$sql .= (isset($user_id)  && !empty($user_id))? " AND wp_user = '" . $user_id . "' ": '';
 		
-		$sql .= $show_expired == 'false' ? " AND (e.start_date >= '" . date('Y-m-d') . "' OR e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
+		//Exclude events that have closed registration
+		if($exclude_closed_events){
+		    $sql .= $show_expired == 'false' ? " AND (e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
+		} else {
+		    $sql .= $show_expired == 'false' ? " AND (e.start_date >= '" . date('Y-m-d') . "' OR e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
+		}
+
+
+		//$sql .= $show_expired == 'false' ? " AND (e.start_date >= '" . date('Y-m-d') . "' OR e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
+		
+
 		if  ($show_expired == 'true'){
 			$allow_override = 1;
 		}
