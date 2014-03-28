@@ -153,10 +153,6 @@ if (!function_exists('event_espresso_get_event_details')) {
 		    $sql .= $show_expired == 'false' ? " AND (e.start_date >= '" . date('Y-m-d') . "' OR e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
 		}
 
-
-		//$sql .= $show_expired == 'false' ? " AND (e.start_date >= '" . date('Y-m-d') . "' OR e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
-		
-
 		if  ($show_expired == 'true'){
 			$allow_override = 1;
 		}
