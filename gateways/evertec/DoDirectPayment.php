@@ -34,13 +34,12 @@ function espresso_process_evertec($payment_data) {
 		'operatorId'=>'',
 		'channel'=>6,//not sure what this is for
 		'ignoreValues'=>'',  
-		'language'=>$evertec_settings['evertec_pages_language'],
 		'tax1'=>'',//0
 		'tax2'=>'',
 		'tax3'=>'',
 		'tax4'=>'',
 		'MerchantTransId'=>$payment_data['registration_id'],
-		'amount'=>'10.00',//$payment_data['event_cost'],
+		'amount'=>$payment_data['total_cost'],
 		'filler1'=>'',
 		'filler2'=>'',
 		'filler3'=>'',
