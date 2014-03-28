@@ -616,7 +616,7 @@ function edit_attendee_record() {
 													$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
 													//$SQL .= "AND ( at.attendee_id IS NULL OR at.attendee_id = %d ) ";
 													$SQL .= $FILTER . " ";
-													$SQL .= "ORDER BY qg.id, q.id ASC";
+													$SQL .= apply_filters('espresso_edit_attendee_questions_order_by', "ORDER BY qg.id, q.sequence, q.id ASC");
 													//echo "sql:".$wpdb->prepare( $SQL, $id );
 													$questions = $wpdb->get_results( $SQL);
 													
