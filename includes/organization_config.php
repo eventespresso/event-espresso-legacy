@@ -5,11 +5,12 @@ function organization_config_mnu() {
 	global $org_options, $espresso_premium, $espresso_check_for_updates;
 	if (isset($_POST['update_org'])) {
 		$org_options['organization'] = isset($_POST['org_name']) && !empty($_POST['org_name']) ? stripslashes_deep($_POST['org_name']) : '';
-		$org_options['organization_street1'] = isset($_POST['org_street1']) && !empty($_POST['org_street1']) ? $_POST['org_street1'] : '';
-		$org_options['organization_street2'] = isset($_POST['org_street2']) && !empty($_POST['org_street2']) ? $_POST['org_street2'] : '';
-		$org_options['organization_city'] = isset($_POST['org_city']) && !empty($_POST['org_city']) ? $_POST['org_city'] : '';
-		$org_options['organization_state'] = isset($_POST['org_state']) && !empty($_POST['org_state']) ? $_POST['org_state'] : '';
-		$org_options['organization_zip'] = isset($_POST['org_zip']) && !empty($_POST['org_zip']) ? $_POST['org_zip'] : '';
+		$org_options['organization_street1'] = isset($_POST['org_street1']) && !empty($_POST['org_street1']) ? stripslashes_deep($_POST['org_street1']) : '';
+		$org_options['organization_street2'] = isset($_POST['org_street2']) && !empty($_POST['org_street2']) ? stripslashes_deep($_POST['org_street2']) : '';
+		$org_options['organization_city'] = isset($_POST['org_city']) && !empty($_POST['org_city']) ? stripslashes_deep($_POST['org_city']) : '';
+		$org_options['organization_state'] = isset($_POST['org_state']) && !empty($_POST['org_state']) ? stripslashes_deep($_POST['org_state']) : '';
+		$org_options['organization_zip'] = isset($_POST['org_zip']) && !empty($_POST['org_zip']) ? stripslashes_deep($_POST['org_zip']) : '';
+		$org_options['organization_country'] = isset($_POST['org_country']) && !empty($_POST['org_country']) ? stripslashes_deep($_POST['org_country']) : '';
 		$org_options['organization_country'] = isset($_POST['org_country']) && !empty($_POST['org_country']) ? $_POST['org_country'] : '';
 		$org_options['contact_email'] = isset($_POST['email']) && !empty($_POST['email']) ? $_POST['email'] : '';
 		$org_options['expire_on_registration_end'] = isset($_POST['expire_on_registration_end']) && !empty($_POST['expire_on_registration_end']) ? $_POST['expire_on_registration_end'] : '';
@@ -189,31 +190,31 @@ function organization_config_mnu() {
 												<label for="org_street1">
 													<?php _e('Organization Street 1:', 'event_espresso'); ?>
 												</label>
-												<input type="text" name="org_street1" size="45" value="<?php echo $org_options['organization_street1']; ?>" />
+												<input type="text" name="org_street1" size="45" value="<?php echo stripslashes_deep($org_options['organization_street1']); ?>" />
 											</li>
 											<li>
 												<label for="org_street2">
 													<?php _e('Organization Street 2:', 'event_espresso'); ?>
 												</label>
-												<input type="text" name="org_street2" size="45" value="<?php echo $org_options['organization_street2']; ?>" />
+												<input type="text" name="org_street2" size="45" value="<?php echo stripslashes_deep($org_options['organization_street2']); ?>" />
 											</li>
 											<li>
 												<label for="org_city">
 													<?php _e('Organization City:', 'event_espresso'); ?>
 												</label>
-												<input type="text" name="org_city" size="45" value="<?php echo $org_options['organization_city']; ?>" />
+												<input type="text" name="org_city" size="45" value="<?php echo stripslashes_deep($org_options['organization_city']); ?>" />
 											</li>
 											<li>
 												<label for="org_state">
 													<?php _e('Organization State:', 'event_espresso'); ?>
 												</label>
-												<input type="text" name="org_state" size="45" value="<?php echo $org_options['organization_state']; ?>" />
+												<input type="text" name="org_state" size="45" value="<?php echo stripslashes_deep($org_options['organization_state']); ?>" />
 											</li>
 											<li>
 												<label for="org_zip">
 													<?php _e('Organization Zip/Postal Code:', 'event_espresso'); ?>
 												</label>
-												<input type="text" name="org_zip" size="10" value="<?php echo $org_options['organization_zip']; ?>" />
+												<input type="text" name="org_zip" size="10" value="<?php echo stripslashes_deep($org_options['organization_zip']); ?>" />
 											</li>
 											<li>
 												<label for="org_country">
