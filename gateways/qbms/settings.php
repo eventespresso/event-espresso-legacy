@@ -54,7 +54,7 @@ function event_espresso_qbms_payment_settings() {
 	<div class="postbox <?php echo $postbox_style; ?>">
 		<div title="Click to toggle" class="handlediv"><br /></div>
 		<h3 class="hndle">
-			<?php _e('QuickBooks Mechant Services Settings', 'event_espresso'); ?>
+			<?php _e('QuickBooks Merchant Services Settings', 'event_espresso'); ?>
 		</h3>
 		<div class="inside">
 			<div class="padding">
