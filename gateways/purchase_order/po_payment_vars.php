@@ -55,7 +55,7 @@ function espresso_display_purchase_order($payment_data) {
 			<p>
 				<strong><?php _e('Attention!', 'event_espresso'); ?></strong><br />
 				<?php _e('If you wish to pay by check or money order, then please make note of the information above, and<br />enter Purchase Order or Money Order Number :', 'event_espresso'); ?> 
-				<input type="text" name="po_number" id="po_number" /><br/>
+				<input type="text" name="po_number" id="po_number" class="required" /><br/>
 				<?php foreach($args as $key=>$value){
 					echo "<input type='hidden' name='$key' value='$value'>";
 				}?>
@@ -73,6 +73,17 @@ function espresso_display_purchase_order($payment_data) {
 
 	</div>
 </div>
+<script>
+jQuery(document).ready(function($) {
+	$(function(){
+		//po payment form validation if the po option is selected
+		if (!$('#po-payment-option-dv').hasClass('.payment-option-closed')) {
+			$('#finalize_purchase_order').validate();
+		}
+	});
+});
+</script>
+
 	<?php
 }
 

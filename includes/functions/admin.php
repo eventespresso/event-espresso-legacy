@@ -1678,13 +1678,17 @@ function espresso_get_question_groups_for_event( $existing_question_groups = arr
 
 }
 
-function espresso_check_ssl() {
-	$home = str_replace("http://", "https://", home_url());
-	@$handle = fopen($home, "r");
-	if(empty($handle)){ 
-		return FALSE;
+if (!function_exists('espresso_check_ssl')) {
+
+	function espresso_check_ssl() {
+		$home = str_replace("http://", "https://", home_url());
+		@$handle = fopen($home, "r");
+		if(empty($handle)){ 
+			return FALSE;
+		}
+		return TRUE;
 	}
-	return TRUE;
+
 }
 
 /**
