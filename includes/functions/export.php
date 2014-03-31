@@ -427,6 +427,15 @@ if (!function_exists('espresso_export_stuff')) {
 							$sql .= $espresso_member ? ") ORDER BY att_id " : " ORDER BY a.id ";
 
 							$participants = $wpdb->get_results($sql);
+							/*
+							 * Remove duplicate entries if multiple entries in checkin table
+							 * save last entry for export.
+							 */
+							$rebuild_participants = array();
+							foreach ($participants as $participant) {
+								$rebuild_participants[$participant->att_id] = $participant;
+							}
+							$participants = $rebuild_participants;
 
 							$filename = ( isset($_REQUEST['all_events']) && $_REQUEST['all_events'] == "true" ) ? __('all-events', 'event_espresso') : $event_name;
 
