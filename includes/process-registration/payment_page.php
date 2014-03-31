@@ -361,7 +361,6 @@ function espresso_confirm_registration() {
 		if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/process-registration/pending_approval_page.php')) {
 			require_once('pending_approval_page.php');
 			echo espresso_pending_registration_approval($registration_id);
-			return;
 		}
 		
 	}
