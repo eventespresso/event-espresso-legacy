@@ -478,7 +478,7 @@ function events_data_tables_install() {
 					  price_option VARCHAR(100) DEFAULT NULL,
 					  orig_price decimal(20,2) DEFAULT '0.00',
 					  final_price decimal(20,2) DEFAULT '0.00',
-					  quantity tinyint(1) DEFAULT '0',
+					  quantity INT(11) DEFAULT '0',
 					  total_cost decimal(20,2) DEFAULT '0.00',
 					  amount_pd decimal(20,2) DEFAULT '0.00',
 					  coupon_code VARCHAR(45) DEFAULT NULL,
