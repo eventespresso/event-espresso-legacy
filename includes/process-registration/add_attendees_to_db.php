@@ -679,8 +679,8 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 			$count_of_events = count($events_in_session);
 			$current_session_id = $_SESSION['espresso_session']['id'];
 			$biz_name = $count_of_events . ' ' . $org_options['organization'] . __(' events', 'event_espresso');
-			$event_cost = $_SESSION['espresso_session']['grand_total'];
-			$event_cost = apply_filters('filter_hook_espresso_cart_grand_total', $event_cost);
+			//$event_cost = $_SESSION['espresso_session']['grand_total'];
+			//$event_cost = apply_filters('filter_hook_espresso_cart_grand_total', $event_cost);
 
 			// If there are events in the session, add them one by one to the attendee table
 			if ($count_of_events > 0) {
