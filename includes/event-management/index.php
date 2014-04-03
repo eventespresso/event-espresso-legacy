@@ -187,7 +187,7 @@ function event_espresso_manage_events() {
 	</div>
 	<div id="alt_email_info" style="display:none">
 		<h2><?php _e('Alternate Email Address', 'event_espresso'); ?></h2>
-		<p><?php _e('If an alternate email address is entered. Admin email notifications wil be sent to this address instead.', 'event_espresso'); ?></p>
+		<p><?php _e('If an alternate email address is entered. Admin email notifications for the event will also be sent to this address.', 'event_espresso'); ?></p>
 	</div>
 	<div id="status_types_info" style="display:none;">
 		<h2><?php _e('Event Status Types', 'event_espresso'); ?></h2>
