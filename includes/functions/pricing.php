@@ -437,11 +437,14 @@ if (!function_exists('event_espresso_price_dropdown')) {
                 }
                 $message = isset($message) ? $message : '';
 
-                if ( $result->event_cost != '0.00' ) {
+                /*if ( $result->event_cost != '0.00' ) {
                     $html .= '<span class="'.espresso_template_css_class('event_price_label','event_price_label', false).'">' . __('Price:', 'event_espresso') . '</span> <span class="'.espresso_template_css_class('event_price_value','event_price_value', false).'">' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . $surcharge . '</span>';
                     $html .= '<input type="hidden" name="price_id' . $multi_name_adjust . '" id="price_id-' . $result->id . '" value="' . $result->id . '" />';
                     $html .= '<span class="'.espresso_template_css_class('free_event','free_event', false).'">' . $result->price_type . '</span>';
-				}
+				}*/
+
+				$html .= '<span class="'.espresso_template_css_class('event_price_label','event_price_label', false).'">' . __('Price:', 'event_espresso') . '</span> <span class="'.espresso_template_css_class('event_price_value','event_price_value', false).'">' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . $surcharge . '</span>';
+				$html .= '<input type="hidden" name="price_id' . $multi_name_adjust . '" id="price_id-' . $result->id . '" value="' . $result->id . '" />'; 
             }
         }
        	echo $html;
