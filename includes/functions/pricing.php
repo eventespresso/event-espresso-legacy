@@ -377,7 +377,7 @@ if (!function_exists('event_espresso_price_dropdown')) {
        	
 		$html = '';
 		
-		$label = $label == '' ? '<span class="'.espresso_template_css_class('section_title','section-title', false).'">'.__('Choose an Option: ', 'event_espresso').'</span>' : $label;
+		$label = $label == '' ? '<span class="'.espresso_template_css_class('section_title','section-title', false).'">'.__('Choose an Option:', 'event_espresso').'</span>' : $label;
 		
 		//Will make the name an array and put the time id as a key so we know which event this belongs to
         $multi_name_adjust = isset($multi_reg) && $multi_reg == true ? "[$event_id]" : '';
@@ -462,7 +462,7 @@ function espresso_attendee_admin_price_dropdown($event_id, $atts) {
 		return;
 		
 	$html = '';
-	$label = isset($label) && $label != '' ? $label : '<span class="'.espresso_template_css_class('section_title','section-title', false).'">'.__('Choose an Option: ', 'event_espresso').'</span>';
+	$label = isset($label) && $label != '' ? $label : '<span class="'.espresso_template_css_class('section_title','section-title', false).'">'.__('Choose an Option:', 'event_espresso').'</span>';
 	
 	$results = $wpdb->get_results("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' ORDER BY id ASC");
 	//echo "<pre>".print_r($results,true)."</pre>";

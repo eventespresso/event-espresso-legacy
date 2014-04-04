@@ -165,7 +165,7 @@ p.error,
 .event_espresso_form_wrapper label,
 .event_espresso_form_wrapper span.label {
 	display: inline-block; float: left; width:150px; padding:.5em 10px 1em 0;
-	text-align: right; font-size:12px; line-height:1em; vertical-align: middle; 
+	text-align: left; font-size:12px; line-height:1em; vertical-align: middle; 
 }
 .event_form_field .event-quest-group-textarea label.ee-reg-page-questions{
 	vertical-align: top; 
