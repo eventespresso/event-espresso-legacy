@@ -714,7 +714,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 								// ADD ATTENDEE TO DB
 								$return_data = event_espresso_add_attendees_to_db( $event_id, $session_vars, TRUE );
 								if (!empty($return_data['registration_id'])) $session_vars['data']['attendee_quantity']--;
-								if ( ! $return_data){
+								if (!$return_data){
 									//something went wrong when adding them to the DB, 
 									//like the event sold out
 									return;
