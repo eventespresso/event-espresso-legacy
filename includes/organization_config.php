@@ -54,9 +54,9 @@ function organization_config_mnu() {
 		$org_options['default_promocode_usage'] = isset($_POST['default_promocode_usage']) && !empty($_POST['default_promocode_usage']) ? $_POST['default_promocode_usage'] : 'N';
 		$org_options['ticket_reservation_time'] = isset($_POST['ticket_reservation_time']) && !empty($_POST['ticket_reservation_time']) ? $_POST['ticket_reservation_time'] : '30';
 		$ueip_optin = isset($_POST['ueip_optin']) && !empty($_POST['ueip_optin']) ? $_POST['ueip_optin'] : 'yes';
-		
+
 		$org_options['default_logo_url'] = isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ? $_REQUEST['upload_image'] : '';
-			 
+
 		$currency_format = getCountryFullData($org_options['organization_country']);
 		switch ($currency_format['iso_code_3']) {
 			case 'USA': $org_options['currency_symbol'] = '$'; // US Dollar
@@ -128,9 +128,10 @@ function organization_config_mnu() {
 
 	$org_options = get_option('events_organization_settings');
 	$ueip_optin = get_option('ee_ueip_optin');
-	$plugin_basename = plugin_basename(EVENT_ESPRESSO_PLUGINPATH);
+	$plugin_basename = EVENT_ESPRESSO_WPPLUGINPATH;
+
 	$verify_fail = get_option( 'pue_verification_error_' . $plugin_basename );
-	$site_license_key_verified = $verify_fail || !empty( $verify_fail ) ? '<span class"pue-sl-not-verified"></span>' : '<span class="pue-sl-verified"></span>';/**/ 
+	$site_license_key_verified = $verify_fail || !empty( $verify_fail ) || ( empty( $org_options['site_license_key'] ) && empty( $verify_fail ) ) ? '<span class="pue-sl-not-verified"> </span>' : '<span class="pue-sl-verified"> </span>';/**/
 	$values = array(
 			array('id' => 'Y', 'text' => __('Yes', 'event_espresso')),
 			array('id' => 'N', 'text' => __('No', 'event_espresso')));
@@ -177,7 +178,7 @@ function organization_config_mnu() {
 															<p><?php echo __('The default logo will be used in your custom invoice, ticketing, certificates, and payment templates.', 'event_espresso'); ?></p>
 														</div>
 														</li>
-														<li><h4><?php _e('Contact Information', 'event_espresso'); ?></h4></li>									
+														<li><h4><?php _e('Contact Information', 'event_espresso'); ?></h4></li>
 											<li>
 												<label for="org_name">
 													<?php _e('Organization Name:', 'event_espresso'); ?>
@@ -242,9 +243,9 @@ function organization_config_mnu() {
 													<?php _e('You must set the time zone for your city, or the city closest to you. UTC time will not work.', 'event_espresso'); ?>
 													<a href="http://ee-updates.s3.amazonaws.com/images/time-zone-settings-example.jpg" class="thickbox">View an example?</a> </p>
 											</li>
-											
+
 										</ul>
-										
+
 										<p>
 											<input class="button-primary" type="submit" name="Submit" value="<?php _e('Save Options', 'event_espresso'); ?>" id="save_organization_saetting_1" />
 										</p>
@@ -650,15 +651,15 @@ function organization_config_mnu() {
 									<div class="inside">
 										<div class="padding">
 											<p>
-												<?php echo espresso_data_collection_optin_text(); ?>	
+												<?php echo espresso_data_collection_optin_text(); ?>
 											</p>
 											<ul>
 												<li>
 													<label for="ueip_optin">
 		<?php _e('Yes! I\'m In:', 'event_espresso'); ?>
 													</label>
-													<?php 
-													$values=array(					
+													<?php
+													$values=array(
 													array('id'=>'yes','text'=> __('Yes','event_espresso')),
 													array('id'=>'no','text'=> __('No','event_espresso'))
 												);
@@ -708,7 +709,7 @@ function organization_config_mnu() {
 					jQuery("p.default-logo-thumb").remove();
 					jQuery("p#image-display").remove();
 					jQuery('#remove-image').remove();
-					
+
 					//Add new image
 					imgurl = jQuery('img',html).attr('src');
 					jQuery('#' + formfield).val(imgurl);
@@ -719,7 +720,7 @@ function organization_config_mnu() {
 					window.original_send_to_editor(html);
 				}
 			}
-			
+
 			// process the remove link in the metabox
 			jQuery('#remove-image').click(function(){
 				var answer = confirm("<?php _e('Do you really want to delete this image? Please remember to save your settings to complete the removal.', 'event_espresso'); ?>");
