@@ -64,6 +64,7 @@ class PluginUpdateEngineChecker {
 	private $_installed_version = ''; //this will just hold what installed version we have of the plugin right now.
 	private $_is_premium = FALSE; //this is a flag used for setting whether the premium version is installed or not.
 	private $_is_prerelease = FALSE; //optional, this flag is used to indicate whether this is a pre-release version or not.
+	private $_is_freerelease = FALSE; //this is used to indicate whether this is a free release or not.
 	private $_plugin_basename = '';
 	private $_use_wp_update = FALSE; //flag for indicating if free downloads are updated from wp or not.
 	private $_incoming_slug = '';
@@ -92,6 +93,8 @@ class PluginUpdateEngineChecker {
 	 */
 	function __construct( $metadataUrl = NULL, $slug = NULL, $options = array() ){
 		$this->metadataUrl = $metadataUrl;
+		if ( empty($this->metadataUrl) )
+			return FALSE;
 
 		$this->_incoming_slug = $slug;
 
@@ -133,7 +136,6 @@ class PluginUpdateEngineChecker {
 		if ( $this->_is_premium && isset($this->_incoming_slug['free'] ) ) {
 			delete_site_option( 'pue_force_upgrade_' . $this->_incoming_slug['free'][key($this->_incoming_slug['free'])]);
 		} else {
-
 			$force_upgrade = get_site_option( 'pue_force_upgrade_' . $this->slug );
 			$this->_force_premium_upgrade = !empty($force_upgrade) ? TRUE : FALSE;
 			$this->_is_premium = !empty( $force_upgrade ) ? TRUE : FALSE;
@@ -314,6 +316,10 @@ class PluginUpdateEngineChecker {
 		$pr_search_ref = is_array($slug) && isset( $slug['prerelease'] ) ? key( $slug['prerelease'] ) : NULL;
 		$this->_is_prerelease = !empty( $pr_search_ref ) && preg_match("/$pr_search_ref/i", $this->_installed_version ) ? TRUE : FALSE;
 
+		//free_release?
+		$fr_search_ref = is_array($slug) && isset( $slug['free'] ) ? key( $slug['free'] ) : NULL;
+		$this->_is_freerelease = !empty( $fr_search_ref ) && preg_match("/$fr_search_ref/", $this->_installed_version ) ? TRUE : FALSE;
+
 
 		//set slug we use
 		$this->slug = $this->_is_premium && is_array( $slug ) ? $slug['premium'][key($slug['premium'])] : NULL;
@@ -407,8 +413,111 @@ class PluginUpdateEngineChecker {
 			wp_clear_scheduled_hook($cronHook);
 		}
 		//dashboard message "dismiss upgrade" link
-		add_action( "wp_ajax_".$this->dismiss_upgrade, array($this, 'dashboard_dismiss_upgrade')); 
+		add_action( "wp_ajax_".$this->dismiss_upgrade, array($this, 'dashboard_dismiss_upgrade'));
+
+
+		if ( !$this->_use_wp_update ) {
+			add_filter( 'upgrader_pre_install', array( $this, 'pre_upgrade_setup'), 10, 2 );
+			add_filter( 'upgrader_post_install', array( $this, 'tidy_up_after_upgrade'), 10, 3 );
+		}
 	}
+
+
+	/**
+	 * This is where we'll hook in to set filters for handling bulk and regular updates (i.e. making sure directory names are setup properly etc.)
+	 * @param  boolean $continue   return true or WP aborts current upgrade process.
+	 * @param  array   $hook_extra This will contain the plugin basename in a 'plugin' key
+	 * @return boolean             We always make sure to return true otherwise wp aborts.
+	 */
+	function pre_upgrade_setup( $continue, $hook_extra ) {
+		if ( !empty( $hook_extra['plugin'] ) && $hook_extra['plugin'] == $this->pluginFile ) {
+			//we need to make sure that the new directory is named correctly
+			add_filter('upgrader_source_selection', array( $this, 'fixDirName'), 10, 3 );
+		}
+		return TRUE;
+	}
+
+
+
+
+	/**
+	 * Tidy's up our plugin upgrade stuff after update is complete so other plugins aren't affected.
+	 *
+	 * @uses
+	 * @param  boolean $continue       return true so wp doesn't abort.
+	 * @param  array   $hook_extra     contains the plugin_basename with the 'plugin' 
+	 *                                 index which we can use to indicate if this is 
+	 *                                 where we want our stuff run
+	 * @param  array   $install_result WP sends off all the things that have been done in 
+	 *                                 an array (post install)
+	 * @return boolean				   if wp_error object is returned then wp aborts.
+	 */
+	function tidy_up_after_upgrade( $continue, $hook_extra, $install_result ) {
+		if ( !empty( $hook_extra['plugin'] ) && $hook_extra['plugin'] == $this->pluginFile ) {
+			//gotta make sure bulk updates for other files don't get messed up!!
+			remove_filter('upgrader_source_selection', array( $this, 'fixDirName'), 10);
+			//maybe clean up any leftover files from upgrades
+			$this->maybe_cleanup_upgrade();
+		}
+		return true;
+	}
+
+
+
+	/**
+	 * This basically is set to fix the directories for our plugins.
+	 *
+	 * Take incoming remote_source file and rename it to match what it should be.
+	 * 
+	 * @param  string $source        This is usually the same as $remote_source but *may* be something else if this has already been filtered
+	 * @param  string $remote_source What WP has set as the source (ee plugins coming from beta.eventespresso.com will be beta.tmp)
+	 * @param  WPPluginUpgrader $wppu 
+	 * @return string renamed file and path
+	 */
+	function fixDirName( $source, $remote_source, $wppu ) {
+		global $wp_filesystem;
+
+		//get out early if this doesn't have a plugin updgrader object.
+		if ( !$wppu instanceof Plugin_Upgrader )
+			return $source;
+
+		//if this is a bulk update then we need an alternate method to verify this is an update we need to modify.
+		if ( $wppu->bulk ) {
+			$url_to_check = $wppu->skin->options['url'];
+			$is_good = strpos( $url_to_check, urlencode($this->pluginFile) ) === FALSE ? FALSE : TRUE;
+		} else {
+			$is_good = isset( $wppu->skin->plugin ) && $wppu->skin->plugin == $this->pluginFile ? TRUE : FALSE;
+		}
+
+		if ( $is_good ) {
+			$new_dir = $wp_filesystem->wp_content_dir() . 'upgrade/' . $this->slug . '/';
+
+			//make new directory if needed.
+			if ( $wp_filesystem->exists( $new_dir ) ) {
+				//delete the existing dir first because we want to make sure clean install
+				$wp_filesystem->delete($new_dir, FALSE, 'd');
+			}
+
+			//now make sure that we DON'T have the directory and we'll create a new one for this.
+			if ( ! $wp_filesystem->exists( $new_dir ) ) {
+				if ( !$wp_filesystem->mkdir( $new_dir, FS_CHMOD_DIR ) )
+					return new WP_Error( 'mkdir_failed_destination', $wppu->strings['mkdir_failed'], $new_dir );
+			}
+
+			//copy original $source into new source
+			$result = copy_dir( $source, $new_dir );
+			if ( is_wp_error($result ) ) {
+				//something went wrong let's just return the original $source as a fallback.
+				return $source;
+			}
+
+			//everything went okay... new source = new dir
+			$source = $new_dir;
+		}
+		return $source;
+	}
+
+
 	
 
 	function hook_into_wp_update_api() {
@@ -431,20 +540,38 @@ class PluginUpdateEngineChecker {
 
 			//Insert our update info into the update array maintained by WP
 			add_filter('site_transient_update_plugins', array( $this,'injectUpdate' ));
+
 		}
 
 
 		if ( !$this->_use_wp_update ) {
-			$this->json_error = get_site_option('pue_json_error_'.$this->pluginFile);	
+			$this->json_error = get_site_option('pue_json_error_'.$this->pluginFile);
 			if ( !empty($this->json_error) && !$this->_force_premium_upgrade ) {
-				add_action('admin_notices', array($this, 'display_json_error'));
-			} else {
-				//no errors so let's get rid of any error option if present
+				add_action('admin_notices', array($this, 'display_json_error'), 10, 3);
+			} else if ( empty( $this->json_error ) ) {
+				//no errors so let's get rid of any error option if present BUT ONLY if there are no json_errors!
 				delete_site_option( 'pue_verification_error_' . $this->pluginFile );
 			}
 		}
 	}
 
+
+
+
+	function maybe_cleanup_upgrade() {
+		global $wp_filesystem;
+
+		$chk_file = WP_CONTENT_DIR . '/upgrade/' . $this->slug . '/';
+
+		if ( is_readable($chk_file ) ) {
+			if ( !is_object( $wp_filesystem ) ) {
+				require_once( ABSPATH . '/wp-admin/includes/file.php');
+				WP_Filesystem();
+			}
+			$wp_filesystem->delete($chk_file, FALSE, 'd');
+		}
+
+	}
 
 
 
@@ -475,11 +602,14 @@ class PluginUpdateEngineChecker {
 			$this->api_secret_key = $value;
 			$this->set_api($this->api_secret_key);
 
+			//reset force_upgrade flag
+			delete_site_option( 'pue_force_upgrade_' . $this->_incoming_slug['free'][key($this->_incoming_slug['free'])]);
+
 			//now let's reset some flags if necessary?  in other words IF the user has entered a premium key and the CURRENT version is a free version (NOT a prerelease version) then we need to make sure that we ping for the right version
 			$free_key_match = '/FREE/i';
 
 			//if this condition matches then that means we've got a free active key in place (or a free version from wp WITHOUT an active key) and the user has entered a NON free API key which means they intend to check for premium access.
-			if ( !preg_match( $free_key_match, $this->api_secret_key ) && !empty($this->api_secret_key) && !$this->_is_premium && !$this->_is_prerelease ) {
+			if ( !preg_match( $free_key_match, $this->api_secret_key ) && !empty($this->api_secret_key) && !$this->_is_premium && !$this->_is_prerelease && $this->_is_freerelease ) {
 				$this->_use_wp_update = FALSE;
 				$this->slug = $this->_incoming_slug['premium'][key($this->_incoming_slug['premium'])];
 				$this->_is_premium = TRUE;
@@ -686,7 +816,8 @@ class PluginUpdateEngineChecker {
 			ob_start();
 			?>
 				<div class="updated" style="padding:15px; position:relative;" id="pu_dashboard_message"><?php echo $msg ?>
-				<a href="javascript:void(0);" onclick="PUDismissUpgrade();" style='float:right;'><?php _e("Dismiss") ?></a>
+				<a class="button-secondary" href="javascript:void(0);" onclick="PUDismissUpgrade();" style='float:right;'><?php _e("Dismiss") ?></a>
+				<div style="clear:both;"></div>
             </div>
             <script type="text/javascript">
                 function PUDismissUpgrade(){
@@ -697,7 +828,7 @@ class PluginUpdateEngineChecker {
 			<?php
 			$content = ob_get_contents();
 			ob_end_clean();
-			if ( $echo )
+			if ( $echo !== FALSE )
 				echo $content;
 			else
 				return $content;
@@ -721,13 +852,23 @@ class PluginUpdateEngineChecker {
 		//check if we're on the wp update page.  If so get out
 		if ( $current_screen->id == 'update' )
 			return;
+
+		$update_dismissed = get_site_option($this->dismiss_upgrade);
+		$is_dismissed = !empty($update_dismissed) && !empty( $this->json_error ) && in_array( $this->json_error->version, $update_dismissed ) ? true : false;
+
 		//first any json errors?
 		if ( !empty( $this->json_error ) && isset($this->json_error->api_invalid) ) {
+				if ( $is_dismissed )
+					return;
 				$msg = str_replace('%plugin_name%', $this->pluginName, $this->json_error->api_invalid_message);
 				$msg = str_replace('%version%', $this->json_error->version, $msg);
 				$msg = sprintf( __('It appears you\'ve tried entering an api key to upgrade to the premium version of %s, however, the key does not appear to be valid.  This is the message received back from the server:', $this->lang_domain ), $this->pluginName ) . '</p><p>' . $msg;
+				//let's add an option for plugin developers to display some sort of verification message on their options page.
+				update_site_option( 'pue_verification_error_' . $this->pluginFile, $msg );
+
 		} else {
 			$msg = sprintf( __('Congratulations!  You have entered in a valid api key for the premium version of %s.  You can click the button below to upgrade to this version immediately.', $this->lang_domain), $this->pluginName );
+			delete_site_option( 'pue_verification_error_' . $this->pluginFile, $msg );
 		}
 
 		//todo add in upgrade button in here.
@@ -736,7 +877,14 @@ class PluginUpdateEngineChecker {
 
 		$content = '<div class="updated" style="padding:15px; position:relative;" id="pue_update_now_container"><p>' . $msg . '</p>';
 		$content .= empty($this->json_error) ? $button : '';
-		$content .= '</div>';
+		$content .= '<a class="button-secondary" href="javascript:void(0);" onclick="PUDismissUpgrade();" style="float:right;">' . __("Dismiss") . '</a>';
+		$content .= '<div style="clear:both;"></div></div>';
+		$content .= '<script type="text/javascript">
+			function PUDismissUpgrade(){
+				jQuery("#pue_update_now_container").slideUp();
+				jQuery.post( ajaxurl, {action:"' . $this->dismiss_upgrade .'", version:"' . $this->json_error->version . '", cookie: encodeURIComponent(document.cookie)});
+			}
+			</script>';
 
 		echo $content;
 	}
@@ -883,6 +1031,7 @@ class PluginUpdateEngineChecker {
 
 		return $updates;
 	}
+
 	
 	/**
 	 * Register a callback for filtering query arguments. 
