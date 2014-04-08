@@ -71,7 +71,7 @@ $this_event_id = $event_id;
 		<?php
 	}
 	?>
-	<div class="<?php espresso_template_css_class('event-meta','event-meta'); ?>">
+	<div class="<?php espresso_template_css_class('event_meta','event-meta'); ?>">
 		<?php $event->event_cost = empty($event->event_cost) ? '' : $event->event_cost;
 			//Featured image
 			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');
