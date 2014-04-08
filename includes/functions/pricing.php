@@ -686,7 +686,7 @@ function espresso_price_display_output ($event_id, $event_cost, $type){
 		
 		case 'default':
 		default:
-			echo '<p id="p_event_price-'.$event_id.'" class="'.espresso_template_css_class('event_price','event_price').'"><span class="'.espresso_template_css_class('section_title','section-title').'">'. __('Price: ', 'event_espresso').'</span> '.$org_options['currency_symbol'].$event_cost.'</p>';
+			echo '<p id="p_event_price-'.$event_id.'" class="'.espresso_template_css_class('event_price','event_price', false).'"><span class="'.espresso_template_css_class('section_title','section-title', false).'">'. __('Price: ', 'event_espresso').'</span> '.$org_options['currency_symbol'].$event_cost.'</p>';
 		break;
 	}
 }
@@ -710,7 +710,7 @@ if (!function_exists('event_espresso_price_list')) {
 		$results = $wpdb->get_results( $wpdb->prepare($sql, '') );
 		if ($wpdb->num_rows > 1) {	
 			//Create a dropdown of prices
-			$html .= '<ul id="price-list-' . $event_id . '" class="'.espresso_template_css_class('espresso_price_list','espresso-price-list').'">';
+			$html .= '<ul id="price-list-' . $event_id . '" class="'.espresso_template_css_class('espresso_price_list','espresso-price-list',false).'">';
 		 
 			foreach ($results as $result) {
 				if ($member_event == TRUE) {
@@ -780,7 +780,7 @@ if (!function_exists('espresso_price_range')) {
 		}
 			
 		
-		echo '<p id="p_event_price-'.$event_id.'" class="event_price"><span class="'.espresso_template_css_class('section_title','section-title').'">'.__('Price: ', 'event_espresso').'</span> '.$result.'</p>';
+		echo '<p id="p_event_price-'.$event_id.'" class="event_price"><span class="'.espresso_template_css_class('section_title','section-title',false).'">'.__('Price: ', 'event_espresso').'</span> '.$result.'</p>';
 	}
 }
 add_action('action_hook_espresso_price_range', 'espresso_price_range', 20, 2);
