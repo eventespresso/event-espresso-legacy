@@ -700,6 +700,7 @@ if (!function_exists('event_espresso_price_list')) {
 		$sql = "SELECT id, event_cost, surcharge, surcharge_type, price_type";
 		$order_by = 'event_cost';
 		$member_event = FALSE;
+		$surcharge_text = isset($org_options['surcharge_text']) ? $org_options['surcharge_text'] : __('Surcharge', 'event_espresso');
 		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && is_user_logged_in() ) {
 			$sql .= ", member_price, member_price_type ";
 			$member_event = TRUE;
