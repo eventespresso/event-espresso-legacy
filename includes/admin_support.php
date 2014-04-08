@@ -680,12 +680,12 @@ function event_espresso_support() {
 									<div class="support-tokens">
 										<h6><a href="http://eventespresso.com/product/priority-support-tokens/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=1+Premium+Support+Token<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">1 Premium Support Token</a></h6>
 										<p>Single incident, up to 30 minutes of live support or priority e-mail support.</p>
-										<p class="support-prices"><span class="price">Price: $65.00 </span></p>
+										<p class="support-prices"><span class="price">Price: $70.00 </span></p>
 									</div>
 									<div class="support-tokens">
 										<h6><a href="http://eventespresso.com/product/3-premium-support-tokens/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=3+Premium+Support+Tokens<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">3 Premium Support Tokens</a></h6>
 										<p>Up to 90 minutes of live support or priority e-mail support.</p>
-										<p class="support-prices"><span class="price">Price: $150.00 </span></p>
+										<p class="support-prices"><span class="price">Price: $185.00 </span></p>
 									</div>
 									<h5>
 	<?php _e('Installation &amp; Consulting', 'event_espreso'); ?>
@@ -698,14 +698,15 @@ function event_espresso_support() {
 									<div class="install-options">
 										<h6><a href="http://eventespresso.com/product/basic-install-with-configuration/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Basic+Install+with+Configuration<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">Basic Install with Configuration</a></h6>
 										<p>Includes configuration and testing Payment Gateway's .</p>
-										<p class="support-prices"><span class="price">Price: $65.00 </span></p>
+										<p class="support-prices"><span class="price">Price: $70.00 </span></p>
 									</div>
 									<div class="install-options">
 										<h6><a href="http://eventespresso.com/product/consultation/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Consulting+(1+hour)<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">Consulting (1 hour)</a></h6>
 										<p>Developer support and implementation consulting for the Advanced Events Registration plugin for WordPress.</p>
 										<p class="support-prices"><span class="price">Price: $135.00 </span></p>
 									</div>
-									<h5>* Requirements for installation service:</h5>
+									<h5>* Prices subject to change on live website.</h5>
+									<h5>** Requirements for installation service:</h5>
 									<ul>
 										<li> The server must be accessible over the internet.</li>
 										<li> The server must meet the server requirements (for Advanced Events Registration).</li>
