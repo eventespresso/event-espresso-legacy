@@ -710,6 +710,7 @@ if (!function_exists('event_espresso_price_list')) {
 		$results = $wpdb->get_results( $wpdb->prepare($sql, '') );
 		if ($wpdb->num_rows > 1) {	
 			//Create a dropdown of prices
+			$html .= '<span class="'.espresso_template_css_class('section_title','section-title',false).'">'. __(' Prices:', 'event_espresso').'</span>';
 			$html .= '<ul id="price-list-' . $event_id . '" class="'.espresso_template_css_class('espresso_price_list','espresso-price-list',false).'">';
 		 
 			foreach ($results as $result) {
@@ -744,7 +745,7 @@ if (!function_exists('event_espresso_price_list')) {
 				$event_cost = $wpdb->last_result[0]->event_cost;
 				$price_type = $wpdb->last_result[0]->price_type;
 			}
-				$html .= '<p>' . $price_type . ' ' . $org_options['currency_symbol'] . number_format($event_cost, 2) . '</p>';
+				$html .= '<p><span class="'.espresso_template_css_class('section_title','section-title',false).'">'. __(' Price:', 'event_espresso').'</span> ' . $price_type . ' ' . $org_options['currency_symbol'] . number_format($event_cost, 2) . '</p>';
 		}
 		echo $html;
 		return;
