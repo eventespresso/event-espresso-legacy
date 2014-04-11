@@ -147,7 +147,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		$sql .= (isset($user_id)  && !empty($user_id))? " AND wp_user = '" . $user_id . "' ": '';
 		
 		//Exclude events that have closed registration
-		if($exclude_closed_events){
+		if($exclude_closed_events == 'true'){
 		    $sql .= $show_expired == 'false' ? " AND (e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
 		} else {
 		    $sql .= $show_expired == 'false' ? " AND (e.start_date >= '" . date('Y-m-d') . "' OR e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
