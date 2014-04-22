@@ -427,7 +427,7 @@ function edit_attendee_record() {
 			}		
 			$SQL .= " WHERE registration_id IN ( $reg_ids ) ORDER BY att.id";
 		}
-		$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, NULL ));
+		$attendees = @$wpdb->get_results( $wpdb->prepare( $SQL, NULL ));
 		
 		foreach ($attendees as $attendee) {
 			if ( $counter == 0 ) {
