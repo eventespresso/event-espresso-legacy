@@ -96,7 +96,7 @@ function update_event($recurrence_arr = array()) {
                             LEFT JOIN " . EVENTS_ATTENDEE_TABLE . " EAT
                                 ON EDT.id = EAT.event_id
                             WHERE EAT.id IS NULL
-                            AND EDT.start_date NOT IN (" . $delete_in . ")
+                            AND EDT.start_date NOT IN (%s)
                             AND recurrence_id = " . sanitize_text_field($_POST['recurrence_id']);
 
                         $UPDATE_SQL = "SELECT id,start_date,event_identifier FROM " . EVENTS_DETAIL_TABLE . " WHERE recurrence_id = %d and NOT event_status = 'D' ORDER BY start_date";
@@ -112,7 +112,7 @@ function update_event($recurrence_arr = array()) {
                     }
 
                     if ($delete_in != '')
-                        $wpdb->query($wpdb->prepare($DEL_SQL, NULL));
+                        $wpdb->query($wpdb->prepare($DEL_SQL, $delete_in));
 
                     /*
                      * Add the new records based on the new formula
@@ -284,7 +284,7 @@ function update_event($recurrence_arr = array()) {
 			$tmp_seating_chart_id = (int)$_REQUEST['seating_chart_id'];
 			if ( $tmp_seating_chart_id > 0 ){
 				if ( $seating_chart_result === false ){
-					$tmp_seating_chart_row = $wpdb->get_row($wpdb->prepare("select seating_chart_id from ".EVENTS_SEATING_CHART_EVENT_TABLE." where event_id = $event_id", NULL));
+					$tmp_seating_chart_row = $wpdb->get_row($wpdb->prepare("select seating_chart_id from ".EVENTS_SEATING_CHART_EVENT_TABLE." where event_id = %d", $event_id));
 					if ( $tmp_seating_chart_row !== NULL ){
 						$tmp_seating_chart_id = $tmp_seating_chart_row->seating_chart_id;
 					}else{
@@ -408,17 +408,17 @@ function update_event($recurrence_arr = array()) {
  		
 		//BEGIN CATEGORY MODIFICATION
         //We first delete the previous entry then we get the category id's of the event and put them in events_detail_table.category_id as a well-formatted string (id,n id)
-        $del_cats = "DELETE FROM " . EVENTS_CATEGORY_REL_TABLE . " WHERE event_id = '" . $event_id . "'";
-        $wpdb->query($wpdb->prepare($del_cats, NULL));
-        $update_event_detail_category_id = "UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = NULL WHERE id='" . $event_id . "'";
-        $wpdb->query($wpdb->prepare($update_event_detail_category_id, NULL));
+        $del_cats = "DELETE FROM " . EVENTS_CATEGORY_REL_TABLE . " WHERE event_id = '%d'";
+        $wpdb->query($wpdb->prepare($del_cats, $event_id));
+        $update_event_detail_category_id = "UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = NULL WHERE id='%d'";
+        $wpdb->query($wpdb->prepare($update_event_detail_category_id, $event_id));
 		$string_cat = '';
 
         if (!empty($_REQUEST['event_category'])) {
             foreach ($_REQUEST['event_category'] as $k => $v) {
                 if (!empty($v)) {
-                    $sql_cat = "INSERT INTO " . EVENTS_CATEGORY_REL_TABLE . " (event_id, cat_id) VALUES ('" . $event_id . "', '" . (int)$v . "')";
-					$wpdb->query($wpdb->prepare($sql_cat, array()) );
+                    $sql_cat = "INSERT INTO " . EVENTS_CATEGORY_REL_TABLE . " (event_id, cat_id) VALUES ('%d', '" . (int)$v . "')";
+					$wpdb->query($wpdb->prepare($sql_cat, array($event_id)) );
                     $string_cat.=sanitize_text_field($v).",";
                 }
             }
@@ -429,8 +429,8 @@ function update_event($recurrence_arr = array()) {
             $cleaned_string_cat=implode(",", $tmp);
             trim($cleaned_string_cat);
 
-            $sql_update_event_detail_category_id="UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = '".$cleaned_string_cat."' WHERE id='" . $event_id . "'";
-            $wpdb->query($wpdb->prepare($sql_update_event_detail_category_id, NULL));
+            $sql_update_event_detail_category_id="UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = '".$cleaned_string_cat."' WHERE id='%s'";
+            $wpdb->query($wpdb->prepare($sql_update_event_detail_category_id, $event_id));
             }
         }
         //END CATEGORY MODIFICATION
@@ -442,62 +442,62 @@ function update_event($recurrence_arr = array()) {
 		}
 		
 		if ($_POST['event_id'] == $event_id || $update_all_staff == TRUE){
-			$del_ppl = "DELETE FROM " . EVENTS_PERSONNEL_REL_TABLE . " WHERE event_id = '" . $event_id . "'";
-			$wpdb->query($wpdb->prepare($del_ppl, NULL));
+			$del_ppl = "DELETE FROM " . EVENTS_PERSONNEL_REL_TABLE . " WHERE event_id = '%d'";
+			$wpdb->query($wpdb->prepare($del_ppl, $event_id));
 			
 			if (!empty($_REQUEST['event_person'])) {
 				foreach ($_REQUEST['event_person'] as $k => $v) {
 					if (!empty($v)) {
-						$sql_ppl = "INSERT INTO " . EVENTS_PERSONNEL_REL_TABLE . " (event_id, person_id) VALUES ('" . $event_id . "', '" . (int)$v . "')";
-						$wpdb->query($wpdb->prepare($sql_ppl, array()) );
+						$sql_ppl = "INSERT INTO " . EVENTS_PERSONNEL_REL_TABLE . " (event_id, person_id) VALUES ('%d', '" . (int)$v . "')";
+						$wpdb->query($wpdb->prepare($sql_ppl, array($event_id)) );
 					}
 				}
 			}
 		}
 		
 		//Venues
-        $del_venues = "DELETE FROM " . EVENTS_VENUE_REL_TABLE . " WHERE event_id = '" . $event_id . "'";
-        $wpdb->query($wpdb->prepare($del_venues, NULL));
+        $del_venues = "DELETE FROM " . EVENTS_VENUE_REL_TABLE . " WHERE event_id = '%d'";
+        $wpdb->query($wpdb->prepare($del_venues, $event_id));
 
         if (!empty($_REQUEST['venue_id'])) {
             foreach ($_REQUEST['venue_id'] as $k => $v) {
                 if (!empty($v) && $v != 0) {
-                    $sql_venues = "INSERT INTO " . EVENTS_VENUE_REL_TABLE . " (event_id, venue_id) VALUES ('" . $event_id . "', '" . (int)$v . "')";
-					$wpdb->query($wpdb->prepare($sql_venues, array()) );
+                    $sql_venues = "INSERT INTO " . EVENTS_VENUE_REL_TABLE . " (event_id, venue_id) VALUES ('%d', '" . (int)$v . "')";
+					$wpdb->query($wpdb->prepare($sql_venues, array($event_id)) );
                 }
             }
         }
 		
 		//Discounts
-        $del_discounts = "DELETE FROM " . EVENTS_DISCOUNT_REL_TABLE . " WHERE event_id = '" . $event_id . "'";
-        $wpdb->query($wpdb->prepare($del_discounts, NULL));
+        $del_discounts = "DELETE FROM " . EVENTS_DISCOUNT_REL_TABLE . " WHERE event_id = '%d'";
+        $wpdb->query($wpdb->prepare($del_discounts, $event_id));
 
 		if (!empty($_REQUEST['event_discount']) && $_REQUEST['use_coupon_code'] == 'Y') {
 			//only re-add the coupon codes if they've specified to use all global coupon codes
 			//and 'specific' coupon codes
 			foreach ($_REQUEST['event_discount'] as $k => $v) {
 				if (!empty($v)) {
-					$sql_discount = "INSERT INTO " . EVENTS_DISCOUNT_REL_TABLE . " (event_id, discount_id) VALUES ('" . $event_id . "', '" . (int)$v . "')";
-					$wpdb->query($wpdb->prepare($sql_discount, array()) );
+					$sql_discount = "INSERT INTO " . EVENTS_DISCOUNT_REL_TABLE . " (event_id, discount_id) VALUES ('%d', '" . (int)$v . "')";
+					$wpdb->query($wpdb->prepare($sql_discount, array($event_id)) );
 				}
 			}
 		}
 
-        $del_times = "DELETE FROM " . EVENTS_START_END_TABLE . " WHERE event_id = '" . $event_id . "'";
-        $wpdb->query($wpdb->prepare($del_times, NULL));
+        $del_times = "DELETE FROM " . EVENTS_START_END_TABLE . " WHERE event_id = '%d'";
+        $wpdb->query($wpdb->prepare($del_times, $event_id));
 
         if (!empty($_REQUEST['start_time'])) {
             foreach ($_REQUEST['start_time'] as $k => $v) {
                 if (!empty($v)) {
                     $time_qty = empty($_REQUEST['time_qty'][$k]) ? '0' : "'" . (int)$_REQUEST['time_qty'][$k] . "'";
-                    $sql_times = "INSERT INTO " . EVENTS_START_END_TABLE . " (event_id, start_time, end_time, reg_limit) VALUES ('" . $event_id . "', '" . event_date_display(sanitize_text_field($v), 'H:i') . "', '" . event_date_display(sanitize_text_field($_REQUEST['end_time'][$k]), 'H:i') . "', " . $time_qty . ")";
-					$wpdb->query($wpdb->prepare($sql_times, array()) );
+                    $sql_times = "INSERT INTO " . EVENTS_START_END_TABLE . " (event_id, start_time, end_time, reg_limit) VALUES ('%d', '" . event_date_display(sanitize_text_field($v), 'H:i') . "', '" . event_date_display(sanitize_text_field($_REQUEST['end_time'][$k]), 'H:i') . "', " . $time_qty . ")";
+					$wpdb->query($wpdb->prepare($sql_times, array($event_id)) );
                 }
             }
         }
 
-        $del_prices = "DELETE FROM " . EVENTS_PRICES_TABLE . " WHERE event_id = '" . $event_id . "'";
-        $wpdb->query($wpdb->prepare($del_prices, NULL));
+        $del_prices = "DELETE FROM " . EVENTS_PRICES_TABLE . " WHERE event_id = '%d'";
+        $wpdb->query($wpdb->prepare($del_prices, $event_id));
 
         if (!empty($_REQUEST['event_cost'])) {
             foreach ($_REQUEST['event_cost'] as $k => $v) {
@@ -523,8 +523,8 @@ function update_event($recurrence_arr = array()) {
                 }
             }
         } else {
-            $sql_price = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, price_type, member_price, member_price_type) VALUES ('" . $event_id . "', '0.00', '0.00', '" . __('Free', 'event_espresso') . "', '0.00', '" . __('Free', 'event_espresso') . "')";
-            if ( !$wpdb->query($wpdb->prepare($sql_price, array()) ) ) {
+            $sql_price = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, price_type, member_price, member_price_type) VALUES ('%d', '0.00', '0.00', '" . __('Free', 'event_espresso') . "', '0.00', '" . __('Free', 'event_espresso') . "')";
+            if ( !$wpdb->query($wpdb->prepare($sql_price, $event_id) ) ) {
                 $error = true;
             }
         }
@@ -540,8 +540,8 @@ function update_event($recurrence_arr = array()) {
             switch ( $_REQUEST[ 'create_post' ] ) {
                 case 'N':
                     $sql = " SELECT * FROM " . EVENTS_DETAIL_TABLE;
-                    $sql .= " WHERE id = '" . $event_id . "' ";
-                    $wpdb->get_results($wpdb->prepare($sql, NULL));
+                    $sql .= " WHERE id = '%d' ";
+                    $wpdb->get_results($wpdb->prepare($sql, $event_id));
                     $post_id = $wpdb->last_result[0]->post_id;
                     if ($wpdb->num_rows > 0 && !empty($_REQUEST['delete_post']) && $_REQUEST['delete_post'] == 'Y') {
                         $sql = array('post_id' => '', 'post_type' => '');
@@ -582,8 +582,8 @@ function update_event($recurrence_arr = array()) {
                     $my_post = array();
 
                     $sql = " SELECT * FROM " . EVENTS_DETAIL_TABLE;
-                    $sql .= " WHERE id = '" . $event_id . "' ";
-                    $wpdb->get_results($wpdb->prepare($sql, NULL));
+                    $sql .= " WHERE id = '%d' ";
+                    $wpdb->get_results($wpdb->prepare($sql, $event_id));
                     $post_id = $wpdb->last_result[0]->post_id;
 
 
