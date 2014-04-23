@@ -298,7 +298,7 @@ function espresso_confirm_registration() {
 	$SQL .= " LIMIT 0,1 "; //Get the first attendees details
 
 
-	if ( ! $attendee = $wpdb->get_row( $wpdb->prepare( $SQL, NULL ))) {
+	if ( ! $attendee = @$wpdb->get_row( $wpdb->prepare( $SQL, NULL ))) {
 		wp_die(__('An error occured. The primary attendee could not be found.', 'event_espresso'));
 	}
 
@@ -390,8 +390,8 @@ function event_espresso_pay() {
 	if ( $REG_ID != false && empty($payment_data['attendee_id'] )) {
 		//we're assuming there is NO payment data in this request, so we'll just 
 		//prepare the $payment_data for display only. No processing of payment etc.
-		$SQL = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id='" . $REG_ID . "' ORDER BY id LIMIT 1";
-		$payment_data['attendee_id'] = $wpdb->get_var( $wpdb->prepare( $SQL, NULL ));
+		$SQL = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id='%s' ORDER BY id LIMIT 1";
+		$payment_data['attendee_id'] = $wpdb->get_var( $wpdb->prepare( $SQL, $REG_ID ));
 				
 		$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_prepare_event_link', $payment_data);

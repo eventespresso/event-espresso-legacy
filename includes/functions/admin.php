@@ -1567,7 +1567,7 @@ function espresso_get_user_questions($user_id = null, $question_id = null, $use_
 
 	$sql .= " ORDER BY sequence, id ASC ";
 
-	$questions = $wpdb->get_results( $wpdb->prepare($sql, NULL) );
+	$questions = @$wpdb->get_results( $wpdb->prepare($sql, NULL) );
 
 	return ( $use_filters) ? apply_filters('espresso_get_user_questions_questions', $questions, $user_id, $num) : $questions;
 }
@@ -1583,10 +1583,10 @@ function espresso_get_user_questions_for_group( $group_id, $user_id = null, $use
     $sql .= " LEFT JOIN " . EVENTS_QST_GROUP_TABLE . " AS qg ";
     $sql .= " on qg.id = qgr.group_id ";
     //$sql .= $use_filters ? apply_filters('espresso_get_user_questions_for_group', " WHERE q.wp_user = '0' OR q.wp_user = '1' ", $group_id, $user_id) : " WHERE q.wp_user = '0' OR q.wp_user = '1' ";
-    $sql .= " WHERE qgr.group_id = " . $group_id;
+    $sql .= " WHERE qgr.group_id = %d " ;
     $sql .= " ORDER BY q.sequence, q.id ASC ";
 
-    $questions = $wpdb->get_results($wpdb->prepare($sql, NULL) );
+    $questions = $wpdb->get_results($wpdb->prepare($sql, $group_id) );
 
     foreach ( $questions as $question ) {
   		$q_attached[] = $question->id;
@@ -1645,7 +1645,7 @@ function espresso_get_user_question_groups($user_id = null, $use_filters = true,
 
 	$sql .= ( empty($group_id) ) ? " ORDER BY group_order " : " ORDER BY id ASC ";
 
-	$groups = $wpdb->get_results( $wpdb->prepare($sql, NULL) );
+	$groups = @$wpdb->get_results( $wpdb->prepare($sql, NULL) );
 
 	return $use_filters ? apply_filters('espresso_get_user_groups_groups', $groups, $user_id, $num) : $groups;		
 }

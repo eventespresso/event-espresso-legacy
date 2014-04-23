@@ -384,7 +384,7 @@ if (!function_exists('event_espresso_price_dropdown')) {
        
 	    $surcharge_text = isset($org_options['surcharge_text']) ? $org_options['surcharge_text'] : __('Surcharge', 'event_espresso');
 
-        $results = $wpdb->get_results( $wpdb->prepare("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' ORDER BY id ASC", '') );
+        $results = $wpdb->get_results( $wpdb->prepare("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='%d' ORDER BY id ASC", $event_id) );
 
         if ($wpdb->num_rows > 1) {
            //Create the label for the drop down
@@ -706,8 +706,8 @@ if (!function_exists('event_espresso_price_list')) {
 			$member_event = TRUE;
 			$order_by = 'member_price';
 		}
-		$sql .= " FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' ORDER BY " . $order_by . " ASC";
-		$results = $wpdb->get_results( $wpdb->prepare($sql, '') );
+		$sql .= " FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='%d' ORDER BY " . $order_by . " ASC";
+		$results = $wpdb->get_results( $wpdb->prepare($sql, $event_id) );
 		if ($wpdb->num_rows > 1) {	
 			//Create a dropdown of prices
 			$html .= '<span class="'.espresso_template_css_class('section_title','section-title',false).'">'. __(' Prices:', 'event_espresso').'</span>';
