@@ -19,7 +19,7 @@ if ($excludes) {
 } else {
 	$exclude_where_sql = '';
 }
-$sql_in_common = $wpdb->prepare(" FROM " . EVENTS_DISCOUNT_CODES_TABLE . " WHERE  $exclude_where_sql apply_to_all=0", $event_id);
+$sql_in_common = " FROM " . EVENTS_DISCOUNT_CODES_TABLE . " WHERE  $exclude_where_sql apply_to_all=0";
 if (function_exists('espresso_member_data') && !empty($event_id)) {
 	$wpdb->get_results("SELECT wp_user FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'");
 	$wp_user = $wpdb->last_result[0]->wp_user != '' ? $wpdb->last_result[0]->wp_user : espresso_member_data('id');
