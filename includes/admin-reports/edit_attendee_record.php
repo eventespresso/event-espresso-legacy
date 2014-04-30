@@ -413,7 +413,8 @@ function edit_attendee_record() {
 		$SQL .= "JOIN " . EVENTS_DETAIL_TABLE . " evt ON att.event_id = evt.id ";
 		// are we looking for an additional attendee ?
 		if ( isset( $_REQUEST['attendee_num'] ) && $_REQUEST['attendee_num'] > 1 && isset( $_REQUEST['id'] )) {
-			$SQL .= "WHERE  att.id = " . ee_sanitize_value( $_REQUEST['id'] );
+			$SQL .= "WHERE  att.id = %d";
+			$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, ee_sanitize_value( $_REQUEST['id'] ) ));
 		} else {
 			// check for multi reg & additional attendees by first finding primary attendee
 			$SQL2 = "SELECT primary_registration_id FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE registration_id = %s";
@@ -424,10 +425,10 @@ function edit_attendee_record() {
 				$reg_ids = "'" . implode("','", $reg_ids) . "'";
 			} else {
 				$reg_ids = "'" . ee_sanitize_value( $_REQUEST['registration_id'] ) . "'";
-			}		
-			$SQL .= " WHERE registration_id IN ( $reg_ids ) ORDER BY att.id";
+			}	
+			$SQL .= " WHERE registration_id IN ( $reg_ids ) ORDER BY %s";
+			$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, 'att.id' ));
 		}
-		$attendees = @$wpdb->get_results( $wpdb->prepare( $SQL, NULL ));
 		
 		foreach ($attendees as $attendee) {
 			if ( $counter == 0 ) {
