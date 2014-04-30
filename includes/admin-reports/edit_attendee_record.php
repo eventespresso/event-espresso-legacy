@@ -413,7 +413,7 @@ function edit_attendee_record() {
 		$SQL .= "JOIN " . EVENTS_DETAIL_TABLE . " evt ON att.event_id = evt.id ";
 		// are we looking for an additional attendee ?
 		if ( isset( $_REQUEST['attendee_num'] ) && $_REQUEST['attendee_num'] > 1 && isset( $_REQUEST['id'] )) {
-			$SQL .= "WHERE  att.id = %s";
+			$SQL .= "WHERE  att.id = %d";
 			$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, ee_sanitize_value( $_REQUEST['id'] ) ));
 		} else {
 			// check for multi reg & additional attendees by first finding primary attendee
