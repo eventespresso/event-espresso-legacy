@@ -1558,17 +1558,17 @@ function espresso_get_user_questions($user_id = null, $question_id = null, $use_
 	//first let's satisfy the query.
 	$sql = "SELECT * FROM " . EVENTS_QUESTION_TABLE . " AS q ";
 	if ( !empty($user_id) ) {
-  		$sql .= $use_filters ? apply_filters('espresso_get_user_questions_where', " WHERE (q.wp_user = '0' OR q.wp_user = '1') ", $user_id, $num) : " WHERE (q.wp_user = '0' OR q.wp_user = '1') ";
+  		$sql .= $use_filters ? apply_filters('espresso_get_user_questions_where', $wpdb->prepare(" WHERE (q.wp_user = '%d' OR q.wp_user = '%d') ", 0, 1), $user_id, $num) : $wpdb->prepare(" WHERE (q.wp_user = '%d' OR q.wp_user = '%d') ", 0, 1);
   	}
 
   	if ( !empty($question_id) ) {
-		$sql .= " WHERE q.id = '" . $question_id . "' ";
+		$sql .= $wpdb->prepare(" WHERE q.id = '%d' ", $question_id);
 	}
 
 	$sql .= " ORDER BY sequence, id ASC ";
 
-	$questions = @$wpdb->get_results( $wpdb->prepare($sql, NULL) );
-
+	$questions = $wpdb->get_results( $sql );
+	
 	return ( $use_filters) ? apply_filters('espresso_get_user_questions_questions', $questions, $user_id, $num) : $questions;
 }
 
@@ -1636,17 +1636,17 @@ function espresso_get_user_question_groups($user_id = null, $use_filters = true,
 	global $wpdb;
 	$sql = "SELECT * FROM " . EVENTS_QST_GROUP_TABLE . " AS qg ";
 	if ( !empty($user_id) ) {
-  		$sql .= $use_filters ? apply_filters('espresso_get_user_question_groups_where', " WHERE (qg.wp_user = '0' OR qg.wp_user = '1' ) ", $user_id, $num) : " WHERE (qg.wp_user = '0' OR qg.wp_user = '1' ) ";
+  		$sql .= $use_filters ? apply_filters('espresso_get_user_question_groups_where', $wpdb->prepare( " WHERE (qg.wp_user = '%d' OR qg.wp_user = '%d' ) ", 0, 1 ), $user_id, $num) : $wpdb->prepare( " WHERE (qg.wp_user = '%d' OR qg.wp_user = '%d' ) ", 0, 1);
   	}
 
   	if ( !empty($group_id) ) {
-  		$sql .= " WHERE qg.id = '" . $group_id . "' ";
+  		$sql .= $wpdb->prepare(" WHERE qg.id = '%d' ", $group_id);
   	} 
 
 	$sql .= ( empty($group_id) ) ? " ORDER BY group_order " : " ORDER BY id ASC ";
 
-	$groups = @$wpdb->get_results( $wpdb->prepare($sql, NULL) );
-
+	$groups = $wpdb->get_results( $sql );
+	
 	return $use_filters ? apply_filters('espresso_get_user_groups_groups', $groups, $user_id, $num) : $groups;		
 }
 

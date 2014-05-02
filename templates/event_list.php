@@ -135,7 +135,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id= e.id ";
 		$sql .= " LEFT JOIN " . EVENTS_PRICES_TABLE . " p ON p.event_id=e.id ";
-		$sql .= " WHERE is_active = 'Y' ";
+		$sql .= " WHERE is_active = %s ";
 		
 		//Category sql
 		$sql .= $category_sql;
@@ -189,7 +189,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$sort." " : " ORDER BY date(start_date), id ASC ";
 		$sql .= $limit > 0 ? ' LIMIT 0, %d' : '';  
 		
-		$events = $wpdb->get_results( $wpdb->prepare($sql, $limit));
+		$events = $wpdb->get_results( $wpdb->prepare($sql, 'Y', $limit));
 //		echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		
 		$category_id			= isset($wpdb->last_result[0]->id) ? $wpdb->last_result[0]->id : '';
