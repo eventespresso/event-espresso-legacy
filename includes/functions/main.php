@@ -289,8 +289,8 @@ if ( !function_exists('espresso_get_event') ) {
 		if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
 			$sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id ";
 		}
-		$sql.= " WHERE e.is_active='Y' ";
-		$sql.= " AND e.event_status != 'D' ";
+		$sql.= " WHERE e.is_active= %s ";
+		$sql.= " AND e.event_status != %s ";
 		if ($single_event_id != NULL) {
 			//If a single event needs to be displayed, get its ID
             $sql .= " AND event_identifier = '" . $single_event_id . "' ";
@@ -305,7 +305,7 @@ if ( !function_exists('espresso_get_event') ) {
             $sql .= " LIMIT 0,1";
         }
 
-		$data = @$wpdb->get_row( $wpdb->prepare( $sql, NULL ), OBJECT );
+		$data = $wpdb->get_row( $wpdb->prepare( $sql, 'Y', 'D' ), OBJECT );
 		return $data;
 	}
 }
