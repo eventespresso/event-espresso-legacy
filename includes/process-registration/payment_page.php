@@ -286,9 +286,9 @@ function espresso_confirm_registration() {
 	$SQL = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE;
 
 	if ($registration_id != '') {
-		$SQL .= " WHERE registration_id = '" . $registration_id . "' ";
+		$SQL .= $wpdb->prepare(" WHERE registration_id = '%s' ", $registration_id);
 	} elseif ($attendee_id != '') {
-		$SQL .= " WHERE id = '" . $attendee_id . "' ";
+		$SQL .= $wpdb->prepare(" WHERE id = '%d' ", $attendee_id);
 	} else {
 		_e('No ID Supplied', 'event_espresso');
 	}
@@ -298,7 +298,7 @@ function espresso_confirm_registration() {
 	$SQL .= " LIMIT 0,1 "; //Get the first attendees details
 
 
-	if ( ! $attendee = @$wpdb->get_row( $wpdb->prepare( $SQL, NULL ))) {
+	if ( ! $attendee = $wpdb->get_row( $SQL )) {
 		wp_die(__('An error occured. The primary attendee could not be found.', 'event_espresso'));
 	}
 
