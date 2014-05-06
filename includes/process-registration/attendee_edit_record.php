@@ -95,6 +95,8 @@ function attendee_edit_record() {
 			$questions_in = substr($questions_in, 0, -1);
 //			echo '<h4>$questions_in : ' . $questions_in . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 			
+			$questions_in = esc_sql( $questions_in );
+
 			$group_name = '';
 			$counter = 0;
 
@@ -103,10 +105,10 @@ function attendee_edit_record() {
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
 			$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
-			$SQL .= "AND q.admin_only != 'Y' ";
+			$SQL .= "AND q.admin_only != %s ";
 			$SQL .= "ORDER BY qg.group_order, qg.id, q.sequence ASC";
 			
-			$questions = @$wpdb->get_results( $wpdb->prepare( $SQL, NULL ));
+			$questions = $wpdb->get_results( $wpdb->prepare( $SQL, 'Y' ));
 //			echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //			printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 
