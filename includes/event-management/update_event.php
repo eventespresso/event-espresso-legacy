@@ -429,7 +429,7 @@ function update_event($recurrence_arr = array()) {
             $cleaned_string_cat=implode(",", $tmp);
             trim($cleaned_string_cat);
 
-            $sql_update_event_detail_category_id="UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = '".$cleaned_string_cat."' WHERE id='%s'";
+            $sql_update_event_detail_category_id="UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = '".$cleaned_string_cat."' WHERE id='%d'";
             $wpdb->query($wpdb->prepare($sql_update_event_detail_category_id, $event_id));
             }
         }
