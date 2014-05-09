@@ -426,8 +426,8 @@ function edit_attendee_record() {
 			} else {
 				$reg_ids = "'" . ee_sanitize_value( $_REQUEST['registration_id'] ) . "'";
 			}	
-			$SQL .= " WHERE registration_id IN ( $reg_ids ) ORDER BY %s";
-			$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, 'att.id' ));
+			$SQL .= " WHERE registration_id IN ( $reg_ids ) ORDER BY att.id";
+			$attendees = $wpdb->get_results( $SQL );
 		}
 		
 		foreach ($attendees as $attendee) {
