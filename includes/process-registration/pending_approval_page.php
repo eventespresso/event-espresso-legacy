@@ -44,9 +44,9 @@ function espresso_pending_registration_approval($registration_id) {
 	$SQL = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE;
 
 	if ($registration_id != ''){
-		$SQL .= " WHERE registration_id = '".$registration_id."' ";
+		$SQL .= $wpdb->prepare(" WHERE registration_id = '%s' ", $registration_id);
 	}elseif ($attendee_id != ''){
-		$SQL .= " WHERE id = '".$attendee_id."' ";
+		$SQL .= $wpdb->prepare(" WHERE id = '%d' ", $attendee_id);
 	}else{
 		wp_die( _e('No ID Supplied', 'event_espresso'));
 	}
@@ -55,7 +55,7 @@ function espresso_pending_registration_approval($registration_id) {
 	$SQL .= " LIMIT 0,1 ";//Get the first attendees details
 
 
-	$attendee  = @$wpdb->get_row($wpdb->prepare( $SQL, NULL ));
+	$attendee  = $wpdb->get_row( $SQL );
 	//global $attendee_id;
 	
 	if ( $attendee !== FALSE ) {
