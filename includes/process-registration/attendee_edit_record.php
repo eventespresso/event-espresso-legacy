@@ -94,8 +94,6 @@ function attendee_edit_record() {
 			}
 			$questions_in = substr($questions_in, 0, -1);
 //			echo '<h4>$questions_in : ' . $questions_in . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-			
-			$questions_in = esc_sql( $questions_in );
 
 			$group_name = '';
 			$counter = 0;
