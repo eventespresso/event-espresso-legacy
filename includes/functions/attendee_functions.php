@@ -26,8 +26,6 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 		}
 		$questions_in = substr($questions_in, 0, -1);
 
-		$questions_in = esc_sql( $questions_in );
-
 		$SQL = "SELECT q.*, q.id AS %s, qg.id, qg.group_name ";
 		$SQL .= "FROM " . EVENTS_QST_GROUP_TABLE . " qg ";
 		$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr ON qg.id = qgr.group_id ";
