@@ -24,10 +24,10 @@ function espresso_display_upay($payment_data) {
 	$myPaypal->addField(('EXT_TRANS_ID'), $payment_data['registration_id']);
 	$myPaypal->addField('EXT_TRANS_ID_LABEL', __("Registration ID", 'event_espresso'));
 	$myPaypal->addField('AMT', number_format($payment_data['event_cost'],2));
-	$return_url = espresso_build_gateway_url('return_url', array('attendee_id'=>$upay_settings['attendee_id'],'registration_id'=>$upay_settings['registration_id']), 'upay');
+	$return_url = espresso_build_gateway_url('return_url', array('attendee_id'=>$payment_data['attendee_id'],'registration_id'=>$payment_data['registration_id']), 'upay');
 	$myPaypal->addField('SUCCESS_LINK', $return_url);
 	$myPaypal->addField('ERROR_LINK',$return_url);
-	$myPaypal->addField('CANCEL_LINK', espresso_build_gateway_url('cancel_return', array('attendee_id'=>$upay_settings['attendee_id'], 'registration_id'=>$upay_settings['registration_id']), 'upay'));
+	$myPaypal->addField('CANCEL_LINK', espresso_build_gateway_url('cancel_return', array('attendee_id'=>$payment_data['attendee_id'], 'registration_id'=>$payment_data['registration_id']), 'upay'));
 	
 //	$myPaypal->addField('charset', "utf-8");
 //	$myPaypal->addField('return', $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id . '&type=upay');

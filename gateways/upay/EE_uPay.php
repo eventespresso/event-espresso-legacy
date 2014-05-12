@@ -35,6 +35,11 @@ class EE_uPay extends Espresso_PaymentGateway{
 
 	protected function validateIpn() {
 		
+		//@todo: check the posting_key to verify its actually from uPay
+		foreach($_POST as $key => $val){
+			$this->ipnData[$key] = $val;
+		}
+		return true;
 	}
 }
 
