@@ -2,21 +2,15 @@
 
 function espresso_transactions_upay_get_attendee_id($attendee_id) {
 	if (!empty($_REQUEST['EXT_TRANS_ID'])) {
-		$attendee_id = $_REQUEST['EXT_TRANS_ID'];
+		global $wpdb;
+		$reg_id = $_REQUEST['EXT_TRANS_ID'];
+		$attendee_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM ".$wpdb->prefix."events_attendee WHERE registration_id=%s LIMIT 1",$reg_id));
+		$_REQUEST['registration_id'] = $reg_id;
+		$_REQUEST['id'] = $attendee_id;
 	}
 	return $attendee_id;
 }
 
-//get the registration ID and pretend it iwas in the request all along
-function espresso_transactions_upay_get_reg_id($payment_data){
-	if(isset($payment_data['attendee_id'])){
-		global $wpdb;
-		$reg_id = $wpdb->get_var($wpdb->prepare("SELECT registration_id FROM ".$wpdb->prefix."events_attendee WHERE id=%d LIMIT 1",$payment_data['attendee_id']));
-		$payment_data['registration_id'] = $reg_id;
-		$_REQUEST['registration_id'] = $reg_id;
-	}
-	return $payment_data;
-}
 
 function espresso_process_upay($payment_data) {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
@@ -29,15 +23,15 @@ function espresso_process_upay($payment_data) {
 	echo '<!--Event Espresso uPay Gateway Version ' . $myuPay->gateway_version . '-->';
 	$myuPay->ipnLog = TRUE;
 	$upay_settings = get_option('event_espresso_upay_settings');
-	if ($upay_settings['use_sandbox']) {
+	if ($upay_settings['debug_mode']) {
 		$myuPay->enableTestMode();
 	}
 	if ($myuPay->validateIpn()) {
 		$payment_data['txn_details'] = serialize($myuPay->ipnData);
-		$payment_data['txn_id'] = $myuPay->ipnData['EXT_TRANS_ID'];
+		$payment_data['txn_id'] = $myuPay->ipnData['sys_tracking_id'];
 		if ($myuPay->ipnData['pmt_amt'] >= $payment_data['total_cost'] && ($myuPay->ipnData['pmt_status'] == 'success')) {
 			$payment_data['payment_status'] = 'Completed';
-			if ($upay_settings['use_sandbox']) {
+			if ($upay_settings['debug_mode']) {
 				// For this, we'll just email ourselves ALL the data as plain text output.
 				$subject = 'Instant Payment Notification - Gateway Variable Dump';
 				$body = "An instant payment notification was successfully recieved\n";

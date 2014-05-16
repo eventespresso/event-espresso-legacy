@@ -15,9 +15,9 @@ function event_espresso_upay_payment_settings() {
 	$upay_settings = get_option('event_espresso_upay_settings');
 	if (empty($upay_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/upay/btn_stdCheckout2.gif")) {
-			$upay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/upay/btn_stdCheckout2.gif";
+			$upay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/upay/upay.JPG";
 		} else {
-			$upay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/upay/btn_stdCheckout2.gif";
+			$upay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/upay/upay.JPG";
 		}
 		$upay_settings['upay_site_id'] = '';
 		$upay_settings['upay_site_url'] = '';

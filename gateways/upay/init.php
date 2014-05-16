@@ -21,3 +21,6 @@ function espresso_upay_payment_type( $gateway_payment_types ) {
 	$gateway_payment_types['upay'] = 'uPay / Credit Card';
 }
 add_filter( 'action_hook_espresso_gateway_payment_type', 'espresso_upay_payment_type', 10, 1 );
+//  wp_mail('michael@eventespresso.com', 'request received to '.$_SERVER['REQUEST_URI'], print_r($_REQUEST,true));
+ 
+ 
