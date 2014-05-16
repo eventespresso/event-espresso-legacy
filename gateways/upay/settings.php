@@ -14,7 +14,7 @@ function event_espresso_upay_payment_settings() {
 	}
 	$upay_settings = get_option('event_espresso_upay_settings');
 	if (empty($upay_settings)) {
-		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/upay/btn_stdCheckout2.gif")) {
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/upay/upay.JPG")) {
 			$upay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/upay/upay.JPG";
 		} else {
 			$upay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/upay/upay.JPG";
@@ -79,6 +79,8 @@ function event_espresso_upay_payment_settings() {
 //uPay Settings Form
 function event_espresso_display_upay_settings() {
 	$upay_settings = get_option('event_espresso_upay_settings');
+	global $org_options;
+	$upay_posting_url = add_query_arg('type','upay',str_replace("http://","https://",get_permalink($org_options['notify_url']))); 
 	?>
 	<form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
 		<table width="99%" border="0" cellspacing="5" cellpadding="5">
@@ -96,6 +98,12 @@ function event_espresso_display_upay_settings() {
 								<?php _e('uPay Site URL', 'event_espresso'); ?>
 							</label>
 							<input type="text" name="upay_site_url" size="35" value="<?php echo $upay_settings['upay_site_url']; ?>">
+						</li>
+						<li>
+							<label for='upay_posting_url'>
+								<?php _e('Posting URL','event_espresso'); ?><a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=upay_posting_url"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							</label>
+							<input disabled="disabled" value='<?php echo $upay_posting_url ?>'>
 						</li>
 					</ul>
 				</td>	
@@ -141,6 +149,17 @@ function event_espresso_display_upay_settings() {
 		<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update uPay Settings', 'event_espresso') ?>" id="save_upay_settings" />
 	</p>
 	</form>
+	<div id="upay_posting_url" style="display:none">
+		<h2>
+			<?php _e('uPay Posting URL', 'event_espresso'); ?>
+		</h2>
+		<p>
+			<?php _e("This is the URL uPay will send payment notifications to, and is configured from uPay's website (login to uPay, go to Marketplace, then your site's 'Miscellaneous' settings. It's the 'posting url').")?>
+		</p>
+		<p>
+			<?php _e("Please note: this URL must begin with HTTPS, and so your site must support HTTPS. Also note that uPay must whitelist your site's IP address.")?>
+		</p>
+	</div>
 	
 	<?php
 }
