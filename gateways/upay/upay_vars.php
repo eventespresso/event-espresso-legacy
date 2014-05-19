@@ -12,7 +12,7 @@ function espresso_display_upay($payment_data) {
 	//printr( $myPaypal, '$myPaypal  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 	$myPaypal->gatewayUrl = $upay_settings['upay_site_url'];
 	$myPaypal->addField('UPAY_SITE_ID', $upay_settings['upay_site_id']);
-	$myPaypal->addField('BILL_NAME', $payment_data['fname'] . $payment_data['lname']);
+	$myPaypal->addField('BILL_NAME', $payment_data['fname'] ." ". $payment_data['lname']);
 	$myPaypal->addField('BILL_EMAIL_ADDRESS', $payment_data['email']);
 	$myPaypal->addField('BILL_STREET1', $payment_data['address1']);
 	$myPaypal->addField('BILL_STREET2', $payment_data['address2']);
