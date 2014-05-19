@@ -1,7 +1,6 @@
 <?php
 
 function espresso_display_upay($payment_data) {
-	global $wpdb;
 	extract($payment_data);
 	include_once ('EE_uPay.php');
 	$upay_settings = get_option('event_espresso_upay_settings');
@@ -10,11 +9,20 @@ function espresso_display_upay($payment_data) {
 	$myPaypal = new EE_uPay();
 	
 	//printr( $myPaypal, '$myPaypal  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-	$myPaypal->gatewayUrl = $upay_settings['upay_site_url'];
-	$myPaypal->addField('UPAY_SITE_ID', $upay_settings['upay_site_id']);
+	$upay_site_url = $upay_settings['upay_site_url'];
+	if( ! $upay_site_url ){
+		echo "<span class='error'>".__("uPay gateway has not been configured correctly. No Site URL was specified.", 'event_espresso')."</span>";
+	}
+		
+	$myPaypal->gatewayUrl = $upay_site_url;
+	$upay_site_id = $upay_settings['upay_site_id'];
+	if( $upay_site_id === NULL || $upay_site_id ===''){
+		echo "<span class='error'>".__("uPay gateway has not been configured correctly. No site ID was specified.", 'event_espresso')."</span>";
+	}
+	$myPaypal->addField('UPAY_SITE_ID', $upay_site_id);
 	$myPaypal->addField('BILL_NAME', $payment_data['fname'] ." ". $payment_data['lname']);
-	$myPaypal->addField('BILL_EMAIL_ADDRESS', $payment_data['email']);
-	$myPaypal->addField('BILL_STREET1', $payment_data['address1']);
+	$myPaypal->addField('BILL_EMAIL_ADDRESS', $payment_data['attendee_email']);
+	$myPaypal->addField('BILL_STREET1', $payment_data['address']);
 	$myPaypal->addField('BILL_STREET2', $payment_data['address2']);
 	$myPaypal->addField('BILL_CITY', $payment_data['city']);
 	$myPaypal->addField('BILL_STATE', $payment_data['state']);
