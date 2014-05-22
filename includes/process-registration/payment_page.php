@@ -445,6 +445,8 @@ function event_espresso_pay() {
 				require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "templates/return_payment.php");
 			}
 		}
+
+		do_action( 'action_hook_espresso_process_registration_payment_page', $event_id, $payment_data );
 	}
 	if (isset($payment_data['attendee_session'])){
 		event_espresso_clear_session_of_attendee($payment_data['attendee_session']);

@@ -1666,8 +1666,8 @@ function espresso_add_additional_registration($event_id){
 	$link = '<div class="additional-registration-div"><a href="'.espresso_reg_url($event_id).'" id="additional-registration-lnk" class="additional-registration-lnk " title="' . __('Add Another Registration to This Event', 'event_espresso') . '">' . __('Add Another Registration to This Event', 'event_espresso') . '</a></div>';
 	echo $link;
 }
-add_action('action_hook_espresso_payment_page_bottom', 'espresso_add_additional_registration', 10, 1);
-add_action('action_hook_espresso_payment_overview_page_bottom', 'espresso_add_additional_registration', 10, 1);
+add_action('action_hook_espresso_process_registration_payment_page', 'espresso_add_additional_registration', 10, 1);
+add_action('action_hook_espresso_payment_page_free_event', 'espresso_add_additional_registration', 10, 1);
 
 //Function to create and apply CSS filters dynamically
 function espresso_template_css_class($filter_name, $classes, $echo = true) {
