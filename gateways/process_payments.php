@@ -170,7 +170,6 @@ add_filter('filter_hook_espresso_prepare_event_link', 'espresso_prepare_event_li
 
 function event_espresso_txn() {
 	ob_start();
-
 	global $wpdb, $org_options, $espresso_content;
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	do_action('action_hook_espresso_transaction');

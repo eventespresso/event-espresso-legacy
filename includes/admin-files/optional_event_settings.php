@@ -73,7 +73,7 @@ $values=array(
             </label>
             <?php	echo select_input('espresso_dashboard_widget', $values, isset($org_options['espresso_dashboard_widget']) ? $org_options['espresso_dashboard_widget'] : '');?>
             <?php _e('Show the next', 'event_espresso'); ?>
-            <input name="events_in_dasboard" size="5" style="width:50px;" type="text" value="<?php echo isset($org_options['events_in_dasboard']) || $org_options['events_in_dasboard'] == ''? '30':stripslashes_deep($org_options['events_in_dasboard']);?>" />
+            <input name="events_in_dasboard" size="5" style="width:50px;" type="text" value="<?php echo !isset($org_options['events_in_dasboard']) || $org_options['events_in_dasboard'] == ''? '30':stripslashes_deep($org_options['events_in_dasboard']);?>" />
             <?php _e('days of events in the dashboard.', 'event_espresso'); ?>
           </li>
           <li>
@@ -159,9 +159,9 @@ $values=array(
                           <p>
                             <?php _e('Promote Event Espresso and earn cash!', 'event_espresso'); ?>
                           </p>
-                          <p>Get paid by helping other event mangers understand the power of Event Espresso by becoming an affiliate.</p><ol><li>Go to the <a href="http://eventespresso.com/wp-content/plugins/wp-affiliate-platform/affiliates/register.php" target="_blank">affiliate sign up page</a> to get your affiliate link</li><li>All affiliates get 20% from each sale</li><li>Payments are made only through paypal</li><li>Payments are sent at the beginning of each month for the sales of  the previous month</li><li>Payments will be made regardless of the sales volume. There is no  minimum limit</li><li>You can create your own banner or use the ones below</li></ol>
+                          <p>Get paid by helping other event mangers understand the power of Event Espresso by becoming an affiliate.</p><ol><li>Go to the <a href="http://eventespresso.com/wp-content/plugins/wp-affiliate-platform/affiliates/register.php?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Promote+Event+Espresso<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=general_settings_tab" target="_blank">affiliate sign up page</a> to get your affiliate link</li><li>All affiliates get 20% from each sale</li><li>Payments are made only through paypal</li><li>Payments are sent at the beginning of each month for the sales of  the previous month</li><li>Payments will be made regardless of the sales volume. There is no  minimum limit</li><li>You can create your own banner or use the ones below</li></ol>
                         <p>
-                            <a href="http://eventespresso.com/affiliates/" target="_blank"><?php _e('Banners and More Info >>', 'event_espresso'); ?></a>
+                            <a href="http://eventespresso.com/affiliates/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Banners+and+More+Info<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=general_settings_tab" target="_blank"><?php _e('Banners and More Info >>', 'event_espresso'); ?></a>
                           </p>
                         </div>
           </li>

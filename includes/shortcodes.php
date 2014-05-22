@@ -2,8 +2,8 @@
 if (!defined('EVENT_ESPRESSO_VERSION'))
 	exit('No direct script access allowed');
 //These are the core shortcodes used by the plugin.
-//If you would like to add your own shortcodes, please puchasse the custom shortcodes addon from http://eventespresso.com/download/plugins-and-addons/custom-files-addon/
-//For a list and description of available shortcodes, please refer to http://eventespresso.com/forums/2010/10/post-type-variables-and-shortcodes/
+//If you would like to add your own shortcodes, please puchasse the custom shortcodes addon from http://eventespresso.com/product/espresso-custom-files/
+//For a list and description of available shortcodes, please refer to http://eventespresso.com/wiki/shortcodes-template-variables/
 
 /*
  *
@@ -303,7 +303,7 @@ if (!function_exists('espresso_category_name_sc')) {
 		global $wpdb, $org_options;
 		extract(shortcode_atts(array('event_id' => '0'), $atts));
 		$event_id = "{$event_id}";
-		$category_name = espresso_event_category_data($event_id);
+		$category_name = espresso_event_category_data($event_id, TRUE);
 		return $category_name['category_name'];
 	}
 

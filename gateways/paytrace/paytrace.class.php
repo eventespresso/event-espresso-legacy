@@ -58,7 +58,7 @@ class Espresso_ClsPaytrace
 		$result['msg'] = "Unknown error";
 		//format the parameter string to process a transaction through PayTrace
 		$param_list = "parmlist=";
-		$params		= "UN~{$UN}|PSWD~{$Pass}|TERMS~Y|";
+		$params		= "INTEGRATORID~90000034ESSO|UN~{$UN}|PSWD~{$Pass}|TERMS~Y|";
 		$params 	.= "METHOD~ProcessTranx|TRANXTYPE~Sale|";
 		$params 	.= "CC~{$cc}|EXPMNTH~{$exp_month}|EXPYR~{$exp_year}|";
 		$params 	.= "AMOUNT~{$amount}|CSC~{$csc}|DISCOUNT~{$discount}|";

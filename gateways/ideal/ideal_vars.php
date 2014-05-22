@@ -13,15 +13,11 @@ function espresso_process_ideal($payment_data) {
 
 	if ($ideal_mollie_settings['ideal_mollie_use_sandbox'])
 		$iDEAL->setTestMode();
-	if ($ideal_mollie_settings['force_ssl_return']) {
-		$home = str_replace("http://", "https://", home_url());
-	} else {
-		$home = home_url();
-	}
+	
 	if (!empty($_POST['bank_id'])) {
 
-		$return_url = $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $payment_data['attendee_id'] . '&r_id=' . $payment_data['registration_id'] . '&type=ideal';
-		$report_url = $home . '/?page_id=' . $org_options['notify_url'] . '&id=' . $payment_data['attendee_id'] . '&r_id=' . $payment_data['registration_id'] . '&event_id=' . $payment_data['event_id'] . '&attendee_action=post_payment&form_action=payment&ideal=1';
+		$return_url = espresso_build_gateway_url('return_url', $payment_data, 'ideal');
+		$report_url = espresso_build_gateway_url('notify_url', $payment_data, 'ideal', array('ideal'=>'1'));
 //Find the correct amount so that unsavory characters don't change it in the previous form
 
 		$description = stripslashes_deep($payment_data['event_name']);

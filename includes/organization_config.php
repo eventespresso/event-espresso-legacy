@@ -130,8 +130,8 @@ function organization_config_mnu() {
 	$org_options = get_option('events_organization_settings');
 	$ueip_optin = get_option('ee_ueip_optin');
 	$plugin_basename = plugin_basename(EVENT_ESPRESSO_PLUGINPATH);
-	/*$verify_fail = get_option( 'pue_verification_error_' . $plugin_basename );
-	$site_license_key_verified = !empty( $verify_fail ) ? '<span class"pue-sl-not-verified"></span>' : '<span class="pue-sl-verified"></span>';/**/ //to be added for 3.1.37
+	$verify_fail = get_option( 'pue_verification_error_' . $plugin_basename );
+	$site_license_key_verified = $verify_fail || !empty( $verify_fail ) ? '<span class"pue-sl-not-verified"></span>' : '<span class="pue-sl-verified"></span>';/**/ 
 	$values = array(
 			array('id' => 'Y', 'text' => __('Yes', 'event_espresso')),
 			array('id' => 'N', 'text' => __('No', 'event_espresso')));
@@ -551,7 +551,7 @@ function organization_config_mnu() {
 									</h3>
 									<div class="inside">
 										<div class="padding">
-											<p><?php echo __('Please purchase a', 'event_espresso') ?> <a href="http://eventespresso.com/download/" target="_blank"><?php echo __('support license', 'event_espresso') ?></a> <?php echo __('to gain access to these features.', 'event_espresso') ?></p>
+											<p><?php echo __('Please purchase a', 'event_espresso') ?> <a href="http://eventespresso.com/pricing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=purchase+a+support+license<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=organization_config_tab" target="_blank"><?php echo __('support license', 'event_espresso') ?></a> <?php echo __('to gain access to these features.', 'event_espresso') ?></p>
 											<p>
 													<?php _e('Additional features include:', 'event_espresso'); ?>
 											</p>
@@ -593,7 +593,7 @@ function organization_config_mnu() {
 									</h3>
 									<div class="inside">
 										<div class="padding">
-											<p><?php echo __('Please purchase a', 'event_espresso') ?> <a href="http://eventespresso.com/download/" target="_blank"><?php echo __('support license', 'event_espresso') ?></a> <?php echo __('to gain access to this feature.', 'event_espresso') ?></p>
+											<p><?php echo __('Please purchase a', 'event_espresso') ?> <a href="http://eventespresso.com/pricing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=purchase+a+support+license<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=organization_config_tab" target="_blank"><?php echo __('support license', 'event_espresso') ?></a> <?php echo __('to gain access to this feature.', 'event_espresso') ?></p>
 											<p> <?php echo sprintf(__('reCAPTCHA helps prevent automated abuse of your site (such as comment spam or bogus registrations) by using a %s to ensure that only humans perform certain actions.', 'event_espresso'), '<a href="http://recaptcha.net/captcha.html">CAPTCHA</a>'); ?> </p>
 										</div>
 									</div>
@@ -622,7 +622,7 @@ function organization_config_mnu() {
 		<?php _e('Site License Key:', 'event_espresso'); ?>
 													</label>
 													<input type="text" name="site_license_key" size="45" value="<?php echo isset( $org_options['site_license_key'] ) ? stripslashes_deep($org_options['site_license_key']) : ''; ?>" />
-													<?php //echo $site_license_key_verified; ?>
+													<?php echo $site_license_key_verified; ?>
 												</li>
 
 											</ul>
@@ -723,7 +723,7 @@ function organization_config_mnu() {
 			
 			// process the remove link in the metabox
 			jQuery('#remove-image').click(function(){
-				var answer = confirm('<?php _e('Do you really want to delete this image? Please remember to save your settings to complete the removal.', 'event_espresso'); ?>');
+				var answer = confirm("<?php _e('Do you really want to delete this image? Please remember to save your settings to complete the removal.', 'event_espresso'); ?>");
 				if (answer){
 					jQuery("#upload_image").val('');
 					jQuery("p.default-logo-thumb").remove();

@@ -33,7 +33,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	// GET ATTENDEE
 	$SQL = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id =%d";
 	$attendee = $wpdb->get_row( $wpdb->prepare( $SQL, $attendee_id ));
-	
+	do_action('action_hook_espresso_pre_confirmation_page', $attendee);
 	//printr( $attendee, '$attendee  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 
 	$attendee_last = $attendee->lname;
@@ -387,7 +387,6 @@ function event_espresso_pay() {
 
 	$payment_data['attendee_id'] = apply_filters( 'filter_hook_espresso_transactions_get_attendee_id', $payment_data['attendee_id'] );
 	$REG_ID = espresso_return_reg_id();
-	
 	if ( $REG_ID != false && empty($payment_data['attendee_id'] )) {
 		//we're assuming there is NO payment data in this request, so we'll just 
 		//prepare the $payment_data for display only. No processing of payment etc.
@@ -399,11 +398,10 @@ function event_espresso_pay() {
 		$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
 		
 	} elseif ( ! empty( $payment_data['attendee_id'] )) {
-	
 		$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_prepare_event_link', $payment_data);
-		
+
 		if ( $REG_ID == false || $payment_data['registration_id'] != $REG_ID ) {
 			wp_die(__('There was a problem finding your Registration ID', 'event_espresso'));
 		}
@@ -411,7 +409,6 @@ function event_espresso_pay() {
 		if ( $payment_data['amount_owed'] > 0.00 && $payment_data['payment_status'] != 'Refund' ) {
 			
 			$payment_data = apply_filters('filter_hook_espresso_thank_you_get_payment_data', $payment_data);
-			
 			$payment_details = array(
 							'file' => __FILE__, 
 							'function' => __FUNCTION__, 

@@ -881,33 +881,34 @@ function event_espresso_display_right_column() {
 					<div class="padding">
 						<ul class="infolinks">
 							<li>
-								<?php echo '<a href="http://eventespresso.com/wiki/installation/" target="_blank">'.__('Installation', 'event_espresso') . '</a>  &amp; <a href="http://eventespresso.com/wiki/setting-up-event-espresso/" target="_blank">' . __('Usage Guide').'</a>'; ?>
+								<?php echo '<a href="http://eventespresso.com/support/documentation/#getting-started?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Installation+ee_version_'.EVENT_ESPRESSO_VERSION .'&utm_campaign=plugin_sidebar" target="_blank">'.__('Getting Started', 'event_espresso') . '</a>'; ?>
 								</li>
-							<li><a href="http://eventespresso.com/wiki/put-custom-templates/" target="_blank">
+							<li><a href="http://eventespresso.com/wiki/put-custom-templates/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Template+Customization<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank">
 									<?php _e('Template Customization', 'event_espresso'); ?>
 								</a></li>
-							<li><a href="http://eventespresso.com/support/forums/" target="_blank">
+							<li><a href="http://eventespresso.com/support/forums/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Support+Forums<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank">
 									<?php _e('Support Forums', 'event_espresso'); ?>
 								</a></li>
 							
-							<li><a href="http://eventespresso.com/wiki/change-log/" target="_blank">
+							<li><a href="http://eventespresso.com/wiki/change-log/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Changelog<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank">
 									<?php _e('Changelog', 'event_espresso'); ?>
 								</a></li>
-							<li><a href="http://eventespresso.com/about/" target="_blank">
+							<li><a href="http://eventespresso.com/about/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Meet+the+Team<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank">
 									<?php _e('Meet the Team', 'event_espresso'); ?>
 								</a></li>
-							<li><a href="http://eventespresso.com/rich-features/sponsor-new-features/" target="_blank">
+							<li><a href="http://eventespresso.com/rich-features/sponsor-new-features/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Sponsor+New+Features<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank">
 									<?php _e('Sponsor New Features!', 'event_espresso'); ?>
 								</a></li>
 							<li>
-									<?php echo '<a href="http://eventespresso.com/pricing/" target="_blank">'.__('Plugins', 'event_espresso'). '</a> &amp; <a href="http://eventespresso.com/add-ons/" target="_blank">' .__('Addons', 'event_espresso').'</a>'; ?><br />
+									<?php echo '<a href="http://eventespresso.com/pricing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Plugins&utm_campaign=admin_sidebar" target="_blank">'.__('Plugins', 'event_espresso'). '</a> &amp; <a href="http://eventespresso.com/add-ons/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Addons+ee_version_'.EVENT_ESPRESSO_VERSION .'&utm_campaign=admin_sidebar" target="_blank">' .__('Addons', 'event_espresso').'</a>'; ?><br />
 									<br />
 									<ol>
-						<li><a href="http://eventespresso.com/product/espresso-ticketing/" target="_blank">Ticket Scanning</a></li>
-						<li><a href="http://eventespresso.com/product/espresso-multiple/" target="_blank">Multiple Event Registration</a></li>
-						<li><a href="http://eventespresso.com/product/espresso-recurring/" target="_blank">Recurring Events</a></li>
-						<li><a href="http://eventespresso.com/product/espresso-members/" target="_blank">WP User Integration</a></li>
-						<li><a href="http://eventespresso.com/product/espresso-seating/" target="_blank">Seating Chart</a></li>
+						<li><a href="http://eventespresso.com/product/espresso-json-api/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+JSON+API<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('JSON API', 'event_espresso'); ?></a></li>
+						<li><a href="http://eventespresso.com/product/espresso-ticketing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Ticket+Scanning<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('Ticket Scanning', 'event_espresso'); ?></a></li>
+						<li><a href="http://eventespresso.com/product/espresso-multiple/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Multiple+Event+Registration<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('Multiple Event Registration', 'event_espresso'); ?></a></li>
+						<li><a href="http://eventespresso.com/product/espresso-recurring/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Recurring+Events<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('Recurring Events', 'event_espresso'); ?></a></li>
+						<li><a href="http://eventespresso.com/product/espresso-members/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+WP+User+Integration<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('WP User Integration', 'event_espresso'); ?></a></li>
+						<li><a href="http://eventespresso.com/product/espresso-seating/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Helpful+Plugin+Links+-+Seating+Chart<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=admin_sidebar" target="_blank"><?php _e('Seating Chart', 'event_espresso'); ?></a></li>
 					</ol>
 								</li>
 						</ul>
@@ -1017,7 +1018,7 @@ function event_espresso_custom_email_info() {
 				<p style="font-size:10px;">***This is an automated response - Do Not Reply***</p>
 				<p style="font-size:10px;">Thank you [fname] [lname] for registering for [event]. We hope that you will find this event both informative and enjoyable. Should have any questions, please contact [contact].</p>
 				<p style="font-size:10px;"><strong>Ticket type:</strong> [ticket_type]</p>
-				<p style="font-size:10px;"><strong>Print Tickets:</strong> [ticket_link] (A link <a href="http://eventespresso.com/?p=3754" target="_blank">Your Customized Ticket</a> if the ticketing addon is installed.)</p>
+				<p style="font-size:10px;"><strong>Print Tickets:</strong> [ticket_link] (A link <a href="http://eventespresso.com/product/espresso-ticketing/" target="_blank">Your Customized Ticket</a> if the ticketing addon is installed.)</p>
 				<p style="font-size:10px;">[qr_code] (generated by the QR Code addon, if installed)</p>
 				<p style="font-size:10px;">If you have not done so already, please submit your payment in the amount of [cost].</p>
 				<p style="font-size:10px;">Click here to review your payment information [payment_url].</p>
@@ -1431,7 +1432,7 @@ function espresso_admin_performance($show = 0) {
 		$show_many = isset($_GET['debug_queries']);
 
 		if ($wpdb->num_queries > 500 && !$show_many)
-			$out .= "<p>" . sprintf(__('There are too many queries to show easily! <a href="%s">Show them anyway</a>', 'debug-bar'), add_query_arg('debug_queries', 'true')) . "</p>";
+			$out .= "<p>" . sprintf(__('There are too many queries to show easily! <a href="%s">Show them anyway</a>', 'event_espresso'), add_query_arg('debug_queries', 'true')) . "</p>";
 
 		$out .= '<ol class="wpd-queries">';
 		$counter = 0;
@@ -1455,13 +1456,13 @@ function espresso_admin_performance($show = 0) {
 		$out .= '</ol>';
 	} else {
 		if ($wpdb->num_queries == 0)
-			$out .= "<p><strong>" . __('There are no queries on this page.', 'debug-bar') . "</strong></p>";
+			$out .= "<p><strong>" . __('There are no queries on this page.', 'event_espresso') . "</strong></p>";
 		else
-			$out .= "<p><strong>" . __('SAVEQUERIES must be defined to show the query log.', 'debug-bar') . "</strong></p>";
+			$out .= "<p><strong>" . __('SAVEQUERIES must be defined to show the query log.', 'event_espresso') . "</strong></p>";
 	}
 
 	if (!empty($EZSQL_ERROR)) {
-		$out .= '<h3>' . __('Database Errors', 'debug-bar') . '</h3>';
+		$out .= '<h3>' . __('Database Errors', 'event_espresso') . '</h3>';
 		$out .= '<ol class="wpd-queries">';
 
 		foreach ($EZSQL_ERROR as $e) {
@@ -1487,7 +1488,7 @@ function espresso_admin_performance($show = 0) {
 add_filter('admin_footer_text', 'espresso_admin_performance');
 
 function espresso_admin_footer() {
-	echo 'Event Registration and Ticketing Powered by <a href="http://eventespresso.com/" title="Event Registration Powered by Event Espresso" target="_blank">' . EVENT_ESPRESSO_POWERED_BY . '</a>';
+	echo 'Event Registration and Ticketing Powered by <a href="http://eventespresso.com/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Event+Registration+and+Ticketing+Powered+by+ee_version_'.EVENT_ESPRESSO_VERSION .'&utm_campaign=espresso_admin_footer" title="Event Registration Powered by Event Espresso" target="_blank">' . EVENT_ESPRESSO_POWERED_BY . '</a>';
 }
 
 add_filter('admin_footer_text', 'espresso_admin_footer');

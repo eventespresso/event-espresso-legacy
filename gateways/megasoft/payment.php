@@ -24,7 +24,7 @@ function espresso_display_megasoft($data) {
 ?>
 		<h3 class="payment_header"><?php echo $megasoft_settings['header']; ?></h3><?php } ?>
 
-		<form id="megasoft_payment_form" name="megasoft_payment_form" method="post" action="<?php echo site_url() . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
+		<form id="megasoft_payment_form" name="megasoft_payment_form" method="post" action="<?php echo add_query_arg(array('r_id'=>$registration_id), get_permalink($org_options['return_url'])); ?>">
 			<div class = "event_espresso_form_wrapper">
 
 				<fieldset id="megasoft-billing-info-dv">
@@ -41,7 +41,7 @@ function espresso_display_megasoft($data) {
 					  <label for="cid_code"><?php _e('Número de Identificación', 'event_espresso'); ?></label>
 					  <select id="cid_code" name ="cid_code" class="required">
 							<option value='V'><?php _e('Venezolano','event_espresso'); ?></option>
-							<option value='J'><?php _e('Juridico','event_espress');?></option>
+							<option value='J'><?php _e('Juridico','event_espresso');?></option>
 							<option value='E'><?php _e('Extranjero','event_espresso'); ?></option>
 							<option value='G'><?php _e("Gubernamental",'event_espresso');?></option>
 							<option value='P'><?php _e("Pasaporte",'event_espresso');?></option>

@@ -20,8 +20,8 @@ if ($payment_status == "Pending") {
 		wp_register_script( 'espresso_payment_page', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_payment_page.js', array( 'jquery' ), '1.0', TRUE );
 		wp_enqueue_script( 'espresso_payment_page' );	
 ?>
-		<div class="event_espresso_attention">
-			<strong class="payment_details payment_pending"><?php _e('Pending Payment', 'event_espresso');?></strong><br />
+		<div class="<?php espresso_template_css_class('attention','event_espresso_attention'); ?>">
+			<strong class="<?php espresso_template_css_class('payment_pending','payment_details payment_pending'); ?>"><?php _e('Pending Payment', 'event_espresso');?></strong><br />
 			<?php _e('Would you like to choose a different payment option?', 'event_espresso');?>
 		</div>
 <?php
@@ -46,11 +46,13 @@ if ( $payment_status == "Incomplete" || $payment_status == "Payment Declined" ||
 	wp_enqueue_script( 'espresso_payment_page' );	
 
 	//Check the number of available sapce against this registration
-	if ( get_number_of_attendees_reg_limit( $event_id, 'number_available_spaces' ) < $quantity ) {
+	if ( apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id) < $quantity ) {
+		$number_available_spaces = apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);//Gets the number of available spaces
+		$reg_limit = apply_filters('filter_hook_espresso_get_reg_limit', $event_id);//Gets the registration limit
 ?>
-		<p class="espesso_event_full"> <?php _e('Sorry, there are not enough spaces available to complete your registration.', 'event_espresso'); ?></p>
-		<p class="espesso_event_full"> <?php _e('Quantity in your Party:', 'event_espresso'); ?> <?php echo $quantity ?></p>
-		<p class="espesso_event_full"><?php _e('Spaces Available:', 'event_espresso'); ?> <?php echo get_number_of_attendees_reg_limit($event_id, 'avail_spaces_slash_reg_limit') ?></p>
+		<p class="<?php espresso_template_css_class('event_full','espesso_event_full'); ?>"><?php _e('Sorry, there are not enough spaces available to complete your registration.', 'event_espresso'); ?></p>
+		<p class="<?php espresso_template_css_class('event_full','espesso_event_full'); ?>"><?php _e('Quantity in your Party:', 'event_espresso'); ?> <?php echo $quantity ?></p>
+		<p class="<?php espresso_template_css_class('event_full','espesso_event_full'); ?>"><?php _e('Spaces Available:', 'event_espresso'); ?> <?php echo $number_available_spaces.'/'.$reg_limit; ?></p>
 <?php
 		return;
 	}

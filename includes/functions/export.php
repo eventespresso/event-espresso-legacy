@@ -164,7 +164,7 @@ if (!function_exists('espresso_event_export')) {
 			$status = event_espresso_get_is_active($event_id);
 			$recurrence_id = $event->recurrence_id;
 			$registration_startT = $event->registration_startT;
-
+			$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $event_id);
 
 			//Venue variables
 			if (isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y') {
@@ -212,7 +212,7 @@ if (!function_exists('espresso_event_export')) {
 				echo $s . (espresso_user_meta($wp_user, 'user_firstname') != '' ? espresso_user_meta($wp_user, 'user_firstname') . ' ' . espresso_user_meta($wp_user, 'user_lastname') : espresso_user_meta($wp_user, 'display_name'));
 			}
 
-			echo $s . strip_tags($status['display']) . $s . str_replace('/', ' of ', get_number_of_attendees_reg_limit($event_id, 'num_attendees_slash_reg_limit'));
+			echo $s . strip_tags($status['display']) . $s . $num_attendees.' of '.$reg_limit;
 
 			switch ($_REQUEST['type']) {
 				case "csv" : echo "\r\n";
@@ -427,6 +427,15 @@ if (!function_exists('espresso_export_stuff')) {
 							$sql .= $espresso_member ? ") ORDER BY att_id " : " ORDER BY a.id ";
 
 							$participants = $wpdb->get_results($sql);
+							/*
+							 * Remove duplicate entries if multiple entries in checkin table
+							 * save last entry for export.
+							 */
+							$rebuild_participants = array();
+							foreach ($participants as $participant) {
+								$rebuild_participants[$participant->att_id] = $participant;
+							}
+							$participants = $rebuild_participants;
 
 							$filename = ( isset($_REQUEST['all_events']) && $_REQUEST['all_events'] == "true" ) ? __('all-events', 'event_espresso') : $event_name;
 
