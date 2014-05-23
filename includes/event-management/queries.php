@@ -188,6 +188,8 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	$SQL .=! $count && ! $attendees && $use_venue_manager && $group_admin_locales ? ' AND l.locale_id IN (' . $group_admin_locales . ') ' : '';
 	// Attendee Payment Status
 	$SQL .= ! $count && $attendees && $payment_status ? ' AND a.payment_status = "' . $payment_status . '"' : '';
+	// Filter to allow the user to excluded attendees based on payment status within the default attendee report
+	if (!$count && $attendees && !$payment_status) { $SQL .=  apply_filters('espresso_attendee_report_payment_status_where', ''); }
 	//Month filter
 	$SQL .= $month_range && $attendees && ! $event_id ? ' AND a.date BETWEEN "' . $year_r . '-' . $month_r . '-01" AND "' . $year_r . '-' . $month_r . '-' . $days_this_month . '"' : '';
 	$SQL .= $month_range && ! $attendees && ! $event_id ? ' AND e.start_date BETWEEN "' . $year_r . '-' . $month_r . '-01" AND "' . $year_r . '-' . $month_r . '-' . $days_this_month . '"' : '';
