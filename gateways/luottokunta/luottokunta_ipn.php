@@ -89,7 +89,7 @@ function generate_mac_string($payment_data){
 	
 	$payment_data = espresso_get_total_cost($payment_data);
 	//var_dump($payment_data);
-	$mac_parts['amount'] =  $payment_data['total_cost'] * 100;//12345;//get from using the $payment_data, and passing it to espresso_get_total_cost(), and then multiplying $paymnet_data['total_cost'] by 100
+	$mac_parts['amount'] =  $payment_data['total_cost'] * 100;//12345;//get from using the $payment_data, and passing it to espresso_get_total_cost(), and then multiplying $payment_data['total_cost'] by 100
 	
 	$mac_parts['order_id'] =  $_GET['order_id'];//'987654321';
 	
