@@ -10,7 +10,7 @@ if ($espresso_premium != true) {
 
 /**
  * 	espresso_retreive_filter_query_args
- * 	gnerates a list of current query args and removes empty elements
+ * 	generates a list of current query args and removes empty elements
  *
  *  @access public
  *  array $var
