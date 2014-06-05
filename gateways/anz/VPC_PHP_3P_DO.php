@@ -134,7 +134,7 @@ foreach($_POST as $key => $value) {
     // create the md5 input and URL leaving out any fields that have no value
     if (strlen($value) > 0) {
         
-        // this ensures the first paramter of the URL is preceded by the '?' char
+        // this ensures the first parameter of the URL is preceded by the '?' char
         if ($appendAmp == 0) {
             $vpcURL .= urlencode($key) . '=' . urlencode($value);
             $appendAmp = 1;

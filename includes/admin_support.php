@@ -328,7 +328,7 @@ function event_espresso_support() {
 											<?php _e('(Used to redirect to the shopping cart page. Must be added to an event description.)', 'event_espresso'); ?>
 										</p>
 										<p><span class="highlight">[ESPRESSO_CART_LINK event_id="add_event_id_here" direct_to_cart=1 moving_to_cart="Redirecting to cart..."]</span><br />
-	<?php _e('(Same as above, but uses the event_id paramter and can be added to a page or post.)', 'event_espresso'); ?>
+	<?php _e('(Same as above, but uses the event_id parameter and can be added to a page or post.)', 'event_espresso'); ?>
 										</p>
 									</div>
 									<div class="shortcode-box">
