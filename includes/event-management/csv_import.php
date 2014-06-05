@@ -252,7 +252,7 @@ function load_events_to_db() {
 						require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/category-management/add_cat_to_db.php');
 						add_cat_to_db();
 						$cat_id = $wpdb->get_var($wpdb->prepare($category_sql, $category_name));
-						//ok, now that we've fooled it and added teh category, revert the $_REQUEST params
+						//ok, now that we've fooled it and added the category, revert the $_REQUEST params
 						$_REQUEST['action'] = $old_REQUEST_action;
 					}
 					$cat_sql_2 = "INSERT INTO " . EVENTS_CATEGORY_REL_TABLE . " (event_id, cat_id) VALUES (%d, %d)";

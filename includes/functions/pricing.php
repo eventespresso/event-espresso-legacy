@@ -236,7 +236,7 @@ if (!function_exists('event_espresso_get_orig_price_and_surcharge')) {
 }
 
 /**
- * Gets teh price result for this event. Used when we just want one of them.
+ * Gets the price result for this event. Used when we just want one of them.
  * @global type $wpdb
  * @param type $event_id
  * @return type
