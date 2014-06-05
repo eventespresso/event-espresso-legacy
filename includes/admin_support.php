@@ -704,7 +704,7 @@ function event_espresso_support() {
 									<h5>** Requirements for installation service:</h5>
 									<ul>
 										<li> The server must be accessible over the internet.</li>
-										<li> The server must meet the server requirements (for Advanced Events Registration).</li>
+										<li> The server must meet the server requirements (for Event Espresso).</li>
 										<li> You must be able to provide a FTP/SFTP username and password. A MySQL database name, username and password is needed for a Basic Install. A WordPress admin user name, password, and login URL.</li>
 									</ul>
 								</div>
