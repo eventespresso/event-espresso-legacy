@@ -95,23 +95,34 @@ function update_event($recurrence_arr = array()) {
 
                     if ($_POST['recurrence_apply_changes_to'] == 2) {
                         //Update all events in the series based on recurrence id
-                        //$DEL_SQL = 'UPDATE ' . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date NOT IN (" . $delete_in . ") AND recurrence_id = " . $_POST['recurrence_id'];
-                        $DEL_SQL = 'DELETE EDT, EAT FROM ' . EVENTS_DETAIL_TABLE . " EDT
+                        
+                        //'Soft delete' any events that are not within the current series when using the 'All events in this series' option.
+                        $DEL_SQL = 'UPDATE ' . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date NOT IN (" . $delete_in . ") AND recurrence_id = " . $_POST['recurrence_id'];
+                        /*
+                            //Permanently delete events not within the current formula
+                            $DEL_SQL = 'DELETE EDT, EAT FROM ' . EVENTS_DETAIL_TABLE . " EDT
                             LEFT JOIN " . EVENTS_ATTENDEE_TABLE . " EAT
                                 ON EDT.id = EAT.event_id
                             WHERE EAT.id IS NULL
                             AND EDT.start_date NOT IN (%s)
                             AND recurrence_id = " . sanitize_text_field($_POST['recurrence_id']);
-
+                        */
                         $UPDATE_SQL = "SELECT id,start_date,event_identifier FROM " . EVENTS_DETAIL_TABLE . " WHERE recurrence_id = %d and NOT event_status = 'D' ORDER BY start_date";
                     } else {
-                       $DEL_SQL = 'DELETE EDT, EAT FROM ' . EVENTS_DETAIL_TABLE . " EDT
+
+                        //'Soft delete' any events that are not within the current series when using the 'This and all upcoming events'
+                        $DEL_SQL = 'UPDATE ' . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date >='" . esc_sql(sanitize_text_field($_POST['start_date'])) . "' AND start_date NOT IN (" . $delete_in . ") AND recurrence_id = " . $_POST['recurrence_id'];
+
+                        /*
+                            //Permanently delete events not within the current formula
+                            $DEL_SQL = 'DELETE EDT, EAT FROM ' . EVENTS_DETAIL_TABLE . " EDT
                             LEFT JOIN " . EVENTS_ATTENDEE_TABLE . " EAT
                                 ON EDT.id = EAT.event_id
                             WHERE EAT.id IS NULL
                             AND EDT.start_date >='" . esc_sql(sanitize_text_field($_POST['start_date'])) . "'
                             AND EDT.start_date NOT IN (" . $delete_in . ")
                             AND recurrence_id = " . $_POST['recurrence_id'];
+                        */
                         $UPDATE_SQL = "SELECT id,start_date,event_identifier FROM " . EVENTS_DETAIL_TABLE . " WHERE start_date >='" . sanitize_text_field($_POST['start_date']) . "' AND recurrence_id = %d AND NOT event_status = 'D'  ORDER BY start_date";
                     }
 
