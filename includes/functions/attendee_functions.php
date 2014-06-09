@@ -45,7 +45,7 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 			// cycle thru questions
 			foreach ($questions as $question) {
 				//printr( $question, '$question  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-				// depending on the quesion, it's POST key may be different
+				// depending on the question, it's POST key may be different
 				$question_type = !empty($response_source[$question->question_type . '_' . $question->qstn_id]) ? $response_source[$question->question_type . '_' . $question->qstn_id] :'';			
 				//echo '<h4>$question_type : ' . $question_type . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				// so if we haven't already displayed this question

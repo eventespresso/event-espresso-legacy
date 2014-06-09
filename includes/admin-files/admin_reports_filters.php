@@ -10,14 +10,14 @@ if ($espresso_premium != true) {
 
 /**
  * 	espresso_retreive_filter_query_args
- * 	gnerates a list of current query args and removes empty elements
+ * 	generates a list of current query args and removes empty elements
  *
  *  @access public
  *  array $var
  *  string
  */
 function espresso_retreive_filter_query_args() {
-	// for deez filtaz ta be da shiltaz, dey haz ta function in conjuntion wit da othaz
+	// for deez filtaz ta be da shiltaz, dey haz ta function in conjunction wit da othaz
 	// so let's grab the existing query string
 	$query_string = isset( $_SERVER['QUERY_STRING'] ) ? wp_strip_all_tags( $_SERVER['QUERY_STRING'] ) : array();
 	// and convert it's parameters into an array of query args

@@ -273,7 +273,7 @@ if ( isset( $_POST[ 'name' ] ) && isset( $_POST[ 'MC_type'] ) && 'worldpay' == $
  * 
  * @param string $type usually either 'notify_url','return_url', or 'cancel_url' (keys in the global $org_options
  * @param array $payment_data specifically, this array should contain keys 'attendee_id', 'registration_id', 
- * @param string $gateway_slug name of teh gateway folder, eg 'paypal','mwarrior','eway_rapid3' etc. This is used to get the gateway's option, that option should have a key 'force_ssl_return',
+ * @param string $gateway_slug name of the gateway folder, eg 'paypal','mwarrior','eway_rapid3' etc. This is used to get the gateway's option, that option should have a key 'force_ssl_return',
  * @param array $extra_args any extra querystring args to be added to the URL.
  * @return string which can be sent to the gateway
  */

@@ -51,7 +51,7 @@ function espresso_format_content($content = '') {
 //This function pulls HTML entities back into HTML format first then strips it.
 //Use it if you want to strip the HTML from the event_desc column in the daatabase.
 //I have to store HTML as special chars in the database, because the html was breaking the sql queries.
-//I tried doing add_slashes, then strip_slashes, but it kept adding to many slashes and not removing the extras. It was a nightmare so i decided to jsut make all HTML into special chars.
+//I tried doing add_slashes, then strip_slashes, but it kept adding to many slashes and not removing the extras. It was a nightmare so i decided to just make all HTML into special chars.
 function event_espresso_strip_html_from_entity($html_entity) {
 	$stripped_html_entity = strip_tags(html_entity_decode($html_entity));
 	return $stripped_html_entity;
@@ -1230,7 +1230,7 @@ if (!function_exists('event_espresso_require_gateway')) {
 //function to include all active gateways' code
 if(!function_exists('event_espresso_init_active_gateways')){
 	/**
-	 *  initialized each active gateway. this is added onto the 'plugins_loaded' hook so taht each active gateway will be called.
+	 *  initialized each active gateway. this is added onto the 'plugins_loaded' hook so that each active gateway will be called.
 	 * before each gateway was included only on pages with important shortcodes (like transaction, or payment) but that wasn't enough power
 	 * for some gateways (eg: the google checkout gateway needed to be able to add a hook on init for all page loads, which it coudln't do before)
 	 */

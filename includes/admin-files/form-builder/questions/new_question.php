@@ -55,7 +55,7 @@ function event_espresso_form_builder_new(){
 							</th>
 							<td>
 								<input name="question_values" id="question-values" class="wide-text" value="" type="text" /><br />
-								<span class="description"><?php _e('A comma seperated list of values. Eg. black, blue, red', 'event_espresso'); ?></span>
+								<span class="description"><?php _e('A comma separated list of values. Eg. black, blue, red', 'event_espresso'); ?></span>
 							</td>
 						</tr>
 						

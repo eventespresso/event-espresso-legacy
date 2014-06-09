@@ -461,11 +461,11 @@ function event_espresso_pay() {
 }
 /**
  * Clears the event espresso session (containing info about events being registered for)
- * for the attendee with this $attendee_session ('attendee_session' on teh events_attendee table).
+ * for the attendee with this $attendee_session ('attendee_session' on the events_attendee table).
  * Before we simply cleared the session of the CURRENT user. That worked 95% of the time, except SOME gateways
  * (notably Worldpay, and probably Authnet) send the request to the thank you page directly (instead of redirecting
- * the user to teh thank you page). When THEY send the request on behalf of the user, they're on a different session.
- * So what's the use in clearing the session in that case? (Because we're clearing the session of teh gateway sending the request
+ * the user to the thank you page). When THEY send the request on behalf of the user, they're on a different session.
+ * So what's the use in clearing the session in that case? (Because we're clearing the session of the gateway sending the request
  * instead of the user's session). So, instead we need to use the attendee's 'attendee_session', which contains info about
  * the php session. So we load that session (the user's) and modify IT, instead of the current requestor's session
  * (because they could be the gateway, instead of the user).
@@ -483,7 +483,7 @@ function event_espresso_clear_session_of_attendee($attendee_session){
 	//if the current session doesn't have id == $php_session_id, (probably
 	//because its the gateway who's sent the request to the current page, not the user themselves)
 	//effectively this overwrites the session (which has id == $php_session_id) to be identical
-	//to teh current session. That means if the user's session had events queued in it, they're gone.
+	//to the current session. That means if the user's session had events queued in it, they're gone.
 	session_id($php_session_id);
 	
 	//in case the current session's id == $php_session_id (ie, the current request IS NOT a

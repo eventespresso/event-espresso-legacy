@@ -26,7 +26,7 @@ function espresso_display_psigate($payment_data){
 	
 	$return_url= espresso_build_gateway_url('return_url', $payment_data, 'psigate');
 	$server_url=($psigate_settings['use_sandbox'])?"https://devcheckout.psigate.com/HTMLPost/HTMLMessenger":'https://checkout.psigate.com/HTMLPost/HTMLMessenger';
-	/* @var $items StdClass[] array of attendees inner join with event on teh current purhcase*/
+	/* @var $items StdClass[] array of attendees inner join with event on the current purhcase*/
 	//$items=espresso_get_items_being_purchased($payment_data['attendee_id']);
 	//get payment's details
 	//get country of user. default to Canada, as this gateway is canadian

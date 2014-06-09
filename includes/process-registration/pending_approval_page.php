@@ -84,7 +84,10 @@ function espresso_pending_registration_approval($registration_id) {
     		require_once(EVENT_ESPRESSO_TEMPLATE_DIR . "pending_approval.php");
 		} else {
     		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "templates/pending_approval.php");
-		}		
+		}
+
+		espresso_cancelled();
+	
 	} else {
 		wp_die( _e('An error occured. The primary attendee could not be located.', 'event_espresso'));		
 	}

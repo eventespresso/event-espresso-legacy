@@ -66,7 +66,7 @@ function espresso_display_anz($payment_data){
 
 	
 	<?php
-	//only redirect immediately if they didnt jsut return from ANZ
+	//only redirect immediately if they didnt just return from ANZ
 	//otherwise, we want them to see the error message
 	if($bypass_payment_page && !array_key_exists('vpc_Message',$_GET)){
 		

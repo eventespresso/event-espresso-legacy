@@ -105,7 +105,7 @@ function event_espresso_form_builder_edit(){
 							<td>
 				  			<input name="values" id="question-values" class="wide-text" value="<?php echo htmlspecialchars( $question_values, ENT_QUOTES, 'UTF-8' ); ?>" type="text" />
 							<br />
-								<span class="description"><?php _e('A comma seperated list of values. Eg. black, blue, red', 'event_espresso'); ?></span>
+								<span class="description"><?php _e('A comma separated list of values. Eg. black, blue, red', 'event_espresso'); ?></span>
 							</td>
 						</tr>
 						

@@ -4,11 +4,11 @@ function csv_import() { ?>
 	<h3>Event Import</h3>
 	<ul>
 		<li>
-			<p><?php _e('This page is for importing your events from a comma seperated file (CSV) directly into the the events database.  The limitation of this upload is that it does not support the extra questions, only the core event configuration.', 'event_espresso'); ?> </p>
+			<p><?php _e('This page is for importing your events from a comma separated file (CSV) directly into the the events database.  The limitation of this upload is that it does not support the extra questions, only the core event configuration.', 'event_espresso'); ?> </p>
 			<ul>
 				<li><?php _e('Please use Y where you want to say Yes and N where you want No.', 'event_espresso'); ?></li>
 				<li><?php _e('Dates should be formatted YYYY-MM-DD (2009-07-04).', 'event_espresso'); ?></li>
-				<li><?php _e('We have included a template file', 'event_espresso'); ?> <a href="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>events.csv"><?php _e('here', 'event_espresso'); ?></a> <?php _e('that I recommend you download and use.  It is very easy to work with it in excel, just remember to save it as a csv and not excel sheet.', 'event_espresso'); ?></li>
+				<li><?php _e('We have included a template file', 'event_espresso'); ?> <a href="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>events.csv"><?php _e('here', 'event_espresso'); ?></a> <?php _e('that I recommend you download and use.  It is very easy to work with it in excel, just remember to save it as a CSV and not excel sheet.', 'event_espresso'); ?></li>
 				<li><?php _e('The file name should be events.csv in order for it to work. I will fix this issue later, I just wanted to get this working first.', 'event_espresso'); ?></li>
 			</ul>
 			<p><?php _e('One final note, you will see that the header row, fist column has a 0 while other rows have a 1.  This tells the upload to ignore rows that have the 0 identifier and only use rows with the 1.', 'event_espresso'); ?></p>
@@ -252,7 +252,7 @@ function load_events_to_db() {
 						require_once(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/category-management/add_cat_to_db.php');
 						add_cat_to_db();
 						$cat_id = $wpdb->get_var($wpdb->prepare($category_sql, $category_name));
-						//ok, now that we've fooled it and added teh category, revert the $_REQUEST params
+						//ok, now that we've fooled it and added the category, revert the $_REQUEST params
 						$_REQUEST['action'] = $old_REQUEST_action;
 					}
 					$cat_sql_2 = "INSERT INTO " . EVENTS_CATEGORY_REL_TABLE . " (event_id, cat_id) VALUES (%d, %d)";
