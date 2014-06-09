@@ -334,6 +334,7 @@ function espresso_generate_attendee_event_list( $data ) {
 	$SQL .= 'LEFT JOIN ' . EVENTS_DETAIL_TABLE . ' evt ON evt.id=att.event_id ';	
 	$SQL .= $use_venue ? " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = evt.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id " : '';	
 	$SQL .= 'WHERE att.email = %s AND att.attendee_session = %s';
+	$SQL .= 'ORDER BY att.start_date, att.event_time';
 
 	$events = $wpdb->get_results( $wpdb->prepare( $SQL, $data->attendee->email, $data->attendee->attendee_session ));
 	
