@@ -135,16 +135,9 @@ if (!class_exists('Event_Espresso_Widget')) {
 							break;
                         case 'PENDING':
                                 if (current_user_can('administrator') || function_exists('espresso_member_data') && espresso_can_view_event($event_id) == true) {
-                                    //Uncomment to show active status array
-                                    //print_r( event_espresso_get_is_active($event_id));
-
-                                    echo '<div class="pending_event">';
-                                    if ( empty( $path ) ) {
-                                      include( $template_name );
-                                    } else {
-                                      include( $path );
-                                    }
-                                    echo '</div>';
+                                    ?>
+                                    <li  class="pending_event"><a href="<?php echo $registration_url; ?>"><?php echo stripslashes_deep($event->event_name) ?> - <span class="widget-event-date"><?php echo event_date_display($event->start_date) ?></span></a>
+                                    <?php
                                 }
                             break;
                         default:
