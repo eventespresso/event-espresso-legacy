@@ -29,7 +29,7 @@ function espresso_display_stripe($payment_data) {
 <?php } ?>
 
 		<div class = "event_espresso_form_wrapper">
-			<form id="stripe_payment_form" name="stripe_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
+			<form id="stripe_payment_form" name="stripe_payment_form" method="post" action="<?php echo add_query_arg(array('r_id'=>$registration_id), get_permalink($org_options['return_url'])); ?>">
 
 				<fieldset id="stripe-billing-info-dv">
 					<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>

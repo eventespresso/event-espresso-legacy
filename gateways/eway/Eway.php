@@ -12,7 +12,11 @@ $eway_gateway_version = '1.0';
 class Espresso_Eway extends Espresso_PaymentGateway {
 
 	var $eway_settings = NULL;
-
+	/**
+	 * array of arguuments for sending along with redirect
+	 * @var array
+	 */
+	var $gatewayUrlArgs = array();
     /**
      * Initialize the eWay gateway
      *
@@ -57,8 +61,7 @@ class Espresso_Eway extends Espresso_PaymentGateway {
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
         $response = curl_exec($ch);
-				$error["result"] = curl_error($ch);
-	
+		$error["result"] = curl_error($ch);
         function fetch_data($string, $start_tag, $end_tag) {
             $position = stripos($string, $start_tag);
             $str = substr($string, $position);
@@ -74,9 +77,12 @@ class Espresso_Eway extends Espresso_PaymentGateway {
 
   
       if ($responsemode == "True") {
-            $this->gatewayUrl = explode("?", $responseurl);
-            parse_str($this->gatewayUrl[1]);
-            $this->gatewayUrl[1] = $value;
+			//we COULD just use the responseurl and redirect the user to it.
+			//but we kinda prefer to make a form with GET method and submit it
+			//instead. So let's find the URL and the args to add to the form...
+			$url_parts = explode("?", $responseurl,2);
+            $this->gatewayUrl =  $url_parts[0];
+			parse_str($url_parts[1],$this->gatewayUrlArgs );
         } elseif ( $this->eway_settings['use_sandbox'] != '' ) {
             echo "ERROR\n";
 						echo $error["set_host"] ? "Success" : "Failure";
@@ -93,10 +99,10 @@ class Espresso_Eway extends Espresso_PaymentGateway {
             echo "<body onLoad=\"document.forms['payment_form'].submit();\">\n";
             echo "<p style=\"text-align:center;\"><h2>Please wait, your order is being processed and you";
             echo " will be redirected to the payment website.</h2></p>\n";
-            echo '<form method="get" name="payment_form" action="' . $this->gatewayUrl[0] . '">';
-						echo '<input type="hidden" value="' . $this->gatewayUrl[1] . '" name="value">';
-             echo "<input type=\"hidden\" id=\"bypass_payment_page\" name=\"bypass_payment_page\" value=\"true\"/>\n";
-           echo "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to ";
+            echo '<form method="get" name="payment_form" action="' . $this->gatewayUrl . '">';
+			$this->echoArgs();
+            echo "<input type=\"hidden\" id=\"bypass_payment_page\" name=\"bypass_payment_page\" value=\"true\"/>\n";
+            echo "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to ";
             echo "the payment website within 5 seconds...<br/><br/>\n";
             echo "<input class=\"allow-leave-page\" type=\"submit\" value=\"Click Here\"></p>\n";
             echo "</form>\n";
@@ -105,11 +111,16 @@ class Espresso_Eway extends Espresso_PaymentGateway {
 
     public function submitButton($button_url, $gateway) {
         $this->prepareSubmit();
-        echo '<form method="get" name="payment_form" action="' . $this->gatewayUrl[0] . '">';
-        echo '<input type="hidden" value="' . $this->gatewayUrl[1] . '" name="value">';
+        echo '<form method="get" name="payment_form" action="' . $this->gatewayUrl . '">';
+		$this->echoArgs();
        echo '<input id="eway-payment-option-lnk" class="payment-option-lnk allow-leave-page" type="image" alt="Pay using eWay" src="' . $button_url . '" />';
         echo '</form>';
     }
+	protected function echoArgs(){
+		foreach($this->gatewayUrlArgs as $argname=>$argvalue){
+			echo '<input type="hidden" value="' . $argvalue . '" name="'.$argname.'">';
+		}
+	}
 
     /**
      * Validate the IPN notification

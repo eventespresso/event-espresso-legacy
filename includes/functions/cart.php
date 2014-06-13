@@ -841,7 +841,7 @@ function event_espresso_copy_dd($event_id, $meta) {
 
 
 	$var = '<div class = "copy_dropdown_wrapper"> ';
-	$var .= '<label>Copy from: </label>';
+	$var .= '<label>'.__('Copy from:', 'event_espresso').' </label>';
 	$var .= '<select id="multi_regis_form_fields-' . $event_id . '" class="'.espresso_template_css_class('copy_info','event_espresso_copy_info', false).'">';
 	$var .= "<option value=''></option>";
 
@@ -860,23 +860,23 @@ function event_espresso_copy_dd($event_id, $meta) {
 				if ($event_meta['additional_attendee_reg_info'] == 1) {
 					$i = 1;
 					$event_name = strlen($v_event_id['event_name']) > 25 ? substr($v_event_id['event_name'], 0, 15) . '... ' : $v_event_id['event_name']; //if too long to display
-					$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}|$k_event_id|$k_price_id|$i'>" . stripslashes_deep($event_name) . ' - ' . stripslashes_deep($v_price_id['price_type'] ). ' - Attendee ' . $i . "</option>";
+					$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}|$k_event_id|$k_price_id|$i'>" . stripslashes_deep($event_name) . ' - ' . stripslashes_deep($v_price_id['price_type'] ). ' - '.__('Attendee', 'event_espresso').' ' . $i . "</option>";
 				} else {
 					for ($i = 1; $i <= $v_price_id['attendee_quantity']; $i++) {
 						$event_name = strlen($v_event_id['event_name']) > 25 ? substr($v_event_id['event_name'], 0, 15) . '... ' : $v_event_id['event_name']; //if too long to display
-						$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}|$k_event_id|$k_price_id|$i'>" . stripslashes_deep($event_name) . ' - ' . $v_price_id['price_type'] . ' - Attendee ' . $i . "</option>";
+						$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}|$k_event_id|$k_price_id|$i'>" . stripslashes_deep($event_name) . ' - ' . $v_price_id['price_type'] . ' - '.__('Attendee', 'event_espresso').' ' . $i . "</option>";
 					}
 				}
 			}
 		}
 	}
 
-	$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}'>CLEAR FIELDS</option>";
+	$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}'>".__('CLEAR FIELDS', 'event_espresso')."</option>";
 	$var .= "</select></div>";
 
 	return $var;
 
-	return "<a href='#' class='event_espresso_copy_link' id='event_espresso_copy_link-$event_id'> Copy from above</a>";
+	return "<a href='#' class='event_espresso_copy_link' id='event_espresso_copy_link-$event_id'>".__('Copy from above', 'event_espresso')."</a>";
 }
 
 

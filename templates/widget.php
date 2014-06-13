@@ -133,6 +133,13 @@ if (!class_exists('Event_Espresso_Widget')) {
 						case 'DRAFT':
 							//Don't show the event if event is draft.
 							break;
+                        case 'PENDING':
+                                if (current_user_can('administrator') || function_exists('espresso_member_data') && espresso_can_view_event($event_id) == true) {
+                                    ?>
+                                    <li  class="pending_event"><a href="<?php echo $registration_url; ?>"><?php echo stripslashes_deep($event->event_name) ?> - <span class="widget-event-date"><?php echo event_date_display($event->start_date) ?></span></a>
+                                    <?php
+                                }
+                            break;
                         default:
                             ?>
                             <li><a href="<?php echo $registration_url; ?>"><?php echo stripslashes_deep($event->event_name) ?> - <span class="widget-event-date"><?php echo event_date_display($event->start_date) ?></span></a>

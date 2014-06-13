@@ -74,7 +74,7 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 	                	$use_percentage = $coupon['use_percentage'];
 
 					
-				} else {//ask teh DB if the promocode is valid
+				} else {//ask the DB if the promocode is valid
 					
 					$SQL = "SELECT d.* FROM " . EVENTS_DISCOUNT_CODES_TABLE . " d ";
 					$SQL .= " LEFT JOIN " . EVENTS_DISCOUNT_REL_TABLE . " r ON r.discount_id  = d.id ";

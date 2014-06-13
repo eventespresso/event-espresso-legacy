@@ -16,7 +16,7 @@ if ($reg_form_only == false) {
 	$ui_corner = espresso_template_css_class('ui_corner_bottom','ui-corner-bottom', false);
 }
 ?>
-		<div class="<?php espresso_template_css_class('event_data_display','event_espresso_form_wrapper event-data-display ui-widget-content'); ?> <?php echo $ui_corner ?>">
+		<div class="<?php espresso_template_css_class('event_data_display','event_espresso_form_wrapper event-data-display ui-widget-content clearfix'); ?> <?php echo $ui_corner ?>">
 			<?php //Featured image
 		echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');?>
 			<?php /* Venue details. Un-comment first and last lines & any venue details you wish to display or use the provided shortcodes. */ ?>
@@ -110,7 +110,7 @@ if ($reg_form_only == false) {
 					}
 
 					if ($display_price_dropdown == TRUE) {
-						$price_label = '<span class="section-title">'.__('Choose an Option: ', 'event_espresso').'</span>';
+						$price_label = '<span class="'.espresso_template_css_class('section_title','event_price_label', false).'">'.__('Choose an Option:', 'event_espresso').'</span>';
 	?>
 						<p class="event_prices">
 							<?php do_action( 'espresso_price_select', $event_id, array('show_label'=>TRUE, 'label'=>$price_label) );?>

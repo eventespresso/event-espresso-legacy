@@ -61,8 +61,9 @@ if (!function_exists('event_espresso_get_event_details')) {
 			'css_class'					=> 'NULL',
 			'current_page'				=> 1,
 			'events_per_page'			=> 50,
-			'num_page_links_to_display'	=>10,
-			'use_wrapper'				=> true
+			'num_page_links_to_display'	=> 10,
+			'use_wrapper'				=> true,
+			'exclude_closed_events'		=> 'false'
 		);
 		// loop thru default atts
 		foreach ($default_attributes as $key => $default_attribute) {
@@ -134,7 +135,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id= e.id ";
 		$sql .= " LEFT JOIN " . EVENTS_PRICES_TABLE . " p ON p.event_id=e.id ";
-		$sql .= " WHERE is_active = 'Y' ";
+		$sql .= " WHERE is_active = %s ";
 		
 		//Category sql
 		$sql .= $category_sql;
@@ -145,7 +146,13 @@ if (!function_exists('event_espresso_get_event_details')) {
 		//User sql
 		$sql .= (isset($user_id)  && !empty($user_id))? " AND wp_user = '" . $user_id . "' ": '';
 		
-		$sql .= $show_expired == 'false' ? " AND (e.start_date >= '" . date('Y-m-d') . "' OR e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
+		//Exclude events that have closed registration
+		if($exclude_closed_events == 'false'){
+			$sql .= $show_expired == 'false' ? " AND (e.start_date >= '" . date('Y-m-d') . "' OR e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
+		} else {
+			$sql .= $show_expired == 'false' ? " AND (e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
+		}
+
 		if  ($show_expired == 'true'){
 			$allow_override = 1;
 		}
@@ -180,9 +187,9 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		$sql .= " GROUP BY e.id ";
 		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$sort." " : " ORDER BY date(start_date), id ASC ";
-		$sql .= $limit > 0 ? ' LIMIT 0, '.$limit : '';  
+		$sql .= $limit > 0 ? ' LIMIT 0, %d' : '';  
 		
-		$events = $wpdb->get_results( $wpdb->prepare($sql, ''));
+		$events = $wpdb->get_results( $wpdb->prepare($sql, 'Y', $limit));
 //		echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		
 		$category_id			= isset($wpdb->last_result[0]->id) ? $wpdb->last_result[0]->id : '';
@@ -297,7 +304,8 @@ if (!function_exists('event_espresso_get_event_details')) {
 				$display_reg_form = $event->display_reg_form;
 				$allow_overflow = $event->allow_overflow;
 				$overflow_event_id = $event->overflow_event_id;
-				$event_desc = array_shift(explode('<!--more-->', $event_desc));
+				$event_desc = explode('<!--more-->', $event_desc);
+				$event_desc = array_shift($event_desc);
 				global $event_meta;
 				$event_meta = unserialize($event->event_meta);
 				$event_meta['is_active'] = $event->is_active;

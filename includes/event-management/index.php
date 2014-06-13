@@ -170,8 +170,8 @@ function event_espresso_manage_events() {
 		<p><?php _e('These emails will override the custom email if a pre-existing email is selected. You must select "Yes" in the "Send custom confirmation emails for this event?" above.', 'event_espresso'); ?></p>
 	</div>
 	<div id="coupon_code_info" style="display:none">
-		<h2><?php _e('Coupon/Promo Code', 'event_espresso'); ?></h2><p><?php _e('This is used to apply discounts to events.', 'event_espresso'); ?></p><p><?php _e('A coupon or promo code could can be anything you want. For example: Say you have an event that costs', 'event_espresso'); ?> <?php echo $org_options['currency_symbol'] ?>200. <?php _e('If you supplied a promo like "PROMO50" and entered 50.00 into the "Discount w/Promo Code" field your event will be discounted', 'event_espresso'); ?>  <?php echo $org_options['currency_symbol'] ?>50.00, <?php _e('Bringing the cost of the event to', 'event_espresso'); ?> <?php echo $org_options['currency_symbol'] ?>150. </p>
-			<p><?php	_e("Note: Promo Codes which are marked to 'apply to all events', although not explicitly enumerated, can also be used for this event, provided it allows promo codes.", "event_espresso");?></p>
+		<h2><?php _e('Coupon/Promo Code', 'event_espresso'); ?></h2><p><?php _e('This is used to apply discounts to events.', 'event_espresso'); ?></p><p><?php _e('A coupon or promo code can be anything you want. For example: Say you have an event that costs', 'event_espresso'); ?> <?php echo $org_options['currency_symbol'] ?>200. <?php _e('If you supplied a promo like "PROMO50" and entered 50.00 into the "Discount w/Promo Code" field your event will be discounted', 'event_espresso'); ?>  <?php echo $org_options['currency_symbol'] ?>50.00, <?php _e('bringing the cost of the event to', 'event_espresso'); ?> <?php echo $org_options['currency_symbol'] ?>150. </p>
+			<p><?php	_e("Note: Promo codes which are set to 'apply to all events', can also be used for this event, provided it allows promo codes.", "event_espresso");?></p>
 	</div>
 	<div id="unique_id_info" style="display:none">
 		<h2><?php _e('Event Identifier', 'event_espresso'); ?></h2><p><?php _e('This should be a unique identifier for the event. Example: "Event1" (without quotes.)</p><p>The unique ID can also be used in individual pages using the', 'event_espresso'); ?> [SINGLEEVENT single_event_id="<?php _e('Unique Event ID', 'event_espresso'); ?>"] <?php _e('shortcode', 'event_espresso'); ?>.</p>
@@ -183,11 +183,11 @@ function event_espresso_manage_events() {
 	</div>
 	<div id="external_URL_info" style="display:none">
 		<h2><?php _e('Off-site Registration Page', 'event_espresso'); ?></h2>
-		<p><?php _e('If an off-site registration page is entered, it will override your registration page and send attendees to the URL that is entered.', 'event_espresso'); ?></p>
+		<p><?php _e('This option will override your existing registration page and send attendees to the URL that is entered.', 'event_espresso'); ?></p>
 	</div>
 	<div id="alt_email_info" style="display:none">
 		<h2><?php _e('Alternate Email Address', 'event_espresso'); ?></h2>
-		<p><?php _e('If an alternate email address is entered. Admin email notifications wil be sent to this address instead.', 'event_espresso'); ?></p>
+		<p><?php _e('If an alternate email address is entered, then admin email notifications for the event will also be sent to this address.', 'event_espresso'); ?></p>
 	</div>
 	<div id="status_types_info" style="display:none;">
 		<h2><?php _e('Event Status Types', 'event_espresso'); ?></h2>
@@ -195,7 +195,7 @@ function event_espresso_manage_events() {
 			<li><strong><?php _e('Public', 'event_espresso'); ?></strong><br /><?php _e('This type if event will appear in the event listings. It is a live event (not deleted, ongoing or secondary.)', 'event_espresso'); ?></li>
 			<li><strong><?php _e('Waitlist', 'event_espresso'); ?></strong><br /><?php _e('This type of event can be hidden and used as a waiting list for a primary event. Template customizations may be required. For more information, please', 'event_espresso'); ?> <a href="http://eventespresso.com/wiki/create-a-waiting-list-for-your-event/" target="_blank"><?php _e('view the documentation', 'event_espresso'); ?></a></li>
 			<li><strong><?php _e('Ongoing', 'event_espresso'); ?></strong><br /><?php _e('This type of an event can be set to appear in your event listings and display a registration page. Template customizations are required.', 'event_espresso'); ?></li>
-			<li><strong><?php _e('Deleted', 'event_espresso'); ?></strong><br /><?php _e('This is event type will not appear in the event listings and will not dispaly a registrations page. Deleted events can still be accessed in the', 'event_espresso'); ?> <a href="admin.php?page=events"><?php _e('Attendee Reports', 'event_espresso'); ?></a> <?php _e('page', 'event_espresso'); ?>.</li>
+			<li><strong><?php _e('Deleted', 'event_espresso'); ?></strong><br /><?php _e('This event type will not appear in the event listings and will not display a registrations page. Deleted events can still be accessed in the', 'event_espresso'); ?> <a href="admin.php?page=events"><?php _e('Event Overview', 'event_espresso'); ?></a> <?php _e('page by filtering the status to deleted.', 'event_espresso'); ?>.</li>
 		</ul>
 	</div>
 	<?php

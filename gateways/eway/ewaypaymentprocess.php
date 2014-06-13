@@ -46,23 +46,12 @@ function espresso_process_eway($payment_data) {
 		curl_setopt($ch, CURLOPT_PROXY, CURL_PROXY_SERVER_DETAILS);
 	}
 
-	function fetch_data($string, $start_tag, $end_tag) {
-
-		$position = stripos($string, $start_tag);
-		$str = substr($string, $position);
-		$str_second = substr($str, strlen($start_tag));
-		$second_positon = stripos($str_second, $end_tag);
-		$str_third = substr($str_second, 0, $second_positon);
-		$fetch_data = trim($str_third);
-		return $fetch_data;
-	}
-
 	$response = curl_exec($ch);
 
 	if (!empty($response)) {
 		$payment_data['txn_details'] = $response;
-		$responsecode = fetch_data($response, '<responsecode>', '</responsecode>');
-		$payment_data['txn_id'] = fetch_data($response, '<trxnnumber>', '</trxnnumber>');
+		$responsecode = espresso_eway_fetch_data($response, '<responsecode>', '</responsecode>');
+		$payment_data['txn_id'] = espresso_eway_fetch_data($response, '<trxnnumber>', '</trxnnumber>');
 
 		if ($responsecode == '00' || $responsecode == '08') {
 
@@ -100,3 +89,14 @@ function espresso_process_eway($payment_data) {
 	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }
+
+	function espresso_eway_fetch_data($string, $start_tag, $end_tag) {
+
+		$position = stripos($string, $start_tag);
+		$str = substr($string, $position);
+		$str_second = substr($str, strlen($start_tag));
+		$second_positon = stripos($str_second, $end_tag);
+		$str_third = substr($str_second, 0, $second_positon);
+		$fetch_data = trim($str_third);
+		return $fetch_data;
+	}

@@ -35,7 +35,6 @@ global $gateway_formal_names;
 $gateway_formal_names = array();
 
 $gateway_formal_names = apply_filters( 'action_hook_espresso_gateway_formal_name', $gateway_formal_names );
-
 $data['fname'] = $fname;
 $data['lname'] = $lname;
 if (empty($attendee_email)) {
@@ -48,7 +47,7 @@ $data['address2'] = isset($address2) && !empty($address2) ? $address2 : '';
 $data['city'] = isset($city) && !empty($city) ? $city : '';
 $data['state'] = isset($state) && !empty($state) ? $state : '';
 $data['country'] = isset($country) && !empty($country) ? $country : '';
-$data['country'] = isset($country_id) && !empty($country_id)  && $data['country'] == '' ? $country_id : '';
+$data['country'] = isset($country_id) && !empty($country_id)  && $data['country'] == '' ? $country_id : $data['country'];
 $data['zip'] = isset($zip) && !empty($zip) ? $zip : '';
 if (empty($event_cost)) {
 	$data['event_cost'] = $total_cost;

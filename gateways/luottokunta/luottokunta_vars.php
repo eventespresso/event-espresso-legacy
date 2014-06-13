@@ -34,7 +34,7 @@ function espresso_display_luottokunta($payment_data){
 	$server_url="https://dmp2.luottokunta.fi/dmp/html_payments";
 	$user_ip = $_SERVER["REMOTE_ADDR"]!='::1'?$_SERVER['REMOTE_ADDR']:'127.0.0.1';
 	
-	$button_url = espresso_select_button_for_display($luottokunta_settings['button_url'], "luottokunta/luottokunta.gif");
+	$button_url = espresso_select_button_for_display($luottokunta_settings['button_url'], "luottokunta/luottokunta.jpg");
 	$submit_html="<input type='image' class='payment-option-lnk allow-leave-page' src='$button_url'/>";
 
 	if($bypass_payment_page){

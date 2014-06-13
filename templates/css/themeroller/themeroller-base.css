@@ -116,7 +116,6 @@ div.event-data-display{
 	padding:1em;
 	line-height:1.5em;
 	margin:0;
-	overflow: auto;
 }
 .event_title, h2.section-heading, .display-box-heading {
 	padding-left: 10px;

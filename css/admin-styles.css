@@ -681,7 +681,7 @@ textarea#conf_mail, .postbox textarea.std-textarea {
 
 #payment_settings td {
 	width: 50%;
-	padding: 5px; 
+	padding: 5px;
 }
 
 /*___ Help & Support ___*/
@@ -1309,7 +1309,7 @@ textarea {
 #espresso-admin-add-new-attendee-dv .event_espresso_form_wrapper span.label { width:120px; }
 #espresso-admin-add-new-attendee-dv .espresso_additional_limit { margin:0 0 2em; }
 #espresso-admin-add-new-attendee-dv legend,
-#espresso-admin-add-new-attendee-dv .espresso_additional_limit label { 
+#espresso-admin-add-new-attendee-dv .espresso_additional_limit label {
 	display: inline-block; float:left; width: 120px; margin-left:0;
 	text-align: right; vertical-align:middle;}
 
@@ -1346,8 +1346,8 @@ textarea {
 .event_price_label,
 .event_espresso_form_wrapper label,
 .event_espresso_form_wrapper span.label {
-	display: inline-block; width:100px; padding:0 10px 0 0; 
-	text-align: right; line-height:1em; vertical-align: middle; 
+	display: inline-block; width:100px; padding:0 10px 0 0;
+	text-align: right; line-height:1em; vertical-align: middle;
 }
 .span_event_date_value,
 .span_event_time_value { display: inline; padding:0; margin:0; text-align: left; font-size:1.1em; font-weight: bold; }
@@ -1787,7 +1787,7 @@ div.box-right-body ul.infolinks li a {
 }
 #wpbody #post-body .attention-block {
 	padding: 6px; background: #E9D2B7; border: 1px solid #000;
-	color: #000; font-size: 1.2em;	
+	color: #000; font-size: 1.2em;
 }
 .input-info {
 	background: #F0F0C7;
@@ -2422,7 +2422,7 @@ jsDatePick is distributed under the terms of the GNU General Public License.
 .pue-sl-not-verified {
 	padding-left: 20px;
 	padding-top: 2px;
-	background: transparent url(images/cancel.png) no-repeat left;
+	background: transparent url('../images/icons/cancel.png') no-repeat left;
 }
 #image-display img {max-width: 100%;}
 

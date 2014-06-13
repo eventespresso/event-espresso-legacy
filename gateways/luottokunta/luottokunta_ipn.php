@@ -22,9 +22,9 @@ function espresso_process_luottokunta($payment_data) {
 	
 	//order_id which is a string which is totally unique for every request sent to luottokunta
 	$order_id= $_GET['order_id'];
-	//success which is set to eitehr 1 or 0, depending on whether the payment was successful or not
+	//success which is set to either 1 or 0, depending on whether the payment was successful or not
 	$success = $_GET['success'];
-	//to teh failure url, we expect to receive
+	//to the failure url, we expect to receive
 	//LKPRC primary error code
 	//LKSRC secondary error code
 	//LKMSGTXT basic error message text
@@ -49,7 +49,7 @@ function espresso_process_luottokunta($payment_data) {
 		<p><?php _e("If this error persists, you may want to contact the site owners and provide them with the above data.",'event_espresso');?></p>
 		<?php
 		
-	//if the request says it was successful, check the mac calculations (if teh settings indicate we should)
+	//if the request says it was successful, check the mac calculations (if the settings indicate we should)
 	}elseif($success && 'Y' == $luottokunta_settings['luottokunta_uses_mac_key']){
 		$locally_calculated_mac_string = generate_mac_string($payment_data);
 		if( array_key_exists('LKMAC',$_GET) && $locally_calculated_mac_string == $_GET['LKMAC'] ){
@@ -89,7 +89,7 @@ function generate_mac_string($payment_data){
 	
 	$payment_data = espresso_get_total_cost($payment_data);
 	//var_dump($payment_data);
-	$mac_parts['amount'] =  $payment_data['total_cost'] * 100;//12345;//get from using the $payment_data, and passing it to espresso_get_total_cost(), and then multiplying $paymnet_data['total_cost'] by 100
+	$mac_parts['amount'] =  $payment_data['total_cost'] * 100;//12345;//get from using the $payment_data, and passing it to espresso_get_total_cost(), and then multiplying $payment_data['total_cost'] by 100
 	
 	$mac_parts['order_id'] =  $_GET['order_id'];//'987654321';
 	

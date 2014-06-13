@@ -24,7 +24,7 @@
         <?php _e("<code>&lt;?php echo do_shortcode('[EE_META type=\"event_meta\" name=\"my_meta_key\"]'); ?></code>", "event_espresso") ?>
       </p>
       <p>
-        <?php _e("Further information on shortcodes is available <a href='admin.php?page=support#shortcodes'> on the Help &amp; Support page</a> or on the website <a href='http://eventespresso.com/wiki/shortcodes-template-variables/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=shortcode+documentation+ee_version_".EVENT_ESPRESSO_VERSION ."+ee_install_url_".site_url()."&utm_campaign=create_event_tab'>documentation</a>.", "event_espreso"); ?>
+        <?php _e("Further information on shortcodes is available <a href='admin.php?page=support#shortcodes'> on the Help &amp; Support page</a> or on the website <a href='http://eventespresso.com/wiki/shortcodes-template-variables/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=shortcode+documentation+ee_version_".EVENT_ESPRESSO_VERSION ."+ee_install_url_".site_url()."&utm_campaign=create_event_tab'>documentation</a>.", "event_espresso"); ?>
       </p>
     </div>
   </div>

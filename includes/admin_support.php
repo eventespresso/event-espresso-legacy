@@ -115,7 +115,7 @@ function event_espresso_support() {
 										<dt> <a href="http://www.stickergiant.com/?referral=eventespresso.com" target="_blank">
 	<?php _e('StickerGiant.com', 'event_espresso'); ?>
 										</a> </dt>
-										<dd><a href="http://www.stickergiant.com/?referral=eventespresso.com" target="_blank"><img src="http://www.stickergiant.com/banners/120x60.gif" class="alignright" width="120" height="60" border="0"></a>StickerGiant is two businesses in one. We are a printing company that prints stickers and labels for thousands of customers all over the United States and Canada. We also have a fun online sticker store that has over 26,000 designs from bands to sports and everything in between. Our selection of Embroidered Patches is vast. </dd>
+										<dd><a href="http://www.stickergiant.com/?referral=eventespresso.com" target="_blank">StickerGiant</a> is two businesses in one. We are a printing company that prints stickers and labels for thousands of customers all over the United States and Canada. We also have a fun online sticker store that has over 26,000 designs from bands to sports and everything in between. Our selection of Embroidered Patches is vast. </dd>
 										<dt> <a href="http://eventespresso.com/contact/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Add+a+Marketing+Resource<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">
 	<?php _e('Add a Marketing Resource', 'event_espresso'); ?>
 										</a> </dt>
@@ -328,7 +328,7 @@ function event_espresso_support() {
 											<?php _e('(Used to redirect to the shopping cart page. Must be added to an event description.)', 'event_espresso'); ?>
 										</p>
 										<p><span class="highlight">[ESPRESSO_CART_LINK event_id="add_event_id_here" direct_to_cart=1 moving_to_cart="Redirecting to cart..."]</span><br />
-	<?php _e('(Same as above, but uses the event_id paramter and can be added to a page or post.)', 'event_espresso'); ?>
+	<?php _e('(Same as above, but uses the event_id parameter and can be added to a page or post.)', 'event_espresso'); ?>
 										</p>
 									</div>
 									<div class="shortcode-box">
@@ -680,15 +680,15 @@ function event_espresso_support() {
 									<div class="support-tokens">
 										<h6><a href="http://eventespresso.com/product/priority-support-tokens/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=1+Premium+Support+Token<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">1 Premium Support Token</a></h6>
 										<p>Single incident, up to 30 minutes of live support or priority e-mail support.</p>
-										<p class="support-prices"><span class="price">Price: $65.00 </span></p>
+										<p class="support-prices"><span class="price">Price: $70.00 </span></p>
 									</div>
 									<div class="support-tokens">
 										<h6><a href="http://eventespresso.com/product/3-premium-support-tokens/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=3+Premium+Support+Tokens<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">3 Premium Support Tokens</a></h6>
 										<p>Up to 90 minutes of live support or priority e-mail support.</p>
-										<p class="support-prices"><span class="price">Price: $150.00 </span></p>
+										<p class="support-prices"><span class="price">Price: $185.00 </span></p>
 									</div>
 									<h5>
-	<?php _e('Installation &amp; Consulting', 'event_espreso'); ?>
+	<?php _e('Installation Services', 'event_espresso'); ?>
 									</h5>
 									<div class="install-options">
 										<h6><a href="http://eventespresso.com/product/basic-install/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Basic+Install<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">Basic Install</a></h6>
@@ -698,17 +698,13 @@ function event_espresso_support() {
 									<div class="install-options">
 										<h6><a href="http://eventespresso.com/product/basic-install-with-configuration/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Basic+Install+with+Configuration<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">Basic Install with Configuration</a></h6>
 										<p>Includes configuration and testing Payment Gateway's .</p>
-										<p class="support-prices"><span class="price">Price: $65.00 </span></p>
+										<p class="support-prices"><span class="price">Price: $70.00 </span></p>
 									</div>
-									<div class="install-options">
-										<h6><a href="http://eventespresso.com/product/consultation/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Consulting+(1+hour)<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=help_support_tab" target="_blank">Consulting (1 hour)</a></h6>
-										<p>Developer support and implementation consulting for the Advanced Events Registration plugin for WordPress.</p>
-										<p class="support-prices"><span class="price">Price: $135.00 </span></p>
-									</div>
-									<h5>* Requirements for installation service:</h5>
+									<h5>* Prices subject to change on live website.</h5>
+									<h5>** Requirements for installation service:</h5>
 									<ul>
 										<li> The server must be accessible over the internet.</li>
-										<li> The server must meet the server requirements (for Advanced Events Registration).</li>
+										<li> The server must meet the server requirements (for Event Espresso).</li>
 										<li> You must be able to provide a FTP/SFTP username and password. A MySQL database name, username and password is needed for a Basic Install. A WordPress admin user name, password, and login URL.</li>
 									</ul>
 								</div>
@@ -777,7 +773,7 @@ function event_espresso_support() {
 										</dt>
 										<dd>
 											<p>
-	<?php _e('Check your CSV for any apotrophes in the title or description. Using Excel (or someother spreadsheet application) find and replace all apostrophes with <tt>\&amp;#039;</tt>.  This is the HTML entity for \' and is how the titles are entered into the database. For more information, see <a href="http://eventespresso.com/wiki/how-to-import-events/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=CSV+upload+tool+ee_version_'.EVENT_ESPRESSO_VERSION.'&utm_campaign=help_support_tab" target="_blank">this forum post</a>.', 'event_espresso'); ?>
+	<?php _e('Check your CSV for any apostrophes in the title or description. Using Excel (or some other spreadsheet application) find and replace all apostrophes with <tt>\&amp;#039;</tt>.  This is the HTML entity for \' and is how the titles are entered into the database. For more information, see <a href="http://eventespresso.com/wiki/how-to-import-events/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=CSV+upload+tool+ee_version_'.EVENT_ESPRESSO_VERSION.'&utm_campaign=help_support_tab" target="_blank">this forum post</a>.', 'event_espresso'); ?>
 											</p>
 										</dd>
 									</dl>

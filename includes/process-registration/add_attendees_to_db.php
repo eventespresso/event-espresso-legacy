@@ -602,7 +602,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
 								$SQL .= "ORDER BY q.id ASC";
 								
-								$questions_list = $wpdb->get_results($wpdb->prepare( $SQL, NULL ));
+								$questions_list = $wpdb->get_results( $SQL );
 								foreach ($questions_list as $question_list) {
 									if ($question_list->system_name != '') {
 										$ext_att_data_source[$question_list->system_name] = $att_data_source['x_attendee_' . $question_list->system_name][$k];
@@ -679,8 +679,8 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 			$count_of_events = count($events_in_session);
 			$current_session_id = $_SESSION['espresso_session']['id'];
 			$biz_name = $count_of_events . ' ' . $org_options['organization'] . __(' events', 'event_espresso');
-			$event_cost = $_SESSION['espresso_session']['grand_total'];
-			$event_cost = apply_filters('filter_hook_espresso_cart_grand_total', $event_cost);
+			//$event_cost = $_SESSION['espresso_session']['grand_total'];
+			//$event_cost = apply_filters('filter_hook_espresso_cart_grand_total', $event_cost);
 
 			// If there are events in the session, add them one by one to the attendee table
 			if ($count_of_events > 0) {
@@ -714,7 +714,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 								// ADD ATTENDEE TO DB
 								$return_data = event_espresso_add_attendees_to_db( $event_id, $session_vars, TRUE );
 								if (!empty($return_data['registration_id'])) $session_vars['data']['attendee_quantity']--;
-								if ( ! $return_data){
+								if (!$return_data){
 									//something went wrong when adding them to the DB, 
 									//like the event sold out
 									return;

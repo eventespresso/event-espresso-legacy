@@ -115,12 +115,12 @@ $purchaseOrderNum = $payment_data['registration_id'];
 				$payment_data['payment_status'] = 'Completed';
 				$payment_data['txn_id'] = $transaction_result->txnID;
 			}else{
-				$payment_data['paymnet_status'] = 'Payment Declined';
+				$payment_data['payment_status'] = 'Payment Declined';
 				echo '<p><strong class="credit_card_failure">'.__('Attention: Your transaction was declined for the following reason:','event_espresso').'</strong><br />';
 				echo $transaction_result->responseText."</p>";
 			}
 		}else{
-			$payment_data['paymnet_status'] = 'Payment Declined';
+			$payment_data['payment_status'] = 'Payment Declined';
 			echo '<p><strong class="credit_card_failure">'.__('Attention: There was a server error when communicating with Securepay','event_espresso').'</strong><br />';
 			echo $payment_response->Status->statusDescription."</p>";
 		}
