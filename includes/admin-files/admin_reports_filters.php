@@ -9,14 +9,14 @@ if ($espresso_premium != true) {
 
 
 /**
- * 	espresso_retreive_filter_query_args
+ * 	espresso_retrieve_filter_query_args
  * 	generates a list of current query args and removes empty elements
  *
  *  @access public
  *  array $var
  *  string
  */
-function espresso_retreive_filter_query_args() {
+function espresso_retrieve_filter_query_args() {
 	// for deez filtaz ta be da shiltaz, dey haz ta function in conjunction wit da othaz
 	// so let's grab the existing query string
 	$query_string = isset( $_SERVER['QUERY_STRING'] ) ? wp_strip_all_tags( $_SERVER['QUERY_STRING'] ) : array();
@@ -41,7 +41,7 @@ function espresso_retreive_filter_query_args() {
  */
 function espresso_remove_filter_from_query_args( $filter_params = array(), $query_args = FALSE ) {	
 	// no query args ? well then let's get some
-	$query_args = $query_args ? $query_args : espresso_retreive_filter_query_args();
+	$query_args = $query_args ? $query_args : espresso_retrieve_filter_query_args();
 	// check that $filter_params is an array
 	$filter_params = is_array( $filter_params ) ? $filter_params : array( $filter_params );
 	// then loop thru the $query_args to remove them
