@@ -104,10 +104,15 @@ function event_espresso_form_group_edit() {
                                     if ( count($questions['questions_in_group']) > 0 ) {
                                         foreach ($questions['questions_in_group'] as $question) {
                                             $checked = (!is_null($question->rel_id)) ? 'checked="checked"' : '';
+                                            
+                                            if (preg_match("/fname|lname|email/", $question->system_name) == 1 && $question->system_group == 1 ) {
+                                                
+                                                echo '<li><label><input ' . $checked . ' type="checkbox" disabled="disabled" name="disabled_system_question_id[' . $question->id . ']" value="' . $question->id . '" id="question_id_' . $question->id . '" />' . stripslashes($question->question) . '</label></li>';
+                                                echo '<input ' . $checked . ' type="hidden" name="question_id[' . $question->id . ']" value="' . $question->id . '" id="question_id_' . $question->id . '" />';
 
-                                            $visibility = (preg_match("/fname|lname|email/", $question->system_name) == 1 && $question->system_group == 1 ) ? 'style="visibility:hidden"' : '';
-
-                                            echo '<li><label><input ' . $checked . ' type="checkbox" ' . $visibility . ' name="question_id[' . $question->id . ']" value="' . $question->id . '" id="question_id_' . $question->id . '" />' . stripslashes($question->question) . '</label></li>';
+                                            } else {
+                                                echo '<li><label><input ' . $checked . ' type="checkbox" name="question_id[' . $question->id . ']" value="' . $question->id . '" id="question_id_' . $question->id . '" />' . stripslashes($question->question) . '</label></li>';
+                                            }
                                         }
                                         
                                     }
