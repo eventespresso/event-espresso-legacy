@@ -28,7 +28,7 @@ function espresso_display_psigate($payment_data){
 	} else {
 		$home = home_url();
 	}
-	$return_url= $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $payment_data['registration_id']. '&type=psigate';
+	$return_url = add_query_arg( array( 'r_id'=>$payment_data['registration_id'], 'type' => 'psigate' ), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
 	$server_url=($psigate_settings['use_sandbox'])?"https://devcheckout.psigate.com/HTMLPost/HTMLMessenger":'https://checkout.psigate.com/HTMLPost/HTMLMessenger';
 	/* @var $items StdClass[] array of attendees inner join with event on teh current purhcase*/
 	//$items=espresso_get_items_being_purchased($payment_data['attendee_id']);

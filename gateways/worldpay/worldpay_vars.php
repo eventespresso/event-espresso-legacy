@@ -26,7 +26,7 @@ function espresso_display_worldpay($payment_data) {
 	//$myworldpay->addField('MC_session_id', session_id());
 	$myworldpay->addField('MC_type', 'worldpay');
 	$myworldpay->addField('currency', $worldpay_settings['currency_format']);
-	$myworldpay->addField('MC_callback', get_permalink($org_options['return_url']));
+	$myworldpay->addField('MC_callback', apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
 
 	if (!empty($worldpay_settings['bypass_payment_page'])) {
 		$myworldpay->submitPayment(); //Enable auto redirect to payment site

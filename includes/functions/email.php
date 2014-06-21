@@ -282,7 +282,7 @@ function espresso_prepare_email_data($attendee_id, $multi_reg, $custom_data='') 
 	}
 
 	//Payment URL
-	$payment_url = add_query_arg('r_id', $data->attendee->registration_id, get_permalink($org_options['return_url']));
+	$payment_url = add_query_arg('r_id', $data->attendee->registration_id, apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
 	$data->payment_link = '<a href="' . $payment_url . '">' . __('View Your Payment Details','event_espresso') . '</a>';
 
 	// download link

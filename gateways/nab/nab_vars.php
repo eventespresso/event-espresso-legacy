@@ -5,7 +5,7 @@ function espresso_display_nab($payment_data) {
 	$mynab = new Espresso_nab(); // initiate an instance of the class
 	global $org_options;
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	$nab_result_url = home_url() . '/?page_id=' . $org_options['return_url'] . '&id=' . $payment_data['attendee_id'] . '&r_id=' . $payment_data['registration_id'] . '&event_id=' . $payment_data['event_id'] . '&attendee_action=post_payment&form_action=payment&type=nab';
+	$nab_result_url = add_query_arg(array('id'=>$payment_data['attendee_id'],'r_id'=>$payment_data['registration_id'],'event_id'=>$payment_data['event_id'],'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'nab'),  apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
 	$nab_settings = get_option('event_espresso_nab_settings');
 	$nab_id = $nab_settings['nab_merchant_id'];
 	$nab_pass = $nab_settings['nab_merchant_password'];

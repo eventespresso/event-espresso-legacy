@@ -28,7 +28,6 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	$return_url = $org_options['return_url'];
 	$cancel_return = $org_options['cancel_return'];
 	$notify_url = $org_options['notify_url'];
-	$event_page_id = $org_options['event_page_id'];
 	
 	// GET ATTENDEE
 	$SQL = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id =%d";
@@ -177,7 +176,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	
 	if ( isset($org_options['skip_confirmation_page']) && $org_options['skip_confirmation_page'] == 'Y' ) {	
 
-		$redirect_url = home_url().'/?page_id='.$org_options['event_page_id'] . '&regevent_action=confirm_registration';				
+		$redirect_url = add_query_arg(array('regevent_action' => 'confirm_registration'), apply_filters('espresso_filter_permalink', get_permalink($org_options['event_page_id']), $org_options['event_page_id']));				
 		$_POST['regevent_action'] = 'confirm_registration';
 		$_POST['confirm'] = 'Confirm Registration';
 		$_POST['confirm_registration'] = TRUE;

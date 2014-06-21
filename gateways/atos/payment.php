@@ -15,7 +15,7 @@ function espresso_display_atos($payment_data) {
 	$parm .= number_format($event_cost, 0, '', '');
 	$parm .= " currency_code=".$settings['currency_code'];
 	$parm .= " pathfile=".dirname(__FILE__).DS.$settings['provider'].DS.'pathfile';
-	$normal_return_url = home_url() . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=atos';
+	$normal_return_url = add_query_arg(array('id' => $attendee_id, 'r_id' => $registration_id, 'event_id' => $event_id, 'attendee_action' => 'post_payment', 'form_action' => 'payment', 'type' => 'atos'), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
 	$parm .= " normal_return_url=".$normal_return_url;
 	$cancel_return_url = home_url() . '/?page_id=' . $org_options['cancel_return'];
 	$parm .= " cancel_return_url=".$cancel_return_url;

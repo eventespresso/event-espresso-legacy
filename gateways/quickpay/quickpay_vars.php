@@ -58,22 +58,22 @@ function espresso_display_quickpay($payment_data) {
 	$amount = number_format($amount, 2, '', '');
 	$currency = $quickpay_settings['quickpay_currency'];
 
+	$return_url = apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']);
+	$cancel_url = apply_filters('espresso_filter_permalink', get_permalink($org_options['cancel_return']), $org_options['cancel_return']);
+	$notify_url = apply_filters('espresso_filter_permalink', get_permalink($org_options['notify_url']), $org_options['notify_url']);
 	if ($quickpay_settings['force_ssl_return']) {
-		$home = str_replace('http://', 'https://', home_url());
-	} else {
-		$home = home_url();
+		$return_url = str_replace('http://', 'https://', $return_url);
+		$cancel_url = str_replace('http://', 'https://', $cancel_url);
+		$notify_url = str_replace('http://', 'https://', $notify_url);
 	}
-	$transact_url = $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&attendee_action=post_payment&form_action=payment&type=quickpay';
-	$params = array('chronopay_callback' => 'true', 'transaction_id' => $transaction_id, 'sessionid' => $sessionid);
-	$continueurl = add_query_arg($params, $transact_url);
+	$params = array('id' => $attendee_id,  'r_id' => $registration_id, 'attendee_action' => 'post_payment', 'form_action' => 'payment', 'type' => 'quickpay', 'chronopay_callback' => 'true', 'transaction_id' => $transaction_id, 'sessionid' => $sessionid);
+	$continueurl = add_query_arg($params, $return_url);
 
-	$transact_url = $home . '/?page_id=' . $org_options['cancel_return'];
 	$params = array('chronopay_callback' => 'cancel', 'transaction_id' => $transaction_id, 'sessionid' => $sessionid);
-	$cancelurl = add_query_arg($params, $transact_url);
+	$cancelurl = add_query_arg($params, $cancel_url);
 
-	$transact_url = $home . '/?page_id=' . $org_options['notify_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&attendee_action=post_payment&form_action=payment&type=quickpay';
-	$params = array('chronopay_callback' => 'true', 'transaction_id' => $transaction_id, 'sessionid' => $sessionid);
-	$callbackurl = add_query_arg($params, $transact_url);
+	$params = array('id' => $attendee_id, 'r_id' => $registration_id, 'attendee_action' => 'post_payment', 'form_action' => 'payment', 'type' => 'quickpay', 'chronopay_callback' => 'true', 'transaction_id' => $transaction_id, 'sessionid' => $sessionid);
+	$callbackurl = add_query_arg($params, $notify_url);
 
 	$autocapture = $quickpay_settings['quickpay_autocapture'];
 	$cardtypelock = 'creditcard';

@@ -15,7 +15,6 @@ if (!function_exists('multi_register_attendees')) {
 		static $attendee_number = 1;
 
 		//The following variables are used to get information about your organization
-		$event_page_id = $org_options['event_page_id'];
 		$Organization = isset($org_options['organization']) && !empty($org_options['organization']) ? stripslashes_deep($org_options['organization']) : '';
 		$Organization_street1 = isset($org_options['organization_street1']) && !empty($org_options['organization_street1']) ? $org_options['organization_street1'] : '';
 		$Organization_street2 = isset($org_options['organization_street2']) && !empty($org_options['organization_street2']) ? $org_options['organization_street2'] : '';

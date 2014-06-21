@@ -208,7 +208,7 @@ if (isset($invoice_payment_settings['pdf_instructions'])) {
 }
 
 //Create a payment link
-$payment_link = home_url() . "/?page_id=" . $org_options['return_url'] . "&r_id=" . $registration_id;
+$payment_link = add_query_arg(array('r_id' => $registration_id), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
 
 $pdf->SetFont('Arial', 'BU', 20);
 $pdf->Cell(200, 20, 'Pay Online', 0, 1, 'C', 0, $payment_link); //Set payment link

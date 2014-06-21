@@ -36,12 +36,13 @@ function espresso_display_2checkout($payment_data) {
 	$my2checkout->addField('id_type', '1');
 	$my2checkout->addField('sid', $twocheckout_id);
 	$my2checkout->addField('cart_order_id', rand(1, 100));
+	$return_url = add_query_arg(array('id' => $attendee_id, 'r_id' => $registration_id, 'event_id' => $event_id, 'attendee_action' => 'post_payment', 'form_action'=> 'payment', 'type' => '2co'), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
 	if ($twocheckout_settings['force_ssl_return']) {
-		$home = str_replace('http:', 'https:', home_url());
+		$return_url = str_replace('http:', 'https:', $return_url);
 	} else {
-		$home = home_url();
+		$return_url = $return_url;
 	}
-	$my2checkout->addField('x_Receipt_Link_URL', $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=2co');
+	$my2checkout->addField('x_Receipt_Link_URL', $return_url);
 	$my2checkout->addField('total', number_format($event_cost, 2, '.', ''));
 	$my2checkout->addField('tco_currency', $twocheckout_cur);
 

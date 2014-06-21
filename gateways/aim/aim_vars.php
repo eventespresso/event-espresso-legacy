@@ -21,16 +21,17 @@ function espresso_display_aim($data) {
 			echo '<p>Test credit card # 4007000000027</p>';
 			echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3>';
 		}
+		
+		$return_url = add_query_arg(array('r_id' => $registration_id), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
 		if ($authnet_aim_settings['force_ssl_return']) {
-			$home = str_replace('http://', 'https://', home_url());
-		} else {
-			$home = home_url();
+			$return_url = str_replace('http://', 'https://', $return_url);
 		}
+		
 		if ($authnet_aim_settings['display_header']) {
 ?>
 		<h3 class="payment_header"><?php echo $authnet_aim_settings['header']; ?></h3><?php } ?>
 
-		<form id="aim_payment_form" name="aim_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
+		<form id="aim_payment_form" name="aim_payment_form" method="post" action="<?php echo $return_url; ?>">
 			<div class = "event_espresso_form_wrapper">
 
 				<fieldset id="aim-billing-info-dv">
