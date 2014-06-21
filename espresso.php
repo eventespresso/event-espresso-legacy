@@ -91,9 +91,9 @@ add_action('wp_head', 'espresso_info_header');
 
 
 //Globals
-global $org_options, $wpdb, $this_is_a_reg_page, $espresso_content;
+global $org_options, $wpdb, $espresso_content;
 $espresso_content = '';
-$this_is_a_reg_page = FALSE;
+
 
 
 $org_options = get_option('events_organization_settings');
@@ -104,37 +104,41 @@ if (empty($org_options['event_page_id'])) {
 	$org_options['notify_url'] = '';
 }
 
+function espresso_translated_page_id ($page_id) {
+	if ( function_exists('icl_object_id') && !empty($_GET['lang'])) {
+			$translated_event_page_id = icl_object_id($page_id, 'page', false, $_GET['lang']);
+			if (is_numeric($translated_event_page_id)) {
+				return $translated_event_page_id;
+			} else {
+				return $page_id;
+			}
+	}
+	return $page_id;
+}
+add_filter('espresso_filter_page_id', 'espresso_translated_page_id');
+
+function espresso_translated_permalink ($permalink, $page_id) {
+	if ( function_exists('icl_object_id') && !empty($_GET['lang'])) {
+		$translated_event_page_id = icl_object_id($page_id, 'page', false, $_GET['lang']);
+		if (is_numeric($translated_event_page_id)) {
+			return add_query_arg(array('lang' => $_GET['lang']), get_permalink($translated_event_page_id));
+		} else {
+			return $permalink;
+		}
+	}
+	return $permalink;
+}
+add_filter('espresso_filter_permalink', 'espresso_translated_permalink', 10, 2);
+
 function espresso_shortcode_pages( $page_id ) {
 
 	global $org_options, $this_is_a_reg_page;
 	$reg_page_ids = array(
-			$org_options['event_page_id'] => 'event_page_id',
-			$org_options['return_url'] => 'return_url',
-			$org_options['cancel_return'] => 'cancel_return',
-			$org_options['notify_url'] => 'notify_url'
+			apply_filters('espresso_filter_page_id', $org_options['event_page_id']) => 'event_page_id',
+			apply_filters('espresso_filter_page_id', $org_options['return_url']) => 'return_url',
+			apply_filters('espresso_filter_page_id', $org_options['cancel_return']) => 'cancel_return',
+			apply_filters('espresso_filter_page_id', $org_options['notify_url']) => 'notify_url'
 	);
-	if ( function_exists('icl_object_id') && !empty($_GET['lang'])) {
-		$translated_event_page_id = icl_object_id($org_options['event_page_id'], 'page', false, $_GET['lang']);
-		if (is_numeric($translated_event_page_id)) {
-			$reg_page_ids[$translated_event_page_id] = 'event_page_id';
-		}
-		$translated_return_page_id = icl_object_id($org_options['return_url'], 'page', false, $_GET['lang']);
-		if (is_numeric($translated_return_page_id)) {
-			$reg_page_ids[$translated_return_page_id] = 'return_url';
-		}
-		$translated_cancel_page_id = icl_object_id($org_options['cancel_return'], 'page', false, $_GET['lang']);
-		if (is_numeric($translated_cancel_page_id)) {
-			$reg_page_ids[$translated_cancel_page_id] = 'cancel_return';
-		}
-		$translated_notify_page_id = icl_object_id($org_options['notify_url'], 'page', false, $_GET['lang']);
-		if (is_numeric($translated_notify_page_id)) {
-			$reg_page_ids[$translated_notify_page_id] = 'notify_url';
-		}
-	}
-	/*$temp = icl_object_id($org_options['event_page_id'], 'page', false, $_GET['lang']);
-	var_dump($temp);
-	var_dump($page_id);
-	die("here");*/
 	if ( isset( $reg_page_ids[ $page_id ] )) {
 		switch( $reg_page_ids[ $page_id ] ) {
 			case 'event_page_id' : 
@@ -159,6 +163,8 @@ function espresso_shortcode_pages( $page_id ) {
 }
 
 function espresso_page_check () {
+	global $this_is_a_reg_page;
+	$this_is_a_reg_page = FALSE;
 	if (is_ssl()) {
 		$find = str_replace('https://', '', site_url());
 	} else {
@@ -193,12 +199,51 @@ function espresso_page_check () {
 
 		}
 	}
+	
+	if ( is_admin() ) {
+		$this_is_a_reg_page = TRUE;
+	}
+	
+	//Seating chart
+	if ($this_is_a_reg_page == TRUE && file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "/seatingchart/seatingchart.php")) {
+		require_once( EVENT_ESPRESSO_UPLOAD_DIR . "/seatingchart/seatingchart.php");
+	}
+	
+	//Load these files if we are in an actuial registration page
+	if ($this_is_a_reg_page == TRUE) {
+
+		//Process email confirmations
+		require_once("includes/functions/email.php");
+		//Payment processing - Used for onsite payment processing. Used with the [ESPRESSO_TXN_PAGE] shortcode
+		event_espresso_require_gateway('process_payments.php');
+		event_espresso_require_gateway('PaymentGateway.php');
+
+		// AJAX functions
+		add_action('wp_ajax_event_espresso_add_item', 'event_espresso_add_item_to_session');
+		add_action('wp_ajax_nopriv_event_espresso_add_item', 'event_espresso_add_item_to_session');
+
+		add_action('wp_ajax_event_espresso_delete_item', 'event_espresso_delete_item_from_session');
+		add_action('wp_ajax_nopriv_event_espresso_delete_item', 'event_espresso_delete_item_from_session');
+
+		add_action('wp_ajax_event_espresso_update_item', 'event_espresso_update_item_in_session');
+		add_action('wp_ajax_nopriv_event_espresso_update_item', 'event_espresso_update_item_in_session');
+
+		add_action('wp_ajax_event_espresso_calculate_total', 'event_espresso_calculate_total');
+		add_action('wp_ajax_nopriv_event_espresso_calculate_total', 'event_espresso_calculate_total');
+
+		add_action('wp_ajax_event_espresso_load_regis_form', 'event_espresso_load_regis_form');
+		add_action('wp_ajax_nopriv_event_espresso_load_regis_form', 'event_espresso_load_regis_form');
+
+		add_action('wp_ajax_event_espresso_confirm_and_pay', 'event_espresso_confirm_and_pay');
+		add_action('wp_ajax_nopriv_event_espresso_confirm_and_pay', 'event_espresso_confirm_and_pay');
+
+		add_action('wp_ajax_events_pagination','event_espresso_pagination');
+		add_action('wp_ajax_nopriv_events_pagination','event_espresso_pagination');
+
+	}
 }
 add_action('plugins_loaded', 'espresso_page_check');
 
-if ( is_admin() ) {
-	$this_is_a_reg_page = TRUE;
-}
 	
 
 
@@ -405,10 +450,6 @@ if ( file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "ticketing/template.php") || functi
 	//echo '<h1>IN !!!</h1>'; die();
 }
 
-//Seating chart
-if ($this_is_a_reg_page == TRUE && file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "/seatingchart/seatingchart.php")) {
-	require_once( EVENT_ESPRESSO_UPLOAD_DIR . "/seatingchart/seatingchart.php");
-}
 
 //Global files
 //Premium funtions. If this is a paid version, then we need to include these files.
@@ -513,38 +554,7 @@ function event_espresso_get_discount_codes_for_jquery_datatables(){
 
 add_action('wp_ajax_event_espresso_get_discount_codes_for_jquery_datatables', 'event_espresso_get_discount_codes_for_jquery_datatables');
 
-//Load these files if we are in an actuial registration page
-if ($this_is_a_reg_page == TRUE) {
-	
-	//Process email confirmations
-	require_once("includes/functions/email.php");
-	//Payment processing - Used for onsite payment processing. Used with the [ESPRESSO_TXN_PAGE] shortcode
-	event_espresso_require_gateway('process_payments.php');
-	event_espresso_require_gateway('PaymentGateway.php');
 
-	// AJAX functions
-	add_action('wp_ajax_event_espresso_add_item', 'event_espresso_add_item_to_session');
-	add_action('wp_ajax_nopriv_event_espresso_add_item', 'event_espresso_add_item_to_session');
-
-	add_action('wp_ajax_event_espresso_delete_item', 'event_espresso_delete_item_from_session');
-	add_action('wp_ajax_nopriv_event_espresso_delete_item', 'event_espresso_delete_item_from_session');
-
-	add_action('wp_ajax_event_espresso_update_item', 'event_espresso_update_item_in_session');
-	add_action('wp_ajax_nopriv_event_espresso_update_item', 'event_espresso_update_item_in_session');
-
-	add_action('wp_ajax_event_espresso_calculate_total', 'event_espresso_calculate_total');
-	add_action('wp_ajax_nopriv_event_espresso_calculate_total', 'event_espresso_calculate_total');
-
-	add_action('wp_ajax_event_espresso_load_regis_form', 'event_espresso_load_regis_form');
-	add_action('wp_ajax_nopriv_event_espresso_load_regis_form', 'event_espresso_load_regis_form');
-
-	add_action('wp_ajax_event_espresso_confirm_and_pay', 'event_espresso_confirm_and_pay');
-	add_action('wp_ajax_nopriv_event_espresso_confirm_and_pay', 'event_espresso_confirm_and_pay');
-    
-    add_action('wp_ajax_events_pagination','event_espresso_pagination');
-    add_action('wp_ajax_nopriv_events_pagination','event_espresso_pagination');
-    
-}
 
 
 if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/coupon-management/index.php')) {

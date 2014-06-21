@@ -8,7 +8,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 $attendee_num = apply_filters('action_hook_espresso_confirmation_page_primary_attendee_count',1);
 
 ?>
-	<form id="form1" name="form1" method="post" action="<?php echo get_permalink($org_options['event_page_id']);?>">
+	<form id="form1" name="form1" method="post" action="<?php echo apply_filters('espresso_filter_permalink', get_permalink($org_options['event_page_id']), $org_options['event_page_id']); ?>">
 		<div class="event-conf-block event-display-boxes ui-widget" >
 		<h3 class="event_title ui-widget-header ui-corner-top">
 			<?php _e('Verify Registration','event_espresso'); ?>

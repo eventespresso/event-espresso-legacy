@@ -30,16 +30,7 @@ function espresso_reg_url($event_id = 0) {
 	global $org_options;
 	if ($event_id > 0) {
 		//return espresso_getTinyUrl(home_url().'/?page_id='.$org_options['event_page_id'].'&regevent_action=register&event_id='.$event_id);
-		if ( function_exists('icl_object_id') && !empty($_GET['lang'])) {
-			$translated_event_page_id = icl_object_id($org_options['event_page_id'], 'page', false, $_GET['lang']);
-			if (is_numeric($translated_event_page_id)) {
-				$new_url = add_query_arg(array('ee' => $event_id, 'lang' => $_GET['lang']), get_permalink($translated_event_page_id));
-			} else {
-				$new_url = add_query_arg('ee', $event_id, get_permalink($org_options['event_page_id']));
-			}
-		} else {
-			$new_url = add_query_arg('ee', $event_id, get_permalink($org_options['event_page_id']));
-		}
+		$new_url = add_query_arg('ee', $event_id, apply_filters('espresso_filter_permalink', get_permalink($org_options['event_page_id']), $org_options['event_page_id']));
 		return $new_url;
 	}/* else {
 	  echo 'No event id supplied'; */
