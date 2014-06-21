@@ -105,8 +105,8 @@ if (empty($org_options['event_page_id'])) {
 }
 
 function espresso_translated_page_id ($page_id) {
-	if ( function_exists('icl_object_id') && !empty($_GET['lang'])) {
-			$translated_event_page_id = icl_object_id($page_id, 'page', false, $_GET['lang']);
+	if ( function_exists('icl_object_id') && defined('ICL_LANGUAGE_CODE') ) {
+			$translated_event_page_id = icl_object_id($page_id, 'page', false, ICL_LANGUAGE_CODE);
 			if (is_numeric($translated_event_page_id)) {
 				return $translated_event_page_id;
 			} else {
@@ -118,10 +118,10 @@ function espresso_translated_page_id ($page_id) {
 add_filter('espresso_filter_page_id', 'espresso_translated_page_id');
 
 function espresso_translated_permalink ($permalink, $page_id) {
-	if ( function_exists('icl_object_id') && !empty($_GET['lang'])) {
-		$translated_event_page_id = icl_object_id($page_id, 'page', false, $_GET['lang']);
+	if ( function_exists('icl_object_id') && defined('ICL_LANGUAGE_CODE') ) {
+		$translated_event_page_id = icl_object_id($page_id, 'page', false, ICL_LANGUAGE_CODE);
 		if (is_numeric($translated_event_page_id)) {
-			return add_query_arg(array('lang' => $_GET['lang']), get_permalink($translated_event_page_id));
+			return get_permalink($translated_event_page_id);
 		} else {
 			return $permalink;
 		}
