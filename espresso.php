@@ -105,14 +105,6 @@ if (empty($org_options['event_page_id'])) {
 	$org_options['notify_url'] = '';
 }
 
-
-if (is_ssl()) {
-	$find = str_replace('https://', '', site_url());
-} else {
-	$find = str_replace('http://', '', site_url());
-}	
-
-
 function espresso_shortcode_pages( $page_id ) {
 
 	global $org_options, $this_is_a_reg_page;
@@ -122,10 +114,31 @@ function espresso_shortcode_pages( $page_id ) {
 			$org_options['cancel_return'] => 'cancel_return',
 			$org_options['notify_url'] => 'notify_url'
 	);
-
+	if ( function_exists('icl_object_id') && !empty($_GET['lang'])) {
+		$translated_event_page_id = icl_object_id($org_options['event_page_id'], 'page', false, $_GET['lang']);
+		if (is_numeric($translated_event_page_id)) {
+			$reg_page_ids[$translated_event_page_id] = 'event_page_id';
+		}
+		$translated_return_page_id = icl_object_id($org_options['return_url'], 'page', false, $_GET['lang']);
+		if (is_numeric($translated_return_page_id)) {
+			$reg_page_ids[$translated_return_page_id] = 'return_url';
+		}
+		$translated_cancel_page_id = icl_object_id($org_options['cancel_return'], 'page', false, $_GET['lang']);
+		if (is_numeric($translated_cancel_page_id)) {
+			$reg_page_ids[$translated_cancel_page_id] = 'cancel_return';
+		}
+		$translated_notify_page_id = icl_object_id($org_options['notify_url'], 'page', false, $_GET['lang']);
+		if (is_numeric($translated_notify_page_id)) {
+			$reg_page_ids[$translated_notify_page_id] = 'notify_url';
+		}
+	}
+	/*$temp = icl_object_id($org_options['event_page_id'], 'page', false, $_GET['lang']);
+	var_dump($temp);
+	var_dump($page_id);
+	die("here");*/
 	if ( isset( $reg_page_ids[ $page_id ] )) {
 		switch( $reg_page_ids[ $page_id ] ) {
-			case 'event_page_id' :
+			case 'event_page_id' : 
 					$this_is_a_reg_page = TRUE;
 					add_action( 'init', 'event_espresso_run', 100 );
 				break;
@@ -146,35 +159,43 @@ function espresso_shortcode_pages( $page_id ) {
 
 }
 
-$page_id = isset($_REQUEST['page_id']) ? $_REQUEST['page_id'] : '';
+function espresso_page_check () {
+	if (is_ssl()) {
+		$find = str_replace('https://', '', site_url());
+	} else {
+		$find = str_replace('http://', '', site_url());
+	}	
+	$page_id = isset($_REQUEST['page_id']) ? $_REQUEST['page_id'] : '';
 
-if ( ! empty( $page_id )) {
-	espresso_shortcode_pages( $page_id );
-} else {
-	// try to find post_name via the url
-	$find = str_replace($_SERVER['SERVER_NAME'], '', $find);
-	$uri_string = str_replace($find, '', $_SERVER['REQUEST_URI']);
-	$uri_string = isset($_SERVER['QUERY_STRING'])?str_replace($_SERVER['QUERY_STRING'], '', $uri_string):$uri_string;
-	$uri_string = rtrim($uri_string, '?');
-	$uri_string = trim($uri_string, '/');
-	$uri_segments = explode('/', $uri_string);
-	// then find the page id via the post_name
-	foreach ( $uri_segments as $uri_segment ) {
-		if ( $uri_segment != '' ) {
-			$page_id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment ));
-			if ( $wpdb->num_rows > 0 ) {
-				espresso_shortcode_pages( $page_id );
-			}		
-		} else {
-			if ( get_option('show_on_front') == 'page' ) {
-				$frontpage = get_option('page_on_front');
-				espresso_shortcode_pages( $frontpage );
+	if ( ! empty( $page_id )) {
+		espresso_shortcode_pages( $page_id );
+	} else {
+		global $wpdb;
+		// try to find post_name via the url
+		$find = str_replace($_SERVER['SERVER_NAME'], '', $find);
+		$uri_string = str_replace($find, '', $_SERVER['REQUEST_URI']);
+		$uri_string = isset($_SERVER['QUERY_STRING'])?str_replace($_SERVER['QUERY_STRING'], '', $uri_string):$uri_string;
+		$uri_string = rtrim($uri_string, '?');
+		$uri_string = trim($uri_string, '/');
+		$uri_segments = explode('/', $uri_string);
+		// then find the page id via the post_name
+		foreach ( $uri_segments as $uri_segment ) {
+			if ( $uri_segment != '' ) {
+				$page_id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM $wpdb->posts WHERE post_name = %s ", $uri_segment ));
+				if ( $wpdb->num_rows > 0 ) {
+					espresso_shortcode_pages( $page_id );
+				}		
+			} else {
+				if ( get_option('show_on_front') == 'page' ) {
+					$frontpage = get_option('page_on_front');
+					espresso_shortcode_pages( $frontpage );
+				}
 			}
-		}
 
+		}
 	}
 }
-
+add_action('plugins_loaded', 'espresso_page_check');
 
 if ( is_admin() ) {
 	$this_is_a_reg_page = TRUE;
