@@ -107,7 +107,7 @@ class EE_Moneris_HPP extends Espresso_PaymentGateway {
 					'method' => 'POST',
 					'timeout' => 30,
 					'headers' => array(
-						   'Referer' =>  get_permalink( $org_options['notify_url'] )
+						   'Referer' =>  apply_filters('espresso_filter_permalink', get_permalink($org_options['notify_url']), $org_options['notify_url'])
 						),
 					'body' => array(
 						   'ps_store_id' => $this->settings['moneris_hpp_ps_store_id'],

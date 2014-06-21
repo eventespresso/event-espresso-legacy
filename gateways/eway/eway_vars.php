@@ -45,7 +45,7 @@ function espresso_display_eway($payment_data) {
 	$myeway->addField('CustomerEmail', $attendee_email);
 	$myeway->addField('CustomerPhone', $phone);
 	$myeway->addField('InvoiceDescription', stripslashes_deep($event_name) . ' | ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($fname . ' ' . $lname) . ' | ' . __('Registrant Email:', 'event_espresso') . ' ' . $attendee_email . ' | ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity);
-	$myeway->addField('CancelURL', str_replace("&", "%26", home_url() . '/?page_id=' . $org_options['cancel_return']));
+	$myeway->addField('CancelURL', str_replace("&", "%26", apply_filters('espresso_filter_permalink', get_permalink($org_options['cancel_return']), $org_options['cancel_return'])));
 	
 	$return_url = str_replace("&","%26", add_query_arg(array('id' => $attendee_id, 'r_id' => $registration_id, 'event_id' => $event_id, 'attendee_action' => 'post_payment', 'form_action' => 'payment', 'type' => 'eway'), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url'])) );
 	if ($eway_settings['force_ssl_return']) {
