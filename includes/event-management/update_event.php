@@ -408,17 +408,17 @@ function update_event($recurrence_arr = array()) {
  		
 		//BEGIN CATEGORY MODIFICATION
         //We first delete the previous entry then we get the category id's of the event and put them in events_detail_table.category_id as a well-formatted string (id,n id)
-        $del_cats = "DELETE FROM " . EVENTS_CATEGORY_REL_TABLE . " WHERE event_id = '" . $event_id . "'";
-        $wpdb->query($wpdb->prepare($del_cats, NULL));
-        $update_event_detail_category_id = "UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = NULL WHERE id='" . $event_id . "'";
-        $wpdb->query($wpdb->prepare($update_event_detail_category_id, NULL));
+        $del_cats = "DELETE FROM " . EVENTS_CATEGORY_REL_TABLE . " WHERE event_id = %d";
+        $wpdb->query($wpdb->prepare($del_cats, $event_id));
+        $update_event_detail_category_id = "UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = NULL WHERE id=%d";
+        $wpdb->query($wpdb->prepare($update_event_detail_category_id, $event_id));
 		$string_cat = '';
 
         if (!empty($_REQUEST['event_category'])) {
             foreach ($_REQUEST['event_category'] as $k => $v) {
                 if (!empty($v)) {
-                    $sql_cat = "INSERT INTO " . EVENTS_CATEGORY_REL_TABLE . " (event_id, cat_id) VALUES ('" . $event_id . "', '" . (int)$v . "')";
-					$wpdb->query($wpdb->prepare($sql_cat, array()) );
+                    $sql_cat = "INSERT INTO " . EVENTS_CATEGORY_REL_TABLE . " (event_id, cat_id) VALUES (%d, %d)";
+					$wpdb->query($wpdb->prepare($sql_cat, $event_id, (int)$v) );
                     $string_cat.=sanitize_text_field($v).",";
                 }
             }
@@ -429,8 +429,8 @@ function update_event($recurrence_arr = array()) {
             $cleaned_string_cat=implode(",", $tmp);
             trim($cleaned_string_cat);
 
-            $sql_update_event_detail_category_id="UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = '".$cleaned_string_cat."' WHERE id='" . $event_id . "'";
-            $wpdb->query($wpdb->prepare($sql_update_event_detail_category_id, NULL));
+            $sql_update_event_detail_category_id="UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = '%s' WHERE id=%d";
+            $wpdb->query($wpdb->prepare($sql_update_event_detail_category_id, $cleaned_string_cat, $event_id));
             }
         }
         //END CATEGORY MODIFICATION

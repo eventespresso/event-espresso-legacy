@@ -297,7 +297,7 @@ function espresso_confirm_registration() {
 	$SQL .= " LIMIT 0,1 "; //Get the first attendees details
 
 
-	if ( ! $attendee = $wpdb->get_row( $wpdb->prepare( $SQL, NULL ))) {
+	if ( ! $attendee = $wpdb->get_row( $SQL)) {
 		wp_die(__('An error occured. The primary attendee could not be found.', 'event_espresso'));
 	}
 

@@ -30,9 +30,9 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 		$SQL .= "FROM " . EVENTS_QST_GROUP_TABLE . " qg ";
 		$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr ON qg.id = qgr.group_id ";
 		$SQL .= "	JOIN " . EVENTS_QUESTION_TABLE . " q ON q.id = qgr.question_id ";
-		$SQL .= 'WHERE qg.id IN ('.$questions_in.') ORDER BY qg.id, q.id ASC';
+		$SQL .= 'WHERE qg.id IN (%s) ORDER BY qg.id, q.id ASC';
 
-		$questions = $wpdb->get_results( $wpdb->prepare( $SQL, NULL ));
+		$questions = $wpdb->get_results( $wpdb->prepare( $SQL, $questions_in ));
 //		echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //		printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 

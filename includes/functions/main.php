@@ -305,7 +305,7 @@ if ( !function_exists('espresso_get_event') ) {
             $sql .= " LIMIT 0,1";
         }
 
-		$data = $wpdb->get_row( $wpdb->prepare( $sql, NULL ), OBJECT );
+		$data = $wpdb->get_row( $sql, OBJECT );
 		return $data;
 	}
 }
