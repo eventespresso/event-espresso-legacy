@@ -25,7 +25,7 @@ function espresso_display_luottokunta($payment_data){
 			apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url'])); 
 	$success_url=add_query_arg('success',true,$base_return_url);
 	$failure_url = add_query_arg('success',0,$base_return_url);
-	$cancel_url = get_permalink($org_options['cancel_return']);
+	$cancel_url = apply_filters('espresso_filter_permalink', get_permalink($org_options['cancel_return']), $org_options['cancel_return']);
 	if ($luottokunta_settings['force_ssl_return']) {
 		$success_url = str_replace("http://", "https://", $success_url);
 		$failure_url = str_replace("http://", "https://", $failure_url);

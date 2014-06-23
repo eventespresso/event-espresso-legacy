@@ -18,9 +18,11 @@ function espresso_process_ideal($payment_data) {
 
 		$return_url = add_query_arg(array('id' => $payment_data['attendee_id'], 'r_id' => $payment_data['registration_id'], 'type' => 'ideal'), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
 		$report_url = add_query_arg(array('id' => $payment_data['attendee_id'], 'r_id' => $payment_data['registration_id'], 'event_id=' => $payment_data['event_id'], 'attendee_action' => 'post_payment', 'form_action' => 'payment', 'ideal' => 1), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
+		$notify_url = apply_filters('espresso_filter_permalink', get_permalink($org_options['notify_url']), $org_options['notify_url']);
 		if ($ideal_mollie_settings['force_ssl_return']) {
 			$return_url = str_replace("http://", "https://", $return_url);
 			$report_url = str_replace("http://", "https://", $report_url);
+			$notify_url = str_replace("http://", "https://", $notify_url);
 		}
 		
 //Find the correct amount so that unsavory characters don't change it in the previous form
@@ -54,7 +56,7 @@ function espresso_process_ideal($payment_data) {
 	<div id="ideal-payment-option-form-dv" class="hide-if-js">	
 		<div class="event-display-boxes">
 		<div class = "event_espresso_form_wrapper">
-			<form id="ideal-mollie-form" class="ee-forms" method="post" action="<?php echo $home . '/?page_id=' . $org_options['notify_url']; ?>">
+			<form id="ideal-mollie-form" class="ee-forms" method="post" action="<?php echo $notify_url; ?>">
 			
 				<fieldset id="ideal-billing-info-dv">
 					<h4 class="section-title"><?php _e('Select Bank', 'event_espresso') ?></h4>
