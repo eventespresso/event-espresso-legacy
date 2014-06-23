@@ -188,6 +188,7 @@ function event_espresso_txn() {
 	$payment_data['attendee_id'] = apply_filters('filter_hook_espresso_transactions_get_attendee_id', '');
 	if ( empty( $payment_data['attendee_id'] )) {
 		echo "An error occurred. No ID or an invalid ID was supplied.";
+		$payment_data['attendee_session'] = $_SESSION['espresso_session']['id'];
 	} else {
 		$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_get_total_cost', $payment_data);
