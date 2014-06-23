@@ -280,6 +280,7 @@ if ( !function_exists('espresso_get_event') ) {
 		$data = (object)array();
 
 		//Build event queries
+		$wpdb_prepare_array = array();
 		$sql = "SELECT e.*, ese.start_time, ese.end_time ";
 		if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
 		 	$sql .= ", v.name venue_name, v.address venue_address, v.address2 venue_address2, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta ";
@@ -289,23 +290,27 @@ if ( !function_exists('espresso_get_event') ) {
 		if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
 			$sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id ";
 		}
-		$sql.= " WHERE e.is_active= %s ";
-		$sql.= " AND e.event_status != %s ";
+		$sql.= " WHERE e.is_active= 'Y' ";
+		$sql.= " AND e.event_status != 'D' ";
 		if ($single_event_id != NULL) {
 			//If a single event needs to be displayed, get its ID
-            $sql .= " AND event_identifier = '" . $single_event_id . "' ";
+			$wpdb_prepare_array[] = $single_event_id;
+            $sql .= " AND event_identifier = %d ";
+			
         } else {
-			$sql.= " AND e.id = '" . $event_id . "' LIMIT 0,1";
+			$wpdb_prepare_array[] = $event_id;
+			$sql.= " AND e.id = %d LIMIT 0,1";
         }
         //Support for diarise
         if (!empty($_REQUEST['post_event_id'])) {
+			$wpdb_prepare_array[] = $_REQUEST['post_event_id'];
             $sql = "SELECT e.* FROM " . EVENTS_DETAIL_TABLE . ' e';
             $sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id = e.id ";
-            $sql .= " WHERE post_id = '" . $_REQUEST['post_event_id'] . "' ";
+            $sql .= " WHERE post_id = %d ";
             $sql .= " LIMIT 0,1";
         }
 
-		$data = $wpdb->get_row( $wpdb->prepare( $sql, 'Y', 'D' ), OBJECT );
+		$data = $wpdb->get_row( $wpdb->prepare( $sql, $wpdb_prepare_array ), OBJECT );
 		return $data;
 	}
 }

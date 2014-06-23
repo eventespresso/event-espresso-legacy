@@ -384,7 +384,7 @@ if (!function_exists('event_espresso_price_dropdown')) {
        
 	    $surcharge_text = isset($org_options['surcharge_text']) ? $org_options['surcharge_text'] : __('Surcharge', 'event_espresso');
 
-        $results = $wpdb->get_results( $wpdb->prepare("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='%d' ORDER BY id ASC", $event_id) );
+        $results = $wpdb->get_results( $wpdb->prepare("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id=%d ORDER BY id ASC", $event_id) );
 
         if ($wpdb->num_rows > 1) {
            //Create the label for the drop down
