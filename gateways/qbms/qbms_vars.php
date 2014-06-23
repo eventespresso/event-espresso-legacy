@@ -6,10 +6,7 @@ function espresso_display_qbms($payment_data) {
 	
 	$qbms_settings = get_option('event_espresso_qbms_settings');
 	
-	$return_url = add_query_arg( array( 'r_id'=>$registration_id ), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
-	if (isset($_SERVER['HTTPS'])) {
-		$return_url = str_replace('http://', 'https://', $return_url);
-	}
+	$return_url = espresso_build_gateway_url('return_url', $payment_data, 'qbms');
 	
 	wp_register_script( 'qbms', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/qbms/qbms.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'qbms' );	

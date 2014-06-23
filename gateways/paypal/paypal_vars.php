@@ -71,14 +71,9 @@ function espresso_display_paypal($payment_data) {
 	//printr( $myPaypal, '$myPaypal  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 
 	$myPaypal->addField('business', $paypal_id);
-	$return_url = add_query_arg( array( 'r_id'=>$registration_id, 'type' => 'paypal' ), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
-	$cancel_url = apply_filters('espresso_filter_permalink', get_permalink($org_options['cancel_return']), $org_options['cancel_return']);
-	$notify_url = add_query_arg( array( 'id' => $attendee_id, 'r_id'=>$registration_id, 'event_id' => $event_id, 'attendee_action' => 'post_payment', 'form_action' => 'payment', 'type' => 'paypal' ), apply_filters('espresso_filter_permalink', get_permalink($org_options['notify_url']), $org_options['notify_url']));
-	if ($paypal_settings['force_ssl_return']) {
-		$return_url = str_replace("http://", "https://", $return_url);
-		$cancel_url = str_replace("http://", "https://", $cancel_url);
-		$notify_url = str_replace("http://", "https://", $notify_url);
-	}
+	$return_url = espresso_build_gateway_url('return_url', $payment_data, 'paypal');
+	$cancel_url = espresso_build_gateway_url('cancel_return', $payment_data, 'paypal');
+	$notify_url = espresso_build_gateway_url('notify_url', $payment_data, 'paypal', array('event_id' => $event_id));
 	$myPaypal->addField('charset', "utf-8");
 	$myPaypal->addField('return', $return_url);
 	$myPaypal->addField('cancel_return', $cancel_url);

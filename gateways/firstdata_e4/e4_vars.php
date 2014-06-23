@@ -31,11 +31,7 @@ function espresso_display_firstdata_e4($payment_data) {
 	$myE4->addField('x_show_form', 'PAYMENT_FORM');
 	$myE4->addField('x_reference_3', $registration_id . ' FDe4');
 	$myE4->addField('x_relay_response', 'TRUE');
-	$return_url = add_query_arg(array('type' => 'firstdata_e4'), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
-	if ($firstdata_e4_settings['force_ssl_return']) {
-		$return_url = str_replace("http://", "https://", $return_url);
-	}
-	$myE4->addField('x_relay_url', $return_url);
+	$myE4->addField('x_relay_url', espresso_build_gateway_url('return_url', $payment_data, 'firstdata_e4'));
 	$myE4->addField('x_description', stripslashes_deep($event_name) . ' ' . __('Reg. ID:', 'event_espresso') . ' ' . $attendee_id . ' ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($fname . ' ' . $lname) . ' ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity);
 	$myE4->addField('x_logo_url', $image_url);
 	//$myE4->addField('x_invoice_num', event_espresso_session_id());

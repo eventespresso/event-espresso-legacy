@@ -176,7 +176,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	
 	if ( isset($org_options['skip_confirmation_page']) && $org_options['skip_confirmation_page'] == 'Y' ) {	
 
-		$redirect_url = add_query_arg(array('regevent_action' => 'confirm_registration'), apply_filters('espresso_filter_permalink', get_permalink($org_options['event_page_id']), $org_options['event_page_id']));				
+		$redirect_url = add_query_arg(array('regevent_action' => 'confirm_registration'), espresso_page('event_page_id'));				
 		$_POST['regevent_action'] = 'confirm_registration';
 		$_POST['confirm'] = 'Confirm Registration';
 		$_POST['confirm_registration'] = TRUE;

@@ -16,10 +16,7 @@ function espresso_display_anz($payment_data){
 	$button_url = $anz_settings['button_url'];
 	
 	
-	$return_url= add_query_arg(array('r_id' => $registration_id, 'type'=> 'anz'), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
-	if ($anz_settings['force_ssl_return']) {
-		$return_url = str_replace("http://", "https://", $return_url);
-	}
+	$return_url= espresso_build_gateway_url('return_url', $payment_data, 'anz');
 	
 	$server_url="https://migs.mastercard.com.au/vpcpay";
 	

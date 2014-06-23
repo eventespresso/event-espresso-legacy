@@ -36,7 +36,7 @@ function espresso_display_2checkout($payment_data) {
 	$my2checkout->addField('id_type', '1');
 	$my2checkout->addField('sid', $twocheckout_id);
 	$my2checkout->addField('cart_order_id', rand(1, 100));
-	$return_url = add_query_arg(array('id' => $attendee_id, 'r_id' => $registration_id, 'event_id' => $event_id, 'attendee_action' => 'post_payment', 'form_action'=> 'payment', 'type' => '2co'), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
+	$return_url = espresso_build_gateway_url('return_url', $payment_data, '2checkout', array('event_id' => $event_id));
 	if ($twocheckout_settings['force_ssl_return']) {
 		$return_url = str_replace('http:', 'https:', $return_url);
 	} else {

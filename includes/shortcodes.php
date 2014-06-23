@@ -409,7 +409,7 @@ add_shortcode('EVENT_LIST', 'display_event_list_sc');
 function ee_create_autocomplete_search(){
 	global $wpdb, $espresso_manager, $current_user, $org_options;
 	$array = array('ee_search' => 'true');
-	$url = add_query_arg($array, apply_filters('espresso_filter_permalink', get_permalink($org_options['event_page_id']), $org_options['event_page_id']));
+	$url = add_query_arg($array, espresso_page('event_page_id'));
 	ob_start();
 	?>
 	<div id="espresso-search-form-dv" class="ui-widget">

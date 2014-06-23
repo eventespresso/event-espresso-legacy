@@ -15,7 +15,7 @@ function espresso_display_bank($payment_data) {
 		'payment_type' => 'cash_check',
 		'type' => 'bank',
 	);
-	$finalize_link = add_query_arg( $args, apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']) );	
+	$finalize_link = add_query_arg( $args, espresso_page('return_url') );	
 ?>
 <div id="bank-payment-option-dv" class="payment-option-dv">
 

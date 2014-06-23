@@ -5,10 +5,7 @@ function espresso_display_paytrace($payment_data) {
 	global $org_options;
 	$paytrace_settings = get_option('event_espresso_paytrace_settings');
 
-	$return_url = add_query_arg( array( 'r_id'=>$registration_id ), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
-	if ($paytrace_settings['force_ssl_return']) {
-		$return_url = str_replace('http://', 'https://', $return_url);
-	}
+	$return_url = espresso_build_gateway_url('return_url', $payment_data, 'paytrace');
 	wp_register_script( 'paytrace', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/paytrace/paytrace.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'paytrace' );
 ?>

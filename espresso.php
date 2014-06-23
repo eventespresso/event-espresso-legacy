@@ -131,6 +131,10 @@ function espresso_translated_permalink ($permalink, $page_id) {
 }
 add_filter('espresso_filter_permalink', 'espresso_translated_permalink', 10, 2);
 
+function espresso_page($page) {
+	return apply_filters('espresso_filter_permalink', get_permalink($org_options[$page]), $org_options[$page]);
+}
+
 function espresso_shortcode_pages( $page_id ) {
 
 	global $org_options, $this_is_a_reg_page;

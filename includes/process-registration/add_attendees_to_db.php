@@ -847,11 +847,11 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 			</tr>
 		</table>
 		<p class="event_espresso_refresh_total">
-			<a href="<?php add_query_arg(array('regevent_action' => 'show_shopping_cart'), apply_filters('espresso_filter_permalink', get_permalink($org_options['event_page_id']), $org_options['event_page_id'])); ?>">
+			<a href="<?php add_query_arg(array('regevent_action' => 'show_shopping_cart'), espresso_page('event_page_id')); ?>">
 			<?php _e('Edit Cart', 'event_espresso'); ?>
 			</a>
 			<?php _e(' or ', 'event_espresso'); ?>
-			<a href="<?php add_query_arg(array('regevent_action' => 'load_checkout_page'), apply_filters('espresso_filter_permalink', get_permalink($org_options['event_page_id']), $org_options['event_page_id'])); ?>">
+			<a href="<?php add_query_arg(array('regevent_action' => 'load_checkout_page'), espresso_page('event_page_id')); ?>">
 			<?php _e('Edit Registrant Information', 'event_espresso'); ?>
 			</a> 
 		</p>

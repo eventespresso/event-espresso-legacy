@@ -5,10 +5,7 @@ function espresso_display_stripe($payment_data) {
 	global $org_options;
 	$stripe_settings = get_option('event_espresso_stripe_settings');
 	
-	$return_url = add_query_arg( array( 'r_id'=>$registration_id ), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
-	if ($stripe_settings['force_ssl_return']) {
-			$return_url = str_replace('http://', 'https://', $return_url);
-	}
+	$return_url = espresso_build_gateway_url('return_url', $payment_data, 'stripe');
 
 	wp_register_script( 'stripe', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/stripe/stripe.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'stripe' );	

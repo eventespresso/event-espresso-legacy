@@ -211,7 +211,7 @@ function attendee_edit_record() {
 				<strong><?php _e('Event:', 'event_espresso'); ?></strong> <?php echo $event_name; ?>
 			</p>
 			
-			<form method="post" action="<?php apply_filters('espresso_filter_permalink', get_permalink($org_options['event_page_id']), $org_options['event_page_id']); ?>" class="espresso_form" id="registration_form">
+			<form method="post" action="<?php espresso_page('event_page_id'); ?>" class="espresso_form" id="registration_form">
 <?php
 				if ( count( $question_groups ) > 0 ) {
 					

@@ -10,10 +10,7 @@ function espresso_display_paychoice($payment_data) {
 	}
 	
 	$paychoice_settings = get_option('event_espresso_paychoice_settings');
-	$return_url = add_query_arg( array( 'r_id'=>$registration_id ), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
-	if ($paychoice_settings['force_ssl_return']) {
-		$return_url = str_replace('http://', 'https://', $return_url);
-	}
+	$return_url = espresso_build_gateway_url('return_url', $payment_data, 'paychoice');
 	
 	$paychoice_settings['header'] = $paychoice_settings['display_header'] ? '<h3 class="payment_header">' . $paychoice_settings['header'] . '</h3>' : '';
 

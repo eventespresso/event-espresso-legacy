@@ -16,9 +16,9 @@ function espresso_process_ideal($payment_data) {
 	
 	if (!empty($_POST['bank_id'])) {
 
-		$return_url = add_query_arg(array('id' => $payment_data['attendee_id'], 'r_id' => $payment_data['registration_id'], 'type' => 'ideal'), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
-		$report_url = add_query_arg(array('id' => $payment_data['attendee_id'], 'r_id' => $payment_data['registration_id'], 'event_id=' => $payment_data['event_id'], 'attendee_action' => 'post_payment', 'form_action' => 'payment', 'ideal' => 1), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
-		$notify_url = apply_filters('espresso_filter_permalink', get_permalink($org_options['notify_url']), $org_options['notify_url']);
+		$return_url = add_query_arg(array('id' => $payment_data['attendee_id'], 'r_id' => $payment_data['registration_id'], 'type' => 'ideal'), espresso_page('return_url'));
+		$report_url = add_query_arg(array('id' => $payment_data['attendee_id'], 'r_id' => $payment_data['registration_id'], 'event_id=' => $payment_data['event_id'], 'attendee_action' => 'post_payment', 'form_action' => 'payment', 'ideal' => 1), espresso_page('return_url'));
+		$notify_url = espresso_page('notify_url');
 		if ($ideal_mollie_settings['force_ssl_return']) {
 			$return_url = str_replace("http://", "https://", $return_url);
 			$report_url = str_replace("http://", "https://", $report_url);

@@ -32,10 +32,7 @@ function espresso_display_exact($payment_data) {
 	$myExact->addField('x_show_form', 'PAYMENT_FORM');
 	$myExact->addField('registration_id', $registration_id );
 	$myExact->addField('x_relay_response', 'TRUE');
-	$return_url = add_query_arg(array('type' => 'exact'), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
-	if ($exact_settings['force_ssl_return']) {
-		$return_url = str_replace("http://", "https://", $return_url);
-	}
+	$return_url = espresso_build_gateway_url('return_url', $payment_data, 'exact');
 	$myExact->addField('x_relay_url', $return_url );
 	$myExact->addField('x_description', stripslashes_deep($event_name) . ' | ' . __('Reg. ID:', 'event_espresso') . ' ' . $attendee_id . ' | ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($fname . ' ' . $lname) . ' | ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity);
 	$myExact->addField('x_logo_url', $image_url);

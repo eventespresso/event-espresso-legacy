@@ -24,7 +24,7 @@ function espresso_display_megasoft($data) {
 ?>
 		<h3 class="payment_header"><?php echo $megasoft_settings['header']; ?></h3><?php } ?>
 
-		<form id="megasoft_payment_form" name="megasoft_payment_form" method="post" action="<?php echo add_query_arg( array( 'r_id'=>$registration_id ), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url'])); ?>">
+		<form id="megasoft_payment_form" name="megasoft_payment_form" method="post" action="<?php echo espresso_build_gateway_url('return_url', $payment_data, 'megasoft'); ?>">
 			<div class = "event_espresso_form_wrapper">
 
 				<fieldset id="megasoft-billing-info-dv">

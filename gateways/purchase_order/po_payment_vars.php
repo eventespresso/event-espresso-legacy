@@ -14,7 +14,7 @@ function espresso_display_purchase_order($payment_data) {
 		'payment_type' => 'purchase_order',
 		'type' => 'purchase_order',
 	);
-	$finalize_link = add_query_arg( $args, apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']) );	
+	$finalize_link = add_query_arg( $args, espresso_page('return_url') );	
 ?>
 <div id="po-payment-option-dv" class="payment-option-dv">
 

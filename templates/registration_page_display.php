@@ -88,7 +88,7 @@ if ($reg_form_only == false) {
 		do_action('action_hook_espresso_registration_page_top', $event_id, $event_meta, $all_meta);
 ?>
 				<div class="event_espresso_form_wrapper <?php espresso_template_css_class('form_wrapper',''); ?>">
-					<form method="post" action="<?php echo apply_filters('espresso_filter_permalink', get_permalink( $event_page_id ), $event_page_id); ?>" id="registration_form">
+					<form method="post" action="<?php echo espresso_page('event_page_id'); ?>" id="registration_form">
 						<?php
 				
 			//This hides the date/times and location when usign custom post types or the ESPRESSO_REG_FORM shortcode

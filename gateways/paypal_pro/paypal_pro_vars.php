@@ -22,10 +22,7 @@ function espresso_display_paypal_pro($data) {
 				echo '<p>CVV2: 123 </p>';
 				echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3></div>';
 			}
-			$return_url = add_query_arg( array( 'r_id'=>$registration_id ), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
-			if ($paypal_pro_settings['force_ssl_return']) {
-				$return_url = str_replace('http://', 'https://', $return_url);
-			}
+			$return_url = $return_url = espresso_build_gateway_url('return_url', $payment_data, 'paypal_pro');
 			if ($paypal_pro_settings['display_header']) {
 ?>
 			<h3 class="payment_header"><?php echo $paypal_pro_settings['header']; ?></h3><?php } ?>

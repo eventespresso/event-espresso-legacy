@@ -208,7 +208,7 @@ if (isset($invoice_payment_settings['pdf_instructions'])) {
 }
 
 //Create a payment link
-$payment_link = add_query_arg(array('r_id' => $registration_id), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
+$payment_link = add_query_arg(array('r_id' => $registration_id), espresso_page('return_url'));
 
 $pdf->SetFont('Arial', 'BU', 20);
 add_action( 'action_hook_espresso_invoice_payment_link', 'espresso_invoice_payment_link', 10, 2 );

@@ -276,11 +276,11 @@ if ( isset( $_POST[ 'name' ] ) && isset( $_POST[ 'MC_type'] ) && 'worldpay' == $
  * @param array $extra_args any extra querystring args to be added to the URL.
  * @return string which can be sent to the gateway
  */
-function espresso_build_gateway_url($type, $payment_data, $gateway_slug, $extra_args = array() ){
+function espresso_build_gateway_url($type, $payment_data, $gateway_slug, $extra_args = array() ) {
 	global $org_options;
-	$url = get_permalink($org_options[$type]);
+	$url = espresso_page($type);
 	$gateway_settings = get_option("event_espresso_{$gateway_slug}_settings");
-	if($gateway_settings['force_ssl_return']){
+	if(!empty($gateway_settings['force_ssl_return'])) {
 		$url = str_replace("http://","https://",$url);
 	}
 	
@@ -289,7 +289,7 @@ function espresso_build_gateway_url($type, $payment_data, $gateway_slug, $extra_
 		'r_id'=>$payment_data['registration_id'],
 		'type'=>$gateway_slug
 	);
-	switch($type){
+	switch($type) {
 		case 'notify_url':
 		case 'return_url':
 			$query_args['attendee_action']='post_payment';

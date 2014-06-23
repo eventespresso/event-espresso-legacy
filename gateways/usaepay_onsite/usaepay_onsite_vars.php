@@ -12,11 +12,7 @@ function espresso_display_usaepay_onsite($data) {
 			echo '<p>CVV2: 123 </p>';
 			echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3></div>';
 		}
-		$return_url = add_query_arg( array( 'r_id'=>$registration_id ), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
-		if ($usaepay_onsite_settings['force_ssl_return']) {
-			$return_url = str_replace('http://', 'https://', $return_url);
-		}
-
+		$return_url = espresso_build_gateway_url('return_url', $payment_data, 'usaepay_onsite');
 	wp_register_script( 'usaepay_onsite', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/usaepay_onsite/usaepay_onsite.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'usaepay_onsite' );	
 

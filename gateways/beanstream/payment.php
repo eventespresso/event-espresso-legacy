@@ -314,10 +314,7 @@ function espresso_display_beanstream($data) {
 	global $org_options;
 	$beanstream_settings = get_option('event_espresso_beanstream_settings');
 	$use_sandbox = $beanstream_settings['beanstream_use_sandbox'];
-	$return_url = add_query_arg(array('r_id' => $registration_id), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
-	if ($beanstream_settings['force_ssl_return']) {
-		$return_url = str_replace('http://', 'https://', $return_url);
-	}
+	$return_url = espresso_build_gateway_url('return_url', $data, 'beanstream');
 
 	wp_register_script( 'beanstream', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/beanstream/beanstream.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'beanstream' );	

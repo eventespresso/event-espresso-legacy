@@ -14,7 +14,7 @@ function add_to_calendar(){
 				$start_time = $result->start_time;
 				$end_time = $result->end_time;
 				$calendar_category = $_REQUEST['calendar_category'];
-		$linky = add_query_arg(array('regevent_action' => 'register', 'event_id' => $event_id, 'name_of_event' => $event_name), apply_filters('espresso_filter_permalink', get_permalink($org_options['event_page_id']), $org_options['event_page_id']));
+		$linky = add_query_arg(array('regevent_action' => 'register', 'event_id' => $event_id, 'name_of_event' => $event_name), espresso_page('event_page_id'));
 		
 		$sql = "INSERT INTO " . WP_CALENDAR_TABLE . " SET event_title='" . mysql_escape_string($event_name)
 	     . "', event_desc='" . mysql_escape_string($event_desc) . "', event_begin='" . mysql_escape_string($start_date) 

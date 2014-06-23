@@ -22,10 +22,7 @@ function espresso_display_aim($data) {
 			echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3>';
 		}
 		
-		$return_url = add_query_arg(array('r_id' => $registration_id), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
-		if ($authnet_aim_settings['force_ssl_return']) {
-			$return_url = str_replace('http://', 'https://', $return_url);
-		}
+		$return_url = espresso_build_gateway_url('return_url', $data, 'authnet_aim');
 		
 		if ($authnet_aim_settings['display_header']) {
 ?>
