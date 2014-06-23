@@ -22,17 +22,17 @@ function espresso_display_paypal_pro($data) {
 				echo '<p>CVV2: 123 </p>';
 				echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3></div>';
 			}
+			$return_url = add_query_arg( array( 'r_id'=>$registration_id ), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
 			if ($paypal_pro_settings['force_ssl_return']) {
-				$home = str_replace('http://', 'https://', home_url());
-			} else {
-				$home = home_url();
+				$return_url = str_replace('http://', 'https://', $return_url);
 			}
 			if ($paypal_pro_settings['display_header']) {
 ?>
 			<h3 class="payment_header"><?php echo $paypal_pro_settings['header']; ?></h3><?php } ?>
 
 			<div class = "event_espresso_form_wrapper">
-				<form id="paypal_pro_payment_form" name="paypal_pro_payment_form" method="post" action="<?php echo add_query_arg(array('r_id'=>$registration_id), get_permalink($org_options['return_url'])); ?>">
+				<form id="paypal_pro_payment_form" name="paypal_pro_payment_form" method="post" action="<?php echo $return_url; ?>">
+>>>>>>> 07b229d... worked through all the references to $org_options['event_page'] and $org_options['return_url'] to filter them for wpml. still working through cancel_url and notify_url
 					
 					<fieldset id="paypal-billing-info-dv">
 						<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>

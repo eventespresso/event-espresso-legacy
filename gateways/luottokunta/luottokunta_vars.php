@@ -22,7 +22,7 @@ function espresso_display_luottokunta($payment_data){
 		'r_id'=>$payment_data['registration_id'],
 		'type'=>'luottokunta',
 		'order_id'=>$order_id), 
-			get_permalink($org_options['return_url'] )); 
+			apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url'])); 
 	$success_url=add_query_arg('success',true,$base_return_url);
 	$failure_url = add_query_arg('success',0,$base_return_url);
 	$cancel_url = get_permalink($org_options['cancel_return']);

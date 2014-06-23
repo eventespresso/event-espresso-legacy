@@ -35,7 +35,7 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 
 			$result = $wpdb->get_results( $sql );
 			
-			$reg_page_url = add_query_arg('regevent_action', 'load_checkout_page', get_permalink($org_options['event_page_id']));
+			$reg_page_url = add_query_arg('regevent_action', 'load_checkout_page', apply_filters('espresso_filter_permalink', get_permalink($org_options['event_page_id']), $org_options['event_page_id']));
 
 ?>
 

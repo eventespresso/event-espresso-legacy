@@ -10,13 +10,12 @@ function espresso_display_bank($payment_data) {
 	$bank_deposit_settings = get_option('event_espresso_bank_deposit_settings');
 
 	$args = array(
-		'page_id' =>$org_options['return_url'],
 		'r_id' =>$registration_id,
 		'id' =>$attendee_id,
 		'payment_type' => 'cash_check',
 		'type' => 'bank',
 	);
-	$finalize_link = add_query_arg( $args, home_url() );	
+	$finalize_link = add_query_arg( $args, apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']) );	
 ?>
 <div id="bank-payment-option-dv" class="payment-option-dv">
 

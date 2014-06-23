@@ -123,10 +123,11 @@ function event_espresso_display_firstdata_e4_settings() {
 						<li>
 							<label><?php _e('Relay Response URL', 'event_espresso'); ?></label>
 							<span class="display-path" style="background-color: rgb(255, 251, 204); border:#999 solid 1px; padding:2px;"><?php
+							$return_url = add_query_arg(array('type' => 'firstdata_e4'), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
 							if($firstdata_e4_settings['force_ssl_return']) {
-								echo str_replace("http://", "https://", home_url() . '/?type=firstdata_e4&page_id=' . $org_options['return_url']);
+								echo str_replace("http://", "https://", $return_url);
 							} else {
-								echo home_url() . '/?type=firstdata_e4&page_id=' . $org_options['return_url'];
+								echo $return_url;
 							}
 ?></span> &nbsp;<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=relay_response"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a> </li>
 						<li>

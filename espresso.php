@@ -817,7 +817,7 @@ if (!function_exists('espresso_load_jquery')) {
 			//wp_enqueue_script('jquery');
 			if ( function_exists('event_espresso_multi_reg_init') ) {
 				wp_enqueue_script('ee_ajax_request', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_cart_functions.js', array('jquery'), EVENT_ESPRESSO_VERSION);
-				$EEGlobals = array('ajaxurl' => admin_url('admin-ajax.php'), 'plugin_url' => EVENT_ESPRESSO_PLUGINFULLURL, 'event_page_id' => $org_options['event_page_id']);
+				$EEGlobals = array('ajaxurl' => admin_url('admin-ajax.php'), 'plugin_url' => EVENT_ESPRESSO_PLUGINFULLURL, 'event_page_id' => apply_filters('espresso_filter_page_id', $org_options['event_page_id']));
 				wp_localize_script('ee_ajax_request', 'EEGlobals',$EEGlobals );
 				
 				//Load the jQuery migrate scripts if WP is older than 3.6

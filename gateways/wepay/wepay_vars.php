@@ -21,8 +21,8 @@ function espresso_display_wepay($payment_data) {
 	$fields['reference_id'] = $attendee_id;
 	$fields['amount'] = number_format($event_cost, 2, '.', '');
 	
-	$fields['redirect_uri'] = add_query_arg(array('id'=>$attendee_id,'r_id'=>$registration_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'wepay'),  get_permalink($org_options['return_url']));
-	$fields['callback_uri'] = add_query_arg(array('id'=>$attendee_id,'r_id'=>$registration_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'wepay'),  get_permalink($org_options['notify_url']));
+	$fields['redirect_uri'] = add_query_arg(array('id'=>$attendee_id,'r_id'=>$registration_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'wepay'),  apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
+	$fields['callback_uri'] = add_query_arg(array('id'=>$attendee_id,'r_id'=>$registration_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'wepay'),  apply_filters('espresso_filter_permalink', get_permalink($org_options['notify_url']), $org_options['notify_url']));
 //	$fields['redirect_uri'] = $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=wepay';
 //	$fields['callback_uri'] = $home . '/?page_id=' . $org_options['notify_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=wepay';
 

@@ -9,13 +9,12 @@ function espresso_display_purchase_order($payment_data) {
 
 	$po_payment_settings = get_option('event_espresso_purchase_order_payment_settings');
 	$args = array(
-		'page_id' =>$org_options['return_url'],
 		'r_id' =>$registration_id,
 		'id' =>$attendee_id,
 		'payment_type' => 'purchase_order',
 		'type' => 'purchase_order',
 	);
-	$finalize_link = add_query_arg( $args, home_url() );	
+	$finalize_link = add_query_arg( $args, apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']) );	
 ?>
 <div id="po-payment-option-dv" class="payment-option-dv">
 

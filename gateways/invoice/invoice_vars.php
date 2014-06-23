@@ -15,13 +15,12 @@ function espresso_display_invoice($payment_data) {
 	}
 
 	$args = array(
-		'page_id' =>$org_options['return_url'],
 		'r_id' =>$registration_id,
 		'id' =>$attendee_id,
 		'payment_type' => 'invoice',
 		'type' => 'invoice',
 	);
-	$finalize_link = add_query_arg( $args, home_url() );	
+	$finalize_link = add_query_arg( $args, apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']) );	
 
 ?>
 <div id="invoice-payment-option-dv" class="payment-option-dv">

@@ -12,10 +12,9 @@ function espresso_display_usaepay_onsite($data) {
 			echo '<p>CVV2: 123 </p>';
 			echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3></div>';
 		}
+		$return_url = add_query_arg( array( 'r_id'=>$registration_id ), apply_filters('espresso_filter_permalink', get_permalink($org_options['return_url']), $org_options['return_url']));
 		if ($usaepay_onsite_settings['force_ssl_return']) {
-			$home = str_replace('http://', 'https://', home_url());
-		} else {
-			$home = home_url();
+			$return_url = str_replace('http://', 'https://', $return_url);
 		}
 
 	wp_register_script( 'usaepay_onsite', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/usaepay_onsite/usaepay_onsite.js', array( 'jquery.validate.js' ), '1.0', TRUE );
@@ -36,7 +35,7 @@ function espresso_display_usaepay_onsite($data) {
 <?php } ?>
 
 		<div class = "event_espresso_form_wrapper">
-			<form id="usaepay_onsite_payment_form" name="usaepay_onsite_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
+			<form id="usaepay_onsite_payment_form" name="usaepay_onsite_payment_form" method="post" action="<?php echo $return_url; ?>">
 
 				<fieldset id="usaepay_onsite-billing-info-dv">
 					<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>
