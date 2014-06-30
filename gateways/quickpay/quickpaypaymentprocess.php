@@ -25,9 +25,10 @@ function espresso_process_quickpay($payment_data) {
 	$transaction	= isset( $_POST['transaction'] ) ? sanitize_text_field( $_POST['transaction'] ) : '';
 	$cardtype		= isset( $_POST['cardtype'] ) ? sanitize_text_field( $_POST['cardtype'] ) : '';
 	$cardnumber		= isset( $_POST['cardnumber'] ) ? sanitize_text_field( $_POST['cardnumber'] ) : '';
+	$fee		= isset( $_POST['fee'] ) ? sanitize_text_field( $_POST['fee'] ) : '';
 	
 	// concatenate above values,  add our SECRET QUIICKPAY SALT value, then  md5 the whole thing
-	$response_md5_check = md5( $msgtype . $ordernumber . $amount . $currency . $time . $state . $qpstat . $qpstatmsg . $chstat . $chstatmsg . $merchant . $merchantemail . $transaction . $cardtype . $cardnumber . $quickpay_settings['quickpay_md5secret'] );
+	$response_md5_check = md5( $msgtype . $ordernumber . $amount . $currency . $time . $state . $qpstat . $qpstatmsg . $chstat . $chstatmsg . $merchant . $merchantemail . $transaction . $cardtype . $cardnumber . $fee . $quickpay_settings['quickpay_md5secret'] );
 	
 	// if our md5 check value matches QuickPay's md5 check value, then nobody haxor'd  the data
 	// oh... and the TXN also has to have been approved
