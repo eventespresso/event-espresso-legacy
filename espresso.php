@@ -579,6 +579,7 @@ if (is_admin()) {
 	//Install/Update Tables when plugin is activated
 	register_activation_hook(__FILE__, 'espresso_check_data_tables'); 
 	register_activation_hook(__FILE__, 'espresso_update_active_gateways');
+	register_activation_hook(__FILE__, 'espresso_migrate_atos_gateway');
 	
 	//Premium funtions. If this is a paid version, then we need to include these files.
 	//Premium upgrade options if the piad plugin is not installed
@@ -1082,6 +1083,10 @@ if (is_admin()) {
 	//Check to make sure all of the main pages are setup properly, if not show an admin message.
 	if (((!isset($_REQUEST['event_page_id']) || $_REQUEST['event_page_id'] == NULL) && ($org_options['event_page_id'] == ('0' || ''))) || $org_options['return_url'] == ('0' || '') || $org_options['notify_url'] == ('0' || '')) {
 		add_action('admin_notices', 'event_espresso_activation_notice', 5);
+	}
+	//Check for the Atos gateway migration
+	if ( get_option( 'espresso_atos_migration') != true ) {
+		add_action('admin_notices', 'espresso_migrate_atos_admin_notice');
 	}
 }
 

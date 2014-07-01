@@ -431,3 +431,52 @@ function espresso_update_active_gateways() {
 	} else
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '.htaccess file already exists in logs folder');
 }
+
+function espresso_migrate_atos_gateway() {
+	// script to help handle the migration of the atos gateway from core to /wp-content/uploads/espresso/gateways
+	// hooked to plugin activation
+	
+	$active_gateways = get_option( 'event_espresso_active_gateways', array() );
+	if ( !empty($active_gateways ) ) {
+		if ( array_key_exists( 'atos', $active_gateways ) ) {
+
+			// unset the atos option if it has not been moved to /wp-content/uploads/espresso/gateways already
+			$upload_gateways_glob = glob(EVENT_ESPRESSO_GATEWAY_DIR . '*/settings.php');
+			if (!is_array($upload_gateways_glob)) {
+				$upload_gateways_glob = array();
+			}
+			if (!array_key_exists('atos', $upload_gateways_glob)) {				
+				// unset the active gateway setting
+				unset($active_gateways['atos']);
+				update_option('event_espresso_active_gateways', $active_gateways);
+				add_option( 'espresso_atos_migration', false);	
+			} else {
+				update_option( 'espresso_atos_migration', true);
+			}
+		}
+	}
+}
+
+function espresso_migrate_atos_admin_notice() {
+	global $current_user ;
+	$user_id = $current_user->ID;
+	// Check that the user hasn't already clicked to ignore the message
+	if ( ! get_user_meta($user_id, 'espresso_atos_ignore_notice') ) {
+		$hide_url = add_query_arg( 'espresso_atos_nag_ignore', '0' );
+		echo '<div class="updated"><p>';
+		printf(__('The <strong>Atos</strong> gateway has been removed from Event Espresso core in 3.1.37. Please download and upload the Atos gateway to /wp-content/uploads/espresso/templates. Link to documentation goes here. | <a href="%1$s">Hide this message</a>'), $hide_url );
+		echo "</p></div>";
+	}
+}
+
+add_action('admin_init', 'espresso_atos_nag_ignore');
+
+function espresso_atos_nag_ignore() {
+	global $current_user;
+    $user_id = $current_user->ID;
+    /* If user clicks to ignore the notice, add that to their user meta */
+    if ( isset($_GET['espresso_atos_nag_ignore']) && '0' == $_GET['espresso_atos_nag_ignore'] ) {
+		add_user_meta($user_id, 'espresso_atos_ignore_notice', 'true', true);
+		add_option( 'espresso_atos_migration', false);	
+	}
+}
