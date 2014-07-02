@@ -439,19 +439,15 @@ function espresso_migrate_atos_gateway() {
 	$active_gateways = get_option( 'event_espresso_active_gateways', array() );
 	if ( !empty($active_gateways ) ) {
 		if ( array_key_exists( 'atos', $active_gateways ) ) {
-
 			// unset the atos option if it has not been moved to /wp-content/uploads/espresso/gateways already
-			$upload_gateways_glob = glob(EVENT_ESPRESSO_GATEWAY_DIR . '*/settings.php');
-			if (!is_array($upload_gateways_glob)) {
-				$upload_gateways_glob = array();
-			}
-			if (!array_key_exists('atos', $upload_gateways_glob)) {				
+			$uploaded_atos_file = EVENT_ESPRESSO_GATEWAY_DIR . 'atos/settings.php';
+			if (file_exists($uploaded_atos_file)) {
+				update_option( 'espresso_atos_migration', true);					
+			} else {
 				// unset the active gateway setting
 				unset($active_gateways['atos']);
 				update_option('event_espresso_active_gateways', $active_gateways);
-				add_option( 'espresso_atos_migration', false);	
-			} else {
-				update_option( 'espresso_atos_migration', true);
+				add_option( 'espresso_atos_migration', false);
 			}
 		}
 	}
@@ -464,7 +460,7 @@ function espresso_migrate_atos_admin_notice() {
 	if ( ! get_user_meta($user_id, 'espresso_atos_ignore_notice') ) {
 		$hide_url = add_query_arg( 'espresso_atos_nag_ignore', '0' );
 		echo '<div class="updated"><p>';
-		printf(__('The <strong>Atos</strong> gateway has been removed from Event Espresso core in 3.1.37. Please download and upload the Atos gateway to /wp-content/uploads/espresso/templates. Link to documentation goes here. | <a href="%1$s">Hide this message</a>'), $hide_url );
+		printf(__('The <strong>Atos</strong> gateway has been removed from Event Espresso core in 3.1.37. Please download and upload the Atos gateway to /wp-content/uploads/espresso/templates. Link to documentation goes here. | <a href="%1$s">Hide this message</a>', 'event_espresso'), $hide_url );
 		echo "</p></div>";
 	}
 }
