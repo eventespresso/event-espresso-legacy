@@ -57,9 +57,9 @@ $advanced_options .= '<p><label>' . __('Display  description? ', 'event_espresso
 $advanced_options .= '<p id="p_display_reg_form"><label>' . __('Display  registration form? ', 'event_espresso') . '</label>' . select_input('display_reg_form', $values, $display_reg_form, 'id="display_reg_form"') . '</p>';
 $advanced_options .= '<p class="inputunder"><label>' . __('Default Payment Status for Event: ', 'event_espresso') . '</label>' . select_input('default_payment_status', $default_payment_status, isset($event_meta['default_payment_status']) ? $event_meta['default_payment_status']: '') . '</p>';
 $advanced_options .= $event_status != 'S' ? espresso_secondary_events_dd($overflow_event_id, $allow_overflow) : '';
-$advanced_options .= '<p class="inputunder"><label>' . __('Alternate Registration Page (optional)', 'event_espresso') . '</label>
+$advanced_options .= '<p class="inputunder"><label>' . __('Alternative Registration Page (optional)', 'event_espresso') . '</label>
 				<input name="externalURL" size="20" type="text" value="' . $externalURL . '"> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=external_URL_info"><img src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/question-frame.png" width="16" height="16" /></a><br /></p>';
-$advanced_options .= '<p class="inputunder"><label>' . __('Alternate Email Address (optional)', 'event_espresso') . '</label>
+$advanced_options .= '<p class="inputunder"><label>' . __('CC Email Address (optional)', 'event_espresso') . '</label>
 				<input name="alt_email" size="20" type="text" value="' . $alt_email . '"> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=alt_email_info"><img src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/question-frame.png" width="16" height="16" /></a></p>';
 				
 $advanced_options = apply_filters('filter_hook_espresso_event_editor_advanced_options', $advanced_options );

@@ -6,7 +6,6 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-
   Version: 3.1.38-dev
 
   Author: Event Espresso
