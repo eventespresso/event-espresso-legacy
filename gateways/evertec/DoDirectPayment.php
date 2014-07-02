@@ -20,35 +20,34 @@ function espresso_process_evertec($payment_data) {
 	$params = array(
 		'userName'=>$evertec_settings['username'],
 		'passWord'=>$evertec_settings['password'],
-		'customerName'=>$r['first_name']." ".$r['last_name'],
+		'customerName'=>substr( $r['first_name']." ".$r['last_name'], 0, 40),
 		'customerID'=>$payment_data['registration_id'],
 		'customerEmail'=>$r['email'],//$payment_data['attendee_email'],
-		'address1'=>$r['address'],
-		'address2'=>isset($r['address2']) ? $r['address2'] : '',
+		'address1'=>substr( $r['address'], 0, 40),
+		'address2'=>isset($r['address2']) ? substr( $r['address2'], 0, 40) : '',
 		'city'=>$r['city'],
 		'state'=>$r['state'],
 		'zipCode'=>$r['zip'],
 		'telephone'=>$r['phone'],
 		'fax'=>'',
-		'descriptionBuy'=>$payment_data['event_name'],
+		'descriptionBuy'=>substr( htmlspecialchars( $payment_data['event_name'] ), 0, 50 ),
 		'operatorId'=>'',
 		'channel'=>6,//not sure what this is for
-		'ignoreValues'=>'',  
-		'language'=>$evertec_settings['evertec_pages_language'],
+		'ignoreValues'=>'',
 		'tax1'=>'',//0
 		'tax2'=>'',
 		'tax3'=>'',
 		'tax4'=>'',
-		'MerchantTransId'=>$payment_data['registration_id'],
-		'amount'=>'10.00',//$payment_data['event_cost'],
+		'MerchantTransId'=>wp_generate_password( 10, FALSE ),
+		'amount'=>$payment_data['total_cost'],
 		'filler1'=>'',
 		'filler2'=>'',
 		'filler3'=>'',
 		'filler4'=>'',
 		'Note'=>'',
-		'paymentType'=>$r['evertec_payment_method'],	
+		'paymentType'=>$r['evertec_payment_method'],
 			);
-		$cardNumber = $r['card_num'];
+		$cardNumber = str_replace( " ", "", $r['card_num'] );
 		$securityCardCode = $r['cvv'];
 		$expirationDate = $r['expmonth'].$r['expyear'];
 		$bankRoutingNumber=$r['bankRoutingNumber'];
@@ -71,8 +70,8 @@ function espresso_process_evertec($payment_data) {
 		$raw_xml_body = '<?xml version="1.0" encoding="utf-8" ?><soap:Envelope	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 			xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" ><soap:Body><SendTransactions xmlns="http://tempuri.org/cpsh2h/serviceh2h">'.$xml_params.'</SendTransactions></soap:Body></soap:Envelope>';
-	
-// 	echo "raw xml:".htmlentities($raw_xml_body)."<hr>";		
+
+// 	echo "raw xml:".htmlentities($raw_xml_body)."<hr>";
 		//send request
 		$response = wp_remote_post($server_url,
 			array(
@@ -80,21 +79,20 @@ function espresso_process_evertec($payment_data) {
 					'Content-Type'=>'text/xml; charset=utf-8;',
 					"User-Agent"=> "PHP-SOAP/5.4.4",
 					'Connection'=> 'Keep-Alive',
-					'SOAPAction'=> 'http://tempuri.org/cpsh2h/serviceh2h/SendTransactions'), 
+					'SOAPAction'=> 'http://tempuri.org/cpsh2h/serviceh2h/SendTransactions'),
 				'method'=>'POST',
 				'httpversion' => '1.1',
 				'body'=>$raw_xml_body,
 				'sslverify' => false));
 //		echo 'echodump of $response';
-//		echo htmlentities($response['body']);
-// 		die;
-		
+		//echo htmlentities($response['body']);
+ 		//die;
+
 		//process response
 		$payment_data['payment_status'] = 'Incomplete';
 		$payment_data['txn_type'] = 'EverTec';
 		$payment_data['txn_id'] = 0;
 		$payment_data['txn_details'] = serialize($_REQUEST);
-		
 		if(isset($response['body'])){
 			$xml   = simplexml_load_string($response['body']);
 			$payment_data['txn_details'] = $response['body'];
@@ -109,7 +107,7 @@ function espresso_process_evertec($payment_data) {
 				$statusDescription = $statusDescriptionElements[0];
 				$confirmationNumber = is_array($confirmationNumberElements) ? $confirmationNumberElements[0] : NULL;
 				$authorizationNumber = is_array($authorizationNumberElements) ? $authorizationNumberElements[0] : NULL;
-				if($paymentResult == '0000' && $confirmationNumber && $authorizationNumber){
+				if($paymentResult == '0000' ){
 					$payment_data['payment_status'] = 'Completed';
 					$payment_data['txn_id'] = 'conf:'.$confirmationNumber.",auth:".$authorizationNumber;
 					$error_message = false;
@@ -130,7 +128,7 @@ function espresso_process_evertec($payment_data) {
 		?><p><strong class="credit_card_failure"><?php _e("An error occurred processing your payment:", "event_espresso");?></strong><br/> <?php echo $error_message?></p>
 		<?php
 	}
-	
-	
+
+
 	return $payment_data;
 }
