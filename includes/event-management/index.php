@@ -182,12 +182,12 @@ function event_espresso_manage_events() {
 		<p><?php _e('If an event is set up as an "Waitlist Event," it can be set to not appear in your event listings template. You may need to customize your event_listing.php file to make this work. For more information, please', 'event_espresso'); ?> <a href="http://eventespresso.com/wiki/create-a-waiting-list-for-your-event/" target="_blank"><?php _e('view the documentation', 'event_espresso'); ?></a>.</p>
 	</div>
 	<div id="external_URL_info" style="display:none">
-		<h2><?php _e('Off-site Registration Page', 'event_espresso'); ?></h2>
+		<h2><?php _e('Alternative Registration Page', 'event_espresso'); ?></h2>
 		<p><?php _e('This option will override your existing registration page and send attendees to the URL that is entered.', 'event_espresso'); ?></p>
 	</div>
 	<div id="alt_email_info" style="display:none">
-		<h2><?php _e('Alternate Email Address', 'event_espresso'); ?></h2>
-		<p><?php _e('If an alternate email address is entered, then admin email notifications for the event will also be sent to this address.', 'event_espresso'); ?></p>
+		<h2><?php _e('CC Email Address', 'event_espresso'); ?></h2>
+		<p><?php _e('If an email address is entered, then admin email notifications for the event will also be sent to this address.', 'event_espresso'); ?></p>
 	</div>
 	<div id="status_types_info" style="display:none;">
 		<h2><?php _e('Event Status Types', 'event_espresso'); ?></h2>
