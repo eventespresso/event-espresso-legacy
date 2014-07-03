@@ -10,6 +10,7 @@ event_espresso_require_gateway("paypal/paypal_ipn.php");
 if (!empty($_REQUEST['type']) && $_REQUEST['type'] == 'paypal') {
 	add_filter('filter_hook_espresso_transactions_get_attendee_id', 'espresso_transactions_paypal_get_attendee_id');
 	add_filter('filter_hook_espresso_transactions_get_payment_data', 'espresso_process_paypal');
+	add_filter('filter_hook_espresso_thank_you_get_payment_data', 'espresso_process_paypal');
 }
 
 function espresso_paypal_formal_name( $gateway_formal_names ) {

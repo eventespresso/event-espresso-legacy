@@ -26,7 +26,11 @@ function espresso_process_paypal($payment_data) {
 	if ($use_sandbox) {
 		$myPaypal->enableTestMode();
 	}
-	if ($myPaypal->validateIpn()) {
+	if (empty($_POST['ipn_track_id']) && ($_POST['payment_status'] == 'Completed' || $_POST['payment_status'] == 'Pending')) {
+		$payment_data['txn_details'] = serialize($_POST);
+		$payment_data['txn_id'] = $_POST['txn_id'];
+		$payment_data['payment_status'] = 'Pending';
+	} elseif ($myPaypal->validateIpn()) {
 		$payment_data['txn_details'] = serialize($myPaypal->ipnData);
 		$payment_data['txn_id'] = $myPaypal->ipnData['txn_id'];
 		if ($myPaypal->ipnData['mc_gross'] >= $payment_data['total_cost'] && ($myPaypal->ipnData['payment_status'] == 'Completed' || $myPaypal->ipnData['payment_status'] == 'Pending')) {
