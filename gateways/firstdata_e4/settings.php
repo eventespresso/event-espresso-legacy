@@ -123,10 +123,11 @@ function event_espresso_display_firstdata_e4_settings() {
 						<li>
 							<label><?php _e('Relay Response URL', 'event_espresso'); ?></label>
 							<span class="display-path" style="background-color: rgb(255, 251, 204); border:#999 solid 1px; padding:2px;"><?php
+							$return_url = add_query_arg(array('type' => 'firstdata_e4'), espresso_page('return_url'));
 							if($firstdata_e4_settings['force_ssl_return']) {
-								echo str_replace("http://", "https://", home_url() . '/?type=firstdata_e4&page_id=' . $org_options['return_url']);
+								echo str_replace("http://", "https://", $return_url);
 							} else {
-								echo home_url() . '/?type=firstdata_e4&page_id=' . $org_options['return_url'];
+								echo $return_url;
 							}
 ?></span> &nbsp;<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=relay_response"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a> </li>
 						<li>
@@ -172,7 +173,7 @@ function event_espresso_display_firstdata_e4_settings() {
 	<div id="relay_response" style="display:none">
 		<h2><?php _e('Relay Response', 'event_espresso'); ?></h2>
 		<p><?php _e('This shows the specific the URL to which the gateway should return the relay response for a transaction. This the page should be set in your FirstData E4 account. Login to FirstData E4, goto Account > Response/Receipt URLs > Add URL and enter the following URL.', 'event_espresso'); ?></p>
-		<p><strong><?php _e('Relay Response URL:', 'event_espresso'); ?></strong> <?php echo home_url() . '/?page_id=' . $org_options['notify_url'] ?><br />
+		<p><strong><?php _e('Relay Response URL:', 'event_espresso'); ?></strong> <?php echo espresso_page('return_url'); ?><br />
 			<span style="color:red;"><?php _e('Note:', 'event_espresso'); ?></span> <?php _e('This URL can be changed in the "Organization Settings" page.', 'event_espresso'); ?></p>
 		<p><?php _e('For complete information on configuring relay response, please refer to', 'event_espresso'); ?> <a href="https://account.authorize.net/help/Merchant_Interface_RoboHelp_Project.htm#Miscellaneous/Reference.htm%3E%3Epan=2"><?php _e('Reference &amp; User Guides', 'event_espresso'); ?></a>.</p>
 	</div>

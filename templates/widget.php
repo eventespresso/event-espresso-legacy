@@ -27,7 +27,6 @@ if (!class_exists('Event_Espresso_Widget')) {
                 $type = 'category';
             }
 
-            $event_page_id = $org_options['event_page_id'];
 
             $show_expired = $instance['show_expired'] == 'false' ? " AND (e.start_date >= '" . date('Y-m-d') . "' OR e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
             $show_secondary = $instance['show_secondary'] == 'false' ? " AND e.event_status != 'S' " : '';

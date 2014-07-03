@@ -657,7 +657,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 			$meta = array();
 			//echo "<pre>", print_r($_POST), "</pre>";
 			
-			$reg_page_url = add_query_arg('regevent_action', 'post_multi_attendee', get_permalink($org_options['event_page_id']));
+			$reg_page_url = add_query_arg('regevent_action', 'post_multi_attendee', espresso_page('event_page_id'));
 			
 			?>
 
@@ -666,7 +666,7 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 		<?php
 					$err = '';
 					
-					$cart_page_url = add_query_arg('regevent_action', 'show_shopping_cart', get_permalink($org_options['event_page_id']));
+					$cart_page_url = add_query_arg('regevent_action', 'show_shopping_cart', espresso_page('event_page_id'));
 					
 					$edit_cart_link = '<a href="'.$cart_page_url.'" rel="nofollow" class="btn_event_form_submit inline-link">'.__('Edit Cart', 'event_espresso').'</a>';
 	
@@ -1051,7 +1051,7 @@ if (!function_exists('event_espresso_cart_link')) {
 					'event_name' => ' ',
 					'separator' => NULL,
 					'view_cart' => FALSE,
-					'event_page_id' => $org_options['event_page_id'], //instead of sending it in as a var, grab the id here.
+					'event_page_id' => apply_filters('espresso_filter_page_id', $org_options['event_page_id']), //instead of sending it in as a var, grab the id here.
 					'direct_to_cart' => 0,
 					'moving_to_cart' => "Please wait redirecting to cart page"
 				), 
@@ -1071,7 +1071,7 @@ if (!function_exists('event_espresso_cart_link')) {
 
 		// if event is already in session, return the view cart link  		array_key_exists($event_id, $events_in_session)
 		if ( $view_cart || is_array( $events_in_session ) && isset( $events_in_session[ $event_id ] )) {
-			$registration_cart_url = add_query_arg('regevent_action', 'show_shopping_cart', get_permalink($org_options['event_page_id']));
+			$registration_cart_url = add_query_arg('regevent_action', 'show_shopping_cart', espresso_page('event_page_id'));
 			//$registration_cart_url = get_option('siteurl') . '/?page_id=' . $event_page_id . '&regevent_action=show_shopping_cart';
 			$anchor = __("View Cart", 'event_espresso');
 			
@@ -1110,7 +1110,7 @@ if (!function_exists('event_espresso_cart_link')) {
 				return empty( $events_in_session ) ? $error : '';
 			}
 			//show them the add to cart link
-			$registration_cart_url = isset($externalURL) && $externalURL != '' ? $externalURL : add_query_arg('event_id', $event_id, get_permalink($org_options['event_page_id']));
+			$registration_cart_url = isset($externalURL) && $externalURL != '' ? $externalURL : add_query_arg('event_id', $event_id, espresso_page('event_page_id'));
 			$registration_cart_class = 'ee_add_item_to_cart';
 			
 		}

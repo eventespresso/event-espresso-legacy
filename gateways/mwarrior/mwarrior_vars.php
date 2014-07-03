@@ -41,15 +41,9 @@ function espresso_display_mwarrior($payment_data) {
 	$mwarrior->addField('transactionCurrency', $mwarrior_cur);
 
 	$mwarrior->addField('logoURL', $logo_url);
-	$returnURL = espresso_build_gateway_url('return_url', $payment_data, 'mwarrior');
-	//notify is the thank yuo page... is that right? mike july 19 2013, editing code...
-	$notifyURL = espresso_build_gateway_url('return_url', $payment_data, 'mwarrior');
-	
+	$returnURL = espresso_build_gateway_url('return_url', $payment_data, 'mwarrior', array('event_id'=>$event_id));
 	$mwarrior->addField('returnURL',$returnURL);
-	$mwarrior->addField('notifyURL',$notifyURL);
-//	$mwarrior->addField('returnURL', $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=mwarrior');
-//$mwarrior->addField('cancel_return', $home.'/?page_id='.$org_options['cancel_return']);
-//	$mwarrior->addField('notifyURL', $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=mwarrior');
+	$mwarrior->addField('notifyURL',$returnURL);
 	$mwarrior->addField('urlHash', $mwarrior->_calculateHash($mwarrior->fields, "url"));
 	$mwarrior->addField('hash', $mwarrior->_calculateHash($mwarrior->fields, "transaction"));
 	$mwarrior->addField('hashSalt', $salt);

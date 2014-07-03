@@ -45,9 +45,10 @@ function espresso_display_eway($payment_data) {
 	$myeway->addField('CustomerEmail', $attendee_email);
 	$myeway->addField('CustomerPhone', $phone);
 	$myeway->addField('InvoiceDescription', stripslashes_deep($event_name) . ' | ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($fname . ' ' . $lname) . ' | ' . __('Registrant Email:', 'event_espresso') . ' ' . $attendee_email . ' | ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity);
-	$myeway->addField('CancelURL', str_replace("&", "%26", get_permalink($org_options['cancel_return'])));
-
-	$return_url = str_replace("&","%26", espresso_build_gateway_url('return_url', $payment_data, 'eway'));
+	$myeway->addField('CancelURL', str_replace("&", "%26", espresso_build_gateway_url('cancel_return', $payment_data, 'eway')));
+	
+	$return_url = str_replace("&","%26", espresso_build_gateway_url('return_url', $payment_data, 'eway', array('event_id' => $event_id)) );
+	
 	$myeway->addField('ReturnURL', $return_url);
 	$myeway->addField('CompanyLogo', $eway_settings['image_url']);
 	$myeway->addField('PageBanner', '');

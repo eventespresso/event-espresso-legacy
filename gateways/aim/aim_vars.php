@@ -22,11 +22,13 @@ function espresso_display_aim($data) {
 			echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debug Mode Is Turned On', 'event_espresso') . '</h3>';
 		}
 		
+		$return_url = espresso_build_gateway_url('return_url', $data, 'authnet_aim');
+		
 		if ($authnet_aim_settings['display_header']) {
 ?>
 		<h3 class="payment_header"><?php echo $authnet_aim_settings['header']; ?></h3><?php } ?>
 
-		<form id="aim_payment_form" name="aim_payment_form" method="post" action="<?php echo add_query_arg(array('r_id'=>$registration_id), get_permalink($org_options['return_url'])); ?>">
+		<form id="aim_payment_form" name="aim_payment_form" method="post" action="<?php echo $return_url; ?>">
 			<div class = "event_espresso_form_wrapper">
 
 				<fieldset id="aim-billing-info-dv">

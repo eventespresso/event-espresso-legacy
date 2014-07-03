@@ -21,20 +21,14 @@ function espresso_display_wepay($payment_data) {
 	$fields['reference_id'] = $attendee_id;
 	$fields['amount'] = number_format($event_cost, 2, '.', '');
 	
-	$fields['redirect_uri'] = add_query_arg(array('id'=>$attendee_id,'r_id'=>$registration_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'wepay'),  get_permalink($org_options['return_url']));
-	$fields['callback_uri'] = add_query_arg(array('id'=>$attendee_id,'r_id'=>$registration_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'wepay'),  get_permalink($org_options['notify_url']));
-//	$fields['redirect_uri'] = $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=wepay';
-//	$fields['callback_uri'] = $home . '/?page_id=' . $org_options['notify_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=wepay';
+	$fields['redirect_uri'] = espresso_build_gateway_url('return_url', $payment_data, 'usaepay_onsite', array('event_id'=>$event_id));
+	$fields['callback_uri'] = espresso_build_gateway_url('notify_url', $payment_data, 'usaepay_onsite', array('event_id'=>$event_id));
 
-	if ($wepay_settings['force_ssl_return']) {
-		$fields['redirect_uri'] = str_replace("http://", "https://", $fields['redirect_uri']);
-		$fields['callback_uri'] = str_replace("http://", "https://", $fields['callback_uri']);
-	}
 	if (empty($wepay_settings['access_token'])) return;
-	try{
-	$wepay = new Espresso_Wepay($wepay_settings['access_token']);
-	$raw = $wepay->request('checkout/create', $fields);
-	}catch(Exception $e){
+	try {
+		$wepay = new Espresso_Wepay($wepay_settings['access_token']);
+		$raw = $wepay->request('checkout/create', $fields);
+	} catch(Exception $e) {
 		printf(__("WePay seems to be misconfigured. Error: %s", "event_espresso"),$e->getMessage());
 		return;
 	}

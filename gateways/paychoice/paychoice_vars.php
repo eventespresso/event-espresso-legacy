@@ -10,6 +10,7 @@ function espresso_display_paychoice($payment_data) {
 	}
 	
 	$paychoice_settings = get_option('event_espresso_paychoice_settings');
+	$return_url = espresso_build_gateway_url('return_url', $payment_data, 'paychoice');
 	
 	$paychoice_settings['header'] = $paychoice_settings['display_header'] ? '<h3 class="payment_header">' . $paychoice_settings['header'] . '</h3>' : '';
 
@@ -27,7 +28,7 @@ function espresso_display_paychoice($payment_data) {
 		<?php echo $paychoice_settings['header']; ?>	
 		<p class="section-title"><?php _e('Credit Card Information', 'event_espresso'); ?></p>
 		<div class = "event_espresso_form_wrapper">
-			<form id="paychoice_payment_form" name="paychoice_payment_form" method="post" action="<?php echo add_query_arg(array('r_id'=>$registration_id), get_permalink($org_options['return_url'])); ?>">
+			<form id="paychoice_payment_form" name="paychoice_payment_form" method="post" action="<?php echo $return_url; ?>">
 				<p>
 					<label for="cc_name"><?php _e('Name on Card', 'event_espresso'); ?> <em>*</em></label>
 					<input type="text" name="cc_name" id="paychoice_cc_name" class="required" />

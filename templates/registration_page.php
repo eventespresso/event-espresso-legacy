@@ -42,7 +42,6 @@ if (!function_exists('register_attendees')) {
         }
 
         //The following variables are used to get information about your organization
-        $event_page_id				= $org_options['event_page_id'];
         $Organization				= stripslashes_deep($org_options['organization']);
         $Organization_street1		= $org_options['organization_street1'];
         $Organization_street2		= $org_options['organization_street2'];

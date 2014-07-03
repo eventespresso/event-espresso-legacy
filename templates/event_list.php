@@ -33,7 +33,6 @@ if (!function_exists('event_espresso_get_event_details')) {
 		$template_name = ( 'event_list_display.php' );
 		$path = locate_template( $template_name );
 		
-		$event_page_id = $org_options['event_page_id'];
 		$currency_symbol = isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : '';
 		$ee_search = isset($_REQUEST['ee_search']) && $_REQUEST['ee_search'] == 'true' && isset($_REQUEST['ee_name']) && !empty($_REQUEST['ee_name']) ? true : false;
 		$ee_search_string = isset($_REQUEST['ee_name']) && !empty($_REQUEST['ee_name']) ? sanitize_text_field( $_REQUEST['ee_name'] ) : '';
@@ -111,6 +110,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		//END CATEGORY MODIFICATION
 
 		//Create the query
+		$wpdb_prepare_array = array();
 		$DISTINCT = $ee_search == true ? "DISTINCT" : '';
 		$sql = "SELECT $DISTINCT e.*, ese.start_time, ese.end_time, p.event_cost ";
 		
@@ -135,7 +135,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id= e.id ";
 		$sql .= " LEFT JOIN " . EVENTS_PRICES_TABLE . " p ON p.event_id=e.id ";
-		$sql .= " WHERE is_active = %s ";
+		$sql .= " WHERE is_active = 'Y' ";
 		
 		//Category sql
 		$sql .= $category_sql;
@@ -171,7 +171,8 @@ if (!function_exists('event_espresso_get_event_details')) {
 		//Search query
 		if ( $ee_search ){
 			// search for full original string within bracketed search options
-			$sql .= " AND ( e.event_name LIKE '%%$ee_search_string%%' ";
+			$wpdb_prepare_array[] = $ee_search_string;
+			$sql .= " AND ( e.event_name LIKE '%%%s%%' ";
 			// array of common words that we don't want to waste time looking for
 			$words_to_strip = array( ' the ', ' a ', ' or ', ' and ' );
 			$words = str_replace( $words_to_strip, ' ', $ee_search_string );
@@ -179,7 +180,8 @@ if (!function_exists('event_espresso_get_event_details')) {
 			$words = explode( ' ', $words );
 			// search for each word  as an OR statement
 			foreach ( $words as $word ) {
-				$sql .= " OR e.event_name LIKE '%%$word%%' ";			
+				$wpdb_prepare_array[] = $word;
+				$sql .= " OR e.event_name LIKE '%%%s%%' ";			
 			}
 			// close the search options
 			$sql .= " ) ";
@@ -187,9 +189,15 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		$sql .= " GROUP BY e.id ";
 		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$sort." " : " ORDER BY date(start_date), id ASC ";
-		$sql .= $limit > 0 ? ' LIMIT 0, %d' : '';  
-		
-		$events = $wpdb->get_results( $wpdb->prepare($sql, 'Y', $limit));
+		if ($limit > 0) {
+			$wpdb_prepare_array[] = $limit;
+			$sql .= ' LIMIT 0, %d';  
+		}
+		if (!empty($wpdb_prepare_array)) {
+			$events = $wpdb->get_results( $wpdb->prepare($sql, $wpdb_prepare_array));
+		} else {
+			$events = $wpdb->get_results( $sql );
+		}
 //		echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		
 		$category_id			= isset($wpdb->last_result[0]->id) ? $wpdb->last_result[0]->id : '';

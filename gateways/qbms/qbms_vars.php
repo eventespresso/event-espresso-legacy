@@ -5,11 +5,8 @@ function espresso_display_qbms($payment_data) {
 	global $org_options;
 	
 	$qbms_settings = get_option('event_espresso_qbms_settings');
-	if (isset($_SERVER['HTTPS'])) {
-		$home = str_replace('http://', 'https://', home_url());
-	} else {
-		$home = home_url();
-	}
+	
+	$return_url = espresso_build_gateway_url('return_url', $payment_data, 'qbms');
 	
 	wp_register_script( 'qbms', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/qbms/qbms.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'qbms' );	
@@ -29,7 +26,7 @@ function espresso_display_qbms($payment_data) {
 			<?php } ?>
 
 			<div class = "event_espresso_form_wrapper">
-				<form id="qbms_payment_form" name="qbms_payment_form" method="post" action="<?php echo $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id; ?>">
+				<form id="qbms_payment_form" name="qbms_payment_form" method="post" action="<?php echo $return_url; ?>">
 
 					<fieldset id="qbms-billing-info-dv">
 						<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>

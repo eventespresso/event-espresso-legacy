@@ -14,14 +14,7 @@ function espresso_display_invoice($payment_data) {
 		echo '<!--Event Espresso Default Gateway Version ' . $default_gateway_version . '-->';
 	}
 
-	$args = array(
-		'page_id' =>$org_options['return_url'],
-		'r_id' =>$registration_id,
-		'id' =>$attendee_id,
-		'payment_type' => 'invoice',
-		'type' => 'invoice',
-	);
-	$finalize_link = add_query_arg( $args, home_url() );	
+	$finalize_link = espresso_build_gateway_url('return_url', $payment_data, 'invoice', array( 'payment_type' => 'invoice' ));	
 
 ?>
 <div id="invoice-payment-option-dv" class="payment-option-dv">

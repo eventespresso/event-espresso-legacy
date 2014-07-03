@@ -18,7 +18,7 @@ function espresso_edit_attendee($registration_id, $attendee_id, $event_id = 0, $
 		case'attendee':
 		default:
 			$array = array('r_id' => $registration_id, 'id' => $attendee_id, 'event_id' => $event_id, 'edit_attendee' => 'true', 'single' => 'true');
-			$url = add_query_arg($array, get_permalink($org_options['event_page_id']));
+			$url = add_query_arg($array, espresso_page('event_page_id'));
 			$html .= '<a  href="' . $url . '" target="_blank" id="espresso_edit_attendee_' . $attendee_id . '" class="espresso_edit_attendee" title="' . __('Edit Attendee Details', 'event_espresso') . '">' . $text . '</a>';
 			//$html .= '<a  href="' . home_url() . '?page_id=' . $org_options['event_page_id'] . '&registration_id=' . $registration_id . '&amp;id=' . $attendee_id . '&amp;regevent_action=register&form_action=edit_attendee&single=true" target="_blank" id="espresso_edit_attendee_' . $attendee_id . '" class="espresso_edit_attendee" title="' . __('Edit Attendee Details', 'event_espresso') . '">' . $text . '</a>';
 			break;
@@ -30,16 +30,7 @@ function espresso_reg_url($event_id = 0) {
 	global $org_options;
 	if ($event_id > 0) {
 		//return espresso_getTinyUrl(home_url().'/?page_id='.$org_options['event_page_id'].'&regevent_action=register&event_id='.$event_id);
-		if ( function_exists('icl_object_id') && !empty($_GET['lang'])) {
-			$translated_event_page_id = icl_object_id($org_options['event_page_id'], 'page', false, $_GET['lang']);
-			if (is_numeric($translated_event_page_id)) {
-				$new_url = add_query_arg(array('ee' => $event_id, 'lang' => $_GET['lang']), get_permalink($translated_event_page_id));
-			} else {
-				$new_url = add_query_arg('ee', $event_id, get_permalink($org_options['event_page_id']));
-			}
-		} else {
-			$new_url = add_query_arg('ee', $event_id, get_permalink($org_options['event_page_id']));
-		}
+		$new_url = add_query_arg('ee', $event_id, espresso_page('event_page_id'));
 		return $new_url;
 	}/* else {
 	  echo 'No event id supplied'; */
@@ -289,6 +280,7 @@ if ( !function_exists('espresso_get_event') ) {
 		$data = (object)array();
 
 		//Build event queries
+		$wpdb_prepare_array = array();
 		$sql = "SELECT e.*, ese.start_time, ese.end_time ";
 		if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
 		 	$sql .= ", v.name venue_name, v.address venue_address, v.address2 venue_address2, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta ";
@@ -298,23 +290,27 @@ if ( !function_exists('espresso_get_event') ) {
 		if ( isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ) {
 			$sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id ";
 		}
-		$sql.= " WHERE e.is_active= %s ";
-		$sql.= " AND e.event_status != %s ";
+		$sql.= " WHERE e.is_active= 'Y' ";
+		$sql.= " AND e.event_status != 'D' ";
 		if ($single_event_id != NULL) {
 			//If a single event needs to be displayed, get its ID
-            $sql .= " AND event_identifier = '" . $single_event_id . "' ";
+			$wpdb_prepare_array[] = $single_event_id;
+            $sql .= " AND event_identifier = %d ";
+			
         } else {
-			$sql.= " AND e.id = '" . $event_id . "' LIMIT 0,1";
+			$wpdb_prepare_array[] = $event_id;
+			$sql.= " AND e.id = %d LIMIT 0,1";
         }
         //Support for diarise
         if (!empty($_REQUEST['post_event_id'])) {
+			$wpdb_prepare_array[] = $_REQUEST['post_event_id'];
             $sql = "SELECT e.* FROM " . EVENTS_DETAIL_TABLE . ' e';
             $sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id = e.id ";
-            $sql .= " WHERE post_id = '" . $_REQUEST['post_event_id'] . "' ";
+            $sql .= " WHERE post_id = %d ";
             $sql .= " LIMIT 0,1";
         }
 
-		$data = $wpdb->get_row( $wpdb->prepare( $sql, 'Y', 'D' ), OBJECT );
+		$data = $wpdb->get_row( $wpdb->prepare( $sql, $wpdb_prepare_array ), OBJECT );
 		return $data;
 	}
 }

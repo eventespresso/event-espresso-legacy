@@ -91,9 +91,9 @@ add_action('wp_head', 'espresso_info_header');
 
 
 //Globals
-global $org_options, $wpdb, $this_is_a_reg_page, $espresso_content;
+global $org_options, $wpdb, $espresso_content;
 $espresso_content = '';
-$this_is_a_reg_page = FALSE;
+
 
 
 $org_options = get_option('events_organization_settings');
@@ -104,37 +104,47 @@ if (empty($org_options['event_page_id'])) {
 	$org_options['notify_url'] = '';
 }
 
+function espresso_translated_page_id ($page_id) {
+	if ( function_exists('icl_object_id') && defined('ICL_LANGUAGE_CODE') ) {
+			$translated_event_page_id = icl_object_id($page_id, 'page', false, ICL_LANGUAGE_CODE);
+			if (is_numeric($translated_event_page_id)) {
+				return $translated_event_page_id;
+			} else {
+				return $page_id;
+			}
+	}
+	return $page_id;
+}
+add_filter('espresso_filter_page_id', 'espresso_translated_page_id');
+
+function espresso_translated_permalink ($permalink, $page_id) {
+	if ( function_exists('icl_object_id') && defined('ICL_LANGUAGE_CODE') ) {
+		$translated_event_page_id = icl_object_id($page_id, 'page', false, ICL_LANGUAGE_CODE);
+		if (is_numeric($translated_event_page_id)) {
+			return get_permalink($translated_event_page_id);
+		} else {
+			return $permalink;
+		}
+	}
+	return $permalink;
+}
+add_filter('espresso_filter_permalink', 'espresso_translated_permalink', 10, 2);
+
+function espresso_page($page) {
+	global $org_options;
+	return apply_filters('espresso_filter_permalink', get_permalink($org_options[$page]), $org_options[$page]);
+}
+
 function espresso_shortcode_pages( $page_id ) {
 
 	global $org_options, $this_is_a_reg_page;
 	$reg_page_ids = array(
-			$org_options['event_page_id'] => 'event_page_id',
-			$org_options['return_url'] => 'return_url',
-			$org_options['cancel_return'] => 'cancel_return',
-			$org_options['notify_url'] => 'notify_url'
+			apply_filters('espresso_filter_page_id', $org_options['event_page_id']) => 'event_page_id',
+			apply_filters('espresso_filter_page_id', $org_options['return_url']) => 'return_url',
+			apply_filters('espresso_filter_page_id', $org_options['cancel_return']) => 'cancel_return',
+			apply_filters('espresso_filter_page_id', $org_options['notify_url']) => 'notify_url'
 	);
-	if ( function_exists('icl_object_id') && !empty($_GET['lang'])) {
-		$translated_event_page_id = icl_object_id($org_options['event_page_id'], 'page', false, $_GET['lang']);
-		if (is_numeric($translated_event_page_id)) {
-			$reg_page_ids[$translated_event_page_id] = 'event_page_id';
-		}
-		$translated_return_page_id = icl_object_id($org_options['return_url'], 'page', false, $_GET['lang']);
-		if (is_numeric($translated_return_page_id)) {
-			$reg_page_ids[$translated_return_page_id] = 'return_url';
-		}
-		$translated_cancel_page_id = icl_object_id($org_options['cancel_return'], 'page', false, $_GET['lang']);
-		if (is_numeric($translated_cancel_page_id)) {
-			$reg_page_ids[$translated_cancel_page_id] = 'cancel_return';
-		}
-		$translated_notify_page_id = icl_object_id($org_options['notify_url'], 'page', false, $_GET['lang']);
-		if (is_numeric($translated_notify_page_id)) {
-			$reg_page_ids[$translated_notify_page_id] = 'notify_url';
-		}
-	}
-	//$temp = icl_object_id($org_options['event_page_id'], 'page', false, $_GET['lang']);
-	//var_dump($temp);
-	//var_dump($reg_page_ids);
-	//die("here");
+
 	if ( isset( $reg_page_ids[ $page_id ] )) {
 		switch( $reg_page_ids[ $page_id ] ) {
 			case 'event_page_id' : 
@@ -159,6 +169,8 @@ function espresso_shortcode_pages( $page_id ) {
 }
 
 function espresso_page_check () {
+	global $this_is_a_reg_page;
+	$this_is_a_reg_page = FALSE;
 	if (is_ssl()) {
 		$find = str_replace('https://', '', site_url());
 	} else {
@@ -194,12 +206,10 @@ function espresso_page_check () {
 		}
 	}
 	
-	global $this_is_a_reg_page;
-	
 	if ( is_admin() ) {
 		$this_is_a_reg_page = TRUE;
 	}
-
+	
 	//Seating chart
 	if ($this_is_a_reg_page == TRUE && file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "/seatingchart/seatingchart.php")) {
 		require_once( EVENT_ESPRESSO_UPLOAD_DIR . "/seatingchart/seatingchart.php");
@@ -810,7 +820,7 @@ if (!function_exists('espresso_load_jquery')) {
 			//wp_enqueue_script('jquery');
 			if ( function_exists('event_espresso_multi_reg_init') ) {
 				wp_enqueue_script('ee_ajax_request', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_cart_functions.js', array('jquery'), EVENT_ESPRESSO_VERSION);
-				$EEGlobals = array('ajaxurl' => admin_url('admin-ajax.php'), 'plugin_url' => EVENT_ESPRESSO_PLUGINFULLURL, 'event_page_id' => $org_options['event_page_id']);
+				$EEGlobals = array('ajaxurl' => admin_url('admin-ajax.php'), 'plugin_url' => EVENT_ESPRESSO_PLUGINFULLURL, 'event_page_id' => apply_filters('espresso_filter_page_id', $org_options['event_page_id']));
 				wp_localize_script('ee_ajax_request', 'EEGlobals',$EEGlobals );
 				
 				//Load the jQuery migrate scripts if WP is older than 3.6

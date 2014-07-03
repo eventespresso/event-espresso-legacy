@@ -5,7 +5,7 @@ function espresso_display_nab($payment_data) {
 	$mynab = new Espresso_nab(); // initiate an instance of the class
 	global $org_options;
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	$nab_result_url = espresso_build_gateway_url('return_url', $payment_data, 'nab');
+	$nab_result_url = espresso_build_gateway_url('return_url', $payment_data, 'nab', array('event_id' => $payment_data['event_id']));
 	$nab_settings = get_option('event_espresso_nab_settings');
 	$nab_id = $nab_settings['nab_merchant_id'];
 	$nab_pass = $nab_settings['nab_merchant_password'];

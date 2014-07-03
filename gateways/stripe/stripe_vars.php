@@ -4,11 +4,8 @@ function espresso_display_stripe($payment_data) {
 	extract($payment_data);
 	global $org_options;
 	$stripe_settings = get_option('event_espresso_stripe_settings');
-	if ($stripe_settings['force_ssl_return']) {
-			$home = str_replace('http://', 'https://', home_url());
-		} else {
-			$home = home_url();
-		}
+	
+	$return_url = espresso_build_gateway_url('return_url', $payment_data, 'stripe');
 
 	wp_register_script( 'stripe', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/stripe/stripe.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'stripe' );	
@@ -29,8 +26,8 @@ function espresso_display_stripe($payment_data) {
 <?php } ?>
 
 		<div class = "event_espresso_form_wrapper">
-			<form id="stripe_payment_form" name="stripe_payment_form" method="post" action="<?php echo add_query_arg(array('r_id'=>$registration_id), get_permalink($org_options['return_url'])); ?>">
 
+			<form id="stripe_payment_form" name="stripe_payment_form" method="post" action="<?php echo $return_url; ?>">
 				<fieldset id="stripe-billing-info-dv">
 					<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>
 					<p>

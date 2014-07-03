@@ -8,7 +8,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 $attendee_num = apply_filters('action_hook_espresso_confirmation_page_primary_attendee_count',1);
 
 ?>
-	<form id="form1" name="form1" method="post" action="<?php echo get_permalink($org_options['event_page_id']);?>">
+	<form id="form1" name="form1" method="post" action="<?php echo espresso_page('event_page_id'); ?>">
 		<div class="<?php espresso_template_css_class('event_display_boxes','event-conf-block event-display-boxes ui-widget'); ?>" >
 		<h3 class="<?php espresso_template_css_class('event_title','event_title ui-widget-header ui-corner-top'); ?>">
 			<?php _e('Verify Registration','event_espresso'); ?>
@@ -80,7 +80,7 @@ $attendee_num = apply_filters('action_hook_espresso_confirmation_page_primary_at
 					<td  valign="top">
 						<span class="<?php espresso_template_css_class('value','event_espresso_value'); ?>"><?php echo stripslashes_deep($attendee_name)?> (<?php echo $attendee_email?>) 
 <?php 
-						echo '<a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$attendee_id.'&amp;regevent_action=edit_attendee&amp;primary='.$attendee_id.'&amp;event_id='.$event_id.'&amp;attendee_num='.$attendee_num.'">'. __('Edit', 'event_espresso').'</a>';
+						echo '<a href="' . add_query_arg(array('registration_id' => $registration_id, 'id' => $attendee_id, 'regevent_action' => 'edit_attendee', 'primary' => $attendee_id, 'event_id' => $event_id, 'attendee_num' => $attendee_num), espresso_page('event_page_id')) . '">'. __('Edit', 'event_espresso').'</a>';
 						
 						//Create additional attendees
 						$sql = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE;
@@ -99,9 +99,9 @@ $attendee_num = apply_filters('action_hook_espresso_confirmation_page_primary_at
 									echo "(" . $x_attendee['email']  . ") ";
 								}
 								//Create edit link
-								echo '<a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$x_attendee['id'].'&amp;regevent_action=register&amp;form_action=edit_attendee&amp;primary='.$attendee_id.'&amp;p_id='.$attendee_id.'&amp;attendee_num='.$attendee_num.'&amp;event_id='.$event_id.'">'. __('Edit', 'event_espresso').'</a>';
+								echo '<a href="' . add_query_arg(array('registration_id' => $registration_id, 'id' => $x_attendee['id'], 'regevent_action' => 'register', 'form_action' => 'edit_attendee', 'primary' => $attendee_id, 'p_id' => $attendee_id, 'event_id' => $event_id, 'attendee_num' => $attendee_num), espresso_page('event_page_id')) . '">'. __('Edit', 'event_espresso').'</a>';
 								//Create delete link
-								echo ' | <a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$x_attendee['id'].'&amp;regevent_action=register&amp;form_action=edit_attendee&amp;primary='.$attendee_id.'&amp;delete_attendee=true&amp;p_id='.$attendee_id.'&amp;event_id='.$event_id.'">'. __('Delete', 'event_espresso').'</a>';
+								echo ' | <a href="' . add_query_arg(array('registration_id' => $registration_id, 'id' => $x_attendee['id'], 'regevent_action' => 'register', 'form_action' => 'edit_attendee', 'primary' => $attendee_id, 'delete_attendee' => 'true', 'p_id' => $attendee_id, 'event_id' => $event_id), espresso_page('event_page_id')) . '">'. __('Delete', 'event_espresso').'</a>';
 							}
 						}
 ?>

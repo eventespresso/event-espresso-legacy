@@ -11,13 +11,12 @@ function espresso_display_check($payment_data) {
 	$check_payment_settings = get_option('event_espresso_check_payment_settings');
 	
 	$args = array(
-		'page_id' =>$org_options['return_url'],
 		'r_id' =>$registration_id,
 		'id' =>$attendee_id,
 		'payment_type' => 'cash_check',
 		'type' => 'check',
 	);
-	$finalize_link = add_query_arg( $args, home_url() );	
+	$finalize_link = add_query_arg( $args, espresso_page('return_url') );	
 	
 ?>
 <div id="check-payment-option-dv" class="payment-option-dv">

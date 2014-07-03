@@ -15,13 +15,11 @@ function espresso_display_atos($payment_data) {
 	$parm .= number_format($event_cost, 0, '', '');
 	$parm .= " currency_code=".$settings['currency_code'];
 	$parm .= " pathfile=".dirname(__FILE__).DS.$settings['provider'].DS.'pathfile';
-		
-	$normal_return_url = espresso_build_gateway_url('return_url', $payment_data, 'atos');
+	$normal_return_url = espresso_build_gateway_url('return_url', $payment_data, 'atos', array('event_id' => $event_id));
 	$parm .= " normal_return_url=".$normal_return_url;
-	$cancel_return_url = get_permalink($org_options['cancel_return']);
+	$cancel_return_url = espresso_build_gateway_url('cancel_return', $payment_data, 'atos');
 	$parm .= " cancel_return_url=".$cancel_return_url;
-	
-	$automatic_response_url = espresso_build_gateway_url('notify_url', $payment_data, 'atos');
+	$automatic_response_url = espresso_build_gateway_url('notify_url', $payment_data, 'atos', array('event_id' => $event_id));
 	$parm .= " automatic_response_url=".$automatic_response_url;
 	$parm .= " language=".$settings['language'];
 	$payment_means = '';

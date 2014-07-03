@@ -36,8 +36,13 @@ function espresso_display_2checkout($payment_data) {
 	$my2checkout->addField('id_type', '1');
 	$my2checkout->addField('sid', $twocheckout_id);
 	$my2checkout->addField('cart_order_id', rand(1, 100));
-	
-	$my2checkout->addField('x_Receipt_Link_URL', espresso_build_gateway_url('return_url', $payment_data, '2checkout'));
+	$return_url = espresso_build_gateway_url('return_url', $payment_data, '2checkout', array('event_id' => $event_id));
+	if ($twocheckout_settings['force_ssl_return']) {
+		$return_url = str_replace('http:', 'https:', $return_url);
+	} else {
+		$return_url = $return_url;
+	}
+	$my2checkout->addField('x_Receipt_Link_URL', $return_url);
 	$my2checkout->addField('total', number_format($event_cost, 2, '.', ''));
 	$my2checkout->addField('tco_currency', $twocheckout_cur);
 
