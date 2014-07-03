@@ -131,10 +131,10 @@ function espresso_shortcode_pages( $page_id ) {
 			$reg_page_ids[$translated_notify_page_id] = 'notify_url';
 		}
 	}
-	/*$temp = icl_object_id($org_options['event_page_id'], 'page', false, $_GET['lang']);
-	var_dump($temp);
-	var_dump($page_id);
-	die("here");*/
+	//$temp = icl_object_id($org_options['event_page_id'], 'page', false, $_GET['lang']);
+	//var_dump($temp);
+	//var_dump($reg_page_ids);
+	//die("here");
 	if ( isset( $reg_page_ids[ $page_id ] )) {
 		switch( $reg_page_ids[ $page_id ] ) {
 			case 'event_page_id' : 
@@ -193,14 +193,52 @@ function espresso_page_check () {
 
 		}
 	}
+	
+	global $this_is_a_reg_page;
+	
+	if ( is_admin() ) {
+		$this_is_a_reg_page = TRUE;
+	}
+
+	//Seating chart
+	if ($this_is_a_reg_page == TRUE && file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "/seatingchart/seatingchart.php")) {
+		require_once( EVENT_ESPRESSO_UPLOAD_DIR . "/seatingchart/seatingchart.php");
+	}
+	
+	//Load these files if we are in an actuial registration page
+	if ($this_is_a_reg_page == TRUE) {
+
+		//Process email confirmations
+		require_once("includes/functions/email.php");
+		//Payment processing - Used for onsite payment processing. Used with the [ESPRESSO_TXN_PAGE] shortcode
+		event_espresso_require_gateway('process_payments.php');
+		event_espresso_require_gateway('PaymentGateway.php');
+
+		// AJAX functions
+		add_action('wp_ajax_event_espresso_add_item', 'event_espresso_add_item_to_session');
+		add_action('wp_ajax_nopriv_event_espresso_add_item', 'event_espresso_add_item_to_session');
+
+		add_action('wp_ajax_event_espresso_delete_item', 'event_espresso_delete_item_from_session');
+		add_action('wp_ajax_nopriv_event_espresso_delete_item', 'event_espresso_delete_item_from_session');
+
+		add_action('wp_ajax_event_espresso_update_item', 'event_espresso_update_item_in_session');
+		add_action('wp_ajax_nopriv_event_espresso_update_item', 'event_espresso_update_item_in_session');
+
+		add_action('wp_ajax_event_espresso_calculate_total', 'event_espresso_calculate_total');
+		add_action('wp_ajax_nopriv_event_espresso_calculate_total', 'event_espresso_calculate_total');
+
+		add_action('wp_ajax_event_espresso_load_regis_form', 'event_espresso_load_regis_form');
+		add_action('wp_ajax_nopriv_event_espresso_load_regis_form', 'event_espresso_load_regis_form');
+
+		add_action('wp_ajax_event_espresso_confirm_and_pay', 'event_espresso_confirm_and_pay');
+		add_action('wp_ajax_nopriv_event_espresso_confirm_and_pay', 'event_espresso_confirm_and_pay');
+
+		add_action('wp_ajax_events_pagination','event_espresso_pagination');
+		add_action('wp_ajax_nopriv_events_pagination','event_espresso_pagination');
+
+	}
 }
 add_action('plugins_loaded', 'espresso_page_check');
-
-if ( is_admin() ) {
-	$this_is_a_reg_page = TRUE;
-}
-	
-
 
 //This will (should) make sure everything is loaded via SSL
 //So that the "..not everything is secure.." message doesn't appear
@@ -405,10 +443,7 @@ if ( file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "ticketing/template.php") || functi
 	//echo '<h1>IN !!!</h1>'; die();
 }
 
-//Seating chart
-if ($this_is_a_reg_page == TRUE && file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "/seatingchart/seatingchart.php")) {
-	require_once( EVENT_ESPRESSO_UPLOAD_DIR . "/seatingchart/seatingchart.php");
-}
+
 
 //Global files
 //Premium funtions. If this is a paid version, then we need to include these files.
@@ -513,38 +548,7 @@ function event_espresso_get_discount_codes_for_jquery_datatables(){
 
 add_action('wp_ajax_event_espresso_get_discount_codes_for_jquery_datatables', 'event_espresso_get_discount_codes_for_jquery_datatables');
 
-//Load these files if we are in an actuial registration page
-if ($this_is_a_reg_page == TRUE) {
-	
-	//Process email confirmations
-	require_once("includes/functions/email.php");
-	//Payment processing - Used for onsite payment processing. Used with the [ESPRESSO_TXN_PAGE] shortcode
-	event_espresso_require_gateway('process_payments.php');
-	event_espresso_require_gateway('PaymentGateway.php');
 
-	// AJAX functions
-	add_action('wp_ajax_event_espresso_add_item', 'event_espresso_add_item_to_session');
-	add_action('wp_ajax_nopriv_event_espresso_add_item', 'event_espresso_add_item_to_session');
-
-	add_action('wp_ajax_event_espresso_delete_item', 'event_espresso_delete_item_from_session');
-	add_action('wp_ajax_nopriv_event_espresso_delete_item', 'event_espresso_delete_item_from_session');
-
-	add_action('wp_ajax_event_espresso_update_item', 'event_espresso_update_item_in_session');
-	add_action('wp_ajax_nopriv_event_espresso_update_item', 'event_espresso_update_item_in_session');
-
-	add_action('wp_ajax_event_espresso_calculate_total', 'event_espresso_calculate_total');
-	add_action('wp_ajax_nopriv_event_espresso_calculate_total', 'event_espresso_calculate_total');
-
-	add_action('wp_ajax_event_espresso_load_regis_form', 'event_espresso_load_regis_form');
-	add_action('wp_ajax_nopriv_event_espresso_load_regis_form', 'event_espresso_load_regis_form');
-
-	add_action('wp_ajax_event_espresso_confirm_and_pay', 'event_espresso_confirm_and_pay');
-	add_action('wp_ajax_nopriv_event_espresso_confirm_and_pay', 'event_espresso_confirm_and_pay');
-    
-    add_action('wp_ajax_events_pagination','event_espresso_pagination');
-    add_action('wp_ajax_nopriv_events_pagination','event_espresso_pagination');
-    
-}
 
 
 if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/coupon-management/index.php')) {
