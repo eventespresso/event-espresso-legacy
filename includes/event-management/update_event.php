@@ -732,4 +732,5 @@ function update_event($recurrence_arr = array()) {
      */
 	 
 	do_action('action_hook_espresso_update_event_success',$_REQUEST);
+    do_action('action_hook_espresso_update_event_success_id', $event_id);
 }
