@@ -815,7 +815,9 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 		</div>
 		<p><?php echo $org_options['email_before_payment'] == 'Y' ? __('A confirmation email has been sent with additional details of your registration.', 'event_espresso') : ''; ?></p>
 		<table>
+			<? $event_names = array(); ?>
 			<?php foreach ($attendees as $attendee) { ?>
+			<?php $event_names[] = $attendee->event_name; ?>
 			<tr>
 				<td width="70%">
 					<?php echo '<strong>'.stripslashes_deep($attendee->event_name ) . '</strong>'?>&nbsp;-&nbsp;<?php echo stripslashes_deep( $attendee->price_option ) ?> <?php echo $attendee->final_price < $attendee->orig_price ? '<br />&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:.8em;">' . $org_options['currency_symbol'] . number_format($attendee->orig_price - $attendee->final_price, 2) . __(' discount per registration','event_espresso') . '</span>' : ''; ?><br/>
@@ -858,6 +860,11 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 	</div>
 </div>
 <br/><br/>
+<?php
+	$event_names_combined = array_unique($event_names);
+	$event_names_combined = implode($event_names_combined, '-');
+	$event_name = apply_filters('filter_hook_espresso_combine_mer_event_names', $event_names_combined, $event_names); 	
+?>
 <?php
 					//Show payment options
 					if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "gateway_display.php")) {
