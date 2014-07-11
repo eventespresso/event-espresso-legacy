@@ -25,10 +25,17 @@ function espresso_process_quickpay($payment_data) {
 	$transaction	= isset( $_POST['transaction'] ) ? sanitize_text_field( $_POST['transaction'] ) : '';
 	$cardtype		= isset( $_POST['cardtype'] ) ? sanitize_text_field( $_POST['cardtype'] ) : '';
 	$cardnumber		= isset( $_POST['cardnumber'] ) ? sanitize_text_field( $_POST['cardnumber'] ) : '';
+	$cardhash		= isset( $_POST['cardhash'] ) ? sanitize_text_field( $_POST['cardhash'] ) : '';
+	$cardexpire		= isset( $_POST['cardexpire'] ) ? sanitize_text_field( $_POST['cardexpire'] ) : '';
+	$acquirer		= isset( $_POST['acquirer'] ) ? sanitize_text_field( $_POST['acquirer'] ) : '';
+	$splitpayment	= isset( $_POST['splitpayment'] ) ? sanitize_text_field( $_POST['splitpayment'] ) : '';
+	$fraudprobability	= isset( $_POST['fraudprobability'] ) ? sanitize_text_field( $_POST['fraudprobability'] ) : '';
+	$fraudremarks	= isset( $_POST['fraudremarks'] ) ? sanitize_text_field( $_POST['fraudremarks'] ) : '';
+	$fraudreport	= isset( $_POST['fraudreport'] ) ? sanitize_text_field( $_POST['fraudreport'] ) : '';
 	$fee		= isset( $_POST['fee'] ) ? sanitize_text_field( $_POST['fee'] ) : '';
 	
 	// concatenate above values,  add our SECRET QUIICKPAY SALT value, then  md5 the whole thing
-	$response_md5_check = md5( $msgtype . $ordernumber . $amount . $currency . $time . $state . $qpstat . $qpstatmsg . $chstat . $chstatmsg . $merchant . $merchantemail . $transaction . $cardtype . $cardnumber . $fee . $quickpay_settings['quickpay_md5secret'] );
+	$response_md5_check = md5( $msgtype . $ordernumber . $amount . $currency . $time . $state . $qpstat . $qpstatmsg . $chstat . $chstatmsg . $merchant . $merchantemail . $transaction . $cardtype . $cardnumber . $cardhash . $cardexpire . $acquirer . $splitpayment . $fraudprobability . $fraudremarks . $fraudreport . $fee . $quickpay_settings['quickpay_md5secret'] );
 	
 	// if our md5 check value matches QuickPay's md5 check value, then nobody haxor'd  the data
 	// oh... and the TXN also has to have been approved
