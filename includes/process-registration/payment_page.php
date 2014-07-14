@@ -7,7 +7,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');	
 	
 	if ( ! $attendee_id ) {
-		wp_die( __('An error occured. No Attendee was received.', 'event_espresso') );
+		wp_die( __('An error occurred. No Attendee was received.', 'event_espresso') );
 	}
 	
 	global $wpdb, $org_options;
@@ -216,7 +216,7 @@ function espresso_confirm_registration() {
 	if ( ! empty($_POST['confirm_registration'])) {
 		$registration_id = sanitize_text_field( $_POST['registration_id'] );
 	} else {
-		wp_die(__('An error has occured. The registration ID could not be found.', 'event_espresso'));
+		wp_die(__('An error has occurred. The registration ID could not be found.', 'event_espresso'));
 	}
 	
 	echo '<div id="espresso-payment_page-dv" >';
@@ -299,7 +299,7 @@ function espresso_confirm_registration() {
 
 
 	if ( ! $attendee = $wpdb->get_row( $SQL )) {
-		wp_die(__('An error occured. The primary attendee could not be found.', 'event_espresso'));
+		wp_die(__('An error occurred. The primary attendee could not be found.', 'event_espresso'));
 	}
 
 	$attendee_id = $attendee->id;
