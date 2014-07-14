@@ -442,7 +442,7 @@ function espresso_migrate_atos_gateway() {
 			// unset the atos option if it has not been moved to /wp-content/uploads/espresso/gateways already
 			$uploaded_atos_file = EVENT_ESPRESSO_GATEWAY_DIR . 'atos/settings.php';
 			if (file_exists($uploaded_atos_file)) {
-				update_option( 'espresso_atos_migration', true);					
+				update_option( 'espresso_atos_migration', true);
 			} else {
 				// unset the active gateway setting
 				unset($active_gateways['atos']);
@@ -450,14 +450,16 @@ function espresso_migrate_atos_gateway() {
 				add_option( 'espresso_atos_migration', false);
 			}
 		}
+	} else { // no active gateways have been set yet
+		update_option( 'espresso_atos_migration', true );
 	}
 }
 
 function espresso_migrate_atos_admin_notice() {
 	global $current_user ;
 	$user_id = $current_user->ID;
-	// Check that the user hasn't already clicked to ignore the message
-	if ( ! get_user_meta($user_id, 'espresso_atos_ignore_notice') ) {
+	// Check that the user hasn't already clicked to ignore the message and that they're an admin
+	if ( ! get_user_meta($user_id, 'espresso_atos_ignore_notice') && current_user_can( 'activate_plugins' ) ) {
 		$hide_url = add_query_arg( 'espresso_atos_nag_ignore', '0' );
 		echo '<div class="updated"><p>';
 		printf(__('The <strong>Atos</strong> gateway has been removed from Event Espresso core in 3.1.37. Please download and upload the Atos gateway to /wp-content/uploads/espresso/templates. Link to documentation goes here. | <a href="%1$s">Hide this message</a>', 'event_espresso'), $hide_url );

@@ -1085,7 +1085,7 @@ if (is_admin()) {
 		add_action('admin_notices', 'event_espresso_activation_notice', 5);
 	}
 	//Check for the Atos gateway migration
-	if ( current_user_can( 'activate_plugins' ) && get_option( 'espresso_atos_migration' ) != true ) {
+	if ( get_option( 'espresso_atos_migration' ) != true ) {
 		add_action('admin_notices', 'espresso_migrate_atos_admin_notice');
 	}
 }
