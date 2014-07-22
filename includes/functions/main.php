@@ -168,7 +168,7 @@ if (!function_exists('event_espresso_additional_attendees')) {
 			 * Added for seating chart addon
 			 */
 			if (defined('ESPRESSO_SEATING_CHART')) {
-				if (seating_chart::check_event_has_seating_chart($_REQUEST['event_id']) !== false) {
+				if (seating_chart::check_event_has_seating_chart($event_id) !== false) {
 					$attendee_form .= '<p>';
 					$attendee_form .= '<label>' . __('Select a Seat:', 'event_espresso') . '</label>';
 					$attendee_form .= '<input type="text" name="x_seat_id[XXXXXX]" value="" class="ee_s_select_seat" event_id="' . $_REQUEST['event_id'] . '" readonly="readonly" />';
