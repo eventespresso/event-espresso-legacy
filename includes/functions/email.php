@@ -1,6 +1,6 @@
 <?php
 
-function replace_shortcodes($message, $data) {
+function espresso_replace_shortcodes($message, $data) {
 	global $wpdb, $org_options;
 	$payment_data = espresso_get_total_cost(array('attendee_session'=>$data->attendee->attendee_session));
 	$event_cost = $payment_data['total_cost'];
@@ -385,10 +385,10 @@ function espresso_prepare_email($data) {
     }
 
 	//Get the email subject
-	$email_subject = replace_shortcodes($email_subject, $data);
+	$email_subject = espresso_replace_shortcodes($email_subject, $data);
 
 	//Replace email shortcodes
-	$_replaced = replace_shortcodes($conf_mail, $data);
+	$_replaced = espresso_replace_shortcodes($conf_mail, $data);
 
 	//Build the HTML
 	$message_top = "<html><body>";
