@@ -69,7 +69,7 @@ function update_event($recurrence_arr = array()) {
                     $re_params['event_end_date'] = sanitize_text_field($_POST['end_date']);
                     $re_params['registration_start'] = sanitize_text_field($_POST['registration_start']);
                     $re_params['registration_end'] = sanitize_text_field($_POST['registration_end']);
-                    $recurrence_dates = find_recurrence_dates($re_params);
+					$recurrence_dates = ($_POST['recurrence_type'] == 'm') ? find_recurrence_manual_dates($re_params) : find_recurrence_dates($re_params);
                     $UPDATE_SQL = "SELECT id,start_date,event_identifier FROM " . EVENTS_DETAIL_TABLE . " WHERE start_date >='" . sanitize_text_field($_POST['start_date']) . "' AND recurrence_id = %d and NOT event_status = 'D' ";
                 }
 				
