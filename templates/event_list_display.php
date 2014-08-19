@@ -72,10 +72,17 @@ $this_event_id = $event_id;
 	}
 	?>
 	<div class="<?php espresso_template_css_class('event_meta','event-meta clearfix'); ?>">
-		<?php $event->event_cost = empty($event->event_cost) ? '' : $event->event_cost;
+		<?php 
+			if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && is_user_logged_in() ) {
+				$event->member_price = empty($event->member_price) ? '' : $event->member_price;
+				$event_cost = $event->member_price;
+			} else {
+				$event->event_cost = empty($event->event_cost) ? '' : $event->event_cost;
+				$event_cost = $event->event_cost;
+			}
 			//Featured image
 			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');
- 			echo do_action('action_hook_espresso_price_display', $event_id, $event->event_cost, isset($org_options['price_display_in_event_list']) ? $org_options['price_display_in_event_list'] : 'default' );
+ 			echo do_action('action_hook_espresso_price_display', $event_id, $event_cost, isset($org_options['price_display_in_event_list']) ? $org_options['price_display_in_event_list'] : 'default' );
 		?>
 		<p id="event_date-<?php echo $event_id ?>"><span class="<?php espresso_template_css_class('section_title','section-title'); ?>"><?php _e('Date:', 'event_espresso'); ?></span>  <?php echo event_date_display($start_date, get_option('date_format')) ?> 
 			<?php //Add to calendar button
