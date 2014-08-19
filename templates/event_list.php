@@ -113,6 +113,10 @@ if (!function_exists('event_espresso_get_event_details')) {
 		//Create the query
 		$DISTINCT = $ee_search == true ? "DISTINCT" : '';
 		$sql = "SELECT $DISTINCT e.*, ese.start_time, ese.end_time, p.event_cost ";
+
+		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && is_user_logged_in() ) {
+			$sql .= ", member_price, member_price_type ";
+		}
 		
 		//Category field names
 		$sql .= ($category_identifier != NULL && !empty($category_identifier))? ", c.category_name, c.category_desc, c.display_desc, c.category_identifier": '';
