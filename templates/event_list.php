@@ -114,8 +114,8 @@ if (!function_exists('event_espresso_get_event_details')) {
 		$DISTINCT = $ee_search == true ? "DISTINCT" : '';
 		$sql = "SELECT $DISTINCT e.*, ese.start_time, ese.end_time, p.event_cost ";
 
-		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && is_user_logged_in() ) {
-			$sql .= ", member_price, member_price_type ";
+		if ( function_exists('espresso_above_member_threshold') && espresso_above_member_threshold() == true ) {
+			$sql .= ", p.member_price, p.member_price_type ";
 		}
 		
 		//Category field names

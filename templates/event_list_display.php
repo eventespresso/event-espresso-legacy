@@ -73,7 +73,7 @@ $this_event_id = $event_id;
 	?>
 	<div class="<?php espresso_template_css_class('event_meta','event-meta clearfix'); ?>">
 		<?php 
-			if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && is_user_logged_in() ) {
+			if ( function_exists('espresso_above_member_threshold') && espresso_above_member_threshold() == true ) {
 				$event->member_price = empty($event->member_price) ? '' : $event->member_price;
 				$event_cost = $event->member_price;
 			} else {
