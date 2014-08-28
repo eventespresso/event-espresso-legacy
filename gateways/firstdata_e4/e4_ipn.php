@@ -75,7 +75,6 @@ function espresso_process_firstdata_e4($payment_data) {
 
 
 //Debugging option
-		$email_transaction_dump = true;
 		if ($email_transaction_dump == true) {
 // For this, we'll just email ourselves ALL the data as plain text output.
 			$subject = 'First Data e4 Notification - Gateway Variable Dump';
