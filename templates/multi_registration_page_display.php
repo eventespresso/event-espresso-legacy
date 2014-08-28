@@ -146,7 +146,7 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 								<div class="<?php espresso_template_css_class('multi_regis_wrapper_attendee_additional','multi_regis_wrapper_attendee-additional'); ?>">
 									<div class="<?php espresso_template_css_class('event_display_boxes','event-display-boxes'); ?>">
 										<?php
-										echo '<h3 class="'.espresso_template_css_class('section_heading','section-heading').'">' . __('Attendee ', 'event_espresso') . $i . '</h3>';
+										echo '<h3 class="'.espresso_template_css_class('section_heading','section-heading', false).'">' . __('Attendee ', 'event_espresso') . $i . '</h3>';
 										echo event_espresso_copy_dd($event_id, $meta);
 										echo event_espresso_add_question_groups($question_groups, $events_in_session[$event_id], $event_id, 1, $meta);
 										?>

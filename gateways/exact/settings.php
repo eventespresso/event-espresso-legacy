@@ -5,8 +5,8 @@ function event_espresso_exact_payment_settings() {
 	if (!$espresso_premium)
 		return;
 	if (isset($_POST['update_exact'])) {
-		$exact_settings['exact_login_id'] = $_POST['exact_login_id'];
-		$exact_settings['exact_transaction_key'] = $_POST['exact_transaction_key'];
+		$exact_settings['exact_login_id'] = stripslashes_deep($_POST['exact_login_id']);
+		$exact_settings['exact_transaction_key'] = stripslashes_deep($_POST['exact_transaction_key']);
 		$exact_settings['image_url'] = $_POST['image_url'];
 		$exact_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
 		$exact_settings['test_transactions'] = empty($_POST['test_transactions']) ? false : true;
