@@ -58,6 +58,7 @@ function add_event_to_db($recurrence_arr = array()) {
 				'recurrence_regis_date_increment' => $_POST['recurrence_regis_date_increment'],
 				'recurrence_manual_dates'		=> $_POST['recurrence_manual_dates'],
 				'recurrence_manual_end_dates'	=> $_POST['recurrence_manual_end_dates'],
+				'recurrence_expire_event_start' => isset($_POST['recurrence_expire_event_start']) ? $_POST['recurrence_expire_event_start'] : 'N',
 				'recurrence_id'					=> $recurrence_id,
 				'adding_to_db'					=> 'Y'
 			);
