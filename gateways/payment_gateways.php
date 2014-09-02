@@ -461,9 +461,8 @@ function espresso_migrate_atos_admin_notice() {
 	// Check that the user hasn't already clicked to ignore the message and that they're an admin
 	if ( ! get_user_meta($user_id, 'espresso_atos_ignore_notice') && current_user_can( 'activate_plugins' ) ) {
 		$hide_url = add_query_arg( 'espresso_atos_nag_ignore', '0' );
-		echo '<div class="updated"><p>';
-		printf(__('The <strong>Atos</strong> gateway has been removed from Event Espresso core in 3.1.37. Please download and upload the Atos gateway to /wp-content/uploads/espresso/templates. Link to documentation goes here. | <a href="%1$s">Hide this message</a>', 'event_espresso'), $hide_url );
-		echo "</p></div>";
+		$text = sprintf( __( 'The <strong>Atos</strong> gateway has been removed from Event Espresso core in 3.1.37. Please download and upload the Atos gateway to /wp-content/uploads/espresso/gateways. Please see <a href="%1$s">our documentation</a> for more information. | <a href="%2$s">Hide this message</a>', 'event_espresso' ), 'http://eventespresso.com/wiki/payment-settings-ee3/#ATOS', $hide_url );
+		echo '<div class="updated"><p>' . $text . '</p></div>';
 	}
 }
 
