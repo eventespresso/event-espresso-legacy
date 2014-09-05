@@ -99,7 +99,10 @@ function update_event($recurrence_arr = array()) {
                         //Update all events in the series based on recurrence id
                         
                         //'Soft delete' any events that are not within the current series when using the 'All events in this series' option.
-                        $DEL_SQL = 'UPDATE ' . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date NOT IN (" . $delete_in . ") AND recurrence_id = " . $_POST['recurrence_id'];
+                        if ($delete_in != '') {
+                        	$DEL_SQL = "UPDATE " . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date NOT IN (" . $delete_in .") AND recurrence_id = %d";
+                        	$wpdb->query($wpdb->prepare($DEL_SQL, $_POST['recurrence_id']));
+                        }
                         /*
                             //Permanently delete events not within the current formula
                             $DEL_SQL = 'DELETE EDT, EAT FROM ' . EVENTS_DETAIL_TABLE . " EDT
@@ -113,8 +116,10 @@ function update_event($recurrence_arr = array()) {
                     } else {
 
                         //'Soft delete' any events that are not within the current series when using the 'This and all upcoming events'
-                        $DEL_SQL = 'UPDATE ' . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date >='" . esc_sql(sanitize_text_field($_POST['start_date'])) . "' AND start_date NOT IN (" . $delete_in . ") AND recurrence_id = " . $_POST['recurrence_id'];
-
+                        if ($delete_in != '') {
+                        	$DEL_SQL = "UPDATE " . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date >= %s AND start_date NOT IN (" . $delete_in . ") AND recurrence_id = %d";
+                        	$wpdb->query($wpdb->prepare($DEL_SQL, array( esc_sql(sanitize_text_field($_POST['start_date'])), $_POST['recurrence_id'])));
+                        }
                         /*
                             //Permanently delete events not within the current formula
                             $DEL_SQL = 'DELETE EDT, EAT FROM ' . EVENTS_DETAIL_TABLE . " EDT
@@ -127,9 +132,6 @@ function update_event($recurrence_arr = array()) {
                         */
                         $UPDATE_SQL = "SELECT id,start_date,event_identifier FROM " . EVENTS_DETAIL_TABLE . " WHERE start_date >='" . sanitize_text_field($_POST['start_date']) . "' AND recurrence_id = %d AND NOT event_status = 'D'  ORDER BY start_date";
                     }
-
-                    if ($delete_in != '')
-                        $wpdb->query($wpdb->prepare($DEL_SQL, $delete_in));
 
                     /*
                      * Add the new records based on the new formula
