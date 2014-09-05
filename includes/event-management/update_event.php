@@ -715,7 +715,7 @@ function update_event($recurrence_arr = array()) {
         //$recurrence_dates = array_shift($recurrence_dates); //Remove the first item from the array since it will be added after this recursion
         foreach ($recurrence_dates as $r_d) {
 
-            if ($r_d['event_id'] != '' && count($r_d) > 2) {
+            if (!empty($r_d['event_id']) && count($r_d) > 2) {
                 update_event(
 					array(
 						'event_id'					=> $r_d['event_id'],
