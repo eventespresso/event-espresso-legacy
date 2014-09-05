@@ -725,7 +725,7 @@ function update_event($recurrence_arr = array()) {
 						'recurrence_event_end_date' => $r_d['event_end_date'],
 						'registration_start'		=> $r_d['registration_start'],
 						'registration_end'			=> $r_d['registration_end'],
-						'visible_on'				=> $r_d['visible_on'],
+						'visible_on'				=> (isset($r_d['visible_on']) ? $r_d['visible_on'] : ''),
 						'bypass_nonce'				=> TRUE,
                 ));
             }
