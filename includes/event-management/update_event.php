@@ -48,8 +48,6 @@ function update_event($recurrence_arr = array()) {
                     'recurrence_manual_end_dates'	=> !empty($_POST['recurrence_manual_end_dates']) ? $_POST['recurrence_manual_end_dates'] : '',
                     'recurrence_id'					=> !empty($_POST['recurrence_id']) ? $_POST['recurrence_id'] : '',
 					'recurrence_regis_date_increment' => !empty($_POST['recurrence_regis_date_increment']) ? $_POST['recurrence_regis_date_increment'] : '',
-					'recurrence_expire_event_start' => !empty($_POST['recurrence_expire_event_start']) ? $_POST['recurrence_expire_event_start'] : 'N',
-					'recurrence_apply_changes_to'	=> !empty($_POST['recurrence_apply_changes_to']) ? $_POST['recurrence_apply_changes_to'] : '1',
                 );
 
                 //$re_params['adding_to_db'] = 'Y';
