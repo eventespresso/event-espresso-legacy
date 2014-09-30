@@ -167,7 +167,7 @@ function organization_config_mnu() {
 															<div id="default-logo-image">
 															<?php $org_options['default_logo_url'] = isset( $org_options['default_logo_url'] ) ? $org_options['default_logo_url'] : ''; ?>
 															<input id="upload_image" type="hidden" size="36" name="upload_image" value="<?php echo $org_options['default_logo_url'] ?>" />
-															<input id="upload_image_button" type="button" value="Upload Image" />
+															<input id="upload_image_button" type="button" value="<?php _e( 'Upload Image', 'event_espresso' ); ?>" />
 															<?php if ( $org_options['default_logo_url'] != '') { ?>
 																<p class="default-logo-thumb"><img src="<?php echo $org_options['default_logo_url'] ?>" alt="" /><br />
 																<a id="remove-image" href="#" title="Remove this image" onclick="return false;"><?php _e('Remove Image', 'event_espresso'); ?></a></p>
