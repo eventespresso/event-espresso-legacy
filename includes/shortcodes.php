@@ -415,7 +415,7 @@ function ee_create_autocomplete_search(){
 	<div id="espresso-search-form-dv" class="ui-widget">
 		<form name="form" method="post" action="<?php echo $url ?>">
 			<input id="ee_autocomplete" name="ee_name" class="ui-autocomplete-input ui-corner-all" />
-			<input id="ee_search_submit" name="ee_search_submit" class="ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" type="submit" value="Search" />
+			<input id="ee_search_submit" name="ee_search_submit" class="ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" type="submit" value="<?php _e( 'Search', 'event_espresso' ); ?>" />
 			<input id="event_id" name="event_id" type="hidden">
 		</form>
 	</div>
