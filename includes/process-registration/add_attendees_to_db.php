@@ -815,7 +815,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 		</div>
 		<p><?php echo $org_options['email_before_payment'] == 'Y' ? __('A confirmation email has been sent with additional details of your registration.', 'event_espresso') : ''; ?></p>
 		<table>
-			<? $event_names = array(); ?>
+			<?php $event_names = array(); ?>
 			<?php foreach ($attendees as $attendee) { ?>
 			<?php $event_names[] = $attendee->event_name; ?>
 			<tr>
