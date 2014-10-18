@@ -13,4 +13,20 @@ jQuery(document).ready(function($) {
 
 		$('#espresso-data-collect-optin-container').slideUp();
 	});
+
+
+	$('#ee4-admin-notice-container').on('click', '.ee4-admin-notice-button', function() {
+		var selection = $(this).val();
+		var nonce = $('#ee4-admin-notice-nonce').text();
+		
+		$.post(ajaxurl, {
+			action: 'espresso_ee4_dismissed',
+			nonce: nonce,
+			selection: selection
+		}, function(response) {
+			return;
+		});
+
+		$('#espresso-ee4-admin-notice-container').slideUp();
+	});
 });

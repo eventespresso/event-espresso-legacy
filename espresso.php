@@ -561,6 +561,9 @@ if (is_admin()) {
 	do_action('action_hook_espresso_epm_update_api');
 	do_action('action_hook_espresso_infusionsoft_update_api');
 	do_action('action_hook_espresso_attendee_mover_update_api');
+
+	//EE4 Available Notice
+	do_action('action_hook_espresso_ee4_admin_notice');
 	
 	//Custom templates addon
 	do_action('action_hook_espresso_custom_templates_update_api');

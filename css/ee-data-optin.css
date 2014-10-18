@@ -1,4 +1,4 @@
-#espresso-data-collect-optin-container {
+#espresso-data-collect-optin-container, #espresso-ee4-admin-notice-container {
     padding: 10px;
 }
 
@@ -7,7 +7,7 @@
     margin-left: 20px;
 }
 
-#espresso-data-collect-optin-container button.data-optin-button {
+#espresso-data-collect-optin-container button.data-optin-button, #espresso-ee4-admin-notice-container button.ee4-admin-notice-button {
     float: right;
     margin-right: 8px;
 }

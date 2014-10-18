@@ -1691,6 +1691,59 @@ if (!function_exists('espresso_check_ssl')) {
 
 }
 
+/* EE4 Notice */
+add_action('action_hook_espresso_ee4_admin_notice', 'ee_ee4_admin_notice');
+function ee_ee4_admin_notice() {
+
+	$ee4_notice_dismiss = get_option('ee4_notice_has_dismissed');
+	$ee4_notice_has_dismissed = isset($_POST['espresso_ee4_dismissed']) ? TRUE : get_option('ee4_notice_has_dismissed');
+
+	if ( empty($ee4_notice_has_dismissed) ) {
+		add_action('admin_notices', 'espresso_ee4_admin_notice_notice', 10 );
+		add_action('admin_enqueue_scripts', 'espresso_data_collection_enqueue_scripts', 10 );
+		add_action('wp_ajax_espresso_ee4_admin_notice', 'espresso_ee4_admin_notice_ajax_handler', 10 );
+	}
+
+}
+/**
+ * The purpose of this function is to display information about Event Espresso 4.
+ * @return string html.
+ */
+ function espresso_ee4_admin_notice_text() {
+	 echo '<h4>'.__('Event Espresso 4 Now Available!', 'event_espresso').'</h4>';
+	 echo sprintf( __('Just a friendly reminder to check out %sEvent Espresso 4%s (EE4). EE4 is a completely rewritten version of Event Espresso. While we are currently migrating all of the features from EE3 to EE4, it is our latest and greatest system. View EE4 on %sWordPress.org%s or %sEventEspresso.com%s', 'event_espresso'), '<a href="https://wordpress.org/plugins/event-espresso-decaf/" target="_blank">','</a>', '<a href="https://wordpress.org/plugins/event-espresso-decaf/" target="_blank">','</a>', '<a href="http://eventespresso.com/pricing/?ee_ver=ee4&utm_source=ee3_wp_admin_ee4_notice&utm_medium=link&utm_content=Event+Espresso+4+Now+Available+ee_version_'.EVENT_ESPRESSO_VERSION.'&utm_campaign=ee3_ee4_now_available_admin_notice" target="_blank">','</a>' );
+}
+
+function espresso_ee4_admin_notice_notice() {
+	$ee4_notice_has_dismissed = get_option('ee4_notice_has_dismissed');
+	?>
+	<div class="updated ee4-admin-notice" id="espresso-ee4-admin-notice-container">
+		<p><?php echo espresso_ee4_admin_notice_text(); ?></p>
+		<div id="ee4-admin-notice-container">
+			<span style="display: none" id="ee4-admin-notice-nonce"><?php echo wp_create_nonce('ee4-admin-notice'); ?></span>
+			<button class="button-secondary ee4-admin-notice-button" value="yes"><?php _e('Dismiss', 'event_espresso'); ?></button>
+			<div style="clear:both"></div>
+		</div>
+	</div>
+	<?php
+}
+
+
+/**
+ * This just handles the setting of the selected option for EE4 notice dismissed via ajax
+ * @return void
+ */
+function espresso_ee4_admin_notice_ajax_handler() {
+
+	//verify nonce
+	if ( isset($_POST['nonce']) && !wp_verify_nonce($_POST['nonce'], 'ee4-admin-notice') ) exit();
+
+	//made it here so let's save the selection
+	$ueip_optin = isset( $_POST['espresso_ee4_dismissed'] ) ? update_option('ee4_notice_has_dismissed', 1) : '';
+
+	exit();
+}
+
 /**
 *
 * Update notifications
