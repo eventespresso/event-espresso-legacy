@@ -20,7 +20,7 @@ jQuery(document).ready(function($) {
 		var nonce = $('#ee4-admin-notice-nonce').text();
 		
 		$.post(ajaxurl, {
-			action: 'espresso_ee4_dismissed',
+			action: 'espresso_ee4_admin_notice',
 			nonce: nonce,
 			selection: selection
 		}, function(response) {
