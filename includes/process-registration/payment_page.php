@@ -381,6 +381,7 @@ function event_espresso_pay() {
 	
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 	global $wpdb, $org_options, $espresso_content;
+	$_REQUEST['page_id'] = $org_options['return_url'];
 
 	$payment_data= array( 'attendee_id' => '' );
 
@@ -451,7 +452,6 @@ function event_espresso_pay() {
 	if (isset($payment_data['attendee_session'])){
 		event_espresso_clear_session_of_attendee($payment_data['attendee_session']);
 	}
-	$_REQUEST['page_id'] = $org_options['return_url'];
 	
 	$espresso_content = ob_get_contents();
 	ob_end_clean();
