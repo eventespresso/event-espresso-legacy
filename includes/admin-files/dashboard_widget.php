@@ -30,6 +30,7 @@ function event_espresso_edit_list_widget(){
         <tr>
           <th class="manage-column column-title" id="title" scope="col" title="Click to Sort" style="width: 30%;"><?php _e('Name','event_espresso'); ?></th>
           <th class="manage-column column-date" id="start" scope="col" title="Click to Sort" style="width: 30%;"><?php _e('Date','event_espresso'); ?></th>
+          <th class="manage-column column-date" id="start-sortable" scope="col" title="Click to Sort" style="display:none;"><?php _e('Sortable Date','event_espresso'); ?></th>
           <th class="manage-column column-date" id="status" scope="col" title="Click to Sort" style="width: 20%;"><?php _e('Status','event_espresso'); ?></th>
           <th class="manage-column column-date" id="attendees" scope="col" title="Click to Sort"  style="width: 15%;"><?php _e('Attendees','event_espresso'); ?></th>
         </tr>
@@ -95,6 +96,7 @@ function event_espresso_edit_list_widget(){
               <td class="post-title page-title column-title"><strong><a class="row-title" href="admin.php?page=events&action=edit&event_id=<?php echo $event_id?>"><?php echo $event_name?></a></strong>
                 <div class="row-actions"><span><a href="<?php echo add_query_arg(array('ee'=> $event_id), get_permalink($org_options['event_page_id'])); ?>">View</a> | </span><span class='edit'><a href="admin.php?page=events&amp;action=edit&amp;event_id=<?php echo $event_id?>"><?php _e('Edit', 'event_espresso'); ?></a> | </span><span class='delete'><a onclick="return confirmDelete();" href='admin.php?page=events&amp;action=delete&amp;event_id=<?php echo $event_id?>'><?php _e('Delete', 'event_espresso'); ?></a></span> | <span><a href="admin.php?page=events&amp;event_admin_reports=list_attendee_payments&amp;event_id=<?php echo $event_id?>"><?php _e('Attendees', 'event_espresso'); ?></a> | </span><span><a href="<?php echo add_query_arg(array('event_espresso'=> '', 'event_id' => $event_id, 'export'=> 'report', 'action' => 'payment', 'type' => 'excel'),admin_url('admin.php')); ?>"><?php _e('Export', 'event_espresso'); ?></a></span></div></td>
                <td class="author column-author"><?php echo event_date_display($start_date,get_option('date_format'))?> <br />
+               <td class="author column-author" style="display:none;"><?php echo event_date_display($start_date,'Y/m/d') ?><br />
 <?php echo event_espresso_get_time($event_id, 'start_time') ?></td>
               <td class="date column-date"><?php echo $status['display'] ?></td>
               <td align="center" class="author column-attendees"><a href="admin.php?page=events&amp;event_admin_reports=list_attendee_payments&amp;event_id=<?php echo $event_id?>"><?php echo apply_filters('filter_hook_espresso_get_num_attendees', $event_id);?></a></td>              
@@ -117,6 +119,7 @@ function event_espresso_edit_list_widget(){
 						 	"sZeroRecords": "<?php _e('No Records Found!','event_espresso'); ?>" },
 				"aoColumns": [
 							 null,
+							 {"iDataSort": 2},
 							 null,
 							 null,
 							 null
