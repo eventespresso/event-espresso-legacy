@@ -29,10 +29,10 @@ function event_espresso_edit_list_widget(){
     <thead>
         <tr>
           <th class="manage-column column-title" id="title" scope="col" title="Click to Sort" style="width: 30%;"><?php _e('Name','event_espresso'); ?></th>
-          <th class="manage-column column-date" id="start" scope="col" title="Click to Sort" style="width: 30%;"><?php _e('Date','event_espresso'); ?></th>
+          <th class="manage-column column-date" id="start" scope="col" title="Click to Sort" style="width: 25%;"><?php _e('Date','event_espresso'); ?></th>
           <th class="manage-column column-date" id="start-sortable" scope="col" title="Click to Sort" style="display:none;"><?php _e('Sortable Date','event_espresso'); ?></th>
           <th class="manage-column column-date" id="status" scope="col" title="Click to Sort" style="width: 20%;"><?php _e('Status','event_espresso'); ?></th>
-          <th class="manage-column column-date" id="attendees" scope="col" title="Click to Sort"  style="width: 15%;"><?php _e('Attendees','event_espresso'); ?></th>
+          <th class="manage-column column-date" id="attendees" scope="col" title="Click to Sort"  style="width: 20%;"><?php _e('Attendees','event_espresso'); ?></th>
         </tr>
     </thead>
      
