@@ -39,38 +39,18 @@ function event_espresso_edit_list_widget(){
     <tbody>
     <?php 
 			/* Pull the Events */
-		//Get number of total events
-		$wpdb->query("SELECT id FROM ". EVENTS_DETAIL_TABLE ." WHERE event_status != 'D'");
-		$total_events =    $wpdb->num_rows;
-		
-		//Get total events today
-		$wpdb->query("SELECT id FROM ". EVENTS_DETAIL_TABLE ." WHERE event_status != 'D' AND start_date = '" . $curdate . "' ");
-		$total_events_today =	$wpdb->num_rows;
-	
-        if ($total_events > 0) {
-        
 			$curdate = date("Y-m-d");
-			/*$pieces = explode('-',$curdate, 3);
-			$this_year_r = $pieces[0];
-			$this_month_r = $pieces[1];
-			//echo $this_year_r;
-			$days_this_month = date('t', strtotime($curdate));*/
 			
-            $days_in_dasboard = $org_options['events_in_dasboard'] == ''? '30':stripslashes_deep($org_options['events_in_dasboard']);
+            $days_in_dasboard = $org_options['events_in_dasboard'] == ''? '30' : stripslashes_deep($org_options['events_in_dasboard']);
            
 			$sql = "SELECT e.id event_id, e.event_name, e.event_identifier, e.reg_limit, e.registration_start, ";
             $sql .= " e.start_date, e.is_active, e.recurrence_id, e.registration_startT FROM ". EVENTS_DETAIL_TABLE ." e ";
             $sql .= " WHERE event_status != 'D' ";
-           if ($total_events_today >0){
-                $sql .= " AND start_date = '" . $curdate ."' ";
-				global $how_many_events;
-				$how_many_events = __('todays\' events', 'event_espresso');
-            }else{
-				$sql .= " AND ADDDATE('".date ( 'Y-m-d' )."', INTERVAL " . $days_in_dasboard . " DAY) >= start_date AND start_date >= '".date('Y-m-d', strtotime($curdate))."' ";
+			$sql .= " AND ADDDATE('".date ( 'Y-m-d' )."', INTERVAL " . $days_in_dasboard . " DAY) >= start_date AND start_date >= '".date('Y-m-d', strtotime($curdate))."' ";
 			$sql .= " ORDER BY e.start_date ASC ";
 
-				global $how_many_events;
-				$how_many_events = __("the next $days_in_dasboard days of events", 'event_espresso');
+			global $how_many_events;
+			$how_many_events = __("the next $days_in_dasboard days of events", 'event_espresso');
 
             
             
@@ -85,7 +65,6 @@ function event_espresso_edit_list_widget(){
                     $reg_limit = $result->reg_limit;
                     $registration_start = $result->registration_start;
                     $start_date = $result->start_date;
-                    $end_date = $result->end_date;
                     $is_active= $result->is_active;
                     $status = array();
                     $status = event_espresso_get_is_active($event_id);
@@ -94,22 +73,19 @@ function event_espresso_edit_list_widget(){
     ?>
             <tr>
               <td class="post-title page-title column-title"><strong><a class="row-title" href="admin.php?page=events&action=edit&event_id=<?php echo $event_id?>"><?php echo $event_name?></a></strong>
-                <div class="row-actions"><span><a href="<?php echo add_query_arg(array('ee'=> $event_id), get_permalink($org_options['event_page_id'])); ?>">View</a> | </span><span class='edit'><a href="admin.php?page=events&amp;action=edit&amp;event_id=<?php echo $event_id?>"><?php _e('Edit', 'event_espresso'); ?></a> | </span><span class='delete'><a onclick="return confirmDelete();" href='admin.php?page=events&amp;action=delete&amp;event_id=<?php echo $event_id?>'><?php _e('Delete', 'event_espresso'); ?></a></span> | <span><a href="admin.php?page=events&amp;event_admin_reports=list_attendee_payments&amp;event_id=<?php echo $event_id?>"><?php _e('Attendees', 'event_espresso'); ?></a> | </span><span><a href="<?php echo add_query_arg(array('event_espresso'=> '', 'event_id' => $event_id, 'export'=> 'report', 'action' => 'payment', 'type' => 'excel'),admin_url('admin.php')); ?>"><?php _e('Export', 'event_espresso'); ?></a></span></div></td>
-               <td class="author column-author"><?php echo event_date_display($start_date,get_option('date_format'))?> <br />
+                <div class="row-actions"><span><a href="<?php echo add_query_arg(array('ee'=> $event_id), get_permalink($org_options['event_page_id'])); ?>">View</a> | </span><span class='edit'><a href="admin.php?page=events&action=edit&event_id=<?php echo $event_id?>"><?php _e('Edit', 'event_espresso'); ?></a> | </span><span class='delete'><a onclick="return confirmDelete();" href='admin.php?page=events&action=delete&event_id=<?php echo $event_id?>'><?php _e('Delete', 'event_espresso'); ?></a></span> | <span><a href="admin.php?page=events&event_admin_reports=list_attendee_payments&event_id=<?php echo $event_id?>"><?php _e('Attendees', 'event_espresso'); ?></a> | </span><span><a href="<?php echo add_query_arg(array('event_espresso'=> '', 'event_id' => $event_id, 'export'=> 'report', 'action' => 'payment', 'type' => 'excel'),admin_url('admin.php')); ?>"><?php _e('Export', 'event_espresso'); ?></a></span></div></td>
+               <td class="author column-author"><?php echo event_date_display($start_date, get_option('date_format')); ?> <br />
                <td class="author column-author" style="display:none;"><?php echo event_date_display($start_date,'Y/m/d') ?><br />
 <?php echo event_espresso_get_time($event_id, 'start_time') ?></td>
               <td class="date column-date"><?php echo $status['display'] ?></td>
-              <td align="center" class="author column-attendees"><a href="admin.php?page=events&amp;event_admin_reports=list_attendee_payments&amp;event_id=<?php echo $event_id?>"><?php echo apply_filters('filter_hook_espresso_get_num_attendees', $event_id);?></a></td>              
-              
-      </tr>
-    <?php } 
-        }?>
-        
+              <td align="center" class="author column-attendees"><a href="admin.php?page=events&event_admin_reports=list_attendee_payments&event_id=<?php echo $event_id?>"><?php echo apply_filters('filter_hook_espresso_get_num_attendees', $event_id);?></a></td>
+			</tr>
+    <?php } ?>
+
       </tbody>
 </table><p>&nbsp;</p>
 <div style="clear:both"></div>
 <script>
-    
     jQuery(document).ready(function($) {                        
     
 		var mytable = $('#table').dataTable( {
