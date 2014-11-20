@@ -37,7 +37,7 @@ function event_espresso_edit_list_widget(){
      
     <tbody>
     <?php 
-		/* Events */
+			/* Pull the Events */
 		//Get number of total events
 		$wpdb->query("SELECT id FROM ". EVENTS_DETAIL_TABLE ." WHERE event_status != 'D'");
 		$total_events =    $wpdb->num_rows;
@@ -57,7 +57,7 @@ function event_espresso_edit_list_widget(){
 			
             $days_in_dasboard = $org_options['events_in_dasboard'] == ''? '30':stripslashes_deep($org_options['events_in_dasboard']);
            
-		    $sql = "SELECT e.id event_id, e.event_name, e.event_identifier, e.reg_limit, e.registration_start, ";
+			$sql = "SELECT e.id event_id, e.event_name, e.event_identifier, e.reg_limit, e.registration_start, ";
             $sql .= " e.start_date, e.is_active, e.recurrence_id, e.registration_startT FROM ". EVENTS_DETAIL_TABLE ." e ";
             $sql .= " WHERE event_status != 'D' ";
            if ($total_events_today >0){
@@ -66,13 +66,13 @@ function event_espresso_edit_list_widget(){
 				$how_many_events = __('todays\' events', 'event_espresso');
             }else{
 				$sql .= " AND ADDDATE('".date ( 'Y-m-d' )."', INTERVAL " . $days_in_dasboard . " DAY) >= start_date AND start_date >= '".date('Y-m-d', strtotime($curdate))."' ";
+			$sql .= " ORDER BY e.start_date ASC ";
+
 				global $how_many_events;
 				$how_many_events = __("the next $days_in_dasboard days of events", 'event_espresso');
-			}
-				//$sql .= " WHERE event_status != 'D' AND start_date BETWEEN '".date('Y-m-d', strtotime($this_year_r. '-' .$this_month_r . '-01'))."' AND '".date('Y-m-d', strtotime($this_year_r . '-' .$this_month_r. '-' . $days_this_month))."' ";
-			
+
             
-            $sql .= " ORDER BY e.start_date  ASC ";
+            
             
             //echo $sql;
             $results = $wpdb->get_results($sql);
