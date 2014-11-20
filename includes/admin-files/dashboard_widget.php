@@ -4,7 +4,7 @@
 function event_espresso_edit_list_widget(){
     global $wpdb, $org_options;
 	
-    if ( $_POST[ 'delete_event' ] )
+    if ( isset($_POST[ 'delete_event' ]) && $_POST[ 'delete_event' ] )
     {
         if ( is_array( $_POST[ 'checkbox' ] ) )
         {
