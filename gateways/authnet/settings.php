@@ -201,7 +201,7 @@ function event_espresso_display_authnet_settings() {
 	<div id="relay_response" style="display:none">
 		<h2><?php _e('Relay Response', 'event_espresso'); ?></h2>
 		<p><?php _e('This shows the specific the URL to which the gateway should return the relay response for a transaction. This the page should be set in your Authorize.net account. Login to Authorize.net, goto Account > Response/Receipt URLs > Add URL and enter the following URL.', 'event_espresso'); ?></p>
-		<p><strong><?php _e('Relay Response URL:', 'event_espresso'); ?></strong> <?php echo echo get_permalink( $org_options['return_url'] ) ?><br />
+		<p><strong><?php _e('Relay Response URL:', 'event_espresso'); ?></strong> <?php echo get_permalink( $org_options['return_url'] ) ?><br />
 			<span style="color:red;"><?php _e('Note:', 'event_espresso'); ?></span> <?php _e('This URL can be changed in the "Organization Settings" page.', 'event_espresso'); ?></p>
 		<p><?php _e('For complete information on configuring relay response, please refer to', 'event_espresso'); ?> <a href="https://www.authorize.net/support/CNP/helpfiles/Account/Settings/Transaction_Format_Settings/Transaction_Response_Settings/Relay_Response.htm"><?php _e('Reference &amp; User Guides', 'event_espresso'); ?></a>.</p>
 	</div>
