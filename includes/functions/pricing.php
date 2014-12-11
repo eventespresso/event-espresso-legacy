@@ -60,7 +60,7 @@ if (!function_exists('espresso_return_price')) {
 
                     // Addition for Early Registration discount
                     if ($early_price_data = early_discount_amount($event_id, $event_cost)) {
-                        $event_cost = $early_price_data['event_price'];
+                        $event_cost = number_format( $early_price_data['event_price'], 2, '.', '' );
                     }
                 } else {
                     $event_cost = '0.00';
