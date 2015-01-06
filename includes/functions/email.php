@@ -121,40 +121,41 @@ if (!function_exists('espresso_replace_shortcodes')) {
 					'location' => $data->location,
 				), '', '', TRUE
 			)
-	);
+		);
 
-	//Get the questions and answers
-	$questions = $wpdb->get_results("select qst.question as question, ans.answer as answer from " . EVENTS_ANSWER_TABLE . " ans inner join " . EVENTS_QUESTION_TABLE . " qst on ans.question_id = qst.id where ans.attendee_id = " . $data->attendee->id, ARRAY_A);
-	//echo '<p>'.print_r($questions).'</p>';
-	if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->question != NULL) {
-		foreach ($questions as $q) {
-			$k = stripslashes( $q['question'] );
-			$v = stripslashes( $q['answer'] );
-
-			//Output the question
-			array_push($SearchValues, "[" . 'question_' . $k . "]");
-			array_push($ReplaceValues, $k);
-
-			//Output the answer
-			array_push($SearchValues, "[" . 'answer_' . $k . "]");
-			array_push($ReplaceValues, rtrim($v, ",") );
-		}
-	}
-	//Get the event meta
-	//echo '<p>'.print_r($data->event->event_meta).'</p>';
-	if (!empty($data->event->event_meta)) {
-		foreach ($data->event->event_meta as $k => $v) {
-			if (!empty($k) && !is_array($v)) {
-				array_push($SearchValues, "[" . $k . "]");
-				array_push($ReplaceValues, stripslashes_deep($v));
+		//Get the questions and answers
+		$questions = $wpdb->get_results("select qst.question as question, ans.answer as answer from " . EVENTS_ANSWER_TABLE . " ans inner join " . EVENTS_QUESTION_TABLE . " qst on ans.question_id = qst.id where ans.attendee_id = " . $data->attendee->id, ARRAY_A);
+		//echo '<p>'.print_r($questions).'</p>';
+		if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->question != NULL) {
+			foreach ($questions as $q) {
+				$k = stripslashes( $q['question'] );
+				$v = stripslashes( $q['answer'] );
+	
+				//Output the question
+				array_push($SearchValues, "[" . 'question_' . $k . "]");
+				array_push($ReplaceValues, $k);
+	
+				//Output the answer
+				array_push($SearchValues, "[" . 'answer_' . $k . "]");
+				array_push($ReplaceValues, rtrim($v, ",") );
 			}
 		}
+		//Get the event meta
+		//echo '<p>'.print_r($data->event->event_meta).'</p>';
+		if (!empty($data->event->event_meta)) {
+			foreach ($data->event->event_meta as $k => $v) {
+				if (!empty($k) && !is_array($v)) {
+					array_push($SearchValues, "[" . $k . "]");
+					array_push($ReplaceValues, stripslashes_deep($v));
+				}
+			}
+		}
+		apply_filters('filter_hook_espresso_post_replace_shortcode_search_values', $SearchValues);
+		apply_filters('filter_hook_espresso_post_replace_shortcode_replace_values', $ReplaceValues, $data);
+	
+		//Perform the replacement
+		return str_replace($SearchValues, $ReplaceValues, $message);
 	}
-	apply_filters('filter_hook_espresso_post_replace_shortcode_search_values', $SearchValues);
-	apply_filters('filter_hook_espresso_post_replace_shortcode_replace_values', $ReplaceValues, $data);
-
-	//Perform the replacement
-	return str_replace($SearchValues, $ReplaceValues, $message);
 }
 
 //Build the email
