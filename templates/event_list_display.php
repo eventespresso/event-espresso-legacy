@@ -35,7 +35,7 @@ $status_display_not_open = $status['status'] == 'REGISTRATION_NOT_OPEN' ? ' - ' 
 $status_display_open = $status['status'] == 'REGISTRATION_OPEN' ? ' - ' . $status['display_custom'] : '';
 
 //You can also display a custom message. For example, this is a custom registration not open message:
-$status_display_custom_closed = $status['status'] == 'REGISTRATION_CLOSED' ? ' - <span class="'.espresso_template_css_class('espresso_closed','espresso_closed', false).'">' . __('Regsitration is closed', 'event_espresso') . '</span>' : '';
+$status_display_custom_closed = $status['status'] == 'REGISTRATION_CLOSED' ? ' - <span class="'.espresso_template_css_class('espresso_closed','espresso_closed', false).'">' . __('Registration is closed', 'event_espresso') . '</span>' : '';
 global $this_event_id;
 $this_event_id = $event_id;
 ?>
@@ -72,10 +72,17 @@ $this_event_id = $event_id;
 	}
 	?>
 	<div class="<?php espresso_template_css_class('event_meta','event-meta clearfix'); ?>">
-		<?php $event->event_cost = empty($event->event_cost) ? '' : $event->event_cost;
+		<?php 
+			if ( function_exists('espresso_above_member_threshold') && espresso_above_member_threshold() == true ) {
+				$event->member_price = empty($event->member_price) ? '' : $event->member_price;
+				$event_cost = $event->member_price;
+			} else {
+				$event->event_cost = empty($event->event_cost) ? '' : $event->event_cost;
+				$event_cost = $event->event_cost;
+			}
 			//Featured image
 			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');
- 			echo do_action('action_hook_espresso_price_display', $event_id, $event->event_cost, isset($org_options['price_display_in_event_list']) ? $org_options['price_display_in_event_list'] : 'default' );
+ 			echo do_action('action_hook_espresso_price_display', $event_id, $event_cost, isset($org_options['price_display_in_event_list']) ? $org_options['price_display_in_event_list'] : 'default' );
 		?>
 		<p id="event_date-<?php echo $event_id ?>"><span class="<?php espresso_template_css_class('section_title','section-title'); ?>"><?php _e('Date:', 'event_espresso'); ?></span>  <?php echo event_date_display($start_date, get_option('date_format')) ?> 
 			<?php //Add to calendar button

@@ -31,8 +31,8 @@ function event_espresso_paid_status_icon($payment_status ='') {
     }
 }
 
-//Retturns the first price assocaited with an event. If an event has more that one price, you can pass the number of the second price.
-if (!function_exists('espresso_return_price')) {
+//Returns the first price associated with an event. If an event has more that one price, you can pass the number of the second price.
+if (!function_exists('espresso_return_single_price')) {
 
     function espresso_return_single_price($event_id, $number=0) {
 		
@@ -60,7 +60,7 @@ if (!function_exists('espresso_return_price')) {
 
                     // Addition for Early Registration discount
                     if ($early_price_data = early_discount_amount($event_id, $event_cost)) {
-                        $event_cost = $early_price_data['event_price'];
+                        $event_cost = number_format( $early_price_data['event_price'], 2, '.', '' );
                     }
                 } else {
                     $event_cost = '0.00';

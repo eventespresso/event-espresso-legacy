@@ -74,7 +74,6 @@ function espresso_process_exact($payment_data) {
 
 
 //Debugging option
-		$email_transaction_dump = true;
 		if ($email_transaction_dump == true) {
 // For this, we'll just email ourselves ALL the data as plain text output.
 			$subject = 'Exact.com Notification - Gateway Variable Dump';

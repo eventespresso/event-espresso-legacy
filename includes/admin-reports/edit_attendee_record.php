@@ -541,7 +541,7 @@ function edit_attendee_record() {
 <div class="metabox-holder">
 	<div class="postbox">
 		<h3>
-			<?php _e('Registration Id <a href="admin.php?page=events&event_admin_reports=edit_attendee_record&event_id=' . $event_id . '&registration_id=' . $registration_id . '&form_action=edit_attendee">#' . $registration_id . '</a> | ID #' . $id . ' | Name: ' . $fname . ' ' . $lname . ' | Registered For:', 'event_espresso'); ?>
+			<?php echo __('Registration Id', 'event_espresso'). ' ' . '<a href="admin.php?page=events&event_admin_reports=edit_attendee_record&event_id=' . $event_id . '&registration_id=' . $registration_id . '&form_action=edit_attendee">' . $registration_id . '</a> | ' . __('ID #', 'event_espresso') . $id . ' | ' . __('Name:', 'event_espresso') . ' ' . $fname . ' ' . $lname . ' | ' . __('Registered For:', 'event_espresso'); ?>
 			<a href="admin.php?page=events&event_admin_reports=list_attendee_payments&event_id=<?php echo $event_id ?>"><?php echo stripslashes_deep($event_name) ?></a> - <?php echo $event_date; ?>
 		</h3>
 		<div class="inside">
@@ -813,7 +813,7 @@ function edit_attendee_record() {
 									</li>
 									<li>
 										<br/>
-										<input type="submit" name="submit_ticket_prices" class="button-primary action"  value="Update Price" />
+										<input type="submit" name="submit_ticket_prices" class="button-primary action"  value="<?php _e('Update Price', 'event_espresso'); ?>" />
 									</li>
 								</ul>
 							</fieldset>

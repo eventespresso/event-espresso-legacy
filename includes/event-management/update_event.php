@@ -69,7 +69,7 @@ function update_event($recurrence_arr = array()) {
                     $re_params['event_end_date'] = sanitize_text_field($_POST['end_date']);
                     $re_params['registration_start'] = sanitize_text_field($_POST['registration_start']);
                     $re_params['registration_end'] = sanitize_text_field($_POST['registration_end']);
-                    $recurrence_dates = find_recurrence_dates($re_params);
+					$recurrence_dates = ($_POST['recurrence_type'] == 'm') ? find_recurrence_manual_dates($re_params) : find_recurrence_dates($re_params);
                     $UPDATE_SQL = "SELECT id,start_date,event_identifier FROM " . EVENTS_DETAIL_TABLE . " WHERE start_date >='" . sanitize_text_field($_POST['start_date']) . "' AND recurrence_id = %d and NOT event_status = 'D' ";
                 }
 				
@@ -97,7 +97,10 @@ function update_event($recurrence_arr = array()) {
                         //Update all events in the series based on recurrence id
                         
                         //'Soft delete' any events that are not within the current series when using the 'All events in this series' option.
-                        $DEL_SQL = 'UPDATE ' . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date NOT IN (" . $delete_in . ") AND recurrence_id = " . $_POST['recurrence_id'];
+                        if ($delete_in != '') {
+                        	$DEL_SQL = "UPDATE " . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date NOT IN (" . $delete_in .") AND recurrence_id = %d";
+                        	$wpdb->query($wpdb->prepare($DEL_SQL, $_POST['recurrence_id']));
+                        }
                         /*
                             //Permanently delete events not within the current formula
                             $DEL_SQL = 'DELETE EDT, EAT FROM ' . EVENTS_DETAIL_TABLE . " EDT
@@ -111,8 +114,10 @@ function update_event($recurrence_arr = array()) {
                     } else {
 
                         //'Soft delete' any events that are not within the current series when using the 'This and all upcoming events'
-                        $DEL_SQL = 'UPDATE ' . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date >='" . esc_sql(sanitize_text_field($_POST['start_date'])) . "' AND start_date NOT IN (" . $delete_in . ") AND recurrence_id = " . $_POST['recurrence_id'];
-
+                        if ($delete_in != '') {
+                        	$DEL_SQL = "UPDATE " . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date >= %s AND start_date NOT IN (" . $delete_in . ") AND recurrence_id = %d";
+                        	$wpdb->query($wpdb->prepare($DEL_SQL, array( esc_sql(sanitize_text_field($_POST['start_date'])), $_POST['recurrence_id'])));
+                        }
                         /*
                             //Permanently delete events not within the current formula
                             $DEL_SQL = 'DELETE EDT, EAT FROM ' . EVENTS_DETAIL_TABLE . " EDT
@@ -125,9 +130,6 @@ function update_event($recurrence_arr = array()) {
                         */
                         $UPDATE_SQL = "SELECT id,start_date,event_identifier FROM " . EVENTS_DETAIL_TABLE . " WHERE start_date >='" . sanitize_text_field($_POST['start_date']) . "' AND recurrence_id = %d AND NOT event_status = 'D'  ORDER BY start_date";
                     }
-
-                    if ($delete_in != '')
-                        $wpdb->query($wpdb->prepare($DEL_SQL, $delete_in));
 
                     /*
                      * Add the new records based on the new formula
@@ -711,7 +713,7 @@ function update_event($recurrence_arr = array()) {
         //$recurrence_dates = array_shift($recurrence_dates); //Remove the first item from the array since it will be added after this recursion
         foreach ($recurrence_dates as $r_d) {
 
-            if ($r_d['event_id'] != '' && count($r_d) > 2) {
+            if (!empty($r_d['event_id']) && count($r_d) > 2) {
                 update_event(
 					array(
 						'event_id'					=> $r_d['event_id'],
@@ -721,7 +723,7 @@ function update_event($recurrence_arr = array()) {
 						'recurrence_event_end_date' => $r_d['event_end_date'],
 						'registration_start'		=> $r_d['registration_start'],
 						'registration_end'			=> $r_d['registration_end'],
-						'visible_on'				=> $r_d['visible_on'],
+						'visible_on'				=> (isset($r_d['visible_on']) ? $r_d['visible_on'] : ''),
 						'bypass_nonce'				=> TRUE,
                 ));
             }
@@ -732,4 +734,5 @@ function update_event($recurrence_arr = array()) {
      */
 	 
 	do_action('action_hook_espresso_update_event_success',$_REQUEST);
+    do_action('action_hook_espresso_update_event_success_id', $event_id);
 }

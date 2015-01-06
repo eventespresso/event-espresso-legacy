@@ -1,11 +1,12 @@
 <?php
 
-function replace_shortcodes($message, $data) {
-	global $wpdb, $org_options;
-	$payment_data = espresso_get_total_cost(array('attendee_session'=>$data->attendee->attendee_session));
-	$event_cost = $payment_data['total_cost'];
-	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	$SearchValues = array(
+if (!function_exists('espresso_replace_shortcodes')) {
+	function espresso_replace_shortcodes($message, $data) {
+		global $wpdb, $org_options;
+		$payment_data = espresso_get_total_cost(array('attendee_session'=>$data->attendee->attendee_session));
+		$event_cost = $payment_data['total_cost'];
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+		$SearchValues = array(
 			"[event_id]",
 			"[event_identifier]",
 			"[registration_id]",
@@ -53,9 +54,9 @@ function replace_shortcodes($message, $data) {
 			"[seating_tag]",
 			"[edit_attendee_link]",
 			"[add_to_calendar]"
-	);
+		);
 
-	$ReplaceValues = array(
+		$ReplaceValues = array(
 			$data->attendee->event_id,
 			$data->event->event_identifier,
 			$data->attendee->registration_id,
@@ -151,6 +152,7 @@ function replace_shortcodes($message, $data) {
 	}
 	apply_filters('filter_hook_espresso_post_replace_shortcode_search_values', $SearchValues);
 	apply_filters('filter_hook_espresso_post_replace_shortcode_replace_values', $ReplaceValues, $data);
+
 	//Perform the replacement
 	return str_replace($SearchValues, $ReplaceValues, $message);
 }
@@ -388,10 +390,10 @@ function espresso_prepare_email($data) {
     }
 
 	//Get the email subject
-	$email_subject = replace_shortcodes($email_subject, $data);
+	$email_subject = espresso_replace_shortcodes($email_subject, $data);
 
 	//Replace email shortcodes
-	$_replaced = replace_shortcodes($conf_mail, $data);
+	$_replaced = espresso_replace_shortcodes($conf_mail, $data);
 
 	//Build the HTML
 	$message_top = "<html><body>";
@@ -675,7 +677,7 @@ if (!function_exists('espresso_event_reminder')) {
 			?>
 			<div id="message" class="updated fade">
 				<p><strong>
-						<?php echo sprintf(_n('Email Sent to 1 person successfully.', 'Email Sent to %d people successfully.', $count, 'event_espresso'), $count); ?>
+						<?php echo printf( _n('Email Sent to %d person successfully.', 'Email Sent to %d people successfully.', $count, 'event_espresso'), $count ); ?>
 					</strong></p>
 			</div>
 			<?php

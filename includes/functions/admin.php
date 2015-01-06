@@ -1691,6 +1691,31 @@ if (!function_exists('espresso_check_ssl')) {
 
 }
 
+//EE4 Available Notice
+function espresso_ee4_admin_notice() {
+	global $current_user;
+	$user_id = $current_user->ID;
+	// Check that the user hasn't already clicked to ignore the message and that they're an admin
+	if ( ! get_user_meta($user_id, 'espresso_ee4_admin_notice_ignore_notice') && current_user_can( 'activate_plugins' ) ) {
+		$hide_url = add_query_arg( 'espresso_ee4_admin_notice_nag_ignore', '0' );
+		$text = sprintf( __('Just a friendly reminder to check out <a href="%1$s" target="_blank">Event Espresso 4</a>. While we are currently migrating all of the features from EE3 to EE4, it is our newest brew. | <a href="%2$s">Hide this message</a>', 'event_espresso'), 'https://wordpress.org/plugins/event-espresso-decaf/', $hide_url );
+
+		echo '<div class="updated"><h4>'.__('Event Espresso 4 Now Available!', 'event_espresso').'</h4><p>' . $text . '</p></div>';
+	}
+}
+
+add_action('admin_init', 'espresso_ee4_admin_notice_nag_ignore');
+
+function espresso_ee4_admin_notice_nag_ignore() {
+	global $current_user;
+    $user_id = $current_user->ID;
+    /* If user clicks to ignore the notice, add that to their user meta */
+    if ( isset($_GET['espresso_ee4_admin_notice_nag_ignore']) && '0' == $_GET['espresso_ee4_admin_notice_nag_ignore'] ) {
+		add_user_meta($user_id, 'espresso_ee4_admin_notice_ignore_notice', 'true', true);
+	}
+}
+
+
 /**
 *
 * Update notifications

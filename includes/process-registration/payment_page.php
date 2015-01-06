@@ -82,7 +82,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	}
 
 	// update total cost for primary attendee
-	$total_cost = ((float)$final_price * (int)$quantity) - $attendee->amount_pd;
+	$total_cost = ((float)$final_price * (int)$quantity) - $attendee->amount_pd + $attendee->total_cost;
 	$total_attendees = (int)$quantity;
 	$attendee_prices[] = array( 'option' => $attendee->price_option, 'qty' => (int)$quantity, 'price' => (float)( $final_price - $attendee->amount_pd ));
 	
@@ -91,7 +91,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	$prices = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ));
 	//printr( $prices, '$prices  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 	if ( $prices !== FALSE ) {
-		$total_cost = 0;
+		$total_cost = $attendee->total_cost;
 		$total_attendees = 0;
 		$attendee_prices = array();
 		// ensure prices is an array
@@ -118,22 +118,32 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
     //$event_price_x_attendees = number_format( $final_price * $num_people, 2, '.', '' );
     $event_original_cost = $orig_price;
 	
+	if( !function_exists( espresso_seating_chart_override_seat_cost)) {
+		function espresso_seating_chart_override_seat_cost( $total_cost, $registration_id, $event_id ) {
+			global $wpdb;
+			// Added for seating chart addon
+			// This code block overrides the cost using seating chart add-on price
+			if ( defined('ESPRESSO_SEATING_CHART') && class_exists("seating_chart") && seating_chart::check_event_has_seating_chart($event_id) !== false) {
 
-	// Added for seating chart addon
-	// This code block overrides the cost using seating chart add-on price
-	if ( defined('ESPRESSO_SEATING_CHART') && class_exists("seating_chart") && seating_chart::check_event_has_seating_chart($event_id) !== false) {
+				$SQL = "SELECT sum(sces.purchase_price) as purchase_price ";
+				$SQL .= "FROM " . EVENTS_SEATING_CHART_EVENT_SEAT_TABLE . " sces ";
+				$SQL .= "INNER JOIN " . EVENTS_ATTENDEE_TABLE . " ea ON sces.attendee_id = ea.id ";
+				$SQL .= "WHERE ea.registration_id = %s";  
+
+				if ( $seat = $wpdb->get_row( $wpdb->prepare( $SQL, $registration_id ))) {
+					$total_cost = number_format( $seat->purchase_price, 2, '.', '' );
+					//$event_price_x_attendees = (float)$final_price;
+				} 
+
+			} 
+			return $total_cost;
+		}
 		
-		$SQL = "SELECT sum(sces.purchase_price) as purchase_price ";
-		$SQL .= "FROM " . EVENTS_SEATING_CHART_EVENT_SEAT_TABLE . " sces ";
-		$SQL .= "INNER JOIN " . EVENTS_ATTENDEE_TABLE . " ea ON sces.attendee_id = ea.id ";
-		$SQL .= "WHERE ea.registration_id = %s";  
-		
-        if ( $seat = $wpdb->get_row( $wpdb->prepare( $SQL, $registration_id ))) {
-            $total_cost = number_format( $seat->purchase_price, 2, '.', '' );
-            //$event_price_x_attendees = (float)$final_price;
-        } 
-	 
-	} 
+		add_filter('filter_hook_espresso_confirmation_page_total_cost_calculation', 'espresso_seating_chart_override_seat_cost', 10, 3);
+	}	
+	
+	$total_cost = apply_filters('filter_hook_espresso_confirmation_page_total_cost_calculation', $total_cost, $registration_id, $event_id);
+	
 
 	if ( $total_cost == 0 ) {
 		$payment_status = 'Completed';//DO NOT TRANSLATE
@@ -380,6 +390,7 @@ function event_espresso_pay() {
 	
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 	global $wpdb, $org_options, $espresso_content;
+	$_REQUEST['page_id'] = $org_options['return_url'];
 
 	$payment_data= array( 'attendee_id' => '' );
 
@@ -447,7 +458,6 @@ function event_espresso_pay() {
 	if (isset($payment_data['attendee_session'])){
 		event_espresso_clear_session_of_attendee($payment_data['attendee_session']);
 	}
-	$_REQUEST['page_id'] = $org_options['return_url'];
 	
 	$espresso_content = ob_get_contents();
 	ob_end_clean();

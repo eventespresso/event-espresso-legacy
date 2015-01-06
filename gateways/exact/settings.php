@@ -5,8 +5,8 @@ function event_espresso_exact_payment_settings() {
 	if (!$espresso_premium)
 		return;
 	if (isset($_POST['update_exact'])) {
-		$exact_settings['exact_login_id'] = $_POST['exact_login_id'];
-		$exact_settings['exact_transaction_key'] = $_POST['exact_transaction_key'];
+		$exact_settings['exact_login_id'] = stripslashes_deep($_POST['exact_login_id']);
+		$exact_settings['exact_transaction_key'] = stripslashes_deep($_POST['exact_transaction_key']);
 		$exact_settings['image_url'] = $_POST['image_url'];
 		$exact_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
 		$exact_settings['test_transactions'] = empty($_POST['test_transactions']) ? false : true;
@@ -129,7 +129,7 @@ function event_espresso_display_exact_settings() {
 							} else {
 								echo $return_url;
 							}
-?></span> &nbsp;<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=relay_response"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a> </li>
+?></span> &nbsp;<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=exact_relay_response"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a> </li>
 						<li>
 							<label for="use_sandbox">
 								<?php _e('Account Uses E-xact.com\'s Development Server', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=exact_sandbox"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
@@ -172,12 +172,12 @@ function event_espresso_display_exact_settings() {
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update E-xact Settings', 'event_espresso') ?>" id="save_exact_settings" />
 		</p>
 	</form>
-	<div id="relay_response" style="display:none">
+	<div id="exact_relay_response" style="display:none">
 		<h2><?php _e('Relay Response', 'event_espresso'); ?></h2>
 		<p><?php _e('This shows the specific the URL to which the gateway should return the relay response for a transaction. This the page should be set in your E-xact account. Login to E-xact, goto Account > Response/Receipt URLs > Add URL and enter the following URL.', 'event_espresso'); ?></p>
 		<p><strong><?php _e('Relay Response URL:', 'event_espresso'); ?></strong> <?php echo espresso_page('return_url'); ?><br />
 			<span style="color:red;"><?php _e('Note:', 'event_espresso'); ?></span> <?php _e('This URL can be changed in the "Organization Settings" page.', 'event_espresso'); ?></p>
-		<p><?php _e('For complete information on configuring relay response, please refer to', 'event_espresso'); ?> <a href="https://account.authorize.net/help/Merchant_Interface_RoboHelp_Project.htm#Miscellaneous/Reference.htm%3E%3Epan=2"><?php _e('Reference &amp; User Guides', 'event_espresso'); ?></a>.</p>
+		<p><?php _e('For complete information on configuring relay response, please refer to', 'event_espresso'); ?> <a href="https://hostedcheckout.zendesk.com/entries/234989-Where-do-I-enter-my-Relay-Response-URL-"><?php _e('Reference &amp; User Guides', 'event_espresso'); ?></a>.</p>
 	</div>
 	<div id="exact_image_url_info" style="display:none">
 		<h2>
