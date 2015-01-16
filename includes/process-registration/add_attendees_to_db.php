@@ -308,7 +308,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$payment_status		= "Completed";
 				$payment			= "Admin";
 				$txn_type			= __('Added by Admin', 'event_espresso');
-				$payment_date		= date(get_option('date_format'));
+				$payment_date		= date_i18n(get_option('date_format'));
 				$amount_pd			= !empty($data_source['event_cost']) ? $data_source['event_cost'] : 0.00;
 				$registration_id	= uniqid('', true);
 				$_SESSION['espresso_session']['id'] = uniqid('', true);

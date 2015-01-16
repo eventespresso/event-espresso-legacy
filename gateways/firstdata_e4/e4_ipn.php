@@ -80,7 +80,7 @@ function espresso_process_firstdata_e4($payment_data) {
 			$subject = 'First Data e4 Notification - Gateway Variable Dump';
 			$body = "A Firstdata e4 payment notification was successfully recieved\n";
 			$body .= "from " . $myE4->ipnData['x_email'] . " on " . date('m/d/Y');
-			$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+			$body .= " at " . date_i18n('g:i A') . "\n\nDetails:\n";
 			foreach ($myE4->ipnData as $key => $value) {
 				$body .= "\n$key: $value\n";
 			}
@@ -95,7 +95,7 @@ function espresso_process_firstdata_e4($payment_data) {
 		$subject = 'Instant Payment Notification - Gateway Variable Dump';
 		$body = "An instant payment notification failed\n";
 		$body .= "from " . $myE4->ipnData['x_email'] . " on " . date('m/d/Y');
-		$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+		$body .= " at " . date_i18n('g:i A') . "\n\nDetails:\n";
 		foreach ($myE4->ipnData as $key => $value) {
 			$body .= "\n$key: $value\n";
 		}

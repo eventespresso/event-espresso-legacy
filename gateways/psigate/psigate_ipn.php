@@ -45,7 +45,7 @@ function espresso_process_psigate($payment_data) {
 				$subject = 'Instant Payment Notification - Gateway Variable Dump';
 				$body = "An instant payment notification was successfully recieved\n";
 				$body .= "from " . $myPaypal->ipnData['payer_email'] . " on " . date('m/d/Y');
-				$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+				$body .= " at " . date_i18n('g:i A') . "\n\nDetails:\n";
 				foreach ($myPaypal->ipnData as $key => $value) {
 					$body .= "\n$key: $value\n";
 				}
@@ -55,7 +55,7 @@ function espresso_process_psigate($payment_data) {
 			$subject = 'Instant Payment Notification - Gateway Variable Dump';
 			$body = "An instant payment notification failed\n";
 			$body .= "from " . $myPaypal->ipnData['payer_email'] . " on " . date('m/d/Y');
-			$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+			$body .= " at " . date_i18n('g:i A') . "\n\nDetails:\n";
 			foreach ($myPaypal->ipnData as $key => $value) {
 				$body .= "\n$key: $value\n";
 			}

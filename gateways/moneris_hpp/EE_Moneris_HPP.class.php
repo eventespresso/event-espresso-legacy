@@ -68,7 +68,7 @@ class EE_Moneris_HPP extends Espresso_PaymentGateway {
 	public function moneris_hpp_log( $text, $error = FALSE ) {
 		if ($this->logIpn) {
 			// Timestamp
-			$log_entry = "\n" . '[' . date('m/d/Y g:i A') . ']' . "\n";
+			$log_entry = "\n" . '[' . date_i18n('m/d/Y g:i A') . ']' . "\n";
 			// Success or failure being logged?
 			$log_entry .= $error ? "IPN Validation Errors: " . $text : $text;
 			// Write to log

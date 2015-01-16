@@ -16,7 +16,7 @@ function espresso_qbms_logtxn($successful, $statusCode, $statusMessage, $logpath
 
 	$success_text = $successful ? 'SUCCESSFUL' : 'FAILURE';
 	$text = "\n=====QBMS TRANSACTION " . $success_text . "====\n";
-	$text .= ' [Date] ' . date('m/d/Y g:i A');
+	$text .= ' [Date] ' . date_i18n('m/d/Y g:i A');
 	$text .= "\n------Transaction Variables------\n";
 	$text .= " [Status Code] " . $statusCode . "\n";
 	$text .= " [Status Message] " . $statusMessage . "\n";

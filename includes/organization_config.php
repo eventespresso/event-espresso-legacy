@@ -236,7 +236,7 @@ function organization_config_mnu() {
 											<li class="time-date">
 												<p> <span class="run-in">
 														<?php _e('Current Time: ', 'event_espresso'); ?>
-													</span><span class="current-date"> <?php echo date(get_option('date_format') . ' ' . get_option('time_format')); ?> </span><a class="change-date-time" href="options-general.php" target="_blank">
+													</span><span class="current-date"> <?php echo date_i18n(get_option('date_format') . ' ' . get_option('time_format')); ?> </span><a class="change-date-time" href="options-general.php" target="_blank">
 														<?php _e('Change timezone and date format settings?', 'event_espresso'); ?>
 													</a> </p>
 												<p> <span class="important">

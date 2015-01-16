@@ -44,5 +44,16 @@ function ee_load_jquery_autocomplete_scripts(){
 	wp_register_script('jquery-ui-autocomplete', plugins_url( 'js/jquery.ui.autocomplete.min.js', __FILE__ ), array( 'jquery-ui-widget', 'jquery-ui-position' ), '1.8.2', TRUE );
 	wp_enqueue_script('jquery-ui-autocomplete');
 	wp_enqueue_script('jquery-ui-datepicker');
+	espresso_enqueue_datepicker_lang();
+}
 
+function espresso_enqueue_datepicker_lang() {
+	if(WPLANG != '') {
+		$lang_array = explode('_', WPLANG);
+		$lang = $lang_array[0];
+		$content_url = content_url();
+		$lang_url = $content_url.'/languages/';
+		wp_register_script( 'jquery.ui.datepicker-'.$lang, $lang_url.'jquery.ui.datepicker-'.$lang.'.js', array( 'jquery-ui-datepicker' ), false, true );
+	wp_enqueue_script('jquery.ui.datepicker-'.$lang);
+	}
 }

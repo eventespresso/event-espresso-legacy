@@ -23,7 +23,7 @@ function espresso_process_nab ($payment_data) {
 			$subject = 'Instant Payment Notification - Gateway Variable Dump';
 			$body = "An instant payment notification was successfully recieved\n";
 			$body .= "from " . " on " . date('m/d/Y');
-			$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+			$body .= " at " . date_i18n('g:i A') . "\n\nDetails:\n";
 			$body .= $payment_data['txn_details'];
 			wp_mail($payment_data['contact'], $subject, $body);
 		}
@@ -32,7 +32,7 @@ function espresso_process_nab ($payment_data) {
 		$subject = 'Instant Payment Notification - Gateway Variable Dump';
 		$body = "An instant payment notification failed\n";
 		$body .= "from " . " on " . date('m/d/Y');
-		$body .= " at " . date('g:i A') . "\n\nDetails:\n";
+		$body .= " at " . date_i18n('g:i A') . "\n\nDetails:\n";
 		$body .= $payment_data['txn_details'];
 		wp_mail($payment_data['contact'], $subject, $body);
 		//event_espresso_pay(); can anybody say infinite loop?!

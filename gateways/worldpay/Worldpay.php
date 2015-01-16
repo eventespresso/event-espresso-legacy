@@ -42,7 +42,7 @@ class Espresso_Worldpay extends Espresso_PaymentGateway {
 			return;
 		// Timestamp
 
-		$text = '[' . date('m/d/Y g:i A') . '] - ';
+		$text = '[' . date_i18n('m/d/Y g:i A') . '] - ';
 		// Success or failure being logged?
 
 		$text .= "Errors from IPN Validation:\n";

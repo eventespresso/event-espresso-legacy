@@ -41,7 +41,7 @@ class EE_Paypal extends Espresso_PaymentGateway {
 	public function logErrors($errors) {
 		if ($this->logIpn) {
 			// Timestamp
-			$text = '[' . date('m/d/Y g:i A') . '] - ';
+			$text = '[' . date_i18n('m/d/Y g:i A') . '] - ';
 
 			// Success or failure being logged?
 			$text .= "Errors from IPN Validation:\n";
