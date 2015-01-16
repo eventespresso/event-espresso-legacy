@@ -107,6 +107,7 @@ function espresso_display_paypal($payment_data) {
 			$scheme ) );
 	$event_name = $wpdb->get_var('SELECT event_name FROM ' . EVENTS_DETAIL_TABLE . " WHERE id='" . $event_id . "'");
 	$myPaypal->addField('cmd', '_cart');
+	$myPaypal->addField('bn', 'EventEspresso_SP');//EE3 will blow up if you change this.
 	$myPaypal->addField('upload', '1');
 
 	$myPaypal->addField('currency_code', $paypal_cur);
