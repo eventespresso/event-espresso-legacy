@@ -119,7 +119,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
     //$event_price_x_attendees = number_format( $final_price * $num_people, 2, '.', '' );
     $event_original_cost = $orig_price;
 	
-	if( !function_exists( espresso_seating_chart_override_seat_cost)) {
+	if( !function_exists('espresso_seating_chart_override_seat_cost')) {
 		function espresso_seating_chart_override_seat_cost( $total_cost, $registration_id, $event_id ) {
 			global $wpdb;
 			// Added for seating chart addon
