@@ -83,7 +83,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	}
 
 	// update total cost for primary attendee
-	$total_cost = ((float)$final_price * (int)$quantity) - $attendee->amount_pd + $attendee->total_cost;
+	$total_cost = ((float)$final_price * (int)$quantity) - $attendee->amount_pd;
 	$total_attendees = (int)$quantity;
 	$attendee_prices[] = array( 'option' => $attendee->price_option, 'qty' => (int)$quantity, 'price' => (float)( $final_price - $attendee->amount_pd ));
 	
@@ -92,7 +92,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	$prices = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ));
 	//printr( $prices, '$prices  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 	if ( $prices !== FALSE ) {
-		$total_cost = $attendee->total_cost;
+		$total_cost = 0;
 		$total_attendees = 0;
 		$attendee_prices = array();
 		// ensure prices is an array
