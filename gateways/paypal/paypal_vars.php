@@ -19,7 +19,11 @@ function espresso_display_paypal($payment_data) {
 
 	$paypal_cur = empty($paypal_settings['currency_format']) ? '' : $paypal_settings['currency_format'];
 	$no_shipping = isset($paypal_settings['no_shipping']) ? $paypal_settings['no_shipping'] : '0';
-	$use_sandbox = $paypal_settings['use_sandbox'];
+	if (!empty($event_meta['paypal_sandbox'])) {
+		$use_sandbox = $event_meta['paypal_sandbox'];
+	} else {
+		$use_sandbox = $paypal_settings['use_sandbox'];
+	}
 	if ($use_sandbox) {
 		$myPaypal->enableTestMode();
 	}
@@ -41,7 +45,7 @@ function espresso_display_paypal($payment_data) {
 	foreach ($items as $key => $item) {
 
 		$item_num = $key + 1;
-		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' for ' . $item->event_name . '. Attendee: ' . $item->fname . ' ' . $item->lname);
+		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' ' . __('for', 'event_espresso') . ' ' . $item->event_name . ' ' . __('Attendee:', 'event_espresso') . ' ' . $item->fname . ' ' . $item->lname);
 		$myPaypal->addField('quantity_' . $item_num, absint($item->quantity));
 
 		if ($item->final_price < $item->orig_price) {
@@ -68,16 +72,42 @@ function espresso_display_paypal($payment_data) {
 
 	$myPaypal->addField('business', $paypal_id);
 	if ($paypal_settings['force_ssl_return']) {
-		$home = str_replace("http://", "https://", home_url());
+		$scheme = 'https';
 	} else {
-		$home = home_url();
+		$scheme = NULL;
 	}
 	$myPaypal->addField('charset', "utf-8");
-	$myPaypal->addField('return', $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $registration_id . '&type=paypal');
-	$myPaypal->addField('cancel_return', $home . '/?page_id=' . $org_options['cancel_return']);
-	$myPaypal->addField('notify_url', $home . '/?page_id=' . $org_options['notify_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=paypal');
+	$myPaypal->addField(
+		'return',
+		set_url_scheme(
+			add_query_arg(
+				array(
+					'r_id'=>$registration_id,
+					'type'=>'paypal'),
+				get_permalink($org_options['return_url'] ) ),
+			$scheme ) );
+	$myPaypal->addField(
+		'cancel_return',
+		set_url_scheme(
+			get_permalink(
+				$org_options['cancel_return'] ),
+			$scheme ) );
+  $myPaypal->addField(  
+		'notify_url', 
+		set_url_scheme(
+			add_query_arg(
+				array(
+					'r_id'=>$registration_id,
+					'type'=>'paypal',
+					'id'=>$attendee_id,
+					'event_id'=>$event_id,
+					'attendee_action'=>'post_payment',
+					'form_action'=>'payment'),
+				get_permalink($org_options['notify_url'] ) ),
+			$scheme ) );
 	$event_name = $wpdb->get_var('SELECT event_name FROM ' . EVENTS_DETAIL_TABLE . " WHERE id='" . $event_id . "'");
 	$myPaypal->addField('cmd', '_cart');
+	$myPaypal->addField('bn', 'EventEspresso_SP');//EE3 will blow up if you change this.
 	$myPaypal->addField('upload', '1');
 
 	$myPaypal->addField('currency_code', $paypal_cur);

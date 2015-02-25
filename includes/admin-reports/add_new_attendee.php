@@ -81,9 +81,9 @@ function add_new_attendee($event_id){
 
 
 			//This is the start of the registration form. This is where you can start editing your display.
-			$num_attendees = get_number_of_attendees_reg_limit($event_id, 'num_attendees');//Get the number of attendees
-			$available_spaces = get_number_of_attendees_reg_limit($event_id, 'available_spaces');//Gets a count of the available spaces
-			$number_available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');//Gets the number of available spaces
+			$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $event_id);//Get the number of attendees
+			$available_spaces = apply_filters('filter_hook_espresso_available_spaces_text', $event_id);//Gets a count of the available spaces
+			$number_available_spaces = apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);//Gets the number of available spaces
 
 ?>
 <script>$jaer = jQuery.noConflict();

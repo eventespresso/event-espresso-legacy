@@ -362,7 +362,7 @@ function espresso_event_question_groups($question_groups=array(), $add_attendee_
                 echo __('There seems to be a problem with your questions. Please contact support@eventespresso.com', 'event_espresso');
             }
             if ($espresso_premium != true)
-                echo __('Need more questions?', 'event_espresso') . ' <a href="http://eventespresso.com/download/" target="_blank">' . __('Upgrade Now!', 'event_espresso') . '</a>';
+                echo __('Need more questions?', 'event_espresso') . ' <a href="http://eventespresso.com/pricing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Need+more+questions+ee_version_'.EVENT_ESPRESSO_VERSION.'&utm_campaign=create_event_tab" target="_blank">' . __('Upgrade Now!', 'event_espresso') . '</a>';
 
             ?>
 	</div>

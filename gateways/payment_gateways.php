@@ -52,7 +52,7 @@ function event_espresso_gateways_options() {
 			global $espresso_premium;
 			if ($espresso_premium != true) {
 				?>
-				<h2><?php _e('Need more payment options?', 'event_espresso'); ?><a href="http://eventespresso.com/features/payment-options/" target="_blank"><?php _e('Upgrade Now!', 'event_espresso'); ?></a></h2>
+				<h2><?php _e('Need more payment options?', 'event_espresso'); ?><a href="http://eventespresso.com/pricing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Upgrade+Now!<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=payment_gateways" target="_blank"><?php _e('Upgrade Now!', 'event_espresso'); ?></a></h2>
 			<?php } ?>
 		</div><!-- / .meta-box-sortables -->
 		<?php
@@ -430,4 +430,50 @@ function espresso_update_active_gateways() {
 			do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, 'there was a problem creating .htaccess file to block direct access to logs folder');
 	} else
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '.htaccess file already exists in logs folder');
+}
+
+function espresso_migrate_atos_gateway() {
+	// script to help handle the migration of the atos gateway from core to /wp-content/uploads/espresso/gateways
+	// hooked to plugin activation
+	
+	$active_gateways = get_option( 'event_espresso_active_gateways', array() );
+	if ( !empty($active_gateways ) ) {
+		if ( array_key_exists( 'atos', $active_gateways ) ) {
+			// unset the atos option if it has not been moved to /wp-content/uploads/espresso/gateways already
+			$uploaded_atos_file = EVENT_ESPRESSO_GATEWAY_DIR . 'atos/settings.php';
+			if (file_exists($uploaded_atos_file)) {
+				update_option( 'espresso_atos_migration', true);
+			} else {
+				// unset the active gateway setting
+				unset($active_gateways['atos']);
+				update_option('event_espresso_active_gateways', $active_gateways);
+				add_option( 'espresso_atos_migration', false);
+			}
+		}
+	} else { // no active gateways have been set yet
+		update_option( 'espresso_atos_migration', true );
+	}
+}
+
+function espresso_migrate_atos_admin_notice() {
+	global $current_user ;
+	$user_id = $current_user->ID;
+	// Check that the user hasn't already clicked to ignore the message and that they're an admin
+	if ( ! get_user_meta($user_id, 'espresso_atos_ignore_notice') && current_user_can( 'activate_plugins' ) ) {
+		$hide_url = add_query_arg( 'espresso_atos_nag_ignore', '0' );
+		$text = sprintf( __( 'The <strong>Atos</strong> gateway has been removed from Event Espresso core in 3.1.37. Please download and upload the Atos gateway to /wp-content/uploads/espresso/gateways. Please see <a href="%1$s">our documentation</a> for more information. | <a href="%2$s">Hide this message</a>', 'event_espresso' ), 'http://eventespresso.com/wiki/payment-settings-ee3/#ATOS', $hide_url );
+		echo '<div class="updated"><p>' . $text . '</p></div>';
+	}
+}
+
+add_action('admin_init', 'espresso_atos_nag_ignore');
+
+function espresso_atos_nag_ignore() {
+	global $current_user;
+    $user_id = $current_user->ID;
+    /* If user clicks to ignore the notice, add that to their user meta */
+    if ( isset($_GET['espresso_atos_nag_ignore']) && '0' == $_GET['espresso_atos_nag_ignore'] ) {
+		add_user_meta($user_id, 'espresso_atos_ignore_notice', 'true', true);
+		add_option( 'espresso_atos_migration', false);	
+	}
 }

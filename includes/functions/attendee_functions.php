@@ -25,14 +25,14 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 			$questions_in .= $g_id . ',';
 		}
 		$questions_in = substr($questions_in, 0, -1);
-		
-		$SQL = "SELECT q.*, q.id AS qstn_id, qg.id, qg.group_name ";
+
+		$SQL = "SELECT q.*, q.id AS %s, qg.id, qg.group_name ";
 		$SQL .= "FROM " . EVENTS_QST_GROUP_TABLE . " qg ";
 		$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr ON qg.id = qgr.group_id ";
 		$SQL .= "	JOIN " . EVENTS_QUESTION_TABLE . " q ON q.id = qgr.question_id ";
 		$SQL .= 'WHERE qg.id IN ('.$questions_in.') ORDER BY qg.id, q.id ASC';
 
-		$questions = $wpdb->get_results( $wpdb->prepare( $SQL, NULL ));
+		$questions = $wpdb->get_results( $wpdb->prepare( $SQL, 'qstn_id' ) );
 //		echo '<h4>LQ : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //		printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 
@@ -45,7 +45,7 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 			// cycle thru questions
 			foreach ($questions as $question) {
 				//printr( $question, '$question  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-				// depending on the quesion, it's POST key may be different
+				// depending on the question, it's POST key may be different
 				$question_type = !empty($response_source[$question->question_type . '_' . $question->qstn_id]) ? $response_source[$question->question_type . '_' . $question->qstn_id] :'';			
 				//echo '<h4>$question_type : ' . $question_type . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 				// so if we haven't already displayed this question
@@ -60,18 +60,14 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 						case "DROPDOWN" :
 						case "SINGLE" :
 							
-							if ($question->admin_only != 'Y') {
 								$post_val = ( $question->system_name != '' ) ? $response_source[$question->system_name] : $question_type;
 								$post_val = apply_filters( 'filter_hook_espresso_form_question_response', trim( $post_val ), $question, $attendee_id );
-						} else {
-								$post_val = '';
-							}
-							
+						
 							break;
 						case "MULTIPLE" :
 						
 							$post_val = '';
-							if ( ! empty( $response_source[$question->question_type . '_' . $question->qstn_id] ) && $question->admin_only != 'Y' ) {
+							if ( ! empty( $response_source[$question->question_type . '_' . $question->qstn_id] ) ) {
 								for ( $i = 0; $i < count( $response_source[$question->question_type . '_' . $question->qstn_id] ); $i++ ) {
 									$val = trim( $response_source[$question->question_type . '_' . $question->qstn_id][$i] );
 									$val =  apply_filters( 'filter_hook_espresso_form_question_response', $val, $question, $attendee_id );

@@ -413,7 +413,8 @@ function edit_attendee_record() {
 		$SQL .= "JOIN " . EVENTS_DETAIL_TABLE . " evt ON att.event_id = evt.id ";
 		// are we looking for an additional attendee ?
 		if ( isset( $_REQUEST['attendee_num'] ) && $_REQUEST['attendee_num'] > 1 && isset( $_REQUEST['id'] )) {
-			$SQL .= "WHERE  att.id = " . ee_sanitize_value( $_REQUEST['id'] );
+			$SQL .= "WHERE  att.id = %d";
+			$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, ee_sanitize_value( $_REQUEST['id'] ) ));
 		} else {
 			// check for multi reg & additional attendees by first finding primary attendee
 			$SQL2 = "SELECT primary_registration_id FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE registration_id = %s";
@@ -424,10 +425,10 @@ function edit_attendee_record() {
 				$reg_ids = "'" . implode("','", $reg_ids) . "'";
 			} else {
 				$reg_ids = "'" . ee_sanitize_value( $_REQUEST['registration_id'] ) . "'";
-			}		
+			}	
 			$SQL .= " WHERE registration_id IN ( $reg_ids ) ORDER BY att.id";
+			$attendees = $wpdb->get_results( $SQL );
 		}
-		$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, NULL ));
 		
 		foreach ($attendees as $attendee) {
 			if ( $counter == 0 ) {
@@ -540,7 +541,7 @@ function edit_attendee_record() {
 <div class="metabox-holder">
 	<div class="postbox">
 		<h3>
-			<?php _e('Registration Id <a href="admin.php?page=events&event_admin_reports=edit_attendee_record&event_id=' . $event_id . '&registration_id=' . $registration_id . '&form_action=edit_attendee">#' . $registration_id . '</a> | ID #' . $id . ' | Name: ' . $fname . ' ' . $lname . ' | Registered For:', 'event_espresso'); ?>
+			<?php echo __('Registration Id', 'event_espresso'). ' ' . '<a href="admin.php?page=events&event_admin_reports=edit_attendee_record&event_id=' . $event_id . '&registration_id=' . $registration_id . '&form_action=edit_attendee">' . $registration_id . '</a> | ' . __('ID #', 'event_espresso') . $id . ' | ' . __('Name:', 'event_espresso') . ' ' . $fname . ' ' . $lname . ' | ' . __('Registered For:', 'event_espresso'); ?>
 			<a href="admin.php?page=events&event_admin_reports=list_attendee_payments&event_id=<?php echo $event_id ?>"><?php echo stripslashes_deep($event_name) ?></a> - <?php echo $event_date; ?>
 		</h3>
 		<div class="inside">
@@ -616,7 +617,7 @@ function edit_attendee_record() {
 													$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
 													//$SQL .= "AND ( at.attendee_id IS NULL OR at.attendee_id = %d ) ";
 													$SQL .= $FILTER . " ";
-													$SQL .= "ORDER BY qg.id, q.id ASC";
+													$SQL .= apply_filters('espresso_edit_attendee_questions_order_by', "ORDER BY qg.id, q.sequence, q.id ASC");
 													//echo "sql:".$wpdb->prepare( $SQL, $id );
 													$questions = $wpdb->get_results( $SQL);
 													
@@ -778,13 +779,12 @@ function edit_attendee_record() {
 															// number of tickets currently purchased
 															$quantity = ! empty( $quantity ) ? $quantity : 1; 
 															 // availalbe spaces left for event
-															$available_spaces = get_number_of_attendees_reg_limit( $event_id, 'number_available_spaces');
-															if ( $available_spaces != 'Unlimited' ) {
-																// first add our purchased tickets ($quantity) back into available spaces 
-																// ( becuase a sold out show incluldes these tickets here, so admin should be allowed to play with these numbers - think about it )
-																$available_spaces += $quantity;
-																$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
-															}
+															$available_spaces = apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);
+															// first add our purchased tickets ($quantity) back into available spaces 
+															// ( becuase a sold out show incluldes these tickets here, so admin should be allowed to play with these numbers - think about it )
+															$available_spaces += $quantity;
+															$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
+															
 															// final check to make sure that attendee limit has to at LEAST be the number of tickets this attendee has already purchased
 															// otherwise the ticket quantity selector may display less than what this attendee has already purchased													
 															$attendee_limit = $attendee_limit < $quantity ? $quantity : $attendee_limit;
@@ -813,7 +813,7 @@ function edit_attendee_record() {
 									</li>
 									<li>
 										<br/>
-										<input type="submit" name="submit_ticket_prices" class="button-primary action"  value="Update Price" />
+										<input type="submit" name="submit_ticket_prices" class="button-primary action"  value="<?php _e('Update Price', 'event_espresso'); ?>" />
 									</li>
 								</ul>
 							</fieldset>

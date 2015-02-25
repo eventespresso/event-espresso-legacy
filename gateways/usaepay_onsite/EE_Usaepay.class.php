@@ -792,7 +792,7 @@ class EE_umTransaction {
 							$result=curl_exec($ch);
 							if(strlen($result)) {
 								?>
-								SSL certificate for VeriSign was validated sucessfully. This would indicate that you have a root CA bundle installed but that it
+								SSL certificate for VeriSign was validated successfully. This would indicate that you have a root CA bundle installed but that it
 								is outdated. See below.
 								<?php
 							} else {

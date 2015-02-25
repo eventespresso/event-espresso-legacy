@@ -63,6 +63,7 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 		$pieces = explode('-', $month_range, 3);
 		$year_r = $pieces[0];
 		$month_r = $pieces[1];
+		$days_this_month = date('t', strtotime($month_range));
 	}
 
 	//Check if the venue manager is turned on
@@ -143,19 +144,19 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 					break;
 				case 'IA' : // Inactive
 						$SQL .= 'WHERE ( e.is_active = "N" AND e.event_status != "D" ) OR ( e.end_date < "' . $curdate . '" AND e.event_status != "O" )';
-						// and if we are NOT filtering the date in any other way, then only retreive currently running events
+						// and if we are NOT filtering the date in any other way, then only retrieve currently running events
 						//$SQL .=  ! $month_range && ! $today_filter ? ' OR e.end_date < "' . $curdate . '" )' : ' )';
 					break;
 				case 'A' : // Active
 						$SQL .= 'WHERE e.is_active = "Y" AND  ( e.event_status = "' . $event_status . '" OR e.event_status = "O" )';
-						// and if we are NOT filtering the date in any other way, then only retreive currently running events
+						// and if we are NOT filtering the date in any other way, then only retrieve currently running events
 						$SQL .=  ! $month_range && ! $today_filter ? ' AND ( e.end_date >= "' . $curdate . '" OR e.event_status = "O" )' : '';
 					break;							
 				case 'P' : // Pending
 				case 'R' : // Draft
 				case 'S' : // Waitlist
 						$SQL .= 'WHERE e.is_active = "Y" AND  e.event_status = "' . $event_status . '"';
-						// and if we are NOT filtering the date in any other way, then only retreive currently running events
+						// and if we are NOT filtering the date in any other way, then only retrieve currently running events
 						$SQL .=  ! $month_range && ! $today_filter ? ' AND ( e.end_date >= "' . $curdate . '" OR e.event_status = "O" )' : '';
 					break;							
 				case 'O' : // Ongoing
@@ -169,7 +170,7 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 		} else {
 			// show ACTIVE events
 			$SQL .= 'WHERE e.is_active = "Y" AND ( e.event_status = "A" OR e.event_status = "O" )';
-			// and if we are NOT filtering the date in any other way, then only retreive currently running events
+			// and if we are NOT filtering the date in any other way, then only retrieve currently running events
 			if ( $espresso_premium == TRUE ){
 				$SQL .=  ! $month_range && ! $today_filter ? ' AND ( e.end_date >= "' . $curdate . '" OR e.event_status = "O" )' : '';
 			}
@@ -187,6 +188,8 @@ function espresso_generate_events_page_list_table_sql( $count = FALSE, $attendee
 	$SQL .=! $count && ! $attendees && $use_venue_manager && $group_admin_locales ? ' AND l.locale_id IN (' . $group_admin_locales . ') ' : '';
 	// Attendee Payment Status
 	$SQL .= ! $count && $attendees && $payment_status ? ' AND a.payment_status = "' . $payment_status . '"' : '';
+	// Filter to allow the user to excluded attendees based on payment status within the default attendee report
+	if (!$count && $attendees && !$payment_status) { $SQL .=  apply_filters('espresso_attendee_report_payment_status_where', ''); }
 	//Month filter
 	$SQL .= $month_range && $attendees && ! $event_id ? ' AND a.date BETWEEN "' . $year_r . '-' . $month_r . '-01" AND "' . $year_r . '-' . $month_r . '-' . $days_this_month . '"' : '';
 	$SQL .= $month_range && ! $attendees && ! $event_id ? ' AND e.start_date BETWEEN "' . $year_r . '-' . $month_r . '-01" AND "' . $year_r . '-' . $month_r . '-' . $days_this_month . '"' : '';

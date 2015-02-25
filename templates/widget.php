@@ -22,17 +22,8 @@ if (!class_exists('Event_Espresso_Widget')) {
 
             global $wpdb, $org_options;
             /* Our variables from the widget settings. */
-
-            $title = apply_filters('widget_title', $instance['title']);
-
-            /* Before widget (defined by themes). */
-            echo $before_widget;
-			
-            /* Display the widget title if one was input (before and after defined by themes). */
-            if ($title)
-                echo $before_title . $title . $after_title;
-
-            if ($instance['category_name'] != '') {
+            
+			if ($instance['category_name'] != '') {
                 $type = 'category';
             }
 
@@ -43,7 +34,7 @@ if (!class_exists('Event_Espresso_Widget')) {
             $show_deleted = $instance['show_deleted'] == 'false' ? " AND e.event_status != 'D' " : '';
             $show_recurrence = $instance['show_recurrence'] == 'false' ? " AND e.recurrence_id = '0' " : '';
             $limit = $instance['limit'] > 0 ? " LIMIT 0," . $instance['limit'] . " " : ' LIMIT 0,5 ';
-            //$order_by = $order_by != 'NULL'? " ORDER BY ". $order_by ." ASC " : " ORDER BY date(start_date), id ASC ";
+
             $order_by = " ORDER BY date(start_date), id ASC ";
 
             if (isset($type) && $type == 'category') {
@@ -66,13 +57,28 @@ if (!class_exists('Event_Espresso_Widget')) {
             $sql .= $order_by;
             $sql .= $limit;
 
-
+			//Retrieve the events (if any)
             $events = $wpdb->get_results($sql);
+			
+			//If no events, don't show the widget
+			if (count($events) == 0)
+				return;
+			
+			//Get the widget title
+			$title = apply_filters('widget_title', $instance['title']);
 
+            /* Before widget (defined by themes). */
+            echo $before_widget;
+
+            /* Display the widget title if one was input (before and after defined by themes). */
+            if ($title)
+                echo $before_title . $title . $after_title;
+				
             //print_r($events);
             //event_espresso_get_event_details($sql);
 			echo '<ol>';
             foreach ($events as $event) {
+				
                 $event->id = $event->id;
                 $event->event_name = isset($event->event_name) ? $event->event_name : '';
                 $event->start_date = isset($event->start_date) ? $event->start_date : '';
@@ -110,7 +116,7 @@ if (!class_exists('Event_Espresso_Widget')) {
                 $status_display_open = $status['status'] == 'REGISTRATION_OPEN' ? ' - ' . $status['display_custom'] : '';
 
                 //You can also display a custom message. For example, this is a custom registration not open message:
-                $status_display_custom_closed = $status['status'] == 'REGISTRATION_CLOSED' ? ' - <span class="espresso_closed">' . __('Regsitration is closed', 'event_espresso') . '</span>' : '';
+                $status_display_custom_closed = $status['status'] == 'REGISTRATION_CLOSED' ? ' - <span class="espresso_closed">' . __('Registration is closed', 'event_espresso') . '</span>' : '';
 
                 //End
 
@@ -124,7 +130,16 @@ if (!class_exists('Event_Espresso_Widget')) {
                         case 'NOT_ACTIVE':
                             //Don't show the event if any of the above are true
                             break;
-
+						case 'DRAFT':
+							//Don't show the event if event is draft.
+							break;
+                        case 'PENDING':
+                                if (current_user_can('administrator') || function_exists('espresso_member_data') && espresso_can_view_event($event_id) == true) {
+                                    ?>
+                                    <li  class="pending_event"><a href="<?php echo $registration_url; ?>"><?php echo stripslashes_deep($event->event_name) ?> - <span class="widget-event-date"><?php echo event_date_display($event->start_date) ?></span></a>
+                                    <?php
+                                }
+                            break;
                         default:
                             ?>
                             <li><a href="<?php echo $registration_url; ?>"><?php echo stripslashes_deep($event->event_name) ?> - <span class="widget-event-date"><?php echo event_date_display($event->start_date) ?></span></a>

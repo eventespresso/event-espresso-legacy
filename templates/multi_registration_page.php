@@ -152,33 +152,28 @@ if (!function_exists('multi_register_attendees')) {
 			
 //*************  This is the start of the registration form. This is where you can start editing your display. *************
 			
-			//Get the number of attendees
-			$num_attendees = get_number_of_attendees_reg_limit($event_id, 'num_attendees'); 
-			//Gets a count of the available spaces
-			$available_spaces = get_number_of_attendees_reg_limit($event_id, 'available_spaces'); 
-			//Gets the number of available spaces
-			$number_available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces'); 
-			//Please visit http://eventespresso.com/forums/?p=247 for available parameters for the get_number_of_attendees_reg_limit() function.
-			
-			if ($available_spaces == "Unlimited" || $available_spaces >= $number_available_spaces) {
+			$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $event_id);//Get the number of attendees
+			$available_spaces = apply_filters('filter_hook_espresso_available_spaces_text', $event_id);//Gets a count of the available spaces
+			$number_available_spaces = apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);//Gets the number of available spaces
+			if ($available_spaces == 'Unlimited' || $available_spaces >= $number_available_spaces) {
 				//(Shows the regsitration form if enough spaces exist)
 				
 				// SOLD OUT !!!
 				if ($num_attendees >= $reg_limit) {
 					?>
-					<div class="espresso_event_full event-display-boxes" id="espresso_event_full-<?php echo $event_id; ?>">
-						<h3 class="event_title"><?php echo stripslashes_deep($event_name) ?></h3>
-						<p class="event_full"><strong><?php _e('We are sorry but this event has reached the maximum number of attendees!', 'event_espresso'); ?></strong></p>
-						<p class="event_full"><strong><?php _e('Please check back in the event someone cancels.', 'event_espresso'); ?></strong></p>
-						<p class="num_attendees"><?php _e('Current Number of Attendees:', 'event_espresso'); ?> <?php echo $num_attendees ?></p>
+					<div class="<?php espresso_template_css_class('event_full_event_display_boxes','espresso_event_full event-display-boxes'); ?>" id="espresso_event_full-<?php echo $event_id; ?>">
+						<h3 class="<?php espresso_template_css_class('event_title','event_title'); ?>"><?php echo stripslashes_deep($event_name) ?></h3>
+						<p class="<?php espresso_template_css_class('event_full','event_full'); ?>"><strong><?php _e('We are sorry but this event has reached the maximum number of attendees!', 'event_espresso'); ?></strong></p>
+						<p class="<?php espresso_template_css_class('event_full','event_full'); ?>"><strong><?php _e('Please check back in the event someone cancels.', 'event_espresso'); ?></strong></p>
+						<p class="<?php espresso_template_css_class('num_attendees','num_attendees'); ?>"><?php _e('Current Number of Attendees:', 'event_espresso'); ?> <?php echo $num_attendees ?></p>
 
 						<?php
 						// is there an overflow event ????
 						if (($num_attendees >= $reg_limit) && ($allow_overflow == 'Y' && $overflow_event_id != 0)) {
 						?>
-							<p id="register_link-<?php echo $overflow_event_id ?>" class="register-link-footer">
+							<p id="register_link-<?php echo $overflow_event_id ?>" class="<?php espresso_template_css_class('register_link_footer','register-link-footer'); ?>">
 								<a id="a_register_link-<?php echo $overflow_event_id ?>" 
-									class="a_register_link" 
+									class="<?php espresso_template_css_class('a_register_link','a_register_link'); ?>" 
 									href="<?php echo espresso_reg_url($overflow_event_id); ?>" 
 									title="<?php echo stripslashes_deep($event_name) ?>"
 								>

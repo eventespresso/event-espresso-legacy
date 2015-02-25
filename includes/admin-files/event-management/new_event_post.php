@@ -1,3 +1,13 @@
+<?php
+if (function_exists('espresso_member_data')) {
+	global $espresso_manager;
+	$is_admin = (espresso_member_data('role') == "administrator" || espresso_member_data('role') =='espresso_event_admin')? true:false;
+	if ($espresso_manager['event_manager_create_post'] == 'N' && $is_admin == false){
+		return;	
+	}
+}
+?>
+
 <div style="display: block;" id="event-post" class="postbox">
     <div class="handlediv" title="Click to toggle"><br />
     </div>
@@ -8,7 +18,10 @@
         <p>
           <label>  <?php _e('Create a post for this event?', 'event_espresso'); ?></label>
 
-            <?php echo select_input('create_post', $values, 'N'); ?> 
+            <?php 
+                $create_post = apply_filters('filter_hook_espresso_default_create_post_option', 'N');
+                echo select_input('create_post', $values, $create_post); 
+            ?> 
 					</p>
         <input type="hidden" name="post_id" value="<?php echo isset($post_id) ? $post_id : ''; ?>" />
         <?php

@@ -81,7 +81,7 @@ function add_event_to_db($recurrence_arr = array()) {
 		$event_code			= uniqid($current_user->ID . '-');
 		$event_name			= !empty($_REQUEST['event']) ? sanitize_text_field($_REQUEST['event']) : $event_code;
 		if (!isset($_REQUEST['event_identifier']) || $_REQUEST['event_identifier'] == ''){
-			$event_identifier = sanitize_title_with_dashes($event_name . '-' . $event_code);
+			$event_identifier = sanitize_title_with_dashes(remove_accents($event_name . '-' . $event_code));
 		}else{
 			$event_identifier = sanitize_title_with_dashes($_REQUEST['event_identifier']) . $event_code;
 		}
@@ -364,10 +364,14 @@ function add_event_to_db($recurrence_arr = array()) {
 		if (isset($_REQUEST['event_category']) && $_REQUEST['event_category'] != '') {
 			foreach ($_REQUEST['event_category'] as $k => $v) {
 				if ($v != '') {
-					$sql_cat = "INSERT INTO " . EVENTS_CATEGORY_REL_TABLE . " (event_id, cat_id) VALUES ('" . $last_event_id . "', '" . (int)$v . "')";
-					if ( !$wpdb->query($wpdb->prepare($sql_cat, NULL)) ) {
+
+					$sql_cat = array('event_id' => $last_event_id, 'cat_id' => (int)$v);
+					$sql_cat_data = array('%d', '%d');
+						
+					if ( !$wpdb->insert(EVENTS_CATEGORY_REL_TABLE, $sql_cat, $sql_cat_data) ) {
 						$error = true;
 					}
+
 					//We get the category id's of the event and put them in events_detail_table.category_id as a well-formatted string (id,n id)
 					$string_cat.=$v.",";
 				}
@@ -380,8 +384,14 @@ function add_event_to_db($recurrence_arr = array()) {
 				$cleaned_string_cat=implode(",", $tmp);
 				trim($cleaned_string_cat);
 	
-				$sql_insert_event_detail_category_id="UPDATE ".EVENTS_DETAIL_TABLE." SET category_id = '".$cleaned_string_cat."' WHERE id='" . $last_event_id . "'";
-				$wpdb->query($wpdb->prepare($sql_insert_event_detail_category_id, NULL));
+				$sql=array('category_id'=>$cleaned_string_cat); 
+				$update_id = array('id'=> $last_event_id);
+				$sql_data = array('%d');
+						
+				if (!$wpdb->update( EVENTS_DETAIL_TABLE, $sql, $update_id, $sql_data, array( '%d' ) )){
+					$error = true;
+				}
+
 			}
 
 		}
@@ -390,9 +400,13 @@ function add_event_to_db($recurrence_arr = array()) {
 		if (isset($_REQUEST['event_person']) && !empty($_REQUEST['event_person'])) {
 			foreach ($_REQUEST['event_person'] as $k => $v) {
 				if ($v != '') {
-					$sql_ppl = "INSERT INTO " . EVENTS_PERSONNEL_REL_TABLE . " (event_id, person_id) VALUES ('" . $last_event_id . "', '" . $v . "')";
-					//echo "$sql_ppl <br>";
-					$wpdb->query($wpdb->prepare($sql_ppl, NULL));
+
+					$sql_ppl = array('event_id' => $last_event_id, 'person_id' => $v);
+					$sql_ppl_data = array('%d', '%d');
+						
+					if ( !$wpdb->insert(EVENTS_PERSONNEL_REL_TABLE, $sql_ppl, $sql_ppl_data) ) {
+						$error = true;
+					}
 				}
 			}
 		}
@@ -409,20 +423,28 @@ function add_event_to_db($recurrence_arr = array()) {
 		if (isset($_REQUEST['venue_id']) && !empty($_REQUEST['venue_id'])) {
 			foreach ($_REQUEST['venue_id'] as $k => $v) {
 				if ($v != '' && $v != 0) {
-					$sql_venues = "INSERT INTO " . EVENTS_VENUE_REL_TABLE . " (event_id, venue_id) VALUES ('" . $last_event_id . "', '" . $v . "')";
-					$wpdb->query($wpdb->prepare($sql_venues, NULL));
+					
+					$sql_venues = array('event_id' => $last_event_id, 'venue_id' => $v);
+					$sql_venues_data = array('%d', '%d');
+						
+					if ( !$wpdb->insert(EVENTS_VENUE_REL_TABLE, $sql_venues, $sql_venues_data) ) {
+						$error = true;
+					}
 				}
 			}
 		}
 		
 		//Process the discounts
 		if (isset($_REQUEST['event_discount']) && !empty($_REQUEST['event_discount']) && $_REQUEST['use_coupon_code']=='Y') {
-			//if they have specified to use specific coupon codes, THEN we add entries ot teh discount rel table
+			//if they have specified to use specific coupon codes, THEN we add entries ot the discount rel table
 			//otherwise we shouldn't
 			foreach ($_REQUEST['event_discount'] as $k => $v) {
 				if ($v != '') {
-					$sql_cat = "INSERT INTO " . EVENTS_DISCOUNT_REL_TABLE . " (event_id, discount_id) VALUES ('" . $last_event_id . "', '" . $v . "')";
-					if ( !$wpdb->query($wpdb->prepare($sql_cat, NULL)) ) {
+
+					$sql_cat = array('event_id' => $last_event_id, 'discount_id' => $v);
+					$sql_cat_data = array('%d', '%d');
+						
+					if ( !$wpdb->insert(EVENTS_DISCOUNT_REL_TABLE, $sql_cat, $sql_cat_data) ) {
 						$error = true;
 					}
 				}
@@ -435,8 +457,11 @@ function add_event_to_db($recurrence_arr = array()) {
 				$time_qty = ( isset( $_REQUEST[ 'time_qty' ] ) && strlen( trim( $_REQUEST['time_qty'][$k] ) ) > 0 )? "'" . $_REQUEST['time_qty'][$k] . "'" : '0' ;
 				$v = !empty($v) ? $v : $start_time;
 				$_REQUEST['end_time'][$k] = !empty($_REQUEST['end_time'][$k]) ? $_REQUEST['end_time'][$k] : $end_time;
-				$sql3 = "INSERT INTO " . EVENTS_START_END_TABLE . " (event_id, start_time, end_time, reg_limit) VALUES ('" . $last_event_id . "', '" . event_date_display($v, 'H:i') . "', '" . event_date_display($_REQUEST['end_time'][$k], 'H:i') . "', " . $time_qty . ")";
-				if ( !$wpdb->query( $wpdb->prepare($sql3, NULL) ) ) {
+
+				$sql_time = array('event_id' => $last_event_id, 'start_time' => event_date_display($v, 'H:i') , 'end_time' => event_date_display($_REQUEST['end_time'][$k], 'H:i'), 'reg_limit' => $time_qty );
+				$sql_time_data = array('%d', '%s', '%s', '%d');
+					
+				if ( !$wpdb->insert(EVENTS_START_END_TABLE, $sql_time, $sql_time_data) ) {
 					$error = true;
 				}
 			}
@@ -450,8 +475,6 @@ function add_event_to_db($recurrence_arr = array()) {
 					$price_type = !empty($_REQUEST['price_type'][$k]) ? sanitize_text_field(stripslashes_deep($_REQUEST['price_type'][$k])) : __('General Admission', 'event_espresso');
 					$member_price_type = !empty($_REQUEST['member_price_type'][$k]) ? sanitize_text_field(stripslashes_deep($_REQUEST['member_price_type'][$k])) : __('Members Admission', 'event_espresso');
 					$member_price = !empty($_REQUEST['member_price'][$k]) ? $_REQUEST['member_price'][$k] : $v;
-					//$sql_price = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, surcharge_type, price_type, member_price, member_price_type) VALUES ('" . $last_event_id . "', '" . $v . "', '" . $_REQUEST['surcharge'][$k] . "', '" . $_REQUEST['surcharge_type'][$k] . "', '" . $price_type . "', '" . $member_price . "', '" . $member_price_type . "')";
-					//echo "$sql3 <br>";
 					
 					$sql_price = array('event_id' => $last_event_id, 'event_cost' => $v, 'surcharge' => $_REQUEST['surcharge'][$k], 'surcharge_type' => $_REQUEST['surcharge_type'][$k], 'price_type' => $price_type, 'member_price' => $member_price, 'member_price_type' => $member_price_type );
 					$sql_price_data = array('%d', '%s', '%s', '%s', '%s', '%s', '%s');
@@ -462,8 +485,11 @@ function add_event_to_db($recurrence_arr = array()) {
 				}
 			}
 		} elseif (isset($_REQUEST['event_cost']) && $_REQUEST['event_cost'][0] == 0) {
-			$sql_price = "INSERT INTO " . EVENTS_PRICES_TABLE . " (event_id, event_cost, surcharge, price_type, member_price, member_price_type) VALUES ('" . $last_event_id . "', '0.00', '0.00', '" . __('Free', 'event_espresso') . "', '0.00', '" . __('Free', 'event_espresso') . "')";
-			if ( !$wpdb->query($wpdb->prepare($sql_price, NULL)) ) {
+			
+			$sql_price = array('event_id' => $last_event_id, 'event_cost' => '0.00', 'surcharge' => '0.00', 'price_type' => __('Free', 'event_espresso'), 'member_price' => '0.00', 'member_price_type' => __('Free', 'event_espresso') );
+			$sql_price_data = array('%d', '%s', '%s', '%s', '%s', '%s');
+
+			if ( !$wpdb->insert(EVENTS_PRICES_TABLE, $sql_price, $sql_price_data) ) {
 				$error = true;
 			}
 		}
@@ -513,7 +539,7 @@ function add_event_to_db($recurrence_arr = array()) {
 			add_post_meta($post_id, 'event_meta', $event_meta);
 			add_post_meta($post_id, 'event_identifier', $event_identifier);
 			add_post_meta($post_id, 'event_start_date', $start_date);
-			add_post_meta($post_id, 'event_end_date', $end_date);
+			add_post_meta($post_id, 'event_start_date', $start_date . ' ' . date("H:i", strtotime($start_time)));
 			add_post_meta($post_id, 'event_location', $event_location);
 			add_post_meta($post_id, 'event_thumbnail_url', $event_thumbnail_url);
 			add_post_meta($post_id, 'virtual_url', $virtual_url);

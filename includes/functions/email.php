@@ -1,11 +1,12 @@
 <?php
 
-function replace_shortcodes($message, $data) {
-	global $wpdb, $org_options;
-	$payment_data = espresso_get_total_cost(array('attendee_session'=>$data->attendee->attendee_session));
-	$event_cost = $payment_data['total_cost'];
-	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	$SearchValues = array(
+if (!function_exists('espresso_replace_shortcodes')) {
+	function espresso_replace_shortcodes($message, $data) {
+		global $wpdb, $org_options;
+		$payment_data = espresso_get_total_cost(array('attendee_session'=>$data->attendee->attendee_session));
+		$event_cost = $payment_data['total_cost'];
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+		$SearchValues = array(
 			"[event_id]",
 			"[event_identifier]",
 			"[registration_id]",
@@ -53,9 +54,9 @@ function replace_shortcodes($message, $data) {
 			"[seating_tag]",
 			"[edit_attendee_link]",
 			"[add_to_calendar]"
-	);
+		);
 
-	$ReplaceValues = array(
+		$ReplaceValues = array(
 			$data->attendee->event_id,
 			$data->event->event_identifier,
 			$data->attendee->registration_id,
@@ -120,37 +121,38 @@ function replace_shortcodes($message, $data) {
 					'location' => $data->location,
 				), '', '', TRUE
 			)
-	);
-
-	//Get the questions and answers
-	$questions = $wpdb->get_results("select qst.question as question, ans.answer as answer from " . EVENTS_ANSWER_TABLE . " ans inner join " . EVENTS_QUESTION_TABLE . " qst on ans.question_id = qst.id where ans.attendee_id = " . $data->attendee->id, ARRAY_A);
-	//echo '<p>'.print_r($questions).'</p>';
-	if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->question != NULL) {
-		foreach ($questions as $q) {
-			$k = stripslashes( $q['question'] );
-			$v = stripslashes( $q['answer'] );
-
-			//Output the question
-			array_push($SearchValues, "[" . 'question_' . $k . "]");
-			array_push($ReplaceValues, $k);
-
-			//Output the answer
-			array_push($SearchValues, "[" . 'answer_' . $k . "]");
-			array_push($ReplaceValues, rtrim($v, ",") );
-		}
-	}
-	//Get the event meta
-	//echo '<p>'.print_r($data->event->event_meta).'</p>';
-	if (!empty($data->event->event_meta)) {
-		foreach ($data->event->event_meta as $k => $v) {
-			if (!empty($k) && !is_array($v)) {
-				array_push($SearchValues, "[" . $k . "]");
-				array_push($ReplaceValues, stripslashes_deep($v));
+		);
+	
+		//Get the questions and answers
+		$questions = $wpdb->get_results("select qst.question as question, ans.answer as answer from " . EVENTS_ANSWER_TABLE . " ans inner join " . EVENTS_QUESTION_TABLE . " qst on ans.question_id = qst.id where ans.attendee_id = " . $data->attendee->id, ARRAY_A);
+		//echo '<p>'.print_r($questions).'</p>';
+		if ($wpdb->num_rows > 0 && $wpdb->last_result[0]->question != NULL) {
+			foreach ($questions as $q) {
+				$k = stripslashes( $q['question'] );
+				$v = stripslashes( $q['answer'] );
+	
+				//Output the question
+				array_push($SearchValues, "[" . 'question_' . $k . "]");
+				array_push($ReplaceValues, $k);
+	
+				//Output the answer
+				array_push($SearchValues, "[" . 'answer_' . $k . "]");
+				array_push($ReplaceValues, rtrim($v, ",") );
 			}
 		}
+		//Get the event meta
+		//echo '<p>'.print_r($data->event->event_meta).'</p>';
+		if (!empty($data->event->event_meta)) {
+			foreach ($data->event->event_meta as $k => $v) {
+				if (!empty($k) && !is_array($v)) {
+					array_push($SearchValues, "[" . $k . "]");
+					array_push($ReplaceValues, stripslashes_deep($v));
+				}
+			}
+		}
+		//Perform the replacement
+		return str_replace($SearchValues, $ReplaceValues, $message);
 	}
-	//Perform the replacement
-	return str_replace($SearchValues, $ReplaceValues, $message);
 }
 
 //Build the email
@@ -334,6 +336,7 @@ function espresso_generate_attendee_event_list( $data ) {
 	$SQL .= 'LEFT JOIN ' . EVENTS_DETAIL_TABLE . ' evt ON evt.id=att.event_id ';	
 	$SQL .= $use_venue ? " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = evt.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id " : '';	
 	$SQL .= 'WHERE att.email = %s AND att.attendee_session = %s';
+	$SQL .= 'ORDER BY att.start_date, att.event_time';
 
 	$events = $wpdb->get_results( $wpdb->prepare( $SQL, $data->attendee->email, $data->attendee->attendee_session ));
 	
@@ -384,10 +387,10 @@ function espresso_prepare_email($data) {
     }
 
 	//Get the email subject
-	$email_subject = replace_shortcodes($email_subject, $data);
+	$email_subject = espresso_replace_shortcodes($email_subject, $data);
 
 	//Replace email shortcodes
-	$_replaced = replace_shortcodes($conf_mail, $data);
+	$_replaced = espresso_replace_shortcodes($conf_mail, $data);
 
 	//Build the HTML
 	$message_top = "<html><body>";

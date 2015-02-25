@@ -18,7 +18,12 @@ function espresso_process_paypal($payment_data) {
 	echo '<!--Event Espresso PayPal Gateway Version ' . $myPaypal->gateway_version . '-->';
 	$myPaypal->ipnLog = TRUE;
 	$paypal_settings = get_option('event_espresso_paypal_settings');
-	if ($paypal_settings['use_sandbox']) {
+	if (!empty($payment_data['event_meta']['paypal_sandbox'])) {
+	  $use_sandbox = $payment_data['event_meta']['paypal_sandbox'];
+	} else {
+		$use_sandbox = $paypal_settings['use_sandbox'];
+	}
+	if ($use_sandbox) {
 		$myPaypal->enableTestMode();
 	}
 	if ($myPaypal->validateIpn()) {

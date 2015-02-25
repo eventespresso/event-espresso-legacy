@@ -5,11 +5,12 @@ function organization_config_mnu() {
 	global $org_options, $espresso_premium, $espresso_check_for_updates;
 	if (isset($_POST['update_org'])) {
 		$org_options['organization'] = isset($_POST['org_name']) && !empty($_POST['org_name']) ? stripslashes_deep($_POST['org_name']) : '';
-		$org_options['organization_street1'] = isset($_POST['org_street1']) && !empty($_POST['org_street1']) ? $_POST['org_street1'] : '';
-		$org_options['organization_street2'] = isset($_POST['org_street2']) && !empty($_POST['org_street2']) ? $_POST['org_street2'] : '';
-		$org_options['organization_city'] = isset($_POST['org_city']) && !empty($_POST['org_city']) ? $_POST['org_city'] : '';
-		$org_options['organization_state'] = isset($_POST['org_state']) && !empty($_POST['org_state']) ? $_POST['org_state'] : '';
-		$org_options['organization_zip'] = isset($_POST['org_zip']) && !empty($_POST['org_zip']) ? $_POST['org_zip'] : '';
+		$org_options['organization_street1'] = isset($_POST['org_street1']) && !empty($_POST['org_street1']) ? stripslashes_deep($_POST['org_street1']) : '';
+		$org_options['organization_street2'] = isset($_POST['org_street2']) && !empty($_POST['org_street2']) ? stripslashes_deep($_POST['org_street2']) : '';
+		$org_options['organization_city'] = isset($_POST['org_city']) && !empty($_POST['org_city']) ? stripslashes_deep($_POST['org_city']) : '';
+		$org_options['organization_state'] = isset($_POST['org_state']) && !empty($_POST['org_state']) ? stripslashes_deep($_POST['org_state']) : '';
+		$org_options['organization_zip'] = isset($_POST['org_zip']) && !empty($_POST['org_zip']) ? stripslashes_deep($_POST['org_zip']) : '';
+		$org_options['organization_country'] = isset($_POST['org_country']) && !empty($_POST['org_country']) ? stripslashes_deep($_POST['org_country']) : '';
 		$org_options['organization_country'] = isset($_POST['org_country']) && !empty($_POST['org_country']) ? $_POST['org_country'] : '';
 		$org_options['contact_email'] = isset($_POST['email']) && !empty($_POST['email']) ? $_POST['email'] : '';
 		$org_options['expire_on_registration_end'] = isset($_POST['expire_on_registration_end']) && !empty($_POST['expire_on_registration_end']) ? $_POST['expire_on_registration_end'] : '';
@@ -53,9 +54,9 @@ function organization_config_mnu() {
 		$org_options['default_promocode_usage'] = isset($_POST['default_promocode_usage']) && !empty($_POST['default_promocode_usage']) ? $_POST['default_promocode_usage'] : 'N';
 		$org_options['ticket_reservation_time'] = isset($_POST['ticket_reservation_time']) && !empty($_POST['ticket_reservation_time']) ? $_POST['ticket_reservation_time'] : '30';
 		$ueip_optin = isset($_POST['ueip_optin']) && !empty($_POST['ueip_optin']) ? $_POST['ueip_optin'] : 'yes';
-		
+
 		$org_options['default_logo_url'] = isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ? $_REQUEST['upload_image'] : '';
-			 
+
 		$currency_format = getCountryFullData($org_options['organization_country']);
 		switch ($currency_format['iso_code_3']) {
 			case 'USA': $org_options['currency_symbol'] = '$'; // US Dollar
@@ -110,9 +111,9 @@ function organization_config_mnu() {
 				break;
 			case 'VEN' : $org_options['currency_symbol'] = 'BsF'; //venezuelan bolivar, although technically its symbol should be VEF
 				break;
-			case 'LVA' : $org_options['currency_symbol'] = 'LVL'; //Latvian
+			case 'LTU' : $org_options['currency_symbol'] = 'LT'; // Lithuanian Litas (LTL)
 				break;
-			case 'AUT' : case 'BEL' : case 'CYP' : case 'EST' : case 'FIN' : case 'FRA' : case 'DEU' : case 'GRC' : case 'IRL' : case 'ITA' : case 'LUX' : case 'MLT' : case 'NLD' : case 'PRT' : case 'SVK' : case 'SVN' : case 'ESP' : case 'AND' : case 'MCO' : case 'SMR' : case 'VAT' | 'MYT' : case 'MNE' : case 'XKV' : case 'SPM' : $org_options['currency_symbol'] = 'EUR'; // use the Euro for all eurozone countries
+			case 'AUT' : case 'BEL' : case 'CYP' : case 'EST' : case 'FIN' : case 'FRA' : case 'DEU' : case 'GRC' : case 'IRL' : case 'ITA' : case 'LUX' : case 'LVA' : case 'MLT' : case 'NLD' : case 'PRT' : case 'SVK' : case 'SVN' : case 'ESP' : case 'AND' : case 'MCO' : case 'SMR' : case 'VAT' | 'MYT' : case 'MNE' : case 'XKV' : case 'SPM' : $org_options['currency_symbol'] = 'EUR'; // use the Euro for all eurozone countries
 				break;
 			default: $org_options['currency_symbol'] = '$';
 				break;
@@ -129,9 +130,10 @@ function organization_config_mnu() {
 
 	$org_options = get_option('events_organization_settings');
 	$ueip_optin = get_option('ee_ueip_optin');
-	$plugin_basename = plugin_basename(EVENT_ESPRESSO_PLUGINPATH);
-	/*$verify_fail = get_option( 'pue_verification_error_' . $plugin_basename );
-	$site_license_key_verified = !empty( $verify_fail ) ? '<span class"pue-sl-not-verified"></span>' : '<span class="pue-sl-verified"></span>';/**/ //to be added for 3.1.37
+	$plugin_basename = EVENT_ESPRESSO_WPPLUGINPATH;
+
+	$verify_fail = get_option( 'pue_verification_error_' . $plugin_basename );
+	$site_license_key_verified = $verify_fail || !empty( $verify_fail ) || ( empty( $org_options['site_license_key'] ) && empty( $verify_fail ) ) ? '<span class="pue-sl-not-verified"> </span>' : '<span class="pue-sl-verified"> </span>';/**/
 	$values = array(
 			array('id' => 'Y', 'text' => __('Yes', 'event_espresso')),
 			array('id' => 'N', 'text' => __('No', 'event_espresso')));
@@ -165,7 +167,7 @@ function organization_config_mnu() {
 															<div id="default-logo-image">
 															<?php $org_options['default_logo_url'] = isset( $org_options['default_logo_url'] ) ? $org_options['default_logo_url'] : ''; ?>
 															<input id="upload_image" type="hidden" size="36" name="upload_image" value="<?php echo $org_options['default_logo_url'] ?>" />
-															<input id="upload_image_button" type="button" value="Upload Image" />
+															<input id="upload_image_button" type="button" value="<?php _e( 'Upload Image', 'event_espresso' ); ?>" />
 															<?php if ( $org_options['default_logo_url'] != '') { ?>
 																<p class="default-logo-thumb"><img src="<?php echo $org_options['default_logo_url'] ?>" alt="" /><br />
 																<a id="remove-image" href="#" title="Remove this image" onclick="return false;"><?php _e('Remove Image', 'event_espresso'); ?></a></p>
@@ -178,7 +180,7 @@ function organization_config_mnu() {
 															<p><?php echo __('The default logo will be used in your custom invoice, ticketing, certificates, and payment templates.', 'event_espresso'); ?></p>
 														</div>
 														</li>
-														<li><h4><?php _e('Contact Information', 'event_espresso'); ?></h4></li>									
+														<li><h4><?php _e('Contact Information', 'event_espresso'); ?></h4></li>
 											<li>
 												<label for="org_name">
 													<?php _e('Organization Name:', 'event_espresso'); ?>
@@ -189,31 +191,31 @@ function organization_config_mnu() {
 												<label for="org_street1">
 													<?php _e('Organization Street 1:', 'event_espresso'); ?>
 												</label>
-												<input type="text" name="org_street1" size="45" value="<?php echo $org_options['organization_street1']; ?>" />
+												<input type="text" name="org_street1" size="45" value="<?php echo stripslashes_deep($org_options['organization_street1']); ?>" />
 											</li>
 											<li>
 												<label for="org_street2">
 													<?php _e('Organization Street 2:', 'event_espresso'); ?>
 												</label>
-												<input type="text" name="org_street2" size="45" value="<?php echo $org_options['organization_street2']; ?>" />
+												<input type="text" name="org_street2" size="45" value="<?php echo stripslashes_deep($org_options['organization_street2']); ?>" />
 											</li>
 											<li>
 												<label for="org_city">
 													<?php _e('Organization City:', 'event_espresso'); ?>
 												</label>
-												<input type="text" name="org_city" size="45" value="<?php echo $org_options['organization_city']; ?>" />
+												<input type="text" name="org_city" size="45" value="<?php echo stripslashes_deep($org_options['organization_city']); ?>" />
 											</li>
 											<li>
 												<label for="org_state">
 													<?php _e('Organization State:', 'event_espresso'); ?>
 												</label>
-												<input type="text" name="org_state" size="45" value="<?php echo $org_options['organization_state']; ?>" />
+												<input type="text" name="org_state" size="45" value="<?php echo stripslashes_deep($org_options['organization_state']); ?>" />
 											</li>
 											<li>
 												<label for="org_zip">
 													<?php _e('Organization Zip/Postal Code:', 'event_espresso'); ?>
 												</label>
-												<input type="text" name="org_zip" size="10" value="<?php echo $org_options['organization_zip']; ?>" />
+												<input type="text" name="org_zip" size="10" value="<?php echo stripslashes_deep($org_options['organization_zip']); ?>" />
 											</li>
 											<li>
 												<label for="org_country">
@@ -243,9 +245,9 @@ function organization_config_mnu() {
 													<?php _e('You must set the time zone for your city, or the city closest to you. UTC time will not work.', 'event_espresso'); ?>
 													<a href="http://ee-updates.s3.amazonaws.com/images/time-zone-settings-example.jpg" class="thickbox">View an example?</a> </p>
 											</li>
-											
+
 										</ul>
-										
+
 										<p>
 											<input class="button-primary" type="submit" name="Submit" value="<?php _e('Save Options', 'event_espresso'); ?>" id="save_organization_saetting_1" />
 										</p>
@@ -551,7 +553,7 @@ function organization_config_mnu() {
 									</h3>
 									<div class="inside">
 										<div class="padding">
-											<p><?php echo __('Please purchase a', 'event_espresso') ?> <a href="http://eventespresso.com/download/" target="_blank"><?php echo __('support license', 'event_espresso') ?></a> <?php echo __('to gain access to these features.', 'event_espresso') ?></p>
+											<p><?php echo __('Please purchase a', 'event_espresso') ?> <a href="http://eventespresso.com/pricing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=purchase+a+support+license<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=organization_config_tab" target="_blank"><?php echo __('support license', 'event_espresso') ?></a> <?php echo __('to gain access to these features.', 'event_espresso') ?></p>
 											<p>
 													<?php _e('Additional features include:', 'event_espresso'); ?>
 											</p>
@@ -593,8 +595,8 @@ function organization_config_mnu() {
 									</h3>
 									<div class="inside">
 										<div class="padding">
-											<p><?php echo __('Please purchase a', 'event_espresso') ?> <a href="http://eventespresso.com/download/" target="_blank"><?php echo __('support license', 'event_espresso') ?></a> <?php echo __('to gain access to this feature.', 'event_espresso') ?></p>
-											<p> <?php echo sprintf(__('reCAPTCHA helps prevent automated abuse of your site (such as comment spam or bogus registrations) by using a %s to ensure that only humans perform certain actions.', 'event_espresso'), '<a href="http://recaptcha.net/captcha.html">CAPTCHA</a>'); ?> </p>
+											<p><?php echo __('Please purchase a', 'event_espresso') ?> <a href="http://eventespresso.com/pricing/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=purchase+a+support+license<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=organization_config_tab" target="_blank"><?php echo __('support license', 'event_espresso') ?></a> <?php echo __('to gain access to this feature.', 'event_espresso') ?></p>
+											<p> <?php echo sprintf(__('reCAPTCHA helps prevent automated abuse of your site (such as comment spam or bogus registrations) by using a %s to ensure that only humans perform certain actions.', 'event_espresso'), '<a href="http://recaptcha.net/captcha.html">reCAPTCHA</a>'); ?> </p>
 										</div>
 									</div>
 								</div>
@@ -619,10 +621,10 @@ function organization_config_mnu() {
 											<ul>
 												<li>
 													<label for="site_license_key">
-		<?php _e('Site License Key:', 'event_espresso'); ?>
+		<?php _e('Support License Key:', 'event_espresso'); ?>
 													</label>
 													<input type="text" name="site_license_key" size="45" value="<?php echo isset( $org_options['site_license_key'] ) ? stripslashes_deep($org_options['site_license_key']) : ''; ?>" />
-													<?php //echo $site_license_key_verified; ?>
+													<?php echo $site_license_key_verified; ?>
 												</li>
 
 											</ul>
@@ -651,15 +653,15 @@ function organization_config_mnu() {
 									<div class="inside">
 										<div class="padding">
 											<p>
-												<?php echo espresso_data_collection_optin_text(); ?>	
+												<?php echo espresso_data_collection_optin_text(); ?>
 											</p>
 											<ul>
 												<li>
 													<label for="ueip_optin">
 		<?php _e('Yes! I\'m In:', 'event_espresso'); ?>
 													</label>
-													<?php 
-													$values=array(					
+													<?php
+													$values=array(
 													array('id'=>'yes','text'=> __('Yes','event_espresso')),
 													array('id'=>'no','text'=> __('No','event_espresso'))
 												);
@@ -709,7 +711,7 @@ function organization_config_mnu() {
 					jQuery("p.default-logo-thumb").remove();
 					jQuery("p#image-display").remove();
 					jQuery('#remove-image').remove();
-					
+
 					//Add new image
 					imgurl = jQuery('img',html).attr('src');
 					jQuery('#' + formfield).val(imgurl);
@@ -720,10 +722,10 @@ function organization_config_mnu() {
 					window.original_send_to_editor(html);
 				}
 			}
-			
+
 			// process the remove link in the metabox
 			jQuery('#remove-image').click(function(){
-				var answer = confirm('<?php _e('Do you really want to delete this image? Please remember to save your settings to complete the removal.', 'event_espresso'); ?>');
+				var answer = confirm("<?php _e('Do you really want to delete this image? Please remember to save your settings to complete the removal.', 'event_espresso'); ?>");
 				if (answer){
 					jQuery("#upload_image").val('');
 					jQuery("p.default-logo-thumb").remove();

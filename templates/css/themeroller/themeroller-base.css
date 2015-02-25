@@ -113,7 +113,9 @@ div.event-data-display{
 }
 .event-data-display,
 .event_data .event-data-display-dv {
-	padding:1em; line-height:1.5em; margin:0;
+	padding:1em;
+	line-height:1.5em;
+	margin:0;
 }
 .event_title, h2.section-heading, .display-box-heading {
 	padding-left: 10px;
@@ -246,6 +248,7 @@ a.post-edit-link {
 	color: #000;
 	text-shadow:1px 1px #fff;
 	cursor: pointer;
+	display: inline-block;
 }
 .remove-additional-attendee-lnk {
 	padding: 1em 2em 1.25em; 
@@ -255,6 +258,7 @@ a.post-edit-link {
 	border-radius:3px;
 	color: #000; text-shadow:1px 1px #fff;
 	cursor:pointer;
+	display: inline-block;
 }
 
 /*___ Attendee list ___*/
@@ -654,7 +658,7 @@ pre {
 }
 span.ui-icon {
 	float:left;
-	margin: .7em 0 0 .3em;
+	margin: .5em 0 0 .3em;
 }
 /*** clearfix clearing rules ***/
 .clearfix:before, .clearfix:after {

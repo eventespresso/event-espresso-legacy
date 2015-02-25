@@ -23,14 +23,10 @@ function espresso_display_psigate($payment_data){
 	$bypass_payment_page = ($psigate_settings['bypass_payment_page'] == 'Y')?true:false;
 	$button_url = $psigate_settings['button_url'];
 	
-	if ($psigate_settings['force_ssl_return']) {
-		$home = str_replace("http://", "https://", home_url());
-	} else {
-		$home = home_url();
-	}
-	$return_url= $home . '/?page_id=' . $org_options['return_url'] . '&r_id=' . $payment_data['registration_id']. '&type=psigate';
+	
+	$return_url= espresso_build_gateway_url('return_url', $payment_data, 'psigate');
 	$server_url=($psigate_settings['use_sandbox'])?"https://devcheckout.psigate.com/HTMLPost/HTMLMessenger":'https://checkout.psigate.com/HTMLPost/HTMLMessenger';
-	/* @var $items StdClass[] array of attendees inner join with event on teh current purhcase*/
+	/* @var $items StdClass[] array of attendees inner join with event on the current purhcase*/
 	//$items=espresso_get_items_being_purchased($payment_data['attendee_id']);
 	//get payment's details
 	//get country of user. default to Canada, as this gateway is canadian
@@ -50,7 +46,7 @@ function espresso_display_psigate($payment_data){
 	$external_link_img = EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png';
 		
 	$formhtml=<<<HEREDOC
-		 <div id="luottokunta-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+		 <div id="PSiGate-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
 			<img class="off-site-payment-gateway-img" width="16" height="16" src="{$external_link_img}" alt="click to visit this payment gateway">
 	
 			<form action="{$server_url}" id='psigate_form' method="post">

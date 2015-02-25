@@ -146,7 +146,7 @@ function event_espresso_display_moneris_hpp_settings() {
 							<label for="moneris_hpp_ps_store_id"><?php _e('Moneris Hosted Pay Page Store ID (ps_store_id)', 'event_espresso'); ?></label>
 							<input type="text" name="moneris_hpp_ps_store_id" size="24" value="<?php echo $moneris_hpp_settings['moneris_hpp_ps_store_id']; ?>"><br/>
 							<span class="description">
-								<?php _e('Provided by Moneris Solutions – Hosted Paypage Configuration Tool. Identifies the configuration for the Hosted Paypage ( something like:  monca12345 ).', 'event_espresso'); ?>
+								<?php _e('This can be found in the Moneris Eselect Plus Merchant Resource Centre --> Admin --> Hosted Config.', 'event_espresso'); ?>
 							</span>
 						</li>
 						
@@ -154,7 +154,7 @@ function event_espresso_display_moneris_hpp_settings() {
 							<label for="moneris_hpp_key"><?php _e('Moneris Hosted Pay Page Key (hpp_key)', 'event_espresso'); ?></label>
 							<input type="text" name="moneris_hpp_key" size="24" value="<?php echo $moneris_hpp_settings['moneris_hpp_key']; ?>"><br/>
 							<span class="description">
-								<?php _e('Provided by Moneris Solutions – Hosted Paypage Configuration Tool. This is a security key that corresponds to the ps_store_id.', 'event_espresso'); ?>
+								<?php _e('This can be found in the Moneris Eselect Plus Merchant Resource Centre --> Admin --> Hosted Config.', 'event_espresso'); ?>
 							</span>
 						</li>
 						

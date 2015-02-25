@@ -195,7 +195,7 @@ if (!function_exists('event_form_build')) {
 						$value = trim( stripslashes( str_replace( '&#039;', "'", $value )));
 						$value = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
 						$checked = (is_array($answer) && in_array($value, $answer)) ? ' checked="checked"' : "";
-						$value_id = str_replace(' ', '', $value) . '-' . $event_id . '_' . $attendee_number;
+						$value_id = str_replace(' ', '', $value) . '-' . $question->id . '-' . $event_id . '_' . $attendee_number;
 
 						$formatted = apply_filters('filter_hook_espresso_question_formatted_value', $value, $question );
 

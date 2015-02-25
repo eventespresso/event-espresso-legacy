@@ -11,8 +11,7 @@ if ( ! function_exists('espresso_verify_sufficient_remaining_tickets' )){
 	function espresso_verify_sufficient_remaining_tickets($event_id,$data_source){
 		//query for availables spaces, counting INCOMPLETE tickets being purchased by OTHERS within the last X
 		//minutes as being 'reserved'
-		
-		$available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');
+		$available_spaces =  apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);
 		$tickets_requested = espresso_count_tickets_requested($data_source);
 		if( $available_spaces >= $tickets_requested){
 			return true;
@@ -21,8 +20,11 @@ if ( ! function_exists('espresso_verify_sufficient_remaining_tickets' )){
 			//it is used to make sure that for MER, we only show this message once per event
 			//because code will pass through this function once for EACH attendee
 			global $wpdb,$only_show_event_full_message_once_for;
+			if( ! is_array($only_show_event_full_message_once_for)){
+				$only_show_event_full_message_once_for = array();
+			}
 			$event_name = $wpdb->get_var($wpdb->prepare("SELECT event_name FROM ".EVENTS_DETAIL_TABLE." WHERE id=%d",$event_id));
-			if($only_show_event_full_message_once_for[$event_id]){
+			if( ! $only_show_event_full_message_once_for[$event_id]){
 				echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . sprintf(__('Sorry, you have requested %1$d ticket(s) for \'%2$s\', but only %3$d remains(s). ', 'event_espresso'),$tickets_requested,$event_name,$available_spaces) .
 				__("All other tickets for this event have been sold, or are being purchased. You may want to try registering later, in case someone doesn't finish registering or cancels", "event_espresso").'</strong></p></div>';
 			}
@@ -47,7 +49,6 @@ if ( ! function_exists('espresso_count_tickets_requested') ){
 			$num_people = absint($data_source ['num_people']);
 		//if $data_source is from MER, and we are requriing additional attendee info,
 		//foreach attendee, the 'attendee_quantity' should be set.
-		//and yes, it has a typo.
 		} elseif(isset($data_source['attendee_quantity'])){
 			$num_people = absint($data_source['attendee_quantity']);
 		}else {
@@ -569,7 +570,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								//Added by Imon
 								$ext_attendee_id = $wpdb->insert_id;
 								
-								$ext_att_data_source['attendee_id'] = $attendee_id;
+								$ext_att_data_source['attendee_id'] = $ext_attendee_id;
 								$ext_att_data_source['event_meta'] = $event_meta;
 			
 			
@@ -601,7 +602,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 								$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
 								$SQL .= "ORDER BY q.id ASC";
 								
-								$questions_list = $wpdb->get_results($wpdb->prepare( $SQL, NULL ));
+								$questions_list = $wpdb->get_results( $SQL );
 								foreach ($questions_list as $question_list) {
 									if ($question_list->system_name != '') {
 										$ext_att_data_source[$question_list->system_name] = $att_data_source['x_attendee_' . $question_list->system_name][$k];
@@ -678,8 +679,8 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 			$count_of_events = count($events_in_session);
 			$current_session_id = $_SESSION['espresso_session']['id'];
 			$biz_name = $count_of_events . ' ' . $org_options['organization'] . __(' events', 'event_espresso');
-			$event_cost = $_SESSION['espresso_session']['grand_total'];
-			$event_cost = apply_filters('filter_hook_espresso_cart_grand_total', $event_cost);
+			//$event_cost = $_SESSION['espresso_session']['grand_total'];
+			//$event_cost = apply_filters('filter_hook_espresso_cart_grand_total', $event_cost);
 
 			// If there are events in the session, add them one by one to the attendee table
 			if ($count_of_events > 0) {
@@ -692,6 +693,7 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 					
 						$counter = 1;
 						//foreach price type in event attendees
+						
 						foreach ( $event['event_attendees'] as $price_id => $event_attendees ) { 
 						
 							$session_vars['data'] = $event;
@@ -712,6 +714,11 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 								// ADD ATTENDEE TO DB
 								$return_data = event_espresso_add_attendees_to_db( $event_id, $session_vars, TRUE );
 								if (!empty($return_data['registration_id'])) $session_vars['data']['attendee_quantity']--;
+								if (!$return_data){
+									//something went wrong when adding them to the DB, 
+									//like the event sold out
+									return;
+								}
 								$tmp_registration_id = $return_data['registration_id'];
 								$notifications = $return_data['notifications'];
 
@@ -793,64 +800,70 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 				
 				//Post the gateway page with the payment options
 				if ( $total_cost > 0 ) {
+
+//Check if a custom mer_payment_overview.php file exists in wp-content/uploads/espresso/templates if so include that template file here.
+if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . "mer_payment_overview_table.php")) {
+		require_once(EVENT_ESPRESSO_TEMPLATE_DIR . "mer_payment_overview_table.php"); 
+} else {
+	//If not custom template exists, ouput the standard Multi Event Registration Payment Overview table HTML.
 ?>
+	<div class="espresso_payment_overview event-display-boxes ui-widget" >
+	  <h3 class="section-heading ui-widget-header ui-corner-top">
+			<?php _e('Payment Overview', 'event_espresso'); ?>
+	  </h3>
+		<div class="event-data-display ui-widget-content ui-corner-bottom" >
 
-<div class="espresso_payment_overview event-display-boxes ui-widget" >
-  <h3 class="section-heading ui-widget-header ui-corner-top">
-		<?php _e('Payment Overview', 'event_espresso'); ?>
-  </h3>
-	<div class="event-data-display ui-widget-content ui-corner-bottom" >
-
-		<div class="event-messages ui-state-highlight"> <span class="ui-icon ui-icon-alert"></span>
-			<p class="instruct">
-				<?php _e('Your registration is not complete until payment is received.', 'event_espresso'); ?>
+			<div class="event-messages ui-state-highlight"> <span class="ui-icon ui-icon-alert"></span>
+				<p class="instruct">
+					<?php _e('Your registration is not complete until payment is received.', 'event_espresso'); ?>
+				</p>
+			</div>
+			<p><?php echo $org_options['email_before_payment'] == 'Y' ? __('A confirmation email has been sent with additional details of your registration.', 'event_espresso') : ''; ?></p>
+			<table>
+				<?php foreach ($attendees as $attendee) { ?>
+				<tr>
+					<td width="70%">
+						<?php echo '<strong>'.stripslashes_deep($attendee->event_name ) . '</strong>'?>&nbsp;-&nbsp;<?php echo stripslashes_deep( $attendee->price_option ) ?> <?php echo $attendee->final_price < $attendee->orig_price ? '<br />&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:.8em;">' . $org_options['currency_symbol'] . number_format($attendee->orig_price - $attendee->final_price, 2) . __(' discount per registration','event_espresso') . '</span>' : ''; ?><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Attendee:','event_espresso') . ' ' . stripslashes_deep($attendee->fname . ' ' . $attendee->lname) ?>
+					</td>
+					<td width="10%"><?php echo $org_options['currency_symbol'] . number_format($attendee->final_price, 2); ?></td>
+					<td width="10%"><?php echo 'x ' . (int)$attendee->quantity ?></td>
+					<td width="10%" style="text-align:right;"><?php echo $org_options['currency_symbol'] . number_format( $attendee->final_price * (int)$attendee->quantity, 2) ?></td>
+				</tr>
+				<?php } ?>
+				<tr>
+					<td colspan="3"><?php _e('Sub-Total:','event_espresso'); ?></td>
+					<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] . number_format($sub_total, 2); ?></td>
+				</tr>
+				<?php
+						if (!empty($discount_amount)) {
+								?>
+				<tr>
+					<td colspan="3"><?php _e('Total Discounts:','event_espresso'); ?></td>
+					<td colspan="" style="text-align:right"><?php echo '-' . $org_options['currency_symbol'] . number_format( $discount_amount, 2 ); ?></td>
+				</tr>
+				<?php } ?>
+				<tr>
+					<td colspan="3"><strong class="event_espresso_name">
+						<?php _e('Total Amount due: ', 'event_espresso'); ?>
+						</strong></td>
+					<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] ?><?php echo number_format($total_cost,2); ?></td>
+				</tr>
+			</table>
+			<p class="event_espresso_refresh_total">
+				<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=show_shopping_cart">
+				<?php _e('Edit Cart', 'event_espresso'); ?>
+				</a>
+				<?php _e(' or ', 'event_espresso'); ?>
+				<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=load_checkout_page">
+				<?php _e('Edit Registrant Information', 'event_espresso'); ?>
+				</a> 
 			</p>
 		</div>
-		<p><?php echo $org_options['email_before_payment'] == 'Y' ? __('A confirmation email has been sent with additional details of your registration.', 'event_espresso') : ''; ?></p>
-		<table>
-			<?php foreach ($attendees as $attendee) { ?>
-			<tr>
-				<td width="70%">
-					<?php echo '<strong>'.stripslashes_deep($attendee->event_name ) . '</strong>'?>&nbsp;-&nbsp;<?php echo stripslashes_deep( $attendee->price_option ) ?> <?php echo $attendee->final_price < $attendee->orig_price ? '<br />&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:.8em;">' . $org_options['currency_symbol'] . number_format($attendee->orig_price - $attendee->final_price, 2) . __(' discount per registration','event_espresso') . '</span>' : ''; ?><br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Attendee:','event_espresso') . ' ' . stripslashes_deep($attendee->fname . ' ' . $attendee->lname) ?>
-				</td>
-				<td width="10%"><?php echo $org_options['currency_symbol'] . number_format($attendee->final_price, 2); ?></td>
-				<td width="10%"><?php echo 'x ' . (int)$attendee->quantity ?></td>
-				<td width="10%" style="text-align:right;"><?php echo $org_options['currency_symbol'] . number_format( $attendee->final_price * (int)$attendee->quantity, 2) ?></td>
-			</tr>
-			<?php } ?>
-			
-			<tr>
-				<td colspan="3"><?php _e('Sub-Total:','event_espresso'); ?></td>
-				<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] . number_format($sub_total, 2); ?></td>
-			</tr>
-			<?php
-					if (!empty($discount_amount)) {
-							?>
-			<tr>
-				<td colspan="3"><?php _e('Total Discounts:','event_espresso'); ?></td>
-				<td colspan="" style="text-align:right"><?php echo '-' . $org_options['currency_symbol'] . number_format( $discount_amount, 2 ); ?></td>
-			</tr>
-			<?php } ?>
-			<tr>
-				<td colspan="3"><strong class="event_espresso_name">
-					<?php _e('Total Amount due: ', 'event_espresso'); ?>
-					</strong></td>
-				<td colspan="" style="text-align:right"><?php echo $org_options['currency_symbol'] ?><?php echo number_format($total_cost,2); ?></td>
-			</tr>
-		</table>
-		<p class="event_espresso_refresh_total">
-			<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=show_shopping_cart">
-			<?php _e('Edit Cart', 'event_espresso'); ?>
-			</a>
-			<?php _e(' or ', 'event_espresso'); ?>
-			<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=load_checkout_page">
-			<?php _e('Edit Registrant Information', 'event_espresso'); ?>
-			</a> 
-		</p>
 	</div>
-</div>
-<br/><br/>
+	<br/><br/>
+<?php } ?>
+
 <?php
 					//Show payment options
 					if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "gateway_display.php")) {

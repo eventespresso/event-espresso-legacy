@@ -94,7 +94,7 @@ function attendee_edit_record() {
 			}
 			$questions_in = substr($questions_in, 0, -1);
 //			echo '<h4>$questions_in : ' . $questions_in . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-			
+
 			$group_name = '';
 			$counter = 0;
 
@@ -103,10 +103,10 @@ function attendee_edit_record() {
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_REL_TABLE . " qgr on q.id = qgr.question_id ";
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
 			$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
-			$SQL .= "AND q.admin_only != 'Y' ";
+			$SQL .= "AND q.admin_only != %s ";
 			$SQL .= "ORDER BY qg.group_order, qg.id, q.sequence ASC";
 			
-			$questions = $wpdb->get_results( $wpdb->prepare( $SQL, NULL ));
+			$questions = $wpdb->get_results( $wpdb->prepare( $SQL, 'Y' ));
 //			echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //			printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 
@@ -174,6 +174,7 @@ function attendee_edit_record() {
 				//If this is not an attendee returing to edit their details, then we need to return a message.
 				if ( ! isset($_REQUEST['single'] )) {
 					if ( espresso_registration_id( $req_primary ) == $registration_id && espresso_registration_id( $id ) == $registration_id ){
+						do_action ( 'action_hook_espresso_update_registration_details_by_attendee', $registration_id );
 						if($payment_status == 'Completed'){
 							_e('Your registration details have been updated.', 'event_espresso');
 							return;
@@ -197,11 +198,11 @@ function attendee_edit_record() {
 
 ?>
 
-	<div id="edit-attendee-record-dv" class="event-display-boxes ui-widget">
-		<h3 class="event_title ui-widget-header ui-corner-top">
+	<div id="edit-attendee-record-dv" class="<?php espresso_template_css_class('event_display_boxes','event-display-boxes ui-widget'); ?>">
+		<h3 class="<?php espresso_template_css_class('event_title','event_title ui-widget-header ui-corner-top'); ?> ">
 			<?php _e('Edit Registration','event_espresso'); ?>
 		</h3>
-		<div class="event_espresso_form_wrapper event-data-display ui-widget-content ui-corner-bottom">
+		<div class="<?php espresso_template_css_class('event_data_display','event_espresso_form_wrapper event-data-display ui-widget-content ui-corner-bottom'); ?>">
 
 <?php if ( $display_attendee_form ) : ?>
 

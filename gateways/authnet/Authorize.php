@@ -37,7 +37,7 @@ class Espresso_Authorize extends Espresso_PaymentGateway {
 		parent::__construct();
 		// Some default values of the class
 		$this->gatewayUrl = 'https://secure.authorize.net/gateway/transact.dll';
-		$this->ipnLogFile = 'authorize.ipn_results.log';
+		$this->ipnLogFile = EVENT_ESPRESSO_UPLOAD_DIR . 'logs/authorize.ipn_results.log';
 		// Populate $fields array with a few default
 		$this->addField('x_Version', '3.0');
 		$this->addField('x_Show_Form', 'PAYMENT_FORM');

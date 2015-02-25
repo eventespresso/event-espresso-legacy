@@ -7,7 +7,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');	
 	
 	if ( ! $attendee_id ) {
-		wp_die( __('An error occured. No Attendee was received.', 'event_espresso') );
+		wp_die( __('An error occurred. No Attendee was received.', 'event_espresso') );
 	}
 	
 	global $wpdb, $org_options;
@@ -33,7 +33,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 	// GET ATTENDEE
 	$SQL = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id =%d";
 	$attendee = $wpdb->get_row( $wpdb->prepare( $SQL, $attendee_id ));
-	
+	do_action('action_hook_espresso_pre_confirmation_page', $attendee);
 	//printr( $attendee, '$attendee  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 
 	$attendee_last = $attendee->lname;
@@ -119,22 +119,32 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
     //$event_price_x_attendees = number_format( $final_price * $num_people, 2, '.', '' );
     $event_original_cost = $orig_price;
 	
+	if( !function_exists('espresso_seating_chart_override_seat_cost')) {
+		function espresso_seating_chart_override_seat_cost( $total_cost, $registration_id, $event_id ) {
+			global $wpdb;
+			// Added for seating chart addon
+			// This code block overrides the cost using seating chart add-on price
+			if ( defined('ESPRESSO_SEATING_CHART') && class_exists("seating_chart") && seating_chart::check_event_has_seating_chart($event_id) !== false) {
 
-	// Added for seating chart addon
-	// This code block overrides the cost using seating chart add-on price
-	if ( defined('ESPRESSO_SEATING_CHART') && class_exists("seating_chart") && seating_chart::check_event_has_seating_chart($event_id) !== false) {
+				$SQL = "SELECT sum(sces.purchase_price) as purchase_price ";
+				$SQL .= "FROM " . EVENTS_SEATING_CHART_EVENT_SEAT_TABLE . " sces ";
+				$SQL .= "INNER JOIN " . EVENTS_ATTENDEE_TABLE . " ea ON sces.attendee_id = ea.id ";
+				$SQL .= "WHERE ea.registration_id = %s";  
+
+				if ( $seat = $wpdb->get_row( $wpdb->prepare( $SQL, $registration_id ))) {
+					$total_cost = number_format( $seat->purchase_price, 2, '.', '' );
+					//$event_price_x_attendees = (float)$final_price;
+				} 
+
+			} 
+			return $total_cost;
+		}
 		
-		$SQL = "SELECT sum(sces.purchase_price) as purchase_price ";
-		$SQL .= "FROM " . EVENTS_SEATING_CHART_EVENT_SEAT_TABLE . " sces ";
-		$SQL .= "INNER JOIN " . EVENTS_ATTENDEE_TABLE . " ea ON sces.attendee_id = ea.id ";
-		$SQL .= "WHERE ea.registration_id = %s";  
-		
-        if ( $seat = $wpdb->get_row( $wpdb->prepare( $SQL, $registration_id ))) {
-            $total_cost = number_format( $seat->purchase_price, 2, '.', '' );
-            //$event_price_x_attendees = (float)$final_price;
-        } 
-	 
-	} 
+		add_filter('filter_hook_espresso_confirmation_page_total_cost_calculation', 'espresso_seating_chart_override_seat_cost', 10, 3);
+	}	
+	
+	$total_cost = apply_filters('filter_hook_espresso_confirmation_page_total_cost_calculation', $total_cost, $registration_id, $event_id);
+	
 
 	if ( $total_cost == 0 ) {
 		$payment_status = 'Completed';//DO NOT TRANSLATE
@@ -216,7 +226,7 @@ function espresso_confirm_registration() {
 	if ( ! empty($_POST['confirm_registration'])) {
 		$registration_id = sanitize_text_field( $_POST['registration_id'] );
 	} else {
-		wp_die(__('An error has occured. The registration ID could not be found.', 'event_espresso'));
+		wp_die(__('An error has occurred. The registration ID could not be found.', 'event_espresso'));
 	}
 	
 	echo '<div id="espresso-payment_page-dv" >';
@@ -286,9 +296,9 @@ function espresso_confirm_registration() {
 	$SQL = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE;
 
 	if ($registration_id != '') {
-		$SQL .= " WHERE registration_id = '" . $registration_id . "' ";
+		$SQL .= $wpdb->prepare(" WHERE registration_id = '%s' ", $registration_id);
 	} elseif ($attendee_id != '') {
-		$SQL .= " WHERE id = '" . $attendee_id . "' ";
+		$SQL .= $wpdb->prepare(" WHERE id = '%d' ", $attendee_id);
 	} else {
 		_e('No ID Supplied', 'event_espresso');
 	}
@@ -298,8 +308,8 @@ function espresso_confirm_registration() {
 	$SQL .= " LIMIT 0,1 "; //Get the first attendees details
 
 
-	if ( ! $attendee = $wpdb->get_row( $wpdb->prepare( $SQL, NULL ))) {
-		wp_die(__('An error occured. The primary attendee could not be found.', 'event_espresso'));
+	if ( ! $attendee = $wpdb->get_row( $SQL )) {
+		wp_die(__('An error occurred. The primary attendee could not be found.', 'event_espresso'));
 	}
 
 	$attendee_id = $attendee->id;
@@ -310,7 +320,7 @@ function espresso_confirm_registration() {
 	$address2 = isset( $attendee->address2 ) ? htmlspecialchars( stripslashes( $attendee->address2 ), ENT_QUOTES, 'UTF-8' ) : '';
 	$city = isset( $attendee->city ) ? htmlspecialchars( stripslashes( $attendee->city ), ENT_QUOTES, 'UTF-8' ) : '';
 	$state = isset( $attendee->state ) ? htmlspecialchars( stripslashes( $attendee->state ), ENT_QUOTES, 'UTF-8' ) : '';
-	$country = isset( $attendee->country ) ? htmlspecialchars( stripslashes( $attendee->country ), ENT_QUOTES, 'UTF-8' ) : '';
+	$country = isset( $attendee->country_id ) ? htmlspecialchars( stripslashes( $attendee->country_id ), ENT_QUOTES, 'UTF-8' ) : '';
 	$zip =  isset( $attendee->zip ) ? $attendee->zip : '';
 	$payment_status = $attendee->payment_status;
 	$txn_type = $attendee->txn_type;
@@ -361,7 +371,6 @@ function espresso_confirm_registration() {
 		if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/process-registration/pending_approval_page.php')) {
 			require_once('pending_approval_page.php');
 			echo espresso_pending_registration_approval($registration_id);
-			return;
 		}
 		
 	}
@@ -382,6 +391,7 @@ function event_espresso_pay() {
 	
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
 	global $wpdb, $org_options, $espresso_content;
+	$_REQUEST['page_id'] = $org_options['return_url'];
 
 	$payment_data= array( 'attendee_id' => '' );
 
@@ -391,8 +401,8 @@ function event_espresso_pay() {
 	if ( $REG_ID != false && empty($payment_data['attendee_id'] )) {
 		//we're assuming there is NO payment data in this request, so we'll just 
 		//prepare the $payment_data for display only. No processing of payment etc.
-		$SQL = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id='" . $REG_ID . "' ORDER BY id LIMIT 1";
-		$payment_data['attendee_id'] = $wpdb->get_var( $wpdb->prepare( $SQL, NULL ));
+		$SQL = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id='%s' ORDER BY id LIMIT 1";
+		$payment_data['attendee_id'] = $wpdb->get_var( $wpdb->prepare( $SQL, $REG_ID ));
 				
 		$payment_data = apply_filters('filter_hook_espresso_prepare_payment_data_for_gateways', $payment_data);
 		$payment_data = apply_filters('filter_hook_espresso_prepare_event_link', $payment_data);
@@ -446,11 +456,12 @@ function event_espresso_pay() {
 				require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "templates/return_payment.php");
 			}
 		}
+
+		do_action( 'action_hook_espresso_process_registration_payment_page', $event_id, $payment_data );
 	}
 	if (isset($payment_data['attendee_session'])){
 		event_espresso_clear_session_of_attendee($payment_data['attendee_session']);
 	}
-	$_REQUEST['page_id'] = $org_options['return_url'];
 	
 	$espresso_content = ob_get_contents();
 	ob_end_clean();
@@ -460,11 +471,11 @@ function event_espresso_pay() {
 }
 /**
  * Clears the event espresso session (containing info about events being registered for)
- * for the attendee with this $attendee_session ('attendee_session' on teh events_attendee table).
+ * for the attendee with this $attendee_session ('attendee_session' on the events_attendee table).
  * Before we simply cleared the session of the CURRENT user. That worked 95% of the time, except SOME gateways
  * (notably Worldpay, and probably Authnet) send the request to the thank you page directly (instead of redirecting
- * the user to teh thank you page). When THEY send the request on behalf of the user, they're on a different session.
- * So what's the use in clearing the session in that case? (Because we're clearing the session of teh gateway sending the request
+ * the user to the thank you page). When THEY send the request on behalf of the user, they're on a different session.
+ * So what's the use in clearing the session in that case? (Because we're clearing the session of the gateway sending the request
  * instead of the user's session). So, instead we need to use the attendee's 'attendee_session', which contains info about
  * the php session. So we load that session (the user's) and modify IT, instead of the current requestor's session
  * (because they could be the gateway, instead of the user).
@@ -482,7 +493,7 @@ function event_espresso_clear_session_of_attendee($attendee_session){
 	//if the current session doesn't have id == $php_session_id, (probably
 	//because its the gateway who's sent the request to the current page, not the user themselves)
 	//effectively this overwrites the session (which has id == $php_session_id) to be identical
-	//to teh current session. That means if the user's session had events queued in it, they're gone.
+	//to the current session. That means if the user's session had events queued in it, they're gone.
 	session_id($php_session_id);
 	
 	//in case the current session's id == $php_session_id (ie, the current request IS NOT a

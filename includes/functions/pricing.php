@@ -31,8 +31,8 @@ function event_espresso_paid_status_icon($payment_status ='') {
     }
 }
 
-//Retturns the first price assocaited with an event. If an event has more that one price, you can pass the number of the second price.
-if (!function_exists('espresso_return_price')) {
+//Returns the first price associated with an event. If an event has more that one price, you can pass the number of the second price.
+if (!function_exists('espresso_return_single_price')) {
 
     function espresso_return_single_price($event_id, $number=0) {
 		
@@ -60,7 +60,7 @@ if (!function_exists('espresso_return_price')) {
 
                     // Addition for Early Registration discount
                     if ($early_price_data = early_discount_amount($event_id, $event_cost)) {
-                        $event_cost = $early_price_data['event_price'];
+                        $event_cost = number_format( $early_price_data['event_price'], 2, '.', '' );
                     }
                 } else {
                     $event_cost = '0.00';
@@ -106,10 +106,10 @@ if (!function_exists('event_espresso_get_price')) {
                         $result->event_cost = $early_price_data['event_price'];
                         $message = sprintf(__(' (including %s early discount) ', 'event_espresso'), $early_price_data['early_disc']);
                         //$surcharge = ($result->surcharge > 0.00 && $result->event_cost > 0.00)?" +{$result->surcharge}% " . __('Surcharge','event_espresso'):'';
-                        $event_cost = '<span class="event_price_value">' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . '</span>';
+                        $event_cost = '<span class="'.espresso_template_css_class('event_price_value','event_price_value', false).'">' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . '</span>';
                     }
 
-                    $event_cost .= '<input type="hidden"name="event_cost" value="' . $result->event_cost . '">';
+                    $event_cost .= '<input type="hidden" name="event_cost" value="' . $result->event_cost . '">';
                 } else {
                     $event_cost = __('Free Event', 'event_espresso');
                 }
@@ -236,7 +236,7 @@ if (!function_exists('event_espresso_get_orig_price_and_surcharge')) {
 }
 
 /**
- * Gets teh price result for this event. Used when we just want one of them.
+ * Gets the price result for this event. Used when we just want one of them.
  * @global type $wpdb
  * @param type $event_id
  * @return type
@@ -377,14 +377,14 @@ if (!function_exists('event_espresso_price_dropdown')) {
        	
 		$html = '';
 		
-		$label = $label == '' ? '<span class="section-title">'.__('Choose an Option: ', 'event_espresso').'</span>' : $label;
+		$label = $label == '' ? '<span class="'.espresso_template_css_class('section_title','section-title', false).'">'.__('Choose an Option:', 'event_espresso').'</span>' : $label;
 		
 		//Will make the name an array and put the time id as a key so we know which event this belongs to
         $multi_name_adjust = isset($multi_reg) && $multi_reg == true ? "[$event_id]" : '';
        
 	    $surcharge_text = isset($org_options['surcharge_text']) ? $org_options['surcharge_text'] : __('Surcharge', 'event_espresso');
 
-        $results = $wpdb->get_results( $wpdb->prepare("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' ORDER BY id ASC", '') );
+        $results = $wpdb->get_results( $wpdb->prepare("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='%d' ORDER BY id ASC", $event_id) );
 
         if ($wpdb->num_rows > 1) {
            //Create the label for the drop down
@@ -407,7 +407,7 @@ if (!function_exists('event_espresso_price_dropdown')) {
 
                 $surcharge = '';
 
-                if ($result->surcharge > 0 && $result->event_cost > 0.00) {
+                if ($result->surcharge > 0) {
                     $surcharge = " + {$org_options['currency_symbol']}{$result->surcharge} " . $surcharge_text;
                     if ($result->surcharge_type == 'pct') {
                         $surcharge = " + {$result->surcharge}% " . $surcharge_text;
@@ -437,10 +437,14 @@ if (!function_exists('event_espresso_price_dropdown')) {
                 }
                 $message = isset($message) ? $message : '';
 
-              
-                $html .= '<span class="event_price_label">' . __('Price:', 'event_espresso') . '</span> <span class="event_price_value">' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . $surcharge . '</span>';
-                $html .= '<input type="hidden" name="price_id' . $multi_name_adjust . '" id="price_id-' . $result->id . '" value="' . $result->id . '" />';
-               
+                /*if ( $result->event_cost != '0.00' ) {
+                    $html .= '<span class="'.espresso_template_css_class('event_price_label','event_price_label', false).'">' . __('Price:', 'event_espresso') . '</span> <span class="'.espresso_template_css_class('event_price_value','event_price_value', false).'">' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . $surcharge . '</span>';
+                    $html .= '<input type="hidden" name="price_id' . $multi_name_adjust . '" id="price_id-' . $result->id . '" value="' . $result->id . '" />';
+                    $html .= '<span class="'.espresso_template_css_class('free_event','free_event', false).'">' . $result->price_type . '</span>';
+				}*/
+
+				$html .= '<span class="'.espresso_template_css_class('event_price_label','event_price_label', false).'">' . __('Price:', 'event_espresso') . '</span> <span class="'.espresso_template_css_class('event_price_value','event_price_value', false).'">' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . $surcharge . '</span>';
+				$html .= '<input type="hidden" name="price_id' . $multi_name_adjust . '" id="price_id-' . $result->id . '" value="' . $result->id . '" />';
             }
         }
        	echo $html;
@@ -458,7 +462,7 @@ function espresso_attendee_admin_price_dropdown($event_id, $atts) {
 		return;
 		
 	$html = '';
-	$label = isset($label) && $label != '' ? $label : '<span class="section-title">'.__('Choose an Option: ', 'event_espresso').'</span>';
+	$label = isset($label) && $label != '' ? $label : '<span class="'.espresso_template_css_class('section_title','section-title', false).'">'.__('Choose an Option:', 'event_espresso').'</span>';
 	
 	$results = $wpdb->get_results("SELECT id, event_cost, surcharge, surcharge_type, price_type FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='" . $event_id . "' ORDER BY id ASC");
 	//echo "<pre>".print_r($results,true)."</pre>";
@@ -661,4 +665,123 @@ function espresso_selected_price_option($selected){
 	$price_type = $price_options[1];
 	
 	return array('price_id' => $price_id, 'price_type' => $price_type);
+
 }
+
+add_action('action_hook_espresso_price_display','espresso_price_display_output',10,3);
+function espresso_price_display_output ($event_id, $event_cost, $type){
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+	global $org_options;
+	switch ($type){
+		case 'price_range':
+			do_action('action_hook_espresso_price_range', $event_id);
+		break;
+			
+		case 'price_list':
+			do_action('action_hook_espresso_price_list', $event_id);
+		break;
+		
+		case 'off':
+		break;
+		
+		case 'default':
+		default:
+			echo '<p id="p_event_price-'.$event_id.'" class="'.espresso_template_css_class('event_price','event_price', false).'"><span class="'.espresso_template_css_class('section_title','section-title', false).'">'. __('Price: ', 'event_espresso').'</span> '.$org_options['currency_symbol'].$event_cost.'</p>';
+		break;
+	}
+}
+
+
+if (!function_exists('event_espresso_price_list')) {
+ 
+	function event_espresso_price_list($event_id) {
+		$html = '';
+		global $wpdb, $org_options;
+		$sql = "SELECT id, event_cost, surcharge, surcharge_type, price_type";
+		$order_by = 'event_cost';
+		$member_event = FALSE;
+		$surcharge_text = isset($org_options['surcharge_text']) ? $org_options['surcharge_text'] : __('Surcharge', 'event_espresso');
+		if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && is_user_logged_in() ) {
+			$sql .= ", member_price, member_price_type ";
+			$member_event = TRUE;
+			$order_by = 'member_price';
+		}
+		$sql .= " FROM " . EVENTS_PRICES_TABLE . " WHERE event_id='%d' ORDER BY " . $order_by . " ASC";
+		$results = $wpdb->get_results( $wpdb->prepare($sql, $event_id) );
+		if ($wpdb->num_rows > 1) {	
+			//Create a dropdown of prices
+			$html .= '<span class="'.espresso_template_css_class('section_title','section-title',false).'">'. __(' Prices:', 'event_espresso').'</span>';
+			$html .= '<ul id="price-list-' . $event_id . '" class="'.espresso_template_css_class('espresso_price_list','espresso-price-list',false).'">';
+		 
+			foreach ($results as $result) {
+				if ($member_event == TRUE) {
+					$result->event_cost = $result->member_price;
+					$result->price_type = $result->member_price_type;
+				}
+				// Addition for Early Registration discount
+				if ($early_price_data = early_discount_amount($event_id, $result->event_cost)) {
+					$result->event_cost = $early_price_data['event_price'];
+					$message = __(' Early Pricing', 'event_espresso');
+				} else {
+					$message = '';
+				}
+		 
+				$surcharge = '';
+		 
+				if ($result->surcharge > 0 && $result->event_cost > 0.00) {
+					$surcharge = " + {$org_options['currency_symbol']}{$result->surcharge} " . $surcharge_text;
+					if ($result->surcharge_type == 'pct') {
+						$surcharge = " + {$result->surcharge}% " . $surcharge_text;
+					}
+				}
+				$html .= '<li>' . stripslashes_deep($result->price_type) . ' (' . $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . ') ' . $surcharge . ' </li>';
+			}
+			$html .= '</ul>';
+		}else{
+			if ($member_event == TRUE) {
+				$event_cost = $wpdb->last_result[0]->member_price;
+				$price_type = $wpdb->last_result[0]->member_price_type;
+			}else{
+				$event_cost = $wpdb->last_result[0]->event_cost;
+				$price_type = $wpdb->last_result[0]->price_type;
+			}
+				$html .= '<p><span class="'.espresso_template_css_class('section_title','section-title',false).'">'. __(' Price:', 'event_espresso').'</span> ' . $price_type . ' ' . $org_options['currency_symbol'] . number_format($event_cost, 2) . '</p>';
+		}
+		echo $html;
+		return;
+	}
+}
+add_action('action_hook_espresso_price_list', 'event_espresso_price_list', 20, 2);
+
+if (!function_exists('espresso_price_range')) {
+	function espresso_price_range($event_id, $text = '&mdash;') {
+		global $wpdb, $org_options;
+		$result = array("max" => 0, "min" => 0);
+		if (function_exists('espresso_members_version') && is_user_logged_in()) {
+			$price_field = "member_price";
+		} else {
+			$price_field = "event_cost";
+		}
+			
+		$sql = "SELECT MIN(ep.{$price_field}) AS min_price, MAX(ep.{$price_field}) AS max_price FROM " . EVENTS_PRICES_TABLE . " ep INNER JOIN " . EVENTS_PRICES_TABLE . " ep2 ON ep.event_id = ep2.event_id WHERE ep2.event_id = $event_id ";
+		$price_row = $wpdb->get_row($sql);    
+			
+		if ($price_row !== NULL) {
+			$result['min'] = $price_row->min_price;
+			$result['max'] = $price_row->max_price;
+		} else {
+			echo $org_options['currency_symbol'].'0.00';
+			return;	
+		}
+			
+		if ($result['min'] == $result['max']) {
+			$result = $org_options['currency_symbol'].$result['min'];
+		} else {
+			$result = $org_options['currency_symbol'].$result['min'] . " $text " . $org_options['currency_symbol'].$result['max'];
+		}
+			
+		
+		echo '<p id="p_event_price-'.$event_id.'" class="event_price"><span class="'.espresso_template_css_class('section_title','section-title',false).'">'.__('Price: ', 'event_espresso').'</span> '.$result.'</p>';
+	}
+}
+add_action('action_hook_espresso_price_range', 'espresso_price_range', 20, 2);

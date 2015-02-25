@@ -8,12 +8,12 @@ $num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$eve
 $attendee_quantity = ' x '.sprintf(_n('%d attendee', '%d attendees', $meta['attendee_quantity'], 'event_espresso'), $meta['attendee_quantity']);
 $display_description_on_multi_reg_page = isset( $org_options['display_description_on_multi_reg_page'] ) ? $org_options['display_description_on_multi_reg_page'] : 'N';
 ?>
-<div id="event_espresso_registration_form" class="event-display-boxes multi-reg-page ui-widget">
+<div id="event_espresso_registration_form" class="<?php espresso_template_css_class('event_display_boxes','event-display-boxes multi-reg-page ui-widget'); ?>">
 
-	<h3 class="event_title ui-widget-header ui-corner-top" id="event_title-<?php echo $event_id; ?>">
-		<?php echo stripslashes_deep($event_name) ?> <?php echo $is_active['status'] == 'EXPIRED' ? ' - <span class="expired_event">Event Expired</span>' : ''; ?>
+	<h3 class="<?php espresso_template_css_class('event_title','event_title ui-widget-header ui-corner-top'); ?>" id="event_title-<?php echo $event_id; ?>">
+		<?php echo stripslashes_deep($event_name) ?> <?php echo $is_active['status'] == 'EXPIRED' ? ' - <span class="'.espresso_template_css_class('expired_event','expired_event').'">Event Expired</span>' : ''; ?>
 	</h3>
-	<div class="multi_regis_form_fields event-data-display ui-widget-content ui-corner-bottom" id="multi_regis_form_fields-<?php echo $event_id . '-' . $meta['price_id']; ?>">
+	<div class="<?php espresso_template_css_class('event_data_display','multi_regis_form_fields event-data-display ui-widget-content ui-corner-bottom'); ?>" id="multi_regis_form_fields-<?php echo $event_id . '-' . $meta['price_id']; ?>">
 
 		<?php
 		//Show the description ?
@@ -21,7 +21,7 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 			?>
 			<?php //Featured image
 			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');?>
-			<div class="event_description">
+			<div class="<?php espresso_template_css_class('event_description','event_description'); ?>">
 			<?php
 				//Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.
 				echo espresso_format_content($event_desc); 
@@ -32,14 +32,14 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 
 		switch ($is_active['status']) {
 			case 'EXPIRED': //only show the event description.
-				_e('<h3 class="expired_event">This event has passed.</h3>', 'event_espresso');
+				_e('<h3 class="'.espresso_template_css_class('expired_event','expired_event').'">This event has passed.</h3>', 'event_espresso');
 				break;
 
 			case 'REGISTRATION_CLOSED': //only show the event description.
 				// if todays date is after $reg_end_date
 				?>
-				<p class="event_full"><strong><?php _e('We are sorry but registration for this event is now closed.', 'event_espresso'); ?></strong></p>
-				<p class="event_full"><strong><?php _e('Please <a href="contact" title="contact us">contact us</a> if you would like to know if spaces are still available.', 'event_espresso'); ?></strong></p>
+				<p class="<?php espresso_template_css_class('event_full','event_full'); ?>"><strong><?php _e('We are sorry but registration for this event is now closed.', 'event_espresso'); ?></strong></p>
+				<p class="<?php espresso_template_css_class('event_full','event_full'); ?>"><strong><?php _e('Please <a href="contact" title="contact us">contact us</a> if you would like to know if spaces are still available.', 'event_espresso'); ?></strong></p>
 				<?php
 				break;
 
@@ -47,8 +47,8 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 				// if todays date is after $reg_end_date
 				// if todays date is prior to $reg_start_date
 				?>
-				<p class="event_full"><strong><?php _e('We are sorry but this event is not yet open for registration.', 'event_espresso'); ?></strong></p>
-				<p class="event_full"><strong><?php _e('You will be able to register starting ' . event_espresso_no_format_date($reg_start_date, 'F d, Y'), 'event_espresso'); ?></strong></p>
+				<p class="<?php espresso_template_css_class('event_full','event_full'); ?>"><strong><?php _e('We are sorry but this event is not yet open for registration.', 'event_espresso'); ?></strong></p>
+				<p class="<?php espresso_template_css_class('event_full','event_full'); ?>"><strong><?php _e('You will be able to register starting ' . event_espresso_no_format_date($reg_start_date, 'F d, Y'), 'event_espresso'); ?></strong></p>
 				<?php
 				break;
 
@@ -68,12 +68,12 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 				wp_nonce_field('reg_nonce', 'reg_form_nonce');
 				//Outputs registration forms
 				?>
-				<div class="multi_regis_wrapper_attendee-<?php echo $is_primary; ?>">
-					<div class="event-display-boxes">
-						<?php
-						echo '<h4 class="section-heading"><strong>'.__('Price Type:') . '</strong> ' . stripslashes_deep($meta['price_type']).$attendee_quantity.'</h4>';
-						echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $attendee_number . '</h3>';
-		
+				<div class="multi_regis_wrapper_attendee-<?php echo $is_primary; ?> <?php espresso_template_css_class('multi_regis_wrapper_attendee','multi_regis_wrapper_attendee'); ?>">
+					<div class="<?php espresso_template_css_class('event_display_boxes','event-display-boxes'); ?>">
+						
+						<h4 class="<?php espresso_template_css_class('section_heading','section-heading')?>"><strong><?php _e('Price Type: ', 'event_espresso')?></strong><?php echo stripslashes_deep($meta['price_type']).$attendee_quantity?></h4>
+						<h3 class="<?php espresso_template_css_class('section_heading','section-heading')?>"><?php echo __('Attendee ', 'event_espresso') . $attendee_number?></h3>
+					<?php
 						//This will be the main attendee
 						//$meta['attendee_number'] = 1;
 						$meta['attendee_number'] = $price_group_att_counter;
@@ -90,12 +90,12 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 						//Displays the copy to all button
 						if ( $event_counter == 1 && $event_count > 1 || ($meta['attendee_quantity'] > 1 && $event_meta['additional_attendee_reg_info'] > 1) ) {
 							?>
-							<div class="event-messages ui-state-highlight">
-								<p class="instruct" style="position:relative;padding:1em;">
-									<span class="copy-all-button-wrapper" style="position:relative;z-index:10;">									
-										<?php _e('Copy above information to all forms?', 'event_espresso'); ?> <button type="button" class="copy-all-button" value="<?php echo $event_id . '|' . $meta['price_id']; ?>"><?php _e('Yes', 'event_espresso'); ?></button>										
+							<div class="<?php espresso_template_css_class('event_messages','event-messages ui-state-highlight'); ?>">
+								<p class="<?php espresso_template_css_class('instruct','instruct'); ?>" style="position:relative;padding:1em;">
+									<span class="<?php espresso_template_css_class('copy_all_button_wrapper','copy-all-button-wrapper'); ?>" style="position:relative;z-index:10;">									
+										<?php _e('Copy above information to all forms?', 'event_espresso'); ?> <button type="button" class="<?php espresso_template_css_class('copy_all_button','copy-all-button'); ?>" value="<?php echo $event_id . '|' . $meta['price_id']; ?>"><?php _e('Yes', 'event_espresso'); ?></button>										
 									</span>
-									<span class="copy-all-button-success" style="display:none;position:absolute; top:.2em; left:0;padding:1em; border-radius:3px;z-index:1;background:#DCF3D9;"></span>
+									<span class="<?php espresso_template_css_class('copy_all_button_success','copy-all-button-success'); ?>" style="display:none;position:absolute; top:.2em; left:0;padding:1em; border-radius:3px;z-index:1;background:#DCF3D9;"></span>
 								</p>
 							</div>
 							<?php
@@ -142,11 +142,11 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 								//echo 'price_group_att_counter = '.$price_group_att_counter;
 								$meta['attendee_number'] = $price_group_att_counter;
 								?>
-								<hr class="hr_additional_attendee" />
-								<div class="multi_regis_wrapper_attendee-additional">
-									<div class="event-display-boxes">
+								<hr class="<?php espresso_template_css_class('hr_additional_attendee','hr_additional_attendee'); ?>" />
+								<div class="<?php espresso_template_css_class('multi_regis_wrapper_attendee_additional','multi_regis_wrapper_attendee-additional'); ?>">
+									<div class="<?php espresso_template_css_class('event_display_boxes','event-display-boxes'); ?>">
 										<?php
-										echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $i . '</h3>';
+										echo '<h3 class="'.espresso_template_css_class('section_heading','section-heading', false).'">' . __('Attendee ', 'event_espresso') . $i . '</h3>';
 										echo event_espresso_copy_dd($event_id, $meta);
 										echo event_espresso_add_question_groups($question_groups, $events_in_session[$event_id], $event_id, 1, $meta);
 										?>

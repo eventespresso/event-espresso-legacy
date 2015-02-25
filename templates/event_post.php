@@ -22,7 +22,6 @@ global $wpdb;
   $Organization_zip =$org_options['organization_zip'];
   $contact =$org_options['contact_email'];
   $registrar = $org_options['contact_email'];
-  $currency_format =$org_options['currency_format'];
 
         /**
          * do database stuff
@@ -185,9 +184,9 @@ global $wpdb;
                 $additional_limit = '5';
             }
 
-            $num_attendees = get_number_of_attendees_reg_limit($event_id, 'num_attendees'); //Get the number of attendees
-            $available_spaces = get_number_of_attendees_reg_limit($event_id, 'available_spaces'); //Gets a count of the available spaces
-            $number_available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces'); //Gets the number of available spaces
+			$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $event_id);//Get the number of attendees
+			$available_spaces = apply_filters('filter_hook_espresso_available_spaces_text', $event_id);//Gets a count of the available spaces
+			$number_available_spaces = apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);//Gets the number of available spaces
             //echo $number_available_spaces;
 
 
@@ -273,7 +272,7 @@ global $wpdb;
 ?>
 <p><?php echo event_date_display($start_date, get_option('date_format')) . " - " . event_date_display($end_date, get_option('date_format')); ?></p>
 <p><?php echo $event_address ?></p>
-<p><img style="padding-right: 5px;" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL?>/images/map.png" border="0" alt="<?php _e('View Map', 'event_espresso'); ?>" /><?php echo $google_map_link; ?> | <a class="a_register_link" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Register', 'event_espresso'); ?></a></p>
+<p><img style="padding-right: 5px;" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL?>images/map.png" border="0" alt="<?php _e('View Map', 'event_espresso'); ?>" /><?php echo $google_map_link; ?> | <a class="a_register_link" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Register', 'event_espresso'); ?></a></p>
 <?php
 if ($display_desc == 'Y'){ ?>
 <?php /*?><!--more--><?php */ //Uncomment this part to show the Read More link?>

@@ -61,8 +61,9 @@ if (!function_exists('event_espresso_get_event_details')) {
 			'css_class'					=> 'NULL',
 			'current_page'				=> 1,
 			'events_per_page'			=> 50,
-			'num_page_links_to_display'	=>10,
-			'use_wrapper'				=> true
+			'num_page_links_to_display'	=> 10,
+			'use_wrapper'				=> true,
+			'exclude_closed_events'		=> 'false'
 		);
 		// loop thru default atts
 		foreach ($default_attributes as $key => $default_attribute) {
@@ -112,6 +113,10 @@ if (!function_exists('event_espresso_get_event_details')) {
 		//Create the query
 		$DISTINCT = $ee_search == true ? "DISTINCT" : '';
 		$sql = "SELECT $DISTINCT e.*, ese.start_time, ese.end_time, p.event_cost ";
+
+		if ( function_exists('espresso_above_member_threshold') && espresso_above_member_threshold() == true ) {
+			$sql .= ", p.member_price, p.member_price_type ";
+		}
 		
 		//Category field names
 		$sql .= ($category_identifier != NULL && !empty($category_identifier))? ", c.category_name, c.category_desc, c.display_desc, c.category_identifier": '';
@@ -134,7 +139,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id= e.id ";
 		$sql .= " LEFT JOIN " . EVENTS_PRICES_TABLE . " p ON p.event_id=e.id ";
-		$sql .= " WHERE is_active = 'Y' ";
+		$sql .= " WHERE is_active = %s ";
 		
 		//Category sql
 		$sql .= $category_sql;
@@ -145,7 +150,13 @@ if (!function_exists('event_espresso_get_event_details')) {
 		//User sql
 		$sql .= (isset($user_id)  && !empty($user_id))? " AND wp_user = '" . $user_id . "' ": '';
 		
-		$sql .= $show_expired == 'false' ? " AND (e.start_date >= '" . date('Y-m-d') . "' OR e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
+		//Exclude events that have closed registration
+		if($exclude_closed_events == 'false'){
+			$sql .= $show_expired == 'false' ? " AND (e.start_date >= '" . date('Y-m-d') . "' OR e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
+		} else {
+			$sql .= $show_expired == 'false' ? " AND (e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
+		}
+
 		if  ($show_expired == 'true'){
 			$allow_override = 1;
 		}
@@ -180,9 +191,9 @@ if (!function_exists('event_espresso_get_event_details')) {
 		
 		$sql .= " GROUP BY e.id ";
 		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$sort." " : " ORDER BY date(start_date), id ASC ";
-		$sql .= $limit > 0 ? ' LIMIT 0, '.$limit : '';  
+		$sql .= $limit > 0 ? ' LIMIT 0, %d' : '';  
 		
-		$events = $wpdb->get_results( $wpdb->prepare($sql, ''));
+		$events = $wpdb->get_results( $wpdb->prepare($sql, 'Y', $limit));
 //		echo '<h4>' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		
 		$category_id			= isset($wpdb->last_result[0]->id) ? $wpdb->last_result[0]->id : '';
@@ -242,9 +253,9 @@ if (!function_exists('event_espresso_get_event_details')) {
 				$next_no_more = 'no_more';
 			}
 			
-			$espresso_paginate = "<div class='page_navigation'>";
-			$espresso_paginate .= "<a href='#' current_page=1 class='event_paginate $prev_no_more ui-icon ui-icon-seek-first'>&lt;&lt;</a>";
-			$espresso_paginate .= "<a href='#' current_page=$prev class='event_paginate $prev_no_more ui-icon ui-icon-seek-prev'>&lt;</a>";
+			$espresso_paginate = "<div class='".espresso_template_css_class('page_navigation','page_navigation', false)."'>";
+			$espresso_paginate .= "<a href='#' current_page=1 class='".espresso_template_css_class('event_paginate_current_page_1','event_paginate '.$prev_no_more.' ui-icon ui-icon-seek-first', false)."'>&lt;&lt;</a>";
+			$espresso_paginate .= "<a href='#' current_page=$prev class='".espresso_template_css_class('event_paginate_current_page_prev','event_paginate '.$prev_no_more.' ui-icon ui-icon-seek-prev', false)."'>&lt;</a>";
 			if ( $start > 1) {
 				$espresso_paginate .= "<span class='ellipse less'>...</span>";
 			}
@@ -253,22 +264,22 @@ if (!function_exists('event_espresso_get_event_details')) {
 				if ( $i == $current_page) {
 					$active_page = 'active_page';
 				}
-				$espresso_paginate .= "<a class='page_link event_paginate $active_page ' current_page=$i href='#' style='display: block; '>$i</a>";
+				$espresso_paginate .= "<a class='".espresso_template_css_class('page_link_event_paginate_active_page','page_link event_paginate '.$active_page, false)."' current_page=$i href='#' style='display: block; '>$i</a>";
 			}
 			if ( $end < $total_pages) {
 				$espresso_paginate .= "<span class='ellipse more'>...</span>";
 			}
-			$espresso_paginate .= "<a href='#' current_page=$next class='event_paginate $next_no_more ui-icon ui-icon-seek-next'>&gt;</a>";
-			$espresso_paginate .= "<a href='#' current_page=$total_pages class='event_paginate $next_no_more ui-icon ui-icon-seek-end'>&gt;&gt;</a>";
+			$espresso_paginate .= "<a href='#' current_page=$next class='".espresso_template_css_class('event_paginate_current_page_next','event_paginate '. $next_no_more .' ui-icon ui-icon-seek-next', false)."'>&gt;</a>";
+			$espresso_paginate .= "<a href='#' current_page=$total_pages class='".espresso_template_css_class('event_paginate_current_page_total_pages','event_paginate '.$next_no_more.' ui-icon ui-icon-seek-end', false)."'>&gt;&gt;</a>";
 			$espresso_paginate .= "</div>";	
 		}
-		echo "<div id='event_content' class='event_content'>";
+		echo "<div id='event_content' class='".espresso_template_css_class('event_content','event_content', false)."'>";
 		if ( count($events) < 1) {
 			//echo $sql;
 			echo __('No events available...', 'event_espresso');
 		}
 		 if ($display_desc == 'Y') {
-			echo '<p id="events_category_name-' . $category_id . '" class="events_category_name">' . stripslashes_deep($category_name) . '</p>';
+			echo '<p id="events_category_name-' . $category_id . '" class="'.espresso_template_css_class('events_category_name','events_category_name', false).'">' . stripslashes_deep($category_name) . '</p>';
 			echo espresso_format_content($category_desc);
 		}
 		if ( $events ) {
@@ -297,7 +308,8 @@ if (!function_exists('event_espresso_get_event_details')) {
 				$display_reg_form = $event->display_reg_form;
 				$allow_overflow = $event->allow_overflow;
 				$overflow_event_id = $event->overflow_event_id;
-				$event_desc = array_shift(explode('<!--more-->', $event_desc));
+				$event_desc = explode('<!--more-->', $event_desc);
+				$event_desc = array_shift($event_desc);
 				global $event_meta;
 				$event_meta = unserialize($event->event_meta);
 				$event_meta['is_active'] = $event->is_active;
@@ -415,7 +427,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 									//Uncomment to show active status array
 									//print_r( event_espresso_get_is_active($event_id));
 
-									echo '<div class="pending_event">';
+									echo '<div class="'.espresso_template_css_class('events_pending_event','pending_event').'">';
 									if ( empty( $path ) ) {
 									  include( $template_name );
 									} else {

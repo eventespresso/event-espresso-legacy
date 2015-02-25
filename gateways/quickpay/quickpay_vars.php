@@ -12,7 +12,7 @@ function espresso_display_quickpay($payment_data) {
 	$button_url = $quickpay_settings['button_url'];
 	$md5secret = $quickpay_settings['quickpay_md5secret'];
 	$payurl = "https://secure.quickpay.dk/form/";
-	$protocol = '3';
+	$protocol = '7';
 	$msgtype = 'authorize';
 	$merchant = $quickpay_settings['quickpay_merchantid'];
 	$language = $quickpay_settings['quickpay_language'];

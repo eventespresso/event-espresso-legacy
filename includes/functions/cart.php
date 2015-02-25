@@ -705,12 +705,11 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 							//function properly, allowing for registering more than allowed limit.
 							//The info from the following 5 lines will determine
 							//if they have surpassed the limit.
-							$available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');
+							$available_spaces =  apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);
 	
 							$attendee_limit = $r->additional_limit + 1;
 	
-							if ($available_spaces != 'Unlimited')
-								$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
+							$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
 	
 							$total_attendees_per_event = 0;
 	
@@ -755,9 +754,9 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 	
 							if ($attendee_overflow) {
 	
-								$err .= "<div class='event_espresso_error'><p><em>" . __('Attention', 'event_espresso') . "</em><br /> ";
-								$err .= sprintf(__("For %s, please make sure to select at least one attendee or delete it from your cart.", 'event_espresso'), stripslashes($r->event_name));
-								$err .= ' <span class="remove-cart-item"><img class="ee_delete_item_from_cart" id="cart_link_' . $event_id . '" alt="Remove this item from your cart" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" /></span> ';
+								$err .= "<div class='event_espresso_error'><p><em>" . __('Attention', 'event_espresso') . "</em><br />";
+								$err .= sprintf(__("For %s, please make sure to select at least one attendee or delete it from your cart.", 'event_espresso'), stripslashes($r->event_name), $attendee_limit);
+								$err .= '<span class="'.espresso_template_css_class('remove_cart_item','remove-cart-item', false).'"><img class="'.espresso_template_css_class('ee_delete_item_from_cart','ee_delete_item_from_cart', false).'" id="cart_link_' . $event_id . '" alt="Remove this item from your cart" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" /></span> ';
 								$err .= "</p></div>";
 							}
 	
@@ -794,19 +793,19 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 							# the error code from reCAPTCHA, if any
 							$error = null;
 							?>
-							<p class="event_form_field" id="captcha-<?php echo $event_id; ?>">
+							<p class="<?php espresso_template_css_class('event_form_field','event_form_field'); ?>" id="captcha-<?php echo $event_id; ?>">
 								<?php _e('Anti-Spam Measure: Please enter the following phrase', 'event_espresso'); ?>
 								<?php echo recaptcha_get_html($org_options['recaptcha_publickey'], $error, is_ssl() ? true : false); ?> 
 							</p>
 			<?php } //End use captcha	?>
 			
-		<div class="event-display-boxes ui-widget">
-			<div class="mer-event-submit ui-widget-content ui-corner-all">
-				<input type="submit" class="submit btn_event_form_submit ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" name="payment_page" value="<?php _e('Confirm and go to payment page', 'event_espresso'); ?>&nbsp;&raquo;" />
+		<div class="<?php espresso_template_css_class('event_display_boxes','event-display-boxes ui-widget'); ?> ">
+			<div class="<?php espresso_template_css_class('mer_event_submit','mer-event-submit ui-widget-content ui-corner-all'); ?> ">
+				<input type="submit" class="<?php espresso_template_css_class('btn_event_form_submit','submit btn_event_form_submit ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all'); ?>" name="payment_page" value="<?php _e('Confirm and go to payment page', 'event_espresso'); ?>&nbsp;&raquo;" />
 			</div>
 		</div>
 		<?php } ?> 
-				<p id="event_espresso_edit_cart">
+				<p id="event_espresso_edit_cart" class="<?php espresso_template_css_class('event_espresso_edit_cart','event_espresso_edit_cart'); ?>">
 					<a href="<?php echo $cart_page_url ?>" class="btn_event_form_submit inline-link">
 						<?php _e('Edit Cart', 'event_espresso'); ?>
 					</a> 
@@ -842,8 +841,8 @@ function event_espresso_copy_dd($event_id, $meta) {
 
 
 	$var = '<div class = "copy_dropdown_wrapper"> ';
-	$var .= '<label>Copy from: </label>';
-	$var .= '<select id="multi_regis_form_fields-' . $event_id . '" class="event_espresso_copy_info">';
+	$var .= '<label>'.__('Copy from:', 'event_espresso').' </label>';
+	$var .= '<select id="multi_regis_form_fields-' . $event_id . '" class="'.espresso_template_css_class('copy_info','event_espresso_copy_info', false).'">';
 	$var .= "<option value=''></option>";
 
 	/*
@@ -861,23 +860,23 @@ function event_espresso_copy_dd($event_id, $meta) {
 				if ($event_meta['additional_attendee_reg_info'] == 1) {
 					$i = 1;
 					$event_name = strlen($v_event_id['event_name']) > 25 ? substr($v_event_id['event_name'], 0, 15) . '... ' : $v_event_id['event_name']; //if too long to display
-					$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}|$k_event_id|$k_price_id|$i'>" . stripslashes_deep($event_name) . ' - ' . stripslashes_deep($v_price_id['price_type'] ). ' - Attendee ' . $i . "</option>";
+					$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}|$k_event_id|$k_price_id|$i'>" . stripslashes_deep($event_name) . ' - ' . stripslashes_deep($v_price_id['price_type'] ). ' - '.__('Attendee', 'event_espresso').' ' . $i . "</option>";
 				} else {
 					for ($i = 1; $i <= $v_price_id['attendee_quantity']; $i++) {
 						$event_name = strlen($v_event_id['event_name']) > 25 ? substr($v_event_id['event_name'], 0, 15) . '... ' : $v_event_id['event_name']; //if too long to display
-						$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}|$k_event_id|$k_price_id|$i'>" . stripslashes_deep($event_name) . ' - ' . $v_price_id['price_type'] . ' - Attendee ' . $i . "</option>";
+						$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}|$k_event_id|$k_price_id|$i'>" . stripslashes_deep($event_name) . ' - ' . $v_price_id['price_type'] . ' - '.__('Attendee', 'event_espresso').' ' . $i . "</option>";
 					}
 				}
 			}
 		}
 	}
 
-	$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}'>CLEAR FIELDS</option>";
+	$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}'>".__('CLEAR FIELDS', 'event_espresso')."</option>";
 	$var .= "</select></div>";
 
 	return $var;
 
-	return "<a href='#' class='event_espresso_copy_link' id='event_espresso_copy_link-$event_id'> Copy from above</a>";
+	return "<a href='#' class='event_espresso_copy_link' id='event_espresso_copy_link-$event_id'>".__('Copy from above', 'event_espresso')."</a>";
 }
 
 
@@ -951,7 +950,7 @@ if (!function_exists('event_espresso_multi_qty_dd')) {
 		$counter = 0;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		?>
-<select name="price_id[<?php echo $event_id; ?>][<?php echo $price_id; ?>]" id="price_id-<?php echo $event_id; ?>" class="price_id">
+<select name="price_id[<?php echo $event_id; ?>][<?php echo $price_id; ?>]" id="price_id-<?php echo $event_id; ?>" class="<?php espresso_template_css_class('price_id','price_id'); ?>">
 	<?php
 			for ($i = 0; $i <= $qty; $i++):
 				$selected = ($i == $value) ? ' selected="selected" ' : '';
@@ -987,7 +986,7 @@ if (!function_exists('event_espresso_multi_additional_attendees')) {
 		$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
 ?>
 
-<div class="event_espresso_add_attendee_wrapper-<?php echo $event_id; ?>">
+<div class="event_espresso_add_attendee_wrapper-<?php echo $event_id; ?> <?php espresso_template_css_class('event_espresso_add_attendee_wrapper','event_espresso_add_attendee_wrapper'); ?>">
 	<?php
 			$i = 1;
 			while (($i < $additional_limit) && ($i < $available_spaces)) {
@@ -1202,7 +1201,7 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 			
 <table class="price_list">
 	<?php
-			$available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');
+			$available_spaces = apply_filters('filter_hook_espresso_get_num_available_spaces', $event_id);
 			foreach ($results as $result) {
 
 				//Setting this field for use on the registration form
@@ -1238,9 +1237,7 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 				
 				if ($result->allow_multiple == 'Y') {			
 					$attendee_limit = $result->additional_limit;
-					if ($available_spaces != 'Unlimited') {
-						$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
-					}
+					$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
 				}
 					
 				event_espresso_multi_qty_dd( $event_id, $result->id,  $attendee_limit, $att_qty );

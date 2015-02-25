@@ -120,7 +120,7 @@ if ( !function_exists( 'espresso_venue_dd' ) ){
 			$help_div .= '<p>'.__('To use this venue in a page or post. Use the following shortcode.', 'event_espresso').'</p>';
 			$help_div .= '<p>[ESPRESSO_VENUE id="selected_venue_id"]</p>';
 			$help_div .= '<p>Example with Optional Parameters:<br />[ESPRESSO_VENUE outside_wrapper="div" outside_wrapper_class="event_venue"]</p>';
-			$help_div .= '<p><strong><a href="http://eventespresso.com/forums/2010/10/post-type-variables-and-shortcodes/#venue_shortcode" target="_blank">More Examples</a></strong></p>';
+			$help_div .= '<p><strong><a href="http://eventespresso.com/wiki/shortcodes-template-variables/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=venue+shortcode+examples+ee_version_'.EVENT_ESPRESSO_VERSION.'&utm_campaign=event_editor_venue_section#venue_shortcode" target="_blank">More Examples</a></strong></p>';
 			$help_div .= '</div>';
 			ob_start();
 
@@ -198,7 +198,7 @@ if ( !function_exists( 'espresso_personnel_cb' ) ){
 				<p>[ESPRESSO_STAFF]</p>
 				<p><?php _e('Example with Optional Parameters:', 'event_espresso'); ?><br />
 					[ESPRESSO_STAFF outside_wrapper="div" outside_wrapper_class="event_staff" inside_wrapper="p" inside_wrapper_class="event_person"]</p>
-				<p><strong><a href="http://eventespresso.com/wiki/shortcodes-template-variables/#staff_shortcode" target="_blank"><?php _e('More Examples', 'event_espresso'); ?></a></strong></p>
+				<p><strong><a href="http://eventespresso.com/wiki/shortcodes-template-variables/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Staff+Shortcode+examples<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=event_editor_staff_section#staff_shortcode" target="_blank"><?php _e('More Examples', 'event_espresso'); ?></a></strong></p>
 			</div>
 		</div>
 	</div>
