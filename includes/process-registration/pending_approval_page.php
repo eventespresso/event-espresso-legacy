@@ -71,7 +71,7 @@ function espresso_pending_registration_approval($registration_id) {
 		$payment_status = $attendee->payment_status;
 		$txn_type = $attendee->txn_type;
 		$amount_pd = $attendee->amount_pd;
-		$event_cost = $attendee->amount_pd;
+		$event_cost = $attendee->total_cost;
 		$payment_date = $attendee->payment_date;
 		$phone = $attendee->phone;
 		$event_time = $attendee->event_time;
