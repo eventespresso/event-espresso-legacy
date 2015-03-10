@@ -113,6 +113,8 @@ function organization_config_mnu() {
 				break;
 			case 'LTU' : $org_options['currency_symbol'] = 'LT'; // Lithuanian Litas (LTL)
 				break;
+			case 'SAU' : $org_options['currency_symbol'] = 'SAR'; // Saudia Arabia Riyal (SAR)
+				break;
 			case 'AUT' : case 'BEL' : case 'CYP' : case 'EST' : case 'FIN' : case 'FRA' : case 'DEU' : case 'GRC' : case 'IRL' : case 'ITA' : case 'LUX' : case 'LVA' : case 'MLT' : case 'NLD' : case 'PRT' : case 'SVK' : case 'SVN' : case 'ESP' : case 'AND' : case 'MCO' : case 'SMR' : case 'VAT' | 'MYT' : case 'MNE' : case 'XKV' : case 'SPM' : $org_options['currency_symbol'] = 'EUR'; // use the Euro for all eurozone countries
 				break;
 			default: $org_options['currency_symbol'] = '$';
