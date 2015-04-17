@@ -120,6 +120,12 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				$SQL .= "WHERE attendee_session = %s ";
 				$SQL .= $incomplete_filter;
 				
+				if ( $mer_attendee_ids = $wpdb->get_results($wpdb->prepare( $SQL, $prev_session_id ))) {
+					foreach ( $mer_attendee_ids as $v ) {
+						//Delete the old attendee meta
+						do_action('action_hook_espresso_save_attendee_meta', $v->id, 'original_attendee_details', '', TRUE);
+					}			
+				}
 
 				$SQL = "DELETE t1, t2 FROM " . EVENTS_ATTENDEE_TABLE . "  t1 ";
 				$SQL .= "JOIN  " . EVENTS_ANSWER_TABLE . " t2 on t1.id = t2.attendee_id ";
@@ -136,19 +142,6 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 	
 				// Clean up any attendee information from attendee_cost table where attendee is not available in attendee table
 				event_espresso_cleanup_multi_event_registration_id_group_data();		
-
-				if ( $mer_attendee_ids = $wpdb->get_results($wpdb->prepare( $SQL, $prev_session_id ))) {
-					foreach ( $mer_attendee_ids as $v ) {
-						//Added for seating chart addon
-						if ( defined('ESPRESSO_SEATING_CHART')) {				
-							$SQL = "DELETE FROM " . EVENTS_SEATING_CHART_EVENT_SEAT_TABLE . ' ';
-							$SQL .= "WHERE attendee_id = %d";
-							$wpdb->query($wpdb->prepare( $SQL, $v->id ));
-						}
-						//Delete the old attendee meta
-						do_action('action_hook_espresso_save_attendee_meta', $v->id, 'original_attendee_details', '', TRUE);
-					}			
-				}
 				
 			}
 		}
