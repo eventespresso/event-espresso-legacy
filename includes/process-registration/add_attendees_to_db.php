@@ -122,12 +122,6 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 				
 				if ( $mer_attendee_ids = $wpdb->get_results($wpdb->prepare( $SQL, $prev_session_id ))) {
 					foreach ( $mer_attendee_ids as $v ) {
-						//Added for seating chart addon
-						if ( defined('ESPRESSO_SEATING_CHART')) {				
-							$SQL = "DELETE FROM " . EVENTS_SEATING_CHART_EVENT_SEAT_TABLE . ' ';
-							$SQL .= "WHERE attendee_id = %d";
-							$wpdb->query($wpdb->prepare( $SQL, $v->id ));
-						}
 						//Delete the old attendee meta
 						do_action('action_hook_espresso_save_attendee_meta', $v->id, 'original_attendee_details', '', TRUE);
 					}			
