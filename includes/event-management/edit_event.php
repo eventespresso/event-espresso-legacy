@@ -411,7 +411,7 @@ function edit_event($event_id = 0) {
 			<label class="screen-reader-text" for="title">
 	<?php _e('Event Title', 'event_espresso'); ?>
 			</label>
-			<input type="text" name="event" size="30" tabindex="1" value="<?php echo $event_name; ?>" id="title" autocomplete="off" />
+			<input type="text" name="event" size="30" max-limit="200" tabindex="1" value="<?php echo $event_name; ?>" id="title" autocomplete="off" />
 		</div>
 		<!-- /titlewrap -->
 		<div class="inside">
