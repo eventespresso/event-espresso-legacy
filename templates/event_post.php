@@ -23,42 +23,10 @@ global $wpdb;
   $contact =$org_options['contact_email'];
   $registrar = $org_options['contact_email'];
 
-        /**
-         * do database stuff
-         * @since 3.1.14.P
-         * this stuff was all copied from registration_page.php
-         * the original queries weren't calling in any of the venue data
-         * feel free to rip this apart if there are ways to optimize this for this template.
-         * as Thesis developers would say, this is all copy pasta.
-         */
-        //Build event queries
-        $sql = "SELECT e.*, ese.start_time, ese.end_time ";
-        isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= ", v.name venue_name, v.address venue_address, v.address2 venue_address2, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta " : '';
-        $sql .= " FROM " . EVENTS_DETAIL_TABLE . " e ";
-		$sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id = e.id ";
 
-        isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = e.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id " : '';
-		$sql.= " WHERE e.is_active='Y' ";
-		$sql.= " AND e.event_status != 'D' ";
-
-		if (isset($single_event_id) && $single_event_id != NULL) {//Get the ID of a single event
-			//If a single event needs to be displayed, get its ID
-            $sql .= " AND event_identifier = '" . $single_event_id . "' ";
-        } else {
-			$sql.= " AND e.id = '" . $event_id . "' LIMIT 0,1";
-        }
-
-        //Support for diarise
-        if (!empty($_REQUEST['post_event_id'])) {
-            $sql = "SELECT e.* FROM " . EVENTS_DETAIL_TABLE . ' e';
-            $sql .= " LEFT JOIN " . EVENTS_START_END_TABLE . " ese ON ese.event_id = e.id ";
-            $sql .= " WHERE post_id = '" . $_REQUEST['post_event_id'] . "' ";
-            $sql .= " LIMIT 0,1";
-        }
-
-        $data->event = $wpdb->get_row($sql, OBJECT);
-        //print_r($data->event);
-
+        // use espresso_get_event to pull the event details.
+        $this_event = espresso_get_event($event_id);
+        
         $num_rows = $wpdb->num_rows;
 
         //Build the registration page
@@ -67,37 +35,37 @@ global $wpdb;
             //These are the variables that can be used throughout the registration page
             //foreach ($events as $event) {
             global $this_event_id;
-            $event_id = $data->event->id;
+            $event_id = $this_event->id;
             $this_event_id = $event_id;
 
-            $event_name = stripslashes_deep($data->event->event_name);
-            $event_desc = stripslashes_deep($data->event->event_desc);
-            $display_desc = $data->event->display_desc;
-            $display_reg_form = $data->event->display_reg_form;
-            $event_address = $data->event->address;
-            $event_address2 = $data->event->address2;
-            $event_city = $data->event->city;
-            $event_state = $data->event->state;
-            $event_zip = $data->event->zip;
-            $event_country = $data->event->country;
+            $event_name = stripslashes_deep($this_event->event_name);
+            $event_desc = stripslashes_deep($this_event->event_desc);
+            $display_desc = $this_event->display_desc;
+            $display_reg_form = $this_event->display_reg_form;
+            $event_address = $this_event->address;
+            $event_address2 = $this_event->address2;
+            $event_city = $this_event->city;
+            $event_state = $this_event->state;
+            $event_zip = $this_event->zip;
+            $event_country = $this_event->country;
 
 
-            $event_description = stripslashes_deep($data->event->event_desc);
-            $event_identifier = $data->event->event_identifier;
-            $event_cost = isset($data->event->event_cost) ? $data->event->event_cost : "0.00";
-            $member_only = $data->event->member_only;
-            $reg_limit = $data->event->reg_limit;
-            $allow_multiple = $data->event->allow_multiple;
-            $start_date = $data->event->start_date;
-            $end_date = $data->event->end_date;
-            $allow_overflow = $data->event->allow_overflow;
-            $overflow_event_id = $data->event->overflow_event_id;
+            $event_description = stripslashes_deep($this_event->event_desc);
+            $event_identifier = $this_event->event_identifier;
+            $event_cost = isset($this_event->event_cost) ? $this_event->event_cost : "0.00";
+            $member_only = $this_event->member_only;
+            $reg_limit = $this_event->reg_limit;
+            $allow_multiple = $this_event->allow_multiple;
+            $start_date = $this_event->start_date;
+            $end_date = $this_event->end_date;
+            $allow_overflow = $this_event->allow_overflow;
+            $overflow_event_id = $this_event->overflow_event_id;
 
             //Venue details
-            $venue_title = $data->event->venue_title;
-            $venue_url = $data->event->venue_url;
-            $venue_image = $data->event->venue_image;
-            $venue_phone = $data->event->venue_phone;
+            $venue_title = $this_event->venue_title;
+            $venue_url = $this_event->venue_url;
+            $venue_image = $this_event->venue_image;
+            $venue_phone = $this_event->venue_phone;
             $venue_address = '';
             $venue_address2 = '';
             $venue_city = '';
@@ -106,40 +74,40 @@ global $wpdb;
             $venue_country = '';
 
             global $event_meta;
-            $event_meta = unserialize($data->event->event_meta);
+            $event_meta = unserialize($this_event->event_meta);
 
             //Venue information
             if ($org_options['use_venue_manager'] == 'Y') {
-                $event_address = $data->event->venue_address;
-                $event_address2 = $data->event->venue_address2;
-                $event_city = $data->event->venue_city;
-                $event_state = $data->event->venue_state;
-                $event_zip = $data->event->venue_zip;
-                $event_country = $data->event->venue_country;
+                $event_address = $this_event->venue_address;
+                $event_address2 = $this_event->venue_address2;
+                $event_city = $this_event->venue_city;
+                $event_state = $this_event->venue_state;
+                $event_zip = $this_event->venue_zip;
+                $event_country = $this_event->venue_country;
 
                 //Leaving these variables intact, just in case people wnat to use them
-                $venue_title = $data->event->venue_name;
-                $venue_address = $data->event->venue_address;
-                $venue_address2 = $data->event->venue_address2;
-                $venue_city = $data->event->venue_city;
-                $venue_state = $data->event->venue_state;
-                $venue_zip = $data->event->venue_zip;
-                $venue_country = $data->event->venue_country;
+                $venue_title = $this_event->venue_name;
+                $venue_address = $this_event->venue_address;
+                $venue_address2 = $this_event->venue_address2;
+                $venue_city = $this_event->venue_city;
+                $venue_state = $this_event->venue_state;
+                $venue_zip = $this_event->venue_zip;
+                $venue_country = $this_event->venue_country;
                 global $venue_meta;
                 $add_venue_meta = array(
-                    'venue_title' => $data->event->venue_name,
-                    'venue_address' => $data->event->venue_address,
-                    'venue_address2' => $data->event->venue_address2,
-                    'venue_city' => $data->event->venue_city,
-                    'venue_state' => $data->event->venue_state,
-                    'venue_country' => $data->event->venue_country,
+                    'venue_title' => $this_event->venue_name,
+                    'venue_address' => $this_event->venue_address,
+                    'venue_address2' => $this_event->venue_address2,
+                    'venue_city' => $this_event->venue_city,
+                    'venue_state' => $this_event->venue_state,
+                    'venue_country' => $this_event->venue_country,
                 );
-                $venue_meta = (isset($data->event->venue_meta) && $data->event->venue_meta != '') && (isset($add_venue_meta) && $add_venue_meta != '') ? array_merge(unserialize($data->event->venue_meta), $add_venue_meta) : '';
+                $venue_meta = (isset($this_event->venue_meta) && $this_event->venue_meta != '') && (isset($add_venue_meta) && $add_venue_meta != '') ? array_merge(unserialize($this_event->venue_meta), $add_venue_meta) : '';
                 //print_r($venue_meta);
             }
 
-            $virtual_url = stripslashes_deep($data->event->virtual_url);
-            $virtual_phone = stripslashes_deep($data->event->virtual_phone);
+            $virtual_url = stripslashes_deep($this_event->virtual_url);
+            $virtual_phone = stripslashes_deep($this_event->virtual_phone);
 
             //Address formatting
             $location = ($event_address != '' ? $event_address : '') . ($event_address2 != '' ? '<br />' . $event_address2 : '') . ($event_city != '' ? '<br />' . $event_city : '') . ($event_state != '' ? ', ' . $event_state : '') . ($event_zip != '' ? '<br />' . $event_zip : '') . ($event_country != '' ? '<br />' . $event_country : '');
@@ -147,12 +115,12 @@ global $wpdb;
             //Google map link creation
             $google_map_link = espresso_google_map_link(array('address' => $event_address, 'city' => $event_city, 'state' => $event_state, 'zip' => $event_zip, 'country' => $event_country, 'text' => 'Map and Directions', 'type' => 'text'));
 
-            $question_groups = unserialize($data->event->question_groups);
-            $reg_start_date = $data->event->registration_start;
-            $reg_end_date = $data->event->registration_end;
+            $question_groups = unserialize($this_event->question_groups);
+            $reg_start_date = $this_event->registration_start;
+            $reg_end_date = $this_event->registration_end;
             $today = date("Y-m-d");
-            if (isset($data->event->timezone_string) && $data->event->timezone_string != '') {
-                $timezone_string = $data->event->timezone_string;
+            if (isset($this_event->timezone_string) && $this_event->timezone_string != '') {
+                $timezone_string = $this_event->timezone_string;
             } else {
                 $timezone_string = get_option('timezone_string');
                 if (!isset($timezone_string) || $timezone_string == '') {
@@ -164,19 +132,19 @@ global $wpdb;
             $today = date_at_timezone("Y-m-d H:i A", $timezone_string, $t);
             //echo event_date_display($today, get_option('date_format'). ' ' .get_option('time_format')) . ' ' . $timezone_string;
             //echo espresso_ddtimezone_simple();
-            $reg_limit = $data->event->reg_limit;
-            $additional_limit = $data->event->additional_limit;
+            $reg_limit = $this_event->reg_limit;
+            $additional_limit = $this_event->additional_limit;
 
 
 
             //If the coupon code system is intalled then use it
             if (function_exists('event_espresso_coupon_registration_page')) {
-                $use_coupon_code = $data->event->use_coupon_code;
+                $use_coupon_code = $this_event->use_coupon_code;
             }
 
             //If the groupon code addon is installed, then use it
             if (function_exists('event_espresso_groupon_payment_page')) {
-                $use_groupon_code = $data->event->use_groupon_code;
+                $use_groupon_code = $this_event->use_groupon_code;
             }
 
             //Set a default value for additional limit
@@ -207,17 +175,17 @@ global $wpdb;
                 'venue_state' => $venue_state,
                 'venue_country' => $venue_country,
 
-				'is_active' => $data->event->is_active,
-				'event_status' => $data->event->event_status,
-				'start_time' => $data->event->start_time,
-				'start_time' => empty($data->event->start_time) ? '' : $data->event->start_time,
+				'is_active' => $this_event->is_active,
+				'event_status' => $this_event->event_status,
+				'start_time' => $this_event->start_time,
+				'start_time' => empty($this_event->start_time) ? '' : $this_event->start_time,
 
-				'registration_startT' => $data->event->registration_startT,
-				'registration_start' => $data->event->registration_start,
+				'registration_startT' => $this_event->registration_startT,
+				'registration_start' => $this_event->registration_start,
 
-				'registration_endT' => $data->event->registration_endT,
-				'registration_end' => $data->event->registration_end,
-				'event_address' => empty($data->event->event_address) ? '' : $data->event->event_address,
+				'registration_endT' => $this_event->registration_endT,
+				'registration_end' => $this_event->registration_end,
+				'event_address' => empty($this_event->event_address) ? '' : $this_event->event_address,
 
 				'start_date' => '<span class="section-title">' . event_espresso_no_format_date($start_date, get_option('date_format')) . '</span>',
                 'end_date' => '<span class="section-title">' . event_date_display($end_date, get_option('date_format')) . '</span>',
@@ -229,9 +197,10 @@ global $wpdb;
             );
             $registration_url = $externalURL != '' ? $externalURL : espresso_reg_url($event_id);
             //print_r($all_meta);
-//This function gets the status of the event.
-                $is_active = array();
-                $is_active = event_espresso_get_is_active(0, $all_meta); }
+            
+            //This function gets the status of the event.
+            $is_active = array();
+            $is_active = event_espresso_get_is_active(0, $all_meta); }
 
 /**
  * this is the original database stuff

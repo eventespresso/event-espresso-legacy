@@ -32,12 +32,12 @@ if ($reg_form_only == false) {
 			<?php // echo '</div>'; ?>
 			<?php /* end venue details block */ ?>
 			<?php if ($display_desc == "Y") { //Show the description or not ?>
-			<div class="event_description clearfix">
 				<div class="<?php espresso_template_css_class('event_description','event_description clearfix'); ?>">
 					<p class="<?php espresso_template_css_class('section_title','section-title'); ?>">
 						<?php _e('Description:', 'event_espresso') ?>
 					</p>
-					<?php echo espresso_format_content($event_desc); //Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.   ?> </div>
+					<?php echo espresso_format_content($event_desc); //Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description. ?>
+				</div>
 				<?php
 	}//End display description
 
@@ -260,7 +260,6 @@ if ($reg_form_only == false) {
 		}			
 ?>
 				<p class="edit-link-footer"><?php echo espresso_edit_this($event_id) ?></p>
-			</div>
 		</div>
 	</div>
 </div>
