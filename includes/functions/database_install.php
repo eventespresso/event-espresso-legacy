@@ -485,7 +485,7 @@ function events_data_tables_install() {
 					  payment VARCHAR(45) DEFAULT NULL,
 					  payment_status VARCHAR(45) DEFAULT 'Incomplete',
 					  txn_type VARCHAR(45) DEFAULT NULL,
-					  txn_id VARCHAR(45) DEFAULT NULL,
+					  txn_id VARCHAR(250) DEFAULT NULL,
 					  payment_date VARCHAR(45) DEFAULT NULL,
 					  event_id VARCHAR(45) DEFAULT NULL,
 					  event_time VARCHAR(15) DEFAULT NULL,
