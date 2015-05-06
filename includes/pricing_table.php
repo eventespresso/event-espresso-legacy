@@ -193,7 +193,7 @@
 <div id="pricing-table" class="pclear" style="float:left">
      <div class="plan"  >
    
-        <h3>Developer<span>$499.95</span></h3>
+        <h3>Developer<span>$549.95</span></h3>
         <a class="signup" href="http://eventespresso.com/product/developer-license/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Developer+Buy+Now<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Buy Now</a>         
         <ul>
             
@@ -250,7 +250,7 @@
     </div >
       <div class="plan"  id="most-popular" >
    
-        <h3>Business<span>$179.95</span></h3>
+        <h3>Business<span>$199.95</span></h3>
         <a class="signup" href="http://eventespresso.com/product/business-license/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Business+Buy+Now<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Buy Now</a>         
         <ul>
             
@@ -304,7 +304,7 @@
     </div >
       <div class="plan"  >
    
-        <h3>Personal<span>$89.95</span></h3>
+        <h3>Personal<span>$99.95</span></h3>
         <a class="signup" href="http://eventespresso.com/product/personal-license/?utm_source=ee_plugin_admin&utm_medium=link&utm_content=Personal+Buy+Now<?php echo '+ee_version_'.EVENT_ESPRESSO_VERSION; ?>&utm_campaign=pricing_table">Buy Now</a>         
         <ul>
             

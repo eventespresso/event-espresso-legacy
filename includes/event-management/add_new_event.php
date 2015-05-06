@@ -231,7 +231,7 @@ function add_new_event() {
 				<label class="screen-reader-text" for="title">
 					<?php _e('Event Title', 'event_espresso'); ?>
 				</label>
-				<input type="text" name="event" size="30" tabindex="1" value="<?php echo isset($event_name) ? $event_name : ''; ?>" id="title" autocomplete="off" />
+				<input type="text" name="event" size="30" maxlength="199" tabindex="1" value="<?php echo isset($event_name) ? $event_name : ''; ?>" id="title" autocomplete="off" />
 			</div>
 			<!-- /titlewrap -->
 			<div class="inside">
