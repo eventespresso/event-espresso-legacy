@@ -45,7 +45,7 @@ function espresso_display_paypal($payment_data) {
 	foreach ($items as $key => $item) {
 
 		$item_num = $key + 1;
-		$myPaypal->addField( remove_accents( 'item_name_' . $item_num, $item->price_option . ' ' . __('for', 'event_espresso') . ' ' . preg_replace( "/[^a-zA-Z0-9\s]/", "", $item->event_name ) . ' ' . __('Attendee:', 'event_espresso') . ' ' . $item->fname . ' ' . $item->lname ) );
+		$myPaypal->addField('item_name_' . $item_num, $item->price_option . ' ' . __('for', 'event_espresso') . ' ' . preg_replace( "/[^a-zA-Z0-9\s]/", "", $item->event_name ) . ' ' . __('Attendee:', 'event_espresso') . ' ' . $item->fname . ' ' . $item->lname);
 		$myPaypal->addField('quantity_' . $item_num, absint($item->quantity));
 
 		if ($item->final_price < $item->orig_price) {
