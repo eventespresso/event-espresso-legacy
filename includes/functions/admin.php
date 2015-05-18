@@ -1842,7 +1842,8 @@ function ee_core_load_pue_update() {
 				'options_page_slug' => 'event_espresso',
 				'plugin_basename' => EVENT_ESPRESSO_WPPLUGINPATH,
 				'use_wp_update' => TRUE, //if TRUE then you want FREE versions of the plugin to be updated from WP
-				'extra_stats' => $extra_stats
+				'extra_stats' => $extra_stats,
+				'turn_on_notices_saved' => true
 			);
 			$check_for_updates = new PluginUpdateEngineChecker($host_server_url, $plugin_slug, $options); //initiate the class and start the plugin update engine!
 		}
