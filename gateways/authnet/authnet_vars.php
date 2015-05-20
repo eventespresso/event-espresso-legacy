@@ -28,7 +28,7 @@ function espresso_display_authnet($payment_data) {
 	$myAuthorize->setUserInfo($authnet_login_id, $authnet_transaction_key);
 
 	$myAuthorize->addField('x_Relay_URL',espresso_build_gateway_url('return_url', $payment_data, 'authnet') );
-	$myAuthorize->addField('x_Description', stripslashes_deep($event_name) . ' | ' . __('Reg. ID:', 'event_espresso') . ' ' . $attendee_id . ' | ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($fname . ' ' . $lname) . ' | ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity);
+	$myAuthorize->addField('x_Description', remove_accents( preg_replace( "/[^a-zA-Z0-9\s]/", "", remove_accents( stripslashes_deep( $event_name ) ) ) . ' | ' . __('Reg. ID:', 'event_espresso') . ' ' . $attendee_id . ' | ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($fname . ' ' . $lname) . ' | ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity ) );
 	$myAuthorize->addField('x_Amount', number_format($event_cost, 2));
 	$myAuthorize->addField('x_Logo_URL', $image_url);
 	$myAuthorize->addField('x_Invoice_num', 'au-' . event_espresso_session_id());
@@ -50,10 +50,14 @@ function espresso_display_authnet($payment_data) {
 	$items = $wpdb->get_results($sql);
 	foreach ($items as $key=>$item) {
 		$item_num=$key+1;
+		$item_event_name = preg_replace( "/[^a-zA-Z0-9\s]/", "", remove_accents( $item->event_name ) );
+		$item_fname = preg_replace( "/[^a-zA-Z0-9\s]/", "", remove_accents( $item->fname ) );
+		$item_lname = preg_replace( "/[^a-zA-Z0-9\s]/", "", remove_accents( $item->lname ) );
+		$item_price_option = preg_replace( "/[^a-zA-Z0-9\s]/", "", remove_accents( $item->price_option ) );
 		$myAuthorize->addLineItem(
 				$item_num,
-				( strlen($item->event_name) > 30 ? substr_replace($item->event_name, '', 30) : $item->event_name ),
-				substr_replace($item->price_option . ' for ' . $item->event_name . '. Attendee: '. $item->fname . ' ' . $item->lname, '', 255),
+				( strlen($item_event_name) > 30 ? substr_replace($item_event_name, '', 30) : $item_event_name ),
+				substr_replace($item_price_option . ' for ' . $item_event_name . '. Attendee: '. $item_fname . ' ' . $item_lname, '', 255),
 				$item->quantity,
 				$item->final_price,
 				FALSE
