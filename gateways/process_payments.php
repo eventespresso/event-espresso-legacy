@@ -300,3 +300,29 @@ function espresso_build_gateway_url($type, $payment_data, $gateway_slug, $extra_
 	$full_url = add_query_arg($query_args,$url);
 	return $full_url;
 }
+
+
+/**
+ * Removes special characters, accents, multiple whitespace characters etc from values to be sent to gateways that do not allow them.
+ * 
+ * @param tring $value is to the value to be sanitized.
+ * @return string which can be sent to the gateway
+ */
+function espresso_sanitize_gateway_value( $value ) {
+	// remove all tags
+	$value = strip_tags($value);
+
+	// remove accents and any special characters
+	$value = preg_replace( "/[^a-zA-Z0-9\s]/", "", remove_accents( $value ) ); 
+	
+	// kill entities
+	$value = preg_replace('/&.+?;/', '', $value); 
+	
+	// remove multiple whitespace characters
+	$value = preg_replace('/\s+/', ' ', $value); 
+
+	// remove and trailing whitespace
+	$value = trim($value);
+
+	return $value;
+}

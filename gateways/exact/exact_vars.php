@@ -5,6 +5,11 @@ function espresso_display_exact($payment_data) {
 // Setup class
 	include_once ('Exact.php');
 
+	//sanatize values for gateways
+	$exact_event_name = espresso_sanitize_gateway_value( $event_name );
+	$exact_fname = espresso_sanitize_gateway_value( $fname );
+	$exact_lname = espresso_sanitize_gateway_value( $lname );
+
 	global $org_options;
 	$myExact = new Espresso_Exact(); // initiate an instance of the class
 	echo '<!--Event Espresso Exact.com Gateway Version ' . $myExact->gateway_version . '-->';
@@ -38,14 +43,14 @@ function espresso_display_exact($payment_data) {
 		$home = home_url();
 	}
 	$myExact->addField('x_relay_url', $home . '/?type=exact&page_id=' . $org_options['return_url']);
-	$myExact->addField('x_description', stripslashes_deep($event_name) . ' | ' . __('Reg. ID:', 'event_espresso') . ' ' . $attendee_id . ' | ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($fname . ' ' . $lname) . ' | ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity);
+	$myExact->addField('x_description', stripslashes_deep($exact_event_name) . ' | ' . __('Reg. ID:', 'event_espresso') . ' ' . $attendee_id . ' | ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($exact_fname . ' ' . $exact_lname) . ' | ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity);
 	$myExact->addField('x_logo_url', $image_url);
 	$myExact->addField('x_invoice_num', event_espresso_session_id());
 //Post variables
 	$myExact->addField('x_cust_id', $attendee_id);
 
-	$myExact->addField('x_first_name', $fname);
-	$myExact->addField('x_last_name', $lname);
+	$myExact->addField('x_first_name', $exact_fname);
+	$myExact->addField('x_last_name', $exact_lname);
 	$myExact->addField('x_email', $attendee_email);
 	$myExact->addField('x_address', $address);
 	$myExact->addField('x_city', $city);

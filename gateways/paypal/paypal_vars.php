@@ -44,8 +44,16 @@ function espresso_display_paypal($payment_data) {
 
 	foreach ($items as $key => $item) {
 
+		//sanatize event name for paypal
+	 	$item->event_name = espresso_sanitize_gateway_value( $item->event_name );
+	 	$item->fname = espresso_sanitize_gateway_value( $item->fname );
+	 	$item->lname = espresso_sanitize_gateway_value( $item->lname );
+	 	$item->price_option = espresso_sanitize_gateway_value( $item->price_option );
+
+
+
 		$item_num = $key + 1;
-		$item_name = remove_accents( $item->price_option . ' ' . __('for', 'event_espresso') . ' ' . preg_replace( "/[^a-zA-Z0-9\s]/", "", remove_accents($item->event_name)) . ' ' . __('Attendee:', 'event_espresso') . ' ' . $item->fname . ' ' . $item->lname );
+		$item_name = remove_accents( $item->price_option . ' ' . __('for', 'event_espresso') . ' ' . $item->event_name . ' ' . __('Attendee:', 'event_espresso') . ' ' . $item->fname . ' ' . $item->lname );
 		$myPaypal->addField( 'item_name_' . $item_num, $item_name );
 		$myPaypal->addField('quantity_' . $item_num, absint($item->quantity));
 
