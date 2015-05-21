@@ -5,6 +5,11 @@ function espresso_display_firstdata_e4($payment_data) {
 // Setup class
 	include_once ('FirstDataE4.php');
 
+	//sanatize values for gateways
+	$e4_event_name = espresso_sanitize_gateway_value( $event_name );
+	$e4_fname = espresso_sanitize_gateway_value( $fname );
+	$e4_lname = espresso_sanitize_gateway_value( $lname );
+
 	global $org_options;
 	$myE4 = new Espresso_E4(); // initiate an instance of the class
 	echo '<!--Event Espresso E4.com Gateway Version ' . $myE4->gateway_version . '-->';
@@ -37,14 +42,14 @@ function espresso_display_firstdata_e4($payment_data) {
 		$home = home_url();
 	}
 	$myE4->addField('x_relay_url', $home . '/?type=firstdata_e4&page_id=' . $org_options['return_url']);
-	$myE4->addField('x_description', stripslashes_deep($event_name) . ' ' . __('Reg. ID:', 'event_espresso') . ' ' . $attendee_id . ' ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($fname . ' ' . $lname) . ' ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity);
+	$myE4->addField('x_description', stripslashes_deep($e4_event_name) . ' ' . __('Reg. ID:', 'event_espresso') . ' ' . $attendee_id . ' ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($e4_fname . ' ' . $e4_lname) . ' ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity);
 	$myE4->addField('x_logo_url', $image_url);
 	//$myE4->addField('x_invoice_num', event_espresso_session_id());
 //Post variables
 	$myE4->addField('x_cust_id', $attendee_id);
 
-	$myE4->addField('x_first_name', $fname);
-	$myE4->addField('x_last_name', $lname);
+	$myE4->addField('x_first_name', $e4_fname);
+	$myE4->addField('x_last_name', $e4_lname);
 	$myE4->addField('x_email', $attendee_email);
 	$myE4->addField('x_address', $address);
 	$myE4->addField('x_city', $city);
