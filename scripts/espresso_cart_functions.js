@@ -401,10 +401,9 @@ jQuery(document).ready(function() {
 	            case 'radio':
                     var copy_to = jQuery(this);
                     jQuery(":input[name='" + copy_field_name + "']").each(function(i, e) {
-
-                    if ( jQuery(e).attr('checked') && val == jQuery(e).val()) {                            
-                    jQuery(copy_to).attr("checked", "checked");
-                    }
+                        if ( jQuery(e).prop('checked') && val == jQuery(e).val()) {                            
+                            jQuery(copy_to).prop("checked", "checked");
+                        }
                     });
                     break;
 	            case 'checkbox':
