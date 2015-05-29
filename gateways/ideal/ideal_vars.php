@@ -47,7 +47,7 @@ function espresso_process_ideal($payment_data) {
 <div id="ideal-payment-option-dv" class="payment-option-dv">
 
 	<a id="ideal-payment-option-lnk" class="payment-option-lnk display-the-hidden" rel="ideal-payment-option-form" style="cursor:pointer;">
-		<img alt="Pay using a Credit Card" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL; ?>gateways/pay-by-credit-card.png">
+		<img alt="Pay using a Credit Card" src="<?php echo ( ! empty( $ideal_mollie_settings['button_url'] ) ? $ideal_mollie_settings['button_url'] : EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/ideal/ideal-mollie-logo.png') ?>">
 	</a>	
 
 	<div id="ideal-payment-option-form-dv" class="hide-if-js">	
