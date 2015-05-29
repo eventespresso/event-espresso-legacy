@@ -8,21 +8,23 @@ function event_espresso_ideal_payment_settings() {
 		$ideal_settings['ideal_mollie_partner_id'] = $_POST['ideal_mollie_partner_id'];
 		$ideal_settings['ideal_mollie_use_sandbox'] = empty($_POST['ideal_mollie_use_sandbox']) ? false : true;
 		$ideal_settings['force_ssl_return'] = empty($_POST['force_ssl_return']) ? false : true;
+		$ideal_settings['button_url'] = $_POST['button_url'];
 		update_option('event_espresso_ideal_mollie_settings', $ideal_settings);
 		echo '<div id="message" class="updated fade"><p><strong>' . __('Ideal Mollie settings saved.', 'event_espresso') . '</strong></p></div>';
 	}
 	$ideal_settings = get_option('event_espresso_ideal_mollie_settings');
 	if (empty($ideal_settings)) {
+		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/ideal/ideal-mollie-logo.png")) {
+			$ideal_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/ideal/ideal-mollie-logo.png";
+		} else {
+			$ideal_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/ideal/ideal-mollie-logo.png";
+		}
 		$ideal_settings['ideal_mollie_partner_id'] = '';
 		$ideal_settings['ideal_mollie_use_sandbox'] = false;
 		$ideal_settings['force_ssl_return'] = false;
 		if (add_option('event_espresso_ideal_mollie_settings', $ideal_settings, '', 'no') == false) {
 			update_option('event_espresso_ideal_mollie_settings', $ideal_settings);
 		}
-	}
-
-	if ( ! isset( $ideal_settings['button_url'] ) || ! file_exists( $ideal_settings['button_url'] )) {
-		$ideal_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div
@@ -92,6 +94,19 @@ function event_espresso_display_ideal_settings() {
 							<br />
 							<?php _e('(Make sure you enable test mode in your Mollie account).', 'event_espresso'); ?>
 						</li>
+						<li>
+							<label for="button_url">
+								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+							</label>
+							<input class="upload_url_input" type="text" name="button_url" size="35" value="<?php echo (isset($ideal_settings['button_url']) ? $ideal_settings['button_url'] : '' ); ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
+						</li>
+						<?php if ( ! empty($ideal_settings['button_url'])) { ?>
+						<li>
+							<label><?php _e('Current Button Image', 'event_espresso'); ?></label>
+							<?php echo (($ideal_settings['button_url'] == '') ? '' : '<img src="' . $ideal_settings['button_url'] . '" />'); ?>
+						</li>
+						<?php } ?>
 					<?php if (espresso_check_ssl() == TRUE || ( isset($ideal_settings['force_ssl_return']) && $ideal_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
