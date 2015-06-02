@@ -66,11 +66,11 @@ function espresso_process_paypal_pro($payment_data) {
 			'shiptoname' => $_POST['first_name'] . ' ' . $_POST['last_name'], // Required if shipping is included.  Person's name associated with this address.  32 char max.
 			'shiptostreet' =>  $_POST['address'], // Required if shipping is included.  First street address.  100 char max.
 			'shiptostreet2' => '', // Second street address.  100 char max.
-			'shiptocity' => '', // Required if shipping is included.  Name of city.  40 char max.
-			'shiptostate' => '', // Required if shipping is included.  Name of state or province.  40 char max.
-			'shiptozip' => '', // Required if shipping is included.  Postal code of shipping address.  20 char max.
-			'shiptocountrycode' => '', // Required if shipping is included.  Country code of shipping address.  2 char max.
-			'shiptophonenum' => '' // Phone number for shipping address.  20 char max.
+			'shiptocity' => $_POST['city'], // Required if shipping is included.  Name of city.  40 char max.
+			'shiptostate' =>  $_POST['state'], // Required if shipping is included.  Name of state or province.  40 char max.
+			'shiptozip' => 'US', // Required if shipping is included.  Postal code of shipping address.  20 char max.
+			'shiptocountrycode' => $_POST['zip'], // Required if shipping is included.  Country code of shipping address.  2 char max.
+			'shiptophonenum' => empty($_POST['phone']) ? '' : $_POST['phone'] // Phone number for shipping address.  20 char max.
 	);
 
 	$PaymentDetails = array(
