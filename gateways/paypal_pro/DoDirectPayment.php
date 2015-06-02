@@ -106,6 +106,7 @@ function espresso_process_paypal_pro($payment_data) {
 	$PayPalRequestData = array(
 			'DPFields' => $DPFields,
 			'CCDetails' => $CCDetails,
+			'PayerInfo' => $PayerInfo,
 			'PayerName' => $PayerName,
 			'BillingAddress' => $BillingAddress,
 			'PaymentDetails' => $PaymentDetails,
