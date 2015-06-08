@@ -644,12 +644,25 @@ if (!function_exists('event_espresso_send_payment_notification')) {
 //Reminder Notices
 if (!function_exists('espresso_event_reminder')) {
 
-	function espresso_event_reminder($event_id, $email_subject='', $email_text='', $email_id=0) {
+	function espresso_event_reminder($event_id, $email_subject='', $email_text='', $email_id=0, $filter="all") {
 		global $wpdb, $org_options;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$count = 0;
-		$SQL = 'SELECT * FROM ' . EVENTS_ATTENDEE_TABLE . ' WHERE event_id =%d GROUP BY lname, fname';
-		
+                switch ($filter) {
+                    case "completed":
+                        $sql_filter = " AND payment_status='Completed'";
+                        break;
+                    case "incomplete":
+                        $sql_filter = " AND payment_status='Incomplete'";
+                        break;
+                    case "pending":
+                        $sql_filter = " AND payment_status='Pending'";
+                        break;
+                    default:
+                        $sql_filter = "";
+                }
+		$SQL = 'SELECT * FROM ' . EVENTS_ATTENDEE_TABLE . ' WHERE event_id =%d' . $sql_filter . ' GROUP BY lname, fname';
+                
 		$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ));
 		
 		if ($wpdb->num_rows > 0) {
@@ -661,7 +674,7 @@ if (!function_exists('espresso_event_reminder')) {
 			?>
 			<div id="message" class="updated fade">
 				<p><strong>
-						<?php echo printf( _n('Email Sent to %d person successfully.', 'Email Sent to %d people successfully.', $count, 'event_espresso'), $count ); ?>
+						<?php echo sprintf(_n('Email Sent to 1 person successfully.', 'Email Sent to %d people successfully.', $count, 'event_espresso'), $count); ?>
 					</strong></p>
 			</div>
 			<?php
