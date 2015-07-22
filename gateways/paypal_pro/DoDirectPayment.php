@@ -109,6 +109,7 @@ function espresso_process_paypal_pro($payment_data) {
 			'PayerInfo' => $PayerInfo,
 			'PayerName' => $PayerName,
 			'BillingAddress' => $BillingAddress,
+			'ShippingAddress' => $ShippingAddress,			
 			'PaymentDetails' => $PaymentDetails,
 			'OrderItems' => $OrderItems
 	);
