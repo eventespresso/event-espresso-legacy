@@ -662,7 +662,7 @@ if (!function_exists('espresso_event_reminder')) {
                         $sql_filter = "";
                 }
 
-      	$SQL = 'SELECT * FROM ' . EVENTS_ATTENDEE_TABLE . ' WHERE event_id =%d' . $sql_filter . apply_filters('filter_hook_espresso_event_reminder_group_by', ' GROUP BY lname, fname');
+      	$SQL = 'SELECT * FROM ' . EVENTS_ATTENDEE_TABLE . ' WHERE event_id =%d' . $sql_filter . apply_filters('filter_hook_espresso_event_reminder_group_by', ' GROUP BY email');
 
 		$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ));
 
