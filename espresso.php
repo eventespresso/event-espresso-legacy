@@ -282,7 +282,7 @@ setlocale(LC_TIME, get_locale());
 	
 //Get language files
 function espresso_load_language_files() {
-	$lang = WPLANG;
+	$lang = get_locale();
 	espresso_sideload_current_lang();
 
 
@@ -305,8 +305,8 @@ function ee_force_admin_ajax_ssl( $url, $scheme ) {
 
 
 function espresso_sideload_current_lang() {
-	$lang = WPLANG;
-	//first let's see if we've already done an existing file check. || if WPLANG is present
+	$lang = get_locale();
+	//first let's see if we've already done an existing file check. || if $lang has a value
 	if ( $has_check = get_option('lang_file_check_' . $lang . '_' . EVENT_ESPRESSO_VERSION) || empty($lang) )
 		return;
 
