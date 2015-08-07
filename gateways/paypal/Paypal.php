@@ -84,6 +84,7 @@ class EE_Paypal extends Espresso_PaymentGateway {
 			$ch = curl_init(); // Starts the curl handler
 			$error = array();
 			$error["set_host"] = curl_setopt($ch, CURLOPT_URL, $url); // Sets the paypal address for curl
+			$error["useragent"] = curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0');
 			$error["set_fail_on_error"] = curl_setopt($ch, CURLOPT_FAILONERROR, 1);
 			$error["set_return_transfer"] = curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // Returns result to a variable instead of echoing
 			$error["set_timeout"] = curl_setopt($ch, CURLOPT_TIMEOUT, 45); // Sets a time limit for curl in seconds (do not set too low)
