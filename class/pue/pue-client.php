@@ -432,7 +432,7 @@ if ( !class_exists('PluginUpdateEngineChecker') ):
 			//dashboard message "dismiss upgrade" link
 			add_action( "wp_ajax_".$this->dismiss_upgrade, array($this, 'dashboard_dismiss_upgrade'));
 
-			if ( ! has_action( "wp_ajax_pue_dismiss_persistent_notice" ) ) {
+			if ( ! has_action( "wp_ajax_pue_dismiss_persistent_notice" ) && $this->turn_on_notice_saves ) {
 				add_action( "wp_ajax_pue_dismiss_persistent_notice", array( $this, 'dismiss_persistent_notice' ) );
 			}
 
