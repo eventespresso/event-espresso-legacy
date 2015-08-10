@@ -3,7 +3,7 @@ if (!class_exists('Event_Espresso_Widget')) {
 
     class Event_Espresso_Widget extends WP_Widget {
 
-        function Event_Espresso_Widget() {
+        public function __construct() {
 
             /* Widget settings. */
 
@@ -13,7 +13,7 @@ if (!class_exists('Event_Espresso_Widget')) {
             $control_options = array('width' => 300, 'height' => 350, 'id_base' => 'events-widget');
             /* Create the widget. */
 
-            $this->WP_Widget('events-widget', __('Event Espresso Upcoming Events Widget', 'event_espresso'), $widget_options, $control_options);
+            parent::__construct('events-widget', __('Event Espresso Upcoming Events Widget', 'event_espresso'), $widget_options, $control_options);
         }
 
         function widget($args, $instance) {
@@ -189,7 +189,7 @@ if (!class_exists('Event_Espresso_Widget')) {
 
                 /* Set up some default widget settings. */
 
-                $defaults = array('title' => __('Upcoming Events', 'event_espresso'), 'category_name' => '', 'show_expired' => 'false', 'show_secondary' => 'false', 'show_deleted' => 'false', 'show_recurrence' => 'false');
+                $defaults = array('title' => __('Upcoming Events', 'event_espresso'), 'category_name' => '', 'show_expired' => 'false', 'show_secondary' => 'false', 'show_deleted' => 'false', 'show_recurrence' => 'false', 'limit' => '10');
 
                 $instance = wp_parse_args((array) $instance, $defaults);
 
