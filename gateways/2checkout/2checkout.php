@@ -35,6 +35,7 @@ class Espresso_TwoCo extends Espresso_PaymentGateway
     {
         $this->testMode = TRUE;
         $this->addField('demo', 'Y');
+        $this->gatewayUrl = 'https://sandbox.2checkout.com/checkout/purchase';
     }
 
     /**
