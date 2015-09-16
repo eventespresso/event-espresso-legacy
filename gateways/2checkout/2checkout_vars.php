@@ -37,7 +37,7 @@ function espresso_display_2checkout($payment_data) {
 	$my2checkout->addField('sid', $twocheckout_id);
 	$my2checkout->addField('mode', '2CO');
 	$my2checkout->addField('merchant_order_id', rand(1, 100));
-	$my2checkout->addField('x_Receipt_Link_URL', espresso_build_gateway_url('return_url', $payment_data, '2checkout'));
+	$my2checkout->addField('x_receipt_link_url', espresso_build_gateway_url('return_url', $payment_data, '2checkout'));
 	$my2checkout->addField('currency_code', $twocheckout_cur);
 
 //Enable this function if you want to send payment notification before the person has paid.
