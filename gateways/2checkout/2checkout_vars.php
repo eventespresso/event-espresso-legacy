@@ -37,7 +37,12 @@ function espresso_display_2checkout($payment_data) {
 	$my2checkout->addField('sid', $twocheckout_id);
 	$my2checkout->addField('mode', '2CO');
 	$my2checkout->addField('merchant_order_id', rand(1, 100));
-	$my2checkout->addField('x_receipt_link_url', get_permalink($org_options['return_url']));
+	if ($twocheckout_settings['force_ssl_return']) {
+		$return_url = str_replace("http://", "https://", get_permalink($org_options['return_url']));
+	} else {
+		$return_url = get_permalink($org_options['return_url']);
+	}
+	$my2checkout->addField('x_receipt_link_url', $return_url);
 	$my2checkout->addField('id', $payment_data['attendee_id']);
 	$my2checkout->addField('r_id',$payment_data['registration_id']);
 	$my2checkout->addField('payment_method', '2checkout');
