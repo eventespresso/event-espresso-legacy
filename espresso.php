@@ -28,13 +28,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-//Define the version of the plugin
-function espresso_version() {
-	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
-	return '3.1.37.5.P';
-}
-
-//Returns the plugin version
+//Returns the plugin version if another version is not already activated.
 if ( ! function_exists( 'espresso_version' ) ) {
 	/**
 	 * espresso_version
@@ -44,6 +38,7 @@ if ( ! function_exists( 'espresso_version' ) ) {
 		do_action( 'action_hook_espresso_log', __FILE__, __FUNCTION__, '' );
 		return '3.1.37.5.P';
 	}
+
 } else {
 	add_action( 'admin_notices', 'espresso3_duplicate_plugin_error', 1 );
 	unset( $_GET[ 'activate' ] );
