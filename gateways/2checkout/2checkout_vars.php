@@ -25,21 +25,30 @@ function espresso_display_2checkout($payment_data) {
 	//$sql .= " JOIN " . EVENTS_ATTENDEE_COST_TABLE . " ac ON a.id=ac.attendee_id ";
 	$sql .= " WHERE a.attendee_session='$session_id'";
 	$tickets = $wpdb->get_results($sql, ARRAY_A);
-	$item_num = 1;
+	$item_num = 0;
 	foreach ($tickets as $ticket) {
-		$my2checkout->addField('c_prod_' . $item_num, $ticket['id'] . ',' . $ticket['quantity']);
-		$my2checkout->addField('c_name_' . $item_num, $ticket['event_name']);
-		$my2checkout->addField('c_description_' . $item_num, '');
-		$my2checkout->addField('c_price_' . $item_num, $ticket['final_price']);
+		$my2checkout->addField('li_' . $item_num . '_type', 'product');
+		$my2checkout->addField('li_' . $item_num . '_name', $ticket['event_name']);
+		$my2checkout->addField('li_' . $item_num . '_quantity', $ticket['quantity']);
+		$my2checkout->addField('li_' . $item_num . '_price', $ticket['final_price']);
+		$my2checkout->addField('li_' . $item_num . '_tangible', 'N');
 		$item_num++;
 	}
-	$my2checkout->addField('id_type', '1');
 	$my2checkout->addField('sid', $twocheckout_id);
-	$my2checkout->addField('cart_order_id', rand(1, 100));
-	
-	$my2checkout->addField('x_Receipt_Link_URL', espresso_build_gateway_url('return_url', $payment_data, '2checkout'));
-	$my2checkout->addField('total', number_format($event_cost, 2, '.', ''));
-	$my2checkout->addField('tco_currency', $twocheckout_cur);
+	$my2checkout->addField('mode', '2CO');
+	$my2checkout->addField('merchant_order_id', rand(1, 100));
+	if ($twocheckout_settings['force_ssl_return']) {
+		$return_url = str_replace("http://", "https://", get_permalink($org_options['return_url']));
+	} else {
+		$return_url = get_permalink($org_options['return_url']);
+	}
+	$my2checkout->addField('x_receipt_link_url', $return_url);
+	$my2checkout->addField('id', $payment_data['attendee_id']);
+	$my2checkout->addField('r_id',$payment_data['registration_id']);
+	$my2checkout->addField('payment_method', '2checkout');
+	$my2checkout->addField('attendee_action', 'post_payment');
+	$my2checkout->addField('form_action', 'payment');
+	$my2checkout->addField('currency_code', $twocheckout_cur);
 
 //Enable this function if you want to send payment notification before the person has paid.
 //This function is copied on the payment processing page
