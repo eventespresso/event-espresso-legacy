@@ -161,7 +161,7 @@ foreach ($registration_ids as $reg_id) {
 		$sub_total = $tmp_attendee["final_price"] * $tmp_attendee["quantity"];
 		$orig_total = $tmp_attendee["orig_price"] * $tmp_attendee["quantity"];
 		$attendees[] = $pdf->LoadData(array(
-			pdftext($tmp_attendee["event_name"] . "[" . date('m-d-Y', strtotime($tmp_attendee['start_date'])) . "]") . ' >> '
+			pdftext(html_entity_decode(stripslashes($tmp_attendee['event_name']), ENT_QUOTES, "UTF-8") . "[" . date('m-d-Y', strtotime($tmp_attendee['start_date'])) . "]") . ' >> '
 			. pdftext(html_entity_decode($tmp_attendee["fname"], ENT_QUOTES, "UTF-8") . " " . html_entity_decode($tmp_attendee["lname"], ENT_QUOTES, "UTF-8")) . ';'
 			. pdftext($tmp_attendee["quantity"]) . ';'
 			. doubleval($tmp_attendee["final_price"]) . ';'
