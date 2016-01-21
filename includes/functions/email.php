@@ -150,6 +150,11 @@ if (!function_exists('espresso_replace_shortcodes')) {
 				}
 			}
 		}
+
+		//Filters to allow for custom email shortcodes
+		apply_filters('filter_hook_espresso_post_replace_shortcode_search_values', $SearchValues);
+		apply_filters('filter_hook_espresso_post_replace_shortcode_replace_values', $ReplaceValues, $data);
+
 		//Perform the replacement
 		return str_replace($SearchValues, $ReplaceValues, $message);
 	}
@@ -320,7 +325,7 @@ function espresso_prepare_email_data($attendee_id, $multi_reg, $custom_data='') 
 		$data->event->email_id = $custom_data_email_id > 0 ? $custom_data_email_id : '';
 	}
 
-	return $data;
+	return apply_filters('filter_hook_espresso_post_prepare_email_data', $data);
 }
 
 
