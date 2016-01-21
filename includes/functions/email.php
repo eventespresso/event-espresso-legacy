@@ -152,8 +152,8 @@ if (!function_exists('espresso_replace_shortcodes')) {
 		}
 
 		//Filters to allow for custom email shortcodes
-		apply_filters('filter_hook_espresso_post_replace_shortcode_search_values', $SearchValues);
-		apply_filters('filter_hook_espresso_post_replace_shortcode_replace_values', $ReplaceValues, $data);
+		$SearchValues = apply_filters('filter_hook_espresso_post_replace_shortcode_search_values', $SearchValues);
+		$ReplaceValues = apply_filters('filter_hook_espresso_post_replace_shortcode_replace_values', $ReplaceValues, $data);
 
 		//Perform the replacement
 		return str_replace($SearchValues, $ReplaceValues, $message);
