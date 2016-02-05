@@ -101,8 +101,8 @@ if (!function_exists('espresso_ical_prepare_by_meta')) {
 			return '';
 	}
 
-		$start_date = strtotime($meta['start_date'] . ' ' . $meta['start_time']);
-		$end_date = strtotime($meta['end_date'] . ' ' . $meta['end_time']);
+		$start_date = strtotime($meta['start_date_unformatted'] . ' ' . $meta['start_time']);
+		$end_date = strtotime($meta['end_date_unformatted'] . ' ' . $meta['end_time']);
 		$title = empty($text) ? __('iCal Import', 'event_espresso') : $title;
 		$image = empty($image) ? '<img src="'.EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/calendar_link.png">' : $image;
 		if ($link_only == TRUE){
