@@ -100,9 +100,12 @@ if (!function_exists('espresso_ical_prepare_by_meta')) {
 		if (  ! isset( $org_options['display_ical_download'] ) || empty( $org_options['display_ical_download'] ) || $org_options['display_ical_download'] == 'N' ){
 			return '';
 	}
+		$start_date = !empty($meta['start_date_unformatted']) ? $meta['start_date_unformatted'] : $meta['start_date'];
+		$start_date = strtotime( $start_date . ' ' . $meta['start_time']);
 
-		$start_date = strtotime($meta['start_date_unformatted'] . ' ' . $meta['start_time']);
-		$end_date = strtotime($meta['end_date_unformatted'] . ' ' . $meta['end_time']);
+		$end_date = !empty($meta['end_date_unformatted']) ? $meta['start_date_unformatted'] : $meta['start_date'];
+		$end_date = strtotime( $end_date . ' ' . $meta['end_time']);
+
 		$title = empty($text) ? __('iCal Import', 'event_espresso') : $title;
 		$image = empty($image) ? '<img src="'.EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/calendar_link.png">' : $image;
 		if ($link_only == TRUE){
@@ -125,7 +128,7 @@ if (!function_exists('espresso_ical_prepare_by_meta')) {
 			'end_month' => date('m', $end_date),
 			'end_day' => date('d', $end_date),
 			'end_time' => date('His', $end_date),
-			'event_summary' => stripslashes($meta['event_name']),
+			'event_summary' => stripslashes($meta['event_name']) . " - Custom ",
 			//'event_description' => espresso_format_content(stripslashes($meta['event_desc'])),
 			'ee_reg_url' => espresso_reg_url($meta['event_id']),
 			'site_url' => site_url(),
