@@ -128,7 +128,7 @@ if (!function_exists('espresso_ical_prepare_by_meta')) {
 			'end_month' => date('m', $end_date),
 			'end_day' => date('d', $end_date),
 			'end_time' => date('His', $end_date),
-			'event_summary' => stripslashes($meta['event_name']) . " - Custom ",
+			'event_summary' => stripslashes($meta['event_name']),
 			//'event_description' => espresso_format_content(stripslashes($meta['event_desc'])),
 			'ee_reg_url' => espresso_reg_url($meta['event_id']),
 			'site_url' => site_url(),
