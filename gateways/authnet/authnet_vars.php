@@ -27,6 +27,8 @@ function espresso_display_authnet($payment_data) {
 
 	$myAuthorize->setUserInfo($authnet_login_id, $authnet_transaction_key);
 
+//if in debug mode, use authorize.net's sandbox parnter id; otherwise use the Event Espresso partner id
+	$myAuthorize->addField('x_solution_id', $use_sandbox ? 'AAA100302' : 'AAA105363');
 	$myAuthorize->addField('x_Relay_URL',espresso_build_gateway_url('return_url', $payment_data, 'authnet') );
 	$myAuthorize->addField('x_Description', espresso_sanitize_gateway_value( stripslashes_deep( $event_name ) . ' | ' . __('Reg. ID:', 'event_espresso') . ' ' . $attendee_id . ' | ' . __('Name:', 'event_espresso') . ' ' . stripslashes_deep($fname . ' ' . $lname) . ' | ' . __('Total Registrants:', 'event_espresso') . ' ' . $quantity ) );
 	$myAuthorize->addField('x_Amount', number_format($event_cost, 2));

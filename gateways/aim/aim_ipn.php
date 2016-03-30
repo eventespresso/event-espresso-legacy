@@ -28,10 +28,13 @@ function espresso_process_aim($payment_data) {
 	} else {
 		define("AUTHORIZENET_SANDBOX", false);
 	}
+	//if in debug mode, use authorize.net's sandbox id; otherwise use the Event Espresso partner id
+	$authnet_aim_partner_id = defined( 'AUTHORIZENET_SANDBOX' ) ? 'AAA100302' : 'AAA105363' ;
 
 //start transaction
 	$transaction = new Espresso_AuthorizeNetAIM($authnet_aim_login_id, $authnet_aim_transaction_key);
 	echo '<!--Event Espresso Authorize.net AIM Gateway Version ' . $transaction->gateway_version . '-->';
+	$transaction->solution_id = $authnet_aim_partner_id; 
 	$transaction->amount = $_POST['amount'];
 	$transaction->card_num = $_POST['card_num'];
 	$transaction->exp_date = $_POST['exp_month'].$_POST['exp_year'];
