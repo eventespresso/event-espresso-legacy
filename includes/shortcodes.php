@@ -907,7 +907,6 @@ function ee_show_meta_sc($atts) {
 
 		case 'venue':
 		case 'venue_meta':
-		default:
 			return ee_show_meta($venue_meta, $name);
 
 		case 'event':
