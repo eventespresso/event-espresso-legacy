@@ -116,7 +116,7 @@ function add_event_to_db($recurrence_arr = array()) {
 		$early_disc_percentage = !empty($_REQUEST['early_disc_percentage']) ? sanitize_text_field($_REQUEST['early_disc_percentage']) : '';
 		
 		//Alternate email address field
-		$alt_email			= !empty($_REQUEST['alt_email']) ? sanitize_text_field($_REQUEST['alt_email']) : '';
+		$alt_email			= !empty($_REQUEST['alt_email']) ? sanitize_text_field($_REQUEST['alt_email']) : apply_filters( 'filter_hook_espresso_insert_event_alt_email_default', '' );
 		
 		//Send a custom emal
 		$send_mail			= !empty($_REQUEST['send_mail']) ? sanitize_text_field($_REQUEST['send_mail']) : 'N';
@@ -303,7 +303,7 @@ function add_event_to_db($recurrence_arr = array()) {
 			'registration_endT'			=> $registration_endT, 
 			'reg_limit'					=> (int)$reg_limit, 
 			'additional_limit'			=> (int)$additional_limit, 
-			'recurrence_id'				=> $recurrence_id, 
+			'recurrence_id'				=> (int)$recurrence_id, 
 			'email_id'					=> (int)$email_id, 
 			'wp_user'					=> (int)$current_user->ID, 
 			'event_meta'				=> $event_meta, 

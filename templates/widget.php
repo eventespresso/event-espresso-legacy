@@ -32,7 +32,7 @@ if (!class_exists('Event_Espresso_Widget')) {
             $show_expired = $instance['show_expired'] == 'false' ? " AND (e.start_date >= '" . date('Y-m-d') . "' OR e.event_status = 'O' OR e.registration_end >= '" . date('Y-m-d') . "') " : '';
             $show_secondary = $instance['show_secondary'] == 'false' ? " AND e.event_status != 'S' " : '';
             $show_deleted = $instance['show_deleted'] == 'false' ? " AND e.event_status != 'D' " : '';
-            $show_recurrence = $instance['show_recurrence'] == 'false' ? " AND e.recurrence_id = '0' " : '';
+            $show_recurrence = $instance['show_recurrence'] == 'false' ? " AND (e.recurrence_id = '0' OR e.recurrence_id IS NULL) " : '';
             $limit = $instance['limit'] > 0 ? " LIMIT 0," . $instance['limit'] . " " : ' LIMIT 0,5 ';
 
             $order_by = " ORDER BY date(start_date), id ASC ";

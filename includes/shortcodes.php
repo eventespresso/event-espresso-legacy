@@ -132,7 +132,7 @@ if (!function_exists('event_espresso_attendee_list')) {
 		$show_expired = $show_expired == 'false' ? " AND e.start_date >= '" . date('Y-m-d') . "' " : '';
 		$show_secondary = $show_secondary == 'false' ? " AND e.event_status != 'S' " : '';
 		$show_deleted = $show_deleted == 'false' ? " AND e.event_status != 'D' " : '';
-		$show_recurrence = $show_recurrence == 'false' ? " AND e.recurrence_id = '0' " : '';
+		$show_recurrence = $show_recurrence == 'false' ? " AND (e.recurrence_id = '0' OR e.recurrence_id IS NULL) " : '';
 		$sort = $sort_by == 'last name' ? " ORDER BY lname " : '';
 		$limit = $limit > 0 ? " LIMIT 0," . $limit . " " : '';
 		if ($event_identifier != 'NULL' || $event_id != 'NULL' || (isset($this_event_id) && !empty($this_event_id)) ) {
@@ -907,7 +907,6 @@ function ee_show_meta_sc($atts) {
 
 		case 'venue':
 		case 'venue_meta':
-		default:
 			return ee_show_meta($venue_meta, $name);
 
 		case 'event':
