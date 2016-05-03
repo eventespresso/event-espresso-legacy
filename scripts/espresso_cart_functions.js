@@ -398,7 +398,15 @@ jQuery(document).ready(function() {
 	                jQuery(this).val(copy_from.val());
 	                break;
 				 
-	            case 'radio':
+                case 'radio':
+                    var copy_to = jQuery(this);
+                    jQuery(":input[name='" + copy_field_name + "']").each(function(i, e) {
+                        if (jQuery(e).prop('checked') && val == jQuery(e).val()) {                            
+                            jQuery(copy_to).prop("checked", "checked");
+                        }
+                    });
+                    break;
+
 	            case 'checkbox':
 	                if (copy_from.attr('checked') && val == copy_from.val())
 	                    jQuery(this).attr("checked", "checked");
