@@ -170,7 +170,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 			$allow_override = 1;
 		}
 		//echo '<p>'.$order_by.'</p>';
-		$sql .= $show_recurrence == 'false' ? " AND e.recurrence_id = '0' " : '';
+		$sql .= $show_recurrence == 'false' ? " AND (e.recurrence_id = '0' OR e.recurrence_id IS NULL) " : '';
 		
 		//Search query
 		if ( $ee_search ){

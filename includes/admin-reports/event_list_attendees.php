@@ -163,7 +163,7 @@ function event_list_attendees() {
 					}
 					?>
 					<th class="manage-column column-title" id="ticket-option" scope="col" title="Click to Sort" style="width: 13%;">
-						<span><?php _e('Option', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
+						<span><?php echo apply_filters( 'filter_hook_espresso_attendee_reports_price_option_column_title', __('Option', 'event_espresso') ); ?></span> <span class="sorting-indicator"></span> 
 					</th>
 					<th align="center" class="manage-column column-date" id="amount" style="width: 5%;" title="Click to Sort" scope="col">
 						<span><?php _e('Status', 'event_espresso'); ?></span> <span class="sorting-indicator"></span> 
@@ -265,7 +265,7 @@ function event_list_attendees() {
 								<?php } ?>
 
 							<td nowrap="nowrap" title="<?php echo $price_option ?>">
-			<?php echo $price_option ?>
+			<?php echo apply_filters( 'filter_hook_espresso_attendee_reports_price_option_column_cell', $price_option, $attendee ) ?>
 							</td>
 
 							<td class="date column">

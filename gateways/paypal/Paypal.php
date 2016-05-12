@@ -105,6 +105,9 @@ class EE_Paypal extends Espresso_PaymentGateway {
 			$error["set_verbose"] = curl_setopt($ch, CURLOPT_VERBOSE, 1);
 			$errors .= $error["set_verbose"] ? "Success" : "Failure";
 			$errors .= " Setting verbose mode\n";
+			$error["set_http_version"] = curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+			$errors .= $error["set_http_version"] ? "Success" : "Failure";
+			$errors .= " Setting http version\n";
 			$result = curl_exec($ch); // run the curl process (and return the result to $result
 			$this->ipnResponse = $result;
 			$error["result"] = curl_error($ch);

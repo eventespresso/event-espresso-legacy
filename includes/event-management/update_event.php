@@ -229,7 +229,9 @@ function update_event($recurrence_arr = array()) {
         $email_id						= isset($_REQUEST['email_name']) ? (int)$_REQUEST['email_name'] : '0';
 		
 		$ticket_id						= isset($_REQUEST['ticket_id']) ? (int)$_REQUEST['ticket_id'] : '0';
-		
+
+        //If the event has no recurrenace_id make sure the field is set to '0'
+        $recurrence_id                  = array_key_exists('recurrence_id', $recurrence_arr) ? $recurrence_arr['recurrence_id'] : (int)$_REQUEST['recurrence_id'];
 
         $event_category = empty($_REQUEST['event_category']) ? '' : serialize(sanitize_text_field($_REQUEST['event_category']));
         $event_discount = empty($_REQUEST['event_discount']) ? '' : serialize(sanitize_text_field($_REQUEST['event_discount']));
@@ -387,12 +389,13 @@ function update_event($recurrence_arr = array()) {
 			'event_meta'				=> $event_meta,
 			'require_pre_approval'		=> $require_pre_approval,
 			'timezone_string'			=> $timezone_string,
-			'ticket_id'					=> $ticket_id
+			'ticket_id'					=> $ticket_id,
+            'recurrence_id'             => $recurrence_id,
 		);
 
         $sql_data = array('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',
             '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',
-            '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%d');
+            '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d');
 
         $update_id = array('id' => $event_id);
 

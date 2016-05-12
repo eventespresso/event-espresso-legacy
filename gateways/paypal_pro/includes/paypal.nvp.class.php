@@ -516,6 +516,7 @@ class Espresso_PayPal
 				$errors .= "set_url=" . curl_setopt($curl, CURLOPT_URL, $this -> EndPointURL) . "&";
 				$errors .= "set_returntransfer=" . curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1) . "&";
 				$errors .= "set_postfields=" . curl_setopt($curl, CURLOPT_POSTFIELDS, $Request) . "&";
+				$errors .= "set_http_version=" . curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1) . "&";
 
 		if($this -> APIMode == 'Certificate')
 			$errors .= "set_postfields=" . curl_setopt($curl, CURLOPT_SSLCERT, $this -> PathToCertKeyPEM) . "&";
