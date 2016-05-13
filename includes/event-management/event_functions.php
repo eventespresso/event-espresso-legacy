@@ -239,7 +239,7 @@ function event_espresso_get_categories($event_id = 0, $is_fes = false) {
                 $in_event_category = $in_category->cat_id;
             }
             if(empty($in_event_category)) $in_event_category = '';
-            $html .= '<p id="event-category-' . $category_id . '"><label for="in-event-category-' . $category_id . '" class="selectit"><input value="' . $category_id . '" type="checkbox" name="event_category[]" id="in-event-category-' . $category_id . '"' . ($in_event_category == $category_id ? ' checked="checked"' : "" ) . '/> ' . $category_name . "</label></p>";
+            $html .= '<p id="event-category-' . $category_id . '"><label for="in-event-category-' . $category_id . '" class="selectit"><input value="' . $category_id . '" type="checkbox" name="event_category[]" id="in-event-category-' . $category_id . '"' . ($in_event_category == $category_id ? ' checked="checked"' : "" ) . '/> ' . stripslashes( $category_name ) . "</label></p>";
         }
         $top_div = '';
         $bottom_div = '';
