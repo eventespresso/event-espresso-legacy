@@ -25,8 +25,7 @@ if (function_exists('espresso_member_data')) {
 					</p>
         <input type="hidden" name="post_id" value="<?php echo isset($post_id) ? $post_id : ''; ?>" />
         <?php
-        global $current_user;
-        get_currentuserinfo();
+        $current_user = wp_get_current_user();
 
         if (isset($post_id)) {
             $post_data = get_post($post_id);
