@@ -74,6 +74,7 @@ function espresso_process_eway($payment_data) {
 			}
 		} else {
 
+			//Debugging option
 			if ($eway_settings['use_sandbox']) {
 				echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debugging / Sandbox output', 'event_espresso') . '</h3><br />';
 				echo "Response code = " . $responsecode;
