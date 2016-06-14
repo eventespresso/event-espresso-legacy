@@ -73,11 +73,16 @@ function espresso_process_eway($payment_data) {
 				wp_mail($payment_data['contact'], $subject, $body);
 			}
 		} else {
-			echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debugging / Sandbox output', 'event_espresso') . '</h3><br />';
-			echo "Response code = " . $responsecode;
-			echo "\nResponse = ";
-			var_dump($response);
-			echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('End of Debugging / Sandbox output (this will go away when you switch to live transactions)', 'event_espresso') . '</h3>';
+
+			if ($eway_settings['use_sandbox']) {
+				echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('Debugging / Sandbox output', 'event_espresso') . '</h3><br />';
+				echo "Response code = " . $responsecode;
+				echo "\nResponse = ";
+				var_dump($response);
+				echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('End of Debugging / Sandbox output (this will go away when you switch to live transactions)', 'event_espresso') . '</h3>';
+			}
+
+			//Payment failed, email the admin.
 			$subject = 'Instant Payment Notification - Gateway Variable Dump';
 			$body = "An instant payment notification failed\n";
 			$body .= "from " . " on " . date('m/d/Y');
