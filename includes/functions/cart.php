@@ -42,7 +42,12 @@ if (!function_exists('event_espresso_add_item_to_session')) {
 			
 		} else { 
 			//one event per click
-			event_espresso_add_event_process($id, $_POST['name']);
+			if( empty($_POST['name']) || $_POST['name'] == ' ' ) {
+				$event_title = get_event_field('event_name', EVENTS_DETAIL_TABLE, ' WHERE id = ' . $id);
+			} else {
+				$event_title = $_POST['name'];
+			}
+			event_espresso_add_event_process($id, $event_title);
 		}
 
 		$r = event_espresso_cart_link(array('event_id' => $id, 'view_cart' => TRUE, 'event_page_id' => $_POST['event_page_id'], 'direct_to_cart' => $direct_to_cart, 'moving_to_cart' => $moving_to_cart));
