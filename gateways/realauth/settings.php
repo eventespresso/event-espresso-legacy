@@ -54,7 +54,7 @@ function event_espresso_realauth_payment_settings() {
 			<div title="Click to toggle" class="handlediv"><br />
 			</div>
 			<h3 class="hndle">
-				<?php _e('RealAuth Settings', 'event_espresso'); ?>
+				<?php _e('Realex RealAuth Settings', 'event_espresso'); ?>
 			</h3>
 			<div class="inside">
 				<div class="padding">
