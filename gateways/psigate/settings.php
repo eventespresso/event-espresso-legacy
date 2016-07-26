@@ -48,7 +48,7 @@ function event_espresso_psigate_payment_settings() {
 		<div class="postbox <?php echo $postbox_style; ?>">
 			<div title="Click to toggle" class="handlediv"><br /></div>
 			<h3 class="hndle">
-				<?php _e('PSiGate / Merchant Account Settings', 'event_espresso'); ?>
+				<?php _e('PSiGate / MerchantAccount.ca Settings', 'event_espresso'); ?>
 			</h3>
 			<div class="inside">
 				<div class="padding">

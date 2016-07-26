@@ -55,7 +55,7 @@ function event_espresso_paypal_payment_settings() {
 		<div class="postbox <?php echo $postbox_style; ?>">
 			<div title="Click to toggle" class="handlediv"><br /></div>
 			<h3 class="hndle">
-				<?php _e('PayPal Settings', 'event_espresso'); ?>
+				<?php _e('PayPal Standard Settings', 'event_espresso'); ?>
 			</h3>
 			<div class="inside">
 				<div class="padding">
