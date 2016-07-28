@@ -49,7 +49,7 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 		}
 //		echo '<h4>$use_coupon_code : ' . $use_coupon_code . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		
-		if ( in_array($use_coupon_code, array('Y',"G","A")) && $event_cost > 0 ) {
+		if ( in_array($use_coupon_code, array('Y',"G","A")) && ( $event_cost > 0 || is_admin() ) ) {
 //			echo "cuopon code $coupon_code";
 			if ( $coupon_code ){
 
