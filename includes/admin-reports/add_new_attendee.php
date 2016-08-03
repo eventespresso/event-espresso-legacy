@@ -133,6 +133,9 @@ function add_new_attendee($event_id){
 
 						
 						//Coupons
+					?>
+					<input type="hidden" name="use_coupon[<?php echo $event_id; ?>]" value="<?php echo $use_coupon_code; ?>" />
+					<?php
 						if (function_exists('event_espresso_coupon_registration_page')) {
 							echo event_espresso_coupon_registration_page($use_coupon_code, $event_id);
 						}//End coupons display
