@@ -258,7 +258,7 @@ if (!function_exists('register_attendees')) {
 
 					//If enough spaces exist then show the form
                     //Check to see if the Members plugin is installed.
-                    if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && !is_user_logged_in() && ($member_only == 'Y' || $member_options['member_only_all'] == 'Y') ) {
+                    if ( function_exists('espresso_members_installed') && espresso_members_installed() == true && !is_user_logged_in() && ($member_only == 'Y' || ( isset( $member_options['member_only_all'] ) && $member_options['member_only_all'] == 'Y') ) ) {
                         event_espresso_user_login();
                     } else {
                         //Serve up the registration form
