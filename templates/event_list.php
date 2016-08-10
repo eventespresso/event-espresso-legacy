@@ -386,6 +386,8 @@ if (!function_exists('event_espresso_get_event_details')) {
 					'event_country' => $event_country,
 					'start_date' => event_date_display($start_date, get_option('date_format')),
 					'end_date' => event_date_display($end_date, get_option('date_format')),
+					'start_date_unformatted' => $event->start_date,
+					'end_date_unformatted' => $event->end_date,
 					'time' => empty($event->start_time) ? '' : $event->start_time,
 					'start_time' => empty($event->start_time) ? '' : $event->start_time,
 					'end_time' => empty($event->end_time) ? '' : $event->end_time,
