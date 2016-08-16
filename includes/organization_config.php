@@ -31,6 +31,7 @@ function organization_config_mnu() {
 		$org_options['recaptcha_theme'] = isset($_POST['recaptcha_theme']) && !empty($_POST['recaptcha_theme']) ? $_POST['recaptcha_theme'] : '';
 		$org_options['recaptcha_width'] = isset($_POST['recaptcha_width']) && !empty($_POST['recaptcha_width']) ? $_POST['recaptcha_width'] : '';
 		$org_options['recaptcha_language'] = isset($_POST['recaptcha_language']) && !empty($_POST['recaptcha_language']) ? $_POST['recaptcha_language'] : '';
+		$org_options['google_maps_api_key'] = isset($_POST['google_maps_api_key']) && !empty($_POST['google_maps_api_key']) ? $_POST['google_maps_api_key'] : '';
 		$org_options['espresso_dashboard_widget'] = isset($_POST['espresso_dashboard_widget']) && !empty($_POST['espresso_dashboard_widget']) ? $_POST['espresso_dashboard_widget'] : '';
 		$org_options['time_reg_limit'] = isset($_POST['time_reg_limit']) && !empty($_POST['time_reg_limit']) ? $_POST['time_reg_limit'] : '';
 		$org_options['skip_confirmation_page'] = isset($_POST['skip_confirmation_page']) ? $_POST['skip_confirmation_page'] : 'N';
