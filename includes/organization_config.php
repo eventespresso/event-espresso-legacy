@@ -604,11 +604,47 @@ function organization_config_mnu() {
 								</div>
 							</div>
 						</li>
-						<?php
-					}
+					<?php 
+						} //End Premium file check
+					?>
 
+					<li>
+						<div class="metabox-holder">
+							<div class="postbox">
+								<div title="Click to toggle" class="handlediv"><br />
+								</div>
+								<h3 class="hndle">
+									<?php _e('Google Maps Settings', 'event_espresso'); ?>
+								</h3>
+								<div class="inside">
+									<ul>
+						                <li>
+						                  <label for="google_maps_api_key">
+						                    <?php _e('Maps API Key:','event_espresso'); ?>
+						                  </label>
+						                  <input type="text" name="google_maps_api_key" size="45" value="<?php if(isset($org_options['google_maps_api_key'])) echo $org_options['google_maps_api_key'];?>" />
+						                </li>
+						            </ul>
+						            <p class="description">
+				                        <?php
+				                            printf(
+				                                __('An API key is now required to use the Google Maps API: %1$sclick here to get an API key%2$s', 'event_espresso'),
+				                                '<a href="https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,static_maps_backend&keyType=CLIENT_SIDE&reusekey=true" target="_blank">',
+				                                '</a>'
+				                            );
+				                        ?>
+				                    </p>
+						            <p>
+										<input class="button-primary" type="submit" name="Submit" value="<?php _e('Save Options', 'event_espresso'); ?>" id="save_organization_saetting_7" />
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+
+					<?php
 					if ($espresso_check_for_updates == true && $espresso_premium == true) {
-						?>
+					?>
 
 						<li><a name="license_key" id="license_key"></a>
 							<div class="metabox-holder">
