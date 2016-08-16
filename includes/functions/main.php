@@ -1028,6 +1028,8 @@ if (!function_exists('espresso_ticket_information')) {
 if (!function_exists('espresso_google_map_link')) {
 
 	function espresso_google_map_link($atts) {
+		global $org_options;
+
 		extract($atts);
 
 		$address = "{$address}";
@@ -1042,6 +1044,10 @@ if (!function_exists('espresso_google_map_link')) {
 		$map_image_class = isset($map_image_class) ? "{$map_image_class}" : '';
 
 		$gaddress = ($address != '' ? $address : '') . ($city != '' ? ',' . $city : '') . ($state != '' ? ',' . $state : '') . ($zip != '' ? ',' . $zip : '') . ($country != '' ? ',' . $country : '');
+
+		$api_key = ! empty( $org_options['google_maps_api_key'] ) ? $org_options['google_maps_api_key'] : '';
+
+		$api_key = apply_filters( 'filter_hook_espresso_google_map_api_key', $api_key );
 
 		$google_map = htmlentities2('http://maps.google.com/maps?q=' . urlencode($gaddress));
 
