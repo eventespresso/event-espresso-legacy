@@ -378,6 +378,7 @@ li.time-date .run-in {
 * html .pluralink-overlay #pluralink-bg {
 	background: url(images/bg-ie.png) repeat-y left top;
 }
+
 /*___ Overview screen ___*/
 
 ul.subsubsub { clear:both; }
@@ -1425,6 +1426,9 @@ select.wide {width: 175px;}
 
 /*___ General settings ___*/
 
+.toplevel_page_event_espresso .espresso_form input[name*="key"] {
+    width: 350px;
+}
 
 /*__ add_new _event form elements __*/
 
