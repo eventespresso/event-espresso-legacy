@@ -101,10 +101,15 @@ function event_espresso_multi_price_update($event_id) {
             if ($wpdb->num_rows > 0) {
                 foreach ($prices as $price) {
                     echo '<li class="dynamic-price-input-li">';
-                    if (!isset($price->price_type))
-                        $price->price_type = "General Admission";
-                    if (!isset($price->event_cost))
-                        $price->event_cost = "0.00";
+                    if (!isset($price->price_type)) {
+                        $price->price_type = apply_filters(
+                          'filter_hook_espresso_multi_price_update_price_type', 
+                          esc_html__('General Admission', 'event_espresso')
+                        );
+                    }
+                    if (!isset($price->event_cost)) {
+                        $price->event_cost = "0.00";                        
+                    }
                     echo '<p class="event_form_field ee_fem_form_field dynamic-price-input-field"><label class="dynamic-price-input-label price-name" for="add-price-type-' . $price_counter++ . '">' . __('Name', 'event_espresso') . ' ' . $price_counter++ . '</label> <input class="dynamic-price-input price-name-input price-input" id="add-price-type' . $price_counter++ . '" type="text" name="price_type[]" maxlength="99" value="' . stripslashes_deep($price->price_type) . '" /></p> ';
                     echo '<p class="event_form_field ee_fem_form_field dynamic-price-input-field"><label class="dynamic-price-input-label" for="add-price">' . __('Price', 'event_espresso') . ' ' . $org_options['currency_symbol'] . '</label><input class="dynamic-price-input price-input" id="add-price" type="text" name="event_cost[]" value="' . $price->event_cost . '" /></p> ';
 
@@ -131,7 +136,10 @@ function event_espresso_multi_price_update($event_id) {
 				<label class="dynamic-price-input-label price-name" for="add-price-type-<?php echo $price_counter ?>">
 					<?php _e('Name', 'event_espresso'); ?>
 					<?php echo $price_counter ?></label>
-				<input class="dynamic-price-input price-name-input" id="add-price-type-<?php echo $price_counter ?>" type="text" maxlength="99"  name="price_type[]" value="General Admission">
+				<input class="dynamic-price-input price-name-input" id="add-price-type-<?php echo $price_counter ?>" type="text" maxlength="99"  name="price_type[]" 
+                value="<?php echo apply_filters(
+                        'filter_hook_espresso_multi_price_update_price_type', 
+                        esc_html__('General Admission', 'event_espresso')); ?>">
 			</p>
 			<p class="event_form_field ee_fem_form_field dynamic-price-input-field">
 				<label class="dynamic-price-input-label price" for="add-event-cost">
