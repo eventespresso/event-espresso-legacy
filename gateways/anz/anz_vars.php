@@ -31,32 +31,50 @@ function espresso_display_anz($payment_data){
 	//http://localhost/eetrunk31/?page_id=5&r_id=42-5150cf9c1f748&type=anz&Title=PHP+VPC+3-Party&vpc_3DSECI=01&vpc_3DSXID=7S%2BXbvLUbBrsxTkYaXJMxjx0yhM%3D&vpc_3DSenrolled=Y&vpc_3DSstatus=A&vpc_AVSResultCode=Unsupported&vpc_AcqAVSRespCode=Unsupported&vpc_AcqCSCRespCode=N&vpc_AcqResponseCode=04&vpc_Amount=1000&vpc_BatchNo=20130326&vpc_CSCResultCode=N&vpc_Card=MC&vpc_Command=pay&vpc_Locale=en&vpc_MerchTxnRef=425150cf9c1f748&vpc_Merchant=ANZCAZALYS&vpc_Message=Expired+Card&vpc_OrderInfo=VPC+Example2&vpc_ReceiptNo=130326378001&vpc_SecureHash=329FC69DA1F03B3F7B896C97BF488E45&vpc_TransactionNo=2000000187&vpc_TxnResponseCode=4&vpc_VerSecurityLevel=06&vpc_VerStatus=M&vpc_VerToken=how5CsZD%2BBZwCAEAAAJ1AhUAAAA%3D&vpc_VerType=3DS&vpc_Version=1
 	$txn_id = str_replace("-","",$payment_data['registration_id']);
 	$amount_in_cents=$payment_data['total_cost']*100;
-	//as per eGate Virtual Payment Clietn Guide Rev 1.2.0, all inputs must be hashed, in ascending alphabetical order
-	$hash_data = array(
-		'01_secret_must_come_first'=>$secure_secret,
+	
+	//as per eGate Virtual Payment Client Guide Rev 1.2.0, all inputs must be hashed, in ascending alphabetical order
+	$transaction_data = array(
 		'vpc_AccessCode'=>$access_code,
 		'vpc_Amount'=>$amount_in_cents,
 		'vpc_Command'=>'pay',
 		'vpc_Locale'=>'en',
-		'vpc_Merchant'=>$merchant_id,
 		'vpc_MerchTxnRef'=>$txn_id,
+		'vpc_Merchant'=>$merchant_id,
 		'vpc_OrderInfo'=>'VPC Example2',
 		'vpc_ReturnURL'=>$return_url,
-		'Title'=>'PHP VPC 3-Party',
-		'vpc_Version'=>1);
-	$success = ksort($hash_data);
+		//'Title'=>'PHP-VPC-3-Party',
+		'vpc_Version'=>1,
+	);
+
+	//Sort the transaction values, they must be order alphabetically asc.
+	//ksort($hash_data);
+	
+	//Build a string to hash from all the transaction data
+	$values_to_hash = '';
+	
+	foreach( $transaction_data as $key => $value ) {
+		if( strlen( $value ) > 0 ) {
+			$values_to_hash .= $key . '=' . $value . '&';
+		}
+	}
+
+	//Remove any traigning '&' from the string.
+	$values_to_hash = rtrim( $values_to_hash, '&' );
+
+	//Generate a SHA256 hash from the transaction data.
+	$hash_string = strtoupper( hash_hmac( 'SHA256', $values_to_hash, pack( "H*",$secure_secret ) ) );
+
+	//URL encode all of the transaction data values and key for use in the payment link.
 	$url_encoded_hash_values=array();
-	foreach($hash_data as $field_name => $field_value){
+	foreach($transaction_data as $field_name => $field_value){
 		$url_encoded_hash_values[ urlencode( $field_name ) ] = urlencode( $field_value );
 	}
-	$md5_data = implode( "", $hash_data );
-	$hash_string = strtoupper( md5( $md5_data ));
-//	echo "fields used in hash:".implode( "", $hash_fields );
-	//remove our super-secret thing from the list, because we're about to 
-	//send each of them as a GET parameter to ANZ
-	unset($url_encoded_hash_values['01_secret_must_come_first']);
-	unset($hash_data['01_secret_must_come_first']);
-	$full_url = add_query_arg(array('vpc_SecureHash'=>$hash_string), add_query_arg($url_encoded_hash_values,$server_url));
+	
+	//Build the payment link, adding the hash_string value to the link.	
+	$full_url = add_query_arg( array(
+					'vpc_SecureHash'=>$hash_string,
+	 				'vpc_SecureHashType'=>'SHA256' ), 
+					add_query_arg($url_encoded_hash_values,$server_url));
 	?>
 
 		 <div id="anz-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
@@ -64,7 +82,6 @@ function espresso_display_anz($payment_data){
 			<a href="<?php echo $full_url?>" class="payment-option-lnk allow-leave-page"><?php echo $submit_html?></a>
 		</div>
 
-	
 	<?php
 	//only redirect immediately if they didnt just return from ANZ
 	//otherwise, we want them to see the error message
@@ -83,4 +100,3 @@ function espresso_display_anz($payment_data){
 }
 
 add_action('action_hook_espresso_display_offsite_payment_gateway', 'espresso_display_anz');
-

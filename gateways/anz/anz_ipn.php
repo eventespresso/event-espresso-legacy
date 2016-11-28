@@ -34,16 +34,10 @@ function espresso_process_anz($payment_data) {
 	
 	$anz_settings = get_option('event_espresso_anz_settings');
 	$secure_secret=$anz_settings['anz_secure_secret'];
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	$hash_inputs = $_GET;
 	$hash_inputs = espresso_anz_remove_from_array('vpc_SecureHash',$hash_inputs);
+	$hash_inputs = espresso_anz_remove_from_array('vpc_SecureHashType',$hash_inputs);
 	$hash_inputs = espresso_anz_remove_from_array('page_id',$hash_inputs);
 	$hash_inputs = espresso_anz_remove_from_array('type',$hash_inputs);
 	$hash_inputs = espresso_anz_remove_from_array('r_id', $hash_inputs);
@@ -52,29 +46,36 @@ function espresso_process_anz($payment_data) {
 	
 	//copied almost verbatim from ANZ php sample code
 	if (strlen($secure_secret) > 0 && $hash_inputs["vpc_TxnResponseCode"] != "7" && $hash_inputs["vpc_TxnResponseCode"] != "No Value Returned") {
-		$md5HashData = $secure_secret;
-		// sort all the incoming vpc response fields and leave out any with no value
-		foreach($hash_inputs as $key => $value) {
-			if ( ! in_array( $key, array_keys( array("vpc_SecureHash", 'page_id', 'r_id', 'type')))  or strlen($value) > 0) {
-				$md5HashData .= $value;
+		
+		//Build a string to hash from all of the values passed with the transaction.
+		$values_to_hash = '';
+		
+		foreach( $hash_inputs as $key => $value ) {
+			if ( ! in_array( $key, array_keys( array("vpc_SecureHash", "vpc_SecureHashType", 'page_id', 'r_id', 'type')))  or strlen($value) > 0 ) {
+				$values_to_hash .= $key . '=' . $value . '&';
 			}
 		}
-		// Validate the Secure Hash (remember MD5 hashes are not case sensitive)
-	   // This is just one way of displaying the result of checking the hash.
-	   // In production, you would work out your own way of presenting the result.
-	   // The hash check is all about detecting if the data has changed in transit.
-	   if (strtoupper($_GET["vpc_SecureHash"]) == strtoupper(md5($md5HashData))) {
+
+		//Remove any traigning '&' from the string.
+		$values_to_hash = rtrim( $values_to_hash, '&' );
+
+		//Generate the SHA256 hash from the transaction values using the 'secure_secret' value as the key.
+		$hash = strtoupper( hash_hmac( 'SHA256', $values_to_hash, pack("H*", $secure_secret ) ) );
+
+		// Validate the Secure Hash provided within the transaction matches the hash from above.
+	   	// The hash check is all about detecting if the data has changed in transit.
+	   	if (strtoupper($_GET["vpc_SecureHash"]) == $hash ) {
 		   // Secure Hash validation succeeded, add a data field to be displayed
 		   // later.
 		   $authenticated_response = true;
 		   $hashValidated = "<FONT color='#00AA00'><strong>CORRECT</strong></FONT>";
-	   } else {
+	    } else {
 		   // Secure Hash validation failed, add a data field to be displayed
 		   // later.
 		   $authenticated_response = false;
 		   $hashValidated = "<FONT color='#FF0066'><strong>INVALID HASH</strong></FONT>";
 		   $errorExists = true;
-	   }
+	    }
    } else {
 	   // Secure Hash was not validated, add a data field to be displayed later.
 	   $authenticated_response = false;
