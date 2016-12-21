@@ -317,7 +317,7 @@ class EE_umTransaction {
 					if(!$this->exp) return "Expiration Date is required";
 				}
 			}
-			$this->amount=ereg_replace("[^[:digit:].]","",$this->amount);
+			$this->amount=preg_replace("/[^0-9\.]/","",$this->amount);
 			if(!$this->amount) return "Amount is required";
 			if(!$this->invoice && !$this->orderid) return "Invoice number or Order ID is required";
 			if(!$this->magstripe) {
