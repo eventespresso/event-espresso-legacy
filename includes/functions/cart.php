@@ -590,6 +590,11 @@ if (!function_exists('event_espresso_delete_item_from_session')) {
 		 */
 		$id = $_POST['id'];
 		$id = str_replace('cart_link_', '', $id);
+		$current_session_id = $_SESSION['espresso_session']['id'];
+
+		if ( !empty( $id ) && !empty( $current_session_id ) ) {
+			$wpdb->DELETE(EVENTS_ATTENDEE_TABLE, array( 'event_id' => $id, 'attendee_session' => $current_session_id));
+		}
 
 		unset( $_SESSION['espresso_session']['events_in_session'][$id] );
 
