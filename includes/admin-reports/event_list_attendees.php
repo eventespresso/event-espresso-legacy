@@ -432,25 +432,25 @@ function event_list_attendees() {
 					null,
 					null,
 					null,
-					null,//Qty/Attended
-	<?php echo $ticketing_installed ? "null," : ''; ?>//Date Attended
-									null,
-									null,
-									null,
-									null,
-									null,
-									{ "bSortable": false }
-								],
-								"aoColumnDefs": [
-									{ "bVisible": false, "aTargets": [<?php echo $hide; ?>] }
-								],
-								"oColVis": {
-									"aiExclude": [0,2],
-									"buttonText": "Filter: Show / Hide Columns",
-									"bRestore": true
-								},
-							});
-						});
+					<?php echo $ticketing_installed ? "null," : '{ "sType": "numeric" },'; ?>//Qty/Attended
+					<?php echo $ticketing_installed ? "null," : ''; ?>//Date Attended
+					null,
+					null,
+					null,
+					null,
+					null,
+					{ "bSortable": false }
+				],
+				"aoColumnDefs": [
+					{ "bVisible": false, "aTargets": [<?php echo $hide; ?>] }
+				],
+				"oColVis": {
+					"aiExclude": [0,2],
+					"buttonText": "Filter: Show / Hide Columns",
+					"bRestore": true
+				},
+			});
+		});
 	</script>
 	<?php
 }
