@@ -252,12 +252,18 @@ function event_list_attendees() {
 							<td nowrap="nowrap">
 			<?php echo event_date_display($event_time, get_option('time_format')) ?>
 							</td>
-
+			<?php if ( $ticketing_installed == true ) { ?>
 							<td nowrap="nowrap" title="<?php echo $qty_scanned; ?>">
 								<p style="padding-left:15px">
-			<?php echo $qty_scanned; ?>
+									<?php echo $qty_scanned; ?>
 								</p>
 							</td>
+			<?php } else { ?>
+							<td nowrap="nowrap" title="<?php echo $qty_scanned; ?>" class="qty_column" style="padding-left: 2rem;">
+								<?php echo $qty_scanned; ?>
+							</td>
+
+			<?php } ?>
 			<?php if ($ticketing_installed == true) { ?>
 								<td class="date column-date">
 								<?php echo event_date_display($date_scanned, get_option('date_format') . ' g:i a') ?>
