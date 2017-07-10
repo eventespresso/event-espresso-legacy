@@ -3,7 +3,14 @@ function edit_event_category(){
 	global $wpdb;
 	
 	$id=$_REQUEST['id'];
-	$results = $wpdb->get_results("SELECT * FROM ". EVENTS_CATEGORY_TABLE ." WHERE id =".$id);
+	$results = $wpdb->get_results( $wpdb->prepare(
+		"
+			SELECT * 
+			FROM ". EVENTS_CATEGORY_TABLE ." 
+			WHERE id = %d 
+		",
+		$id
+	) );
 	foreach ($results as $result){
 		$category_id = $result->id;
 		$category_name = stripslashes($result->category_name);
