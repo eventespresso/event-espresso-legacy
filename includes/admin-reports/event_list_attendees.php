@@ -252,12 +252,18 @@ function event_list_attendees() {
 							<td nowrap="nowrap">
 			<?php echo event_date_display($event_time, get_option('time_format')) ?>
 							</td>
-
+			<?php if ( $ticketing_installed == true ) { ?>
 							<td nowrap="nowrap" title="<?php echo $qty_scanned; ?>">
 								<p style="padding-left:15px">
-			<?php echo $qty_scanned; ?>
+									<?php echo $qty_scanned; ?>
 								</p>
 							</td>
+			<?php } else { ?>
+							<td nowrap="nowrap" title="<?php echo $qty_scanned; ?>" class="qty_column" style="padding-left: 2rem;">
+								<?php echo $qty_scanned; ?>
+							</td>
+
+			<?php } ?>
 			<?php if ($ticketing_installed == true) { ?>
 								<td class="date column-date">
 								<?php echo event_date_display($date_scanned, get_option('date_format') . ' g:i a') ?>
@@ -426,25 +432,25 @@ function event_list_attendees() {
 					null,
 					null,
 					null,
-					null,//Qty/Attended
-	<?php echo $ticketing_installed ? "null," : ''; ?>//Date Attended
-									null,
-									null,
-									null,
-									null,
-									null,
-									{ "bSortable": false }
-								],
-								"aoColumnDefs": [
-									{ "bVisible": false, "aTargets": [<?php echo $hide; ?>] }
-								],
-								"oColVis": {
-									"aiExclude": [0,2],
-									"buttonText": "Filter: Show / Hide Columns",
-									"bRestore": true
-								},
-							});
-						});
+					<?php echo $ticketing_installed ? "null," : '{ "sType": "numeric" },'; ?>//Qty/Attended
+					<?php echo $ticketing_installed ? "null," : ''; ?>//Date Attended
+					null,
+					null,
+					null,
+					null,
+					null,
+					{ "bSortable": false }
+				],
+				"aoColumnDefs": [
+					{ "bVisible": false, "aTargets": [<?php echo $hide; ?>] }
+				],
+				"oColVis": {
+					"aiExclude": [0,2],
+					"buttonText": "Filter: Show / Hide Columns",
+					"bRestore": true
+				},
+			});
+		});
 	</script>
 	<?php
 }
