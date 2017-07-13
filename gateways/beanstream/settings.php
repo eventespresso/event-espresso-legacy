@@ -49,7 +49,7 @@ function event_espresso_beanstream_payment_settings() {
 		<div class="postbox <?php echo $postbox_style; ?>">
 			<div title="Click to toggle" class="handlediv"><br /></div>
 			<h3 class="hndle">
-				<?php _e('Beanstream Settings', 'event_espresso'); ?>
+				<?php _e('Beanstream/Bambora Settings', 'event_espresso'); ?>
 			</h3>
 			<div class="inside">
 				<div class="padding">
