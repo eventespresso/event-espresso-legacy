@@ -6,6 +6,7 @@ function event_espresso_beanstream_payment_settings() {
 		return;
 	if (isset($_POST['update_beanstream'])) {
 		$beanstream_settings['merchant_id'] = $_POST['merchant_id'];
+		$beanstream_settings['beanstream_url']  = $_POST['beanstream_url'];
 		$beanstream_settings['beanstream_use_sandbox'] = empty($_POST['beanstream_use_sandbox']) ? false : true;
 		$beanstream_settings['header'] = $_POST['header'];
 		$beanstream_settings['force_ssl_return'] = empty($_POST['force_ssl_return']) ? false : true;
@@ -16,6 +17,7 @@ function event_espresso_beanstream_payment_settings() {
 	$beanstream_settings = get_option('event_espresso_beanstream_settings');
 	if (empty($beanstream_settings)) {
 		$beanstream_settings['merchant_id'] = '';
+		$beanstream_settings['beanstream_url'] = 'https://web.na.bambora.com/scripts/process_transaction.asp';
 		$beanstream_settings['beanstream_use_sandbox'] = false;
 		$beanstream_settings['header'] = 'Payment Transactions by Beanstream';
 		$beanstream_settings['force_ssl_return'] = false;
@@ -27,6 +29,10 @@ function event_espresso_beanstream_payment_settings() {
 
 	if ( ! isset( $beanstream_settings['button_url'] ) || ! file_exists( $beanstream_settings['button_url'] )) {
 		$beanstream_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+
+	if ( empty( $beanstream_settings['beanstream_url'] ) ) {
+		$beanstream_settings['beanstream_url'] = 'https://web.na.bambora.com/scripts/process_transaction.asp';
 	}
 
 	//Open or close the postbox div
@@ -43,7 +49,7 @@ function event_espresso_beanstream_payment_settings() {
 		<div class="postbox <?php echo $postbox_style; ?>">
 			<div title="Click to toggle" class="handlediv"><br /></div>
 			<h3 class="hndle">
-				<?php _e('Beanstream Settings', 'event_espresso'); ?>
+				<?php _e('Beanstream/Bambora Settings', 'event_espresso'); ?>
 			</h3>
 			<div class="inside">
 				<div class="padding">
@@ -86,6 +92,29 @@ function event_espresso_display_beanstream_settings() {
 								<?php _e('Beanstream Merchant ID', 'event_espresso'); ?>
 							</label>
 							<input type="text" name="merchant_id" size="35" value="<?php echo $beanstream_settings['merchant_id']; ?>">
+						</li>
+						<li>
+							<label for="beanstream_url">
+								<?php _e('Gateway Server', 'event_espresso'); ?>
+							</label>
+							<?php 
+								$beanstream_urls = array(
+									'Bambora' => 'https://web.na.bambora.com/scripts/process_transaction.asp',
+									'Beanstream (Deprecated)' => 'https://www.beanstream.com/scripts/process_transaction.asp'
+								);
+
+								if( empty($beanstream_settings['beanstream_url']) ) {
+									$beanstream_settings['beanstream_url'] = $beanstream_urls['Bambora'];
+								}
+							?>
+							<select name="beanstream_url">
+								<?php foreach( $beanstream_urls as $key => $value ) {
+									$selected = $beanstream_settings["beanstream_url"] === $value ? ' selected' : '';
+									echo '<option value="'. $value .'"' . $selected . '>' . $key . '</option>';
+								} ?>
+							</select>
+							<br />
+							<?php _e('(The Gateway Server where payment requests will be sent)', 'event_espresso'); ?>
 						</li>
 						<li>
 							<label for="beanstream_use_sandbox">
@@ -132,5 +161,4 @@ function event_espresso_display_beanstream_settings() {
 	</form>
 <?php
 }
-
 add_action('action_hook_espresso_display_gateway_settings', 'event_espresso_beanstream_payment_settings');

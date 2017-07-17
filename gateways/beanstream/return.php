@@ -30,12 +30,16 @@ function espresso_process_beanstream($payment_data) {
 	$data['ordCountry'] = 'ordCountry='.$_POST['country'];
 	$post_data = implode('&', $data);
 	
+	if ( empty( $beanstream_settings['beanstream_url'] ) ) {
+		$beanstream_settings['beanstream_url'] = 'https://web.na.bambora.com/scripts/process_transaction.asp';
+	}
+
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_POST,1);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,0);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,0);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-	curl_setopt($ch, CURLOPT_URL,'https://www.beanstream.com/scripts/process_transaction.asp');
+	curl_setopt($ch, CURLOPT_URL,$beanstream_settings['beanstream_url']);
 	curl_setopt($ch, CURLOPT_POSTFIELDS,$post_data);
 	$txnResult = curl_exec($ch);
 	curl_close($ch);
