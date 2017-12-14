@@ -1,6 +1,6 @@
 <?php
 if(!class_exists("Espresso_Stripe")) {
-	require_once (dirname(__FILE__).'/stripe-php-1.5.19/lib/Stripe.php');
+	require_once (dirname(__FILE__).'/stripe-php-1.18.0/lib/Stripe.php');
 }
 
 class Espresso_ClsStripe{	
