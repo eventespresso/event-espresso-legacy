@@ -16,9 +16,6 @@ function espresso_display_stripe($payment_data) {
 		$stripe_settings['stripe_publishable_key'] = $payment_data['event_meta']['stripe_publishable_key'];
 	}
 
-	wp_register_script( 'stripe', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/stripe/stripe.js', array( 'jquery.validate.js' ), '1.0', TRUE );
-	wp_enqueue_script( 'stripe' );	
-
 ?>
 
 <div id="stripe-payment-option-dv" class="payment-option-dv">
