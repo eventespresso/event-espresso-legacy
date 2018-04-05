@@ -24,7 +24,7 @@
                 </li>
                 <li>
                   <label for="recaptcha_publickey">
-                    <?php _e('Public Key:','event_espresso'); ?>
+                    <?php _e('Public/Site Key:','event_espresso'); ?>
                   </label>
                   <input type="text" name="recaptcha_publickey" size="45" value="<?php if(isset($org_options['recaptcha_publickey'])) echo $org_options['recaptcha_publickey'];?>" />
                 </li>
@@ -51,10 +51,9 @@
                   </label>
                   <?php
 						$values=array(					
-							array('id'=>'red','text'=> __('Red','event_espresso')),
-							array('id'=>'white','text'=> __('White','event_espresso')),
-							array('id'=>'blackglass','text'=> __('Blackglass','event_espresso')),
-							array('id'=>'clean','text'=> __('Clean','event_espresso')));				
+							array('id'=>'light','text'=> __('Light (Default)','event_espresso')),
+							array('id'=>'dark','text'=> __('Dark','event_espresso'))
+            );
 							echo select_input('recaptcha_theme', $values, isset($org_options['recaptcha_theme']) ? $org_options['recaptcha_theme'] : '');
 					?>
                 </li>
