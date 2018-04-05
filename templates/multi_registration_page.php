@@ -138,18 +138,6 @@ if (!function_exists('multi_register_attendees')) {
 
 			$add_attendee_question_groups = $event_meta['add_attendee_question_groups'];
 
-
-			if ($org_options['use_captcha'] == 'Y' && isset( $_REQUEST['edit_details'] ) && $_REQUEST['edit_details'] != 'true') {
-				?>
-				<script type="text/javascript">
-					var RecaptchaOptions = {
-						theme : '<?php echo $org_options['recaptcha_theme'] == '' ? 'red' : $org_options['recaptcha_theme']; ?>',
-						lang : '<?php echo $org_options['recaptcha_language'] == '' ? 'en' : $org_options['recaptcha_language']; ?>'
-					};
-				</script>
-				<?php
-			}
-			
 //*************  This is the start of the registration form. This is where you can start editing your display. *************
 			
 			$num_attendees = apply_filters('filter_hook_espresso_get_num_attendees', $event_id);//Get the number of attendees

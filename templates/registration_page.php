@@ -223,16 +223,6 @@ if (!function_exists('register_attendees')) {
 			$is_active = event_espresso_get_is_active(0, $all_meta);
 			//echo '<p>'.print_r(event_espresso_get_is_active($event_id, $all_meta)).'</p>';;
 
-            if ($org_options['use_captcha'] == 'Y' && empty($_REQUEST['edit_details'])) {
-                ?>
-                <script type="text/javascript">
-                    var RecaptchaOptions = {
-                        theme : '<?php echo $org_options['recaptcha_theme'] == '' ? 'red' : $org_options['recaptcha_theme']; ?>',
-                        lang : '<?php echo $org_options['recaptcha_language'] == '' ? 'en' : $org_options['recaptcha_language']; ?>'
-                    };
-                </script>
-                <?php
-            }
             //This is the start of the registration form. This is where you can start editing your display.
             //(Shows the regsitration form if enough spaces exist)
             if ($num_attendees >= $reg_limit) {
