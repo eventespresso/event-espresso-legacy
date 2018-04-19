@@ -787,7 +787,6 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 							}//End require captcha library
 						?>
 							<p class="<?php espresso_template_css_class('event_form_field','event_form_field'); ?>" id="captcha-<?php echo $event_id; ?>">
-								<?php _e('Anti-Spam Measure: Please enter the following phrase', 'event_espresso'); ?>
 								<?php echo recaptcha_get_html($org_options['recaptcha_publickey']); ?> 
 							</p>
 			<?php } //End use captcha	?>
