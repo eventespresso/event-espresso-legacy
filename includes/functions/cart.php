@@ -782,25 +782,12 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 						
 						//Recaptcha portion
 						if ( $org_options['use_captcha'] == 'Y'  && ! is_user_logged_in()  ) { // && isset( $_REQUEST['edit_details'] ) && $_REQUEST['edit_details'] != 'true'
-							// this is probably superfluous because it's already being loaded elsewhere...trying to cover all my bases ~c  ?>
-							<script type="text/javascript">
-								var RecaptchaOptions = {
-									theme : '<?php echo $org_options['recaptcha_theme'] == '' ? 'red' : $org_options['recaptcha_theme']; ?>',
-									lang : '<?php echo $org_options['recaptcha_language'] == '' ? 'en' : $org_options['recaptcha_language']; ?>'
-								};
-							</script>
-						<?php
 							if ( ! function_exists( 'recaptcha_get_html' )) {
 								require_once( EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/recaptchalib.php' );
 							}//End require captcha library
-							# the response from reCAPTCHA
-							$resp = true;
-							# the error code from reCAPTCHA, if any
-							$error = null;
-							?>
+						?>
 							<p class="<?php espresso_template_css_class('event_form_field','event_form_field'); ?>" id="captcha-<?php echo $event_id; ?>">
-								<?php _e('Anti-Spam Measure: Please enter the following phrase', 'event_espresso'); ?>
-								<?php echo recaptcha_get_html($org_options['recaptcha_publickey'], $error, is_ssl() ? true : false); ?> 
+								<?php echo recaptcha_get_html($org_options['recaptcha_publickey']); ?> 
 							</p>
 			<?php } //End use captcha	?>
 			
