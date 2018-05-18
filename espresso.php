@@ -88,7 +88,7 @@ function ee_init_session($admin_override = false) {
 
 		$_SESSION['espresso_session'] = array();
 		$_SESSION['espresso_session']['id'] = session_id() . '-' . uniqid('', true);
-		$_SESSION['espresso_session']['events_in_session'] = '';
+		$_SESSION['espresso_session']['events_in_session'] = array();
 		$_SESSION['espresso_session']['grand_total'] = '';
 		do_action( 'action_hook_espresso_zero_vlm_dscnt_in_session' );
 	}
