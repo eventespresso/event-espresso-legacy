@@ -81,7 +81,7 @@ if (!function_exists('event_espresso_add_event_process')) {
 
 		$_SESSION['espresso_session']['events_in_session'][$event_id] = array(
 				'id' => $event_id,
-				'event_name' => stripslashes_deep($event_name),
+				'event_name' => stripslashes($event_name),
 				'attendee_quantity' => 1,
 				'start_time_id' => '',
 				'price_id' => array(),
@@ -782,25 +782,12 @@ if (!function_exists('event_espresso_load_checkout_page')) {
 						
 						//Recaptcha portion
 						if ( $org_options['use_captcha'] == 'Y'  && ! is_user_logged_in()  ) { // && isset( $_REQUEST['edit_details'] ) && $_REQUEST['edit_details'] != 'true'
-							// this is probably superfluous because it's already being loaded elsewhere...trying to cover all my bases ~c  ?>
-							<script type="text/javascript">
-								var RecaptchaOptions = {
-									theme : '<?php echo $org_options['recaptcha_theme'] == '' ? 'red' : $org_options['recaptcha_theme']; ?>',
-									lang : '<?php echo $org_options['recaptcha_language'] == '' ? 'en' : $org_options['recaptcha_language']; ?>'
-								};
-							</script>
-						<?php
 							if ( ! function_exists( 'recaptcha_get_html' )) {
 								require_once( EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/recaptchalib.php' );
 							}//End require captcha library
-							# the response from reCAPTCHA
-							$resp = true;
-							# the error code from reCAPTCHA, if any
-							$error = null;
-							?>
+						?>
 							<p class="<?php espresso_template_css_class('event_form_field','event_form_field'); ?>" id="captcha-<?php echo $event_id; ?>">
-								<?php _e('Anti-Spam Measure: Please enter the following phrase', 'event_espresso'); ?>
-								<?php echo recaptcha_get_html($org_options['recaptcha_publickey'], $error, is_ssl() ? true : false); ?> 
+								<?php echo recaptcha_get_html($org_options['recaptcha_publickey']); ?> 
 							</p>
 			<?php } //End use captcha	?>
 			
@@ -865,11 +852,11 @@ function event_espresso_copy_dd($event_id, $meta) {
 				if ($event_meta['additional_attendee_reg_info'] == 1) {
 					$i = 1;
 					$event_name = strlen($v_event_id['event_name']) > 25 ? substr($v_event_id['event_name'], 0, 15) . '... ' : $v_event_id['event_name']; //if too long to display
-					$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}|$k_event_id|$k_price_id|$i'>" . stripslashes_deep($event_name) . ' - ' . stripslashes_deep($v_price_id['price_type'] ). ' - '.__('Attendee', 'event_espresso').' ' . $i . "</option>";
+					$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}|$k_event_id|$k_price_id|$i'>" . stripslashes($event_name) . ' - ' . stripslashes($v_price_id['price_type'] ). ' - '.__('Attendee', 'event_espresso').' ' . $i . "</option>";
 				} else {
 					for ($i = 1; $i <= $v_price_id['attendee_quantity']; $i++) {
 						$event_name = strlen($v_event_id['event_name']) > 25 ? substr($v_event_id['event_name'], 0, 15) . '... ' : $v_event_id['event_name']; //if too long to display
-						$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}|$k_event_id|$k_price_id|$i'>" . stripslashes_deep($event_name) . ' - ' . $v_price_id['price_type'] . ' - '.__('Attendee', 'event_espresso').' ' . $i . "</option>";
+						$var .= "<option value='$event_id|{$meta['price_id']}|{$meta['attendee_number']}|$k_event_id|$k_price_id|$i'>" . stripslashes($event_name) . ' - ' . $v_price_id['price_type'] . ' - '.__('Attendee', 'event_espresso').' ' . $i . "</option>";
 					}
 				}
 			}
@@ -1126,7 +1113,7 @@ if (!function_exists('event_espresso_cart_link')) {
 			echo "<span id='moving_to_cart'>{$moving_to_cart}</span>";
 			echo "<script language='javascript'>window.location='" . $registration_cart_url . "';</script>";
 		} else {
-			echo $separator . ' <a class="ee_view_cart ' . $registration_cart_class . '" id="cart_link_' . $event_id . '" href="' . $registration_cart_url . '" title="' . stripslashes_deep($event_name) . '" moving_to_cart="' . urlencode($moving_to_cart) . '" direct_to_cart="' . $direct_to_cart . '" >' . $anchor . '</a>';
+			echo $separator . ' <a class="ee_view_cart ' . $registration_cart_class . '" id="cart_link_' . $event_id . '" href="' . $registration_cart_url . '" title="' . stripslashes($event_name) . '" moving_to_cart="' . urlencode($moving_to_cart) . '" direct_to_cart="' . $direct_to_cart . '" >' . $anchor . '</a>';
 		}
 
 		$buffer = ob_get_contents();
@@ -1160,7 +1147,7 @@ if (!function_exists('event_espresso_clear_session')) {
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		$_SESSION['espresso_session'] = array();
 		$_SESSION['espresso_session']['id'] = session_id() . '-' . uniqid('', true);
-		$_SESSION['espresso_session']['events_in_session'] = '';
+		$_SESSION['espresso_session']['events_in_session'] = array();
 		$_SESSION['espresso_session']['grand_total'] = '';
 		do_action( 'action_hook_espresso_zero_vlm_dscnt_in_session' ); 
 		
@@ -1210,7 +1197,7 @@ if (!function_exists('event_espresso_group_price_dropdown')) {
 			foreach ($results as $result) {
 
 				//Setting this field for use on the registration form
-				$_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['price_type'] = stripslashes_deep($result->price_type);
+				$_SESSION['espresso_session']['events_in_session'][$event_id]['price_id'][$result->id]['price_type'] = stripslashes($result->price_type);
 				// Addition for Early Registration discount
 				if ($early_price_data = early_discount_amount($event_id, $result->event_cost)) {
 					$result->event_cost = $early_price_data['event_price'];

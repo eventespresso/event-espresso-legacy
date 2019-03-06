@@ -909,8 +909,7 @@ function espresso_verify_recaptcha( $skip_check = FALSE ) {
 		
 		$recaptcha_privatekey = isset( $org_options["recaptcha_privatekey"] ) ? $org_options["recaptcha_privatekey"] : FALSE;
 		$remote_addr = isset( $_SERVER["REMOTE_ADDR"] ) ? $_SERVER["REMOTE_ADDR"] : FALSE;
-		$recaptcha_challenge_field = isset( $_POST["recaptcha_challenge_field"] ) ? $_POST["recaptcha_challenge_field"] : FALSE;
-		$recaptcha_response_field = isset( $_POST["recaptcha_response_field"] ) ? $_POST["recaptcha_response_field"] : FALSE;
+		$recaptcha_response_field = isset( $_POST["g-recaptcha-response"] ) ? $_POST["g-recaptcha-response"] : FALSE;
 		
 		// check private key
 		if ( ! $recaptcha_privatekey ) {
@@ -923,17 +922,11 @@ function espresso_verify_recaptcha( $skip_check = FALSE ) {
 			echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, an error occurred and the anti-spam settings could not be verified. Please contact the site admin or click your browser\'s back button and try again.', 'event_espresso') . '</strong></p></div>';
 			return FALSE;			
 		}
-		
-		// check $recaptcha_challenge_field
-		if ( ! $recaptcha_challenge_field ) {
-			echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, an error occured and the anti-spam fields could not be verified. Please contact the site admin or click your browser\'s back button and try again.', 'event_espresso') . '</strong></p></div>';
-			return FALSE;			
-		}
-		
-		$resp = recaptcha_check_answer( $recaptcha_privatekey, $remote_addr, $recaptcha_challenge_field, $recaptcha_response_field );
-//		printr( $resp, '$resp  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 
-		if ( $resp->is_valid ) {
+		$resp = recaptcha_check_answer( $recaptcha_privatekey, $remote_addr, $recaptcha_response_field );
+		//printr( $resp, '$resp  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+
+		if ( $resp->isSuccess() ) {
 			return TRUE;
 		} else {
 			echo '<div class="attention-icon"><p class="event_espresso_attention"><strong>' . __('Sorry, you did not enter the correct anti-spam phrase. Please click your browser\'s back button and try again.', 'event_espresso') . '</strong></p></div>';
