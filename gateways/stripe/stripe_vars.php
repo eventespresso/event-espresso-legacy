@@ -2,13 +2,17 @@
 
 function espresso_display_stripe($payment_data) {
 	extract($payment_data);
-	global $org_options;
+	global $org_options, $wpdb;
 	$stripe_settings = get_option('event_espresso_stripe_settings');
 	if ($stripe_settings['force_ssl_return']) {
 		$home = str_replace('http://', 'https://', home_url());
 	} else {
 		$home = home_url();
 	}
+	
+	$SQL = "SELECT start_date FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id='%s' ORDER BY id LIMIT 1";
+	$payment_data['start_date'] = $wpdb->get_var( $wpdb->prepare( $SQL, $payment_data['registration_id']));
+
 	$stripe_description = sprintf(
 		/* translators: 1: event name, 2: event date, 3: attendee first name, 4: attendee last name */
 		esc_html__('%1$s [%2$s] >> %3$s %4$s', 'event_espresso'),
