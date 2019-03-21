@@ -23,8 +23,8 @@ function espresso_process_stripe($payment_data) {
 	//Include the Stripe API
 	require_once (dirname(__FILE__).'/stripe-php-1.18.0/lib/Stripe.php');
 
-	//Pull the stripeToken posted by Checkout.
-	$token = $_POST['stripeToken'];
+	//Pull the eeStripeToken posted by Checkout.
+	$token = $_POST['eeStripeToken'];
 
 	//Set the Stripe API secret key.
 	Stripe::setApiKey( $stripe_settings['stripe_secret_key'] );
