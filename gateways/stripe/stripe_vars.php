@@ -54,17 +54,12 @@ function espresso_display_stripe($payment_data) {
 <?php } ?>
 
 		<div class = "event_espresso_form_wrapper">
-
-			<form action="<?php echo add_query_arg(array('r_id'=>$registration_id, 'attendee_id'=>$attendee_id), get_permalink($org_options['return_url'])); ?>" method="POST" class="allow-leave-page">
-			  <script
-				src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
-				data-key="<?php echo $stripe_settings['stripe_publishable_key'] ?>"
-				data-amount="<?php echo str_replace( array(',', '.'), '', number_format( $event_cost, 2) ) ?>"
-				data-name="<?php echo $org_options['organization']; ?>"
-				data-description="<?php echo $event_name; ?>">
-			  </script>
+			<form id="ee-stripe-form" action="<?php echo add_query_arg(array('r_id'=>$registration_id, 'attendee_id'=>$attendee_id), get_permalink($org_options['return_url'])); ?>" method="POST" class="allow-leave-page">
+				<button id="ee-stripe-button-btn"><?php _e( 'Pay Now', 'event_espresso' );?></button>
+				<input id="ee-stripe-token" name="eeStripeToken" type="hidden" value="" />
+				<input id="ee-stripe-transaction-email" name="eeStripeEmail" type="hidden" value="<?php echo $payment_data['attendee_email']; ?>" />
+				<input id="ee-stripe-amount" name="eeStripeAmount" type="hidden" value="<?php echo str_replace( array(',', '.'), '', number_format( $event_cost, 2) ) ?>" />
 			</form>
-
 		</div>
 		<br/>
 		<p class="choose-diff-pay-option-pg">
