@@ -32,11 +32,16 @@ function espresso_process_stripe($payment_data) {
     //Build the Stripe data array
     $stripe_data = array(
         'amount' => str_replace( array(',', '.'), '', number_format( $payment_data['total_cost'], 2) ),
-        'currency' => $stripe_settings['stripe_currency_symbol'],
+        'currency' => !empty($stripe_settings['stripe_currency_symbol']) ? $stripe_settings['stripe_currency_symbol'] : 'USD',
         'card' => $token,
-        'description' => $payment_data["event_name"] . 
-        				"[" . date('m-d-Y', strtotime($payment_data['start_date'])) . "]" . 
-        				" >> " . $payment_data["fname"] . " " . $payment_data["lname"]
+        'description' =>  sprintf(
+        	/* translators: 1: event name, 2: event date, 3: attendee first name, 4: attendee last name */
+            esc_html__('%1$s [%2$s] >> %3$s %4$s', 'event_espresso'),
+            $payment_data["event_name"],
+            date('m-d-Y', strtotime($payment_data['start_date'])),
+            $payment_data["fname"],
+            $payment_data["lname"]
+        )
     );
 	
 	//Create a charge with Stripe.
@@ -49,7 +54,7 @@ function espresso_process_stripe($payment_data) {
 		$payment_data['txn_details'] = serialize( $charge_array );
 		if ( isset($charge_array['status'] ) ) {
 			echo "<div id='stripe_response'>";
-			if ($charge_array['paid'] === TRUE) {
+			if ($charge_array['paid'] === true) {
 				echo "<div class='stripe_status'>" . $charge_array['outcome']['seller_message'] . "</div>";
 				$payment_data['payment_status'] = 'Completed';
 				$payment_data['txn_id'] = $charge_array['id'];
