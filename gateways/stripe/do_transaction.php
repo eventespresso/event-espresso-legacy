@@ -1,8 +1,8 @@
 <?php
 
 function espresso_transactions_stripe_get_attendee_id($attendee_id) {
-	if (isset($_REQUEST['id']))
-		$attendee_id = $_REQUEST['id'];
+	if (isset($_REQUEST['attendee_id']))
+		$attendee_id = $_REQUEST['attendee_id'];
 	return $attendee_id;
 }
 
