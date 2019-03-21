@@ -16,6 +16,20 @@ function espresso_display_stripe($payment_data) {
 		$stripe_settings['stripe_publishable_key'] = $payment_data['event_meta']['stripe_publishable_key'];
 	}
 
+	wp_enqueue_script('stripe_payment_js', 'https://checkout.stripe.com/v2/checkout.js', array(), false, true);
+	wp_enqueue_script('espresso_stripe', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/stripe/espresso_stripe.js', array('stripe_payment_js'), false, true);
+
+	$ee_stripe_args = array(
+        'stripe_pk_key' => $stripe_settings['stripe_publishable_key'],
+        'stripe_org_name' => $org_options['organization'],
+        'stripe_org_image' => $org_options['default_logo_url'],
+        'stripe_description' => $stripe_description,
+        'stripe_currency' => !empty($stripe_settings['stripe_currency_symbol']) ? $stripe_settings['stripe_currency_symbol'] : 'USD',
+        'stripe_panel_label' => sprintf(__('Pay %1$s Now', 'event_espresso'), '{{amount}}'),
+        'card_error_message' => __('Payment Error! Please refresh the page and try again or contact support.', 'event_espresso'),
+	);
+	wp_localize_script('espresso_stripe', 'ee_stripe_args', $ee_stripe_args);
+
 ?>
 
 <div id="stripe-payment-option-dv" class="payment-option-dv">
