@@ -31,7 +31,7 @@ function espresso_process_stripe($payment_data) {
     
     //Build the Stripe data array
     $stripe_data = array(
-        'amount' => str_replace( array(',', '.'), '', number_format( $payment_data['total_cost'], 2) ),
+        'amount' => str_replace( array(',', '.'), '', number_format( $payment_data['total_cost'], get_stripe_decimal_places($stripe_settings['stripe_currency_symbol'])) ),
         'currency' => !empty($stripe_settings['stripe_currency_symbol']) ? $stripe_settings['stripe_currency_symbol'] : 'USD',
         'card' => $token,
         'description' =>  sprintf(

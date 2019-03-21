@@ -62,7 +62,7 @@ function espresso_display_stripe($payment_data) {
 				<button id="ee-stripe-button-btn"><?php _e( 'Pay Now', 'event_espresso' );?></button>
 				<input id="ee-stripe-token" name="eeStripeToken" type="hidden" value="" />
 				<input id="ee-stripe-transaction-email" name="eeStripeEmail" type="hidden" value="<?php echo $payment_data['attendee_email']; ?>" />
-				<input id="ee-stripe-amount" name="eeStripeAmount" type="hidden" value="<?php echo str_replace( array(',', '.'), '', number_format( $event_cost, 2) ) ?>" />
+				<input id="ee-stripe-amount" name="eeStripeAmount" type="hidden" value="<?php echo str_replace( array(',', '.'), '', number_format( $event_cost, get_stripe_decimal_places($stripe_settings['stripe_currency_symbol'])) ) ?>" />
 			</form>
 		</div>
 		<br/>
@@ -76,3 +76,40 @@ function espresso_display_stripe($payment_data) {
 }
 
 add_action('action_hook_espresso_display_onsite_payment_gateway', 'espresso_display_stripe');
+
+
+/**
+ * Gets the number of decimal places Stripe expects a currency to have.
+ * See https://stripe.com/docs/currencies#charge-currencies for the list.
+ *
+ * @param string $currency Accepted currency.
+ * @return int
+ */
+function get_stripe_decimal_places($currency = '')
+{
+    if (!$currency) {
+    	$stripe_settings = get_option('event_espresso_stripe_settings');
+        $currency = !empty($stripe_settings['stripe_currency_symbol']) ? $stripe_settings['stripe_currency_symbol'] : 'USD';
+    }
+    switch (strtoupper($currency)) {
+        // Zero decimal currencies.
+        case 'BIF' :
+        case 'CLP' :
+        case 'DJF' :
+        case 'GNF' :
+        case 'JPY' :
+        case 'KMF' :
+        case 'KRW' :
+        case 'MGA' :
+        case 'PYG' :
+        case 'RWF' :
+        case 'VND' :
+        case 'VUV' :
+        case 'XAF' :
+        case 'XOF' :
+        case 'XPF' :
+            return 0;
+        default :
+            return 2;
+    }
+}
