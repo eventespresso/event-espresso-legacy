@@ -60,7 +60,15 @@ function espresso_process_stripe($payment_data) {
 				$payment_data['txn_id'] = $charge_array['id'];
 			}
 			if ( !empty($charge_array['failure_code']) ) {
-				echo "<div class='stripe_error'>ERROR: " . $charge_array['failure_code'] . " - " . $charge_array['failure_message'] . "  </div>";
+				echo "<div class='stripe_error'>" . 
+					sprintf(
+			        	/* translators: 1: error code, 2: faileure message */
+			            esc_html__('ERROR: %1$s - %2$s', 'event_espresso'),
+			            $charge_array['failure_code'],
+			            $charge_array['failure_message']
+
+			        )  . 
+			    	"</div>";
 			}
 			echo "</div>";
 		}
