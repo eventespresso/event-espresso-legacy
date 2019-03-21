@@ -9,6 +9,14 @@ function espresso_display_stripe($payment_data) {
 	} else {
 		$home = home_url();
 	}
+	$stripe_description = sprintf(
+		/* translators: 1: event name, 2: event date, 3: attendee first name, 4: attendee last name */
+		esc_html__('%1$s [%2$s] >> %3$s %4$s', 'event_espresso'),
+		$payment_data["event_name"],
+		date('m-d-Y', strtotime($payment_data['start_date'])),
+		$payment_data["fname"],
+		$payment_data["lname"]
+	);
 	
 	//Check for an alternate Stripe settings
 	if ( !empty($payment_data['event_meta']['stripe_publishable_key'] ) ) {
