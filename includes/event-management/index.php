@@ -66,7 +66,10 @@ function event_espresso_manage_events() {
 
 			//Delete recurrence series of events
 			if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'delete_recurrence_series') {
-				$r = $wpdb->get_results("SELECT id FROM " . EVENTS_DETAIL_TABLE . " ed WHERE recurrence_id = " . $_REQUEST['recurrence_id']);
+				$r = $wpdb->get_results($wpdb->prepare(
+					"SELECT id FROM " . EVENTS_DETAIL_TABLE . " ed WHERE recurrence_id = %d",
+					$_REQUEST['recurrence_id']
+				));
 
 				if ($wpdb->num_rows > 0) {
 					foreach ($r as $row) {
