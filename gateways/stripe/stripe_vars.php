@@ -10,7 +10,7 @@ function espresso_display_stripe($payment_data) {
 		$home = home_url();
 	}
 	
-	$SQL = "SELECT start_date FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id='%s' ORDER BY id LIMIT 1";
+	$SQL = "SELECT start_date FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id=%s ORDER BY id LIMIT 1";
 	$payment_data['start_date'] = $wpdb->get_var( $wpdb->prepare( $SQL, $payment_data['registration_id']));
 
 	$stripe_description = sprintf(
@@ -38,7 +38,7 @@ function espresso_display_stripe($payment_data) {
         'stripe_description' => $stripe_description,
         'stripe_currency' => !empty($stripe_settings['stripe_currency_symbol']) ? $stripe_settings['stripe_currency_symbol'] : 'USD',
         'stripe_panel_label' => sprintf(__('Pay %1$s Now', 'event_espresso'), '{{amount}}'),
-        'card_error_message' => __('Payment Error! Please refresh the page and try again or contact support.', 'event_espresso'),
+        'card_error_message' => esc_html__('Payment Error! Please refresh the page and try again or contact support.', 'event_espresso'),
 	);
 	wp_localize_script('espresso_stripe', 'ee_stripe_args', $ee_stripe_args);
 
@@ -59,7 +59,7 @@ function espresso_display_stripe($payment_data) {
 
 		<div class = "event_espresso_form_wrapper">
 			<form id="ee-stripe-form" action="<?php echo add_query_arg(array('r_id'=>$registration_id, 'attendee_id'=>$attendee_id), get_permalink($org_options['return_url'])); ?>" method="POST" class="allow-leave-page">
-				<button id="ee-stripe-button-btn"><?php _e( 'Pay Now', 'event_espresso' );?></button>
+				<button id="ee-stripe-button-btn"><?php esc_html_e( 'Pay Now', 'event_espresso' );?></button>
 				<input id="ee-stripe-token" name="eeStripeToken" type="hidden" value="" />
 				<input id="ee-stripe-transaction-email" name="eeStripeEmail" type="hidden" value="<?php echo $payment_data['attendee_email']; ?>" />
 				<input id="ee-stripe-amount" name="eeStripeAmount" type="hidden" value="<?php echo str_replace( array(',', '.'), '', number_format( $event_cost, get_stripe_decimal_places($stripe_settings['stripe_currency_symbol'])) ) ?>" />
@@ -85,7 +85,7 @@ add_action('action_hook_espresso_display_onsite_payment_gateway', 'espresso_disp
  * @param string $currency Accepted currency.
  * @return int
  */
-function get_stripe_decimal_places($currency = '')
+function espresso_get_stripe_decimal_places($currency = '')
 {
     if (!$currency) {
     	$stripe_settings = get_option('event_espresso_stripe_settings');

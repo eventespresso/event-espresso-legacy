@@ -31,7 +31,7 @@ function espresso_process_stripe($payment_data) {
     
     //Build the Stripe data array
     $stripe_data = array(
-        'amount' => str_replace( array(',', '.'), '', number_format( $payment_data['total_cost'], get_stripe_decimal_places($stripe_settings['stripe_currency_symbol'])) ),
+        'amount' => str_replace( array(',', '.'), '', number_format( $payment_data['total_cost'], espresso_get_stripe_decimal_places($stripe_settings['stripe_currency_symbol'])) ),
         'currency' => !empty($stripe_settings['stripe_currency_symbol']) ? $stripe_settings['stripe_currency_symbol'] : 'USD',
         'card' => $token,
         'description' =>  sprintf(
@@ -62,7 +62,7 @@ function espresso_process_stripe($payment_data) {
 			if ( !empty($charge_array['failure_code']) ) {
 				echo "<div class='stripe_error'>" . 
 					sprintf(
-			        	/* translators: 1: error code, 2: faileure message */
+			        	/* translators: 1: error code, 2: failure message */
 			            esc_html__('ERROR: %1$s - %2$s', 'event_espresso'),
 			            $charge_array['failure_code'],
 			            $charge_array['failure_message']
