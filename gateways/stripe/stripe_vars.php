@@ -37,6 +37,7 @@ function espresso_display_stripe($payment_data) {
         'stripe_org_image' => $org_options['default_logo_url'],
         'stripe_description' => $stripe_description,
         'stripe_currency' => !empty($stripe_settings['stripe_currency_symbol']) ? $stripe_settings['stripe_currency_symbol'] : 'USD',
+        /* translators: String used on Stripe checkout modal */
         'stripe_panel_label' => sprintf(__('Pay %1$s Now', 'event_espresso'), '{{amount}}'),
         'card_error_message' => esc_html__('Payment Error! Please refresh the page and try again or contact support.', 'event_espresso'),
 	);
