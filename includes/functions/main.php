@@ -29,7 +29,6 @@ function espresso_edit_attendee($registration_id, $attendee_id, $event_id = 0, $
 function espresso_reg_url($event_id = 0) {
 	global $org_options;
 	if ($event_id > 0) {
-		//return espresso_getTinyUrl(home_url().'/?page_id='.$org_options['event_page_id'].'&regevent_action=register&event_id='.$event_id);
 		$new_url = add_query_arg('ee', $event_id, get_permalink($org_options['event_page_id']));
 		return $new_url;
 	}/* else {
@@ -39,7 +38,7 @@ function espresso_reg_url($event_id = 0) {
 }
 
 function espresso_getTinyUrl($url) {
-	return file_get_contents("http://tinyurl.com/api-create.php?url=" . $url);
+	return $url;
 }
 
 //Text formatting function.
