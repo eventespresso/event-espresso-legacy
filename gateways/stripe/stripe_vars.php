@@ -15,7 +15,7 @@ function espresso_display_stripe($payment_data) {
 
 	$stripe_description = sprintf(
 		/* translators: 1: event name, 2: event date, 3: attendee first name, 4: attendee last name */
-		esc_html__('%1$s [%2$s] >> %3$s %4$s', 'event_espresso'),
+		__('%1$s [%2$s] >> %3$s %4$s', 'event_espresso'),
 		$payment_data["event_name"],
 		date('m-d-Y', strtotime($payment_data['start_date'])),
 		$payment_data["fname"],
@@ -28,21 +28,32 @@ function espresso_display_stripe($payment_data) {
 		$stripe_settings['stripe_publishable_key'] = $payment_data['event_meta']['stripe_publishable_key'];
 	}
 
-	wp_enqueue_script('stripe_payment_js', 'https://checkout.stripe.com/v2/checkout.js', array(), false, true);
+	wp_enqueue_script('stripe_payment_js', 'https://js.stripe.com/v3/', array(), false, true);
 	wp_enqueue_script('espresso_stripe', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/stripe/espresso_stripe.js', array('stripe_payment_js'), false, true);
+	wp_enqueue_style('espresso_stripe_css', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/stripe/espresso_stripe.css');
 
+	//Include the Stripe API
+	require_once (dirname(__FILE__).'/stripe-php-6.43.1/init.php');
+	// Setup a Stripe object using the secret key.
+	\Stripe\Stripe::setApiKey( $stripe_settings['stripe_secret_key']);
+
+	$payment_intent_id = isset($_REQUEST['espresso_stripe_payment_intent_id']) ? $_REQUEST['espresso_stripe_payment_intent_id'] : '';
+	if( $payment_intent_id ) { 
+		$intent = \Stripe\PaymentIntent::retrieve(
+            $payment_intent_id
+        );
+	} else {
+		$intent = \Stripe\PaymentIntent::create([
+	    	'amount' => str_replace( array(',', '.'), '', number_format( $event_cost, espresso_get_stripe_decimal_places($stripe_settings['stripe_currency_symbol'])) ),
+	     	'currency' => $stripe_settings['stripe_currency_symbol'],
+		], [
+			'idempotency_key' => $registration_id,
+		]);
+	}
 	$ee_stripe_args = array(
-        'stripe_pk_key' => $stripe_settings['stripe_publishable_key'],
-        'stripe_org_name' => $org_options['organization'],
-        'stripe_org_image' => $org_options['default_logo_url'],
-        'stripe_description' => $stripe_description,
-        'stripe_currency' => !empty($stripe_settings['stripe_currency_symbol']) ? $stripe_settings['stripe_currency_symbol'] : 'USD',
-        /* translators: String used on Stripe checkout modal */
-        'stripe_panel_label' => sprintf(__('Pay %1$s Now', 'event_espresso'), '{{amount}}'),
-        'card_error_message' => esc_html__('Payment Error! Please refresh the page and try again or contact support.', 'event_espresso'),
+	    'stripe_pk_key' => $stripe_settings['stripe_publishable_key'],
 	);
 	wp_localize_script('espresso_stripe', 'ee_stripe_args', $ee_stripe_args);
-
 ?>
 
 <div id="stripe-payment-option-dv" class="payment-option-dv">
@@ -60,10 +71,45 @@ function espresso_display_stripe($payment_data) {
 
 		<div class = "event_espresso_form_wrapper">
 			<form id="ee-stripe-form" action="<?php echo add_query_arg(array('r_id'=>$registration_id, 'attendee_id'=>$attendee_id), get_permalink($org_options['return_url'])); ?>" method="POST" class="allow-leave-page">
-				<button id="ee-stripe-button-btn"><?php esc_html_e( 'Pay Now', 'event_espresso' );?></button>
-				<input id="ee-stripe-token" name="eeStripeToken" type="hidden" value="" />
-				<input id="ee-stripe-transaction-email" name="eeStripeEmail" type="hidden" value="<?php echo $payment_data['attendee_email']; ?>" />
-				<input id="ee-stripe-amount" name="eeStripeAmount" type="hidden" value="<?php echo str_replace( array(',', '.'), '', number_format( $event_cost, get_stripe_decimal_places($stripe_settings['stripe_currency_symbol'])) ) ?>" />
+				<fieldset id="stripe-billing-info-dv">
+						<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>
+						<p>
+							<label for="first_name"><?php _e('First Name', 'event_espresso'); ?></label>
+							<input name="first_name" type="text" id="espresso_stripe_first_name" class="required" value="<?php echo $fname ?>" />
+						</p>
+						<p>
+							<label for="last_name"><?php _e('Last Name', 'event_espresso'); ?></label>
+							<input name="last_name" type="text" id="espresso_stripe_last_name" class="required" value="<?php echo $lname ?>" />
+						</p>
+						<p>
+							<label for="email"><?php _e('Email Address', 'event_espresso'); ?></label>
+							<input name="email" type="text" id="espresso_stripe_email" class="required" value="<?php echo $attendee_email ?>" />
+						</p>
+						<?php if(! empty($stripe_settings['stripe_collect_billing_address']) && $stripe_settings['stripe_collect_billing_address']) { ?>
+							<p>
+								<label for="address"><?php _e('Address', 'event_espresso'); ?></label>
+								<input name="address" type="text" id="espresso_stripe_address" class="required" value="<?php echo $address ?>" />
+							</p>
+							<p>
+								<label for="city"><?php _e('City', 'event_espresso'); ?></label>
+								<input name="city" type="text" id="espresso_stripe_city" class="required" value="<?php echo $city ?>" />
+							</p>
+							<p>
+								<label for="state"><?php _e('State', 'event_espresso'); ?></label>
+								<input name="state" type="text" id="espresso_stripe_state" class="required" value="<?php echo $state ?>" />
+							</p>
+							<p>
+								<label for="country"><?php _e('Country', 'event_espresso'); ?></label>
+								<input name="country" type="text" id="espresso_stripe_country" class="required" value="<?php echo $country ?>" />
+							</p>
+						<?php } ?>
+				</fieldset>
+				<!-- placeholder for Elements -->
+				<label><?php esc_html_e('Card Details', 'event_espresso');?></label>
+				<div id="ee-stripe-card-element"></div>
+				<button id="ee-stripe-button-btn" data-secret="<?php echo $intent->client_secret ?>"><?php esc_html_e('Pay Now', 'event_espresso');?></button>
+				<h4 id="espresso_stripe_errors" style="color:#ff0000; display:none"></h4>
+				<input id="espresso_stripe_payment_intent_id" type="hidden" name="espresso_stripe_payment_intent_id" value="<?php echo $intent->id?>" />
 			</form>
 		</div>
 		<br/>
