@@ -11,6 +11,7 @@ function event_espresso_stripe_payment_settings() {
 		$stripe_settings['header'] = $_POST['header'];
 		$stripe_settings['force_ssl_return'] = empty($_POST['force_ssl_return']) ? false : true;
 		$stripe_settings['display_header'] = empty($_POST['display_header']) ? false : true;
+		$stripe_settings['stripe_collect_billing_address'] =  empty($_POST['stripe_collect_billing_address']) ? false : true;
 		update_option('event_espresso_stripe_settings', $stripe_settings);
 		echo '<div id="message" class="updated fade"><p><strong>' . __('Stripe settings saved.', 'event_espresso') . '</strong></p></div>';
 	}
@@ -22,6 +23,7 @@ function event_espresso_stripe_payment_settings() {
 		$stripe_settings['header'] = 'Payment Transactions by Stripe';
 		$stripe_settings['force_ssl_return'] = false;
 		$stripe_settings['display_header'] = false;
+		$stripe_settings['stripe_collect_billing_address'] = false;
 		if (add_option('event_espresso_stripe_settings', $stripe_settings, '', 'no') == false) {
 			update_option('event_espresso_stripe_settings', $stripe_settings);
 		}
@@ -30,7 +32,7 @@ function event_espresso_stripe_payment_settings() {
 	if ( ! isset( $stripe_settings['button_url'] ) || ! file_exists( $stripe_settings['button_url'] )) {
 		$stripe_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
-	
+		
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_stripe'])
 					&& (!empty($_REQUEST['activate_stripe'])
@@ -133,6 +135,12 @@ function event_espresso_display_stripe_settings() {
 								<?php _e('Header Text', 'event_espresso'); ?>
 							</label>
 							<input type="text" name="header" size="35" value="<?php echo $stripe_settings['header']; ?>">
+							<li>
+							<label for="stripe_collect_billing_address">
+								<?php _e('Collect billing address?', 'event_espresso'); ?>
+							</label>
+							<input name="stripe_collect_billing_address" type="checkbox" value="1" <?php echo $stripe_settings['stripe_collect_billing_address'] ? 'checked="checked"' : '' ?> /></li>
+							<li>
 						</li>
 						</ul>
 					</td>
