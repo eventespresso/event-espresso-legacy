@@ -1,99 +1,139 @@
 jQuery(document).ready(function($) {
-
-	var EE3_STRIPE;
-
-	EE3_STRIPE = {
-
-		handler : {},
-		submit_button_id : '#ee-stripe-button-btn',
-		submit_payment_button : {},
-		token_string : {},
-		transaction_email : {},
-		transaction_total : {},
-		product_description : {},
-		initialized : false,
-		selected : false,
+	
+	function ee3StripeElements() {
+		this.submitButtonId = '#ee-stripe-button-btn';
+		this.submitPaymentButton = {};
+		this.paymentIntentInput = {};
+		this.stripeErrorContainer = {};
+		this.stripeElements = {};
+		this.stripeCardElement = {};
+		this.cardHolderFirstName = {};
+		this.cardHolderLastName = {};
+		this.cardHolderAddress = {};
+		this.cardHolderAddress2 = {};
+		this.cardHolderCity = {};
+		this.cardHolderState = {};
+		this.cardHolderCountry = {};
+		this.cardHolderZip = {};
+		this.initialized = false;
 
 		/**
 		 * @function initialize
 		 */
-		initialize : function() {
-			EE3_STRIPE.initialize_objects();
+		this.initialize = function() {
+			this.initialize_objects();
 		
-			// ensure that the StripeCheckout js class is loaded
-			if ( typeof StripeCheckout === 'undefined' ) {
+			// ensure that the Stripe js class is loaded
+			if ( typeof Stripe === 'undefined' ) {
 				return;
 			}
-			EE3_STRIPE.selected = true;
-			EE3_STRIPE.set_up_handler();
-			EE3_STRIPE.set_listener_for_submit_payment_button();
-			//alert('EE3_STRIPE.initialized');
-			EE3_STRIPE.initialized = true;
-		},
+
+			this.stripe = Stripe( ee_stripe_args.stripe_pk_key );
+			const args = {};
+			if ( ee_stripe_args.data_locale ) {
+				args.locale = ee_stripe_args.data_locale;
+			}
+			this.stripeElements = this.stripe.elements( args );
+			this.stripeCardElement = this.stripeElements.create( 'card' );
+			this.stripeCardElement.mount( '#ee-stripe-card-element' );
+			
+			// Set up listener for payment button
+			this.set_listener_for_submit_payment_button();
+
+			//alert('this.initialized');
+			this.initialized = true;
+		};
 
 		/**
 		 * @function initialize_objects
 		 */
-		initialize_objects : function() {
-			//console.log( JSON.stringify( '**EE3_STRIPE.initialize_objects**', null, 4 ) );
-			EE3_STRIPE.submit_payment_button = $( EE3_STRIPE.submit_button_id );
-			EE3_STRIPE.token_string = $('#ee-stripe-token');
-			EE3_STRIPE.transaction_email = $('#ee-stripe-transaction-email');
-			EE3_STRIPE.transaction_total = $('#ee-stripe-amount');
-		},
-
-		/**
-		 * @function set_up_handler
-		 */
-		set_up_handler : function() {
-			//console.log( 'initialize', 'set_up_handler', true );
-			EE3_STRIPE.handler = StripeCheckout.configure({
-				key: ee_stripe_args.stripe_pk_key,
-				token: function( stripe_token ) {
-					//console_log_object( 'stripe_token', stripe_token, 0 );
-					// Use the token to create the charge with a server-side script.
-					EE3_STRIPE.checkout_success( stripe_token );
-				}
-			});
-		},
-
-		/**
-		 * @function checkout_success
-		 * @param  {object} stripe_token
-		 */
-		checkout_success : function( stripe_token ) {
-			if ( typeof stripe_token.used !== 'undefined' && ! stripe_token.used ) {
-				//console.log( 'checkout_success > EE_STRIPE.token_string.attr(name)', EE_STRIPE.token_string.attr('name'), true );
-				EE3_STRIPE.token_string.val( stripe_token.id );
-				//console.log( 'checkout_success > stripe_token.id', stripe_token.id, true );
-				// trigger submit on the Stripe form.
-				EE3_STRIPE.submit_payment_button.parents( 'form:first' ).submit();
-			}
-		},
+		this.initialize_objects = function() {
+			//console.log( JSON.stringify( '**this.initialize_objects**', null, 4 ) );
+			this.submitPaymentButton = $( this.submitButtonId );
+			this.paymentIntentInput = $( '#espresso_stripe_payment_intent_id' );
+			this.stripeErrorContainer = $( '#espresso_stripe_errors' );
+			this.cardHolderFirstName = $( '#espresso_stripe_first_name' );
+			this.cardHolderLastName = $( '#espresso_stripe_last_name' );
+			this.cardHolderEmail = $( '#espresso_stripe_email' );
+			this.cardHolderAddress = $( '#espresso_stripe_address' );
+			this.cardHolderCity = $( '#espresso_stripe_city' );
+			this.cardHolderState = $( '#espresso_stripe_state' );
+			this.cardHolderCountry = $( '#espresso_stripe_country' );
+		};
 
 		/**
 		 * @function set_listener_for_submit_payment_button
 		 */
-		set_listener_for_submit_payment_button : function() {
+		this.set_listener_for_submit_payment_button = function() {
+			const stipe_instance = this;
 			//console.log( 'initialize', 'set_listener_for_submit_payment_button', true );
-			EE3_STRIPE.submit_payment_button.on( 'click', function(e) {
+			this.submitPaymentButton.on( 'click', function(e) {
 				e.preventDefault();
-				// Open a modal window with further Checkout options.
-				EE3_STRIPE.handler.open({
-					name: ee_stripe_args.stripe_org_name,					
-					image: ee_stripe_args.stripe_org_image,
-					description: ee_stripe_args.stripe_description,
-					amount: parseInt(EE3_STRIPE.transaction_total.val()),
-					email: EE3_STRIPE.transaction_email.val(),
-					currency: ee_stripe_args.stripe_currency,
-					panelLabel: ee_stripe_args.stripe_panel_label,
-					//zipCode : ee_stripe_args.validate_zip === 'true',
-					//billingAddress : ee_stripe_args.billing_address === 'true',
-					//locale : ee_stripe_args.data_locale
-				});
-			});
-		},
+				const billingDetails = {};
+				if ( stipe_instance.cardHolderFirstName.val() || stipe_instance.cardHolderLastName.val() ) {
+					billingDetails.name = stipe_instance.cardHolderFirstName.val() + ' ' + stipe_instance.cardHolderLastName.val();
+				}
+				if ( stipe_instance.cardHolderEmail.val() ) {
+					billingDetails.email = stipe_instance.cardHolderEmail.val();
+				}
+
+				const address = {};
+				if ( stipe_instance.cardHolderAddress.val() ) {
+					address.line1 = stipe_instance.cardHolderAddress.val();
+				}
+				if ( stipe_instance.cardHolderCity.val() ) {
+					address.city = stipe_instance.cardHolderCity.val();
+				}
+				if ( stipe_instance.cardHolderState.val() ) {
+					address.state = stipe_instance.cardHolderState.val();
+				}
+				if ( stipe_instance.cardHolderCountry.val() ) {
+					address.country = stipe_instance.cardHolderCountry.val();
+				}
+				if ( Object.keys( address ).length > 0 ) {
+					billingDetails.address = address;
+				}
+				stipe_instance.stripe.handleCardPayment( 
+					this.dataset.secret, stipe_instance.stripeCardElement, 
+					{	
+						payment_method_data: {
+							billing_details: billingDetails
+						}
+					} 
+				).then( ( response ) => {
+					stipe_instance.handleStripeResponse( response );
+				} );
+			} );
+		};
+
+		this.handleStripeResponse = function( result ) {
+			if ( result.error ) {
+				this.handleCardPaymentError( result );
+			} else {
+				this.handleCardPaymentSuccess( result );
+			}
+		};
+
+		this.handleCardPaymentError = function( result ) {
+			this.stripeErrorContainer.text(result.error.message)
+			this.stripeErrorContainer.show()
+		};
+		/**
+		 * @function handleCardPaymentSuccess
+		 * @param  {Object} result
+		 */
+		this.handleCardPaymentSuccess = function( result ) {
+			let stripeApiPaymentIntentId = '';
+			if ( typeof result.paymentIntent === 'object' && result.paymentIntent !== null ) {
+				stripeApiPaymentIntentId = result.paymentIntent.id;
+			}
+			//console.log( JSON.stringify( 'handleCardPaymentSuccess', null, 4 ) );
+			this.paymentIntentInput.val( stripeApiPaymentIntentId );
+			this.submitPaymentButton.parents( 'form:first' ).submit();
+		};
 
 	}
+	// end of ee3StripeElements
+	const EE3_STRIPE = new ee3StripeElements();
 	EE3_STRIPE.initialize();
-});
+} );
