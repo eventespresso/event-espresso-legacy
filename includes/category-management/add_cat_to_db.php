@@ -5,14 +5,14 @@ function add_cat_to_db(){
 		$category_name			= isset($_REQUEST['category_name']) && !empty($_REQUEST['category_name']) ? esc_html($_REQUEST['category_name']) : '';
 		$category_identifier	= isset($_REQUEST['category_identifier']) && !empty($_REQUEST['category_identifier']) ? $category_identifier = sanitize_title_with_dashes($_REQUEST['category_identifier']) :  $category_identifier = sanitize_title_with_dashes($category_name.'-'.time()) ;
 		$category_desc			= isset($_REQUEST['category_desc']) && !empty($_REQUEST['category_desc']) ? wp_kses_post( $_REQUEST['category_desc'] ) : ''; 
-		$display_category_desc	= isset($_REQUEST['display_desc']) && !empty($_REQUEST['display_desc']) ? $_REQUEST['display_desc'] : '';
+		$display_category_desc	= isset($_REQUEST['display_desc']) && !empty($_REQUEST['display_desc']) ? sanitize_text_field($_REQUEST['display_desc']) : '';
 		
 		if (!function_exists('espresso_member_data'))
 			$current_user->ID = 1;
 		
-		$category_meta['use_pickers']		= isset($_REQUEST['use_pickers']) && !empty($_REQUEST['use_pickers']) ? $_REQUEST['use_pickers'] : '';
-		$category_meta['event_background']	= isset($_REQUEST['event_background']) && !empty($_REQUEST['event_background']) ? $_REQUEST['event_background'] : '' ;
-		$category_meta['event_text_color']	= isset($_REQUEST['event_text_color']) && !empty($_REQUEST['event_text_color']) ? $_REQUEST['event_text_color'] : '' ;
+		$category_meta['use_pickers']		= isset($_REQUEST['use_pickers']) && !empty($_REQUEST['use_pickers']) ? sanitize_text_field($_REQUEST['use_pickers']) : '';
+		$category_meta['event_background']	= isset($_REQUEST['event_background']) && !empty($_REQUEST['event_background']) ? sanitize_text_field($_REQUEST['event_background']) : '' ;
+		$category_meta['event_text_color']	= isset($_REQUEST['event_text_color']) && !empty($_REQUEST['event_text_color']) ? sanitize_text_field($_REQUEST['event_text_color']) : '' ;
 		$category_meta = serialize($category_meta);
 	
 		$sql		= array('category_name'=>$category_name, 'category_identifier'=>$category_identifier, 'category_desc'=>$category_desc, 'display_desc'=>$display_category_desc, 'category_meta'=>$category_meta, 'wp_user'=>$current_user->ID);
