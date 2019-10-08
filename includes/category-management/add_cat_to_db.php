@@ -5,7 +5,7 @@ function add_cat_to_db(){
 		$category_name			= isset($_REQUEST['category_name']) && !empty($_REQUEST['category_name']) ? esc_html($_REQUEST['category_name']) : '';
 		$category_identifier	= isset($_REQUEST['category_identifier']) && !empty($_REQUEST['category_identifier']) ? $category_identifier = sanitize_title_with_dashes($_REQUEST['category_identifier']) :  $category_identifier = sanitize_title_with_dashes($category_name.'-'.time()) ;
 		$category_desc			= isset($_REQUEST['category_desc']) && !empty($_REQUEST['category_desc']) ? wp_kses_post( $_REQUEST['category_desc'] ) : ''; 
-		$display_category_desc	= isset($_REQUEST['display_desc']) && !empty($_REQUEST['display_desc']) ? sanitize_text_field($_REQUEST['display_desc']) : '';
+		$display_category_desc	= isset($_REQUEST['display_desc']) && $_REQUEST['display_desc'] === 'Y' ? 'Y' : 'N';
 		
 		if (!function_exists('espresso_member_data'))
 			$current_user->ID = 1;
