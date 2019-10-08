@@ -42,12 +42,12 @@ function update_event($recurrence_arr = array()) {
                     'frequency'						=> !empty($_POST['recurrence_frequency']) ? sanitize_text_field($_POST['recurrence_frequency']) : '',
                     'interval'						=> !empty($_POST['recurrence_interval']) ? sanitize_text_field($_POST['recurrence_interval']) : '',
                     'recurrence_type'				=> !empty($_POST['recurrence_type']) ? sanitize_text_field($_POST['recurrence_type']) : '',
-                    'weekdays'						=> !empty($_POST['recurrence_weekday']) ? $_POST['recurrence_weekday'] : '',
-                    'repeat_by'						=> !empty($_POST['recurrence_repeat_by']) ? $_POST['recurrence_repeat_by'] : '',
-                    'recurrence_manual_dates'		=> !empty($_POST['recurrence_manual_dates']) ? $_POST['recurrence_manual_dates'] : '',
-                    'recurrence_manual_end_dates'	=> !empty($_POST['recurrence_manual_end_dates']) ? $_POST['recurrence_manual_end_dates'] : '',
-                    'recurrence_id'					=> !empty($_POST['recurrence_id']) ? $_POST['recurrence_id'] : '',
-					'recurrence_regis_date_increment' => !empty($_POST['recurrence_regis_date_increment']) ? $_POST['recurrence_regis_date_increment'] : '',
+                    'weekdays'						=> !empty($_POST['recurrence_weekday']) ? sanitize_text_field($_POST['recurrence_weekday']) : '',
+                    'repeat_by'						=> !empty($_POST['recurrence_repeat_by']) ? sanitize_text_field($_POST['recurrence_repeat_by']) : '',
+                    'recurrence_manual_dates'		=> !empty($_POST['recurrence_manual_dates']) ? sanitize_text_field($_POST['recurrence_manual_dates']) : '',
+                    'recurrence_manual_end_dates'	=> !empty($_POST['recurrence_manual_end_dates']) ? sanitize_text_field($_POST['recurrence_manual_end_dates']) : '',
+                    'recurrence_id'					=> !empty($_POST['recurrence_id']) ? sanitize_text_field($_POST['recurrence_id']) : '',
+					'recurrence_regis_date_increment' => !empty($_POST['recurrence_regis_date_increment']) ? sanitize_text_field($_POST['recurrence_regis_date_increment']) : '',
                 );
 
                 //$re_params['adding_to_db'] = 'Y';
@@ -116,7 +116,7 @@ function update_event($recurrence_arr = array()) {
                         //'Soft delete' any events that are not within the current series when using the 'This and all upcoming events'
                         if ($delete_in != '') {
                         	$DEL_SQL = "UPDATE " . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date >= %s AND start_date NOT IN (" . $delete_in . ") AND recurrence_id = %d";
-                        	$wpdb->query($wpdb->prepare($DEL_SQL, array( esc_sql(sanitize_text_field($_POST['start_date'])), $_POST['recurrence_id'])));
+                        	$wpdb->query($wpdb->prepare($DEL_SQL, array( esc_sql(sanitize_text_field($_POST['start_date'])), sanitize_text_field($_POST['recurrence_id']))));
                         }
                         /*
                             //Permanently delete events not within the current formula
@@ -408,7 +408,7 @@ function update_event($recurrence_arr = array()) {
 
 
         if (function_exists('event_espresso_add_event_to_db_groupon')) {
-            $sql = event_espresso_add_event_to_db_groupon($sql, $_REQUEST['use_groupon_code']);
+            $sql = event_espresso_add_event_to_db_groupon($sql, isset($_REQUEST['use_groupon_code']) && $_REQUEST['use_groupon_code'] === 'Y' ? 'Y' : 'N');
             ///print count ($sql);
             $sql_data = array_merge((array) $sql_data, (array) '%s');
             //print count($sql_data);
@@ -616,8 +616,8 @@ function update_event($recurrence_arr = array()) {
                     $my_post['post_content']	= $post_content;
                     $my_post['post_status']		= 'publish';
 					$my_post['post_author']		= !empty($_REQUEST['user']) ? (int)$_REQUEST['user'] : '';
-          			$my_post['post_category']	= !empty($_REQUEST['post_category']) ? $_REQUEST['post_category'] : '';
-            		$my_post['tags_input']		= !empty($_REQUEST['post_tags']) ? $_REQUEST['post_tags'] : '';
+          			$my_post['post_category']	= !empty($_REQUEST['post_category']) ? sanitize_text_field($_REQUEST['post_category']) : '';
+            		$my_post['tags_input']		= !empty($_REQUEST['post_tags']) ? sanitize_text_field($_REQUEST['post_tags']) : '';
            			$my_post['post_type']		= !empty($post_type) ? $post_type : 'post';
 					
 					
