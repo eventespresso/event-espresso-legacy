@@ -29,7 +29,7 @@ function organization_config_mnu() {
 		$org_options['recaptcha_publickey'] = isset($_POST['recaptcha_publickey']) && !empty($_POST['recaptcha_publickey']) ? sanitize_text_field($_POST['recaptcha_publickey']) : '';
 		$org_options['recaptcha_privatekey'] = isset($_POST['recaptcha_privatekey']) && !empty($_POST['recaptcha_privatekey']) ? sanitize_text_field($_POST['recaptcha_privatekey']) : '';
 		$org_options['recaptcha_theme'] = isset($_POST['recaptcha_theme']) && !empty($_POST['recaptcha_theme']) ? sanitize_text_field($_POST['recaptcha_theme']) : '';
-		$org_options['recaptcha_width'] = isset($_POST['recaptcha_width']) && !empty($_POST['recaptcha_width']) ? sanitize_text_field($_POST['recaptcha_width']) : '';
+		$org_options['recaptcha_width'] = isset($_POST['recaptcha_width']) && !empty($_POST['recaptcha_width']) ? (string)intval($_POST['recaptcha_width']) : '';
 		$org_options['recaptcha_language'] = isset($_POST['recaptcha_language']) && !empty($_POST['recaptcha_language']) ? sanitize_text_field($_POST['recaptcha_language']) : '';
 		$org_options['google_maps_api_key'] = isset($_POST['google_maps_api_key']) && !empty($_POST['google_maps_api_key']) ? sanitize_text_field($_POST['google_maps_api_key']) : '';
 		$org_options['espresso_dashboard_widget'] = isset($_POST['espresso_dashboard_widget']) && !empty($_POST['espresso_dashboard_widget']) ? sanitize_text_field($_POST['espresso_dashboard_widget']) : '';
