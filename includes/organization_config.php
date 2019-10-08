@@ -15,7 +15,8 @@ function organization_config_mnu() {
 		$org_options['contact_email'] = isset($_POST['email']) && !empty($_POST['email']) ? sanitize_text_field($_POST['email']) : '';
 		$org_options['expire_on_registration_end'] = isset($_POST['expire_on_registration_end']) && !empty($_POST['expire_on_registration_end']) ? sanitize_text_field($_POST['expire_on_registration_end']) : '';
 		$org_options['event_page_id'] = isset($_POST['event_page_id']) && !empty($_POST['event_page_id']) ? sanitize_text_field($_POST['event_page_id']) : '';
-		$org_options['return_url'] = isset($_POST['return_url']) && !empty($_POST['return_url']) ? sanitize_text_field($_POST['return_url']) : '';
+		$org_options['return_url'] = isset($_POST['return_url']) && !empty($_POST['return_url']) ? esc_url($_POST['return_url']) : '';
+``` would probably be more appropriate for all the URL fields. See https://developer.wordpress.org/reference/functions/esc_url/ if you want (it's a bit strange that it's not one of the `sanitize_*` functions)
 		$org_options['cancel_return'] = isset($_POST['cancel_return']) && !empty($_POST['cancel_return']) ? sanitize_text_field($_POST['cancel_return']) : '';
 		$org_options['notify_url'] = isset($_POST['notify_url']) && !empty($_POST['notify_url']) ? sanitize_text_field($_POST['notify_url']) : '';
 		$org_options['events_in_dasboard'] = isset($_POST['events_in_dasboard']) && !empty($_POST['events_in_dasboard']) ? sanitize_text_field($_POST['events_in_dasboard']) : '';
