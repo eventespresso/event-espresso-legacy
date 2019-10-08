@@ -56,7 +56,7 @@ function organization_config_mnu() {
 		$org_options['ticket_reservation_time'] = isset($_POST['ticket_reservation_time']) && !empty($_POST['ticket_reservation_time']) ? (string)intval($_POST['ticket_reservation_time']) : '30';
 		$ueip_optin = isset($_POST['ueip_optin']) && !empty($_POST['ueip_optin']) ? $_POST['ueip_optin'] : 'yes';
 
-		$org_options['default_logo_url'] = isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ? sanitize_text_field($_REQUEST['upload_image']) : '';
+		$org_options['default_logo_url'] = isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ? esc_url($_REQUEST['upload_image']) : '';
 
 		$currency_format = getCountryFullData($org_options['organization_country']);
 		switch ($currency_format['iso_code_3']) {
