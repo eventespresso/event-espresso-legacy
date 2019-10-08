@@ -10,7 +10,7 @@ function add_cat_to_db(){
 		if (!function_exists('espresso_member_data'))
 			$current_user->ID = 1;
 		
-		$category_meta['use_pickers']		= isset($_REQUEST['use_pickers']) && !empty($_REQUEST['use_pickers']) ? sanitize_text_field($_REQUEST['use_pickers']) : '';
+		$category_meta['use_pickers']		= isset($_REQUEST['use_pickers']) && $_REQUEST['use_pickers'] === 'Y' ? 'Y' : 'N';
 		$category_meta['event_background']	= isset($_REQUEST['event_background']) && !empty($_REQUEST['event_background']) ? sanitize_text_field($_REQUEST['event_background']) : '' ;
 		$category_meta['event_text_color']	= isset($_REQUEST['event_text_color']) && !empty($_REQUEST['event_text_color']) ? sanitize_text_field($_REQUEST['event_text_color']) : '' ;
 		$category_meta = serialize($category_meta);
