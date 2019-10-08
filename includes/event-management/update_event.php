@@ -408,7 +408,7 @@ function update_event($recurrence_arr = array()) {
 
 
         if (function_exists('event_espresso_add_event_to_db_groupon')) {
-            $sql = event_espresso_add_event_to_db_groupon($sql, sanitize_text_field($_REQUEST['use_groupon_code']));
+            $sql = event_espresso_add_event_to_db_groupon($sql, isset($_REQUEST['use_groupon_code']) && $_REQUEST['use_groupon_code'] === 'Y' ? 'Y' : 'N');
             ///print count ($sql);
             $sql_data = array_merge((array) $sql_data, (array) '%s');
             //print count($sql_data);
