@@ -56,7 +56,7 @@ function espresso_display_stripe($payment_data) {
 	}
 
 	$ee_stripe_args = array(
-	    'stripe_pk_key' => $stripe_settings['stripe_publishable_key'],
+		'stripe_pk_key' => $stripe_settings['stripe_publishable_key'],
 	);
 	wp_localize_script('espresso_stripe', 'ee_stripe_args', $ee_stripe_args);
 ?>
@@ -139,29 +139,29 @@ add_action('action_hook_espresso_display_onsite_payment_gateway', 'espresso_disp
  */
 function espresso_get_stripe_decimal_places($currency = '')
 {
-    if (!$currency) {
-    	$stripe_settings = get_option('event_espresso_stripe_settings');
-        $currency = !empty($stripe_settings['stripe_currency_symbol']) ? $stripe_settings['stripe_currency_symbol'] : 'USD';
-    }
-    switch (strtoupper($currency)) {
-        // Zero decimal currencies.
-        case 'BIF' :
-        case 'CLP' :
-        case 'DJF' :
-        case 'GNF' :
-        case 'JPY' :
-        case 'KMF' :
-        case 'KRW' :
-        case 'MGA' :
-        case 'PYG' :
-        case 'RWF' :
-        case 'VND' :
-        case 'VUV' :
-        case 'XAF' :
-        case 'XOF' :
-        case 'XPF' :
-            return 0;
-        default :
-            return 2;
-    }
+	if (!$currency) {
+		$stripe_settings = get_option('event_espresso_stripe_settings');
+		$currency = !empty($stripe_settings['stripe_currency_symbol']) ? $stripe_settings['stripe_currency_symbol'] : 'USD';
+	}
+	switch (strtoupper($currency)) {
+		// Zero decimal currencies.
+		case 'BIF' :
+		case 'CLP' :
+		case 'DJF' :
+		case 'GNF' :
+		case 'JPY' :
+		case 'KMF' :
+		case 'KRW' :
+		case 'MGA' :
+		case 'PYG' :
+		case 'RWF' :
+		case 'VND' :
+		case 'VUV' :
+		case 'XAF' :
+		case 'XOF' :
+		case 'XPF' :
+			return 0;
+		default :
+			return 2;
+	}
 }
