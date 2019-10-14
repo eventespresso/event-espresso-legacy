@@ -23,8 +23,10 @@ function espresso_process_stripe($payment_data) {
 	}
 
 	//Include the Stripe API
-	require_once (dirname(__FILE__).'/stripe-php-6.43.1/init.php');
-
+	if (! class_exists('Stripe\Stripe')) {
+		require_once (dirname(__FILE__).'/stripe-php-6.43.1/init.php');
+	}
+	
 	\Stripe\Stripe::setApiKey($stripe_settings['stripe_secret_key']);
 
 	// The JS set the payment intend ID in a hidden field, so pull that value. 

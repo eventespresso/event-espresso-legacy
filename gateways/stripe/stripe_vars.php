@@ -33,7 +33,9 @@ function espresso_display_stripe($payment_data) {
 	wp_enqueue_style('espresso_stripe_css', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/stripe/espresso_stripe.css');
 
 	//Include the Stripe API
-	require_once (dirname(__FILE__).'/stripe-php-6.43.1/init.php');
+	if (! class_exists('Stripe\Stripe')) {
+		require_once (dirname(__FILE__).'/stripe-php-6.43.1/init.php');
+	}
 	// Setup a Stripe object using the secret key.
 	\Stripe\Stripe::setApiKey( $stripe_settings['stripe_secret_key']);
 
