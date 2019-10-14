@@ -112,9 +112,9 @@ function espresso_display_stripe($payment_data) {
 				<!-- placeholder for Elements -->
 				<label><?php esc_html_e('Card Details', 'event_espresso');?></label>
 				<div id="ee-stripe-card-element"></div>
-				<button id="ee-stripe-button-btn" data-secret="<?php echo $intent->client_secret ?>"><?php esc_html_e('Pay Now', 'event_espresso');?></button>
+				<button id="ee-stripe-button-btn" data-secret="<?php echo $intent_client_secret ?>"><?php esc_html_e('Pay Now', 'event_espresso');?></button>
 				<h4 id="espresso_stripe_errors" style="color:#ff0000; display:none"></h4>
-				<input id="espresso_stripe_payment_intent_id" type="hidden" name="espresso_stripe_payment_intent_id" value="<?php echo $intent->id?>" />
+				<input id="espresso_stripe_payment_intent_id" type="hidden" name="espresso_stripe_payment_intent_id" value="<?php echo $intent_id ?>" />
 			</form>
 		</div>
 		<br/>
