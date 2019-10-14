@@ -37,19 +37,24 @@ function espresso_display_stripe($payment_data) {
 	// Setup a Stripe object using the secret key.
 	\Stripe\Stripe::setApiKey( $stripe_settings['stripe_secret_key']);
 
-	$payment_intent_id = isset($_REQUEST['espresso_stripe_payment_intent_id']) ? $_REQUEST['espresso_stripe_payment_intent_id'] : '';
-	if( $payment_intent_id ) { 
-		$intent = \Stripe\PaymentIntent::retrieve(
-            $payment_intent_id
-        );
+	// Create PaymentIntent object.
+	$intent = \Stripe\PaymentIntent::create([
+		'amount' => str_replace( array(',', '.'), '', number_format( $event_cost, espresso_get_stripe_decimal_places($stripe_settings['stripe_currency_symbol'])) ),
+		'currency' => $stripe_settings['stripe_currency_symbol'],
+		'description' => $stripe_description,
+	], [
+		'idempotency_key' => $registration_id,
+	]);
+
+	// If we have a PaymentIntent object, use the values from it.
+	if( $intent instanceof \Stripe\PaymentIntent) {
+		$intent_id     = $intent->id;
+		$intent_client_secret = $intent->client_secret;
 	} else {
-		$intent = \Stripe\PaymentIntent::create([
-	    	'amount' => str_replace( array(',', '.'), '', number_format( $event_cost, espresso_get_stripe_decimal_places($stripe_settings['stripe_currency_symbol'])) ),
-	     	'currency' => $stripe_settings['stripe_currency_symbol'],
-		], [
-			'idempotency_key' => $registration_id,
-		]);
+		$intent_id     = '';
+		$intent_client_secret = '';
 	}
+
 	$ee_stripe_args = array(
 	    'stripe_pk_key' => $stripe_settings['stripe_publishable_key'],
 	);
