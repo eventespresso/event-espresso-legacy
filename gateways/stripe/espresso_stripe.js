@@ -29,7 +29,7 @@ jQuery(document).ready(function($) {
 			}
 
 			this.stripe = Stripe( ee_stripe_args.stripe_pk_key );
-			const args = {};
+			var args = {};
 			if ( ee_stripe_args.data_locale ) {
 				args.locale = ee_stripe_args.data_locale;
 			}
@@ -65,43 +65,43 @@ jQuery(document).ready(function($) {
 		 * @function set_listener_for_submit_payment_button
 		 */
 		this.set_listener_for_submit_payment_button = function() {
-			const stipe_instance = this;
+			var stripe_instance = this;
 			//console.log( 'initialize', 'set_listener_for_submit_payment_button', true );
 			this.submitPaymentButton.on( 'click', function(e) {
 				e.preventDefault();
-				const billingDetails = {};
-				if ( stipe_instance.cardHolderFirstName.val() || stipe_instance.cardHolderLastName.val() ) {
-					billingDetails.name = stipe_instance.cardHolderFirstName.val() + ' ' + stipe_instance.cardHolderLastName.val();
+				var billingDetails = {};
+				if ( stripe_instance.cardHolderFirstName.val() || stripe_instance.cardHolderLastName.val() ) {
+					billingDetails.name = stripe_instance.cardHolderFirstName.val() + ' ' + stripe_instance.cardHolderLastName.val();
 				}
-				if ( stipe_instance.cardHolderEmail.val() ) {
-					billingDetails.email = stipe_instance.cardHolderEmail.val();
+				if ( stripe_instance.cardHolderEmail.val() ) {
+					billingDetails.email = stripe_instance.cardHolderEmail.val();
 				}
 
-				const address = {};
-				if ( stipe_instance.cardHolderAddress.val() ) {
-					address.line1 = stipe_instance.cardHolderAddress.val();
+				var address = {};
+				if ( stripe_instance.cardHolderAddress.val() ) {
+					address.line1 = stripe_instance.cardHolderAddress.val();
 				}
-				if ( stipe_instance.cardHolderCity.val() ) {
-					address.city = stipe_instance.cardHolderCity.val();
+				if ( stripe_instance.cardHolderCity.val() ) {
+					address.city = stripe_instance.cardHolderCity.val();
 				}
-				if ( stipe_instance.cardHolderState.val() ) {
-					address.state = stipe_instance.cardHolderState.val();
+				if ( stripe_instance.cardHolderState.val() ) {
+					address.state = stripe_instance.cardHolderState.val();
 				}
-				if ( stipe_instance.cardHolderCountry.val() ) {
-					address.country = stipe_instance.cardHolderCountry.val();
+				if ( stripe_instance.cardHolderCountry.val() ) {
+					address.country = stripe_instance.cardHolderCountry.val();
 				}
 				if ( Object.keys( address ).length > 0 ) {
 					billingDetails.address = address;
 				}
-				stipe_instance.stripe.handleCardPayment( 
-					this.dataset.secret, stipe_instance.stripeCardElement, 
+				stripe_instance.stripe.handleCardPayment( 
+					this.dataset.secret, stripe_instance.stripeCardElement, 
 					{	
 						payment_method_data: {
 							billing_details: billingDetails
 						}
 					} 
-				).then( ( response ) => {
-					stipe_instance.handleStripeResponse( response );
+				).then( function( response ) {
+					stripe_instance.handleStripeResponse( response );
 				} );
 			} );
 		};
@@ -134,6 +134,6 @@ jQuery(document).ready(function($) {
 
 	}
 	// end of ee3StripeElements
-	const EE3_STRIPE = new ee3StripeElements();
+	var EE3_STRIPE = new ee3StripeElements();
 	EE3_STRIPE.initialize();
 } );
