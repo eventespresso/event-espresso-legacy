@@ -77,34 +77,34 @@ function espresso_display_stripe($payment_data) {
 		<div class = "event_espresso_form_wrapper">
 			<form id="ee-stripe-form" action="<?php echo add_query_arg(array('r_id'=>$registration_id, 'attendee_id'=>$attendee_id), get_permalink($org_options['return_url'])); ?>" method="POST" class="allow-leave-page">
 				<fieldset id="stripe-billing-info-dv">
-						<h4 class="section-title"><?php _e('Billing Information', 'event_espresso') ?></h4>
+						<h4 class="section-title"><?php esc_html_e('Billing Information', 'event_espresso') ?></h4>
 						<p>
-							<label for="first_name"><?php _e('First Name', 'event_espresso'); ?></label>
+							<label for="first_name"><?php esc_html_e('First Name', 'event_espresso'); ?></label>
 							<input name="first_name" type="text" id="espresso_stripe_first_name" class="required" value="<?php echo $fname ?>" />
 						</p>
 						<p>
-							<label for="last_name"><?php _e('Last Name', 'event_espresso'); ?></label>
+							<label for="last_name"><?php esc_html_e('Last Name', 'event_espresso'); ?></label>
 							<input name="last_name" type="text" id="espresso_stripe_last_name" class="required" value="<?php echo $lname ?>" />
 						</p>
 						<p>
-							<label for="email"><?php _e('Email Address', 'event_espresso'); ?></label>
+							<label for="email"><?php esc_html_e('Email Address', 'event_espresso'); ?></label>
 							<input name="email" type="text" id="espresso_stripe_email" class="required" value="<?php echo $attendee_email ?>" />
 						</p>
 						<?php if(! empty($stripe_settings['stripe_collect_billing_address']) && $stripe_settings['stripe_collect_billing_address']) { ?>
 							<p>
-								<label for="address"><?php _e('Address', 'event_espresso'); ?></label>
+								<label for="address"><?php esc_html_e('Address', 'event_espresso'); ?></label>
 								<input name="address" type="text" id="espresso_stripe_address" class="required" value="<?php echo $address ?>" />
 							</p>
 							<p>
-								<label for="city"><?php _e('City', 'event_espresso'); ?></label>
+								<label for="city"><?php esc_html_e('City', 'event_espresso'); ?></label>
 								<input name="city" type="text" id="espresso_stripe_city" class="required" value="<?php echo $city ?>" />
 							</p>
 							<p>
-								<label for="state"><?php _e('State', 'event_espresso'); ?></label>
+								<label for="state"><?php esc_html_e('State', 'event_espresso'); ?></label>
 								<input name="state" type="text" id="espresso_stripe_state" class="required" value="<?php echo $state ?>" />
 							</p>
 							<p>
-								<label for="country"><?php _e('Country', 'event_espresso'); ?></label>
+								<label for="country"><?php esc_html_e('Country', 'event_espresso'); ?></label>
 								<input name="country" type="text" id="espresso_stripe_country" class="required" value="<?php echo $country ?>" />
 							</p>
 						<?php } ?>
@@ -119,7 +119,7 @@ function espresso_display_stripe($payment_data) {
 		</div>
 		<br/>
 		<p class="choose-diff-pay-option-pg">
-			<a class="hide-the-displayed" rel="stripe-payment-option-form" style="cursor:pointer;"><?php _e('Choose a different payment option', 'event_espresso'); ?></a>
+			<a class="hide-the-displayed" rel="stripe-payment-option-form" style="cursor:pointer;"><?php esc_html_e('Choose a different payment option', 'event_espresso'); ?></a>
 		</p>
 
 	</div>
