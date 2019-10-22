@@ -20,18 +20,18 @@ function event_espresso_categories_config_mnu() {
 				while (list($key, $value) = each($_POST['checkbox'])):
 					$del_id = $key;
 					//Delete category data
-					$sql = "DELETE FROM " . EVENTS_CATEGORY_TABLE . " WHERE id='$del_id'";
+					$sql = "DELETE FROM " . EVENTS_CATEGORY_TABLE . " WHERE id='" . (int)$del_id . "'";
 					$wpdb->query($sql);
 
-					$sql = "DELETE FROM " . EVENTS_CATEGORY_REL_TABLE . " WHERE cat_id='$del_id'";
+					$sql = "DELETE FROM " . EVENTS_CATEGORY_REL_TABLE . " WHERE cat_id='" . (int)$del_id . "'";
 					$wpdb->query($sql);
 				endwhile;
 			}
 			if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'delete_category') {
 				//Delete discount data
-				$sql = "DELETE FROM " . EVENTS_CATEGORY_TABLE . " WHERE id='" . $_REQUEST['id'] . "'";
+				$sql = "DELETE FROM " . EVENTS_CATEGORY_TABLE . " WHERE id='" . (int)$_REQUEST['id'] . "'";
 				$wpdb->query($sql);
-				$sql = "DELETE FROM " . EVENTS_CATEGORY_REL_TABLE . " WHERE cat_id='" . $_REQUEST['id'] . "'";
+				$sql = "DELETE FROM " . EVENTS_CATEGORY_REL_TABLE . " WHERE cat_id='" . (int)$_REQUEST['id'] . "'";
 				$wpdb->query($sql);
 			}
 			?>
