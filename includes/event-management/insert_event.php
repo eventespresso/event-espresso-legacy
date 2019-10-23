@@ -231,7 +231,7 @@ function add_event_to_db($recurrence_arr = array()) {
 		$add_attendee_question_groups = empty($_REQUEST['add_attendee_question_groups']) ? '' : sanitize_text_field($_REQUEST['add_attendee_question_groups']);
 		
 		//Process event meta data
-		$event_meta['venue_id'] = isset($_REQUEST['venue_id']) ? sanitize_text_field($_REQUEST['venue_id'][0]) : 0;
+		$event_meta['venue_id'] = isset($_REQUEST['venue_id']) ? (int)$_REQUEST['venue_id'][0] : 0;
 		$event_meta['additional_attendee_reg_info'] = !empty($_REQUEST['additional_attendee_reg_info']) ? sanitize_text_field($_REQUEST['additional_attendee_reg_info']) : '2';
 		$event_meta['add_attendee_question_groups'] = $add_attendee_question_groups;
 		$event_meta['date_submitted'] = date("Y-m-d H:i:s");
@@ -356,7 +356,7 @@ function add_event_to_db($recurrence_arr = array()) {
 		//Added for seating chart addon
 		if ( isset($_REQUEST['seating_chart_id']) ){
 			$cls_seating_chart = new seating_chart();
-			$cls_seating_chart->associate_event_seating_chart(sanitize_text_field($_REQUEST['seating_chart_id']),$last_event_id);
+			$cls_seating_chart->associate_event_seating_chart((int)$_REQUEST['seating_chart_id'],$last_event_id);
 		}
 
 		//Add event to a category
@@ -476,7 +476,7 @@ function add_event_to_db($recurrence_arr = array()) {
 					$v = (float)preg_replace('/[^0-9\.]/ui','',$v);//Removes non-integer characters
 					$price_type = !empty($_REQUEST['price_type'][$k]) ? sanitize_text_field(stripslashes_deep($_REQUEST['price_type'][$k])) : __('General Admission', 'event_espresso');
 					$member_price_type = !empty($_REQUEST['member_price_type'][$k]) ? sanitize_text_field(stripslashes_deep($_REQUEST['member_price_type'][$k])) : __('Members Admission', 'event_espresso');
-					$member_price = !empty($_REQUEST['member_price'][$k]) ? sanitize_text_field($_REQUEST['member_price'][$k]) : $v;
+					$member_price = !empty($_REQUEST['member_price'][$k]) ? (float)$_REQUEST['member_price'][$k] : $v;
 					
 					$sql_price = array('event_id' => $last_event_id, 'event_cost' => $v, 'surcharge' => sanitize_text_field($_REQUEST['surcharge'][$k]), 'surcharge_type' => sanitize_text_field($_REQUEST['surcharge_type'][$k]), 'price_type' => $price_type, 'member_price' => $member_price, 'member_price_type' => $member_price_type );
 					$sql_price_data = array('%d', '%s', '%s', '%s', '%s', '%s', '%s');

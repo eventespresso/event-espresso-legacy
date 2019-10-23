@@ -197,10 +197,10 @@ function enter_attendee_payments() {
 
 			if ( $org_options["use_attendee_pre_approval"] == "Y" ) {
 			
-				$pre_approve = sanitize_text_field($_POST['pre_approve']);
+				$pre_approve = int()$_POST['pre_approve'];
 				if ( count($registration_ids) > 0 ) {
 					foreach($registration_ids as $reg_id) {
-						$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET pre_approve = %s WHERE registration_id = %s";
+						$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET pre_approve = %d WHERE registration_id = %s";
 						$wpdb->query( $wpdb->prepare( $SQL, $pre_approve, $reg_id['registration_id'] ));
 					}
 					

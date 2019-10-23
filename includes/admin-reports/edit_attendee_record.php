@@ -27,7 +27,7 @@ function edit_attendee_record() {
 	if ($_REQUEST['form_action'] == 'edit_attendee') {
 
 		$id = isset($_REQUEST['id']) ? absint( $_REQUEST['id'] ) : '';
-		$registration_id = isset($_REQUEST['registration_id']) ? sanitize_text_field($_REQUEST['registration_id']) : '';
+		$registration_id = isset($_REQUEST['registration_id']) ? ee_sanitize_value($_REQUEST['registration_id']) : '';
 		$multi_reg = FALSE;
 		
 		// check for multi reg, additional attendees, and verify reg id for primary attendee
@@ -61,7 +61,7 @@ function edit_attendee_record() {
 				//wp_die( $failed_nonce_msg );
 			}
 
-			$upd_price = (float)number_format( abs( sanitize_text_field( $_REQUEST['final_price'] )), 2, '.', '' );
+			$upd_price = (float)number_format( abs( ee_sanitize_value( $_REQUEST['final_price'] )), 2, '.', '' );
 			$upd_qty = absint( $_REQUEST['quantity'] );			
 			
 			$set_cols_and_values = array( 
@@ -201,19 +201,19 @@ function edit_attendee_record() {
 			//Move attendee
 			do_action('action_hook_espresso_attendee_mover_move');
 			
-			$event_id = isset($_POST['event_id']) ? sanitize_text_field($_POST['event_id']) : '';
+			$event_id = isset($_POST['event_id']) ? intval($_POST['event_id']) : '';
 			$txn_type = isset($_POST['txn_type']) ? sanitize_text_field($_POST['txn_type']) : '';
 
 			$cols_and_values = array( 
-					'fname'		=> isset($_POST['fname']) ? sanitize_text_field($_POST['fname']) : '', 
-					'lname'		=> isset($_POST['lname']) ? sanitize_text_field($_POST['lname']) : '', 
-					'address'	=> isset($_POST['address']) ? sanitize_text_field($_POST['address']) : '', 
-					'address2'	=> isset($_POST['address2']) ? sanitize_text_field($_POST['address2']) : '', 
-					'city'		=> isset($_POST['city']) ? sanitize_text_field($_POST['city']) : '', 
-					'state'		=> isset($_POST['state']) ? sanitize_text_field($_POST['state']) : '', 
-					'zip'		=> isset($_POST['zip']) ? sanitize_text_field($_POST['zip']) : '', 
-					'phone'		=> isset($_POST['phone']) ? sanitize_text_field($_POST['phone']) : '', 
-					'email'		=> isset($_POST['email']) ? sanitize_email($_POST['email']) : '' 
+					'fname'		=> isset($_POST['fname']) ? ee_sanitize_value($_POST['fname']) : '', 
+					'lname'		=> isset($_POST['lname']) ? ee_sanitize_value($_POST['lname']) : '', 
+					'address'	=> isset($_POST['address']) ? ee_sanitize_value($_POST['address']) : '', 
+					'address2'	=> isset($_POST['address2']) ? ee_sanitize_value($_POST['address2']) : '', 
+					'city'		=> isset($_POST['city']) ? ee_sanitize_value($_POST['city']) : '', 
+					'state'		=> isset($_POST['state']) ? ee_sanitize_value($_POST['state']) : '', 
+					'zip'		=> isset($_POST['zip']) ? ee_sanitize_value($_POST['zip']) : '', 
+					'phone'		=> isset($_POST['phone']) ? ee_sanitize_value($_POST['phone']) : '', 
+					'email'		=> isset($_POST['email']) ? ee_sanitize_value($_POST['email']) : '' 
 			);
 			$cols_and_values_format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' );
 			
@@ -424,7 +424,7 @@ function edit_attendee_record() {
 				$reg_ids = $wpdb->get_col( $wpdb->prepare( $SQL3, $primary_registration_id ));
 				$reg_ids = "'" . implode("','", $reg_ids) . "'";
 			} else {
-				$reg_ids = "'" . sanitize_text_field( $_REQUEST['registration_id'] ) . "'";
+				$reg_ids = "'" . ee_sanitize_value( $_REQUEST['registration_id'] ) . "'";
 			}	
 			$SQL .= " WHERE registration_id IN ( $reg_ids ) ORDER BY att.id";
 			$attendees = $wpdb->get_results( $SQL );

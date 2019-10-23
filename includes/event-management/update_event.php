@@ -99,7 +99,7 @@ function update_event($recurrence_arr = array()) {
                         //'Soft delete' any events that are not within the current series when using the 'All events in this series' option.
                         if ($delete_in != '') {
                         	$DEL_SQL = "UPDATE " . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date NOT IN (" . $delete_in .") AND recurrence_id = %d";
-                        	$wpdb->query($wpdb->prepare($DEL_SQL, sanitize_text_field($_POST['recurrence_id'])));
+                        	$wpdb->query($wpdb->prepare($DEL_SQL, (int)$_POST['recurrence_id']));
                         }
                         /*
                             //Permanently delete events not within the current formula
@@ -197,7 +197,7 @@ function update_event($recurrence_arr = array()) {
         $display_reg_form				= sanitize_text_field($_REQUEST['display_reg_form']);
 		$externalURL					= !empty($_REQUEST['externalURL']) ? esc_html($_REQUEST['externalURL']):'';
         $reg_limit						= (int)$_REQUEST['reg_limit'];
-        $allow_multiple					= sanitize_text_field($_REQUEST['allow_multiple']);
+        $allow_multiple					= (boolean)$_REQUEST['allow_multiple'];
         $overflow_event_id				= (empty($_REQUEST['overflow_event_id'])) ? '0' : (int)$_REQUEST['overflow_event_id'];
         $allow_overflow					= empty($_REQUEST['allow_overflow']) ? 'N' : sanitize_text_field($_REQUEST['allow_overflow']);
         $additional_limit				= !empty($_REQUEST['additional_limit']) && $_REQUEST['additional_limit'] > 0 ? (int)$_REQUEST['additional_limit'] : '5';
