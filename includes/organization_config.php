@@ -14,11 +14,11 @@ function organization_config_mnu() {
 		$org_options['organization_country'] = isset($_POST['org_country']) && !empty($_POST['org_country']) ? sanitize_text_field($_POST['org_country']) : '';
 		$org_options['contact_email'] = isset($_POST['email']) && !empty($_POST['email']) ? sanitize_text_field($_POST['email']) : '';
 		$org_options['expire_on_registration_end'] = isset($_POST['expire_on_registration_end']) && !empty($_POST['expire_on_registration_end']) ? sanitize_text_field($_POST['expire_on_registration_end']) : '';
-		$org_options['event_page_id'] = isset($_POST['event_page_id']) && !empty($_POST['event_page_id']) ? sanitize_text_field($_POST['event_page_id']) : '';
-		$org_options['return_url'] = isset($_POST['return_url']) && !empty($_POST['return_url']) ? esc_url($_POST['return_url']) : '';
-		$org_options['cancel_return'] = isset($_POST['cancel_return']) && !empty($_POST['cancel_return']) ? esc_url($_POST['cancel_return']) : '';
-		$org_options['notify_url'] = isset($_POST['notify_url']) && !empty($_POST['notify_url']) ? esc_url($_POST['notify_url']) : '';
-		$org_options['events_in_dasboard'] = isset($_POST['events_in_dasboard']) && !empty($_POST['events_in_dasboard']) ? sanitize_text_field($_POST['events_in_dasboard']) : '';
+		$org_options['event_page_id'] = isset($_POST['event_page_id']) && !empty($_POST['event_page_id']) ? (int)$_POST['event_page_id'] : '';
+		$org_options['return_url'] = isset($_POST['return_url']) && !empty($_POST['return_url']) ? (int)$_POST['return_url'] : '';
+		$org_options['cancel_return'] = isset($_POST['cancel_return']) && !empty($_POST['cancel_return']) ? (int)$_POST['cancel_return'] : '';
+		$org_options['notify_url'] = isset($_POST['notify_url']) && !empty($_POST['notify_url']) ? (int)$_POST['notify_url'] : '';
+		$org_options['events_in_dasboard'] = isset($_POST['events_in_dasboard']) && !empty($_POST['events_in_dasboard']) ? (int)$_POST['events_in_dasboard'] : '';
 		$org_options['default_mail'] = isset($_POST['default_mail']) && !empty($_POST['default_mail']) ? sanitize_text_field($_POST['default_mail']) : '';
 		$org_options['payment_subject'] = isset($_POST['payment_subject']) && !empty($_POST['payment_subject']) ? sanitize_text_field($_POST['payment_subject']) : '';
 		$org_options['payment_message'] = isset($_POST['payment_message']) && !empty($_POST['payment_message']) ? esc_html($_POST['payment_message']) : '';
