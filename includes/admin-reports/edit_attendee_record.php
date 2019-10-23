@@ -81,7 +81,7 @@ function edit_attendee_record() {
 				// now we need to gather all the ticket prices for all attendees for the entire registraion and calculate a new total cost
 				$upd_total = 0;
 				$SQL = "SELECT payment_status, amount_pd, final_price, quantity, is_primary FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id = %s";
-				if ( $attendee_tickets = $wpdb->get_results( $wpdb->prepare( $SQL, sanitize_text_field($registration_id) ))) {			
+				if ( $attendee_tickets = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ))) {			
 					// loop thru tickets
 					foreach ( $attendee_tickets as $attendee_ticket ) {
 						// calculate total for each attendee and add to total cost
@@ -166,14 +166,14 @@ function edit_attendee_record() {
 				
 				// get id's for all attendees from this registration
 				$SQL = "SELECT id from " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id = %s";
-				$attendees = $wpdb->query( $wpdb->prepare( $SQL, sanitize_text_field($registration_id) ));
+				$attendees = $wpdb->query( $wpdb->prepare( $SQL, $registration_id ));
 				if ( $attendees === FALSE ) {
 					$notifications['error'][] = __('An error occured while attempting to retrieve additional attendee data from the database.', 'event_espresso'); 
 				} else {
 					// update quantities for attendees
 					$SQL = " UPDATE " . EVENTS_ATTENDEE_TABLE . " SET quantity = IF(quantity IS NULL ,NULL,IF(quantity > 0,IF(quantity-1>0,quantity-1,1),0)) ";
 					$SQL .= "WHERE registration_id =%s";
-					if ( $wpdb->query( $wpdb->prepare( $SQL, sanitize_text_field($registration_id) )) === FALSE ) {
+					if ( $wpdb->query( $wpdb->prepare( $SQL, $registration_id )) === FALSE ) {
 						$notifications['error'][] = __('An error occured while attempting to update additional attendee ticket quantities.', 'event_espresso'); 
 					}
 					event_espresso_cleanup_multi_event_registration_id_group_data();
@@ -414,11 +414,11 @@ function edit_attendee_record() {
 		// are we looking for an additional attendee ?
 		if ( isset( $_REQUEST['attendee_num'] ) && $_REQUEST['attendee_num'] > 1 && isset( $_REQUEST['id'] )) {
 			$SQL .= "WHERE  att.id = %d";
-			$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, sanitize_text_field($_REQUEST['id']) ));
+			$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $_REQUEST['id'] ));
 		} else {
 			// check for multi reg & additional attendees by first finding primary attendee
 			$SQL2 = "SELECT primary_registration_id FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE registration_id = %s";
-			if ( $primary_registration_id = $wpdb->get_var( $wpdb->prepare( $SQL2, sanitize_text_field( $_REQUEST['registration_id'] )))) {
+			if ( $primary_registration_id = $wpdb->get_var( $wpdb->prepare( $SQL2, $_REQUEST['registration_id'] ))) {
 				// now find all registrations
 				$SQL3 = "SELECT registration_id FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE primary_registration_id = %s";
 				$reg_ids = $wpdb->get_col( $wpdb->prepare( $SQL3, $primary_registration_id ));

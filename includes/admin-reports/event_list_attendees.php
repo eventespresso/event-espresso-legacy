@@ -32,7 +32,7 @@ function event_list_attendees() {
 				$SQL = "DELETE FROM " . EVENTS_ATTENDEE_META_TABLE . " WHERE attendee_id = '%d'";
 				$wpdb->query($wpdb->prepare($SQL, $att_id));
 				$SQL = "DELETE FROM " . EVENTS_ANSWER_TABLE . " WHERE attendee_id = '%d'";
-				$wpdb->query($wpdb->prepare($SQL, $att_id)); //What's the best way to sanitize here?
+				$wpdb->query($wpdb->prepare($SQL, $att_id));
 
 				//hook for after delete
 				do_action('action_hook_espresso_after_delete_attendee_event_list', $att_id, $EVT_ID);
