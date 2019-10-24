@@ -4,7 +4,6 @@
 function event_espresso_form_group_update($group_id) {
     global $wpdb;
 
-    //$group_id = $_POST['group_id'];
     $group_order = (int)$_POST['group_order'];
     $group_name = sanitize_text_field($_POST['group_name']);
     $group_description = wp_kses_post($_POST['group_description']);
@@ -30,16 +29,27 @@ function event_espresso_form_group_update($group_id) {
             $group_id
         )
     );
+    $del_group_rels = "DELETE FROM " . EVENTS_QST_GROUP_REL_TABLE . " WHERE group_id = %d";
+    $wpdb->query(
+        $wpdb->prepare(
+            $del_group_rels,
+            $group_id
+        )
+    );
 
-    $del_group_rels = "DELETE FROM " . EVENTS_QST_GROUP_REL_TABLE . " WHERE group_id = '" . $group_id . "'";
-    $wpdb->query($del_group_rels);
 
     if (!empty($_REQUEST['question_id'])) {
         foreach ($_REQUEST['question_id'] as $k => $v) {
             if ($v != '') {
-                $sql_group_rel = "INSERT INTO " . EVENTS_QST_GROUP_REL_TABLE . " (group_id, question_id) VALUES ('" . $group_id . "', '" . $v . "')";
-                //echo "$sql_discount <br>";
-                $wpdb->query($sql_group_rel);
+                $v = absint($v);
+                $sql_group_rel = "INSERT INTO " . EVENTS_QST_GROUP_REL_TABLE . " (group_id, question_id) VALUES (%d, %d)";
+                $wpdb->query(
+                    $wpdb->prepare(
+                        $sql_group_rel,
+                        $group_id,
+                        $v
+                    )
+                );
             }
         }
     }
