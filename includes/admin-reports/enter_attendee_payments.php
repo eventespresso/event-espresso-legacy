@@ -197,7 +197,7 @@ function enter_attendee_payments() {
 
 			if ( $org_options["use_attendee_pre_approval"] == "Y" ) {
 			
-				$pre_approve = int()$_POST['pre_approve'];
+				$pre_approve = (int)$_POST['pre_approve'];
 				if ( count($registration_ids) > 0 ) {
 					foreach($registration_ids as $reg_id) {
 						$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET pre_approve = %d WHERE registration_id = %s";
