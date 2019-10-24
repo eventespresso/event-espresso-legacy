@@ -67,7 +67,7 @@ function event_espresso_question_groups_config_mnu() {
 						break;
 					case 'update_group':
 						require_once("update_group.php");
-						event_espresso_form_group_update($_REQUEST['group_id']);
+						event_espresso_form_group_update(absint($_REQUEST['group_id']));
 						break;
 					case 'delete_group':
 						if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/form-builder/groups/delete_group.php')) {
