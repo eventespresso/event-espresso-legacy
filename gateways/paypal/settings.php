@@ -3,16 +3,16 @@
 function event_espresso_paypal_payment_settings() {
 	global $active_gateways;
 	if (isset($_POST['update_paypal'])) {
-		$paypal_settings['paypal_id'] = sanitize_text_field($_POST['paypal_id']);
+		$paypal_settings['paypal_id'] = sanitize_email($_POST['paypal_id']);
 		$paypal_settings['tax_override'] = empty($_POST['tax_override']) ? false : true;
 		$paypal_settings['shipping_override'] = empty($_POST['shipping_override']) ? false : true;
-		$paypal_settings['image_url'] = esc_url($_POST['image_url']);
-		$paypal_settings['currency_format'] = sanitize_text_field($_POST['currency_format']);
+		$paypal_settings['image_url'] = esc_url_raw($_POST['image_url']);
+		$paypal_settings['currency_format'] = ee_sanitize_value($_POST['currency_format']);
 		$paypal_settings['use_sandbox'] = empty($_POST['use_sandbox']) ? false : true;
 		$paypal_settings['bypass_payment_page'] = isset($_POST['bypass_payment_page']) && $_POST['bypass_payment_page'] === 'Y' ? 'Y' : 'N';
 		$paypal_settings['force_ssl_return'] = empty($_POST['force_ssl_return']) ? false : true;
 		$paypal_settings['no_shipping'] = (int)$_POST['no_shipping'];
-		$paypal_settings['button_url'] = esc_url($_POST['button_url']);
+		$paypal_settings['button_url'] = esc_url_raw($_POST['button_url']);
 		update_option('event_espresso_paypal_settings', $paypal_settings);
 		echo '<div id="message" class="updated fade"><p><strong>' . __('PayPal settings saved.', 'event_espresso') . '</strong></p></div>';
 	}
