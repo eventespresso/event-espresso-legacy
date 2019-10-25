@@ -54,7 +54,7 @@ function organization_config_mnu() {
 		$org_options['default_payment_status'] = isset($_POST['default_payment_status']) && !empty($_POST['default_payment_status']) ? sanitize_text_field($_POST['default_payment_status']) : '';
 		$org_options['default_promocode_usage'] = isset($_POST['default_promocode_usage']) && !empty($_POST['default_promocode_usage']) ? sanitize_text_field($_POST['default_promocode_usage']) : 'N';
 		$org_options['ticket_reservation_time'] = isset($_POST['ticket_reservation_time']) && !empty($_POST['ticket_reservation_time']) ? (string)intval($_POST['ticket_reservation_time']) : '30';
-		$ueip_optin = isset($_POST['ueip_optin']) && !empty($_POST['ueip_optin']) ? $_POST['ueip_optin'] : 'yes';
+		$ueip_optin = isset($_POST['ueip_optin']) && $_POST['ueip_optin'] === 'yes' ? 'yes' : 'no';
 
 		$org_options['default_logo_url'] = isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ? esc_url($_REQUEST['upload_image']) : '';
 
