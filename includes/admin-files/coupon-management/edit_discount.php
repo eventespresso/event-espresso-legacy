@@ -4,17 +4,18 @@ function edit_event_discount(){
 
 	global $wpdb;
 
-	$discount_id = $_REQUEST['discount_id'];
-	 $event_discounts = $wpdb->get_results("SELECT * FROM " . EVENTS_DISCOUNT_CODES_TABLE . " WHERE id = " . $discount_id);
+	$discount_id = intval($_REQUEST['discount_id']);
+	$sql = $wpdb->prepare("SELECT * FROM " . EVENTS_DISCOUNT_CODES_TABLE . " WHERE id = %d", array($discount_id));
+	$event_discounts = $wpdb->get_results( $sql );
 
-			foreach ($event_discounts as $event_discount){
-				$discount_id = $event_discount->id;
-				$coupon_code = $event_discount->coupon_code;
-				$coupon_code_price = $event_discount->coupon_code_price;
-				$coupon_code_description = $event_discount->coupon_code_description;
-				$use_percentage = $event_discount->use_percentage;
-				$apply_to_all = $event_discount->apply_to_all;
-			}
+	foreach ($event_discounts as $event_discount){
+		$discount_id = $event_discount->id;
+		$coupon_code = $event_discount->coupon_code;
+		$coupon_code_price = $event_discount->coupon_code_price;
+		$coupon_code_description = $event_discount->coupon_code_description;
+		$use_percentage = $event_discount->use_percentage;
+		$apply_to_all = $event_discount->apply_to_all;
+	}
 ?>
 <!--Add event display-->
 
