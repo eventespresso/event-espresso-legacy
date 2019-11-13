@@ -1,8 +1,8 @@
 <?php
 
 function espresso_transactions_stripe_get_attendee_id($attendee_id) {
-	if (isset($_REQUEST['id']))
-		$attendee_id = $_REQUEST['id'];
+	if (isset($_REQUEST['attendee_id']))
+		$attendee_id = $_REQUEST['attendee_id'];
 	return $attendee_id;
 }
 
@@ -12,40 +12,63 @@ function espresso_process_stripe($payment_data) {
 	$payment_data['txn_id'] = 0;
 	$payment_data['txn_type'] = 'Stripe';
 	$payment_data['payment_status'] = 'Incomplete';
-	require_once(dirname(__FILE__) . '/stripe.class.php');
-
-	$cls_stripe = new Espresso_ClsStripe();
 	$stripe_settings = get_option('event_espresso_stripe_settings');
+	$intent = null;
+	$intent_array = null;
+	
+	//Check for alternate Stripe settings
+	if ( !empty($payment_data['event_meta']['stripe_secret_key'] ) ) {
+		//Alternative Stripe settings set on the event, set the key to be used here.
+		$stripe_settings['stripe_secret_key'] = $payment_data['event_meta']['stripe_secret_key'];
+	}
 
-	$cc = $_POST['cc'];
-	$exp_month = $_POST['exp_month'];
-	$exp_year = $_POST['exp_year'];
-	$csc = $_POST['csc'];
-	$bname = $_POST['first_name'] . " " . $_POST['last_name'];
-	$baddress = $_POST['address'];
-	$bcity = $_POST['city'];
-	$bzip = $_POST['zip'];
-	$email = $_POST['email'];
-	$line_item = "LINEITEM~PRODUCTID=" . $payment_data['attendee_id'] . "+DESCRIPTION=" . $payment_data["event_name"] . "[" . date('m-d-Y', strtotime($payment_data['start_date'])) . "]" . " >> " . $payment_data["fname"] . " " . $payment_data["lname"] . "
-							QUANTITY=1 UNITCOST=" . $payment_data['total_cost'];
+	//Include the Stripe API
+	if (! class_exists('Stripe\Stripe')) {
+		require_once (dirname(__FILE__).'/stripe-php-6.43.1/init.php');
+	}
+	
+	\Stripe\Stripe::setApiKey($stripe_settings['stripe_secret_key']);
 
-	$response = $cls_stripe->do_transaction($payment_data['total_cost'], $cc, $csc, $exp_month, $exp_year, $bname, $line_item, $payment_data);
-	if (!empty($response)) {
-		$payment_data['txn_details'] = serialize($response);
-		if (isset($response['status'])) {
+	// The JS set the payment intend ID in a hidden field, so pull that value. 
+	$payment_intent_id = isset($_REQUEST['espresso_stripe_payment_intent_id']) ? $_REQUEST['espresso_stripe_payment_intent_id'] : '';
+
+	// Pull the payment intent object from Stripe.
+	if ($payment_intent_id) {
+		$intent = \Stripe\PaymentIntent::retrieve(
+			$payment_intent_id
+		);
+		//Convert the Stripe payment intent to an array so we can use it.
+		$intent_array = $intent->__toArray(true);
+	}
+
+	// Check we have values from the intent object in an array.
+	if ( !empty( $intent_array ) ) {
+		$payment_data['txn_details'] = serialize( $intent_array );
+		if ( isset($intent_array['status'] ) ) {
+			$stripe_charge = reset($intent_array['charges']['data']);
 			echo "<div id='stripe_response'>";
-			if ($response['status'] > 0) {
-				echo "<div class='stripe_status'>" . $response['msg'] . "</div>";
+			if ($intent_array['status'] === 'succeeded') {
+				if(!empty($stripe_charge)){
+					echo "<h3 class='stripe_status'>" . $stripe_charge['outcome']['seller_message'] . "</h3>";
+				}
 				$payment_data['payment_status'] = 'Completed';
-				$payment_data['txn_id'] = $response['txid'];
+				$payment_data['txn_id'] = $intent_array['id'];
 			}
-			if (isset($response['error_msg']) && strlen(trim($response['error_msg'])) > 0) {
-				echo "<div class='stripe_error'>ERROR: " . $response['error_msg'] . "  </div>";
+			if ( !empty($stripe_charge['failure_code']) ) {
+				echo "<h3 class='stripe_error'>" . 
+					sprintf(
+						/* translators: 1: error code, 2: failure message */
+						esc_html__('ERROR: %1$s - %2$s', 'event_espresso'),
+						$intent_array['failure_code'],
+						$intent_array['failure_message']
+
+					)  . 
+					"</h3>";
 			}
 			echo "</div>";
 		}
 	}
-	if ($payment_data['payment_status'] != 'Completed') {
+	if ( empty($intent) ) {
 		echo "<div id='stripe_response' class='stripe_error'>Looks like something went wrong.  Please try again or notify the website administrator.</div>";
 	}
 	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
