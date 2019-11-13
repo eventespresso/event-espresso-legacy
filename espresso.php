@@ -263,7 +263,8 @@ if ( isset( $GLOBALS['pagenow'] ) && ! in_array( $GLOBALS['pagenow'], array( 'wp
 
 //Set the default time zone
 //If the default time zone is set up in the WP Settings, then we will use that as the default.
-if (get_option('timezone_string') != '') {
+global $wp_version;
+if (get_option('timezone_string') != '' && version_compare($wp_version, '5.3', '<')) {
 	date_default_timezone_set(get_option('timezone_string'));
 }
 
