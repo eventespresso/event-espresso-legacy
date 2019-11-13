@@ -315,10 +315,6 @@ if (!function_exists('event_espresso_get_is_active')) {
 	function event_espresso_get_is_active($event_id, $event_meta = '') {
 		//printr( $event_meta, '$event_meta  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		global $wpdb, $org_options;
-		//If the timezome is set in the wordpress database, then lets use it as the default timezone.
-		if (get_option('timezone_string') != '') {
-			date_default_timezone_set(get_option('timezone_string'));
-		}
 
 		if (!empty($event_meta)) {
 

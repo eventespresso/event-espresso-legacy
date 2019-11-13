@@ -261,12 +261,6 @@ if ( isset( $GLOBALS['pagenow'] ) && ! in_array( $GLOBALS['pagenow'], array( 'wp
 	do_action( 'action_hook_espresso_log', __FILE__, __FUNCTION__, $_REQUEST );
 }
 
-//Set the default time zone
-//If the default time zone is set up in the WP Settings, then we will use that as the default.
-if (get_option('timezone_string') != '') {
-	date_default_timezone_set(get_option('timezone_string'));
-}
-
 //Define all of the plugins database tables
 define("EVENTS_CATEGORY_TABLE", $wpdb->prefix . "events_category_detail");
 define("EVENTS_CATEGORY_REL_TABLE", $wpdb->prefix . "events_category_rel");
