@@ -25,7 +25,7 @@ I have made several changes to this plugin in the last few months. Quite a bit h
 == Support ==
 Please visit the forums http://eventespresso.com/support/forums/
 
-Current Version: 3.1.37.15
+Current Version: 3.1.37.16
 
 Author: Seth Shoultes
 Author URI: http://eventespresso.com
