@@ -315,10 +315,6 @@ if (!function_exists('event_espresso_get_is_active')) {
 	function event_espresso_get_is_active($event_id, $event_meta = '') {
 		//printr( $event_meta, '$event_meta  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
 		global $wpdb, $org_options;
-		//If the timezome is set in the wordpress database, then lets use it as the default timezone.
-		if (get_option('timezone_string') != '') {
-			date_default_timezone_set(get_option('timezone_string'));
-		}
 
 		if (!empty($event_meta)) {
 
@@ -406,21 +402,21 @@ if (!function_exists('event_espresso_get_is_active')) {
 		/*		 * * Check registration dates ** */
 
 		//If the registration end date is greater than the current date
-		elseif ($is_active == "Y" && date($registration_end_timestamp) <= date(time()) && $event_status != "D") {
+		elseif ($is_active == "Y" && $registration_end_timestamp <= current_time('timestamp') && $event_status != "D") {
 			$event_status = array('status' => 'REGISTRATION_CLOSED', 'display' => '<span style="color: #F00; font-weight:bold;">' . __('CLOSED', 'event_espresso') . '</span>', 'display_custom' => '<span class="espresso_closed">' . __('Closed', 'event_espresso') . '</span>');
 			//print_r( $event_status);
 			return $event_status;
 		}
 
-		//If the registration start date is less than the current date
-		elseif ($is_active == "Y" && date($registration_start_timestamp) >= date(time()) && $event_status != "D") {
+		//If the registration start date is more than the current date
+		elseif ($is_active == "Y" && $registration_start_timestamp >= current_time('timestamp') && $event_status != "D") {
 			$event_status = array('status' => 'REGISTRATION_NOT_OPEN', 'display' => '<span style="color: #090; font-weight:bold;">' . __('NOT_OPEN', 'event_espresso') . '</span>', 'display_custom' => '<span class="espresso_not_open">' . __('Not Open', 'event_espresso') . '</span>');
 			//print_r( $event_status);
 			return $event_status;
 		}
 
 		//If the registration start date is less than the current date
-		elseif ($is_active == "Y" && date($registration_start_timestamp) <= date(time()) && $event_status != "D") {
+		elseif ($is_active == "Y" && $registration_start_timestamp <= current_time('timestamp') && $event_status != "D") {
 			$event_status = array('status' => 'REGISTRATION_OPEN', 'display' => '<span style="color: #090; font-weight:bold;">' . __('OPEN', 'event_espresso') . '</span>', 'display_custom' => '<span class="espresso_open">' . __('Open', 'event_espresso') . '</span>');
 			//print_r( $event_status);
 			return $event_status;
@@ -429,14 +425,14 @@ if (!function_exists('event_espresso_get_is_active')) {
 		/*		 * * End Check registration dates ** */
 
 		//If the start date and time has passed, show as expired.
-		elseif ($is_active == "Y" && date($timestamp) <= date(time()) && $event_status != "D") {
+		elseif ($is_active == "Y" && $timestamp <= current_time('timestamp') && $event_status != "D") {
 			$event_status = array('status' => 'EXPIRED', 'display' => '<span style="color: #F00; font-weight:bold;">' . __('EXPIRED', 'event_espresso') . '</span>', 'display_custom' => '<span class="espresso_expired">' . __('Expired', 'event_espresso') . '</span>');
 			//print_r( $event_status);
 			return $event_status;
 		}
 
 		//If the start date and time has not passed, show as active.
-		elseif ($is_active == "Y" && date($timestamp) >= date(time()) && $event_status != "D") {
+		elseif ($is_active == "Y" && $timestamp >= current_time('timestamp') && $event_status != "D") {
 			$event_status = array('status' => 'ACTIVE', 'display' => '<span style="color: #090; font-weight:bold;">' . __('ACTIVE', 'event_espresso') . '</span>', 'display_custom' => '<span class="espresso_active">' . __('Active', 'event_espresso') . '</span>');
 			//print_r( $event_status);
 			return $event_status;

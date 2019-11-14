@@ -40,13 +40,13 @@ function espresso_display_stripe($payment_data) {
 	\Stripe\Stripe::setApiKey( $stripe_settings['stripe_secret_key']);
 
 	// Create PaymentIntent object.
-	$intent = \Stripe\PaymentIntent::create([
+	$intent = \Stripe\PaymentIntent::create(array(
 		'amount' => str_replace( array(',', '.'), '', number_format( $event_cost, espresso_get_stripe_decimal_places($stripe_settings['stripe_currency_symbol'])) ),
 		'currency' => $stripe_settings['stripe_currency_symbol'],
 		'description' => $stripe_description,
-	], [
+	), array(
 		'idempotency_key' => $registration_id,
-	]);
+	));
 
 	// If we have a PaymentIntent object, use the values from it.
 	if( $intent instanceof \Stripe\PaymentIntent) {

@@ -6,7 +6,7 @@
 
   Reporting features provide a list of events, list of attendees, and excel export.
 
-  Version: 3.1.37.15.P
+  Version: 3.1.37.16.P
 
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
@@ -36,7 +36,7 @@ if ( ! function_exists( 'espresso_version' ) ) {
 	 */
 	function espresso_version() {
 		do_action( 'action_hook_espresso_log', __FILE__, __FUNCTION__, '' );
-		return '3.1.37.15.P';
+		return '3.1.37.16.P';
 	}
 
 } else {
@@ -259,12 +259,6 @@ foreach ($_REQUEST as $key => $value) {
 }
 if ( isset( $GLOBALS['pagenow'] ) && ! in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php' ))) {
 	do_action( 'action_hook_espresso_log', __FILE__, __FUNCTION__, $_REQUEST );
-}
-
-//Set the default time zone
-//If the default time zone is set up in the WP Settings, then we will use that as the default.
-if (get_option('timezone_string') != '') {
-	date_default_timezone_set(get_option('timezone_string'));
 }
 
 //Define all of the plugins database tables

@@ -148,7 +148,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 		$loop_number++;
 
 		//Check if added admin
-		$skip_check = $skip_check || isset( $data_source['admin'] ) ? TRUE : FALSE;
+		$skip_check = $skip_check || (isset( $data_source['admin'] ) && is_admin()) ? TRUE : FALSE;
 		
 		
 		
@@ -217,7 +217,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 			$event_meta = maybe_unserialize( $questions->event_meta );
 			$questions = maybe_unserialize( $questions->question_groups );
 			// Adding attenddee specific cost to events_attendee table
-			if (isset($data_source['admin'])) {
+			if (isset($data_source['admin']) && is_admin()) {
 				
 				$attendee_quantity = 1;
 				$final_price	= (float)$data_source['event_cost'];
@@ -297,7 +297,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 
 			$txn_type = "";
 
-			if (isset($data_source['admin'])) {	
+			if (isset($data_source['admin']) && is_admin()) {	
 					
 				$payment_status		= "Completed";
 				$payment			= "Admin";
@@ -632,7 +632,7 @@ if ( ! function_exists( 'event_espresso_add_attendees_to_db' )) {
 
 			$attendee_number++;
 
-			if (isset($data_source['admin'])) {
+			if (isset($data_source['admin']) && is_admin()) {
 				return $attendee_id;
 			}
 			
