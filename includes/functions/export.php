@@ -61,8 +61,8 @@ if (!function_exists('espresso_event_export')) {
 				$sql .= " JOIN " . EVENTS_LOCALE_REL_TABLE . " l ON  l.venue_id = r.venue_id ";
 			}
 
-			$sql .= ($_POST['event_status'] != '' && $_POST['event_status'] != 'IA') ? " WHERE event_status = '" . $_POST['event_status'] . "' " : " WHERE event_status != 'D' ";
-			$sql .= $_REQUEST['category_id'] != '' ? " AND c.id = '" . $_REQUEST['category_id'] . "' " : '';
+			$sql .= ($_POST['event_status'] != '' && $_POST['event_status'] != 'IA') ? " WHERE event_status = '" . sanitize_text_field($_POST['event_status']) . "' " : " WHERE event_status != 'D' ";
+			$sql .= $_REQUEST['category_id'] != '' ? " AND c.id = '" . sanitize_text_field($_REQUEST['category_id']) . "' " : '';
 			$sql .= $group != '' ? " AND l.locale_id IN (" . implode(",", $group) . ") " : '';
 
 			if ($_POST['month_range'] != '') {
@@ -101,8 +101,8 @@ if (!function_exists('espresso_event_export')) {
 			$sql .= " JOIN " . EVENTS_CATEGORY_TABLE . " c ON  c.id = r.cat_id ";
 		}
 
-		$sql .= (isset($_POST['event_status']) && $_POST['event_status'] != '' && $_POST['event_status'] != 'IA') ? " WHERE event_status = '" . $_POST['event_status'] . "' " : " WHERE event_status != 'D' ";
-		$sql .= isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != '' ? " AND c.id = '" . $_REQUEST['category_id'] . "' " : '';
+		$sql .= (isset($_POST['event_status']) && $_POST['event_status'] != '' && $_POST['event_status'] != 'IA') ? " WHERE event_status = '" . sanitize_text_field($_POST['event_status']) . "' " : " WHERE event_status != 'D' ";
+		$sql .= isset($_REQUEST['category_id']) && sanitize_text_field($_REQUEST['category_id']) != '' ? " AND c.id = '" . $_REQUEST['category_id'] . "' " : '';
 
 		if (isset($_POST['month_range']) && $_POST['month_range'] != '') {
 			$sql .= " AND start_date BETWEEN '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-01')) . "' AND '" . date('Y-m-d', strtotime($year_r . '-' . $month_r . '-31')) . "' ";

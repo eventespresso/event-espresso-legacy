@@ -1904,7 +1904,7 @@ function espresso_data_optin_ajax_handler() {
 	if ( isset($_POST['nonce']) && !wp_verify_nonce($_POST['nonce'], 'ee-data-optin') ) exit();
 
 	//made it here so let's save the selection
-	$ueip_optin = isset( $_POST['selection'] ) ? $_POST['selection'] : 'no';
+	$ueip_optin = isset( $_POST['selection'] ) && $_POST['selection'] === 'yes' ? 'yes' : 'no';
 
 	//update_option('ee_ueip_optin', $ueip_optin);
 	update_option('ee_ueip_has_notified', 1);
