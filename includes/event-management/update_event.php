@@ -35,7 +35,7 @@ function update_event($recurrence_arr = array()) {
                 // Prepare the parameters array for use with various RE functions
                 $re_weekday = !empty($_POST['recurrence_weekday']) ? (array)$_POST['recurrence_weekday'] : array();
                 $re_weekday = array_map('intval', $re_weekday);
-                $re_manual_dates = !empty($_POST['re_manual_dates']) ? (array)$_POST['re_manual_dates'] : array();
+                $re_manual_dates = !empty($_POST['recurrence_manual_dates']) ? (array)$_POST['recurrence_manual_dates'] : array();
                 $re_manual_dates = array_map('sanitize_text_field', $re_manual_dates);
                 $re_manual_end_dates = !empty($_POST['recurrence_manual_end_dates']) ? (array)$_POST['recurrence_manual_end_dates'] : array();
                 $re_manual_end_dates = array_map('sanitize_text_field', $re_manual_end_dates);
