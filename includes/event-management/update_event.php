@@ -33,6 +33,12 @@ function update_event($recurrence_arr = array()) {
             if (count($recurrence_arr) == 0) {
 
                 // Prepare the parameters array for use with various RE functions
+                $re_weekday = !empty($_POST['recurrence_weekday']) ? (array)$_POST['recurrence_weekday'] : array();
+                $re_weekday = array_map('intval', $re_weekday);
+                $re_manual_dates = !empty($_POST['recurrence_manual_dates']) ? (array)$_POST['recurrence_manual_dates'] : array();
+                $re_manual_dates = array_map('sanitize_text_field', $re_manual_dates);
+                $re_manual_end_dates = !empty($_POST['recurrence_manual_end_dates']) ? (array)$_POST['recurrence_manual_end_dates'] : array();
+                $re_manual_end_dates = array_map('sanitize_text_field', $re_manual_end_dates);
                 $re_params = array(
                     'start_date'					=> !empty($_POST['recurrence_start_date']) ? sanitize_text_field($_POST['recurrence_start_date']) :'',
                     'event_end_date'				=> !empty($_POST['recurrence_event_end_date']) ? sanitize_text_field($_POST['recurrence_event_end_date']) : '',
@@ -40,14 +46,14 @@ function update_event($recurrence_arr = array()) {
                     'registration_start'			=> !empty($_POST['recurrence_regis_start_date']) ? sanitize_text_field($_POST['recurrence_regis_start_date']) : '',
                     'registration_end'				=> !empty($_POST['recurrence_regis_end_date']) ? sanitize_text_field($_POST['recurrence_regis_end_date']) : '',
                     'frequency'						=> !empty($_POST['recurrence_frequency']) ? sanitize_text_field($_POST['recurrence_frequency']) : '',
-                    'interval'						=> !empty($_POST['recurrence_interval']) ? sanitize_text_field($_POST['recurrence_interval']) : '',
+                    'interval'						=> !empty($_POST['recurrence_interval']) ? (int)$_POST['recurrence_interval'] : '',
                     'recurrence_type'				=> !empty($_POST['recurrence_type']) ? sanitize_text_field($_POST['recurrence_type']) : '',
-                    'weekdays'						=> !empty($_POST['recurrence_weekday']) ? sanitize_text_field($_POST['recurrence_weekday']) : '',
+                    'weekdays'						=> $re_weekday,
                     'repeat_by'						=> !empty($_POST['recurrence_repeat_by']) ? sanitize_text_field($_POST['recurrence_repeat_by']) : '',
-                    'recurrence_manual_dates'		=> !empty($_POST['recurrence_manual_dates']) ? sanitize_text_field($_POST['recurrence_manual_dates']) : '',
-                    'recurrence_manual_end_dates'	=> !empty($_POST['recurrence_manual_end_dates']) ? sanitize_text_field($_POST['recurrence_manual_end_dates']) : '',
-                    'recurrence_id'					=> !empty($_POST['recurrence_id']) ? sanitize_text_field($_POST['recurrence_id']) : '',
-					'recurrence_regis_date_increment' => !empty($_POST['recurrence_regis_date_increment']) ? sanitize_text_field($_POST['recurrence_regis_date_increment']) : '',
+                    'recurrence_manual_dates'		=> $re_manual_dates,
+                    'recurrence_manual_end_dates'	=> $re_manual_end_dates,
+                    'recurrence_id'					=> !empty($_POST['recurrence_id']) ? (int)$_POST['recurrence_id'] : '',
+					'recurrence_regis_date_increment' => !empty($_POST['recurrence_regis_date_increment']) && $_POST['recurrence_regis_date_increment'] === 'Y' ? 'Y' : 'N',
                 );
 
                 //$re_params['adding_to_db'] = 'Y';
@@ -140,11 +146,11 @@ function update_event($recurrence_arr = array()) {
                     }
 
                     foreach ($recurrence_dates as $k => $v) {
-                        $result = $wpdb->get_row($wpdb->prepare("SELECT ID FROM " . EVENTS_DETAIL_TABLE . " WHERE recurrence_id = %d and start_date = %s and NOT event_status = 'D'", array($_POST['recurrence_id'], $k)));
+                        $result = $wpdb->get_row($wpdb->prepare("SELECT ID FROM " . EVENTS_DETAIL_TABLE . " WHERE recurrence_id = %d and start_date = %s and NOT event_status = 'D'", array((int)$_POST['recurrence_id'], $k)));
 
                         if ($wpdb->num_rows == 0) {
                             add_event_to_db(array(
-                                'recurrence_id' => sanitize_text_field($_POST['recurrence_id']),
+                                'recurrence_id' => (int)$_POST['recurrence_id'],
                                 'recurrence_start_date' => $v['start_date'],
                                 'recurrence_event_end_date' => $v['event_end_date'],
                                 'recurrence_end_date' => $v['start_date'],
@@ -165,7 +171,7 @@ function update_event($recurrence_arr = array()) {
                      */
                 }
 
-                $result = $wpdb->get_results($wpdb->prepare($UPDATE_SQL, array(sanitize_text_field($_POST['recurrence_id']))));				
+                $result = $wpdb->get_results($wpdb->prepare($UPDATE_SQL, array((int)$_POST['recurrence_id'])));				
                 foreach ($result as $row) {
                     if ($row->start_date != '') {
                         $recurrence_dates[$row->start_date]['event_id'] = $row->id;
