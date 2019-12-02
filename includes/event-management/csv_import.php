@@ -37,7 +37,7 @@ function csv_import() { ?>
   upload_dir = The directory to upload to, make sure this ends with a /
  */
 
-function espresso_uploader($num_of_uploads = 1, $file_types_array = array("csv"), $max_file_size = 1048576, $upload_dir = "../wp-content/uploads/") {
+function espresso_uploader($num_of_uploads = 1, $file_types_array = array("csv"), $max_file_size = 1048576, $upload_dir = WP_CONTENT_DIR . "/uploads/") {
 	if (!is_numeric($max_file_size)) {
 		$max_file_size = 1048576;
 	}
@@ -97,7 +97,7 @@ function load_events_to_db() {
 	
 	global $wpdb, $current_user;
 
-	$csvfile = "../wp-content/uploads/events.csv";
+	$csvfile = WP_CONTENT_DIR . "/uploads/events.csv";
 
 	if (!function_exists('espresso_member_data')) {
 		$current_user->ID = 1;
