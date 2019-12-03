@@ -125,7 +125,7 @@ if (!function_exists('event_espresso_delete_event')) {
 	function event_espresso_delete_event($event_id = 'NULL') {
 		global $wpdb;
 		if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'delete') {
-			$event_id = $_REQUEST['event_id'];
+			$event_id = (int)$_REQUEST['event_id'];
 		}
 		if ($event_id != 'NULL') {
 			$sql = array('event_status' => 'D');

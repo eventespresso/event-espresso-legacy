@@ -8,7 +8,7 @@ function event_espresso_form_builder_edit(){
 		array('id'=>'N','text'=> __('No','event_espresso'))
 	);
 									
-	$question_id = $_REQUEST['question_id'];
+	$question_id = (int)$_REQUEST['question_id'];
 	$questions = espresso_get_user_questions(null, $question_id);
 	if ( count($questions) > 0 ) {
 		foreach ($questions as $question) {
