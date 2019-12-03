@@ -228,10 +228,6 @@ define('EVENT_ESPRESSO_WPPLUGINPATH', plugin_basename(__FILE__) );
 define("EVENT_ESPRESSO_PLUGINFULLPATH", WP_PLUGIN_DIR . EVENT_ESPRESSO_PLUGINPATH);
 define("EVENT_ESPRESSO_PLUGINFULLURL", $wp_plugin_url . EVENT_ESPRESSO_PLUGINPATH);
 //End - Define the plugin directory and path
-//Define dierectory structure for uploads
-if (!defined('WP_CONTENT_DIR')) {
-	define('WP_CONTENT_DIR', ABSPATH . 'wp-content');
-}
 $upload_path = WP_CONTENT_DIR . "/uploads";
 $event_espresso_upload_dir = "{$upload_path}/espresso/";
 $event_espresso_template_dir = "{$event_espresso_upload_dir}templates/";
