@@ -41,9 +41,15 @@ function add_event_to_db($recurrence_arr = array()) {
 		$recurrence_id = array_key_exists('recurrence_id', $recurrence_arr) ? $recurrence_arr['recurrence_id'] : Null;
 		if ($_POST['recurrence'] == 'Y' && count($recurrence_arr) < 2) {
 
-			if (is_null($recurrence_id))
+			if (is_null($recurrence_id)) {
 				$recurrence_id = add_recurrence_master_record();
-
+			}
+			$re_weekday = isset($_POST['recurrence_weekday']) ? (array)$_POST['recurrence_weekday'] : array();
+			$re_weekday = array_map('intval', $re_weekday);
+			$re_manual_dates = isset($_POST['recurrence_manual_dates']) ? (array)$_POST['recurrence_manual_dates'] : array();
+			$re_manual_dates = array_map('sanitize_text_field', $re_manual_dates);
+			$re_manual_end_dates = isset($_POST['recurrence_manual_end_dates']) ? (array)$_POST['recurrence_manual_end_dates'] : array();
+			$re_manual_end_dates = array_map('sanitize_text_field', $re_manual_end_dates);
 			$re_params = array(
 				'start_date'					=> ($_POST['recurrence_type'] == 'a') ? sanitize_text_field($_POST['recurrence_start_date']) : sanitize_text_field($_POST['recurrence_manual_dates']),
 				'event_end_date'				=> ($_POST['recurrence_type'] == 'a') ? sanitize_text_field($_POST['recurrence_event_end_date']) : sanitize_text_field($_POST['recurrence_manual_end_dates']),
@@ -51,13 +57,13 @@ function add_event_to_db($recurrence_arr = array()) {
 				'registration_start'			=> sanitize_text_field($_POST['recurrence_regis_start_date']),
 				'registration_end'				=> sanitize_text_field($_POST['recurrence_regis_end_date']),
 				'frequency'						=> sanitize_text_field($_POST['recurrence_frequency']),
-				'interval'						=> sanitize_text_field($_POST['recurrence_interval']),
+				'interval'						=> (int)$_POST['recurrence_interval'],
 				'type'							=> sanitize_text_field($_POST['recurrence_type']),
-				'weekdays'						=> isset($_POST['recurrence_weekday']) ? sanitize_text_field($_POST['recurrence_weekday']) : '',
+				'weekdays'						=> $re_weekday,
 				'repeat_by'						=> sanitize_text_field($_POST['recurrence_repeat_by']),
-				'recurrence_regis_date_increment' => sanitize_text_field($_POST['recurrence_regis_date_increment']),
-				'recurrence_manual_dates'		=> sanitize_text_field($_POST['recurrence_manual_dates']),
-				'recurrence_manual_end_dates'	=> sanitize_text_field($_POST['recurrence_manual_end_dates']),
+				'recurrence_regis_date_increment' => $_POST['recurrence_regis_date_increment'] === 'Y' ? 'Y' : 'N',
+				'recurrence_manual_dates'		=> $re_manual_dates,
+				'recurrence_manual_end_dates'	=> $re_manual_end_dates,
 				'recurrence_id'					=> $recurrence_id,
 				'adding_to_db'					=> 'Y'
 			);
