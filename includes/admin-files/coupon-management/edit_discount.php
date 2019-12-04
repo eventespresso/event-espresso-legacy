@@ -5,7 +5,7 @@ function edit_event_discount(){
 	global $wpdb;
 
 	$discount_id = intval($_REQUEST['discount_id']);
-	$sql = $wpdb->prepare("SELECT * FROM " . EVENTS_DISCOUNT_CODES_TABLE . " WHERE id = %d", array($discount_id));
+	$sql = $wpdb->prepare("SELECT * FROM " . EVENTS_DISCOUNT_CODES_TABLE . " WHERE id = %d", $discount_id);
 	$event_discounts = $wpdb->get_results( $sql );
 
 	foreach ($event_discounts as $event_discount){
