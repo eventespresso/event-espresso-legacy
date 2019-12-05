@@ -5,8 +5,8 @@ function update_event_staff(){
 	//print_r($_REQUEST);
 	$staff_meta['phone'] = sanitize_text_field($_REQUEST['phone']);
 	$staff_meta['twitter'] = sanitize_text_field($_REQUEST['twitter']);
-	$staff_meta['image'] = sanitize_text_field($_REQUEST['image']);
-	$staff_meta['website'] = sanitize_text_field($_REQUEST['website']);
+	$staff_meta['image'] = esc_url_raw($_REQUEST['image']);
+	$staff_meta['website'] = esc_url_raw($_REQUEST['website']);
 	$staff_meta['description'] = wp_kses_post( $_REQUEST['description'] );
 	
 	$staff_meta['organization'] = sanitize_text_field($_REQUEST['organization']);
