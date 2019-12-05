@@ -6,7 +6,7 @@ function event_espresso_question_groups_config_mnu() {
 	if (!empty($_REQUEST['update_sequence'])) {
 		$rows = explode(",", $_POST['row_ids']);
 		for ($i = 0; $i < count($rows); $i++) {
-			$wpdb->query("UPDATE " . EVENTS_QST_GROUP_TABLE . " SET group_order=" . $i . " WHERE id='" . (int)$rows[$i] . "'");
+			$wpdb->query($wpdb->prepare("UPDATE " . EVENTS_QST_GROUP_TABLE . " SET group_order=" . $i . " WHERE id=%d", (int)$rows[$i]));
 		}
 		die();
 	}
