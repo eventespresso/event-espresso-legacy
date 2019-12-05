@@ -7,7 +7,7 @@ function event_espresso_questions_config_mnu() {
 	if (!empty($_REQUEST['update_sequence'])) {
 		$rows = explode(",", $_POST['row_ids']);
 		for ($i = 0; $i < count($rows); $i++) {
-			$wpdb->query("UPDATE " . EVENTS_QUESTION_TABLE . " SET sequence=" . $i . " WHERE id='" . (int)$rows[$i] . "'");
+			$wpdb->query($wpdb->prepare("UPDATE " . EVENTS_QUESTION_TABLE . " SET sequence=" . $i . " WHERE id=%d", (int)$rows[$i]));
 		}
 		die();
 	}
