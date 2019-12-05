@@ -4,17 +4,17 @@ function add_staff_to_db(){
 	$wpdb->show_errors();
 	if ( $_REQUEST['action'] == 'add' ){
 		//print_r($_REQUEST);
-		$staff_meta['phone'] = $_REQUEST['phone'];
-		$staff_meta['twitter'] = $_REQUEST['twitter'];
-		$staff_meta['image'] = $_REQUEST['image'];
-		$staff_meta['website'] = $_REQUEST['website'];
+		$staff_meta['phone'] = sanitize_text_field($_REQUEST['phone']);
+		$staff_meta['twitter'] = sanitize_text_field($_REQUEST['twitter']);
+		$staff_meta['image'] = sanitize_text_field($_REQUEST['image']);
+		$staff_meta['website'] = sanitize_text_field($_REQUEST['website']);
 		$staff_meta['description'] = wp_kses_post( $_REQUEST['description'] );
 	
-		$staff_meta['organization'] = esc_html($_REQUEST['organization']);
-		$staff_meta['title'] = esc_html($_REQUEST['title']);
-		$staff_meta['industry'] = esc_html($_REQUEST['industry']);
-		$staff_meta['city'] = esc_html($_REQUEST['city']);
-		$staff_meta['country'] = esc_html($_REQUEST['country']);
+		$staff_meta['organization'] = sanitize_text_field($_REQUEST['organization']);
+		$staff_meta['title'] = sanitize_text_field($_REQUEST['title']);
+		$staff_meta['industry'] = sanitize_text_field($_REQUEST['industry']);
+		$staff_meta['city'] = sanitize_text_field($_REQUEST['city']);
+		$staff_meta['country'] = sanitize_text_field($_REQUEST['country']);
 
 		$meta = serialize($staff_meta);
 		
@@ -23,7 +23,7 @@ function add_staff_to_db(){
 		if (!function_exists('espresso_member_data'))
 			$current_user->ID = 1;
 	
-		$sql=array('identifier'=>$identifier, 'role'=>$_REQUEST['role'], 'name'=>$_REQUEST['name'],'email'=>$_REQUEST['email'],'wp_user'=>$current_user->ID,'meta'=>$meta); 
+		$sql=array('identifier'=>$identifier, 'role'=>sanitize_text_field($_REQUEST['role']), 'name'=>sanitize_text_field($_REQUEST['name']),'email'=>sanitize_text_field($_REQUEST['email']),'wp_user'=>$current_user->ID,'meta'=>$meta); 
 		
 		$sql_data = array('%s', '%s', '%s','%s','%d','%s');
 			
