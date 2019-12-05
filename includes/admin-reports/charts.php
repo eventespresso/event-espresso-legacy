@@ -1,12 +1,12 @@
 <?php
 function espresso_charts() {
     global $wpdb, $org_options,$espresso_premium;
-	$event_id = $_REQUEST['event_id'];
+	$event_id = (int)$_REQUEST['event_id'];
 ?>
 <div class="metabox-holder">
   <div class="postbox">
     <h3>
-      <?php echo espresso_event_list_attendee_title($_REQUEST['event_id']); ?>
+      <?php echo espresso_event_list_attendee_title($event_id); ?>
     </h3>
     <div class="inside">
 <?php 
