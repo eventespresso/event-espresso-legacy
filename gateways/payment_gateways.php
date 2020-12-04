@@ -87,7 +87,7 @@ function event_espresso_gateways_options() {
 		// Uploading files
 		var file_frame;
 
-		jQuery('.upload_image_button').live('click', function( event ){
+		jQuery('#payment_settings').on('click', '.upload_image_button', function( event ){
 
 			var button = this;
 			event.preventDefault();
