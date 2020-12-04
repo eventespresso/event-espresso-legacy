@@ -12,14 +12,7 @@ jQuery(document).ready(function() {
         cache: false,
         xhr: function()
         {
-            if (jQuery.browser.msie)
-            {
-                return new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            else
-            {
-                return new XMLHttpRequest();
-            }
+            return new XMLHttpRequest();
         },
         type: "POST",
         url:  EEGlobals.ajaxurl
