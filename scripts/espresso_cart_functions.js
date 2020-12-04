@@ -1,7 +1,7 @@
 jQuery(document).ready(function() {
 
     // clear firefox and safari cache
-    jQuery(window).unload( function() {}); 
+    jQuery(window).on("unload", function() {});
 	
 	if ( ! jQuery('#event_espresso_notifications').hasClass('no-hide') ) {
 		jQuery('#event_espresso_notifications').hide();
