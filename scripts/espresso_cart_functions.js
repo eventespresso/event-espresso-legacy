@@ -428,14 +428,7 @@ jQuery(document).ready(function() {
 		})
 		.done(function(response, textStatus){
 			process_response(response, callback);
-		})
-		.fail(function(resp) {
-			//alert('Error.');
-		})
-		.complete(function(resp){
-			//alert('Complete.');
 		});
-
    }
 
     function process_response(from_server, callback)
