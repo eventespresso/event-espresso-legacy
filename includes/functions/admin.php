@@ -39,8 +39,8 @@ function event_espresso_config_page_scripts() {
 	wp_enqueue_script('editor-functions');
 	wp_enqueue_script('media-upload');
 	wp_enqueue_script('post');
-	wp_enqueue_script('dataTables', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/dataTables.min.js', array('jquery')); //Events core table script
-	wp_enqueue_script('dataTablesColVis', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/dataTables.ColVis.min.js', array('jquery')); //Events core table column hide/show script
+	wp_enqueue_script('dataTables', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/jquery.dataTables.min.js', array('jquery')); //Events core table script
+	wp_enqueue_script('dataTablesColVis', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/jquery.ColVis.min.js', array('jquery')); //Events core table column hide/show script
 
 	if ($_REQUEST['page'] == 'espresso_calendar' || $_REQUEST['page'] == 'event_categories') {
 		wp_enqueue_script('farbtastic');

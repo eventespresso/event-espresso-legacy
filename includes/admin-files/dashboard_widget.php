@@ -121,7 +121,7 @@ function event_espresso_dashboard_widget() {
 		return;
 	}
 	wp_enqueue_style('event_espresso', EVENT_ESPRESSO_PLUGINFULLURL . 'css/admin-styles.css');
-	wp_enqueue_script( 'dataTables',  EVENT_ESPRESSO_PLUGINFULLURL.'scripts/dataTables.min.js', array('jquery') );//Events core table script
+	wp_enqueue_script( 'dataTables',  EVENT_ESPRESSO_PLUGINFULLURL.'scripts/jquery.dataTables.min.js', array('jquery') );//Events core table script
 	wp_add_dashboard_widget('todays_events_widget', __('Upcoming Events', 'event_espresso'), 'custom_dashboard_events');
 }
 
