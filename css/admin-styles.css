@@ -1166,7 +1166,7 @@ div.ColVis_collectionBackground {
 	background-color: black;
 	z-index: 1100;
 }
-div.ColVis_collection {
+ul.ColVis_collection {
 	position: relative;
 	width: 160px;
 	background-color: #f3f3f3;
@@ -1174,11 +1174,14 @@ div.ColVis_collection {
 	border: 1px solid #ccc;
 	z-index: 1102;
 }
-div.ColVis_collection button.ColVis_Button {
+ul.ColVis_collection button.ColVis_Button {
 	background-color: white;
 	width: 100%;
 	float: none;
 	margin-bottom: 2px;
+}
+ul.ColVis_collection li {
+	max-height: 1em;
 }
 div.ColVis_catcher {
 	position: absolute;
@@ -1190,7 +1193,7 @@ div.ColVis_catcher {
 button.ColVis_Button {
 	text-align: left;
 }
-div.ColVis_collection button.ColVis_Button:hover {
+ul.ColVis_collection button.ColVis_Button:hover {
 	border: 1px solid #999;
 	background-color: #f0f0f0;
 }
