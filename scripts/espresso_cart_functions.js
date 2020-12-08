@@ -1,7 +1,7 @@
 jQuery(document).ready(function() {
 
     // clear firefox and safari cache
-    jQuery(window).unload( function() {}); 
+    jQuery(window).on("unload", function() {});
 	
 	if ( ! jQuery('#event_espresso_notifications').hasClass('no-hide') ) {
 		jQuery('#event_espresso_notifications').hide();
@@ -12,14 +12,7 @@ jQuery(document).ready(function() {
         cache: false,
         xhr: function()
         {
-            if (jQuery.browser.msie)
-            {
-                return new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            else
-            {
-                return new XMLHttpRequest();
-            }
+            return new XMLHttpRequest();
         },
         type: "POST",
         url:  EEGlobals.ajaxurl
@@ -435,14 +428,7 @@ jQuery(document).ready(function() {
 		})
 		.done(function(response, textStatus){
 			process_response(response, callback);
-		})
-		.fail(function(resp) {
-			//alert('Error.');
-		})
-		.complete(function(resp){
-			//alert('Complete.');
 		});
-
    }
 
     function process_response(from_server, callback)

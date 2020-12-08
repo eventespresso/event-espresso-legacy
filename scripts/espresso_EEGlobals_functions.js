@@ -1,20 +1,13 @@
 jQuery(document).ready(function() {
 
     // clear firefox and safari cache
-    jQuery(window).unload( function() {}); 
+    jQuery(window).on("unload", function() {});
 
     jQuery.ajaxSetup({
         cache: false,
         xhr: function()
         {
-            if (jQuery.browser.msie)
-            {
-                return new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            else
-            {
-                return new XMLHttpRequest();
-            }
+            return new XMLHttpRequest();
         },
         type: "POST",
         url:  EEGlobals.ajaxurl
