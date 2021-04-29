@@ -54,7 +54,7 @@ function organization_config_mnu() {
 		$org_options['default_payment_status'] = isset($_POST['default_payment_status']) && !empty($_POST['default_payment_status']) ? sanitize_text_field($_POST['default_payment_status']) : '';
 		$org_options['default_promocode_usage'] = isset($_POST['default_promocode_usage']) && !empty($_POST['default_promocode_usage']) ? sanitize_text_field($_POST['default_promocode_usage']) : 'N';
 		$org_options['ticket_reservation_time'] = isset($_POST['ticket_reservation_time']) && !empty($_POST['ticket_reservation_time']) ? (string)intval($_POST['ticket_reservation_time']) : '30';
-		$ueip_optin = isset($_POST['ueip_optin']) && !empty($_POST['ueip_optin']) ? $_POST['ueip_optin'] : 'yes';
+		$ueip_optin = isset($_POST['ueip_optin']) && $_POST['ueip_optin'] === 'yes' ? 'yes' : 'no';
 
 		$org_options['default_logo_url'] = isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ? esc_url($_REQUEST['upload_image']) : '';
 
@@ -239,7 +239,7 @@ function organization_config_mnu() {
 											<li class="time-date">
 												<p> <span class="run-in">
 														<?php _e('Current Time: ', 'event_espresso'); ?>
-													</span><span class="current-date"> <?php echo date(get_option('date_format') . ' ' . get_option('time_format')); ?> </span><a class="change-date-time" href="options-general.php" target="_blank">
+													</span><span class="current-date"> <?php echo date_i18n(get_option('date_format') . ' ' . get_option('time_format')); ?> </span><a class="change-date-time" href="options-general.php" target="_blank">
 														<?php _e('Change timezone and date format settings?', 'event_espresso'); ?>
 													</a> </p>
 												<p> <span class="important">

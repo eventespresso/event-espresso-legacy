@@ -32,13 +32,13 @@ if (!function_exists('multi_register_attendees')) {
 		if ( ! $event ) {
 		
 			// the key we will eventually use in our query to find the event
-			$ID = $event_id_sc != '0' ? $event_id_sc : $_REQUEST['event_id'];
+			$ID = $event_id_sc != '0' ? $event_id_sc : (int)$_REQUEST['event_id'];
 
 			if (!empty($_REQUEST['event_id_time'])) {
 				$pieces = explode('|', $_REQUEST['event_id_time'], 3);
-				$ID = $pieces[0];
-				$start_time = $pieces[1];
-				$time_id = $pieces[2];
+				$ID = (int)$pieces[0];
+				$start_time = sanitize_text_field($pieces[1]);
+				$time_id = (int)$pieces[2];
 				$time_selected = true;
 			}
 

@@ -45,7 +45,7 @@ if ( ! function_exists( 'event_espresso_coupon_payment_page' )) {
 //		echo '<h4>$coupon_code : ' . $coupon_code . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';			
 		
 		if ( ! $use_coupon_code ) {
-			$use_coupon_code = isset( $_POST['use_coupon'][$event_id] ) ? $_POST['use_coupon'][$event_id] : 'N';			
+			$use_coupon_code = isset( $_POST['use_coupon'][$event_id] ) ? ee_sanitize_value($_POST['use_coupon'][$event_id]) : 'N';			
 		}
 //		echo '<h4>$use_coupon_code : ' . $use_coupon_code . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 		

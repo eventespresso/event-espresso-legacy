@@ -27,7 +27,7 @@ function edit_attendee_record() {
 	if ($_REQUEST['form_action'] == 'edit_attendee') {
 
 		$id = isset($_REQUEST['id']) ? absint( $_REQUEST['id'] ) : '';
-		$registration_id = isset($_REQUEST['registration_id']) ? ee_sanitize_value( $_REQUEST['registration_id'] ) : '';
+		$registration_id = isset($_REQUEST['registration_id']) ? ee_sanitize_value($_REQUEST['registration_id']) : '';
 		$multi_reg = FALSE;
 		
 		// check for multi reg, additional attendees, and verify reg id for primary attendee
@@ -196,13 +196,13 @@ function edit_attendee_record() {
 			}
 			
 			//Update the price_option_type
-			do_action('action_hook_espresso_save_attendee_meta', $id, 'price_option_type', isset($_POST['price_option_type']) && !empty($_POST['price_option_type']) ? ee_sanitize_value($_POST['price_option_type']) : 'DEFAULT');
+			do_action('action_hook_espresso_save_attendee_meta', $id, 'price_option_type', isset($_POST['price_option_type']) && !empty($_POST['price_option_type']) ? sanitize_text_field($_POST['price_option_type']) : 'DEFAULT');
 			
 			//Move attendee
 			do_action('action_hook_espresso_attendee_mover_move');
 			
-			$event_id = isset($_POST['event_id']) ? $_POST['event_id'] : '';
-			$txn_type = isset($_POST['txn_type']) ? $_POST['txn_type'] : '';
+			$event_id = isset($_POST['event_id']) ? intval($_POST['event_id']) : '';
+			$txn_type = isset($_POST['txn_type']) ? sanitize_text_field($_POST['txn_type']) : '';
 
 			$cols_and_values = array( 
 					'fname'		=> isset($_POST['fname']) ? ee_sanitize_value($_POST['fname']) : '', 
@@ -213,7 +213,7 @@ function edit_attendee_record() {
 					'state'		=> isset($_POST['state']) ? ee_sanitize_value($_POST['state']) : '', 
 					'zip'		=> isset($_POST['zip']) ? ee_sanitize_value($_POST['zip']) : '', 
 					'phone'		=> isset($_POST['phone']) ? ee_sanitize_value($_POST['phone']) : '', 
-					'email'		=> isset($_POST['email']) ? sanitize_email($_POST['email']) : '' 
+					'email'		=> isset($_POST['email']) ? ee_sanitize_value($_POST['email']) : '' 
 			);
 			$cols_and_values_format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' );
 			
@@ -347,7 +347,7 @@ function edit_attendee_record() {
 							}
 							
 							$post_val = apply_filters( 'filter_hook_espresso_admin_question_response', $post_val, $question );
-							$post_val = ee_sanitize_value( stripslashes( $post_val ));
+							$post_val = sanitize_text_field( stripslashes( $post_val ));
 							break;
 							
 						case "MULTIPLE" :
@@ -357,7 +357,7 @@ function edit_attendee_record() {
 								$pval = apply_filters( 'filter_hook_espresso_admin_question_response', trim( $_POST[ $question->question_type . '_' . $question->q_id ][$i] ), $question );
 								$post_val .= $pval . ",";
 							}
-							$post_val = ee_sanitize_value( substr( stripslashes( $post_val ), 0, -1 ));
+							$post_val = sanitize_text_field( substr( stripslashes( $post_val ), 0, -1 ));
 							
 							break;
 					}
@@ -414,11 +414,11 @@ function edit_attendee_record() {
 		// are we looking for an additional attendee ?
 		if ( isset( $_REQUEST['attendee_num'] ) && $_REQUEST['attendee_num'] > 1 && isset( $_REQUEST['id'] )) {
 			$SQL .= "WHERE  att.id = %d";
-			$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, ee_sanitize_value( $_REQUEST['id'] ) ));
+			$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $_REQUEST['id'] ));
 		} else {
 			// check for multi reg & additional attendees by first finding primary attendee
 			$SQL2 = "SELECT primary_registration_id FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE registration_id = %s";
-			if ( $primary_registration_id = $wpdb->get_var( $wpdb->prepare( $SQL2, ee_sanitize_value( $_REQUEST['registration_id'] )))) {
+			if ( $primary_registration_id = $wpdb->get_var( $wpdb->prepare( $SQL2, $_REQUEST['registration_id'] ))) {
 				// now find all registrations
 				$SQL3 = "SELECT registration_id FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE primary_registration_id = %s";
 				$reg_ids = $wpdb->get_col( $wpdb->prepare( $SQL3, $primary_registration_id ));

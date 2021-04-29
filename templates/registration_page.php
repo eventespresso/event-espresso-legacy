@@ -25,19 +25,19 @@ if (!function_exists('register_attendees')) {
 		$default_event_id = 1;
 		$default_event_id = apply_filters( 'filter_hook_espresso_default_event_id', $default_event_id );
 
-		$_REQUEST['event_id'] = isset( $_REQUEST['event_id'] ) && ! empty( $_REQUEST['event_id'] ) ? $_REQUEST['event_id'] : $default_event_id;
+		$_REQUEST['event_id'] = isset( $_REQUEST['event_id'] ) && ! empty( $_REQUEST['event_id'] ) ? (int)$_REQUEST['event_id'] : $default_event_id;
 
         if (isset($_REQUEST['ee']) && $_REQUEST['ee'] != '') {
-            $_REQUEST['event_id'] = $_REQUEST['ee'];
+            $_REQUEST['event_id'] = (int)$_REQUEST['ee'];
         }
 
-        $event_id = $event_id_sc != '0' ? $event_id_sc : $_REQUEST['event_id'];
+        $event_id = $event_id_sc != '0' ? $event_id_sc : (int)$_REQUEST['event_id'];
 
         if (!empty($_REQUEST['event_id_time'])) {
             $pieces = explode('|', $_REQUEST['event_id_time'], 3);
-            $event_id = $pieces[0];
-            $start_time = $pieces[1];
-            $time_id = $pieces[2];
+            $event_id = (int)$pieces[0];
+            $start_time = sanitize_text_field($pieces[1]);
+            $time_id = (int)$pieces[2];
             $time_selected = true;
         }
 

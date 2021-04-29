@@ -33,12 +33,12 @@ function add_new_attendee($event_id){
         wp_print_scripts('reCopy');
 
 	global $wpdb;
-	$sql  = "SELECT * FROM " .EVENTS_DETAIL_TABLE. " WHERE is_active='Y' AND event_status != 'D' AND id = '" . $event_id . "' LIMIT 0,1";
-
+	$sql  = "SELECT * FROM " .EVENTS_DETAIL_TABLE. " ed WHERE ed.is_active='Y' AND ed.event_status != 'D' AND ed.id = %d LIMIT 0,1";
+	
 	//Build the registration page
-	if ($wpdb->get_results($sql)){
-			$events = $wpdb->get_results($sql);
-			//These are the variables that can be used throughout the regsitration page
+	$events = $wpdb->get_results($wpdb->prepare( $sql, $event_id ), OBJECT_K );
+	if ($events){
+			//These are the variables that can be used throughout the registration page
 			foreach ($events as $event){
 					$event_id = $event->id;
 					$event_name = stripslashes($event->event_name);

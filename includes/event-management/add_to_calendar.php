@@ -1,7 +1,7 @@
 <?php 
 function add_to_calendar(){
 	global $wpdb, $current_user, $org_options;
-	$event_id = $_REQUEST ['id'];
+	$event_id = absint( $_REQUEST ['id'] );
 	
 	 $results = $wpdb->get_results("SELECT * FROM " . get_option('events_detail_tbl') . " WHERE id =" . $event_id);
 
@@ -13,7 +13,7 @@ function add_to_calendar(){
 				$end_date = $result->end_date;
 				$start_time = $result->start_time;
 				$end_time = $result->end_time;
-				$calendar_category = $_REQUEST['calendar_category'];
+				$calendar_category = absint( $_REQUEST['calendar_category' );
 		$linky = home_url().'/?page_id=' . $org_options['event_page_id'] . '&regevent_action=register&event_id=' . $event_id . '&name_of_event=' . $event_name;
 		
 		$sql = "INSERT INTO " . WP_CALENDAR_TABLE . " SET event_title='" . mysql_escape_string($event_name)

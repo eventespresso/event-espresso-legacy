@@ -1,7 +1,7 @@
 <?php
 function edit_event_venue(){
 	global $wpdb; 
-    $id = $_REQUEST['id'];
+    $id = (int)$_REQUEST['id'];
     
     if ( function_exists( 'espresso_user_has_venue_permission' ) ) {
         if ( !espresso_user_has_venue_permission( $id ) ) {

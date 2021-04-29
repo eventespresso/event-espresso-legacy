@@ -8,7 +8,14 @@ function add_discount_to_db(){
 			if (!function_exists('espresso_member_data'))
 				$current_user->ID = 1;
 			
-			$sql=array('coupon_code'=>$_REQUEST['coupon_code'], 'coupon_code_price'=>$_REQUEST['coupon_code_price'],'coupon_code_description'=>$_REQUEST['coupon_code_description'], 'use_percentage'=>$_REQUEST['use_percentage'],'apply_to_all'=>$_REQUEST['apply_to_all'], 'wp_user'=>$current_user->ID); 
+			$sql=array(
+				'coupon_code'=>sanitize_text_field($_REQUEST['coupon_code']),
+				'coupon_code_price'=>abs($_REQUEST['coupon_code_price']),
+		 		'coupon_code_description'=>sanitize_text_field($_REQUEST['coupon_code_description']),
+				'use_percentage'=>$_REQUEST['use_percentage'] === 'Y' ? 'Y' : 'N',
+		 		'apply_to_all'=>intval($_REQUEST['apply_to_all']),
+				'wp_user'=>$current_user->ID
+			); 
 		
 			$sql_data = array('%s','%s','%s','%s','%d', '%d');
 	

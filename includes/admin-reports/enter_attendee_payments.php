@@ -57,14 +57,14 @@ function enter_attendee_payments() {
 					$notifications['error'][] = __('An error occured. The primary attendee details could not be retrieved from the database.', 'event_espresso'); 
 				} else {
 
-					$txn_type = !empty($_POST[ 'txn_type' ]) ? $_POST[ 'txn_type' ] : apply_filters('filter_hook_event_espresso_enter_attendee_payments_remove_require_txn_type', FALSE);
-					$txn_id = !empty($_POST[ 'txn_id' ]) ? $_POST[ 'txn_id' ] : apply_filters('filter_hook_event_espresso_enter_attendee_payments_remove_require_txn_id', FALSE);
+					$txn_type = !empty($_POST[ 'txn_type' ]) ? sanitize_text_field($_POST[ 'txn_type' ]) : apply_filters('filter_hook_event_espresso_enter_attendee_payments_remove_require_txn_type', FALSE);
+					$txn_id = !empty($_POST[ 'txn_id' ]) ? sanitize_text_field($_POST[ 'txn_id' ]) : apply_filters('filter_hook_event_espresso_enter_attendee_payments_remove_require_txn_id', FALSE);
 					$payment_date = !empty($_POST[ 'payment_date' ]) ? date_i18n( get_option('date_format'), strtotime( $_POST[ 'payment_date' ] )) : FALSE;
-					$coupon_code = isset($_POST[ 'coupon_code' ]) ? $_POST[ 'coupon_code' ] : '';
+					$coupon_code = isset($_POST[ 'coupon_code' ]) ? sanitize_text_field($_POST[ 'coupon_code' ]) : '';
 					$total_owing = isset($_POST[ 'total_owing' ]) ? (float)number_format( sanitize_text_field( $_POST[ 'total_owing' ] ), 2, '.', '' ) : 0.00;
 					$amount_pd = isset($_POST[ 'amount_pd' ]) ? (float)number_format( sanitize_text_field( $_POST[ 'amount_pd' ] ), 2, '.', '' ) : 0.00;
 					$new_payment = isset($_POST[ 'new_payment' ]) && $_POST[ 'new_payment' ] != '' ? (float)number_format( sanitize_text_field( $_POST[ 'new_payment' ] ), 2, '.', '' ) : 0.00;
-					$upd_payment_status = isset($_POST[ 'payment_status' ]) ? $_POST[ 'payment_status' ] : 'Pending';
+					$upd_payment_status = isset($_POST[ 'payment_status' ]) ? sanitize_text_field($_POST[ 'payment_status' ]) : 'Pending';
 					
 					// if making a payment, we are going to require the txn type and txn id
 					if ( $new_payment != 0.00  ) {						
@@ -158,7 +158,7 @@ function enter_attendee_payments() {
 						}
 
 		                //Send Payment Recieved Email
-						$send_payment_rec = isset( $_POST[ 'send_payment_rec' ] ) ? $_POST[ 'send_payment_rec' ] : FALSE; 
+						$send_payment_rec = isset( $_POST[ 'send_payment_rec' ] ) ? sanitize_text_field($_POST[ 'send_payment_rec' ]) : FALSE; 
 		                if ( $send_payment_rec == "send_message" ) {
 		                    //event_espresso_send_payment_notification( $id );
 							if ( count($attendees_to_email) > 0 ) {								
@@ -197,10 +197,10 @@ function enter_attendee_payments() {
 
 			if ( $org_options["use_attendee_pre_approval"] == "Y" ) {
 			
-				$pre_approve = $_POST['pre_approve'];
+				$pre_approve = (int)$_POST['pre_approve'];
 				if ( count($registration_ids) > 0 ) {
 					foreach($registration_ids as $reg_id) {
-						$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET pre_approve = %s WHERE registration_id = %s";
+						$SQL = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET pre_approve = %d WHERE registration_id = %s";
 						$wpdb->query( $wpdb->prepare( $SQL, $pre_approve, $reg_id['registration_id'] ));
 					}
 					
@@ -231,12 +231,12 @@ function enter_attendee_payments() {
 						}
 						
 						foreach ( $reg_attendees as $reg_attendee ){
-							event_espresso_send_invoice( $reg_attendee->registration_id, $_POST[ 'invoice_subject' ], $_POST[ 'invoice_message' ] );
+							event_espresso_send_invoice( $reg_attendee->registration_id, sanitize_text_field($_POST[ 'invoice_subject' ]), sanitize_text_field($_POST[ 'invoice_message' ]) );
 						}
 
 					
 				} else {
-					event_espresso_send_invoice( $registration_id , $_POST[ 'invoice_subject' ], $_POST[ 'invoice_message' ] );
+					event_espresso_send_invoice( $registration_id , sanitize_text_field($_POST[ 'invoice_subject' ]), sanitize_text_field($_POST[ 'invoice_message' ]) );
 				}
 				
 				$notifications['success'][] = __('Invoice Sent.', 'event_espresso'); 	

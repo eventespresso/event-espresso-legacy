@@ -18,7 +18,7 @@ function event_espresso_venue_config_mnu(){
         $venue_deleted = 0;
 		if ( isset( $_POST[ 'checkbox' ] ) && is_array( $_POST['checkbox'] ) ) {
 			while(list($key,$value)=each($_POST['checkbox'])):
-				$del_id=$key;
+				$del_id=(int)$key;
                 $flag = true;
                 if ( function_exists( 'espresso_user_has_venue_permission') ) {
                     $flag = espresso_user_has_venue_permission( $del_id );
@@ -39,7 +39,7 @@ function event_espresso_venue_config_mnu(){
 		}
 		if( isset( $_REQUEST[ 'id' ] ) && 'delete_venue' == $_REQUEST['action'] ){
             $flag = true;
-            $del_id = $_REQUEST['id'];
+            $del_id = (int)$_REQUEST['id'];
             if ( function_exists( 'espresso_user_has_venue_permission') ) {
                 $flag = espresso_user_has_venue_permission( $del_id );
             }

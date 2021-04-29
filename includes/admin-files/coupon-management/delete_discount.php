@@ -3,24 +3,17 @@ function delete_event_discount(){
 	global $wpdb;
 	if(isset($_REQUEST['delete_discount'])){
 		if (is_array($_POST['checkbox'])){
-			while(list($key,$value)=each($_POST['checkbox'])):
-				$del_id=$key;
+			foreach($_POST['checkbox'] as $key => $value) {
 				//Delete discount data
-				$sql = "DELETE FROM ".EVENTS_DISCOUNT_CODES_TABLE." WHERE id='" . $del_id . "'";
-				$wpdb->query($sql);
-					
-				$sql = "DELETE FROM ".EVENTS_DISCOUNT_REL_TABLE." WHERE discount_id='" . $del_id . "'";
-				$wpdb->query($sql);
-			endwhile;	
+				$wpdb->delete(EVENTS_DISCOUNT_CODES_TABLE, array('id' => $key), array('%d'));
+				$wpdb->delete(EVENTS_DISCOUNT_REL_TABLE, array('discount_id' => $key),array('%d'));
+			}
 		}
 	}
-	if(isset($_REQUEST['action']) && $_REQUEST['action']== 'delete_discount'){
+	if(isset($_REQUEST['action']) && $_REQUEST['action'] === 'delete_discount'){
 		//Delete discount data
-		$sql = "DELETE FROM ".EVENTS_DISCOUNT_CODES_TABLE." WHERE id='" . $_REQUEST['discount_id'] . "'";
-		$wpdb->query($sql);
-					
-		$sql = "DELETE FROM ".EVENTS_DISCOUNT_REL_TABLE." WHERE discount_id='" . $_REQUEST['discount_id'] . "'";
-		$wpdb->query($sql);
+		$wpdb->delete(EVENTS_DISCOUNT_CODES_TABLE, array('id' => $_REQUEST['discount_id']), array('%d'));
+		$wpdb->delete(EVENTS_DISCOUNT_REL_TABLE, array('discount_id' => $_REQUEST['discount_id']), array('%d'));
 	}
 	?>
 	<div id="message" class="updated fade">
