@@ -46,7 +46,7 @@ class Espresso_ClsPaytrace
 		return $result;
 	}
 
-	function do_transaction($amount,$discount,$line_item,$cc,$csc,$exp_month,$exp_year,$csc,$bname="",$baddress="",$bcity="",$bstate="",$bzip="",$email="")
+	function do_transaction($amount,$discount,$line_item,$cc,$csc,$exp_month,$exp_year,$bname="",$baddress="",$bcity="",$bstate="",$bzip="",$email="")
 	{
 		$paytrace_settings = get_option('event_espresso_paytrace_settings');
 
