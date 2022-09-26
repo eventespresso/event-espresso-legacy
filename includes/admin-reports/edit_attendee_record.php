@@ -674,7 +674,7 @@ function edit_attendee_record() {
 							</fieldset>
 						</form></td>
 					<td  width="50%" valign="top">
-						<?php if (count($additional_attendees) > 0) { ?> 
+						<?php if (!empty($additional_attendees)) { ?> 
 						<h4>
 							<?php _e('Additional Attendees', 'event_espresso'); ?>
 						</h4>
