@@ -7,12 +7,12 @@ function event_process_payments(){
     {
         if ( is_array( $_POST[ 'checkbox' ] ) )
         {
-            while ( list($key, $value) = each( $_POST[ 'checkbox' ] ) ):
+            foreach($_POST[ 'checkbox' ] as $key => $value) {
                 $del_id = $key;
 				event_espresso_empty_event_trash($del_id);
                 //$sql = "DELETE FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id = '$del_id'";
                 //$wpdb->query( $sql );
-            endwhile;
+            }
         }
 ?>
 

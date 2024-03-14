@@ -17,7 +17,7 @@ function event_espresso_venue_config_mnu(){
 	if( isset( $_POST['delete_venue'] ) || ( isset( $_REQUEST['action'] )  && 'delete_venue' == $_REQUEST['action'] ) ){
         $venue_deleted = 0;
 		if ( isset( $_POST[ 'checkbox' ] ) && is_array( $_POST['checkbox'] ) ) {
-			while(list($key,$value)=each($_POST['checkbox'])):
+			foreach($_POST[ 'checkbox' ] as $key => $value) {
 				$del_id=$key;
                 $flag = true;
                 if ( function_exists( 'espresso_user_has_venue_permission') ) {
@@ -35,7 +35,7 @@ function event_espresso_venue_config_mnu(){
                     $sql = "DELETE FROM " . EVENTS_LOCALE_REL_TABLE . " WHERE venue_id='$del_id'";
                     $wpdb->query($sql);
                 }
-			endwhile;	
+			}	
 		}
 		if( isset( $_REQUEST[ 'id' ] ) && 'delete_venue' == $_REQUEST['action'] ){
             $flag = true;

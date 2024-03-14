@@ -17,7 +17,7 @@ function event_espresso_categories_config_mnu() {
 		ob_start();
 		if (!empty($_POST['delete_category']) || (isset($_REQUEST['action']) && $_REQUEST['action'] == 'delete_category')) {
 			if (is_array($_POST['checkbox'])) {
-				while (list($key, $value) = each($_POST['checkbox'])):
+				foreach( $_POST['checkbox'] as $key => $value) {
 					$del_id = $key;
 					//Delete category data
 					$sql = "DELETE FROM " . EVENTS_CATEGORY_TABLE . " WHERE id='$del_id'";
@@ -25,7 +25,7 @@ function event_espresso_categories_config_mnu() {
 
 					$sql = "DELETE FROM " . EVENTS_CATEGORY_REL_TABLE . " WHERE cat_id='$del_id'";
 					$wpdb->query($sql);
-				endwhile;
+				}
 			}
 			if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'delete_category') {
 				//Delete discount data

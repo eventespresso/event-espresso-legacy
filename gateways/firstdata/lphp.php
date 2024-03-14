@@ -44,8 +44,9 @@ class Espresso_Linkpoint {
                 if ($webspace) { // use html-friendly output
                     echo "at process, incoming data: <br>";
 
-                    while (list($key, $value) = each($data))
+                    foreach($data as $key => $value) {
                         echo htmlspecialchars($key) . " = " . htmlspecialchars($value) . "<BR>\n";
+                    }
                 } else {      // don't use html output
                     echo "at process, incoming data: \n";
 

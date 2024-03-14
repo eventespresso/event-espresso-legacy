@@ -18,7 +18,7 @@ function event_espresso_staff_config_mnu() {
 	ob_start();
 	if (isset($_POST['delete_staff']) || $_REQUEST['action'] == 'delete_staff') {
             if (is_array($_POST['checkbox'])) {
-                while (list($key, $value) = each($_POST['checkbox'])):
+                foreach($_POST[ 'checkbox' ] as $key => $value) {
                     $del_id = $key;
                     //Delete staff data
                     $sql = "DELETE FROM " . EVENTS_PERSONNEL_TABLE . " WHERE id='$del_id'";
@@ -26,7 +26,7 @@ function event_espresso_staff_config_mnu() {
 
                     $sql = "DELETE FROM " . EVENTS_PERSONNEL_REL_TABLE . " WHERE person_id='$del_id'";
                     $wpdb->query($sql);
-                endwhile;
+                }
             }
             if ($_REQUEST['action'] == 'delete_staff') {
                 //Delete discount data
