@@ -22,6 +22,7 @@ class Espresso_PayPal
 	var $BetaSandbox = '';
 	var $PathToCertKeyPEM = '';
 	var $SSL = '';
+	var $NVPCredentials = '';
 
 	function Espresso_PayPal($DataArray)
 	{
@@ -72,6 +73,7 @@ class Espresso_PayPal
 		$this -> NVPCredentials .= $this -> APISubject != '' ? 'SUBJECT=' . $this -> APISubject : '';
 		$this -> NVPCredentials .= $this -> APIMode == 'Signature' ? '&SIGNATURE=' . $this -> APISignature : '';
 
+		var_dump($this->NVPCredentials);
 		$this -> Countries = array(
 							'Afghanistan' => 'AF',
 							'��land Islands' => 'AX',
@@ -1224,12 +1226,12 @@ class Espresso_PayPal
 			$Secure3DNVP .= '&' . strtoupper($Secure3DVar) . '=' . urlencode($Secure3DVal);
 
 		// Now that we have each chunk we need to go ahead and append them all together for our entire NVP string
-		$NVPRequest = $this -> NVPCredentials . $DPFieldsNVP . $CCDetailsNVP . $PayerInfoNVP . $PayerNameNVP . $BillingAddressNVP . $PaymentDetailsNVP . $OrderItemsNVP . $ShippingAddressNVP . $Secure3DNVP;
-		$NVPResponse = $this -> CURLRequest($NVPRequest);
-		$NVPRequestArray = $this -> NVPToArray($NVPRequest);
-		$NVPResponseArray = $this -> NVPToArray($NVPResponse);
+		$NVPRequest = $this->NVPCredentials . $DPFieldsNVP . $CCDetailsNVP . $PayerInfoNVP . $PayerNameNVP . $BillingAddressNVP . $PaymentDetailsNVP . $OrderItemsNVP . $ShippingAddressNVP . $Secure3DNVP;
+		$NVPResponse = $this->CURLRequest($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 
-		$Errors = $this -> GetErrors($NVPResponseArray);
+		$Errors = $this->GetErrors($NVPResponseArray);
 
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
