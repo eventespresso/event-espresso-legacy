@@ -220,7 +220,7 @@ function espresso_update_attendee_coupon_info( $primary_att_id = FALSE, $coupon_
 }
 
 if (!function_exists('event_espresso_coupon_registration_page')) {
-    function event_espresso_coupon_registration_page( $use_coupon_code = 'N', $event_id, $class =' ee-reg-page-text-input ', $multi_reg = FALSE ) {
+    function event_espresso_coupon_registration_page( $use_coupon_code = 'N', $event_id = 0, $class =' ee-reg-page-text-input ', $multi_reg = FALSE ) {
 	
         global $espresso_premium;
         if ( ! $espresso_premium ) {
