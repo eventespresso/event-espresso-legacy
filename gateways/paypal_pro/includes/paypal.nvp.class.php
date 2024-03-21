@@ -24,7 +24,7 @@ class Espresso_PayPal
 	var $SSL = '';
 	var $NVPCredentials = '';
 
-	function Espresso_PayPal($DataArray)
+	public function __construct($DataArray)
 	{
 		if(isset($DataArray['Sandbox']))
 			$this -> Sandbox = $DataArray['Sandbox'];
