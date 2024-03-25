@@ -1147,7 +1147,7 @@ function get_event_field($field, $table, $where) {
 
 if (!function_exists('espresso_show_personnel')) {
 
-	function espresso_show_personnel($event_id = 0, $atts) {
+	function espresso_show_personnel($event_id = 0, $atts = []) {
 		global $espresso_premium;
 		if ($espresso_premium != true)
 			return;
@@ -1584,7 +1584,7 @@ function espresso_save_attendee_meta($attendee_id, $meta_key, $meta_value, $dele
 	
 	// display error messages
 	if ( ! empty( $notifications['error'] )) {
-		$error_msg = implode( $notifications['error'], '<br />' );
+		$error_msg = implode('<br />', $notifications['error']);
 	?>
 	<div id="message" class="error">
 		<p>

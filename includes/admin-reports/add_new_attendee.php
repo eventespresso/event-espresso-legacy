@@ -19,7 +19,7 @@ function add_new_attendee($event_id){
 		<?php
 		} else {
 			global $notifications;
-			$error_msg = implode( $notifications['error'], '<br />');
+			$error_msg = implode('<br />', $notifications['error']);
 			?>
 			<div id="message" class="error">
 				<p>

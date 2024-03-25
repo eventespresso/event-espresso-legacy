@@ -3,7 +3,7 @@ function event_espresso_form_group_delete(){
 	global $wpdb;
 	if($_POST['delete_group']){
 			if (is_array($_POST['checkbox'])){
-				while(list($key,$value)=each($_POST['checkbox'])){
+				foreach($_POST[ 'checkbox' ] as $key => $value) {
 					$del_id=$key;
                     
                     $go_delete = true;

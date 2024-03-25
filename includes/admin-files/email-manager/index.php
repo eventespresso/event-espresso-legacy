@@ -17,12 +17,12 @@ function event_espresso_email_config_mnu() {
 		ob_start();
 		if (!empty($_POST['delete_email'])) {
 			if (is_array($_POST['checkbox'])) {
-				while (list($key, $value) = each($_POST['checkbox'])):
+				foreach($_POST[ 'checkbox' ] as $key => $value) {
 					$del_id = $key;
 					//Delete email data
 					$sql = "DELETE FROM " . EVENTS_EMAIL_TABLE . " WHERE id='$del_id'";
 					$wpdb->query($sql);
-				endwhile;
+				}
 			}
 			?>
 			<div id="message" class="updated fade">

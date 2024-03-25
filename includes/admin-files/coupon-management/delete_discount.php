@@ -3,7 +3,7 @@ function delete_event_discount(){
 	global $wpdb;
 	if(isset($_REQUEST['delete_discount'])){
 		if (is_array($_POST['checkbox'])){
-			while(list($key,$value)=each($_POST['checkbox'])):
+			foreach($_POST[ 'checkbox' ] as $key => $value) {
 				$del_id=$key;
 				//Delete discount data
 				$sql = "DELETE FROM ".EVENTS_DISCOUNT_CODES_TABLE." WHERE id='" . $del_id . "'";
@@ -11,7 +11,7 @@ function delete_event_discount(){
 					
 				$sql = "DELETE FROM ".EVENTS_DISCOUNT_REL_TABLE." WHERE discount_id='" . $del_id . "'";
 				$wpdb->query($sql);
-			endwhile;	
+			}
 		}
 	}
 	if(isset($_REQUEST['action']) && $_REQUEST['action']== 'delete_discount'){

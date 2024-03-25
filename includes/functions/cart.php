@@ -465,7 +465,7 @@ if (!function_exists('event_espresso_calculate_total')) {
 		$coupon_events =array_unique( $coupon_events );
 		$coupon_count = count( $coupon_events );
 		if ( ! strpos( $coupon_notifications, 'event_espresso_invalid_coupon' ) && $coupon_count > 0 ) {
-			$events = implode( $coupon_events, '<br/>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;' );
+			$events = implode('<br/>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;', $coupon_events);
 			$coupon_notifications .= '&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;' . $events . '</p>';
 			$coupon_errors = FALSE;
 		}
@@ -473,7 +473,7 @@ if (!function_exists('event_espresso_calculate_total')) {
 		$groupon_events =array_unique( $groupon_events );
 		$groupon_count = count( $groupon_events );
 		if ( ! strpos( $groupon_notifications, 'event_espresso_invalid_groupon' ) && $groupon_count > 0 ) {
-			$events = implode( $groupon_events, '<br/>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;' );
+			$events = implode('<br/>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;', $groupon_events);
 			$groupon_notifications .= '&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;' . $events . '</p>';
 			$groupon_errors = FALSE;
 		}

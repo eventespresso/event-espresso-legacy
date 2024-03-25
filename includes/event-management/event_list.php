@@ -11,10 +11,9 @@ function event_espresso_edit_list() {
 	 // DELETE EVENT
 	if (isset($_POST['delete_event'])) {
 		if (is_array($_POST['checkbox'])) {
-			while (list($key, $value) = each($_POST['checkbox'])):
-				$del_id = $key;
-				event_espresso_delete_event($del_id);
-			endwhile;
+			foreach ($_POST['checkbox'] as $key => $value) {
+				event_espresso_delete_event($key);
+			}
 		}
 		?>
 		<div id="message" class="updated fade">
@@ -27,10 +26,9 @@ function event_espresso_edit_list() {
 	// REALLY REALLY DELETE EVENT THIS TIME !!!
 	if (isset($_POST['perm_delete_event'])) {
 		if (is_array($_POST['checkbox'])) {
-			while (list($key, $value) = each($_POST['checkbox'])):
-				$del_id = $key;
-				event_espresso_empty_event_trash($del_id);
-			endwhile;
+			foreach( $_POST['checkbox'] as $key => $value ) {
+				event_espresso_empty_event_trash($key);
+			}
 		}
 		?>
 		<div id="message" class="updated fade">

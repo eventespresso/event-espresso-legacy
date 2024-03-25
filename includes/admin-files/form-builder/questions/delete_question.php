@@ -3,7 +3,7 @@ function event_espresso_form_builder_delete(){
 	global $wpdb;
 	if(!empty($_REQUEST['delete_question']) && !empty($_POST['checkbox'])){
 			if (is_array($_POST['checkbox'])){
-				while(list($key,$value)=each($_POST['checkbox'])){
+				foreach($_POST[ 'checkbox' ] as $key => $value) {
 					$del_id=$key;
                     
                     $go_delete = true;

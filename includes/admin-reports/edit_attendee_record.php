@@ -504,7 +504,7 @@ function edit_attendee_record() {
 
 		// display success messages
 		if ( ! empty( $notifications['success'] )) { 
-			$success_msg = implode( $notifications['success'], '<br />' );
+			$success_msg = implode('<br />', $notifications['success']);
 		?>
 				
 			<div id="message" class="updated fade">
@@ -517,7 +517,7 @@ function edit_attendee_record() {
 		 } 
 		// display error messages
 		if ( ! empty( $notifications['error'] )) {
-			$error_msg = implode( $notifications['error'], '<br />' );
+			$error_msg = implode('<br />', $notifications['error']);
 		?>
 				
 			<div id="message" class="error">
