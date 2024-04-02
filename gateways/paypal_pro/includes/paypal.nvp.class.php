@@ -73,7 +73,6 @@ class Espresso_PayPal
 		$this -> NVPCredentials .= $this -> APISubject != '' ? 'SUBJECT=' . $this -> APISubject : '';
 		$this -> NVPCredentials .= $this -> APIMode == 'Signature' ? '&SIGNATURE=' . $this -> APISignature : '';
 
-		var_dump($this->NVPCredentials);
 		$this -> Countries = array(
 							'Afghanistan' => 'AF',
 							'��land Islands' => 'AX',
