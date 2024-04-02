@@ -16,9 +16,6 @@ function enter_attendee_payments() {
 	</p>
 </div>';
 
-
-	//var_dump($_POST);
-	//var_dump($_REQUEST);
 	$multi_reg = FALSE;
 	$event_id = isset($_REQUEST['event_id']) ? absint( $_REQUEST['event_id'] ) : '';
 	$registration_id = isset( $_REQUEST['registration_id'] ) ? sanitize_text_field( $_REQUEST['registration_id'] ) : FALSE;
