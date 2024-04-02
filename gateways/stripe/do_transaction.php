@@ -39,10 +39,8 @@ function espresso_process_stripe($payment_data) {
 		);
 		//Convert the Stripe payment intent to an array so we can use it.
 		if(method_exists($intent, 'toArray')) {
-			$intent_array = $intent->toArray(true);
-		} else {
-			$intent_array = $intent->__toArray(true);
-		}
+			? $intent_array = $intent->toArray(true);
+			: $intent_array = $intent->__toArray(true);
 	}
 
 	// Check we have values from the intent object in an array.
