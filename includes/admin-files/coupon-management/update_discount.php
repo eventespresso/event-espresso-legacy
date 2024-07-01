@@ -3,9 +3,15 @@ function update_event_discount() {
 	global $wpdb, $current_user;
 	$wpdb->show_errors();
 		
-	$sql=array('coupon_code'=>$_REQUEST['coupon_code'],'coupon_code_price'=>$_REQUEST['coupon_code_price'], 'coupon_code_description'=>$_REQUEST['coupon_code_description'], 'use_percentage'=>$_REQUEST['use_percentage'],'apply_to_all'=>intval($_REQUEST['apply_to_all'])); 
+	$sql=array(
+		'coupon_code'=>sanitize_text_field($_REQUEST['coupon_code']),
+		'coupon_code_price'=>abs($_REQUEST['coupon_code_price']),
+		'coupon_code_description'=>sanitize_text_field($_REQUEST['coupon_code_description']),
+		'use_percentage'=>$_REQUEST['use_percentage'] === 'Y' ? 'Y' : 'N',
+		'apply_to_all'=>intval($_REQUEST['apply_to_all'])
+	);
 		
-	$update_id = array('id'=> $_REQUEST['discount_id']);
+	$update_id = array('id'=> intval($_REQUEST['discount_id']));
 		
 	$sql_data = array('%s','%s','%s','%s','%d');
 	

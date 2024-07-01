@@ -6,7 +6,7 @@ function event_espresso_question_groups_config_mnu() {
 	if (!empty($_REQUEST['update_sequence'])) {
 		$rows = explode(",", $_POST['row_ids']);
 		for ($i = 0; $i < count($rows); $i++) {
-			$wpdb->query("UPDATE " . EVENTS_QST_GROUP_TABLE . " SET group_order=" . $i . " WHERE id='" . $rows[$i] . "'");
+			$wpdb->query($wpdb->prepare("UPDATE " . EVENTS_QST_GROUP_TABLE . " SET group_order=" . $i . " WHERE id=%d", (int)$rows[$i]));
 		}
 		die();
 	}
@@ -67,7 +67,7 @@ function event_espresso_question_groups_config_mnu() {
 						break;
 					case 'update_group':
 						require_once("update_group.php");
-						event_espresso_form_group_update($_REQUEST['group_id']);
+						event_espresso_form_group_update(absint($_REQUEST['group_id']));
 						break;
 					case 'delete_group':
 						if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/form-builder/groups/delete_group.php')) {

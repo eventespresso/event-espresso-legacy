@@ -198,12 +198,12 @@ function update_event($recurrence_arr = array()) {
         $event_meta = array(); //will be used to hold event meta data
         $event_id						= array_key_exists('event_id', $recurrence_arr) ? $recurrence_arr['event_id'] : (int)$_REQUEST['event_id'];
         $event_name						= sanitize_text_field($_REQUEST['event']);
-        $event_desc						= !empty($_REQUEST['event_desc']) ? $_REQUEST['event_desc'] : '';
+        $event_desc						= !empty($_REQUEST['event_desc']) ? sanitize_text_field($_REQUEST['event_desc']) : '';
         $display_desc					= sanitize_text_field($_REQUEST['display_desc']);
         $display_reg_form				= sanitize_text_field($_REQUEST['display_reg_form']);
 		$externalURL					= !empty($_REQUEST['externalURL']) ? esc_html($_REQUEST['externalURL']):'';
         $reg_limit						= (int)$_REQUEST['reg_limit'];
-        $allow_multiple					= $_REQUEST['allow_multiple'];
+        $allow_multiple					= (boolean)$_REQUEST['allow_multiple'];
         $overflow_event_id				= (empty($_REQUEST['overflow_event_id'])) ? '0' : (int)$_REQUEST['overflow_event_id'];
         $allow_overflow					= empty($_REQUEST['allow_overflow']) ? 'N' : sanitize_text_field($_REQUEST['allow_overflow']);
         $additional_limit				= !empty($_REQUEST['additional_limit']) && $_REQUEST['additional_limit'] > 0 ? (int)$_REQUEST['additional_limit'] : '5';
@@ -245,11 +245,11 @@ function update_event($recurrence_arr = array()) {
         $registration_start				= array_key_exists('registration_start', $recurrence_arr) ? $recurrence_arr['registration_start'] : sanitize_text_field($_REQUEST['registration_start']);
         $registration_end				= array_key_exists('registration_end', $recurrence_arr) ? $recurrence_arr['registration_end'] : sanitize_text_field($_REQUEST['registration_end']);
 
-        $start_date						= array_key_exists('recurrence_start_date', $recurrence_arr) ? $recurrence_arr['recurrence_start_date'] : (empty($_REQUEST['start_date']) ? $_REQUEST['recurrence_start_date'] : sanitize_text_field($_REQUEST['start_date']));
+        $start_date						= array_key_exists('recurrence_start_date', $recurrence_arr) ? $recurrence_arr['recurrence_start_date'] : (empty($_REQUEST['start_date']) ? sanitize_text_field($_REQUEST['recurrence_start_date']) : sanitize_text_field($_REQUEST['start_date']));
         $end_date						= array_key_exists('recurrence_event_end_date', $recurrence_arr) ? $recurrence_arr['recurrence_event_end_date'] : (empty($_REQUEST['end_date']) ? sanitize_text_field($_REQUEST['recurrence_start_date']) : sanitize_text_field($_REQUEST['end_date']));
 		
 		$question_groups				= serialize($_REQUEST['question_groups']);
-        $add_attendee_question_groups	= empty($_REQUEST['add_attendee_question_groups']) ? '' : $_REQUEST['add_attendee_question_groups'];
+        $add_attendee_question_groups	= empty($_REQUEST['add_attendee_question_groups']) ? '' : sanitize_text_field($_REQUEST['add_attendee_question_groups']);
 				
         //Venue Information
         $venue_title = isset($_REQUEST['venue_title']) ? sanitize_text_field($_REQUEST['venue_title']):'';
@@ -613,7 +613,7 @@ function update_event($recurrence_arr = array()) {
                     $post_id = $wpdb->last_result[0]->post_id;
 
 
-                    $post_type = $_REQUEST['espresso_post_type'];
+                    $post_type = sanitize_text_field($_REQUEST['espresso_post_type']);
 
                     if ($post_id > 0)
                         $my_post['ID'] = $post_id;
