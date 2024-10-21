@@ -8,10 +8,10 @@ function event_espresso_edit_list_widget(){
     {
         if ( is_array( $_POST[ 'checkbox' ] ) )
         {
-            while ( list($key, $value) = each( $_POST[ 'checkbox' ] ) ):
+            foreach($_POST[ 'checkbox' ] as $key => $value) {
                 $del_id = $key;
                 event_espresso_delete_event($del_id);
-            endwhile;
+            }
         }
     ?>
     <div id="message" class="updated fade">

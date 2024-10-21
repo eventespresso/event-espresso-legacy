@@ -16,11 +16,9 @@ function enter_attendee_payments() {
 	</p>
 </div>';
 
-
-
 	$multi_reg = FALSE;
-	$event_id = isset($_POST['event_id']) ? absint( $_POST['event_id'] ) : isset($_REQUEST['event_id']) ? absint( $_REQUEST['event_id'] ) : '';
-	$registration_id = isset( $_POST['registration_id'] ) ? sanitize_text_field( $_POST['registration_id'] ) : isset( $_REQUEST['registration_id'] ) ? sanitize_text_field( $_REQUEST['registration_id'] ) : FALSE;
+	$event_id = isset($_REQUEST['event_id']) ? absint( $_REQUEST['event_id'] ) : '';
+	$registration_id = isset( $_REQUEST['registration_id'] ) ? sanitize_text_field( $_REQUEST['registration_id'] ) : FALSE;
 	$registration_ids = array();
 	//echo '<h4>$registration_id : ' . $registration_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
@@ -302,7 +300,7 @@ function enter_attendee_payments() {
 
 	// display success messages
 	if ( ! empty( $notifications['success'] )) { 
-		$success_msg = implode( $notifications['success'], '<br />' );
+		$success_msg = implode('<br />', $notifications['success']);
 	?>
 			
 <div id="message" class="updated fade">
@@ -315,7 +313,7 @@ function enter_attendee_payments() {
 	 } 
 	// display error messages
 	if ( ! empty( $notifications['error'] )) {
-		$error_msg = implode( $notifications['error'], '<br />' );
+		$error_msg = implode('<br />', $notifications['error']);
 	?>
 			
 <div id="message" class="error">

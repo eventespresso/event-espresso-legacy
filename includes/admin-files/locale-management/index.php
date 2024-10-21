@@ -18,7 +18,7 @@ function event_espresso_locale_config_mnu(){
 <?php
 	if( ( isset( $_POST['delete_locale'] ) && $_POST['delete_locale'] ) || ( isset( $_REQUEST['action'] ) && 'delete_locale' == $_REQUEST['action'] ) ) {
 		if ( isset( $_POST['checkbox'] ) && is_array( $_POST['checkbox'] ) ){
-			while(list($key,$value)=each($_POST['checkbox'])):
+			foreach($_POST[ 'checkbox' ] as $key => $value) {
 				$del_id=$key;
 				//Delete locale data
 				$sql = "DELETE FROM " . EVENTS_LOCALE_TABLE . " WHERE id='$del_id'";
@@ -26,7 +26,7 @@ function event_espresso_locale_config_mnu(){
 				
 				$sql = "DELETE FROM " . EVENTS_LOCALE_REL_TABLE . " WHERE locale_id='$del_id'";
 				$wpdb->query($sql);
-			endwhile;	
+			}	
 		}
 		if($_REQUEST['action']== 'delete_locale'){
 			//Delete discount data

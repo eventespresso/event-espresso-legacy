@@ -1411,6 +1411,16 @@ if ( !class_exists('PU_PluginInfo') ):
 		public $last_updated;
 		public $render_pass;
 
+		public $api_invalid;
+		public $api_invalid_message;
+		public $api_inline_invalid_message;
+		public $extra_notices;
+		public $extra_data;
+		public $pre_release;
+		public $stable_release_connect;
+		public $is_free_plugin;
+		public $file_prefix;
+
 		public $id = 0; //The native WP.org API returns numeric plugin IDs, but they're not used for anything.
 
 		/**

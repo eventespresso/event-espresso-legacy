@@ -22,7 +22,7 @@ function event_list_attendees() {
 	//Delete the attendee(s)
 	if (isset($_POST['delete_customer']) && !empty($_POST['delete_customer'])) {
 		if (is_array($_POST['checkbox'])) {
-			while (list( $att_id, $value ) = each($_POST['checkbox'])) {
+			foreach( $_POST['checkbox'] as $att_id => $value ) {
 
 				//hook for before delete
 				do_action('action_hook_espresso_before_delete_attendee_event_list', $att_id, $EVT_ID);
@@ -50,7 +50,7 @@ function event_list_attendees() {
 	//	MARKING USERS AS ATTENDED (OR NOT)
 	if ((!empty($_POST['attended_customer']) || !empty($_POST['unattended_customer'])) && $ticketing_installed == TRUE) {
 		if (is_array($_POST['checkbox'])) {
-			while (list($att_id, $value) = each($_POST['checkbox'])) {
+			foreach( $_POST['checkbox'] as $att_id => $value ) {
 				// on / off value for attended status checkbox
 				$check_in_or_out = $value == "on" && array_key_exists('attended_customer', $_POST) ? 1 : 0;
 

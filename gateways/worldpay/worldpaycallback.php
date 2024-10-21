@@ -7,11 +7,11 @@ exit();
 
 # clear a variable to hold the POSTed data
 $datafields = "";
-while (list($name, $value) = each($_POST)) {
-if ( $name == "name" ) {
-$name="wpnm";
-}
-$datafields.=$name."=".$value."&";
+foreach($_POST as $name => $value) {
+	if ( $name == "name" ) {
+		$name="wpnm";
+	}
+	$datafields.=$name."=".$value."&";
 }
 $ch = curl_init($transaction_page_url);
 curl_setopt ($ch, CURLOPT_POST, 1);

@@ -1650,7 +1650,7 @@ function espresso_get_user_question_groups($user_id = null, $use_filters = true,
 	return $use_filters ? apply_filters('espresso_get_user_groups_groups', $groups, $user_id, $num) : $groups;		
 }
 
-function espresso_get_question_groups_for_event( $existing_question_groups = array(), $limit = null, $use_filters = true, $event ) {
+function espresso_get_question_groups_for_event( $existing_question_groups = array(), $limit = null, $use_filters = true, $event = null ) {
 	global $wpdb;
 	$event_groups = array();
 	$selected = $unselected = array();
