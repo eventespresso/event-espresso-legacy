@@ -97,7 +97,7 @@ function espresso_process_paytrace($payment_data) {
 		$state = $_POST['state'];
 
 
-		$response = $cls_paytrace->do_transaction($amount_pd, $discount, $line_item, $cc, $csc, $exp_month, $exp_year, $csc, $bname, $baddress, $bcity, $state, $bzip, $email);
+		$response = $cls_paytrace->do_transaction($amount_pd, $discount, $line_item, $cc, $csc, $exp_month, $exp_year, $bname, $baddress, $bcity, $state, $bzip, $email);
 		if (!empty($response)) {
 			$payment_data['txn_details'] = serialize($response);
 			if (isset($response['status'])) {
